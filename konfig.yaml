@@ -2,7 +2,8 @@ filterTags:
   - Webhooks
   - Development Tools
   - Custom Brokerage API Credentials
-allObjectsHaveAdditionalProperties: true
+allObjectsHaveAdditionalProperties:
+  requestBody: false
 generators:
   java:
     files:

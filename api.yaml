@@ -148,9 +148,7 @@ paths:
       summary: Creates a new SnapTradePartnerAPICredential object
       parameters: []
       requestBody:
-        $ref:
-          "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBod\
-          y"
+        $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
       responses:
         "200":
           description: Returns created SnapTradePartnerAPICredential object
@@ -195,9 +193,7 @@ paths:
             type: string
             format: uuid
       requestBody:
-        $ref:
-          "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBod\
-          y"
+        $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
       responses:
         "200":
           description: Get SnapTradePartnerAPICredential obj based on id
