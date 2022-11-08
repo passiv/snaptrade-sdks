@@ -16,5 +16,5 @@ generators:
         destinationFilename: build.gradle
       JSON.mustache:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
-    groupId: com.konfigthis
-    artifactId: tutorial-java-sdk
+    groupId: com.snaptrade
+    artifactId: snaptrade-java-sdk
