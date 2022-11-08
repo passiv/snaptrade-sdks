@@ -1,8 +1,7 @@
-filterQueryParams:
-  - clientId
-  - timestamp
 filterTags:
   - Webhooks
+  - Development Tools
+  - Custom Brokerage API Credentials
 allObjectsHaveAdditionalProperties: true
 generators:
   java:
