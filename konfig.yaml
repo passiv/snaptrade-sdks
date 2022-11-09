@@ -21,16 +21,16 @@ generators:
       gitignore.mustache:
         destinationFilename: .gitignore
       Configuration.mustache:
-        destinationFilename: src/main/java/com/snaptrade/client/Configuration.java
+        destinationFilename: src/main/java/com/konfigthis/client/Configuration.java
       ApiClient.mustache:
-        destinationFilename: src/main/java/com/snaptrade/client/ApiClient.java
+        destinationFilename: src/main/java/com/konfigthis/client/ApiClient.java
       build.gradle.mustache:
         destinationFilename: build.gradle
       JSON.mustache:
-        destinationFilename: src/main/java/com/snaptrade/client/JSON.java
+        destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
       README.mustache:
         destinationFilename: README.md
-    groupId: com.snaptrade
+    groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
