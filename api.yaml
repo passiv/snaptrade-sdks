@@ -981,7 +981,7 @@ paths:
             The date of the options you are searching for. Will return closest
             date that has not passed. Format- [YYYY-MM-DD]
           schema:
-            type: object
+            type: string
             format: dateTime
         - in: query
           name: min_strike
