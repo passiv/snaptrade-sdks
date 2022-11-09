@@ -15,6 +15,7 @@ allObjectsHaveAdditionalProperties:
     - encryptedResponse
   include:
     - PortfolioGroup
+version: 1.0.1
 generators:
   java:
     files:
