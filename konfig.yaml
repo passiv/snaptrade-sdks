@@ -13,11 +13,12 @@ allObjectsHaveAdditionalProperties:
   requestBody: false
   exclude:
     - encryptedResponse
+    - LoginRedirectURI
   include:
     - PortfolioGroup
-version: 1.0.2
 generators:
   java:
+    version: 1.0.2
     files:
       gitignore.mustache:
         destinationFilename: .gitignore
@@ -35,3 +36,14 @@ generators:
         destinationFilename: README.md
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
+  python:
+    version: 1.0.1
+    files:
+      configuration.mustache:
+        destinationFilename: snaptrade_client/configuration.py
+      rest.mustache:
+        destinationFilename: snaptrade_client/rest.py
+      README.mustache:
+        destinationFilename: README.md
+    packageName: snaptrade_client
+    projectName: snaptrade-python-sdk

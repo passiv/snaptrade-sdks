@@ -4330,8 +4330,8 @@ components:
       type: object
       properties:
         version:
-          type: string
-          example: "1.0"
+          type: integer
+          example: 151
         timestamp:
           type: string
           example: 2022-11-04T01:47:00.377969Z
@@ -4830,9 +4830,10 @@ components:
       type: object
       properties:
         id:
-          $ref: "#component/schema/Id"
+          $ref: "#/components/schemas/Id"
         name:
           type: string
+          example: Traditional Brokerage
     WebhookBase:
       description: The base webhook content
       type: object
