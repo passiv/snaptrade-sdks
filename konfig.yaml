@@ -47,3 +47,13 @@ generators:
         destinationFilename: README.md
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
+  typescript:
+    files:
+      tsconfig.mustache:
+        destinationFilename: tsconfig.json
+      configuration.mustache:
+        destinationFilename: configuration.ts
+      common.mustache:
+        destinationFilename: common.ts
+    version: 1.0.0
+    npmName: snaptrade-typescript-sdk
