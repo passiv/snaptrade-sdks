@@ -57,5 +57,8 @@ generators:
         destinationFilename: common.ts
       README.mustache:
         destinationFilename: README.md
-    version: 1.0.0
+    version: 1.0.3
     npmName: snaptrade-typescript-sdk
+    git:
+      userId: konfig-dev
+      repoId: snaptrade-typescript-sdk
