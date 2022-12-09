@@ -1,0 +1,9 @@
+[submodule "typescript"]
+	path = sdks/typescript
+	url = https://github.com/konfig-dev/snaptrade-typescript-sdk.git
+[submodule "java"]
+	path = sdks/java
+	url = https://github.com/konfig-dev/snaptrade-java-sdk.git
+[submodule "snaptrade-python-sdk"]
+	path = sdks/python
+	url = https://github.com/konfig-dev/snaptrade-python-sdk.git
