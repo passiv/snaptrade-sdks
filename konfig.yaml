@@ -19,6 +19,7 @@ allObjectsHaveAdditionalProperties:
 generators:
   java:
     version: 1.0.2
+    outputDirectory: sdks/java
     files:
       gitignore.mustache:
         destinationFilename: .gitignore
@@ -38,6 +39,7 @@ generators:
     artifactId: snaptrade-java-sdk
   python:
     version: 1.0.1
+    outputDirectory: sdks/python
     files:
       configuration.mustache:
         destinationFilename: snaptrade_client/configuration.py
@@ -48,6 +50,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
+    outputDirectory: sdks/typescript
     files:
       tsconfig.mustache:
         destinationFilename: tsconfig.json
