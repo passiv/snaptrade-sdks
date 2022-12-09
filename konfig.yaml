@@ -1,3 +1,4 @@
+outputDirectory: /tmp/snaptrade-sdks-out
 filterTags:
   - Webhooks
   - Development Tools
