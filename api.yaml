@@ -6,6 +6,8 @@ info:
   termsOfService: N/A
   contact:
     email: api@snaptrade.com
+  x-konfig-ignore:
+    - no-additional-properties
 servers:
   - description: SnapTrade Production API
     url: https://api.snaptrade.com/api/v1
