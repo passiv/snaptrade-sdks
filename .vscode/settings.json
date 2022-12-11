@@ -1,0 +1,6 @@
+{
+  "spectral.enable": true,
+  "files.associations": {
+    ".konfigignore": "ignore"
+  }
+}
