@@ -1,4 +1,5 @@
 outputDirectory: /tmp/snaptrade-sdks-out
+specPath: api.yaml
 filterTags:
   - Webhooks
   - Development Tools

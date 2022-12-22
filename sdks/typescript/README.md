@@ -1,0 +1,99 @@
+## snaptrade-typescript-sdk@1.0.3
+
+This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
+
+Environment
+* Node.js
+* Webpack
+* Browserify
+
+Language level
+* ES5 - you must have a Promises/A+ library installed
+* ES6
+
+Module system
+* CommonJS
+* ES6 module system
+
+It can be used in both TypeScript and JavaScript. In TypeScript, the definition should be automatically resolved via `package.json`. ([Reference](http://www.typescriptlang.org/docs/handbook/typings-for-npm-packages.html))
+
+### Building
+
+To build and compile the typescript sources to javascript use:
+```
+npm install
+npm run build
+```
+
+### Publishing
+
+First build the package then run ```npm publish```
+
+### Consuming
+
+navigate to the folder of your consuming project and run one of the following commands.
+
+_published:_
+
+```
+npm install snaptrade-typescript-sdk@1.0.3 --save
+```
+
+### Getting Started
+
+```typescript
+import {
+  AccountInformationApi,
+  APIStatusApi,
+  AuthenticationApi,
+  Configuration,
+} from "snaptrade-typescript-sdk";
+import { v4 } from "uuid";
+
+// 1) Initialize a configuration with your clientID and consumerKey.
+const config = new Configuration({
+  clientId: "YOUR_CLIENT_ID",
+  consumerKey: "YOUR_CONSUMER_KEY",
+});
+
+const main = async () => {
+  // 2) Check that the client is able to make a request to the API server.
+  const apiStatusApiInst = new APIStatusApi(config);
+  const status = await apiStatusApiInst.rootGet();
+  console.log("status:", status.data);
+
+  // 3) Create a new user on SnapTrade
+  const userId = v4();
+  const authenticationApiInst = new AuthenticationApi(config);
+  const { userSecret } = (
+    await authenticationApiInst.snapTradeRegisterUserPost({
+      userId,
+    })
+  ).data;
+
+  // Note: A user secret is only generated once. It's required to access
+  // resources for certain endpoints.
+  console.log("userSecret:", userSecret);
+
+  // 4) Get a redirect URI. Users will need this to connect
+  const data = (
+    await authenticationApiInst.snapTradeLoginPost(userId, userSecret)
+  ).data;
+  if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
+  console.log("redirectURI:", data.redirectURI);
+
+  // 5) Obtaining account holdings data
+  const accountInformationApi = new AccountInformationApi(config);
+  const holdings = (await accountInformationApi.holdingsGet(userId, userSecret))
+    .data;
+  console.log("holdings:", holdings);
+
+  // 6) Deleting a user
+  const deleteResponse = (
+    await authenticationApiInst.snapTradeDeleteUserDelete(userId)
+  ).data;
+  console.log("deleteResponse:", deleteResponse);
+};
+
+main();
+```
