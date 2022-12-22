@@ -5,7 +5,7 @@
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/konfig-dev/snaptrade-typescript-sdk.git"
+    "url": "https://github.com/passiv/snaptrade-sdks/tree/main/sdks/typescript.git"
   },
   "keywords": [
     "axios",

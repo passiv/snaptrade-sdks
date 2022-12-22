@@ -14,12 +14,12 @@ if [ "$git_host" = "" ]; then
 fi
 
 if [ "$git_user_id" = "" ]; then
-    git_user_id="konfig-dev"
+    git_user_id="passiv"
     echo "[INFO] No command line input provided. Set \$git_user_id to $git_user_id"
 fi
 
 if [ "$git_repo_id" = "" ]; then
-    git_repo_id="snaptrade-typescript-sdk"
+    git_repo_id="snaptrade-sdks/tree/main/sdks/typescript"
     echo "[INFO] No command line input provided. Set \$git_repo_id to $git_repo_id"
 fi
 
