@@ -65,5 +65,5 @@ generators:
     version: 1.0.3
     npmName: snaptrade-typescript-sdk
     git:
-      userId: konfig-dev
-      repoId: snaptrade-typescript-sdk
+      userId: passiv
+      repoId: snaptrade-sdks/tree/main/sdks/typescript
