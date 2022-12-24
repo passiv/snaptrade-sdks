@@ -36,7 +36,7 @@ class TestGettingStarted(unittest.TestCase):
     def testGettingStarted(self):
         # 1) Initialize a client with your clientID and consumerKey.
         configuration = snaptrade_client.Configuration(client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-                                                    consumer_key=os.environ['SNAPTRADE_CONSUMER_KER'])
+                                                    consumer_key=os.environ['SNAPTRADE_CONSUMER_KEY'])
 
         with snaptrade_client.ApiClient(configuration) as api_client:
             # 2) Check that the client is able to make a request to the API server.
