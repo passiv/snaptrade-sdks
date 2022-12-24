@@ -1,8 +1,8 @@
 {
   "name": "snaptrade-typescript-sdk",
   "version": "1.0.3",
-  "description": "OpenAPI client for snaptrade-typescript-sdk",
-  "author": "OpenAPI-Generator Contributors",
+  "description": "Client for SnapTrade",
+  "author": "Konfig",
   "repository": {
     "type": "git",
     "url": "https://github.com/passiv/snaptrade-sdks/tree/main/sdks/typescript.git"
@@ -10,8 +10,7 @@
   "keywords": [
     "axios",
     "typescript",
-    "openapi-client",
-    "openapi-generator",
+    "konfig",
     "snaptrade-typescript-sdk"
   ],
   "license": "Unlicense",
