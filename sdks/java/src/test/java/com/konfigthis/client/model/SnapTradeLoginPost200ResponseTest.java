@@ -51,6 +51,14 @@ public class SnapTradeLoginPost200ResponseTest {
     }
 
     /**
+     * Test the property 'sessionId'
+     */
+    @Test
+    public void sessionIdTest() {
+        // TODO: test sessionId
+    }
+
+    /**
      * Test the property 'encryptedSharedKey'
      */
     @Test

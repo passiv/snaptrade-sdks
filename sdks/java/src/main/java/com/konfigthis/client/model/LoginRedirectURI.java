@@ -55,6 +55,10 @@ public class LoginRedirectURI {
   @SerializedName(SERIALIZED_NAME_REDIRECT_U_R_I)
   private Object redirectURI = null;
 
+  public static final String SERIALIZED_NAME_SESSION_ID = "sessionId";
+  @SerializedName(SERIALIZED_NAME_SESSION_ID)
+  private String sessionId;
+
   public LoginRedirectURI() {
   }
 
@@ -81,6 +85,29 @@ public class LoginRedirectURI {
   }
 
 
+  public LoginRedirectURI sessionId(String sessionId) {
+    
+    this.sessionId = sessionId;
+    return this;
+  }
+
+   /**
+   * Get sessionId
+   * @return sessionId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getSessionId() {
+    return sessionId;
+  }
+
+
+  public void setSessionId(String sessionId) {
+    this.sessionId = sessionId;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -91,7 +118,8 @@ public class LoginRedirectURI {
       return false;
     }
     LoginRedirectURI loginRedirectURI = (LoginRedirectURI) o;
-    return Objects.equals(this.redirectURI, loginRedirectURI.redirectURI);
+    return Objects.equals(this.redirectURI, loginRedirectURI.redirectURI) &&
+        Objects.equals(this.sessionId, loginRedirectURI.sessionId);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -100,7 +128,7 @@ public class LoginRedirectURI {
 
   @Override
   public int hashCode() {
-    return Objects.hash(redirectURI);
+    return Objects.hash(redirectURI, sessionId);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -115,6 +143,7 @@ public class LoginRedirectURI {
     StringBuilder sb = new StringBuilder();
     sb.append("class LoginRedirectURI {\n");
     sb.append("    redirectURI: ").append(toIndentedString(redirectURI)).append("\n");
+    sb.append("    sessionId: ").append(toIndentedString(sessionId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -138,6 +167,7 @@ public class LoginRedirectURI {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("redirectURI");
+    openapiFields.add("sessionId");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -162,6 +192,9 @@ public class LoginRedirectURI {
         if (!LoginRedirectURI.openapiFields.contains(entry.getKey())) {
           throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `LoginRedirectURI` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
+      }
+      if ((jsonObj.get("sessionId") != null && !jsonObj.get("sessionId").isJsonNull()) && !jsonObj.get("sessionId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `sessionId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sessionId").toString()));
       }
   }
 

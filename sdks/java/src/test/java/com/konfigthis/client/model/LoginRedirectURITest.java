@@ -47,4 +47,12 @@ public class LoginRedirectURITest {
         // TODO: test redirectURI
     }
 
+    /**
+     * Test the property 'sessionId'
+     */
+    @Test
+    public void sessionIdTest() {
+        // TODO: test sessionId
+    }
+
 }

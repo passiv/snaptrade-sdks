@@ -3906,6 +3906,8 @@ components:
       properties:
         redirectURI:
           example: https://app.passiv.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example
+        sessionId:
+          type: string
       type: object
     ClientID:
       description: SnapTrade Client ID (generated and provided to partner by Passiv)

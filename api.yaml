@@ -3483,6 +3483,8 @@ components:
       properties:
         redirectURI:
           example: https://app.passiv.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example
+        sessionId:
+          type: string
     MockSignatureResponse:
       description: Mock Signature Response
       type: object

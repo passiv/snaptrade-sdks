@@ -976,6 +976,12 @@ export interface LoginRedirectURI {
      * @memberof LoginRedirectURI
      */
     'redirectURI'?: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginRedirectURI
+     */
+    'sessionId'?: string;
 }
 /**
  * A manual trade object

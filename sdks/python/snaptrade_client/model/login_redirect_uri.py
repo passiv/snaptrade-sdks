@@ -77,6 +77,7 @@ class LoginRedirectURI(ModelNormal):
         """
         return {
             'redirect_uri': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'session_id': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -86,6 +87,7 @@ class LoginRedirectURI(ModelNormal):
 
     attribute_map = {
         'redirect_uri': 'redirectURI',  # noqa: E501
+        'session_id': 'sessionId',  # noqa: E501
     }
 
     read_only_vars = {
@@ -130,6 +132,7 @@ class LoginRedirectURI(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            session_id (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -216,6 +219,7 @@ class LoginRedirectURI(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            session_id (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

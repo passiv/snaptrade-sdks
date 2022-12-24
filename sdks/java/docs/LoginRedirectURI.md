@@ -9,6 +9,7 @@ Redirect uri upon successful login
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**redirectURI** | **Object** |  |  [optional] |
+|**sessionId** | **String** |  |  [optional] |
 
 
 

@@ -86,6 +86,7 @@ class SnapTradeLoginPost200Response(ModelComposed):
         lazy_import()
         return {
             'redirect_uri': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'session_id': (str,),  # noqa: E501
             'encrypted_shared_key': (str,),  # noqa: E501
             'encrypted_message_data': (EncryptedResponseEncryptedMessageData,),  # noqa: E501
         }
@@ -97,6 +98,7 @@ class SnapTradeLoginPost200Response(ModelComposed):
 
     attribute_map = {
         'redirect_uri': 'redirectURI',  # noqa: E501
+        'session_id': 'sessionId',  # noqa: E501
         'encrypted_shared_key': 'encryptedSharedKey',  # noqa: E501
         'encrypted_message_data': 'encryptedMessageData',  # noqa: E501
     }
@@ -141,6 +143,7 @@ class SnapTradeLoginPost200Response(ModelComposed):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            session_id (str): [optional]  # noqa: E501
             encrypted_shared_key (str): [optional]  # noqa: E501
             encrypted_message_data (EncryptedResponseEncryptedMessageData): [optional]  # noqa: E501
         """
@@ -247,6 +250,7 @@ class SnapTradeLoginPost200Response(ModelComposed):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            session_id (str): [optional]  # noqa: E501
             encrypted_shared_key (str): [optional]  # noqa: E501
             encrypted_message_data (EncryptedResponseEncryptedMessageData): [optional]  # noqa: E501
         """
