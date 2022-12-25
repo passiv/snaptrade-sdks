@@ -21,6 +21,12 @@ allObjectsHaveAdditionalProperties:
 generators:
   java:
     version: 1.0.2
+    test:
+      script:
+        - mvn test
+      requiredEnvironmentVariables:
+        - SNAPTRADE_CONSUMER_KEY
+        - SNAPTRADE_CLIENT_ID
     outputDirectory: sdks/java
     files:
       gitignore.mustache:
@@ -41,6 +47,12 @@ generators:
     artifactId: snaptrade-java-sdk
   python:
     version: 1.0.1
+    test:
+      script:
+        - tox test/test_getting_started.py::TestGettingStarted::testGettingStarted
+      requiredEnvironmentVariables:
+        - SNAPTRADE_CONSUMER_KEY
+        - SNAPTRADE_CLIENT_ID
     outputDirectory: sdks/python
     files:
       configuration.mustache:
@@ -53,6 +65,12 @@ generators:
     projectName: snaptrade-python-sdk
   typescript:
     outputDirectory: sdks/typescript
+    test:
+      script:
+        - yarn test
+      requiredEnvironmentVariables:
+        - SNAPTRADE_CONSUMER_KEY
+        - SNAPTRADE_CLIENT_ID
     files:
       tsconfig.mustache:
         destinationFilename: tsconfig.json
