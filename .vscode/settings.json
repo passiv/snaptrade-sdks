@@ -2,5 +2,13 @@
   "spectral.enable": true,
   "files.associations": {
     ".konfigignore": "ignore"
+  },
+  "python.testing.pytestArgs": [
+    "python"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "yaml.schemas": {
+    "swaggerviewer:openapi": "file:///home/asutherland8219/snaptrade-sdks/api.yaml"
   }
 }

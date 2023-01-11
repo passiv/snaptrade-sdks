@@ -478,7 +478,7 @@ paths:
           schema:
             type: string
             format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       responses:
         "200":
           description: Returns list of accounts and holdings
@@ -2380,7 +2380,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SymbolQuery"
-  "/symbols/{symbolId}":
+  /symbols/{symbolId}:
     get:
       tags:
         - Reference Data
@@ -2402,7 +2402,7 @@ paths:
                 $ref: "#/components/schemas/UniversalSymbol"
         default:
           description: Unexpected error
-  "/symbols/{ticker}":
+  /symbols/{ticker}:
     get:
       tags:
         - Reference Data
@@ -3063,7 +3063,7 @@ components:
           $ref: "#/components/schemas/Price"
         currency:
           type: string
-          example: null
+          example: None
     StrategyImpact:
       description: The strategy impact
       type: object
@@ -3257,7 +3257,7 @@ components:
                 example: Pending
               rejectionReason:
                 type: string
-                example: null
+                example: None
               chainId:
                 type: integer
                 format: int32
@@ -3270,7 +3270,7 @@ components:
                 example: 2022-07-19T15:53:47.939000-04:00
               notes:
                 type: string
-                example: null
+                example: None
               primaryRoute:
                 type: string
                 example: AUTO
@@ -3282,14 +3282,14 @@ components:
                 example: MX
               venueHoldingOrder:
                 type: string
-                example: null
+                example: None
               comissionCharged:
                 type: integer
                 format: int32
                 example: 0
               exchangeOrderId:
                 type: string
-                example: null
+                example: None
               isSignificantShareHolder:
                 type: boolean
               isInsider:
@@ -3463,7 +3463,7 @@ components:
           example: 16:00:00
         suffix:
           type: string
-          example: null
+          example: None
         allows_cryptocurrency_symbols:
           type: boolean
           example: false
@@ -4026,7 +4026,7 @@ components:
           $ref: "#/components/schemas/UniversalSymbol"
         local_id:
           type: string
-          example: 3291231
+          example: "3291231"
         is_quotable:
           type: boolean
           example: true
@@ -4429,7 +4429,7 @@ components:
           enum:
             - BUY
             - SELL
-          example: Sell
+          example: SELL
         price:
           type: number
           description: Price of execution
@@ -4495,7 +4495,7 @@ components:
           $ref: "#/components/schemas/Currency"
         local_id:
           type: string
-          example: 1048101
+          example: '1048101'
         description:
           type: string
           example: Metaverse Global ETF
@@ -4707,6 +4707,32 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Currency"
+
+    UniversalSymbolTicker:
+        description: Universal symbol
+        type: object
+        properties:
+          id:
+            $ref: "#/components/schemas/Id"
+          symbol:
+            type: string
+            example: VAB.TO
+          raw_symbol:
+            type: string
+            example: VAB
+          description:
+            type: string
+            example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency:
+            $ref: "#/components/schemas/Currency"
+          exchange:
+            $ref: "#/components/schemas/Exchange"
+          type:
+            $ref: "#/components/schemas/SecurityType"
+          currencies:
+            type: array
+            items:
+              $ref: "#/components/schemas/Currency"
     UnderlyingSymbol:
       description: Underlying Symbol
       type: object
@@ -4813,7 +4839,7 @@ components:
         activated_trial_date:
           type: string
           format: dateTime
-          example: 2017-07-17T15:13:07.177712+00:00
+          example: "2017-07-17T15:13:07.177712+00:00"
         demo:
           type: boolean
           example: false
@@ -4943,4 +4969,4 @@ components:
               example: mWZPkpQh5ktbcz6N7cTRmQ==
             nonce:
               type: string
-              example: null
+              example: None
