@@ -48,6 +48,9 @@ tags:
     description:
       Reach out directly to SnapTrade to enable webhooks in order to be
       notified when certain events occur.
+  - name: Options
+    description:
+      Endpoints to search for options prices and chains as well as place options trades if supported.
 paths:
   /:
     get:
@@ -55,6 +58,7 @@ paths:
         - API Status
       summary: Get API Status
       description: Check whether the API is operational and verify timestamps.
+      operationId: checkApiStatus
       security: []
       responses:
         "200":
@@ -70,6 +74,7 @@ paths:
       tags:
         - API Disclaimer
       summary: Accept or Reject SnapTrade disclaimer agreement
+      operationId: acceptSnapTradeDisclaimer
       parameters:
         - in: query
           required: true
@@ -97,6 +102,7 @@ paths:
       tags:
         - Development Tools
       summary: Debug your signature algorithm for get requests
+      operationId: getTestSignature
       security: []
       parameters: []
       responses:
@@ -114,6 +120,7 @@ paths:
       summary:
         Debug your signature algorithm for post requests, including the request
         body
+      operationId: postTestSignature
       security: []
       parameters: []
       responses:
@@ -132,6 +139,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Gets a list of api credentials linked to SnapTrade Partner
+      operationId: getListAPICredential
       parameters: []
       responses:
         "200":
@@ -148,6 +156,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Creates a new SnapTradePartnerAPICredential object
+      operationId: postCreateAPICredential
       parameters: []
       requestBody:
         $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
@@ -165,6 +174,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Gets SnapTradePartnerAPICredential based on id
+      operationId: getCustomAPICredentialById
       parameters:
         - in: path
           name: apiCredentialsId
@@ -186,6 +196,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Updates SnapTradePartnerAPICredential object
+      operationId: putUpdateCustomAPICredential
       parameters:
         - in: path
           name: apiCredentialsId
@@ -209,6 +220,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Deletes SnapTradePartnerAPICredential object
+      operationId: deleteCustomAPICredential
       parameters:
         - in: path
           name: apiCredentialsId
@@ -227,6 +239,7 @@ paths:
       tags:
         - Authentication
       summary: Get a list of all SnapTrade users you've registered on our platform
+      operationId: getUserList
       responses:
         "200":
           description: Successfully generated a list of users
@@ -256,6 +269,7 @@ paths:
         - Authentication
       summary: Register user with SnapTrade in order to create secure brokerage
         authorizations
+      operationId: postUserRegister
       requestBody:
         $ref: "#/components/requestBodies/RegisterUserRequestBody"
       responses:
@@ -288,6 +302,7 @@ paths:
       summary:
         Delete user from SnapTrade, disabling all brokerage authorizations and
         permanently deleting all data associated with the user
+      operationId: deleteUser
       parameters:
         - in: query
           required: true
@@ -327,6 +342,7 @@ paths:
         - Authentication
       summary: Generate a redirect URI to securely login a user to the SnapTrade
         Connection Portal
+      operationId: postUserLogin
       parameters:
         - in: query
           required: true
@@ -376,6 +392,7 @@ paths:
       summary:
         Obtains an encrypted JWT tokens that should be decrypted on a user's
         local device
+      operationId: getUserJWT
       parameters:
         - in: query
           required: true
@@ -421,6 +438,7 @@ paths:
       tags:
         - Reference Data
       summary: Get metadata related to Snaptrade partner
+      operationId: getPartnerData
       parameters: []
       responses:
         "200":
@@ -458,6 +476,7 @@ paths:
       summary:
         List all accounts for the user, plus balances and positions for each
         account.
+      operationId: getUserHoldings
       parameters:
         - in: query
           required: true
@@ -507,6 +526,7 @@ paths:
       tags:
         - Account Information
       summary: List balances, positions and orders for the specified account.
+      operationId: getHoldingsByAccountId
       parameters:
         - in: path
           name: accountId
@@ -552,6 +572,7 @@ paths:
       tags:
         - Account Information
       summary: List all investment accounts for the user
+      operationId: getUserListAccount
       parameters:
         - in: query
           required: true
@@ -579,6 +600,7 @@ paths:
       tags:
         - Account Information
       summary: Return details of a specific investment account
+      operationId: getUserAccountDetailById
       parameters:
         - in: query
           required: true
@@ -612,6 +634,7 @@ paths:
       tags:
         - Account Information
       summary: Update details of an investment account
+      operationId: putUpdateUserAccountDetailById
       parameters:
         - in: query
           required: true
@@ -646,6 +669,7 @@ paths:
       tags:
         - Account Information
       summary: Get all cash balances of an investment account
+      operationId: getUserCashAccountBalance
       parameters:
         - in: query
           required: true
@@ -680,6 +704,7 @@ paths:
       tags:
         - Account Information
       summary: Get all positions of an investment account
+      operationId: getPositionsByAccountId
       parameters:
         - in: query
           required: true
@@ -714,6 +739,7 @@ paths:
       tags:
         - Trading
       summary: Get all history of orders placed in account
+      operationId: getOrdersByAccountId
       parameters:
         - in: query
           required: true
@@ -757,6 +783,7 @@ paths:
       tags:
         - Trading
       summary: Get symbol quotes
+      operationId: getQuotesByAccountId
       parameters:
         - in: query
           required: true
@@ -801,6 +828,7 @@ paths:
       tags:
         - Trading
       summary: Cancel open order in account
+      operationId: postCancelOpenOrderByAccountId
       parameters:
         - in: query
           required: true
@@ -845,6 +873,7 @@ paths:
       summary:
         Search for symbols that are supported by a brokerage account using a
         substring
+      operationId: postSearchSymbolsByAccountId
       parameters:
         - in: query
           required: true
@@ -886,6 +915,7 @@ paths:
       tags:
         - Options
       summary: Get the options holdings in the account
+      operationId: getOptionsByAccountId
       parameters:
         - in: query
           required: true
@@ -918,6 +948,7 @@ paths:
       tags:
         - Options
       summary: Get the options chain
+      operationId: getOptionChainByAccountId
       parameters:
         - in: query
           required: true
@@ -958,6 +989,7 @@ paths:
         - Options
       summary: Search for more specific option quotes from option chain. Date is
         required but can filter by min, max or min-max.
+      operationId: getOptionsSearch
       parameters:
         - in: query
           required: true
@@ -1013,6 +1045,7 @@ paths:
       tags:
         - Options
       summary: Get a strategies impact on the account
+      operationId: postOptionStrategyImpactByAccountId
       parameters:
         - in: query
           required: true
@@ -1075,6 +1108,7 @@ paths:
       tags:
         - Options
       summary: Get a price quote for a strategy
+      operationId: postOptionStrategyQuotesByAccountId
       parameters:
         - in: query
           required: true
