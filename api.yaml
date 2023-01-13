@@ -30,7 +30,7 @@ tags:
     description: Retrieve and manage user connections.
   - name: Account Information
     description: Retrieve account information, such as positions, balances, etc.
-  - name: Transactions and Reporting
+  - name: Transactions And Reporting
     description: Retrieve information on account transactions, performance,
       dividends, contributions, etc.
   - name: Trading
@@ -58,7 +58,7 @@ paths:
         - API Status
       summary: Get API Status
       description: Check whether the API is operational and verify timestamps.
-      operationId: checkApiStatus
+      operationId: ApiStatus_check
       security: []
       responses:
         "200":
@@ -74,7 +74,7 @@ paths:
       tags:
         - API Disclaimer
       summary: Accept or Reject SnapTrade disclaimer agreement
-      operationId: acceptSnapTradeDisclaimer
+      operationId: APIDisclaimer_accept
       parameters:
         - in: query
           required: true
@@ -102,7 +102,7 @@ paths:
       tags:
         - Development Tools
       summary: Debug your signature algorithm for get requests
-      operationId: getTestSignature
+      operationId: DevelopmentTools_getSignature
       security: []
       parameters: []
       responses:
@@ -120,7 +120,7 @@ paths:
       summary:
         Debug your signature algorithm for post requests, including the request
         body
-      operationId: postTestSignature
+      operationId: DevelopmentTools_postVerifySignature
       security: []
       parameters: []
       responses:
@@ -139,7 +139,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Gets a list of api credentials linked to SnapTrade Partner
-      operationId: getListAPICredential
+      operationId: CustomBrokerageAPICredentials_list
       parameters: []
       responses:
         "200":
@@ -156,7 +156,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Creates a new SnapTradePartnerAPICredential object
-      operationId: postCreateAPICredential
+      operationId: CustomBrokerageAPICredentials_create
       parameters: []
       requestBody:
         $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
@@ -174,7 +174,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Gets SnapTradePartnerAPICredential based on id
-      operationId: getCustomAPICredentialById
+      operationId: CustomBrokerageAPICredentials_getById
       parameters:
         - in: path
           name: apiCredentialsId
@@ -196,7 +196,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Updates SnapTradePartnerAPICredential object
-      operationId: putUpdateCustomAPICredential
+      operationId: CustomBrokerageAPICredentials_updateById
       parameters:
         - in: path
           name: apiCredentialsId
@@ -220,7 +220,7 @@ paths:
       tags:
         - Custom Brokerage API Credentials
       summary: Deletes SnapTradePartnerAPICredential object
-      operationId: deleteCustomAPICredential
+      operationId: CustomBrokerageAPICredentials_deleteById
       parameters:
         - in: path
           name: apiCredentialsId
@@ -239,7 +239,7 @@ paths:
       tags:
         - Authentication
       summary: Get a list of all SnapTrade users you've registered on our platform
-      operationId: getUserList
+      operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
           description: Successfully generated a list of users
@@ -269,7 +269,7 @@ paths:
         - Authentication
       summary: Register user with SnapTrade in order to create secure brokerage
         authorizations
-      operationId: postUserRegister
+      operationId: Authentication_registerSnapTradeUser
       requestBody:
         $ref: "#/components/requestBodies/RegisterUserRequestBody"
       responses:
@@ -302,7 +302,7 @@ paths:
       summary:
         Delete user from SnapTrade, disabling all brokerage authorizations and
         permanently deleting all data associated with the user
-      operationId: deleteUser
+      operationId: Authentication_deleteSnapTradeUser
       parameters:
         - in: query
           required: true
@@ -342,7 +342,7 @@ paths:
         - Authentication
       summary: Generate a redirect URI to securely login a user to the SnapTrade
         Connection Portal
-      operationId: postUserLogin
+      operationId: Authentication_loginSnapTradeUser
       parameters:
         - in: query
           required: true
@@ -392,7 +392,7 @@ paths:
       summary:
         Obtains an encrypted JWT tokens that should be decrypted on a user's
         local device
-      operationId: getUserJWT
+      operationId: Authentication_getUserJWT
       parameters:
         - in: query
           required: true
@@ -438,7 +438,7 @@ paths:
       tags:
         - Reference Data
       summary: Get metadata related to Snaptrade partner
-      operationId: getPartnerData
+      operationId: ReferenceData_getPartnerInfo
       parameters: []
       responses:
         "200":
@@ -476,7 +476,7 @@ paths:
       summary:
         List all accounts for the user, plus balances and positions for each
         account.
-      operationId: getUserHoldings
+      operationId: AccountInformation_getAllUserHoldings
       parameters:
         - in: query
           required: true
@@ -526,7 +526,7 @@ paths:
       tags:
         - Account Information
       summary: List balances, positions and orders for the specified account.
-      operationId: getHoldingsByAccountId
+      operationId: AccountInformation_getUserHoldings
       parameters:
         - in: path
           name: accountId
@@ -572,7 +572,7 @@ paths:
       tags:
         - Account Information
       summary: List all investment accounts for the user
-      operationId: getUserListAccount
+      operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
           required: true
@@ -600,7 +600,7 @@ paths:
       tags:
         - Account Information
       summary: Return details of a specific investment account
-      operationId: getUserAccountDetailById
+      operationId: AccountInformation_getUserAccountDetails
       parameters:
         - in: query
           required: true
@@ -634,7 +634,7 @@ paths:
       tags:
         - Account Information
       summary: Update details of an investment account
-      operationId: putUpdateUserAccountDetailById
+      operationId: AccountInformation_updateUserAccount
       parameters:
         - in: query
           required: true
@@ -669,7 +669,7 @@ paths:
       tags:
         - Account Information
       summary: Get all cash balances of an investment account
-      operationId: getUserCashAccountBalance
+      operationId: AccountInformation_getUserAccountBalance
       parameters:
         - in: query
           required: true
@@ -704,7 +704,7 @@ paths:
       tags:
         - Account Information
       summary: Get all positions of an investment account
-      operationId: getPositionsByAccountId
+      operationId: AccountInformation_getUserAccountPositions
       parameters:
         - in: query
           required: true
@@ -737,9 +737,9 @@ paths:
   "/accounts/{accountId}/orders":
     get:
       tags:
-        - Trading
+        - Account Information
       summary: Get all history of orders placed in account
-      operationId: getOrdersByAccountId
+      operationId: AccountInformation_getUserAccountOrders
       parameters:
         - in: query
           required: true
@@ -783,7 +783,7 @@ paths:
       tags:
         - Trading
       summary: Get symbol quotes
-      operationId: getQuotesByAccountId
+      operationId: Trading_getUserAccountQuotes
       parameters:
         - in: query
           required: true
@@ -828,7 +828,7 @@ paths:
       tags:
         - Trading
       summary: Cancel open order in account
-      operationId: postCancelOpenOrderByAccountId
+      operationId: Trading_cancelUserAccountOrder
       parameters:
         - in: query
           required: true
@@ -873,7 +873,7 @@ paths:
       summary:
         Search for symbols that are supported by a brokerage account using a
         substring
-      operationId: postSearchSymbolsByAccountId
+      operationId: ReferenceData_symbolSearchUserAccount
       parameters:
         - in: query
           required: true
@@ -915,7 +915,7 @@ paths:
       tags:
         - Options
       summary: Get the options holdings in the account
-      operationId: getOptionsByAccountId
+      operationId: Options_listOptionHoldings
       parameters:
         - in: query
           required: true
@@ -948,7 +948,7 @@ paths:
       tags:
         - Options
       summary: Get the options chain
-      operationId: getOptionChainByAccountId
+      operationId: Options_getOptionsChain
       parameters:
         - in: query
           required: true
@@ -989,7 +989,7 @@ paths:
         - Options
       summary: Search for more specific option quotes from option chain. Date is
         required but can filter by min, max or min-max.
-      operationId: getOptionsSearch
+      operationId: Options_searchOptionsQuote
       parameters:
         - in: query
           required: true
@@ -1045,7 +1045,7 @@ paths:
       tags:
         - Options
       summary: Get a strategies impact on the account
-      operationId: postOptionStrategyImpactByAccountId
+      operationId: Options_getOptionsImpact
       parameters:
         - in: query
           required: true
@@ -1108,7 +1108,7 @@ paths:
       tags:
         - Options
       summary: Get a price quote for a strategy
-      operationId: postOptionStrategyQuotesByAccountId
+      operationId: Options_getStrategyQuote
       parameters:
         - in: query
           required: true
@@ -1164,6 +1164,7 @@ paths:
         - Options
       summary: Place the strategy order; impact not required but the
         StrategyOrderQuotes object is
+      operationId: Options_placeOptionsStrategyOrder
       parameters:
         - in: query
           required: true
@@ -1218,6 +1219,7 @@ paths:
       tags:
         - Connections
       summary: List all brokerage authorizations for the user
+      operationId: Connections_listBrokerageAuthorizations
       parameters:
         - in: query
           required: true
@@ -1245,6 +1247,7 @@ paths:
       tags:
         - Connections
       summary: Get detail of a specific brokerage authorizations for the user
+      operationId: Connections_detailBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
@@ -1275,6 +1278,7 @@ paths:
       tags:
         - Connections
       summary: Remove a brokerage authorization.
+      operationId: Connections_removeBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
@@ -1306,6 +1310,7 @@ paths:
       tags:
         - Reference Data
       summary: List of all brokerages.
+      operationId: ReferenceData_listAllBrokerages
       parameters: []
       responses:
         "200":
@@ -1323,6 +1328,7 @@ paths:
       tags:
         - Reference Data
       summary: List of all brokerage authorization types
+      operationId: ReferenceData_listAllBrokerageAuthorizationType
       parameters:
         - in: query
           required: false
@@ -1347,6 +1353,7 @@ paths:
       tags:
         - Reference Data
       summary: List of all supported currencies
+      operationId: ReferenceData_listAllCurrencies
       parameters: []
       responses:
         "200":
@@ -1364,6 +1371,7 @@ paths:
       tags:
         - Error Logs
       summary: Retrieve error logs on behalf of your SnapTrade users
+      operationId: ErrorLogs_listUserErrors
       parameters:
         - in: query
           required: true
@@ -1389,6 +1397,7 @@ paths:
       tags:
         - Reference Data
       summary: Return the exchange rates of all supported currencies
+      operationId: ReferenceData_listAllCurrenciesRates
       parameters: []
       responses:
         "200":
@@ -1404,6 +1413,7 @@ paths:
       tags:
         - Reference Data
       summary: Return the exchange rate of a currency pair
+      operationId: ReferenceData_getCurrencyExchangeRatePair
       parameters:
         - in: path
           name: currencyPair
@@ -1423,6 +1433,7 @@ paths:
       tags:
         - Reference Data
       summary: Return list of stock exchanges on Passiv and their suffixes
+      operationId: ReferenceData_getStockExchanges
       parameters: []
       responses:
         "200":
@@ -1438,6 +1449,7 @@ paths:
       tags:
         - Reference Data
       summary: List of all security types.
+      operationId: ReferenceData_getSecurityTypes
       parameters: []
       responses:
         "200":
@@ -1455,6 +1467,7 @@ paths:
       tags:
         - Portfolio Management
       summary: List of model asset class
+      operationId: PortfolioManagement_listAssetClasses
       responses:
         "200":
           description: A list of all model asset class objects for the authenticated user.
@@ -1468,6 +1481,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Create a new model asset class
+      operationId: PortfolioManagement_createAssetClass
       responses:
         "200":
           description: A new asset class is created.
@@ -1480,6 +1494,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get details of a model asset class
+      operationId: PortfolioManagement_detailAssetClass
       parameters:
         - in: path
           name: modelAssetClassId
@@ -1498,6 +1513,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Updates model asset class objects
+      operationId: PortoflioManagement_updateAssetClass
       parameters:
         - in: path
           name: modelAssetClassId
@@ -1525,6 +1541,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Deletes a model asset class
+      operationId: PortfolioManagement_deleteAssetClass
       parameters:
         - in: path
           name: modelAssetClassId
@@ -1540,6 +1557,7 @@ paths:
       tags:
         - Portfolio Management
       summary: List of model portfolio
+      operationId: PortfolioManagement_listModelPortfolio
       responses:
         "200":
           description: A list of all model portfolio objects for the authenticated user.
@@ -1553,6 +1571,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Creates a new model portfolio
+      operationId: PortfolioManagement_createModelPortfolio
       responses:
         "200":
           description: A new model portfolio is created.
@@ -1565,6 +1584,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get details of a model portfolio
+      operationId: PortfolioManagement_getModelDetailsById
       parameters:
         - in: path
           name: modelPortfolioId
@@ -1583,6 +1603,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Updates model portfolio object
+      operationId: PortfolioManagement_modifyModelPortfolioById
       parameters:
         - in: path
           name: modelPortfolioId
@@ -1618,6 +1639,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Deletes a model portfolio
+      operationId: PortfolioManagement_deleteModelPortfolioById
       parameters:
         - in: path
           name: modelPortfolioId
@@ -1633,6 +1655,7 @@ paths:
       tags:
         - Portfolio Management
       summary: List all portfolio groups
+      operationId: PortfolioManagement_list
       parameters:
         - in: query
           required: true
@@ -1659,6 +1682,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Create new portfolio group
+      operationId: PortfolioManagement_create
       parameters:
         - in: query
           required: true
@@ -1690,6 +1714,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get details of a target portfolio
+      operationId: PortfolioManagement_getPortfolioDetailsById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1711,6 +1736,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Update an existing target portfolio.
+      operationId: PortfolioManagement_savePortfolio
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1740,6 +1766,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Remove a target portfolio.
+      operationId: PortfolioManagement_deletePortfoli
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1766,6 +1793,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get all accounts associated with a portfolio group
+      operationId: PortfolioManagment_listPortfolioAccounts
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1790,6 +1818,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get sum of cash balances in portfolio group
+      operationId: PortfolioManagement_getPortfolioBalances
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1820,6 +1849,7 @@ paths:
       tags:
         - Portfolio Management
       summary: List of trades to make to rebalance portfolio group
+      operationId: PortfolioManagement_listCalculatedTrades
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1840,6 +1870,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Return an individual trade
+      operationId: PortfolioManagement_getCalculatedTradeById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1876,6 +1907,7 @@ paths:
       tags:
         - Trading
       summary: Return the impact of placing a series of trades on the portfolio
+      operationId: Trading_getCalculatedTradesImpact
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1904,8 +1936,8 @@ paths:
     get:
       tags:
         - Trading
-        - Portfolio Management
       summary: Return details of a specific trade before it's placed
+      operationId: Trading_getCalculatedTradeImpactById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1938,8 +1970,8 @@ paths:
     patch:
       tags:
         - Trading
-        - Portfolio Management
       summary: Modify units of a trade before it is placed
+      operationId: Trading_modifyCalculatedTradeById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -1979,6 +2011,7 @@ paths:
       tags:
         - Trading
       summary: Place orders for the CalculatedTrades in series
+      operationId: Trading_placeCalculatedTrades
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2007,7 +2040,8 @@ paths:
     get:
       tags:
         - Portfolio Management
-      summary: Get an array of excluded assets associated with a portfolio group
+      summary: Get an array of excluded assets associated with a portfolio group\
+      operationId: PortfolioManagement_getPortoflioExcludedAssets
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2033,6 +2067,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Adds an asset to exclude to a portfolio group
+      operationId: PortfolioManagement_addPortfolioExcludedAsset
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2058,6 +2093,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Unexclude an asset from a portfolio group
+      operationId: PortfolioManagement_deleteExcludedAsset
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2081,6 +2117,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Import target allocation based on portfolio group
+      operationId: PortfolioManagement_importModelPortfolio
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2107,6 +2144,7 @@ paths:
       summary:
         Return a whole bunch of relevant information relating to a portfolio
         group.
+      operationId: PortfolioManagement_getPortfolioInfo
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2129,6 +2167,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get total of each postions owned in portfolio group
+      operationId: PortfolioManagement_getPortfolioPositions
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2159,6 +2198,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get portfolio group settings
+      operationId: PortfolioManagement_getPortfolioSettings
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2180,6 +2220,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Updates portfolio group settings
+      operationId: PortfolioManagement_updatePortfolioSettings
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2204,6 +2245,7 @@ paths:
       summary:
         Search for symbols limited to brokerages under the specified portfolio
         group
+      operationId: PortfolioManagement_searchPortfolioSymbols
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2233,6 +2275,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get all target assets under the specified PortfolioGroup.
+      operationId: PortfolioManagement_getPortfolioTargets
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2265,6 +2308,7 @@ paths:
         Set a new list of target assets under the specified PortfolioGroup. All
         existing target assets under this portfolio group will be replaced with
         the new list.
+      operationId: PortfolioManagement_setPortfolioTargets
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2298,6 +2342,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Get a specific target from a portfolio group
+      operationId: PortfolioManagement_getPortfolioTargetById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2326,6 +2371,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Update a TargetAsset under the specified PortfolioGroup.
+      operationId: PortfolioManagement_updatePortfolioTargetById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2362,6 +2408,7 @@ paths:
       tags:
         - Portfolio Management
       summary: Remove a TargetAsset.
+      operationId: PortfolioManagement_deletePortfolioTargetById
       parameters:
         - in: path
           name: portfolioGroupId
@@ -2397,6 +2444,7 @@ paths:
       tags:
         - Reference Data
       summary: Search for symbols
+      operationId: ReferenceData_getSymbols
       parameters: []
       responses:
         "200":
@@ -2414,38 +2462,24 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SymbolQuery"
-  /symbols/{symbolId}:
-    get:
-      tags:
-        - Reference Data
-      summary: Get details of a symbol
-      parameters:
-        - in: path
-          name: symbolId
-          required: true
-          description: The ID of the UniversalSymbol to get.
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Successfully gets a symbol
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/UniversalSymbol"
-        default:
-          description: Unexpected error
   /symbols/{ticker}:
     get:
       tags:
         - Reference Data
       summary: Get details of a symbol by the ticker
+      operationId: ReferenceData_getSymbolsByTicker
       parameters:
         - in: path
           name: ticker
           required: true
           description: The ticker of the UniversalSymbol to get.
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: symbolId
+          required: false
+          description: OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
           schema:
             type: string
             format: uuid
@@ -2465,6 +2499,7 @@ paths:
       tags:
         - Trading
       summary: Check impact of trades on account.
+      operationId: Trading_getOrderImpact
       parameters:
         - in: query
           required: true
@@ -2504,6 +2539,7 @@ paths:
       tags:
         - Trading
       summary: Place order
+      operationId: Trading_placeOrder
       parameters:
         - in: path
           name: tradeId
@@ -2542,6 +2578,7 @@ paths:
       tags:
         - Trading
       summary: Place a OCO (One Cancels Other) order
+      operationId: Trading_placeOCOOrder
       parameters:
         - in: query
           required: true
@@ -2570,11 +2607,12 @@ paths:
           description: Unexpected Error
       requestBody:
         $ref: "#/components/requestBodies/OCORequestBody"
-  /activities/:
+  /activities:
     get:
       tags:
-        - Transactions and Reporting
+        - Transactions And Reporting
       summary: Get transaction history for a user
+      operationId: TransactionsAndReporting_getActivities
       description:
         Returns activities (transactions) for a user. Specifing start and
         end date is highly recommended for automatic calls for better
@@ -2622,8 +2660,9 @@ paths:
   /performance/custom:
     get:
       tags:
-        - Transactions and Reporting
+        - Transactions And Reporting
       summary: Get performance information for a specific timeframe
+      operationId: TransactionsAndReporting_getReportingCustomRange
       description:
         Returns performance information (contributions, dividends, rate of
         return, etc) for a specific timeframe. Total Equity Timeframe and Rate
@@ -2689,6 +2728,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_connectionAdded
       requestBody:
         description: Information about a new connection in the system
         content:
@@ -2702,6 +2742,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_connectionDeleted
       requestBody:
         description: Information about the deleted connection
         content:
@@ -2717,6 +2758,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_userRegistered
       requestBody:
         description: Information about the newly registered user
         content:
@@ -2732,6 +2774,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_userDeleted
       requestBody:
         description: Information about the deleted user
         content:
@@ -2746,6 +2789,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_accountAdded
       requestBody:
         description: Information about the newly added account
         content:
@@ -2761,6 +2805,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_accountDeleted
       requestBody:
         description: Information about the deleted account
         content:
@@ -2776,6 +2821,7 @@ paths:
     post:
       tags:
         - Webhooks
+      operationId: Webhooks_updatedTransactions
       requestBody:
         description: Information about the account for which transactions have been updated
         content:
