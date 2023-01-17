@@ -97,43 +97,6 @@ paths:
                 $ref: "#/components/schemas/SnapTradeAPIDisclaimerAcceptStatus"
         "500":
           description: Unexpected Error. Please contact support
-  /snapTrade/mockSignature:
-    get:
-      tags:
-        - Development Tools
-      summary: Debug your signature algorithm for get requests
-      operationId: DevelopmentTools_getSignature
-      security: []
-      parameters: []
-      responses:
-        "200":
-          description: Returns data needed to verify that request signature is correct
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MockSignatureResponse"
-        "500":
-          description: Unexpected Error. Please contact support
-    post:
-      tags:
-        - Development Tools
-      summary:
-        Debug your signature algorithm for post requests, including the request
-        body
-      operationId: DevelopmentTools_postVerifySignature
-      security: []
-      parameters: []
-      responses:
-        "200":
-          description: Returns data needed to verify that request signature is correct
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MockSignatureResponse"
-        "500":
-          description: Unexpected Error. Please contact support
-      requestBody:
-        $ref: "#/components/requestBodies/MockSignatureRequestBody"
   /snapTrade/apiCredentials:
     get:
       tags:
@@ -169,7 +132,7 @@ paths:
                 $ref: "#/components/schemas/SnapTradePartnerAPICredential"
         "500":
           description: Unexpected Error. Please contact support
-  "/snapTrade/apiCredentials/{apiCredentialsId}":
+  /snapTrade/apiCredentials/{apiCredentialsId}:
     get:
       tags:
         - Custom Brokerage API Credentials
@@ -664,7 +627,7 @@ paths:
                   $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error
-  "/accounts/{accountId}/balances":
+  /accounts/{accountId}/balances:
     get:
       tags:
         - Account Information
@@ -699,7 +662,7 @@ paths:
                   $ref: "#/components/schemas/Balance"
         default:
           description: Unexpected error
-  "/accounts/{accountId}/positions":
+  /accounts/{accountId}/positions:
     get:
       tags:
         - Account Information
@@ -734,7 +697,7 @@ paths:
                   $ref: "#/components/schemas/Position"
         default:
           description: Unexpected error
-  "/accounts/{accountId}/orders":
+  /accounts/{accountId}/orders:
     get:
       tags:
         - Account Information
@@ -943,7 +906,7 @@ paths:
                 $ref: "#/components/schemas/OptionsHoldings"
         "500":
           description: Unexpected error
-  "/accounts/{accountId}/options_chain":
+  "/accounts/{accountId}/optionsChain":
     get:
       tags:
         - Options
@@ -970,7 +933,7 @@ paths:
         - in: query
           name: symbol
           required: true
-          description: brokerage symbol to get quotes for.
+          description: Universal symbol ID if symbol
           schema:
             type: string
             format: uuid
@@ -983,69 +946,12 @@ paths:
                 $ref: "#/components/schemas/OptionChain"
         "500":
           description: Unexpected error
-  "/accounts/{accountId}/options_search":
-    get:
-      tags:
-        - Options
-      summary: Search for more specific option quotes from option chain. Date is
-        required but can filter by min, max or min-max.
-      operationId: Options_searchOptionsQuote
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account get positions.
-          schema:
-            type: string
-            format: uuid
-        - in: query
-          name: Date
-          required: true
-          description:
-            The date of the options you are searching for. Will return closest
-            date that has not passed. Format- [YYYY-MM-DD]
-          schema:
-            type: string
-            format: dateTime
-        - in: query
-          name: min_strike
-          required: false
-          description: The minimum strike price for the desired contract
-          schema:
-            type: integer
-            format: integer
-        - in: query
-          name: max_strike
-          required: false
-          description: The max strike price for the desired contract
-          schema:
-            type: integer
-            format: integer
-      responses:
-        "200":
-          description: A successful query
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OptionChain"
-        "500":
-          description: Unexpected error
-  "/accounts/{accountId}/strategy_impact":
+  "/accounts/{accountId}/optionStrategy":
     post:
       tags:
         - Options
-      summary: Get a strategies impact on the account
-      operationId: Options_getOptionsImpact
+      summary: Creates an option strategy object that will be used to place an option strategy order
+      operationId: Options_getOptionStrategy
       parameters:
         - in: query
           required: true
@@ -1057,89 +963,6 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account get positions.
-          schema:
-            type: string
-            format: uuid
-        - in: query
-          name: StrategyQuotesRecord
-          required: true
-          description: The strategy quotes record returned from the strategy_quotes endpoint
-          schema:
-            type: object
-            format: StrategyQuotesRecord
-        - in: query
-          name: strike_price
-          required: false
-          description: The strike price, only needed if the order is a limit order
-          schema:
-            type: integer
-            format: decimal
-        - in: query
-          name: primary_route
-          required: false
-          description: The desired route for the order, default is "AUTO"
-          schema:
-            type: string
-            format: string
-        - in: query
-          name: secondar_route
-          required: false
-          description: The desired secondary route for the order, default is "AUTO"
-          schema:
-            type: string
-            format: string
-      requestBody:
-        $ref: "#/components/requestBodies/CancelOrderRequestBody"
-      responses:
-        "200":
-          description: Impact of option strategy on user account
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StrategyImpact"
-        "500":
-          description: Unexpected error
-  "/accounts/{accountId}/strategy_quotes":
-    post:
-      tags:
-        - Options
-      summary: Get a price quote for a strategy
-      operationId: Options_getStrategyQuote
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: query
-          required: true
-          name: legs
-          schema:
-            $ref: "#/components/schemas/Timestamp"
-        - in: query
-          required: true
-          name: strategy
-          schema:
-            type: string
-        - in: query
-          required: true
-          name: time_in_force
-          schema:
-            type: string
-        - in: query
-          required: true
-          name: order_type
-          schema:
-            type: string
         - in: path
           name: accountId
           required: true
@@ -1148,23 +971,25 @@ paths:
             type: string
             format: uuid
       requestBody:
-        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
+        $ref: "#/components/requestBodies/OptionStrategyRequestBody"
+
       responses:
         "200":
           description: Order Quotes
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StrategyOrderQuotes"
+                $ref: "#/components/schemas/StrategyQuotes"
         "500":
           description: Unexpected error
-  "/accounts/{accountId}/strategy_place":
-    post:
+
+
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+    get:
       tags:
         - Options
-      summary: Place the strategy order; impact not required but the
-        StrategyOrderQuotes object is
-      operationId: Options_placeOptionsStrategyOrder
+      summary: Get latest market data of option strategy
+      operationId: Options_getOptionsStrategyQuote
       parameters:
         - in: query
           required: true
@@ -1176,26 +1001,6 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
-        - in: query
-          required: true
-          name: strategy_order
-          schema:
-            $ref: "#/components/schemas/Timestamp"
-        - in: query
-          required: true
-          name: strike_price
-          schema:
-            $ref: "#/components/schemas/Timestamp"
-        - in: query
-          required: false
-          name: primary_route
-          schema:
-            $ref: "#/components/schemas/Timestamp"
-        - in: query
-          required: false
-          name: secondary_route
-          schema:
-            $ref: "#/components/schemas/Timestamp"
         - in: path
           name: accountId
           required: true
@@ -1203,18 +1008,64 @@ paths:
           schema:
             type: string
             format: uuid
-      requestBody:
-        $ref: "#/components/requestBodies/CancelOrderRequestBody"
+        - in: path
+          required: true
+          name: optionStrategyId
+          description: Option strategy id obtained from response when creating option strategy object
+          schema:
+            $ref: "#/components/schemas/Id"
       responses:
         "200":
-          description: Order Record of canceled order
+          description: Order Quotes
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StrategyOrderPlace"
+                $ref: "#/components/schemas/StrategyQuotes"
         "500":
           description: Unexpected error
-  /authorizations:
+
+  "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute":
+    post:
+      tags:
+        - Options
+      summary: Place an option strategy order on the brokerage
+      operationId: Options_placeOptionStrategy
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account get positions.
+          schema:
+            $ref: "#/components/schemas/Id"
+        - in: path
+          name: optionStrategyId
+          required: true
+          description: Option strategy id obtained from response when creating option strategy object
+          schema:
+            $ref: "#/components/schemas/Id"
+      requestBody:
+        $ref: "#/components/requestBodies/OrderStrategyExecuteBody"
+
+      responses:
+        "200":
+          description: Status of strategy order placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StrategyOrderRecord"
+        "500":
+          description: Unexpected error
+  "/authorizations":
     get:
       tags:
         - Connections
@@ -1305,7 +1156,7 @@ paths:
           description: The specified authorizationId was not found.
         default:
           description: Unexpected error.
-  /brokerages:
+  "/brokerages":
     get:
       tags:
         - Reference Data
@@ -1323,7 +1174,7 @@ paths:
                   $ref: "#/components/schemas/Brokerage"
         default:
           description: Unexpected error.
-  /brokerageAuthorizationTypes:
+  "/brokerageAuthorizationTypes":
     get:
       tags:
         - Reference Data
@@ -1408,7 +1259,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ExchangeRatePairs"
-  "/currencies/rates/{currencyPair}":
+  /currencies/rates/{currencyPair}:
     get:
       tags:
         - Reference Data
@@ -1489,7 +1340,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModelAssetClassDetails"
-  "/modelAssetClass/{modelAssetClassId}":
+  /modelAssetClass/{modelAssetClassId}:
     get:
       tags:
         - Portfolio Management
@@ -2494,6 +2345,47 @@ paths:
           description: No symbol with the specified ticker found.
         default:
           description: Unexpected error
+  /trade/place:
+    post:
+      tags:
+        - Trading
+      summary: Place a trade with NO validation.
+      operationId: Trading_placeForceOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+
+      responses:
+        "200":
+          description: Trade sucessfully placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
   /trade/impact:
     post:
       tags:
@@ -2534,7 +2426,7 @@ paths:
           description: Unexpected Error
       requestBody:
         $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
-  "/trade/{tradeId}":
+  /trade/{tradeId}:
     post:
       tags:
         - Trading
@@ -2936,6 +2828,49 @@ components:
                 description: The ID of first trade object obtained from trade/impact endpoint
               second_trade_id:
                 description: The ID of second trade object obtained from trade/impact endpoint
+
+    OptionStrategyRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["underlying_symbol_id", "legs", "strategy_type"]
+            properties:
+              underlying_symbol_id:
+                $ref: "#/components/schemas/Id"
+              legs:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OptionLeg"
+              strategy_type:
+                type: string
+                enum:
+                - CUSTOM
+
+    OrderStrategyExecuteBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["order_type", "time_in_force", "price"]
+            properties:
+              order_type:
+                type: string
+                enum:
+                  - Limit
+                  - Market
+                  - NetDebit
+                  - NetCredit
+              time_in_force:
+                type: string
+                enum:
+                  - DAY
+                  - GTC
+              price:
+                $ref: "#/components/schemas/Price"
+
     SnapTradeAPIDisclaimerAcceptRequestBody:
       required: true
       content:
@@ -3127,6 +3062,30 @@ components:
         - ACTIVATED
         - PENDING_RISK_REVIEW
         - CONTINGENT_ORDER
+
+    OptionsPosition:
+      description: Option Holdings
+      type: object
+      properties:
+        symbol:
+          $ref: "#/components/schemas/Id"
+        description:
+          type: string
+          example: "SPY PUT Aug 2022"
+        option_symbol:
+          $ref: "#/components/schemas/OptionsSymbol"
+        price:
+          $ref: "#/components/schemas/Price"
+        units:
+          type: number
+          example: 10
+        currency:
+          $ref: "#/components/schemas/Currency"
+        average_purchase_price:
+          type: number
+          example: 108.3353
+          description: Average purchase price for this position
+
     OptionsHoldings:
       description: Option Holdings
       type: object
@@ -3142,8 +3101,11 @@ components:
         price:
           $ref: "#/components/schemas/Price"
         currency:
-          type: string
-          example: None
+            $ref: "#/components/schemas/Currency"
+        average_purchase_price:
+          type: number
+          example: 108.3353
+          description: Average purchase price for this position
     StrategyImpact:
       description: The strategy impact
       type: object
@@ -3428,6 +3390,128 @@ components:
                 format: nullable
               isCrossZero:
                 type: boolean
+
+    OptionStrategy:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        underlying_symbol_id:
+          $ref: "#/components/schemas/UniversalSymbol"
+        strategy_type:
+          type: string
+          example: BUTTERFLY
+        number_of_legs:
+          type: number
+          example: 2
+        legs:
+          type: array
+          items:
+            properties:
+              option_symbol_id:
+                type: string
+                example: AAPLC20221111
+              index:
+                type: number
+                example: 1
+              action:
+                type: string
+                example: BUY_TO_OPEN
+              quantity:
+                type: number
+                example: 10
+
+
+    StrategyQuotes:
+      type: object
+      properties:
+        strategy:
+          $ref: "#/components/schemas/OptionStrategy"
+        open_price:
+          $ref: "#/components/schemas/Price"
+        bid_price:
+          $ref: "#/components/schemas/Price"
+        ask_price:
+          $ref: "#/components/schemas/Price"
+        volatility:
+          type: number
+          example: 0.141
+        greek:
+          type: object
+          properties:
+            delta:
+                type: number
+                example: 0.1
+            gamma:
+                type: number
+                example: 0.1
+            theta:
+                type: number
+                example: 0.1
+            vega:
+                type: number
+                example: 0.1
+            rho:
+                type: number
+                example: 0.1
+    StrategyOrderRecord:
+      description: Strategy order record
+      type: object
+      properties:
+        strategy:
+          $ref: "#/components/schemas/OptionStrategy"
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACCEPTED
+            - FAILED
+            - REJECTED
+            - CANCELED
+            - PARTIAL_CANCELED
+            - CANCEL_PENDING
+            - EXECUTED
+            - PARTIAL
+            - REPLACE_PENDING
+            - REPLACED
+            - STOPPED
+            - SUSPENDED
+            - EXPIRED
+            - QUEUED
+            - TRIGGERED
+            - ACTIVATED
+            - PENDING_RISK_REVIEW
+            - CONTINGENT_ORDER
+        filled_quantity:
+          type: number
+          example: 10
+        open_quantity:
+          type: number
+          example: 10
+        closed_quantity:
+          type: number
+          example: 10
+        order_type:
+          type: string
+          enum:
+            - Limit
+            - Market
+            - NetDebit
+            - NetCredit
+        time_in_force:
+          type: string
+          enum:
+            - DAY
+            - GTC
+        limit_price:
+          $ref: "#/components/schemas/Price"
+        execution_price:
+          $ref: "#/components/schemas/Price"
+        time_placed:
+          $ref: "#/components/schemas/Time"
+        time_updated:
+          $ref: "#/components/schemas/Time"
+
     SnapTradeHoldingsAccount:
       description: SnapTradeUser Investment Account
       type: object
@@ -4868,6 +4952,24 @@ components:
         is_tradable:
           type: boolean
           example: true
+    OptionLeg:
+      description: Option Leg
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - BUY_TO_OPEN
+            - BUY_TO_CLOSE
+            - SELL_TO_OPEN
+            - SELL_TO_CLOSE
+        option_symbol_id:
+          type: string
+          description: Obtained from calling options chain endpoint (option_id)
+          example: SPY220819P00200000
+        quantity:
+          type: number
+          example: 1
     SecurityType:
       description: Security Type
       type: object
