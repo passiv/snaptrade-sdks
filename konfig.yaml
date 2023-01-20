@@ -47,6 +47,7 @@ generators:
       script:
         - tox test/test_getting_started.py::TestGettingStarted::testGettingStarted
     outputDirectory: sdks/python
+    readmeSnippet: snippets/python.py
     files:
       configuration.mustache:
         destinationFilename: snaptrade_client/configuration.py
