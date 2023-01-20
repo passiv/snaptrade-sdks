@@ -23,7 +23,7 @@ requiredEnvironmentVariables:
   - SNAPTRADE_CLIENT_ID
 generators:
   java:
-    version: 1.0.2
+    version: 2.0.0
     outputDirectory: sdks/java
     files:
       gitignore.mustache:
@@ -43,7 +43,7 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 1.0.1
+    version: 2.0.0
     test:
       script:
         - tox test/test_getting_started.py::TestGettingStarted::testGettingStarted
@@ -68,7 +68,7 @@ generators:
         destinationFilename: common.ts
       README.mustache:
         destinationFilename: README.md
-    version: 1.0.3
+    version: 2.0.0
     npmName: snaptrade-typescript-sdk
     git:
       userId: passiv

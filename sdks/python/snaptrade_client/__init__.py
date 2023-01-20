@@ -11,7 +11,7 @@
 """
 
 
-__version__ = "1.0.1"
+__version__ = "2.0.0"
 
 # import ApiClient
 from snaptrade_client.api_client import ApiClient
