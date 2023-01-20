@@ -24,6 +24,13 @@ class TestOptionsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_get_option_strategy(self):
+        """Test case for get_option_strategy
+
+        Creates an option strategy object that will be used to place an option strategy order  # noqa: E501
+        """
+        pass
+
     def test_get_options_chain(self):
         """Test case for get_options_chain
 
@@ -31,17 +38,10 @@ class TestOptionsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_options_impact(self):
-        """Test case for get_options_impact
+    def test_get_options_strategy_quote(self):
+        """Test case for get_options_strategy_quote
 
-        Get a strategies impact on the account  # noqa: E501
-        """
-        pass
-
-    def test_get_strategy_quote(self):
-        """Test case for get_strategy_quote
-
-        Get a price quote for a strategy  # noqa: E501
+        Get latest market data of option strategy  # noqa: E501
         """
         pass
 
@@ -52,17 +52,10 @@ class TestOptionsApi(unittest.TestCase):
         """
         pass
 
-    def test_place_options_strategy_order(self):
-        """Test case for place_options_strategy_order
+    def test_place_option_strategy(self):
+        """Test case for place_option_strategy
 
-        Place the strategy order; impact not required but the StrategyOrderQuotes object is  # noqa: E501
-        """
-        pass
-
-    def test_search_options_quote(self):
-        """Test case for search_options_quote
-
-        Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.  # noqa: E501
+        Place an option strategy order on the brokerage  # noqa: E501
         """
         pass
 

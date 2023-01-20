@@ -26,8 +26,6 @@ generators:
     version: 2.0.0
     outputDirectory: sdks/java
     files:
-      gitignore.mustache:
-        destinationFilename: .gitignore
       Configuration.mustache:
         destinationFilename: src/main/java/com/konfigthis/client/Configuration.java
       ApiClient.mustache:
@@ -38,8 +36,6 @@ generators:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
-      README.mustache:
-        destinationFilename: README.md
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
@@ -53,8 +49,6 @@ generators:
         destinationFilename: snaptrade_client/configuration.py
       rest.mustache:
         destinationFilename: snaptrade_client/rest.py
-      README.mustache:
-        destinationFilename: README.md
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
@@ -66,8 +60,6 @@ generators:
         destinationFilename: configuration.ts
       common.mustache:
         destinationFilename: common.ts
-      README.mustache:
-        destinationFilename: README.md
     version: 2.0.0
     npmName: snaptrade-typescript-sdk
     git:

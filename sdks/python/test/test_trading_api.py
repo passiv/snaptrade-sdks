@@ -73,6 +73,13 @@ class TestTradingApi(unittest.TestCase):
         """
         pass
 
+    def test_place_force_order(self):
+        """Test case for place_force_order
+
+        Place a trade with NO validation.  # noqa: E501
+        """
+        pass
+
     def test_place_oco_order(self):
         """Test case for place_oco_order
 
