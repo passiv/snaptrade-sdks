@@ -61,6 +61,7 @@ generators:
       repoId: snaptrade-sdks/tree/main/sdks/python
   typescript:
     outputDirectory: sdks/typescript
+    readmeSnippet: snippets/typescript.ts
     files:
       tsconfig.mustache:
         destinationFilename: tsconfig.json
