@@ -1,4 +1,4 @@
-## snaptrade-typescript-sdk@2.0.0
+## snaptrade-typescript-sdk@2.0.2
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
