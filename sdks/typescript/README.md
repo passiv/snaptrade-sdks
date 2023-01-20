@@ -47,7 +47,8 @@ const {
   AccountInformationApi,
 } = require("snaptrade-typescript-sdk");
 
-function uuid() {
+// Should be replaced with function to get user ID
+function getUserId() {
   var d = new Date().getTime(); //Timestamp
   var d2 =
     (typeof performance !== "undefined" &&
@@ -82,7 +83,7 @@ async function main() {
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
-  const userId = uuid();
+  const userId = getUserId();
   const authenticationApiInst = new AuthenticationApi(config);
   const { userSecret } = (
     await authenticationApiInst.registerSnapTradeUser({
