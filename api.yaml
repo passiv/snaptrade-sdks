@@ -7,7 +7,7 @@ info:
   contact:
     email: api@snaptrade.com
   x-konfig-ignore:
-    no-additional-properties: true
+    potential-incorrect-type: true
 servers:
   - description: SnapTrade Production API
     url: https://api.snaptrade.com/api/v1
@@ -49,8 +49,7 @@ tags:
       Reach out directly to SnapTrade to enable webhooks in order to be
       notified when certain events occur.
   - name: Options
-    description:
-      Endpoints to search for options prices and chains as well as place options trades if supported.
+    description: Endpoints to search for options prices and chains as well as place options trades if supported.
 paths:
   /:
     get:
@@ -982,7 +981,6 @@ paths:
                 $ref: "#/components/schemas/StrategyQuotes"
         "500":
           description: Unexpected error
-
 
   /accounts/{accountId}/optionStrategy/{optionStrategyId}:
     get:
@@ -2846,7 +2844,7 @@ components:
               strategy_type:
                 type: string
                 enum:
-                - CUSTOM
+                  - CUSTOM
 
     OrderStrategyExecuteBody:
       required: true
@@ -3101,7 +3099,7 @@ components:
         price:
           $ref: "#/components/schemas/Price"
         currency:
-            $ref: "#/components/schemas/Currency"
+          $ref: "#/components/schemas/Currency"
         average_purchase_price:
           type: number
           example: 108.3353
@@ -3421,7 +3419,6 @@ components:
                 type: number
                 example: 10
 
-
     StrategyQuotes:
       type: object
       properties:
@@ -3440,20 +3437,20 @@ components:
           type: object
           properties:
             delta:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             gamma:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             theta:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             vega:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             rho:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
     StrategyOrderRecord:
       description: Strategy order record
       type: object
@@ -4659,7 +4656,7 @@ components:
           $ref: "#/components/schemas/Currency"
         local_id:
           type: string
-          example: '1048101'
+          example: "1048101"
         description:
           type: string
           example: Metaverse Global ETF
@@ -4873,30 +4870,30 @@ components:
             $ref: "#/components/schemas/Currency"
 
     UniversalSymbolTicker:
-        description: Universal symbol
-        type: object
-        properties:
-          id:
-            $ref: "#/components/schemas/Id"
-          symbol:
-            type: string
-            example: VAB.TO
-          raw_symbol:
-            type: string
-            example: VAB
-          description:
-            type: string
-            example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
+      description: Universal symbol
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        symbol:
+          type: string
+          example: VAB.TO
+        raw_symbol:
+          type: string
+          example: VAB
+        description:
+          type: string
+          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+        currency:
+          $ref: "#/components/schemas/Currency"
+        exchange:
+          $ref: "#/components/schemas/Exchange"
+        type:
+          $ref: "#/components/schemas/SecurityType"
+        currencies:
+          type: array
+          items:
             $ref: "#/components/schemas/Currency"
-          exchange:
-            $ref: "#/components/schemas/Exchange"
-          type:
-            $ref: "#/components/schemas/SecurityType"
-          currencies:
-            type: array
-            items:
-              $ref: "#/components/schemas/Currency"
     UnderlyingSymbol:
       description: Underlying Symbol
       type: object
