@@ -1,7 +1,7 @@
 # snaptrade-sdks
 
-To regenerate:
+### [Java](sdks/java)
 
-```
-konfig generate
-```
+### [Python](sdks/python)
+
+### [TypeScript](sdks/typescript)
