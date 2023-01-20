@@ -179,12 +179,11 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**removeBrokerageAuthorization**](docs/ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
 *ErrorLogsApi* | [**listUserErrors**](docs/ErrorLogsApi.md#listUserErrors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
-*OptionsApi* | [**getOptionsChain**](docs/OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/options_chain | Get the options chain
-*OptionsApi* | [**getOptionsImpact**](docs/OptionsApi.md#getOptionsImpact) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account
-*OptionsApi* | [**getStrategyQuote**](docs/OptionsApi.md#getStrategyQuote) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy
+*OptionsApi* | [**getOptionStrategy**](docs/OptionsApi.md#getOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order
+*OptionsApi* | [**getOptionsChain**](docs/OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain
+*OptionsApi* | [**getOptionsStrategyQuote**](docs/OptionsApi.md#getOptionsStrategyQuote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
 *OptionsApi* | [**listOptionHoldings**](docs/OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
-*OptionsApi* | [**placeOptionsStrategyOrder**](docs/OptionsApi.md#placeOptionsStrategyOrder) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is
-*OptionsApi* | [**searchOptionsQuote**](docs/OptionsApi.md#searchOptionsQuote) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+*OptionsApi* | [**placeOptionStrategy**](docs/OptionsApi.md#placeOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 *PortfolioManagementApi* | [**addPortfolioExcludedAsset**](docs/PortfolioManagementApi.md#addPortfolioExcludedAsset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
 *PortfolioManagementApi* | [**callList**](docs/PortfolioManagementApi.md#callList) | **GET** /portfolioGroups | List all portfolio groups
 *PortfolioManagementApi* | [**create**](docs/PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group
@@ -236,6 +235,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**getUserAccountQuotes**](docs/TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**modifyCalculatedTradeById**](docs/TradingApi.md#modifyCalculatedTradeById) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
 *TradingApi* | [**placeCalculatedTrades**](docs/TradingApi.md#placeCalculatedTrades) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
+*TradingApi* | [**placeForceOrder**](docs/TradingApi.md#placeForceOrder) | **POST** /trade/place | Place a trade with NO validation.
 *TradingApi* | [**placeOCOOrder**](docs/TradingApi.md#placeOCOOrder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 *TradingApi* | [**placeOrder**](docs/TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order
 *TransactionsAndReportingApi* | [**getActivities**](docs/TransactionsAndReportingApi.md#getActivities) | **GET** /activities | Get transaction history for a user
@@ -294,7 +294,13 @@ Class | Method | HTTP request | Description
  - [OptionChainInner](docs/OptionChainInner.md)
  - [OptionChainInnerChainPerRootInner](docs/OptionChainInnerChainPerRootInner.md)
  - [OptionChainInnerChainPerRootInnerChainPerStrikePriceInner](docs/OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.md)
+ - [OptionLeg](docs/OptionLeg.md)
+ - [OptionStrategy](docs/OptionStrategy.md)
+ - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
+ - [OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
  - [OptionsHoldings](docs/OptionsHoldings.md)
+ - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
+ - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OrderType](docs/OrderType.md)
  - [PartnerData](docs/PartnerData.md)
@@ -319,6 +325,9 @@ Class | Method | HTTP request | Description
  - [StrategyOrderPlace](docs/StrategyOrderPlace.md)
  - [StrategyOrderPlaceOrdersInner](docs/StrategyOrderPlaceOrdersInner.md)
  - [StrategyOrderPlaceOrdersInnerLegsInner](docs/StrategyOrderPlaceOrdersInnerLegsInner.md)
+ - [StrategyOrderRecord](docs/StrategyOrderRecord.md)
+ - [StrategyQuotes](docs/StrategyQuotes.md)
+ - [StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
  - [StrategyQuotesInner](docs/StrategyQuotesInner.md)
  - [SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [Symbol](docs/Symbol.md)

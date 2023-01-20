@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**get_user_account_quotes**](TradingApi.md#get_user_account_quotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 [**modify_calculated_trade_by_id**](TradingApi.md#modify_calculated_trade_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
 [**place_calculated_trades**](TradingApi.md#place_calculated_trades) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
+[**place_force_order**](TradingApi.md#place_force_order) | **POST** /trade/place | Place a trade with NO validation.
 [**place_oco_order**](TradingApi.md#place_oco_order) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 [**place_order**](TradingApi.md#place_order) | **POST** /trade/{tradeId} | Place order
 
@@ -689,6 +690,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Return trade execution statuses for all trades submitted |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **place_force_order**
+> AccountOrderRecord place_force_order(user_id, user_secret, manual_trade_form)
+
+Place a trade with NO validation.
+
+### Example
+
+* Api Key Authentication (PartnerClientId):
+* Api Key Authentication (PartnerSignature):
+* Api Key Authentication (PartnerTimestamp):
+
+```python
+import time
+import snaptrade_client
+from snaptrade_client.api import trading_api
+from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
+from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse
+from snaptrade_client.model.manual_trade_form import ManualTradeForm
+from snaptrade_client.model.account_order_record import AccountOrderRecord
+from pprint import pprint
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: PartnerClientId
+configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
+
+# Configure API key authorization: PartnerSignature
+configuration.api_key['PartnerSignature'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerSignature'] = 'Bearer'
+
+# Configure API key authorization: PartnerTimestamp
+configuration.api_key['PartnerTimestamp'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerTimestamp'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with snaptrade_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = trading_api.TradingApi(api_client)
+    user_id = "John.doe@snaptrade.com" # str | 
+    user_secret = "USERSECRET123" # str | 
+    manual_trade_form = ManualTradeForm(
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        action=Action("BUY"),
+        order_type=OrderType("Limit"),
+        price=31.33,
+        stop=31.33,
+        time_in_force=TimeInForce("Day"),
+        units=3.14,
+        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    ) # ManualTradeForm | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Place a trade with NO validation.
+        api_response = api_instance.place_force_order(user_id, user_secret, manual_trade_form)
+        pprint(api_response)
+    except snaptrade_client.ApiException as e:
+        print("Exception when calling TradingApi->place_force_order: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**|  |
+ **user_secret** | **str**|  |
+ **manual_trade_form** | [**ManualTradeForm**](ManualTradeForm.md)|  |
+
+### Return type
+
+[**AccountOrderRecord**](AccountOrderRecord.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Trade sucessfully placed |  -  |
+**400** | Trade could not be placed |  -  |
+**403** | User does not have permissions to place trades |  -  |
+**500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

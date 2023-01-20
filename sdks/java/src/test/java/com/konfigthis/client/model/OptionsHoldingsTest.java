@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.OptionsSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -79,6 +80,14 @@ public class OptionsHoldingsTest {
     @Test
     public void currencyTest() {
         // TODO: test currency
+    }
+
+    /**
+     * Test the property 'averagePurchasePrice'
+     */
+    @Test
+    public void averagePurchasePriceTest() {
+        // TODO: test averagePurchasePrice
     }
 
 }

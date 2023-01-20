@@ -4,13 +4,110 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_options_chain**](OptionsApi.md#get_options_chain) | **GET** /accounts/{accountId}/options_chain | Get the options chain
-[**get_options_impact**](OptionsApi.md#get_options_impact) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account
-[**get_strategy_quote**](OptionsApi.md#get_strategy_quote) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy
+[**get_option_strategy**](OptionsApi.md#get_option_strategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order
+[**get_options_chain**](OptionsApi.md#get_options_chain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain
+[**get_options_strategy_quote**](OptionsApi.md#get_options_strategy_quote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
 [**list_option_holdings**](OptionsApi.md#list_option_holdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
-[**place_options_strategy_order**](OptionsApi.md#place_options_strategy_order) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is
-[**search_options_quote**](OptionsApi.md#search_options_quote) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+[**place_option_strategy**](OptionsApi.md#place_option_strategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 
+
+# **get_option_strategy**
+> StrategyQuotes get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request)
+
+Creates an option strategy object that will be used to place an option strategy order
+
+### Example
+
+* Api Key Authentication (PartnerClientId):
+* Api Key Authentication (PartnerSignature):
+* Api Key Authentication (PartnerTimestamp):
+
+```python
+import time
+import snaptrade_client
+from snaptrade_client.api import options_api
+from snaptrade_client.model.strategy_quotes import StrategyQuotes
+from snaptrade_client.model.options_get_option_strategy_request import OptionsGetOptionStrategyRequest
+from pprint import pprint
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: PartnerClientId
+configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
+
+# Configure API key authorization: PartnerSignature
+configuration.api_key['PartnerSignature'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerSignature'] = 'Bearer'
+
+# Configure API key authorization: PartnerTimestamp
+configuration.api_key['PartnerTimestamp'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerTimestamp'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with snaptrade_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = options_api.OptionsApi(api_client)
+    user_id = "John.doe@snaptrade.com" # str | 
+    user_secret = "USERSECRET123" # str | 
+    account_id = "accountId_example" # str | The ID of the account get positions.
+    options_get_option_strategy_request = OptionsGetOptionStrategyRequest(
+        underlying_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        legs=[
+            OptionLeg(),
+        ],
+        strategy_type="CUSTOM",
+    ) # OptionsGetOptionStrategyRequest | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Creates an option strategy object that will be used to place an option strategy order
+        api_response = api_instance.get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request)
+        pprint(api_response)
+    except snaptrade_client.ApiException as e:
+        print("Exception when calling OptionsApi->get_option_strategy: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**|  |
+ **user_secret** | **str**|  |
+ **account_id** | **str**| The ID of the account get positions. |
+ **options_get_option_strategy_request** | [**OptionsGetOptionStrategyRequest**](OptionsGetOptionStrategyRequest.md)|  |
+
+### Return type
+
+[**StrategyQuotes**](StrategyQuotes.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Order Quotes |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_options_chain**
 > OptionChain get_options_chain(user_id, user_secret, account_id, symbol)
@@ -59,7 +156,7 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     user_id = "John.doe@snaptrade.com" # str | 
     user_secret = "USERSECRET123" # str | 
     account_id = "accountId_example" # str | The ID of the account get positions.
-    symbol = "symbol_example" # str | brokerage symbol to get quotes for.
+    symbol = "symbol_example" # str | Universal symbol ID if symbol
 
     # example passing only required values which don't have defaults set
     try:
@@ -78,7 +175,7 @@ Name | Type | Description  | Notes
  **user_id** | **str**|  |
  **user_secret** | **str**|  |
  **account_id** | **str**| The ID of the account get positions. |
- **symbol** | **str**| brokerage symbol to get quotes for. |
+ **symbol** | **str**| Universal symbol ID if symbol |
 
 ### Return type
 
@@ -103,10 +200,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_options_impact**
-> StrategyImpact get_options_impact(user_id, user_secret, account_id, strategy_quotes_record, body)
+# **get_options_strategy_quote**
+> StrategyQuotes get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id)
 
-Get a strategies impact on the account
+Get latest market data of option strategy
 
 ### Example
 
@@ -118,7 +215,7 @@ Get a strategies impact on the account
 import time
 import snaptrade_client
 from snaptrade_client.api import options_api
-from snaptrade_client.model.strategy_impact import StrategyImpact
+from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from pprint import pprint
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
@@ -150,28 +247,15 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     user_id = "John.doe@snaptrade.com" # str | 
     user_secret = "USERSECRET123" # str | 
     account_id = "accountId_example" # str | The ID of the account get positions.
-    strategy_quotes_record = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} | The strategy quotes record returned from the strategy_quotes endpoint
-    body = "2bcd7cc3-e922-4976-bce1-9858296801c3" # str | 
-    strike_price = 1 # int | The strike price, only needed if the order is a limit order (optional)
-    primary_route = "primary_route_example" # str | The desired route for the order, default is \"AUTO\" (optional)
-    secondar_route = "secondar_route_example" # str | The desired secondary route for the order, default is \"AUTO\" (optional)
+    option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3" # str | Option strategy id obtained from response when creating option strategy object
 
     # example passing only required values which don't have defaults set
     try:
-        # Get a strategies impact on the account
-        api_response = api_instance.get_options_impact(user_id, user_secret, account_id, strategy_quotes_record, body)
+        # Get latest market data of option strategy
+        api_response = api_instance.get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->get_options_impact: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Get a strategies impact on the account
-        api_response = api_instance.get_options_impact(user_id, user_secret, account_id, strategy_quotes_record, body, strike_price=strike_price, primary_route=primary_route, secondar_route=secondar_route)
-        pprint(api_response)
-    except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->get_options_impact: %s\n" % e)
+        print("Exception when calling OptionsApi->get_options_strategy_quote: %s\n" % e)
 ```
 
 
@@ -182,15 +266,11 @@ Name | Type | Description  | Notes
  **user_id** | **str**|  |
  **user_secret** | **str**|  |
  **account_id** | **str**| The ID of the account get positions. |
- **strategy_quotes_record** | [**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**](bool, date, datetime, dict, float, int, list, str, none_type.md)| The strategy quotes record returned from the strategy_quotes endpoint |
- **body** | **str**|  |
- **strike_price** | **int**| The strike price, only needed if the order is a limit order | [optional]
- **primary_route** | **str**| The desired route for the order, default is \&quot;AUTO\&quot; | [optional]
- **secondar_route** | **str**| The desired secondary route for the order, default is \&quot;AUTO\&quot; | [optional]
+ **option_strategy_id** | **str**| Option strategy id obtained from response when creating option strategy object |
 
 ### Return type
 
-[**StrategyImpact**](StrategyImpact.md)
+[**StrategyQuotes**](StrategyQuotes.md)
 
 ### Authorization
 
@@ -198,115 +278,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Impact of option strategy on user account |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_strategy_quote**
-> bool, date, datetime, dict, float, int, list, str, none_type get_strategy_quote(user_id, user_secret, legs, strategy, time_in_force, order_type, account_id, manual_trade_form)
-
-Get a price quote for a strategy
-
-### Example
-
-* Api Key Authentication (PartnerClientId):
-* Api Key Authentication (PartnerSignature):
-* Api Key Authentication (PartnerTimestamp):
-
-```python
-import time
-import snaptrade_client
-from snaptrade_client.api import options_api
-from snaptrade_client.model.manual_trade_form import ManualTradeForm
-from pprint import pprint
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
-
-# Configure API key authorization: PartnerSignature
-configuration.api_key['PartnerSignature'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerSignature'] = 'Bearer'
-
-# Configure API key authorization: PartnerTimestamp
-configuration.api_key['PartnerTimestamp'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with snaptrade_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = options_api.OptionsApi(api_client)
-    user_id = "John.doe@snaptrade.com" # str | 
-    user_secret = "USERSECRET123" # str | 
-    legs = 1635790389 # int | 
-    strategy = "strategy_example" # str | 
-    time_in_force = "time_in_force_example" # str | 
-    order_type = "order_type_example" # str | 
-    account_id = "accountId_example" # str | The ID of the account get positions.
-    manual_trade_form = ManualTradeForm(
-        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        action=Action("BUY"),
-        order_type=OrderType("Limit"),
-        price=31.33,
-        stop=31.33,
-        time_in_force=TimeInForce("Day"),
-        units=3.14,
-        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    ) # ManualTradeForm | 
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Get a price quote for a strategy
-        api_response = api_instance.get_strategy_quote(user_id, user_secret, legs, strategy, time_in_force, order_type, account_id, manual_trade_form)
-        pprint(api_response)
-    except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->get_strategy_quote: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**|  |
- **user_secret** | **str**|  |
- **legs** | **int**|  |
- **strategy** | **str**|  |
- **time_in_force** | **str**|  |
- **order_type** | **str**|  |
- **account_id** | **str**| The ID of the account get positions. |
- **manual_trade_form** | [**ManualTradeForm**](ManualTradeForm.md)|  |
-
-### Return type
-
-**bool, date, datetime, dict, float, int, list, str, none_type**
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -408,10 +380,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **place_options_strategy_order**
-> StrategyOrderPlace place_options_strategy_order(user_id, user_secret, strategy_order, strike_price, account_id, body)
+# **place_option_strategy**
+> StrategyOrderRecord place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
 
-Place the strategy order; impact not required but the StrategyOrderQuotes object is
+Place an option strategy order on the brokerage
 
 ### Example
 
@@ -423,7 +395,8 @@ Place the strategy order; impact not required but the StrategyOrderQuotes object
 import time
 import snaptrade_client
 from snaptrade_client.api import options_api
-from snaptrade_client.model.strategy_order_place import StrategyOrderPlace
+from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
+from snaptrade_client.model.options_place_option_strategy_request import OptionsPlaceOptionStrategyRequest
 from pprint import pprint
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
@@ -454,29 +427,21 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     api_instance = options_api.OptionsApi(api_client)
     user_id = "John.doe@snaptrade.com" # str | 
     user_secret = "USERSECRET123" # str | 
-    strategy_order = 1635790389 # int | 
-    strike_price = 1635790389 # int | 
-    account_id = "accountId_example" # str | The ID of the account get positions.
-    body = "2bcd7cc3-e922-4976-bce1-9858296801c3" # str | 
-    primary_route = 1635790389 # int |  (optional)
-    secondary_route = 1635790389 # int |  (optional)
+    account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3" # str | The ID of the account get positions.
+    option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3" # str | Option strategy id obtained from response when creating option strategy object
+    options_place_option_strategy_request = OptionsPlaceOptionStrategyRequest(
+        order_type="Limit",
+        time_in_force="DAY",
+        price=31.33,
+    ) # OptionsPlaceOptionStrategyRequest | 
 
     # example passing only required values which don't have defaults set
     try:
-        # Place the strategy order; impact not required but the StrategyOrderQuotes object is
-        api_response = api_instance.place_options_strategy_order(user_id, user_secret, strategy_order, strike_price, account_id, body)
+        # Place an option strategy order on the brokerage
+        api_response = api_instance.place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->place_options_strategy_order: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Place the strategy order; impact not required but the StrategyOrderQuotes object is
-        api_response = api_instance.place_options_strategy_order(user_id, user_secret, strategy_order, strike_price, account_id, body, primary_route=primary_route, secondary_route=secondary_route)
-        pprint(api_response)
-    except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->place_options_strategy_order: %s\n" % e)
+        print("Exception when calling OptionsApi->place_option_strategy: %s\n" % e)
 ```
 
 
@@ -486,16 +451,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**|  |
  **user_secret** | **str**|  |
- **strategy_order** | **int**|  |
- **strike_price** | **int**|  |
  **account_id** | **str**| The ID of the account get positions. |
- **body** | **str**|  |
- **primary_route** | **int**|  | [optional]
- **secondary_route** | **int**|  | [optional]
+ **option_strategy_id** | **str**| Option strategy id obtained from response when creating option strategy object |
+ **options_place_option_strategy_request** | [**OptionsPlaceOptionStrategyRequest**](OptionsPlaceOptionStrategyRequest.md)|  |
 
 ### Return type
 
-[**StrategyOrderPlace**](StrategyOrderPlace.md)
+[**StrategyOrderRecord**](StrategyOrderRecord.md)
 
 ### Authorization
 
@@ -511,111 +473,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Order Record of canceled order |  -  |
-**500** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **search_options_quote**
-> OptionChain search_options_quote(user_id, user_secret, account_id, date)
-
-Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-
-### Example
-
-* Api Key Authentication (PartnerClientId):
-* Api Key Authentication (PartnerSignature):
-* Api Key Authentication (PartnerTimestamp):
-
-```python
-import time
-import snaptrade_client
-from snaptrade_client.api import options_api
-from snaptrade_client.model.option_chain import OptionChain
-from pprint import pprint
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
-
-# Configure API key authorization: PartnerSignature
-configuration.api_key['PartnerSignature'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerSignature'] = 'Bearer'
-
-# Configure API key authorization: PartnerTimestamp
-configuration.api_key['PartnerTimestamp'] = 'YOUR_API_KEY'
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with snaptrade_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = options_api.OptionsApi(api_client)
-    user_id = "John.doe@snaptrade.com" # str | 
-    user_secret = "USERSECRET123" # str | 
-    account_id = "accountId_example" # str | The ID of the account get positions.
-    date = "Date_example" # str | The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-    min_strike = 1 # int | The minimum strike price for the desired contract (optional)
-    max_strike = 1 # int | The max strike price for the desired contract (optional)
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-        api_response = api_instance.search_options_quote(user_id, user_secret, account_id, date)
-        pprint(api_response)
-    except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->search_options_quote: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-        api_response = api_instance.search_options_quote(user_id, user_secret, account_id, date, min_strike=min_strike, max_strike=max_strike)
-        pprint(api_response)
-    except snaptrade_client.ApiException as e:
-        print("Exception when calling OptionsApi->search_options_quote: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**|  |
- **user_secret** | **str**|  |
- **account_id** | **str**| The ID of the account get positions. |
- **date** | **str**| The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] |
- **min_strike** | **int**| The minimum strike price for the desired contract | [optional]
- **max_strike** | **int**| The max strike price for the desired contract | [optional]
-
-### Return type
-
-[**OptionChain**](OptionChain.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | A successful query |  -  |
+**200** | Status of strategy order placed |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

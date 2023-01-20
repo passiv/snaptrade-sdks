@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.OptionsSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -71,7 +72,11 @@ public class OptionsHoldings {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private String currency;
+  private Currency currency;
+
+  public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
+  @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
+  private BigDecimal averagePurchasePrice;
 
   public OptionsHoldings() {
   }
@@ -168,7 +173,7 @@ public class OptionsHoldings {
   }
 
 
-  public OptionsHoldings currency(String currency) {
+  public OptionsHoldings currency(Currency currency) {
     
     this.currency = currency;
     return this;
@@ -179,15 +184,38 @@ public class OptionsHoldings {
    * @return currency
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "None", value = "")
+  @ApiModelProperty(value = "")
 
-  public String getCurrency() {
+  public Currency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(String currency) {
+  public void setCurrency(Currency currency) {
     this.currency = currency;
+  }
+
+
+  public OptionsHoldings averagePurchasePrice(BigDecimal averagePurchasePrice) {
+    
+    this.averagePurchasePrice = averagePurchasePrice;
+    return this;
+  }
+
+   /**
+   * Average purchase price for this position
+   * @return averagePurchasePrice
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "108.3353", value = "Average purchase price for this position")
+
+  public BigDecimal getAveragePurchasePrice() {
+    return averagePurchasePrice;
+  }
+
+
+  public void setAveragePurchasePrice(BigDecimal averagePurchasePrice) {
+    this.averagePurchasePrice = averagePurchasePrice;
   }
 
   /**
@@ -249,13 +277,14 @@ public class OptionsHoldings {
         Objects.equals(this.symbol, optionsHoldings.symbol) &&
         Objects.equals(this.optionSymbol, optionsHoldings.optionSymbol) &&
         Objects.equals(this.price, optionsHoldings.price) &&
-        Objects.equals(this.currency, optionsHoldings.currency)&&
+        Objects.equals(this.currency, optionsHoldings.currency) &&
+        Objects.equals(this.averagePurchasePrice, optionsHoldings.averagePurchasePrice)&&
         Objects.equals(this.additionalProperties, optionsHoldings.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, optionSymbol, price, currency, additionalProperties);
+    return Objects.hash(id, symbol, optionSymbol, price, currency, averagePurchasePrice, additionalProperties);
   }
 
   @Override
@@ -267,6 +296,7 @@ public class OptionsHoldings {
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -295,6 +325,7 @@ public class OptionsHoldings {
     openapiFields.add("option_symbol");
     openapiFields.add("price");
     openapiFields.add("currency");
+    openapiFields.add("average_purchase_price");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -317,9 +348,6 @@ public class OptionsHoldings {
       }
       if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
-      }
-      if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));
       }
   }
 

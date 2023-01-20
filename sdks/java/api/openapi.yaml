@@ -900,7 +900,7 @@ paths:
       tags:
       - Options
       x-accepts: application/json
-  /accounts/{accountId}/options_chain:
+  /accounts/{accountId}/optionsChain:
     get:
       operationId: Options_getOptionsChain
       parameters:
@@ -927,7 +927,7 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: brokerage symbol to get quotes for.
+      - description: Universal symbol ID if symbol
         explode: true
         in: query
         name: symbol
@@ -949,78 +949,9 @@ paths:
       tags:
       - Options
       x-accepts: application/json
-  /accounts/{accountId}/options_search:
-    get:
-      operationId: Options_searchOptionsQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: "The date of the options you are searching for. Will return closest\
-          \ date that has not passed. Format- [YYYY-MM-DD]"
-        explode: true
-        in: query
-        name: Date
-        required: true
-        schema:
-          format: dateTime
-          type: string
-        style: form
-      - description: The minimum strike price for the desired contract
-        explode: true
-        in: query
-        name: min_strike
-        required: false
-        schema:
-          format: integer
-          type: integer
-        style: form
-      - description: The max strike price for the desired contract
-        explode: true
-        in: query
-        name: max_strike
-        required: false
-        schema:
-          format: integer
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionChain'
-          description: A successful query
-        "500":
-          description: Unexpected error
-      summary: "Search for more specific option quotes from option chain. Date is\
-        \ required but can filter by min, max or min-max."
-      tags:
-      - Options
-      x-accepts: application/json
-  /accounts/{accountId}/strategy_impact:
+  /accounts/{accountId}/optionStrategy:
     post:
-      operationId: Options_getOptionsImpact
+      operationId: Options_getOptionStrategy
       parameters:
       - explode: true
         in: query
@@ -1035,115 +966,6 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: The strategy quotes record returned from the strategy_quotes
-          endpoint
-        explode: true
-        in: query
-        name: StrategyQuotesRecord
-        required: true
-        schema:
-          additionalProperties: true
-          format: StrategyQuotesRecord
-          type: object
-        style: form
-      - description: "The strike price, only needed if the order is a limit order"
-        explode: true
-        in: query
-        name: strike_price
-        required: false
-        schema:
-          format: decimal
-          type: integer
-        style: form
-      - description: "The desired route for the order, default is \"AUTO\""
-        explode: true
-        in: query
-        name: primary_route
-        required: false
-        schema:
-          format: string
-          type: string
-        style: form
-      - description: "The desired secondary route for the order, default is \"AUTO\""
-        explode: true
-        in: query
-        name: secondar_route
-        required: false
-        schema:
-          format: string
-          type: string
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyImpact'
-          description: Impact of option strategy on user account
-        "500":
-          description: Unexpected error
-      summary: Get a strategies impact on the account
-      tags:
-      - Options
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/strategy_quotes:
-    post:
-      operationId: Options_getStrategyQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: true
-        in: query
-        name: legs
-        required: true
-        schema:
-          $ref: '#/components/schemas/Timestamp'
-        style: form
-      - explode: true
-        in: query
-        name: strategy
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: time_in_force
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_type
-        required: true
-        schema:
-          type: string
         style: form
       - description: The ID of the account get positions.
         explode: false
@@ -1155,24 +977,25 @@ paths:
           type: string
         style: simple
       requestBody:
-        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
+        $ref: '#/components/requestBodies/OptionStrategyRequestBody'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StrategyOrderQuotes'
+                $ref: '#/components/schemas/StrategyQuotes'
           description: Order Quotes
         "500":
           description: Unexpected error
-      summary: Get a price quote for a strategy
+      summary: Creates an option strategy object that will be used to place an option
+        strategy order
       tags:
       - Options
       x-content-type: application/json
       x-accepts: application/json
-  /accounts/{accountId}/strategy_place:
-    post:
-      operationId: Options_placeOptionsStrategyOrder
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+    get:
+      operationId: Options_getOptionsStrategyQuote
       parameters:
       - explode: true
         in: query
@@ -1188,34 +1011,6 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - explode: true
-        in: query
-        name: strategy_order
-        required: true
-        schema:
-          $ref: '#/components/schemas/Timestamp'
-        style: form
-      - explode: true
-        in: query
-        name: strike_price
-        required: true
-        schema:
-          $ref: '#/components/schemas/Timestamp'
-        style: form
-      - explode: true
-        in: query
-        name: primary_route
-        required: false
-        schema:
-          $ref: '#/components/schemas/Timestamp'
-        style: form
-      - explode: true
-        in: query
-        name: secondary_route
-        required: false
-        schema:
-          $ref: '#/components/schemas/Timestamp'
-        style: form
       - description: The ID of the account get positions.
         explode: false
         in: path
@@ -1225,19 +1020,75 @@ paths:
           format: uuid
           type: string
         style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StrategyOrderPlace'
-          description: Order Record of canceled order
+                $ref: '#/components/schemas/StrategyQuotes'
+          description: Order Quotes
         "500":
           description: Unexpected error
-      summary: Place the strategy order; impact not required but the StrategyOrderQuotes
-        object is
+      summary: Get latest market data of option strategy
+      tags:
+      - Options
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
+    post:
+      operationId: Options_placeOptionStrategy
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account get positions.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/OrderStrategyExecuteBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyOrderRecord'
+          description: Status of strategy order placed
+        "500":
+          description: Unexpected error
+      summary: Place an option strategy order on the brokerage
       tags:
       - Options
       x-content-type: application/json
@@ -2706,6 +2557,52 @@ paths:
       tags:
       - Reference Data
       x-accepts: '*/*'
+  /trade/place:
+    post:
+      operationId: Trading_placeForceOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Trade sucessfully placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+        "500":
+          description: Unexpected Error
+      summary: Place a trade with NO validation.
+      tags:
+      - Trading
+      x-content-type: application/json
+      x-accepts: application/json
   /trade/impact:
     post:
       operationId: Trading_getOrderImpact
@@ -3032,6 +2929,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Trading_placeOCOOrder_request'
+      required: true
+    OptionStrategyRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Options_getOptionStrategy_request'
+      required: true
+    OrderStrategyExecuteBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Options_placeOptionStrategy_request'
       required: true
     SnapTradeAPIDisclaimerAcceptRequestBody:
       content:
@@ -3480,14 +3389,45 @@ components:
       - PENDING_RISK_REVIEW
       - CONTINGENT_ORDER
       type: string
+    OptionsPosition:
+      additionalProperties: true
+      description: Option Holdings
+      properties:
+        symbol:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+        description:
+          example: SPY PUT Aug 2022
+          type: string
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbol'
+        price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        units:
+          example: 10
+          type: number
+        currency:
+          $ref: '#/components/schemas/Currency'
+        average_purchase_price:
+          description: Average purchase price for this position
+          example: 108.3353
+          type: number
+      type: object
     OptionsHoldings:
       additionalProperties: true
       description: Option Holdings
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         price: 31.33
-        currency: None
+        currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
+        average_purchase_price: 108.3353
         option_symbol:
           is_quotable: true
           ticker: SPY 220819P00200000
@@ -3545,38 +3485,15 @@ components:
           example: 31.33
           type: number
         currency:
-          example: None
-          type: string
+          $ref: '#/components/schemas/Currency'
+        average_purchase_price:
+          description: Average purchase price for this position
+          example: 108.3353
+          type: number
       type: object
     StrategyImpact:
       additionalProperties: true
       description: The strategy impact
-      example:
-        side: Buy
-        buyingPowerResult: 8800.0882
-        buyingPowerEffect: -156.3435
-        price: 0.35
-        legs:
-        - symbol: AC21Oct22C30.00.MX
-          symbolId: 41790511
-          avgExecPrice: avgExecPrice
-          side: BTO
-          legRatioQuantity: 1
-          legId: 0
-          lastExecPrice: lastExecPrice
-        - symbol: AC21Oct22C30.00.MX
-          symbolId: 41790511
-          avgExecPrice: avgExecPrice
-          side: BTO
-          legRatioQuantity: 1
-          legId: 0
-          lastExecPrice: lastExecPrice
-        effect: Debit
-        maintExcessResult: 2642.669129
-        estimatedCommissions: 11.95
-        strategy: Strangle
-        tradeValueCalculation: 1 x 0.07 x 100 + 1 x 0.28 x 100 = DR 35.00 CAD
-        maintExcessEffect: -46.95
       properties:
         estimatedCommissions:
           example: 11.95
@@ -3622,123 +3539,6 @@ components:
     StrategyOrderPlace:
       additionalProperties: true
       description: The reponse for a correctly placed order
-      example:
-        orderId: 1069605761
-        orders:
-        - symbol: AC.TO
-          symbolId: 7960447
-          orderType: Market
-          notes: None
-          creationTime: 2022-07-19T19:53:47.915Z
-          orderGroupId: 0
-          orderRoute: MX
-          canceledQuantity: 0
-          source: TradingAPI
-          openQuantity: 1
-          filledQuantity: 0
-          isSignificantShareHolder: true
-          orderClass: orderClass
-          strategyType: Strangle
-          gtdDate: gtdDate
-          totalQuantity: 1
-          minQuantity: minQuantity
-          isLimitOffsetInDollar: true
-          legs:
-          - symbol: AC21Oct22C30.00.MX
-            symbolId: 41790511
-            avgExecPrice: 0
-            side: BTO
-            legRatioQuantity: 1
-            legId: 0
-            lastExecPrice: lastExecPrice
-          - symbol: AC21Oct22C30.00.MX
-            symbolId: 41790511
-            avgExecPrice: 0
-            side: BTO
-            legRatioQuantity: 1
-            legId: 0
-            lastExecPrice: lastExecPrice
-          id: 1069605761
-          state: Pending
-          timeInForce: Day
-          icebergQuantity: icebergQuantity
-          exchangeOrderId: None
-          avgExecPrice: 0
-          side: Buy
-          triggerStopPrice: triggerStopPrice
-          limitPrice: limitPrice
-          comissionCharged: 0
-          updateTime: 2022-07-19T19:53:47.939Z
-          userId: 514603
-          secondaryRoute: AUTO
-          stopPrice: stopPrice
-          isAnonymous: true
-          isCrossZero: true
-          chainId: 1069605761
-          isInsider: true
-          placementCommission: placementCommission
-          isAllOrNone: true
-          lastExecPrice: lastExecPrice
-          primaryRoute: AUTO
-          venueHoldingOrder: None
-          rejectionReason: None
-        - symbol: AC.TO
-          symbolId: 7960447
-          orderType: Market
-          notes: None
-          creationTime: 2022-07-19T19:53:47.915Z
-          orderGroupId: 0
-          orderRoute: MX
-          canceledQuantity: 0
-          source: TradingAPI
-          openQuantity: 1
-          filledQuantity: 0
-          isSignificantShareHolder: true
-          orderClass: orderClass
-          strategyType: Strangle
-          gtdDate: gtdDate
-          totalQuantity: 1
-          minQuantity: minQuantity
-          isLimitOffsetInDollar: true
-          legs:
-          - symbol: AC21Oct22C30.00.MX
-            symbolId: 41790511
-            avgExecPrice: 0
-            side: BTO
-            legRatioQuantity: 1
-            legId: 0
-            lastExecPrice: lastExecPrice
-          - symbol: AC21Oct22C30.00.MX
-            symbolId: 41790511
-            avgExecPrice: 0
-            side: BTO
-            legRatioQuantity: 1
-            legId: 0
-            lastExecPrice: lastExecPrice
-          id: 1069605761
-          state: Pending
-          timeInForce: Day
-          icebergQuantity: icebergQuantity
-          exchangeOrderId: None
-          avgExecPrice: 0
-          side: Buy
-          triggerStopPrice: triggerStopPrice
-          limitPrice: limitPrice
-          comissionCharged: 0
-          updateTime: 2022-07-19T19:53:47.939Z
-          userId: 514603
-          secondaryRoute: AUTO
-          stopPrice: stopPrice
-          isAnonymous: true
-          isCrossZero: true
-          chainId: 1069605761
-          isInsider: true
-          placementCommission: placementCommission
-          isAllOrNone: true
-          lastExecPrice: lastExecPrice
-          primaryRoute: AUTO
-          venueHoldingOrder: None
-          rejectionReason: None
       properties:
         orderId:
           example: 1069605761
@@ -3748,6 +3548,266 @@ components:
           items:
             $ref: '#/components/schemas/StrategyOrderPlace_orders_inner'
           type: array
+      type: object
+    OptionStrategy:
+      additionalProperties: true
+      example:
+        number_of_legs: 2
+        legs:
+        - quantity: 10
+          index: 1
+          action: BUY_TO_OPEN
+          option_symbol_id: AAPLC20221111
+        - quantity: 10
+          index: 1
+          action: BUY_TO_OPEN
+          option_symbol_id: AAPLC20221111
+        strategy_type: BUTTERFLY
+        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        underlying_symbol_id:
+          symbol: VAB.TO
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          exchange:
+            start_time: 09:30:00
+            mic_code: XTSE
+            code: TSX
+            timezone: America/New_York
+            name: Toronto Stock Exchange
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            close_time: "57600"
+            suffix: .TO
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: et
+            description: ETF
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+      properties:
+        id:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+        underlying_symbol_id:
+          $ref: '#/components/schemas/UniversalSymbol'
+        strategy_type:
+          example: BUTTERFLY
+          type: string
+        number_of_legs:
+          example: 2
+          type: number
+        legs:
+          items:
+            $ref: '#/components/schemas/OptionStrategy_legs_inner'
+          type: array
+      type: object
+    StrategyQuotes:
+      additionalProperties: true
+      example:
+        greek:
+          delta: 0.1
+          rho: 0.1
+          theta: 0.1
+          gamma: 0.1
+          vega: 0.1
+        volatility: 0.141
+        strategy:
+          number_of_legs: 2
+          legs:
+          - quantity: 10
+            index: 1
+            action: BUY_TO_OPEN
+            option_symbol_id: AAPLC20221111
+          - quantity: 10
+            index: 1
+            action: BUY_TO_OPEN
+            option_symbol_id: AAPLC20221111
+          strategy_type: BUTTERFLY
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          underlying_symbol_id:
+            symbol: VAB.TO
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency:
+              code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            exchange:
+              start_time: 09:30:00
+              mic_code: XTSE
+              code: TSX
+              timezone: America/New_York
+              name: Toronto Stock Exchange
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              close_time: "57600"
+              suffix: .TO
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: et
+              description: ETF
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+        open_price: 31.33
+        bid_price: 31.33
+        ask_price: 31.33
+      properties:
+        strategy:
+          $ref: '#/components/schemas/OptionStrategy'
+        open_price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        bid_price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        ask_price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        volatility:
+          example: 0.141
+          type: number
+        greek:
+          $ref: '#/components/schemas/StrategyQuotes_greek'
+      type: object
+    StrategyOrderRecord:
+      additionalProperties: true
+      description: Strategy order record
+      example:
+        time_in_force: DAY
+        execution_price: 31.33
+        time_placed: 2022-01-21T20:11:19.217Z
+        strategy:
+          number_of_legs: 2
+          legs:
+          - quantity: 10
+            index: 1
+            action: BUY_TO_OPEN
+            option_symbol_id: AAPLC20221111
+          - quantity: 10
+            index: 1
+            action: BUY_TO_OPEN
+            option_symbol_id: AAPLC20221111
+          strategy_type: BUTTERFLY
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          underlying_symbol_id:
+            symbol: VAB.TO
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency:
+              code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            exchange:
+              start_time: 09:30:00
+              mic_code: XTSE
+              code: TSX
+              timezone: America/New_York
+              name: Toronto Stock Exchange
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              close_time: "57600"
+              suffix: .TO
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: et
+              description: ETF
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+        filled_quantity: 10
+        order_type: Limit
+        limit_price: 31.33
+        open_quantity: 10
+        closed_quantity: 10
+        time_updated: 2022-01-21T20:11:19.217Z
+        status: PENDING
+      properties:
+        strategy:
+          $ref: '#/components/schemas/OptionStrategy'
+        status:
+          enum:
+          - PENDING
+          - ACCEPTED
+          - FAILED
+          - REJECTED
+          - CANCELED
+          - PARTIAL_CANCELED
+          - CANCEL_PENDING
+          - EXECUTED
+          - PARTIAL
+          - REPLACE_PENDING
+          - REPLACED
+          - STOPPED
+          - SUSPENDED
+          - EXPIRED
+          - QUEUED
+          - TRIGGERED
+          - ACTIVATED
+          - PENDING_RISK_REVIEW
+          - CONTINGENT_ORDER
+          type: string
+        filled_quantity:
+          example: 10
+          type: number
+        open_quantity:
+          example: 10
+          type: number
+        closed_quantity:
+          example: 10
+          type: number
+        order_type:
+          enum:
+          - Limit
+          - Market
+          - NetDebit
+          - NetCredit
+          type: string
+        time_in_force:
+          enum:
+          - DAY
+          - GTC
+          type: string
+        limit_price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        execution_price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+        time_placed:
+          description: Time
+          example: 2022-01-21T20:11:19.217Z
+          type: string
+        time_updated:
+          description: Time
+          example: 2022-01-21T20:11:19.217Z
+          type: string
       type: object
     SnapTradeHoldingsAccount:
       additionalProperties: true
@@ -8260,6 +8320,25 @@ components:
           example: true
           type: boolean
       type: object
+    OptionLeg:
+      additionalProperties: true
+      description: Option Leg
+      properties:
+        action:
+          enum:
+          - BUY_TO_OPEN
+          - BUY_TO_CLOSE
+          - SELL_TO_OPEN
+          - SELL_TO_CLOSE
+          type: string
+        option_symbol_id:
+          description: Obtained from calling options chain endpoint (option_id)
+          example: SPY220819P00200000
+          type: string
+        quantity:
+          example: 1
+          type: number
+      type: object
     SecurityType:
       additionalProperties: true
       description: Security Type
@@ -8371,6 +8450,7 @@ components:
       example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
       type: string
     encryptedResponse:
+      additionalProperties: false
       description: |
         This response consists of 2 different components that must be decrypted to obtain the decrypted message
 
@@ -8440,6 +8520,48 @@ components:
       oneOf:
       - $ref: '#/components/schemas/LoginRedirectURI'
       - $ref: '#/components/schemas/encryptedResponse'
+    Options_getOptionStrategy_request:
+      properties:
+        underlying_symbol_id:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+        legs:
+          items:
+            $ref: '#/components/schemas/OptionLeg'
+          type: array
+        strategy_type:
+          enum:
+          - CUSTOM
+          type: string
+      required:
+      - legs
+      - strategy_type
+      - underlying_symbol_id
+      type: object
+    Options_placeOptionStrategy_request:
+      properties:
+        order_type:
+          enum:
+          - Limit
+          - Market
+          - NetDebit
+          - NetCredit
+          type: string
+        time_in_force:
+          enum:
+          - DAY
+          - GTC
+          type: string
+        price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          type: number
+      required:
+      - order_type
+      - price
+      - time_in_force
+      type: object
     Trading_placeOCOOrder_request:
       properties:
         first_trade_id:
@@ -8449,14 +8571,6 @@ components:
       type: object
     StrategyImpact_legs_inner:
       additionalProperties: true
-      example:
-        symbol: AC21Oct22C30.00.MX
-        symbolId: 41790511
-        avgExecPrice: avgExecPrice
-        side: BTO
-        legRatioQuantity: 1
-        legId: 0
-        lastExecPrice: lastExecPrice
       properties:
         legId:
           example: 0
@@ -8529,14 +8643,6 @@ components:
       type: object
     StrategyOrderPlace_orders_inner_legs_inner:
       additionalProperties: true
-      example:
-        symbol: AC21Oct22C30.00.MX
-        symbolId: 41790511
-        avgExecPrice: 0
-        side: BTO
-        legRatioQuantity: 1
-        legId: 0
-        lastExecPrice: lastExecPrice
       properties:
         legId:
           example: 0
@@ -8566,64 +8672,6 @@ components:
       type: object
     StrategyOrderPlace_orders_inner:
       additionalProperties: true
-      example:
-        symbol: AC.TO
-        symbolId: 7960447
-        orderType: Market
-        notes: None
-        creationTime: 2022-07-19T19:53:47.915Z
-        orderGroupId: 0
-        orderRoute: MX
-        canceledQuantity: 0
-        source: TradingAPI
-        openQuantity: 1
-        filledQuantity: 0
-        isSignificantShareHolder: true
-        orderClass: orderClass
-        strategyType: Strangle
-        gtdDate: gtdDate
-        totalQuantity: 1
-        minQuantity: minQuantity
-        isLimitOffsetInDollar: true
-        legs:
-        - symbol: AC21Oct22C30.00.MX
-          symbolId: 41790511
-          avgExecPrice: 0
-          side: BTO
-          legRatioQuantity: 1
-          legId: 0
-          lastExecPrice: lastExecPrice
-        - symbol: AC21Oct22C30.00.MX
-          symbolId: 41790511
-          avgExecPrice: 0
-          side: BTO
-          legRatioQuantity: 1
-          legId: 0
-          lastExecPrice: lastExecPrice
-        id: 1069605761
-        state: Pending
-        timeInForce: Day
-        icebergQuantity: icebergQuantity
-        exchangeOrderId: None
-        avgExecPrice: 0
-        side: Buy
-        triggerStopPrice: triggerStopPrice
-        limitPrice: limitPrice
-        comissionCharged: 0
-        updateTime: 2022-07-19T19:53:47.939Z
-        userId: 514603
-        secondaryRoute: AUTO
-        stopPrice: stopPrice
-        isAnonymous: true
-        isCrossZero: true
-        chainId: 1069605761
-        isInsider: true
-        placementCommission: placementCommission
-        isAllOrNone: true
-        lastExecPrice: lastExecPrice
-        primaryRoute: AUTO
-        venueHoldingOrder: None
-        rejectionReason: None
       properties:
         id:
           example: 1069605761
@@ -8760,6 +8808,50 @@ components:
           type: string
         isCrossZero:
           type: boolean
+      type: object
+    OptionStrategy_legs_inner:
+      example:
+        quantity: 10
+        index: 1
+        action: BUY_TO_OPEN
+        option_symbol_id: AAPLC20221111
+      properties:
+        option_symbol_id:
+          example: AAPLC20221111
+          type: string
+        index:
+          example: 1
+          type: number
+        action:
+          example: BUY_TO_OPEN
+          type: string
+        quantity:
+          example: 10
+          type: number
+    StrategyQuotes_greek:
+      additionalProperties: true
+      example:
+        delta: 0.1
+        rho: 0.1
+        theta: 0.1
+        gamma: 0.1
+        vega: 0.1
+      properties:
+        delta:
+          example: 0.1
+          type: number
+        gamma:
+          example: 0.1
+          type: number
+        theta:
+          example: 0.1
+          type: number
+        vega:
+          example: 0.1
+          type: number
+        rho:
+          example: 0.1
+          type: number
       type: object
     BrokerageAuthorizationTypeReadOnly_brokerage:
       additionalProperties: true

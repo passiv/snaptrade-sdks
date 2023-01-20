@@ -13,7 +13,9 @@ import sys
 import unittest
 
 import snaptrade_client
+from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.options_symbol import OptionsSymbol
+globals()['Currency'] = Currency
 globals()['OptionsSymbol'] = OptionsSymbol
 from snaptrade_client.model.options_holdings import OptionsHoldings
 

@@ -1624,6 +1624,145 @@ export interface OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
     'putSymbolId'?: number;
 }
 /**
+ * Option Leg
+ * @export
+ * @interface OptionLeg
+ */
+export interface OptionLeg {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionLeg
+     */
+    'action'?: OptionLegActionEnum;
+    /**
+     * Obtained from calling options chain endpoint (option_id)
+     * @type {string}
+     * @memberof OptionLeg
+     */
+    'option_symbol_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionLeg
+     */
+    'quantity'?: number;
+}
+
+export const OptionLegActionEnum = {
+    BuyToOpen: 'BUY_TO_OPEN',
+    BuyToClose: 'BUY_TO_CLOSE',
+    SellToOpen: 'SELL_TO_OPEN',
+    SellToClose: 'SELL_TO_CLOSE'
+} as const;
+
+export type OptionLegActionEnum = typeof OptionLegActionEnum[keyof typeof OptionLegActionEnum];
+
+/**
+ * 
+ * @export
+ * @interface OptionStrategy
+ */
+export interface OptionStrategy {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionStrategy
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {UniversalSymbol}
+     * @memberof OptionStrategy
+     */
+    'underlying_symbol_id'?: UniversalSymbol;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionStrategy
+     */
+    'strategy_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionStrategy
+     */
+    'number_of_legs'?: number;
+    /**
+     * 
+     * @type {Array<OptionStrategyLegsInner>}
+     * @memberof OptionStrategy
+     */
+    'legs'?: Array<OptionStrategyLegsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface OptionStrategyLegsInner
+ */
+export interface OptionStrategyLegsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionStrategyLegsInner
+     */
+    'option_symbol_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionStrategyLegsInner
+     */
+    'index'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionStrategyLegsInner
+     */
+    'action'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionStrategyLegsInner
+     */
+    'quantity'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface OptionsGetOptionStrategyRequest
+ */
+export interface OptionsGetOptionStrategyRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsGetOptionStrategyRequest
+     */
+    'underlying_symbol_id': string;
+    /**
+     * 
+     * @type {Array<OptionLeg>}
+     * @memberof OptionsGetOptionStrategyRequest
+     */
+    'legs': Array<OptionLeg>;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsGetOptionStrategyRequest
+     */
+    'strategy_type': OptionsGetOptionStrategyRequestStrategyTypeEnum;
+}
+
+export const OptionsGetOptionStrategyRequestStrategyTypeEnum = {
+    Custom: 'CUSTOM'
+} as const;
+
+export type OptionsGetOptionStrategyRequestStrategyTypeEnum = typeof OptionsGetOptionStrategyRequestStrategyTypeEnum[keyof typeof OptionsGetOptionStrategyRequestStrategyTypeEnum];
+
+/**
  * Option Holdings
  * @export
  * @interface OptionsHoldings
@@ -1657,10 +1796,108 @@ export interface OptionsHoldings {
     'price'?: number;
     /**
      * 
-     * @type {string}
+     * @type {Currency}
      * @memberof OptionsHoldings
      */
-    'currency'?: string;
+    'currency'?: Currency;
+    /**
+     * Average purchase price for this position
+     * @type {number}
+     * @memberof OptionsHoldings
+     */
+    'average_purchase_price'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface OptionsPlaceOptionStrategyRequest
+ */
+export interface OptionsPlaceOptionStrategyRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsPlaceOptionStrategyRequest
+     */
+    'order_type': OptionsPlaceOptionStrategyRequestOrderTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsPlaceOptionStrategyRequest
+     */
+    'time_in_force': OptionsPlaceOptionStrategyRequestTimeInForceEnum;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof OptionsPlaceOptionStrategyRequest
+     */
+    'price': number;
+}
+
+export const OptionsPlaceOptionStrategyRequestOrderTypeEnum = {
+    Limit: 'Limit',
+    Market: 'Market',
+    NetDebit: 'NetDebit',
+    NetCredit: 'NetCredit'
+} as const;
+
+export type OptionsPlaceOptionStrategyRequestOrderTypeEnum = typeof OptionsPlaceOptionStrategyRequestOrderTypeEnum[keyof typeof OptionsPlaceOptionStrategyRequestOrderTypeEnum];
+export const OptionsPlaceOptionStrategyRequestTimeInForceEnum = {
+    Day: 'DAY',
+    Gtc: 'GTC'
+} as const;
+
+export type OptionsPlaceOptionStrategyRequestTimeInForceEnum = typeof OptionsPlaceOptionStrategyRequestTimeInForceEnum[keyof typeof OptionsPlaceOptionStrategyRequestTimeInForceEnum];
+
+/**
+ * Option Holdings
+ * @export
+ * @interface OptionsPosition
+ */
+export interface OptionsPosition {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsPosition
+     */
+    'symbol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsPosition
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {OptionsSymbol}
+     * @memberof OptionsPosition
+     */
+    'option_symbol'?: OptionsSymbol;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'units'?: number;
+    /**
+     * 
+     * @type {Currency}
+     * @memberof OptionsPosition
+     */
+    'currency'?: Currency;
+    /**
+     * Average purchase price for this position
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'average_purchase_price'?: number;
 }
 /**
  * Options Symbol
@@ -2938,6 +3175,204 @@ export interface StrategyOrderPlaceOrdersInnerLegsInner {
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
     'lastExecPrice'?: string;
+}
+/**
+ * Strategy order record
+ * @export
+ * @interface StrategyOrderRecord
+ */
+export interface StrategyOrderRecord {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {OptionStrategy}
+     * @memberof StrategyOrderRecord
+     */
+    'strategy'?: OptionStrategy;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrategyOrderRecord
+     */
+    'status'?: StrategyOrderRecordStatusEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyOrderRecord
+     */
+    'filled_quantity'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyOrderRecord
+     */
+    'open_quantity'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyOrderRecord
+     */
+    'closed_quantity'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrategyOrderRecord
+     */
+    'order_type'?: StrategyOrderRecordOrderTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof StrategyOrderRecord
+     */
+    'time_in_force'?: StrategyOrderRecordTimeInForceEnum;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof StrategyOrderRecord
+     */
+    'limit_price'?: number;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof StrategyOrderRecord
+     */
+    'execution_price'?: number;
+    /**
+     * Time
+     * @type {string}
+     * @memberof StrategyOrderRecord
+     */
+    'time_placed'?: string;
+    /**
+     * Time
+     * @type {string}
+     * @memberof StrategyOrderRecord
+     */
+    'time_updated'?: string;
+}
+
+export const StrategyOrderRecordStatusEnum = {
+    Pending: 'PENDING',
+    Accepted: 'ACCEPTED',
+    Failed: 'FAILED',
+    Rejected: 'REJECTED',
+    Canceled: 'CANCELED',
+    PartialCanceled: 'PARTIAL_CANCELED',
+    CancelPending: 'CANCEL_PENDING',
+    Executed: 'EXECUTED',
+    Partial: 'PARTIAL',
+    ReplacePending: 'REPLACE_PENDING',
+    Replaced: 'REPLACED',
+    Stopped: 'STOPPED',
+    Suspended: 'SUSPENDED',
+    Expired: 'EXPIRED',
+    Queued: 'QUEUED',
+    Triggered: 'TRIGGERED',
+    Activated: 'ACTIVATED',
+    PendingRiskReview: 'PENDING_RISK_REVIEW',
+    ContingentOrder: 'CONTINGENT_ORDER'
+} as const;
+
+export type StrategyOrderRecordStatusEnum = typeof StrategyOrderRecordStatusEnum[keyof typeof StrategyOrderRecordStatusEnum];
+export const StrategyOrderRecordOrderTypeEnum = {
+    Limit: 'Limit',
+    Market: 'Market',
+    NetDebit: 'NetDebit',
+    NetCredit: 'NetCredit'
+} as const;
+
+export type StrategyOrderRecordOrderTypeEnum = typeof StrategyOrderRecordOrderTypeEnum[keyof typeof StrategyOrderRecordOrderTypeEnum];
+export const StrategyOrderRecordTimeInForceEnum = {
+    Day: 'DAY',
+    Gtc: 'GTC'
+} as const;
+
+export type StrategyOrderRecordTimeInForceEnum = typeof StrategyOrderRecordTimeInForceEnum[keyof typeof StrategyOrderRecordTimeInForceEnum];
+
+/**
+ * 
+ * @export
+ * @interface StrategyQuotes
+ */
+export interface StrategyQuotes {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {OptionStrategy}
+     * @memberof StrategyQuotes
+     */
+    'strategy'?: OptionStrategy;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof StrategyQuotes
+     */
+    'open_price'?: number;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof StrategyQuotes
+     */
+    'bid_price'?: number;
+    /**
+     * Trade Price if limit or stop limit order
+     * @type {number}
+     * @memberof StrategyQuotes
+     */
+    'ask_price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotes
+     */
+    'volatility'?: number;
+    /**
+     * 
+     * @type {StrategyQuotesGreek}
+     * @memberof StrategyQuotes
+     */
+    'greek'?: StrategyQuotesGreek;
+}
+/**
+ * 
+ * @export
+ * @interface StrategyQuotesGreek
+ */
+export interface StrategyQuotesGreek {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotesGreek
+     */
+    'delta'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotesGreek
+     */
+    'gamma'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotesGreek
+     */
+    'theta'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotesGreek
+     */
+    'vega'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof StrategyQuotesGreek
+     */
+    'rho'?: number;
 }
 /**
  * 
@@ -5839,11 +6274,74 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
+         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {OptionsGetOptionStrategyRequest} optionsGetOptionStrategyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionStrategy: async (userId: string, userSecret: string, accountId: string, optionsGetOptionStrategyRequest: OptionsGetOptionStrategyRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getOptionStrategy', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getOptionStrategy', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getOptionStrategy', 'accountId', accountId)
+            // verify required parameter 'optionsGetOptionStrategyRequest' is not null or undefined
+            assertParamExists('getOptionStrategy', 'optionsGetOptionStrategyRequest', optionsGetOptionStrategyRequest)
+            const localVarPath = `/accounts/{accountId}/optionStrategy`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(optionsGetOptionStrategyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the options chain
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} symbol brokerage symbol to get quotes for.
+         * @param {string} symbol Universal symbol ID if symbol
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5856,7 +6354,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getOptionsChain', 'accountId', accountId)
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getOptionsChain', 'symbol', symbol)
-            const localVarPath = `/accounts/{accountId}/options_chain`
+            const localVarPath = `/accounts/{accountId}/optionsChain`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5903,31 +6401,26 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get a strategies impact on the account
+         * @summary Get latest market data of option strategy
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {{ [key: string]: any; }} strategyQuotesRecord The strategy quotes record returned from the strategy_quotes endpoint
-         * @param {string} body 
-         * @param {number} [strikePrice] The strike price, only needed if the order is a limit order
-         * @param {string} [primaryRoute] The desired route for the order, default is \&quot;AUTO\&quot;
-         * @param {string} [secondarRoute] The desired secondary route for the order, default is \&quot;AUTO\&quot;
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOptionsImpact: async (userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOptionsStrategyQuote: async (userId: string, userSecret: string, accountId: string, optionStrategyId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getOptionsImpact', 'userId', userId)
+            assertParamExists('getOptionsStrategyQuote', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getOptionsImpact', 'userSecret', userSecret)
+            assertParamExists('getOptionsStrategyQuote', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getOptionsImpact', 'accountId', accountId)
-            // verify required parameter 'strategyQuotesRecord' is not null or undefined
-            assertParamExists('getOptionsImpact', 'strategyQuotesRecord', strategyQuotesRecord)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('getOptionsImpact', 'body', body)
-            const localVarPath = `/accounts/{accountId}/strategy_impact`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            assertParamExists('getOptionsStrategyQuote', 'accountId', accountId)
+            // verify required parameter 'optionStrategyId' is not null or undefined
+            assertParamExists('getOptionsStrategyQuote', 'optionStrategyId', optionStrategyId)
+            const localVarPath = `/accounts/{accountId}/optionStrategy/{optionStrategyId}`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)))
+                .replace(`{${"optionStrategyId"}}`, encodeURIComponent(String(optionStrategyId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5935,7 +6428,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5956,121 +6449,11 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
-            if (strategyQuotesRecord !== undefined) {
-                localVarQueryParameter['StrategyQuotesRecord'] = strategyQuotesRecord;
-            }
-
-            if (strikePrice !== undefined) {
-                localVarQueryParameter['strike_price'] = strikePrice;
-            }
-
-            if (primaryRoute !== undefined) {
-                localVarQueryParameter['primary_route'] = primaryRoute;
-            }
-
-            if (secondarRoute !== undefined) {
-                localVarQueryParameter['secondar_route'] = secondarRoute;
-            }
-
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get a price quote for a strategy
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} legs 
-         * @param {string} strategy 
-         * @param {string} timeInForce 
-         * @param {string} orderType 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getStrategyQuote: async (userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getStrategyQuote', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getStrategyQuote', 'userSecret', userSecret)
-            // verify required parameter 'legs' is not null or undefined
-            assertParamExists('getStrategyQuote', 'legs', legs)
-            // verify required parameter 'strategy' is not null or undefined
-            assertParamExists('getStrategyQuote', 'strategy', strategy)
-            // verify required parameter 'timeInForce' is not null or undefined
-            assertParamExists('getStrategyQuote', 'timeInForce', timeInForce)
-            // verify required parameter 'orderType' is not null or undefined
-            assertParamExists('getStrategyQuote', 'orderType', orderType)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getStrategyQuote', 'accountId', accountId)
-            // verify required parameter 'manualTradeForm' is not null or undefined
-            assertParamExists('getStrategyQuote', 'manualTradeForm', manualTradeForm)
-            const localVarPath = `/accounts/{accountId}/strategy_quotes`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (legs !== undefined) {
-                localVarQueryParameter['legs'] = legs;
-            }
-
-            if (strategy !== undefined) {
-                localVarQueryParameter['strategy'] = strategy;
-            }
-
-            if (timeInForce !== undefined) {
-                localVarQueryParameter['time_in_force'] = timeInForce;
-            }
-
-            if (orderType !== undefined) {
-                localVarQueryParameter['order_type'] = orderType;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6136,33 +6519,29 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
+         * @summary Place an option strategy order on the brokerage
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {number} strategyOrder 
-         * @param {number} strikePrice 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
-         * @param {number} [primaryRoute] 
-         * @param {number} [secondaryRoute] 
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
+         * @param {OptionsPlaceOptionStrategyRequest} optionsPlaceOptionStrategyRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeOptionsStrategyOrder: async (userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeOptionStrategy: async (userId: string, userSecret: string, accountId: string, optionStrategyId: string, optionsPlaceOptionStrategyRequest: OptionsPlaceOptionStrategyRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'userId', userId)
+            assertParamExists('placeOptionStrategy', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'userSecret', userSecret)
-            // verify required parameter 'strategyOrder' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'strategyOrder', strategyOrder)
-            // verify required parameter 'strikePrice' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'strikePrice', strikePrice)
+            assertParamExists('placeOptionStrategy', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'accountId', accountId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('placeOptionsStrategyOrder', 'body', body)
-            const localVarPath = `/accounts/{accountId}/strategy_place`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            assertParamExists('placeOptionStrategy', 'accountId', accountId)
+            // verify required parameter 'optionStrategyId' is not null or undefined
+            assertParamExists('placeOptionStrategy', 'optionStrategyId', optionStrategyId)
+            // verify required parameter 'optionsPlaceOptionStrategyRequest' is not null or undefined
+            assertParamExists('placeOptionStrategy', 'optionsPlaceOptionStrategyRequest', optionsPlaceOptionStrategyRequest)
+            const localVarPath = `/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)))
+                .replace(`{${"optionStrategyId"}}`, encodeURIComponent(String(optionStrategyId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6191,22 +6570,6 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
-            if (strategyOrder !== undefined) {
-                localVarQueryParameter['strategy_order'] = strategyOrder;
-            }
-
-            if (strikePrice !== undefined) {
-                localVarQueryParameter['strike_price'] = strikePrice;
-            }
-
-            if (primaryRoute !== undefined) {
-                localVarQueryParameter['primary_route'] = primaryRoute;
-            }
-
-            if (secondaryRoute !== undefined) {
-                localVarQueryParameter['secondary_route'] = secondaryRoute;
-            }
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -6214,81 +6577,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        searchOptionsQuote: async (userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('searchOptionsQuote', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('searchOptionsQuote', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('searchOptionsQuote', 'accountId', accountId)
-            // verify required parameter 'date' is not null or undefined
-            assertParamExists('searchOptionsQuote', 'date', date)
-            const localVarPath = `/accounts/{accountId}/options_search`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (date !== undefined) {
-                localVarQueryParameter['Date'] = date;
-            }
-
-            if (minStrike !== undefined) {
-                localVarQueryParameter['min_strike'] = minStrike;
-            }
-
-            if (maxStrike !== undefined) {
-                localVarQueryParameter['max_strike'] = maxStrike;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(optionsPlaceOptionStrategyRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6307,11 +6596,25 @@ export const OptionsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {OptionsGetOptionStrategyRequest} optionsGetOptionStrategyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOptionStrategy(userId: string, userSecret: string, accountId: string, optionsGetOptionStrategyRequest: OptionsGetOptionStrategyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyQuotes>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Get the options chain
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} symbol brokerage symbol to get quotes for.
+         * @param {string} symbol Universal symbol ID if symbol
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6321,38 +6624,16 @@ export const OptionsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get a strategies impact on the account
+         * @summary Get latest market data of option strategy
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {{ [key: string]: any; }} strategyQuotesRecord The strategy quotes record returned from the strategy_quotes endpoint
-         * @param {string} body 
-         * @param {number} [strikePrice] The strike price, only needed if the order is a limit order
-         * @param {string} [primaryRoute] The desired route for the order, default is \&quot;AUTO\&quot;
-         * @param {string} [secondarRoute] The desired secondary route for the order, default is \&quot;AUTO\&quot;
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyImpact>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get a price quote for a strategy
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} legs 
-         * @param {string} strategy 
-         * @param {string} timeInForce 
-         * @param {string} orderType 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options);
+        async getOptionsStrategyQuote(userId: string, userSecret: string, accountId: string, optionStrategyId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyQuotes>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6370,36 +6651,17 @@ export const OptionsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} strategyOrder 
-         * @param {number} strikePrice 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
-         * @param {number} [primaryRoute] 
-         * @param {number} [secondaryRoute] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyOrderPlace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+         * @summary Place an option strategy order on the brokerage
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
+         * @param {OptionsPlaceOptionStrategyRequest} optionsPlaceOptionStrategyRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options);
+        async placeOptionStrategy(userId: string, userSecret: string, accountId: string, optionStrategyId: string, optionsPlaceOptionStrategyRequest: OptionsPlaceOptionStrategyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -6414,11 +6676,24 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {OptionsGetOptionStrategyRequest} optionsGetOptionStrategyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionStrategy(userId: string, userSecret: string, accountId: string, optionsGetOptionStrategyRequest: OptionsGetOptionStrategyRequest, options?: any): AxiosPromise<StrategyQuotes> {
+            return localVarFp.getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the options chain
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} symbol brokerage symbol to get quotes for.
+         * @param {string} symbol Universal symbol ID if symbol
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6427,37 +6702,16 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Get a strategies impact on the account
+         * @summary Get latest market data of option strategy
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {{ [key: string]: any; }} strategyQuotesRecord The strategy quotes record returned from the strategy_quotes endpoint
-         * @param {string} body 
-         * @param {number} [strikePrice] The strike price, only needed if the order is a limit order
-         * @param {string} [primaryRoute] The desired route for the order, default is \&quot;AUTO\&quot;
-         * @param {string} [secondarRoute] The desired secondary route for the order, default is \&quot;AUTO\&quot;
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: any): AxiosPromise<StrategyImpact> {
-            return localVarFp.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get a price quote for a strategy
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} legs 
-         * @param {string} strategy 
-         * @param {string} timeInForce 
-         * @param {string} orderType 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<any> {
-            return localVarFp.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(axios, basePath));
+        getOptionsStrategyQuote(userId: string, userSecret: string, accountId: string, optionStrategyId: string, options?: any): AxiosPromise<StrategyQuotes> {
+            return localVarFp.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6473,35 +6727,17 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} strategyOrder 
-         * @param {number} strikePrice 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
-         * @param {number} [primaryRoute] 
-         * @param {number} [secondaryRoute] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: any): AxiosPromise<StrategyOrderPlace> {
-            return localVarFp.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+         * @summary Place an option strategy order on the brokerage
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
+         * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
+         * @param {OptionsPlaceOptionStrategyRequest} optionsPlaceOptionStrategyRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: any): AxiosPromise<Array<OptionChainInner>> {
-            return localVarFp.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(axios, basePath));
+        placeOptionStrategy(userId: string, userSecret: string, accountId: string, optionStrategyId: string, optionsPlaceOptionStrategyRequest: OptionsPlaceOptionStrategyRequest, options?: any): AxiosPromise<StrategyOrderRecord> {
+            return localVarFp.placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6515,11 +6751,26 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
 export class OptionsApi extends BaseAPI {
     /**
      * 
+     * @summary Creates an option strategy object that will be used to place an option strategy order
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {OptionsGetOptionStrategyRequest} optionsGetOptionStrategyRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OptionsApi
+     */
+    public getOptionStrategy(userId: string, userSecret: string, accountId: string, optionsGetOptionStrategyRequest: OptionsGetOptionStrategyRequest, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the options chain
      * @param {string} userId 
      * @param {string} userSecret 
      * @param {string} accountId The ID of the account get positions.
-     * @param {string} symbol brokerage symbol to get quotes for.
+     * @param {string} symbol Universal symbol ID if symbol
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OptionsApi
@@ -6530,40 +6781,17 @@ export class OptionsApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get a strategies impact on the account
+     * @summary Get latest market data of option strategy
      * @param {string} userId 
      * @param {string} userSecret 
      * @param {string} accountId The ID of the account get positions.
-     * @param {{ [key: string]: any; }} strategyQuotesRecord The strategy quotes record returned from the strategy_quotes endpoint
-     * @param {string} body 
-     * @param {number} [strikePrice] The strike price, only needed if the order is a limit order
-     * @param {string} [primaryRoute] The desired route for the order, default is \&quot;AUTO\&quot;
-     * @param {string} [secondarRoute] The desired secondary route for the order, default is \&quot;AUTO\&quot;
+     * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OptionsApi
      */
-    public getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get a price quote for a strategy
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {number} legs 
-     * @param {string} strategy 
-     * @param {string} timeInForce 
-     * @param {string} orderType 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {ManualTradeForm} manualTradeForm 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApi
-     */
-    public getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
+    public getOptionsStrategyQuote(userId: string, userSecret: string, accountId: string, optionStrategyId: string, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6582,38 +6810,18 @@ export class OptionsApi extends BaseAPI {
 
     /**
      * 
-     * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
+     * @summary Place an option strategy order on the brokerage
      * @param {string} userId 
      * @param {string} userSecret 
-     * @param {number} strategyOrder 
-     * @param {number} strikePrice 
      * @param {string} accountId The ID of the account get positions.
-     * @param {string} body 
-     * @param {number} [primaryRoute] 
-     * @param {number} [secondaryRoute] 
+     * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
+     * @param {OptionsPlaceOptionStrategyRequest} optionsPlaceOptionStrategyRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OptionsApi
      */
-    public placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-     * @param {number} [minStrike] The minimum strike price for the desired contract
-     * @param {number} [maxStrike] The max strike price for the desired contract
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApi
-     */
-    public searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(this.axios, this.basePath));
+    public placeOptionStrategy(userId: string, userSecret: string, accountId: string, optionStrategyId: string, optionsPlaceOptionStrategyRequest: OptionsPlaceOptionStrategyRequest, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10537,6 +10745,65 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Place a trade with NO validation.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeForceOrder: async (userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeForceOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeForceOrder', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeForm' is not null or undefined
+            assertParamExists('placeForceOrder', 'manualTradeForm', manualTradeForm)
+            const localVarPath = `/trade/place`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Place a OCO (One Cancels Other) order
          * @param {string} userId 
          * @param {string} userSecret 
@@ -10756,6 +11023,19 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Place a trade with NO validation.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeForceOrder(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(userId, userSecret, manualTradeForm, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Place a OCO (One Cancels Other) order
          * @param {string} userId 
          * @param {string} userSecret 
@@ -10875,6 +11155,18 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         placeCalculatedTrades(portfolioGroupId: string, calculatedTradeId: string, options?: any): AxiosPromise<Array<TradeExecutionStatus>> {
             return localVarFp.placeCalculatedTrades(portfolioGroupId, calculatedTradeId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Place a trade with NO validation.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeForceOrder(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeForceOrder(userId, userSecret, manualTradeForm, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11008,6 +11300,20 @@ export class TradingApi extends BaseAPI {
      */
     public placeCalculatedTrades(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeCalculatedTrades(portfolioGroupId, calculatedTradeId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Place a trade with NO validation.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {ManualTradeForm} manualTradeForm 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApi
+     */
+    public placeForceOrder(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeForceOrder(userId, userSecret, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -141,6 +141,20 @@ public class TradingApiTest {
     }
 
     /**
+     * Place a trade with NO validation.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeForceOrderTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        ManualTradeForm manualTradeForm = null;
+        AccountOrderRecord response = api.placeForceOrder(userId, userSecret, manualTradeForm);
+        // TODO: test validations
+    }
+
+    /**
      * Place a OCO (One Cancels Other) order
      *
      * @throws ApiException if the Api call fails

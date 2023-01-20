@@ -13,11 +13,12 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
-import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OptionChainInner;
+import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsHoldings;
-import com.konfigthis.client.model.StrategyImpact;
-import com.konfigthis.client.model.StrategyOrderPlace;
+import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
+import com.konfigthis.client.model.StrategyOrderRecord;
+import com.konfigthis.client.model.StrategyQuotes;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,21 @@ public class OptionsApiTest {
     private final OptionsApi api = new OptionsApi();
 
     /**
+     * Creates an option strategy object that will be used to place an option strategy order
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getOptionStrategyTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = null;
+        StrategyQuotes response = api.getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+        // TODO: test validations
+    }
+
+    /**
      * Get the options chain
      *
      * @throws ApiException if the Api call fails
@@ -51,40 +67,17 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get a strategies impact on the account
+     * Get latest market data of option strategy
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getOptionsImpactTest() throws ApiException {
+    public void getOptionsStrategyQuoteTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        Map<String, Object> strategyQuotesRecord = null;
-        UUID body = null;
-        Integer strikePrice = null;
-        String primaryRoute = null;
-        String secondarRoute = null;
-        StrategyImpact response = api.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute);
-        // TODO: test validations
-    }
-
-    /**
-     * Get a price quote for a strategy
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getStrategyQuoteTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        Integer legs = null;
-        String strategy = null;
-        String timeInForce = null;
-        String orderType = null;
-        UUID accountId = null;
-        ManualTradeForm manualTradeForm = null;
-        Object response = api.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm);
+        UUID optionStrategyId = null;
+        StrategyQuotes response = api.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
         // TODO: test validations
     }
 
@@ -103,38 +96,18 @@ public class OptionsApiTest {
     }
 
     /**
-     * Place the strategy order; impact not required but the StrategyOrderQuotes object is
+     * Place an option strategy order on the brokerage
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void placeOptionsStrategyOrderTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        Integer strategyOrder = null;
-        Integer strikePrice = null;
-        UUID accountId = null;
-        UUID body = null;
-        Integer primaryRoute = null;
-        Integer secondaryRoute = null;
-        StrategyOrderPlace response = api.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute);
-        // TODO: test validations
-    }
-
-    /**
-     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchOptionsQuoteTest() throws ApiException {
+    public void placeOptionStrategyTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        String date = null;
-        Integer minStrike = null;
-        Integer maxStrike = null;
-        List<OptionChainInner> response = api.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike);
+        UUID optionStrategyId = null;
+        OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = null;
+        StrategyOrderRecord response = api.placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
         // TODO: test validations
     }
 

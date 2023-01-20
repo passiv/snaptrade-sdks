@@ -31,7 +31,9 @@ from snaptrade_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from snaptrade_client.model.currency import Currency
     from snaptrade_client.model.options_symbol import OptionsSymbol
+    globals()['Currency'] = Currency
     globals()['OptionsSymbol'] = OptionsSymbol
 
 
@@ -92,7 +94,8 @@ class OptionsHoldings(ModelNormal):
             'symbol': (str,),  # noqa: E501
             'option_symbol': (OptionsSymbol,),  # noqa: E501
             'price': (float,),  # noqa: E501
-            'currency': (str,),  # noqa: E501
+            'currency': (Currency,),  # noqa: E501
+            'average_purchase_price': (float,),  # noqa: E501
         }
 
     @cached_property
@@ -106,6 +109,7 @@ class OptionsHoldings(ModelNormal):
         'option_symbol': 'option_symbol',  # noqa: E501
         'price': 'price',  # noqa: E501
         'currency': 'currency',  # noqa: E501
+        'average_purchase_price': 'average_purchase_price',  # noqa: E501
     }
 
     read_only_vars = {
@@ -153,7 +157,8 @@ class OptionsHoldings(ModelNormal):
             symbol (str): [optional]  # noqa: E501
             option_symbol (OptionsSymbol): [optional]  # noqa: E501
             price (float): Trade Price if limit or stop limit order. [optional]  # noqa: E501
-            currency (str): [optional]  # noqa: E501
+            currency (Currency): [optional]  # noqa: E501
+            average_purchase_price (float): Average purchase price for this position. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -243,7 +248,8 @@ class OptionsHoldings(ModelNormal):
             symbol (str): [optional]  # noqa: E501
             option_symbol (OptionsSymbol): [optional]  # noqa: E501
             price (float): Trade Price if limit or stop limit order. [optional]  # noqa: E501
-            currency (str): [optional]  # noqa: E501
+            currency (Currency): [optional]  # noqa: E501
+            average_purchase_price (float): Average purchase price for this position. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

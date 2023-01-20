@@ -5136,6 +5136,7 @@ components:
               return cipher.decrypt_and_verify(encrypted_msg, tag).decode()
           ```
       type: object
+      additionalProperties: false
       properties:
         encryptedSharedKey:
           type: string

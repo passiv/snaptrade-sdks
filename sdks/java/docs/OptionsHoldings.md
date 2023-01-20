@@ -12,7 +12,8 @@ Option Holdings
 |**symbol** | **UUID** |  |  [optional] |
 |**optionSymbol** | **OptionsSymbol** |  |  [optional] |
 |**price** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**currency** | **String** |  |  [optional] |
+|**currency** | **Currency** |  |  [optional] |
+|**averagePurchasePrice** | **BigDecimal** | Average purchase price for this position |  [optional] |
 
 
 
