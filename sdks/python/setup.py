@@ -36,7 +36,7 @@ setup(
     description="SnapTrade",
     author="Konfig",
     author_email="api@snaptrade.com",
-    url="https:////",
+    url="https://github.com/passiv/snaptrade-sdks/tree/main/sdks/python",
     keywords=["Konfig", "SnapTrade"],
     python_requires=">=3.6",
     install_requires=REQUIRES,

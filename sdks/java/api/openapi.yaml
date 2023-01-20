@@ -7,7 +7,7 @@ info:
   title: SnapTrade
   version: 1.0.0
   x-konfig-ignore:
-    no-additional-properties: true
+    potential-incorrect-type: true
 servers:
 - description: SnapTrade Production API
   url: https://api.snaptrade.com/api/v1

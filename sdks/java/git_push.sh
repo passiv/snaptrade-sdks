@@ -9,17 +9,17 @@ release_note=$3
 git_host=$4
 
 if [ "$git_host" = "" ]; then
-    git_host=""
+    git_host="github.com"
     echo "[INFO] No command line input provided. Set \$git_host to $git_host"
 fi
 
 if [ "$git_user_id" = "" ]; then
-    git_user_id=""
+    git_user_id="passiv"
     echo "[INFO] No command line input provided. Set \$git_user_id to $git_user_id"
 fi
 
 if [ "$git_repo_id" = "" ]; then
-    git_repo_id=""
+    git_repo_id="snaptrade-sdks/tree/main/sdks/java"
     echo "[INFO] No command line input provided. Set \$git_repo_id to $git_repo_id"
 fi
 

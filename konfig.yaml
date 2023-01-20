@@ -38,6 +38,9 @@ generators:
         destinationFilename: pom.xml
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
+    git:
+      userId: passiv
+      repoId: snaptrade-sdks/tree/main/sdks/java
   python:
     version: 2.0.0
     test:
@@ -51,6 +54,9 @@ generators:
         destinationFilename: snaptrade_client/rest.py
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
+    git:
+      userId: passiv
+      repoId: snaptrade-sdks/tree/main/sdks/python
   typescript:
     outputDirectory: sdks/typescript
     files:
