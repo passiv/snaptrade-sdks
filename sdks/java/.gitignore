@@ -19,5 +19,10 @@ hs_err_pid*
 target
 .gradle
 build
-// CUSTOM CODE
+
+# Ignore IntelliJ files
+.idea
+*.iml
+
+# Mac OS
 .DS_Store

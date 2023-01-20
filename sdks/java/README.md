@@ -83,72 +83,47 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.api.*;
 import com.konfigthis.client.models.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
-
-  // 1) Initialize the default client with your clientID and consumerKey. 
-  static {
-      Configuration.setDefaultClientId("YOUR_CLIENT_ID");
-      Configuration.setDefaultConsumerKey("YOUR_CONSUMER_KEY");
-  }
-
   public static void main(String[] args) {
-      ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-      // 2) Check that the client is able to make a request to the API server
-      ApiStatusApi apiStatusApi = new ApiStatusApi(defaultClient);
-      Status status = apiStatusApi.rootGet();
-      System.out.printf("SnapTrade is online: %s\n", status.getOnline());
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    
+    // Configure API key authorization: PartnerClientId
+    ApiKeyAuth PartnerClientId = (ApiKeyAuth) apiClient.getAuthentication("PartnerClientId");
+    PartnerClientId.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerClientId.setApiKeyPrefix("Token");
 
-      // 3) Create a new user on SnapTrade
-      AuthenticationApi authenticationApi = new AuthenticationApi(defaultClient);
+    // Configure API key authorization: PartnerSignature
+    ApiKeyAuth PartnerSignature = (ApiKeyAuth) apiClient.getAuthentication("PartnerSignature");
+    PartnerSignature.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerSignature.setApiKeyPrefix("Token");
 
-      // The userId should be provided by you and refer to permanent value such as a database row ID
-      UUID userId = UUID.randomUUID();
-      UserIDandSecret userIDandSecret = authenticationApi.snapTradeRegisterUserPost(new SnapTradeRegisterUserRequestBody().userId(userId.toString()));
-      // Note: A user secret is only generated once. It's required to access resources for certain endpoints
-      System.out.printf("userID: %s, userSecret: %s\n", userIDandSecret.getUserId(), userIDandSecret.getUserSecret());
+    // Configure API key authorization: PartnerTimestamp
+    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) apiClient.getAuthentication("PartnerTimestamp");
+    PartnerTimestamp.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerTimestamp.setApiKeyPrefix("Token");
 
-      //  4) Get a redirect URI. Users will need this to connect their brokerage to the SnapTrade server
-      SnapTradeLoginPost200Response response = authenticationApi.snapTradeLoginPost(userIDandSecret.getUserId(), userIDandSecret.getUserSecret(), new SnapTradeLoginUserRequestBody());
-      System.out.println(response.getLoginRedirectURI().getRedirectURI());
-
-      // 5) Make a portfolio group and query
-      PortfolioManagementApi portfolioManagementApi = new PortfolioManagementApi(defaultClient);
-      Map<String, Object> portfolioGroupPostBody = new HashMap<>();
-      portfolioGroupPostBody.put("id", UUID.randomUUID().toString());
-      portfolioGroupPostBody.put("name", "MyPortfolio");
-      List<PortfolioGroup> portfolioGroupsFromPost = portfolioManagementApi.portfolioGroupsPost(userIDandSecret.getUserId(), userIDandSecret.getUserSecret(), portfolioGroupPostBody);
-      System.out.println(portfolioGroupsFromPost);
-      List<PortfolioGroup> portfolioGroups = portfolioManagementApi.portfolioGroupsGet(userIDandSecret.getUserId(), userIDandSecret.getUserSecret());
-      System.out.println(portfolioGroups);
-
-      // 6) Accept the disclaimer
-      ApiDisclaimerApi apiDisclaimerApi = new ApiDisclaimerApi(defaultClient);
-      SnapTradeAPIDisclaimerAcceptStatus snapTradeAPIDisclaimerAcceptStatus = apiDisclaimerApi.snapTradeAcceptDisclaimerPost(userIDandSecret.getUserId(), userIDandSecret.getUserSecret(), new SnapTradeAcceptDisclaimerPostRequest().accepted(true));
-      System.out.println(snapTradeAPIDisclaimerAcceptStatus);
-
-      AccountInformationApi accountInformationApi = new AccountInformationApi(defaultClient);
-      ReferenceDataApi referenceDataApi = new ReferenceDataApi(defaultClient);
-
-      // 7) Query holdings and available brokerages
-      List<AccountHoldings> holdings = accountInformationApi.holdingsGet(userIDandSecret.getUserId(), userIDandSecret.getUserSecret(), null);
-      System.out.println(holdings);
-      List<Account> accounts = accountInformationApi.accountsGet(userIDandSecret.getUserId(), userIDandSecret.getUserSecret());
-      System.out.println(accounts);
-      List<Brokerage> brokerages = referenceDataApi.brokeragesGet();
-      System.out.println(brokerages);
-
-      // 8) Deleting a user
-      DeleteUserResponse deleteUserResponse = authenticationApi.snapTradeDeleteUserDelete(userIDandSecret.getUserId());
-      System.out.println(deleteUserResponse);
+    AccountInformationApi apiInstance = new AccountInformationApi(apiClient);
+    String userId = "userId_example"; // String | 
+    String userSecret = "userSecret_example"; // String | 
+    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // UUID | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    try {
+      List<AccountHoldings> result = apiInstance.getAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
   }
 }
 

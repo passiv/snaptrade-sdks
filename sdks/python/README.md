@@ -14,10 +14,12 @@ Python >=3.6
 ## Installation & Usage
 ### pip install
 
+If the python package is hosted on a repository, you can install directly using:
+
 ```sh
-pip install snaptrade-python-sdk
+pip install git+https:////.git
 ```
-(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk`)
+(you may need to run `pip` with root permission: `sudo pip install git+https:////.git`)
 
 Then import the package:
 ```python
@@ -43,47 +45,53 @@ import snaptrade_client
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
-import uuid
+
+import time
 import snaptrade_client
 from pprint import pprint
-from snaptrade_client.api import api_status_api
-from snaptrade_client.api import authentication_api
-from snaptrade_client.api import account_information_api
-from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
+from snaptrade_client.api import api_disclaimer_api
+from snaptrade_client.model.api_disclaimer_accept_request import APIDisclaimerAcceptRequest
+from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# 1) Initialize a client with your clientID and consumerKey.
-configuration = snaptrade_client.Configuration(client_id="YOUR_CLIENT_ID",
-                                               consumer_key="YOUR_CONSUMER_KEY")
+# Configure API key authorization: PartnerClientId
+configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
 
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
+
+# Configure API key authorization: PartnerSignature
+configuration.api_key['PartnerSignature'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerSignature'] = 'Bearer'
+
+# Configure API key authorization: PartnerTimestamp
+configuration.api_key['PartnerTimestamp'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['PartnerTimestamp'] = 'Bearer'
+
+
+# Enter a context with an instance of the API client
 with snaptrade_client.ApiClient(configuration) as api_client:
-    # 2) Check that the client is able to make a request to the API server.
-    api_status_api_inst = api_status_api.APIStatusApi(api_client)
-    api_response = api_status_api_inst.root_get()
-    pprint(api_response)
+    # Create an instance of the API class
+    api_instance = api_disclaimer_api.APIDisclaimerApi(api_client)
+    user_id = "John.doe@snaptrade.com" # str | 
+    user_secret = "USERSECRET123" # str | 
+    api_disclaimer_accept_request = APIDisclaimerAcceptRequest(
+        accepted=True,
+    ) # APIDisclaimerAcceptRequest | 
 
-    # 3) Create a new user on SnapTrade
-    user_id = str(uuid.uuid4())
-    authentication_api_inst = authentication_api.AuthenticationApi(api_client)
-    register_response = authentication_api_inst.snap_trade_register_user_post(
-        SnapTradeRegisterUserRequestBody(user_id=user_id))
-    pprint(register_response)
-
-    # Note: A user secret is only generated once. It's required to access
-    # resources for certain endpoints.
-    user_secret = register_response.user_secret
-
-    # 4) Get a redirect URI. Users will need this to connect
-    # their brokerage to the SnapTrade server.
-    redirect_uri = authentication_api_inst.snap_trade_login_post(user_id, user_secret)
-
-    # 5) Obtaining account holdings data
-    account_information_api_inst = account_information_api.AccountInformationApi(api_client)
-    holdings = account_information_api_inst.holdings_get(user_id, user_secret)
-    pprint(holdings)
-
-    # 6) Deleting a user
-    deleted_response = authentication_api_inst.snap_trade_delete_user_delete(user_id)
-    pprint(deleted_response)
+    try:
+        # Accept or Reject SnapTrade disclaimer agreement
+        api_response = api_instance.accept(user_id, user_secret, api_disclaimer_accept_request)
+        pprint(api_response)
+    except snaptrade_client.ApiException as e:
+        print("Exception when calling APIDisclaimerApi->accept: %s\n" % e)
 ```
 
 ## Documentation for API Endpoints
@@ -332,3 +340,4 @@ import snaptrade_client
 from snaptrade_client.apis import *
 from snaptrade_client.models import *
 ```
+
