@@ -35,7 +35,7 @@ import com.konfigthis.client.model.SymbolsQuotes;
 import com.konfigthis.client.model.Trade;
 import com.konfigthis.client.model.TradeExecutionStatus;
 import com.konfigthis.client.model.TradeImpact;
-import com.konfigthis.client.model.TradeOcoPostRequest;
+import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -83,7 +83,7 @@ public class TradingApi {
     }
 
     /**
-     * Build call for accountsAccountIdOrdersCancelPost
+     * Build call for cancelUserAccountOrder
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
@@ -99,7 +99,7 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOrdersCancelPostCall(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call cancelUserAccountOrderCall(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -154,28 +154,28 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdOrdersCancelPostValidateBeforeCall(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cancelUserAccountOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdOrdersCancelPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling cancelUserAccountOrder(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdOrdersCancelPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling cancelUserAccountOrder(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdOrdersCancelPost(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling cancelUserAccountOrder(Async)");
         }
 
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling accountsAccountIdOrdersCancelPost(Async)");
+            throw new ApiException("Missing the required parameter 'body' when calling cancelUserAccountOrder(Async)");
         }
 
-        return accountsAccountIdOrdersCancelPostCall(userId, userSecret, accountId, body, _callback);
+        return cancelUserAccountOrderCall(userId, userSecret, accountId, body, _callback);
 
     }
 
@@ -196,8 +196,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public AccountOrderRecord accountsAccountIdOrdersCancelPost(String userId, String userSecret, UUID accountId, UUID body) throws ApiException {
-        ApiResponse<AccountOrderRecord> localVarResp = accountsAccountIdOrdersCancelPostWithHttpInfo(userId, userSecret, accountId, body);
+    public AccountOrderRecord cancelUserAccountOrder(String userId, String userSecret, UUID accountId, UUID body) throws ApiException {
+        ApiResponse<AccountOrderRecord> localVarResp = cancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, body);
         return localVarResp.getData();
     }
 
@@ -218,8 +218,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AccountOrderRecord> accountsAccountIdOrdersCancelPostWithHttpInfo(String userId, String userSecret, UUID accountId, UUID body) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdOrdersCancelPostValidateBeforeCall(userId, userSecret, accountId, body, null);
+    public ApiResponse<AccountOrderRecord> cancelUserAccountOrderWithHttpInfo(String userId, String userSecret, UUID accountId, UUID body) throws ApiException {
+        okhttp3.Call localVarCall = cancelUserAccountOrderValidateBeforeCall(userId, userSecret, accountId, body, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -242,30 +242,28 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOrdersCancelPostAsync(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    public okhttp3.Call cancelUserAccountOrderAsync(String userId, String userSecret, UUID accountId, UUID body, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdOrdersCancelPostValidateBeforeCall(userId, userSecret, accountId, body, _callback);
+        okhttp3.Call localVarCall = cancelUserAccountOrderValidateBeforeCall(userId, userSecret, accountId, body, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for accountsAccountIdOrdersGet
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
+     * Build call for getCalculatedTradeImpactById
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param tradeId The ID of trade object (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOrdersGetCall(String userId, String userSecret, UUID accountId, String state, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getCalculatedTradeImpactByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -282,26 +280,16 @@ public class TradingApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/accounts/{accountId}/orders"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
+            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()))
+            .replace("{" + "tradeId" + "}", localVarApiClient.escapeString(tradeId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        if (state != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("state", state));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -323,95 +311,383 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdOrdersGetValidateBeforeCall(String userId, String userSecret, UUID accountId, String state, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdOrdersGet(Async)");
+    private okhttp3.Call getCalculatedTradeImpactByIdValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getCalculatedTradeImpactById(Async)");
         }
 
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdOrdersGet(Async)");
+        // verify the required parameter 'calculatedTradeId' is set
+        if (calculatedTradeId == null) {
+            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling getCalculatedTradeImpactById(Async)");
         }
 
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdOrdersGet(Async)");
+        // verify the required parameter 'tradeId' is set
+        if (tradeId == null) {
+            throw new ApiException("Missing the required parameter 'tradeId' when calling getCalculatedTradeImpactById(Async)");
         }
 
-        return accountsAccountIdOrdersGetCall(userId, userSecret, accountId, state, _callback);
+        return getCalculatedTradeImpactByIdCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
 
     }
 
     /**
-     * Get all history of orders placed in account
+     * Return details of a specific trade before it&#39;s placed
      * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @return List&lt;AccountOrderRecord&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param tradeId The ID of trade object (required)
+     * @return Trade
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
      </table>
      */
-    public List<AccountOrderRecord> accountsAccountIdOrdersGet(String userId, String userSecret, UUID accountId, String state) throws ApiException {
-        ApiResponse<List<AccountOrderRecord>> localVarResp = accountsAccountIdOrdersGetWithHttpInfo(userId, userSecret, accountId, state);
+    public Trade getCalculatedTradeImpactById(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
+        ApiResponse<Trade> localVarResp = getCalculatedTradeImpactByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
         return localVarResp.getData();
     }
 
     /**
-     * Get all history of orders placed in account
+     * Return details of a specific trade before it&#39;s placed
      * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @return ApiResponse&lt;List&lt;AccountOrderRecord&gt;&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param tradeId The ID of trade object (required)
+     * @return ApiResponse&lt;Trade&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<AccountOrderRecord>> accountsAccountIdOrdersGetWithHttpInfo(String userId, String userSecret, UUID accountId, String state) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdOrdersGetValidateBeforeCall(userId, userSecret, accountId, state, null);
-        Type localVarReturnType = new TypeToken<List<AccountOrderRecord>>(){}.getType();
+    public ApiResponse<Trade> getCalculatedTradeImpactByIdWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
+        okhttp3.Call localVarCall = getCalculatedTradeImpactByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
+        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get all history of orders placed in account (asynchronously)
+     * Return details of a specific trade before it&#39;s placed (asynchronously)
      * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param tradeId The ID of trade object (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOrdersGetAsync(String userId, String userSecret, UUID accountId, String state, final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
+    public okhttp3.Call getCalculatedTradeImpactByIdAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<Trade> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdOrdersGetValidateBeforeCall(userId, userSecret, accountId, state, _callback);
-        Type localVarReturnType = new TypeToken<List<AccountOrderRecord>>(){}.getType();
+        okhttp3.Call localVarCall = getCalculatedTradeImpactByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for accountsAccountIdQuotesGet
+     * Build call for getCalculatedTradesImpact
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCalculatedTradesImpactCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
+            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getCalculatedTradesImpactValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getCalculatedTradesImpact(Async)");
+        }
+
+        // verify the required parameter 'calculatedTradeId' is set
+        if (calculatedTradeId == null) {
+            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling getCalculatedTradesImpact(Async)");
+        }
+
+        return getCalculatedTradesImpactCall(portfolioGroupId, calculatedTradeId, _callback);
+
+    }
+
+    /**
+     * Return the impact of placing a series of trades on the portfolio
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @return List&lt;TradeImpact&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<TradeImpact> getCalculatedTradesImpact(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
+        ApiResponse<List<TradeImpact>> localVarResp = getCalculatedTradesImpactWithHttpInfo(portfolioGroupId, calculatedTradeId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Return the impact of placing a series of trades on the portfolio
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @return ApiResponse&lt;List&lt;TradeImpact&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<TradeImpact>> getCalculatedTradesImpactWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
+        okhttp3.Call localVarCall = getCalculatedTradesImpactValidateBeforeCall(portfolioGroupId, calculatedTradeId, null);
+        Type localVarReturnType = new TypeToken<List<TradeImpact>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Return the impact of placing a series of trades on the portfolio (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getCalculatedTradesImpactAsync(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback<List<TradeImpact>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getCalculatedTradesImpactValidateBeforeCall(portfolioGroupId, calculatedTradeId, _callback);
+        Type localVarReturnType = new TypeToken<List<TradeImpact>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getOrderImpact
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeForm  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOrderImpactCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manualTradeForm;
+
+        // create path and map variables
+        String localVarPath = "/trade/impact";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getOrderImpactValidateBeforeCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getOrderImpact(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getOrderImpact(Async)");
+        }
+
+        // verify the required parameter 'manualTradeForm' is set
+        if (manualTradeForm == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling getOrderImpact(Async)");
+        }
+
+        return getOrderImpactCall(userId, userSecret, manualTradeForm, _callback);
+
+    }
+
+    /**
+     * Check impact of trades on account.
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeForm  (required)
+     * @return ManualTradeAndImpact
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ManualTradeAndImpact getOrderImpact(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
+        ApiResponse<ManualTradeAndImpact> localVarResp = getOrderImpactWithHttpInfo(userId, userSecret, manualTradeForm);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Check impact of trades on account.
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeForm  (required)
+     * @return ApiResponse&lt;ManualTradeAndImpact&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ManualTradeAndImpact> getOrderImpactWithHttpInfo(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = getOrderImpactValidateBeforeCall(userId, userSecret, manualTradeForm, null);
+        Type localVarReturnType = new TypeToken<ManualTradeAndImpact>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Check impact of trades on account. (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeForm  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOrderImpactAsync(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback<ManualTradeAndImpact> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getOrderImpactValidateBeforeCall(userId, userSecret, manualTradeForm, _callback);
+        Type localVarReturnType = new TypeToken<ManualTradeAndImpact>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getUserAccountQuotes
      * @param userId  (required)
      * @param userSecret  (required)
      * @param symbols List of universal_symbol_id or tickers to get quotes for. (required)
@@ -427,7 +703,7 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdQuotesGetCall(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getUserAccountQuotesCall(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -489,28 +765,28 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdQuotesGetValidateBeforeCall(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountQuotesValidateBeforeCall(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdQuotesGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountQuotes(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdQuotesGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAccountQuotes(Async)");
         }
 
         // verify the required parameter 'symbols' is set
         if (symbols == null) {
-            throw new ApiException("Missing the required parameter 'symbols' when calling accountsAccountIdQuotesGet(Async)");
+            throw new ApiException("Missing the required parameter 'symbols' when calling getUserAccountQuotes(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdQuotesGet(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountQuotes(Async)");
         }
 
-        return accountsAccountIdQuotesGetCall(userId, userSecret, symbols, accountId, useTicker, _callback);
+        return getUserAccountQuotesCall(userId, userSecret, symbols, accountId, useTicker, _callback);
 
     }
 
@@ -531,8 +807,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public SymbolsQuotes accountsAccountIdQuotesGet(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker) throws ApiException {
-        ApiResponse<SymbolsQuotes> localVarResp = accountsAccountIdQuotesGetWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
+    public SymbolsQuotes getUserAccountQuotes(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker) throws ApiException {
+        ApiResponse<SymbolsQuotes> localVarResp = getUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
         return localVarResp.getData();
     }
 
@@ -553,8 +829,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SymbolsQuotes> accountsAccountIdQuotesGetWithHttpInfo(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdQuotesGetValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, null);
+    public ApiResponse<SymbolsQuotes> getUserAccountQuotesWithHttpInfo(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker) throws ApiException {
+        okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, null);
         Type localVarReturnType = new TypeToken<SymbolsQuotes>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -577,291 +853,15 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdQuotesGetAsync(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback<SymbolsQuotes> _callback) throws ApiException {
+    public okhttp3.Call getUserAccountQuotesAsync(String userId, String userSecret, UUID symbols, UUID accountId, Boolean useTicker, final ApiCallback<SymbolsQuotes> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdQuotesGetValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, _callback);
+        okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, _callback);
         Type localVarReturnType = new TypeToken<SymbolsQuotes>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(Async)");
-        }
-
-        // verify the required parameter 'calculatedTradeId' is set
-        if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetCall(portfolioGroupId, calculatedTradeId, _callback);
-
-    }
-
-    /**
-     * Return the impact of placing a series of trades on the portfolio
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @return List&lt;TradeImpact&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TradeImpact> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
-        ApiResponse<List<TradeImpact>> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetWithHttpInfo(portfolioGroupId, calculatedTradeId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Return the impact of placing a series of trades on the portfolio
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @return ApiResponse&lt;List&lt;TradeImpact&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TradeImpact>> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, null);
-        Type localVarReturnType = new TypeToken<List<TradeImpact>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Return the impact of placing a series of trades on the portfolio (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Impact of trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetAsync(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback<List<TradeImpact>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, _callback);
-        Type localVarReturnType = new TypeToken<List<TradeImpact>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()))
-            .replace("{" + "tradeId" + "}", localVarApiClient.escapeString(tradeId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
-        }
-
-        // verify the required parameter 'calculatedTradeId' is set
-        if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
-        }
-
-        // verify the required parameter 'tradeId' is set
-        if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
-
-    }
-
-    /**
-     * Return details of a specific trade before it&#39;s placed
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return Trade
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public Trade portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        ApiResponse<Trade> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Return details of a specific trade before it&#39;s placed
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return ApiResponse&lt;Trade&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Trade> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Return details of a specific trade before it&#39;s placed (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<Trade> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch
+     * Build call for modifyCalculatedTradeById
      * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
      * @param calculatedTradeId The ID of calculated trade to get account impact (required)
      * @param tradeId The ID of trade object (required)
@@ -875,7 +875,7 @@ public class TradingApi {
         <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call modifyCalculatedTradeByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -924,23 +924,23 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call modifyCalculatedTradeByIdValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling modifyCalculatedTradeById(Async)");
         }
 
         // verify the required parameter 'calculatedTradeId' is set
         if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling modifyCalculatedTradeById(Async)");
         }
 
         // verify the required parameter 'tradeId' is set
         if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'tradeId' when calling modifyCalculatedTradeById(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
+        return modifyCalculatedTradeByIdCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
 
     }
 
@@ -959,8 +959,8 @@ public class TradingApi {
         <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
      </table>
      */
-    public Trade portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
-        ApiResponse<Trade> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId, trade);
+    public Trade modifyCalculatedTradeById(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
+        ApiResponse<Trade> localVarResp = modifyCalculatedTradeByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId, trade);
         return localVarResp.getData();
     }
 
@@ -979,8 +979,8 @@ public class TradingApi {
         <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Trade> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, null);
+    public ApiResponse<Trade> modifyCalculatedTradeByIdWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
+        okhttp3.Call localVarCall = modifyCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, null);
         Type localVarReturnType = new TypeToken<Trade>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1001,15 +1001,15 @@ public class TradingApi {
         <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback<Trade> _callback) throws ApiException {
+    public okhttp3.Call modifyCalculatedTradeByIdAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback<Trade> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
+        okhttp3.Call localVarCall = modifyCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
         Type localVarReturnType = new TypeToken<Trade>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost
+     * Build call for placeCalculatedTrades
      * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
      * @param calculatedTradeId The ID of calculated trade to get account impact (required)
      * @param _callback Callback for upload/download progress
@@ -1021,7 +1021,7 @@ public class TradingApi {
         <tr><td> 200 </td><td> Return trade execution statuses for all trades submitted </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call placeCalculatedTradesCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1068,18 +1068,18 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeCalculatedTradesValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling placeCalculatedTrades(Async)");
         }
 
         // verify the required parameter 'calculatedTradeId' is set
         if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(Async)");
+            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling placeCalculatedTrades(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostCall(portfolioGroupId, calculatedTradeId, _callback);
+        return placeCalculatedTradesCall(portfolioGroupId, calculatedTradeId, _callback);
 
     }
 
@@ -1096,8 +1096,8 @@ public class TradingApi {
         <tr><td> 200 </td><td> Return trade execution statuses for all trades submitted </td><td>  -  </td></tr>
      </table>
      */
-    public List<TradeExecutionStatus> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
-        ApiResponse<List<TradeExecutionStatus>> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostWithHttpInfo(portfolioGroupId, calculatedTradeId);
+    public List<TradeExecutionStatus> placeCalculatedTrades(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
+        ApiResponse<List<TradeExecutionStatus>> localVarResp = placeCalculatedTradesWithHttpInfo(portfolioGroupId, calculatedTradeId);
         return localVarResp.getData();
     }
 
@@ -1114,8 +1114,8 @@ public class TradingApi {
         <tr><td> 200 </td><td> Return trade execution statuses for all trades submitted </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<TradeExecutionStatus>> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostValidateBeforeCall(portfolioGroupId, calculatedTradeId, null);
+    public ApiResponse<List<TradeExecutionStatus>> placeCalculatedTradesWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId) throws ApiException {
+        okhttp3.Call localVarCall = placeCalculatedTradesValidateBeforeCall(portfolioGroupId, calculatedTradeId, null);
         Type localVarReturnType = new TypeToken<List<TradeExecutionStatus>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1134,179 +1134,18 @@ public class TradingApi {
         <tr><td> 200 </td><td> Return trade execution statuses for all trades submitted </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostAsync(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback<List<TradeExecutionStatus>> _callback) throws ApiException {
+    public okhttp3.Call placeCalculatedTradesAsync(UUID portfolioGroupId, UUID calculatedTradeId, final ApiCallback<List<TradeExecutionStatus>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostValidateBeforeCall(portfolioGroupId, calculatedTradeId, _callback);
+        okhttp3.Call localVarCall = placeCalculatedTradesValidateBeforeCall(portfolioGroupId, calculatedTradeId, _callback);
         Type localVarReturnType = new TypeToken<List<TradeExecutionStatus>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for tradeImpactPost
+     * Build call for placeOCOOrder
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param manualTradeForm  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call tradeImpactPostCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = manualTradeForm;
-
-        // create path and map variables
-        String localVarPath = "/trade/impact";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call tradeImpactPostValidateBeforeCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling tradeImpactPost(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling tradeImpactPost(Async)");
-        }
-
-        // verify the required parameter 'manualTradeForm' is set
-        if (manualTradeForm == null) {
-            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling tradeImpactPost(Async)");
-        }
-
-        return tradeImpactPostCall(userId, userSecret, manualTradeForm, _callback);
-
-    }
-
-    /**
-     * Check impact of trades on account.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param manualTradeForm  (required)
-     * @return ManualTradeAndImpact
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ManualTradeAndImpact tradeImpactPost(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
-        ApiResponse<ManualTradeAndImpact> localVarResp = tradeImpactPostWithHttpInfo(userId, userSecret, manualTradeForm);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Check impact of trades on account.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param manualTradeForm  (required)
-     * @return ApiResponse&lt;ManualTradeAndImpact&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ManualTradeAndImpact> tradeImpactPostWithHttpInfo(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
-        okhttp3.Call localVarCall = tradeImpactPostValidateBeforeCall(userId, userSecret, manualTradeForm, null);
-        Type localVarReturnType = new TypeToken<ManualTradeAndImpact>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Check impact of trades on account. (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param manualTradeForm  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Missing or wrong data format provided in request body </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User does not have permissions to place trades </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call tradeImpactPostAsync(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback<ManualTradeAndImpact> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = tradeImpactPostValidateBeforeCall(userId, userSecret, manualTradeForm, _callback);
-        Type localVarReturnType = new TypeToken<ManualTradeAndImpact>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for tradeOcoPost
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param tradeOcoPostRequest  (required)
+     * @param tradingPlaceOCOOrderRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1318,7 +1157,7 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tradeOcoPostCall(String userId, String userSecret, TradeOcoPostRequest tradeOcoPostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call placeOCOOrderCall(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1332,7 +1171,7 @@ public class TradingApi {
             basePath = null;
         }
 
-        Object localVarPostBody = tradeOcoPostRequest;
+        Object localVarPostBody = tradingPlaceOCOOrderRequest;
 
         // create path and map variables
         String localVarPath = "/trade/oco";
@@ -1372,23 +1211,23 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call tradeOcoPostValidateBeforeCall(String userId, String userSecret, TradeOcoPostRequest tradeOcoPostRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeOCOOrderValidateBeforeCall(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling tradeOcoPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling placeOCOOrder(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling tradeOcoPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeOCOOrder(Async)");
         }
 
-        // verify the required parameter 'tradeOcoPostRequest' is set
-        if (tradeOcoPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradeOcoPostRequest' when calling tradeOcoPost(Async)");
+        // verify the required parameter 'tradingPlaceOCOOrderRequest' is set
+        if (tradingPlaceOCOOrderRequest == null) {
+            throw new ApiException("Missing the required parameter 'tradingPlaceOCOOrderRequest' when calling placeOCOOrder(Async)");
         }
 
-        return tradeOcoPostCall(userId, userSecret, tradeOcoPostRequest, _callback);
+        return placeOCOOrderCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
 
     }
 
@@ -1397,7 +1236,7 @@ public class TradingApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param tradeOcoPostRequest  (required)
+     * @param tradingPlaceOCOOrderRequest  (required)
      * @return AccountOrderRecord
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1408,8 +1247,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public AccountOrderRecord tradeOcoPost(String userId, String userSecret, TradeOcoPostRequest tradeOcoPostRequest) throws ApiException {
-        ApiResponse<AccountOrderRecord> localVarResp = tradeOcoPostWithHttpInfo(userId, userSecret, tradeOcoPostRequest);
+    public AccountOrderRecord placeOCOOrder(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest) throws ApiException {
+        ApiResponse<AccountOrderRecord> localVarResp = placeOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
         return localVarResp.getData();
     }
 
@@ -1418,7 +1257,7 @@ public class TradingApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param tradeOcoPostRequest  (required)
+     * @param tradingPlaceOCOOrderRequest  (required)
      * @return ApiResponse&lt;AccountOrderRecord&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1429,8 +1268,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AccountOrderRecord> tradeOcoPostWithHttpInfo(String userId, String userSecret, TradeOcoPostRequest tradeOcoPostRequest) throws ApiException {
-        okhttp3.Call localVarCall = tradeOcoPostValidateBeforeCall(userId, userSecret, tradeOcoPostRequest, null);
+    public ApiResponse<AccountOrderRecord> placeOCOOrderWithHttpInfo(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = placeOCOOrderValidateBeforeCall(userId, userSecret, tradingPlaceOCOOrderRequest, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1440,7 +1279,7 @@ public class TradingApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param tradeOcoPostRequest  (required)
+     * @param tradingPlaceOCOOrderRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1452,15 +1291,15 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tradeOcoPostAsync(String userId, String userSecret, TradeOcoPostRequest tradeOcoPostRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    public okhttp3.Call placeOCOOrderAsync(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = tradeOcoPostValidateBeforeCall(userId, userSecret, tradeOcoPostRequest, _callback);
+        okhttp3.Call localVarCall = placeOCOOrderValidateBeforeCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for tradeTradeIdPost
+     * Build call for placeOrder
      * @param tradeId The ID of trade object obtained from trade/impact endpoint (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1475,7 +1314,7 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tradeTradeIdPostCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1529,23 +1368,23 @@ public class TradingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call tradeTradeIdPostValidateBeforeCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeOrderValidateBeforeCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'tradeId' is set
         if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling tradeTradeIdPost(Async)");
+            throw new ApiException("Missing the required parameter 'tradeId' when calling placeOrder(Async)");
         }
 
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling tradeTradeIdPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling placeOrder(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling tradeTradeIdPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeOrder(Async)");
         }
 
-        return tradeTradeIdPostCall(tradeId, userId, userSecret, _callback);
+        return placeOrderCall(tradeId, userId, userSecret, _callback);
 
     }
 
@@ -1565,8 +1404,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public AccountOrderRecord tradeTradeIdPost(UUID tradeId, String userId, String userSecret) throws ApiException {
-        ApiResponse<AccountOrderRecord> localVarResp = tradeTradeIdPostWithHttpInfo(tradeId, userId, userSecret);
+    public AccountOrderRecord placeOrder(UUID tradeId, String userId, String userSecret) throws ApiException {
+        ApiResponse<AccountOrderRecord> localVarResp = placeOrderWithHttpInfo(tradeId, userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -1586,8 +1425,8 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<AccountOrderRecord> tradeTradeIdPostWithHttpInfo(UUID tradeId, String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = tradeTradeIdPostValidateBeforeCall(tradeId, userId, userSecret, null);
+    public ApiResponse<AccountOrderRecord> placeOrderWithHttpInfo(UUID tradeId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1609,9 +1448,9 @@ public class TradingApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call tradeTradeIdPostAsync(UUID tradeId, String userId, String userSecret, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    public okhttp3.Call placeOrderAsync(UUID tradeId, String userId, String userSecret, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = tradeTradeIdPostValidateBeforeCall(tradeId, userId, userSecret, _callback);
+        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

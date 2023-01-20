@@ -92,99 +92,98 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APIDisclaimerApi* | [**snap_trade_accept_disclaimer_post**](docs/APIDisclaimerApi.md#snap_trade_accept_disclaimer_post) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
-*APIStatusApi* | [**root_get**](docs/APIStatusApi.md#root_get) | **GET** / | Get API Status
-*AccountInformationApi* | [**accounts_account_id_balances_get**](docs/AccountInformationApi.md#accounts_account_id_balances_get) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
-*AccountInformationApi* | [**accounts_account_id_get**](docs/AccountInformationApi.md#accounts_account_id_get) | **GET** /accounts/{accountId} | Return details of a specific investment account
-*AccountInformationApi* | [**accounts_account_id_holdings_get**](docs/AccountInformationApi.md#accounts_account_id_holdings_get) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-*AccountInformationApi* | [**accounts_account_id_positions_get**](docs/AccountInformationApi.md#accounts_account_id_positions_get) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account
-*AccountInformationApi* | [**accounts_account_id_put**](docs/AccountInformationApi.md#accounts_account_id_put) | **PUT** /accounts/{accountId} | Update details of an investment account
-*AccountInformationApi* | [**accounts_get**](docs/AccountInformationApi.md#accounts_get) | **GET** /accounts | List all investment accounts for the user
-*AccountInformationApi* | [**holdings_get**](docs/AccountInformationApi.md#holdings_get) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
-*AuthenticationApi* | [**snap_trade_delete_user_delete**](docs/AuthenticationApi.md#snap_trade_delete_user_delete) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-*AuthenticationApi* | [**snap_trade_encrypted_jwt_get**](docs/AuthenticationApi.md#snap_trade_encrypted_jwt_get) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
-*AuthenticationApi* | [**snap_trade_list_users_get**](docs/AuthenticationApi.md#snap_trade_list_users_get) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform
-*AuthenticationApi* | [**snap_trade_login_post**](docs/AuthenticationApi.md#snap_trade_login_post) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-*AuthenticationApi* | [**snap_trade_register_user_post**](docs/AuthenticationApi.md#snap_trade_register_user_post) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
-*ConnectionsApi* | [**authorizations_authorization_id_delete**](docs/ConnectionsApi.md#authorizations_authorization_id_delete) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
-*ConnectionsApi* | [**authorizations_authorization_id_get**](docs/ConnectionsApi.md#authorizations_authorization_id_get) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
-*ConnectionsApi* | [**authorizations_get**](docs/ConnectionsApi.md#authorizations_get) | **GET** /authorizations | List all brokerage authorizations for the user
-*ErrorLogsApi* | [**snap_trade_list_user_errors_get**](docs/ErrorLogsApi.md#snap_trade_list_user_errors_get) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
-*OptionsApi* | [**accounts_account_id_options_chain_get**](docs/OptionsApi.md#accounts_account_id_options_chain_get) | **GET** /accounts/{accountId}/options_chain | Get the options chain
-*OptionsApi* | [**accounts_account_id_options_get**](docs/OptionsApi.md#accounts_account_id_options_get) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
-*OptionsApi* | [**accounts_account_id_options_search_get**](docs/OptionsApi.md#accounts_account_id_options_search_get) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-*OptionsApi* | [**accounts_account_id_strategy_impact_post**](docs/OptionsApi.md#accounts_account_id_strategy_impact_post) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account
-*OptionsApi* | [**accounts_account_id_strategy_place_post**](docs/OptionsApi.md#accounts_account_id_strategy_place_post) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is
-*OptionsApi* | [**accounts_account_id_strategy_quotes_post**](docs/OptionsApi.md#accounts_account_id_strategy_quotes_post) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy
-*PortfolioManagementApi* | [**model_asset_class_get**](docs/PortfolioManagementApi.md#model_asset_class_get) | **GET** /modelAssetClass | List of model asset class
-*PortfolioManagementApi* | [**model_asset_class_model_asset_class_id_delete**](docs/PortfolioManagementApi.md#model_asset_class_model_asset_class_id_delete) | **DELETE** /modelAssetClass/{modelAssetClassId} | Deletes a model asset class
-*PortfolioManagementApi* | [**model_asset_class_model_asset_class_id_get**](docs/PortfolioManagementApi.md#model_asset_class_model_asset_class_id_get) | **GET** /modelAssetClass/{modelAssetClassId} | Get details of a model asset class
-*PortfolioManagementApi* | [**model_asset_class_model_asset_class_id_post**](docs/PortfolioManagementApi.md#model_asset_class_model_asset_class_id_post) | **POST** /modelAssetClass/{modelAssetClassId} | Updates model asset class objects
-*PortfolioManagementApi* | [**model_asset_class_post**](docs/PortfolioManagementApi.md#model_asset_class_post) | **POST** /modelAssetClass | Create a new model asset class
-*PortfolioManagementApi* | [**model_portfolio_get**](docs/PortfolioManagementApi.md#model_portfolio_get) | **GET** /modelPortfolio | List of model portfolio
-*PortfolioManagementApi* | [**model_portfolio_model_portfolio_id_delete**](docs/PortfolioManagementApi.md#model_portfolio_model_portfolio_id_delete) | **DELETE** /modelPortfolio/{modelPortfolioId} | Deletes a model portfolio
-*PortfolioManagementApi* | [**model_portfolio_model_portfolio_id_get**](docs/PortfolioManagementApi.md#model_portfolio_model_portfolio_id_get) | **GET** /modelPortfolio/{modelPortfolioId} | Get details of a model portfolio
-*PortfolioManagementApi* | [**model_portfolio_model_portfolio_id_post**](docs/PortfolioManagementApi.md#model_portfolio_model_portfolio_id_post) | **POST** /modelPortfolio/{modelPortfolioId} | Updates model portfolio object
-*PortfolioManagementApi* | [**model_portfolio_post**](docs/PortfolioManagementApi.md#model_portfolio_post) | **POST** /modelPortfolio | Creates a new model portfolio
-*PortfolioManagementApi* | [**portfolio_groups_get**](docs/PortfolioManagementApi.md#portfolio_groups_get) | **GET** /portfolioGroups | List all portfolio groups
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_accounts_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_accounts_get) | **GET** /portfolioGroups/{portfolioGroupId}/accounts | Get all accounts associated with a portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_balances_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_balances_get) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Return details of a specific trade before it&#39;s placed
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId} | Return an individual trade
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_get) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_delete**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_delete) | **DELETE** /portfolioGroups/{portfolioGroupId} | Remove a target portfolio.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_excludedassets_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_excludedassets_get) | **GET** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_excludedassets_post**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_excludedassets_post) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete) | **DELETE** /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId} | Unexclude an asset from a portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_get) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_import_post**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_import_post) | **POST** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_info_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_info_get) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_patch**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_patch) | **PATCH** /portfolioGroups/{portfolioGroupId} | Update an existing target portfolio.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_positions_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_positions_get) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_settings_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_settings_get) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_settings_patch**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_settings_patch) | **PATCH** /portfolioGroups/{portfolioGroupId}/settings | Updates portfolio group settings
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_symbols_post**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_symbols_post) | **POST** /portfolioGroups/{portfolioGroupId}/symbols | Search for symbols limited to brokerages under the specified portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_targets_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_targets_get) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_targets_post**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_targets_post) | **POST** /portfolioGroups/{portfolioGroupId}/targets | Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_targets_target_asset_id_delete**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_targets_target_asset_id_delete) | **DELETE** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Remove a TargetAsset.
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_targets_target_asset_id_get**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_targets_target_asset_id_get) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
-*PortfolioManagementApi* | [**portfolio_groups_portfolio_group_id_targets_target_asset_id_patch**](docs/PortfolioManagementApi.md#portfolio_groups_portfolio_group_id_targets_target_asset_id_patch) | **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup.
-*PortfolioManagementApi* | [**portfolio_groups_post**](docs/PortfolioManagementApi.md#portfolio_groups_post) | **POST** /portfolioGroups | Create new portfolio group
-*ReferenceDataApi* | [**accounts_account_id_symbols_post**](docs/ReferenceDataApi.md#accounts_account_id_symbols_post) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
-*ReferenceDataApi* | [**brokerage_authorization_types_get**](docs/ReferenceDataApi.md#brokerage_authorization_types_get) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**brokerages_get**](docs/ReferenceDataApi.md#brokerages_get) | **GET** /brokerages | List of all brokerages.
-*ReferenceDataApi* | [**currencies_get**](docs/ReferenceDataApi.md#currencies_get) | **GET** /currencies | List of all supported currencies
-*ReferenceDataApi* | [**currencies_rates_currency_pair_get**](docs/ReferenceDataApi.md#currencies_rates_currency_pair_get) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
-*ReferenceDataApi* | [**currencies_rates_get**](docs/ReferenceDataApi.md#currencies_rates_get) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
-*ReferenceDataApi* | [**exchanges_get**](docs/ReferenceDataApi.md#exchanges_get) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
-*ReferenceDataApi* | [**security_types_get**](docs/ReferenceDataApi.md#security_types_get) | **GET** /securityTypes | List of all security types.
-*ReferenceDataApi* | [**snap_trade_partners_get**](docs/ReferenceDataApi.md#snap_trade_partners_get) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
-*ReferenceDataApi* | [**symbols_post**](docs/ReferenceDataApi.md#symbols_post) | **POST** /symbols | Search for symbols
-*ReferenceDataApi* | [**symbols_symbol_id_get**](docs/ReferenceDataApi.md#symbols_symbol_id_get) | **GET** /symbols/{symbolId} | Get details of a symbol
-*ReferenceDataApi* | [**symbols_ticker_get**](docs/ReferenceDataApi.md#symbols_ticker_get) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
-*TradingApi* | [**accounts_account_id_orders_cancel_post**](docs/TradingApi.md#accounts_account_id_orders_cancel_post) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*TradingApi* | [**accounts_account_id_orders_get**](docs/TradingApi.md#accounts_account_id_orders_get) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
-*TradingApi* | [**accounts_account_id_quotes_get**](docs/TradingApi.md#accounts_account_id_quotes_get) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
-*TradingApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get**](docs/TradingApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact | Return the impact of placing a series of trades on the portfolio
-*TradingApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get**](docs/TradingApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Return details of a specific trade before it&#39;s placed
-*TradingApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch**](docs/TradingApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
-*TradingApi* | [**portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post**](docs/TradingApi.md#portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
-*TradingApi* | [**trade_impact_post**](docs/TradingApi.md#trade_impact_post) | **POST** /trade/impact | Check impact of trades on account.
-*TradingApi* | [**trade_oco_post**](docs/TradingApi.md#trade_oco_post) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
-*TradingApi* | [**trade_trade_id_post**](docs/TradingApi.md#trade_trade_id_post) | **POST** /trade/{tradeId} | Place order
-*TransactionsAndReportingApi* | [**activities_get**](docs/TransactionsAndReportingApi.md#activities_get) | **GET** /activities/ | Get transaction history for a user
-*TransactionsAndReportingApi* | [**performance_custom_get**](docs/TransactionsAndReportingApi.md#performance_custom_get) | **GET** /performance/custom | Get performance information for a specific timeframe
+*APIDisclaimerApi* | [**accept**](docs/APIDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
+*APIStatusApi* | [**check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
+*AccountInformationApi* | [**get_all_user_holdings**](docs/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
+*AccountInformationApi* | [**get_user_account_balance**](docs/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
+*AccountInformationApi* | [**get_user_account_details**](docs/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
+*AccountInformationApi* | [**get_user_account_orders**](docs/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
+*AccountInformationApi* | [**get_user_account_positions**](docs/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account
+*AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
+*AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user
+*AccountInformationApi* | [**update_user_account**](docs/AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account
+*AuthenticationApi* | [**delete_snap_trade_user**](docs/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+*AuthenticationApi* | [**get_user_jwt**](docs/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+*AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform
+*AuthenticationApi* | [**login_snap_trade_user**](docs/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+*AuthenticationApi* | [**register_snap_trade_user**](docs/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
+*ConnectionsApi* | [**detail_brokerage_authorization**](docs/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
+*ConnectionsApi* | [**list_brokerage_authorizations**](docs/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
+*ConnectionsApi* | [**remove_brokerage_authorization**](docs/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
+*ErrorLogsApi* | [**list_user_errors**](docs/ErrorLogsApi.md#list_user_errors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
+*OptionsApi* | [**get_options_chain**](docs/OptionsApi.md#get_options_chain) | **GET** /accounts/{accountId}/options_chain | Get the options chain
+*OptionsApi* | [**get_options_impact**](docs/OptionsApi.md#get_options_impact) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account
+*OptionsApi* | [**get_strategy_quote**](docs/OptionsApi.md#get_strategy_quote) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy
+*OptionsApi* | [**list_option_holdings**](docs/OptionsApi.md#list_option_holdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
+*OptionsApi* | [**place_options_strategy_order**](docs/OptionsApi.md#place_options_strategy_order) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is
+*OptionsApi* | [**search_options_quote**](docs/OptionsApi.md#search_options_quote) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+*PortfolioManagementApi* | [**add_portfolio_excluded_asset**](docs/PortfolioManagementApi.md#add_portfolio_excluded_asset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
+*PortfolioManagementApi* | [**create**](docs/PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group
+*PortfolioManagementApi* | [**create_asset_class**](docs/PortfolioManagementApi.md#create_asset_class) | **POST** /modelAssetClass | Create a new model asset class
+*PortfolioManagementApi* | [**create_model_portfolio**](docs/PortfolioManagementApi.md#create_model_portfolio) | **POST** /modelPortfolio | Creates a new model portfolio
+*PortfolioManagementApi* | [**delete_asset_class**](docs/PortfolioManagementApi.md#delete_asset_class) | **DELETE** /modelAssetClass/{modelAssetClassId} | Deletes a model asset class
+*PortfolioManagementApi* | [**delete_excluded_asset**](docs/PortfolioManagementApi.md#delete_excluded_asset) | **DELETE** /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId} | Unexclude an asset from a portfolio group
+*PortfolioManagementApi* | [**delete_model_portfolio_by_id**](docs/PortfolioManagementApi.md#delete_model_portfolio_by_id) | **DELETE** /modelPortfolio/{modelPortfolioId} | Deletes a model portfolio
+*PortfolioManagementApi* | [**delete_portfoli**](docs/PortfolioManagementApi.md#delete_portfoli) | **DELETE** /portfolioGroups/{portfolioGroupId} | Remove a target portfolio.
+*PortfolioManagementApi* | [**delete_portfolio_target_by_id**](docs/PortfolioManagementApi.md#delete_portfolio_target_by_id) | **DELETE** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Remove a TargetAsset.
+*PortfolioManagementApi* | [**detail_asset_class**](docs/PortfolioManagementApi.md#detail_asset_class) | **GET** /modelAssetClass/{modelAssetClassId} | Get details of a model asset class
+*PortfolioManagementApi* | [**get_calculated_trade_by_id**](docs/PortfolioManagementApi.md#get_calculated_trade_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId} | Return an individual trade
+*PortfolioManagementApi* | [**get_model_details_by_id**](docs/PortfolioManagementApi.md#get_model_details_by_id) | **GET** /modelPortfolio/{modelPortfolioId} | Get details of a model portfolio
+*PortfolioManagementApi* | [**get_portfolio_balances**](docs/PortfolioManagementApi.md#get_portfolio_balances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
+*PortfolioManagementApi* | [**get_portfolio_details_by_id**](docs/PortfolioManagementApi.md#get_portfolio_details_by_id) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
+*PortfolioManagementApi* | [**get_portfolio_info**](docs/PortfolioManagementApi.md#get_portfolio_info) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
+*PortfolioManagementApi* | [**get_portfolio_positions**](docs/PortfolioManagementApi.md#get_portfolio_positions) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group
+*PortfolioManagementApi* | [**get_portfolio_settings**](docs/PortfolioManagementApi.md#get_portfolio_settings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
+*PortfolioManagementApi* | [**get_portfolio_target_by_id**](docs/PortfolioManagementApi.md#get_portfolio_target_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
+*PortfolioManagementApi* | [**get_portfolio_targets**](docs/PortfolioManagementApi.md#get_portfolio_targets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
+*PortfolioManagementApi* | [**get_portoflio_excluded_assets**](docs/PortfolioManagementApi.md#get_portoflio_excluded_assets) | **GET** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group\\
+*PortfolioManagementApi* | [**import_model_portfolio**](docs/PortfolioManagementApi.md#import_model_portfolio) | **POST** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group
+*PortfolioManagementApi* | [**list**](docs/PortfolioManagementApi.md#list) | **GET** /portfolioGroups | List all portfolio groups
+*PortfolioManagementApi* | [**list_asset_classes**](docs/PortfolioManagementApi.md#list_asset_classes) | **GET** /modelAssetClass | List of model asset class
+*PortfolioManagementApi* | [**list_calculated_trades**](docs/PortfolioManagementApi.md#list_calculated_trades) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group
+*PortfolioManagementApi* | [**list_model_portfolio**](docs/PortfolioManagementApi.md#list_model_portfolio) | **GET** /modelPortfolio | List of model portfolio
+*PortfolioManagementApi* | [**list_portfolio_accounts**](docs/PortfolioManagementApi.md#list_portfolio_accounts) | **GET** /portfolioGroups/{portfolioGroupId}/accounts | Get all accounts associated with a portfolio group
+*PortfolioManagementApi* | [**modify_model_portfolio_by_id**](docs/PortfolioManagementApi.md#modify_model_portfolio_by_id) | **POST** /modelPortfolio/{modelPortfolioId} | Updates model portfolio object
+*PortfolioManagementApi* | [**save_portfolio**](docs/PortfolioManagementApi.md#save_portfolio) | **PATCH** /portfolioGroups/{portfolioGroupId} | Update an existing target portfolio.
+*PortfolioManagementApi* | [**search_portfolio_symbols**](docs/PortfolioManagementApi.md#search_portfolio_symbols) | **POST** /portfolioGroups/{portfolioGroupId}/symbols | Search for symbols limited to brokerages under the specified portfolio group
+*PortfolioManagementApi* | [**set_portfolio_targets**](docs/PortfolioManagementApi.md#set_portfolio_targets) | **POST** /portfolioGroups/{portfolioGroupId}/targets | Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+*PortfolioManagementApi* | [**update_asset_class**](docs/PortfolioManagementApi.md#update_asset_class) | **POST** /modelAssetClass/{modelAssetClassId} | Updates model asset class objects
+*PortfolioManagementApi* | [**update_portfolio_settings**](docs/PortfolioManagementApi.md#update_portfolio_settings) | **PATCH** /portfolioGroups/{portfolioGroupId}/settings | Updates portfolio group settings
+*PortfolioManagementApi* | [**update_portfolio_target_by_id**](docs/PortfolioManagementApi.md#update_portfolio_target_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup.
+*ReferenceDataApi* | [**get_currency_exchange_rate_pair**](docs/ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
+*ReferenceDataApi* | [**get_partner_info**](docs/ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
+*ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types.
+*ReferenceDataApi* | [**get_stock_exchanges**](docs/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+*ReferenceDataApi* | [**get_symbols**](docs/ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols
+*ReferenceDataApi* | [**get_symbols_by_ticker**](docs/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
+*ReferenceDataApi* | [**list_all_brokerage_authorization_type**](docs/ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
+*ReferenceDataApi* | [**list_all_brokerages**](docs/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List of all brokerages.
+*ReferenceDataApi* | [**list_all_currencies**](docs/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List of all supported currencies
+*ReferenceDataApi* | [**list_all_currencies_rates**](docs/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
+*ReferenceDataApi* | [**symbol_search_user_account**](docs/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+*TradingApi* | [**cancel_user_account_order**](docs/TradingApi.md#cancel_user_account_order) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
+*TradingApi* | [**get_calculated_trade_impact_by_id**](docs/TradingApi.md#get_calculated_trade_impact_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Return details of a specific trade before it&#39;s placed
+*TradingApi* | [**get_calculated_trades_impact**](docs/TradingApi.md#get_calculated_trades_impact) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact | Return the impact of placing a series of trades on the portfolio
+*TradingApi* | [**get_order_impact**](docs/TradingApi.md#get_order_impact) | **POST** /trade/impact | Check impact of trades on account.
+*TradingApi* | [**get_user_account_quotes**](docs/TradingApi.md#get_user_account_quotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
+*TradingApi* | [**modify_calculated_trade_by_id**](docs/TradingApi.md#modify_calculated_trade_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
+*TradingApi* | [**place_calculated_trades**](docs/TradingApi.md#place_calculated_trades) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
+*TradingApi* | [**place_oco_order**](docs/TradingApi.md#place_oco_order) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
+*TradingApi* | [**place_order**](docs/TradingApi.md#place_order) | **POST** /trade/{tradeId} | Place order
+*TransactionsAndReportingApi* | [**get_activities**](docs/TransactionsAndReportingApi.md#get_activities) | **GET** /activities | Get transaction history for a user
+*TransactionsAndReportingApi* | [**get_reporting_custom_range**](docs/TransactionsAndReportingApi.md#get_reporting_custom_range) | **GET** /performance/custom | Get performance information for a specific timeframe
 
 
 ## Documentation For Models
 
+ - [APIDisclaimerAcceptRequest](docs/APIDisclaimerAcceptRequest.md)
  - [Account](docs/Account.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [Action](docs/Action.md)
+ - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
@@ -244,10 +243,8 @@ Class | Method | HTTP request | Description
  - [RedirectTokenandPin](docs/RedirectTokenandPin.md)
  - [SecurityType](docs/SecurityType.md)
  - [SnapTradeAPIDisclaimerAcceptStatus](docs/SnapTradeAPIDisclaimerAcceptStatus.md)
- - [SnapTradeAcceptDisclaimerPostRequest](docs/SnapTradeAcceptDisclaimerPostRequest.md)
  - [SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
  - [SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
- - [SnapTradeLoginPost200Response](docs/SnapTradeLoginPost200Response.md)
  - [SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)
  - [SnapTradeRegisterUserRequestBody](docs/SnapTradeRegisterUserRequestBody.md)
  - [Status](docs/Status.md)
@@ -268,11 +265,12 @@ Class | Method | HTTP request | Description
  - [Trade](docs/Trade.md)
  - [TradeExecutionStatus](docs/TradeExecutionStatus.md)
  - [TradeImpact](docs/TradeImpact.md)
- - [TradeOcoPostRequest](docs/TradeOcoPostRequest.md)
+ - [TradingPlaceOCOOrderRequest](docs/TradingPlaceOCOOrderRequest.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)
  - [UniversalActivity](docs/UniversalActivity.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
+ - [UniversalSymbolTicker](docs/UniversalSymbolTicker.md)
  - [UserErrorLog](docs/UserErrorLog.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [UserList](docs/UserList.md)

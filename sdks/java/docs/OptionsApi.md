@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**accountsAccountIdOptionsChainGet**](OptionsApi.md#accountsAccountIdOptionsChainGet) | **GET** /accounts/{accountId}/options_chain | Get the options chain |
-| [**accountsAccountIdOptionsGet**](OptionsApi.md#accountsAccountIdOptionsGet) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
-| [**accountsAccountIdOptionsSearchGet**](OptionsApi.md#accountsAccountIdOptionsSearchGet) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max. |
-| [**accountsAccountIdStrategyImpactPost**](OptionsApi.md#accountsAccountIdStrategyImpactPost) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account |
-| [**accountsAccountIdStrategyPlacePost**](OptionsApi.md#accountsAccountIdStrategyPlacePost) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is |
-| [**accountsAccountIdStrategyQuotesPost**](OptionsApi.md#accountsAccountIdStrategyQuotesPost) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy |
+| [**getOptionsChain**](OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/options_chain | Get the options chain |
+| [**getOptionsImpact**](OptionsApi.md#getOptionsImpact) | **POST** /accounts/{accountId}/strategy_impact | Get a strategies impact on the account |
+| [**getStrategyQuote**](OptionsApi.md#getStrategyQuote) | **POST** /accounts/{accountId}/strategy_quotes | Get a price quote for a strategy |
+| [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
+| [**placeOptionsStrategyOrder**](OptionsApi.md#placeOptionsStrategyOrder) | **POST** /accounts/{accountId}/strategy_place | Place the strategy order; impact not required but the StrategyOrderQuotes object is |
+| [**searchOptionsQuote**](OptionsApi.md#searchOptionsQuote) | **GET** /accounts/{accountId}/options_search | Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max. |
 
 
-<a name="accountsAccountIdOptionsChainGet"></a>
-# **accountsAccountIdOptionsChainGet**
-> List&lt;OptionChainInner&gt; accountsAccountIdOptionsChainGet(userId, userSecret, accountId, symbol)
+<a name="getOptionsChain"></a>
+# **getOptionsChain**
+> List&lt;OptionChainInner&gt; getOptionsChain(userId, userSecret, accountId, symbol)
 
 Get the options chain
 
@@ -57,10 +57,10 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
     UUID symbol = UUID.randomUUID(); // UUID | brokerage symbol to get quotes for.
     try {
-      List<OptionChainInner> result = apiInstance.accountsAccountIdOptionsChainGet(userId, userSecret, accountId, symbol);
+      List<OptionChainInner> result = apiInstance.getOptionsChain(userId, userSecret, accountId, symbol);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdOptionsChainGet");
+      System.err.println("Exception when calling OptionsApi#getOptionsChain");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -98,183 +98,9 @@ public class Example {
 | **200** | List of all Options available for the brokerage symbol |  -  |
 | **500** | Unexpected error |  -  |
 
-<a name="accountsAccountIdOptionsGet"></a>
-# **accountsAccountIdOptionsGet**
-> OptionsHoldings accountsAccountIdOptionsGet(userId, userSecret, accountId)
-
-Get the options holdings in the account
-
-### Example
-```java
-// Import classes:
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
-import com.konfigthis.client.api.OptionsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
-    
-    // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
-
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    try {
-      OptionsHoldings result = apiInstance.accountsAccountIdOptionsGet(userId, userSecret, accountId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdOptionsGet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
-
-### Return type
-
-[**OptionsHoldings**](OptionsHoldings.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | The option holdings in the account |  -  |
-| **500** | Unexpected error |  -  |
-
-<a name="accountsAccountIdOptionsSearchGet"></a>
-# **accountsAccountIdOptionsSearchGet**
-> List&lt;OptionChainInner&gt; accountsAccountIdOptionsSearchGet(userId, userSecret, accountId, date, minStrike, maxStrike)
-
-Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-
-### Example
-```java
-// Import classes:
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
-import com.konfigthis.client.api.OptionsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
-    
-    // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
-
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    String date = "date_example"; // String | The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-    Integer minStrike = 56; // Integer | The minimum strike price for the desired contract
-    Integer maxStrike = 56; // Integer | The max strike price for the desired contract
-    try {
-      List<OptionChainInner> result = apiInstance.accountsAccountIdOptionsSearchGet(userId, userSecret, accountId, date, minStrike, maxStrike);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdOptionsSearchGet");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
-| **date** | **String**| The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] | |
-| **minStrike** | **Integer**| The minimum strike price for the desired contract | [optional] |
-| **maxStrike** | **Integer**| The max strike price for the desired contract | [optional] |
-
-### Return type
-
-[**List&lt;OptionChainInner&gt;**](OptionChainInner.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | A successful query |  -  |
-| **500** | Unexpected error |  -  |
-
-<a name="accountsAccountIdStrategyImpactPost"></a>
-# **accountsAccountIdStrategyImpactPost**
-> StrategyImpact accountsAccountIdStrategyImpactPost(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute)
+<a name="getOptionsImpact"></a>
+# **getOptionsImpact**
+> StrategyImpact getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute)
 
 Get a strategies impact on the account
 
@@ -321,10 +147,10 @@ public class Example {
     String primaryRoute = "primaryRoute_example"; // String | The desired route for the order, default is \"AUTO\"
     String secondarRoute = "secondarRoute_example"; // String | The desired secondary route for the order, default is \"AUTO\"
     try {
-      StrategyImpact result = apiInstance.accountsAccountIdStrategyImpactPost(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute);
+      StrategyImpact result = apiInstance.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdStrategyImpactPost");
+      System.err.println("Exception when calling OptionsApi#getOptionsImpact");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -366,103 +192,9 @@ public class Example {
 | **200** | Impact of option strategy on user account |  -  |
 | **500** | Unexpected error |  -  |
 
-<a name="accountsAccountIdStrategyPlacePost"></a>
-# **accountsAccountIdStrategyPlacePost**
-> StrategyOrderPlace accountsAccountIdStrategyPlacePost(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute)
-
-Place the strategy order; impact not required but the StrategyOrderQuotes object is
-
-### Example
-```java
-// Import classes:
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
-import com.konfigthis.client.api.OptionsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
-    
-    // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
-
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    Integer strategyOrder = 56; // Integer | 
-    Integer strikePrice = 56; // Integer | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    UUID body = UUID.randomUUID(); // UUID | 
-    Integer primaryRoute = 56; // Integer | 
-    Integer secondaryRoute = 56; // Integer | 
-    try {
-      StrategyOrderPlace result = apiInstance.accountsAccountIdStrategyPlacePost(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdStrategyPlacePost");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **strategyOrder** | **Integer**|  | |
-| **strikePrice** | **Integer**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
-| **body** | **UUID**|  | |
-| **primaryRoute** | **Integer**|  | [optional] |
-| **secondaryRoute** | **Integer**|  | [optional] |
-
-### Return type
-
-[**StrategyOrderPlace**](StrategyOrderPlace.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Order Record of canceled order |  -  |
-| **500** | Unexpected error |  -  |
-
-<a name="accountsAccountIdStrategyQuotesPost"></a>
-# **accountsAccountIdStrategyQuotesPost**
-> Object accountsAccountIdStrategyQuotesPost(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm)
+<a name="getStrategyQuote"></a>
+# **getStrategyQuote**
+> Object getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm)
 
 Get a price quote for a strategy
 
@@ -509,10 +241,10 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
     ManualTradeForm manualTradeForm = new ManualTradeForm(); // ManualTradeForm | 
     try {
-      Object result = apiInstance.accountsAccountIdStrategyQuotesPost(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm);
+      Object result = apiInstance.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#accountsAccountIdStrategyQuotesPost");
+      System.err.println("Exception when calling OptionsApi#getStrategyQuote");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -552,5 +284,273 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Order Quotes |  -  |
+| **500** | Unexpected error |  -  |
+
+<a name="listOptionHoldings"></a>
+# **listOptionHoldings**
+> OptionsHoldings listOptionHoldings(userId, userSecret, accountId)
+
+Get the options holdings in the account
+
+### Example
+```java
+// Import classes:
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.models.*;
+import com.konfigthis.client.api.OptionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+    
+    // Configure API key authorization: PartnerClientId
+    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
+    PartnerClientId.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerClientId.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerSignature
+    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
+    PartnerSignature.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerSignature.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerTimestamp
+    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
+    PartnerTimestamp.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerTimestamp.setApiKeyPrefix("Token");
+
+    OptionsApi apiInstance = new OptionsApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    String userSecret = "userSecret_example"; // String | 
+    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    try {
+      OptionsHoldings result = apiInstance.listOptionHoldings(userId, userSecret, accountId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#listOptionHoldings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**| The ID of the account get positions. | |
+
+### Return type
+
+[**OptionsHoldings**](OptionsHoldings.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The option holdings in the account |  -  |
+| **500** | Unexpected error |  -  |
+
+<a name="placeOptionsStrategyOrder"></a>
+# **placeOptionsStrategyOrder**
+> StrategyOrderPlace placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute)
+
+Place the strategy order; impact not required but the StrategyOrderQuotes object is
+
+### Example
+```java
+// Import classes:
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.models.*;
+import com.konfigthis.client.api.OptionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+    
+    // Configure API key authorization: PartnerClientId
+    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
+    PartnerClientId.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerClientId.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerSignature
+    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
+    PartnerSignature.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerSignature.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerTimestamp
+    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
+    PartnerTimestamp.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerTimestamp.setApiKeyPrefix("Token");
+
+    OptionsApi apiInstance = new OptionsApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    String userSecret = "userSecret_example"; // String | 
+    Integer strategyOrder = 56; // Integer | 
+    Integer strikePrice = 56; // Integer | 
+    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    UUID body = UUID.randomUUID(); // UUID | 
+    Integer primaryRoute = 56; // Integer | 
+    Integer secondaryRoute = 56; // Integer | 
+    try {
+      StrategyOrderPlace result = apiInstance.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#placeOptionsStrategyOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **strategyOrder** | **Integer**|  | |
+| **strikePrice** | **Integer**|  | |
+| **accountId** | **UUID**| The ID of the account get positions. | |
+| **body** | **UUID**|  | |
+| **primaryRoute** | **Integer**|  | [optional] |
+| **secondaryRoute** | **Integer**|  | [optional] |
+
+### Return type
+
+[**StrategyOrderPlace**](StrategyOrderPlace.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order Record of canceled order |  -  |
+| **500** | Unexpected error |  -  |
+
+<a name="searchOptionsQuote"></a>
+# **searchOptionsQuote**
+> List&lt;OptionChainInner&gt; searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike)
+
+Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+
+### Example
+```java
+// Import classes:
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.models.*;
+import com.konfigthis.client.api.OptionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+    
+    // Configure API key authorization: PartnerClientId
+    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
+    PartnerClientId.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerClientId.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerSignature
+    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
+    PartnerSignature.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerSignature.setApiKeyPrefix("Token");
+
+    // Configure API key authorization: PartnerTimestamp
+    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
+    PartnerTimestamp.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //PartnerTimestamp.setApiKeyPrefix("Token");
+
+    OptionsApi apiInstance = new OptionsApi(defaultClient);
+    String userId = "userId_example"; // String | 
+    String userSecret = "userSecret_example"; // String | 
+    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    String date = "date_example"; // String | The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+    Integer minStrike = 56; // Integer | The minimum strike price for the desired contract
+    Integer maxStrike = 56; // Integer | The max strike price for the desired contract
+    try {
+      List<OptionChainInner> result = apiInstance.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#searchOptionsQuote");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**| The ID of the account get positions. | |
+| **date** | **String**| The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] | |
+| **minStrike** | **Integer**| The minimum strike price for the desired contract | [optional] |
+| **maxStrike** | **Integer**| The max strike price for the desired contract | [optional] |
+
+### Return type
+
+[**List&lt;OptionChainInner&gt;**](OptionChainInner.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A successful query |  -  |
 | **500** | Unexpected error |  -  |
 

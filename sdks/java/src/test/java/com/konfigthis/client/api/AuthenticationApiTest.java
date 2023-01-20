@@ -13,12 +13,12 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.model.AuthenticationLoginSnapTradeUser200Response;
 import com.konfigthis.client.model.DeleteUserResponse;
 import com.konfigthis.client.model.EncryptedResponse;
 import com.konfigthis.client.model.Model400FailedRequestResponse;
 import com.konfigthis.client.model.Model403FailedRequestResponse;
 import com.konfigthis.client.model.Model404FailedRequestResponse;
-import com.konfigthis.client.model.SnapTradeLoginPost200Response;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -44,9 +44,9 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeDeleteUserDeleteTest() throws ApiException {
+    public void deleteSnapTradeUserTest() throws ApiException {
         String userId = null;
-        DeleteUserResponse response = api.snapTradeDeleteUserDelete(userId);
+        DeleteUserResponse response = api.deleteSnapTradeUser(userId);
         // TODO: test validations
     }
 
@@ -56,10 +56,10 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeEncryptedJWTGetTest() throws ApiException {
+    public void getUserJWTTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        EncryptedResponse response = api.snapTradeEncryptedJWTGet(userId, userSecret);
+        EncryptedResponse response = api.getUserJWT(userId, userSecret);
         // TODO: test validations
     }
 
@@ -69,8 +69,8 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeListUsersGetTest() throws ApiException {
-        List<String> response = api.snapTradeListUsersGet();
+    public void listSnapTradeUsersTest() throws ApiException {
+        List<String> response = api.listSnapTradeUsers();
         // TODO: test validations
     }
 
@@ -80,11 +80,11 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeLoginPostTest() throws ApiException {
+    public void loginSnapTradeUserTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null;
-        SnapTradeLoginPost200Response response = api.snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody);
+        AuthenticationLoginSnapTradeUser200Response response = api.loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
         // TODO: test validations
     }
 
@@ -94,9 +94,9 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeRegisterUserPostTest() throws ApiException {
+    public void registerSnapTradeUserTest() throws ApiException {
         SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = null;
-        UserIDandSecret response = api.snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody);
+        UserIDandSecret response = api.registerSnapTradeUser(snapTradeRegisterUserRequestBody);
         // TODO: test validations
     }
 

@@ -803,10 +803,10 @@ class Endpoint(object):
         Example:
 
         api_instance = APIDisclaimerApi()
-        api_instance.snap_trade_accept_disclaimer_post  # this is an instance of the class Endpoint
-        api_instance.snap_trade_accept_disclaimer_post()  # this invokes api_instance.snap_trade_accept_disclaimer_post.__call__()
+        api_instance.accept  # this is an instance of the class Endpoint
+        api_instance.accept()  # this invokes api_instance.accept.__call__()
         which then invokes the callable functions stored in that endpoint at
-        api_instance.snap_trade_accept_disclaimer_post.callable or self.callable in this class
+        api_instance.accept.callable or self.callable in this class
 
         """
         return self.callable(self, *args, **kwargs)

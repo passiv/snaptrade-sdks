@@ -40,7 +40,7 @@ class OptionsApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.accounts_account_id_options_chain_get_endpoint = _Endpoint(
+        self.get_options_chain_endpoint = _Endpoint(
             settings={
                 'response_type': (OptionChain,),
                 'auth': [
@@ -49,7 +49,7 @@ class OptionsApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/accounts/{accountId}/options_chain',
-                'operation_id': 'accounts_account_id_options_chain_get',
+                'operation_id': 'get_options_chain',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -111,153 +111,7 @@ class OptionsApi(object):
             },
             api_client=api_client
         )
-        self.accounts_account_id_options_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (OptionsHoldings,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/accounts/{accountId}/options',
-                'operation_id': 'accounts_account_id_options_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
-                ],
-                'required': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'user_id':
-                        (str,),
-                    'user_secret':
-                        (str,),
-                    'account_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                    'account_id': 'accountId',
-                },
-                'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'account_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.accounts_account_id_options_search_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (OptionChain,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/accounts/{accountId}/options_search',
-                'operation_id': 'accounts_account_id_options_search_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
-                    'date',
-                    'min_strike',
-                    'max_strike',
-                ],
-                'required': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
-                    'date',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'user_id':
-                        (str,),
-                    'user_secret':
-                        (str,),
-                    'account_id':
-                        (str,),
-                    'date':
-                        (str,),
-                    'min_strike':
-                        (int,),
-                    'max_strike':
-                        (int,),
-                },
-                'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                    'account_id': 'accountId',
-                    'date': 'Date',
-                    'min_strike': 'min_strike',
-                    'max_strike': 'max_strike',
-                },
-                'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'account_id': 'path',
-                    'date': 'query',
-                    'min_strike': 'query',
-                    'max_strike': 'query',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.accounts_account_id_strategy_impact_post_endpoint = _Endpoint(
+        self.get_options_impact_endpoint = _Endpoint(
             settings={
                 'response_type': (StrategyImpact,),
                 'auth': [
@@ -266,7 +120,7 @@ class OptionsApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/accounts/{accountId}/strategy_impact',
-                'operation_id': 'accounts_account_id_strategy_impact_post',
+                'operation_id': 'get_options_impact',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -350,101 +204,7 @@ class OptionsApi(object):
             },
             api_client=api_client
         )
-        self.accounts_account_id_strategy_place_post_endpoint = _Endpoint(
-            settings={
-                'response_type': (StrategyOrderPlace,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/accounts/{accountId}/strategy_place',
-                'operation_id': 'accounts_account_id_strategy_place_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'user_id',
-                    'user_secret',
-                    'strategy_order',
-                    'strike_price',
-                    'account_id',
-                    'body',
-                    'primary_route',
-                    'secondary_route',
-                ],
-                'required': [
-                    'user_id',
-                    'user_secret',
-                    'strategy_order',
-                    'strike_price',
-                    'account_id',
-                    'body',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'user_id':
-                        (str,),
-                    'user_secret':
-                        (str,),
-                    'strategy_order':
-                        (int,),
-                    'strike_price':
-                        (int,),
-                    'account_id':
-                        (str,),
-                    'body':
-                        (str,),
-                    'primary_route':
-                        (int,),
-                    'secondary_route':
-                        (int,),
-                },
-                'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                    'strategy_order': 'strategy_order',
-                    'strike_price': 'strike_price',
-                    'account_id': 'accountId',
-                    'primary_route': 'primary_route',
-                    'secondary_route': 'secondary_route',
-                },
-                'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'strategy_order': 'query',
-                    'strike_price': 'query',
-                    'account_id': 'path',
-                    'body': 'body',
-                    'primary_route': 'query',
-                    'secondary_route': 'query',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
-        self.accounts_account_id_strategy_quotes_post_endpoint = _Endpoint(
+        self.get_strategy_quote_endpoint = _Endpoint(
             settings={
                 'response_type': (bool, date, datetime, dict, float, int, list, str, none_type,),
                 'auth': [
@@ -453,7 +213,7 @@ class OptionsApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/accounts/{accountId}/strategy_quotes',
-                'operation_id': 'accounts_account_id_strategy_quotes_post',
+                'operation_id': 'get_strategy_quote',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -540,8 +300,248 @@ class OptionsApi(object):
             },
             api_client=api_client
         )
+        self.list_option_holdings_endpoint = _Endpoint(
+            settings={
+                'response_type': (OptionsHoldings,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/accounts/{accountId}/options',
+                'operation_id': 'list_option_holdings',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'user_id',
+                    'user_secret',
+                    'account_id',
+                ],
+                'required': [
+                    'user_id',
+                    'user_secret',
+                    'account_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'user_id':
+                        (str,),
+                    'user_secret':
+                        (str,),
+                    'account_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'user_id': 'userId',
+                    'user_secret': 'userSecret',
+                    'account_id': 'accountId',
+                },
+                'location_map': {
+                    'user_id': 'query',
+                    'user_secret': 'query',
+                    'account_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.place_options_strategy_order_endpoint = _Endpoint(
+            settings={
+                'response_type': (StrategyOrderPlace,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/accounts/{accountId}/strategy_place',
+                'operation_id': 'place_options_strategy_order',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'user_id',
+                    'user_secret',
+                    'strategy_order',
+                    'strike_price',
+                    'account_id',
+                    'body',
+                    'primary_route',
+                    'secondary_route',
+                ],
+                'required': [
+                    'user_id',
+                    'user_secret',
+                    'strategy_order',
+                    'strike_price',
+                    'account_id',
+                    'body',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'user_id':
+                        (str,),
+                    'user_secret':
+                        (str,),
+                    'strategy_order':
+                        (int,),
+                    'strike_price':
+                        (int,),
+                    'account_id':
+                        (str,),
+                    'body':
+                        (str,),
+                    'primary_route':
+                        (int,),
+                    'secondary_route':
+                        (int,),
+                },
+                'attribute_map': {
+                    'user_id': 'userId',
+                    'user_secret': 'userSecret',
+                    'strategy_order': 'strategy_order',
+                    'strike_price': 'strike_price',
+                    'account_id': 'accountId',
+                    'primary_route': 'primary_route',
+                    'secondary_route': 'secondary_route',
+                },
+                'location_map': {
+                    'user_id': 'query',
+                    'user_secret': 'query',
+                    'strategy_order': 'query',
+                    'strike_price': 'query',
+                    'account_id': 'path',
+                    'body': 'body',
+                    'primary_route': 'query',
+                    'secondary_route': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.search_options_quote_endpoint = _Endpoint(
+            settings={
+                'response_type': (OptionChain,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/accounts/{accountId}/options_search',
+                'operation_id': 'search_options_quote',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'user_id',
+                    'user_secret',
+                    'account_id',
+                    'date',
+                    'min_strike',
+                    'max_strike',
+                ],
+                'required': [
+                    'user_id',
+                    'user_secret',
+                    'account_id',
+                    'date',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'user_id':
+                        (str,),
+                    'user_secret':
+                        (str,),
+                    'account_id':
+                        (str,),
+                    'date':
+                        (str,),
+                    'min_strike':
+                        (int,),
+                    'max_strike':
+                        (int,),
+                },
+                'attribute_map': {
+                    'user_id': 'userId',
+                    'user_secret': 'userSecret',
+                    'account_id': 'accountId',
+                    'date': 'Date',
+                    'min_strike': 'min_strike',
+                    'max_strike': 'max_strike',
+                },
+                'location_map': {
+                    'user_id': 'query',
+                    'user_secret': 'query',
+                    'account_id': 'path',
+                    'date': 'query',
+                    'min_strike': 'query',
+                    'max_strike': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
 
-    def accounts_account_id_options_chain_get(
+    def get_options_chain(
         self,
         user_id,
         user_secret,
@@ -554,7 +554,7 @@ class OptionsApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_options_chain_get(user_id, user_secret, account_id, symbol, async_req=True)
+        >>> thread = api.get_options_chain(user_id, user_secret, account_id, symbol, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -633,195 +633,9 @@ class OptionsApi(object):
             account_id
         kwargs['symbol'] = \
             symbol
-        return self.accounts_account_id_options_chain_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_options_chain_endpoint.call_with_http_info(**kwargs)
 
-    def accounts_account_id_options_get(
-        self,
-        user_id,
-        user_secret,
-        account_id,
-        **kwargs
-    ):
-        """Get the options holdings in the account  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.accounts_account_id_options_get(user_id, user_secret, account_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-            account_id (str): The ID of the account get positions.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            OptionsHoldings
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        kwargs['account_id'] = \
-            account_id
-        return self.accounts_account_id_options_get_endpoint.call_with_http_info(**kwargs)
-
-    def accounts_account_id_options_search_get(
-        self,
-        user_id,
-        user_secret,
-        account_id,
-        date,
-        **kwargs
-    ):
-        """Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.accounts_account_id_options_search_get(user_id, user_secret, account_id, date, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-            account_id (str): The ID of the account get positions.
-            date (str): The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-
-        Keyword Args:
-            min_strike (int): The minimum strike price for the desired contract. [optional]
-            max_strike (int): The max strike price for the desired contract. [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            OptionChain
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        kwargs['account_id'] = \
-            account_id
-        kwargs['date'] = \
-            date
-        return self.accounts_account_id_options_search_get_endpoint.call_with_http_info(**kwargs)
-
-    def accounts_account_id_strategy_impact_post(
+    def get_options_impact(
         self,
         user_id,
         user_secret,
@@ -835,7 +649,7 @@ class OptionsApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_strategy_impact_post(user_id, user_secret, account_id, strategy_quotes_record, body, async_req=True)
+        >>> thread = api.get_options_impact(user_id, user_secret, account_id, strategy_quotes_record, body, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -920,113 +734,9 @@ class OptionsApi(object):
             strategy_quotes_record
         kwargs['body'] = \
             body
-        return self.accounts_account_id_strategy_impact_post_endpoint.call_with_http_info(**kwargs)
+        return self.get_options_impact_endpoint.call_with_http_info(**kwargs)
 
-    def accounts_account_id_strategy_place_post(
-        self,
-        user_id,
-        user_secret,
-        strategy_order,
-        strike_price,
-        account_id,
-        body,
-        **kwargs
-    ):
-        """Place the strategy order; impact not required but the StrategyOrderQuotes object is  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.accounts_account_id_strategy_place_post(user_id, user_secret, strategy_order, strike_price, account_id, body, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-            strategy_order (int):
-            strike_price (int):
-            account_id (str): The ID of the account get positions.
-            body (str):
-
-        Keyword Args:
-            primary_route (int): [optional]
-            secondary_route (int): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            StrategyOrderPlace
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        kwargs['strategy_order'] = \
-            strategy_order
-        kwargs['strike_price'] = \
-            strike_price
-        kwargs['account_id'] = \
-            account_id
-        kwargs['body'] = \
-            body
-        return self.accounts_account_id_strategy_place_post_endpoint.call_with_http_info(**kwargs)
-
-    def accounts_account_id_strategy_quotes_post(
+    def get_strategy_quote(
         self,
         user_id,
         user_secret,
@@ -1043,7 +753,7 @@ class OptionsApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_strategy_quotes_post(user_id, user_secret, legs, strategy, time_in_force, order_type, account_id, manual_trade_form, async_req=True)
+        >>> thread = api.get_strategy_quote(user_id, user_secret, legs, strategy, time_in_force, order_type, account_id, manual_trade_form, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1134,5 +844,295 @@ class OptionsApi(object):
             account_id
         kwargs['manual_trade_form'] = \
             manual_trade_form
-        return self.accounts_account_id_strategy_quotes_post_endpoint.call_with_http_info(**kwargs)
+        return self.get_strategy_quote_endpoint.call_with_http_info(**kwargs)
+
+    def list_option_holdings(
+        self,
+        user_id,
+        user_secret,
+        account_id,
+        **kwargs
+    ):
+        """Get the options holdings in the account  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_option_holdings(user_id, user_secret, account_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+            account_id (str): The ID of the account get positions.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            OptionsHoldings
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['user_id'] = \
+            user_id
+        kwargs['user_secret'] = \
+            user_secret
+        kwargs['account_id'] = \
+            account_id
+        return self.list_option_holdings_endpoint.call_with_http_info(**kwargs)
+
+    def place_options_strategy_order(
+        self,
+        user_id,
+        user_secret,
+        strategy_order,
+        strike_price,
+        account_id,
+        body,
+        **kwargs
+    ):
+        """Place the strategy order; impact not required but the StrategyOrderQuotes object is  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.place_options_strategy_order(user_id, user_secret, strategy_order, strike_price, account_id, body, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+            strategy_order (int):
+            strike_price (int):
+            account_id (str): The ID of the account get positions.
+            body (str):
+
+        Keyword Args:
+            primary_route (int): [optional]
+            secondary_route (int): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            StrategyOrderPlace
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['user_id'] = \
+            user_id
+        kwargs['user_secret'] = \
+            user_secret
+        kwargs['strategy_order'] = \
+            strategy_order
+        kwargs['strike_price'] = \
+            strike_price
+        kwargs['account_id'] = \
+            account_id
+        kwargs['body'] = \
+            body
+        return self.place_options_strategy_order_endpoint.call_with_http_info(**kwargs)
+
+    def search_options_quote(
+        self,
+        user_id,
+        user_secret,
+        account_id,
+        date,
+        **kwargs
+    ):
+        """Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.search_options_quote(user_id, user_secret, account_id, date, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+            account_id (str): The ID of the account get positions.
+            date (str): The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+
+        Keyword Args:
+            min_strike (int): The minimum strike price for the desired contract. [optional]
+            max_strike (int): The max strike price for the desired contract. [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            OptionChain
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['user_id'] = \
+            user_id
+        kwargs['user_secret'] = \
+            user_secret
+        kwargs['account_id'] = \
+            account_id
+        kwargs['date'] = \
+            date
+        return self.search_options_quote_endpoint.call_with_http_info(**kwargs)
 

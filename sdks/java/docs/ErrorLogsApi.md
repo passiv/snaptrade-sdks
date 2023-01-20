@@ -4,12 +4,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**snapTradeListUserErrorsGet**](ErrorLogsApi.md#snapTradeListUserErrorsGet) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users |
+| [**listUserErrors**](ErrorLogsApi.md#listUserErrors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users |
 
 
-<a name="snapTradeListUserErrorsGet"></a>
-# **snapTradeListUserErrorsGet**
-> List&lt;UserErrorLog&gt; snapTradeListUserErrorsGet(userId, userSecret)
+<a name="listUserErrors"></a>
+# **listUserErrors**
+> List&lt;UserErrorLog&gt; listUserErrors(userId, userSecret)
 
 Retrieve error logs on behalf of your SnapTrade users
 
@@ -50,10 +50,10 @@ public class Example {
     String userId = "userId_example"; // String | 
     String userSecret = "userSecret_example"; // String | 
     try {
-      List<UserErrorLog> result = apiInstance.snapTradeListUserErrorsGet(userId, userSecret);
+      List<UserErrorLog> result = apiInstance.listUserErrors(userId, userSecret);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ErrorLogsApi#snapTradeListUserErrorsGet");
+      System.err.println("Exception when calling ErrorLogsApi#listUserErrors");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

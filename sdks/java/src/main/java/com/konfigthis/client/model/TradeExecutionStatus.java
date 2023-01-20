@@ -321,7 +321,7 @@ public class TradeExecutionStatus {
    * @return action
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Sell", value = "Action of executed trade")
+  @ApiModelProperty(example = "SELL", value = "Action of executed trade")
 
   public ActionEnum getAction() {
     return action;

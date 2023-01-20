@@ -1,6 +1,6 @@
 
 
-# TradeOcoPostRequest
+# TradingPlaceOCOOrderRequest
 
 
 ## Properties

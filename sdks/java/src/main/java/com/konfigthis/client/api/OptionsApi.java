@@ -78,7 +78,7 @@ public class OptionsApi {
     }
 
     /**
-     * Build call for accountsAccountIdOptionsChainGet
+     * Build call for getOptionsChain
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
@@ -93,7 +93,7 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOptionsChainGetCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getOptionsChainCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -151,28 +151,28 @@ public class OptionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdOptionsChainGetValidateBeforeCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOptionsChainValidateBeforeCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdOptionsChainGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getOptionsChain(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdOptionsChainGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getOptionsChain(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdOptionsChainGet(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling getOptionsChain(Async)");
         }
 
         // verify the required parameter 'symbol' is set
         if (symbol == null) {
-            throw new ApiException("Missing the required parameter 'symbol' when calling accountsAccountIdOptionsChainGet(Async)");
+            throw new ApiException("Missing the required parameter 'symbol' when calling getOptionsChain(Async)");
         }
 
-        return accountsAccountIdOptionsChainGetCall(userId, userSecret, accountId, symbol, _callback);
+        return getOptionsChainCall(userId, userSecret, accountId, symbol, _callback);
 
     }
 
@@ -192,8 +192,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public List<OptionChainInner> accountsAccountIdOptionsChainGet(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
-        ApiResponse<List<OptionChainInner>> localVarResp = accountsAccountIdOptionsChainGetWithHttpInfo(userId, userSecret, accountId, symbol);
+    public List<OptionChainInner> getOptionsChain(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
+        ApiResponse<List<OptionChainInner>> localVarResp = getOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
         return localVarResp.getData();
     }
 
@@ -213,8 +213,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<OptionChainInner>> accountsAccountIdOptionsChainGetWithHttpInfo(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdOptionsChainGetValidateBeforeCall(userId, userSecret, accountId, symbol, null);
+    public ApiResponse<List<OptionChainInner>> getOptionsChainWithHttpInfo(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
+        okhttp3.Call localVarCall = getOptionsChainValidateBeforeCall(userId, userSecret, accountId, symbol, null);
         Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -236,350 +236,15 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdOptionsChainGetAsync(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
+    public okhttp3.Call getOptionsChainAsync(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdOptionsChainGetValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
+        okhttp3.Call localVarCall = getOptionsChainValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
         Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for accountsAccountIdOptionsGet
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdOptionsGetCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/accounts/{accountId}/options"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdOptionsGetValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdOptionsGet(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdOptionsGet(Async)");
-        }
-
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdOptionsGet(Async)");
-        }
-
-        return accountsAccountIdOptionsGetCall(userId, userSecret, accountId, _callback);
-
-    }
-
-    /**
-     * Get the options holdings in the account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return OptionsHoldings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public OptionsHoldings accountsAccountIdOptionsGet(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<OptionsHoldings> localVarResp = accountsAccountIdOptionsGetWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get the options holdings in the account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return ApiResponse&lt;OptionsHoldings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<OptionsHoldings> accountsAccountIdOptionsGetWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdOptionsGetValidateBeforeCall(userId, userSecret, accountId, null);
-        Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get the options holdings in the account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdOptionsGetAsync(String userId, String userSecret, UUID accountId, final ApiCallback<OptionsHoldings> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = accountsAccountIdOptionsGetValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for accountsAccountIdOptionsSearchGet
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
-     * @param minStrike The minimum strike price for the desired contract (optional)
-     * @param maxStrike The max strike price for the desired contract (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdOptionsSearchGetCall(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/accounts/{accountId}/options_search"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        if (date != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Date", date));
-        }
-
-        if (minStrike != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("min_strike", minStrike));
-        }
-
-        if (maxStrike != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("max_strike", maxStrike));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdOptionsSearchGetValidateBeforeCall(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdOptionsSearchGet(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdOptionsSearchGet(Async)");
-        }
-
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdOptionsSearchGet(Async)");
-        }
-
-        // verify the required parameter 'date' is set
-        if (date == null) {
-            throw new ApiException("Missing the required parameter 'date' when calling accountsAccountIdOptionsSearchGet(Async)");
-        }
-
-        return accountsAccountIdOptionsSearchGetCall(userId, userSecret, accountId, date, minStrike, maxStrike, _callback);
-
-    }
-
-    /**
-     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
-     * @param minStrike The minimum strike price for the desired contract (optional)
-     * @param maxStrike The max strike price for the desired contract (optional)
-     * @return List&lt;OptionChainInner&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<OptionChainInner> accountsAccountIdOptionsSearchGet(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike) throws ApiException {
-        ApiResponse<List<OptionChainInner>> localVarResp = accountsAccountIdOptionsSearchGetWithHttpInfo(userId, userSecret, accountId, date, minStrike, maxStrike);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
-     * @param minStrike The minimum strike price for the desired contract (optional)
-     * @param maxStrike The max strike price for the desired contract (optional)
-     * @return ApiResponse&lt;List&lt;OptionChainInner&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<OptionChainInner>> accountsAccountIdOptionsSearchGetWithHttpInfo(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdOptionsSearchGetValidateBeforeCall(userId, userSecret, accountId, date, minStrike, maxStrike, null);
-        Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max. (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
-     * @param minStrike The minimum strike price for the desired contract (optional)
-     * @param maxStrike The max strike price for the desired contract (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdOptionsSearchGetAsync(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = accountsAccountIdOptionsSearchGetValidateBeforeCall(userId, userSecret, accountId, date, minStrike, maxStrike, _callback);
-        Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for accountsAccountIdStrategyImpactPost
+     * Build call for getOptionsImpact
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
@@ -598,7 +263,7 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdStrategyImpactPostCall(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getOptionsImpactCall(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -669,33 +334,33 @@ public class OptionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdStrategyImpactPostValidateBeforeCall(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOptionsImpactValidateBeforeCall(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdStrategyImpactPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getOptionsImpact(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdStrategyImpactPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getOptionsImpact(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdStrategyImpactPost(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling getOptionsImpact(Async)");
         }
 
         // verify the required parameter 'strategyQuotesRecord' is set
         if (strategyQuotesRecord == null) {
-            throw new ApiException("Missing the required parameter 'strategyQuotesRecord' when calling accountsAccountIdStrategyImpactPost(Async)");
+            throw new ApiException("Missing the required parameter 'strategyQuotesRecord' when calling getOptionsImpact(Async)");
         }
 
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling accountsAccountIdStrategyImpactPost(Async)");
+            throw new ApiException("Missing the required parameter 'body' when calling getOptionsImpact(Async)");
         }
 
-        return accountsAccountIdStrategyImpactPostCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, _callback);
+        return getOptionsImpactCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, _callback);
 
     }
 
@@ -719,8 +384,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public StrategyImpact accountsAccountIdStrategyImpactPost(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute) throws ApiException {
-        ApiResponse<StrategyImpact> localVarResp = accountsAccountIdStrategyImpactPostWithHttpInfo(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute);
+    public StrategyImpact getOptionsImpact(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute) throws ApiException {
+        ApiResponse<StrategyImpact> localVarResp = getOptionsImpactWithHttpInfo(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute);
         return localVarResp.getData();
     }
 
@@ -744,8 +409,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<StrategyImpact> accountsAccountIdStrategyImpactPostWithHttpInfo(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdStrategyImpactPostValidateBeforeCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, null);
+    public ApiResponse<StrategyImpact> getOptionsImpactWithHttpInfo(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute) throws ApiException {
+        okhttp3.Call localVarCall = getOptionsImpactValidateBeforeCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, null);
         Type localVarReturnType = new TypeToken<StrategyImpact>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -771,220 +436,15 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdStrategyImpactPostAsync(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback<StrategyImpact> _callback) throws ApiException {
+    public okhttp3.Call getOptionsImpactAsync(String userId, String userSecret, UUID accountId, Map<String, Object> strategyQuotesRecord, UUID body, Integer strikePrice, String primaryRoute, String secondarRoute, final ApiCallback<StrategyImpact> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdStrategyImpactPostValidateBeforeCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, _callback);
+        okhttp3.Call localVarCall = getOptionsImpactValidateBeforeCall(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, _callback);
         Type localVarReturnType = new TypeToken<StrategyImpact>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for accountsAccountIdStrategyPlacePost
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param strategyOrder  (required)
-     * @param strikePrice  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param body  (required)
-     * @param primaryRoute  (optional)
-     * @param secondaryRoute  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdStrategyPlacePostCall(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/accounts/{accountId}/strategy_place"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        if (strategyOrder != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("strategy_order", strategyOrder));
-        }
-
-        if (strikePrice != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("strike_price", strikePrice));
-        }
-
-        if (primaryRoute != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("primary_route", primaryRoute));
-        }
-
-        if (secondaryRoute != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("secondary_route", secondaryRoute));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdStrategyPlacePostValidateBeforeCall(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        // verify the required parameter 'strategyOrder' is set
-        if (strategyOrder == null) {
-            throw new ApiException("Missing the required parameter 'strategyOrder' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        // verify the required parameter 'strikePrice' is set
-        if (strikePrice == null) {
-            throw new ApiException("Missing the required parameter 'strikePrice' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling accountsAccountIdStrategyPlacePost(Async)");
-        }
-
-        return accountsAccountIdStrategyPlacePostCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, _callback);
-
-    }
-
-    /**
-     * Place the strategy order; impact not required but the StrategyOrderQuotes object is
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param strategyOrder  (required)
-     * @param strikePrice  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param body  (required)
-     * @param primaryRoute  (optional)
-     * @param secondaryRoute  (optional)
-     * @return StrategyOrderPlace
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public StrategyOrderPlace accountsAccountIdStrategyPlacePost(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute) throws ApiException {
-        ApiResponse<StrategyOrderPlace> localVarResp = accountsAccountIdStrategyPlacePostWithHttpInfo(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Place the strategy order; impact not required but the StrategyOrderQuotes object is
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param strategyOrder  (required)
-     * @param strikePrice  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param body  (required)
-     * @param primaryRoute  (optional)
-     * @param secondaryRoute  (optional)
-     * @return ApiResponse&lt;StrategyOrderPlace&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<StrategyOrderPlace> accountsAccountIdStrategyPlacePostWithHttpInfo(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdStrategyPlacePostValidateBeforeCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, null);
-        Type localVarReturnType = new TypeToken<StrategyOrderPlace>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Place the strategy order; impact not required but the StrategyOrderQuotes object is (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param strategyOrder  (required)
-     * @param strikePrice  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param body  (required)
-     * @param primaryRoute  (optional)
-     * @param secondaryRoute  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call accountsAccountIdStrategyPlacePostAsync(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback<StrategyOrderPlace> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = accountsAccountIdStrategyPlacePostValidateBeforeCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, _callback);
-        Type localVarReturnType = new TypeToken<StrategyOrderPlace>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for accountsAccountIdStrategyQuotesPost
+     * Build call for getStrategyQuote
      * @param userId  (required)
      * @param userSecret  (required)
      * @param legs  (required)
@@ -1003,7 +463,7 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdStrategyQuotesPostCall(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getStrategyQuoteCall(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1074,48 +534,48 @@ public class OptionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call accountsAccountIdStrategyQuotesPostValidateBeforeCall(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getStrategyQuoteValidateBeforeCall(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'legs' is set
         if (legs == null) {
-            throw new ApiException("Missing the required parameter 'legs' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'legs' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'strategy' is set
         if (strategy == null) {
-            throw new ApiException("Missing the required parameter 'strategy' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'strategy' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'timeInForce' is set
         if (timeInForce == null) {
-            throw new ApiException("Missing the required parameter 'timeInForce' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'timeInForce' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'orderType' is set
         if (orderType == null) {
-            throw new ApiException("Missing the required parameter 'orderType' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'orderType' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling getStrategyQuote(Async)");
         }
 
         // verify the required parameter 'manualTradeForm' is set
         if (manualTradeForm == null) {
-            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling accountsAccountIdStrategyQuotesPost(Async)");
+            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling getStrategyQuote(Async)");
         }
 
-        return accountsAccountIdStrategyQuotesPostCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, _callback);
+        return getStrategyQuoteCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, _callback);
 
     }
 
@@ -1139,8 +599,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public Object accountsAccountIdStrategyQuotesPost(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm) throws ApiException {
-        ApiResponse<Object> localVarResp = accountsAccountIdStrategyQuotesPostWithHttpInfo(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm);
+    public Object getStrategyQuote(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm) throws ApiException {
+        ApiResponse<Object> localVarResp = getStrategyQuoteWithHttpInfo(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm);
         return localVarResp.getData();
     }
 
@@ -1164,8 +624,8 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Object> accountsAccountIdStrategyQuotesPostWithHttpInfo(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm) throws ApiException {
-        okhttp3.Call localVarCall = accountsAccountIdStrategyQuotesPostValidateBeforeCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, null);
+    public ApiResponse<Object> getStrategyQuoteWithHttpInfo(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = getStrategyQuoteValidateBeforeCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, null);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1191,10 +651,550 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call accountsAccountIdStrategyQuotesPostAsync(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback<Object> _callback) throws ApiException {
+    public okhttp3.Call getStrategyQuoteAsync(String userId, String userSecret, Integer legs, String strategy, String timeInForce, String orderType, UUID accountId, ManualTradeForm manualTradeForm, final ApiCallback<Object> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = accountsAccountIdStrategyQuotesPostValidateBeforeCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, _callback);
+        okhttp3.Call localVarCall = getStrategyQuoteValidateBeforeCall(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, _callback);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listOptionHoldings
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOptionHoldingsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/options"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listOptionHoldingsValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling listOptionHoldings(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listOptionHoldings(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling listOptionHoldings(Async)");
+        }
+
+        return listOptionHoldingsCall(userId, userSecret, accountId, _callback);
+
+    }
+
+    /**
+     * Get the options holdings in the account
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @return OptionsHoldings
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public OptionsHoldings listOptionHoldings(String userId, String userSecret, UUID accountId) throws ApiException {
+        ApiResponse<OptionsHoldings> localVarResp = listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the options holdings in the account
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @return ApiResponse&lt;OptionsHoldings&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<OptionsHoldings> listOptionHoldingsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+        okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, null);
+        Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the options holdings in the account (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOptionHoldingsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<OptionsHoldings> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, _callback);
+        Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for placeOptionsStrategyOrder
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param strategyOrder  (required)
+     * @param strikePrice  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param body  (required)
+     * @param primaryRoute  (optional)
+     * @param secondaryRoute  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call placeOptionsStrategyOrderCall(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/strategy_place"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        if (strategyOrder != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("strategy_order", strategyOrder));
+        }
+
+        if (strikePrice != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("strike_price", strikePrice));
+        }
+
+        if (primaryRoute != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("primary_route", primaryRoute));
+        }
+
+        if (secondaryRoute != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("secondary_route", secondaryRoute));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeOptionsStrategyOrderValidateBeforeCall(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        // verify the required parameter 'strategyOrder' is set
+        if (strategyOrder == null) {
+            throw new ApiException("Missing the required parameter 'strategyOrder' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        // verify the required parameter 'strikePrice' is set
+        if (strikePrice == null) {
+            throw new ApiException("Missing the required parameter 'strikePrice' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling placeOptionsStrategyOrder(Async)");
+        }
+
+        return placeOptionsStrategyOrderCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, _callback);
+
+    }
+
+    /**
+     * Place the strategy order; impact not required but the StrategyOrderQuotes object is
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param strategyOrder  (required)
+     * @param strikePrice  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param body  (required)
+     * @param primaryRoute  (optional)
+     * @param secondaryRoute  (optional)
+     * @return StrategyOrderPlace
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public StrategyOrderPlace placeOptionsStrategyOrder(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute) throws ApiException {
+        ApiResponse<StrategyOrderPlace> localVarResp = placeOptionsStrategyOrderWithHttpInfo(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Place the strategy order; impact not required but the StrategyOrderQuotes object is
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param strategyOrder  (required)
+     * @param strikePrice  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param body  (required)
+     * @param primaryRoute  (optional)
+     * @param secondaryRoute  (optional)
+     * @return ApiResponse&lt;StrategyOrderPlace&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<StrategyOrderPlace> placeOptionsStrategyOrderWithHttpInfo(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute) throws ApiException {
+        okhttp3.Call localVarCall = placeOptionsStrategyOrderValidateBeforeCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, null);
+        Type localVarReturnType = new TypeToken<StrategyOrderPlace>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Place the strategy order; impact not required but the StrategyOrderQuotes object is (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param strategyOrder  (required)
+     * @param strikePrice  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param body  (required)
+     * @param primaryRoute  (optional)
+     * @param secondaryRoute  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call placeOptionsStrategyOrderAsync(String userId, String userSecret, Integer strategyOrder, Integer strikePrice, UUID accountId, UUID body, Integer primaryRoute, Integer secondaryRoute, final ApiCallback<StrategyOrderPlace> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeOptionsStrategyOrderValidateBeforeCall(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, _callback);
+        Type localVarReturnType = new TypeToken<StrategyOrderPlace>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchOptionsQuote
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
+     * @param minStrike The minimum strike price for the desired contract (optional)
+     * @param maxStrike The max strike price for the desired contract (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchOptionsQuoteCall(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/options_search"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        if (date != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Date", date));
+        }
+
+        if (minStrike != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("min_strike", minStrike));
+        }
+
+        if (maxStrike != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("max_strike", maxStrike));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchOptionsQuoteValidateBeforeCall(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling searchOptionsQuote(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling searchOptionsQuote(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling searchOptionsQuote(Async)");
+        }
+
+        // verify the required parameter 'date' is set
+        if (date == null) {
+            throw new ApiException("Missing the required parameter 'date' when calling searchOptionsQuote(Async)");
+        }
+
+        return searchOptionsQuoteCall(userId, userSecret, accountId, date, minStrike, maxStrike, _callback);
+
+    }
+
+    /**
+     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
+     * @param minStrike The minimum strike price for the desired contract (optional)
+     * @param maxStrike The max strike price for the desired contract (optional)
+     * @return List&lt;OptionChainInner&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<OptionChainInner> searchOptionsQuote(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike) throws ApiException {
+        ApiResponse<List<OptionChainInner>> localVarResp = searchOptionsQuoteWithHttpInfo(userId, userSecret, accountId, date, minStrike, maxStrike);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
+     * @param minStrike The minimum strike price for the desired contract (optional)
+     * @param maxStrike The max strike price for the desired contract (optional)
+     * @return ApiResponse&lt;List&lt;OptionChainInner&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<OptionChainInner>> searchOptionsQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike) throws ApiException {
+        okhttp3.Call localVarCall = searchOptionsQuoteValidateBeforeCall(userId, userSecret, accountId, date, minStrike, maxStrike, null);
+        Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max. (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId The ID of the account get positions. (required)
+     * @param date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD] (required)
+     * @param minStrike The minimum strike price for the desired contract (optional)
+     * @param maxStrike The max strike price for the desired contract (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A successful query </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchOptionsQuoteAsync(String userId, String userSecret, UUID accountId, String date, Integer minStrike, Integer maxStrike, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchOptionsQuoteValidateBeforeCall(userId, userSecret, accountId, date, minStrike, maxStrike, _callback);
+        Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

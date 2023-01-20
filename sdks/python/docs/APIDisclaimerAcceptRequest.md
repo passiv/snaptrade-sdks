@@ -1,4 +1,4 @@
-# SnapTradeAcceptDisclaimerPostRequest
+# APIDisclaimerAcceptRequest
 
 
 ## Properties

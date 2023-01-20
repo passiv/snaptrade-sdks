@@ -22,8 +22,8 @@ from snaptrade_client.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from snaptrade_client.model.api_disclaimer_accept_request import APIDisclaimerAcceptRequest
 from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus
-from snaptrade_client.model.snap_trade_accept_disclaimer_post_request import SnapTradeAcceptDisclaimerPostRequest
 
 
 class APIDisclaimerApi(object):
@@ -37,7 +37,7 @@ class APIDisclaimerApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.snap_trade_accept_disclaimer_post_endpoint = _Endpoint(
+        self.accept_endpoint = _Endpoint(
             settings={
                 'response_type': (SnapTradeAPIDisclaimerAcceptStatus,),
                 'auth': [
@@ -46,7 +46,7 @@ class APIDisclaimerApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/acceptDisclaimer',
-                'operation_id': 'snap_trade_accept_disclaimer_post',
+                'operation_id': 'accept',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -54,12 +54,12 @@ class APIDisclaimerApi(object):
                 'all': [
                     'user_id',
                     'user_secret',
-                    'snap_trade_accept_disclaimer_post_request',
+                    'api_disclaimer_accept_request',
                 ],
                 'required': [
                     'user_id',
                     'user_secret',
-                    'snap_trade_accept_disclaimer_post_request',
+                    'api_disclaimer_accept_request',
                 ],
                 'nullable': [
                 ],
@@ -78,8 +78,8 @@ class APIDisclaimerApi(object):
                         (str,),
                     'user_secret':
                         (str,),
-                    'snap_trade_accept_disclaimer_post_request':
-                        (SnapTradeAcceptDisclaimerPostRequest,),
+                    'api_disclaimer_accept_request':
+                        (APIDisclaimerAcceptRequest,),
                 },
                 'attribute_map': {
                     'user_id': 'userId',
@@ -88,7 +88,7 @@ class APIDisclaimerApi(object):
                 'location_map': {
                     'user_id': 'query',
                     'user_secret': 'query',
-                    'snap_trade_accept_disclaimer_post_request': 'body',
+                    'api_disclaimer_accept_request': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -104,11 +104,11 @@ class APIDisclaimerApi(object):
             api_client=api_client
         )
 
-    def snap_trade_accept_disclaimer_post(
+    def accept(
         self,
         user_id,
         user_secret,
-        snap_trade_accept_disclaimer_post_request,
+        api_disclaimer_accept_request,
         **kwargs
     ):
         """Accept or Reject SnapTrade disclaimer agreement  # noqa: E501
@@ -116,13 +116,13 @@ class APIDisclaimerApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_accept_disclaimer_post(user_id, user_secret, snap_trade_accept_disclaimer_post_request, async_req=True)
+        >>> thread = api.accept(user_id, user_secret, api_disclaimer_accept_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             user_id (str):
             user_secret (str):
-            snap_trade_accept_disclaimer_post_request (SnapTradeAcceptDisclaimerPostRequest):
+            api_disclaimer_accept_request (APIDisclaimerAcceptRequest):
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -190,7 +190,7 @@ class APIDisclaimerApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        kwargs['snap_trade_accept_disclaimer_post_request'] = \
-            snap_trade_accept_disclaimer_post_request
-        return self.snap_trade_accept_disclaimer_post_endpoint.call_with_http_info(**kwargs)
+        kwargs['api_disclaimer_accept_request'] = \
+            api_disclaimer_accept_request
+        return self.accept_endpoint.call_with_http_info(**kwargs)
 

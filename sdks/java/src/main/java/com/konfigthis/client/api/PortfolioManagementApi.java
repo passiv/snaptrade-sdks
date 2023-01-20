@@ -87,17 +87,19 @@ public class PortfolioManagementApi {
     }
 
     /**
-     * Build call for modelAssetClassGet
+     * Build call for addPortfolioExcludedAsset
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
+     * @param universalSymbol  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call modelAssetClassGetCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call addPortfolioExcludedAssetCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -111,10 +113,11 @@ public class PortfolioManagementApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = universalSymbol;
 
         // create path and map variables
-        String localVarPath = "/modelAssetClass";
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -124,362 +127,6 @@ public class PortfolioManagementApi {
 
         final String[] localVarAccepts = {
             "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelAssetClassGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return modelAssetClassGetCall(_callback);
-
-    }
-
-    /**
-     * List of model asset class
-     * 
-     * @return List&lt;ModelAssetClassDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ModelAssetClassDetails> modelAssetClassGet() throws ApiException {
-        ApiResponse<List<ModelAssetClassDetails>> localVarResp = modelAssetClassGetWithHttpInfo();
-        return localVarResp.getData();
-    }
-
-    /**
-     * List of model asset class
-     * 
-     * @return ApiResponse&lt;List&lt;ModelAssetClassDetails&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ModelAssetClassDetails>> modelAssetClassGetWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = modelAssetClassGetValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * List of model asset class (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassGetAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelAssetClassGetValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelAssetClassModelAssetClassIdDelete
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdDeleteCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
-            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelAssetClassModelAssetClassIdDeleteValidateBeforeCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelAssetClassId' is set
-        if (modelAssetClassId == null) {
-            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling modelAssetClassModelAssetClassIdDelete(Async)");
-        }
-
-        return modelAssetClassModelAssetClassIdDeleteCall(modelAssetClassId, _callback);
-
-    }
-
-    /**
-     * Deletes a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public void modelAssetClassModelAssetClassIdDelete(UUID modelAssetClassId) throws ApiException {
-        modelAssetClassModelAssetClassIdDeleteWithHttpInfo(modelAssetClassId);
-    }
-
-    /**
-     * Deletes a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> modelAssetClassModelAssetClassIdDeleteWithHttpInfo(UUID modelAssetClassId) throws ApiException {
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdDeleteValidateBeforeCall(modelAssetClassId, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Deletes a model asset class (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdDeleteAsync(UUID modelAssetClassId, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdDeleteValidateBeforeCall(modelAssetClassId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelAssetClassModelAssetClassIdGet
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdGetCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
-            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelAssetClassModelAssetClassIdGetValidateBeforeCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelAssetClassId' is set
-        if (modelAssetClassId == null) {
-            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling modelAssetClassModelAssetClassIdGet(Async)");
-        }
-
-        return modelAssetClassModelAssetClassIdGetCall(modelAssetClassId, _callback);
-
-    }
-
-    /**
-     * Get details of a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @return ModelAssetClassDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelAssetClassDetails modelAssetClassModelAssetClassIdGet(UUID modelAssetClassId) throws ApiException {
-        ApiResponse<ModelAssetClassDetails> localVarResp = modelAssetClassModelAssetClassIdGetWithHttpInfo(modelAssetClassId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get details of a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelAssetClassDetails> modelAssetClassModelAssetClassIdGetWithHttpInfo(UUID modelAssetClassId) throws ApiException {
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdGetValidateBeforeCall(modelAssetClassId, null);
-        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get details of a model asset class (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdGetAsync(UUID modelAssetClassId, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdGetValidateBeforeCall(modelAssetClassId, _callback);
-        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelAssetClassModelAssetClassIdPost
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdPostCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = modelAssetClassDetails;
-
-        // create path and map variables
-        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
-            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -499,785 +146,76 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelAssetClassModelAssetClassIdPostValidateBeforeCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelAssetClassId' is set
-        if (modelAssetClassId == null) {
-            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling modelAssetClassModelAssetClassIdPost(Async)");
+    private okhttp3.Call addPortfolioExcludedAssetValidateBeforeCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling addPortfolioExcludedAsset(Async)");
         }
 
-        // verify the required parameter 'modelAssetClassDetails' is set
-        if (modelAssetClassDetails == null) {
-            throw new ApiException("Missing the required parameter 'modelAssetClassDetails' when calling modelAssetClassModelAssetClassIdPost(Async)");
-        }
-
-        return modelAssetClassModelAssetClassIdPostCall(modelAssetClassId, modelAssetClassDetails, _callback);
+        return addPortfolioExcludedAssetCall(portfolioGroupId, universalSymbol, _callback);
 
     }
 
     /**
-     * Updates model asset class objects
+     * Adds an asset to exclude to a portfolio group
      * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
+     * @param universalSymbol  (optional)
+     * @return ExcludedAsset
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
      </table>
      */
-    public void modelAssetClassModelAssetClassIdPost(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
-        modelAssetClassModelAssetClassIdPostWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
-    }
-
-    /**
-     * Updates model asset class objects
-     * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> modelAssetClassModelAssetClassIdPostWithHttpInfo(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdPostValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Updates model asset class objects (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassModelAssetClassIdPostAsync(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelAssetClassModelAssetClassIdPostValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelAssetClassPost
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelAssetClassPostCall(final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelAssetClass";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelAssetClassPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return modelAssetClassPostCall(_callback);
-
-    }
-
-    /**
-     * Create a new model asset class
-     * 
-     * @return ModelAssetClassDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelAssetClassDetails modelAssetClassPost() throws ApiException {
-        ApiResponse<ModelAssetClassDetails> localVarResp = modelAssetClassPostWithHttpInfo();
+    public ExcludedAsset addPortfolioExcludedAsset(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
+        ApiResponse<ExcludedAsset> localVarResp = addPortfolioExcludedAssetWithHttpInfo(portfolioGroupId, universalSymbol);
         return localVarResp.getData();
     }
 
     /**
-     * Create a new model asset class
+     * Adds an asset to exclude to a portfolio group
      * 
-     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
+     * @param universalSymbol  (optional)
+     * @return ApiResponse&lt;ExcludedAsset&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ModelAssetClassDetails> modelAssetClassPostWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = modelAssetClassPostValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
+    public ApiResponse<ExcludedAsset> addPortfolioExcludedAssetWithHttpInfo(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
+        okhttp3.Call localVarCall = addPortfolioExcludedAssetValidateBeforeCall(portfolioGroupId, universalSymbol, null);
+        Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Create a new model asset class (asynchronously)
+     * Adds an asset to exclude to a portfolio group (asynchronously)
      * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
+     * @param universalSymbol  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call modelAssetClassPostAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+    public okhttp3.Call addPortfolioExcludedAssetAsync(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback<ExcludedAsset> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = modelAssetClassPostValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
+        okhttp3.Call localVarCall = addPortfolioExcludedAssetValidateBeforeCall(portfolioGroupId, universalSymbol, _callback);
+        Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for modelPortfolioGet
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioGetCall(final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelPortfolio";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelPortfolioGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return modelPortfolioGetCall(_callback);
-
-    }
-
-    /**
-     * List of model portfolio
-     * 
-     * @return List&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ModelPortfolioDetails> modelPortfolioGet() throws ApiException {
-        ApiResponse<List<ModelPortfolioDetails>> localVarResp = modelPortfolioGetWithHttpInfo();
-        return localVarResp.getData();
-    }
-
-    /**
-     * List of model portfolio
-     * 
-     * @return ApiResponse&lt;List&lt;ModelPortfolioDetails&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ModelPortfolioDetails>> modelPortfolioGetWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = modelPortfolioGetValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * List of model portfolio (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioGetAsync(final ApiCallback<List<ModelPortfolioDetails>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelPortfolioGetValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelPortfolioModelPortfolioIdDelete
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdDeleteCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
-            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelPortfolioModelPortfolioIdDeleteValidateBeforeCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelPortfolioId' is set
-        if (modelPortfolioId == null) {
-            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling modelPortfolioModelPortfolioIdDelete(Async)");
-        }
-
-        return modelPortfolioModelPortfolioIdDeleteCall(modelPortfolioId, _callback);
-
-    }
-
-    /**
-     * Deletes a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public void modelPortfolioModelPortfolioIdDelete(UUID modelPortfolioId) throws ApiException {
-        modelPortfolioModelPortfolioIdDeleteWithHttpInfo(modelPortfolioId);
-    }
-
-    /**
-     * Deletes a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> modelPortfolioModelPortfolioIdDeleteWithHttpInfo(UUID modelPortfolioId) throws ApiException {
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdDeleteValidateBeforeCall(modelPortfolioId, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Deletes a model portfolio (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdDeleteAsync(UUID modelPortfolioId, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdDeleteValidateBeforeCall(modelPortfolioId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelPortfolioModelPortfolioIdGet
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdGetCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
-            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelPortfolioModelPortfolioIdGetValidateBeforeCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelPortfolioId' is set
-        if (modelPortfolioId == null) {
-            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling modelPortfolioModelPortfolioIdGet(Async)");
-        }
-
-        return modelPortfolioModelPortfolioIdGetCall(modelPortfolioId, _callback);
-
-    }
-
-    /**
-     * Get details of a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @return ModelPortfolioDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelPortfolioDetails modelPortfolioModelPortfolioIdGet(UUID modelPortfolioId) throws ApiException {
-        ApiResponse<ModelPortfolioDetails> localVarResp = modelPortfolioModelPortfolioIdGetWithHttpInfo(modelPortfolioId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get details of a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelPortfolioDetails> modelPortfolioModelPortfolioIdGetWithHttpInfo(UUID modelPortfolioId) throws ApiException {
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdGetValidateBeforeCall(modelPortfolioId, null);
-        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get details of a model portfolio (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdGetAsync(UUID modelPortfolioId, final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdGetValidateBeforeCall(modelPortfolioId, _callback);
-        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelPortfolioModelPortfolioIdPost
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdPostCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = modelPortfolioDetails;
-
-        // create path and map variables
-        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
-            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelPortfolioModelPortfolioIdPostValidateBeforeCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'modelPortfolioId' is set
-        if (modelPortfolioId == null) {
-            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling modelPortfolioModelPortfolioIdPost(Async)");
-        }
-
-        // verify the required parameter 'modelPortfolioDetails' is set
-        if (modelPortfolioDetails == null) {
-            throw new ApiException("Missing the required parameter 'modelPortfolioDetails' when calling modelPortfolioModelPortfolioIdPost(Async)");
-        }
-
-        return modelPortfolioModelPortfolioIdPostCall(modelPortfolioId, modelPortfolioDetails, _callback);
-
-    }
-
-    /**
-     * Updates model portfolio object
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public void modelPortfolioModelPortfolioIdPost(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
-        modelPortfolioModelPortfolioIdPostWithHttpInfo(modelPortfolioId, modelPortfolioDetails);
-    }
-
-    /**
-     * Updates model portfolio object
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> modelPortfolioModelPortfolioIdPostWithHttpInfo(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdPostValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Updates model portfolio object (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioModelPortfolioIdPostAsync(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelPortfolioModelPortfolioIdPostValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for modelPortfolioPost
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioPostCall(final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/modelPortfolio";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call modelPortfolioPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return modelPortfolioPostCall(_callback);
-
-    }
-
-    /**
-     * Creates a new model portfolio
-     * 
-     * @return ModelPortfolioDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelPortfolioDetails modelPortfolioPost() throws ApiException {
-        ApiResponse<ModelPortfolioDetails> localVarResp = modelPortfolioPostWithHttpInfo();
-        return localVarResp.getData();
-    }
-
-    /**
-     * Creates a new model portfolio
-     * 
-     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelPortfolioDetails> modelPortfolioPostWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = modelPortfolioPostValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Creates a new model portfolio (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modelPortfolioPostAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = modelPortfolioPostValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsGet
+     * Build call for callList
      * @param userId  (required)
      * @param userSecret  (required)
      * @param _callback Callback for upload/download progress
@@ -1290,7 +228,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsGetCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call callListCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1343,18 +281,18 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsGetValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call callListValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling portfolioGroupsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling callList(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling portfolioGroupsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling callList(Async)");
         }
 
-        return portfolioGroupsGetCall(userId, userSecret, _callback);
+        return callListCall(userId, userSecret, _callback);
 
     }
 
@@ -1372,8 +310,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<PortfolioGroup> portfolioGroupsGet(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<PortfolioGroup>> localVarResp = portfolioGroupsGetWithHttpInfo(userId, userSecret);
+    public List<PortfolioGroup> callList(String userId, String userSecret) throws ApiException {
+        ApiResponse<List<PortfolioGroup>> localVarResp = callListWithHttpInfo(userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -1391,8 +329,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<PortfolioGroup>> portfolioGroupsGetWithHttpInfo(String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsGetValidateBeforeCall(userId, userSecret, null);
+    public ApiResponse<List<PortfolioGroup>> callListWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = callListValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1412,27 +350,182 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsGetAsync(String userId, String userSecret, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+    public okhttp3.Call callListAsync(String userId, String userSecret, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsGetValidateBeforeCall(userId, userSecret, _callback);
+        okhttp3.Call localVarCall = callListValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdAccountsGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * Build call for create
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param requestBody  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdAccountsGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call createCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = requestBody;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createValidateBeforeCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling create(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling create(Async)");
+        }
+
+        // verify the required parameter 'requestBody' is set
+        if (requestBody == null) {
+            throw new ApiException("Missing the required parameter 'requestBody' when calling create(Async)");
+        }
+
+        return createCall(userId, userSecret, requestBody, _callback);
+
+    }
+
+    /**
+     * Create new portfolio group
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param requestBody  (required)
+     * @return List&lt;PortfolioGroup&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<PortfolioGroup> create(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
+        ApiResponse<List<PortfolioGroup>> localVarResp = createWithHttpInfo(userId, userSecret, requestBody);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create new portfolio group
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param requestBody  (required)
+     * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<PortfolioGroup>> createWithHttpInfo(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
+        okhttp3.Call localVarCall = createValidateBeforeCall(userId, userSecret, requestBody, null);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create new portfolio group (asynchronously)
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param requestBody  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAsync(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createValidateBeforeCall(userId, userSecret, requestBody, _callback);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createAssetClass
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAssetClassCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1449,7 +542,601 @@ public class PortfolioManagementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/accounts"
+        String localVarPath = "/modelAssetClass";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAssetClassValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return createAssetClassCall(_callback);
+
+    }
+
+    /**
+     * Create a new model asset class
+     * 
+     * @return ModelAssetClassDetails
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ModelAssetClassDetails createAssetClass() throws ApiException {
+        ApiResponse<ModelAssetClassDetails> localVarResp = createAssetClassWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create a new model asset class
+     * 
+     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ModelAssetClassDetails> createAssetClassWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create a new model asset class (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAssetClassAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createModelPortfolio
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createModelPortfolioCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/modelPortfolio";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createModelPortfolioValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return createModelPortfolioCall(_callback);
+
+    }
+
+    /**
+     * Creates a new model portfolio
+     * 
+     * @return ModelPortfolioDetails
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ModelPortfolioDetails createModelPortfolio() throws ApiException {
+        ApiResponse<ModelPortfolioDetails> localVarResp = createModelPortfolioWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Creates a new model portfolio
+     * 
+     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ModelPortfolioDetails> createModelPortfolioWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = createModelPortfolioValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Creates a new model portfolio (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createModelPortfolioAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createModelPortfolioValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteAssetClass
+     * @param modelAssetClassId The ID of the model asset class to delete. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
+            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteAssetClassValidateBeforeCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelAssetClassId' is set
+        if (modelAssetClassId == null) {
+            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling deleteAssetClass(Async)");
+        }
+
+        return deleteAssetClassCall(modelAssetClassId, _callback);
+
+    }
+
+    /**
+     * Deletes a model asset class
+     * 
+     * @param modelAssetClassId The ID of the model asset class to delete. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteAssetClass(UUID modelAssetClassId) throws ApiException {
+        deleteAssetClassWithHttpInfo(modelAssetClassId);
+    }
+
+    /**
+     * Deletes a model asset class
+     * 
+     * @param modelAssetClassId The ID of the model asset class to delete. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
+        okhttp3.Call localVarCall = deleteAssetClassValidateBeforeCall(modelAssetClassId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Deletes a model asset class (asynchronously)
+     * 
+     * @param modelAssetClassId The ID of the model asset class to delete. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteAssetClassAsync(UUID modelAssetClassId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteAssetClassValidateBeforeCall(modelAssetClassId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteExcludedAsset
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
+     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteExcludedAssetCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
+            .replace("{" + "symbolId" + "}", localVarApiClient.escapeString(symbolId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteExcludedAssetValidateBeforeCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling deleteExcludedAsset(Async)");
+        }
+
+        // verify the required parameter 'symbolId' is set
+        if (symbolId == null) {
+            throw new ApiException("Missing the required parameter 'symbolId' when calling deleteExcludedAsset(Async)");
+        }
+
+        return deleteExcludedAssetCall(portfolioGroupId, symbolId, _callback);
+
+    }
+
+    /**
+     * Unexclude an asset from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
+     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteExcludedAsset(UUID portfolioGroupId, UUID symbolId) throws ApiException {
+        deleteExcludedAssetWithHttpInfo(portfolioGroupId, symbolId);
+    }
+
+    /**
+     * Unexclude an asset from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
+     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteExcludedAssetWithHttpInfo(UUID portfolioGroupId, UUID symbolId) throws ApiException {
+        okhttp3.Call localVarCall = deleteExcludedAssetValidateBeforeCall(portfolioGroupId, symbolId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Unexclude an asset from a portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
+     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteExcludedAssetAsync(UUID portfolioGroupId, UUID symbolId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteExcludedAssetValidateBeforeCall(portfolioGroupId, symbolId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteModelPortfolioById
+     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteModelPortfolioByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
+            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteModelPortfolioByIdValidateBeforeCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelPortfolioId' is set
+        if (modelPortfolioId == null) {
+            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling deleteModelPortfolioById(Async)");
+        }
+
+        return deleteModelPortfolioByIdCall(modelPortfolioId, _callback);
+
+    }
+
+    /**
+     * Deletes a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteModelPortfolioById(UUID modelPortfolioId) throws ApiException {
+        deleteModelPortfolioByIdWithHttpInfo(modelPortfolioId);
+    }
+
+    /**
+     * Deletes a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
+        okhttp3.Call localVarCall = deleteModelPortfolioByIdValidateBeforeCall(modelPortfolioId, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Deletes a model portfolio (asynchronously)
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteModelPortfolioByIdAsync(UUID modelPortfolioId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteModelPortfolioByIdValidateBeforeCall(modelPortfolioId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deletePortfoli
+     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deletePortfoliCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}"
             .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1474,94 +1161,101 @@ public class PortfolioManagementApi {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdAccountsGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deletePortfoliValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdAccountsGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling deletePortfoli(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdAccountsGetCall(portfolioGroupId, _callback);
+        return deletePortfoliCall(portfolioGroupId, _callback);
 
     }
 
     /**
-     * Get all accounts associated with a portfolio group
+     * Remove a target portfolio.
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @return List&lt;Account&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
+     * @return PortfolioGroup
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<Account> portfolioGroupsPortfolioGroupIdAccountsGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<Account>> localVarResp = portfolioGroupsPortfolioGroupIdAccountsGetWithHttpInfo(portfolioGroupId);
+    public PortfolioGroup deletePortfoli(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<PortfolioGroup> localVarResp = deletePortfoliWithHttpInfo(portfolioGroupId);
         return localVarResp.getData();
     }
 
     /**
-     * Get all accounts associated with a portfolio group
+     * Remove a target portfolio.
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
+     * @return ApiResponse&lt;PortfolioGroup&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Account>> portfolioGroupsPortfolioGroupIdAccountsGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdAccountsGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+    public ApiResponse<PortfolioGroup> deletePortfoliWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = deletePortfoliValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get all accounts associated with a portfolio group (asynchronously)
+     * Remove a target portfolio. (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdAccountsGetAsync(UUID portfolioGroupId, final ApiCallback<List<Account>> _callback) throws ApiException {
+    public okhttp3.Call deletePortfoliAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdAccountsGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        okhttp3.Call localVarCall = deletePortfoliValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdBalancesGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * Build call for deletePortfolioTargetById
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to delete. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdBalancesGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deletePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1578,8 +1272,9 @@ public class PortfolioManagementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/balances"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
+            .replace("{" + "targetAssetId" + "}", localVarApiClient.escapeString(targetAssetId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1603,99 +1298,105 @@ public class PortfolioManagementApi {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdBalancesGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deletePortfolioTargetByIdValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdBalancesGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling deletePortfolioTargetById(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdBalancesGetCall(portfolioGroupId, _callback);
+        // verify the required parameter 'targetAssetId' is set
+        if (targetAssetId == null) {
+            throw new ApiException("Missing the required parameter 'targetAssetId' when calling deletePortfolioTargetById(Async)");
+        }
+
+        return deletePortfolioTargetByIdCall(portfolioGroupId, targetAssetId, _callback);
 
     }
 
     /**
-     * Get sum of cash balances in portfolio group
+     * Remove a TargetAsset.
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;Balance&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to delete. (required)
+     * @return TargetAsset
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<Balance> portfolioGroupsPortfolioGroupIdBalancesGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<Balance>> localVarResp = portfolioGroupsPortfolioGroupIdBalancesGetWithHttpInfo(portfolioGroupId);
+    public TargetAsset deletePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+        ApiResponse<TargetAsset> localVarResp = deletePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
         return localVarResp.getData();
     }
 
     /**
-     * Get sum of cash balances in portfolio group
+     * Remove a TargetAsset.
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to delete. (required)
+     * @return ApiResponse&lt;TargetAsset&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Balance>> portfolioGroupsPortfolioGroupIdBalancesGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdBalancesGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
+    public ApiResponse<TargetAsset> deletePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+        okhttp3.Call localVarCall = deletePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, null);
+        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get sum of cash balances in portfolio group (asynchronously)
+     * Remove a TargetAsset. (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to delete. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdBalancesGetAsync(UUID portfolioGroupId, final ApiCallback<List<Balance>> _callback) throws ApiException {
+    public okhttp3.Call deletePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdBalancesGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
+        okhttp3.Call localVarCall = deletePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
+        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
+     * Build call for detailAssetClass
+     * @param modelAssetClassId The ID of the model asset class to get. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call detailAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1712,10 +1413,8 @@ public class PortfolioManagementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()))
-            .replace("{" + "tradeId" + "}", localVarApiClient.escapeString(tradeId.toString()));
+        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
+            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1743,237 +1442,73 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
+    private okhttp3.Call detailAssetClassValidateBeforeCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelAssetClassId' is set
+        if (modelAssetClassId == null) {
+            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling detailAssetClass(Async)");
         }
 
-        // verify the required parameter 'calculatedTradeId' is set
-        if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
-        }
-
-        // verify the required parameter 'tradeId' is set
-        if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        return detailAssetClassCall(modelAssetClassId, _callback);
 
     }
 
     /**
-     * Return details of a specific trade before it&#39;s placed
+     * Get details of a model asset class
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return Trade
+     * @param modelAssetClassId The ID of the model asset class to get. (required)
+     * @return ModelAssetClassDetails
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public Trade portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        ApiResponse<Trade> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
+    public ModelAssetClassDetails detailAssetClass(UUID modelAssetClassId) throws ApiException {
+        ApiResponse<ModelAssetClassDetails> localVarResp = detailAssetClassWithHttpInfo(modelAssetClassId);
         return localVarResp.getData();
     }
 
     /**
-     * Return details of a specific trade before it&#39;s placed
+     * Get details of a model asset class
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return ApiResponse&lt;Trade&gt;
+     * @param modelAssetClassId The ID of the model asset class to get. (required)
+     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Trade> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
+    public ApiResponse<ModelAssetClassDetails> detailAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
+        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, null);
+        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Return details of a specific trade before it&#39;s placed (asynchronously)
+     * Get details of a model asset class (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
+     * @param modelAssetClassId The ID of the model asset class to get. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade object </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<Trade> _callback) throws ApiException {
+    public okhttp3.Call detailAssetClassAsync(UUID modelAssetClassId, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
+        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, _callback);
+        Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param trade  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = trade;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "calculatedTradeId" + "}", localVarApiClient.escapeString(calculatedTradeId.toString()))
-            .replace("{" + "tradeId" + "}", localVarApiClient.escapeString(tradeId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
-        }
-
-        // verify the required parameter 'calculatedTradeId' is set
-        if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
-        }
-
-        // verify the required parameter 'tradeId' is set
-        if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
-
-    }
-
-    /**
-     * Modify units of a trade before it is placed
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param trade  (optional)
-     * @return Trade
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public Trade portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
-        ApiResponse<Trade> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId, trade);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Modify units of a trade before it is placed
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param trade  (optional)
-     * @return ApiResponse&lt;Trade&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Trade> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, null);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Modify units of a trade before it is placed (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param trade  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Modified trade object </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, Trade trade, final ApiCallback<Trade> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, trade, _callback);
-        Type localVarReturnType = new TypeToken<Trade>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet
+     * Build call for getCalculatedTradeById
      * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
      * @param calculatedTradeId The ID of calculated trade to get account impact (required)
      * @param tradeId The ID of trade object (required)
@@ -1986,7 +1521,7 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getCalculatedTradeByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2034,23 +1569,23 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getCalculatedTradeByIdValidateBeforeCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getCalculatedTradeById(Async)");
         }
 
         // verify the required parameter 'calculatedTradeId' is set
         if (calculatedTradeId == null) {
-            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'calculatedTradeId' when calling getCalculatedTradeById(Async)");
         }
 
         // verify the required parameter 'tradeId' is set
         if (tradeId == null) {
-            throw new ApiException("Missing the required parameter 'tradeId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'tradeId' when calling getCalculatedTradeById(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        return getCalculatedTradeByIdCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
 
     }
 
@@ -2068,8 +1603,8 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
      </table>
      */
-    public List<Trade> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        ApiResponse<List<Trade>> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
+    public List<Trade> getCalculatedTradeById(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
+        ApiResponse<List<Trade>> localVarResp = getCalculatedTradeByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
         return localVarResp.getData();
     }
 
@@ -2087,8 +1622,8 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Trade>> portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
+    public ApiResponse<List<Trade>> getCalculatedTradeByIdWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
+        okhttp3.Call localVarCall = getCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
         Type localVarReturnType = new TypeToken<List<Trade>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2108,26 +1643,26 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<List<Trade>> _callback) throws ApiException {
+    public okhttp3.Call getCalculatedTradeByIdAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<List<Trade>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        okhttp3.Call localVarCall = getCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
         Type localVarReturnType = new TypeToken<List<Trade>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdCalculatedtradesGet
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * Build call for getModelDetailsById
+     * @param modelPortfolioId The ID of the model portfolio to get. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getModelDetailsByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2144,7 +1679,133 @@ public class PortfolioManagementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades"
+        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
+            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getModelDetailsByIdValidateBeforeCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelPortfolioId' is set
+        if (modelPortfolioId == null) {
+            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling getModelDetailsById(Async)");
+        }
+
+        return getModelDetailsByIdCall(modelPortfolioId, _callback);
+
+    }
+
+    /**
+     * Get details of a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to get. (required)
+     * @return ModelPortfolioDetails
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ModelPortfolioDetails getModelDetailsById(UUID modelPortfolioId) throws ApiException {
+        ApiResponse<ModelPortfolioDetails> localVarResp = getModelDetailsByIdWithHttpInfo(modelPortfolioId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get details of a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to get. (required)
+     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ModelPortfolioDetails> getModelDetailsByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
+        okhttp3.Call localVarCall = getModelDetailsByIdValidateBeforeCall(modelPortfolioId, null);
+        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get details of a model portfolio (asynchronously)
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to get. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getModelDetailsByIdAsync(UUID modelPortfolioId, final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getModelDetailsByIdValidateBeforeCall(modelPortfolioId, _callback);
+        Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getPortfolioBalances
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioBalancesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/balances"
             .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -2173,591 +1834,82 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPortfolioBalancesValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdCalculatedtradesGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioBalances(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdCalculatedtradesGetCall(portfolioGroupId, _callback);
+        return getPortfolioBalancesCall(portfolioGroupId, _callback);
 
     }
 
     /**
-     * List of trades to make to rebalance portfolio group
+     * Get sum of cash balances in portfolio group
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @return CalculatedTrade
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return List&lt;Balance&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public CalculatedTrade portfolioGroupsPortfolioGroupIdCalculatedtradesGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<CalculatedTrade> localVarResp = portfolioGroupsPortfolioGroupIdCalculatedtradesGetWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * List of trades to make to rebalance portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @return ApiResponse&lt;CalculatedTrade&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<CalculatedTrade> portfolioGroupsPortfolioGroupIdCalculatedtradesGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * List of trades to make to rebalance portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdCalculatedtradesGetAsync(UUID portfolioGroupId, final ApiCallback<CalculatedTrade> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdCalculatedtradesGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdDelete
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdDeleteCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdDeleteValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdDelete(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdDeleteCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Remove a target portfolio.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @return PortfolioGroup
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroup portfolioGroupsPortfolioGroupIdDelete(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = portfolioGroupsPortfolioGroupIdDeleteWithHttpInfo(portfolioGroupId);
+    public List<Balance> getPortfolioBalances(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<Balance>> localVarResp = getPortfolioBalancesWithHttpInfo(portfolioGroupId);
         return localVarResp.getData();
     }
 
     /**
-     * Remove a target portfolio.
+     * Get sum of cash balances in portfolio group
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @return ApiResponse&lt;PortfolioGroup&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PortfolioGroup> portfolioGroupsPortfolioGroupIdDeleteWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdDeleteValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
+    public ApiResponse<List<Balance>> getPortfolioBalancesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioBalancesValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Remove a target portfolio. (asynchronously)
+     * Get sum of cash balances in portfolio group (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdDeleteAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    public okhttp3.Call getPortfolioBalancesAsync(UUID portfolioGroupId, final ApiCallback<List<Balance>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdDeleteValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
+        okhttp3.Call localVarCall = getPortfolioBalancesValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdExcludedassetsGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdExcludedassetsGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdExcludedassetsGetCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Get an array of excluded assets associated with a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @return List&lt;ExcludedAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ExcludedAsset> portfolioGroupsPortfolioGroupIdExcludedassetsGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<ExcludedAsset>> localVarResp = portfolioGroupsPortfolioGroupIdExcludedassetsGetWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get an array of excluded assets associated with a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @return ApiResponse&lt;List&lt;ExcludedAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ExcludedAsset>> portfolioGroupsPortfolioGroupIdExcludedassetsGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get an array of excluded assets associated with a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsGetAsync(UUID portfolioGroupId, final ApiCallback<List<ExcludedAsset>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdExcludedassetsPost
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsPostCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = universalSymbol;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsPostValidateBeforeCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdExcludedassetsPost(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdExcludedassetsPostCall(portfolioGroupId, universalSymbol, _callback);
-
-    }
-
-    /**
-     * Adds an asset to exclude to a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @return ExcludedAsset
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ExcludedAsset portfolioGroupsPortfolioGroupIdExcludedassetsPost(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
-        ApiResponse<ExcludedAsset> localVarResp = portfolioGroupsPortfolioGroupIdExcludedassetsPostWithHttpInfo(portfolioGroupId, universalSymbol);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Adds an asset to exclude to a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @return ApiResponse&lt;ExcludedAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ExcludedAsset> portfolioGroupsPortfolioGroupIdExcludedassetsPostWithHttpInfo(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsPostValidateBeforeCall(portfolioGroupId, universalSymbol, null);
-        Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Adds an asset to exclude to a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsPostAsync(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback<ExcludedAsset> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsPostValidateBeforeCall(portfolioGroupId, universalSymbol, _callback);
-        Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "symbolId" + "}", localVarApiClient.escapeString(symbolId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteValidateBeforeCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(Async)");
-        }
-
-        // verify the required parameter 'symbolId' is set
-        if (symbolId == null) {
-            throw new ApiException("Missing the required parameter 'symbolId' when calling portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteCall(portfolioGroupId, symbolId, _callback);
-
-    }
-
-    /**
-     * Unexclude an asset from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public void portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(UUID portfolioGroupId, UUID symbolId) throws ApiException {
-        portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteWithHttpInfo(portfolioGroupId, symbolId);
-    }
-
-    /**
-     * Unexclude an asset from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteWithHttpInfo(UUID portfolioGroupId, UUID symbolId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteValidateBeforeCall(portfolioGroupId, symbolId, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Unexclude an asset from a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteAsync(UUID portfolioGroupId, UUID symbolId, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteValidateBeforeCall(portfolioGroupId, symbolId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdGet
+     * Build call for getPortfolioDetailsById
      * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -2769,7 +1921,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPortfolioDetailsByIdCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2815,13 +1967,13 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPortfolioDetailsByIdValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioDetailsById(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdGetCall(portfolioGroupId, _callback);
+        return getPortfolioDetailsByIdCall(portfolioGroupId, _callback);
 
     }
 
@@ -2838,8 +1990,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public PortfolioGroup portfolioGroupsPortfolioGroupIdGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = portfolioGroupsPortfolioGroupIdGetWithHttpInfo(portfolioGroupId);
+    public PortfolioGroup getPortfolioDetailsById(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<PortfolioGroup> localVarResp = getPortfolioDetailsByIdWithHttpInfo(portfolioGroupId);
         return localVarResp.getData();
     }
 
@@ -2856,8 +2008,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PortfolioGroup> portfolioGroupsPortfolioGroupIdGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdGetValidateBeforeCall(portfolioGroupId, null);
+    public ApiResponse<PortfolioGroup> getPortfolioDetailsByIdWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioDetailsByIdValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2876,15 +2028,15 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdGetAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    public okhttp3.Call getPortfolioDetailsByIdAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdGetValidateBeforeCall(portfolioGroupId, _callback);
+        okhttp3.Call localVarCall = getPortfolioDetailsByIdValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdImportPost
+     * Build call for getPortfolioInfo
      * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -2896,134 +2048,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdImportPostCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/import"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdImportPostValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdImportPost(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdImportPostCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Import target allocation based on portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TargetAsset> portfolioGroupsPortfolioGroupIdImportPost(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = portfolioGroupsPortfolioGroupIdImportPostWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Import target allocation based on portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TargetAsset>> portfolioGroupsPortfolioGroupIdImportPostWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdImportPostValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Import target allocation based on portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdImportPostAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdImportPostValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdInfoGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdInfoGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPortfolioInfoCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3069,13 +2094,13 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdInfoGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPortfolioInfoValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdInfoGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioInfo(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdInfoGetCall(portfolioGroupId, _callback);
+        return getPortfolioInfoCall(portfolioGroupId, _callback);
 
     }
 
@@ -3092,8 +2117,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public PortfolioGroupInfo portfolioGroupsPortfolioGroupIdInfoGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupInfo> localVarResp = portfolioGroupsPortfolioGroupIdInfoGetWithHttpInfo(portfolioGroupId);
+    public PortfolioGroupInfo getPortfolioInfo(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<PortfolioGroupInfo> localVarResp = getPortfolioInfoWithHttpInfo(portfolioGroupId);
         return localVarResp.getData();
     }
 
@@ -3110,8 +2135,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PortfolioGroupInfo> portfolioGroupsPortfolioGroupIdInfoGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdInfoGetValidateBeforeCall(portfolioGroupId, null);
+    public ApiResponse<PortfolioGroupInfo> getPortfolioInfoWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioInfoValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroupInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3130,15 +2155,1407 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdInfoGetAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupInfo> _callback) throws ApiException {
+    public okhttp3.Call getPortfolioInfoAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupInfo> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdInfoGetValidateBeforeCall(portfolioGroupId, _callback);
+        okhttp3.Call localVarCall = getPortfolioInfoValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroupInfo>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdPatch
+     * Build call for getPortfolioPositions
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioPositionsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/positions"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPortfolioPositionsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioPositions(Async)");
+        }
+
+        return getPortfolioPositionsCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Get total of each postions owned in portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return List&lt;PortfolioGroupPosition&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<PortfolioGroupPosition> getPortfolioPositions(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<PortfolioGroupPosition>> localVarResp = getPortfolioPositionsWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get total of each postions owned in portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return ApiResponse&lt;List&lt;PortfolioGroupPosition&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<PortfolioGroupPosition>> getPortfolioPositionsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioPositionsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get total of each postions owned in portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioPositionsAsync(UUID portfolioGroupId, final ApiCallback<List<PortfolioGroupPosition>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPortfolioPositionsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getPortfolioSettings
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/settings"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPortfolioSettingsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioSettings(Async)");
+        }
+
+        return getPortfolioSettingsCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Get portfolio group settings
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
+     * @return PortfolioGroupSettings
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public PortfolioGroupSettings getPortfolioSettings(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<PortfolioGroupSettings> localVarResp = getPortfolioSettingsWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get portfolio group settings
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
+     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PortfolioGroupSettings> getPortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioSettingsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get portfolio group settings (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPortfolioSettingsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getPortfolioTargetById
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
+            .replace("{" + "targetAssetId" + "}", localVarApiClient.escapeString(targetAssetId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "*/*"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPortfolioTargetByIdValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioTargetById(Async)");
+        }
+
+        // verify the required parameter 'targetAssetId' is set
+        if (targetAssetId == null) {
+            throw new ApiException("Missing the required parameter 'targetAssetId' when calling getPortfolioTargetById(Async)");
+        }
+
+        return getPortfolioTargetByIdCall(portfolioGroupId, targetAssetId, _callback);
+
+    }
+
+    /**
+     * Get a specific target from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @return TargetAsset
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+     </table>
+     */
+    public TargetAsset getPortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+        ApiResponse<TargetAsset> localVarResp = getPortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get a specific target from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @return ApiResponse&lt;TargetAsset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<TargetAsset> getPortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, null);
+        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get a specific target from a portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
+        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getPortfolioTargets
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioTargetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPortfolioTargetsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioTargets(Async)");
+        }
+
+        return getPortfolioTargetsCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Get all target assets under the specified PortfolioGroup.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return List&lt;TargetAsset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<TargetAsset> getPortfolioTargets(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<TargetAsset>> localVarResp = getPortfolioTargetsWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get all target assets under the specified PortfolioGroup.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<TargetAsset>> getPortfolioTargetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortfolioTargetsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get all target assets under the specified PortfolioGroup. (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortfolioTargetsAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPortfolioTargetsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getPortoflioExcludedAssets
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortoflioExcludedAssetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/excludedassets"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPortoflioExcludedAssetsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortoflioExcludedAssets(Async)");
+        }
+
+        return getPortoflioExcludedAssetsCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Get an array of excluded assets associated with a portfolio group\\
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
+     * @return List&lt;ExcludedAsset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<ExcludedAsset> getPortoflioExcludedAssets(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<ExcludedAsset>> localVarResp = getPortoflioExcludedAssetsWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get an array of excluded assets associated with a portfolio group\\
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
+     * @return ApiResponse&lt;List&lt;ExcludedAsset&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<ExcludedAsset>> getPortoflioExcludedAssetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = getPortoflioExcludedAssetsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get an array of excluded assets associated with a portfolio group\\ (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getPortoflioExcludedAssetsAsync(UUID portfolioGroupId, final ApiCallback<List<ExcludedAsset>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPortoflioExcludedAssetsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for importModelPortfolio
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importModelPortfolioCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/import"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call importModelPortfolioValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling importModelPortfolio(Async)");
+        }
+
+        return importModelPortfolioCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Import target allocation based on portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return List&lt;TargetAsset&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<TargetAsset> importModelPortfolio(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<TargetAsset>> localVarResp = importModelPortfolioWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Import target allocation based on portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<TargetAsset>> importModelPortfolioWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = importModelPortfolioValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Import target allocation based on portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importModelPortfolioAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = importModelPortfolioValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAssetClasses
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAssetClassesCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/modelAssetClass";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAssetClassesValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listAssetClassesCall(_callback);
+
+    }
+
+    /**
+     * List of model asset class
+     * 
+     * @return List&lt;ModelAssetClassDetails&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<ModelAssetClassDetails> listAssetClasses() throws ApiException {
+        ApiResponse<List<ModelAssetClassDetails>> localVarResp = listAssetClassesWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * List of model asset class
+     * 
+     * @return ApiResponse&lt;List&lt;ModelAssetClassDetails&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<ModelAssetClassDetails>> listAssetClassesWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List of model asset class (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAssetClassesAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listCalculatedTrades
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listCalculatedTradesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/calculatedtrades"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listCalculatedTradesValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling listCalculatedTrades(Async)");
+        }
+
+        return listCalculatedTradesCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * List of trades to make to rebalance portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @return CalculatedTrade
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public CalculatedTrade listCalculatedTrades(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<CalculatedTrade> localVarResp = listCalculatedTradesWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List of trades to make to rebalance portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @return ApiResponse&lt;CalculatedTrade&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CalculatedTrade> listCalculatedTradesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = listCalculatedTradesValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List of trades to make to rebalance portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listCalculatedTradesAsync(UUID portfolioGroupId, final ApiCallback<CalculatedTrade> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listCalculatedTradesValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listModelPortfolio
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listModelPortfolioCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/modelPortfolio";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listModelPortfolioValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listModelPortfolioCall(_callback);
+
+    }
+
+    /**
+     * List of model portfolio
+     * 
+     * @return List&lt;ModelPortfolioDetails&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<ModelPortfolioDetails> listModelPortfolio() throws ApiException {
+        ApiResponse<List<ModelPortfolioDetails>> localVarResp = listModelPortfolioWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * List of model portfolio
+     * 
+     * @return ApiResponse&lt;List&lt;ModelPortfolioDetails&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<ModelPortfolioDetails>> listModelPortfolioWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listModelPortfolioValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List of model portfolio (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listModelPortfolioAsync(final ApiCallback<List<ModelPortfolioDetails>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listModelPortfolioValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listPortfolioAccounts
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPortfolioAccountsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/accounts"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listPortfolioAccountsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'portfolioGroupId' is set
+        if (portfolioGroupId == null) {
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling listPortfolioAccounts(Async)");
+        }
+
+        return listPortfolioAccountsCall(portfolioGroupId, _callback);
+
+    }
+
+    /**
+     * Get all accounts associated with a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @return List&lt;Account&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<Account> listPortfolioAccounts(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<List<Account>> localVarResp = listPortfolioAccountsWithHttpInfo(portfolioGroupId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get all accounts associated with a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<Account>> listPortfolioAccountsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = listPortfolioAccountsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get all accounts associated with a portfolio group (asynchronously)
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listPortfolioAccountsAsync(UUID portfolioGroupId, final ApiCallback<List<Account>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listPortfolioAccountsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for modifyModelPortfolioById
+     * @param modelPortfolioId The ID of the model portfolio to update. (required)
+     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call modifyModelPortfolioByIdCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = modelPortfolioDetails;
+
+        // create path and map variables
+        String localVarPath = "/modelPortfolio/{modelPortfolioId}"
+            .replace("{" + "modelPortfolioId" + "}", localVarApiClient.escapeString(modelPortfolioId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call modifyModelPortfolioByIdValidateBeforeCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelPortfolioId' is set
+        if (modelPortfolioId == null) {
+            throw new ApiException("Missing the required parameter 'modelPortfolioId' when calling modifyModelPortfolioById(Async)");
+        }
+
+        // verify the required parameter 'modelPortfolioDetails' is set
+        if (modelPortfolioDetails == null) {
+            throw new ApiException("Missing the required parameter 'modelPortfolioDetails' when calling modifyModelPortfolioById(Async)");
+        }
+
+        return modifyModelPortfolioByIdCall(modelPortfolioId, modelPortfolioDetails, _callback);
+
+    }
+
+    /**
+     * Updates model portfolio object
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to update. (required)
+     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+     </table>
+     */
+    public void modifyModelPortfolioById(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
+        modifyModelPortfolioByIdWithHttpInfo(modelPortfolioId, modelPortfolioDetails);
+    }
+
+    /**
+     * Updates model portfolio object
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to update. (required)
+     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> modifyModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
+        okhttp3.Call localVarCall = modifyModelPortfolioByIdValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Updates model portfolio object (asynchronously)
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to update. (required)
+     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call modifyModelPortfolioByIdAsync(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = modifyModelPortfolioByIdValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for savePortfolio
      * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
      * @param requestBody  (required)
      * @param _callback Callback for upload/download progress
@@ -3153,7 +3570,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdPatchCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call savePortfolioCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3200,18 +3617,18 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdPatchValidateBeforeCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call savePortfolioValidateBeforeCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling savePortfolio(Async)");
         }
 
         // verify the required parameter 'requestBody' is set
         if (requestBody == null) {
-            throw new ApiException("Missing the required parameter 'requestBody' when calling portfolioGroupsPortfolioGroupIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'requestBody' when calling savePortfolio(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdPatchCall(portfolioGroupId, requestBody, _callback);
+        return savePortfolioCall(portfolioGroupId, requestBody, _callback);
 
     }
 
@@ -3231,8 +3648,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public PortfolioGroup portfolioGroupsPortfolioGroupIdPatch(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = portfolioGroupsPortfolioGroupIdPatchWithHttpInfo(portfolioGroupId, requestBody);
+    public PortfolioGroup savePortfolio(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
+        ApiResponse<PortfolioGroup> localVarResp = savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
         return localVarResp.getData();
     }
 
@@ -3252,8 +3669,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PortfolioGroup> portfolioGroupsPortfolioGroupIdPatchWithHttpInfo(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdPatchValidateBeforeCall(portfolioGroupId, requestBody, null);
+    public ApiResponse<PortfolioGroup> savePortfolioWithHttpInfo(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
+        okhttp3.Call localVarCall = savePortfolioValidateBeforeCall(portfolioGroupId, requestBody, null);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3275,404 +3692,15 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdPatchAsync(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    public okhttp3.Call savePortfolioAsync(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdPatchValidateBeforeCall(portfolioGroupId, requestBody, _callback);
+        okhttp3.Call localVarCall = savePortfolioValidateBeforeCall(portfolioGroupId, requestBody, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdPositionsGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdPositionsGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/positions"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdPositionsGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdPositionsGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdPositionsGetCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Get total of each postions owned in portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;PortfolioGroupPosition&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<PortfolioGroupPosition> portfolioGroupsPortfolioGroupIdPositionsGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<PortfolioGroupPosition>> localVarResp = portfolioGroupsPortfolioGroupIdPositionsGetWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get total of each postions owned in portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;PortfolioGroupPosition&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<PortfolioGroupPosition>> portfolioGroupsPortfolioGroupIdPositionsGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdPositionsGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get total of each postions owned in portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdPositionsGetAsync(UUID portfolioGroupId, final ApiCallback<List<PortfolioGroupPosition>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdPositionsGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdSettingsGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/settings"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdSettingsGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdSettingsGetCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Get portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @return PortfolioGroupSettings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroupSettings portfolioGroupsPortfolioGroupIdSettingsGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupSettings> localVarResp = portfolioGroupsPortfolioGroupIdSettingsGetWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroupSettings> portfolioGroupsPortfolioGroupIdSettingsGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSettingsGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get portfolio group settings (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsGetAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSettingsGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdSettingsPatch
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsPatchCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/settings"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "*/*"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsPatchValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdSettingsPatch(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdSettingsPatchCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Updates portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @return PortfolioGroupSettings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroupSettings portfolioGroupsPortfolioGroupIdSettingsPatch(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupSettings> localVarResp = portfolioGroupsPortfolioGroupIdSettingsPatchWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Updates portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroupSettings> portfolioGroupsPortfolioGroupIdSettingsPatchWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSettingsPatchValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Updates portfolio group settings (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSettingsPatchAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSettingsPatchValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdSymbolsPost
+     * Build call for searchPortfolioSymbols
      * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
      * @param symbolQuery  (optional)
      * @param _callback Callback for upload/download progress
@@ -3685,7 +3713,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSymbolsPostCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchPortfolioSymbolsCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3732,13 +3760,13 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdSymbolsPostValidateBeforeCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchPortfolioSymbolsValidateBeforeCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdSymbolsPost(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling searchPortfolioSymbols(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdSymbolsPostCall(portfolioGroupId, symbolQuery, _callback);
+        return searchPortfolioSymbolsCall(portfolioGroupId, symbolQuery, _callback);
 
     }
 
@@ -3756,8 +3784,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<UniversalSymbol> portfolioGroupsPortfolioGroupIdSymbolsPost(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
-        ApiResponse<List<UniversalSymbol>> localVarResp = portfolioGroupsPortfolioGroupIdSymbolsPostWithHttpInfo(portfolioGroupId, symbolQuery);
+    public List<UniversalSymbol> searchPortfolioSymbols(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
+        ApiResponse<List<UniversalSymbol>> localVarResp = searchPortfolioSymbolsWithHttpInfo(portfolioGroupId, symbolQuery);
         return localVarResp.getData();
     }
 
@@ -3775,8 +3803,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<UniversalSymbol>> portfolioGroupsPortfolioGroupIdSymbolsPostWithHttpInfo(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSymbolsPostValidateBeforeCall(portfolioGroupId, symbolQuery, null);
+    public ApiResponse<List<UniversalSymbol>> searchPortfolioSymbolsWithHttpInfo(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
+        okhttp3.Call localVarCall = searchPortfolioSymbolsValidateBeforeCall(portfolioGroupId, symbolQuery, null);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -3796,150 +3824,15 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdSymbolsPostAsync(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+    public okhttp3.Call searchPortfolioSymbolsAsync(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdSymbolsPostValidateBeforeCall(portfolioGroupId, symbolQuery, _callback);
+        okhttp3.Call localVarCall = searchPortfolioSymbolsValidateBeforeCall(portfolioGroupId, symbolQuery, _callback);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdTargetsGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsGetCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsGetValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdTargetsGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdTargetsGetCall(portfolioGroupId, _callback);
-
-    }
-
-    /**
-     * Get all target assets under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TargetAsset> portfolioGroupsPortfolioGroupIdTargetsGet(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = portfolioGroupsPortfolioGroupIdTargetsGetWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get all target assets under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TargetAsset>> portfolioGroupsPortfolioGroupIdTargetsGetWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsGetValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get all target assets under the specified PortfolioGroup. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsGetAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsGetValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPortfolioGroupIdTargetsPost
+     * Build call for setPortfolioTargets
      * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
      * @param targetAsset  (optional)
      * @param _callback Callback for upload/download progress
@@ -3954,7 +3847,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsPostCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setPortfolioTargetsCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4001,13 +3894,13 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsPostValidateBeforeCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setPortfolioTargetsValidateBeforeCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdTargetsPost(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling setPortfolioTargets(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdTargetsPostCall(portfolioGroupId, targetAsset, _callback);
+        return setPortfolioTargetsCall(portfolioGroupId, targetAsset, _callback);
 
     }
 
@@ -4027,8 +3920,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<TargetAsset> portfolioGroupsPortfolioGroupIdTargetsPost(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = portfolioGroupsPortfolioGroupIdTargetsPostWithHttpInfo(portfolioGroupId, targetAsset);
+    public List<TargetAsset> setPortfolioTargets(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
+        ApiResponse<List<TargetAsset>> localVarResp = setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
         return localVarResp.getData();
     }
 
@@ -4048,8 +3941,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<TargetAsset>> portfolioGroupsPortfolioGroupIdTargetsPostWithHttpInfo(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsPostValidateBeforeCall(portfolioGroupId, targetAsset, null);
+    public ApiResponse<List<TargetAsset>> setPortfolioTargetsWithHttpInfo(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
+        okhttp3.Call localVarCall = setPortfolioTargetsValidateBeforeCall(portfolioGroupId, targetAsset, null);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4071,30 +3964,27 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsPostAsync(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+    public okhttp3.Call setPortfolioTargetsAsync(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsPostValidateBeforeCall(portfolioGroupId, targetAsset, _callback);
+        okhttp3.Call localVarCall = setPortfolioTargetsValidateBeforeCall(portfolioGroupId, targetAsset, _callback);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
+     * Build call for updateAssetClass
+     * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updateAssetClassCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4108,12 +3998,11 @@ public class PortfolioManagementApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = modelAssetClassDetails;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "targetAssetId" + "}", localVarApiClient.escapeString(targetAssetId.toString()));
+        String localVarPath = "/modelAssetClass/{modelAssetClassId}"
+            .replace("{" + "modelAssetClassId" + "}", localVarApiClient.escapeString(modelAssetClassId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4122,7 +4011,6 @@ public class PortfolioManagementApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -4130,6 +4018,7 @@ public class PortfolioManagementApi {
         }
 
         final String[] localVarContentTypes = {
+            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -4137,107 +4026,93 @@ public class PortfolioManagementApi {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(Async)");
+    private okhttp3.Call updateAssetClassValidateBeforeCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelAssetClassId' is set
+        if (modelAssetClassId == null) {
+            throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling updateAssetClass(Async)");
         }
 
-        // verify the required parameter 'targetAssetId' is set
-        if (targetAssetId == null) {
-            throw new ApiException("Missing the required parameter 'targetAssetId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(Async)");
+        // verify the required parameter 'modelAssetClassDetails' is set
+        if (modelAssetClassDetails == null) {
+            throw new ApiException("Missing the required parameter 'modelAssetClassDetails' when calling updateAssetClass(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteCall(portfolioGroupId, targetAssetId, _callback);
+        return updateAssetClassCall(modelAssetClassId, modelAssetClassDetails, _callback);
 
     }
 
     /**
-     * Remove a TargetAsset.
+     * Updates model asset class objects
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @return TargetAsset
+     * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public TargetAsset portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteWithHttpInfo(portfolioGroupId, targetAssetId);
-        return localVarResp.getData();
+    public void updateAssetClass(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
+        updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
     }
 
     /**
-     * Remove a TargetAsset.
+     * Updates model asset class objects
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @return ApiResponse&lt;TargetAsset&gt;
+     * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
+     * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TargetAsset> portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteValidateBeforeCall(portfolioGroupId, targetAssetId, null);
-        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    public ApiResponse<Void> updateAssetClassWithHttpInfo(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
+        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, null);
+        return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     * Remove a TargetAsset. (asynchronously)
+     * Updates model asset class objects (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
+     * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    public okhttp3.Call updateAssetClassAsync(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
-        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * Build call for updatePortfolioSettings
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updatePortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4254,9 +4129,8 @@ public class PortfolioManagementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()))
-            .replace("{" + "targetAssetId" + "}", localVarApiClient.escapeString(targetAssetId.toString()));
+        String localVarPath = "/portfolioGroups/{portfolioGroupId}/settings"
+            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -4280,88 +4154,80 @@ public class PortfolioManagementApi {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updatePortfolioSettingsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling updatePortfolioSettings(Async)");
         }
 
-        // verify the required parameter 'targetAssetId' is set
-        if (targetAssetId == null) {
-            throw new ApiException("Missing the required parameter 'targetAssetId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(Async)");
-        }
-
-        return portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetCall(portfolioGroupId, targetAssetId, _callback);
+        return updatePortfolioSettingsCall(portfolioGroupId, _callback);
 
     }
 
     /**
-     * Get a specific target from a portfolio group
+     * Updates portfolio group settings
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @return TargetAsset
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
+     * @return PortfolioGroupSettings
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public TargetAsset portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetWithHttpInfo(portfolioGroupId, targetAssetId);
+    public PortfolioGroupSettings updatePortfolioSettings(UUID portfolioGroupId) throws ApiException {
+        ApiResponse<PortfolioGroupSettings> localVarResp = updatePortfolioSettingsWithHttpInfo(portfolioGroupId);
         return localVarResp.getData();
     }
 
     /**
-     * Get a specific target from a portfolio group
+     * Updates portfolio group settings
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @return ApiResponse&lt;TargetAsset&gt;
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
+     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TargetAsset> portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetValidateBeforeCall(portfolioGroupId, targetAssetId, null);
-        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
+    public ApiResponse<PortfolioGroupSettings> updatePortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+        okhttp3.Call localVarCall = updatePortfolioSettingsValidateBeforeCall(portfolioGroupId, null);
+        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get a specific target from a portfolio group (asynchronously)
+     * Updates portfolio group settings (asynchronously)
      * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    public okhttp3.Call updatePortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
-        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
+        okhttp3.Call localVarCall = updatePortfolioSettingsValidateBeforeCall(portfolioGroupId, _callback);
+        Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch
+     * Build call for updatePortfolioTargetById
      * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset. (required)
      * @param targetAssetId The ID of the TargetAsset to patch. (required)
      * @param targetAsset  (required)
@@ -4377,7 +4243,7 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updatePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4425,23 +4291,23 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updatePortfolioTargetByIdValidateBeforeCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'portfolioGroupId' is set
         if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling updatePortfolioTargetById(Async)");
         }
 
         // verify the required parameter 'targetAssetId' is set
         if (targetAssetId == null) {
-            throw new ApiException("Missing the required parameter 'targetAssetId' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'targetAssetId' when calling updatePortfolioTargetById(Async)");
         }
 
         // verify the required parameter 'targetAsset' is set
         if (targetAsset == null) {
-            throw new ApiException("Missing the required parameter 'targetAsset' when calling portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(Async)");
+            throw new ApiException("Missing the required parameter 'targetAsset' when calling updatePortfolioTargetById(Async)");
         }
 
-        return portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
+        return updatePortfolioTargetByIdCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
 
     }
 
@@ -4462,8 +4328,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public TargetAsset portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchWithHttpInfo(portfolioGroupId, targetAssetId, targetAsset);
+    public TargetAsset updatePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
+        ApiResponse<TargetAsset> localVarResp = updatePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId, targetAsset);
         return localVarResp.getData();
     }
 
@@ -4484,8 +4350,8 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<TargetAsset> portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, null);
+    public ApiResponse<TargetAsset> updatePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
+        okhttp3.Call localVarCall = updatePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, null);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -4508,167 +4374,10 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchAsync(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    public okhttp3.Call updatePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback<TargetAsset> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
+        okhttp3.Call localVarCall = updatePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for portfolioGroupsPost
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPostCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = requestBody;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call portfolioGroupsPostValidateBeforeCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling portfolioGroupsPost(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling portfolioGroupsPost(Async)");
-        }
-
-        // verify the required parameter 'requestBody' is set
-        if (requestBody == null) {
-            throw new ApiException("Missing the required parameter 'requestBody' when calling portfolioGroupsPost(Async)");
-        }
-
-        return portfolioGroupsPostCall(userId, userSecret, requestBody, _callback);
-
-    }
-
-    /**
-     * Create new portfolio group
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @return List&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<PortfolioGroup> portfolioGroupsPost(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
-        ApiResponse<List<PortfolioGroup>> localVarResp = portfolioGroupsPostWithHttpInfo(userId, userSecret, requestBody);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Create new portfolio group
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<PortfolioGroup>> portfolioGroupsPostWithHttpInfo(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
-        okhttp3.Call localVarCall = portfolioGroupsPostValidateBeforeCall(userId, userSecret, requestBody, null);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Create new portfolio group (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call portfolioGroupsPostAsync(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = portfolioGroupsPostValidateBeforeCall(userId, userSecret, requestBody, _callback);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

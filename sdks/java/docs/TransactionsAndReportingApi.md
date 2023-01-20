@@ -4,13 +4,13 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**activitiesGet**](TransactionsAndReportingApi.md#activitiesGet) | **GET** /activities/ | Get transaction history for a user |
-| [**performanceCustomGet**](TransactionsAndReportingApi.md#performanceCustomGet) | **GET** /performance/custom | Get performance information for a specific timeframe |
+| [**getActivities**](TransactionsAndReportingApi.md#getActivities) | **GET** /activities | Get transaction history for a user |
+| [**getReportingCustomRange**](TransactionsAndReportingApi.md#getReportingCustomRange) | **GET** /performance/custom | Get performance information for a specific timeframe |
 
 
-<a name="activitiesGet"></a>
-# **activitiesGet**
-> List&lt;UniversalActivity&gt; activitiesGet(userId, userSecret, startDate, endDate, accounts)
+<a name="getActivities"></a>
+# **getActivities**
+> List&lt;UniversalActivity&gt; getActivities(userId, userSecret, startDate, endDate, accounts)
 
 Get transaction history for a user
 
@@ -56,10 +56,10 @@ public class Example {
     String endDate = "endDate_example"; // String | 
     String accounts = "accounts_example"; // String | Optional comma seperated list of account IDs used to filter the request on specific accounts
     try {
-      List<UniversalActivity> result = apiInstance.activitiesGet(userId, userSecret, startDate, endDate, accounts);
+      List<UniversalActivity> result = apiInstance.getActivities(userId, userSecret, startDate, endDate, accounts);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling TransactionsAndReportingApi#activitiesGet");
+      System.err.println("Exception when calling TransactionsAndReportingApi#getActivities");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -98,9 +98,9 @@ public class Example {
 | **200** | Successfully retrieved transaction history |  -  |
 | **0** | Unexpected error |  -  |
 
-<a name="performanceCustomGet"></a>
-# **performanceCustomGet**
-> PerformanceCustom performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency)
+<a name="getReportingCustomRange"></a>
+# **getReportingCustomRange**
+> PerformanceCustom getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency)
 
 Get performance information for a specific timeframe
 
@@ -148,10 +148,10 @@ public class Example {
     Boolean detailed = true; // Boolean | Optional, increases frequency of data points for the total value and contribution charts if set to true
     String frequency = "frequency_example"; // String | Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     try {
-      PerformanceCustom result = apiInstance.performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+      PerformanceCustom result = apiInstance.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling TransactionsAndReportingApi#performanceCustomGet");
+      System.err.println("Exception when calling TransactionsAndReportingApi#getReportingCustomRange");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

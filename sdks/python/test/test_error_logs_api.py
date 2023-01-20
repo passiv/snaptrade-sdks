@@ -24,8 +24,8 @@ class TestErrorLogsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_snap_trade_list_user_errors_get(self):
-        """Test case for snap_trade_list_user_errors_get
+    def test_list_user_errors(self):
+        """Test case for list_user_errors
 
         Retrieve error logs on behalf of your SnapTrade users  # noqa: E501
         """

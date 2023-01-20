@@ -24,15 +24,15 @@ class TestTransactionsAndReportingApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_activities_get(self):
-        """Test case for activities_get
+    def test_get_activities(self):
+        """Test case for get_activities
 
         Get transaction history for a user  # noqa: E501
         """
         pass
 
-    def test_performance_custom_get(self):
-        """Test case for performance_custom_get
+    def test_get_reporting_custom_range(self):
+        """Test case for get_reporting_custom_range
 
         Get performance information for a specific timeframe  # noqa: E501
         """

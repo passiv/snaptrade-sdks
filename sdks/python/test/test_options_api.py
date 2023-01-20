@@ -24,45 +24,45 @@ class TestOptionsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_accounts_account_id_options_chain_get(self):
-        """Test case for accounts_account_id_options_chain_get
+    def test_get_options_chain(self):
+        """Test case for get_options_chain
 
         Get the options chain  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_options_get(self):
-        """Test case for accounts_account_id_options_get
-
-        Get the options holdings in the account  # noqa: E501
-        """
-        pass
-
-    def test_accounts_account_id_options_search_get(self):
-        """Test case for accounts_account_id_options_search_get
-
-        Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.  # noqa: E501
-        """
-        pass
-
-    def test_accounts_account_id_strategy_impact_post(self):
-        """Test case for accounts_account_id_strategy_impact_post
+    def test_get_options_impact(self):
+        """Test case for get_options_impact
 
         Get a strategies impact on the account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_strategy_place_post(self):
-        """Test case for accounts_account_id_strategy_place_post
+    def test_get_strategy_quote(self):
+        """Test case for get_strategy_quote
+
+        Get a price quote for a strategy  # noqa: E501
+        """
+        pass
+
+    def test_list_option_holdings(self):
+        """Test case for list_option_holdings
+
+        Get the options holdings in the account  # noqa: E501
+        """
+        pass
+
+    def test_place_options_strategy_order(self):
+        """Test case for place_options_strategy_order
 
         Place the strategy order; impact not required but the StrategyOrderQuotes object is  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_strategy_quotes_post(self):
-        """Test case for accounts_account_id_strategy_quotes_post
+    def test_search_options_quote(self):
+        """Test case for search_options_quote
 
-        Get a price quote for a strategy  # noqa: E501
+        Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.  # noqa: E501
         """
         pass
 

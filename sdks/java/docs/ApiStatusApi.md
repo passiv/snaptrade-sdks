@@ -4,12 +4,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**rootGet**](ApiStatusApi.md#rootGet) | **GET** / | Get API Status |
+| [**check**](ApiStatusApi.md#check) | **GET** / | Get API Status |
 
 
-<a name="rootGet"></a>
-# **rootGet**
-> Status rootGet()
+<a name="check"></a>
+# **check**
+> Status check()
 
 Get API Status
 
@@ -31,10 +31,10 @@ public class Example {
 
     ApiStatusApi apiInstance = new ApiStatusApi(defaultClient);
     try {
-      Status result = apiInstance.rootGet();
+      Status result = apiInstance.check();
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ApiStatusApi#rootGet");
+      System.err.println("Exception when calling ApiStatusApi#check");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

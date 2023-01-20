@@ -13,8 +13,8 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.model.APIDisclaimerAcceptRequest;
 import com.konfigthis.client.model.SnapTradeAPIDisclaimerAcceptStatus;
-import com.konfigthis.client.model.SnapTradeAcceptDisclaimerPostRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -37,11 +37,11 @@ public class ApiDisclaimerApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeAcceptDisclaimerPostTest() throws ApiException {
+    public void acceptTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest = null;
-        SnapTradeAPIDisclaimerAcceptStatus response = api.snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest);
+        APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest = null;
+        SnapTradeAPIDisclaimerAcceptStatus response = api.accept(userId, userSecret, apIDisclaimerAcceptRequest);
         // TODO: test validations
     }
 

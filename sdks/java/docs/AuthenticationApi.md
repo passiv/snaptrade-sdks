@@ -4,16 +4,16 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**snapTradeDeleteUserDelete**](AuthenticationApi.md#snapTradeDeleteUserDelete) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user |
-| [**snapTradeEncryptedJWTGet**](AuthenticationApi.md#snapTradeEncryptedJWTGet) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device |
-| [**snapTradeListUsersGet**](AuthenticationApi.md#snapTradeListUsersGet) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform |
-| [**snapTradeLoginPost**](AuthenticationApi.md#snapTradeLoginPost) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal |
-| [**snapTradeRegisterUserPost**](AuthenticationApi.md#snapTradeRegisterUserPost) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations |
+| [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user |
+| [**getUserJWT**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device |
+| [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform |
+| [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal |
+| [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations |
 
 
-<a name="snapTradeDeleteUserDelete"></a>
-# **snapTradeDeleteUserDelete**
-> DeleteUserResponse snapTradeDeleteUserDelete(userId)
+<a name="deleteSnapTradeUser"></a>
+# **deleteSnapTradeUser**
+> DeleteUserResponse deleteSnapTradeUser(userId)
 
 Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 
@@ -53,10 +53,10 @@ public class Example {
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     String userId = "userId_example"; // String | 
     try {
-      DeleteUserResponse result = apiInstance.snapTradeDeleteUserDelete(userId);
+      DeleteUserResponse result = apiInstance.deleteSnapTradeUser(userId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#snapTradeDeleteUserDelete");
+      System.err.println("Exception when calling AuthenticationApi#deleteSnapTradeUser");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -94,9 +94,9 @@ public class Example {
 | **404** | Not Found |  -  |
 | **500** | Unexpected Error |  -  |
 
-<a name="snapTradeEncryptedJWTGet"></a>
-# **snapTradeEncryptedJWTGet**
-> EncryptedResponse snapTradeEncryptedJWTGet(userId, userSecret)
+<a name="getUserJWT"></a>
+# **getUserJWT**
+> EncryptedResponse getUserJWT(userId, userSecret)
 
 Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
 
@@ -137,10 +137,10 @@ public class Example {
     String userId = "userId_example"; // String | 
     String userSecret = "userSecret_example"; // String | 
     try {
-      EncryptedResponse result = apiInstance.snapTradeEncryptedJWTGet(userId, userSecret);
+      EncryptedResponse result = apiInstance.getUserJWT(userId, userSecret);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#snapTradeEncryptedJWTGet");
+      System.err.println("Exception when calling AuthenticationApi#getUserJWT");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -179,9 +179,9 @@ public class Example {
 | **404** | Not Found |  -  |
 | **500** | Unexpected Error |  -  |
 
-<a name="snapTradeListUsersGet"></a>
-# **snapTradeListUsersGet**
-> List&lt;String&gt; snapTradeListUsersGet()
+<a name="listSnapTradeUsers"></a>
+# **listSnapTradeUsers**
+> List&lt;String&gt; listSnapTradeUsers()
 
 Get a list of all SnapTrade users you&#39;ve registered on our platform
 
@@ -220,10 +220,10 @@ public class Example {
 
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     try {
-      List<String> result = apiInstance.snapTradeListUsersGet();
+      List<String> result = apiInstance.listSnapTradeUsers();
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#snapTradeListUsersGet");
+      System.err.println("Exception when calling AuthenticationApi#listSnapTradeUsers");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -257,9 +257,9 @@ This endpoint does not need any parameter.
 | **404** | Invalid SnapTrade Client ID provided in query |  -  |
 | **500** | Unexpected error |  -  |
 
-<a name="snapTradeLoginPost"></a>
-# **snapTradeLoginPost**
-> SnapTradeLoginPost200Response snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody)
+<a name="loginSnapTradeUser"></a>
+# **loginSnapTradeUser**
+> AuthenticationLoginSnapTradeUser200Response loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody)
 
 Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
 
@@ -301,10 +301,10 @@ public class Example {
     String userSecret = "userSecret_example"; // String | 
     SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(); // SnapTradeLoginUserRequestBody | 
     try {
-      SnapTradeLoginPost200Response result = apiInstance.snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody);
+      AuthenticationLoginSnapTradeUser200Response result = apiInstance.loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#snapTradeLoginPost");
+      System.err.println("Exception when calling AuthenticationApi#loginSnapTradeUser");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -324,7 +324,7 @@ public class Example {
 
 ### Return type
 
-[**SnapTradeLoginPost200Response**](SnapTradeLoginPost200Response.md)
+[**AuthenticationLoginSnapTradeUser200Response**](AuthenticationLoginSnapTradeUser200Response.md)
 
 ### Authorization
 
@@ -344,9 +344,9 @@ public class Example {
 | **404** | Not Found |  -  |
 | **500** | Unexpected Error |  -  |
 
-<a name="snapTradeRegisterUserPost"></a>
-# **snapTradeRegisterUserPost**
-> UserIDandSecret snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody)
+<a name="registerSnapTradeUser"></a>
+# **registerSnapTradeUser**
+> UserIDandSecret registerSnapTradeUser(snapTradeRegisterUserRequestBody)
 
 Register user with SnapTrade in order to create secure brokerage authorizations
 
@@ -386,10 +386,10 @@ public class Example {
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody(); // SnapTradeRegisterUserRequestBody | 
     try {
-      UserIDandSecret result = apiInstance.snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody);
+      UserIDandSecret result = apiInstance.registerSnapTradeUser(snapTradeRegisterUserRequestBody);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#snapTradeRegisterUserPost");
+      System.err.println("Exception when calling AuthenticationApi#registerSnapTradeUser");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

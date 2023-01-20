@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import snaptrade_client
-from snaptrade_client.model.trade_oco_post_request import TradeOcoPostRequest
+from snaptrade_client.model.api_disclaimer_accept_request import APIDisclaimerAcceptRequest
 
 
-class TestTradeOcoPostRequest(unittest.TestCase):
-    """TradeOcoPostRequest unit test stubs"""
+class TestAPIDisclaimerAcceptRequest(unittest.TestCase):
+    """APIDisclaimerAcceptRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,10 +25,10 @@ class TestTradeOcoPostRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTradeOcoPostRequest(self):
-        """Test TradeOcoPostRequest"""
+    def testAPIDisclaimerAcceptRequest(self):
+        """Test APIDisclaimerAcceptRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = TradeOcoPostRequest()  # noqa: E501
+        # model = APIDisclaimerAcceptRequest()  # noqa: E501
         pass
 
 

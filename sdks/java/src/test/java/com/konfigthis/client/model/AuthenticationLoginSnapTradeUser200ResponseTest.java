@@ -29,17 +29,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for SnapTradeLoginPost200Response
+ * Model tests for AuthenticationLoginSnapTradeUser200Response
  */
-public class SnapTradeLoginPost200ResponseTest {
-    private final SnapTradeLoginPost200Response model = new SnapTradeLoginPost200Response();
+public class AuthenticationLoginSnapTradeUser200ResponseTest {
+    private final AuthenticationLoginSnapTradeUser200Response model = new AuthenticationLoginSnapTradeUser200Response();
 
     /**
-     * Model tests for SnapTradeLoginPost200Response
+     * Model tests for AuthenticationLoginSnapTradeUser200Response
      */
     @Test
-    public void testSnapTradeLoginPost200Response() {
-        // TODO: test SnapTradeLoginPost200Response
+    public void testAuthenticationLoginSnapTradeUser200Response() {
+        // TODO: test AuthenticationLoginSnapTradeUser200Response
     }
 
     /**

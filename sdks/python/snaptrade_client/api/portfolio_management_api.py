@@ -50,177 +50,26 @@ class PortfolioManagementApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.model_asset_class_get_endpoint = _Endpoint(
+        self.add_portfolio_excluded_asset_endpoint = _Endpoint(
             settings={
-                'response_type': ([ModelAssetClassDetails],),
+                'response_type': (ExcludedAsset,),
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/modelAssetClass',
-                'operation_id': 'model_asset_class_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_asset_class_model_asset_class_id_delete_endpoint = _Endpoint(
-            settings={
-                'response_type': None,
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
-                'operation_id': 'model_asset_class_model_asset_class_id_delete',
-                'http_method': 'DELETE',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'model_asset_class_id',
-                ],
-                'required': [
-                    'model_asset_class_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'model_asset_class_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'model_asset_class_id': 'modelAssetClassId',
-                },
-                'location_map': {
-                    'model_asset_class_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_asset_class_model_asset_class_id_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (ModelAssetClassDetails,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
-                'operation_id': 'model_asset_class_model_asset_class_id_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'model_asset_class_id',
-                ],
-                'required': [
-                    'model_asset_class_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'model_asset_class_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'model_asset_class_id': 'modelAssetClassId',
-                },
-                'location_map': {
-                    'model_asset_class_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_asset_class_model_asset_class_id_post_endpoint = _Endpoint(
-            settings={
-                'response_type': None,
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
-                'operation_id': 'model_asset_class_model_asset_class_id_post',
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets',
+                'operation_id': 'add_portfolio_excluded_asset',
                 'http_method': 'POST',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'model_asset_class_id',
-                    'model_asset_class_details',
+                    'portfolio_group_id',
+                    'universal_symbol',
                 ],
                 'required': [
-                    'model_asset_class_id',
-                    'model_asset_class_details',
+                    'portfolio_group_id',
                 ],
                 'nullable': [
                 ],
@@ -235,330 +84,32 @@ class PortfolioManagementApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'model_asset_class_id':
+                    'portfolio_group_id':
                         (str,),
-                    'model_asset_class_details':
-                        (ModelAssetClassDetails,),
+                    'universal_symbol':
+                        (UniversalSymbol,),
                 },
                 'attribute_map': {
-                    'model_asset_class_id': 'modelAssetClassId',
+                    'portfolio_group_id': 'portfolioGroupId',
                 },
                 'location_map': {
-                    'model_asset_class_id': 'path',
-                    'model_asset_class_details': 'body',
+                    'portfolio_group_id': 'path',
+                    'universal_symbol': 'body',
                 },
                 'collection_format_map': {
                 }
             },
             headers_map={
-                'accept': [],
+                'accept': [
+                    'application/json'
+                ],
                 'content_type': [
                     'application/json'
                 ]
             },
             api_client=api_client
         )
-        self.model_asset_class_post_endpoint = _Endpoint(
-            settings={
-                'response_type': (ModelAssetClassDetails,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelAssetClass',
-                'operation_id': 'model_asset_class_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_portfolio_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([ModelPortfolioDetails],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelPortfolio',
-                'operation_id': 'model_portfolio_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_portfolio_model_portfolio_id_delete_endpoint = _Endpoint(
-            settings={
-                'response_type': None,
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
-                'operation_id': 'model_portfolio_model_portfolio_id_delete',
-                'http_method': 'DELETE',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'model_portfolio_id',
-                ],
-                'required': [
-                    'model_portfolio_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'model_portfolio_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'model_portfolio_id': 'modelPortfolioId',
-                },
-                'location_map': {
-                    'model_portfolio_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_portfolio_model_portfolio_id_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (ModelPortfolioDetails,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
-                'operation_id': 'model_portfolio_model_portfolio_id_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'model_portfolio_id',
-                ],
-                'required': [
-                    'model_portfolio_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'model_portfolio_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'model_portfolio_id': 'modelPortfolioId',
-                },
-                'location_map': {
-                    'model_portfolio_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.model_portfolio_model_portfolio_id_post_endpoint = _Endpoint(
-            settings={
-                'response_type': None,
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
-                'operation_id': 'model_portfolio_model_portfolio_id_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'model_portfolio_id',
-                    'model_portfolio_details',
-                ],
-                'required': [
-                    'model_portfolio_id',
-                    'model_portfolio_details',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'model_portfolio_id':
-                        (str,),
-                    'model_portfolio_details':
-                        (ModelPortfolioDetails,),
-                },
-                'attribute_map': {
-                    'model_portfolio_id': 'modelPortfolioId',
-                },
-                'location_map': {
-                    'model_portfolio_id': 'path',
-                    'model_portfolio_details': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
-        self.model_portfolio_post_endpoint = _Endpoint(
-            settings={
-                'response_type': (ModelPortfolioDetails,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/modelPortfolio',
-                'operation_id': 'model_portfolio_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                ],
-                'required': [],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                },
-                'attribute_map': {
-                },
-                'location_map': {
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_get_endpoint = _Endpoint(
+        self.create_endpoint = _Endpoint(
             settings={
                 'response_type': ([PortfolioGroup],),
                 'auth': [
@@ -567,18 +118,20 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups',
-                'operation_id': 'portfolio_groups_get',
-                'http_method': 'GET',
+                'operation_id': 'create',
+                'http_method': 'POST',
                 'servers': None,
             },
             params_map={
                 'all': [
                     'user_id',
                     'user_secret',
+                    'portfolio_group',
                 ],
                 'required': [
                     'user_id',
                     'user_secret',
+                    'portfolio_group',
                 ],
                 'nullable': [
                 ],
@@ -597,6 +150,8 @@ class PortfolioManagementApi(object):
                         (str,),
                     'user_secret':
                         (str,),
+                    'portfolio_group':
+                        (PortfolioGroup,),
                 },
                 'attribute_map': {
                     'user_id': 'userId',
@@ -605,246 +160,7 @@ class PortfolioManagementApi(object):
                 'location_map': {
                     'user_id': 'query',
                     'user_secret': 'query',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_accounts_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([Account],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/accounts',
-                'operation_id': 'portfolio_groups_portfolio_group_id_accounts_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_balances_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([Balance],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/balances',
-                'operation_id': 'portfolio_groups_portfolio_group_id_balances_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (Trade,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'calculated_trade_id':
-                        (str,),
-                    'trade_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'calculated_trade_id': 'calculatedTradeId',
-                    'trade_id': 'tradeId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'calculated_trade_id': 'path',
-                    'trade_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch_endpoint = _Endpoint(
-            settings={
-                'response_type': (Trade,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch',
-                'http_method': 'PATCH',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                    'trade',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'calculated_trade_id':
-                        (str,),
-                    'trade_id':
-                        (str,),
-                    'trade':
-                        (Trade,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'calculated_trade_id': 'calculatedTradeId',
-                    'trade_id': 'tradeId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'calculated_trade_id': 'path',
-                    'trade_id': 'path',
-                    'trade': 'body',
+                    'portfolio_group': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -859,7 +175,423 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get_endpoint = _Endpoint(
+        self.create_asset_class_endpoint = _Endpoint(
+            settings={
+                'response_type': (ModelAssetClassDetails,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelAssetClass',
+                'operation_id': 'create_asset_class',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.create_model_portfolio_endpoint = _Endpoint(
+            settings={
+                'response_type': (ModelPortfolioDetails,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelPortfolio',
+                'operation_id': 'create_model_portfolio',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.delete_asset_class_endpoint = _Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
+                'operation_id': 'delete_asset_class',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'model_asset_class_id',
+                ],
+                'required': [
+                    'model_asset_class_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'model_asset_class_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'model_asset_class_id': 'modelAssetClassId',
+                },
+                'location_map': {
+                    'model_asset_class_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.delete_excluded_asset_endpoint = _Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}',
+                'operation_id': 'delete_excluded_asset',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                    'symbol_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                    'symbol_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                    'symbol_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                    'symbol_id': 'symbolId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                    'symbol_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.delete_model_portfolio_by_id_endpoint = _Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
+                'operation_id': 'delete_model_portfolio_by_id',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'model_portfolio_id',
+                ],
+                'required': [
+                    'model_portfolio_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'model_portfolio_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'model_portfolio_id': 'modelPortfolioId',
+                },
+                'location_map': {
+                    'model_portfolio_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.delete_portfoli_endpoint = _Endpoint(
+            settings={
+                'response_type': (PortfolioGroup,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}',
+                'operation_id': 'delete_portfoli',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.delete_portfolio_target_by_id_endpoint = _Endpoint(
+            settings={
+                'response_type': (TargetAsset,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}',
+                'operation_id': 'delete_portfolio_target_by_id',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                    'target_asset_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                    'target_asset_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                    'target_asset_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                    'target_asset_id': 'targetAssetId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                    'target_asset_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.detail_asset_class_endpoint = _Endpoint(
+            settings={
+                'response_type': (ModelAssetClassDetails,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
+                'operation_id': 'detail_asset_class',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'model_asset_class_id',
+                ],
+                'required': [
+                    'model_asset_class_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'model_asset_class_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'model_asset_class_id': 'modelAssetClassId',
+                },
+                'location_map': {
+                    'model_asset_class_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_calculated_trade_by_id_endpoint = _Endpoint(
             settings={
                 'response_type': ([Trade],),
                 'auth': [
@@ -868,7 +600,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get',
+                'operation_id': 'get_calculated_trade_by_id',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -924,16 +656,69 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_get_endpoint = _Endpoint(
+        self.get_model_details_by_id_endpoint = _Endpoint(
             settings={
-                'response_type': (CalculatedTrade,),
+                'response_type': (ModelPortfolioDetails,),
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_get',
+                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
+                'operation_id': 'get_model_details_by_id',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'model_portfolio_id',
+                ],
+                'required': [
+                    'model_portfolio_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'model_portfolio_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'model_portfolio_id': 'modelPortfolioId',
+                },
+                'location_map': {
+                    'model_portfolio_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_portfolio_balances_endpoint = _Endpoint(
+            settings={
+                'response_type': ([Balance],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/balances',
+                'operation_id': 'get_portfolio_balances',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -977,7 +762,7 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_delete_endpoint = _Endpoint(
+        self.get_portfolio_details_by_id_endpoint = _Endpoint(
             settings={
                 'response_type': (PortfolioGroup,),
                 'auth': [
@@ -986,229 +771,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_delete',
-                'http_method': 'DELETE',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_excludedassets_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([ExcludedAsset],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets',
-                'operation_id': 'portfolio_groups_portfolio_group_id_excludedassets_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_excludedassets_post_endpoint = _Endpoint(
-            settings={
-                'response_type': (ExcludedAsset,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets',
-                'operation_id': 'portfolio_groups_portfolio_group_id_excludedassets_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'universal_symbol',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'universal_symbol':
-                        (UniversalSymbol,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'universal_symbol': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete_endpoint = _Endpoint(
-            settings={
-                'response_type': None,
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete',
-                'http_method': 'DELETE',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'symbol_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                    'symbol_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'symbol_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'symbol_id': 'symbolId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'symbol_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (PortfolioGroup,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_get',
+                'operation_id': 'get_portfolio_details_by_id',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -1252,60 +815,7 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_import_post_endpoint = _Endpoint(
-            settings={
-                'response_type': ([TargetAsset],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/import',
-                'operation_id': 'portfolio_groups_portfolio_group_id_import_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_info_get_endpoint = _Endpoint(
+        self.get_portfolio_info_endpoint = _Endpoint(
             settings={
                 'response_type': (PortfolioGroupInfo,),
                 'auth': [
@@ -1314,7 +824,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/info',
-                'operation_id': 'portfolio_groups_portfolio_group_id_info_get',
+                'operation_id': 'get_portfolio_info',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -1358,7 +868,646 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_patch_endpoint = _Endpoint(
+        self.get_portfolio_positions_endpoint = _Endpoint(
+            settings={
+                'response_type': ([PortfolioGroupPosition],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/positions',
+                'operation_id': 'get_portfolio_positions',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_portfolio_settings_endpoint = _Endpoint(
+            settings={
+                'response_type': (PortfolioGroupSettings,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/settings',
+                'operation_id': 'get_portfolio_settings',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_portfolio_target_by_id_endpoint = _Endpoint(
+            settings={
+                'response_type': (TargetAsset,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}',
+                'operation_id': 'get_portfolio_target_by_id',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                    'target_asset_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                    'target_asset_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                    'target_asset_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                    'target_asset_id': 'targetAssetId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                    'target_asset_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    '*/*'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_portfolio_targets_endpoint = _Endpoint(
+            settings={
+                'response_type': ([TargetAsset],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets',
+                'operation_id': 'get_portfolio_targets',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_portoflio_excluded_assets_endpoint = _Endpoint(
+            settings={
+                'response_type': ([ExcludedAsset],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/excludedassets',
+                'operation_id': 'get_portoflio_excluded_assets',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.import_model_portfolio_endpoint = _Endpoint(
+            settings={
+                'response_type': ([TargetAsset],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/import',
+                'operation_id': 'import_model_portfolio',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.list_endpoint = _Endpoint(
+            settings={
+                'response_type': ([PortfolioGroup],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups',
+                'operation_id': 'list',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'user_id',
+                    'user_secret',
+                ],
+                'required': [
+                    'user_id',
+                    'user_secret',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'user_id':
+                        (str,),
+                    'user_secret':
+                        (str,),
+                },
+                'attribute_map': {
+                    'user_id': 'userId',
+                    'user_secret': 'userSecret',
+                },
+                'location_map': {
+                    'user_id': 'query',
+                    'user_secret': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.list_asset_classes_endpoint = _Endpoint(
+            settings={
+                'response_type': ([ModelAssetClassDetails],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelAssetClass',
+                'operation_id': 'list_asset_classes',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.list_calculated_trades_endpoint = _Endpoint(
+            settings={
+                'response_type': (CalculatedTrade,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades',
+                'operation_id': 'list_calculated_trades',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.list_model_portfolio_endpoint = _Endpoint(
+            settings={
+                'response_type': ([ModelPortfolioDetails],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelPortfolio',
+                'operation_id': 'list_model_portfolio',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.list_portfolio_accounts_endpoint = _Endpoint(
+            settings={
+                'response_type': ([Account],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/accounts',
+                'operation_id': 'list_portfolio_accounts',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.modify_model_portfolio_by_id_endpoint = _Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/modelPortfolio/{modelPortfolioId}',
+                'operation_id': 'modify_model_portfolio_by_id',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'model_portfolio_id',
+                    'model_portfolio_details',
+                ],
+                'required': [
+                    'model_portfolio_id',
+                    'model_portfolio_details',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'model_portfolio_id':
+                        (str,),
+                    'model_portfolio_details':
+                        (ModelPortfolioDetails,),
+                },
+                'attribute_map': {
+                    'model_portfolio_id': 'modelPortfolioId',
+                },
+                'location_map': {
+                    'model_portfolio_id': 'path',
+                    'model_portfolio_details': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.save_portfolio_endpoint = _Endpoint(
             settings={
                 'response_type': (PortfolioGroup,),
                 'auth': [
@@ -1367,7 +1516,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_patch',
+                'operation_id': 'save_portfolio',
                 'http_method': 'PATCH',
                 'servers': None,
             },
@@ -1418,166 +1567,7 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_positions_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([PortfolioGroupPosition],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/positions',
-                'operation_id': 'portfolio_groups_portfolio_group_id_positions_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_settings_get_endpoint = _Endpoint(
-            settings={
-                'response_type': (PortfolioGroupSettings,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/settings',
-                'operation_id': 'portfolio_groups_portfolio_group_id_settings_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_settings_patch_endpoint = _Endpoint(
-            settings={
-                'response_type': (PortfolioGroupSettings,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/settings',
-                'operation_id': 'portfolio_groups_portfolio_group_id_settings_patch',
-                'http_method': 'PATCH',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    '*/*'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_symbols_post_endpoint = _Endpoint(
+        self.search_portfolio_symbols_endpoint = _Endpoint(
             settings={
                 'response_type': ([UniversalSymbol],),
                 'auth': [
@@ -1586,7 +1576,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/symbols',
-                'operation_id': 'portfolio_groups_portfolio_group_id_symbols_post',
+                'operation_id': 'search_portfolio_symbols',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -1636,60 +1626,7 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_targets_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([TargetAsset],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets',
-                'operation_id': 'portfolio_groups_portfolio_group_id_targets_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_targets_post_endpoint = _Endpoint(
+        self.set_portfolio_targets_endpoint = _Endpoint(
             settings={
                 'response_type': (TargetAssetList,),
                 'auth': [
@@ -1698,7 +1635,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets',
-                'operation_id': 'portfolio_groups_portfolio_group_id_targets_post',
+                'operation_id': 'set_portfolio_targets',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -1748,27 +1685,27 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_targets_target_asset_id_delete_endpoint = _Endpoint(
+        self.update_asset_class_endpoint = _Endpoint(
             settings={
-                'response_type': (TargetAsset,),
+                'response_type': None,
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_targets_target_asset_id_delete',
-                'http_method': 'DELETE',
+                'endpoint_path': '/modelAssetClass/{modelAssetClassId}',
+                'operation_id': 'update_asset_class',
+                'http_method': 'POST',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'portfolio_group_id',
-                    'target_asset_id',
+                    'model_asset_class_id',
+                    'model_asset_class_details',
                 ],
                 'required': [
-                    'portfolio_group_id',
-                    'target_asset_id',
+                    'model_asset_class_id',
+                    'model_asset_class_details',
                 ],
                 'nullable': [
                 ],
@@ -1783,51 +1720,48 @@ class PortfolioManagementApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'portfolio_group_id':
+                    'model_asset_class_id':
                         (str,),
-                    'target_asset_id':
-                        (str,),
+                    'model_asset_class_details':
+                        (ModelAssetClassDetails,),
                 },
                 'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'target_asset_id': 'targetAssetId',
+                    'model_asset_class_id': 'modelAssetClassId',
                 },
                 'location_map': {
-                    'portfolio_group_id': 'path',
-                    'target_asset_id': 'path',
+                    'model_asset_class_id': 'path',
+                    'model_asset_class_details': 'body',
                 },
                 'collection_format_map': {
                 }
             },
             headers_map={
-                'accept': [
+                'accept': [],
+                'content_type': [
                     'application/json'
-                ],
-                'content_type': [],
+                ]
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_targets_target_asset_id_get_endpoint = _Endpoint(
+        self.update_portfolio_settings_endpoint = _Endpoint(
             settings={
-                'response_type': (TargetAsset,),
+                'response_type': (PortfolioGroupSettings,),
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_targets_target_asset_id_get',
-                'http_method': 'GET',
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/settings',
+                'operation_id': 'update_portfolio_settings',
+                'http_method': 'PATCH',
                 'servers': None,
             },
             params_map={
                 'all': [
                     'portfolio_group_id',
-                    'target_asset_id',
                 ],
                 'required': [
                     'portfolio_group_id',
-                    'target_asset_id',
                 ],
                 'nullable': [
                 ],
@@ -1844,16 +1778,12 @@ class PortfolioManagementApi(object):
                 'openapi_types': {
                     'portfolio_group_id':
                         (str,),
-                    'target_asset_id':
-                        (str,),
                 },
                 'attribute_map': {
                     'portfolio_group_id': 'portfolioGroupId',
-                    'target_asset_id': 'targetAssetId',
                 },
                 'location_map': {
                     'portfolio_group_id': 'path',
-                    'target_asset_id': 'path',
                 },
                 'collection_format_map': {
                 }
@@ -1866,7 +1796,7 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_targets_target_asset_id_patch_endpoint = _Endpoint(
+        self.update_portfolio_target_by_id_endpoint = _Endpoint(
             settings={
                 'response_type': (TargetAsset,),
                 'auth': [
@@ -1875,7 +1805,7 @@ class PortfolioManagementApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_targets_target_asset_id_patch',
+                'operation_id': 'update_portfolio_target_by_id',
                 'http_method': 'PATCH',
                 'servers': None,
             },
@@ -1932,83 +1862,190 @@ class PortfolioManagementApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_post_endpoint = _Endpoint(
-            settings={
-                'response_type': ([PortfolioGroup],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups',
-                'operation_id': 'portfolio_groups_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'user_id',
-                    'user_secret',
-                    'portfolio_group',
-                ],
-                'required': [
-                    'user_id',
-                    'user_secret',
-                    'portfolio_group',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'user_id':
-                        (str,),
-                    'user_secret':
-                        (str,),
-                    'portfolio_group':
-                        (PortfolioGroup,),
-                },
-                'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                },
-                'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'portfolio_group': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
 
-    def model_asset_class_get(
+    def add_portfolio_excluded_asset(
         self,
+        portfolio_group_id,
         **kwargs
     ):
-        """List of model asset class  # noqa: E501
+        """Adds an asset to exclude to a portfolio group  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.model_asset_class_get(async_req=True)
+        >>> thread = api.add_portfolio_excluded_asset(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to exclude an asset.
+
+        Keyword Args:
+            universal_symbol (UniversalSymbol): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            ExcludedAsset
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.add_portfolio_excluded_asset_endpoint.call_with_http_info(**kwargs)
+
+    def create(
+        self,
+        user_id,
+        user_secret,
+        portfolio_group,
+        **kwargs
+    ):
+        """Create new portfolio group  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create(user_id, user_secret, portfolio_group, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+            portfolio_group (PortfolioGroup):
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [PortfolioGroup]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['user_id'] = \
+            user_id
+        kwargs['user_secret'] = \
+            user_secret
+        kwargs['portfolio_group'] = \
+            portfolio_group
+        return self.create_endpoint.call_with_http_info(**kwargs)
+
+    def create_asset_class(
+        self,
+        **kwargs
+    ):
+        """Create a new model asset class  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_asset_class(async_req=True)
         >>> result = thread.get()
 
 
@@ -2045,7 +2082,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            [ModelAssetClassDetails]
+            ModelAssetClassDetails
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -2074,9 +2111,86 @@ class PortfolioManagementApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.model_asset_class_get_endpoint.call_with_http_info(**kwargs)
+        return self.create_asset_class_endpoint.call_with_http_info(**kwargs)
 
-    def model_asset_class_model_asset_class_id_delete(
+    def create_model_portfolio(
+        self,
+        **kwargs
+    ):
+        """Creates a new model portfolio  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_model_portfolio(async_req=True)
+        >>> result = thread.get()
+
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            ModelPortfolioDetails
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        return self.create_model_portfolio_endpoint.call_with_http_info(**kwargs)
+
+    def delete_asset_class(
         self,
         model_asset_class_id,
         **kwargs
@@ -2086,7 +2200,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.model_asset_class_model_asset_class_id_delete(model_asset_class_id, async_req=True)
+        >>> thread = api.delete_asset_class(model_asset_class_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -2156,107 +2270,25 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['model_asset_class_id'] = \
             model_asset_class_id
-        return self.model_asset_class_model_asset_class_id_delete_endpoint.call_with_http_info(**kwargs)
+        return self.delete_asset_class_endpoint.call_with_http_info(**kwargs)
 
-    def model_asset_class_model_asset_class_id_get(
+    def delete_excluded_asset(
         self,
-        model_asset_class_id,
+        portfolio_group_id,
+        symbol_id,
         **kwargs
     ):
-        """Get details of a model asset class  # noqa: E501
+        """Unexclude an asset from a portfolio group  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.model_asset_class_model_asset_class_id_get(model_asset_class_id, async_req=True)
+        >>> thread = api.delete_excluded_asset(portfolio_group_id, symbol_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            model_asset_class_id (str): The ID of the model asset class to get.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ModelAssetClassDetails
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['model_asset_class_id'] = \
-            model_asset_class_id
-        return self.model_asset_class_model_asset_class_id_get_endpoint.call_with_http_info(**kwargs)
-
-    def model_asset_class_model_asset_class_id_post(
-        self,
-        model_asset_class_id,
-        model_asset_class_details,
-        **kwargs
-    ):
-        """Updates model asset class objects  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_asset_class_model_asset_class_id_post(model_asset_class_id, model_asset_class_details, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            model_asset_class_id (str): The ID of the model asset class to update.
-            model_asset_class_details (ModelAssetClassDetails): Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to unexclude an asset.
+            symbol_id (str): The ID of the excluded asset Symbol to delete.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -2320,167 +2352,13 @@ class PortfolioManagementApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['model_asset_class_id'] = \
-            model_asset_class_id
-        kwargs['model_asset_class_details'] = \
-            model_asset_class_details
-        return self.model_asset_class_model_asset_class_id_post_endpoint.call_with_http_info(**kwargs)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        kwargs['symbol_id'] = \
+            symbol_id
+        return self.delete_excluded_asset_endpoint.call_with_http_info(**kwargs)
 
-    def model_asset_class_post(
-        self,
-        **kwargs
-    ):
-        """Create a new model asset class  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_asset_class_post(async_req=True)
-        >>> result = thread.get()
-
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ModelAssetClassDetails
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.model_asset_class_post_endpoint.call_with_http_info(**kwargs)
-
-    def model_portfolio_get(
-        self,
-        **kwargs
-    ):
-        """List of model portfolio  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_portfolio_get(async_req=True)
-        >>> result = thread.get()
-
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [ModelPortfolioDetails]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.model_portfolio_get_endpoint.call_with_http_info(**kwargs)
-
-    def model_portfolio_model_portfolio_id_delete(
+    def delete_model_portfolio_by_id(
         self,
         model_portfolio_id,
         **kwargs
@@ -2490,7 +2368,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.model_portfolio_model_portfolio_id_delete(model_portfolio_id, async_req=True)
+        >>> thread = api.delete_model_portfolio_by_id(model_portfolio_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -2560,354 +2438,23 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['model_portfolio_id'] = \
             model_portfolio_id
-        return self.model_portfolio_model_portfolio_id_delete_endpoint.call_with_http_info(**kwargs)
+        return self.delete_model_portfolio_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def model_portfolio_model_portfolio_id_get(
-        self,
-        model_portfolio_id,
-        **kwargs
-    ):
-        """Get details of a model portfolio  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_portfolio_model_portfolio_id_get(model_portfolio_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            model_portfolio_id (str): The ID of the model portfolio to get.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ModelPortfolioDetails
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['model_portfolio_id'] = \
-            model_portfolio_id
-        return self.model_portfolio_model_portfolio_id_get_endpoint.call_with_http_info(**kwargs)
-
-    def model_portfolio_model_portfolio_id_post(
-        self,
-        model_portfolio_id,
-        model_portfolio_details,
-        **kwargs
-    ):
-        """Updates model portfolio object  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_portfolio_model_portfolio_id_post(model_portfolio_id, model_portfolio_details, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            model_portfolio_id (str): The ID of the model portfolio to update.
-            model_portfolio_details (ModelPortfolioDetails): Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            None
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['model_portfolio_id'] = \
-            model_portfolio_id
-        kwargs['model_portfolio_details'] = \
-            model_portfolio_details
-        return self.model_portfolio_model_portfolio_id_post_endpoint.call_with_http_info(**kwargs)
-
-    def model_portfolio_post(
-        self,
-        **kwargs
-    ):
-        """Creates a new model portfolio  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.model_portfolio_post(async_req=True)
-        >>> result = thread.get()
-
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ModelPortfolioDetails
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.model_portfolio_post_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_get(
-        self,
-        user_id,
-        user_secret,
-        **kwargs
-    ):
-        """List all portfolio groups  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_get(user_id, user_secret, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [PortfolioGroup]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        return self.portfolio_groups_get_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_accounts_get(
+    def delete_portfoli(
         self,
         portfolio_group_id,
         **kwargs
     ):
-        """Get all accounts associated with a portfolio group  # noqa: E501
+        """Remove a target portfolio.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_accounts_get(portfolio_group_id, async_req=True)
+        >>> thread = api.delete_portfoli(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which the accounts are linked.
+            portfolio_group_id (str): The ID of the PortfolioGroup to delete.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -2942,7 +2489,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            [Account]
+            PortfolioGroup
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -2973,23 +2520,25 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_accounts_get_endpoint.call_with_http_info(**kwargs)
+        return self.delete_portfoli_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_balances_get(
+    def delete_portfolio_target_by_id(
         self,
         portfolio_group_id,
+        target_asset_id,
         **kwargs
     ):
-        """Get sum of cash balances in portfolio group  # noqa: E501
+        """Remove a TargetAsset.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_balances_get(portfolio_group_id, async_req=True)
+        >>> thread = api.delete_portfolio_target_by_id(portfolio_group_id, target_asset_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to remove the target asset.
+            target_asset_id (str): The ID of the TargetAsset to delete.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -3024,7 +2573,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            [Balance]
+            TargetAsset
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -3055,27 +2604,25 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_balances_get_endpoint.call_with_http_info(**kwargs)
+        kwargs['target_asset_id'] = \
+            target_asset_id
+        return self.delete_portfolio_target_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(
+    def detail_asset_class(
         self,
-        portfolio_group_id,
-        calculated_trade_id,
-        trade_id,
+        model_asset_class_id,
         **kwargs
     ):
-        """Return details of a specific trade before it's placed  # noqa: E501
+        """Get details of a model asset class  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
+        >>> thread = api.detail_asset_class(model_asset_class_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
-            calculated_trade_id (str): The ID of calculated trade to get account impact
-            trade_id (str): The ID of trade object
+            model_asset_class_id (str): The ID of the model asset class to get.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -3110,7 +2657,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            Trade
+            ModelAssetClassDetails
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -3139,106 +2686,11 @@ class PortfolioManagementApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['calculated_trade_id'] = \
-            calculated_trade_id
-        kwargs['trade_id'] = \
-            trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get_endpoint.call_with_http_info(**kwargs)
+        kwargs['model_asset_class_id'] = \
+            model_asset_class_id
+        return self.detail_asset_class_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(
-        self,
-        portfolio_group_id,
-        calculated_trade_id,
-        trade_id,
-        **kwargs
-    ):
-        """Modify units of a trade before it is placed  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
-            calculated_trade_id (str): The ID of calculated trade to get account impact
-            trade_id (str): The ID of trade object
-
-        Keyword Args:
-            trade (Trade): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            Trade
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['calculated_trade_id'] = \
-            calculated_trade_id
-        kwargs['trade_id'] = \
-            trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get(
+    def get_calculated_trade_by_id(
         self,
         portfolio_group_id,
         calculated_trade_id,
@@ -3250,7 +2702,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
+        >>> thread = api.get_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -3326,23 +2778,23 @@ class PortfolioManagementApi(object):
             calculated_trade_id
         kwargs['trade_id'] = \
             trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_calculated_trade_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_calculatedtrades_get(
+    def get_model_details_by_id(
         self,
-        portfolio_group_id,
+        model_portfolio_id,
         **kwargs
     ):
-        """List of trades to make to rebalance portfolio group  # noqa: E501
+        """Get details of a model portfolio  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_get(portfolio_group_id, async_req=True)
+        >>> thread = api.get_model_details_by_id(model_portfolio_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
+            model_portfolio_id (str): The ID of the model portfolio to get.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -3377,7 +2829,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            CalculatedTrade
+            ModelPortfolioDetails
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -3406,25 +2858,25 @@ class PortfolioManagementApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_get_endpoint.call_with_http_info(**kwargs)
+        kwargs['model_portfolio_id'] = \
+            model_portfolio_id
+        return self.get_model_details_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_delete(
+    def get_portfolio_balances(
         self,
         portfolio_group_id,
         **kwargs
     ):
-        """Remove a target portfolio.  # noqa: E501
+        """Get sum of cash balances in portfolio group  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_delete(portfolio_group_id, async_req=True)
+        >>> thread = api.get_portfolio_balances(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to delete.
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -3459,7 +2911,7 @@ class PortfolioManagementApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            PortfolioGroup
+            [Balance]
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -3490,260 +2942,9 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_delete_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_balances_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_excludedassets_get(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Get an array of excluded assets associated with a portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_excludedassets_get(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which the excluded assets are linked.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [ExcludedAsset]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_excludedassets_get_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_excludedassets_post(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Adds an asset to exclude to a portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_excludedassets_post(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to exclude an asset.
-
-        Keyword Args:
-            universal_symbol (UniversalSymbol): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ExcludedAsset
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_excludedassets_post_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete(
-        self,
-        portfolio_group_id,
-        symbol_id,
-        **kwargs
-    ):
-        """Unexclude an asset from a portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete(portfolio_group_id, symbol_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to unexclude an asset.
-            symbol_id (str): The ID of the excluded asset Symbol to delete.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            None
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['symbol_id'] = \
-            symbol_id
-        return self.portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_get(
+    def get_portfolio_details_by_id(
         self,
         portfolio_group_id,
         **kwargs
@@ -3753,7 +2954,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_get(portfolio_group_id, async_req=True)
+        >>> thread = api.get_portfolio_details_by_id(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -3823,91 +3024,9 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_details_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_import_post(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Import target allocation based on portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_import_post(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [TargetAsset]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_import_post_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_info_get(
+    def get_portfolio_info(
         self,
         portfolio_group_id,
         **kwargs
@@ -3917,7 +3036,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_info_get(portfolio_group_id, async_req=True)
+        >>> thread = api.get_portfolio_info(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -3987,95 +3106,9 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_info_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_info_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_patch(
-        self,
-        portfolio_group_id,
-        portfolio_group,
-        **kwargs
-    ):
-        """Update an existing target portfolio.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_patch(portfolio_group_id, portfolio_group, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to update.
-            portfolio_group (PortfolioGroup):
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            PortfolioGroup
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['portfolio_group'] = \
-            portfolio_group
-        return self.portfolio_groups_portfolio_group_id_patch_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_positions_get(
+    def get_portfolio_positions(
         self,
         portfolio_group_id,
         **kwargs
@@ -4085,7 +3118,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_positions_get(portfolio_group_id, async_req=True)
+        >>> thread = api.get_portfolio_positions(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -4155,9 +3188,9 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_positions_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_positions_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_settings_get(
+    def get_portfolio_settings(
         self,
         portfolio_group_id,
         **kwargs
@@ -4167,7 +3200,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_settings_get(portfolio_group_id, async_req=True)
+        >>> thread = api.get_portfolio_settings(portfolio_group_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -4237,425 +3270,9 @@ class PortfolioManagementApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['portfolio_group_id'] = \
             portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_settings_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_settings_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_settings_patch(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Updates portfolio group settings  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_settings_patch(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to patch the settings.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            PortfolioGroupSettings
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_settings_patch_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_symbols_post(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Search for symbols limited to brokerages under the specified portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_symbols_post(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to search under
-
-        Keyword Args:
-            symbol_query (SymbolQuery): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [UniversalSymbol]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_symbols_post_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_targets_get(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Get all target assets under the specified PortfolioGroup.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_targets_get(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [TargetAsset]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_targets_get_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_targets_post(
-        self,
-        portfolio_group_id,
-        **kwargs
-    ):
-        """Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_targets_post(portfolio_group_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
-
-        Keyword Args:
-            target_asset_list (TargetAssetList): [optional]
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            TargetAssetList
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        return self.portfolio_groups_portfolio_group_id_targets_post_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_targets_target_asset_id_delete(
-        self,
-        portfolio_group_id,
-        target_asset_id,
-        **kwargs
-    ):
-        """Remove a TargetAsset.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_targets_target_asset_id_delete(portfolio_group_id, target_asset_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup under which to remove the target asset.
-            target_asset_id (str): The ID of the TargetAsset to delete.
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            TargetAsset
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['target_asset_id'] = \
-            target_asset_id
-        return self.portfolio_groups_portfolio_group_id_targets_target_asset_id_delete_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_targets_target_asset_id_get(
+    def get_portfolio_target_by_id(
         self,
         portfolio_group_id,
         target_asset_id,
@@ -4666,7 +3283,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_targets_target_asset_id_get(portfolio_group_id, target_asset_id, async_req=True)
+        >>> thread = api.get_portfolio_target_by_id(portfolio_group_id, target_asset_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -4739,9 +3356,1165 @@ class PortfolioManagementApi(object):
             portfolio_group_id
         kwargs['target_asset_id'] = \
             target_asset_id
-        return self.portfolio_groups_portfolio_group_id_targets_target_asset_id_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_portfolio_target_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_targets_target_asset_id_patch(
+    def get_portfolio_targets(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Get all target assets under the specified PortfolioGroup.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_portfolio_targets(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [TargetAsset]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.get_portfolio_targets_endpoint.call_with_http_info(**kwargs)
+
+    def get_portoflio_excluded_assets(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Get an array of excluded assets associated with a portfolio group\\  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_portoflio_excluded_assets(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which the excluded assets are linked.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [ExcludedAsset]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.get_portoflio_excluded_assets_endpoint.call_with_http_info(**kwargs)
+
+    def import_model_portfolio(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Import target allocation based on portfolio group  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.import_model_portfolio(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [TargetAsset]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.import_model_portfolio_endpoint.call_with_http_info(**kwargs)
+
+    def list(
+        self,
+        user_id,
+        user_secret,
+        **kwargs
+    ):
+        """List all portfolio groups  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list(user_id, user_secret, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [PortfolioGroup]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['user_id'] = \
+            user_id
+        kwargs['user_secret'] = \
+            user_secret
+        return self.list_endpoint.call_with_http_info(**kwargs)
+
+    def list_asset_classes(
+        self,
+        **kwargs
+    ):
+        """List of model asset class  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_asset_classes(async_req=True)
+        >>> result = thread.get()
+
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [ModelAssetClassDetails]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        return self.list_asset_classes_endpoint.call_with_http_info(**kwargs)
+
+    def list_calculated_trades(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """List of trades to make to rebalance portfolio group  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_calculated_trades(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            CalculatedTrade
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.list_calculated_trades_endpoint.call_with_http_info(**kwargs)
+
+    def list_model_portfolio(
+        self,
+        **kwargs
+    ):
+        """List of model portfolio  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_model_portfolio(async_req=True)
+        >>> result = thread.get()
+
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [ModelPortfolioDetails]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        return self.list_model_portfolio_endpoint.call_with_http_info(**kwargs)
+
+    def list_portfolio_accounts(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Get all accounts associated with a portfolio group  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_portfolio_accounts(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which the accounts are linked.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [Account]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.list_portfolio_accounts_endpoint.call_with_http_info(**kwargs)
+
+    def modify_model_portfolio_by_id(
+        self,
+        model_portfolio_id,
+        model_portfolio_details,
+        **kwargs
+    ):
+        """Updates model portfolio object  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.modify_model_portfolio_by_id(model_portfolio_id, model_portfolio_details, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            model_portfolio_id (str): The ID of the model portfolio to update.
+            model_portfolio_details (ModelPortfolioDetails): Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            None
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['model_portfolio_id'] = \
+            model_portfolio_id
+        kwargs['model_portfolio_details'] = \
+            model_portfolio_details
+        return self.modify_model_portfolio_by_id_endpoint.call_with_http_info(**kwargs)
+
+    def save_portfolio(
+        self,
+        portfolio_group_id,
+        portfolio_group,
+        **kwargs
+    ):
+        """Update an existing target portfolio.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.save_portfolio(portfolio_group_id, portfolio_group, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup to update.
+            portfolio_group (PortfolioGroup):
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PortfolioGroup
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        kwargs['portfolio_group'] = \
+            portfolio_group
+        return self.save_portfolio_endpoint.call_with_http_info(**kwargs)
+
+    def search_portfolio_symbols(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Search for symbols limited to brokerages under the specified portfolio group  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.search_portfolio_symbols(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup to search under
+
+        Keyword Args:
+            symbol_query (SymbolQuery): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [UniversalSymbol]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.search_portfolio_symbols_endpoint.call_with_http_info(**kwargs)
+
+    def set_portfolio_targets(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_portfolio_targets(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to create the target asset.
+
+        Keyword Args:
+            target_asset_list (TargetAssetList): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            TargetAssetList
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.set_portfolio_targets_endpoint.call_with_http_info(**kwargs)
+
+    def update_asset_class(
+        self,
+        model_asset_class_id,
+        model_asset_class_details,
+        **kwargs
+    ):
+        """Updates model asset class objects  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_asset_class(model_asset_class_id, model_asset_class_details, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            model_asset_class_id (str): The ID of the model asset class to update.
+            model_asset_class_details (ModelAssetClassDetails): Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            None
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['model_asset_class_id'] = \
+            model_asset_class_id
+        kwargs['model_asset_class_details'] = \
+            model_asset_class_details
+        return self.update_asset_class_endpoint.call_with_http_info(**kwargs)
+
+    def update_portfolio_settings(
+        self,
+        portfolio_group_id,
+        **kwargs
+    ):
+        """Updates portfolio group settings  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_portfolio_settings(portfolio_group_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup under which to patch the settings.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PortfolioGroupSettings
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        return self.update_portfolio_settings_endpoint.call_with_http_info(**kwargs)
+
+    def update_portfolio_target_by_id(
         self,
         portfolio_group_id,
         target_asset_id,
@@ -4753,7 +4526,7 @@ class PortfolioManagementApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_targets_target_asset_id_patch(portfolio_group_id, target_asset_id, target_asset, async_req=True)
+        >>> thread = api.update_portfolio_target_by_id(portfolio_group_id, target_asset_id, target_asset, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -4829,95 +4602,5 @@ class PortfolioManagementApi(object):
             target_asset_id
         kwargs['target_asset'] = \
             target_asset
-        return self.portfolio_groups_portfolio_group_id_targets_target_asset_id_patch_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_post(
-        self,
-        user_id,
-        user_secret,
-        portfolio_group,
-        **kwargs
-    ):
-        """Create new portfolio group  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_post(user_id, user_secret, portfolio_group, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-            portfolio_group (PortfolioGroup):
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [PortfolioGroup]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        kwargs['portfolio_group'] = \
-            portfolio_group
-        return self.portfolio_groups_post_endpoint.call_with_http_info(**kwargs)
+        return self.update_portfolio_target_by_id_endpoint.call_with_http_info(**kwargs)
 

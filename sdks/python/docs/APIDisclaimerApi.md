@@ -4,11 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**snap_trade_accept_disclaimer_post**](APIDisclaimerApi.md#snap_trade_accept_disclaimer_post) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
+[**accept**](APIDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
 
 
-# **snap_trade_accept_disclaimer_post**
-> SnapTradeAPIDisclaimerAcceptStatus snap_trade_accept_disclaimer_post(user_id, user_secret, snap_trade_accept_disclaimer_post_request)
+# **accept**
+> SnapTradeAPIDisclaimerAcceptStatus accept(user_id, user_secret, api_disclaimer_accept_request)
 
 Accept or Reject SnapTrade disclaimer agreement
 
@@ -22,15 +22,9 @@ Accept or Reject SnapTrade disclaimer agreement
 import time
 import snaptrade_client
 from snaptrade_client.api import api_disclaimer_api
+from snaptrade_client.model.api_disclaimer_accept_request import APIDisclaimerAcceptRequest
 from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus
-from snaptrade_client.model.snap_trade_accept_disclaimer_post_request import SnapTradeAcceptDisclaimerPostRequest
 from pprint import pprint
-# Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = snaptrade_client.Configuration(
-    host = "https://api.snaptrade.com/api/v1"
-)
-
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
@@ -60,17 +54,17 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     api_instance = api_disclaimer_api.APIDisclaimerApi(api_client)
     user_id = "John.doe@snaptrade.com" # str | 
     user_secret = "USERSECRET123" # str | 
-    snap_trade_accept_disclaimer_post_request = SnapTradeAcceptDisclaimerPostRequest(
+    api_disclaimer_accept_request = APIDisclaimerAcceptRequest(
         accepted=True,
-    ) # SnapTradeAcceptDisclaimerPostRequest | 
+    ) # APIDisclaimerAcceptRequest | 
 
     # example passing only required values which don't have defaults set
     try:
         # Accept or Reject SnapTrade disclaimer agreement
-        api_response = api_instance.snap_trade_accept_disclaimer_post(user_id, user_secret, snap_trade_accept_disclaimer_post_request)
+        api_response = api_instance.accept(user_id, user_secret, api_disclaimer_accept_request)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling APIDisclaimerApi->snap_trade_accept_disclaimer_post: %s\n" % e)
+        print("Exception when calling APIDisclaimerApi->accept: %s\n" % e)
 ```
 
 
@@ -80,7 +74,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**|  |
  **user_secret** | **str**|  |
- **snap_trade_accept_disclaimer_post_request** | [**SnapTradeAcceptDisclaimerPostRequest**](SnapTradeAcceptDisclaimerPostRequest.md)|  |
+ **api_disclaimer_accept_request** | [**APIDisclaimerAcceptRequest**](APIDisclaimerAcceptRequest.md)|  |
 
 ### Return type
 

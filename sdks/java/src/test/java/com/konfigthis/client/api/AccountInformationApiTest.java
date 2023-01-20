@@ -15,6 +15,7 @@ package com.konfigthis.client.api;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
+import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.Model400FailedRequestResponse;
 import com.konfigthis.client.model.Model403FailedRequestResponse;
@@ -37,16 +38,30 @@ public class AccountInformationApiTest {
     private final AccountInformationApi api = new AccountInformationApi();
 
     /**
+     * List all accounts for the user, plus balances and positions for each account.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAllUserHoldingsTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID brokerageAuthorizations = null;
+        List<AccountHoldings> response = api.getAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+        // TODO: test validations
+    }
+
+    /**
      * Get all cash balances of an investment account
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdBalancesGetTest() throws ApiException {
+    public void getUserAccountBalanceTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Balance> response = api.accountsAccountIdBalancesGet(userId, userSecret, accountId);
+        List<Balance> response = api.getUserAccountBalance(userId, userSecret, accountId);
         // TODO: test validations
     }
 
@@ -56,25 +71,26 @@ public class AccountInformationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdGetTest() throws ApiException {
+    public void getUserAccountDetailsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Account> response = api.accountsAccountIdGet(userId, userSecret, accountId);
+        List<Account> response = api.getUserAccountDetails(userId, userSecret, accountId);
         // TODO: test validations
     }
 
     /**
-     * List balances, positions and orders for the specified account.
+     * Get all history of orders placed in account
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdHoldingsGetTest() throws ApiException {
-        UUID accountId = null;
+    public void getUserAccountOrdersTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        AccountHoldings response = api.accountsAccountIdHoldingsGet(accountId, userId, userSecret);
+        UUID accountId = null;
+        String state = null;
+        List<AccountOrderRecord> response = api.getUserAccountOrders(userId, userSecret, accountId, state);
         // TODO: test validations
     }
 
@@ -84,25 +100,25 @@ public class AccountInformationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdPositionsGetTest() throws ApiException {
+    public void getUserAccountPositionsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Position> response = api.accountsAccountIdPositionsGet(userId, userSecret, accountId);
+        List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId);
         // TODO: test validations
     }
 
     /**
-     * Update details of an investment account
+     * List balances, positions and orders for the specified account.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdPutTest() throws ApiException {
+    public void getUserHoldingsTest() throws ApiException {
+        UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        UUID accountId = null;
-        List<Account> response = api.accountsAccountIdPut(userId, userSecret, accountId);
+        AccountHoldings response = api.getUserHoldings(accountId, userId, userSecret);
         // TODO: test validations
     }
 
@@ -112,24 +128,24 @@ public class AccountInformationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsGetTest() throws ApiException {
+    public void listUserAccountsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<Account> response = api.accountsGet(userId, userSecret);
+        List<Account> response = api.listUserAccounts(userId, userSecret);
         // TODO: test validations
     }
 
     /**
-     * List all accounts for the user, plus balances and positions for each account.
+     * Update details of an investment account
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void holdingsGetTest() throws ApiException {
+    public void updateUserAccountTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        UUID brokerageAuthorizations = null;
-        List<AccountHoldings> response = api.holdingsGet(userId, userSecret, brokerageAuthorizations);
+        UUID accountId = null;
+        List<Account> response = api.updateUserAccount(userId, userSecret, accountId);
         // TODO: test validations
     }
 

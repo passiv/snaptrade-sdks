@@ -4,11 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**root_get**](APIStatusApi.md#root_get) | **GET** / | Get API Status
+[**check**](APIStatusApi.md#check) | **GET** / | Get API Status
 
 
-# **root_get**
-> Status root_get()
+# **check**
+> Status check()
 
 Get API Status
 
@@ -23,12 +23,6 @@ import snaptrade_client
 from snaptrade_client.api import api_status_api
 from snaptrade_client.model.status import Status
 from pprint import pprint
-# Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = snaptrade_client.Configuration(
-    host = "https://api.snaptrade.com/api/v1"
-)
-
 
 # Enter a context with an instance of the API client
 with snaptrade_client.ApiClient() as api_client:
@@ -38,10 +32,10 @@ with snaptrade_client.ApiClient() as api_client:
     # example, this endpoint has no required or optional parameters
     try:
         # Get API Status
-        api_response = api_instance.root_get()
+        api_response = api_instance.check()
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling APIStatusApi->root_get: %s\n" % e)
+        print("Exception when calling APIStatusApi->check: %s\n" % e)
 ```
 
 

@@ -73,7 +73,7 @@ public class ApiStatusApi {
     }
 
     /**
-     * Build call for rootGet
+     * Build call for check
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -84,7 +84,7 @@ public class ApiStatusApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call rootGetCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call checkCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -129,8 +129,8 @@ public class ApiStatusApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call rootGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return rootGetCall(_callback);
+    private okhttp3.Call checkValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return checkCall(_callback);
 
     }
 
@@ -146,8 +146,8 @@ public class ApiStatusApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public Status rootGet() throws ApiException {
-        ApiResponse<Status> localVarResp = rootGetWithHttpInfo();
+    public Status check() throws ApiException {
+        ApiResponse<Status> localVarResp = checkWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -163,8 +163,8 @@ public class ApiStatusApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Status> rootGetWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = rootGetValidateBeforeCall(null);
+    public ApiResponse<Status> checkWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = checkValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<Status>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -182,9 +182,9 @@ public class ApiStatusApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call rootGetAsync(final ApiCallback<Status> _callback) throws ApiException {
+    public okhttp3.Call checkAsync(final ApiCallback<Status> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = rootGetValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = checkValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<Status>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

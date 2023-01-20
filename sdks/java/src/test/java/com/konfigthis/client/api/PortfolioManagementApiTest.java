@@ -45,120 +45,15 @@ public class PortfolioManagementApiTest {
     private final PortfolioManagementApi api = new PortfolioManagementApi();
 
     /**
-     * List of model asset class
+     * Adds an asset to exclude to a portfolio group
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void modelAssetClassGetTest() throws ApiException {
-        List<ModelAssetClassDetails> response = api.modelAssetClassGet();
-        // TODO: test validations
-    }
-
-    /**
-     * Deletes a model asset class
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelAssetClassModelAssetClassIdDeleteTest() throws ApiException {
-        UUID modelAssetClassId = null;
-        api.modelAssetClassModelAssetClassIdDelete(modelAssetClassId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get details of a model asset class
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelAssetClassModelAssetClassIdGetTest() throws ApiException {
-        UUID modelAssetClassId = null;
-        ModelAssetClassDetails response = api.modelAssetClassModelAssetClassIdGet(modelAssetClassId);
-        // TODO: test validations
-    }
-
-    /**
-     * Updates model asset class objects
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelAssetClassModelAssetClassIdPostTest() throws ApiException {
-        UUID modelAssetClassId = null;
-        ModelAssetClassDetails modelAssetClassDetails = null;
-        api.modelAssetClassModelAssetClassIdPost(modelAssetClassId, modelAssetClassDetails);
-        // TODO: test validations
-    }
-
-    /**
-     * Create a new model asset class
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelAssetClassPostTest() throws ApiException {
-        ModelAssetClassDetails response = api.modelAssetClassPost();
-        // TODO: test validations
-    }
-
-    /**
-     * List of model portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelPortfolioGetTest() throws ApiException {
-        List<ModelPortfolioDetails> response = api.modelPortfolioGet();
-        // TODO: test validations
-    }
-
-    /**
-     * Deletes a model portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelPortfolioModelPortfolioIdDeleteTest() throws ApiException {
-        UUID modelPortfolioId = null;
-        api.modelPortfolioModelPortfolioIdDelete(modelPortfolioId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get details of a model portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelPortfolioModelPortfolioIdGetTest() throws ApiException {
-        UUID modelPortfolioId = null;
-        ModelPortfolioDetails response = api.modelPortfolioModelPortfolioIdGet(modelPortfolioId);
-        // TODO: test validations
-    }
-
-    /**
-     * Updates model portfolio object
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelPortfolioModelPortfolioIdPostTest() throws ApiException {
-        UUID modelPortfolioId = null;
-        ModelPortfolioDetails modelPortfolioDetails = null;
-        api.modelPortfolioModelPortfolioIdPost(modelPortfolioId, modelPortfolioDetails);
-        // TODO: test validations
-    }
-
-    /**
-     * Creates a new model portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modelPortfolioPostTest() throws ApiException {
-        ModelPortfolioDetails response = api.modelPortfolioPost();
+    public void addPortfolioExcludedAssetTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UniversalSymbol universalSymbol = null;
+        ExcludedAsset response = api.addPortfolioExcludedAsset(portfolioGroupId, universalSymbol);
         // TODO: test validations
     }
 
@@ -168,302 +63,10 @@ public class PortfolioManagementApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void portfolioGroupsGetTest() throws ApiException {
+    public void callListTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<PortfolioGroup> response = api.portfolioGroupsGet(userId, userSecret);
-        // TODO: test validations
-    }
-
-    /**
-     * Get all accounts associated with a portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdAccountsGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<Account> response = api.portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get sum of cash balances in portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdBalancesGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<Balance> response = api.portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Return details of a specific trade before it&#39;s placed
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        Trade response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId);
-        // TODO: test validations
-    }
-
-    /**
-     * Modify units of a trade before it is placed
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        Trade trade = null;
-        Trade response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade);
-        // TODO: test validations
-    }
-
-    /**
-     * Return an individual trade
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        List<Trade> response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId);
-        // TODO: test validations
-    }
-
-    /**
-     * List of trades to make to rebalance portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        CalculatedTrade response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Remove a target portfolio.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdDeleteTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        PortfolioGroup response = api.portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get an array of excluded assets associated with a portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdExcludedassetsGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<ExcludedAsset> response = api.portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Adds an asset to exclude to a portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdExcludedassetsPostTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UniversalSymbol universalSymbol = null;
-        ExcludedAsset response = api.portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId, universalSymbol);
-        // TODO: test validations
-    }
-
-    /**
-     * Unexclude an asset from a portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDeleteTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID symbolId = null;
-        api.portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId, symbolId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get details of a target portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        PortfolioGroup response = api.portfolioGroupsPortfolioGroupIdGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Import target allocation based on portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdImportPostTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<TargetAsset> response = api.portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Return a whole bunch of relevant information relating to a portfolio group.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdInfoGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        PortfolioGroupInfo response = api.portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Update an existing target portfolio.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdPatchTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        Map<String, Object> requestBody = null;
-        PortfolioGroup response = api.portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId, requestBody);
-        // TODO: test validations
-    }
-
-    /**
-     * Get total of each postions owned in portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdPositionsGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<PortfolioGroupPosition> response = api.portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get portfolio group settings
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdSettingsGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        PortfolioGroupSettings response = api.portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Updates portfolio group settings
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdSettingsPatchTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        PortfolioGroupSettings response = api.portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Search for symbols limited to brokerages under the specified portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdSymbolsPostTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId, symbolQuery);
-        // TODO: test validations
-    }
-
-    /**
-     * Get all target assets under the specified PortfolioGroup.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdTargetsGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<TargetAsset> response = api.portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdTargetsPostTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<TargetAsset> targetAsset = null;
-        List<TargetAsset> response = api.portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId, targetAsset);
-        // TODO: test validations
-    }
-
-    /**
-     * Remove a TargetAsset.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDeleteTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID targetAssetId = null;
-        TargetAsset response = api.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId, targetAssetId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get a specific target from a portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID targetAssetId = null;
-        TargetAsset response = api.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId, targetAssetId);
-        // TODO: test validations
-    }
-
-    /**
-     * Update a TargetAsset under the specified PortfolioGroup.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatchTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID targetAssetId = null;
-        TargetAsset targetAsset = null;
-        TargetAsset response = api.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId, targetAssetId, targetAsset);
+        List<PortfolioGroup> response = api.callList(userId, userSecret);
         // TODO: test validations
     }
 
@@ -473,11 +76,379 @@ public class PortfolioManagementApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void portfolioGroupsPostTest() throws ApiException {
+    public void createTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         Map<String, Object> requestBody = null;
-        List<PortfolioGroup> response = api.portfolioGroupsPost(userId, userSecret, requestBody);
+        List<PortfolioGroup> response = api.create(userId, userSecret, requestBody);
+        // TODO: test validations
+    }
+
+    /**
+     * Create a new model asset class
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createAssetClassTest() throws ApiException {
+        ModelAssetClassDetails response = api.createAssetClass();
+        // TODO: test validations
+    }
+
+    /**
+     * Creates a new model portfolio
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createModelPortfolioTest() throws ApiException {
+        ModelPortfolioDetails response = api.createModelPortfolio();
+        // TODO: test validations
+    }
+
+    /**
+     * Deletes a model asset class
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteAssetClassTest() throws ApiException {
+        UUID modelAssetClassId = null;
+        api.deleteAssetClass(modelAssetClassId);
+        // TODO: test validations
+    }
+
+    /**
+     * Unexclude an asset from a portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteExcludedAssetTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID symbolId = null;
+        api.deleteExcludedAsset(portfolioGroupId, symbolId);
+        // TODO: test validations
+    }
+
+    /**
+     * Deletes a model portfolio
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteModelPortfolioByIdTest() throws ApiException {
+        UUID modelPortfolioId = null;
+        api.deleteModelPortfolioById(modelPortfolioId);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove a target portfolio.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deletePortfoliTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        PortfolioGroup response = api.deletePortfoli(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove a TargetAsset.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deletePortfolioTargetByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID targetAssetId = null;
+        TargetAsset response = api.deletePortfolioTargetById(portfolioGroupId, targetAssetId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get details of a model asset class
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void detailAssetClassTest() throws ApiException {
+        UUID modelAssetClassId = null;
+        ModelAssetClassDetails response = api.detailAssetClass(modelAssetClassId);
+        // TODO: test validations
+    }
+
+    /**
+     * Return an individual trade
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCalculatedTradeByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID calculatedTradeId = null;
+        UUID tradeId = null;
+        List<Trade> response = api.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get details of a model portfolio
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getModelDetailsByIdTest() throws ApiException {
+        UUID modelPortfolioId = null;
+        ModelPortfolioDetails response = api.getModelDetailsById(modelPortfolioId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get sum of cash balances in portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioBalancesTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<Balance> response = api.getPortfolioBalances(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get details of a target portfolio
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioDetailsByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        PortfolioGroup response = api.getPortfolioDetailsById(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Return a whole bunch of relevant information relating to a portfolio group.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioInfoTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        PortfolioGroupInfo response = api.getPortfolioInfo(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get total of each postions owned in portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioPositionsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<PortfolioGroupPosition> response = api.getPortfolioPositions(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get portfolio group settings
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioSettingsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        PortfolioGroupSettings response = api.getPortfolioSettings(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get a specific target from a portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioTargetByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID targetAssetId = null;
+        TargetAsset response = api.getPortfolioTargetById(portfolioGroupId, targetAssetId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get all target assets under the specified PortfolioGroup.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortfolioTargetsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<TargetAsset> response = api.getPortfolioTargets(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Get an array of excluded assets associated with a portfolio group\\
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getPortoflioExcludedAssetsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<ExcludedAsset> response = api.getPortoflioExcludedAssets(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Import target allocation based on portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void importModelPortfolioTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<TargetAsset> response = api.importModelPortfolio(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * List of model asset class
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAssetClassesTest() throws ApiException {
+        List<ModelAssetClassDetails> response = api.listAssetClasses();
+        // TODO: test validations
+    }
+
+    /**
+     * List of trades to make to rebalance portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listCalculatedTradesTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        CalculatedTrade response = api.listCalculatedTrades(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * List of model portfolio
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listModelPortfolioTest() throws ApiException {
+        List<ModelPortfolioDetails> response = api.listModelPortfolio();
+        // TODO: test validations
+    }
+
+    /**
+     * Get all accounts associated with a portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listPortfolioAccountsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<Account> response = api.listPortfolioAccounts(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Updates model portfolio object
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void modifyModelPortfolioByIdTest() throws ApiException {
+        UUID modelPortfolioId = null;
+        ModelPortfolioDetails modelPortfolioDetails = null;
+        api.modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails);
+        // TODO: test validations
+    }
+
+    /**
+     * Update an existing target portfolio.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void savePortfolioTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        Map<String, Object> requestBody = null;
+        PortfolioGroup response = api.savePortfolio(portfolioGroupId, requestBody);
+        // TODO: test validations
+    }
+
+    /**
+     * Search for symbols limited to brokerages under the specified portfolio group
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchPortfolioSymbolsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        SymbolQuery symbolQuery = null;
+        List<UniversalSymbol> response = api.searchPortfolioSymbols(portfolioGroupId, symbolQuery);
+        // TODO: test validations
+    }
+
+    /**
+     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setPortfolioTargetsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        List<TargetAsset> targetAsset = null;
+        List<TargetAsset> response = api.setPortfolioTargets(portfolioGroupId, targetAsset);
+        // TODO: test validations
+    }
+
+    /**
+     * Updates model asset class objects
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateAssetClassTest() throws ApiException {
+        UUID modelAssetClassId = null;
+        ModelAssetClassDetails modelAssetClassDetails = null;
+        api.updateAssetClass(modelAssetClassId, modelAssetClassDetails);
+        // TODO: test validations
+    }
+
+    /**
+     * Updates portfolio group settings
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updatePortfolioSettingsTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        PortfolioGroupSettings response = api.updatePortfolioSettings(portfolioGroupId);
+        // TODO: test validations
+    }
+
+    /**
+     * Update a TargetAsset under the specified PortfolioGroup.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updatePortfolioTargetByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID targetAssetId = null;
+        TargetAsset targetAsset = null;
+        TargetAsset response = api.updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset);
         // TODO: test validations
     }
 

@@ -73,7 +73,7 @@ public class ErrorLogsApi {
     }
 
     /**
-     * Build call for snapTradeListUserErrorsGet
+     * Build call for listUserErrors
      * @param userId  (required)
      * @param userSecret  (required)
      * @param _callback Callback for upload/download progress
@@ -85,7 +85,7 @@ public class ErrorLogsApi {
         <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeListUserErrorsGetCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listUserErrorsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -138,18 +138,18 @@ public class ErrorLogsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeListUserErrorsGetValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listUserErrorsValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling snapTradeListUserErrorsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling listUserErrors(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling snapTradeListUserErrorsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listUserErrors(Async)");
         }
 
-        return snapTradeListUserErrorsGetCall(userId, userSecret, _callback);
+        return listUserErrorsCall(userId, userSecret, _callback);
 
     }
 
@@ -166,8 +166,8 @@ public class ErrorLogsApi {
         <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
      </table>
      */
-    public List<UserErrorLog> snapTradeListUserErrorsGet(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<UserErrorLog>> localVarResp = snapTradeListUserErrorsGetWithHttpInfo(userId, userSecret);
+    public List<UserErrorLog> listUserErrors(String userId, String userSecret) throws ApiException {
+        ApiResponse<List<UserErrorLog>> localVarResp = listUserErrorsWithHttpInfo(userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -184,8 +184,8 @@ public class ErrorLogsApi {
         <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<UserErrorLog>> snapTradeListUserErrorsGetWithHttpInfo(String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeListUserErrorsGetValidateBeforeCall(userId, userSecret, null);
+    public ApiResponse<List<UserErrorLog>> listUserErrorsWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listUserErrorsValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<UserErrorLog>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -204,9 +204,9 @@ public class ErrorLogsApi {
         <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeListUserErrorsGetAsync(String userId, String userSecret, final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
+    public okhttp3.Call listUserErrorsAsync(String userId, String userSecret, final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeListUserErrorsGetValidateBeforeCall(userId, userSecret, _callback);
+        okhttp3.Call localVarCall = listUserErrorsValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<UserErrorLog>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

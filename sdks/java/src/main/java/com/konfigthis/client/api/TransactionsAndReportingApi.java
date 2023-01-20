@@ -74,7 +74,7 @@ public class TransactionsAndReportingApi {
     }
 
     /**
-     * Build call for activitiesGet
+     * Build call for getActivities
      * @param userId  (required)
      * @param userSecret  (required)
      * @param startDate  (optional)
@@ -90,7 +90,7 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call activitiesGetCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getActivitiesCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -107,7 +107,7 @@ public class TransactionsAndReportingApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/activities/";
+        String localVarPath = "/activities";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -155,18 +155,18 @@ public class TransactionsAndReportingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call activitiesGetValidateBeforeCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getActivitiesValidateBeforeCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling activitiesGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getActivities(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling activitiesGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getActivities(Async)");
         }
 
-        return activitiesGetCall(userId, userSecret, startDate, endDate, accounts, _callback);
+        return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, _callback);
 
     }
 
@@ -187,8 +187,8 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public List<UniversalActivity> activitiesGet(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
-        ApiResponse<List<UniversalActivity>> localVarResp = activitiesGetWithHttpInfo(userId, userSecret, startDate, endDate, accounts);
+    public List<UniversalActivity> getActivities(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
+        ApiResponse<List<UniversalActivity>> localVarResp = getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts);
         return localVarResp.getData();
     }
 
@@ -209,8 +209,8 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<UniversalActivity>> activitiesGetWithHttpInfo(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
-        okhttp3.Call localVarCall = activitiesGetValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, null);
+    public ApiResponse<List<UniversalActivity>> getActivitiesWithHttpInfo(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
+        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, null);
         Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -233,15 +233,15 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call activitiesGetAsync(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+    public okhttp3.Call getActivitiesAsync(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = activitiesGetValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, _callback);
+        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, _callback);
         Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for performanceCustomGet
+     * Build call for getReportingCustomRange
      * @param startDate  (required)
      * @param endDate  (required)
      * @param userId  (required)
@@ -259,7 +259,7 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call performanceCustomGetCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getReportingCustomRangeCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -332,28 +332,28 @@ public class TransactionsAndReportingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call performanceCustomGetValidateBeforeCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getReportingCustomRangeValidateBeforeCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'startDate' is set
         if (startDate == null) {
-            throw new ApiException("Missing the required parameter 'startDate' when calling performanceCustomGet(Async)");
+            throw new ApiException("Missing the required parameter 'startDate' when calling getReportingCustomRange(Async)");
         }
 
         // verify the required parameter 'endDate' is set
         if (endDate == null) {
-            throw new ApiException("Missing the required parameter 'endDate' when calling performanceCustomGet(Async)");
+            throw new ApiException("Missing the required parameter 'endDate' when calling getReportingCustomRange(Async)");
         }
 
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling performanceCustomGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getReportingCustomRange(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling performanceCustomGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getReportingCustomRange(Async)");
         }
 
-        return performanceCustomGetCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
+        return getReportingCustomRangeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
 
     }
 
@@ -376,8 +376,8 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public PerformanceCustom performanceCustomGet(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
-        ApiResponse<PerformanceCustom> localVarResp = performanceCustomGetWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+    public PerformanceCustom getReportingCustomRange(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
+        ApiResponse<PerformanceCustom> localVarResp = getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
         return localVarResp.getData();
     }
 
@@ -400,8 +400,8 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PerformanceCustom> performanceCustomGetWithHttpInfo(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
-        okhttp3.Call localVarCall = performanceCustomGetValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, null);
+    public ApiResponse<PerformanceCustom> getReportingCustomRangeWithHttpInfo(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
+        okhttp3.Call localVarCall = getReportingCustomRangeValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, null);
         Type localVarReturnType = new TypeToken<PerformanceCustom>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -426,9 +426,9 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call performanceCustomGetAsync(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback<PerformanceCustom> _callback) throws ApiException {
+    public okhttp3.Call getReportingCustomRangeAsync(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback<PerformanceCustom> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = performanceCustomGetValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
+        okhttp3.Call localVarCall = getReportingCustomRangeValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
         Type localVarReturnType = new TypeToken<PerformanceCustom>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

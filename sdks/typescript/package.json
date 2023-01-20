@@ -5,7 +5,7 @@
   "author": "Konfig",
   "repository": {
     "type": "git",
-    "url": "https://github.com/passiv/snaptrade-sdks/tree/main/sdks/typescript.git"
+    "url": "https://github.com/passiv/snaptrade-sdks/tree/main/sdks/typescript"
   },
   "keywords": [
     "axios",
@@ -17,7 +17,8 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc ",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist/",
     "prepare": "npm run build",
     "test": "jest"
   },

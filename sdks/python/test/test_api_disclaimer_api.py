@@ -24,8 +24,8 @@ class TestAPIDisclaimerApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_snap_trade_accept_disclaimer_post(self):
-        """Test case for snap_trade_accept_disclaimer_post
+    def test_accept(self):
+        """Test case for accept
 
         Accept or Reject SnapTrade disclaimer agreement  # noqa: E501
         """

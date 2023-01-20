@@ -31,7 +31,7 @@ from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.trade import Trade
 from snaptrade_client.model.trade_execution_status import TradeExecutionStatus
 from snaptrade_client.model.trade_impact import TradeImpact
-from snaptrade_client.model.trade_oco_post_request import TradeOcoPostRequest
+from snaptrade_client.model.trading_place_oco_order_request import TradingPlaceOCOOrderRequest
 
 
 class TradingApi(object):
@@ -45,7 +45,7 @@ class TradingApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.accounts_account_id_orders_cancel_post_endpoint = _Endpoint(
+        self.cancel_user_account_order_endpoint = _Endpoint(
             settings={
                 'response_type': (AccountOrderRecord,),
                 'auth': [
@@ -54,7 +54,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/accounts/{accountId}/orders/cancel',
-                'operation_id': 'accounts_account_id_orders_cancel_post',
+                'operation_id': 'cancel_user_account_order',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -117,35 +117,33 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.accounts_account_id_orders_get_endpoint = _Endpoint(
+        self.get_calculated_trade_impact_by_id_endpoint = _Endpoint(
             settings={
-                'response_type': ([AccountOrderRecord],),
+                'response_type': (Trade,),
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/accounts/{accountId}/orders',
-                'operation_id': 'accounts_account_id_orders_get',
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}',
+                'operation_id': 'get_calculated_trade_impact_by_id',
                 'http_method': 'GET',
                 'servers': None,
             },
             params_map={
                 'all': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
-                    'state',
+                    'portfolio_group_id',
+                    'calculated_trade_id',
+                    'trade_id',
                 ],
                 'required': [
-                    'user_id',
-                    'user_secret',
-                    'account_id',
+                    'portfolio_group_id',
+                    'calculated_trade_id',
+                    'trade_id',
                 ],
                 'nullable': [
                 ],
                 'enum': [
-                    'state',
                 ],
                 'validation': [
                 ]
@@ -154,34 +152,24 @@ class TradingApi(object):
                 'validations': {
                 },
                 'allowed_values': {
-                    ('state',): {
-
-                        "ALL": "all",
-                        "OPEN": "open",
-                        "EXECUTED": "executed"
-                    },
                 },
                 'openapi_types': {
-                    'user_id':
+                    'portfolio_group_id':
                         (str,),
-                    'user_secret':
+                    'calculated_trade_id':
                         (str,),
-                    'account_id':
-                        (str,),
-                    'state':
+                    'trade_id':
                         (str,),
                 },
                 'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                    'account_id': 'accountId',
-                    'state': 'state',
+                    'portfolio_group_id': 'portfolioGroupId',
+                    'calculated_trade_id': 'calculatedTradeId',
+                    'trade_id': 'tradeId',
                 },
                 'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'account_id': 'path',
-                    'state': 'query',
+                    'portfolio_group_id': 'path',
+                    'calculated_trade_id': 'path',
+                    'trade_id': 'path',
                 },
                 'collection_format_map': {
                 }
@@ -194,7 +182,132 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.accounts_account_id_quotes_get_endpoint = _Endpoint(
+        self.get_calculated_trades_impact_endpoint = _Endpoint(
+            settings={
+                'response_type': ([TradeImpact],),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact',
+                'operation_id': 'get_calculated_trades_impact',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'portfolio_group_id',
+                    'calculated_trade_id',
+                ],
+                'required': [
+                    'portfolio_group_id',
+                    'calculated_trade_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'portfolio_group_id':
+                        (str,),
+                    'calculated_trade_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'portfolio_group_id': 'portfolioGroupId',
+                    'calculated_trade_id': 'calculatedTradeId',
+                },
+                'location_map': {
+                    'portfolio_group_id': 'path',
+                    'calculated_trade_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client
+        )
+        self.get_order_impact_endpoint = _Endpoint(
+            settings={
+                'response_type': (ManualTradeAndImpact,),
+                'auth': [
+                    'PartnerClientId',
+                    'PartnerSignature',
+                    'PartnerTimestamp'
+                ],
+                'endpoint_path': '/trade/impact',
+                'operation_id': 'get_order_impact',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'user_id',
+                    'user_secret',
+                    'manual_trade_form',
+                ],
+                'required': [
+                    'user_id',
+                    'user_secret',
+                    'manual_trade_form',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'user_id':
+                        (str,),
+                    'user_secret':
+                        (str,),
+                    'manual_trade_form':
+                        (ManualTradeForm,),
+                },
+                'attribute_map': {
+                    'user_id': 'userId',
+                    'user_secret': 'userSecret',
+                },
+                'location_map': {
+                    'user_id': 'query',
+                    'user_secret': 'query',
+                    'manual_trade_form': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.get_user_account_quotes_endpoint = _Endpoint(
             settings={
                 'response_type': (SymbolsQuotes,),
                 'auth': [
@@ -203,7 +316,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/accounts/{accountId}/quotes',
-                'operation_id': 'accounts_account_id_quotes_get',
+                'operation_id': 'get_user_account_quotes',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -270,66 +383,7 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get_endpoint = _Endpoint(
-            settings={
-                'response_type': ([TradeImpact],),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'calculated_trade_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'calculated_trade_id': 'calculatedTradeId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'calculated_trade_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get_endpoint = _Endpoint(
+        self.modify_calculated_trade_by_id_endpoint = _Endpoint(
             settings={
                 'response_type': (Trade,),
                 'auth': [
@@ -338,72 +392,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                ],
-                'required': [
-                    'portfolio_group_id',
-                    'calculated_trade_id',
-                    'trade_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'portfolio_group_id':
-                        (str,),
-                    'calculated_trade_id':
-                        (str,),
-                    'trade_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'portfolio_group_id': 'portfolioGroupId',
-                    'calculated_trade_id': 'calculatedTradeId',
-                    'trade_id': 'tradeId',
-                },
-                'location_map': {
-                    'portfolio_group_id': 'path',
-                    'calculated_trade_id': 'path',
-                    'trade_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client
-        )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch_endpoint = _Endpoint(
-            settings={
-                'response_type': (Trade,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch',
+                'operation_id': 'modify_calculated_trade_by_id',
                 'http_method': 'PATCH',
                 'servers': None,
             },
@@ -465,7 +454,7 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post_endpoint = _Endpoint(
+        self.place_calculated_trades_endpoint = _Endpoint(
             settings={
                 'response_type': ([TradeExecutionStatus],),
                 'auth': [
@@ -474,7 +463,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders',
-                'operation_id': 'portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post',
+                'operation_id': 'place_calculated_trades',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -524,73 +513,7 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.trade_impact_post_endpoint = _Endpoint(
-            settings={
-                'response_type': (ManualTradeAndImpact,),
-                'auth': [
-                    'PartnerClientId',
-                    'PartnerSignature',
-                    'PartnerTimestamp'
-                ],
-                'endpoint_path': '/trade/impact',
-                'operation_id': 'trade_impact_post',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'user_id',
-                    'user_secret',
-                    'manual_trade_form',
-                ],
-                'required': [
-                    'user_id',
-                    'user_secret',
-                    'manual_trade_form',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'user_id':
-                        (str,),
-                    'user_secret':
-                        (str,),
-                    'manual_trade_form':
-                        (ManualTradeForm,),
-                },
-                'attribute_map': {
-                    'user_id': 'userId',
-                    'user_secret': 'userSecret',
-                },
-                'location_map': {
-                    'user_id': 'query',
-                    'user_secret': 'query',
-                    'manual_trade_form': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client
-        )
-        self.trade_oco_post_endpoint = _Endpoint(
+        self.place_oco_order_endpoint = _Endpoint(
             settings={
                 'response_type': (AccountOrderRecord,),
                 'auth': [
@@ -599,7 +522,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/trade/oco',
-                'operation_id': 'trade_oco_post',
+                'operation_id': 'place_oco_order',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -607,12 +530,12 @@ class TradingApi(object):
                 'all': [
                     'user_id',
                     'user_secret',
-                    'trade_oco_post_request',
+                    'trading_place_oco_order_request',
                 ],
                 'required': [
                     'user_id',
                     'user_secret',
-                    'trade_oco_post_request',
+                    'trading_place_oco_order_request',
                 ],
                 'nullable': [
                 ],
@@ -631,8 +554,8 @@ class TradingApi(object):
                         (str,),
                     'user_secret':
                         (str,),
-                    'trade_oco_post_request':
-                        (TradeOcoPostRequest,),
+                    'trading_place_oco_order_request':
+                        (TradingPlaceOCOOrderRequest,),
                 },
                 'attribute_map': {
                     'user_id': 'userId',
@@ -641,7 +564,7 @@ class TradingApi(object):
                 'location_map': {
                     'user_id': 'query',
                     'user_secret': 'query',
-                    'trade_oco_post_request': 'body',
+                    'trading_place_oco_order_request': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -656,7 +579,7 @@ class TradingApi(object):
             },
             api_client=api_client
         )
-        self.trade_trade_id_post_endpoint = _Endpoint(
+        self.place_order_endpoint = _Endpoint(
             settings={
                 'response_type': (AccountOrderRecord,),
                 'auth': [
@@ -665,7 +588,7 @@ class TradingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/trade/{tradeId}',
-                'operation_id': 'trade_trade_id_post',
+                'operation_id': 'place_order',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -722,7 +645,7 @@ class TradingApi(object):
             api_client=api_client
         )
 
-    def accounts_account_id_orders_cancel_post(
+    def cancel_user_account_order(
         self,
         user_id,
         user_secret,
@@ -735,7 +658,7 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_orders_cancel_post(user_id, user_secret, account_id, body, async_req=True)
+        >>> thread = api.cancel_user_account_order(user_id, user_secret, account_id, body, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -814,30 +737,29 @@ class TradingApi(object):
             account_id
         kwargs['body'] = \
             body
-        return self.accounts_account_id_orders_cancel_post_endpoint.call_with_http_info(**kwargs)
+        return self.cancel_user_account_order_endpoint.call_with_http_info(**kwargs)
 
-    def accounts_account_id_orders_get(
+    def get_calculated_trade_impact_by_id(
         self,
-        user_id,
-        user_secret,
-        account_id,
+        portfolio_group_id,
+        calculated_trade_id,
+        trade_id,
         **kwargs
     ):
-        """Get all history of orders placed in account  # noqa: E501
+        """Return details of a specific trade before it's placed  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_orders_get(user_id, user_secret, account_id, async_req=True)
+        >>> thread = api.get_calculated_trade_impact_by_id(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
         >>> result = thread.get()
 
         Args:
-            user_id (str):
-            user_secret (str):
-            account_id (str): The ID of the account get positions.
+            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
+            calculated_trade_id (str): The ID of calculated trade to get account impact
+            trade_id (str): The ID of trade object
 
         Keyword Args:
-            state (str): defaults value is set to \"all\". [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -870,7 +792,183 @@ class TradingApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            [AccountOrderRecord]
+            Trade
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        kwargs['calculated_trade_id'] = \
+            calculated_trade_id
+        kwargs['trade_id'] = \
+            trade_id
+        return self.get_calculated_trade_impact_by_id_endpoint.call_with_http_info(**kwargs)
+
+    def get_calculated_trades_impact(
+        self,
+        portfolio_group_id,
+        calculated_trade_id,
+        **kwargs
+    ):
+        """Return the impact of placing a series of trades on the portfolio  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_calculated_trades_impact(portfolio_group_id, calculated_trade_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
+            calculated_trade_id (str): The ID of calculated trade to get account impact
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            [TradeImpact]
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['portfolio_group_id'] = \
+            portfolio_group_id
+        kwargs['calculated_trade_id'] = \
+            calculated_trade_id
+        return self.get_calculated_trades_impact_endpoint.call_with_http_info(**kwargs)
+
+    def get_order_impact(
+        self,
+        user_id,
+        user_secret,
+        manual_trade_form,
+        **kwargs
+    ):
+        """Check impact of trades on account.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_order_impact(user_id, user_secret, manual_trade_form, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            user_id (str):
+            user_secret (str):
+            manual_trade_form (ManualTradeForm):
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            ManualTradeAndImpact
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -903,11 +1001,11 @@ class TradingApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        kwargs['account_id'] = \
-            account_id
-        return self.accounts_account_id_orders_get_endpoint.call_with_http_info(**kwargs)
+        kwargs['manual_trade_form'] = \
+            manual_trade_form
+        return self.get_order_impact_endpoint.call_with_http_info(**kwargs)
 
-    def accounts_account_id_quotes_get(
+    def get_user_account_quotes(
         self,
         user_id,
         user_secret,
@@ -920,7 +1018,7 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.accounts_account_id_quotes_get(user_id, user_secret, symbols, account_id, async_req=True)
+        >>> thread = api.get_user_account_quotes(user_id, user_secret, symbols, account_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1000,185 +1098,9 @@ class TradingApi(object):
             symbols
         kwargs['account_id'] = \
             account_id
-        return self.accounts_account_id_quotes_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_user_account_quotes_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get(
-        self,
-        portfolio_group_id,
-        calculated_trade_id,
-        **kwargs
-    ):
-        """Return the impact of placing a series of trades on the portfolio  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get(portfolio_group_id, calculated_trade_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
-            calculated_trade_id (str): The ID of calculated trade to get account impact
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            [TradeImpact]
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['calculated_trade_id'] = \
-            calculated_trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(
-        self,
-        portfolio_group_id,
-        calculated_trade_id,
-        trade_id,
-        **kwargs
-    ):
-        """Return details of a specific trade before it's placed  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            portfolio_group_id (str): The ID of the PortfolioGroup to perform rebalancing calculations
-            calculated_trade_id (str): The ID of calculated trade to get account impact
-            trade_id (str): The ID of trade object
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            Trade
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['portfolio_group_id'] = \
-            portfolio_group_id
-        kwargs['calculated_trade_id'] = \
-            calculated_trade_id
-        kwargs['trade_id'] = \
-            trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get_endpoint.call_with_http_info(**kwargs)
-
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(
+    def modify_calculated_trade_by_id(
         self,
         portfolio_group_id,
         calculated_trade_id,
@@ -1190,7 +1112,7 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
+        >>> thread = api.modify_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1267,9 +1189,9 @@ class TradingApi(object):
             calculated_trade_id
         kwargs['trade_id'] = \
             trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch_endpoint.call_with_http_info(**kwargs)
+        return self.modify_calculated_trade_by_id_endpoint.call_with_http_info(**kwargs)
 
-    def portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post(
+    def place_calculated_trades(
         self,
         portfolio_group_id,
         calculated_trade_id,
@@ -1280,7 +1202,7 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post(portfolio_group_id, calculated_trade_id, async_req=True)
+        >>> thread = api.place_calculated_trades(portfolio_group_id, calculated_trade_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1353,103 +1275,13 @@ class TradingApi(object):
             portfolio_group_id
         kwargs['calculated_trade_id'] = \
             calculated_trade_id
-        return self.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post_endpoint.call_with_http_info(**kwargs)
+        return self.place_calculated_trades_endpoint.call_with_http_info(**kwargs)
 
-    def trade_impact_post(
+    def place_oco_order(
         self,
         user_id,
         user_secret,
-        manual_trade_form,
-        **kwargs
-    ):
-        """Check impact of trades on account.  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-
-        >>> thread = api.trade_impact_post(user_id, user_secret, manual_trade_form, async_req=True)
-        >>> result = thread.get()
-
-        Args:
-            user_id (str):
-            user_secret (str):
-            manual_trade_form (ManualTradeForm):
-
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
-            async_req (bool): execute request asynchronously
-
-        Returns:
-            ManualTradeAndImpact
-                If the method is called asynchronously, returns the request
-                thread.
-        """
-        kwargs['async_req'] = kwargs.get(
-            'async_req', False
-        )
-        kwargs['_return_http_data_only'] = kwargs.get(
-            '_return_http_data_only', True
-        )
-        kwargs['_preload_content'] = kwargs.get(
-            '_preload_content', True
-        )
-        kwargs['_request_timeout'] = kwargs.get(
-            '_request_timeout', None
-        )
-        kwargs['_check_input_type'] = kwargs.get(
-            '_check_input_type', True
-        )
-        kwargs['_check_return_type'] = kwargs.get(
-            '_check_return_type', True
-        )
-        kwargs['_spec_property_naming'] = kwargs.get(
-            '_spec_property_naming', False
-        )
-        kwargs['_content_type'] = kwargs.get(
-            '_content_type')
-        kwargs['_host_index'] = kwargs.get('_host_index')
-        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        kwargs['user_id'] = \
-            user_id
-        kwargs['user_secret'] = \
-            user_secret
-        kwargs['manual_trade_form'] = \
-            manual_trade_form
-        return self.trade_impact_post_endpoint.call_with_http_info(**kwargs)
-
-    def trade_oco_post(
-        self,
-        user_id,
-        user_secret,
-        trade_oco_post_request,
+        trading_place_oco_order_request,
         **kwargs
     ):
         """Place a OCO (One Cancels Other) order  # noqa: E501
@@ -1457,13 +1289,13 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.trade_oco_post(user_id, user_secret, trade_oco_post_request, async_req=True)
+        >>> thread = api.place_oco_order(user_id, user_secret, trading_place_oco_order_request, async_req=True)
         >>> result = thread.get()
 
         Args:
             user_id (str):
             user_secret (str):
-            trade_oco_post_request (TradeOcoPostRequest):
+            trading_place_oco_order_request (TradingPlaceOCOOrderRequest):
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -1531,11 +1363,11 @@ class TradingApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        kwargs['trade_oco_post_request'] = \
-            trade_oco_post_request
-        return self.trade_oco_post_endpoint.call_with_http_info(**kwargs)
+        kwargs['trading_place_oco_order_request'] = \
+            trading_place_oco_order_request
+        return self.place_oco_order_endpoint.call_with_http_info(**kwargs)
 
-    def trade_trade_id_post(
+    def place_order(
         self,
         trade_id,
         user_id,
@@ -1547,7 +1379,7 @@ class TradingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.trade_trade_id_post(trade_id, user_id, user_secret, async_req=True)
+        >>> thread = api.place_order(trade_id, user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -1623,5 +1455,5 @@ class TradingApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.trade_trade_id_post_endpoint.call_with_http_info(**kwargs)
+        return self.place_order_endpoint.call_with_http_info(**kwargs)
 

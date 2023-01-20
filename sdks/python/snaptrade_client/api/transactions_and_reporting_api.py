@@ -37,7 +37,7 @@ class TransactionsAndReportingApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.activities_get_endpoint = _Endpoint(
+        self.get_activities_endpoint = _Endpoint(
             settings={
                 'response_type': ([UniversalActivity],),
                 'auth': [
@@ -45,8 +45,8 @@ class TransactionsAndReportingApi(object):
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
-                'endpoint_path': '/activities/',
-                'operation_id': 'activities_get',
+                'endpoint_path': '/activities',
+                'operation_id': 'get_activities',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -111,7 +111,7 @@ class TransactionsAndReportingApi(object):
             },
             api_client=api_client
         )
-        self.performance_custom_get_endpoint = _Endpoint(
+        self.get_reporting_custom_range_endpoint = _Endpoint(
             settings={
                 'response_type': (PerformanceCustom,),
                 'auth': [
@@ -120,7 +120,7 @@ class TransactionsAndReportingApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/performance/custom',
-                'operation_id': 'performance_custom_get',
+                'operation_id': 'get_reporting_custom_range',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -198,7 +198,7 @@ class TransactionsAndReportingApi(object):
             api_client=api_client
         )
 
-    def activities_get(
+    def get_activities(
         self,
         user_id,
         user_secret,
@@ -210,7 +210,7 @@ class TransactionsAndReportingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.activities_get(user_id, user_secret, async_req=True)
+        >>> thread = api.get_activities(user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -286,9 +286,9 @@ class TransactionsAndReportingApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.activities_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_activities_endpoint.call_with_http_info(**kwargs)
 
-    def performance_custom_get(
+    def get_reporting_custom_range(
         self,
         start_date,
         end_date,
@@ -302,7 +302,7 @@ class TransactionsAndReportingApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.performance_custom_get(start_date, end_date, user_id, user_secret, async_req=True)
+        >>> thread = api.get_reporting_custom_range(start_date, end_date, user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -384,5 +384,5 @@ class TransactionsAndReportingApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.performance_custom_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_reporting_custom_range_endpoint.call_with_http_info(**kwargs)
 

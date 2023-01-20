@@ -24,52 +24,59 @@ class TestAccountInformationApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_accounts_account_id_balances_get(self):
-        """Test case for accounts_account_id_balances_get
+    def test_get_all_user_holdings(self):
+        """Test case for get_all_user_holdings
+
+        List all accounts for the user, plus balances and positions for each account.  # noqa: E501
+        """
+        pass
+
+    def test_get_user_account_balance(self):
+        """Test case for get_user_account_balance
 
         Get all cash balances of an investment account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_get(self):
-        """Test case for accounts_account_id_get
+    def test_get_user_account_details(self):
+        """Test case for get_user_account_details
 
         Return details of a specific investment account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_holdings_get(self):
-        """Test case for accounts_account_id_holdings_get
+    def test_get_user_account_orders(self):
+        """Test case for get_user_account_orders
 
-        List balances, positions and orders for the specified account.  # noqa: E501
+        Get all history of orders placed in account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_positions_get(self):
-        """Test case for accounts_account_id_positions_get
+    def test_get_user_account_positions(self):
+        """Test case for get_user_account_positions
 
         Get all positions of an investment account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_put(self):
-        """Test case for accounts_account_id_put
+    def test_get_user_holdings(self):
+        """Test case for get_user_holdings
 
-        Update details of an investment account  # noqa: E501
+        List balances, positions and orders for the specified account.  # noqa: E501
         """
         pass
 
-    def test_accounts_get(self):
-        """Test case for accounts_get
+    def test_list_user_accounts(self):
+        """Test case for list_user_accounts
 
         List all investment accounts for the user  # noqa: E501
         """
         pass
 
-    def test_holdings_get(self):
-        """Test case for holdings_get
+    def test_update_user_account(self):
+        """Test case for update_user_account
 
-        List all accounts for the user, plus balances and positions for each account.  # noqa: E501
+        Update details of an investment account  # noqa: E501
         """
         pass
 

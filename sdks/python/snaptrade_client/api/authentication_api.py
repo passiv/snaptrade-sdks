@@ -22,12 +22,12 @@ from snaptrade_client.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
+from snaptrade_client.model.authentication_login_snap_trade_user200_response import AuthenticationLoginSnapTradeUser200Response
 from snaptrade_client.model.delete_user_response import DeleteUserResponse
 from snaptrade_client.model.encrypted_response import EncryptedResponse
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse
-from snaptrade_client.model.snap_trade_login_post200_response import SnapTradeLoginPost200Response
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret
@@ -45,7 +45,7 @@ class AuthenticationApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.snap_trade_delete_user_delete_endpoint = _Endpoint(
+        self.delete_snap_trade_user_endpoint = _Endpoint(
             settings={
                 'response_type': (DeleteUserResponse,),
                 'auth': [
@@ -54,7 +54,7 @@ class AuthenticationApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/deleteUser',
-                'operation_id': 'snap_trade_delete_user_delete',
+                'operation_id': 'delete_snap_trade_user',
                 'http_method': 'DELETE',
                 'servers': None,
             },
@@ -98,7 +98,7 @@ class AuthenticationApi(object):
             },
             api_client=api_client
         )
-        self.snap_trade_encrypted_jwt_get_endpoint = _Endpoint(
+        self.get_user_jwt_endpoint = _Endpoint(
             settings={
                 'response_type': (EncryptedResponse,),
                 'auth': [
@@ -107,7 +107,7 @@ class AuthenticationApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/encryptedJWT',
-                'operation_id': 'snap_trade_encrypted_jwt_get',
+                'operation_id': 'get_user_jwt',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -157,7 +157,7 @@ class AuthenticationApi(object):
             },
             api_client=api_client
         )
-        self.snap_trade_list_users_get_endpoint = _Endpoint(
+        self.list_snap_trade_users_endpoint = _Endpoint(
             settings={
                 'response_type': (UserList,),
                 'auth': [
@@ -166,7 +166,7 @@ class AuthenticationApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/listUsers',
-                'operation_id': 'snap_trade_list_users_get',
+                'operation_id': 'list_snap_trade_users',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -203,16 +203,16 @@ class AuthenticationApi(object):
             },
             api_client=api_client
         )
-        self.snap_trade_login_post_endpoint = _Endpoint(
+        self.login_snap_trade_user_endpoint = _Endpoint(
             settings={
-                'response_type': (SnapTradeLoginPost200Response,),
+                'response_type': (AuthenticationLoginSnapTradeUser200Response,),
                 'auth': [
                     'PartnerClientId',
                     'PartnerSignature',
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/login',
-                'operation_id': 'snap_trade_login_post',
+                'operation_id': 'login_snap_trade_user',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -268,7 +268,7 @@ class AuthenticationApi(object):
             },
             api_client=api_client
         )
-        self.snap_trade_register_user_post_endpoint = _Endpoint(
+        self.register_snap_trade_user_endpoint = _Endpoint(
             settings={
                 'response_type': (UserIDandSecret,),
                 'auth': [
@@ -277,7 +277,7 @@ class AuthenticationApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/registerUser',
-                'operation_id': 'snap_trade_register_user_post',
+                'operation_id': 'register_snap_trade_user',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -323,7 +323,7 @@ class AuthenticationApi(object):
             api_client=api_client
         )
 
-    def snap_trade_delete_user_delete(
+    def delete_snap_trade_user(
         self,
         user_id,
         **kwargs
@@ -333,7 +333,7 @@ class AuthenticationApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_delete_user_delete(user_id, async_req=True)
+        >>> thread = api.delete_snap_trade_user(user_id, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -403,9 +403,9 @@ class AuthenticationApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['user_id'] = \
             user_id
-        return self.snap_trade_delete_user_delete_endpoint.call_with_http_info(**kwargs)
+        return self.delete_snap_trade_user_endpoint.call_with_http_info(**kwargs)
 
-    def snap_trade_encrypted_jwt_get(
+    def get_user_jwt(
         self,
         user_id,
         user_secret,
@@ -416,7 +416,7 @@ class AuthenticationApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_encrypted_jwt_get(user_id, user_secret, async_req=True)
+        >>> thread = api.get_user_jwt(user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -489,9 +489,9 @@ class AuthenticationApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.snap_trade_encrypted_jwt_get_endpoint.call_with_http_info(**kwargs)
+        return self.get_user_jwt_endpoint.call_with_http_info(**kwargs)
 
-    def snap_trade_list_users_get(
+    def list_snap_trade_users(
         self,
         **kwargs
     ):
@@ -500,7 +500,7 @@ class AuthenticationApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_list_users_get(async_req=True)
+        >>> thread = api.list_snap_trade_users(async_req=True)
         >>> result = thread.get()
 
 
@@ -566,9 +566,9 @@ class AuthenticationApi(object):
             '_content_type')
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
-        return self.snap_trade_list_users_get_endpoint.call_with_http_info(**kwargs)
+        return self.list_snap_trade_users_endpoint.call_with_http_info(**kwargs)
 
-    def snap_trade_login_post(
+    def login_snap_trade_user(
         self,
         user_id,
         user_secret,
@@ -579,7 +579,7 @@ class AuthenticationApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_login_post(user_id, user_secret, async_req=True)
+        >>> thread = api.login_snap_trade_user(user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -620,7 +620,7 @@ class AuthenticationApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            SnapTradeLoginPost200Response
+            AuthenticationLoginSnapTradeUser200Response
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -653,9 +653,9 @@ class AuthenticationApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.snap_trade_login_post_endpoint.call_with_http_info(**kwargs)
+        return self.login_snap_trade_user_endpoint.call_with_http_info(**kwargs)
 
-    def snap_trade_register_user_post(
+    def register_snap_trade_user(
         self,
         snap_trade_register_user_request_body,
         **kwargs
@@ -665,7 +665,7 @@ class AuthenticationApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_register_user_post(snap_trade_register_user_request_body, async_req=True)
+        >>> thread = api.register_snap_trade_user(snap_trade_register_user_request_body, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -735,5 +735,5 @@ class AuthenticationApi(object):
         kwargs['_request_auths'] = kwargs.get('_request_auths', None)
         kwargs['snap_trade_register_user_request_body'] = \
             snap_trade_register_user_request_body
-        return self.snap_trade_register_user_post_endpoint.call_with_http_info(**kwargs)
+        return self.register_snap_trade_user_endpoint.call_with_http_info(**kwargs)
 

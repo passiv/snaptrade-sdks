@@ -20,6 +20,11 @@ VERSION = "1.0.1"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
+# read the contents of README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 REQUIRES = [
   "urllib3 >= 1.25.3",
   "python-dateutil",
@@ -31,13 +36,12 @@ setup(
     description="SnapTrade",
     author="Konfig",
     author_email="api@snaptrade.com",
-    url="",
+    url="https:////",
     keywords=["Konfig", "SnapTrade"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
-    long_description="""\
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
-    """
+    long_description=long_description,
+    long_description_content_type='text/markdown'
 )

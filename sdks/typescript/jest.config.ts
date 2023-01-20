@@ -4,5 +4,8 @@ const config: Config.InitialOptions = {
   preset: "ts-jest",
   testEnvironment: "node",
   testPathIgnorePatterns: ["dist/"],
+  transform: {
+    "^.+\\.ts?$": ["ts-jest", { tsconfig: "./tsconfig.test.json" }],
+  },
 };
 export default config;

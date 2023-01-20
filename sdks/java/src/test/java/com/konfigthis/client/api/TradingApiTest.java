@@ -22,7 +22,7 @@ import com.konfigthis.client.model.SymbolsQuotes;
 import com.konfigthis.client.model.Trade;
 import com.konfigthis.client.model.TradeExecutionStatus;
 import com.konfigthis.client.model.TradeImpact;
-import com.konfigthis.client.model.TradeOcoPostRequest;
+import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -46,56 +46,12 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void accountsAccountIdOrdersCancelPostTest() throws ApiException {
+    public void cancelUserAccountOrderTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
         UUID body = null;
-        AccountOrderRecord response = api.accountsAccountIdOrdersCancelPost(userId, userSecret, accountId, body);
-        // TODO: test validations
-    }
-
-    /**
-     * Get all history of orders placed in account
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void accountsAccountIdOrdersGetTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        String state = null;
-        List<AccountOrderRecord> response = api.accountsAccountIdOrdersGet(userId, userSecret, accountId, state);
-        // TODO: test validations
-    }
-
-    /**
-     * Get symbol quotes
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void accountsAccountIdQuotesGetTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID symbols = null;
-        UUID accountId = null;
-        Boolean useTicker = null;
-        SymbolsQuotes response = api.accountsAccountIdQuotesGet(userId, userSecret, symbols, accountId, useTicker);
-        // TODO: test validations
-    }
-
-    /**
-     * Return the impact of placing a series of trades on the portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGetTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        List<TradeImpact> response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId, calculatedTradeId);
+        AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId, body);
         // TODO: test validations
     }
 
@@ -105,39 +61,24 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGetTest() throws ApiException {
+    public void getCalculatedTradeImpactByIdTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
         UUID tradeId = null;
-        Trade response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId);
+        Trade response = api.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId);
         // TODO: test validations
     }
 
     /**
-     * Modify units of a trade before it is placed
+     * Return the impact of placing a series of trades on the portfolio
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatchTest() throws ApiException {
+    public void getCalculatedTradesImpactTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        Trade trade = null;
-        Trade response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade);
-        // TODO: test validations
-    }
-
-    /**
-     * Place orders for the CalculatedTrades in series
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPostTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        List<TradeExecutionStatus> response = api.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId, calculatedTradeId);
+        List<TradeImpact> response = api.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId);
         // TODO: test validations
     }
 
@@ -147,11 +88,55 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void tradeImpactPostTest() throws ApiException {
+    public void getOrderImpactTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         ManualTradeForm manualTradeForm = null;
-        ManualTradeAndImpact response = api.tradeImpactPost(userId, userSecret, manualTradeForm);
+        ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret, manualTradeForm);
+        // TODO: test validations
+    }
+
+    /**
+     * Get symbol quotes
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountQuotesTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID symbols = null;
+        UUID accountId = null;
+        Boolean useTicker = null;
+        SymbolsQuotes response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
+        // TODO: test validations
+    }
+
+    /**
+     * Modify units of a trade before it is placed
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void modifyCalculatedTradeByIdTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID calculatedTradeId = null;
+        UUID tradeId = null;
+        Trade trade = null;
+        Trade response = api.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade);
+        // TODO: test validations
+    }
+
+    /**
+     * Place orders for the CalculatedTrades in series
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeCalculatedTradesTest() throws ApiException {
+        UUID portfolioGroupId = null;
+        UUID calculatedTradeId = null;
+        List<TradeExecutionStatus> response = api.placeCalculatedTrades(portfolioGroupId, calculatedTradeId);
         // TODO: test validations
     }
 
@@ -161,11 +146,11 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void tradeOcoPostTest() throws ApiException {
+    public void placeOCOOrderTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        TradeOcoPostRequest tradeOcoPostRequest = null;
-        AccountOrderRecord response = api.tradeOcoPost(userId, userSecret, tradeOcoPostRequest);
+        TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = null;
+        AccountOrderRecord response = api.placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
         // TODO: test validations
     }
 
@@ -175,11 +160,11 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void tradeTradeIdPostTest() throws ApiException {
+    public void placeOrderTest() throws ApiException {
         UUID tradeId = null;
         String userId = null;
         String userSecret = null;
-        AccountOrderRecord response = api.tradeTradeIdPost(tradeId, userId, userSecret);
+        AccountOrderRecord response = api.placeOrder(tradeId, userId, userSecret);
         // TODO: test validations
     }
 

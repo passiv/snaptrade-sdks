@@ -36,7 +36,7 @@ class ErrorLogsApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-        self.snap_trade_list_user_errors_get_endpoint = _Endpoint(
+        self.list_user_errors_endpoint = _Endpoint(
             settings={
                 'response_type': ([UserErrorLog],),
                 'auth': [
@@ -45,7 +45,7 @@ class ErrorLogsApi(object):
                     'PartnerTimestamp'
                 ],
                 'endpoint_path': '/snapTrade/listUserErrors',
-                'operation_id': 'snap_trade_list_user_errors_get',
+                'operation_id': 'list_user_errors',
                 'http_method': 'GET',
                 'servers': None,
             },
@@ -96,7 +96,7 @@ class ErrorLogsApi(object):
             api_client=api_client
         )
 
-    def snap_trade_list_user_errors_get(
+    def list_user_errors(
         self,
         user_id,
         user_secret,
@@ -107,7 +107,7 @@ class ErrorLogsApi(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.snap_trade_list_user_errors_get(user_id, user_secret, async_req=True)
+        >>> thread = api.list_user_errors(user_id, user_secret, async_req=True)
         >>> result = thread.get()
 
         Args:
@@ -180,5 +180,5 @@ class ErrorLogsApi(object):
             user_id
         kwargs['user_secret'] = \
             user_secret
-        return self.snap_trade_list_user_errors_get_endpoint.call_with_http_info(**kwargs)
+        return self.list_user_errors_endpoint.call_with_http_info(**kwargs)
 

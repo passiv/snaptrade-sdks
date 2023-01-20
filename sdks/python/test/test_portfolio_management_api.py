@@ -24,248 +24,234 @@ class TestPortfolioManagementApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_model_asset_class_get(self):
-        """Test case for model_asset_class_get
-
-        List of model asset class  # noqa: E501
-        """
-        pass
-
-    def test_model_asset_class_model_asset_class_id_delete(self):
-        """Test case for model_asset_class_model_asset_class_id_delete
-
-        Deletes a model asset class  # noqa: E501
-        """
-        pass
-
-    def test_model_asset_class_model_asset_class_id_get(self):
-        """Test case for model_asset_class_model_asset_class_id_get
-
-        Get details of a model asset class  # noqa: E501
-        """
-        pass
-
-    def test_model_asset_class_model_asset_class_id_post(self):
-        """Test case for model_asset_class_model_asset_class_id_post
-
-        Updates model asset class objects  # noqa: E501
-        """
-        pass
-
-    def test_model_asset_class_post(self):
-        """Test case for model_asset_class_post
-
-        Create a new model asset class  # noqa: E501
-        """
-        pass
-
-    def test_model_portfolio_get(self):
-        """Test case for model_portfolio_get
-
-        List of model portfolio  # noqa: E501
-        """
-        pass
-
-    def test_model_portfolio_model_portfolio_id_delete(self):
-        """Test case for model_portfolio_model_portfolio_id_delete
-
-        Deletes a model portfolio  # noqa: E501
-        """
-        pass
-
-    def test_model_portfolio_model_portfolio_id_get(self):
-        """Test case for model_portfolio_model_portfolio_id_get
-
-        Get details of a model portfolio  # noqa: E501
-        """
-        pass
-
-    def test_model_portfolio_model_portfolio_id_post(self):
-        """Test case for model_portfolio_model_portfolio_id_post
-
-        Updates model portfolio object  # noqa: E501
-        """
-        pass
-
-    def test_model_portfolio_post(self):
-        """Test case for model_portfolio_post
-
-        Creates a new model portfolio  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_get(self):
-        """Test case for portfolio_groups_get
-
-        List all portfolio groups  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_accounts_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_accounts_get
-
-        Get all accounts associated with a portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_balances_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_balances_get
-
-        Get sum of cash balances in portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get
-
-        Return details of a specific trade before it's placed  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch
-
-        Modify units of a trade before it is placed  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id_get
-
-        Return an individual trade  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_get
-
-        List of trades to make to rebalance portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_delete(self):
-        """Test case for portfolio_groups_portfolio_group_id_delete
-
-        Remove a target portfolio.  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_excludedassets_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_excludedassets_get
-
-        Get an array of excluded assets associated with a portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_excludedassets_post(self):
-        """Test case for portfolio_groups_portfolio_group_id_excludedassets_post
+    def test_add_portfolio_excluded_asset(self):
+        """Test case for add_portfolio_excluded_asset
 
         Adds an asset to exclude to a portfolio group  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete(self):
-        """Test case for portfolio_groups_portfolio_group_id_excludedassets_symbol_id_delete
+    def test_create(self):
+        """Test case for create
+
+        Create new portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_create_asset_class(self):
+        """Test case for create_asset_class
+
+        Create a new model asset class  # noqa: E501
+        """
+        pass
+
+    def test_create_model_portfolio(self):
+        """Test case for create_model_portfolio
+
+        Creates a new model portfolio  # noqa: E501
+        """
+        pass
+
+    def test_delete_asset_class(self):
+        """Test case for delete_asset_class
+
+        Deletes a model asset class  # noqa: E501
+        """
+        pass
+
+    def test_delete_excluded_asset(self):
+        """Test case for delete_excluded_asset
 
         Unexclude an asset from a portfolio group  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_get
+    def test_delete_model_portfolio_by_id(self):
+        """Test case for delete_model_portfolio_by_id
 
-        Get details of a target portfolio  # noqa: E501
+        Deletes a model portfolio  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_import_post(self):
-        """Test case for portfolio_groups_portfolio_group_id_import_post
+    def test_delete_portfoli(self):
+        """Test case for delete_portfoli
 
-        Import target allocation based on portfolio group  # noqa: E501
+        Remove a target portfolio.  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_info_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_info_get
-
-        Return a whole bunch of relevant information relating to a portfolio group.  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_patch(self):
-        """Test case for portfolio_groups_portfolio_group_id_patch
-
-        Update an existing target portfolio.  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_positions_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_positions_get
-
-        Get total of each postions owned in portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_settings_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_settings_get
-
-        Get portfolio group settings  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_settings_patch(self):
-        """Test case for portfolio_groups_portfolio_group_id_settings_patch
-
-        Updates portfolio group settings  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_symbols_post(self):
-        """Test case for portfolio_groups_portfolio_group_id_symbols_post
-
-        Search for symbols limited to brokerages under the specified portfolio group  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_targets_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_targets_get
-
-        Get all target assets under the specified PortfolioGroup.  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_targets_post(self):
-        """Test case for portfolio_groups_portfolio_group_id_targets_post
-
-        Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_targets_target_asset_id_delete(self):
-        """Test case for portfolio_groups_portfolio_group_id_targets_target_asset_id_delete
+    def test_delete_portfolio_target_by_id(self):
+        """Test case for delete_portfolio_target_by_id
 
         Remove a TargetAsset.  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_targets_target_asset_id_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_targets_target_asset_id_get
+    def test_detail_asset_class(self):
+        """Test case for detail_asset_class
+
+        Get details of a model asset class  # noqa: E501
+        """
+        pass
+
+    def test_get_calculated_trade_by_id(self):
+        """Test case for get_calculated_trade_by_id
+
+        Return an individual trade  # noqa: E501
+        """
+        pass
+
+    def test_get_model_details_by_id(self):
+        """Test case for get_model_details_by_id
+
+        Get details of a model portfolio  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_balances(self):
+        """Test case for get_portfolio_balances
+
+        Get sum of cash balances in portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_details_by_id(self):
+        """Test case for get_portfolio_details_by_id
+
+        Get details of a target portfolio  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_info(self):
+        """Test case for get_portfolio_info
+
+        Return a whole bunch of relevant information relating to a portfolio group.  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_positions(self):
+        """Test case for get_portfolio_positions
+
+        Get total of each postions owned in portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_settings(self):
+        """Test case for get_portfolio_settings
+
+        Get portfolio group settings  # noqa: E501
+        """
+        pass
+
+    def test_get_portfolio_target_by_id(self):
+        """Test case for get_portfolio_target_by_id
 
         Get a specific target from a portfolio group  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_targets_target_asset_id_patch(self):
-        """Test case for portfolio_groups_portfolio_group_id_targets_target_asset_id_patch
+    def test_get_portfolio_targets(self):
+        """Test case for get_portfolio_targets
 
-        Update a TargetAsset under the specified PortfolioGroup.  # noqa: E501
+        Get all target assets under the specified PortfolioGroup.  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_post(self):
-        """Test case for portfolio_groups_post
+    def test_get_portoflio_excluded_assets(self):
+        """Test case for get_portoflio_excluded_assets
 
-        Create new portfolio group  # noqa: E501
+        Get an array of excluded assets associated with a portfolio group\\  # noqa: E501
+        """
+        pass
+
+    def test_import_model_portfolio(self):
+        """Test case for import_model_portfolio
+
+        Import target allocation based on portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_list(self):
+        """Test case for list
+
+        List all portfolio groups  # noqa: E501
+        """
+        pass
+
+    def test_list_asset_classes(self):
+        """Test case for list_asset_classes
+
+        List of model asset class  # noqa: E501
+        """
+        pass
+
+    def test_list_calculated_trades(self):
+        """Test case for list_calculated_trades
+
+        List of trades to make to rebalance portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_list_model_portfolio(self):
+        """Test case for list_model_portfolio
+
+        List of model portfolio  # noqa: E501
+        """
+        pass
+
+    def test_list_portfolio_accounts(self):
+        """Test case for list_portfolio_accounts
+
+        Get all accounts associated with a portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_modify_model_portfolio_by_id(self):
+        """Test case for modify_model_portfolio_by_id
+
+        Updates model portfolio object  # noqa: E501
+        """
+        pass
+
+    def test_save_portfolio(self):
+        """Test case for save_portfolio
+
+        Update an existing target portfolio.  # noqa: E501
+        """
+        pass
+
+    def test_search_portfolio_symbols(self):
+        """Test case for search_portfolio_symbols
+
+        Search for symbols limited to brokerages under the specified portfolio group  # noqa: E501
+        """
+        pass
+
+    def test_set_portfolio_targets(self):
+        """Test case for set_portfolio_targets
+
+        Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.  # noqa: E501
+        """
+        pass
+
+    def test_update_asset_class(self):
+        """Test case for update_asset_class
+
+        Updates model asset class objects  # noqa: E501
+        """
+        pass
+
+    def test_update_portfolio_settings(self):
+        """Test case for update_portfolio_settings
+
+        Updates portfolio group settings  # noqa: E501
+        """
+        pass
+
+    def test_update_portfolio_target_by_id(self):
+        """Test case for update_portfolio_target_by_id
+
+        Update a TargetAsset under the specified PortfolioGroup.  # noqa: E501
         """
         pass
 

@@ -467,7 +467,7 @@ public class BrokerageAuthorization {
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      if ((jsonObj.get("disabled_date") != null && !jsonObj.get("disabled_date").isJsonNull()) && !jsonObj.get("disabled_date").isJsonPrimitive()) {
+      if (!jsonObj.get("disabled_date").isJsonNull() && (jsonObj.get("disabled_date") != null && !jsonObj.get("disabled_date").isJsonNull()) && !jsonObj.get("disabled_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `disabled_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("disabled_date").toString()));
       }
   }

@@ -32,14 +32,14 @@ it("getting started", async () => {
 
   // 2) Check that the client is able to make a request to the API server.
   const apiStatusApiInst = new APIStatusApi(config);
-  const status = await apiStatusApiInst.rootGet();
+  const status = await apiStatusApiInst.check();
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
   const userId = uuid();
   const authenticationApiInst = new AuthenticationApi(config);
   const { userSecret } = (
-    await authenticationApiInst.snapTradeRegisterUserPost({
+    await authenticationApiInst.registerSnapTradeUser({
       userId,
     })
   ).data;
@@ -50,20 +50,21 @@ it("getting started", async () => {
 
   // 4) Get a redirect URI. Users will need this to connect
   const data = (
-    await authenticationApiInst.snapTradeLoginPost(userId, userSecret)
+    await authenticationApiInst.loginSnapTradeUser(userId, userSecret)
   ).data;
   if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
   console.log("redirectURI:", data.redirectURI);
 
   // 5) Obtaining account holdings data
   const accountInformationApi = new AccountInformationApi(config);
-  const holdings = (await accountInformationApi.holdingsGet(userId, userSecret))
-    .data;
+  const holdings = (
+    await accountInformationApi.getAllUserHoldings(userId, userSecret)
+  ).data;
   console.log("holdings:", holdings);
 
   // 6) Deleting a user
   const deleteResponse = (
-    await authenticationApiInst.snapTradeDeleteUserDelete(userId)
+    await authenticationApiInst.deleteSnapTradeUser(userId)
   ).data;
   console.log("deleteResponse:", deleteResponse);
 });

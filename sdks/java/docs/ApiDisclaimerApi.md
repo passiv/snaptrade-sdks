@@ -4,12 +4,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**snapTradeAcceptDisclaimerPost**](ApiDisclaimerApi.md#snapTradeAcceptDisclaimerPost) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement |
+| [**accept**](ApiDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement |
 
 
-<a name="snapTradeAcceptDisclaimerPost"></a>
-# **snapTradeAcceptDisclaimerPost**
-> SnapTradeAPIDisclaimerAcceptStatus snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest)
+<a name="accept"></a>
+# **accept**
+> SnapTradeAPIDisclaimerAcceptStatus accept(userId, userSecret, apIDisclaimerAcceptRequest)
 
 Accept or Reject SnapTrade disclaimer agreement
 
@@ -49,12 +49,12 @@ public class Example {
     ApiDisclaimerApi apiInstance = new ApiDisclaimerApi(defaultClient);
     String userId = "userId_example"; // String | 
     String userSecret = "userSecret_example"; // String | 
-    SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest = new SnapTradeAcceptDisclaimerPostRequest(); // SnapTradeAcceptDisclaimerPostRequest | 
+    APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest = new APIDisclaimerAcceptRequest(); // APIDisclaimerAcceptRequest | 
     try {
-      SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest);
+      SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.accept(userId, userSecret, apIDisclaimerAcceptRequest);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ApiDisclaimerApi#snapTradeAcceptDisclaimerPost");
+      System.err.println("Exception when calling ApiDisclaimerApi#accept");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -70,7 +70,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **snapTradeAcceptDisclaimerPostRequest** | [**SnapTradeAcceptDisclaimerPostRequest**](SnapTradeAcceptDisclaimerPostRequest.md)|  | |
+| **apIDisclaimerAcceptRequest** | [**APIDisclaimerAcceptRequest**](APIDisclaimerAcceptRequest.md)|  | |
 
 ### Return type
 

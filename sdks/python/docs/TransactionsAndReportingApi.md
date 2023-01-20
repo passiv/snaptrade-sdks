@@ -4,12 +4,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activities_get**](TransactionsAndReportingApi.md#activities_get) | **GET** /activities/ | Get transaction history for a user
-[**performance_custom_get**](TransactionsAndReportingApi.md#performance_custom_get) | **GET** /performance/custom | Get performance information for a specific timeframe
+[**get_activities**](TransactionsAndReportingApi.md#get_activities) | **GET** /activities | Get transaction history for a user
+[**get_reporting_custom_range**](TransactionsAndReportingApi.md#get_reporting_custom_range) | **GET** /performance/custom | Get performance information for a specific timeframe
 
 
-# **activities_get**
-> [UniversalActivity] activities_get(user_id, user_secret)
+# **get_activities**
+> [UniversalActivity] get_activities(user_id, user_secret)
 
 Get transaction history for a user
 
@@ -27,12 +27,6 @@ import snaptrade_client
 from snaptrade_client.api import transactions_and_reporting_api
 from snaptrade_client.model.universal_activity import UniversalActivity
 from pprint import pprint
-# Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = snaptrade_client.Configuration(
-    host = "https://api.snaptrade.com/api/v1"
-)
-
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
@@ -69,19 +63,19 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Get transaction history for a user
-        api_response = api_instance.activities_get(user_id, user_secret)
+        api_response = api_instance.get_activities(user_id, user_secret)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling TransactionsAndReportingApi->activities_get: %s\n" % e)
+        print("Exception when calling TransactionsAndReportingApi->get_activities: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # Get transaction history for a user
-        api_response = api_instance.activities_get(user_id, user_secret, start_date=start_date, end_date=end_date, accounts=accounts)
+        api_response = api_instance.get_activities(user_id, user_secret, start_date=start_date, end_date=end_date, accounts=accounts)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling TransactionsAndReportingApi->activities_get: %s\n" % e)
+        print("Exception when calling TransactionsAndReportingApi->get_activities: %s\n" % e)
 ```
 
 
@@ -118,8 +112,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **performance_custom_get**
-> PerformanceCustom performance_custom_get(start_date, end_date, user_id, user_secret)
+# **get_reporting_custom_range**
+> PerformanceCustom get_reporting_custom_range(start_date, end_date, user_id, user_secret)
 
 Get performance information for a specific timeframe
 
@@ -137,12 +131,6 @@ import snaptrade_client
 from snaptrade_client.api import transactions_and_reporting_api
 from snaptrade_client.model.performance_custom import PerformanceCustom
 from pprint import pprint
-# Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = snaptrade_client.Configuration(
-    host = "https://api.snaptrade.com/api/v1"
-)
-
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
@@ -181,19 +169,19 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Get performance information for a specific timeframe
-        api_response = api_instance.performance_custom_get(start_date, end_date, user_id, user_secret)
+        api_response = api_instance.get_reporting_custom_range(start_date, end_date, user_id, user_secret)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling TransactionsAndReportingApi->performance_custom_get: %s\n" % e)
+        print("Exception when calling TransactionsAndReportingApi->get_reporting_custom_range: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # Get performance information for a specific timeframe
-        api_response = api_instance.performance_custom_get(start_date, end_date, user_id, user_secret, accounts=accounts, detailed=detailed, frequency=frequency)
+        api_response = api_instance.get_reporting_custom_range(start_date, end_date, user_id, user_secret, accounts=accounts, detailed=detailed, frequency=frequency)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling TransactionsAndReportingApi->performance_custom_get: %s\n" % e)
+        print("Exception when calling TransactionsAndReportingApi->get_reporting_custom_range: %s\n" % e)
 ```
 
 

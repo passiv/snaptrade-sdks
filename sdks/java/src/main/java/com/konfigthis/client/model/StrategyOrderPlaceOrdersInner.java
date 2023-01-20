@@ -721,7 +721,7 @@ public class StrategyOrderPlaceOrdersInner {
    * @return rejectionReason
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getRejectionReason() {
     return rejectionReason;
@@ -813,7 +813,7 @@ public class StrategyOrderPlaceOrdersInner {
    * @return notes
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getNotes() {
     return notes;
@@ -905,7 +905,7 @@ public class StrategyOrderPlaceOrdersInner {
    * @return venueHoldingOrder
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getVenueHoldingOrder() {
     return venueHoldingOrder;
@@ -951,7 +951,7 @@ public class StrategyOrderPlaceOrdersInner {
    * @return exchangeOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getExchangeOrderId() {
     return exchangeOrderId;

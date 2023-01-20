@@ -22,6 +22,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
 /**
+ * 
+ * @export
+ * @interface APIDisclaimerAcceptRequest
+ */
+export interface APIDisclaimerAcceptRequest {
+    /**
+     * A boolean that indicates whether this user has accepted the disclaimer or not.
+     * @type {boolean}
+     * @memberof APIDisclaimerAcceptRequest
+     */
+    'accepted'?: boolean;
+}
+/**
  * SnapTradeUser Investment Account
  * @export
  * @interface Account
@@ -300,6 +313,12 @@ export const Action = {
 
 export type Action = typeof Action[keyof typeof Action];
 
+
+/**
+ * @type AuthenticationLoginSnapTradeUser200Response
+ * @export
+ */
+export type AuthenticationLoginSnapTradeUser200Response = EncryptedResponse | LoginRedirectURI;
 
 /**
  * Account Balance
@@ -2293,19 +2312,6 @@ export interface SnapTradeAPIDisclaimerAcceptStatus {
     'timestamp'?: string;
 }
 /**
- * 
- * @export
- * @interface SnapTradeAcceptDisclaimerPostRequest
- */
-export interface SnapTradeAcceptDisclaimerPostRequest {
-    /**
-     * A boolean that indicates whether this user has accepted the disclaimer or not.
-     * @type {boolean}
-     * @memberof SnapTradeAcceptDisclaimerPostRequest
-     */
-    'accepted'?: boolean;
-}
-/**
  * SnapTradeUser Investment Account
  * @export
  * @interface SnapTradeHoldingsAccount
@@ -2377,12 +2383,6 @@ export interface SnapTradeHoldingsTotalValue {
      */
     'currency'?: string;
 }
-/**
- * @type SnapTradeLoginPost200Response
- * @export
- */
-export type SnapTradeLoginPost200Response = EncryptedResponse | LoginRedirectURI;
-
 /**
  * Data to login a user via SnapTrade Partner
  * @export
@@ -3393,19 +3393,19 @@ export interface TradeImpact {
 /**
  * 
  * @export
- * @interface TradeOcoPostRequest
+ * @interface TradingPlaceOCOOrderRequest
  */
-export interface TradeOcoPostRequest {
+export interface TradingPlaceOCOOrderRequest {
     /**
      * The ID of first trade object obtained from trade/impact endpoint
      * @type {any}
-     * @memberof TradeOcoPostRequest
+     * @memberof TradingPlaceOCOOrderRequest
      */
     'first_trade_id'?: any;
     /**
      * The ID of second trade object obtained from trade/impact endpoint
      * @type {any}
-     * @memberof TradeOcoPostRequest
+     * @memberof TradingPlaceOCOOrderRequest
      */
     'second_trade_id'?: any;
 }
@@ -3702,6 +3702,63 @@ export interface UniversalSymbol {
     'currencies'?: Array<Currency>;
 }
 /**
+ * Universal symbol
+ * @export
+ * @interface UniversalSymbolTicker
+ */
+export interface UniversalSymbolTicker {
+    [key: string]: any;
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UniversalSymbolTicker
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UniversalSymbolTicker
+     */
+    'symbol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UniversalSymbolTicker
+     */
+    'raw_symbol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UniversalSymbolTicker
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Currency}
+     * @memberof UniversalSymbolTicker
+     */
+    'currency'?: Currency;
+    /**
+     * 
+     * @type {Exchange}
+     * @memberof UniversalSymbolTicker
+     */
+    'exchange'?: Exchange;
+    /**
+     * 
+     * @type {SecurityType}
+     * @memberof UniversalSymbolTicker
+     */
+    'type'?: SecurityType;
+    /**
+     * 
+     * @type {Array<Currency>}
+     * @memberof UniversalSymbolTicker
+     */
+    'currencies'?: Array<Currency>;
+}
+/**
  * An API error log for a specific SnapTrade user.
  * @export
  * @interface UserErrorLog
@@ -3848,17 +3905,17 @@ export const APIDisclaimerApiAxiosParamCreator = function (configuration?: Confi
          * @summary Accept or Reject SnapTrade disclaimer agreement
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {SnapTradeAcceptDisclaimerPostRequest} snapTradeAcceptDisclaimerPostRequest 
+         * @param {APIDisclaimerAcceptRequest} aPIDisclaimerAcceptRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeAcceptDisclaimerPost: async (userId: string, userSecret: string, snapTradeAcceptDisclaimerPostRequest: SnapTradeAcceptDisclaimerPostRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        accept: async (userId: string, userSecret: string, aPIDisclaimerAcceptRequest: APIDisclaimerAcceptRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('snapTradeAcceptDisclaimerPost', 'userId', userId)
+            assertParamExists('accept', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('snapTradeAcceptDisclaimerPost', 'userSecret', userSecret)
-            // verify required parameter 'snapTradeAcceptDisclaimerPostRequest' is not null or undefined
-            assertParamExists('snapTradeAcceptDisclaimerPost', 'snapTradeAcceptDisclaimerPostRequest', snapTradeAcceptDisclaimerPostRequest)
+            assertParamExists('accept', 'userSecret', userSecret)
+            // verify required parameter 'aPIDisclaimerAcceptRequest' is not null or undefined
+            assertParamExists('accept', 'aPIDisclaimerAcceptRequest', aPIDisclaimerAcceptRequest)
             const localVarPath = `/snapTrade/acceptDisclaimer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3895,7 +3952,7 @@ export const APIDisclaimerApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(snapTradeAcceptDisclaimerPostRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aPIDisclaimerAcceptRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3917,12 +3974,12 @@ export const APIDisclaimerApiFp = function(configuration?: Configuration) {
          * @summary Accept or Reject SnapTrade disclaimer agreement
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {SnapTradeAcceptDisclaimerPostRequest} snapTradeAcceptDisclaimerPostRequest 
+         * @param {APIDisclaimerAcceptRequest} aPIDisclaimerAcceptRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeAcceptDisclaimerPost(userId: string, userSecret: string, snapTradeAcceptDisclaimerPostRequest: SnapTradeAcceptDisclaimerPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapTradeAPIDisclaimerAcceptStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, options);
+        async accept(userId: string, userSecret: string, aPIDisclaimerAcceptRequest: APIDisclaimerAcceptRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapTradeAPIDisclaimerAcceptStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accept(userId, userSecret, aPIDisclaimerAcceptRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -3940,12 +3997,12 @@ export const APIDisclaimerApiFactory = function (configuration?: Configuration, 
          * @summary Accept or Reject SnapTrade disclaimer agreement
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {SnapTradeAcceptDisclaimerPostRequest} snapTradeAcceptDisclaimerPostRequest 
+         * @param {APIDisclaimerAcceptRequest} aPIDisclaimerAcceptRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeAcceptDisclaimerPost(userId: string, userSecret: string, snapTradeAcceptDisclaimerPostRequest: SnapTradeAcceptDisclaimerPostRequest, options?: any): AxiosPromise<SnapTradeAPIDisclaimerAcceptStatus> {
-            return localVarFp.snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, options).then((request) => request(axios, basePath));
+        accept(userId: string, userSecret: string, aPIDisclaimerAcceptRequest: APIDisclaimerAcceptRequest, options?: any): AxiosPromise<SnapTradeAPIDisclaimerAcceptStatus> {
+            return localVarFp.accept(userId, userSecret, aPIDisclaimerAcceptRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3962,13 +4019,13 @@ export class APIDisclaimerApi extends BaseAPI {
      * @summary Accept or Reject SnapTrade disclaimer agreement
      * @param {string} userId 
      * @param {string} userSecret 
-     * @param {SnapTradeAcceptDisclaimerPostRequest} snapTradeAcceptDisclaimerPostRequest 
+     * @param {APIDisclaimerAcceptRequest} aPIDisclaimerAcceptRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIDisclaimerApi
      */
-    public snapTradeAcceptDisclaimerPost(userId: string, userSecret: string, snapTradeAcceptDisclaimerPostRequest: SnapTradeAcceptDisclaimerPostRequest, options?: AxiosRequestConfig) {
-        return APIDisclaimerApiFp(this.configuration).snapTradeAcceptDisclaimerPost(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, options).then((request) => request(this.axios, this.basePath));
+    public accept(userId: string, userSecret: string, aPIDisclaimerAcceptRequest: APIDisclaimerAcceptRequest, options?: AxiosRequestConfig) {
+        return APIDisclaimerApiFp(this.configuration).accept(userId, userSecret, aPIDisclaimerAcceptRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3985,7 +4042,7 @@ export const APIStatusApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rootGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        check: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4025,8 +4082,8 @@ export const APIStatusApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rootGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Status>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rootGet(options);
+        async check(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Status>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.check(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -4045,8 +4102,8 @@ export const APIStatusApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rootGet(options?: any): AxiosPromise<Status> {
-            return localVarFp.rootGet(options).then((request) => request(axios, basePath));
+        check(options?: any): AxiosPromise<Status> {
+            return localVarFp.check(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4065,8 +4122,8 @@ export class APIStatusApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIStatusApi
      */
-    public rootGet(options?: AxiosRequestConfig) {
-        return APIStatusApiFp(this.configuration).rootGet(options).then((request) => request(this.axios, this.basePath));
+    public check(options?: AxiosRequestConfig) {
+        return APIStatusApiFp(this.configuration).check(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4079,6 +4136,64 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
     return {
         /**
          * 
+         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllUserHoldings: async (userId: string, userSecret: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getAllUserHoldings', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getAllUserHoldings', 'userSecret', userSecret)
+            const localVarPath = `/holdings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (brokerageAuthorizations !== undefined) {
+                localVarQueryParameter['brokerage_authorizations'] = brokerageAuthorizations;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get all cash balances of an investment account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -4086,13 +4201,13 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdBalancesGet: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountBalance: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdBalancesGet', 'userId', userId)
+            assertParamExists('getUserAccountBalance', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdBalancesGet', 'userSecret', userSecret)
+            assertParamExists('getUserAccountBalance', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdBalancesGet', 'accountId', accountId)
+            assertParamExists('getUserAccountBalance', 'accountId', accountId)
             const localVarPath = `/accounts/{accountId}/balances`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4143,13 +4258,13 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdGet: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountDetails: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdGet', 'userId', userId)
+            assertParamExists('getUserAccountDetails', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdGet', 'userSecret', userSecret)
+            assertParamExists('getUserAccountDetails', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdGet', 'accountId', accountId)
+            assertParamExists('getUserAccountDetails', 'accountId', accountId)
             const localVarPath = `/accounts/{accountId}`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4193,21 +4308,22 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
-         * @param {string} accountId The ID of the account to fetch holdings for.
+         * @summary Get all history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdHoldingsGet: async (accountId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdHoldingsGet', 'accountId', accountId)
+        getUserAccountOrders: async (userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdHoldingsGet', 'userId', userId)
+            assertParamExists('getUserAccountOrders', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdHoldingsGet', 'userSecret', userSecret)
-            const localVarPath = `/accounts/{accountId}/holdings`
+            assertParamExists('getUserAccountOrders', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getUserAccountOrders', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/orders`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4237,6 +4353,10 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
+            if (state !== undefined) {
+                localVarQueryParameter['state'] = state;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -4257,13 +4377,13 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdPositionsGet: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountPositions: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdPositionsGet', 'userId', userId)
+            assertParamExists('getUserAccountPositions', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdPositionsGet', 'userSecret', userSecret)
+            assertParamExists('getUserAccountPositions', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdPositionsGet', 'accountId', accountId)
+            assertParamExists('getUserAccountPositions', 'accountId', accountId)
             const localVarPath = `/accounts/{accountId}/positions`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4307,21 +4427,21 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary Update details of an investment account
+         * @summary List balances, positions and orders for the specified account.
+         * @param {string} accountId The ID of the account to fetch holdings for.
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account to update.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdPut: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdPut', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdPut', 'userSecret', userSecret)
+        getUserHoldings: async (accountId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdPut', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}`
+            assertParamExists('getUserHoldings', 'accountId', accountId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserHoldings', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getUserHoldings', 'userSecret', userSecret)
+            const localVarPath = `/accounts/{accountId}/holdings`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4330,7 +4450,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -4370,11 +4490,11 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsGet: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUserAccounts: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsGet', 'userId', userId)
+            assertParamExists('listUserAccounts', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsGet', 'userSecret', userSecret)
+            assertParamExists('listUserAccounts', 'userSecret', userSecret)
             const localVarPath = `/accounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4417,19 +4537,22 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @summary Update details of an investment account
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+         * @param {string} accountId The ID of the account to update.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        holdingsGet: async (userId: string, userSecret: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateUserAccount: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('holdingsGet', 'userId', userId)
+            assertParamExists('updateUserAccount', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('holdingsGet', 'userSecret', userSecret)
-            const localVarPath = `/holdings`;
+            assertParamExists('updateUserAccount', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('updateUserAccount', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4437,7 +4560,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -4456,10 +4579,6 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (brokerageAuthorizations !== undefined) {
-                localVarQueryParameter['brokerage_authorizations'] = brokerageAuthorizations;
             }
 
 
@@ -4485,6 +4604,19 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllUserHoldings(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountHoldings>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllUserHoldings(userId, userSecret, brokerageAuthorizations, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Get all cash balances of an investment account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -4492,8 +4624,8 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdBalancesGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdBalancesGet(userId, userSecret, accountId, options);
+        async getUserAccountBalance(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountBalance(userId, userSecret, accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4505,21 +4637,22 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdGet(userId, userSecret, accountId, options);
+        async getUserAccountDetails(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountDetails(userId, userSecret, accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
-         * @param {string} accountId The ID of the account to fetch holdings for.
+         * @summary Get all history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdHoldingsGet(accountId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldings>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdHoldingsGet(accountId, userId, userSecret, options);
+        async getUserAccountOrders(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrders(userId, userSecret, accountId, state, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4531,8 +4664,33 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdPositionsGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Position>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdPositionsGet(userId, userSecret, accountId, options);
+        async getUserAccountPositions(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Position>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountPositions(userId, userSecret, accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List balances, positions and orders for the specified account.
+         * @param {string} accountId The ID of the account to fetch holdings for.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserHoldings(accountId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldings>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserHoldings(accountId, userId, userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List all investment accounts for the user
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listUserAccounts(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4544,33 +4702,8 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdPut(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdPut(userId, userSecret, accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List all investment accounts for the user
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async accountsGet(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsGet(userId, userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async holdingsGet(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountHoldings>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.holdingsGet(userId, userSecret, brokerageAuthorizations, options);
+        async updateUserAccount(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserAccount(userId, userSecret, accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -4585,6 +4718,18 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     return {
         /**
          * 
+         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllUserHoldings(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: any): AxiosPromise<Array<AccountHoldings>> {
+            return localVarFp.getAllUserHoldings(userId, userSecret, brokerageAuthorizations, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get all cash balances of an investment account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -4592,8 +4737,8 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdBalancesGet(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Balance>> {
-            return localVarFp.accountsAccountIdBalancesGet(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
+        getUserAccountBalance(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Balance>> {
+            return localVarFp.getUserAccountBalance(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4604,20 +4749,21 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdGet(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Account>> {
-            return localVarFp.accountsAccountIdGet(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
+        getUserAccountDetails(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Account>> {
+            return localVarFp.getUserAccountDetails(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
-         * @param {string} accountId The ID of the account to fetch holdings for.
+         * @summary Get all history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdHoldingsGet(accountId: string, userId: string, userSecret: string, options?: any): AxiosPromise<AccountHoldings> {
-            return localVarFp.accountsAccountIdHoldingsGet(accountId, userId, userSecret, options).then((request) => request(axios, basePath));
+        getUserAccountOrders(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: any): AxiosPromise<Array<AccountOrderRecord>> {
+            return localVarFp.getUserAccountOrders(userId, userSecret, accountId, state, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4628,8 +4774,31 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdPositionsGet(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Position>> {
-            return localVarFp.accountsAccountIdPositionsGet(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
+        getUserAccountPositions(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Position>> {
+            return localVarFp.getUserAccountPositions(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List balances, positions and orders for the specified account.
+         * @param {string} accountId The ID of the account to fetch holdings for.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserHoldings(accountId: string, userId: string, userSecret: string, options?: any): AxiosPromise<AccountHoldings> {
+            return localVarFp.getUserHoldings(accountId, userId, userSecret, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List all investment accounts for the user
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listUserAccounts(userId: string, userSecret: string, options?: any): AxiosPromise<Array<Account>> {
+            return localVarFp.listUserAccounts(userId, userSecret, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4640,31 +4809,8 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdPut(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Account>> {
-            return localVarFp.accountsAccountIdPut(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all investment accounts for the user
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsGet(userId: string, userSecret: string, options?: any): AxiosPromise<Array<Account>> {
-            return localVarFp.accountsGet(userId, userSecret, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        holdingsGet(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: any): AxiosPromise<Array<AccountHoldings>> {
-            return localVarFp.holdingsGet(userId, userSecret, brokerageAuthorizations, options).then((request) => request(axios, basePath));
+        updateUserAccount(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<Array<Account>> {
+            return localVarFp.updateUserAccount(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4678,6 +4824,20 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
 export class AccountInformationApi extends BaseAPI {
     /**
      * 
+     * @summary List all accounts for the user, plus balances and positions for each account.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApi
+     */
+    public getAllUserHoldings(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getAllUserHoldings(userId, userSecret, brokerageAuthorizations, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get all cash balances of an investment account
      * @param {string} userId 
      * @param {string} userSecret 
@@ -4686,8 +4846,8 @@ export class AccountInformationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountInformationApi
      */
-    public accountsAccountIdBalancesGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsAccountIdBalancesGet(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountBalance(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountBalance(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4700,22 +4860,23 @@ export class AccountInformationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountInformationApi
      */
-    public accountsAccountIdGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsAccountIdGet(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountDetails(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountDetails(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary List balances, positions and orders for the specified account.
-     * @param {string} accountId The ID of the account to fetch holdings for.
+     * @summary Get all history of orders placed in account
      * @param {string} userId 
      * @param {string} userSecret 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountInformationApi
      */
-    public accountsAccountIdHoldingsGet(accountId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsAccountIdHoldingsGet(accountId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOrders(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountOrders(userId, userSecret, accountId, state, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4728,8 +4889,35 @@ export class AccountInformationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountInformationApi
      */
-    public accountsAccountIdPositionsGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsAccountIdPositionsGet(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountPositions(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountPositions(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List balances, positions and orders for the specified account.
+     * @param {string} accountId The ID of the account to fetch holdings for.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApi
+     */
+    public getUserHoldings(accountId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserHoldings(accountId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List all investment accounts for the user
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApi
+     */
+    public listUserAccounts(userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).listUserAccounts(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4742,35 +4930,8 @@ export class AccountInformationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AccountInformationApi
      */
-    public accountsAccountIdPut(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsAccountIdPut(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all investment accounts for the user
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AccountInformationApi
-     */
-    public accountsGet(userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).accountsGet(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all accounts for the user, plus balances and positions for each account.
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AccountInformationApi
-     */
-    public holdingsGet(userId: string, userSecret: string, brokerageAuthorizations?: string, options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).holdingsGet(userId, userSecret, brokerageAuthorizations, options).then((request) => request(this.axios, this.basePath));
+    public updateUserAccount(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).updateUserAccount(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4788,9 +4949,9 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeDeleteUserDelete: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteSnapTradeUser: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('snapTradeDeleteUserDelete', 'userId', userId)
+            assertParamExists('deleteSnapTradeUser', 'userId', userId)
             const localVarPath = `/snapTrade/deleteUser`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4835,11 +4996,11 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeEncryptedJWTGet: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserJWT: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('snapTradeEncryptedJWTGet', 'userId', userId)
+            assertParamExists('getUserJWT', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('snapTradeEncryptedJWTGet', 'userSecret', userSecret)
+            assertParamExists('getUserJWT', 'userSecret', userSecret)
             const localVarPath = `/snapTrade/encryptedJWT`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4886,7 +5047,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeListUsersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listSnapTradeUsers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/snapTrade/listUsers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4928,11 +5089,11 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeLoginPost: async (userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        loginSnapTradeUser: async (userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('snapTradeLoginPost', 'userId', userId)
+            assertParamExists('loginSnapTradeUser', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('snapTradeLoginPost', 'userSecret', userSecret)
+            assertParamExists('loginSnapTradeUser', 'userSecret', userSecret)
             const localVarPath = `/snapTrade/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4983,9 +5144,9 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeRegisterUserPost: async (snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        registerSnapTradeUser: async (snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'snapTradeRegisterUserRequestBody' is not null or undefined
-            assertParamExists('snapTradeRegisterUserPost', 'snapTradeRegisterUserRequestBody', snapTradeRegisterUserRequestBody)
+            assertParamExists('registerSnapTradeUser', 'snapTradeRegisterUserRequestBody', snapTradeRegisterUserRequestBody)
             const localVarPath = `/snapTrade/registerUser`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5038,8 +5199,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeDeleteUserDelete(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteUserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeDeleteUserDelete(userId, options);
+        async deleteSnapTradeUser(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteUserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSnapTradeUser(userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5050,8 +5211,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeEncryptedJWTGet(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptedResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeEncryptedJWTGet(userId, userSecret, options);
+        async getUserJWT(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserJWT(userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5060,8 +5221,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeListUsersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeListUsersGet(options);
+        async listSnapTradeUsers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSnapTradeUsers(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5073,8 +5234,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeLoginPost(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapTradeLoginPost200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody, options);
+        async loginSnapTradeUser(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationLoginSnapTradeUser200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5084,8 +5245,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody, options);
+        async registerSnapTradeUser(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registerSnapTradeUser(snapTradeRegisterUserRequestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5105,8 +5266,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeDeleteUserDelete(userId: string, options?: any): AxiosPromise<DeleteUserResponse> {
-            return localVarFp.snapTradeDeleteUserDelete(userId, options).then((request) => request(axios, basePath));
+        deleteSnapTradeUser(userId: string, options?: any): AxiosPromise<DeleteUserResponse> {
+            return localVarFp.deleteSnapTradeUser(userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5116,8 +5277,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeEncryptedJWTGet(userId: string, userSecret: string, options?: any): AxiosPromise<EncryptedResponse> {
-            return localVarFp.snapTradeEncryptedJWTGet(userId, userSecret, options).then((request) => request(axios, basePath));
+        getUserJWT(userId: string, userSecret: string, options?: any): AxiosPromise<EncryptedResponse> {
+            return localVarFp.getUserJWT(userId, userSecret, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5125,8 +5286,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeListUsersGet(options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.snapTradeListUsersGet(options).then((request) => request(axios, basePath));
+        listSnapTradeUsers(options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.listSnapTradeUsers(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5137,8 +5298,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeLoginPost(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: any): AxiosPromise<SnapTradeLoginPost200Response> {
-            return localVarFp.snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody, options).then((request) => request(axios, basePath));
+        loginSnapTradeUser(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: any): AxiosPromise<AuthenticationLoginSnapTradeUser200Response> {
+            return localVarFp.loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5147,8 +5308,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: any): AxiosPromise<UserIDandSecret> {
-            return localVarFp.snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody, options).then((request) => request(axios, basePath));
+        registerSnapTradeUser(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: any): AxiosPromise<UserIDandSecret> {
+            return localVarFp.registerSnapTradeUser(snapTradeRegisterUserRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5168,8 +5329,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public snapTradeDeleteUserDelete(userId: string, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).snapTradeDeleteUserDelete(userId, options).then((request) => request(this.axios, this.basePath));
+    public deleteSnapTradeUser(userId: string, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).deleteSnapTradeUser(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5181,8 +5342,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public snapTradeEncryptedJWTGet(userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).snapTradeEncryptedJWTGet(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public getUserJWT(userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).getUserJWT(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5192,8 +5353,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public snapTradeListUsersGet(options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).snapTradeListUsersGet(options).then((request) => request(this.axios, this.basePath));
+    public listSnapTradeUsers(options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).listSnapTradeUsers(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5206,8 +5367,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public snapTradeLoginPost(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).snapTradeLoginPost(userId, userSecret, snapTradeLoginUserRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public loginSnapTradeUser(userId: string, userSecret: string, snapTradeLoginUserRequestBody?: SnapTradeLoginUserRequestBody, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).loginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5218,8 +5379,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).snapTradeRegisterUserPost(snapTradeRegisterUserRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public registerSnapTradeUser(snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).registerSnapTradeUser(snapTradeRegisterUserRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5232,63 +5393,6 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @summary Remove a brokerage authorization.
-         * @param {string} authorizationId The ID of the Authorization to delete.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizationsAuthorizationIdDelete: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorizationId' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdDelete', 'authorizationId', authorizationId)
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdDelete', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdDelete', 'userSecret', userSecret)
-            const localVarPath = `/authorizations/{authorizationId}`
-                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get detail of a specific brokerage authorizations for the user
          * @param {string} authorizationId The ID of a brokerage authorization object.
          * @param {string} userId 
@@ -5296,13 +5400,13 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorizationsAuthorizationIdGet: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        detailBrokerageAuthorization: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'authorizationId' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdGet', 'authorizationId', authorizationId)
+            assertParamExists('detailBrokerageAuthorization', 'authorizationId', authorizationId)
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdGet', 'userId', userId)
+            assertParamExists('detailBrokerageAuthorization', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('authorizationsAuthorizationIdGet', 'userSecret', userSecret)
+            assertParamExists('detailBrokerageAuthorization', 'userSecret', userSecret)
             const localVarPath = `/authorizations/{authorizationId}`
                 .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5352,11 +5456,11 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorizationsGet: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listBrokerageAuthorizations: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('authorizationsGet', 'userId', userId)
+            assertParamExists('listBrokerageAuthorizations', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('authorizationsGet', 'userSecret', userSecret)
+            assertParamExists('listBrokerageAuthorizations', 'userSecret', userSecret)
             const localVarPath = `/authorizations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5366,6 +5470,63 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a brokerage authorization.
+         * @param {string} authorizationId The ID of the Authorization to delete.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeBrokerageAuthorization: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('removeBrokerageAuthorization', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('removeBrokerageAuthorization', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('removeBrokerageAuthorization', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5409,19 +5570,6 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Remove a brokerage authorization.
-         * @param {string} authorizationId The ID of the Authorization to delete.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authorizationsAuthorizationIdDelete(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizationsAuthorizationIdDelete(authorizationId, userId, userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Get detail of a specific brokerage authorizations for the user
          * @param {string} authorizationId The ID of a brokerage authorization object.
          * @param {string} userId 
@@ -5429,8 +5577,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorizationsAuthorizationIdGet(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizationsAuthorizationIdGet(authorizationId, userId, userSecret, options);
+        async detailBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.detailBrokerageAuthorization(authorizationId, userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5441,8 +5589,21 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorizationsGet(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorization>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizationsGet(userId, userSecret, options);
+        async listBrokerageAuthorizations(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorization>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listBrokerageAuthorizations(userId, userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Remove a brokerage authorization.
+         * @param {string} authorizationId The ID of the Authorization to delete.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async removeBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeBrokerageAuthorization(authorizationId, userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5457,18 +5618,6 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @summary Remove a brokerage authorization.
-         * @param {string} authorizationId The ID of the Authorization to delete.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizationsAuthorizationIdDelete(authorizationId: string, userId: string, userSecret: string, options?: any): AxiosPromise<void> {
-            return localVarFp.authorizationsAuthorizationIdDelete(authorizationId, userId, userSecret, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Get detail of a specific brokerage authorizations for the user
          * @param {string} authorizationId The ID of a brokerage authorization object.
          * @param {string} userId 
@@ -5476,8 +5625,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorizationsAuthorizationIdGet(authorizationId: string, userId: string, userSecret: string, options?: any): AxiosPromise<BrokerageAuthorization> {
-            return localVarFp.authorizationsAuthorizationIdGet(authorizationId, userId, userSecret, options).then((request) => request(axios, basePath));
+        detailBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: any): AxiosPromise<BrokerageAuthorization> {
+            return localVarFp.detailBrokerageAuthorization(authorizationId, userId, userSecret, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5487,8 +5636,20 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorizationsGet(userId: string, userSecret: string, options?: any): AxiosPromise<Array<BrokerageAuthorization>> {
-            return localVarFp.authorizationsGet(userId, userSecret, options).then((request) => request(axios, basePath));
+        listBrokerageAuthorizations(userId: string, userSecret: string, options?: any): AxiosPromise<Array<BrokerageAuthorization>> {
+            return localVarFp.listBrokerageAuthorizations(userId, userSecret, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a brokerage authorization.
+         * @param {string} authorizationId The ID of the Authorization to delete.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeBrokerageAuthorization(authorizationId, userId, userSecret, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5502,20 +5663,6 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
 export class ConnectionsApi extends BaseAPI {
     /**
      * 
-     * @summary Remove a brokerage authorization.
-     * @param {string} authorizationId The ID of the Authorization to delete.
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectionsApi
-     */
-    public authorizationsAuthorizationIdDelete(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).authorizationsAuthorizationIdDelete(authorizationId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Get detail of a specific brokerage authorizations for the user
      * @param {string} authorizationId The ID of a brokerage authorization object.
      * @param {string} userId 
@@ -5524,8 +5671,8 @@ export class ConnectionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectionsApi
      */
-    public authorizationsAuthorizationIdGet(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).authorizationsAuthorizationIdGet(authorizationId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public detailBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).detailBrokerageAuthorization(authorizationId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5537,8 +5684,22 @@ export class ConnectionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectionsApi
      */
-    public authorizationsGet(userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).authorizationsGet(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public listBrokerageAuthorizations(userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizations(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a brokerage authorization.
+     * @param {string} authorizationId The ID of the Authorization to delete.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApi
+     */
+    public removeBrokerageAuthorization(authorizationId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).removeBrokerageAuthorization(authorizationId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5557,11 +5718,11 @@ export const ErrorLogsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeListUserErrorsGet: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listUserErrors: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('snapTradeListUserErrorsGet', 'userId', userId)
+            assertParamExists('listUserErrors', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('snapTradeListUserErrorsGet', 'userSecret', userSecret)
+            assertParamExists('listUserErrors', 'userSecret', userSecret)
             const localVarPath = `/snapTrade/listUserErrors`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5620,8 +5781,8 @@ export const ErrorLogsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradeListUserErrorsGet(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserErrorLog>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradeListUserErrorsGet(userId, userSecret, options);
+        async listUserErrors(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserErrorLog>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUserErrors(userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5642,8 +5803,8 @@ export const ErrorLogsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradeListUserErrorsGet(userId: string, userSecret: string, options?: any): AxiosPromise<Array<UserErrorLog>> {
-            return localVarFp.snapTradeListUserErrorsGet(userId, userSecret, options).then((request) => request(axios, basePath));
+        listUserErrors(userId: string, userSecret: string, options?: any): AxiosPromise<Array<UserErrorLog>> {
+            return localVarFp.listUserErrors(userId, userSecret, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5664,8 +5825,8 @@ export class ErrorLogsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ErrorLogsApi
      */
-    public snapTradeListUserErrorsGet(userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return ErrorLogsApiFp(this.configuration).snapTradeListUserErrorsGet(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public listUserErrors(userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return ErrorLogsApiFp(this.configuration).listUserErrors(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5686,15 +5847,15 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOptionsChainGet: async (userId: string, userSecret: string, accountId: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOptionsChain: async (userId: string, userSecret: string, accountId: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsChainGet', 'userId', userId)
+            assertParamExists('getOptionsChain', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsChainGet', 'userSecret', userSecret)
+            assertParamExists('getOptionsChain', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsChainGet', 'accountId', accountId)
+            assertParamExists('getOptionsChain', 'accountId', accountId)
             // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsChainGet', 'symbol', symbol)
+            assertParamExists('getOptionsChain', 'symbol', symbol)
             const localVarPath = `/accounts/{accountId}/options_chain`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5742,137 +5903,6 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get the options holdings in the account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdOptionsGet: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsGet', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsGet', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsGet', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/options`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdOptionsSearchGet: async (userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsSearchGet', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsSearchGet', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsSearchGet', 'accountId', accountId)
-            // verify required parameter 'date' is not null or undefined
-            assertParamExists('accountsAccountIdOptionsSearchGet', 'date', date)
-            const localVarPath = `/accounts/{accountId}/options_search`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (date !== undefined) {
-                localVarQueryParameter['Date'] = date;
-            }
-
-            if (minStrike !== undefined) {
-                localVarQueryParameter['min_strike'] = minStrike;
-            }
-
-            if (maxStrike !== undefined) {
-                localVarQueryParameter['max_strike'] = maxStrike;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get a strategies impact on the account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -5885,17 +5915,17 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdStrategyImpactPost: async (userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOptionsImpact: async (userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyImpactPost', 'userId', userId)
+            assertParamExists('getOptionsImpact', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyImpactPost', 'userSecret', userSecret)
+            assertParamExists('getOptionsImpact', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyImpactPost', 'accountId', accountId)
+            assertParamExists('getOptionsImpact', 'accountId', accountId)
             // verify required parameter 'strategyQuotesRecord' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyImpactPost', 'strategyQuotesRecord', strategyQuotesRecord)
+            assertParamExists('getOptionsImpact', 'strategyQuotesRecord', strategyQuotesRecord)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyImpactPost', 'body', body)
+            assertParamExists('getOptionsImpact', 'body', body)
             const localVarPath = `/accounts/{accountId}/strategy_impact`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5958,6 +5988,154 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Get a price quote for a strategy
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {number} legs 
+         * @param {string} strategy 
+         * @param {string} timeInForce 
+         * @param {string} orderType 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStrategyQuote: async (userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getStrategyQuote', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getStrategyQuote', 'userSecret', userSecret)
+            // verify required parameter 'legs' is not null or undefined
+            assertParamExists('getStrategyQuote', 'legs', legs)
+            // verify required parameter 'strategy' is not null or undefined
+            assertParamExists('getStrategyQuote', 'strategy', strategy)
+            // verify required parameter 'timeInForce' is not null or undefined
+            assertParamExists('getStrategyQuote', 'timeInForce', timeInForce)
+            // verify required parameter 'orderType' is not null or undefined
+            assertParamExists('getStrategyQuote', 'orderType', orderType)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getStrategyQuote', 'accountId', accountId)
+            // verify required parameter 'manualTradeForm' is not null or undefined
+            assertParamExists('getStrategyQuote', 'manualTradeForm', manualTradeForm)
+            const localVarPath = `/accounts/{accountId}/strategy_quotes`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (legs !== undefined) {
+                localVarQueryParameter['legs'] = legs;
+            }
+
+            if (strategy !== undefined) {
+                localVarQueryParameter['strategy'] = strategy;
+            }
+
+            if (timeInForce !== undefined) {
+                localVarQueryParameter['time_in_force'] = timeInForce;
+            }
+
+            if (orderType !== undefined) {
+                localVarQueryParameter['order_type'] = orderType;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the options holdings in the account
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listOptionHoldings: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('listOptionHoldings', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('listOptionHoldings', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('listOptionHoldings', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/options`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
          * @param {string} userId 
          * @param {string} userSecret 
@@ -5970,19 +6148,19 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdStrategyPlacePost: async (userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeOptionsStrategyOrder: async (userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'userId', userId)
+            assertParamExists('placeOptionsStrategyOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'userSecret', userSecret)
+            assertParamExists('placeOptionsStrategyOrder', 'userSecret', userSecret)
             // verify required parameter 'strategyOrder' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'strategyOrder', strategyOrder)
+            assertParamExists('placeOptionsStrategyOrder', 'strategyOrder', strategyOrder)
             // verify required parameter 'strikePrice' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'strikePrice', strikePrice)
+            assertParamExists('placeOptionsStrategyOrder', 'strikePrice', strikePrice)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'accountId', accountId)
+            assertParamExists('placeOptionsStrategyOrder', 'accountId', accountId)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyPlacePost', 'body', body)
+            assertParamExists('placeOptionsStrategyOrder', 'body', body)
             const localVarPath = `/accounts/{accountId}/strategy_place`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -6045,36 +6223,26 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get a price quote for a strategy
+         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {number} legs 
-         * @param {string} strategy 
-         * @param {string} timeInForce 
-         * @param {string} orderType 
          * @param {string} accountId The ID of the account get positions.
-         * @param {ManualTradeForm} manualTradeForm 
+         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+         * @param {number} [minStrike] The minimum strike price for the desired contract
+         * @param {number} [maxStrike] The max strike price for the desired contract
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdStrategyQuotesPost: async (userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchOptionsQuote: async (userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'userId', userId)
+            assertParamExists('searchOptionsQuote', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'userSecret', userSecret)
-            // verify required parameter 'legs' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'legs', legs)
-            // verify required parameter 'strategy' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'strategy', strategy)
-            // verify required parameter 'timeInForce' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'timeInForce', timeInForce)
-            // verify required parameter 'orderType' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'orderType', orderType)
+            assertParamExists('searchOptionsQuote', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'accountId', accountId)
-            // verify required parameter 'manualTradeForm' is not null or undefined
-            assertParamExists('accountsAccountIdStrategyQuotesPost', 'manualTradeForm', manualTradeForm)
-            const localVarPath = `/accounts/{accountId}/strategy_quotes`
+            assertParamExists('searchOptionsQuote', 'accountId', accountId)
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('searchOptionsQuote', 'date', date)
+            const localVarPath = `/accounts/{accountId}/options_search`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6083,7 +6251,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -6104,30 +6272,23 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
-            if (legs !== undefined) {
-                localVarQueryParameter['legs'] = legs;
+            if (date !== undefined) {
+                localVarQueryParameter['Date'] = date;
             }
 
-            if (strategy !== undefined) {
-                localVarQueryParameter['strategy'] = strategy;
+            if (minStrike !== undefined) {
+                localVarQueryParameter['min_strike'] = minStrike;
             }
 
-            if (timeInForce !== undefined) {
-                localVarQueryParameter['time_in_force'] = timeInForce;
-            }
-
-            if (orderType !== undefined) {
-                localVarQueryParameter['order_type'] = orderType;
+            if (maxStrike !== undefined) {
+                localVarQueryParameter['max_strike'] = maxStrike;
             }
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6154,37 +6315,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdOptionsChainGet(userId: string, userSecret: string, accountId: string, symbol: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdOptionsChainGet(userId, userSecret, accountId, symbol, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the options holdings in the account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async accountsAccountIdOptionsGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionsHoldings>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdOptionsGet(userId, userSecret, accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async accountsAccountIdOptionsSearchGet(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdOptionsSearchGet(userId, userSecret, accountId, date, minStrike, maxStrike, options);
+        async getOptionsChain(userId: string, userSecret: string, accountId: string, symbol: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionsChain(userId, userSecret, accountId, symbol, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6201,26 +6333,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdStrategyImpactPost(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyImpact>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdStrategyImpactPost(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} strategyOrder 
-         * @param {number} strikePrice 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
-         * @param {number} [primaryRoute] 
-         * @param {number} [secondaryRoute] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async accountsAccountIdStrategyPlacePost(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyOrderPlace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdStrategyPlacePost(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options);
+        async getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyImpact>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6237,8 +6351,55 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdStrategyQuotesPost(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdStrategyQuotesPost(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options);
+        async getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the options holdings in the account
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listOptionHoldings(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionsHoldings>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listOptionHoldings(userId, userSecret, accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {number} strategyOrder 
+         * @param {number} strikePrice 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {string} body 
+         * @param {number} [primaryRoute] 
+         * @param {number} [secondaryRoute] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyOrderPlace>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+         * @param {number} [minStrike] The minimum strike price for the desired contract
+         * @param {number} [maxStrike] The max strike price for the desired contract
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -6261,35 +6422,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOptionsChainGet(userId: string, userSecret: string, accountId: string, symbol: string, options?: any): AxiosPromise<Array<OptionChainInner>> {
-            return localVarFp.accountsAccountIdOptionsChainGet(userId, userSecret, accountId, symbol, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the options holdings in the account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdOptionsGet(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<OptionsHoldings> {
-            return localVarFp.accountsAccountIdOptionsGet(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-         * @param {number} [minStrike] The minimum strike price for the desired contract
-         * @param {number} [maxStrike] The max strike price for the desired contract
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdOptionsSearchGet(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: any): AxiosPromise<Array<OptionChainInner>> {
-            return localVarFp.accountsAccountIdOptionsSearchGet(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(axios, basePath));
+        getOptionsChain(userId: string, userSecret: string, accountId: string, symbol: string, options?: any): AxiosPromise<Array<OptionChainInner>> {
+            return localVarFp.getOptionsChain(userId, userSecret, accountId, symbol, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6305,25 +6439,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdStrategyImpactPost(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: any): AxiosPromise<StrategyImpact> {
-            return localVarFp.accountsAccountIdStrategyImpactPost(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {number} strategyOrder 
-         * @param {number} strikePrice 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
-         * @param {number} [primaryRoute] 
-         * @param {number} [secondaryRoute] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdStrategyPlacePost(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: any): AxiosPromise<StrategyOrderPlace> {
-            return localVarFp.accountsAccountIdStrategyPlacePost(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(axios, basePath));
+        getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: any): AxiosPromise<StrategyImpact> {
+            return localVarFp.getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6339,8 +6456,52 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdStrategyQuotesPost(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<any> {
-            return localVarFp.accountsAccountIdStrategyQuotesPost(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(axios, basePath));
+        getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<any> {
+            return localVarFp.getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the options holdings in the account
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listOptionHoldings(userId: string, userSecret: string, accountId: string, options?: any): AxiosPromise<OptionsHoldings> {
+            return localVarFp.listOptionHoldings(userId, userSecret, accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {number} strategyOrder 
+         * @param {number} strikePrice 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {string} body 
+         * @param {number} [primaryRoute] 
+         * @param {number} [secondaryRoute] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: any): AxiosPromise<StrategyOrderPlace> {
+            return localVarFp.placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+         * @param {number} [minStrike] The minimum strike price for the desired contract
+         * @param {number} [maxStrike] The max strike price for the desired contract
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: any): AxiosPromise<Array<OptionChainInner>> {
+            return localVarFp.searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6363,39 +6524,8 @@ export class OptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OptionsApi
      */
-    public accountsAccountIdOptionsChainGet(userId: string, userSecret: string, accountId: string, symbol: string, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdOptionsChainGet(userId, userSecret, accountId, symbol, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the options holdings in the account
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApi
-     */
-    public accountsAccountIdOptionsGet(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdOptionsGet(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
-     * @param {number} [minStrike] The minimum strike price for the desired contract
-     * @param {number} [maxStrike] The max strike price for the desired contract
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApi
-     */
-    public accountsAccountIdOptionsSearchGet(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdOptionsSearchGet(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(this.axios, this.basePath));
+    public getOptionsChain(userId: string, userSecret: string, accountId: string, symbol: string, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getOptionsChain(userId, userSecret, accountId, symbol, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6413,27 +6543,8 @@ export class OptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OptionsApi
      */
-    public accountsAccountIdStrategyImpactPost(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdStrategyImpactPost(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {number} strategyOrder 
-     * @param {number} strikePrice 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {string} body 
-     * @param {number} [primaryRoute] 
-     * @param {number} [secondaryRoute] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApi
-     */
-    public accountsAccountIdStrategyPlacePost(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdStrategyPlacePost(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(this.axios, this.basePath));
+    public getOptionsImpact(userId: string, userSecret: string, accountId: string, strategyQuotesRecord: { [key: string]: any; }, body: string, strikePrice?: number, primaryRoute?: string, secondarRoute?: string, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getOptionsImpact(userId, userSecret, accountId, strategyQuotesRecord, body, strikePrice, primaryRoute, secondarRoute, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6451,8 +6562,58 @@ export class OptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OptionsApi
      */
-    public accountsAccountIdStrategyQuotesPost(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).accountsAccountIdStrategyQuotesPost(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
+    public getStrategyQuote(userId: string, userSecret: string, legs: number, strategy: string, timeInForce: string, orderType: string, accountId: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getStrategyQuote(userId, userSecret, legs, strategy, timeInForce, orderType, accountId, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the options holdings in the account
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OptionsApi
+     */
+    public listOptionHoldings(userId: string, userSecret: string, accountId: string, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).listOptionHoldings(userId, userSecret, accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Place the strategy order; impact not required but the StrategyOrderQuotes object is
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {number} strategyOrder 
+     * @param {number} strikePrice 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {string} body 
+     * @param {number} [primaryRoute] 
+     * @param {number} [secondaryRoute] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OptionsApi
+     */
+    public placeOptionsStrategyOrder(userId: string, userSecret: string, strategyOrder: number, strikePrice: number, accountId: string, body: string, primaryRoute?: number, secondaryRoute?: number, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).placeOptionsStrategyOrder(userId, userSecret, strategyOrder, strikePrice, accountId, body, primaryRoute, secondaryRoute, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search for more specific option quotes from option chain. Date is required but can filter by min, max or min-max.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {string} date The date of the options you are searching for. Will return closest date that has not passed. Format- [YYYY-MM-DD]
+     * @param {number} [minStrike] The minimum strike price for the desired contract
+     * @param {number} [maxStrike] The max strike price for the desired contract
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OptionsApi
+     */
+    public searchOptionsQuote(userId: string, userSecret: string, accountId: string, date: string, minStrike?: number, maxStrike?: number, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).searchOptionsQuote(userId, userSecret, accountId, date, minStrike, maxStrike, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6465,866 +6626,15 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     return {
         /**
          * 
-         * @summary List of model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/modelAssetClass`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Deletes a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdDelete: async (modelAssetClassId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelAssetClassId' is not null or undefined
-            assertParamExists('modelAssetClassModelAssetClassIdDelete', 'modelAssetClassId', modelAssetClassId)
-            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
-                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get details of a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdGet: async (modelAssetClassId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelAssetClassId' is not null or undefined
-            assertParamExists('modelAssetClassModelAssetClassIdGet', 'modelAssetClassId', modelAssetClassId)
-            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
-                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Updates model asset class objects
-         * @param {string} modelAssetClassId The ID of the model asset class to update.
-         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdPost: async (modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelAssetClassId' is not null or undefined
-            assertParamExists('modelAssetClassModelAssetClassIdPost', 'modelAssetClassId', modelAssetClassId)
-            // verify required parameter 'modelAssetClassDetails' is not null or undefined
-            assertParamExists('modelAssetClassModelAssetClassIdPost', 'modelAssetClassDetails', modelAssetClassDetails)
-            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
-                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(modelAssetClassDetails, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Create a new model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/modelAssetClass`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List of model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/modelPortfolio`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Deletes a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdDelete: async (modelPortfolioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelPortfolioId' is not null or undefined
-            assertParamExists('modelPortfolioModelPortfolioIdDelete', 'modelPortfolioId', modelPortfolioId)
-            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
-                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get details of a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdGet: async (modelPortfolioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelPortfolioId' is not null or undefined
-            assertParamExists('modelPortfolioModelPortfolioIdGet', 'modelPortfolioId', modelPortfolioId)
-            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
-                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Updates model portfolio object
-         * @param {string} modelPortfolioId The ID of the model portfolio to update.
-         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdPost: async (modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'modelPortfolioId' is not null or undefined
-            assertParamExists('modelPortfolioModelPortfolioIdPost', 'modelPortfolioId', modelPortfolioId)
-            // verify required parameter 'modelPortfolioDetails' is not null or undefined
-            assertParamExists('modelPortfolioModelPortfolioIdPost', 'modelPortfolioDetails', modelPortfolioDetails)
-            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
-                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(modelPortfolioDetails, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Creates a new model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/modelPortfolio`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all portfolio groups
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsGet: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('portfolioGroupsGet', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('portfolioGroupsGet', 'userSecret', userSecret)
-            const localVarPath = `/portfolioGroups`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all accounts associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdAccountsGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdAccountsGet', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/accounts`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get sum of cash balances in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdBalancesGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdBalancesGet', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/balances`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'calculatedTradeId', calculatedTradeId)
-            // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'tradeId', tradeId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
-                .replace(`{${"tradeId"}}`, encodeURIComponent(String(tradeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Modify units of a trade before it is placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {Trade} [trade] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'calculatedTradeId', calculatedTradeId)
-            // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'tradeId', tradeId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
-                .replace(`{${"tradeId"}}`, encodeURIComponent(String(tradeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(trade, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return an individual trade
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet', 'calculatedTradeId', calculatedTradeId)
-            // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet', 'tradeId', tradeId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
-                .replace(`{${"TradeId"}}`, encodeURIComponent(String(tradeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List of trades to make to rebalance portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesGet', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove a target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdDelete: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdDelete', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get an array of excluded assets associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdExcludedassetsGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdExcludedassetsGet', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/excludedassets`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Adds an asset to exclude to a portfolio group
          * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
          * @param {UniversalSymbol} [universalSymbol] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdExcludedassetsPost: async (portfolioGroupId: string, universalSymbol?: UniversalSymbol, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addPortfolioExcludedAsset: async (portfolioGroupId: string, universalSymbol?: UniversalSymbol, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdExcludedassetsPost', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('addPortfolioExcludedAsset', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/excludedassets`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7363,17 +6673,197 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
+         * @summary Create new portfolio group
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {{ [key: string]: any; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create: async (userId: string, userSecret: string, requestBody: { [key: string]: any; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('create', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('create', 'userSecret', userSecret)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('create', 'requestBody', requestBody)
+            const localVarPath = `/portfolioGroups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAssetClass: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/modelAssetClass`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Creates a new model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createModelPortfolio: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/modelPortfolio`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deletes a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAssetClass: async (modelAssetClassId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelAssetClassId' is not null or undefined
+            assertParamExists('deleteAssetClass', 'modelAssetClassId', modelAssetClassId)
+            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
+                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Unexclude an asset from a portfolio group
          * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
          * @param {string} symbolId The ID of the excluded asset Symbol to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete: async (portfolioGroupId: string, symbolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteExcludedAsset: async (portfolioGroupId: string, symbolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('deleteExcludedAsset', 'portfolioGroupId', portfolioGroupId)
             // verify required parameter 'symbolId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete', 'symbolId', symbolId)
+            assertParamExists('deleteExcludedAsset', 'symbolId', symbolId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
                 .replace(`{${"symbolId"}}`, encodeURIComponent(String(symbolId)));
@@ -7410,14 +6900,327 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
+         * @summary Deletes a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteModelPortfolioById: async (modelPortfolioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelPortfolioId' is not null or undefined
+            assertParamExists('deleteModelPortfolioById', 'modelPortfolioId', modelPortfolioId)
+            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
+                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePortfoli: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('deletePortfoli', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a TargetAsset.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePortfolioTargetById: async (portfolioGroupId: string, targetAssetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('deletePortfolioTargetById', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'targetAssetId' is not null or undefined
+            assertParamExists('deletePortfolioTargetById', 'targetAssetId', targetAssetId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
+                .replace(`{${"targetAssetId"}}`, encodeURIComponent(String(targetAssetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get details of a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        detailAssetClass: async (modelAssetClassId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelAssetClassId' is not null or undefined
+            assertParamExists('detailAssetClass', 'modelAssetClassId', modelAssetClassId)
+            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
+                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Return an individual trade
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCalculatedTradeById: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getCalculatedTradeById', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'calculatedTradeId' is not null or undefined
+            assertParamExists('getCalculatedTradeById', 'calculatedTradeId', calculatedTradeId)
+            // verify required parameter 'tradeId' is not null or undefined
+            assertParamExists('getCalculatedTradeById', 'tradeId', tradeId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
+                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
+                .replace(`{${"TradeId"}}`, encodeURIComponent(String(tradeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get details of a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getModelDetailsById: async (modelPortfolioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelPortfolioId' is not null or undefined
+            assertParamExists('getModelDetailsById', 'modelPortfolioId', modelPortfolioId)
+            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
+                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get sum of cash balances in portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioBalances: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getPortfolioBalances', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/balances`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get details of a target portfolio
          * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortfolioDetailsById: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdGet', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('getPortfolioDetailsById', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7453,57 +7256,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Import target allocation based on portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdImportPost: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdImportPost', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/import`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Return a whole bunch of relevant information relating to a portfolio group.
          * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdInfoGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortfolioInfo: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdInfoGet', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('getPortfolioInfo', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/info`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7539,63 +7299,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Update an existing target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
-         * @param {{ [key: string]: any; }} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdPatch: async (portfolioGroupId: string, requestBody: { [key: string]: any; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdPatch', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdPatch', 'requestBody', requestBody)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get total of each postions owned in portfolio group
          * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdPositionsGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortfolioPositions: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdPositionsGet', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('getPortfolioPositions', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/positions`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7636,9 +7347,9 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdSettingsGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortfolioSettings: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdSettingsGet', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('getPortfolioSettings', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/settings`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7674,16 +7385,20 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Updates portfolio group settings
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
+         * @summary Get a specific target from a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdSettingsPatch: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPortfolioTargetById: async (portfolioGroupId: string, targetAssetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdSettingsPatch', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/settings`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            assertParamExists('getPortfolioTargetById', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'targetAssetId' is not null or undefined
+            assertParamExists('getPortfolioTargetById', 'targetAssetId', targetAssetId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
+                .replace(`{${"targetAssetId"}}`, encodeURIComponent(String(targetAssetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7691,7 +7406,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -7717,15 +7432,459 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
+         * @summary Get all target assets under the specified PortfolioGroup.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioTargets: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getPortfolioTargets', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get an array of excluded assets associated with a portfolio group\\
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortoflioExcludedAssets: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getPortoflioExcludedAssets', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/excludedassets`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Import target allocation based on portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importModelPortfolio: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('importModelPortfolio', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/import`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List all portfolio groups
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('list', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('list', 'userSecret', userSecret)
+            const localVarPath = `/portfolioGroups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAssetClasses: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/modelAssetClass`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of trades to make to rebalance portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCalculatedTrades: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('listCalculatedTrades', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listModelPortfolio: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/modelPortfolio`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all accounts associated with a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPortfolioAccounts: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('listPortfolioAccounts', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/accounts`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Updates model portfolio object
+         * @param {string} modelPortfolioId The ID of the model portfolio to update.
+         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        modifyModelPortfolioById: async (modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelPortfolioId' is not null or undefined
+            assertParamExists('modifyModelPortfolioById', 'modelPortfolioId', modelPortfolioId)
+            // verify required parameter 'modelPortfolioDetails' is not null or undefined
+            assertParamExists('modifyModelPortfolioById', 'modelPortfolioDetails', modelPortfolioDetails)
+            const localVarPath = `/modelPortfolio/{modelPortfolioId}`
+                .replace(`{${"modelPortfolioId"}}`, encodeURIComponent(String(modelPortfolioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(modelPortfolioDetails, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update an existing target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
+         * @param {{ [key: string]: any; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        savePortfolio: async (portfolioGroupId: string, requestBody: { [key: string]: any; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('savePortfolio', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('savePortfolio', 'requestBody', requestBody)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Search for symbols limited to brokerages under the specified portfolio group
          * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
          * @param {SymbolQuery} [symbolQuery] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdSymbolsPost: async (portfolioGroupId: string, symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchPortfolioSymbols: async (portfolioGroupId: string, symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdSymbolsPost', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('searchPortfolioSymbols', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/symbols`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7764,58 +7923,15 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Get all target assets under the specified PortfolioGroup.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsGet: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsGet', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
          * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
          * @param {Array<TargetAsset>} [targetAsset] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdTargetsPost: async (portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setPortfolioTargets: async (portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsPost', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('setPortfolioTargets', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7854,20 +7970,19 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Remove a TargetAsset.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to delete.
+         * @summary Updates model asset class objects
+         * @param {string} modelAssetClassId The ID of the model asset class to update.
+         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete: async (portfolioGroupId: string, targetAssetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'targetAssetId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete', 'targetAssetId', targetAssetId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"targetAssetId"}}`, encodeURIComponent(String(targetAssetId)));
+        updateAssetClass: async (modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'modelAssetClassId' is not null or undefined
+            assertParamExists('updateAssetClass', 'modelAssetClassId', modelAssetClassId)
+            // verify required parameter 'modelAssetClassDetails' is not null or undefined
+            assertParamExists('updateAssetClass', 'modelAssetClassDetails', modelAssetClassDetails)
+            const localVarPath = `/modelAssetClass/{modelAssetClassId}`
+                .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7875,7 +7990,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -7890,9 +8005,12 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(modelAssetClassDetails, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7901,20 +8019,16 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         },
         /**
          * 
-         * @summary Get a specific target from a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to get.
+         * @summary Updates portfolio group settings
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet: async (portfolioGroupId: string, targetAssetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePortfolioSettings: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'targetAssetId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet', 'targetAssetId', targetAssetId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"targetAssetId"}}`, encodeURIComponent(String(targetAssetId)));
+            assertParamExists('updatePortfolioSettings', 'portfolioGroupId', portfolioGroupId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/settings`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7922,7 +8036,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -7955,13 +8069,13 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch: async (portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePortfolioTargetById: async (portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('updatePortfolioTargetById', 'portfolioGroupId', portfolioGroupId)
             // verify required parameter 'targetAssetId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch', 'targetAssetId', targetAssetId)
+            assertParamExists('updatePortfolioTargetById', 'targetAssetId', targetAssetId)
             // verify required parameter 'targetAsset' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch', 'targetAsset', targetAsset)
+            assertParamExists('updatePortfolioTargetById', 'targetAsset', targetAsset)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
                 .replace(`{${"targetAssetId"}}`, encodeURIComponent(String(targetAssetId)));
@@ -7999,6 +8113,28 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * PortfolioManagementApi - functional programming interface
+ * @export
+ */
+export const PortfolioManagementApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PortfolioManagementApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Adds an asset to exclude to a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
+         * @param {UniversalSymbol} [universalSymbol] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addPortfolioExcludedAsset(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExcludedAsset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPortfolioExcludedAsset(portfolioGroupId, universalSymbol, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @summary Create new portfolio group
@@ -8008,14 +8144,1307 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPost: async (userId: string, userSecret: string, requestBody: { [key: string]: any; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('portfolioGroupsPost', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('portfolioGroupsPost', 'userSecret', userSecret)
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('portfolioGroupsPost', 'requestBody', requestBody)
-            const localVarPath = `/portfolioGroups`;
+        async create(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(userId, userSecret, requestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Create a new model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAssetClass(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAssetClass(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Creates a new model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createModelPortfolio(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelPortfolioDetails>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createModelPortfolio(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Deletes a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAssetClass(modelAssetClassId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAssetClass(modelAssetClassId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Unexclude an asset from a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
+         * @param {string} symbolId The ID of the excluded asset Symbol to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteExcludedAsset(portfolioGroupId: string, symbolId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteExcludedAsset(portfolioGroupId, symbolId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Deletes a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteModelPortfolioById(modelPortfolioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteModelPortfolioById(modelPortfolioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Remove a target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deletePortfoli(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortfoli(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Remove a TargetAsset.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deletePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePortfolioTargetById(portfolioGroupId, targetAssetId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get details of a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async detailAssetClass(modelAssetClassId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.detailAssetClass(modelAssetClassId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Return an individual trade
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Trade>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get details of a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getModelDetailsById(modelPortfolioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelPortfolioDetails>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getModelDetailsById(modelPortfolioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get sum of cash balances in portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioBalances(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioBalances(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get details of a target portfolio
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioDetailsById(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioDetailsById(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Return a whole bunch of relevant information relating to a portfolio group.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioInfo(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioInfo(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get total of each postions owned in portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioPositions(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroupPosition>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioPositions(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get portfolio group settings
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioSettings(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupSettings>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioSettings(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get a specific target from a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioTargetById(portfolioGroupId, targetAssetId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get all target assets under the specified PortfolioGroup.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortfolioTargets(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioTargets(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get an array of excluded assets associated with a portfolio group\\
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPortoflioExcludedAssets(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ExcludedAsset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortoflioExcludedAssets(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Import target allocation based on portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importModelPortfolio(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importModelPortfolio(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List all portfolio groups
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async list(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list(userId, userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAssetClasses(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelAssetClassDetails>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAssetClasses(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of trades to make to rebalance portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listCalculatedTrades(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CalculatedTrade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listCalculatedTrades(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listModelPortfolio(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelPortfolioDetails>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listModelPortfolio(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get all accounts associated with a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listPortfolioAccounts(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPortfolioAccounts(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Updates model portfolio object
+         * @param {string} modelPortfolioId The ID of the model portfolio to update.
+         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async modifyModelPortfolioById(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update an existing target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
+         * @param {{ [key: string]: any; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async savePortfolio(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortfolio(portfolioGroupId, requestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Search for symbols limited to brokerages under the specified portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
+         * @param {SymbolQuery} [symbolQuery] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchPortfolioSymbols(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPortfolioSymbols(portfolioGroupId, symbolQuery, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {Array<TargetAsset>} [targetAsset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setPortfolioTargets(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setPortfolioTargets(portfolioGroupId, targetAsset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Updates model asset class objects
+         * @param {string} modelAssetClassId The ID of the model asset class to update.
+         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAssetClass(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAssetClass(modelAssetClassId, modelAssetClassDetails, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Updates portfolio group settings
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePortfolioSettings(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupSettings>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortfolioSettings(portfolioGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update a TargetAsset under the specified PortfolioGroup.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to patch.
+         * @param {TargetAsset} targetAsset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PortfolioManagementApi - factory interface
+ * @export
+ */
+export const PortfolioManagementApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PortfolioManagementApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Adds an asset to exclude to a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
+         * @param {UniversalSymbol} [universalSymbol] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPortfolioExcludedAsset(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: any): AxiosPromise<ExcludedAsset> {
+            return localVarFp.addPortfolioExcludedAsset(portfolioGroupId, universalSymbol, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create new portfolio group
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {{ [key: string]: any; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: any): AxiosPromise<Array<PortfolioGroup>> {
+            return localVarFp.create(userId, userSecret, requestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAssetClass(options?: any): AxiosPromise<ModelAssetClassDetails> {
+            return localVarFp.createAssetClass(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Creates a new model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createModelPortfolio(options?: any): AxiosPromise<ModelPortfolioDetails> {
+            return localVarFp.createModelPortfolio(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deletes a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAssetClass(modelAssetClassId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteAssetClass(modelAssetClassId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Unexclude an asset from a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
+         * @param {string} symbolId The ID of the excluded asset Symbol to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteExcludedAsset(portfolioGroupId: string, symbolId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteExcludedAsset(portfolioGroupId, symbolId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deletes a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteModelPortfolioById(modelPortfolioId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteModelPortfolioById(modelPortfolioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePortfoli(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroup> {
+            return localVarFp.deletePortfoli(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a TargetAsset.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to delete.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: any): AxiosPromise<TargetAsset> {
+            return localVarFp.deletePortfolioTargetById(portfolioGroupId, targetAssetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get details of a model asset class
+         * @param {string} modelAssetClassId The ID of the model asset class to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        detailAssetClass(modelAssetClassId: string, options?: any): AxiosPromise<ModelAssetClassDetails> {
+            return localVarFp.detailAssetClass(modelAssetClassId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return an individual trade
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: any): AxiosPromise<Array<Trade>> {
+            return localVarFp.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get details of a model portfolio
+         * @param {string} modelPortfolioId The ID of the model portfolio to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getModelDetailsById(modelPortfolioId: string, options?: any): AxiosPromise<ModelPortfolioDetails> {
+            return localVarFp.getModelDetailsById(modelPortfolioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get sum of cash balances in portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioBalances(portfolioGroupId: string, options?: any): AxiosPromise<Array<Balance>> {
+            return localVarFp.getPortfolioBalances(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get details of a target portfolio
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioDetailsById(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroup> {
+            return localVarFp.getPortfolioDetailsById(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return a whole bunch of relevant information relating to a portfolio group.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioInfo(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupInfo> {
+            return localVarFp.getPortfolioInfo(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get total of each postions owned in portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioPositions(portfolioGroupId: string, options?: any): AxiosPromise<Array<PortfolioGroupPosition>> {
+            return localVarFp.getPortfolioPositions(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get portfolio group settings
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioSettings(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupSettings> {
+            return localVarFp.getPortfolioSettings(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a specific target from a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: any): AxiosPromise<TargetAsset> {
+            return localVarFp.getPortfolioTargetById(portfolioGroupId, targetAssetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all target assets under the specified PortfolioGroup.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortfolioTargets(portfolioGroupId: string, options?: any): AxiosPromise<Array<TargetAsset>> {
+            return localVarFp.getPortfolioTargets(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get an array of excluded assets associated with a portfolio group\\
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPortoflioExcludedAssets(portfolioGroupId: string, options?: any): AxiosPromise<Array<ExcludedAsset>> {
+            return localVarFp.getPortoflioExcludedAssets(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Import target allocation based on portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importModelPortfolio(portfolioGroupId: string, options?: any): AxiosPromise<Array<TargetAsset>> {
+            return localVarFp.importModelPortfolio(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List all portfolio groups
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list(userId: string, userSecret: string, options?: any): AxiosPromise<Array<PortfolioGroup>> {
+            return localVarFp.list(userId, userSecret, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of model asset class
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAssetClasses(options?: any): AxiosPromise<Array<ModelAssetClassDetails>> {
+            return localVarFp.listAssetClasses(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of trades to make to rebalance portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listCalculatedTrades(portfolioGroupId: string, options?: any): AxiosPromise<CalculatedTrade> {
+            return localVarFp.listCalculatedTrades(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of model portfolio
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listModelPortfolio(options?: any): AxiosPromise<Array<ModelPortfolioDetails>> {
+            return localVarFp.listModelPortfolio(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get all accounts associated with a portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPortfolioAccounts(portfolioGroupId: string, options?: any): AxiosPromise<Array<Account>> {
+            return localVarFp.listPortfolioAccounts(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Updates model portfolio object
+         * @param {string} modelPortfolioId The ID of the model portfolio to update.
+         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        modifyModelPortfolioById(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: any): AxiosPromise<void> {
+            return localVarFp.modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update an existing target portfolio.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
+         * @param {{ [key: string]: any; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        savePortfolio(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: any): AxiosPromise<PortfolioGroup> {
+            return localVarFp.savePortfolio(portfolioGroupId, requestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Search for symbols limited to brokerages under the specified portfolio group
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
+         * @param {SymbolQuery} [symbolQuery] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchPortfolioSymbols(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
+            return localVarFp.searchPortfolioSymbols(portfolioGroupId, symbolQuery, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+         * @param {Array<TargetAsset>} [targetAsset] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setPortfolioTargets(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: any): AxiosPromise<Array<TargetAsset>> {
+            return localVarFp.setPortfolioTargets(portfolioGroupId, targetAsset, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Updates model asset class objects
+         * @param {string} modelAssetClassId The ID of the model asset class to update.
+         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAssetClass(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: any): AxiosPromise<void> {
+            return localVarFp.updateAssetClass(modelAssetClassId, modelAssetClassDetails, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Updates portfolio group settings
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePortfolioSettings(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupSettings> {
+            return localVarFp.updatePortfolioSettings(portfolioGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a TargetAsset under the specified PortfolioGroup.
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
+         * @param {string} targetAssetId The ID of the TargetAsset to patch.
+         * @param {TargetAsset} targetAsset 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: any): AxiosPromise<TargetAsset> {
+            return localVarFp.updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PortfolioManagementApi - object-oriented interface
+ * @export
+ * @class PortfolioManagementApi
+ * @extends {BaseAPI}
+ */
+export class PortfolioManagementApi extends BaseAPI {
+    /**
+     * 
+     * @summary Adds an asset to exclude to a portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
+     * @param {UniversalSymbol} [universalSymbol] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public addPortfolioExcludedAsset(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).addPortfolioExcludedAsset(portfolioGroupId, universalSymbol, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create new portfolio group
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {{ [key: string]: any; }} requestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public create(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).create(userId, userSecret, requestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new model asset class
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public createAssetClass(options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).createAssetClass(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Creates a new model portfolio
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public createModelPortfolio(options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).createModelPortfolio(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deletes a model asset class
+     * @param {string} modelAssetClassId The ID of the model asset class to delete.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public deleteAssetClass(modelAssetClassId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).deleteAssetClass(modelAssetClassId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Unexclude an asset from a portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
+     * @param {string} symbolId The ID of the excluded asset Symbol to delete.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public deleteExcludedAsset(portfolioGroupId: string, symbolId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).deleteExcludedAsset(portfolioGroupId, symbolId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deletes a model portfolio
+     * @param {string} modelPortfolioId The ID of the model portfolio to delete.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public deleteModelPortfolioById(modelPortfolioId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).deleteModelPortfolioById(modelPortfolioId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a target portfolio.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public deletePortfoli(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).deletePortfoli(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a TargetAsset.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
+     * @param {string} targetAssetId The ID of the TargetAsset to delete.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public deletePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).deletePortfolioTargetById(portfolioGroupId, targetAssetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get details of a model asset class
+     * @param {string} modelAssetClassId The ID of the model asset class to get.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public detailAssetClass(modelAssetClassId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).detailAssetClass(modelAssetClassId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return an individual trade
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+     * @param {string} tradeId The ID of trade object
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get details of a model portfolio
+     * @param {string} modelPortfolioId The ID of the model portfolio to get.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getModelDetailsById(modelPortfolioId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getModelDetailsById(modelPortfolioId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get sum of cash balances in portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioBalances(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioBalances(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get details of a target portfolio
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioDetailsById(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioDetailsById(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return a whole bunch of relevant information relating to a portfolio group.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioInfo(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioInfo(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get total of each postions owned in portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioPositions(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioPositions(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get portfolio group settings
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioSettings(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioSettings(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a specific target from a portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
+     * @param {string} targetAssetId The ID of the TargetAsset to get.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioTargetById(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioTargetById(portfolioGroupId, targetAssetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all target assets under the specified PortfolioGroup.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortfolioTargets(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortfolioTargets(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get an array of excluded assets associated with a portfolio group\\
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public getPortoflioExcludedAssets(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).getPortoflioExcludedAssets(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Import target allocation based on portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public importModelPortfolio(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).importModelPortfolio(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List all portfolio groups
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public list(userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).list(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of model asset class
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public listAssetClasses(options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).listAssetClasses(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of trades to make to rebalance portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public listCalculatedTrades(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).listCalculatedTrades(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of model portfolio
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public listModelPortfolio(options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).listModelPortfolio(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get all accounts associated with a portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public listPortfolioAccounts(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).listPortfolioAccounts(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates model portfolio object
+     * @param {string} modelPortfolioId The ID of the model portfolio to update.
+     * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public modifyModelPortfolioById(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update an existing target portfolio.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
+     * @param {{ [key: string]: any; }} requestBody 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public savePortfolio(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).savePortfolio(portfolioGroupId, requestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search for symbols limited to brokerages under the specified portfolio group
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
+     * @param {SymbolQuery} [symbolQuery] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public searchPortfolioSymbols(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).searchPortfolioSymbols(portfolioGroupId, symbolQuery, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
+     * @param {Array<TargetAsset>} [targetAsset] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public setPortfolioTargets(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).setPortfolioTargets(portfolioGroupId, targetAsset, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates model asset class objects
+     * @param {string} modelAssetClassId The ID of the model asset class to update.
+     * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public updateAssetClass(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).updateAssetClass(modelAssetClassId, modelAssetClassDetails, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates portfolio group settings
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public updatePortfolioSettings(portfolioGroupId: string, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).updatePortfolioSettings(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a TargetAsset under the specified PortfolioGroup.
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
+     * @param {string} targetAssetId The ID of the TargetAsset to patch.
+     * @param {TargetAsset} targetAsset 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioManagementApi
+     */
+    public updatePortfolioTargetById(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ReferenceDataApi - axios parameter creator
+ * @export
+ */
+export const ReferenceDataApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Return the exchange rate of a currency pair
+         * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCurrencyExchangeRatePair: async (currencyPair: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'currencyPair' is not null or undefined
+            assertParamExists('getCurrencyExchangeRatePair', 'currencyPair', currencyPair)
+            const localVarPath = `/currencies/rates/{currencyPair}`
+                .replace(`{${"currencyPair"}}`, encodeURIComponent(String(currencyPair)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get metadata related to Snaptrade partner
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPartnerInfo: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapTrade/partners`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of all security types.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSecurityTypes: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/securityTypes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStockExchanges: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/exchanges`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Search for symbols
+         * @param {SymbolQuery} [symbolQuery] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSymbols: async (symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/symbols`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8036,14 +9465,6 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             // authentication PartnerTimestamp required
             await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
 
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -8051,1257 +9472,222 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(symbolQuery, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
             };
         },
-    }
-};
+        /**
+         * 
+         * @summary Get details of a symbol by the ticker
+         * @param {string} ticker The ticker of the UniversalSymbol to get.
+         * @param {string} [symbolId] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSymbolsByTicker: async (ticker: string, symbolId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ticker' is not null or undefined
+            assertParamExists('getSymbolsByTicker', 'ticker', ticker)
+            const localVarPath = `/symbols/{ticker}`
+                .replace(`{${"ticker"}}`, encodeURIComponent(String(ticker)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
 
-/**
- * PortfolioManagementApi - functional programming interface
- * @export
- */
-export const PortfolioManagementApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PortfolioManagementApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary List of model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelAssetClassGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelAssetClassDetails>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelAssetClassGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Deletes a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelAssetClassModelAssetClassIdDelete(modelAssetClassId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelAssetClassModelAssetClassIdDelete(modelAssetClassId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get details of a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelAssetClassModelAssetClassIdGet(modelAssetClassId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelAssetClassModelAssetClassIdGet(modelAssetClassId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Updates model asset class objects
-         * @param {string} modelAssetClassId The ID of the model asset class to update.
-         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelAssetClassModelAssetClassIdPost(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelAssetClassModelAssetClassIdPost(modelAssetClassId, modelAssetClassDetails, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Create a new model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelAssetClassPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelAssetClassPost(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelPortfolioGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelPortfolioDetails>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelPortfolioGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Deletes a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelPortfolioModelPortfolioIdDelete(modelPortfolioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelPortfolioModelPortfolioIdDelete(modelPortfolioId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get details of a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelPortfolioModelPortfolioIdGet(modelPortfolioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelPortfolioDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelPortfolioModelPortfolioIdGet(modelPortfolioId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Updates model portfolio object
-         * @param {string} modelPortfolioId The ID of the model portfolio to update.
-         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelPortfolioModelPortfolioIdPost(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelPortfolioModelPortfolioIdPost(modelPortfolioId, modelPortfolioDetails, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Creates a new model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async modelPortfolioPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelPortfolioDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modelPortfolioPost(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List all portfolio groups
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsGet(userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsGet(userId, userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all accounts associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get sum of cash balances in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Modify units of a trade before it is placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {Trade} [trade] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return an individual trade
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Trade>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of trades to make to rebalance portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CalculatedTrade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Remove a target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get an array of excluded assets associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ExcludedAsset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Adds an asset to exclude to a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
-         * @param {UniversalSymbol} [universalSymbol] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExcludedAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId, universalSymbol, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Unexclude an asset from a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
-         * @param {string} symbolId The ID of the excluded asset Symbol to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId: string, symbolId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId, symbolId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get details of a target portfolio
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Import target allocation based on portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return a whole bunch of relevant information relating to a portfolio group.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Update an existing target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
-         * @param {{ [key: string]: any; }} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId, requestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get total of each postions owned in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroupPosition>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get portfolio group settings
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupSettings>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Updates portfolio group settings
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroupSettings>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Search for symbols limited to brokerages under the specified portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
-         * @param {SymbolQuery} [symbolQuery] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId, symbolQuery, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get all target assets under the specified PortfolioGroup.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {Array<TargetAsset>} [targetAsset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TargetAsset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId, targetAsset, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Remove a TargetAsset.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId, targetAssetId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get a specific target from a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId, targetAssetId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Update a TargetAsset under the specified PortfolioGroup.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to patch.
-         * @param {TargetAsset} targetAsset 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId, targetAssetId, targetAsset, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Create new portfolio group
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {{ [key: string]: any; }} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPost(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPost(userId, userSecret, requestBody, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
-/**
- * PortfolioManagementApi - factory interface
- * @export
- */
-export const PortfolioManagementApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PortfolioManagementApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary List of model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassGet(options?: any): AxiosPromise<Array<ModelAssetClassDetails>> {
-            return localVarFp.modelAssetClassGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Deletes a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdDelete(modelAssetClassId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.modelAssetClassModelAssetClassIdDelete(modelAssetClassId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get details of a model asset class
-         * @param {string} modelAssetClassId The ID of the model asset class to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdGet(modelAssetClassId: string, options?: any): AxiosPromise<ModelAssetClassDetails> {
-            return localVarFp.modelAssetClassModelAssetClassIdGet(modelAssetClassId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Updates model asset class objects
-         * @param {string} modelAssetClassId The ID of the model asset class to update.
-         * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassModelAssetClassIdPost(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: any): AxiosPromise<void> {
-            return localVarFp.modelAssetClassModelAssetClassIdPost(modelAssetClassId, modelAssetClassDetails, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Create a new model asset class
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelAssetClassPost(options?: any): AxiosPromise<ModelAssetClassDetails> {
-            return localVarFp.modelAssetClassPost(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioGet(options?: any): AxiosPromise<Array<ModelPortfolioDetails>> {
-            return localVarFp.modelPortfolioGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Deletes a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdDelete(modelPortfolioId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.modelPortfolioModelPortfolioIdDelete(modelPortfolioId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get details of a model portfolio
-         * @param {string} modelPortfolioId The ID of the model portfolio to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdGet(modelPortfolioId: string, options?: any): AxiosPromise<ModelPortfolioDetails> {
-            return localVarFp.modelPortfolioModelPortfolioIdGet(modelPortfolioId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Updates model portfolio object
-         * @param {string} modelPortfolioId The ID of the model portfolio to update.
-         * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioModelPortfolioIdPost(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: any): AxiosPromise<void> {
-            return localVarFp.modelPortfolioModelPortfolioIdPost(modelPortfolioId, modelPortfolioDetails, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Creates a new model portfolio
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        modelPortfolioPost(options?: any): AxiosPromise<ModelPortfolioDetails> {
-            return localVarFp.modelPortfolioPost(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all portfolio groups
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsGet(userId: string, userSecret: string, options?: any): AxiosPromise<Array<PortfolioGroup>> {
-            return localVarFp.portfolioGroupsGet(userId, userSecret, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all accounts associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId: string, options?: any): AxiosPromise<Array<Account>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get sum of cash balances in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId: string, options?: any): AxiosPromise<Array<Balance>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: any): AxiosPromise<Trade> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Modify units of a trade before it is placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {Trade} [trade] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: any): AxiosPromise<Trade> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return an individual trade
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: any): AxiosPromise<Array<Trade>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of trades to make to rebalance portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId: string, options?: any): AxiosPromise<CalculatedTrade> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove a target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroup> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get an array of excluded assets associated with a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId: string, options?: any): AxiosPromise<Array<ExcludedAsset>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Adds an asset to exclude to a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
-         * @param {UniversalSymbol} [universalSymbol] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: any): AxiosPromise<ExcludedAsset> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId, universalSymbol, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Unexclude an asset from a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
-         * @param {string} symbolId The ID of the excluded asset Symbol to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId: string, symbolId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId, symbolId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get details of a target portfolio
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdGet(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroup> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Import target allocation based on portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId: string, options?: any): AxiosPromise<Array<TargetAsset>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return a whole bunch of relevant information relating to a portfolio group.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupInfo> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Update an existing target portfolio.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
-         * @param {{ [key: string]: any; }} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: any): AxiosPromise<PortfolioGroup> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId, requestBody, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get total of each postions owned in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId: string, options?: any): AxiosPromise<Array<PortfolioGroupPosition>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get portfolio group settings
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupSettings> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Updates portfolio group settings
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId: string, options?: any): AxiosPromise<PortfolioGroupSettings> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Search for symbols limited to brokerages under the specified portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
-         * @param {SymbolQuery} [symbolQuery] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId, symbolQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all target assets under the specified PortfolioGroup.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId: string, options?: any): AxiosPromise<Array<TargetAsset>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {Array<TargetAsset>} [targetAsset] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: any): AxiosPromise<Array<TargetAsset>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId, targetAsset, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove a TargetAsset.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to delete.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId: string, targetAssetId: string, options?: any): AxiosPromise<TargetAsset> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId, targetAssetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get a specific target from a portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId: string, targetAssetId: string, options?: any): AxiosPromise<TargetAsset> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId, targetAssetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Update a TargetAsset under the specified PortfolioGroup.
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
-         * @param {string} targetAssetId The ID of the TargetAsset to patch.
-         * @param {TargetAsset} targetAsset 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: any): AxiosPromise<TargetAsset> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId, targetAssetId, targetAsset, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Create new portfolio group
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {{ [key: string]: any; }} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPost(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: any): AxiosPromise<Array<PortfolioGroup>> {
-            return localVarFp.portfolioGroupsPost(userId, userSecret, requestBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
 
-/**
- * PortfolioManagementApi - object-oriented interface
- * @export
- * @class PortfolioManagementApi
- * @extends {BaseAPI}
- */
-export class PortfolioManagementApi extends BaseAPI {
-    /**
-     * 
-     * @summary List of model asset class
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelAssetClassGet(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelAssetClassGet(options).then((request) => request(this.axios, this.basePath));
-    }
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
 
-    /**
-     * 
-     * @summary Deletes a model asset class
-     * @param {string} modelAssetClassId The ID of the model asset class to delete.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelAssetClassModelAssetClassIdDelete(modelAssetClassId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelAssetClassModelAssetClassIdDelete(modelAssetClassId, options).then((request) => request(this.axios, this.basePath));
-    }
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
 
-    /**
-     * 
-     * @summary Get details of a model asset class
-     * @param {string} modelAssetClassId The ID of the model asset class to get.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelAssetClassModelAssetClassIdGet(modelAssetClassId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelAssetClassModelAssetClassIdGet(modelAssetClassId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Updates model asset class objects
-     * @param {string} modelAssetClassId The ID of the model asset class to update.
-     * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelAssetClassModelAssetClassIdPost(modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelAssetClassModelAssetClassIdPost(modelAssetClassId, modelAssetClassDetails, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create a new model asset class
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelAssetClassPost(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelAssetClassPost(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of model portfolio
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelPortfolioGet(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelPortfolioGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Deletes a model portfolio
-     * @param {string} modelPortfolioId The ID of the model portfolio to delete.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelPortfolioModelPortfolioIdDelete(modelPortfolioId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelPortfolioModelPortfolioIdDelete(modelPortfolioId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get details of a model portfolio
-     * @param {string} modelPortfolioId The ID of the model portfolio to get.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelPortfolioModelPortfolioIdGet(modelPortfolioId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelPortfolioModelPortfolioIdGet(modelPortfolioId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Updates model portfolio object
-     * @param {string} modelPortfolioId The ID of the model portfolio to update.
-     * @param {ModelPortfolioDetails} modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelPortfolioModelPortfolioIdPost(modelPortfolioId: string, modelPortfolioDetails: ModelPortfolioDetails, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelPortfolioModelPortfolioIdPost(modelPortfolioId, modelPortfolioDetails, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Creates a new model portfolio
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public modelPortfolioPost(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).modelPortfolioPost(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all portfolio groups
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsGet(userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsGet(userId, userSecret, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all accounts associated with a portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdAccountsGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get sum of cash balances in portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdBalancesGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return details of a specific trade before it\'s placed
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-     * @param {string} tradeId The ID of trade object
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Modify units of a trade before it is placed
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-     * @param {string} tradeId The ID of trade object
-     * @param {Trade} [trade] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return an individual trade
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-     * @param {string} tradeId The ID of trade object
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of trades to make to rebalance portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove a target portfolio.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to delete.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdDelete(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get an array of excluded assets associated with a portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdExcludedassetsGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Adds an asset to exclude to a portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset.
-     * @param {UniversalSymbol} [universalSymbol] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId: string, universalSymbol?: UniversalSymbol, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdExcludedassetsPost(portfolioGroupId, universalSymbol, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Unexclude an asset from a portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset.
-     * @param {string} symbolId The ID of the excluded asset Symbol to delete.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId: string, symbolId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdExcludedassetsSymbolIdDelete(portfolioGroupId, symbolId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get details of a target portfolio
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to get.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Import target allocation based on portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdImportPost(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return a whole bunch of relevant information relating to a portfolio group.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdInfoGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Update an existing target portfolio.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to update.
-     * @param {{ [key: string]: any; }} requestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdPatch(portfolioGroupId, requestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get total of each postions owned in portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdPositionsGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get portfolio group settings
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the settings.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdSettingsGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Updates portfolio group settings
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the settings.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdSettingsPatch(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Search for symbols limited to brokerages under the specified portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to search under
-     * @param {SymbolQuery} [symbolQuery] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdSymbolsPost(portfolioGroupId, symbolQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all target assets under the specified PortfolioGroup.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdTargetsGet(portfolioGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-     * @param {Array<TargetAsset>} [targetAsset] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId: string, targetAsset?: Array<TargetAsset>, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdTargetsPost(portfolioGroupId, targetAsset, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove a TargetAsset.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset.
-     * @param {string} targetAssetId The ID of the TargetAsset to delete.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdDelete(portfolioGroupId, targetAssetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get a specific target from a portfolio group
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to get the target asset.
-     * @param {string} targetAssetId The ID of the TargetAsset to get.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId: string, targetAssetId: string, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdGet(portfolioGroupId, targetAssetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Update a TargetAsset under the specified PortfolioGroup.
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset.
-     * @param {string} targetAssetId The ID of the TargetAsset to patch.
-     * @param {TargetAsset} targetAsset 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId: string, targetAssetId: string, targetAsset: TargetAsset, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPortfolioGroupIdTargetsTargetAssetIdPatch(portfolioGroupId, targetAssetId, targetAsset, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create new portfolio group
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {{ [key: string]: any; }} requestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public portfolioGroupsPost(userId: string, userSecret: string, requestBody: { [key: string]: any; }, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).portfolioGroupsPost(userId, userSecret, requestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-}
+            if (symbolId !== undefined) {
+                localVarQueryParameter['symbolId'] = symbolId;
+            }
 
 
-/**
- * ReferenceDataApi - axios parameter creator
- * @export
- */
-export const ReferenceDataApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of all brokerage authorization types
+         * @param {string} [brokerage] Comma separated value of brokerage slugs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerageAuthorizationType: async (brokerage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/brokerageAuthorizationTypes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+            if (brokerage !== undefined) {
+                localVarQueryParameter['brokerage'] = brokerage;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of all brokerages.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerages: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/brokerages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllCurrencies: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/currencies`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Return the exchange rates of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllCurrenciesRates: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/currencies/rates`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary Search for symbols that are supported by a brokerage account using a substring
@@ -9312,13 +9698,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdSymbolsPost: async (userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        symbolSearchUserAccount: async (userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdSymbolsPost', 'userId', userId)
+            assertParamExists('symbolSearchUserAccount', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdSymbolsPost', 'userSecret', userSecret)
+            assertParamExists('symbolSearchUserAccount', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdSymbolsPost', 'accountId', accountId)
+            assertParamExists('symbolSearchUserAccount', 'accountId', accountId)
             const localVarPath = `/accounts/{accountId}/symbols`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9363,456 +9749,6 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary List of all brokerage authorization types
-         * @param {string} [brokerage] Comma separated value of brokerage slugs
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brokerageAuthorizationTypesGet: async (brokerage?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/brokerageAuthorizationTypes`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (brokerage !== undefined) {
-                localVarQueryParameter['brokerage'] = brokerage;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List of all brokerages.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brokeragesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/brokerages`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currenciesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/currencies`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return the exchange rate of a currency pair
-         * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currenciesRatesCurrencyPairGet: async (currencyPair: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'currencyPair' is not null or undefined
-            assertParamExists('currenciesRatesCurrencyPairGet', 'currencyPair', currencyPair)
-            const localVarPath = `/currencies/rates/{currencyPair}`
-                .replace(`{${"currencyPair"}}`, encodeURIComponent(String(currencyPair)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return the exchange rates of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currenciesRatesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/currencies/rates`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        exchangesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/exchanges`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List of all security types.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        securityTypesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/securityTypes`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get metadata related to Snaptrade partner
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        snapTradePartnersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/snapTrade/partners`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Search for symbols
-         * @param {SymbolQuery} [symbolQuery] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        symbolsPost: async (symbolQuery?: SymbolQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/symbols`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(symbolQuery, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get details of a symbol
-         * @param {string} symbolId The ID of the UniversalSymbol to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        symbolsSymbolIdGet: async (symbolId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'symbolId' is not null or undefined
-            assertParamExists('symbolsSymbolIdGet', 'symbolId', symbolId)
-            const localVarPath = `/symbols/{symbolId}`
-                .replace(`{${"symbolId"}}`, encodeURIComponent(String(symbolId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get details of a symbol by the ticker
-         * @param {string} ticker The ticker of the UniversalSymbol to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        symbolsTickerGet: async (ticker: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'ticker' is not null or undefined
-            assertParamExists('symbolsTickerGet', 'ticker', ticker)
-            const localVarPath = `/symbols/{ticker}`
-                .replace(`{${"ticker"}}`, encodeURIComponent(String(ticker)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -9825,88 +9761,13 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Search for symbols that are supported by a brokerage account using a substring
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {SymbolQuery} [symbolQuery] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async accountsAccountIdSymbolsPost(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdSymbolsPost(userId, userSecret, accountId, symbolQuery, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of all brokerage authorization types
-         * @param {string} [brokerage] Comma separated value of brokerage slugs
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async brokerageAuthorizationTypesGet(brokerage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.brokerageAuthorizationTypesGet(brokerage, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of all brokerages.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async brokeragesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Brokerage>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.brokeragesGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async currenciesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Currency>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.currenciesGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Return the exchange rate of a currency pair
          * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async currenciesRatesCurrencyPairGet(currencyPair: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExchangeRatePairs>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.currenciesRatesCurrencyPairGet(currencyPair, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return the exchange rates of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async currenciesRatesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ExchangeRatePairs>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.currenciesRatesGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async exchangesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exchange>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.exchangesGet(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary List of all security types.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async securityTypesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SecurityType>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.securityTypesGet(options);
+        async getCurrencyExchangeRatePair(currencyPair: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExchangeRatePairs>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrencyExchangeRatePair(currencyPair, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9915,8 +9776,28 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async snapTradePartnersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PartnerData>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.snapTradePartnersGet(options);
+        async getPartnerInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PartnerData>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPartnerInfo(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of all security types.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSecurityTypes(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SecurityType>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSecurityTypes(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStockExchanges(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Exchange>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStockExchanges(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9926,30 +9807,75 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async symbolsPost(symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolsPost(symbolQuery, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get details of a symbol
-         * @param {string} symbolId The ID of the UniversalSymbol to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async symbolsSymbolIdGet(symbolId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolsSymbolIdGet(symbolId, options);
+        async getSymbols(symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbols(symbolQuery, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary Get details of a symbol by the ticker
          * @param {string} ticker The ticker of the UniversalSymbol to get.
+         * @param {string} [symbolId] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async symbolsTickerGet(ticker: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolsTickerGet(ticker, options);
+        async getSymbolsByTicker(ticker: string, symbolId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbolsByTicker(ticker, symbolId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of all brokerage authorization types
+         * @param {string} [brokerage] Comma separated value of brokerage slugs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllBrokerageAuthorizationType(brokerage?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageAuthorizationType(brokerage, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of all brokerages.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllBrokerages(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Brokerage>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerages(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllCurrencies(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Currency>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllCurrencies(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Return the exchange rates of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllCurrenciesRates(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ExchangeRatePairs>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllCurrenciesRates(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Search for symbols that are supported by a brokerage account using a substring
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {SymbolQuery} [symbolQuery] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async symbolSearchUserAccount(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -9964,81 +9890,13 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
-         * @summary Search for symbols that are supported by a brokerage account using a substring
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {SymbolQuery} [symbolQuery] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        accountsAccountIdSymbolsPost(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
-            return localVarFp.accountsAccountIdSymbolsPost(userId, userSecret, accountId, symbolQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of all brokerage authorization types
-         * @param {string} [brokerage] Comma separated value of brokerage slugs
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brokerageAuthorizationTypesGet(brokerage?: string, options?: any): AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>> {
-            return localVarFp.brokerageAuthorizationTypesGet(brokerage, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of all brokerages.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brokeragesGet(options?: any): AxiosPromise<Array<Brokerage>> {
-            return localVarFp.brokeragesGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currenciesGet(options?: any): AxiosPromise<Array<Currency>> {
-            return localVarFp.currenciesGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Return the exchange rate of a currency pair
          * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        currenciesRatesCurrencyPairGet(currencyPair: string, options?: any): AxiosPromise<ExchangeRatePairs> {
-            return localVarFp.currenciesRatesCurrencyPairGet(currencyPair, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return the exchange rates of all supported currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        currenciesRatesGet(options?: any): AxiosPromise<Array<ExchangeRatePairs>> {
-            return localVarFp.currenciesRatesGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        exchangesGet(options?: any): AxiosPromise<Array<Exchange>> {
-            return localVarFp.exchangesGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List of all security types.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        securityTypesGet(options?: any): AxiosPromise<Array<SecurityType>> {
-            return localVarFp.securityTypesGet(options).then((request) => request(axios, basePath));
+        getCurrencyExchangeRatePair(currencyPair: string, options?: any): AxiosPromise<ExchangeRatePairs> {
+            return localVarFp.getCurrencyExchangeRatePair(currencyPair, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10046,8 +9904,26 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        snapTradePartnersGet(options?: any): AxiosPromise<PartnerData> {
-            return localVarFp.snapTradePartnersGet(options).then((request) => request(axios, basePath));
+        getPartnerInfo(options?: any): AxiosPromise<PartnerData> {
+            return localVarFp.getPartnerInfo(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of all security types.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSecurityTypes(options?: any): AxiosPromise<Array<SecurityType>> {
+            return localVarFp.getSecurityTypes(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStockExchanges(options?: any): AxiosPromise<Array<Exchange>> {
+            return localVarFp.getStockExchanges(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10056,28 +9932,69 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        symbolsPost(symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
-            return localVarFp.symbolsPost(symbolQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get details of a symbol
-         * @param {string} symbolId The ID of the UniversalSymbol to get.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        symbolsSymbolIdGet(symbolId: string, options?: any): AxiosPromise<UniversalSymbol> {
-            return localVarFp.symbolsSymbolIdGet(symbolId, options).then((request) => request(axios, basePath));
+        getSymbols(symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
+            return localVarFp.getSymbols(symbolQuery, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Get details of a symbol by the ticker
          * @param {string} ticker The ticker of the UniversalSymbol to get.
+         * @param {string} [symbolId] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        symbolsTickerGet(ticker: string, options?: any): AxiosPromise<UniversalSymbol> {
-            return localVarFp.symbolsTickerGet(ticker, options).then((request) => request(axios, basePath));
+        getSymbolsByTicker(ticker: string, symbolId?: string, options?: any): AxiosPromise<UniversalSymbol> {
+            return localVarFp.getSymbolsByTicker(ticker, symbolId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of all brokerage authorization types
+         * @param {string} [brokerage] Comma separated value of brokerage slugs
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerageAuthorizationType(brokerage?: string, options?: any): AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>> {
+            return localVarFp.listAllBrokerageAuthorizationType(brokerage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of all brokerages.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerages(options?: any): AxiosPromise<Array<Brokerage>> {
+            return localVarFp.listAllBrokerages(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllCurrencies(options?: any): AxiosPromise<Array<Currency>> {
+            return localVarFp.listAllCurrencies(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return the exchange rates of all supported currencies
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllCurrenciesRates(options?: any): AxiosPromise<Array<ExchangeRatePairs>> {
+            return localVarFp.listAllCurrenciesRates(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Search for symbols that are supported by a brokerage account using a substring
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId The ID of the account get positions.
+         * @param {SymbolQuery} [symbolQuery] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        symbolSearchUserAccount(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: any): AxiosPromise<Array<UniversalSymbol>> {
+            return localVarFp.symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10091,96 +10008,14 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
 export class ReferenceDataApi extends BaseAPI {
     /**
      * 
-     * @summary Search for symbols that are supported by a brokerage account using a substring
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {SymbolQuery} [symbolQuery] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public accountsAccountIdSymbolsPost(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).accountsAccountIdSymbolsPost(userId, userSecret, accountId, symbolQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of all brokerage authorization types
-     * @param {string} [brokerage] Comma separated value of brokerage slugs
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public brokerageAuthorizationTypesGet(brokerage?: string, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).brokerageAuthorizationTypesGet(brokerage, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of all brokerages.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public brokeragesGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).brokeragesGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of all supported currencies
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public currenciesGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).currenciesGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Return the exchange rate of a currency pair
      * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApi
      */
-    public currenciesRatesCurrencyPairGet(currencyPair: string, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).currenciesRatesCurrencyPairGet(currencyPair, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return the exchange rates of all supported currencies
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public currenciesRatesGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).currenciesRatesGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return list of stock exchanges on Passiv and their suffixes
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public exchangesGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).exchangesGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List of all security types.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public securityTypesGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).securityTypesGet(options).then((request) => request(this.axios, this.basePath));
+    public getCurrencyExchangeRatePair(currencyPair: string, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getCurrencyExchangeRatePair(currencyPair, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10190,8 +10025,30 @@ export class ReferenceDataApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReferenceDataApi
      */
-    public snapTradePartnersGet(options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).snapTradePartnersGet(options).then((request) => request(this.axios, this.basePath));
+    public getPartnerInfo(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getPartnerInfo(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of all security types.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public getSecurityTypes(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getSecurityTypes(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return list of stock exchanges on Passiv and their suffixes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public getStockExchanges(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getStockExchanges(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10202,32 +10059,81 @@ export class ReferenceDataApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReferenceDataApi
      */
-    public symbolsPost(symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).symbolsPost(symbolQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get details of a symbol
-     * @param {string} symbolId The ID of the UniversalSymbol to get.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApi
-     */
-    public symbolsSymbolIdGet(symbolId: string, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).symbolsSymbolIdGet(symbolId, options).then((request) => request(this.axios, this.basePath));
+    public getSymbols(symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getSymbols(symbolQuery, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get details of a symbol by the ticker
      * @param {string} ticker The ticker of the UniversalSymbol to get.
+     * @param {string} [symbolId] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApi
      */
-    public symbolsTickerGet(ticker: string, options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).symbolsTickerGet(ticker, options).then((request) => request(this.axios, this.basePath));
+    public getSymbolsByTicker(ticker: string, symbolId?: string, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).getSymbolsByTicker(ticker, symbolId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of all brokerage authorization types
+     * @param {string} [brokerage] Comma separated value of brokerage slugs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public listAllBrokerageAuthorizationType(brokerage?: string, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listAllBrokerageAuthorizationType(brokerage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of all brokerages.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public listAllBrokerages(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listAllBrokerages(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List of all supported currencies
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public listAllCurrencies(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listAllCurrencies(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return the exchange rates of all supported currencies
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public listAllCurrenciesRates(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listAllCurrenciesRates(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search for symbols that are supported by a brokerage account using a substring
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {string} accountId The ID of the account get positions.
+     * @param {SymbolQuery} [symbolQuery] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApi
+     */
+    public symbolSearchUserAccount(userId: string, userSecret: string, accountId: string, symbolQuery?: SymbolQuery, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10248,15 +10154,15 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOrdersCancelPost: async (userId: string, userSecret: string, accountId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelUserAccountOrder: async (userId: string, userSecret: string, accountId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersCancelPost', 'userId', userId)
+            assertParamExists('cancelUserAccountOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersCancelPost', 'userSecret', userSecret)
+            assertParamExists('cancelUserAccountOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersCancelPost', 'accountId', accountId)
+            assertParamExists('cancelUserAccountOrder', 'accountId', accountId)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersCancelPost', 'body', body)
+            assertParamExists('cancelUserAccountOrder', 'body', body)
             const localVarPath = `/accounts/{accountId}/orders/cancel`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10303,23 +10209,24 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+         * @summary Return details of a specific trade before it\'s placed
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOrdersGet: async (userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersGet', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersGet', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdOrdersGet', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/orders`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+        getCalculatedTradeImpactById: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getCalculatedTradeImpactById', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'calculatedTradeId' is not null or undefined
+            assertParamExists('getCalculatedTradeImpactById', 'calculatedTradeId', calculatedTradeId)
+            // verify required parameter 'tradeId' is not null or undefined
+            assertParamExists('getCalculatedTradeImpactById', 'tradeId', tradeId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
+                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
+                .replace(`{${"tradeId"}}`, encodeURIComponent(String(tradeId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10340,6 +10247,101 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             // authentication PartnerTimestamp required
             await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
 
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Return the impact of placing a series of trades on the portfolio
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCalculatedTradesImpact: async (portfolioGroupId: string, calculatedTradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'portfolioGroupId' is not null or undefined
+            assertParamExists('getCalculatedTradesImpact', 'portfolioGroupId', portfolioGroupId)
+            // verify required parameter 'calculatedTradeId' is not null or undefined
+            assertParamExists('getCalculatedTradesImpact', 'calculatedTradeId', calculatedTradeId)
+            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact`
+                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
+                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Check impact of trades on account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrderImpact: async (userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getOrderImpact', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getOrderImpact', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeForm' is not null or undefined
+            assertParamExists('getOrderImpact', 'manualTradeForm', manualTradeForm)
+            const localVarPath = `/trade/impact`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+
+            // authentication PartnerSignature required
+            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -10348,15 +10350,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
-            if (state !== undefined) {
-                localVarQueryParameter['state'] = state;
-            }
-
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -10374,15 +10375,15 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdQuotesGet: async (userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountQuotes: async (userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('accountsAccountIdQuotesGet', 'userId', userId)
+            assertParamExists('getUserAccountQuotes', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('accountsAccountIdQuotesGet', 'userSecret', userSecret)
+            assertParamExists('getUserAccountQuotes', 'userSecret', userSecret)
             // verify required parameter 'symbols' is not null or undefined
-            assertParamExists('accountsAccountIdQuotesGet', 'symbols', symbols)
+            assertParamExists('getUserAccountQuotes', 'symbols', symbols)
             // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('accountsAccountIdQuotesGet', 'accountId', accountId)
+            assertParamExists('getUserAccountQuotes', 'accountId', accountId)
             const localVarPath = `/accounts/{accountId}/quotes`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10434,104 +10435,6 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Return the impact of placing a series of trades on the portfolio
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet: async (portfolioGroupId: string, calculatedTradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet', 'calculatedTradeId', calculatedTradeId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'portfolioGroupId', portfolioGroupId)
-            // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'calculatedTradeId', calculatedTradeId)
-            // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet', 'tradeId', tradeId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
-                .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
-                .replace(`{${"tradeId"}}`, encodeURIComponent(String(tradeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Modify units of a trade before it is placed
          * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
          * @param {string} calculatedTradeId The ID of calculated trade to get account impact
@@ -10540,13 +10443,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        modifyCalculatedTradeById: async (portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('modifyCalculatedTradeById', 'portfolioGroupId', portfolioGroupId)
             // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'calculatedTradeId', calculatedTradeId)
+            assertParamExists('modifyCalculatedTradeById', 'calculatedTradeId', calculatedTradeId)
             // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch', 'tradeId', tradeId)
+            assertParamExists('modifyCalculatedTradeById', 'tradeId', tradeId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
                 .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)))
@@ -10593,11 +10496,11 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost: async (portfolioGroupId: string, calculatedTradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeCalculatedTrades: async (portfolioGroupId: string, calculatedTradeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost', 'portfolioGroupId', portfolioGroupId)
+            assertParamExists('placeCalculatedTrades', 'portfolioGroupId', portfolioGroupId)
             // verify required parameter 'calculatedTradeId' is not null or undefined
-            assertParamExists('portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost', 'calculatedTradeId', calculatedTradeId)
+            assertParamExists('placeCalculatedTrades', 'calculatedTradeId', calculatedTradeId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)))
                 .replace(`{${"calculatedTradeId"}}`, encodeURIComponent(String(calculatedTradeId)));
@@ -10634,79 +10537,20 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Check impact of trades on account.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tradeImpactPost: async (userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('tradeImpactPost', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('tradeImpactPost', 'userSecret', userSecret)
-            // verify required parameter 'manualTradeForm' is not null or undefined
-            assertParamExists('tradeImpactPost', 'manualTradeForm', manualTradeForm)
-            const localVarPath = `/trade/impact`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
-
-            // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
-
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Place a OCO (One Cancels Other) order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {TradeOcoPostRequest} tradeOcoPostRequest 
+         * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tradeOcoPost: async (userId: string, userSecret: string, tradeOcoPostRequest: TradeOcoPostRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeOCOOrder: async (userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('tradeOcoPost', 'userId', userId)
+            assertParamExists('placeOCOOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('tradeOcoPost', 'userSecret', userSecret)
-            // verify required parameter 'tradeOcoPostRequest' is not null or undefined
-            assertParamExists('tradeOcoPost', 'tradeOcoPostRequest', tradeOcoPostRequest)
+            assertParamExists('placeOCOOrder', 'userSecret', userSecret)
+            // verify required parameter 'tradingPlaceOCOOrderRequest' is not null or undefined
+            assertParamExists('placeOCOOrder', 'tradingPlaceOCOOrderRequest', tradingPlaceOCOOrderRequest)
             const localVarPath = `/trade/oco`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10743,7 +10587,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tradeOcoPostRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceOCOOrderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -10759,13 +10603,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tradeTradeIdPost: async (tradeId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeOrder: async (tradeId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tradeId' is not null or undefined
-            assertParamExists('tradeTradeIdPost', 'tradeId', tradeId)
+            assertParamExists('placeOrder', 'tradeId', tradeId)
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('tradeTradeIdPost', 'userId', userId)
+            assertParamExists('placeOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('tradeTradeIdPost', 'userSecret', userSecret)
+            assertParamExists('placeOrder', 'userSecret', userSecret)
             const localVarPath = `/trade/{tradeId}`
                 .replace(`{${"tradeId"}}`, encodeURIComponent(String(tradeId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10827,22 +10671,46 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdOrdersCancelPost(userId: string, userSecret: string, accountId: string, body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdOrdersCancelPost(userId, userSecret, accountId, body, options);
+        async cancelUserAccountOrder(userId: string, userSecret: string, accountId: string, body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelUserAccountOrder(userId, userSecret, accountId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+         * @summary Return details of a specific trade before it\'s placed
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdOrdersGet(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdOrdersGet(userId, userSecret, accountId, state, options);
+        async getCalculatedTradeImpactById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Return the impact of placing a series of trades on the portfolio
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCalculatedTradesImpact(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TradeImpact>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Check impact of trades on account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOrderImpact(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManualTradeAndImpact>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderImpact(userId, userSecret, manualTradeForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10856,33 +10724,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountsAccountIdQuotesGet(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SymbolsQuotes>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accountsAccountIdQuotesGet(userId, userSecret, symbols, accountId, useTicker, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return the impact of placing a series of trades on the portfolio
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TradeImpact>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId, calculatedTradeId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options);
+        async getUserAccountQuotes(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SymbolsQuotes>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10895,8 +10738,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options);
+        async modifyCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10907,21 +10750,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TradeExecutionStatus>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId, calculatedTradeId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Check impact of trades on account.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tradeImpactPost(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManualTradeAndImpact>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tradeImpactPost(userId, userSecret, manualTradeForm, options);
+        async placeCalculatedTrades(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TradeExecutionStatus>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeCalculatedTrades(portfolioGroupId, calculatedTradeId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10929,12 +10759,12 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @summary Place a OCO (One Cancels Other) order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {TradeOcoPostRequest} tradeOcoPostRequest 
+         * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tradeOcoPost(userId: string, userSecret: string, tradeOcoPostRequest: TradeOcoPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tradeOcoPost(userId, userSecret, tradeOcoPostRequest, options);
+        async placeOCOOrder(userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10946,8 +10776,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tradeTradeIdPost(tradeId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tradeTradeIdPost(tradeId, userId, userSecret, options);
+        async placeOrder(tradeId: string, userId: string, userSecret: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOrder(tradeId, userId, userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -10970,21 +10800,43 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOrdersCancelPost(userId: string, userSecret: string, accountId: string, body: string, options?: any): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.accountsAccountIdOrdersCancelPost(userId, userSecret, accountId, body, options).then((request) => request(axios, basePath));
+        cancelUserAccountOrder(userId: string, userSecret: string, accountId: string, body: string, options?: any): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.cancelUserAccountOrder(userId, userSecret, accountId, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
-         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+         * @summary Return details of a specific trade before it\'s placed
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {string} tradeId The ID of trade object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdOrdersGet(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: any): AxiosPromise<Array<AccountOrderRecord>> {
-            return localVarFp.accountsAccountIdOrdersGet(userId, userSecret, accountId, state, options).then((request) => request(axios, basePath));
+        getCalculatedTradeImpactById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: any): AxiosPromise<Trade> {
+            return localVarFp.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return the impact of placing a series of trades on the portfolio
+         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCalculatedTradesImpact(portfolioGroupId: string, calculatedTradeId: string, options?: any): AxiosPromise<Array<TradeImpact>> {
+            return localVarFp.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Check impact of trades on account.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeForm} manualTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrderImpact(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<ManualTradeAndImpact> {
+            return localVarFp.getOrderImpact(userId, userSecret, manualTradeForm, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10997,31 +10849,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountsAccountIdQuotesGet(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: any): AxiosPromise<SymbolsQuotes> {
-            return localVarFp.accountsAccountIdQuotesGet(userId, userSecret, symbols, accountId, useTicker, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return the impact of placing a series of trades on the portfolio
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId: string, calculatedTradeId: string, options?: any): AxiosPromise<Array<TradeImpact>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId, calculatedTradeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return details of a specific trade before it\'s placed
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-         * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-         * @param {string} tradeId The ID of trade object
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: any): AxiosPromise<Trade> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(axios, basePath));
+        getUserAccountQuotes(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: any): AxiosPromise<SymbolsQuotes> {
+            return localVarFp.getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11033,8 +10862,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: any): AxiosPromise<Trade> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(axios, basePath));
+        modifyCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: any): AxiosPromise<Trade> {
+            return localVarFp.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11044,32 +10873,20 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId: string, calculatedTradeId: string, options?: any): AxiosPromise<Array<TradeExecutionStatus>> {
-            return localVarFp.portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId, calculatedTradeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Check impact of trades on account.
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {ManualTradeForm} manualTradeForm 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tradeImpactPost(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: any): AxiosPromise<ManualTradeAndImpact> {
-            return localVarFp.tradeImpactPost(userId, userSecret, manualTradeForm, options).then((request) => request(axios, basePath));
+        placeCalculatedTrades(portfolioGroupId: string, calculatedTradeId: string, options?: any): AxiosPromise<Array<TradeExecutionStatus>> {
+            return localVarFp.placeCalculatedTrades(portfolioGroupId, calculatedTradeId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Place a OCO (One Cancels Other) order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {TradeOcoPostRequest} tradeOcoPostRequest 
+         * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tradeOcoPost(userId: string, userSecret: string, tradeOcoPostRequest: TradeOcoPostRequest, options?: any): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.tradeOcoPost(userId, userSecret, tradeOcoPostRequest, options).then((request) => request(axios, basePath));
+        placeOCOOrder(userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options?: any): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11080,8 +10897,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tradeTradeIdPost(tradeId: string, userId: string, userSecret: string, options?: any): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.tradeTradeIdPost(tradeId, userId, userSecret, options).then((request) => request(axios, basePath));
+        placeOrder(tradeId: string, userId: string, userSecret: string, options?: any): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeOrder(tradeId, userId, userSecret, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11104,23 +10921,49 @@ export class TradingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public accountsAccountIdOrdersCancelPost(userId: string, userSecret: string, accountId: string, body: string, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).accountsAccountIdOrdersCancelPost(userId, userSecret, accountId, body, options).then((request) => request(this.axios, this.basePath));
+    public cancelUserAccountOrder(userId: string, userSecret: string, accountId: string, body: string, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).cancelUserAccountOrder(userId, userSecret, accountId, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Get all history of orders placed in account
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {string} accountId The ID of the account get positions.
-     * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+     * @summary Return details of a specific trade before it\'s placed
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+     * @param {string} tradeId The ID of trade object
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public accountsAccountIdOrdersGet(userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).accountsAccountIdOrdersGet(userId, userSecret, accountId, state, options).then((request) => request(this.axios, this.basePath));
+    public getCalculatedTradeImpactById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return the impact of placing a series of trades on the portfolio
+     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
+     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApi
+     */
+    public getCalculatedTradesImpact(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Check impact of trades on account.
+     * @param {string} userId 
+     * @param {string} userSecret 
+     * @param {ManualTradeForm} manualTradeForm 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApi
+     */
+    public getOrderImpact(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getOrderImpact(userId, userSecret, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11135,35 +10978,8 @@ export class TradingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public accountsAccountIdQuotesGet(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).accountsAccountIdQuotesGet(userId, userSecret, symbols, accountId, useTicker, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return the impact of placing a series of trades on the portfolio
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TradingApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpactGet(portfolioGroupId, calculatedTradeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return details of a specific trade before it\'s placed
-     * @param {string} portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations
-     * @param {string} calculatedTradeId The ID of calculated trade to get account impact
-     * @param {string} tradeId The ID of trade object
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TradingApi
-     */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdGet(portfolioGroupId, calculatedTradeId, tradeId, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountQuotes(userId: string, userSecret: string, symbols: string, accountId: string, useTicker?: boolean, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11177,8 +10993,8 @@ export class TradingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeIdPatch(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(this.axios, this.basePath));
+    public modifyCalculatedTradeById(portfolioGroupId: string, calculatedTradeId: string, tradeId: string, trade?: Trade, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11190,22 +11006,8 @@ export class TradingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).portfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrdersPost(portfolioGroupId, calculatedTradeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Check impact of trades on account.
-     * @param {string} userId 
-     * @param {string} userSecret 
-     * @param {ManualTradeForm} manualTradeForm 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TradingApi
-     */
-    public tradeImpactPost(userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).tradeImpactPost(userId, userSecret, manualTradeForm, options).then((request) => request(this.axios, this.basePath));
+    public placeCalculatedTrades(portfolioGroupId: string, calculatedTradeId: string, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeCalculatedTrades(portfolioGroupId, calculatedTradeId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11213,13 +11015,13 @@ export class TradingApi extends BaseAPI {
      * @summary Place a OCO (One Cancels Other) order
      * @param {string} userId 
      * @param {string} userSecret 
-     * @param {TradeOcoPostRequest} tradeOcoPostRequest 
+     * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public tradeOcoPost(userId: string, userSecret: string, tradeOcoPostRequest: TradeOcoPostRequest, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).tradeOcoPost(userId, userSecret, tradeOcoPostRequest, options).then((request) => request(this.axios, this.basePath));
+    public placeOCOOrder(userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11232,8 +11034,8 @@ export class TradingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TradingApi
      */
-    public tradeTradeIdPost(tradeId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).tradeTradeIdPost(tradeId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
+    public placeOrder(tradeId: string, userId: string, userSecret: string, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeOrder(tradeId, userId, userSecret, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -11255,12 +11057,12 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activitiesGet: async (userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getActivities: async (userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('activitiesGet', 'userId', userId)
+            assertParamExists('getActivities', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('activitiesGet', 'userSecret', userSecret)
-            const localVarPath = `/activities/`;
+            assertParamExists('getActivities', 'userSecret', userSecret)
+            const localVarPath = `/activities`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11325,15 +11127,15 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        performanceCustomGet: async (startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReportingCustomRange: async (startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'startDate' is not null or undefined
-            assertParamExists('performanceCustomGet', 'startDate', startDate)
+            assertParamExists('getReportingCustomRange', 'startDate', startDate)
             // verify required parameter 'endDate' is not null or undefined
-            assertParamExists('performanceCustomGet', 'endDate', endDate)
+            assertParamExists('getReportingCustomRange', 'endDate', endDate)
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('performanceCustomGet', 'userId', userId)
+            assertParamExists('getReportingCustomRange', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('performanceCustomGet', 'userSecret', userSecret)
+            assertParamExists('getReportingCustomRange', 'userSecret', userSecret)
             const localVarPath = `/performance/custom`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -11415,8 +11217,8 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activitiesGet(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalActivity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activitiesGet(userId, userSecret, startDate, endDate, accounts, options);
+        async getActivities(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalActivity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(userId, userSecret, startDate, endDate, accounts, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11432,8 +11234,8 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async performanceCustomGet(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PerformanceCustom>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options);
+        async getReportingCustomRange(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PerformanceCustom>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -11457,8 +11259,8 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activitiesGet(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: any): AxiosPromise<Array<UniversalActivity>> {
-            return localVarFp.activitiesGet(userId, userSecret, startDate, endDate, accounts, options).then((request) => request(axios, basePath));
+        getActivities(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: any): AxiosPromise<Array<UniversalActivity>> {
+            return localVarFp.getActivities(userId, userSecret, startDate, endDate, accounts, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
@@ -11473,8 +11275,8 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        performanceCustomGet(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: any): AxiosPromise<PerformanceCustom> {
-            return localVarFp.performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options).then((request) => request(axios, basePath));
+        getReportingCustomRange(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: any): AxiosPromise<PerformanceCustom> {
+            return localVarFp.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11498,8 +11300,8 @@ export class TransactionsAndReportingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TransactionsAndReportingApi
      */
-    public activitiesGet(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: AxiosRequestConfig) {
-        return TransactionsAndReportingApiFp(this.configuration).activitiesGet(userId, userSecret, startDate, endDate, accounts, options).then((request) => request(this.axios, this.basePath));
+    public getActivities(userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options?: AxiosRequestConfig) {
+        return TransactionsAndReportingApiFp(this.configuration).getActivities(userId, userSecret, startDate, endDate, accounts, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11516,8 +11318,8 @@ export class TransactionsAndReportingApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TransactionsAndReportingApi
      */
-    public performanceCustomGet(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: AxiosRequestConfig) {
-        return TransactionsAndReportingApiFp(this.configuration).performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options).then((request) => request(this.axios, this.basePath));
+    public getReportingCustomRange(startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options?: AxiosRequestConfig) {
+        return TransactionsAndReportingApiFp(this.configuration).getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

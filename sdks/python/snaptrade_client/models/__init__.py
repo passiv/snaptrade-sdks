@@ -9,12 +9,14 @@
 # import sys
 # sys.setrecursionlimit(n)
 
+from snaptrade_client.model.api_disclaimer_accept_request import APIDisclaimerAcceptRequest
 from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.authentication_login_snap_trade_user200_response import AuthenticationLoginSnapTradeUser200Response
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
@@ -74,10 +76,8 @@ from snaptrade_client.model.position_symbol import PositionSymbol
 from snaptrade_client.model.redirect_tokenand_pin import RedirectTokenandPin
 from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus
-from snaptrade_client.model.snap_trade_accept_disclaimer_post_request import SnapTradeAcceptDisclaimerPostRequest
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
-from snaptrade_client.model.snap_trade_login_post200_response import SnapTradeLoginPost200Response
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.status import Status
@@ -98,11 +98,12 @@ from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.trade import Trade
 from snaptrade_client.model.trade_execution_status import TradeExecutionStatus
 from snaptrade_client.model.trade_impact import TradeImpact
-from snaptrade_client.model.trade_oco_post_request import TradeOcoPostRequest
+from snaptrade_client.model.trading_place_oco_order_request import TradingPlaceOCOOrderRequest
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.universal_activity import UniversalActivity
 from snaptrade_client.model.universal_symbol import UniversalSymbol
+from snaptrade_client.model.universal_symbol_ticker import UniversalSymbolTicker
 from snaptrade_client.model.user_error_log import UserErrorLog
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret
 from snaptrade_client.model.user_list import UserList

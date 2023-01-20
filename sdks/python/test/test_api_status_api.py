@@ -24,8 +24,8 @@ class TestAPIStatusApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_root_get(self):
-        """Test case for root_get
+    def test_check(self):
+        """Test case for check
 
         Get API Status  # noqa: E501
         """

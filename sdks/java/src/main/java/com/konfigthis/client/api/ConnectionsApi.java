@@ -74,163 +74,7 @@ public class ConnectionsApi {
     }
 
     /**
-     * Build call for authorizationsAuthorizationIdDelete
-     * @param authorizationId The ID of the Authorization to delete. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call authorizationsAuthorizationIdDeleteCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/authorizations/{authorizationId}"
-            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call authorizationsAuthorizationIdDeleteValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'authorizationId' is set
-        if (authorizationId == null) {
-            throw new ApiException("Missing the required parameter 'authorizationId' when calling authorizationsAuthorizationIdDelete(Async)");
-        }
-
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling authorizationsAuthorizationIdDelete(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling authorizationsAuthorizationIdDelete(Async)");
-        }
-
-        return authorizationsAuthorizationIdDeleteCall(authorizationId, userId, userSecret, _callback);
-
-    }
-
-    /**
-     * Remove a brokerage authorization.
-     * 
-     * @param authorizationId The ID of the Authorization to delete. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public void authorizationsAuthorizationIdDelete(UUID authorizationId, String userId, String userSecret) throws ApiException {
-        authorizationsAuthorizationIdDeleteWithHttpInfo(authorizationId, userId, userSecret);
-    }
-
-    /**
-     * Remove a brokerage authorization.
-     * 
-     * @param authorizationId The ID of the Authorization to delete. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> authorizationsAuthorizationIdDeleteWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = authorizationsAuthorizationIdDeleteValidateBeforeCall(authorizationId, userId, userSecret, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Remove a brokerage authorization. (asynchronously)
-     * 
-     * @param authorizationId The ID of the Authorization to delete. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call authorizationsAuthorizationIdDeleteAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = authorizationsAuthorizationIdDeleteValidateBeforeCall(authorizationId, userId, userSecret, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for authorizationsAuthorizationIdGet
+     * Build call for detailBrokerageAuthorization
      * @param authorizationId The ID of a brokerage authorization object. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -244,7 +88,7 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call authorizationsAuthorizationIdGetCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call detailBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -298,23 +142,23 @@ public class ConnectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call authorizationsAuthorizationIdGetValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call detailBrokerageAuthorizationValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'authorizationId' is set
         if (authorizationId == null) {
-            throw new ApiException("Missing the required parameter 'authorizationId' when calling authorizationsAuthorizationIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling detailBrokerageAuthorization(Async)");
         }
 
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling authorizationsAuthorizationIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling detailBrokerageAuthorization(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling authorizationsAuthorizationIdGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling detailBrokerageAuthorization(Async)");
         }
 
-        return authorizationsAuthorizationIdGetCall(authorizationId, userId, userSecret, _callback);
+        return detailBrokerageAuthorizationCall(authorizationId, userId, userSecret, _callback);
 
     }
 
@@ -333,8 +177,8 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public BrokerageAuthorization authorizationsAuthorizationIdGet(UUID authorizationId, String userId, String userSecret) throws ApiException {
-        ApiResponse<BrokerageAuthorization> localVarResp = authorizationsAuthorizationIdGetWithHttpInfo(authorizationId, userId, userSecret);
+    public BrokerageAuthorization detailBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        ApiResponse<BrokerageAuthorization> localVarResp = detailBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -353,8 +197,8 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<BrokerageAuthorization> authorizationsAuthorizationIdGetWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = authorizationsAuthorizationIdGetValidateBeforeCall(authorizationId, userId, userSecret, null);
+    public ApiResponse<BrokerageAuthorization> detailBrokerageAuthorizationWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = detailBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, null);
         Type localVarReturnType = new TypeToken<BrokerageAuthorization>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -375,15 +219,15 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call authorizationsAuthorizationIdGetAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<BrokerageAuthorization> _callback) throws ApiException {
+    public okhttp3.Call detailBrokerageAuthorizationAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<BrokerageAuthorization> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = authorizationsAuthorizationIdGetValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        okhttp3.Call localVarCall = detailBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<BrokerageAuthorization>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for authorizationsGet
+     * Build call for listBrokerageAuthorizations
      * @param userId  (required)
      * @param userSecret  (required)
      * @param _callback Callback for upload/download progress
@@ -396,7 +240,7 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call authorizationsGetCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listBrokerageAuthorizationsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -449,18 +293,18 @@ public class ConnectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call authorizationsGetValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listBrokerageAuthorizationsValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling authorizationsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling listBrokerageAuthorizations(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling authorizationsGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listBrokerageAuthorizations(Async)");
         }
 
-        return authorizationsGetCall(userId, userSecret, _callback);
+        return listBrokerageAuthorizationsCall(userId, userSecret, _callback);
 
     }
 
@@ -478,8 +322,8 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<BrokerageAuthorization> authorizationsGet(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<BrokerageAuthorization>> localVarResp = authorizationsGetWithHttpInfo(userId, userSecret);
+    public List<BrokerageAuthorization> listBrokerageAuthorizations(String userId, String userSecret) throws ApiException {
+        ApiResponse<List<BrokerageAuthorization>> localVarResp = listBrokerageAuthorizationsWithHttpInfo(userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -497,8 +341,8 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<BrokerageAuthorization>> authorizationsGetWithHttpInfo(String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = authorizationsGetValidateBeforeCall(userId, userSecret, null);
+    public ApiResponse<List<BrokerageAuthorization>> listBrokerageAuthorizationsWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listBrokerageAuthorizationsValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<BrokerageAuthorization>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -518,11 +362,167 @@ public class ConnectionsApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call authorizationsGetAsync(String userId, String userSecret, final ApiCallback<List<BrokerageAuthorization>> _callback) throws ApiException {
+    public okhttp3.Call listBrokerageAuthorizationsAsync(String userId, String userSecret, final ApiCallback<List<BrokerageAuthorization>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = authorizationsGetValidateBeforeCall(userId, userSecret, _callback);
+        okhttp3.Call localVarCall = listBrokerageAuthorizationsValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<BrokerageAuthorization>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for removeBrokerageAuthorization
+     * @param authorizationId The ID of the Authorization to delete. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/authorizations/{authorizationId}"
+            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call removeBrokerageAuthorizationValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'authorizationId' is set
+        if (authorizationId == null) {
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling removeBrokerageAuthorization(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling removeBrokerageAuthorization(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling removeBrokerageAuthorization(Async)");
+        }
+
+        return removeBrokerageAuthorizationCall(authorizationId, userId, userSecret, _callback);
+
+    }
+
+    /**
+     * Remove a brokerage authorization.
+     * 
+     * @param authorizationId The ID of the Authorization to delete. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public void removeBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        removeBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
+    }
+
+    /**
+     * Remove a brokerage authorization.
+     * 
+     * @param authorizationId The ID of the Authorization to delete. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> removeBrokerageAuthorizationWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = removeBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Remove a brokerage authorization. (asynchronously)
+     * 
+     * @param authorizationId The ID of the Authorization to delete. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeBrokerageAuthorizationAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = removeBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
 }

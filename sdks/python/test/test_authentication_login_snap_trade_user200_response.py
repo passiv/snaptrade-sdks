@@ -19,11 +19,11 @@ from snaptrade_client.model.login_redirect_uri import LoginRedirectURI
 globals()['EncryptedResponse'] = EncryptedResponse
 globals()['EncryptedResponseEncryptedMessageData'] = EncryptedResponseEncryptedMessageData
 globals()['LoginRedirectURI'] = LoginRedirectURI
-from snaptrade_client.model.snap_trade_login_post200_response import SnapTradeLoginPost200Response
+from snaptrade_client.model.authentication_login_snap_trade_user200_response import AuthenticationLoginSnapTradeUser200Response
 
 
-class TestSnapTradeLoginPost200Response(unittest.TestCase):
-    """SnapTradeLoginPost200Response unit test stubs"""
+class TestAuthenticationLoginSnapTradeUser200Response(unittest.TestCase):
+    """AuthenticationLoginSnapTradeUser200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -31,10 +31,10 @@ class TestSnapTradeLoginPost200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSnapTradeLoginPost200Response(self):
-        """Test SnapTradeLoginPost200Response"""
+    def testAuthenticationLoginSnapTradeUser200Response(self):
+        """Test AuthenticationLoginSnapTradeUser200Response"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = SnapTradeLoginPost200Response()  # noqa: E501
+        # model = AuthenticationLoginSnapTradeUser200Response()  # noqa: E501
         pass
 
 

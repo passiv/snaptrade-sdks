@@ -20,30 +20,39 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for SnapTradeAcceptDisclaimerPostRequest
+ * Model tests for TradingPlaceOCOOrderRequest
  */
-public class SnapTradeAcceptDisclaimerPostRequestTest {
-    private final SnapTradeAcceptDisclaimerPostRequest model = new SnapTradeAcceptDisclaimerPostRequest();
+public class TradingPlaceOCOOrderRequestTest {
+    private final TradingPlaceOCOOrderRequest model = new TradingPlaceOCOOrderRequest();
 
     /**
-     * Model tests for SnapTradeAcceptDisclaimerPostRequest
+     * Model tests for TradingPlaceOCOOrderRequest
      */
     @Test
-    public void testSnapTradeAcceptDisclaimerPostRequest() {
-        // TODO: test SnapTradeAcceptDisclaimerPostRequest
+    public void testTradingPlaceOCOOrderRequest() {
+        // TODO: test TradingPlaceOCOOrderRequest
     }
 
     /**
-     * Test the property 'accepted'
+     * Test the property 'firstTradeId'
      */
     @Test
-    public void acceptedTest() {
-        // TODO: test accepted
+    public void firstTradeIdTest() {
+        // TODO: test firstTradeId
+    }
+
+    /**
+     * Test the property 'secondTradeId'
+     */
+    @Test
+    public void secondTradeIdTest() {
+        // TODO: test secondTradeId
     }
 
 }

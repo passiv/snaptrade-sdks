@@ -24,36 +24,36 @@ class TestAuthenticationApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_snap_trade_delete_user_delete(self):
-        """Test case for snap_trade_delete_user_delete
+    def test_delete_snap_trade_user(self):
+        """Test case for delete_snap_trade_user
 
         Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user  # noqa: E501
         """
         pass
 
-    def test_snap_trade_encrypted_jwt_get(self):
-        """Test case for snap_trade_encrypted_jwt_get
+    def test_get_user_jwt(self):
+        """Test case for get_user_jwt
 
         Obtains an encrypted JWT tokens that should be decrypted on a user's local device  # noqa: E501
         """
         pass
 
-    def test_snap_trade_list_users_get(self):
-        """Test case for snap_trade_list_users_get
+    def test_list_snap_trade_users(self):
+        """Test case for list_snap_trade_users
 
         Get a list of all SnapTrade users you've registered on our platform  # noqa: E501
         """
         pass
 
-    def test_snap_trade_login_post(self):
-        """Test case for snap_trade_login_post
+    def test_login_snap_trade_user(self):
+        """Test case for login_snap_trade_user
 
         Generate a redirect URI to securely login a user to the SnapTrade Connection Portal  # noqa: E501
         """
         pass
 
-    def test_snap_trade_register_user_post(self):
-        """Test case for snap_trade_register_user_post
+    def test_register_snap_trade_user(self):
+        """Test case for register_snap_trade_user
 
         Register user with SnapTrade in order to create secure brokerage authorizations  # noqa: E501
         """

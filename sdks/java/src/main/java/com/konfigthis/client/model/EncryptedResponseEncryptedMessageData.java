@@ -121,7 +121,7 @@ public class EncryptedResponseEncryptedMessageData {
    * @return nonce
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getNonce() {
     return nonce;

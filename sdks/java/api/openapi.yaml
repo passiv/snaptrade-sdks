@@ -28,7 +28,7 @@ tags:
   name: Account Information
 - description: "Retrieve information on account transactions, performance, dividends,\
     \ contributions, etc."
-  name: Transactions and Reporting
+  name: Transactions And Reporting
 - description: Manage orders on user accounts
   name: Trading
 - description: "Create portfolio groups, model portfolios, and trade calculations\
@@ -39,10 +39,14 @@ tags:
   name: Reference Data
 - description: Retrieve error logs for your SnapTrade users and API requests.
   name: Error Logs
+- description: Endpoints to search for options prices and chains as well as place
+    options trades if supported.
+  name: Options
 paths:
   /:
     get:
       description: Check whether the API is operational and verify timestamps.
+      operationId: ApiStatus_check
       responses:
         "200":
           content:
@@ -59,6 +63,7 @@ paths:
       x-accepts: application/json
   /snapTrade/acceptDisclaimer:
     post:
+      operationId: APIDisclaimer_accept
       parameters:
       - explode: true
         in: query
@@ -92,6 +97,7 @@ paths:
       x-accepts: application/json
   /snapTrade/listUsers:
     get:
+      operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
           content:
@@ -120,6 +126,7 @@ paths:
       x-accepts: application/json
   /snapTrade/registerUser:
     post:
+      operationId: Authentication_registerSnapTradeUser
       requestBody:
         $ref: '#/components/requestBodies/RegisterUserRequestBody'
       responses:
@@ -151,6 +158,7 @@ paths:
       x-accepts: application/json
   /snapTrade/deleteUser:
     delete:
+      operationId: Authentication_deleteSnapTradeUser
       parameters:
       - explode: true
         in: query
@@ -193,6 +201,7 @@ paths:
       x-accepts: application/json
   /snapTrade/login:
     post:
+      operationId: Authentication_loginSnapTradeUser
       parameters:
       - explode: true
         in: query
@@ -215,7 +224,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_snapTrade_login_post_200_response'
+                $ref: '#/components/schemas/Authentication_loginSnapTradeUser_200_response'
           description: Login successful. Redirect user to provided URI in response
         "400":
           content:
@@ -245,6 +254,7 @@ paths:
       x-accepts: application/json
   /snapTrade/encryptedJWT:
     get:
+      operationId: Authentication_getUserJWT
       parameters:
       - explode: true
         in: query
@@ -295,6 +305,7 @@ paths:
       x-accepts: application/json
   /snapTrade/partners:
     get:
+      operationId: ReferenceData_getPartnerInfo
       parameters: []
       responses:
         "200":
@@ -330,6 +341,7 @@ paths:
       x-accepts: application/json
   /holdings:
     get:
+      operationId: AccountInformation_getAllUserHoldings
       parameters:
       - explode: true
         in: query
@@ -352,6 +364,7 @@ paths:
         name: brokerage_authorizations
         required: false
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
         style: form
@@ -385,6 +398,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/holdings:
     get:
+      operationId: AccountInformation_getUserHoldings
       parameters:
       - description: The ID of the account to fetch holdings for.
         explode: false
@@ -437,6 +451,7 @@ paths:
       x-accepts: application/json
   /accounts:
     get:
+      operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
         in: query
@@ -469,6 +484,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}:
     get:
+      operationId: AccountInformation_getUserAccountDetails
       parameters:
       - explode: true
         in: query
@@ -509,6 +525,7 @@ paths:
       - Account Information
       x-accepts: application/json
     put:
+      operationId: AccountInformation_updateUserAccount
       parameters:
       - explode: true
         in: query
@@ -550,6 +567,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/balances:
     get:
+      operationId: AccountInformation_getUserAccountBalance
       parameters:
       - explode: true
         in: query
@@ -591,6 +609,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/positions:
     get:
+      operationId: AccountInformation_getUserAccountPositions
       parameters:
       - explode: true
         in: query
@@ -632,6 +651,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/orders:
     get:
+      operationId: AccountInformation_getUserAccountOrders
       parameters:
       - explode: true
         in: query
@@ -681,10 +701,11 @@ paths:
           description: Unexpected error
       summary: Get all history of orders placed in account
       tags:
-      - Trading
+      - Account Information
       x-accepts: application/json
   /accounts/{accountId}/quotes:
     get:
+      operationId: Trading_getUserAccountQuotes
       parameters:
       - explode: true
         in: query
@@ -741,6 +762,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/orders/cancel:
     post:
+      operationId: Trading_cancelUserAccountOrder
       parameters:
       - explode: true
         in: query
@@ -790,6 +812,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/symbols:
     post:
+      operationId: ReferenceData_symbolSearchUserAccount
       parameters:
       - explode: true
         in: query
@@ -839,6 +862,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/options:
     get:
+      operationId: Options_listOptionHoldings
       parameters:
       - explode: true
         in: query
@@ -878,6 +902,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/options_chain:
     get:
+      operationId: Options_getOptionsChain
       parameters:
       - explode: true
         in: query
@@ -926,6 +951,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/options_search:
     get:
+      operationId: Options_searchOptionsQuote
       parameters:
       - explode: true
         in: query
@@ -994,6 +1020,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/strategy_impact:
     post:
+      operationId: Options_getOptionsImpact
       parameters:
       - explode: true
         in: query
@@ -1074,6 +1101,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/strategy_quotes:
     post:
+      operationId: Options_getStrategyQuote
       parameters:
       - explode: true
         in: query
@@ -1144,6 +1172,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/strategy_place:
     post:
+      operationId: Options_placeOptionsStrategyOrder
       parameters:
       - explode: true
         in: query
@@ -1215,6 +1244,7 @@ paths:
       x-accepts: application/json
   /authorizations:
     get:
+      operationId: Connections_listBrokerageAuthorizations
       parameters:
       - explode: true
         in: query
@@ -1247,6 +1277,7 @@ paths:
       x-accepts: application/json
   /authorizations/{authorizationId}:
     delete:
+      operationId: Connections_removeBrokerageAuthorization
       parameters:
       - description: The ID of the Authorization to delete.
         explode: false
@@ -1284,6 +1315,7 @@ paths:
       - Connections
       x-accepts: application/json
     get:
+      operationId: Connections_detailBrokerageAuthorization
       parameters:
       - description: The ID of a brokerage authorization object.
         explode: false
@@ -1322,6 +1354,7 @@ paths:
       x-accepts: application/json
   /brokerages:
     get:
+      operationId: ReferenceData_listAllBrokerages
       parameters: []
       responses:
         "200":
@@ -1340,6 +1373,7 @@ paths:
       x-accepts: application/json
   /brokerageAuthorizationTypes:
     get:
+      operationId: ReferenceData_listAllBrokerageAuthorizationType
       parameters:
       - description: Comma separated value of brokerage slugs
         explode: true
@@ -1367,6 +1401,7 @@ paths:
       x-accepts: application/json
   /currencies:
     get:
+      operationId: ReferenceData_listAllCurrencies
       parameters: []
       responses:
         "200":
@@ -1385,6 +1420,7 @@ paths:
       x-accepts: application/json
   /snapTrade/listUserErrors:
     get:
+      operationId: ErrorLogs_listUserErrors
       parameters:
       - explode: true
         in: query
@@ -1416,6 +1452,7 @@ paths:
       x-accepts: application/json
   /currencies/rates:
     get:
+      operationId: ReferenceData_listAllCurrenciesRates
       parameters: []
       responses:
         "200":
@@ -1432,6 +1469,7 @@ paths:
       x-accepts: application/json
   /currencies/rates/{currencyPair}:
     get:
+      operationId: ReferenceData_getCurrencyExchangeRatePair
       parameters:
       - description: "A currency pair based on currency code for example, {CAD-USD}"
         explode: false
@@ -1454,6 +1492,7 @@ paths:
       x-accepts: application/json
   /exchanges:
     get:
+      operationId: ReferenceData_getStockExchanges
       parameters: []
       responses:
         "200":
@@ -1470,6 +1509,7 @@ paths:
       x-accepts: application/json
   /securityTypes:
     get:
+      operationId: ReferenceData_getSecurityTypes
       parameters: []
       responses:
         "200":
@@ -1488,6 +1528,7 @@ paths:
       x-accepts: application/json
   /modelAssetClass:
     get:
+      operationId: PortfolioManagement_listAssetClasses
       responses:
         "200":
           content:
@@ -1503,6 +1544,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_createAssetClass
       responses:
         "200":
           content:
@@ -1516,6 +1558,7 @@ paths:
       x-accepts: application/json
   /modelAssetClass/{modelAssetClassId}:
     delete:
+      operationId: PortfolioManagement_deleteAssetClass
       parameters:
       - description: The ID of the model asset class to delete.
         explode: false
@@ -1533,6 +1576,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     get:
+      operationId: PortfolioManagement_detailAssetClass
       parameters:
       - description: The ID of the model asset class to get.
         explode: false
@@ -1554,6 +1598,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortoflioManagement_updateAssetClass
       parameters:
       - description: The ID of the model asset class to update.
         explode: false
@@ -1585,6 +1630,7 @@ paths:
       x-accepts: application/json
   /modelPortfolio:
     get:
+      operationId: PortfolioManagement_listModelPortfolio
       responses:
         "200":
           content:
@@ -1600,6 +1646,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_createModelPortfolio
       responses:
         "200":
           content:
@@ -1613,6 +1660,7 @@ paths:
       x-accepts: application/json
   /modelPortfolio/{modelPortfolioId}:
     delete:
+      operationId: PortfolioManagement_deleteModelPortfolioById
       parameters:
       - description: The ID of the model portfolio to delete.
         explode: false
@@ -1630,6 +1678,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     get:
+      operationId: PortfolioManagement_getModelDetailsById
       parameters:
       - description: The ID of the model portfolio to get.
         explode: false
@@ -1651,6 +1700,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_modifyModelPortfolioById
       parameters:
       - description: The ID of the model portfolio to update.
         explode: false
@@ -1689,6 +1739,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups:
     get:
+      operationId: PortfolioManagement_list
       parameters:
       - explode: true
         in: query
@@ -1721,6 +1772,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_create
       parameters:
       - explode: true
         in: query
@@ -1758,6 +1810,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}:
     delete:
+      operationId: PortfolioManagement_deletePortfoli
       parameters:
       - description: The ID of the PortfolioGroup to delete.
         explode: false
@@ -1786,6 +1839,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     get:
+      operationId: PortfolioManagement_getPortfolioDetailsById
       parameters:
       - description: The ID of the PortfolioGroup to get.
         explode: false
@@ -1810,6 +1864,7 @@ paths:
       - Portfolio Management
       x-accepts: '*/*'
     patch:
+      operationId: PortfolioManagement_savePortfolio
       parameters:
       - description: The ID of the PortfolioGroup to update.
         explode: false
@@ -1843,6 +1898,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/accounts:
     get:
+      operationId: PortfolioManagment_listPortfolioAccounts
       parameters:
       - description: The ID of the PortfolioGroup under which the accounts are linked.
         explode: false
@@ -1870,6 +1926,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/balances:
     get:
+      operationId: PortfolioManagement_getPortfolioBalances
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -1904,6 +1961,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/calculatedtrades:
     get:
+      operationId: PortfolioManagement_listCalculatedTrades
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -1927,6 +1985,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId}:
     get:
+      operationId: PortfolioManagement_getCalculatedTradeById
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -1970,6 +2029,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact:
     get:
+      operationId: Trading_getCalculatedTradesImpact
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -2004,6 +2064,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}:
     get:
+      operationId: Trading_getCalculatedTradeImpactById
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -2042,9 +2103,9 @@ paths:
       summary: Return details of a specific trade before it's placed
       tags:
       - Trading
-      - Portfolio Management
       x-accepts: application/json
     patch:
+      operationId: Trading_modifyCalculatedTradeById
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -2088,11 +2149,11 @@ paths:
       summary: Modify units of a trade before it is placed
       tags:
       - Trading
-      - Portfolio Management
       x-content-type: application/json
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders:
     post:
+      operationId: Trading_placeCalculatedTrades
       parameters:
       - description: The ID of the PortfolioGroup to perform rebalancing calculations
         explode: false
@@ -2127,6 +2188,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/excludedassets:
     get:
+      operationId: PortfolioManagement_getPortoflioExcludedAssets
       parameters:
       - description: The ID of the PortfolioGroup under which the excluded assets
           are linked.
@@ -2149,11 +2211,12 @@ paths:
           description: Array of excluded assets linked to portfolio group
         default:
           description: Unexpected error
-      summary: Get an array of excluded assets associated with a portfolio group
+      summary: Get an array of excluded assets associated with a portfolio group\
       tags:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_addPortfolioExcludedAsset
       parameters:
       - description: The ID of the PortfolioGroup under which to exclude an asset.
         explode: false
@@ -2183,6 +2246,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}:
     delete:
+      operationId: PortfolioManagement_deleteExcludedAsset
       parameters:
       - description: The ID of the PortfolioGroup under which to unexclude an asset.
         explode: false
@@ -2211,6 +2275,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/import:
     post:
+      operationId: PortfolioManagement_importModelPortfolio
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -2239,6 +2304,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/info:
     get:
+      operationId: PortfolioManagement_getPortfolioInfo
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -2266,6 +2332,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/positions:
     get:
+      operationId: PortfolioManagement_getPortfolioPositions
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -2299,6 +2366,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/settings:
     get:
+      operationId: PortfolioManagement_getPortfolioSettings
       parameters:
       - description: The ID of the PortfolioGroup under which to get the settings.
         explode: false
@@ -2323,6 +2391,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     patch:
+      operationId: PortfolioManagement_updatePortfolioSettings
       parameters:
       - description: The ID of the PortfolioGroup under which to patch the settings.
         explode: false
@@ -2348,6 +2417,7 @@ paths:
       x-accepts: '*/*'
   /portfolioGroups/{portfolioGroupId}/symbols:
     post:
+      operationId: PortfolioManagement_searchPortfolioSymbols
       parameters:
       - description: The ID of the PortfolioGroup to search under
         explode: false
@@ -2383,6 +2453,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/targets:
     get:
+      operationId: PortfolioManagement_getPortfolioTargets
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -2415,6 +2486,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     post:
+      operationId: PortfolioManagement_setPortfolioTargets
       parameters:
       - description: The ID of the PortfolioGroup under which to create the target
           asset.
@@ -2454,6 +2526,7 @@ paths:
       x-accepts: application/json
   /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}:
     delete:
+      operationId: PortfolioManagement_deletePortfolioTargetById
       parameters:
       - description: The ID of the PortfolioGroup under which to remove the target
           asset.
@@ -2493,6 +2566,7 @@ paths:
       - Portfolio Management
       x-accepts: application/json
     get:
+      operationId: PortfolioManagement_getPortfolioTargetById
       parameters:
       - description: The ID of the PortfolioGroup under which to get the target asset.
         explode: false
@@ -2526,6 +2600,7 @@ paths:
       - Portfolio Management
       x-accepts: '*/*'
     patch:
+      operationId: PortfolioManagement_updatePortfolioTargetById
       parameters:
       - description: The ID of the PortfolioGroup under which to patch the target
           asset.
@@ -2569,6 +2644,7 @@ paths:
       x-accepts: application/json
   /symbols:
     post:
+      operationId: ReferenceData_getSymbols
       parameters: []
       requestBody:
         content:
@@ -2592,33 +2668,9 @@ paths:
       - Reference Data
       x-content-type: application/json
       x-accepts: application/json
-  /symbols/{symbolId}:
-    get:
-      parameters:
-      - description: The ID of the UniversalSymbol to get.
-        explode: false
-        in: path
-        name: symbolId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/UniversalSymbol'
-          description: Successfully gets a symbol
-        default:
-          description: Unexpected error
-      summary: Get details of a symbol
-      tags:
-      - Reference Data
-      x-accepts: '*/*'
   /symbols/{ticker}:
     get:
+      operationId: ReferenceData_getSymbolsByTicker
       parameters:
       - description: The ticker of the UniversalSymbol to get.
         explode: false
@@ -2629,6 +2681,16 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: OPTIONAL IN PATH Can be used instead of the ticker ; The ID of
+          the UniversalSymbol to get.
+        explode: true
+        in: query
+        name: symbolId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -2646,6 +2708,7 @@ paths:
       x-accepts: '*/*'
   /trade/impact:
     post:
+      operationId: Trading_getOrderImpact
       parameters:
       - explode: true
         in: query
@@ -2691,6 +2754,7 @@ paths:
       x-accepts: application/json
   /trade/{tradeId}:
     post:
+      operationId: Trading_placeOrder
       parameters:
       - description: The ID of trade object obtained from trade/impact endpoint
         explode: false
@@ -2736,6 +2800,7 @@ paths:
       x-accepts: application/json
   /trade/oco:
     post:
+      operationId: Trading_placeOCOOrder
       parameters:
       - explode: true
         in: query
@@ -2773,10 +2838,11 @@ paths:
       - Trading
       x-content-type: application/json
       x-accepts: application/json
-  /activities/:
+  /activities:
     get:
       description: Returns activities (transactions) for a user. Specifing start and
         end date is highly recommended for automatic calls for better performance
+      operationId: TransactionsAndReporting_getActivities
       parameters:
       - explode: true
         in: query
@@ -2828,13 +2894,14 @@ paths:
           description: Unexpected error
       summary: Get transaction history for a user
       tags:
-      - Transactions and Reporting
+      - Transactions And Reporting
       x-accepts: application/json
   /performance/custom:
     get:
       description: "Returns performance information (contributions, dividends, rate\
         \ of return, etc) for a specific timeframe. Total Equity Timeframe and Rate\
         \ of Returns are experimental and should not be trusted to be 100% accurate"
+      operationId: TransactionsAndReporting_getReportingCustomRange
       parameters:
       - explode: true
         in: query
@@ -2903,7 +2970,7 @@ paths:
           description: Unexpected error
       summary: Get performance information for a specific timeframe
       tags:
-      - Transactions and Reporting
+      - Transactions And Reporting
       x-accepts: application/json
 components:
   requestBodies:
@@ -2964,13 +3031,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/_trade_oco_post_request'
+            $ref: '#/components/schemas/Trading_placeOCOOrder_request'
       required: true
     SnapTradeAPIDisclaimerAcceptRequestBody:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/_snapTrade_acceptDisclaimer_post_request'
+            $ref: '#/components/schemas/APIDisclaimer_accept_request'
       required: true
   schemas:
     "400FailedRequestResponse":
@@ -3419,7 +3486,7 @@ components:
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         price: 31.33
-        currency: currency
+        currency: None
         id: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
         option_symbol:
           is_quotable: true
@@ -3442,7 +3509,7 @@ components:
               name: NYSE ARCA
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               close_time: "57600"
-              suffix: suffix
+              suffix: None
               allows_cryptocurrency_symbols: false
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
@@ -3478,8 +3545,8 @@ components:
           example: 31.33
           type: number
         currency:
+          example: None
           type: string
-          example: null
       type: object
     StrategyImpact:
       additionalProperties: true
@@ -3561,7 +3628,7 @@ components:
         - symbol: AC.TO
           symbolId: 7960447
           orderType: Market
-          notes: notes
+          notes: None
           creationTime: 2022-07-19T19:53:47.915Z
           orderGroupId: 0
           orderRoute: MX
@@ -3595,7 +3662,7 @@ components:
           state: Pending
           timeInForce: Day
           icebergQuantity: icebergQuantity
-          exchangeOrderId: exchangeOrderId
+          exchangeOrderId: None
           avgExecPrice: 0
           side: Buy
           triggerStopPrice: triggerStopPrice
@@ -3613,12 +3680,12 @@ components:
           isAllOrNone: true
           lastExecPrice: lastExecPrice
           primaryRoute: AUTO
-          venueHoldingOrder: venueHoldingOrder
-          rejectionReason: rejectionReason
+          venueHoldingOrder: None
+          rejectionReason: None
         - symbol: AC.TO
           symbolId: 7960447
           orderType: Market
-          notes: notes
+          notes: None
           creationTime: 2022-07-19T19:53:47.915Z
           orderGroupId: 0
           orderRoute: MX
@@ -3652,7 +3719,7 @@ components:
           state: Pending
           timeInForce: Day
           icebergQuantity: icebergQuantity
-          exchangeOrderId: exchangeOrderId
+          exchangeOrderId: None
           avgExecPrice: 0
           side: Buy
           triggerStopPrice: triggerStopPrice
@@ -3670,8 +3737,8 @@ components:
           isAllOrNone: true
           lastExecPrice: lastExecPrice
           primaryRoute: AUTO
-          venueHoldingOrder: venueHoldingOrder
-          rejectionReason: rejectionReason
+          venueHoldingOrder: None
+          rejectionReason: None
       properties:
         orderId:
           example: 1069605761
@@ -3859,7 +3926,7 @@ components:
         name: NYSE ARCA
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         close_time: "57600"
-        suffix: suffix
+        suffix: None
         allows_cryptocurrency_symbols: false
       properties:
         id:
@@ -3885,8 +3952,8 @@ components:
           example: "57600"
           type: string
         suffix:
+          example: None
           type: string
-          example: null
         allows_cryptocurrency_symbols:
           example: false
           type: boolean
@@ -7249,7 +7316,7 @@ components:
         commissions: 23.44
         meta:
           canceledUnits: 2
-        action: Sell
+        action: SELL
         state: Executed
         universal_symbol:
           symbol: VAB.TO
@@ -7307,7 +7374,7 @@ components:
           enum:
           - BUY
           - SELL
-          example: Sell
+          example: SELL
           type: string
         price:
           description: Price of execution
@@ -7888,7 +7955,7 @@ components:
               name: NYSE ARCA
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               close_time: "57600"
-              suffix: suffix
+              suffix: None
               allows_cryptocurrency_symbols: false
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
@@ -8033,6 +8100,34 @@ components:
             $ref: '#/components/schemas/Currency'
           type: array
       type: object
+    UniversalSymbolTicker:
+      additionalProperties: true
+      description: Universal symbol
+      properties:
+        id:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+        symbol:
+          example: VAB.TO
+          type: string
+        raw_symbol:
+          example: VAB
+          type: string
+        description:
+          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        exchange:
+          $ref: '#/components/schemas/Exchange'
+        type:
+          $ref: '#/components/schemas/SecurityType'
+        currencies:
+          items:
+            $ref: '#/components/schemas/Currency'
+          type: array
+      type: object
     UnderlyingSymbol:
       additionalProperties: true
       description: Underlying Symbol
@@ -8051,7 +8146,7 @@ components:
           name: NYSE ARCA
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           close_time: "57600"
-          suffix: suffix
+          suffix: None
           allows_cryptocurrency_symbols: false
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         type:
@@ -8112,7 +8207,7 @@ components:
             name: NYSE ARCA
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             close_time: "57600"
-            suffix: suffix
+            suffix: None
             allows_cryptocurrency_symbols: false
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
@@ -8209,7 +8304,7 @@ components:
           example: true
           type: boolean
         activated_trial_date:
-          example: 2017-07-17T15:13:07.177Z
+          example: 2017-07-17T15:13:07.177712+00:00
           format: dateTime
           type: string
         demo:
@@ -8326,7 +8421,7 @@ components:
         encryptedMessageData:
           encryptedMessage: 9Xy05vqZOfp0OpW5fLAaDw==
           tag: mWZPkpQh5ktbcz6N7cTRmQ==
-          nonce: nonce
+          nonce: None
       properties:
         encryptedSharedKey:
           example: 5UEaY9QGzcNTr8y2jGDUI79jY1OdfK9x
@@ -8334,18 +8429,18 @@ components:
         encryptedMessageData:
           $ref: '#/components/schemas/encryptedResponse_encryptedMessageData'
       type: object
-    _snapTrade_acceptDisclaimer_post_request:
+    APIDisclaimer_accept_request:
       properties:
         accepted:
           description: A boolean that indicates whether this user has accepted the
             disclaimer or not.
           type: boolean
       type: object
-    _snapTrade_login_post_200_response:
+    Authentication_loginSnapTradeUser_200_response:
       oneOf:
       - $ref: '#/components/schemas/LoginRedirectURI'
       - $ref: '#/components/schemas/encryptedResponse'
-    _trade_oco_post_request:
+    Trading_placeOCOOrder_request:
       properties:
         first_trade_id:
           description: The ID of first trade object obtained from trade/impact endpoint
@@ -8475,7 +8570,7 @@ components:
         symbol: AC.TO
         symbolId: 7960447
         orderType: Market
-        notes: notes
+        notes: None
         creationTime: 2022-07-19T19:53:47.915Z
         orderGroupId: 0
         orderRoute: MX
@@ -8509,7 +8604,7 @@ components:
         state: Pending
         timeInForce: Day
         icebergQuantity: icebergQuantity
-        exchangeOrderId: exchangeOrderId
+        exchangeOrderId: None
         avgExecPrice: 0
         side: Buy
         triggerStopPrice: triggerStopPrice
@@ -8527,8 +8622,8 @@ components:
         isAllOrNone: true
         lastExecPrice: lastExecPrice
         primaryRoute: AUTO
-        venueHoldingOrder: venueHoldingOrder
-        rejectionReason: rejectionReason
+        venueHoldingOrder: None
+        rejectionReason: None
       properties:
         id:
           example: 1069605761
@@ -8599,8 +8694,8 @@ components:
           example: Pending
           type: string
         rejectionReason:
+          example: None
           type: string
-          example: null
         chainId:
           example: 1069605761
           format: int32
@@ -8612,8 +8707,8 @@ components:
           example: 2022-07-19T19:53:47.939Z
           type: string
         notes:
+          example: None
           type: string
-          example: null
         primaryRoute:
           example: AUTO
           type: string
@@ -8624,15 +8719,15 @@ components:
           example: MX
           type: string
         venueHoldingOrder:
+          example: None
           type: string
-          example: null
         comissionCharged:
           example: 0
           format: int32
           type: integer
         exchangeOrderId:
+          example: None
           type: string
-          example: null
         isSignificantShareHolder:
           type: boolean
         isInsider:
@@ -8781,7 +8876,7 @@ components:
       example:
         encryptedMessage: 9Xy05vqZOfp0OpW5fLAaDw==
         tag: mWZPkpQh5ktbcz6N7cTRmQ==
-        nonce: nonce
+        nonce: None
       properties:
         encryptedMessage:
           example: 9Xy05vqZOfp0OpW5fLAaDw==
@@ -8790,8 +8885,8 @@ components:
           example: mWZPkpQh5ktbcz6N7cTRmQ==
           type: string
         nonce:
+          example: None
           type: string
-          example: null
       type: object
   securitySchemes:
     PartnerSignature:

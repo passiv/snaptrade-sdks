@@ -20,39 +20,30 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for TradeOcoPostRequest
+ * Model tests for APIDisclaimerAcceptRequest
  */
-public class TradeOcoPostRequestTest {
-    private final TradeOcoPostRequest model = new TradeOcoPostRequest();
+public class APIDisclaimerAcceptRequestTest {
+    private final APIDisclaimerAcceptRequest model = new APIDisclaimerAcceptRequest();
 
     /**
-     * Model tests for TradeOcoPostRequest
+     * Model tests for APIDisclaimerAcceptRequest
      */
     @Test
-    public void testTradeOcoPostRequest() {
-        // TODO: test TradeOcoPostRequest
+    public void testAPIDisclaimerAcceptRequest() {
+        // TODO: test APIDisclaimerAcceptRequest
     }
 
     /**
-     * Test the property 'firstTradeId'
+     * Test the property 'accepted'
      */
     @Test
-    public void firstTradeIdTest() {
-        // TODO: test firstTradeId
-    }
-
-    /**
-     * Test the property 'secondTradeId'
-     */
-    @Test
-    public void secondTradeIdTest() {
-        // TODO: test secondTradeId
+    public void acceptedTest() {
+        // TODO: test accepted
     }
 
 }

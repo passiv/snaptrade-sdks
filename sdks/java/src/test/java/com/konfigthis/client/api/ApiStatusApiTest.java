@@ -38,8 +38,8 @@ public class ApiStatusApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void rootGetTest() throws ApiException {
-        Status response = api.rootGet();
+    public void checkTest() throws ApiException {
+        Status response = api.check();
         // TODO: test validations
     }
 

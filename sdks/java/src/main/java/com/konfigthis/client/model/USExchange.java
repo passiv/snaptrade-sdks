@@ -262,7 +262,7 @@ public class USExchange {
    * @return suffix
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getSuffix() {
     return suffix;

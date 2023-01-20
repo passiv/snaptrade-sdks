@@ -32,30 +32,16 @@ public class ConnectionsApiTest {
     private final ConnectionsApi api = new ConnectionsApi();
 
     /**
-     * Remove a brokerage authorization.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void authorizationsAuthorizationIdDeleteTest() throws ApiException {
-        UUID authorizationId = null;
-        String userId = null;
-        String userSecret = null;
-        api.authorizationsAuthorizationIdDelete(authorizationId, userId, userSecret);
-        // TODO: test validations
-    }
-
-    /**
      * Get detail of a specific brokerage authorizations for the user
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void authorizationsAuthorizationIdGetTest() throws ApiException {
+    public void detailBrokerageAuthorizationTest() throws ApiException {
         UUID authorizationId = null;
         String userId = null;
         String userSecret = null;
-        BrokerageAuthorization response = api.authorizationsAuthorizationIdGet(authorizationId, userId, userSecret);
+        BrokerageAuthorization response = api.detailBrokerageAuthorization(authorizationId, userId, userSecret);
         // TODO: test validations
     }
 
@@ -65,10 +51,24 @@ public class ConnectionsApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void authorizationsGetTest() throws ApiException {
+    public void listBrokerageAuthorizationsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<BrokerageAuthorization> response = api.authorizationsGet(userId, userSecret);
+        List<BrokerageAuthorization> response = api.listBrokerageAuthorizations(userId, userSecret);
+        // TODO: test validations
+    }
+
+    /**
+     * Remove a brokerage authorization.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void removeBrokerageAuthorizationTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        api.removeBrokerageAuthorization(authorizationId, userId, userSecret);
         // TODO: test validations
     }
 

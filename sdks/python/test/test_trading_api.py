@@ -24,71 +24,64 @@ class TestTradingApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_accounts_account_id_orders_cancel_post(self):
-        """Test case for accounts_account_id_orders_cancel_post
+    def test_cancel_user_account_order(self):
+        """Test case for cancel_user_account_order
 
         Cancel open order in account  # noqa: E501
         """
         pass
 
-    def test_accounts_account_id_orders_get(self):
-        """Test case for accounts_account_id_orders_get
-
-        Get all history of orders placed in account  # noqa: E501
-        """
-        pass
-
-    def test_accounts_account_id_quotes_get(self):
-        """Test case for accounts_account_id_quotes_get
-
-        Get symbol quotes  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact_get
-
-        Return the impact of placing a series of trades on the portfolio  # noqa: E501
-        """
-        pass
-
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_get
+    def test_get_calculated_trade_impact_by_id(self):
+        """Test case for get_calculated_trade_impact_by_id
 
         Return details of a specific trade before it's placed  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id_patch
+    def test_get_calculated_trades_impact(self):
+        """Test case for get_calculated_trades_impact
 
-        Modify units of a trade before it is placed  # noqa: E501
+        Return the impact of placing a series of trades on the portfolio  # noqa: E501
         """
         pass
 
-    def test_portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post(self):
-        """Test case for portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders_post
-
-        Place orders for the CalculatedTrades in series  # noqa: E501
-        """
-        pass
-
-    def test_trade_impact_post(self):
-        """Test case for trade_impact_post
+    def test_get_order_impact(self):
+        """Test case for get_order_impact
 
         Check impact of trades on account.  # noqa: E501
         """
         pass
 
-    def test_trade_oco_post(self):
-        """Test case for trade_oco_post
+    def test_get_user_account_quotes(self):
+        """Test case for get_user_account_quotes
+
+        Get symbol quotes  # noqa: E501
+        """
+        pass
+
+    def test_modify_calculated_trade_by_id(self):
+        """Test case for modify_calculated_trade_by_id
+
+        Modify units of a trade before it is placed  # noqa: E501
+        """
+        pass
+
+    def test_place_calculated_trades(self):
+        """Test case for place_calculated_trades
+
+        Place orders for the CalculatedTrades in series  # noqa: E501
+        """
+        pass
+
+    def test_place_oco_order(self):
+        """Test case for place_oco_order
 
         Place a OCO (One Cancels Other) order  # noqa: E501
         """
         pass
 
-    def test_trade_trade_id_post(self):
-        """Test case for trade_trade_id_post
+    def test_place_order(self):
+        """Test case for place_order
 
         Place order  # noqa: E501
         """

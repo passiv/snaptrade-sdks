@@ -24,87 +24,80 @@ class TestReferenceDataApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_accounts_account_id_symbols_post(self):
-        """Test case for accounts_account_id_symbols_post
-
-        Search for symbols that are supported by a brokerage account using a substring  # noqa: E501
-        """
-        pass
-
-    def test_brokerage_authorization_types_get(self):
-        """Test case for brokerage_authorization_types_get
-
-        List of all brokerage authorization types  # noqa: E501
-        """
-        pass
-
-    def test_brokerages_get(self):
-        """Test case for brokerages_get
-
-        List of all brokerages.  # noqa: E501
-        """
-        pass
-
-    def test_currencies_get(self):
-        """Test case for currencies_get
-
-        List of all supported currencies  # noqa: E501
-        """
-        pass
-
-    def test_currencies_rates_currency_pair_get(self):
-        """Test case for currencies_rates_currency_pair_get
+    def test_get_currency_exchange_rate_pair(self):
+        """Test case for get_currency_exchange_rate_pair
 
         Return the exchange rate of a currency pair  # noqa: E501
         """
         pass
 
-    def test_currencies_rates_get(self):
-        """Test case for currencies_rates_get
-
-        Return the exchange rates of all supported currencies  # noqa: E501
-        """
-        pass
-
-    def test_exchanges_get(self):
-        """Test case for exchanges_get
-
-        Return list of stock exchanges on Passiv and their suffixes  # noqa: E501
-        """
-        pass
-
-    def test_security_types_get(self):
-        """Test case for security_types_get
-
-        List of all security types.  # noqa: E501
-        """
-        pass
-
-    def test_snap_trade_partners_get(self):
-        """Test case for snap_trade_partners_get
+    def test_get_partner_info(self):
+        """Test case for get_partner_info
 
         Get metadata related to Snaptrade partner  # noqa: E501
         """
         pass
 
-    def test_symbols_post(self):
-        """Test case for symbols_post
+    def test_get_security_types(self):
+        """Test case for get_security_types
+
+        List of all security types.  # noqa: E501
+        """
+        pass
+
+    def test_get_stock_exchanges(self):
+        """Test case for get_stock_exchanges
+
+        Return list of stock exchanges on Passiv and their suffixes  # noqa: E501
+        """
+        pass
+
+    def test_get_symbols(self):
+        """Test case for get_symbols
 
         Search for symbols  # noqa: E501
         """
         pass
 
-    def test_symbols_symbol_id_get(self):
-        """Test case for symbols_symbol_id_get
+    def test_get_symbols_by_ticker(self):
+        """Test case for get_symbols_by_ticker
 
-        Get details of a symbol  # noqa: E501
+        Get details of a symbol by the ticker  # noqa: E501
         """
         pass
 
-    def test_symbols_ticker_get(self):
-        """Test case for symbols_ticker_get
+    def test_list_all_brokerage_authorization_type(self):
+        """Test case for list_all_brokerage_authorization_type
 
-        Get details of a symbol by the ticker  # noqa: E501
+        List of all brokerage authorization types  # noqa: E501
+        """
+        pass
+
+    def test_list_all_brokerages(self):
+        """Test case for list_all_brokerages
+
+        List of all brokerages.  # noqa: E501
+        """
+        pass
+
+    def test_list_all_currencies(self):
+        """Test case for list_all_currencies
+
+        List of all supported currencies  # noqa: E501
+        """
+        pass
+
+    def test_list_all_currencies_rates(self):
+        """Test case for list_all_currencies_rates
+
+        Return the exchange rates of all supported currencies  # noqa: E501
+        """
+        pass
+
+    def test_symbol_search_user_account(self):
+        """Test case for symbol_search_user_account
+
+        Search for symbols that are supported by a brokerage account using a substring  # noqa: E501
         """
         pass
 

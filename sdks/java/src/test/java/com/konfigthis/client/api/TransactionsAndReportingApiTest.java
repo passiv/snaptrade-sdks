@@ -39,13 +39,13 @@ public class TransactionsAndReportingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void activitiesGetTest() throws ApiException {
+    public void getActivitiesTest() throws ApiException {
         String userId = null;
         String userSecret = null;
         String startDate = null;
         String endDate = null;
         String accounts = null;
-        List<UniversalActivity> response = api.activitiesGet(userId, userSecret, startDate, endDate, accounts);
+        List<UniversalActivity> response = api.getActivities(userId, userSecret, startDate, endDate, accounts);
         // TODO: test validations
     }
 
@@ -57,7 +57,7 @@ public class TransactionsAndReportingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void performanceCustomGetTest() throws ApiException {
+    public void getReportingCustomRangeTest() throws ApiException {
         String startDate = null;
         String endDate = null;
         String userId = null;
@@ -65,7 +65,7 @@ public class TransactionsAndReportingApiTest {
         String accounts = null;
         Boolean detailed = null;
         String frequency = null;
-        PerformanceCustom response = api.performanceCustomGet(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+        PerformanceCustom response = api.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
         // TODO: test validations
     }
 

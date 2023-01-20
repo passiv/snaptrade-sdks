@@ -36,10 +36,10 @@ public class ErrorLogsApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradeListUserErrorsGetTest() throws ApiException {
+    public void listUserErrorsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<UserErrorLog> response = api.snapTradeListUserErrorsGet(userId, userSecret);
+        List<UserErrorLog> response = api.listUserErrors(userId, userSecret);
         // TODO: test validations
     }
 

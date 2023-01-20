@@ -43,96 +43,14 @@ public class ReferenceDataApiTest {
     private final ReferenceDataApi api = new ReferenceDataApi();
 
     /**
-     * Search for symbols that are supported by a brokerage account using a substring
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void accountsAccountIdSymbolsPostTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.accountsAccountIdSymbolsPost(userId, userSecret, accountId, symbolQuery);
-        // TODO: test validations
-    }
-
-    /**
-     * List of all brokerage authorization types
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void brokerageAuthorizationTypesGetTest() throws ApiException {
-        String brokerage = null;
-        List<BrokerageAuthorizationTypeReadOnly> response = api.brokerageAuthorizationTypesGet(brokerage);
-        // TODO: test validations
-    }
-
-    /**
-     * List of all brokerages.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void brokeragesGetTest() throws ApiException {
-        List<Brokerage> response = api.brokeragesGet();
-        // TODO: test validations
-    }
-
-    /**
-     * List of all supported currencies
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void currenciesGetTest() throws ApiException {
-        List<Currency> response = api.currenciesGet();
-        // TODO: test validations
-    }
-
-    /**
      * Return the exchange rate of a currency pair
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void currenciesRatesCurrencyPairGetTest() throws ApiException {
+    public void getCurrencyExchangeRatePairTest() throws ApiException {
         String currencyPair = null;
-        ExchangeRatePairs response = api.currenciesRatesCurrencyPairGet(currencyPair);
-        // TODO: test validations
-    }
-
-    /**
-     * Return the exchange rates of all supported currencies
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void currenciesRatesGetTest() throws ApiException {
-        List<ExchangeRatePairs> response = api.currenciesRatesGet();
-        // TODO: test validations
-    }
-
-    /**
-     * Return list of stock exchanges on Passiv and their suffixes
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void exchangesGetTest() throws ApiException {
-        List<Exchange> response = api.exchangesGet();
-        // TODO: test validations
-    }
-
-    /**
-     * List of all security types.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void securityTypesGetTest() throws ApiException {
-        List<SecurityType> response = api.securityTypesGet();
+        ExchangeRatePairs response = api.getCurrencyExchangeRatePair(currencyPair);
         // TODO: test validations
     }
 
@@ -142,8 +60,30 @@ public class ReferenceDataApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void snapTradePartnersGetTest() throws ApiException {
-        PartnerData response = api.snapTradePartnersGet();
+    public void getPartnerInfoTest() throws ApiException {
+        PartnerData response = api.getPartnerInfo();
+        // TODO: test validations
+    }
+
+    /**
+     * List of all security types.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getSecurityTypesTest() throws ApiException {
+        List<SecurityType> response = api.getSecurityTypes();
+        // TODO: test validations
+    }
+
+    /**
+     * Return list of stock exchanges on Passiv and their suffixes
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getStockExchangesTest() throws ApiException {
+        List<Exchange> response = api.getStockExchanges();
         // TODO: test validations
     }
 
@@ -153,21 +93,9 @@ public class ReferenceDataApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void symbolsPostTest() throws ApiException {
+    public void getSymbolsTest() throws ApiException {
         SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.symbolsPost(symbolQuery);
-        // TODO: test validations
-    }
-
-    /**
-     * Get details of a symbol
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void symbolsSymbolIdGetTest() throws ApiException {
-        UUID symbolId = null;
-        UniversalSymbol response = api.symbolsSymbolIdGet(symbolId);
+        List<UniversalSymbol> response = api.getSymbols(symbolQuery);
         // TODO: test validations
     }
 
@@ -177,9 +105,70 @@ public class ReferenceDataApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void symbolsTickerGetTest() throws ApiException {
+    public void getSymbolsByTickerTest() throws ApiException {
         UUID ticker = null;
-        UniversalSymbol response = api.symbolsTickerGet(ticker);
+        UUID symbolId = null;
+        UniversalSymbol response = api.getSymbolsByTicker(ticker, symbolId);
+        // TODO: test validations
+    }
+
+    /**
+     * List of all brokerage authorization types
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAllBrokerageAuthorizationTypeTest() throws ApiException {
+        String brokerage = null;
+        List<BrokerageAuthorizationTypeReadOnly> response = api.listAllBrokerageAuthorizationType(brokerage);
+        // TODO: test validations
+    }
+
+    /**
+     * List of all brokerages.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAllBrokeragesTest() throws ApiException {
+        List<Brokerage> response = api.listAllBrokerages();
+        // TODO: test validations
+    }
+
+    /**
+     * List of all supported currencies
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAllCurrenciesTest() throws ApiException {
+        List<Currency> response = api.listAllCurrencies();
+        // TODO: test validations
+    }
+
+    /**
+     * Return the exchange rates of all supported currencies
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAllCurrenciesRatesTest() throws ApiException {
+        List<ExchangeRatePairs> response = api.listAllCurrenciesRates();
+        // TODO: test validations
+    }
+
+    /**
+     * Search for symbols that are supported by a brokerage account using a substring
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void symbolSearchUserAccountTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        SymbolQuery symbolQuery = null;
+        List<UniversalSymbol> response = api.symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
         // TODO: test validations
     }
 

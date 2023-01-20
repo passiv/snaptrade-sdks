@@ -1,6 +1,6 @@
 
 
-# SnapTradeLoginPost200Response
+# AuthenticationLoginSnapTradeUser200Response
 
 
 ## Properties

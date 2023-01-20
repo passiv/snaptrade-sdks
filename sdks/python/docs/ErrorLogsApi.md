@@ -4,11 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**snap_trade_list_user_errors_get**](ErrorLogsApi.md#snap_trade_list_user_errors_get) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
+[**list_user_errors**](ErrorLogsApi.md#list_user_errors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
 
 
-# **snap_trade_list_user_errors_get**
-> [UserErrorLog] snap_trade_list_user_errors_get(user_id, user_secret)
+# **list_user_errors**
+> [UserErrorLog] list_user_errors(user_id, user_secret)
 
 Retrieve error logs on behalf of your SnapTrade users
 
@@ -24,12 +24,6 @@ import snaptrade_client
 from snaptrade_client.api import error_logs_api
 from snaptrade_client.model.user_error_log import UserErrorLog
 from pprint import pprint
-# Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = snaptrade_client.Configuration(
-    host = "https://api.snaptrade.com/api/v1"
-)
-
 # The client must configure the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
@@ -63,10 +57,10 @@ with snaptrade_client.ApiClient(configuration) as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Retrieve error logs on behalf of your SnapTrade users
-        api_response = api_instance.snap_trade_list_user_errors_get(user_id, user_secret)
+        api_response = api_instance.list_user_errors(user_id, user_secret)
         pprint(api_response)
     except snaptrade_client.ApiException as e:
-        print("Exception when calling ErrorLogsApi->snap_trade_list_user_errors_get: %s\n" % e)
+        print("Exception when calling ErrorLogsApi->list_user_errors: %s\n" % e)
 ```
 
 

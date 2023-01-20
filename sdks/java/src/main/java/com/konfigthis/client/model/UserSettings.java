@@ -221,7 +221,7 @@ public class UserSettings {
    * @return activatedTrialDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2017-07-17T15:13:07.177Z", value = "")
+  @ApiModelProperty(example = "2017-07-17T15:13:07.177712+00:00", value = "")
 
   public String getActivatedTrialDate() {
     return activatedTrialDate;

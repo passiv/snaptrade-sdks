@@ -26,12 +26,12 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.konfigthis.client.model.AuthenticationLoginSnapTradeUser200Response;
 import com.konfigthis.client.model.DeleteUserResponse;
 import com.konfigthis.client.model.EncryptedResponse;
 import com.konfigthis.client.model.Model400FailedRequestResponse;
 import com.konfigthis.client.model.Model403FailedRequestResponse;
 import com.konfigthis.client.model.Model404FailedRequestResponse;
-import com.konfigthis.client.model.SnapTradeLoginPost200Response;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -81,7 +81,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * Build call for snapTradeDeleteUserDelete
+     * Build call for deleteSnapTradeUser
      * @param userId  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -96,7 +96,7 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeDeleteUserDeleteCall(String userId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteSnapTradeUserCall(String userId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -145,13 +145,13 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeDeleteUserDeleteValidateBeforeCall(String userId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteSnapTradeUserValidateBeforeCall(String userId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling snapTradeDeleteUserDelete(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling deleteSnapTradeUser(Async)");
         }
 
-        return snapTradeDeleteUserDeleteCall(userId, _callback);
+        return deleteSnapTradeUserCall(userId, _callback);
 
     }
 
@@ -171,8 +171,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public DeleteUserResponse snapTradeDeleteUserDelete(String userId) throws ApiException {
-        ApiResponse<DeleteUserResponse> localVarResp = snapTradeDeleteUserDeleteWithHttpInfo(userId);
+    public DeleteUserResponse deleteSnapTradeUser(String userId) throws ApiException {
+        ApiResponse<DeleteUserResponse> localVarResp = deleteSnapTradeUserWithHttpInfo(userId);
         return localVarResp.getData();
     }
 
@@ -192,8 +192,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<DeleteUserResponse> snapTradeDeleteUserDeleteWithHttpInfo(String userId) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeDeleteUserDeleteValidateBeforeCall(userId, null);
+    public ApiResponse<DeleteUserResponse> deleteSnapTradeUserWithHttpInfo(String userId) throws ApiException {
+        okhttp3.Call localVarCall = deleteSnapTradeUserValidateBeforeCall(userId, null);
         Type localVarReturnType = new TypeToken<DeleteUserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -215,15 +215,15 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeDeleteUserDeleteAsync(String userId, final ApiCallback<DeleteUserResponse> _callback) throws ApiException {
+    public okhttp3.Call deleteSnapTradeUserAsync(String userId, final ApiCallback<DeleteUserResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeDeleteUserDeleteValidateBeforeCall(userId, _callback);
+        okhttp3.Call localVarCall = deleteSnapTradeUserValidateBeforeCall(userId, _callback);
         Type localVarReturnType = new TypeToken<DeleteUserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for snapTradeEncryptedJWTGet
+     * Build call for getUserJWT
      * @param userId  (required)
      * @param userSecret  (required)
      * @param _callback Callback for upload/download progress
@@ -239,7 +239,7 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeEncryptedJWTGetCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getUserJWTCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -292,18 +292,18 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeEncryptedJWTGetValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserJWTValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling snapTradeEncryptedJWTGet(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserJWT(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling snapTradeEncryptedJWTGet(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserJWT(Async)");
         }
 
-        return snapTradeEncryptedJWTGetCall(userId, userSecret, _callback);
+        return getUserJWTCall(userId, userSecret, _callback);
 
     }
 
@@ -324,8 +324,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public EncryptedResponse snapTradeEncryptedJWTGet(String userId, String userSecret) throws ApiException {
-        ApiResponse<EncryptedResponse> localVarResp = snapTradeEncryptedJWTGetWithHttpInfo(userId, userSecret);
+    public EncryptedResponse getUserJWT(String userId, String userSecret) throws ApiException {
+        ApiResponse<EncryptedResponse> localVarResp = getUserJWTWithHttpInfo(userId, userSecret);
         return localVarResp.getData();
     }
 
@@ -346,8 +346,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EncryptedResponse> snapTradeEncryptedJWTGetWithHttpInfo(String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeEncryptedJWTGetValidateBeforeCall(userId, userSecret, null);
+    public ApiResponse<EncryptedResponse> getUserJWTWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = getUserJWTValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<EncryptedResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -370,15 +370,15 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeEncryptedJWTGetAsync(String userId, String userSecret, final ApiCallback<EncryptedResponse> _callback) throws ApiException {
+    public okhttp3.Call getUserJWTAsync(String userId, String userSecret, final ApiCallback<EncryptedResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeEncryptedJWTGetValidateBeforeCall(userId, userSecret, _callback);
+        okhttp3.Call localVarCall = getUserJWTValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<EncryptedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for snapTradeListUsersGet
+     * Build call for listSnapTradeUsers
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -391,7 +391,7 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeListUsersGetCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call listSnapTradeUsersCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -436,8 +436,8 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeListUsersGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return snapTradeListUsersGetCall(_callback);
+    private okhttp3.Call listSnapTradeUsersValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listSnapTradeUsersCall(_callback);
 
     }
 
@@ -455,8 +455,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public List<String> snapTradeListUsersGet() throws ApiException {
-        ApiResponse<List<String>> localVarResp = snapTradeListUsersGetWithHttpInfo();
+    public List<String> listSnapTradeUsers() throws ApiException {
+        ApiResponse<List<String>> localVarResp = listSnapTradeUsersWithHttpInfo();
         return localVarResp.getData();
     }
 
@@ -474,8 +474,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<String>> snapTradeListUsersGetWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = snapTradeListUsersGetValidateBeforeCall(null);
+    public ApiResponse<List<String>> listSnapTradeUsersWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listSnapTradeUsersValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -495,15 +495,15 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeListUsersGetAsync(final ApiCallback<List<String>> _callback) throws ApiException {
+    public okhttp3.Call listSnapTradeUsersAsync(final ApiCallback<List<String>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeListUsersGetValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = listSnapTradeUsersValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for snapTradeLoginPost
+     * Build call for loginSnapTradeUser
      * @param userId  (required)
      * @param userSecret  (required)
      * @param snapTradeLoginUserRequestBody  (optional)
@@ -520,7 +520,7 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeLoginPostCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call loginSnapTradeUserCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -574,18 +574,18 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeLoginPostValidateBeforeCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call loginSnapTradeUserValidateBeforeCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling snapTradeLoginPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling loginSnapTradeUser(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling snapTradeLoginPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling loginSnapTradeUser(Async)");
         }
 
-        return snapTradeLoginPostCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
+        return loginSnapTradeUserCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
 
     }
 
@@ -595,7 +595,7 @@ public class AuthenticationApi {
      * @param userId  (required)
      * @param userSecret  (required)
      * @param snapTradeLoginUserRequestBody  (optional)
-     * @return SnapTradeLoginPost200Response
+     * @return AuthenticationLoginSnapTradeUser200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -607,8 +607,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public SnapTradeLoginPost200Response snapTradeLoginPost(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
-        ApiResponse<SnapTradeLoginPost200Response> localVarResp = snapTradeLoginPostWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
+    public AuthenticationLoginSnapTradeUser200Response loginSnapTradeUser(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
+        ApiResponse<AuthenticationLoginSnapTradeUser200Response> localVarResp = loginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
         return localVarResp.getData();
     }
 
@@ -618,7 +618,7 @@ public class AuthenticationApi {
      * @param userId  (required)
      * @param userSecret  (required)
      * @param snapTradeLoginUserRequestBody  (optional)
-     * @return ApiResponse&lt;SnapTradeLoginPost200Response&gt;
+     * @return ApiResponse&lt;AuthenticationLoginSnapTradeUser200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -630,9 +630,9 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SnapTradeLoginPost200Response> snapTradeLoginPostWithHttpInfo(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeLoginPostValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, null);
-        Type localVarReturnType = new TypeToken<SnapTradeLoginPost200Response>(){}.getType();
+    public ApiResponse<AuthenticationLoginSnapTradeUser200Response> loginSnapTradeUserWithHttpInfo(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
+        okhttp3.Call localVarCall = loginSnapTradeUserValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, null);
+        Type localVarReturnType = new TypeToken<AuthenticationLoginSnapTradeUser200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -655,15 +655,15 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeLoginPostAsync(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback<SnapTradeLoginPost200Response> _callback) throws ApiException {
+    public okhttp3.Call loginSnapTradeUserAsync(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback<AuthenticationLoginSnapTradeUser200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeLoginPostValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
-        Type localVarReturnType = new TypeToken<SnapTradeLoginPost200Response>(){}.getType();
+        okhttp3.Call localVarCall = loginSnapTradeUserValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
+        Type localVarReturnType = new TypeToken<AuthenticationLoginSnapTradeUser200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for snapTradeRegisterUserPost
+     * Build call for registerSnapTradeUser
      * @param snapTradeRegisterUserRequestBody  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -677,7 +677,7 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeRegisterUserPostCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call registerSnapTradeUserCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -723,13 +723,13 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeRegisterUserPostValidateBeforeCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call registerSnapTradeUserValidateBeforeCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'snapTradeRegisterUserRequestBody' is set
         if (snapTradeRegisterUserRequestBody == null) {
-            throw new ApiException("Missing the required parameter 'snapTradeRegisterUserRequestBody' when calling snapTradeRegisterUserPost(Async)");
+            throw new ApiException("Missing the required parameter 'snapTradeRegisterUserRequestBody' when calling registerSnapTradeUser(Async)");
         }
 
-        return snapTradeRegisterUserPostCall(snapTradeRegisterUserRequestBody, _callback);
+        return registerSnapTradeUserCall(snapTradeRegisterUserRequestBody, _callback);
 
     }
 
@@ -748,8 +748,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public UserIDandSecret snapTradeRegisterUserPost(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
-        ApiResponse<UserIDandSecret> localVarResp = snapTradeRegisterUserPostWithHttpInfo(snapTradeRegisterUserRequestBody);
+    public UserIDandSecret registerSnapTradeUser(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
+        ApiResponse<UserIDandSecret> localVarResp = registerSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
         return localVarResp.getData();
     }
 
@@ -768,8 +768,8 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<UserIDandSecret> snapTradeRegisterUserPostWithHttpInfo(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeRegisterUserPostValidateBeforeCall(snapTradeRegisterUserRequestBody, null);
+    public ApiResponse<UserIDandSecret> registerSnapTradeUserWithHttpInfo(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
+        okhttp3.Call localVarCall = registerSnapTradeUserValidateBeforeCall(snapTradeRegisterUserRequestBody, null);
         Type localVarReturnType = new TypeToken<UserIDandSecret>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -790,9 +790,9 @@ public class AuthenticationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeRegisterUserPostAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback<UserIDandSecret> _callback) throws ApiException {
+    public okhttp3.Call registerSnapTradeUserAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback<UserIDandSecret> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeRegisterUserPostValidateBeforeCall(snapTradeRegisterUserRequestBody, _callback);
+        okhttp3.Call localVarCall = registerSnapTradeUserValidateBeforeCall(snapTradeRegisterUserRequestBody, _callback);
         Type localVarReturnType = new TypeToken<UserIDandSecret>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

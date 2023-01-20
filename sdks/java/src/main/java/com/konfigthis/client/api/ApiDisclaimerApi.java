@@ -26,8 +26,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.konfigthis.client.model.APIDisclaimerAcceptRequest;
 import com.konfigthis.client.model.SnapTradeAPIDisclaimerAcceptStatus;
-import com.konfigthis.client.model.SnapTradeAcceptDisclaimerPostRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -74,10 +74,10 @@ public class ApiDisclaimerApi {
     }
 
     /**
-     * Build call for snapTradeAcceptDisclaimerPost
+     * Build call for accept
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param snapTradeAcceptDisclaimerPostRequest  (required)
+     * @param apIDisclaimerAcceptRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -88,7 +88,7 @@ public class ApiDisclaimerApi {
         <tr><td> 500 </td><td> Unexpected Error. Please contact support </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeAcceptDisclaimerPostCall(String userId, String userSecret, SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call acceptCall(String userId, String userSecret, APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -102,7 +102,7 @@ public class ApiDisclaimerApi {
             basePath = null;
         }
 
-        Object localVarPostBody = snapTradeAcceptDisclaimerPostRequest;
+        Object localVarPostBody = apIDisclaimerAcceptRequest;
 
         // create path and map variables
         String localVarPath = "/snapTrade/acceptDisclaimer";
@@ -142,23 +142,23 @@ public class ApiDisclaimerApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call snapTradeAcceptDisclaimerPostValidateBeforeCall(String userId, String userSecret, SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call acceptValidateBeforeCall(String userId, String userSecret, APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling snapTradeAcceptDisclaimerPost(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling accept(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling snapTradeAcceptDisclaimerPost(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling accept(Async)");
         }
 
-        // verify the required parameter 'snapTradeAcceptDisclaimerPostRequest' is set
-        if (snapTradeAcceptDisclaimerPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'snapTradeAcceptDisclaimerPostRequest' when calling snapTradeAcceptDisclaimerPost(Async)");
+        // verify the required parameter 'apIDisclaimerAcceptRequest' is set
+        if (apIDisclaimerAcceptRequest == null) {
+            throw new ApiException("Missing the required parameter 'apIDisclaimerAcceptRequest' when calling accept(Async)");
         }
 
-        return snapTradeAcceptDisclaimerPostCall(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, _callback);
+        return acceptCall(userId, userSecret, apIDisclaimerAcceptRequest, _callback);
 
     }
 
@@ -167,7 +167,7 @@ public class ApiDisclaimerApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param snapTradeAcceptDisclaimerPostRequest  (required)
+     * @param apIDisclaimerAcceptRequest  (required)
      * @return SnapTradeAPIDisclaimerAcceptStatus
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -177,8 +177,8 @@ public class ApiDisclaimerApi {
         <tr><td> 500 </td><td> Unexpected Error. Please contact support </td><td>  -  </td></tr>
      </table>
      */
-    public SnapTradeAPIDisclaimerAcceptStatus snapTradeAcceptDisclaimerPost(String userId, String userSecret, SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest) throws ApiException {
-        ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResp = snapTradeAcceptDisclaimerPostWithHttpInfo(userId, userSecret, snapTradeAcceptDisclaimerPostRequest);
+    public SnapTradeAPIDisclaimerAcceptStatus accept(String userId, String userSecret, APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest) throws ApiException {
+        ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResp = acceptWithHttpInfo(userId, userSecret, apIDisclaimerAcceptRequest);
         return localVarResp.getData();
     }
 
@@ -187,7 +187,7 @@ public class ApiDisclaimerApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param snapTradeAcceptDisclaimerPostRequest  (required)
+     * @param apIDisclaimerAcceptRequest  (required)
      * @return ApiResponse&lt;SnapTradeAPIDisclaimerAcceptStatus&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -197,8 +197,8 @@ public class ApiDisclaimerApi {
         <tr><td> 500 </td><td> Unexpected Error. Please contact support </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> snapTradeAcceptDisclaimerPostWithHttpInfo(String userId, String userSecret, SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest) throws ApiException {
-        okhttp3.Call localVarCall = snapTradeAcceptDisclaimerPostValidateBeforeCall(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, null);
+    public ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> acceptWithHttpInfo(String userId, String userSecret, APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest) throws ApiException {
+        okhttp3.Call localVarCall = acceptValidateBeforeCall(userId, userSecret, apIDisclaimerAcceptRequest, null);
         Type localVarReturnType = new TypeToken<SnapTradeAPIDisclaimerAcceptStatus>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -208,7 +208,7 @@ public class ApiDisclaimerApi {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param snapTradeAcceptDisclaimerPostRequest  (required)
+     * @param apIDisclaimerAcceptRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -219,9 +219,9 @@ public class ApiDisclaimerApi {
         <tr><td> 500 </td><td> Unexpected Error. Please contact support </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call snapTradeAcceptDisclaimerPostAsync(String userId, String userSecret, SnapTradeAcceptDisclaimerPostRequest snapTradeAcceptDisclaimerPostRequest, final ApiCallback<SnapTradeAPIDisclaimerAcceptStatus> _callback) throws ApiException {
+    public okhttp3.Call acceptAsync(String userId, String userSecret, APIDisclaimerAcceptRequest apIDisclaimerAcceptRequest, final ApiCallback<SnapTradeAPIDisclaimerAcceptStatus> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = snapTradeAcceptDisclaimerPostValidateBeforeCall(userId, userSecret, snapTradeAcceptDisclaimerPostRequest, _callback);
+        okhttp3.Call localVarCall = acceptValidateBeforeCall(userId, userSecret, apIDisclaimerAcceptRequest, _callback);
         Type localVarReturnType = new TypeToken<SnapTradeAPIDisclaimerAcceptStatus>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

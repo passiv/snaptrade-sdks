@@ -24,24 +24,24 @@ class TestConnectionsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_authorizations_authorization_id_delete(self):
-        """Test case for authorizations_authorization_id_delete
-
-        Remove a brokerage authorization.  # noqa: E501
-        """
-        pass
-
-    def test_authorizations_authorization_id_get(self):
-        """Test case for authorizations_authorization_id_get
+    def test_detail_brokerage_authorization(self):
+        """Test case for detail_brokerage_authorization
 
         Get detail of a specific brokerage authorizations for the user  # noqa: E501
         """
         pass
 
-    def test_authorizations_get(self):
-        """Test case for authorizations_get
+    def test_list_brokerage_authorizations(self):
+        """Test case for list_brokerage_authorizations
 
         List all brokerage authorizations for the user  # noqa: E501
+        """
+        pass
+
+    def test_remove_brokerage_authorization(self):
+        """Test case for remove_brokerage_authorization
+
+        Remove a brokerage authorization.  # noqa: E501
         """
         pass
 

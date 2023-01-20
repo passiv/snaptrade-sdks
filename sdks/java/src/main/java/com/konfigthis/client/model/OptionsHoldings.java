@@ -179,7 +179,7 @@ public class OptionsHoldings {
    * @return currency
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "None", value = "")
 
   public String getCurrency() {
     return currency;
