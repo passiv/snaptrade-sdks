@@ -25,6 +25,7 @@ generators:
   java:
     version: 2.0.0
     outputDirectory: sdks/java
+    readmeSnippet: snippets/java.java
     files:
       Configuration.mustache:
         destinationFilename: src/main/java/com/konfigthis/client/Configuration.java
