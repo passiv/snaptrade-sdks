@@ -31,14 +31,10 @@ from snaptrade_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from snaptrade_client.model.from_snaptrade_client_model_option_strategy_import_option_strategy import FromSnaptradeClientModelOptionStrategyImportOptionStrategy
-    from snaptrade_client.model.from_snaptrade_client_model_strategy_quotes_greek_import_strategy_quotes_greek import FromSnaptradeClientModelStrategyQuotesGreekImportStrategyQuotesGreek
-    from snaptrade_client.model.globals_option_strategy_option_strategy import GlobalsOptionStrategyOptionStrategy
-    from snaptrade_client.model.globals_strategy_quotes_greek_strategy_quotes_greek import GlobalsStrategyQuotesGreekStrategyQuotesGreek
-    globals()['from snaptrade_client.model.option_strategy import OptionStrategy'] = from snaptrade_client.model.option_strategy import OptionStrategy
-    globals()['from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek'] = from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
-    globals()['globals()['OptionStrategy'] = OptionStrategy'] = globals()['OptionStrategy'] = OptionStrategy
-    globals()['globals()['StrategyQuotesGreek'] = StrategyQuotesGreek'] = globals()['StrategyQuotesGreek'] = StrategyQuotesGreek
+    from snaptrade_client.model.option_strategy import OptionStrategy
+    from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
+    globals()['OptionStrategy'] = OptionStrategy
+    globals()['StrategyQuotesGreek'] = StrategyQuotesGreek
 
 
 class StrategyQuotes(ModelNormal):

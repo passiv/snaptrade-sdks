@@ -95,7 +95,6 @@ from snaptrade_client.model.strategy_order_place_orders_inner_legs_inner import 
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
-from snaptrade_client.model.strategy_quotes_inner import StrategyQuotesInner
 from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate
 from snaptrade_client.model.symbol import Symbol
 from snaptrade_client.model.symbol_query import SymbolQuery

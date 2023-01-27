@@ -3532,10 +3532,6 @@ components:
       type: object
     StrategyOrderQuotes:
       description: The quotes for the strategy requested
-    strategyQuotes:
-      items:
-        $ref: '#/components/schemas/strategyQuotes_inner'
-      type: array
     StrategyOrderPlace:
       additionalProperties: true
       description: The reponse for a correctly placed order
@@ -8596,50 +8592,6 @@ components:
         lastExecPrice:
           format: nullable
           type: string
-      type: object
-    strategyQuotes_inner:
-      additionalProperties: true
-      properties:
-        variantId:
-          example: 1
-          format: int32
-          type: integer
-        bidPrice:
-          example: 0.24
-          type: number
-        askPrice:
-          example: 0.34
-          type: number
-        underlying:
-          example: AC.TO
-          type: string
-        underlyingId:
-          example: 7960447
-          format: int32
-          type: integer
-        openPrice:
-          format: nullable
-          type: string
-        volatility:
-          example: 108.022492
-          type: number
-        delta:
-          example: -0.038001
-          type: number
-        gamma:
-          example: 0.039656
-          type: number
-        theta:
-          example: -0.003889
-          type: number
-        vega:
-          example: 0.015522
-          type: number
-        rho:
-          example: -0.002157
-          type: number
-        isRealTime:
-          type: boolean
       type: object
     StrategyOrderPlace_orders_inner_legs_inner:
       additionalProperties: true
