@@ -35,7 +35,7 @@ from pprint import pprint
 # satisfies your auth use case.
 
 # Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+configuration = snaptrade_client.Configuration(api_key={'PartnerClientId': 'YOUR_API_KEY'})
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
@@ -132,7 +132,7 @@ from pprint import pprint
 # satisfies your auth use case.
 
 # Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+configuration = snaptrade_client.Configuration(api_key={'PartnerClientId': 'YOUR_API_KEY'})
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
@@ -223,7 +223,7 @@ from pprint import pprint
 # satisfies your auth use case.
 
 # Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+configuration = snaptrade_client.Configuration(api_key={'PartnerClientId': 'YOUR_API_KEY'})
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
@@ -314,7 +314,7 @@ from pprint import pprint
 # satisfies your auth use case.
 
 # Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+configuration = snaptrade_client.Configuration(api_key={'PartnerClientId': 'YOUR_API_KEY'})
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['PartnerClientId'] = 'Bearer'
@@ -404,7 +404,7 @@ from pprint import pprint
 # satisfies your auth use case.
 
 # Configure API key authorization: PartnerClientId
-configuration.api_key['PartnerClientId'] = 'YOUR_API_KEY'
+configuration = snaptrade_client.Configuration(api_key={'PartnerClientId': 'YOUR_API_KEY'})
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['PartnerClientId'] = 'Bearer'

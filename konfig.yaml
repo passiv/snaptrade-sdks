@@ -1,5 +1,3 @@
-outputDirectory: /tmp/snaptrade-sdks-out
-specPath: api.yaml
 filterTags:
   - Webhooks
   - Development Tools
@@ -21,11 +19,9 @@ allObjectsHaveAdditionalProperties:
 requiredEnvironmentVariables:
   - SNAPTRADE_CONSUMER_KEY
   - SNAPTRADE_CLIENT_ID
+outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   java:
-    version: 2.0.0
-    outputDirectory: sdks/java
-    readmeSnippet: snippets/java.java
     files:
       Configuration.mustache:
         destinationFilename: src/main/java/com/konfigthis/client/Configuration.java
@@ -37,31 +33,39 @@ generators:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
-    groupId: com.konfigthis
-    artifactId: snaptrade-java-sdk
+    version: 2.1.0
+    outputDirectory: sdks/java
+    readmeSnippet: snippets/java.java
     git:
+      host: github.com
       userId: passiv
       repoId: snaptrade-sdks/tree/main/sdks/java
-  python:
-    version: 2.0.0
+    groupId: com.konfigthis
+    artifactId: snaptrade-java-sdk
     test:
       script:
-        - tox test/test_getting_started.py::TestGettingStarted::testGettingStarted
-    outputDirectory: sdks/python
-    readmeSnippet: snippets/python.py
+        - mvn test
+  python:
     files:
       configuration.mustache:
         destinationFilename: snaptrade_client/configuration.py
       rest.mustache:
         destinationFilename: snaptrade_client/rest.py
-    packageName: snaptrade_client
-    projectName: snaptrade-python-sdk
+    version: 2.1.0
+    outputDirectory: sdks/python
+    readmeSnippet: snippets/python.py
+    test:
+      script:
+        - tox
+          test/test_getting_started.py::TestGettingStarted::testGettingStarted
     git:
+      host: github.com
       userId: passiv
       repoId: snaptrade-sdks/tree/main/sdks/python
+    packageName: snaptrade_client
+    projectName: snaptrade-python-sdk
+    generator: python-prior
   typescript:
-    outputDirectory: sdks/typescript
-    readmeSnippet: snippets/typescript.ts
     files:
       tsconfig.mustache:
         destinationFilename: tsconfig.json
@@ -69,8 +73,15 @@ generators:
         destinationFilename: configuration.ts
       common.mustache:
         destinationFilename: common.ts
-    version: 2.0.2
-    npmName: snaptrade-typescript-sdk
+    version: 2.1.0
+    outputDirectory: sdks/typescript
+    readmeSnippet: snippets/typescript.ts
     git:
+      host: github.com
       userId: passiv
       repoId: snaptrade-sdks/tree/main/sdks/typescript
+    npmName: snaptrade-typescript-sdk
+    test:
+      script:
+        - yarn test
+specPath: api.yaml
