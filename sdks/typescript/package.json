@@ -1,11 +1,11 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "repository": {
     "type": "git",
-    "url": "https://github.com/passiv/snaptrade-sdks/tree/main/sdks/typescript"
+    "url": "https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript"
   },
   "keywords": [
     "axios",

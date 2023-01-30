@@ -19,7 +19,7 @@ if [ "$git_user_id" = "" ]; then
 fi
 
 if [ "$git_repo_id" = "" ]; then
-    git_repo_id="snaptrade-sdks/tree/main/sdks/java"
+    git_repo_id="snaptrade-sdks/tree/master/sdks/java"
     echo "[INFO] No command line input provided. Set \$git_repo_id to $git_repo_id"
 fi
 

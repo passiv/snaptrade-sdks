@@ -12,7 +12,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "snaptrade-python-sdk"
-VERSION = "2.2.0"
+VERSION = "2.3.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -36,7 +36,7 @@ setup(
     description="SnapTrade",
     author="Konfig",
     author_email="api@snaptrade.com",
-    url="https://github.com/passiv/snaptrade-sdks/tree/main/sdks/python",
+    url="https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python",
     keywords=["Konfig", "SnapTrade"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
