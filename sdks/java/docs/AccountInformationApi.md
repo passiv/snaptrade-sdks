@@ -27,7 +27,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -113,7 +113,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -197,7 +197,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -281,7 +281,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -367,7 +367,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -451,7 +451,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -537,7 +537,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
@@ -619,7 +619,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
-import com.konfigthis.client.models.*;
+import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {

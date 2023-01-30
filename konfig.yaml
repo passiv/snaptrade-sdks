@@ -33,7 +33,7 @@ generators:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
-    version: 2.1.0
+    version: 2.2.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     git:
@@ -51,12 +51,13 @@ generators:
         destinationFilename: snaptrade_client/configuration.py
       rest.mustache:
         destinationFilename: snaptrade_client/rest.py
-    version: 2.1.0
+    version: 2.2.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     test:
       script:
-        - tox
+        - >-
+          tox
           test/test_getting_started.py::TestGettingStarted::testGettingStarted
     git:
       host: github.com
@@ -73,7 +74,7 @@ generators:
         destinationFilename: configuration.ts
       common.mustache:
         destinationFilename: common.ts
-    version: 2.1.0
+    version: 2.2.0
     outputDirectory: sdks/typescript
     readmeSnippet: snippets/typescript.ts
     git:
