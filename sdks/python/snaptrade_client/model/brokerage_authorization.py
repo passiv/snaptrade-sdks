@@ -72,7 +72,7 @@ class BrokerageAuthorization(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -96,7 +96,7 @@ class BrokerageAuthorization(ModelNormal):
             'type': (str,),  # noqa: E501
             'disabled': (bool,),  # noqa: E501
             'disabled_date': (str, none_type,),  # noqa: E501
-            'meta': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
+            'meta': ({str: (bool, dict, float, int, list, str, none_type)},),  # noqa: E501
         }
 
     @cached_property
@@ -165,7 +165,7 @@ class BrokerageAuthorization(ModelNormal):
             type (str): [optional]  # noqa: E501
             disabled (bool): [optional]  # noqa: E501
             disabled_date (str, none_type): Disabled date. [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Additional data about brokerage authorization. [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): Additional data about brokerage authorization. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -259,7 +259,7 @@ class BrokerageAuthorization(ModelNormal):
             type (str): [optional]  # noqa: E501
             disabled (bool): [optional]  # noqa: E501
             disabled_date (str, none_type): Disabled date. [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Additional data about brokerage authorization. [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): Additional data about brokerage authorization. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

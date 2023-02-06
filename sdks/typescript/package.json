@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "repository": {
@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rm -rf dist/",
-    "prepare": "npm run build",
+    "prepack": "npm run build",
     "test": "jest"
   },
   "dependencies": {

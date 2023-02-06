@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **can_access_reference_data** | **bool** | Shows if Snaptrade partners can get users holdings data | [optional] 
 **can_access_portfolio_management** | **bool** | Shows if users Snaptrade partners can access portfolio group management features | [optional] 
 **can_access_orders** | **bool** | Shows if Snaptrade partners can get users account order history | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

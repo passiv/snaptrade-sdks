@@ -67,7 +67,7 @@ class Model401FailedRequestResponse(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -82,8 +82,8 @@ class Model401FailedRequestResponse(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'default_detail': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
-            'default_code': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'default_detail': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
+            'default_code': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -137,8 +137,8 @@ class Model401FailedRequestResponse(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            default_detail (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            default_code (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            default_detail (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            default_code (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -224,8 +224,8 @@ class Model401FailedRequestResponse(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            default_detail (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            default_code (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            default_detail (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            default_code (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

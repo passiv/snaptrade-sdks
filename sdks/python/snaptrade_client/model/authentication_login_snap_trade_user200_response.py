@@ -76,7 +76,7 @@ class AuthenticationLoginSnapTradeUser200Response(ModelComposed):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -92,7 +92,7 @@ class AuthenticationLoginSnapTradeUser200Response(ModelComposed):
         """
         lazy_import()
         return {
-            'redirect_uri': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'redirect_uri': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
             'session_id': (str,),  # noqa: E501
             'encrypted_shared_key': (str,),  # noqa: E501
             'encrypted_message_data': (EncryptedResponseEncryptedMessageData,),  # noqa: E501
@@ -149,7 +149,7 @@ class AuthenticationLoginSnapTradeUser200Response(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            redirect_uri (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             session_id (str): [optional]  # noqa: E501
             encrypted_shared_key (str): [optional]  # noqa: E501
             encrypted_message_data (EncryptedResponseEncryptedMessageData): [optional]  # noqa: E501
@@ -256,7 +256,7 @@ class AuthenticationLoginSnapTradeUser200Response(ModelComposed):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            redirect_uri (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             session_id (str): [optional]  # noqa: E501
             encrypted_shared_key (str): [optional]  # noqa: E501
             encrypted_message_data (EncryptedResponseEncryptedMessageData): [optional]  # noqa: E501

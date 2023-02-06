@@ -72,7 +72,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -94,7 +94,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             'name': (str,),  # noqa: E501
             'number': (str,),  # noqa: E501
             'institution_name': (str,),  # noqa: E501
-            'meta': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
+            'meta': ({str: (bool, dict, float, int, list, str, none_type)},),  # noqa: E501
         }
 
     @cached_property
@@ -159,7 +159,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             name (str): [optional]  # noqa: E501
             number (str): [optional]  # noqa: E501
             institution_name (str): [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -251,7 +251,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             name (str): [optional]  # noqa: E501
             number (str): [optional]  # noqa: E501
             institution_name (str): [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

@@ -67,7 +67,7 @@ class TradingPlaceOCOOrderRequest(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -82,8 +82,8 @@ class TradingPlaceOCOOrderRequest(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'first_trade_id': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
-            'second_trade_id': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'first_trade_id': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
+            'second_trade_id': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -137,8 +137,8 @@ class TradingPlaceOCOOrderRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            first_trade_id (bool, date, datetime, dict, float, int, list, str, none_type): The ID of first trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
-            second_trade_id (bool, date, datetime, dict, float, int, list, str, none_type): The ID of second trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
+            first_trade_id (bool, dict, float, int, list, str, none_type): The ID of first trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
+            second_trade_id (bool, dict, float, int, list, str, none_type): The ID of second trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -224,8 +224,8 @@ class TradingPlaceOCOOrderRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            first_trade_id (bool, date, datetime, dict, float, int, list, str, none_type): The ID of first trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
-            second_trade_id (bool, date, datetime, dict, float, int, list, str, none_type): The ID of second trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
+            first_trade_id (bool, dict, float, int, list, str, none_type): The ID of first trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
+            second_trade_id (bool, dict, float, int, list, str, none_type): The ID of second trade object obtained from trade/impact endpoint. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

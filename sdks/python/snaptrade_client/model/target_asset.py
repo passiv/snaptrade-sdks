@@ -74,7 +74,7 @@ class TargetAsset(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -95,7 +95,7 @@ class TargetAsset(ModelNormal):
             'percent': (Percent,),  # noqa: E501
             'is_supported': (bool,),  # noqa: E501
             'is_excluded': (bool,),  # noqa: E501
-            'meta': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
+            'meta': ({str: (bool, dict, float, int, list, str, none_type)},),  # noqa: E501
         }
 
     @cached_property
@@ -158,7 +158,7 @@ class TargetAsset(ModelNormal):
             percent (Percent): [optional]  # noqa: E501
             is_supported (bool): [optional]  # noqa: E501
             is_excluded (bool): [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -249,7 +249,7 @@ class TargetAsset(ModelNormal):
             percent (Percent): [optional]  # noqa: E501
             is_supported (bool): [optional]  # noqa: E501
             is_excluded (bool): [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

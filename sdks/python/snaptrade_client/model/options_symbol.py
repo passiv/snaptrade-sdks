@@ -72,7 +72,7 @@ class OptionsSymbol(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -95,8 +95,8 @@ class OptionsSymbol(ModelNormal):
             'is_mini_option': (bool,),  # noqa: E501
             'underlying_symbol': (UnderlyingSymbol,),  # noqa: E501
             'local_id': (str,),  # noqa: E501
-            'security_type': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
-            'listing_exchange': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'security_type': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
+            'listing_exchange': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
             'is_quotable': (bool,),  # noqa: E501
             'is_tradable': (bool,),  # noqa: E501
         }
@@ -168,8 +168,8 @@ class OptionsSymbol(ModelNormal):
             is_mini_option (bool): [optional]  # noqa: E501
             underlying_symbol (UnderlyingSymbol): [optional]  # noqa: E501
             local_id (str): [optional]  # noqa: E501
-            security_type (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            listing_exchange (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            security_type (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            listing_exchange (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             is_quotable (bool): [optional]  # noqa: E501
             is_tradable (bool): [optional]  # noqa: E501
         """
@@ -264,8 +264,8 @@ class OptionsSymbol(ModelNormal):
             is_mini_option (bool): [optional]  # noqa: E501
             underlying_symbol (UnderlyingSymbol): [optional]  # noqa: E501
             local_id (str): [optional]  # noqa: E501
-            security_type (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
-            listing_exchange (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            security_type (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            listing_exchange (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             is_quotable (bool): [optional]  # noqa: E501
             is_tradable (bool): [optional]  # noqa: E501
         """

@@ -87,7 +87,7 @@ class TradeExecutionStatus(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -111,7 +111,7 @@ class TradeExecutionStatus(ModelNormal):
             'action': (str,),  # noqa: E501
             'price': (float,),  # noqa: E501
             'commissions': (float,),  # noqa: E501
-            'meta': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
+            'meta': ({str: (bool, dict, float, int, list, str, none_type)},),  # noqa: E501
         }
 
     @cached_property
@@ -180,7 +180,7 @@ class TradeExecutionStatus(ModelNormal):
             action (str): Action of executed trade. [optional]  # noqa: E501
             price (float): Price of execution. [optional]  # noqa: E501
             commissions (float): Fees paid from executing trade. [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Other misc. data. [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): Other misc. data. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -274,7 +274,7 @@ class TradeExecutionStatus(ModelNormal):
             action (str): Action of executed trade. [optional]  # noqa: E501
             price (float): Price of execution. [optional]  # noqa: E501
             commissions (float): Fees paid from executing trade. [optional]  # noqa: E501
-            meta ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Other misc. data. [optional]  # noqa: E501
+            meta ({str: (bool, dict, float, int, list, str, none_type)}): Other misc. data. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

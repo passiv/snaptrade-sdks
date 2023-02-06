@@ -67,7 +67,7 @@ class LoginRedirectURI(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -82,7 +82,7 @@ class LoginRedirectURI(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'redirect_uri': (bool, date, datetime, dict, float, int, list, str, none_type,),  # noqa: E501
+            'redirect_uri': (bool, dict, float, int, list, str, none_type,),  # noqa: E501
             'session_id': (str,),  # noqa: E501
         }
 
@@ -137,7 +137,7 @@ class LoginRedirectURI(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            redirect_uri (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             session_id (str): [optional]  # noqa: E501
         """
 
@@ -224,7 +224,7 @@ class LoginRedirectURI(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            redirect_uri (bool, date, datetime, dict, float, int, list, str, none_type): [optional]  # noqa: E501
+            redirect_uri (bool, dict, float, int, list, str, none_type): [optional]  # noqa: E501
             session_id (str): [optional]  # noqa: E501
         """
 

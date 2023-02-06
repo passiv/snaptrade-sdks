@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **rate_of_return** | **float** | The return rate over the timeframe. Annualized if timeframe is longer than 1 year | [optional] 
 **return_rate_timeframe** | [**[SubPeriodReturnRate]**](SubPeriodReturnRate.md) |  | [optional] 
 **detailed_mode** | **bool** | Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes) | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

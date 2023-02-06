@@ -72,7 +72,7 @@ class Brokerage(ModelNormal):
         of type self, this must run after the class is loaded
         """
         lazy_import()
-        return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
+        return (bool, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
 
@@ -105,7 +105,7 @@ class Brokerage(ModelNormal):
             'is_scraping_integration': (bool,),  # noqa: E501
             'default_currency': (str,),  # noqa: E501
             'brokerage_type': (BrokerageType,),  # noqa: E501
-            'exchanges': ([bool, date, datetime, dict, float, int, list, str, none_type],),  # noqa: E501
+            'exchanges': ([bool, dict, float, int, list, str, none_type],),  # noqa: E501
         }
 
     @cached_property
@@ -192,7 +192,7 @@ class Brokerage(ModelNormal):
             is_scraping_integration (bool): [optional]  # noqa: E501
             default_currency (str): [optional]  # noqa: E501
             brokerage_type (BrokerageType): [optional]  # noqa: E501
-            exchanges ([bool, date, datetime, dict, float, int, list, str, none_type]): List of exchange ID supported by brokerage. [optional]  # noqa: E501
+            exchanges ([bool, dict, float, int, list, str, none_type]): List of exchange ID supported by brokerage. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -295,7 +295,7 @@ class Brokerage(ModelNormal):
             is_scraping_integration (bool): [optional]  # noqa: E501
             default_currency (str): [optional]  # noqa: E501
             brokerage_type (BrokerageType): [optional]  # noqa: E501
-            exchanges ([bool, date, datetime, dict, float, int, list, str, none_type]): List of exchange ID supported by brokerage. [optional]  # noqa: E501
+            exchanges ([bool, dict, float, int, list, str, none_type]): List of exchange ID supported by brokerage. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

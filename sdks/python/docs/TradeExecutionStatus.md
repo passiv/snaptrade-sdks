@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **action** | **str** | Action of executed trade | [optional] 
 **price** | **float** | Price of execution | [optional] 
 **commissions** | **float** | Fees paid from executing trade | [optional] 
-**meta** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | Other misc. data | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**meta** | **{str: (bool, dict, float, int, list, str, none_type)}** | Other misc. data | [optional] 
+**any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

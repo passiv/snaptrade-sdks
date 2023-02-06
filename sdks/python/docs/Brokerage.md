@@ -21,8 +21,8 @@ Name | Type | Description | Notes
 **is_scraping_integration** | **bool** |  | [optional] 
 **default_currency** | **str** |  | [optional] 
 **brokerage_type** | [**BrokerageType**](BrokerageType.md) |  | [optional] 
-**exchanges** | **[bool, date, datetime, dict, float, int, list, str, none_type]** | List of exchange ID supported by brokerage | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**exchanges** | **[bool, dict, float, int, list, str, none_type]** | List of exchange ID supported by brokerage | [optional] 
+**any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
