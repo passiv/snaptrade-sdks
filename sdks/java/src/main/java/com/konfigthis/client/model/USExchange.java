@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -363,9 +364,20 @@ public class USExchange {
         Objects.equals(this.additionalProperties, usExchange.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, code, micCode, name, timezone, startTime, closeTime, suffix, allowsCryptocurrencySymbols, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -451,7 +463,7 @@ public class USExchange {
       if ((jsonObj.get("close_time") != null && !jsonObj.get("close_time").isJsonNull()) && !jsonObj.get("close_time").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `close_time` to be a primitive type in the JSON string but got `%s`", jsonObj.get("close_time").toString()));
       }
-      if ((jsonObj.get("suffix") != null && !jsonObj.get("suffix").isJsonNull()) && !jsonObj.get("suffix").isJsonPrimitive()) {
+      if (!jsonObj.get("suffix").isJsonNull() && (jsonObj.get("suffix") != null && !jsonObj.get("suffix").isJsonNull()) && !jsonObj.get("suffix").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `suffix` to be a primitive type in the JSON string but got `%s`", jsonObj.get("suffix").toString()));
       }
   }

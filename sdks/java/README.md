@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>2.4.0</version>
+  <version>3.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -50,12 +50,11 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the 'snaptrade-java-sdk' jar has been published to maven central.
-    mavenLocal()       // Needed if the 'snaptrade-java-sdk' jar has been published to the local maven repo.
+    mavenCentral()
   }
 
   dependencies {
-     implementation "com.konfigthis:snaptrade-java-sdk:2.4.0"
+     implementation "com.konfigthis:snaptrade-java-sdk:3.0.0"
   }
 ```
 
@@ -69,7 +68,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-2.4.0.jar`
+* `target/snaptrade-java-sdk-3.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -376,8 +375,3 @@ Authentication schemes defined for the API:
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-
-## Author
-
-api@snaptrade.com
-

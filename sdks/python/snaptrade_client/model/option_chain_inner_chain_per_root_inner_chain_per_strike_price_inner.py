@@ -82,9 +82,9 @@ class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'strike_price': (int,),  # noqa: E501
-            'call_symbol_id': (int,),  # noqa: E501
-            'put_symbol_id': (int,),  # noqa: E501
+            'strike_price': (int, none_type,),  # noqa: E501
+            'call_symbol_id': (int, none_type,),  # noqa: E501
+            'put_symbol_id': (int, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -139,9 +139,9 @@ class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            strike_price (int): [optional]  # noqa: E501
-            call_symbol_id (int): [optional]  # noqa: E501
-            put_symbol_id (int): [optional]  # noqa: E501
+            strike_price (int, none_type): [optional]  # noqa: E501
+            call_symbol_id (int, none_type): [optional]  # noqa: E501
+            put_symbol_id (int, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -227,9 +227,9 @@ class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            strike_price (int): [optional]  # noqa: E501
-            call_symbol_id (int): [optional]  # noqa: E501
-            put_symbol_id (int): [optional]  # noqa: E501
+            strike_price (int, none_type): [optional]  # noqa: E501
+            call_symbol_id (int, none_type): [optional]  # noqa: E501
+            put_symbol_id (int, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

@@ -92,7 +92,7 @@ class ManualTradeSymbol(ModelNormal):
             'universal_symbol_id': (str,),  # noqa: E501
             'currency': (Currency,),  # noqa: E501
             'local_id': (str,),  # noqa: E501
-            'description': (str,),  # noqa: E501
+            'description': (str, none_type,),  # noqa: E501
             'symbol': (str,),  # noqa: E501
         }
 
@@ -155,7 +155,7 @@ class ManualTradeSymbol(ModelNormal):
             universal_symbol_id (str): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             local_id (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
         """
 
@@ -246,7 +246,7 @@ class ManualTradeSymbol(ModelNormal):
             universal_symbol_id (str): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             local_id (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
         """
 

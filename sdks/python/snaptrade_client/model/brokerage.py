@@ -97,11 +97,11 @@ class Brokerage(ModelNormal):
             'url': (str,),  # noqa: E501
             'enabled': (bool,),  # noqa: E501
             'maintenance_mode': (bool,),  # noqa: E501
-            'allows_fractional_units': (bool,),  # noqa: E501
+            'allows_fractional_units': (bool, none_type,),  # noqa: E501
             'allows_trading': (bool,),  # noqa: E501
             'has_reporting': (bool,),  # noqa: E501
             'is_real_time_connection': (bool,),  # noqa: E501
-            'allows_trading_through_snaptrade_api': (bool,),  # noqa: E501
+            'allows_trading_through_snaptrade_api': (bool, none_type,),  # noqa: E501
             'is_scraping_integration': (bool,),  # noqa: E501
             'default_currency': (str,),  # noqa: E501
             'brokerage_type': (BrokerageType,),  # noqa: E501
@@ -184,11 +184,11 @@ class Brokerage(ModelNormal):
             url (str): [optional]  # noqa: E501
             enabled (bool): [optional]  # noqa: E501
             maintenance_mode (bool): [optional]  # noqa: E501
-            allows_fractional_units (bool): [optional]  # noqa: E501
+            allows_fractional_units (bool, none_type): [optional]  # noqa: E501
             allows_trading (bool): [optional]  # noqa: E501
             has_reporting (bool): [optional]  # noqa: E501
             is_real_time_connection (bool): [optional]  # noqa: E501
-            allows_trading_through_snaptrade_api (bool): [optional]  # noqa: E501
+            allows_trading_through_snaptrade_api (bool, none_type): [optional]  # noqa: E501
             is_scraping_integration (bool): [optional]  # noqa: E501
             default_currency (str): [optional]  # noqa: E501
             brokerage_type (BrokerageType): [optional]  # noqa: E501
@@ -287,11 +287,11 @@ class Brokerage(ModelNormal):
             url (str): [optional]  # noqa: E501
             enabled (bool): [optional]  # noqa: E501
             maintenance_mode (bool): [optional]  # noqa: E501
-            allows_fractional_units (bool): [optional]  # noqa: E501
+            allows_fractional_units (bool, none_type): [optional]  # noqa: E501
             allows_trading (bool): [optional]  # noqa: E501
             has_reporting (bool): [optional]  # noqa: E501
             is_real_time_connection (bool): [optional]  # noqa: E501
-            allows_trading_through_snaptrade_api (bool): [optional]  # noqa: E501
+            allows_trading_through_snaptrade_api (bool, none_type): [optional]  # noqa: E501
             is_scraping_integration (bool): [optional]  # noqa: E501
             default_currency (str): [optional]  # noqa: E501
             brokerage_type (BrokerageType): [optional]  # noqa: E501

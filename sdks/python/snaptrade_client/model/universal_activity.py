@@ -116,7 +116,7 @@ class UniversalActivity(ModelNormal):
         return {
             'id': (str,),  # noqa: E501
             'account': (AccountSimple,),  # noqa: E501
-            'amount': (float,),  # noqa: E501
+            'amount': (float, none_type,),  # noqa: E501
             'currency': (Currency,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'fee': (float,),  # noqa: E501
@@ -126,7 +126,7 @@ class UniversalActivity(ModelNormal):
             'settlement_date': (str,),  # noqa: E501
             'symbol': (Symbol,),  # noqa: E501
             'option_symbol': (OptionsSymbol,),  # noqa: E501
-            'trade_date': (str,),  # noqa: E501
+            'trade_date': (str, none_type,),  # noqa: E501
             'type': (str,),  # noqa: E501
             'units': (float,),  # noqa: E501
         }
@@ -197,7 +197,7 @@ class UniversalActivity(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (str): [optional]  # noqa: E501
             account (AccountSimple): [optional]  # noqa: E501
-            amount (float): [optional]  # noqa: E501
+            amount (float, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             description (str): [optional]  # noqa: E501
             fee (float): [optional]  # noqa: E501
@@ -207,7 +207,7 @@ class UniversalActivity(ModelNormal):
             settlement_date (str): [optional]  # noqa: E501
             symbol (Symbol): [optional]  # noqa: E501
             option_symbol (OptionsSymbol): [optional]  # noqa: E501
-            trade_date (str): [optional]  # noqa: E501
+            trade_date (str, none_type): [optional]  # noqa: E501
             type (str): [optional]  # noqa: E501
             units (float): Usually but not necessarily an integer. [optional]  # noqa: E501
         """
@@ -297,7 +297,7 @@ class UniversalActivity(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (str): [optional]  # noqa: E501
             account (AccountSimple): [optional]  # noqa: E501
-            amount (float): [optional]  # noqa: E501
+            amount (float, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             description (str): [optional]  # noqa: E501
             fee (float): [optional]  # noqa: E501
@@ -307,7 +307,7 @@ class UniversalActivity(ModelNormal):
             settlement_date (str): [optional]  # noqa: E501
             symbol (Symbol): [optional]  # noqa: E501
             option_symbol (OptionsSymbol): [optional]  # noqa: E501
-            trade_date (str): [optional]  # noqa: E501
+            trade_date (str, none_type): [optional]  # noqa: E501
             type (str): [optional]  # noqa: E501
             units (float): Usually but not necessarily an integer. [optional]  # noqa: E501
         """

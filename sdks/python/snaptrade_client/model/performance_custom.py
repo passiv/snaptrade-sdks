@@ -101,18 +101,18 @@ class PerformanceCustom(ModelNormal):
             'contribution_timeframe': ([PastValue],),  # noqa: E501
             'contribution_timeframe_cumulative': ([PastValue],),  # noqa: E501
             'withdrawal_timeframe': ([PastValue],),  # noqa: E501
-            'contribution_streak': (float,),  # noqa: E501
-            'contribution_months_contributed': (float,),  # noqa: E501
-            'contribution_total_months': (float,),  # noqa: E501
+            'contribution_streak': (float, none_type,),  # noqa: E501
+            'contribution_months_contributed': (float, none_type,),  # noqa: E501
+            'contribution_total_months': (float, none_type,),  # noqa: E501
             'dividends': ([NetDividend],),  # noqa: E501
-            'dividend_income': (float,),  # noqa: E501
-            'monthly_dividends': (float,),  # noqa: E501
-            'bad_tickers': ([str],),  # noqa: E501
+            'dividend_income': (float, none_type,),  # noqa: E501
+            'monthly_dividends': (float, none_type,),  # noqa: E501
+            'bad_tickers': ([str, none_type],),  # noqa: E501
             'dividend_timeline': ([MonthlyDividends],),  # noqa: E501
-            'commissions': (float,),  # noqa: E501
-            'forex_fees': (float,),  # noqa: E501
-            'fees': (float,),  # noqa: E501
-            'rate_of_return': (float,),  # noqa: E501
+            'commissions': (float, none_type,),  # noqa: E501
+            'forex_fees': (float, none_type,),  # noqa: E501
+            'fees': (float, none_type,),  # noqa: E501
+            'rate_of_return': (float, none_type,),  # noqa: E501
             'return_rate_timeframe': ([SubPeriodReturnRate],),  # noqa: E501
             'detailed_mode': (bool,),  # noqa: E501
         }
@@ -190,18 +190,18 @@ class PerformanceCustom(ModelNormal):
             contribution_timeframe ([PastValue]): [optional]  # noqa: E501
             contribution_timeframe_cumulative ([PastValue]): [optional]  # noqa: E501
             withdrawal_timeframe ([PastValue]): [optional]  # noqa: E501
-            contribution_streak (float): Current streak of cosecutive months where contributions were made. [optional]  # noqa: E501
-            contribution_months_contributed (float): Number of months in the timeframe with contributions. [optional]  # noqa: E501
-            contribution_total_months (float): Total months in timeframe. [optional]  # noqa: E501
+            contribution_streak (float, none_type): Current streak of cosecutive months where contributions were made. [optional]  # noqa: E501
+            contribution_months_contributed (float, none_type): Number of months in the timeframe with contributions. [optional]  # noqa: E501
+            contribution_total_months (float, none_type): Total months in timeframe. [optional]  # noqa: E501
             dividends ([NetDividend]): [optional]  # noqa: E501
-            dividend_income (float): Total dividends received over the timeframe. [optional]  # noqa: E501
-            monthly_dividends (float): Average dividends received per month over the timeframe. [optional]  # noqa: E501
-            bad_tickers ([str]): list of tickers which may not be supported or may not have accurate price data. [optional]  # noqa: E501
+            dividend_income (float, none_type): Total dividends received over the timeframe. [optional]  # noqa: E501
+            monthly_dividends (float, none_type): Average dividends received per month over the timeframe. [optional]  # noqa: E501
+            bad_tickers ([str, none_type]): list of tickers which may not be supported or may not have accurate price data. [optional]  # noqa: E501
             dividend_timeline ([MonthlyDividends]): [optional]  # noqa: E501
-            commissions (float): commissions incurred during the timeframe. [optional]  # noqa: E501
-            forex_fees (float): forex fees incurred during the timeframe. [optional]  # noqa: E501
-            fees (float): other fees incurred during the timeframe. [optional]  # noqa: E501
-            rate_of_return (float): The return rate over the timeframe. Annualized if timeframe is longer than 1 year. [optional]  # noqa: E501
+            commissions (float, none_type): commissions incurred during the timeframe. [optional]  # noqa: E501
+            forex_fees (float, none_type): forex fees incurred during the timeframe. [optional]  # noqa: E501
+            fees (float, none_type): other fees incurred during the timeframe. [optional]  # noqa: E501
+            rate_of_return (float, none_type): The return rate over the timeframe. Annualized if timeframe is longer than 1 year. [optional]  # noqa: E501
             return_rate_timeframe ([SubPeriodReturnRate]): [optional]  # noqa: E501
             detailed_mode (bool): Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes). [optional]  # noqa: E501
         """
@@ -294,18 +294,18 @@ class PerformanceCustom(ModelNormal):
             contribution_timeframe ([PastValue]): [optional]  # noqa: E501
             contribution_timeframe_cumulative ([PastValue]): [optional]  # noqa: E501
             withdrawal_timeframe ([PastValue]): [optional]  # noqa: E501
-            contribution_streak (float): Current streak of cosecutive months where contributions were made. [optional]  # noqa: E501
-            contribution_months_contributed (float): Number of months in the timeframe with contributions. [optional]  # noqa: E501
-            contribution_total_months (float): Total months in timeframe. [optional]  # noqa: E501
+            contribution_streak (float, none_type): Current streak of cosecutive months where contributions were made. [optional]  # noqa: E501
+            contribution_months_contributed (float, none_type): Number of months in the timeframe with contributions. [optional]  # noqa: E501
+            contribution_total_months (float, none_type): Total months in timeframe. [optional]  # noqa: E501
             dividends ([NetDividend]): [optional]  # noqa: E501
-            dividend_income (float): Total dividends received over the timeframe. [optional]  # noqa: E501
-            monthly_dividends (float): Average dividends received per month over the timeframe. [optional]  # noqa: E501
-            bad_tickers ([str]): list of tickers which may not be supported or may not have accurate price data. [optional]  # noqa: E501
+            dividend_income (float, none_type): Total dividends received over the timeframe. [optional]  # noqa: E501
+            monthly_dividends (float, none_type): Average dividends received per month over the timeframe. [optional]  # noqa: E501
+            bad_tickers ([str, none_type]): list of tickers which may not be supported or may not have accurate price data. [optional]  # noqa: E501
             dividend_timeline ([MonthlyDividends]): [optional]  # noqa: E501
-            commissions (float): commissions incurred during the timeframe. [optional]  # noqa: E501
-            forex_fees (float): forex fees incurred during the timeframe. [optional]  # noqa: E501
-            fees (float): other fees incurred during the timeframe. [optional]  # noqa: E501
-            rate_of_return (float): The return rate over the timeframe. Annualized if timeframe is longer than 1 year. [optional]  # noqa: E501
+            commissions (float, none_type): commissions incurred during the timeframe. [optional]  # noqa: E501
+            forex_fees (float, none_type): forex fees incurred during the timeframe. [optional]  # noqa: E501
+            fees (float, none_type): other fees incurred during the timeframe. [optional]  # noqa: E501
+            rate_of_return (float, none_type): The return rate over the timeframe. Annualized if timeframe is longer than 1 year. [optional]  # noqa: E501
             return_rate_timeframe ([SubPeriodReturnRate]): [optional]  # noqa: E501
             detailed_mode (bool): Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes). [optional]  # noqa: E501
         """

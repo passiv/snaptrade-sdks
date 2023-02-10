@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **timezone** | **str** |  | [optional] 
 **start_time** | **str** |  | [optional] 
 **close_time** | **str** |  | [optional] 
-**suffix** | **str** |  | [optional] 
+**suffix** | **str, none_type** |  | [optional] 
 **allows_cryptocurrency_symbols** | **bool** |  | [optional] 
 **any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 

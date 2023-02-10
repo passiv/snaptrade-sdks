@@ -95,7 +95,7 @@ class UniversalSymbol(ModelNormal):
             'id': (str,),  # noqa: E501
             'symbol': (str,),  # noqa: E501
             'raw_symbol': (str,),  # noqa: E501
-            'description': (str,),  # noqa: E501
+            'description': (str, none_type,),  # noqa: E501
             'currency': (Currency,),  # noqa: E501
             'exchange': (Exchange,),  # noqa: E501
             'type': (SecurityType,),  # noqa: E501
@@ -162,7 +162,7 @@ class UniversalSymbol(ModelNormal):
             id (str): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
             raw_symbol (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             exchange (Exchange): [optional]  # noqa: E501
             type (SecurityType): [optional]  # noqa: E501
@@ -255,7 +255,7 @@ class UniversalSymbol(ModelNormal):
             id (str): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
             raw_symbol (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             exchange (Exchange): [optional]  # noqa: E501
             type (SecurityType): [optional]  # noqa: E501

@@ -94,7 +94,7 @@ class UnderlyingSymbol(ModelNormal):
         return {
             'id': (str,),  # noqa: E501
             'symbol': (str,),  # noqa: E501
-            'description': (str,),  # noqa: E501
+            'description': (str, none_type,),  # noqa: E501
             'currency': (Currency,),  # noqa: E501
             'exchange': (USExchange,),  # noqa: E501
             'type': (SecurityType,),  # noqa: E501
@@ -159,7 +159,7 @@ class UnderlyingSymbol(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (str): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             exchange (USExchange): [optional]  # noqa: E501
             type (SecurityType): [optional]  # noqa: E501
@@ -251,7 +251,7 @@ class UnderlyingSymbol(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             id (str): [optional]  # noqa: E501
             symbol (str): [optional]  # noqa: E501
-            description (str): [optional]  # noqa: E501
+            description (str, none_type): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
             exchange (USExchange): [optional]  # noqa: E501
             type (SecurityType): [optional]  # noqa: E501

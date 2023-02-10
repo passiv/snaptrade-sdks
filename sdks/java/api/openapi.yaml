@@ -3864,6 +3864,7 @@ components:
           type: string
         name:
           example: Registered Retirement Savings Account
+          nullable: true
           type: string
         number:
           example: Q6542138443
@@ -3907,6 +3908,7 @@ components:
           $ref: '#/components/schemas/Currency'
         cash:
           example: 300.71
+          nullable: true
           type: number
       type: object
     ConsumerKey:
@@ -3969,6 +3971,7 @@ components:
           type: string
         suffix:
           example: .TO
+          nullable: true
           type: string
       type: object
     USExchange:
@@ -4009,6 +4012,7 @@ components:
           type: string
         suffix:
           example: None
+          nullable: true
           type: string
         allows_cryptocurrency_symbols:
           example: false
@@ -4205,14 +4209,17 @@ components:
           description: Current streak of cosecutive months where contributions were
             made
           example: 5
+          nullable: true
           type: number
         contributionMonthsContributed:
           description: Number of months in the timeframe with contributions
           example: 10
+          nullable: true
           type: number
         contributionTotalMonths:
           description: Total months in timeframe
           example: 13
+          nullable: true
           type: number
         dividends:
           items:
@@ -4221,16 +4228,19 @@ components:
         dividendIncome:
           description: Total dividends received over the timeframe
           example: 135.97
+          nullable: true
           type: number
         monthlyDividends:
           description: Average dividends received per month over the timeframe
           example: 26.37
+          nullable: true
           type: number
         badTickers:
           description: list of tickers which may not be supported or may not have
             accurate price data
           items:
             example: MAW105
+            nullable: true
             type: string
           type: array
         dividendTimeline:
@@ -4240,19 +4250,23 @@ components:
         commissions:
           description: commissions incurred during the timeframe
           example: 3.26
+          nullable: true
           type: number
         forexFees:
           description: forex fees incurred during the timeframe
           example: 5.26
+          nullable: true
           type: number
         fees:
           description: other fees incurred during the timeframe
           example: 2.72
+          nullable: true
           type: number
         rateOfReturn:
           description: The return rate over the timeframe. Annualized if timeframe
             is longer than 1 year
           example: 0.082312367452
+          nullable: true
           type: number
         returnRateTimeframe:
           items:
@@ -4283,6 +4297,7 @@ components:
         rateOfReturn:
           description: The return rate for the given period
           example: 0.012312367452
+          nullable: true
           type: number
       type: object
     DividendAtDate:
@@ -4295,10 +4310,12 @@ components:
         symbol:
           description: The ticker of the symbol that the dividend came from
           example: AAPL
+          nullable: true
           type: string
         amount:
           description: The amount received from the dividend
           example: 6.82
+          nullable: true
           type: number
         currency:
           description: The currency of the amount
@@ -4468,13 +4485,16 @@ components:
           $ref: '#/components/schemas/PositionSymbol'
         units:
           example: 40
+          nullable: true
           type: number
         price:
           description: Last known market price for the symbol
           example: 113.15
+          nullable: true
           type: number
         open_pnl:
           example: 0.44
+          nullable: true
           type: number
         fractional_units:
           description: "Deprecated, use the units field for both fractional and integer\
@@ -4775,6 +4795,7 @@ components:
           type: boolean
         allows_fractional_units:
           example: true
+          nullable: true
           type: boolean
         allows_trading:
           example: true
@@ -4787,6 +4808,7 @@ components:
           type: boolean
         allows_trading_through_snaptrade_api:
           example: true
+          nullable: true
           type: boolean
         is_scraping_integration:
           example: true
@@ -4961,6 +4983,7 @@ components:
           type: string
         allows_fractional_units:
           example: true
+          nullable: true
           type: boolean
       type: object
     PositionSymbol:
@@ -5014,6 +5037,7 @@ components:
           $ref: '#/components/schemas/UniversalSymbol'
         local_id:
           example: "3291231"
+          nullable: true
           type: string
         is_quotable:
           example: true
@@ -5695,6 +5719,7 @@ components:
           type: string
         contributions:
           example: 524.74
+          nullable: true
           type: number
         currency:
           example: CAD
@@ -5741,6 +5766,7 @@ components:
           $ref: '#/components/schemas/UniversalSymbol'
         amount:
           example: 165.05
+          nullable: true
           type: number
         currency:
           example: USD
@@ -6880,6 +6906,7 @@ components:
         price:
           description: Last known market price for the symbol
           example: 24.81
+          nullable: true
           type: number
         units:
           example: 15
@@ -7008,6 +7035,7 @@ components:
           example: true
           type: boolean
         meta:
+          nullable: true
           type: object
       type: object
     TargetAssetList:
@@ -7594,6 +7622,7 @@ components:
           type: string
         description:
           example: Metaverse Global ETF
+          nullable: true
           type: string
         symbol:
           example: MVGP.U.TO
@@ -7639,6 +7668,7 @@ components:
         cash:
           description: Cash
           example: 1.11
+          nullable: true
           type: number
       type: object
     ManualTradeAndImpact:
@@ -7889,6 +7919,7 @@ components:
           description: "Stop Price. If stop loss or stop limit order, the price to\
             \ trigger the stop"
           example: 31.33
+          nullable: true
           type: number
         time_in_force:
           $ref: '#/components/schemas/TimeInForce'
@@ -7903,6 +7934,7 @@ components:
     Cash:
       description: Cash
       example: 1.11
+      nullable: true
       type: number
     OrderType:
       description: Order Type
@@ -7953,6 +7985,7 @@ components:
       description: "Stop Price. If stop loss or stop limit order, the price to trigger\
         \ the stop"
       example: 31.33
+      nullable: true
       type: number
     UniversalActivity:
       additionalProperties: true
@@ -8043,6 +8076,7 @@ components:
           $ref: '#/components/schemas/AccountSimple'
         amount:
           example: 263.82
+          nullable: true
           type: number
         currency:
           $ref: '#/components/schemas/Currency'
@@ -8072,6 +8106,7 @@ components:
           $ref: '#/components/schemas/OptionsSymbol'
         trade_date:
           example: 2022-01-06T05:00:00.000Z
+          nullable: true
           type: string
         type:
           enum:
@@ -8144,6 +8179,7 @@ components:
           type: string
         description:
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          nullable: true
           type: string
         currency:
           $ref: '#/components/schemas/Currency'
@@ -8227,6 +8263,7 @@ components:
           type: string
         description:
           example: SPDR S&P 500 ETF Trust
+          nullable: true
           type: string
         currency:
           $ref: '#/components/schemas/Currency'
@@ -8836,14 +8873,17 @@ components:
         strikePrice:
           example: 70
           format: int32
+          nullable: true
           type: integer
         callSymbolId:
           example: 42816081
           format: int32
+          nullable: true
           type: integer
         putSymbolId:
           example: 42816129
           format: int32
+          nullable: true
           type: integer
       type: object
     OptionChain_inner_chainPerRoot_inner:

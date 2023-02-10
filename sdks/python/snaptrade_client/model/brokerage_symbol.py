@@ -94,7 +94,7 @@ class BrokerageSymbol(ModelNormal):
             'symbol': (UniversalSymbol,),  # noqa: E501
             'brokerage_authorization': (BrokerageAuthorization,),  # noqa: E501
             'description': (str,),  # noqa: E501
-            'allows_fractional_units': (bool,),  # noqa: E501
+            'allows_fractional_units': (bool, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -155,7 +155,7 @@ class BrokerageSymbol(ModelNormal):
             symbol (UniversalSymbol): [optional]  # noqa: E501
             brokerage_authorization (BrokerageAuthorization): [optional]  # noqa: E501
             description (str): [optional]  # noqa: E501
-            allows_fractional_units (bool): [optional]  # noqa: E501
+            allows_fractional_units (bool, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -245,7 +245,7 @@ class BrokerageSymbol(ModelNormal):
             symbol (UniversalSymbol): [optional]  # noqa: E501
             brokerage_authorization (BrokerageAuthorization): [optional]  # noqa: E501
             description (str): [optional]  # noqa: E501
-            allows_fractional_units (bool): [optional]  # noqa: E501
+            allows_fractional_units (bool, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

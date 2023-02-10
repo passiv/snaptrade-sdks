@@ -91,7 +91,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             'id': (str,),  # noqa: E501
             'brokerage_authorization': (BrokerageAuthorization,),  # noqa: E501
             'portfolio_group': (str,),  # noqa: E501
-            'name': (str,),  # noqa: E501
+            'name': (str, none_type,),  # noqa: E501
             'number': (str,),  # noqa: E501
             'institution_name': (str,),  # noqa: E501
             'meta': ({str: (bool, dict, float, int, list, str, none_type)},),  # noqa: E501
@@ -156,7 +156,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             id (str): [optional]  # noqa: E501
             brokerage_authorization (BrokerageAuthorization): [optional]  # noqa: E501
             portfolio_group (str): [optional]  # noqa: E501
-            name (str): [optional]  # noqa: E501
+            name (str, none_type): [optional]  # noqa: E501
             number (str): [optional]  # noqa: E501
             institution_name (str): [optional]  # noqa: E501
             meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
@@ -248,7 +248,7 @@ class SnapTradeHoldingsAccount(ModelNormal):
             id (str): [optional]  # noqa: E501
             brokerage_authorization (BrokerageAuthorization): [optional]  # noqa: E501
             portfolio_group (str): [optional]  # noqa: E501
-            name (str): [optional]  # noqa: E501
+            name (str, none_type): [optional]  # noqa: E501
             number (str): [optional]  # noqa: E501
             institution_name (str): [optional]  # noqa: E501
             meta ({str: (bool, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501

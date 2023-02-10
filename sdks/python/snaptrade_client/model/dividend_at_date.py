@@ -82,8 +82,8 @@ class DividendAtDate(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'symbol': (str,),  # noqa: E501
-            'amount': (float,),  # noqa: E501
+            'symbol': (str, none_type,),  # noqa: E501
+            'amount': (float, none_type,),  # noqa: E501
             'currency': (str,),  # noqa: E501
         }
 
@@ -139,8 +139,8 @@ class DividendAtDate(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            symbol (str): The ticker of the symbol that the dividend came from. [optional]  # noqa: E501
-            amount (float): The amount received from the dividend. [optional]  # noqa: E501
+            symbol (str, none_type): The ticker of the symbol that the dividend came from. [optional]  # noqa: E501
+            amount (float, none_type): The amount received from the dividend. [optional]  # noqa: E501
             currency (str): The currency of the amount. [optional]  # noqa: E501
         """
 
@@ -227,8 +227,8 @@ class DividendAtDate(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            symbol (str): The ticker of the symbol that the dividend came from. [optional]  # noqa: E501
-            amount (float): The amount received from the dividend. [optional]  # noqa: E501
+            symbol (str, none_type): The ticker of the symbol that the dividend came from. [optional]  # noqa: E501
+            amount (float, none_type): The amount received from the dividend. [optional]  # noqa: E501
             currency (str): The currency of the amount. [optional]  # noqa: E501
         """
 

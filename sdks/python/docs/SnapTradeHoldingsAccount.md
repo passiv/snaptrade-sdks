@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] 
 **brokerage_authorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] 
 **portfolio_group** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **str, none_type** |  | [optional] 
 **number** | **str** |  | [optional] 
 **institution_name** | **str** |  | [optional] 
 **meta** | **{str: (bool, dict, float, int, list, str, none_type)}** |  | [optional] 

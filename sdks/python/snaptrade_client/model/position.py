@@ -89,9 +89,9 @@ class Position(ModelNormal):
         lazy_import()
         return {
             'symbol': (PositionSymbol,),  # noqa: E501
-            'units': (float,),  # noqa: E501
-            'price': (float,),  # noqa: E501
-            'open_pnl': (float,),  # noqa: E501
+            'units': (float, none_type,),  # noqa: E501
+            'price': (float, none_type,),  # noqa: E501
+            'open_pnl': (float, none_type,),  # noqa: E501
             'fractional_units': (float, none_type,),  # noqa: E501
             'average_purchase_price': (float,),  # noqa: E501
         }
@@ -152,9 +152,9 @@ class Position(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (PositionSymbol): [optional]  # noqa: E501
-            units (float): [optional]  # noqa: E501
-            price (float): Last known market price for the symbol. [optional]  # noqa: E501
-            open_pnl (float): [optional]  # noqa: E501
+            units (float, none_type): [optional]  # noqa: E501
+            price (float, none_type): Last known market price for the symbol. [optional]  # noqa: E501
+            open_pnl (float, none_type): [optional]  # noqa: E501
             fractional_units (float, none_type): Deprecated, use the units field for both fractional and integer units going forward. [optional]  # noqa: E501
             average_purchase_price (float): Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.. [optional]  # noqa: E501
         """
@@ -243,9 +243,9 @@ class Position(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (PositionSymbol): [optional]  # noqa: E501
-            units (float): [optional]  # noqa: E501
-            price (float): Last known market price for the symbol. [optional]  # noqa: E501
-            open_pnl (float): [optional]  # noqa: E501
+            units (float, none_type): [optional]  # noqa: E501
+            price (float, none_type): Last known market price for the symbol. [optional]  # noqa: E501
+            open_pnl (float, none_type): [optional]  # noqa: E501
             fractional_units (float, none_type): Deprecated, use the units field for both fractional and integer units going forward. [optional]  # noqa: E501
             average_purchase_price (float): Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.. [optional]  # noqa: E501
         """
