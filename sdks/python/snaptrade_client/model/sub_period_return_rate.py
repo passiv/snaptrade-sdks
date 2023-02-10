@@ -84,7 +84,7 @@ class SubPeriodReturnRate(ModelNormal):
         return {
             'period_start': (str,),  # noqa: E501
             'period_end': (str,),  # noqa: E501
-            'rate_of_return': (float,),  # noqa: E501
+            'rate_of_return': (float, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -141,7 +141,7 @@ class SubPeriodReturnRate(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             period_start (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
             period_end (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
-            rate_of_return (float): The return rate for the given period. [optional]  # noqa: E501
+            rate_of_return (float, none_type): The return rate for the given period. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -229,7 +229,7 @@ class SubPeriodReturnRate(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             period_start (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
             period_end (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
-            rate_of_return (float): The return rate for the given period. [optional]  # noqa: E501
+            rate_of_return (float, none_type): The return rate for the given period. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

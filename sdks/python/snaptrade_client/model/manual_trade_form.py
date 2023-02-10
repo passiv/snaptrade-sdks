@@ -96,7 +96,7 @@ class ManualTradeForm(ModelNormal):
             'action': (Action,),  # noqa: E501
             'order_type': (OrderType,),  # noqa: E501
             'price': (float,),  # noqa: E501
-            'stop': (float,),  # noqa: E501
+            'stop': (float, none_type,),  # noqa: E501
             'time_in_force': (TimeInForce,),  # noqa: E501
             'units': (float,),  # noqa: E501
             'universal_symbol_id': (str,),  # noqa: E501
@@ -163,7 +163,7 @@ class ManualTradeForm(ModelNormal):
             action (Action): [optional]  # noqa: E501
             order_type (OrderType): [optional]  # noqa: E501
             price (float): Trade Price if limit or stop limit order. [optional]  # noqa: E501
-            stop (float): Stop Price. If stop loss or stop limit order, the price to trigger the stop. [optional]  # noqa: E501
+            stop (float, none_type): Stop Price. If stop loss or stop limit order, the price to trigger the stop. [optional]  # noqa: E501
             time_in_force (TimeInForce): [optional]  # noqa: E501
             units (float): Trade Units. [optional]  # noqa: E501
             universal_symbol_id (str): [optional]  # noqa: E501
@@ -256,7 +256,7 @@ class ManualTradeForm(ModelNormal):
             action (Action): [optional]  # noqa: E501
             order_type (OrderType): [optional]  # noqa: E501
             price (float): Trade Price if limit or stop limit order. [optional]  # noqa: E501
-            stop (float): Stop Price. If stop loss or stop limit order, the price to trigger the stop. [optional]  # noqa: E501
+            stop (float, none_type): Stop Price. If stop loss or stop limit order, the price to trigger the stop. [optional]  # noqa: E501
             time_in_force (TimeInForce): [optional]  # noqa: E501
             units (float): Trade Units. [optional]  # noqa: E501
             universal_symbol_id (str): [optional]  # noqa: E501

@@ -27,6 +27,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.math.BigDecimal;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -614,9 +615,20 @@ public class UniversalActivity {
         Objects.equals(this.additionalProperties, universalActivity.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, account, amount, currency, description, fee, institution, optionType, price, settlementDate, symbol, optionSymbol, tradeDate, type, units, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -708,7 +720,7 @@ public class UniversalActivity {
       if ((jsonObj.get("settlement_date") != null && !jsonObj.get("settlement_date").isJsonNull()) && !jsonObj.get("settlement_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `settlement_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("settlement_date").toString()));
       }
-      if ((jsonObj.get("trade_date") != null && !jsonObj.get("trade_date").isJsonNull()) && !jsonObj.get("trade_date").isJsonPrimitive()) {
+      if (!jsonObj.get("trade_date").isJsonNull() && (jsonObj.get("trade_date") != null && !jsonObj.get("trade_date").isJsonNull()) && !jsonObj.get("trade_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `trade_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trade_date").toString()));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {

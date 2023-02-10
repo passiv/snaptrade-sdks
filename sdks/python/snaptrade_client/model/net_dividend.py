@@ -89,7 +89,7 @@ class NetDividend(ModelNormal):
         lazy_import()
         return {
             'symbol': (UniversalSymbol,),  # noqa: E501
-            'amount': (float,),  # noqa: E501
+            'amount': (float, none_type,),  # noqa: E501
             'currency': (str,),  # noqa: E501
         }
 
@@ -146,7 +146,7 @@ class NetDividend(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (UniversalSymbol): [optional]  # noqa: E501
-            amount (float): [optional]  # noqa: E501
+            amount (float, none_type): [optional]  # noqa: E501
             currency (str): [optional]  # noqa: E501
         """
 
@@ -234,7 +234,7 @@ class NetDividend(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (UniversalSymbol): [optional]  # noqa: E501
-            amount (float): [optional]  # noqa: E501
+            amount (float, none_type): [optional]  # noqa: E501
             currency (str): [optional]  # noqa: E501
         """
 

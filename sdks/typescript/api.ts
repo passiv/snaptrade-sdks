@@ -339,7 +339,7 @@ export interface Balance {
      * @type {number}
      * @memberof Balance
      */
-    'cash'?: number;
+    'cash'?: number | null;
 }
 /**
  * 
@@ -408,7 +408,7 @@ export interface Brokerage {
      * @type {boolean}
      * @memberof Brokerage
      */
-    'allows_fractional_units'?: boolean;
+    'allows_fractional_units'?: boolean | null;
     /**
      * 
      * @type {boolean}
@@ -432,7 +432,7 @@ export interface Brokerage {
      * @type {boolean}
      * @memberof Brokerage
      */
-    'allows_trading_through_snaptrade_api'?: boolean;
+    'allows_trading_through_snaptrade_api'?: boolean | null;
     /**
      * 
      * @type {boolean}
@@ -657,7 +657,7 @@ export interface BrokerageSymbol {
      * @type {boolean}
      * @memberof BrokerageSymbol
      */
-    'allows_fractional_units'?: boolean;
+    'allows_fractional_units'?: boolean | null;
 }
 /**
  * Type of brokerage
@@ -809,13 +809,13 @@ export interface DividendAtDate {
      * @type {string}
      * @memberof DividendAtDate
      */
-    'symbol'?: string;
+    'symbol'?: string | null;
     /**
      * The amount received from the dividend
      * @type {number}
      * @memberof DividendAtDate
      */
-    'amount'?: number;
+    'amount'?: number | null;
     /**
      * The currency of the amount
      * @type {string}
@@ -924,7 +924,7 @@ export interface Exchange {
      * @type {string}
      * @memberof Exchange
      */
-    'suffix'?: string;
+    'suffix'?: string | null;
 }
 /**
  * The exchange rate of a pair of currencies
@@ -1111,7 +1111,7 @@ export interface ManualTradeBalance {
      * @type {number}
      * @memberof ManualTradeBalance
      */
-    'cash'?: number;
+    'cash'?: number | null;
 }
 /**
  * Manual Trade Form
@@ -1148,7 +1148,7 @@ export interface ManualTradeForm {
      * @type {number}
      * @memberof ManualTradeForm
      */
-    'stop'?: number;
+    'stop'?: number | null;
     /**
      * 
      * @type {TimeInForce}
@@ -1205,7 +1205,7 @@ export interface ManualTradeSymbol {
      * @type {string}
      * @memberof ManualTradeSymbol
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {string}
@@ -1495,7 +1495,7 @@ export interface NetContributions {
      * @type {number}
      * @memberof NetContributions
      */
-    'contributions'?: number;
+    'contributions'?: number | null;
     /**
      * 
      * @type {string}
@@ -1522,7 +1522,7 @@ export interface NetDividend {
      * @type {number}
      * @memberof NetDividend
      */
-    'amount'?: number;
+    'amount'?: number | null;
     /**
      * 
      * @type {string}
@@ -1609,19 +1609,19 @@ export interface OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
      * @type {number}
      * @memberof OptionChainInnerChainPerRootInnerChainPerStrikePriceInner
      */
-    'strikePrice'?: number;
+    'strikePrice'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof OptionChainInnerChainPerRootInnerChainPerStrikePriceInner
      */
-    'callSymbolId'?: number;
+    'callSymbolId'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof OptionChainInnerChainPerRootInnerChainPerStrikePriceInner
      */
-    'putSymbolId'?: number;
+    'putSymbolId'?: number | null;
 }
 /**
  * Option Leg
@@ -2141,19 +2141,19 @@ export interface PerformanceCustom {
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'contributionStreak'?: number;
+    'contributionStreak'?: number | null;
     /**
      * Number of months in the timeframe with contributions
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'contributionMonthsContributed'?: number;
+    'contributionMonthsContributed'?: number | null;
     /**
      * Total months in timeframe
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'contributionTotalMonths'?: number;
+    'contributionTotalMonths'?: number | null;
     /**
      * 
      * @type {Array<NetDividend>}
@@ -2165,13 +2165,13 @@ export interface PerformanceCustom {
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'dividendIncome'?: number;
+    'dividendIncome'?: number | null;
     /**
      * Average dividends received per month over the timeframe
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'monthlyDividends'?: number;
+    'monthlyDividends'?: number | null;
     /**
      * list of tickers which may not be supported or may not have accurate price data
      * @type {Array<string>}
@@ -2189,25 +2189,25 @@ export interface PerformanceCustom {
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'commissions'?: number;
+    'commissions'?: number | null;
     /**
      * forex fees incurred during the timeframe
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'forexFees'?: number;
+    'forexFees'?: number | null;
     /**
      * other fees incurred during the timeframe
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'fees'?: number;
+    'fees'?: number | null;
     /**
      * The return rate over the timeframe. Annualized if timeframe is longer than 1 year
      * @type {number}
      * @memberof PerformanceCustom
      */
-    'rateOfReturn'?: number;
+    'rateOfReturn'?: number | null;
     /**
      * 
      * @type {Array<SubPeriodReturnRate>}
@@ -2336,7 +2336,7 @@ export interface PortfolioGroupPosition {
      * @type {number}
      * @memberof PortfolioGroupPosition
      */
-    'price'?: number;
+    'price'?: number | null;
     /**
      * 
      * @type {number}
@@ -2402,19 +2402,19 @@ export interface Position {
      * @type {number}
      * @memberof Position
      */
-    'units'?: number;
+    'units'?: number | null;
     /**
      * Last known market price for the symbol
      * @type {number}
      * @memberof Position
      */
-    'price'?: number;
+    'price'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof Position
      */
-    'open_pnl'?: number;
+    'open_pnl'?: number | null;
     /**
      * Deprecated, use the units field for both fractional and integer units going forward
      * @type {number}
@@ -2459,7 +2459,7 @@ export interface PositionSymbol {
      * @type {string}
      * @memberof PositionSymbol
      */
-    'local_id'?: string;
+    'local_id'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -2579,7 +2579,7 @@ export interface SnapTradeHoldingsAccount {
      * @type {string}
      * @memberof SnapTradeHoldingsAccount
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
      * 
      * @type {string}
@@ -3399,7 +3399,7 @@ export interface SubPeriodReturnRate {
      * @type {number}
      * @memberof SubPeriodReturnRate
      */
-    'rateOfReturn'?: number;
+    'rateOfReturn'?: number | null;
 }
 /**
  * Symbol
@@ -3539,7 +3539,7 @@ export interface TargetAsset {
      * @type {object}
      * @memberof TargetAsset
      */
-    'meta'?: object;
+    'meta'?: object | null;
 }
 /**
  * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
@@ -3812,7 +3812,7 @@ export interface USExchange {
      * @type {string}
      * @memberof USExchange
      */
-    'suffix'?: string;
+    'suffix'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -3845,7 +3845,7 @@ export interface UnderlyingSymbol {
      * @type {string}
      * @memberof UnderlyingSymbol
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {Currency}
@@ -3896,7 +3896,7 @@ export interface UniversalActivity {
      * @type {number}
      * @memberof UniversalActivity
      */
-    'amount'?: number;
+    'amount'?: number | null;
     /**
      * 
      * @type {Currency}
@@ -3956,7 +3956,7 @@ export interface UniversalActivity {
      * @type {string}
      * @memberof UniversalActivity
      */
-    'trade_date'?: string;
+    'trade_date'?: string | null;
     /**
      * 
      * @type {string}
@@ -4023,7 +4023,7 @@ export interface UniversalSymbol {
      * @type {string}
      * @memberof UniversalSymbol
      */
-    'description'?: string;
+    'description'?: string | null;
     /**
      * 
      * @type {Currency}

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] 
 **symbol** | **str** |  | [optional] 
 **raw_symbol** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
+**description** | **str, none_type** |  | [optional] 
 **currency** | [**Currency**](Currency.md) |  | [optional] 
 **exchange** | [**Exchange**](Exchange.md) |  | [optional] 
 **type** | [**SecurityType**](SecurityType.md) |  | [optional] 

@@ -92,7 +92,7 @@ class ManualTradeBalance(ModelNormal):
         return {
             'account': (Account,),  # noqa: E501
             'currency': (Currency,),  # noqa: E501
-            'cash': (float,),  # noqa: E501
+            'cash': (float, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -149,7 +149,7 @@ class ManualTradeBalance(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             account (Account): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
-            cash (float): Cash. [optional]  # noqa: E501
+            cash (float, none_type): Cash. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -237,7 +237,7 @@ class ManualTradeBalance(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             account (Account): [optional]  # noqa: E501
             currency (Currency): [optional]  # noqa: E501
-            cash (float): Cash. [optional]  # noqa: E501
+            cash (float, none_type): Cash. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

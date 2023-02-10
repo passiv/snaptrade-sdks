@@ -89,7 +89,7 @@ class Exchange(ModelNormal):
             'timezone': (str,),  # noqa: E501
             'start_time': (str,),  # noqa: E501
             'close_time': (str,),  # noqa: E501
-            'suffix': (str,),  # noqa: E501
+            'suffix': (str, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -156,7 +156,7 @@ class Exchange(ModelNormal):
             timezone (str): [optional]  # noqa: E501
             start_time (str): [optional]  # noqa: E501
             close_time (str): [optional]  # noqa: E501
-            suffix (str): [optional]  # noqa: E501
+            suffix (str, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -249,7 +249,7 @@ class Exchange(ModelNormal):
             timezone (str): [optional]  # noqa: E501
             start_time (str): [optional]  # noqa: E501
             close_time (str): [optional]  # noqa: E501
-            suffix (str): [optional]  # noqa: E501
+            suffix (str, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

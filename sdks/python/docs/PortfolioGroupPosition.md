@@ -6,7 +6,7 @@ Details of a security held
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**price** | **float** | Last known market price for the symbol | [optional] 
+**price** | **float, none_type** | Last known market price for the symbol | [optional] 
 **units** | **int** |  | [optional] 
 **any string name** | **bool, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 

@@ -89,7 +89,7 @@ class Balance(ModelNormal):
         lazy_import()
         return {
             'currency': (Currency,),  # noqa: E501
-            'cash': (float,),  # noqa: E501
+            'cash': (float, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -144,7 +144,7 @@ class Balance(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             currency (Currency): [optional]  # noqa: E501
-            cash (float): [optional]  # noqa: E501
+            cash (float, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -231,7 +231,7 @@ class Balance(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             currency (Currency): [optional]  # noqa: E501
-            cash (float): [optional]  # noqa: E501
+            cash (float, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

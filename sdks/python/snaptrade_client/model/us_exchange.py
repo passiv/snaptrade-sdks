@@ -89,7 +89,7 @@ class USExchange(ModelNormal):
             'timezone': (str,),  # noqa: E501
             'start_time': (str,),  # noqa: E501
             'close_time': (str,),  # noqa: E501
-            'suffix': (str,),  # noqa: E501
+            'suffix': (str, none_type,),  # noqa: E501
             'allows_cryptocurrency_symbols': (bool,),  # noqa: E501
         }
 
@@ -158,7 +158,7 @@ class USExchange(ModelNormal):
             timezone (str): [optional]  # noqa: E501
             start_time (str): [optional]  # noqa: E501
             close_time (str): [optional]  # noqa: E501
-            suffix (str): [optional]  # noqa: E501
+            suffix (str, none_type): [optional]  # noqa: E501
             allows_cryptocurrency_symbols (bool): [optional]  # noqa: E501
         """
 
@@ -252,7 +252,7 @@ class USExchange(ModelNormal):
             timezone (str): [optional]  # noqa: E501
             start_time (str): [optional]  # noqa: E501
             close_time (str): [optional]  # noqa: E501
-            suffix (str): [optional]  # noqa: E501
+            suffix (str, none_type): [optional]  # noqa: E501
             allows_cryptocurrency_symbols (bool): [optional]  # noqa: E501
         """
 

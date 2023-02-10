@@ -83,7 +83,7 @@ class NetContributions(ModelNormal):
         """
         return {
             'date': (str,),  # noqa: E501
-            'contributions': (float,),  # noqa: E501
+            'contributions': (float, none_type,),  # noqa: E501
             'currency': (str,),  # noqa: E501
         }
 
@@ -140,7 +140,7 @@ class NetContributions(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             date (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
-            contributions (float): [optional]  # noqa: E501
+            contributions (float, none_type): [optional]  # noqa: E501
             currency (str): [optional]  # noqa: E501
         """
 
@@ -228,7 +228,7 @@ class NetContributions(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             date (str): Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). [optional]  # noqa: E501
-            contributions (float): [optional]  # noqa: E501
+            contributions (float, none_type): [optional]  # noqa: E501
             currency (str): [optional]  # noqa: E501
         """
 

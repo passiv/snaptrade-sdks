@@ -89,7 +89,7 @@ class PortfolioGroupPosition(ModelNormal):
         lazy_import()
         return {
             'symbol': (UniversalSymbol,),  # noqa: E501
-            'price': (float,),  # noqa: E501
+            'price': (float, none_type,),  # noqa: E501
             'units': (int,),  # noqa: E501
         }
 
@@ -146,7 +146,7 @@ class PortfolioGroupPosition(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (UniversalSymbol): [optional]  # noqa: E501
-            price (float): Last known market price for the symbol. [optional]  # noqa: E501
+            price (float, none_type): Last known market price for the symbol. [optional]  # noqa: E501
             units (int): [optional]  # noqa: E501
         """
 
@@ -234,7 +234,7 @@ class PortfolioGroupPosition(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             symbol (UniversalSymbol): [optional]  # noqa: E501
-            price (float): Last known market price for the symbol. [optional]  # noqa: E501
+            price (float, none_type): Last known market price for the symbol. [optional]  # noqa: E501
             units (int): [optional]  # noqa: E501
         """
 
