@@ -3479,6 +3479,7 @@ components:
         name:
           type: string
           example: Registered Retirement Savings Account
+          nullable: true
         number:
           type: string
           example: Q6542138443
@@ -3510,6 +3511,7 @@ components:
         cash:
           type: number
           example: 300.71
+          nullable: true
     ConsumerKey:
       description: Shared key used to sign requests
       type: string
@@ -3555,6 +3557,7 @@ components:
         suffix:
           type: string
           example: .TO
+          nullable: true
     USExchange:
       description: US Stock Exchange
       type: object
@@ -3582,6 +3585,7 @@ components:
         suffix:
           type: string
           example: None
+          nullable: true
         allows_cryptocurrency_symbols:
           type: boolean
           example: false
@@ -3651,14 +3655,17 @@ components:
           type: number
           example: 5
           description: Current streak of cosecutive months where contributions were made
+          nullable: true
         contributionMonthsContributed:
           type: number
           example: 10
           description: Number of months in the timeframe with contributions
+          nullable: true
         contributionTotalMonths:
           type: number
           example: 13
           description: Total months in timeframe
+          nullable: true
         dividends:
           type: array
           items:
@@ -3667,15 +3674,18 @@ components:
           type: number
           description: Total dividends received over the timeframe
           example: 135.97
+          nullable: true
         monthlyDividends:
           type: number
           description: Average dividends received per month over the timeframe
           example: 26.37
+          nullable: true
         badTickers:
           type: array
           items:
             type: string
             example: MAW105
+            nullable: true
           description:
             list of tickers which may not be supported or may not have accurate
             price data
@@ -3687,20 +3697,24 @@ components:
           type: number
           example: 3.26
           description: commissions incurred during the timeframe
+          nullable: true
         forexFees:
           type: number
           example: 5.26
           description: forex fees incurred during the timeframe
+          nullable: true
         fees:
           type: number
           example: 2.72
           description: other fees incurred during the timeframe
+          nullable: true
         rateOfReturn:
           type: number
           example: 0.082312367452
           description:
             The return rate over the timeframe. Annualized if timeframe is
             longer than 1 year
+          nullable: true
         returnRateTimeframe:
           type: array
           items:
@@ -3721,6 +3735,7 @@ components:
           type: number
           example: 0.012312367452
           description: The return rate for the given period
+          nullable: true
     DividendAtDate:
       type: object
       properties:
@@ -3728,10 +3743,12 @@ components:
           type: string
           example: AAPL
           description: The ticker of the symbol that the dividend came from
+          nullable: true
         amount:
           type: number
           example: 6.82
           description: The amount received from the dividend
+          nullable: true
         currency:
           type: string
           example: CAD
@@ -3802,13 +3819,16 @@ components:
         units:
           type: number
           example: 40
+          nullable: true
         price:
           type: number
           example: 113.15
           description: Last known market price for the symbol
+          nullable: true
         open_pnl:
           type: number
           example: 0.44
+          nullable: true
         fractional_units:
           description:
             Deprecated, use the units field for both fractional and integer
@@ -4058,6 +4078,7 @@ components:
         allows_fractional_units:
           type: boolean
           example: true
+          nullable: true
         allows_trading:
           type: boolean
           example: true
@@ -4070,6 +4091,7 @@ components:
         allows_trading_through_snaptrade_api:
           type: boolean
           example: true
+          nullable: true
         is_scraping_integration:
           type: boolean
           example: true
@@ -4131,6 +4153,7 @@ components:
         allows_fractional_units:
           type: boolean
           example: true
+          nullable: true
     PositionSymbol:
       description: Symbol returned in position object
       type: object
@@ -4145,6 +4168,7 @@ components:
         local_id:
           type: string
           example: "3291231"
+          nullable: true
         is_quotable:
           type: boolean
           example: true
@@ -4196,14 +4220,17 @@ components:
                         type: integer
                         format: int32
                         example: 70
+                        nullable: true
                       callSymbolId:
                         type: integer
                         format: int32
                         example: 42816081
+                        nullable: true
                       putSymbolId:
                         type: integer
                         format: int32
                         example: 42816129
+                        nullable: true
                 multiplier:
                   type: integer
                   format: int32
@@ -4323,6 +4350,7 @@ components:
         contributions:
           type: number
           example: 524.74
+          nullable: true
         currency:
           type: string
           example: CAD
@@ -4335,6 +4363,7 @@ components:
         amount:
           type: number
           example: 165.05
+          nullable: true
         currency:
           type: string
           example: USD
@@ -4417,6 +4446,7 @@ components:
           type: number
           example: 24.81
           description: Last known market price for the symbol
+          nullable: true
         units:
           type: integer
           example: 15
@@ -4485,6 +4515,7 @@ components:
           example: true
         meta:
           type: object
+          nullable: true
     TargetAssetList:
       description: Target percentage of a certain asset
       type: array
@@ -4617,6 +4648,7 @@ components:
         description:
           type: string
           example: Metaverse Global ETF
+          nullable: true
         symbol:
           type: string
           example: MVGP.U.TO
@@ -4687,6 +4719,7 @@ components:
       description: Cash
       type: number
       example: 1.11
+      nullable: true
     OrderType:
       description: Order Type
       type: string
@@ -4734,6 +4767,7 @@ components:
         the stop
       type: number
       example: 31.33
+      nullable: true
     UniversalActivity:
       description: A transaction or activity from an institution
       type: object
@@ -4746,6 +4780,7 @@ components:
         amount:
           type: number
           example: 263.82
+          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
         description:
@@ -4775,6 +4810,7 @@ components:
         trade_date:
           type: string
           example: 2022-01-06T05:00:00Z
+          nullable: true
         type:
           type: string
           enum:
@@ -4815,6 +4851,7 @@ components:
         description:
           type: string
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
         exchange:
@@ -4863,6 +4900,7 @@ components:
         description:
           type: string
           example: SPDR S&P 500 ETF Trust
+          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
         exchange:
