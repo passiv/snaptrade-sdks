@@ -4471,7 +4471,7 @@ components:
         Date used to specify timeframe for a reporting call (in YYYY-MM-DD
         format)
       type: string
-      example: 2022-01-24
+      example: "2022-01-24"
     ReportingFrequency:
       description: Optional frequency for the rate of return chart (defaults to
         monthly). Possible values are weekly, monthly, quarterly, yearly.
