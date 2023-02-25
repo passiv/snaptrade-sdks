@@ -12,7 +12,7 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths. import get  # noqa: E501
+from snaptrade_client.paths.root import get  # noqa: E501
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin

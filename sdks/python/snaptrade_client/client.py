@@ -24,7 +24,7 @@ from snaptrade_client.apis.tags.trading_api import TradingApi
 from snaptrade_client.apis.tags.transactions_and_reporting_api import TransactionsAndReportingApi
 
 
-class Newscatcher:
+class SnapTrade:
 
     def __init__(self, configuration: Configuration = None, **kwargs):
         if (len(kwargs) > 0):
@@ -32,14 +32,14 @@ class Newscatcher:
         if (configuration is None):
             raise Exception("configuration is required")
         api_client = ApiClient(configuration)
-        self.API Disclaimer = APIDisclaimerApi(api_client)
-        self.API Status = APIStatusApi(api_client)
-        self.Account Information = AccountInformationApi(api_client)
-        self.Authentication = AuthenticationApi(api_client)
-        self.Connections = ConnectionsApi(api_client)
-        self.Error Logs = ErrorLogsApi(api_client)
-        self.Options = OptionsApi(api_client)
-        self.Portfolio Management = PortfolioManagementApi(api_client)
-        self.Reference Data = ReferenceDataApi(api_client)
-        self.Trading = TradingApi(api_client)
-        self.Transactions And Reporting = TransactionsAndReportingApi(api_client)
+        self.api_disclaimer = APIDisclaimerApi(api_client)
+        self.api_status = APIStatusApi(api_client)
+        self.account_information = AccountInformationApi(api_client)
+        self.authentication = AuthenticationApi(api_client)
+        self.connections = ConnectionsApi(api_client)
+        self.error_logs = ErrorLogsApi(api_client)
+        self.options = OptionsApi(api_client)
+        self.portfolio_management = PortfolioManagementApi(api_client)
+        self.reference_data = ReferenceDataApi(api_client)
+        self.trading = TradingApi(api_client)
+        self.transactions_and_reporting = TransactionsAndReportingApi(api_client)
