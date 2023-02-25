@@ -1,0 +1,9 @@
+from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id.get import ApiForget
+from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id.patch import ApiForpatch
+
+
+class PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeId(
+    ApiForget,
+    ApiForpatch,
+):
+    pass

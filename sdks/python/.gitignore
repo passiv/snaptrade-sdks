@@ -33,6 +33,7 @@ var/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+dev-requirements.txt.log
 
 # Unit test / coverage reports
 htmlcov/
@@ -64,4 +65,6 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# PyCharm files
 .idea
