@@ -66,7 +66,6 @@ generators:
       repoId: snaptrade-sdks/tree/master/sdks/python
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
-    generator: python-prior
   typescript:
     files:
       tsconfig.mustache:
