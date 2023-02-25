@@ -23,11 +23,9 @@ class TestPortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceO
     PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrders unit test stubs
         Place orders for the CalculatedTrades in series  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = post.ApiForpost(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

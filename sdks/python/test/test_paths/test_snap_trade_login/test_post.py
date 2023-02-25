@@ -23,11 +23,9 @@ class TestSnapTradeLogin(ApiTestMixin, unittest.TestCase):
     SnapTradeLogin unit test stubs
         Generate a redirect URI to securely login a user to the SnapTrade Connection Portal  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = post.ApiForpost(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

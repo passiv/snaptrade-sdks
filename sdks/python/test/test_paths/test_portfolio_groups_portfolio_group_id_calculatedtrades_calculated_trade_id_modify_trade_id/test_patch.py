@@ -23,11 +23,9 @@ class TestPortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModify
     PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeId unit test stubs
         Modify units of a trade before it is placed  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = patch.ApiForpatch(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

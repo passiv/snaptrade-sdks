@@ -19,7 +19,7 @@ from snaptrade_client import configuration
 
 class TestPrice(unittest.TestCase):
     """Price unit test stubs"""
-    _configuration = configuration.Configuration()
+    pass
 
 
 if __name__ == '__main__':

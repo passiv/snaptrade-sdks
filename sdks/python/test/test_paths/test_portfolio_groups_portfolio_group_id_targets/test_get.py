@@ -23,11 +23,9 @@ class TestPortfolioGroupsPortfolioGroupIdTargets(ApiTestMixin, unittest.TestCase
     PortfolioGroupsPortfolioGroupIdTargets unit test stubs
         Get all target assets under the specified PortfolioGroup.  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = get.ApiForget(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

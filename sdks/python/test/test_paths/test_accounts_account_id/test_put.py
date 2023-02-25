@@ -23,11 +23,9 @@ class TestAccountsAccountId(ApiTestMixin, unittest.TestCase):
     AccountsAccountId unit test stubs
         Update details of an investment account  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = put.ApiForput(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

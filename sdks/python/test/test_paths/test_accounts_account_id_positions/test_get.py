@@ -23,11 +23,9 @@ class TestAccountsAccountIdPositions(ApiTestMixin, unittest.TestCase):
     AccountsAccountIdPositions unit test stubs
         Get all positions of an investment account  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = get.ApiForget(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

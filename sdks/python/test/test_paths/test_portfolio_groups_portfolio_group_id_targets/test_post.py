@@ -23,11 +23,9 @@ class TestPortfolioGroupsPortfolioGroupIdTargets(ApiTestMixin, unittest.TestCase
     PortfolioGroupsPortfolioGroupIdTargets unit test stubs
         Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = post.ApiForpost(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

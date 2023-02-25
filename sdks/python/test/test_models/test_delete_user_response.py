@@ -19,7 +19,7 @@ from snaptrade_client import configuration
 
 class TestDeleteUserResponse(unittest.TestCase):
     """DeleteUserResponse unit test stubs"""
-    _configuration = configuration.Configuration()
+    pass
 
 
 if __name__ == '__main__':

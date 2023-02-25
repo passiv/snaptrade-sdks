@@ -19,7 +19,7 @@ from snaptrade_client import configuration
 
 class TestReportingFrequency(unittest.TestCase):
     """ReportingFrequency unit test stubs"""
-    _configuration = configuration.Configuration()
+    pass
 
 
 if __name__ == '__main__':

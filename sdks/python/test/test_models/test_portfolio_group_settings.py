@@ -19,7 +19,7 @@ from snaptrade_client import configuration
 
 class TestPortfolioGroupSettings(unittest.TestCase):
     """PortfolioGroupSettings unit test stubs"""
-    _configuration = configuration.Configuration()
+    pass
 
 
 if __name__ == '__main__':

@@ -23,11 +23,9 @@ class TestSnapTradeListUserErrors(ApiTestMixin, unittest.TestCase):
     SnapTradeListUserErrors unit test stubs
         Retrieve error logs on behalf of your SnapTrade users  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = get.ApiForget(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

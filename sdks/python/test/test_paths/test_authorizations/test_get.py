@@ -23,11 +23,9 @@ class TestAuthorizations(ApiTestMixin, unittest.TestCase):
     Authorizations unit test stubs
         List all brokerage authorizations for the user  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = get.ApiForget(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

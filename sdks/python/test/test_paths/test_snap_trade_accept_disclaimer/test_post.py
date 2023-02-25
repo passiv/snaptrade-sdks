@@ -23,11 +23,9 @@ class TestSnapTradeAcceptDisclaimer(ApiTestMixin, unittest.TestCase):
     SnapTradeAcceptDisclaimer unit test stubs
         Accept or Reject SnapTrade disclaimer agreement  # noqa: E501
     """
-    _configuration = configuration.Configuration()
 
     def setUp(self):
-        used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = post.ApiForpost(api_client=used_api_client)  # noqa: E501
+        pass
 
     def tearDown(self):
         pass

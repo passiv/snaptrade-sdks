@@ -19,7 +19,7 @@ from snaptrade_client import configuration
 
 class TestPerformanceCustom(unittest.TestCase):
     """PerformanceCustom unit test stubs"""
-    _configuration = configuration.Configuration()
+    pass
 
 
 if __name__ == '__main__':
