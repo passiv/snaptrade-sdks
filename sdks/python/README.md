@@ -118,7 +118,6 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**list_option_holdings**](docs/apis/tags/OptionsApi.md#list_option_holdings) | **get** /accounts/{accountId}/options | Get the options holdings in the account
 *OptionsApi* | [**place_option_strategy**](docs/apis/tags/OptionsApi.md#place_option_strategy) | **post** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 *PortfolioManagementApi* | [**add_portfolio_excluded_asset**](docs/apis/tags/PortfolioManagementApi.md#add_portfolio_excluded_asset) | **post** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
-*PortfolioManagementApi* | [**call_list**](docs/apis/tags/PortfolioManagementApi.md#call_list) | **get** /portfolioGroups | List all portfolio groups
 *PortfolioManagementApi* | [**create**](docs/apis/tags/PortfolioManagementApi.md#create) | **post** /portfolioGroups | Create new portfolio group
 *PortfolioManagementApi* | [**create_asset_class**](docs/apis/tags/PortfolioManagementApi.md#create_asset_class) | **post** /modelAssetClass | Create a new model asset class
 *PortfolioManagementApi* | [**create_model_portfolio**](docs/apis/tags/PortfolioManagementApi.md#create_model_portfolio) | **post** /modelPortfolio | Creates a new model portfolio
@@ -139,6 +138,7 @@ Class | Method | HTTP request | Description
 *PortfolioManagementApi* | [**get_portfolio_targets**](docs/apis/tags/PortfolioManagementApi.md#get_portfolio_targets) | **get** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
 *PortfolioManagementApi* | [**get_portoflio_excluded_assets**](docs/apis/tags/PortfolioManagementApi.md#get_portoflio_excluded_assets) | **get** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group\\
 *PortfolioManagementApi* | [**import_model_portfolio**](docs/apis/tags/PortfolioManagementApi.md#import_model_portfolio) | **post** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group
+*PortfolioManagementApi* | [**list**](docs/apis/tags/PortfolioManagementApi.md#list) | **get** /portfolioGroups | List all portfolio groups
 *PortfolioManagementApi* | [**list_asset_classes**](docs/apis/tags/PortfolioManagementApi.md#list_asset_classes) | **get** /modelAssetClass | List of model asset class
 *PortfolioManagementApi* | [**list_calculated_trades**](docs/apis/tags/PortfolioManagementApi.md#list_calculated_trades) | **get** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group
 *PortfolioManagementApi* | [**list_model_portfolio**](docs/apis/tags/PortfolioManagementApi.md#list_model_portfolio) | **get** /modelPortfolio | List of model portfolio
