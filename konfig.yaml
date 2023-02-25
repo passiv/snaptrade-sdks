@@ -54,6 +54,7 @@ generators:
     version: 3.0.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
+    clientName: SnapTrade
     test:
       script:
         - >-
@@ -76,6 +77,7 @@ generators:
         destinationFilename: common.ts
     version: 3.0.0
     outputDirectory: sdks/typescript
+    clientName: Snaptrade
     readmeSnippet: snippets/typescript.ts
     git:
       host: github.com
