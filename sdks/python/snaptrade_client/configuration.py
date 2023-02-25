@@ -105,6 +105,8 @@ conf = snaptrade_client.Configuration(
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
+                 consumer_key=None,
+                 client_id=None,
                  disabled_client_side_validations="",
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
@@ -117,6 +119,11 @@ conf = snaptrade_client.Configuration(
         self.server_index = 0 if server_index is None and host is None else server_index
         self.server_operation_index = server_operation_index or {}
         """Default server index
+        """
+        if consumer_key is None:
+            raise Exception("consumer_key is required")
+        self.consumer_key = consumer_key
+        """Client State
         """
         self.server_variables = server_variables or {}
         self.server_operation_variables = server_operation_variables or {}
@@ -132,6 +139,9 @@ conf = snaptrade_client.Configuration(
                 self.api_key = {'PartnerClientId': api_key}
             else:
                 self.api_key = api_key
+        if client_id is None:
+            raise Exception("client_id is required")
+        self.api_key['PartnerClientId'] = client_id
         """dict to store API key(s)
         """
         self.api_key_prefix = {}

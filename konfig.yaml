@@ -55,6 +55,10 @@ generators:
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     clientName: SnapTrade
+    clientState:
+      - consumer_key
+    apiKeyAlias:
+      PartnerClientId: client_id
     test:
       script:
         - >-
