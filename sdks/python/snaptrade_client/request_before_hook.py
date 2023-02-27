@@ -2,20 +2,17 @@ import typing
 import time
 from urllib3._collections import HTTPHeaderDict
 
-from snaptrade_client.api_client import ApiClient
+from snaptrade_client.configuration import Configuration
 
 def request_before_hook(
         resource_path: str,
         method: str,
-        api_client: ApiClient,
+        configuration: Configuration,
         headers: typing.Optional[HTTPHeaderDict] = None,
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
 ) -> str:
-    auth_settings['PartnerTimestamp'] = {
-        'type': 'api_key',
-        'in': 'query',
-        'key': 'timestamp',
-        'value': str(time.time()),
-    }
+    if auth_settings is None:
+        return
+    configuration.api_key['PartnerTimestamp'] = int(time.time())

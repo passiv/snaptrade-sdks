@@ -5,13 +5,14 @@ import json
 import typing
 from urllib3._collections import HTTPHeaderDict
 
-from snaptrade_client.api_client import ApiClient
+from snaptrade_client.configuration import Configuration
 
 def compute_request_signature(path: str, consumer_key: str, body: typing.Any):
+    subpath, query = path.split("?")
     sig_object = {
         "content": body,
-        "path": "/api/v1%s" % path,
-        "query": path
+        "path": "/api/v1%s" % subpath,
+        "query": query
     }
     sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)
     sig_digest = hmac.new(consumer_key.encode(), sig_content.encode(), hashlib.sha256).digest()
@@ -21,14 +22,18 @@ def compute_request_signature(path: str, consumer_key: str, body: typing.Any):
 def request_after_hook(
         resource_path: str,
         method: str,
-        api_client: ApiClient,
+        configuration: Configuration,
         headers: typing.Optional[HTTPHeaderDict] = None,
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
 ):
+    if headers is None:
+        return
+    if auth_settings is None:
+        return
     headers['Signature'] = compute_request_signature(
         path=resource_path,
-        consumer_key=api_client.configuration.consumer_key,
+        consumer_key=configuration.consumer_key,
         body=body
     )

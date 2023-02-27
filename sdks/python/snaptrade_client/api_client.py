@@ -1085,13 +1085,13 @@ class ApiClient:
     ) -> urllib3.HTTPResponse:
 
         request_before_hook(
-            resource_path,
-            method,
-            self,
-            headers,
-            body,
-            fields,
-            auth_settings,
+            resource_path=resource_path,
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            headers=headers,
         )
 
         # header parameters
@@ -1119,15 +1119,15 @@ class ApiClient:
         else:
             # use server/host defined in path or operation instead
             url = host + resource_path
-        
+
         request_after_hook(
-            resource_path,
-            method,
-            self,
-            headers,
-            body,
-            fields,
-            auth_settings,
+            resource_path=resource_path,
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            headers=used_headers,
         )
 
         # perform request and return response
