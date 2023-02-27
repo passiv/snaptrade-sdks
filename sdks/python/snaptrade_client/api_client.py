@@ -1297,7 +1297,7 @@ class ApiClient:
                 and need to output resource_path with query params added
                 """
                 resource_path += ParameterSerializerBase._ref6570_expansion(
-                    variable_name=auth_setting['key'], 
+                    variable_name=auth_setting['key'],
                     in_data=auth_setting['value'],
                     explode=False,
                     percent_encode=False,
