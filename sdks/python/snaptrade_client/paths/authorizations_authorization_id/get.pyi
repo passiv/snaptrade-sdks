@@ -223,6 +223,7 @@ class BaseApi(api_client.Api):
             method='get'.upper(),
             headers=_headers,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             stream=stream,
             timeout=timeout,
         )

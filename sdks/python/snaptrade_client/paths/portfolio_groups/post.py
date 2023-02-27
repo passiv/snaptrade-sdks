@@ -274,9 +274,10 @@ class BaseApi(api_client.Api):
             method='post'.upper(),
             headers=_headers,
             fields=_fields,
-            body=body,
             serialized_body=_body,
+            body=body,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             stream=stream,
             timeout=timeout,
         )

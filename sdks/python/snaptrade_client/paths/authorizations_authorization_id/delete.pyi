@@ -224,6 +224,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method='delete'.upper(),
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             stream=stream,
             timeout=timeout,
         )
