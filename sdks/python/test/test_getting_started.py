@@ -47,7 +47,7 @@ class TestGettingStarted(unittest.TestCase):
 
         # 4) Get a redirect URI. Users will need this to connect
         # their brokerage to the SnapTrade server.
-        redirect_uri = snaptrade.authentication.login_snap_trade_user(user_id, user_secret)
+        redirect_uri = snaptrade.authentication.login_snap_trade_user(query_params={"userId": user_id, "userSecret": user_secret})
         print(redirect_uri.body)
 
 
