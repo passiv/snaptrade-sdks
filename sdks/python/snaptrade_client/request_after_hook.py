@@ -5,12 +5,13 @@ import json
 import typing
 from urllib3._collections import HTTPHeaderDict
 
+from snaptrade_client import schemas
 from snaptrade_client.configuration import Configuration
 
 def compute_request_signature(path: str, consumer_key: str, body: typing.Any):
     subpath, query = path.split("?")
     sig_object = {
-        "content": body,
+        "content": None if body is schemas.unset else body,
         "path": "/api/v1%s" % subpath,
         "query": query
     }
