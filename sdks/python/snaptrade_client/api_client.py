@@ -1078,6 +1078,7 @@ class ApiClient:
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
+        prefix_separator_iterator: PrefixSeparatorIterator = None,
     ) -> urllib3.HTTPResponse:
 
         # header parameters
@@ -1086,8 +1087,14 @@ class ApiClient:
             headers['Cookie'] = self.cookie
 
         # auth setting
-        self.update_params_for_auth(used_headers,
-                                    auth_settings, resource_path, method, body)
+        resource_path = self.update_params_for_auth(
+            used_headers,
+            auth_settings,
+            resource_path,
+            method,
+            body,
+            prefix_separator_iterator
+        )
 
         # must happen after cookie setting and auth setting in case user is overriding those
         if headers:
@@ -1124,6 +1131,7 @@ class ApiClient:
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
+        prefix_separator_iterator: PrefixSeparatorIterator = None,
     ) -> urllib3.HTTPResponse:
         """Makes the HTTP request (synchronous) and returns deserialized data.
 
@@ -1170,6 +1178,7 @@ class ApiClient:
                 stream,
                 timeout,
                 host,
+                prefix_separator_iterator,
             )
 
         return self.pool.apply_async(
@@ -1185,6 +1194,7 @@ class ApiClient:
                 stream,
                 timeout,
                 host,
+                prefix_separator_iterator,
             )
         )
 
@@ -1249,8 +1259,15 @@ class ApiClient:
                 " `POST`, `PATCH`, `PUT` or `DELETE`."
             )
 
-    def update_params_for_auth(self, headers, auth_settings,
-                               resource_path, method, body):
+    def update_params_for_auth(
+            self,
+            headers,
+            auth_settings,
+            resource_path,
+            method,
+            body,
+            prefix_separator_iterator: PrefixSeparatorIterator = None
+        ) -> str:
         """Updates header and query params based on authentication setting.
 
         :param headers: Header parameters dict to be updated.
@@ -1261,7 +1278,9 @@ class ApiClient:
             The object type is the return value of _encoder.default().
         """
         if not auth_settings:
-            return
+            return resource_path
+        if prefix_separator_iterator is None:
+            prefix_separator_iterator = PrefixSeparatorIterator("?", "&")
 
         for auth in auth_settings:
             auth_setting = self.configuration.auth_settings().get(auth)
@@ -1277,11 +1296,18 @@ class ApiClient:
                 need to pass in prefix_separator_iterator
                 and need to output resource_path with query params added
                 """
-                raise ApiValueError("Auth in query not yet implemented")
+                resource_path += ParameterSerializerBase._ref6570_expansion(
+                    variable_name=auth_setting['key'], 
+                    in_data=auth_setting['value'],
+                    explode=False,
+                    percent_encode=False,
+                    prefix_separator_iterator=prefix_separator_iterator
+                )
             else:
                 raise ApiValueError(
                     'Authentication token must be in `query` or `header`'
                 )
+        return resource_path
 
 
 class Api:
