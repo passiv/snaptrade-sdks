@@ -54,6 +54,7 @@ generators:
     version: 4.0.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
+    apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
     clientName: SnapTrade
     clientState:
       - consumer_key

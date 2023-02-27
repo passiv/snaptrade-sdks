@@ -29,27 +29,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Cancel open order in account
@@ -189,27 +173,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Return details of a specific trade before it's placed
@@ -301,27 +269,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Return the impact of placing a series of trades on the portfolio
@@ -410,27 +362,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Check impact of trades on account.
@@ -573,27 +509,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Get symbol quotes
@@ -725,27 +645,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Modify units of a trade before it is placed
@@ -854,27 +758,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Place orders for the CalculatedTrades in series
@@ -963,27 +851,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Place a trade with NO validation.
@@ -1126,27 +998,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Place a OCO (One Cancels Other) order
@@ -1276,27 +1132,11 @@ from pprint import pprint
 from snaptrade_client import SnapTrade
 
 snaptrade = SnapTrade(
-        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-        # See configuration.py for a list of all supported configuration parameters.
-        host = "https://api.snaptrade.com/api/v1",
-    
-        # Configure API key authorization: PartnerClientId
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerClientId': 'Bearer'}
-    
-        # Configure API key authorization: PartnerSignature
-        api_key = 'YOUR_API_KEY',
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerSignature': 'Bearer'}
-    
-        # Configure API key authorization: PartnerTimestamp
-        api_key = 'YOUR_API_KEY'
-    
-        # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-        # api_key_prefix = {'PartnerTimestamp': 'Bearer'}
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
 )
 
 # Place order
