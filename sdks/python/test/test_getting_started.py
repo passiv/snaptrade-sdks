@@ -52,10 +52,10 @@ class TestGettingStarted(unittest.TestCase):
 
 
         snaptrade.portfolio_management.create(query_params={"userId": user_id, "userSecret": user_secret}, body={"id": str(uuid.uuid4()), "name": "MyPortfolio"})
-        res = snaptrade.portfolio_management.list(user_id, user_secret)
+        res = snaptrade.portfolio_management.list(query_params={"userId": user_id, "userSecret": user_secret})
         pprint(res.body)
 
-        snaptrade.api_disclaimer.accept(query_params={"userId": user_id, "userSecret": user_secret}, body={"accepted":True})
+        snaptrade.api_disclaimer.accept(query_params={"userId": user_id, "userSecret": user_secret}, body={"accepted": True})
 
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(query_params={"userId": user_id, "userSecret": user_secret})
