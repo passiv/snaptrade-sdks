@@ -33,6 +33,8 @@ import frozendict
 from snaptrade_client import rest
 from snaptrade_client.configuration import Configuration
 from snaptrade_client.exceptions import ApiTypeError, ApiValueError
+from snaptrade_client.request_after_hook import request_after_hook
+from snaptrade_client.request_before_hook import request_before_hook
 from snaptrade_client.schemas import (
     NoneClass,
     BoolClass,
@@ -1072,7 +1074,8 @@ class ApiClient:
         resource_path: str,
         method: str,
         headers: typing.Optional[HTTPHeaderDict] = None,
-        body: typing.Optional[typing.Union[str, bytes]] = None,
+        serialized_body: typing.Optional[typing.Union[str, bytes]] = None,
+        body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
         stream: bool = False,
@@ -1080,6 +1083,16 @@ class ApiClient:
         host: typing.Optional[str] = None,
         prefix_separator_iterator: PrefixSeparatorIterator = None,
     ) -> urllib3.HTTPResponse:
+
+        request_before_hook(
+            resource_path,
+            method,
+            self,
+            headers,
+            body,
+            fields,
+            auth_settings,
+        )
 
         # header parameters
         used_headers = HTTPHeaderDict(self.default_headers)
@@ -1106,6 +1119,16 @@ class ApiClient:
         else:
             # use server/host defined in path or operation instead
             url = host + resource_path
+        
+        request_after_hook(
+            resource_path,
+            method,
+            self,
+            headers,
+            body,
+            fields,
+            auth_settings,
+        )
 
         # perform request and return response
         response = self.request(
@@ -1113,7 +1136,7 @@ class ApiClient:
             url,
             headers=used_headers,
             fields=fields,
-            body=body,
+            body=serialized_body,
             stream=stream,
             timeout=timeout,
         )
@@ -1124,7 +1147,8 @@ class ApiClient:
         resource_path: str,
         method: str,
         headers: typing.Optional[HTTPHeaderDict] = None,
-        body: typing.Optional[typing.Union[str, bytes]] = None,
+        serialized_body: typing.Optional[typing.Union[str, bytes]] = None,
+        body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
         async_req: typing.Optional[bool] = None,
@@ -1172,6 +1196,7 @@ class ApiClient:
                 resource_path,
                 method,
                 headers,
+                serialized_body,
                 body,
                 fields,
                 auth_settings,
@@ -1187,6 +1212,7 @@ class ApiClient:
                 resource_path,
                 method,
                 headers,
+                serialized_body,
                 body,
                 json,
                 fields,
