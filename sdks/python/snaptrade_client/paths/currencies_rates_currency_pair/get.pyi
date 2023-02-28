@@ -32,7 +32,7 @@ CurrencyPairSchema = schemas.StrSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'currencyPair': typing.Union[CurrencyPairSchema, str, ],
+    'currencyPair': typing.Union[CurrencyPairSchema, str, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

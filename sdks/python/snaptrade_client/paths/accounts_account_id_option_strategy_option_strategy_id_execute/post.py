@@ -25,6 +25,7 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.price import Price
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 
 from . import path
@@ -35,8 +36,8 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+    'userId': typing.Union[UserIdSchema, str, ],
+    'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -71,8 +72,8 @@ OptionStrategyIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
-        'optionStrategyId': typing.Union[OptionStrategyIdSchema, str, uuid.UUID, ],
+    'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+    'optionStrategyId': typing.Union[OptionStrategyIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -167,7 +168,10 @@ class SchemaForRequestBodyApplicationJson(
                 @schemas.classproperty
                 def GTC(cls):
                     return cls("GTC")
-            price = schemas.NumberSchema
+        
+            @staticmethod
+            def price() -> typing.Type['Price']:
+                return Price
             __annotations__ = {
                 "order_type": order_type,
                 "time_in_force": time_in_force,
@@ -175,7 +179,7 @@ class SchemaForRequestBodyApplicationJson(
             }
     
     time_in_force: MetaOapg.properties.time_in_force
-    price: MetaOapg.properties.price
+    price: 'Price'
     order_type: MetaOapg.properties.order_type
     
     @typing.overload
@@ -185,7 +189,7 @@ class SchemaForRequestBodyApplicationJson(
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -202,7 +206,7 @@ class SchemaForRequestBodyApplicationJson(
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -215,7 +219,7 @@ class SchemaForRequestBodyApplicationJson(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
-        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, ],
+        price: 'Price',
         order_type: typing.Union[MetaOapg.properties.order_type, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],

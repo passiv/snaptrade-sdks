@@ -129,7 +129,7 @@ headers | Unset | headers were not defined |
 
 # **list_brokerage_authorizations**
 <a name="list_brokerage_authorizations"></a>
-> [BrokerageAuthorization] list_brokerage_authorizations(user_iduser_secret)
+> [BrokerageAuthorization], none_type list_brokerage_authorizations(user_iduser_secret)
 
 List all brokerage authorizations for the user
 
@@ -213,7 +213,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

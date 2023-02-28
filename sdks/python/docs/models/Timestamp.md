@@ -5,7 +5,7 @@ Unix Epoch time
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-decimal.Decimal, int,  | decimal.Decimal,  | Unix Epoch time | 
+None, decimal.Decimal, int,  | NoneClass, decimal.Decimal,  | Unix Epoch time | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

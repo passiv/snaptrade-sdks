@@ -48,7 +48,10 @@ class ManualTradeForm(
             @staticmethod
             def order_type() -> typing.Type['OrderType']:
                 return OrderType
-            price = schemas.NumberSchema
+        
+            @staticmethod
+            def price() -> typing.Type['Price']:
+                return Price
         
             @staticmethod
             def stop() -> typing.Type['StopPrice']:
@@ -57,7 +60,10 @@ class ManualTradeForm(
             @staticmethod
             def time_in_force() -> typing.Type['TimeInForce']:
                 return TimeInForce
-            units = schemas.NumberSchema
+        
+            @staticmethod
+            def units() -> typing.Type['Units']:
+                return Units
             universal_symbol_id = schemas.UUIDSchema
             __annotations__ = {
                 "account_id": account_id,
@@ -80,7 +86,7 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["stop"]) -> 'StopPrice': ...
@@ -89,7 +95,7 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
+    def __getitem__(self, name: typing_extensions.Literal["units"]) -> 'Units': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["universal_symbol_id"]) -> MetaOapg.properties.universal_symbol_id: ...
@@ -112,7 +118,7 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["stop"]) -> typing.Union['StopPrice', schemas.Unset]: ...
@@ -121,7 +127,7 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForce', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union['Units', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["universal_symbol_id"]) -> typing.Union[MetaOapg.properties.universal_symbol_id, schemas.Unset]: ...
@@ -139,10 +145,10 @@ class ManualTradeForm(
         account_id: typing.Union[MetaOapg.properties.account_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         action: typing.Union['Action', schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
-        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        price: typing.Union['Price', schemas.Unset] = schemas.unset,
         stop: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
-        units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        units: typing.Union['Units', schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -164,5 +170,7 @@ class ManualTradeForm(
 
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.order_type import OrderType
+from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice
 from snaptrade_client.model.time_in_force import TimeInForce
+from snaptrade_client.model.units import Units

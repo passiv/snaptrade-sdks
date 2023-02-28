@@ -41,7 +41,10 @@ request_body_symbol_query = api_client.RequestBody(
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
+    schemas.ListBase,
+    schemas.NoneBase,
+    schemas.Schema,
+    schemas.NoneTupleMixin
 ):
 
 
@@ -51,19 +54,17 @@ class SchemaFor200ResponseBodyApplicationJson(
         def items() -> typing.Type['UniversalSymbol']:
             return UniversalSymbol
 
+
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['UniversalSymbol'], typing.List['UniversalSymbol']],
+        *args: typing.Union[list, tuple, None, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            arg,
+            *args,
             _configuration=_configuration,
         )
-
-    def __getitem__(self, i: int) -> 'UniversalSymbol':
-        return super().__getitem__(i)
 
 
 @dataclass

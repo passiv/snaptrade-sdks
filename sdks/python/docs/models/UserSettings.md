@@ -5,20 +5,20 @@ Passiv user account settings
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Passiv user account settings | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Passiv user account settings | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**email** | str,  | str,  |  | [optional] 
-**name** | str,  | str,  |  | [optional] 
-**receive_cash_notification** | bool,  | BoolClass,  |  | [optional] 
-**receive_drift_notification** | bool,  | BoolClass,  |  | [optional] 
-**user_trial_activated** | bool,  | BoolClass,  |  | [optional] 
-**activated_trial_date** | str,  | str,  |  | [optional] 
-**demo** | bool,  | BoolClass,  |  | [optional] 
-**api_enabled** | bool,  | BoolClass,  |  | [optional] 
-**drift_threshold** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
+**email** | [**Email**](Email.md) | [**Email**](Email.md) |  | [optional] 
+**name** | None, str,  | NoneClass, str,  |  | [optional] 
+**receive_cash_notification** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**receive_drift_notification** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**user_trial_activated** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**activated_trial_date** | None, str,  | NoneClass, str,  |  | [optional] 
+**demo** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**api_enabled** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**drift_threshold** | None, decimal.Decimal, int, float,  | NoneClass, decimal.Decimal,  |  | [optional] 
 **preferred_currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 

@@ -9,6 +9,7 @@ filterModels:
 filterRequestBodies:
   - CreateSnapTradeParterAPICredentialsRequestBody
   - MockSignatureRequestBody
+attachNullabletoAllResponseSchemas: true
 allObjectsHaveAdditionalProperties:
   requestBody: false
   exclude:

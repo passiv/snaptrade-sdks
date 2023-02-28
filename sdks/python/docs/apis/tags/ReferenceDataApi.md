@@ -200,7 +200,7 @@ headers | Unset | headers were not defined |
 
 # **get_security_types**
 <a name="get_security_types"></a>
-> [SecurityType] get_security_types()
+> [SecurityType], none_type get_security_types()
 
 List of all security types.
 
@@ -245,7 +245,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -267,7 +267,7 @@ headers | Unset | headers were not defined |
 
 # **get_stock_exchanges**
 <a name="get_stock_exchanges"></a>
-> [Exchange] get_stock_exchanges()
+> [Exchange], none_type get_stock_exchanges()
 
 Return list of stock exchanges on Passiv and their suffixes
 
@@ -311,7 +311,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -326,7 +326,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 
 # **get_symbols**
 <a name="get_symbols"></a>
-> [UniversalSymbol] get_symbols()
+> [UniversalSymbol], none_type get_symbols()
 
 Search for symbols
 
@@ -391,7 +391,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -526,7 +526,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_brokerage_authorization_type**
 <a name="list_all_brokerage_authorization_type"></a>
-> [BrokerageAuthorizationTypeReadOnly] list_all_brokerage_authorization_type()
+> [BrokerageAuthorizationTypeReadOnly], none_type list_all_brokerage_authorization_type()
 
 List of all brokerage authorization types
 
@@ -597,7 +597,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -619,7 +619,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_brokerages**
 <a name="list_all_brokerages"></a>
-> [Brokerage] list_all_brokerages()
+> [Brokerage], none_type list_all_brokerages()
 
 List of all brokerages.
 
@@ -664,7 +664,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -686,7 +686,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_currencies**
 <a name="list_all_currencies"></a>
-> [Currency] list_all_currencies()
+> [Currency], none_type list_all_currencies()
 
 List of all supported currencies
 
@@ -731,7 +731,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -753,7 +753,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_currencies_rates**
 <a name="list_all_currencies_rates"></a>
-> [ExchangeRatePairs] list_all_currencies_rates()
+> [ExchangeRatePairs], none_type list_all_currencies_rates()
 
 Return the exchange rates of all supported currencies
 
@@ -797,7 +797,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -812,7 +812,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 
 # **symbol_search_user_account**
 <a name="symbol_search_user_account"></a>
-> [UniversalSymbol] symbol_search_user_account(user_iduser_secretaccount_id)
+> [UniversalSymbol], none_type symbol_search_user_account(user_iduser_secretaccount_id)
 
 Search for symbols that are supported by a brokerage account using a substring
 
@@ -927,7 +927,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

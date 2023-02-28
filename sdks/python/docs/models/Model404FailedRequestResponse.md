@@ -5,7 +5,7 @@ Example for failed request response
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Example for failed request response | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Example for failed request response | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

@@ -35,8 +35,8 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+    'userId': typing.Union[UserIdSchema, str, ],
+    'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -70,7 +70,7 @@ AccountIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+    'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -99,7 +99,10 @@ _auth = [
 
 
 class SchemaFor200ResponseBody(
-    schemas.ListSchema
+    schemas.ListBase,
+    schemas.NoneBase,
+    schemas.Schema,
+    schemas.NoneTupleMixin
 ):
 
 
@@ -109,19 +112,17 @@ class SchemaFor200ResponseBody(
         def items() -> typing.Type['Position']:
             return Position
 
+
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
+        *args: typing.Union[list, tuple, None, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBody':
         return super().__new__(
             cls,
-            arg,
+            *args,
             _configuration=_configuration,
         )
-
-    def __getitem__(self, i: int) -> 'Position':
-        return super().__getitem__(i)
 
 
 @dataclass

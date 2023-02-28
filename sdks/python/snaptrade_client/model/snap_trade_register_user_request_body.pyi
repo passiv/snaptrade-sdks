@@ -39,18 +39,24 @@ class SnapTradeRegisterUserRequestBody(
     class MetaOapg:
         
         class properties:
-            userId = schemas.StrSchema
-            rsaPublicKey = schemas.StrSchema
+        
+            @staticmethod
+            def userId() -> typing.Type['SnapTradeUserID']:
+                return SnapTradeUserID
+        
+            @staticmethod
+            def rsaPublicKey() -> typing.Type['RsaPublicKey']:
+                return RsaPublicKey
             __annotations__ = {
                 "userId": userId,
                 "rsaPublicKey": rsaPublicKey,
             }
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["userId"]) -> MetaOapg.properties.userId: ...
+    def __getitem__(self, name: typing_extensions.Literal["userId"]) -> 'SnapTradeUserID': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["rsaPublicKey"]) -> MetaOapg.properties.rsaPublicKey: ...
+    def __getitem__(self, name: typing_extensions.Literal["rsaPublicKey"]) -> 'RsaPublicKey': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -61,10 +67,10 @@ class SnapTradeRegisterUserRequestBody(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["userId"]) -> typing.Union[MetaOapg.properties.userId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["userId"]) -> typing.Union['SnapTradeUserID', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["rsaPublicKey"]) -> typing.Union[MetaOapg.properties.rsaPublicKey, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["rsaPublicKey"]) -> typing.Union['RsaPublicKey', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -76,8 +82,8 @@ class SnapTradeRegisterUserRequestBody(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        userId: typing.Union[MetaOapg.properties.userId, str, schemas.Unset] = schemas.unset,
-        rsaPublicKey: typing.Union[MetaOapg.properties.rsaPublicKey, str, schemas.Unset] = schemas.unset,
+        userId: typing.Union['SnapTradeUserID', schemas.Unset] = schemas.unset,
+        rsaPublicKey: typing.Union['RsaPublicKey', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SnapTradeRegisterUserRequestBody':
@@ -89,3 +95,6 @@ class SnapTradeRegisterUserRequestBody(
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.rsa_public_key import RsaPublicKey
+from snaptrade_client.model.snap_trade_user_id import SnapTradeUserID

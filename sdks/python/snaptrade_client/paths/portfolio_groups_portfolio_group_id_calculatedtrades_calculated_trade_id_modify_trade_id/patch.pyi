@@ -34,9 +34,9 @@ TradeIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
-        'calculatedTradeId': typing.Union[CalculatedTradeIdSchema, str, uuid.UUID, ],
-        'tradeId': typing.Union[TradeIdSchema, str, uuid.UUID, ],
+    'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
+    'calculatedTradeId': typing.Union[CalculatedTradeIdSchema, str, uuid.UUID, ],
+    'tradeId': typing.Union[TradeIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

@@ -36,8 +36,8 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+    'userId': typing.Union[UserIdSchema, str, ],
+    'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -71,7 +71,7 @@ AccountIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+    'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

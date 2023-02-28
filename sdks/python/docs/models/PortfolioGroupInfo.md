@@ -5,21 +5,21 @@ Summary of all relevant information about a portfolio group.
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Summary of all relevant information about a portfolio group. | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Summary of all relevant information about a portfolio group. | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**[symbols](#symbols)** | list, tuple,  | tuple,  |  | [optional] 
-**[quotable_symbols](#quotable_symbols)** | list, tuple,  | tuple,  |  | [optional] 
-**[balances](#balances)** | list, tuple,  | tuple,  |  | [optional] 
-**[positions](#positions)** | list, tuple,  | tuple,  |  | [optional] 
-**[target_positions](#target_positions)** | list, tuple,  | tuple,  |  | [optional] 
-**[ideal_positions](#ideal_positions)** | list, tuple,  | tuple,  |  | [optional] 
-**[excluded_positions](#excluded_positions)** | list, tuple,  | tuple,  |  | [optional] 
-**[calculated_trades](#calculated_trades)** | list, tuple,  | tuple,  |  | [optional] 
-**[brokerage_authorizations](#brokerage_authorizations)** | list, tuple,  | tuple,  |  | [optional] 
-**accuracy** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
+**[symbols](#symbols)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[quotable_symbols](#quotable_symbols)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[balances](#balances)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[positions](#positions)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[target_positions](#target_positions)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[ideal_positions](#ideal_positions)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[excluded_positions](#excluded_positions)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[calculated_trades](#calculated_trades)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[brokerage_authorizations](#brokerage_authorizations)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**accuracy** | None, decimal.Decimal, int, float,  | NoneClass, decimal.Decimal,  |  | [optional] 
 **settings** | [**PortfolioGroupSettings**](PortfolioGroupSettings.md) | [**PortfolioGroupSettings**](PortfolioGroupSettings.md) |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
@@ -28,7 +28,7 @@ Key | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -40,7 +40,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -52,7 +52,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -64,7 +64,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -76,7 +76,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -88,7 +88,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -100,7 +100,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -112,7 +112,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -124,7 +124,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

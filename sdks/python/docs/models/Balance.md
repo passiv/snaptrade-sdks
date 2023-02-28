@@ -5,7 +5,7 @@ Account Balance
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Account Balance | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Account Balance | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

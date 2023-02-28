@@ -5,7 +5,7 @@ An excluded asset in a portfolio group
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | An excluded asset in a portfolio group | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | An excluded asset in a portfolio group | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

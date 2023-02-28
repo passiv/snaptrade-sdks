@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 # **get_all_user_holdings**
 <a name="get_all_user_holdings"></a>
-> [AccountHoldings] get_all_user_holdings(user_iduser_secret)
+> [AccountHoldings], none_type get_all_user_holdings(user_iduser_secret)
 
 List all accounts for the user, plus balances and positions for each account.
 
@@ -111,7 +111,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -159,7 +159,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_balance**
 <a name="get_user_account_balance"></a>
-> [Balance] get_user_account_balance(user_iduser_secretaccount_id)
+> [Balance], none_type get_user_account_balance(user_iduser_secretaccount_id)
 
 Get all cash balances of an investment account
 
@@ -261,7 +261,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -283,7 +283,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_details**
 <a name="get_user_account_details"></a>
-> [Account] get_user_account_details(user_iduser_secretaccount_id)
+> [Account], none_type get_user_account_details(user_iduser_secretaccount_id)
 
 Return details of a specific investment account
 
@@ -385,7 +385,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -407,7 +407,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_orders**
 <a name="get_user_account_orders"></a>
-> [AccountOrderRecord] get_user_account_orders(user_iduser_secretaccount_id)
+> [AccountOrderRecord], none_type get_user_account_orders(user_iduser_secretaccount_id)
 
 Get all history of orders placed in account
 
@@ -518,7 +518,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -540,7 +540,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_positions**
 <a name="get_user_account_positions"></a>
-> [Position] get_user_account_positions(user_iduser_secretaccount_id)
+> [Position], none_type get_user_account_positions(user_iduser_secretaccount_id)
 
 Get all positions of an investment account
 
@@ -642,7 +642,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -810,7 +810,7 @@ headers | Unset | headers were not defined |
 
 # **list_user_accounts**
 <a name="list_user_accounts"></a>
-> [Account] list_user_accounts(user_iduser_secret)
+> [Account], none_type list_user_accounts(user_iduser_secret)
 
 List all investment accounts for the user
 
@@ -894,7 +894,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -916,7 +916,7 @@ headers | Unset | headers were not defined |
 
 # **update_user_account**
 <a name="update_user_account"></a>
-> [Account] update_user_account(user_iduser_secretaccount_id)
+> [Account], none_type update_user_account(user_iduser_secretaccount_id)
 
 Update details of an investment account
 
@@ -1018,7 +1018,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

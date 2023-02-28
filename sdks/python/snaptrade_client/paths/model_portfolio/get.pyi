@@ -30,7 +30,10 @@ from snaptrade_client.model.model_portfolio_details import ModelPortfolioDetails
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
+    schemas.ListBase,
+    schemas.NoneBase,
+    schemas.Schema,
+    schemas.NoneTupleMixin
 ):
 
 
@@ -40,19 +43,17 @@ class SchemaFor200ResponseBodyApplicationJson(
         def items() -> typing.Type['ModelPortfolioDetails']:
             return ModelPortfolioDetails
 
+
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['ModelPortfolioDetails'], typing.List['ModelPortfolioDetails']],
+        *args: typing.Union[list, tuple, None, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            arg,
+            *args,
             _configuration=_configuration,
         )
-
-    def __getitem__(self, i: int) -> 'ModelPortfolioDetails':
-        return super().__getitem__(i)
 
 
 @dataclass

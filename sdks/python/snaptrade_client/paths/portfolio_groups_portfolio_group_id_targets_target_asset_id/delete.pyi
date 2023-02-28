@@ -33,8 +33,8 @@ TargetAssetIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
-        'targetAssetId': typing.Union[TargetAssetIdSchema, str, uuid.UUID, ],
+    'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
+    'targetAssetId': typing.Union[TargetAssetIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

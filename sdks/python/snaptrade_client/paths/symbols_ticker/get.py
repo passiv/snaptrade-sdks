@@ -60,7 +60,7 @@ TickerSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'ticker': typing.Union[TickerSchema, str, uuid.UUID, ],
+    'ticker': typing.Union[TickerSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

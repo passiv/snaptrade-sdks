@@ -5,14 +5,14 @@ Account Holdings
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Account Holdings | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Account Holdings | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **account** | [**SnapTradeHoldingsAccount**](SnapTradeHoldingsAccount.md) | [**SnapTradeHoldingsAccount**](SnapTradeHoldingsAccount.md) |  | [optional] 
-**[balances](#balances)** | list, tuple,  | tuple,  |  | [optional] 
-**[positions](#positions)** | list, tuple,  | tuple,  |  | [optional] 
+**[balances](#balances)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[positions](#positions)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
 **total_value** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
@@ -21,7 +21,7 @@ Key | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -33,7 +33,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

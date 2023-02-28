@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 # **list_user_errors**
 <a name="list_user_errors"></a>
-> [UserErrorLog] list_user_errors(user_iduser_secret)
+> [UserErrorLog], none_type list_user_errors(user_iduser_secret)
 
 Retrieve error logs on behalf of your SnapTrade users
 
@@ -92,7 +92,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

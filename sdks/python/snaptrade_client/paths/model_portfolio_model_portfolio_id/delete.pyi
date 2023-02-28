@@ -29,7 +29,7 @@ ModelPortfolioIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'modelPortfolioId': typing.Union[ModelPortfolioIdSchema, str, uuid.UUID, ],
+    'modelPortfolioId': typing.Union[ModelPortfolioIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

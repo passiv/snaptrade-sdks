@@ -38,8 +38,8 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+    'userId': typing.Union[UserIdSchema, str, ],
+    'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -97,7 +97,10 @@ _auth = [
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
+    schemas.ListBase,
+    schemas.NoneBase,
+    schemas.Schema,
+    schemas.NoneTupleMixin
 ):
 
 
@@ -107,19 +110,17 @@ class SchemaFor200ResponseBodyApplicationJson(
         def items() -> typing.Type['UniversalActivity']:
             return UniversalActivity
 
+
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['UniversalActivity'], typing.List['UniversalActivity']],
+        *args: typing.Union[list, tuple, None, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            arg,
+            *args,
             _configuration=_configuration,
         )
-
-    def __getitem__(self, i: int) -> 'UniversalActivity':
-        return super().__getitem__(i)
 
 
 @dataclass

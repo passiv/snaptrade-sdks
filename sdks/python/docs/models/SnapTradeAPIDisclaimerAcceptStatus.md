@@ -5,13 +5,13 @@ Status of user acceptance of SnapTrade API disclaimer
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Status of user acceptance of SnapTrade API disclaimer | 
+dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Status of user acceptance of SnapTrade API disclaimer | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**accepted** | bool,  | BoolClass,  |  | [optional] 
-**timestamp** | str,  | str,  |  | [optional] 
+**accepted** | None, bool,  | NoneClass, BoolClass,  |  | [optional] 
+**timestamp** | None, str,  | NoneClass, str,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

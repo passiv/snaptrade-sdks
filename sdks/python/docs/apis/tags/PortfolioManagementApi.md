@@ -135,7 +135,7 @@ Type | Description  | Notes
 
 # **create**
 <a name="create"></a>
-> [PortfolioGroup] create(user_iduser_secretportfolio_group)
+> [PortfolioGroup], none_type create(user_iduser_secretportfolio_group)
 
 Create new portfolio group
 
@@ -234,7 +234,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -879,7 +879,7 @@ Type | Description  | Notes
 
 # **get_calculated_trade_by_id**
 <a name="get_calculated_trade_by_id"></a>
-> [Trade] get_calculated_trade_by_id(portfolio_group_idcalculated_trade_idtrade_id)
+> [Trade], none_type get_calculated_trade_by_id(portfolio_group_idcalculated_trade_idtrade_id)
 
 Return an individual trade
 
@@ -966,7 +966,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1059,7 +1059,7 @@ Type | Description  | Notes
 
 # **get_portfolio_balances**
 <a name="get_portfolio_balances"></a>
-> [Balance] get_portfolio_balances(portfolio_group_id)
+> [Balance], none_type get_portfolio_balances(portfolio_group_id)
 
 Get sum of cash balances in portfolio group
 
@@ -1131,7 +1131,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1339,7 +1339,7 @@ headers | Unset | headers were not defined |
 
 # **get_portfolio_positions**
 <a name="get_portfolio_positions"></a>
-> [PortfolioGroupPosition] get_portfolio_positions(portfolio_group_id)
+> [PortfolioGroupPosition], none_type get_portfolio_positions(portfolio_group_id)
 
 Get total of each postions owned in portfolio group
 
@@ -1411,7 +1411,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1628,7 +1628,7 @@ headers | Unset | headers were not defined |
 
 # **get_portfolio_targets**
 <a name="get_portfolio_targets"></a>
-> [TargetAsset] get_portfolio_targets(portfolio_group_id)
+> [TargetAsset], none_type get_portfolio_targets(portfolio_group_id)
 
 Get all target assets under the specified PortfolioGroup.
 
@@ -1700,7 +1700,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1736,7 +1736,7 @@ headers | Unset | headers were not defined |
 
 # **get_portoflio_excluded_assets**
 <a name="get_portoflio_excluded_assets"></a>
-> [ExcludedAsset] get_portoflio_excluded_assets(portfolio_group_id)
+> [ExcludedAsset], none_type get_portoflio_excluded_assets(portfolio_group_id)
 
 Get an array of excluded assets associated with a portfolio group\\
 
@@ -1806,7 +1806,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1828,7 +1828,7 @@ headers | Unset | headers were not defined |
 
 # **import_model_portfolio**
 <a name="import_model_portfolio"></a>
-> [TargetAsset] import_model_portfolio(portfolio_group_id)
+> [TargetAsset], none_type import_model_portfolio(portfolio_group_id)
 
 Import target allocation based on portfolio group
 
@@ -1898,7 +1898,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -1920,7 +1920,7 @@ headers | Unset | headers were not defined |
 
 # **list**
 <a name="list"></a>
-> [PortfolioGroup] list(user_iduser_secret)
+> [PortfolioGroup], none_type list(user_iduser_secret)
 
 List all portfolio groups
 
@@ -2004,7 +2004,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -2026,7 +2026,7 @@ headers | Unset | headers were not defined |
 
 # **list_asset_classes**
 <a name="list_asset_classes"></a>
-> [ModelAssetClassDetails] list_asset_classes()
+> [ModelAssetClassDetails], none_type list_asset_classes()
 
 List of model asset class
 
@@ -2070,7 +2070,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -2163,7 +2163,7 @@ Type | Description  | Notes
 
 # **list_model_portfolio**
 <a name="list_model_portfolio"></a>
-> [ModelPortfolioDetails] list_model_portfolio()
+> [ModelPortfolioDetails], none_type list_model_portfolio()
 
 List of model portfolio
 
@@ -2207,7 +2207,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -2222,7 +2222,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 
 # **list_portfolio_accounts**
 <a name="list_portfolio_accounts"></a>
-> [Account] list_portfolio_accounts(portfolio_group_id)
+> [Account], none_type list_portfolio_accounts(portfolio_group_id)
 
 Get all accounts associated with a portfolio group
 
@@ -2292,7 +2292,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -2512,7 +2512,7 @@ headers | Unset | headers were not defined |
 
 # **search_portfolio_symbols**
 <a name="search_portfolio_symbols"></a>
-> [UniversalSymbol] search_portfolio_symbols(portfolio_group_id)
+> [UniversalSymbol], none_type search_portfolio_symbols(portfolio_group_id)
 
 Search for symbols limited to brokerages under the specified portfolio group
 
@@ -2595,7 +2595,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

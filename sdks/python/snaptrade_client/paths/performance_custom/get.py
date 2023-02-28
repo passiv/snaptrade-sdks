@@ -40,10 +40,10 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'startDate': typing.Union[StartDateSchema, str, ],
-        'endDate': typing.Union[EndDateSchema, str, ],
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+    'startDate': typing.Union[StartDateSchema, str, ],
+    'endDate': typing.Union[EndDateSchema, str, ],
+    'userId': typing.Union[UserIdSchema, str, ],
+    'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(

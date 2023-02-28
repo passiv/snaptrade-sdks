@@ -258,7 +258,7 @@ Type | Description  | Notes
 
 # **get_calculated_trades_impact**
 <a name="get_calculated_trades_impact"></a>
-> [TradeImpact] get_calculated_trades_impact(portfolio_group_idcalculated_trade_id)
+> [TradeImpact], none_type get_calculated_trades_impact(portfolio_group_idcalculated_trade_id)
 
 Return the impact of placing a series of trades on the portfolio
 
@@ -336,7 +336,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
@@ -747,7 +747,7 @@ Type | Description  | Notes
 
 # **place_calculated_trades**
 <a name="place_calculated_trades"></a>
-> [TradeExecutionStatus] place_calculated_trades(portfolio_group_idcalculated_trade_id)
+> [TradeExecutionStatus], none_type place_calculated_trades(portfolio_group_idcalculated_trade_id)
 
 Place orders for the CalculatedTrades in series
 
@@ -825,7 +825,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
+list, tuple, None,  | tuple, NoneClass,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
