@@ -1011,8 +1011,8 @@ response = snaptrade.trading.place_oco_order(
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
-    body = 
-    ,
+    body = {
+    },
 )
 pprint(response)
 ```

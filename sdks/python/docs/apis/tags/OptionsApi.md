@@ -40,10 +40,10 @@ response = snaptrade.options.get_option_strategy(
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
-    body = 
+    body = {
         'underlying_symbol_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
         'strategy_type': "CUSTOM",
-    ,
+    },
 )
 pprint(response)
 ```
@@ -566,11 +566,11 @@ response = snaptrade.options.place_option_strategy(
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
-    body = 
+    body = {
         'order_type': "Limit",
         'time_in_force': "DAY",
         'price': 31.33,
-    ,
+    },
 )
 pprint(response)
 ```

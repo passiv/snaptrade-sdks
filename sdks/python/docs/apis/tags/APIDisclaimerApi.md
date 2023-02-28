@@ -33,8 +33,8 @@ response = snaptrade.api_disclaimer.accept(
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
-    body = 
-    ,
+    body = {
+    },
 )
 pprint(response)
 ```
