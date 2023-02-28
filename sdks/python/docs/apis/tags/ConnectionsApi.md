@@ -218,7 +218,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**BrokerageAuthorization**]({{complexTypePrefix}}BrokerageAuthorization.md) | [**BrokerageAuthorization**]({{complexTypePrefix}}BrokerageAuthorization.md) | [**BrokerageAuthorization**]({{complexTypePrefix}}BrokerageAuthorization.md) |  | 
+[**BrokerageAuthorization**](../../models/BrokerageAuthorization.md) | [**BrokerageAuthorization**](../../models/BrokerageAuthorization.md) | [**BrokerageAuthorization**](../../models/BrokerageAuthorization.md) |  | 
 
 #### list_brokerage_authorizations.ApiResponseForDefault
 Name | Type | Description  | Notes

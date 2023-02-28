@@ -485,8 +485,8 @@ dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal
 #### oneOf
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[LoginRedirectURI]({{complexTypePrefix}}LoginRedirectURI.md) | [**LoginRedirectURI**]({{complexTypePrefix}}LoginRedirectURI.md) | [**LoginRedirectURI**]({{complexTypePrefix}}LoginRedirectURI.md) |  | 
-[EncryptedResponse]({{complexTypePrefix}}EncryptedResponse.md) | [**EncryptedResponse**]({{complexTypePrefix}}EncryptedResponse.md) | [**EncryptedResponse**]({{complexTypePrefix}}EncryptedResponse.md) |  | 
+[LoginRedirectURI](../../models/LoginRedirectURI.md) | [**LoginRedirectURI**](../../models/LoginRedirectURI.md) | [**LoginRedirectURI**](../../models/LoginRedirectURI.md) |  | 
+[EncryptedResponse](../../models/EncryptedResponse.md) | [**EncryptedResponse**](../../models/EncryptedResponse.md) | [**EncryptedResponse**](../../models/EncryptedResponse.md) |  | 
 
 #### login_snap_trade_user.ApiResponseFor400
 Name | Type | Description  | Notes

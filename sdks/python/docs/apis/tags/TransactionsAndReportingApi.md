@@ -134,7 +134,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**UniversalActivity**]({{complexTypePrefix}}UniversalActivity.md) | [**UniversalActivity**]({{complexTypePrefix}}UniversalActivity.md) | [**UniversalActivity**]({{complexTypePrefix}}UniversalActivity.md) |  | 
+[**UniversalActivity**](../../models/UniversalActivity.md) | [**UniversalActivity**](../../models/UniversalActivity.md) | [**UniversalActivity**](../../models/UniversalActivity.md) |  | 
 
 #### get_activities.ApiResponseForDefault
 Name | Type | Description  | Notes

@@ -250,7 +250,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**SecurityType**]({{complexTypePrefix}}SecurityType.md) | [**SecurityType**]({{complexTypePrefix}}SecurityType.md) | [**SecurityType**]({{complexTypePrefix}}SecurityType.md) |  | 
+[**SecurityType**](../../models/SecurityType.md) | [**SecurityType**](../../models/SecurityType.md) | [**SecurityType**](../../models/SecurityType.md) |  | 
 
 #### get_security_types.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -316,7 +316,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Exchange**]({{complexTypePrefix}}Exchange.md) | [**Exchange**]({{complexTypePrefix}}Exchange.md) | [**Exchange**]({{complexTypePrefix}}Exchange.md) |  | 
+[**Exchange**](../../models/Exchange.md) | [**Exchange**](../../models/Exchange.md) | [**Exchange**](../../models/Exchange.md) |  | 
 
 ### Authorization
 
@@ -396,7 +396,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) |  | 
+[**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) |  | 
 
 #### get_symbols.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -602,7 +602,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**BrokerageAuthorizationTypeReadOnly**]({{complexTypePrefix}}BrokerageAuthorizationTypeReadOnly.md) | [**BrokerageAuthorizationTypeReadOnly**]({{complexTypePrefix}}BrokerageAuthorizationTypeReadOnly.md) | [**BrokerageAuthorizationTypeReadOnly**]({{complexTypePrefix}}BrokerageAuthorizationTypeReadOnly.md) |  | 
+[**BrokerageAuthorizationTypeReadOnly**](../../models/BrokerageAuthorizationTypeReadOnly.md) | [**BrokerageAuthorizationTypeReadOnly**](../../models/BrokerageAuthorizationTypeReadOnly.md) | [**BrokerageAuthorizationTypeReadOnly**](../../models/BrokerageAuthorizationTypeReadOnly.md) |  | 
 
 #### list_all_brokerage_authorization_type.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -669,7 +669,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Brokerage**]({{complexTypePrefix}}Brokerage.md) | [**Brokerage**]({{complexTypePrefix}}Brokerage.md) | [**Brokerage**]({{complexTypePrefix}}Brokerage.md) |  | 
+[**Brokerage**](../../models/Brokerage.md) | [**Brokerage**](../../models/Brokerage.md) | [**Brokerage**](../../models/Brokerage.md) |  | 
 
 #### list_all_brokerages.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -736,7 +736,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Currency**]({{complexTypePrefix}}Currency.md) | [**Currency**]({{complexTypePrefix}}Currency.md) | [**Currency**]({{complexTypePrefix}}Currency.md) |  | 
+[**Currency**](../../models/Currency.md) | [**Currency**](../../models/Currency.md) | [**Currency**](../../models/Currency.md) |  | 
 
 #### list_all_currencies.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -802,7 +802,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**ExchangeRatePairs**]({{complexTypePrefix}}ExchangeRatePairs.md) | [**ExchangeRatePairs**]({{complexTypePrefix}}ExchangeRatePairs.md) | [**ExchangeRatePairs**]({{complexTypePrefix}}ExchangeRatePairs.md) |  | 
+[**ExchangeRatePairs**](../../models/ExchangeRatePairs.md) | [**ExchangeRatePairs**](../../models/ExchangeRatePairs.md) | [**ExchangeRatePairs**](../../models/ExchangeRatePairs.md) |  | 
 
 ### Authorization
 
@@ -932,7 +932,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) |  | 
+[**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) |  | 
 
 #### symbol_search_user_account.ApiResponseForDefault
 Name | Type | Description  | Notes

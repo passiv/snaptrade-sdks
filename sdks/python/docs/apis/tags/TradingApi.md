@@ -341,7 +341,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**TradeImpact**]({{complexTypePrefix}}TradeImpact.md) | [**TradeImpact**]({{complexTypePrefix}}TradeImpact.md) | [**TradeImpact**]({{complexTypePrefix}}TradeImpact.md) |  | 
+[**TradeImpact**](../../models/TradeImpact.md) | [**TradeImpact**](../../models/TradeImpact.md) | [**TradeImpact**](../../models/TradeImpact.md) |  | 
 
 ### Authorization
 
@@ -830,7 +830,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**TradeExecutionStatus**]({{complexTypePrefix}}TradeExecutionStatus.md) | [**TradeExecutionStatus**]({{complexTypePrefix}}TradeExecutionStatus.md) | [**TradeExecutionStatus**]({{complexTypePrefix}}TradeExecutionStatus.md) |  | 
+[**TradeExecutionStatus**](../../models/TradeExecutionStatus.md) | [**TradeExecutionStatus**](../../models/TradeExecutionStatus.md) | [**TradeExecutionStatus**](../../models/TradeExecutionStatus.md) |  | 
 
 ### Authorization
 

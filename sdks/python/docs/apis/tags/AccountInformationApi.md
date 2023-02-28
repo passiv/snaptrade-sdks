@@ -116,7 +116,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**AccountHoldings**]({{complexTypePrefix}}AccountHoldings.md) | [**AccountHoldings**]({{complexTypePrefix}}AccountHoldings.md) | [**AccountHoldings**]({{complexTypePrefix}}AccountHoldings.md) |  | 
+[**AccountHoldings**](../../models/AccountHoldings.md) | [**AccountHoldings**](../../models/AccountHoldings.md) | [**AccountHoldings**](../../models/AccountHoldings.md) |  | 
 
 #### get_all_user_holdings.ApiResponseFor400
 Name | Type | Description  | Notes
@@ -266,7 +266,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Balance**]({{complexTypePrefix}}Balance.md) | [**Balance**]({{complexTypePrefix}}Balance.md) | [**Balance**]({{complexTypePrefix}}Balance.md) |  | 
+[**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) |  | 
 
 #### get_user_account_balance.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -390,7 +390,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) |  | 
+[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
 
 #### get_user_account_details.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -523,7 +523,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**AccountOrderRecord**]({{complexTypePrefix}}AccountOrderRecord.md) | [**AccountOrderRecord**]({{complexTypePrefix}}AccountOrderRecord.md) | [**AccountOrderRecord**]({{complexTypePrefix}}AccountOrderRecord.md) |  | 
+[**AccountOrderRecord**](../../models/AccountOrderRecord.md) | [**AccountOrderRecord**](../../models/AccountOrderRecord.md) | [**AccountOrderRecord**](../../models/AccountOrderRecord.md) |  | 
 
 #### get_user_account_orders.ApiResponseFor500
 Name | Type | Description  | Notes
@@ -647,7 +647,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Position**]({{complexTypePrefix}}Position.md) | [**Position**]({{complexTypePrefix}}Position.md) | [**Position**]({{complexTypePrefix}}Position.md) |  | 
+[**Position**](../../models/Position.md) | [**Position**](../../models/Position.md) | [**Position**](../../models/Position.md) |  | 
 
 #### get_user_account_positions.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -899,7 +899,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) |  | 
+[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
 
 #### list_user_accounts.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -1023,7 +1023,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) |  | 
+[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
 
 #### update_user_account.ApiResponseForDefault
 Name | Type | Description  | Notes

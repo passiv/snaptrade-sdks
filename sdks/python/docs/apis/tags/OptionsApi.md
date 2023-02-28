@@ -87,7 +87,7 @@ list, tuple,  | tuple,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**OptionLeg**]({{complexTypePrefix}}OptionLeg.md) | [**OptionLeg**]({{complexTypePrefix}}OptionLeg.md) | [**OptionLeg**]({{complexTypePrefix}}OptionLeg.md) |  | 
+[**OptionLeg**](../../models/OptionLeg.md) | [**OptionLeg**](../../models/OptionLeg.md) | [**OptionLeg**](../../models/OptionLeg.md) |  | 
 
 ### query_params
 #### RequestQueryParams
@@ -600,7 +600,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **time_in_force** | str,  | str,  |  | must be one of ["DAY", "GTC", ] 
-**price** | [**Price**]({{complexTypePrefix}}Price.md) | [**Price**]({{complexTypePrefix}}Price.md) |  | 
+**price** | [**Price**](../../models/Price.md) | [**Price**](../../models/Price.md) |  | 
 **order_type** | str,  | str,  |  | must be one of ["Limit", "Market", "NetDebit", "NetCredit", ] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 

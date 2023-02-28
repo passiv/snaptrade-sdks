@@ -97,7 +97,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**UserErrorLog**]({{complexTypePrefix}}UserErrorLog.md) | [**UserErrorLog**]({{complexTypePrefix}}UserErrorLog.md) | [**UserErrorLog**]({{complexTypePrefix}}UserErrorLog.md) |  | 
+[**UserErrorLog**](../../models/UserErrorLog.md) | [**UserErrorLog**](../../models/UserErrorLog.md) | [**UserErrorLog**](../../models/UserErrorLog.md) |  | 
 
 ### Authorization
 

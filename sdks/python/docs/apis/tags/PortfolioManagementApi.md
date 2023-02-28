@@ -239,7 +239,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) | [**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) | [**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) |  | 
+[**PortfolioGroup**](../../models/PortfolioGroup.md) | [**PortfolioGroup**](../../models/PortfolioGroup.md) | [**PortfolioGroup**](../../models/PortfolioGroup.md) |  | 
 
 #### create.ApiResponseFor400
 Name | Type | Description  | Notes
@@ -971,7 +971,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Trade**]({{complexTypePrefix}}Trade.md) | [**Trade**]({{complexTypePrefix}}Trade.md) | [**Trade**]({{complexTypePrefix}}Trade.md) |  | 
+[**Trade**](../../models/Trade.md) | [**Trade**](../../models/Trade.md) | [**Trade**](../../models/Trade.md) |  | 
 
 ### Authorization
 
@@ -1136,7 +1136,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Balance**]({{complexTypePrefix}}Balance.md) | [**Balance**]({{complexTypePrefix}}Balance.md) | [**Balance**]({{complexTypePrefix}}Balance.md) |  | 
+[**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) |  | 
 
 #### get_portfolio_balances.ApiResponseFor400
 Name | Type | Description  | Notes
@@ -1416,7 +1416,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**PortfolioGroupPosition**]({{complexTypePrefix}}PortfolioGroupPosition.md) | [**PortfolioGroupPosition**]({{complexTypePrefix}}PortfolioGroupPosition.md) | [**PortfolioGroupPosition**]({{complexTypePrefix}}PortfolioGroupPosition.md) |  | 
+[**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) | [**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) | [**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) |  | 
 
 #### get_portfolio_positions.ApiResponseFor400
 Name | Type | Description  | Notes
@@ -1705,7 +1705,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) | [**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) | [**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) |  | 
+[**TargetAsset**](../../models/TargetAsset.md) | [**TargetAsset**](../../models/TargetAsset.md) | [**TargetAsset**](../../models/TargetAsset.md) |  | 
 
 #### get_portfolio_targets.ApiResponseFor400
 Name | Type | Description  | Notes
@@ -1811,7 +1811,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**ExcludedAsset**]({{complexTypePrefix}}ExcludedAsset.md) | [**ExcludedAsset**]({{complexTypePrefix}}ExcludedAsset.md) | [**ExcludedAsset**]({{complexTypePrefix}}ExcludedAsset.md) |  | 
+[**ExcludedAsset**](../../models/ExcludedAsset.md) | [**ExcludedAsset**](../../models/ExcludedAsset.md) | [**ExcludedAsset**](../../models/ExcludedAsset.md) |  | 
 
 #### get_portoflio_excluded_assets.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -1903,7 +1903,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) | [**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) | [**TargetAsset**]({{complexTypePrefix}}TargetAsset.md) |  | 
+[**TargetAsset**](../../models/TargetAsset.md) | [**TargetAsset**](../../models/TargetAsset.md) | [**TargetAsset**](../../models/TargetAsset.md) |  | 
 
 #### import_model_portfolio.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -2009,7 +2009,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) | [**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) | [**PortfolioGroup**]({{complexTypePrefix}}PortfolioGroup.md) |  | 
+[**PortfolioGroup**](../../models/PortfolioGroup.md) | [**PortfolioGroup**](../../models/PortfolioGroup.md) | [**PortfolioGroup**](../../models/PortfolioGroup.md) |  | 
 
 #### list.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -2075,7 +2075,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**ModelAssetClassDetails**]({{complexTypePrefix}}ModelAssetClassDetails.md) | [**ModelAssetClassDetails**]({{complexTypePrefix}}ModelAssetClassDetails.md) | [**ModelAssetClassDetails**]({{complexTypePrefix}}ModelAssetClassDetails.md) |  | 
+[**ModelAssetClassDetails**](../../models/ModelAssetClassDetails.md) | [**ModelAssetClassDetails**](../../models/ModelAssetClassDetails.md) | [**ModelAssetClassDetails**](../../models/ModelAssetClassDetails.md) |  | 
 
 ### Authorization
 
@@ -2212,7 +2212,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**ModelPortfolioDetails**]({{complexTypePrefix}}ModelPortfolioDetails.md) | [**ModelPortfolioDetails**]({{complexTypePrefix}}ModelPortfolioDetails.md) | [**ModelPortfolioDetails**]({{complexTypePrefix}}ModelPortfolioDetails.md) |  | 
+[**ModelPortfolioDetails**](../../models/ModelPortfolioDetails.md) | [**ModelPortfolioDetails**](../../models/ModelPortfolioDetails.md) | [**ModelPortfolioDetails**](../../models/ModelPortfolioDetails.md) |  | 
 
 ### Authorization
 
@@ -2297,7 +2297,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) | [**Account**]({{complexTypePrefix}}Account.md) |  | 
+[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
 
 #### list_portfolio_accounts.ApiResponseForDefault
 Name | Type | Description  | Notes
@@ -2600,7 +2600,7 @@ list, tuple, None,  | tuple, NoneClass,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) | [**UniversalSymbol**]({{complexTypePrefix}}UniversalSymbol.md) |  | 
+[**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) | [**UniversalSymbol**](../../models/UniversalSymbol.md) |  | 
 
 #### search_portfolio_symbols.ApiResponseForDefault
 Name | Type | Description  | Notes
