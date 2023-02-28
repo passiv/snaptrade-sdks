@@ -20,6 +20,8 @@ allObjectsHaveAdditionalProperties:
 requiredEnvironmentVariables:
   - SNAPTRADE_CONSUMER_KEY
   - SNAPTRADE_CLIENT_ID
+  - SNAPTRADE_TEST_USER_ID
+  - SNAPTRADE_TEST_USER_SECRET
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   java:
@@ -61,11 +63,6 @@ generators:
       - consumer_key
     apiKeyAlias:
       PartnerClientId: client_id
-    test:
-      script:
-        - >-
-          tox
-          test/test_getting_started.py::TestGettingStarted::testGettingStarted
     git:
       host: github.com
       userId: passiv

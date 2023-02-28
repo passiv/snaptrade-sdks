@@ -50,7 +50,6 @@ class TestGettingStarted(unittest.TestCase):
         redirect_uri = snaptrade.authentication.login_snap_trade_user(query_params={"userId": user_id, "userSecret": user_secret})
         print(redirect_uri.body)
 
-
         snaptrade.portfolio_management.create(query_params={"userId": user_id, "userSecret": user_secret}, body={"id": str(uuid.uuid4()), "name": "MyPortfolio"})
         res = snaptrade.portfolio_management.list(query_params={"userId": user_id, "userSecret": user_secret})
         pprint(res.body)
@@ -64,6 +63,25 @@ class TestGettingStarted(unittest.TestCase):
         # 6) Deleting a user
         deleted_response = snaptrade.authentication.delete_snap_trade_user(query_params={"userId": user_id})
         pprint(deleted_response.body)
+    
+    def test_get_user_account_balance(self):
+        snaptrade = SnapTrade(
+            consumer_key=os.environ['SNAPTRADE_CONSUMER_KEY'],
+            client_id=os.environ["SNAPTRADE_CLIENT_ID"]
+        )
+        user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
+        user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
+        accounts = snaptrade.account_information.list_user_accounts(query_params={"userId": user_id, "userSecret": user_secret})
+        response = snaptrade.account_information.get_user_account_balance(
+            path_params = {
+                'accountId': accounts.body[0]["id"],
+            },
+            query_params = {
+                'userId': user_id,
+                'userSecret': user_secret,
+            },
+        )
+        pprint(response.body)
 
 
 if __name__ == '__main__':
