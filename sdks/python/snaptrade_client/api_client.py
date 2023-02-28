@@ -942,6 +942,46 @@ class OpenApiResponse(JSONDetector):
             for part in msg.get_payload()
         }
 
+    def __get_schema_for_content_type(
+        self,
+        content_type
+    ) -> typing.Optional[typing.Type[Schema]]:
+        """
+        Finds the correct SchemaObject for a particular content type. Handles
+        the asterisk "*" character that is used to group media types into ranges
+        (https://www.rfc-editor.org/rfc/rfc7231#section-5.3.2)
+        """
+        media_types = self.content.keys()
+        matched_media_type = OpenApiResponse.match_content_type(
+            content_type=content_type,
+            media_types=media_types
+        )
+        if matched_media_type is None:
+            return None
+        return self.content[matched_media_type].schema
+
+    @staticmethod
+    def match_content_type(content_type: str, media_types: typing.List[str]) -> typing.Optional[str]:
+        """
+        Matches a content type to a media type in a list of media types, handling media type ranges as defined in RFC7231.
+
+        Parameters:
+        content_type (str): The content type to match.
+        media_types (list): The list of media types to search.
+
+        Returns:
+        str: The first media type that matches the content type, or None if no match is found.
+        """
+        for media_type in media_types:
+            if media_type == '*/*' or media_type == content_type:
+                return media_type
+            elif '/' in media_type:
+                type_, subtype = media_type.split('/')
+                if (type_ == '*' or type_ == content_type.split('/')[0]) and \
+                (subtype == '*' or subtype == content_type.split('/')[1]):
+                    return media_type
+        return None
+
     def deserialize(self, response: urllib3.HTTPResponse, configuration: Configuration) -> ApiResponse:
         content_type = response.getheader('content-type')
         deserialized_body = unset
@@ -953,18 +993,18 @@ class OpenApiResponse(JSONDetector):
             pass
 
         if self.content is not None:
-            if content_type not in self.content:
-                raise ApiValueError(
-                    f"Invalid content_type returned. Content_type='{content_type}' was returned "
-                    f"when only {str(set(self.content))} are defined for status_code={str(response.status)}"
-                )
-            body_schema = self.content[content_type].schema
-            if body_schema is None:
+            if len(self.content) == 0:
                 # some specs do not define response content media type schemas
                 return self.response_cls(
                     response=response,
                     headers=deserialized_headers,
                     body=unset
+                )
+            body_schema = self.__get_schema_for_content_type(content_type)
+            if body_schema is None:
+                raise ApiValueError(
+                    f"Invalid content_type returned. Content_type='{content_type}' was returned "
+                    f"when only {str(set(self.content))} are defined for status_code={str(response.status)}"
                 )
 
             if self._content_type_is_json(content_type):
