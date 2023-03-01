@@ -25,9 +25,10 @@ Method | HTTP request | Description
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getAllUserHoldings({
@@ -84,9 +85,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getUserAccountBalance({
@@ -141,9 +143,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getUserAccountDetails({
@@ -198,9 +201,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getUserAccountOrders({
@@ -257,9 +261,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getUserAccountPositions({
@@ -314,9 +319,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.getUserHoldings({
@@ -373,9 +379,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.listUserAccounts({
@@ -428,9 +435,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.accountInformation.updateUserAccount({

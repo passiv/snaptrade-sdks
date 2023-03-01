@@ -28,9 +28,10 @@ Method | HTTP request | Description
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getCurrencyExchangeRatePair({
@@ -80,9 +81,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getPartnerInfo()
@@ -131,9 +133,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getSecurityTypes()
@@ -179,9 +182,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getStockExchanges()
@@ -226,9 +230,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getSymbols({
@@ -281,9 +286,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.getSymbolsByTicker({
@@ -337,9 +343,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.listAllBrokerageAuthorizationType({
@@ -390,9 +397,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.listAllBrokerages()
@@ -438,9 +446,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.listAllCurrencies()
@@ -486,9 +495,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.listAllCurrenciesRates()
@@ -533,9 +543,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.referenceData.symbolSearchUserAccount({

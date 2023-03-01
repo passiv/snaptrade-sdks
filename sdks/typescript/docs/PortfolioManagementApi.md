@@ -50,9 +50,10 @@ Method | HTTP request | Description
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
@@ -109,9 +110,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.create({
@@ -170,9 +172,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.createAssetClass()
@@ -217,9 +220,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.createModelPortfolio()
@@ -264,9 +268,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.deleteAssetClass({
@@ -316,9 +321,10 @@ void (empty response body)
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.deleteExcludedAsset({
@@ -370,9 +376,10 @@ void (empty response body)
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.deleteModelPortfolioById({
@@ -422,9 +429,10 @@ void (empty response body)
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.deletePortfoli({
@@ -477,9 +485,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.deletePortfolioTargetById({
@@ -534,9 +543,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.detailAssetClass({
@@ -586,9 +596,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getCalculatedTradeById({
@@ -642,9 +653,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getModelDetailsById({
@@ -694,9 +706,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioBalances({
@@ -749,9 +762,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioDetailsById({
@@ -802,9 +816,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioInfo({
@@ -855,9 +870,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioPositions({
@@ -910,9 +926,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioSettings({
@@ -963,9 +980,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioTargetById({
@@ -1018,9 +1036,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortfolioTargets({
@@ -1073,9 +1092,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.getPortoflioExcludedAssets({
@@ -1126,9 +1146,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.importModelPortfolio({
@@ -1179,9 +1200,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.list({
@@ -1234,9 +1256,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.listAssetClasses()
@@ -1281,9 +1304,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.listCalculatedTrades({
@@ -1333,9 +1357,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.listModelPortfolio()
@@ -1380,9 +1405,10 @@ This endpoint does not need any parameter.
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.listPortfolioAccounts({
@@ -1433,9 +1459,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.modifyModelPortfolioById({
@@ -1488,9 +1515,10 @@ void (empty response body)
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.savePortfolio({
@@ -1548,9 +1576,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.searchPortfolioSymbols({
@@ -1605,9 +1634,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.setPortfolioTargets({
@@ -1669,9 +1699,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.updateAssetClass({
@@ -1724,9 +1755,10 @@ void (empty response body)
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.updatePortfolioSettings({
@@ -1777,9 +1809,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.portfolioManagement.updatePortfolioTargetById({

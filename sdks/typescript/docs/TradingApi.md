@@ -27,9 +27,10 @@ Method | HTTP request | Description
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.cancelUserAccountOrder({
@@ -87,9 +88,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.getCalculatedTradeImpactById({
@@ -143,9 +145,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.getCalculatedTradesImpact({
@@ -197,9 +200,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.getOrderImpact({
@@ -264,9 +268,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.getUserAccountQuotes({
@@ -325,9 +330,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.modifyCalculatedTradeById({
@@ -389,9 +395,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.placeCalculatedTrades({
@@ -443,9 +450,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.placeForceOrder({
@@ -510,9 +518,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.placeOCOOrder({
@@ -569,9 +578,10 @@ Name | Type | Description  | Notes
 import { Snaptrade } from "snaptrade-typescript-sdk"
 
 const snaptrade = new Snaptrade({
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
-    apiKey: 'API_KEY',
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
 })
 
 const response = await snaptrade.trading.placeOrder({
