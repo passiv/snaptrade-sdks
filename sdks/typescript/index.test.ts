@@ -69,3 +69,51 @@ it("getting started", async () => {
   ).data;
   console.log("deleteResponse:", deleteResponse);
 });
+
+it("getUserAccountBalance", async () => {
+  const snaptrade = new Snaptrade({
+    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+    clientId: process.env.SNAPTRADE_CLIENT_ID,
+  });
+  const userId = process.env.SNAPTRADE_TEST_USER_ID;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const accounts = await snaptrade.accountInformation.listUserAccounts({
+    userId,
+    userSecret,
+  });
+  console.log(accounts.data);
+  const response = await snaptrade.accountInformation.getUserAccountBalance({
+    accountId: accounts.data[0].id,
+    userId,
+    userSecret,
+  });
+  console.log(response.data);
+});
+
+it.skip("getOptionsChain", async () => {
+  const snaptrade = new Snaptrade({
+    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+    clientId: process.env.SNAPTRADE_CLIENT_ID,
+  });
+  const userId = process.env.SNAPTRADE_TEST_USER_ID;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const accounts = await snaptrade.accountInformation.listUserAccounts({
+    userId,
+    userSecret,
+  });
+  console.log(accounts.data);
+  const accountId = accounts.data[0].id;
+  const symbols = await snaptrade.referenceData.getSymbols({
+    requestBody: { substring: "apple" },
+  });
+  console.log(symbols);
+  const symbol = symbols.data[0].id;
+  console.log(symbol);
+  const response = await snaptrade.options.getOptionsChain({
+    accountId,
+    userId,
+    userSecret,
+    symbol,
+  });
+  console.log(response.data);
+});
