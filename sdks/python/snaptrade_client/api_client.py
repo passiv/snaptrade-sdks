@@ -982,7 +982,7 @@ class OpenApiResponse(JSONDetector):
                     return media_type
         return None
 
-    def deserialize(self, response: urllib3.HTTPResponse, configuration: Configuration) -> ApiResponse:
+    def deserialize(self, response: urllib3.HTTPResponse, configuration: Configuration, skip_deserialization = False) -> ApiResponse:
         content_type = response.getheader('content-type')
         deserialized_body = unset
         streamed = response.supports_chunked_reads()
@@ -1016,8 +1016,20 @@ class OpenApiResponse(JSONDetector):
                 content_type = 'multipart/form-data'
             else:
                 raise NotImplementedError('Deserialization of {} has not yet been implemented'.format(content_type))
-            deserialized_body = body_schema.from_openapi_data_oapg(
-                body_data, _configuration=configuration)
+            if skip_deserialization:
+                return self.response_cls(
+                    response=response,
+                    headers=deserialized_headers,
+                    body=body_data
+                )
+
+            # Execute validation and throw as a side effect if validation fails
+            body_schema.from_openapi_data_oapg(
+                body_data,
+                _configuration=configuration
+            )
+            # Validation passed, set deserialized_body to plain old deserialized data
+            deserialized_body = body_data
         elif streamed:
             response.release_conn()
 

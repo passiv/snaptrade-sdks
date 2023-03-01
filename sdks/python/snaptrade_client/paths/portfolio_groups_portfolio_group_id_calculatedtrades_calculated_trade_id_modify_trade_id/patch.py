@@ -36,9 +36,9 @@ TradeIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-    'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
-    'calculatedTradeId': typing.Union[CalculatedTradeIdSchema, str, uuid.UUID, ],
-    'tradeId': typing.Union[TradeIdSchema, str, uuid.UUID, ],
+        'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
+        'calculatedTradeId': typing.Union[CalculatedTradeIdSchema, str, uuid.UUID, ],
+        'tradeId': typing.Union[TradeIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -178,7 +178,7 @@ class BaseApi(api_client.Api):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         """
         Modify units of a trade before it is placed
@@ -231,14 +231,15 @@ class BaseApi(api_client.Api):
             timeout=timeout,
         )
 
-        if skip_deserialization:
-            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+        response_for_status = _status_code_to_response.get(str(response.status))
+        if response_for_status:
+            api_response = response_for_status.deserialize(
+                                                   response,
+                                                   self.api_client.configuration,
+                                                   skip_deserialization=skip_deserialization
+                                               )
         else:
-            response_for_status = _status_code_to_response.get(str(response.status))
-            if response_for_status:
-                api_response = response_for_status.deserialize(response, self.api_client.configuration)
-            else:
-                api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
 
         if not 200 <= response.status <= 299:
             raise exceptions.ApiException(api_response=api_response)
@@ -313,7 +314,7 @@ class ModifyCalculatedTradeById(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._modify_calculated_trade_by_id_oapg(
             body=body,
@@ -393,7 +394,7 @@ class ApiForpatch(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._modify_calculated_trade_by_id_oapg(
             body=body,

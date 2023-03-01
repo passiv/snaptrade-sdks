@@ -49,14 +49,10 @@ generators:
       script:
         - mvn test
   python:
-    files:
-      configuration.mustache:
-        destinationFilename: snaptrade_client/configuration.py
-      rest.mustache:
-        destinationFilename: snaptrade_client/rest.py
     version: 5.0.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
+    setSkipSerializationToTrueByDefault: true
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
     clientName: SnapTrade
     clientState:

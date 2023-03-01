@@ -33,7 +33,7 @@ PortfolioGroupIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-    'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
+        'portfolioGroupId': typing.Union[PortfolioGroupIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -153,7 +153,7 @@ class BaseApi(api_client.Api):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         """
         Adds an asset to exclude to a portfolio group
@@ -204,14 +204,15 @@ class BaseApi(api_client.Api):
             timeout=timeout,
         )
 
-        if skip_deserialization:
-            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+        response_for_status = _status_code_to_response.get(str(response.status))
+        if response_for_status:
+            api_response = response_for_status.deserialize(
+                                                   response,
+                                                   self.api_client.configuration,
+                                                   skip_deserialization=skip_deserialization
+                                               )
         else:
-            response_for_status = _status_code_to_response.get(str(response.status))
-            if response_for_status:
-                api_response = response_for_status.deserialize(response, self.api_client.configuration)
-            else:
-                api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
 
         if not 200 <= response.status <= 299:
             raise exceptions.ApiException(api_response=api_response)
@@ -286,7 +287,7 @@ class AddPortfolioExcludedAsset(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._add_portfolio_excluded_asset_oapg(
             body=body,
@@ -366,7 +367,7 @@ class ApiForpost(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._add_portfolio_excluded_asset_oapg(
             body=body,

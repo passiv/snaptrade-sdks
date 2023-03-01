@@ -36,9 +36,9 @@ SymbolSchema = schemas.UUIDSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-    'userId': typing.Union[UserIdSchema, str, ],
-    'userSecret': typing.Union[UserSecretSchema, str, ],
-    'symbol': typing.Union[SymbolSchema, str, uuid.UUID, ],
+        'userId': typing.Union[UserIdSchema, str, ],
+        'userSecret': typing.Union[UserSecretSchema, str, ],
+        'symbol': typing.Union[SymbolSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -79,7 +79,7 @@ AccountIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-    'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -191,7 +191,7 @@ class BaseApi(api_client.Api):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         """
         Get the options chain
@@ -247,14 +247,15 @@ class BaseApi(api_client.Api):
             timeout=timeout,
         )
 
-        if skip_deserialization:
-            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+        response_for_status = _status_code_to_response.get(str(response.status))
+        if response_for_status:
+            api_response = response_for_status.deserialize(
+                                                   response,
+                                                   self.api_client.configuration,
+                                                   skip_deserialization=skip_deserialization
+                                               )
         else:
-            response_for_status = _status_code_to_response.get(str(response.status))
-            if response_for_status:
-                api_response = response_for_status.deserialize(response, self.api_client.configuration)
-            else:
-                api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
 
         if not 200 <= response.status <= 299:
             raise exceptions.ApiException(api_response=api_response)
@@ -310,7 +311,7 @@ class GetOptionsChain(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._get_options_chain_oapg(
             query_params=query_params,
@@ -370,7 +371,7 @@ class ApiForget(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._get_options_chain_oapg(
             query_params=query_params,

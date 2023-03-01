@@ -37,7 +37,7 @@ UserIdSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-    'userId': typing.Union[UserIdSchema, str, ],
+        'userId': typing.Union[UserIdSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -206,7 +206,7 @@ class BaseApi(api_client.Api):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         """
         Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
@@ -246,14 +246,15 @@ class BaseApi(api_client.Api):
             timeout=timeout,
         )
 
-        if skip_deserialization:
-            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+        response_for_status = _status_code_to_response.get(str(response.status))
+        if response_for_status:
+            api_response = response_for_status.deserialize(
+                                                   response,
+                                                   self.api_client.configuration,
+                                                   skip_deserialization=skip_deserialization
+                                               )
         else:
-            response_for_status = _status_code_to_response.get(str(response.status))
-            if response_for_status:
-                api_response = response_for_status.deserialize(response, self.api_client.configuration)
-            else:
-                api_response = api_client.ApiResponseWithoutDeserialization(response=response)
+            api_response = api_client.ApiResponseWithoutDeserialization(response=response)
 
         if not 200 <= response.status <= 299:
             raise exceptions.ApiException(api_response=api_response)
@@ -305,7 +306,7 @@ class DeleteSnapTradeUser(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._delete_snap_trade_user_oapg(
             query_params=query_params,
@@ -360,7 +361,7 @@ class ApiFordelete(BaseApi):
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = False,
+        skip_deserialization: bool = True,
     ):
         return self._delete_snap_trade_user_oapg(
             query_params=query_params,
