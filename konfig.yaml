@@ -73,7 +73,7 @@ generators:
         destinationFilename: configuration.ts
       common.mustache:
         destinationFilename: common.ts
-    version: 3.0.0
+    version: 4.0.0
     outputDirectory: sdks/typescript
     apiDocumentationAuthenticationPartial: snippets/typescriptDocAuthPartial.ts
     clientName: Snaptrade
