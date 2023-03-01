@@ -1,28 +1,23 @@
-const {
-  Configuration,
-  APIStatusApi,
-  AuthenticationApi,
-  AccountInformationApi,
-} = require("snaptrade-typescript-sdk");
+const { Snaptrade } = require("snaptrade-typescript-sdk");
 
 async function main() {
-  // 1) Initialize a configuration with your clientID and consumerKey.
-  const config = new Configuration({
+  // 1) Initialize a client with your clientID and consumerKey.
+  const snaptrade = new Snaptrade({
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
     clientId: process.env.SNAPTRADE_CLIENT_ID,
   });
 
   // 2) Check that the client is able to make a request to the API server.
-  const apiStatusApiInst = new APIStatusApi(config);
-  const status = await apiStatusApiInst.check();
+  const status = await snaptrade.apiStatus.check();
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
-  const userId = getUserId();
-  const authenticationApiInst = new AuthenticationApi(config);
+  const userId = uuid();
   const { userSecret } = (
-    await authenticationApiInst.registerSnapTradeUser({
-      userId,
+    await snaptrade.authentication.registerSnapTradeUser({
+      requestBody: {
+        userId,
+      },
     })
   ).data;
 
@@ -32,21 +27,23 @@ async function main() {
 
   // 4) Get a redirect URI. Users will need this to connect
   const data = (
-    await authenticationApiInst.loginSnapTradeUser(userId, userSecret)
+    await snaptrade.authentication.loginSnapTradeUser({ userId, userSecret })
   ).data;
   if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
   console.log("redirectURI:", data.redirectURI);
 
   // 5) Obtaining account holdings data
-  const accountInformationApi = new AccountInformationApi(config);
   const holdings = (
-    await accountInformationApi.getAllUserHoldings(userId, userSecret)
+    await snaptrade.accountInformation.getAllUserHoldings({
+      userId,
+      userSecret,
+    })
   ).data;
   console.log("holdings:", holdings);
 
   // 6) Deleting a user
   const deleteResponse = (
-    await authenticationApiInst.deleteSnapTradeUser(userId)
+    await snaptrade.authentication.deleteSnapTradeUser({ userId })
   ).data;
   console.log("deleteResponse:", deleteResponse);
 }
