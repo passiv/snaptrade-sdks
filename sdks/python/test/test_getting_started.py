@@ -83,6 +83,34 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(response.body)
 
+    def test_get_user_holdings(self):
+        snaptrade = SnapTrade(
+            consumer_key=os.environ['SNAPTRADE_CONSUMER_KEY'],
+            client_id=os.environ["SNAPTRADE_CLIENT_ID"]
+        )
+        user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
+        user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
+        accounts = snaptrade.account_information.list_user_accounts(query_params={"userId": user_id, "userSecret": user_secret})
+        account_id = accounts.body[0]["id"]
+        holdings = snaptrade.account_information.get_user_holdings(query_params={"userId": user_id, "userSecret": user_secret}, path_params={"accountId": account_id})
+        pprint(holdings)
+
+    @unittest.skip(reason="getting 500 internal server error")
+    def test_get_options_chain(self):
+        
+        snaptrade = SnapTrade(
+            consumer_key=os.environ['SNAPTRADE_CONSUMER_KEY'],
+            client_id=os.environ["SNAPTRADE_CLIENT_ID"]
+        )
+        user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
+        user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
+        accounts = snaptrade.account_information.list_user_accounts(query_params={"userId": user_id, "userSecret": user_secret})
+        account_id = accounts.body[0]["id"]
+        symbols = snaptrade.reference_data.get_symbols(body={"substring": "apple"})
+        symbol_id = symbols.body[0]["id"]
+        options_chain = snaptrade.options.get_options_chain(query_params={"userId": user_id, "userSecret": user_secret, "symbol": symbol_id}, path_params={"accountId": account_id})
+        pprint(options_chain)
+
 
 if __name__ == '__main__':
     unittest.main()
