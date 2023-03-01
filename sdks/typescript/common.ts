@@ -12,10 +12,10 @@
  * Do not edit the class manually.
  */
 
-import * as crypto from "crypto"
 import { Configuration } from "./configuration";
 import { RequiredError, RequestArgs } from "./base";
 import { AxiosInstance, AxiosResponse } from 'axios';
+import { requestHook } from "./requestHook";
 
 /**
  *
@@ -40,10 +40,18 @@ export const assertParamExists = function (functionName: string, paramName: stri
  */
 export const setApiKeyToObject = async function (object: any, keyParamName: string, configuration?: Configuration) {
     if (configuration && configuration.apiKey) {
-        const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-            ? await configuration.apiKey(keyParamName)
-            : await configuration.apiKey;
-        object[keyParamName] = localVarApiKeyValue;
+      if (typeof configuration.apiKey === "function")
+        object[keyParamName] = await configuration.apiKey(keyParamName);
+      if (typeof configuration.apiKey === "string")
+        object[keyParamName] = configuration.apiKey;
+      if (typeof configuration.apiKey === "object") {
+        await configuration.apiKey
+        if (keyParamName in configuration.apiKey)
+          object[keyParamName] = await configuration.apiKey[keyParamName];
+      } else
+        throw Error(
+          `Unexpected type ${typeof configuration.apiKey} for Configuration.apiKey`
+        );
     }
 }
 
@@ -136,45 +144,14 @@ export const toPathString = function (url: URL) {
     return url.pathname + url.search + url.hash
 }
 
-const JSONstringifyOrder = (obj: any) => {
-  var allKeys: any = [];
-  var seen: any = {};
-  JSON.stringify(obj, function (key, value) {
-    if (!(key in seen)) {
-      allKeys.push(key);
-      seen[key] = null;
-    }
-    return value;
-  });
-  allKeys.sort();
-  return JSON.stringify(obj, allKeys);
-};
-
 /**
  *
  * @export
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
     return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-        const axiosRequestArgs = {...axiosArgs.options, url: (configuration?.basePath || basePath) + axiosArgs.url};
-
-        if (configuration?.consumerKey === undefined) throw Error("Consumer key is required")
-        const consumerKey = encodeURI(configuration.consumerKey);
-        const requestData = axiosArgs.options.data === undefined || axiosArgs.options.data === '{}' ? null : JSON.parse(axiosArgs.options.data);
-        const path = axiosArgs.url.indexOf("?") === -1 ? `${axiosArgs.url}` : `${axiosArgs.url.split("?")[0]}`
-        const requestPath = `/api/v1${path}`
-        const requestQuery = axiosRequestArgs.url.replace(BASE_PATH, "").replace(path, "").replace("?", "");
-        const sigObject = {
-            content: requestData,
-            path: requestPath,
-            query: requestQuery,
-        };
-        const sigContent = JSONstringifyOrder(sigObject);
-        const hmac = crypto.createHmac("sha256", consumerKey);
-        const signature = hmac.update(sigContent).digest("base64");
-
-        axiosRequestArgs.headers["Signature"] = signature;
-  
-        return axios.request<T, R>(axiosRequestArgs);
+        const url = (configuration?.basePath || basePath) + axiosArgs.url
+        requestHook({axiosArgs, basePath, url, configuration})
+        return axios.request<T, R>({...axiosArgs.options, url});
     };
 }

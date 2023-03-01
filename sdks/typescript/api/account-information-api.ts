@@ -63,7 +63,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -124,7 +124,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -181,7 +181,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -239,7 +239,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -300,7 +300,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -357,7 +357,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -410,7 +410,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -467,7 +467,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             }
 
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required

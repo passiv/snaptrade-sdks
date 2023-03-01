@@ -75,6 +75,8 @@ generators:
         destinationFilename: common.ts
     version: 4.0.0
     outputDirectory: sdks/typescript
+    clientState:
+      - consumerKey
     apiDocumentationAuthenticationPartial: snippets/typescriptDocAuthPartial.ts
     clientName: Snaptrade
     readmeSnippet: snippets/typescript.ts

@@ -63,7 +63,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -112,7 +112,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -159,7 +159,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -205,7 +205,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
@@ -258,7 +258,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
