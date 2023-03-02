@@ -66,10 +66,7 @@ request_query_user_secret = api_client.QueryParameter(
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListBase,
-    schemas.NoneBase,
-    schemas.Schema,
-    schemas.NoneTupleMixin
+    schemas.ListSchema
 ):
 
 
@@ -79,17 +76,19 @@ class SchemaFor200ResponseBodyApplicationJson(
         def items() -> typing.Type['Account']:
             return Account
 
-
     def __new__(
         cls,
-        *args: typing.Union[list, tuple, None, ],
+        arg: typing.Union[typing.Tuple['Account'], typing.List['Account']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            *args,
+            arg,
             _configuration=_configuration,
         )
+
+    def __getitem__(self, i: int) -> 'Account':
+        return super().__getitem__(i)
 
 
 @dataclass

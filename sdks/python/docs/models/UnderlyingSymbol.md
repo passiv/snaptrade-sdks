@@ -5,18 +5,18 @@ Underlying Symbol
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Underlying Symbol | 
+dict, frozendict.frozendict,  | frozendict.frozendict,  | Underlying Symbol | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
-**symbol** | None, str,  | NoneClass, str,  |  | [optional] 
+**symbol** | str,  | str,  |  | [optional] 
 **description** | None, str,  | NoneClass, str,  |  | [optional] 
 **currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | [optional] 
 **exchange** | [**USExchange**](USExchange.md) | [**USExchange**](USExchange.md) |  | [optional] 
 **type** | [**SecurityType**](SecurityType.md) | [**SecurityType**](SecurityType.md) |  | [optional] 
-**[currencies](#currencies)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[currencies](#currencies)** | list, tuple,  | tuple,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 # currencies
@@ -24,7 +24,7 @@ Key | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple, None,  | tuple, NoneClass,  |  | 
+list, tuple,  | tuple,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

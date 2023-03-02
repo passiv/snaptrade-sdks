@@ -77,10 +77,7 @@ request_body_portfolio_group = api_client.RequestBody(
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListBase,
-    schemas.NoneBase,
-    schemas.Schema,
-    schemas.NoneTupleMixin
+    schemas.ListSchema
 ):
 
 
@@ -90,17 +87,19 @@ class SchemaFor200ResponseBodyApplicationJson(
         def items() -> typing.Type['PortfolioGroup']:
             return PortfolioGroup
 
-
     def __new__(
         cls,
-        *args: typing.Union[list, tuple, None, ],
+        arg: typing.Union[typing.Tuple['PortfolioGroup'], typing.List['PortfolioGroup']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            *args,
+            arg,
             _configuration=_configuration,
         )
+
+    def __getitem__(self, i: int) -> 'PortfolioGroup':
+        return super().__getitem__(i)
 
 
 @dataclass

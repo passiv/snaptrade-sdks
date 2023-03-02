@@ -99,10 +99,7 @@ _auth = [
 
 
 class SchemaFor200ResponseBody(
-    schemas.ListBase,
-    schemas.NoneBase,
-    schemas.Schema,
-    schemas.NoneTupleMixin
+    schemas.ListSchema
 ):
 
 
@@ -112,17 +109,19 @@ class SchemaFor200ResponseBody(
         def items() -> typing.Type['Balance']:
             return Balance
 
-
     def __new__(
         cls,
-        *args: typing.Union[list, tuple, None, ],
+        arg: typing.Union[typing.Tuple['Balance'], typing.List['Balance']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBody':
         return super().__new__(
             cls,
-            *args,
+            arg,
             _configuration=_configuration,
         )
+
+    def __getitem__(self, i: int) -> 'Balance':
+        return super().__getitem__(i)
 
 
 @dataclass

@@ -5,7 +5,7 @@ Balance
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Balance | 
+dict, frozendict.frozendict,  | frozendict.frozendict,  | Balance | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

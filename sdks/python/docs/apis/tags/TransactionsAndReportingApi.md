@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 # **get_activities**
 <a name="get_activities"></a>
-> [UniversalActivity], none_type get_activities(user_iduser_secret)
+> [UniversalActivity] get_activities(user_iduser_secret)
 
 Get transaction history for a user
 
@@ -129,7 +129,7 @@ headers | Unset | headers were not defined |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple, None,  | tuple, NoneClass,  |  | 
+list, tuple,  | tuple,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes

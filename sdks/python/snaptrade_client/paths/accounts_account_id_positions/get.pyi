@@ -92,10 +92,7 @@ request_path_account_id = api_client.PathParameter(
 
 
 class SchemaFor200ResponseBody(
-    schemas.ListBase,
-    schemas.NoneBase,
-    schemas.Schema,
-    schemas.NoneTupleMixin
+    schemas.ListSchema
 ):
 
 
@@ -105,17 +102,19 @@ class SchemaFor200ResponseBody(
         def items() -> typing.Type['Position']:
             return Position
 
-
     def __new__(
         cls,
-        *args: typing.Union[list, tuple, None, ],
+        arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBody':
         return super().__new__(
             cls,
-            *args,
+            arg,
             _configuration=_configuration,
         )
+
+    def __getitem__(self, i: int) -> 'Position':
+        return super().__getitem__(i)
 
 
 @dataclass

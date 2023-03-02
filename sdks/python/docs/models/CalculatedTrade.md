@@ -5,13 +5,13 @@ Array of trades to make to rebalance portfolio
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict, None,  | frozendict.frozendict, NoneClass,  | Array of trades to make to rebalance portfolio | 
+dict, frozendict.frozendict,  | frozendict.frozendict,  | Array of trades to make to rebalance portfolio | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
-**[trades](#trades)** | list, tuple, None,  | tuple, NoneClass,  |  | [optional] 
+**[trades](#trades)** | list, tuple,  | tuple,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 # trades
@@ -19,7 +19,7 @@ Key | Input Type | Accessed Type | Description | Notes
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-list, tuple, None,  | tuple, NoneClass,  |  | 
+list, tuple,  | tuple,  |  | 
 
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
