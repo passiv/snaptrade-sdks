@@ -38,13 +38,13 @@ export interface UniversalActivity {
      * @type {string}
      * @memberof UniversalActivity
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * 
      * @type {AccountSimple}
      * @memberof UniversalActivity
      */
-    'account'?: AccountSimple | null;
+    'account'?: AccountSimple;
     /**
      * 
      * @type {number}
@@ -56,55 +56,55 @@ export interface UniversalActivity {
      * @type {Currency}
      * @memberof UniversalActivity
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {string}
      * @memberof UniversalActivity
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {number}
      * @memberof UniversalActivity
      */
-    'fee'?: number | null;
+    'fee'?: number;
     /**
      * 
      * @type {string}
      * @memberof UniversalActivity
      */
-    'institution'?: string | null;
+    'institution'?: string;
     /**
      * If an option transaction, then it\'s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
      * @type {string}
      * @memberof UniversalActivity
      */
-    'option_type'?: string | null;
+    'option_type'?: string;
     /**
      * 
      * @type {number}
      * @memberof UniversalActivity
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * 
      * @type {string}
      * @memberof UniversalActivity
      */
-    'settlement_date'?: string | null;
+    'settlement_date'?: string;
     /**
      * 
      * @type {Symbol}
      * @memberof UniversalActivity
      */
-    'symbol'?: Symbol | null;
+    'symbol'?: Symbol;
     /**
      * 
      * @type {OptionsSymbol}
      * @memberof UniversalActivity
      */
-    'option_symbol'?: OptionsSymbol | null;
+    'option_symbol'?: OptionsSymbol;
     /**
      * 
      * @type {string}
@@ -122,7 +122,7 @@ export interface UniversalActivity {
      * @type {number}
      * @memberof UniversalActivity
      */
-    'units'?: number | null;
+    'units'?: number;
 }
 
 export const UniversalActivityTypeEnum = {

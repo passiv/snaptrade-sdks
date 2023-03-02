@@ -26,42 +26,42 @@ export interface StrategyOrderPlaceOrdersInnerLegsInner {
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'legId'?: number | null;
+    'legId'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'symbolId'?: number | null;
+    'symbolId'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'legRatioQuantity'?: number | null;
+    'legRatioQuantity'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'side'?: string | null;
+    'side'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'avgExecPrice'?: number | null;
+    'avgExecPrice'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInnerLegsInner
      */
-    'lastExecPrice'?: string | null;
+    'lastExecPrice'?: string;
 }
 

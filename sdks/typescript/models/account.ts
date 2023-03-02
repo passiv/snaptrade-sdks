@@ -47,36 +47,36 @@ export interface Account {
      * @type {string}
      * @memberof Account
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Account
      */
-    'number'?: string | null;
+    'number'?: string;
     /**
      * 
      * @type {string}
      * @memberof Account
      */
-    'institution_name'?: string | null;
+    'institution_name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Account
      */
-    'created_date'?: string | null;
+    'created_date'?: string;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof Account
      */
-    'meta'?: { [key: string]: any; } | null;
+    'meta'?: { [key: string]: any; };
     /**
      * 
      * @type {Array<CashRestriction>}
      * @memberof Account
      */
-    'cash_restrictions'?: Array<CashRestriction> | null;
+    'cash_restrictions'?: Array<CashRestriction>;
 }
 

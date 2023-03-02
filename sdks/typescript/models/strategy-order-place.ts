@@ -29,12 +29,12 @@ export interface StrategyOrderPlace {
      * @type {number}
      * @memberof StrategyOrderPlace
      */
-    'orderId'?: number | null;
+    'orderId'?: number;
     /**
      * 
      * @type {Array<StrategyOrderPlaceOrdersInner>}
      * @memberof StrategyOrderPlace
      */
-    'orders'?: Array<StrategyOrderPlaceOrdersInner> | null;
+    'orders'?: Array<StrategyOrderPlaceOrdersInner>;
 }
 

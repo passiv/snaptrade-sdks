@@ -48,6 +48,7 @@ import { Trade } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
+import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * PortfolioManagementApi - axios parameter creator
  * @export
@@ -74,7 +75,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -91,11 +92,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(universalSymbol, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -125,7 +133,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -150,11 +158,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -175,7 +190,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -190,10 +205,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -214,7 +236,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -229,10 +251,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -257,7 +286,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -272,10 +301,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -304,7 +340,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -319,10 +355,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -347,7 +390,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -362,10 +405,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -390,7 +440,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -405,10 +455,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -437,7 +494,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -452,10 +509,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -480,7 +544,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -495,10 +559,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -531,7 +602,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -546,10 +617,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -574,7 +652,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -589,10 +667,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -617,7 +702,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -632,10 +717,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -660,7 +752,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -675,10 +767,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -703,7 +802,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -718,10 +817,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -746,7 +852,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -761,10 +867,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -789,7 +902,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -804,10 +917,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -836,7 +956,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -851,10 +971,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -879,7 +1006,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -894,10 +1021,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -922,7 +1056,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -937,10 +1071,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -965,7 +1106,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -980,10 +1121,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1010,7 +1158,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1033,10 +1181,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1057,7 +1212,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1072,10 +1227,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1100,7 +1262,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1115,10 +1277,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1139,7 +1308,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1154,10 +1323,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1182,7 +1358,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1197,10 +1373,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1228,7 +1411,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1245,11 +1428,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(modelPortfolioDetails, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1277,7 +1467,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1294,11 +1484,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1324,7 +1521,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1341,11 +1538,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(symbolQuery, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1371,7 +1575,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1388,11 +1592,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(targetAsset, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1420,7 +1631,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1437,11 +1648,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(modelAssetClassDetails, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1466,7 +1684,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1481,10 +1699,17 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -1516,7 +1741,7 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1533,11 +1758,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(targetAsset, localVarRequestOptions, configuration)
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,

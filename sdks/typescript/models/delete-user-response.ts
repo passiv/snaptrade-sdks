@@ -26,12 +26,12 @@ export interface DeleteUserResponse {
      * @type {string}
      * @memberof DeleteUserResponse
      */
-    'status'?: string | null;
+    'status'?: string;
     /**
      * SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\'s unique to a user
      * @type {string}
      * @memberof DeleteUserResponse
      */
-    'userId'?: string | null;
+    'userId'?: string;
 }
 

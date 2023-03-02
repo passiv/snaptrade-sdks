@@ -35,30 +35,30 @@ export interface SymbolsQuotes {
      * @type {number}
      * @memberof SymbolsQuotes
      */
-    'bid_price'?: number | null;
+    'bid_price'?: number;
     /**
      * 
      * @type {number}
      * @memberof SymbolsQuotes
      */
-    'ask_price'?: number | null;
+    'ask_price'?: number;
     /**
      * 
      * @type {number}
      * @memberof SymbolsQuotes
      */
-    'last_trade_price'?: number | null;
+    'last_trade_price'?: number;
     /**
      * 
      * @type {number}
      * @memberof SymbolsQuotes
      */
-    'bid_size'?: number | null;
+    'bid_size'?: number;
     /**
      * 
      * @type {number}
      * @memberof SymbolsQuotes
      */
-    'ask_size'?: number | null;
+    'ask_size'?: number;
 }
 

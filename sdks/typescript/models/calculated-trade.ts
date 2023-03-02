@@ -35,6 +35,6 @@ export interface CalculatedTrade {
      * @type {Array<Trade>}
      * @memberof CalculatedTrade
      */
-    'trades'?: Array<Trade> | null;
+    'trades'?: Array<Trade>;
 }
 

@@ -41,6 +41,6 @@ export interface PortfolioGroupPosition {
      * @type {number}
      * @memberof PortfolioGroupPosition
      */
-    'units'?: number | null;
+    'units'?: number;
 }
 

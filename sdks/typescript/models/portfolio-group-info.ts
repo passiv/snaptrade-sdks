@@ -50,66 +50,66 @@ export interface PortfolioGroupInfo {
      * @type {Array<UniversalSymbol>}
      * @memberof PortfolioGroupInfo
      */
-    'symbols'?: Array<UniversalSymbol> | null;
+    'symbols'?: Array<UniversalSymbol>;
     /**
      * 
      * @type {Array<UniversalSymbol>}
      * @memberof PortfolioGroupInfo
      */
-    'quotable_symbols'?: Array<UniversalSymbol> | null;
+    'quotable_symbols'?: Array<UniversalSymbol>;
     /**
      * 
      * @type {Array<Balance>}
      * @memberof PortfolioGroupInfo
      */
-    'balances'?: Array<Balance> | null;
+    'balances'?: Array<Balance>;
     /**
      * 
      * @type {Array<Position>}
      * @memberof PortfolioGroupInfo
      */
-    'positions'?: Array<Position> | null;
+    'positions'?: Array<Position>;
     /**
      * 
      * @type {Array<TargetAsset>}
      * @memberof PortfolioGroupInfo
      */
-    'target_positions'?: Array<TargetAsset> | null;
+    'target_positions'?: Array<TargetAsset>;
     /**
      * 
      * @type {Array<Position>}
      * @memberof PortfolioGroupInfo
      */
-    'ideal_positions'?: Array<Position> | null;
+    'ideal_positions'?: Array<Position>;
     /**
      * 
      * @type {Array<ExcludedAsset>}
      * @memberof PortfolioGroupInfo
      */
-    'excluded_positions'?: Array<ExcludedAsset> | null;
+    'excluded_positions'?: Array<ExcludedAsset>;
     /**
      * 
      * @type {Array<CalculatedTrade>}
      * @memberof PortfolioGroupInfo
      */
-    'calculated_trades'?: Array<CalculatedTrade> | null;
+    'calculated_trades'?: Array<CalculatedTrade>;
     /**
      * 
      * @type {Array<BrokerageAuthorization>}
      * @memberof PortfolioGroupInfo
      */
-    'brokerage_authorizations'?: Array<BrokerageAuthorization> | null;
+    'brokerage_authorizations'?: Array<BrokerageAuthorization>;
     /**
      * 
      * @type {number}
      * @memberof PortfolioGroupInfo
      */
-    'accuracy'?: number | null;
+    'accuracy'?: number;
     /**
      * 
      * @type {PortfolioGroupSettings}
      * @memberof PortfolioGroupInfo
      */
-    'settings'?: PortfolioGroupSettings | null;
+    'settings'?: PortfolioGroupSettings;
 }
 

@@ -39,7 +39,7 @@ export interface TargetAsset {
      * @type {number}
      * @memberof TargetAsset
      */
-    'percent'?: number | null;
+    'percent'?: number;
     /**
      * 
      * @type {boolean}

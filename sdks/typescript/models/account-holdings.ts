@@ -38,24 +38,24 @@ export interface AccountHoldings {
      * @type {SnapTradeHoldingsAccount}
      * @memberof AccountHoldings
      */
-    'account'?: SnapTradeHoldingsAccount | null;
+    'account'?: SnapTradeHoldingsAccount;
     /**
      * 
      * @type {Array<Balance>}
      * @memberof AccountHoldings
      */
-    'balances'?: Array<Balance> | null;
+    'balances'?: Array<Balance>;
     /**
      * 
      * @type {Array<Position>}
      * @memberof AccountHoldings
      */
-    'positions'?: Array<Position> | null;
+    'positions'?: Array<Position>;
     /**
      * 
      * @type {SnapTradeHoldingsTotalValue}
      * @memberof AccountHoldings
      */
-    'total_value'?: SnapTradeHoldingsTotalValue | null;
+    'total_value'?: SnapTradeHoldingsTotalValue;
 }
 

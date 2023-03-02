@@ -27,12 +27,12 @@ export interface EncryptedResponse {
      * @type {string}
      * @memberof EncryptedResponse
      */
-    'encryptedSharedKey'?: string | null;
+    'encryptedSharedKey'?: string;
     /**
      * 
      * @type {EncryptedResponseEncryptedMessageData}
      * @memberof EncryptedResponse
      */
-    'encryptedMessageData'?: EncryptedResponseEncryptedMessageData | null;
+    'encryptedMessageData'?: EncryptedResponseEncryptedMessageData;
 }
 

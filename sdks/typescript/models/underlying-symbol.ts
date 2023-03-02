@@ -41,7 +41,7 @@ export interface UnderlyingSymbol {
      * @type {string}
      * @memberof UnderlyingSymbol
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {string}
@@ -53,24 +53,24 @@ export interface UnderlyingSymbol {
      * @type {Currency}
      * @memberof UnderlyingSymbol
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {USExchange}
      * @memberof UnderlyingSymbol
      */
-    'exchange'?: USExchange | null;
+    'exchange'?: USExchange;
     /**
      * 
      * @type {SecurityType}
      * @memberof UnderlyingSymbol
      */
-    'type'?: SecurityType | null;
+    'type'?: SecurityType;
     /**
      * 
      * @type {Array<Currency>}
      * @memberof UnderlyingSymbol
      */
-    'currencies'?: Array<Currency> | null;
+    'currencies'?: Array<Currency>;
 }
 

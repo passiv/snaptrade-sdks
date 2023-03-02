@@ -44,18 +44,18 @@ export interface OptionStrategy {
      * @type {string}
      * @memberof OptionStrategy
      */
-    'strategy_type'?: string | null;
+    'strategy_type'?: string;
     /**
      * 
      * @type {number}
      * @memberof OptionStrategy
      */
-    'number_of_legs'?: number | null;
+    'number_of_legs'?: number;
     /**
      * 
      * @type {Array<OptionStrategyLegsInner>}
      * @memberof OptionStrategy
      */
-    'legs'?: Array<OptionStrategyLegsInner> | null;
+    'legs'?: Array<OptionStrategyLegsInner>;
 }
 

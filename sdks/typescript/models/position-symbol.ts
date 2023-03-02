@@ -35,7 +35,7 @@ export interface PositionSymbol {
      * @type {string}
      * @memberof PositionSymbol
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {UniversalSymbol}
@@ -53,12 +53,12 @@ export interface PositionSymbol {
      * @type {boolean}
      * @memberof PositionSymbol
      */
-    'is_quotable'?: boolean | null;
+    'is_quotable'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof PositionSymbol
      */
-    'is_tradable'?: boolean | null;
+    'is_tradable'?: boolean;
 }
 

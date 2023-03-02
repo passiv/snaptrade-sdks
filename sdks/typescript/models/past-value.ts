@@ -32,12 +32,12 @@ export interface PastValue {
      * @type {number}
      * @memberof PastValue
      */
-    'value'?: number | null;
+    'value'?: number;
     /**
      * 
      * @type {string}
      * @memberof PastValue
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

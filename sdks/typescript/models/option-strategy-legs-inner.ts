@@ -24,24 +24,24 @@ export interface OptionStrategyLegsInner {
      * @type {string}
      * @memberof OptionStrategyLegsInner
      */
-    'option_symbol_id'?: string | null;
+    'option_symbol_id'?: string;
     /**
      * 
      * @type {number}
      * @memberof OptionStrategyLegsInner
      */
-    'index'?: number | null;
+    'index'?: number;
     /**
      * 
      * @type {string}
      * @memberof OptionStrategyLegsInner
      */
-    'action'?: string | null;
+    'action'?: string;
     /**
      * 
      * @type {number}
      * @memberof OptionStrategyLegsInner
      */
-    'quantity'?: number | null;
+    'quantity'?: number;
 }
 

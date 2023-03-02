@@ -34,6 +34,7 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Position } from '../models';
 import { paginate } from "../pagination/paginate";
+import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * AccountInformationApi - axios parameter creator
  * @export
@@ -62,7 +63,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -89,10 +90,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -123,7 +131,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -146,10 +154,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -180,7 +195,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -203,10 +218,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -238,7 +260,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -265,10 +287,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -299,7 +328,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -322,10 +351,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -356,7 +392,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -379,10 +415,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -409,7 +452,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -432,10 +475,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -466,7 +516,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -489,10 +539,17 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,

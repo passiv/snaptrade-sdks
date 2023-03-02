@@ -29,72 +29,72 @@ export interface PartnerData {
      * @type {string}
      * @memberof PartnerData
      */
-    'redirect_uri'?: string | null;
+    'redirect_uri'?: string;
     /**
      * Brokerages that can be accessed by partners
      * @type {Array<Brokerage>}
      * @memberof PartnerData
      */
-    'allowed_brokerages'?: Array<Brokerage> | null;
+    'allowed_brokerages'?: Array<Brokerage>;
     /**
      * Name of Snaptrade Partner
      * @type {string}
      * @memberof PartnerData
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * Slug of Snaptrade Partner
      * @type {string}
      * @memberof PartnerData
      */
-    'slug'?: string | null;
+    'slug'?: string;
     /**
      * URL to partner\'s logo
      * @type {string}
      * @memberof PartnerData
      */
-    'logo_url'?: string | null;
+    'logo_url'?: string;
     /**
      * Shows if pin is required by users to access connection page
      * @type {boolean}
      * @memberof PartnerData
      */
-    'pin_required'?: boolean | null;
+    'pin_required'?: boolean;
     /**
      * Shows if users of Snaptrade partners can access trade endpoints
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_trades'?: boolean | null;
+    'can_access_trades'?: boolean;
     /**
      * Shows if Snaptrade partners can get user holdings data
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_holdings'?: boolean | null;
+    'can_access_holdings'?: boolean;
     /**
      * Shows if Snaptrade partners can get users account history data
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_account_history'?: boolean | null;
+    'can_access_account_history'?: boolean;
     /**
      * Shows if Snaptrade partners can get users holdings data
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_reference_data'?: boolean | null;
+    'can_access_reference_data'?: boolean;
     /**
      * Shows if users Snaptrade partners can access portfolio group management features
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_portfolio_management'?: boolean | null;
+    'can_access_portfolio_management'?: boolean;
     /**
      * Shows if Snaptrade partners can get users account order history
      * @type {boolean}
      * @memberof PartnerData
      */
-    'can_access_orders'?: boolean | null;
+    'can_access_orders'?: boolean;
 }
 

@@ -30,6 +30,6 @@ export interface LoginRedirectURI {
      * @type {string}
      * @memberof LoginRedirectURI
      */
-    'sessionId'?: string | null;
+    'sessionId'?: string;
 }
 

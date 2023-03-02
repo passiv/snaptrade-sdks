@@ -38,6 +38,6 @@ export interface NetContributions {
      * @type {string}
      * @memberof NetContributions
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

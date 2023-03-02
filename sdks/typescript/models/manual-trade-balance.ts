@@ -32,13 +32,13 @@ export interface ManualTradeBalance {
      * @type {Account}
      * @memberof ManualTradeBalance
      */
-    'account'?: Account | null;
+    'account'?: Account;
     /**
      * 
      * @type {Currency}
      * @memberof ManualTradeBalance
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * Cash
      * @type {number}

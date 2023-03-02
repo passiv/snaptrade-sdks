@@ -38,36 +38,36 @@ export interface OptionsPosition {
      * @type {string}
      * @memberof OptionsPosition
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {OptionsSymbol}
      * @memberof OptionsPosition
      */
-    'option_symbol'?: OptionsSymbol | null;
+    'option_symbol'?: OptionsSymbol;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof OptionsPosition
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * 
      * @type {number}
      * @memberof OptionsPosition
      */
-    'units'?: number | null;
+    'units'?: number;
     /**
      * 
      * @type {Currency}
      * @memberof OptionsPosition
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * Average purchase price for this position
      * @type {number}
      * @memberof OptionsPosition
      */
-    'average_purchase_price'?: number | null;
+    'average_purchase_price'?: number;
 }
 

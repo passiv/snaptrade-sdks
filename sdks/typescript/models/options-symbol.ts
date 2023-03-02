@@ -35,37 +35,37 @@ export interface OptionsSymbol {
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'ticker'?: string | null;
+    'ticker'?: string;
     /**
      * 
      * @type {number}
      * @memberof OptionsSymbol
      */
-    'strike_price'?: number | null;
+    'strike_price'?: number;
     /**
      * 
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'expiration_date'?: string | null;
+    'expiration_date'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof OptionsSymbol
      */
-    'is_mini_option'?: boolean | null;
+    'is_mini_option'?: boolean;
     /**
      * 
      * @type {UnderlyingSymbol}
      * @memberof OptionsSymbol
      */
-    'underlying_symbol'?: UnderlyingSymbol | null;
+    'underlying_symbol'?: UnderlyingSymbol;
     /**
      * 
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'local_id'?: string | null;
+    'local_id'?: string;
     /**
      * 
      * @type {any}
@@ -83,12 +83,12 @@ export interface OptionsSymbol {
      * @type {boolean}
      * @memberof OptionsSymbol
      */
-    'is_quotable'?: boolean | null;
+    'is_quotable'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OptionsSymbol
      */
-    'is_tradable'?: boolean | null;
+    'is_tradable'?: boolean;
 }
 

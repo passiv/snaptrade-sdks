@@ -32,7 +32,7 @@ export interface ModelPortfolio {
      * @type {string}
      * @memberof ModelPortfolio
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * Enum definitions -> [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio]
      * @type {number}

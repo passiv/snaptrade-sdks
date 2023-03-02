@@ -26,18 +26,18 @@ export interface EncryptedResponseEncryptedMessageData {
      * @type {string}
      * @memberof EncryptedResponseEncryptedMessageData
      */
-    'encryptedMessage'?: string | null;
+    'encryptedMessage'?: string;
     /**
      * 
      * @type {string}
      * @memberof EncryptedResponseEncryptedMessageData
      */
-    'tag'?: string | null;
+    'tag'?: string;
     /**
      * 
      * @type {string}
      * @memberof EncryptedResponseEncryptedMessageData
      */
-    'nonce'?: string | null;
+    'nonce'?: string;
 }
 

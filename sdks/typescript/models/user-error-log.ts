@@ -26,36 +26,36 @@ export interface UserErrorLog {
      * @type {string}
      * @memberof UserErrorLog
      */
-    'requestedAt'?: string | null;
+    'requestedAt'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserErrorLog
      */
-    'response'?: string | null;
+    'response'?: string;
     /**
      * 
      * @type {number}
      * @memberof UserErrorLog
      */
-    'statusCode'?: number | null;
+    'statusCode'?: number;
     /**
      * 
      * @type {string}
      * @memberof UserErrorLog
      */
-    'queryParams'?: string | null;
+    'queryParams'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserErrorLog
      */
-    'httpMethod'?: string | null;
+    'httpMethod'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserErrorLog
      */
-    'endpoint'?: string | null;
+    'endpoint'?: string;
 }
 

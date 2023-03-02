@@ -35,7 +35,7 @@ export interface TradeExecutionStatus {
      * @type {BrokerageSymbol}
      * @memberof TradeExecutionStatus
      */
-    'symbol'?: BrokerageSymbol | null;
+    'symbol'?: BrokerageSymbol;
     /**
      * 
      * @type {UniversalSymbol}
@@ -59,7 +59,7 @@ export interface TradeExecutionStatus {
      * @type {number}
      * @memberof TradeExecutionStatus
      */
-    'filled_units'?: number | null;
+    'filled_units'?: number;
     /**
      * Action of executed trade
      * @type {string}
@@ -71,19 +71,19 @@ export interface TradeExecutionStatus {
      * @type {number}
      * @memberof TradeExecutionStatus
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * Fees paid from executing trade
      * @type {number}
      * @memberof TradeExecutionStatus
      */
-    'commissions'?: number | null;
+    'commissions'?: number;
     /**
      * Other misc. data
      * @type {{ [key: string]: any; }}
      * @memberof TradeExecutionStatus
      */
-    'meta'?: { [key: string]: any; } | null;
+    'meta'?: { [key: string]: any; };
 }
 
 export const TradeExecutionStatusStateEnum = {

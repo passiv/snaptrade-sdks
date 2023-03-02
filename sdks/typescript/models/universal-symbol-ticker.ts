@@ -41,42 +41,42 @@ export interface UniversalSymbolTicker {
      * @type {string}
      * @memberof UniversalSymbolTicker
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {string}
      * @memberof UniversalSymbolTicker
      */
-    'raw_symbol'?: string | null;
+    'raw_symbol'?: string;
     /**
      * 
      * @type {string}
      * @memberof UniversalSymbolTicker
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {Currency}
      * @memberof UniversalSymbolTicker
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {Exchange}
      * @memberof UniversalSymbolTicker
      */
-    'exchange'?: Exchange | null;
+    'exchange'?: Exchange;
     /**
      * 
      * @type {SecurityType}
      * @memberof UniversalSymbolTicker
      */
-    'type'?: SecurityType | null;
+    'type'?: SecurityType;
     /**
      * 
      * @type {Array<Currency>}
      * @memberof UniversalSymbolTicker
      */
-    'currencies'?: Array<Currency> | null;
+    'currencies'?: Array<Currency>;
 }
 

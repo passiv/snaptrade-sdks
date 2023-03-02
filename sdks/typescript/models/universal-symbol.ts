@@ -57,19 +57,19 @@ export interface UniversalSymbol {
      * @type {Currency}
      * @memberof UniversalSymbol
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {Exchange}
      * @memberof UniversalSymbol
      */
-    'exchange'?: Exchange | null;
+    'exchange'?: Exchange;
     /**
      * 
      * @type {SecurityType}
      * @memberof UniversalSymbol
      */
-    'type'?: SecurityType | null;
+    'type'?: SecurityType;
     /**
      * 
      * @type {Array<Currency>}

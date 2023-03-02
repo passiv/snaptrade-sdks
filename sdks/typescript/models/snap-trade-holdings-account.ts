@@ -35,7 +35,7 @@ export interface SnapTradeHoldingsAccount {
      * @type {BrokerageAuthorization}
      * @memberof SnapTradeHoldingsAccount
      */
-    'brokerage_authorization'?: BrokerageAuthorization | null;
+    'brokerage_authorization'?: BrokerageAuthorization;
     /**
      * 
      * @type {string}
@@ -53,18 +53,18 @@ export interface SnapTradeHoldingsAccount {
      * @type {string}
      * @memberof SnapTradeHoldingsAccount
      */
-    'number'?: string | null;
+    'number'?: string;
     /**
      * 
      * @type {string}
      * @memberof SnapTradeHoldingsAccount
      */
-    'institution_name'?: string | null;
+    'institution_name'?: string;
     /**
      * 
      * @type {{ [key: string]: any; }}
      * @memberof SnapTradeHoldingsAccount
      */
-    'meta'?: { [key: string]: any; } | null;
+    'meta'?: { [key: string]: any; };
 }
 

@@ -32,13 +32,13 @@ export interface OptionLeg {
      * @type {string}
      * @memberof OptionLeg
      */
-    'option_symbol_id'?: string | null;
+    'option_symbol_id'?: string;
     /**
      * 
      * @type {number}
      * @memberof OptionLeg
      */
-    'quantity'?: number | null;
+    'quantity'?: number;
 }
 
 export const OptionLegActionEnum = {

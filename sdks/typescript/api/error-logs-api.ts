@@ -22,6 +22,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { UserErrorLog } from '../models';
 import { paginate } from "../pagination/paginate";
+import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ErrorLogsApi - axios parameter creator
  * @export
@@ -49,7 +50,7 @@ export const ErrorLogsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -72,10 +73,17 @@ export const ErrorLogsApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
+            requestBeforeHook({
+              queryParameters: localVarQueryParameter,
+              requestConfig: localVarRequestOptions,
+              path: localVarPath,
+              configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,

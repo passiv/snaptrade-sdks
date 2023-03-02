@@ -50,7 +50,7 @@ export interface CashRestriction {
      * @type {number}
      * @memberof CashRestriction
      */
-    'amount'?: number | null;
+    'amount'?: number;
 }
 
 export const CashRestrictionTypeEnum = {

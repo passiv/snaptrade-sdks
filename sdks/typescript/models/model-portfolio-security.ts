@@ -35,6 +35,6 @@ export interface ModelPortfolioSecurity {
      * @type {number}
      * @memberof ModelPortfolioSecurity
      */
-    'percent'?: number | null;
+    'percent'?: number;
 }
 

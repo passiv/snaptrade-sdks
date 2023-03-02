@@ -29,7 +29,7 @@ export interface StrategyOrderRecord {
      * @type {OptionStrategy}
      * @memberof StrategyOrderRecord
      */
-    'strategy'?: OptionStrategy | null;
+    'strategy'?: OptionStrategy;
     /**
      * 
      * @type {string}
@@ -41,19 +41,19 @@ export interface StrategyOrderRecord {
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'filled_quantity'?: number | null;
+    'filled_quantity'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'open_quantity'?: number | null;
+    'open_quantity'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'closed_quantity'?: number | null;
+    'closed_quantity'?: number;
     /**
      * 
      * @type {string}
@@ -71,25 +71,25 @@ export interface StrategyOrderRecord {
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'limit_price'?: number | null;
+    'limit_price'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'execution_price'?: number | null;
+    'execution_price'?: number;
     /**
      * Time
      * @type {string}
      * @memberof StrategyOrderRecord
      */
-    'time_placed'?: string | null;
+    'time_placed'?: string;
     /**
      * Time
      * @type {string}
      * @memberof StrategyOrderRecord
      */
-    'time_updated'?: string | null;
+    'time_updated'?: string;
 }
 
 export const StrategyOrderRecordStatusEnum = {

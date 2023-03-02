@@ -26,12 +26,12 @@ export interface SnapTradeHoldingsTotalValue {
      * @type {number}
      * @memberof SnapTradeHoldingsTotalValue
      */
-    'value'?: number | null;
+    'value'?: number;
     /**
      * 
      * @type {string}
      * @memberof SnapTradeHoldingsTotalValue
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

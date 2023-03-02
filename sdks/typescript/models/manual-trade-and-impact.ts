@@ -32,18 +32,18 @@ export interface ManualTradeAndImpact {
      * @type {ManualTrade}
      * @memberof ManualTradeAndImpact
      */
-    'trade'?: ManualTrade | null;
+    'trade'?: ManualTrade;
     /**
      * 
      * @type {Array<ManualTrade>}
      * @memberof ManualTradeAndImpact
      */
-    'trade_impacts'?: Array<ManualTrade> | null;
+    'trade_impacts'?: Array<ManualTrade>;
     /**
      * 
      * @type {ManualTradeBalance}
      * @memberof ManualTradeAndImpact
      */
-    'combined_remaining_balance'?: ManualTradeBalance | null;
+    'combined_remaining_balance'?: ManualTradeBalance;
 }
 

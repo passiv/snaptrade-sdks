@@ -35,37 +35,37 @@ export interface BrokerageAuthorization {
      * @type {string}
      * @memberof BrokerageAuthorization
      */
-    'created_date'?: string | null;
+    'created_date'?: string;
     /**
      * Time
      * @type {string}
      * @memberof BrokerageAuthorization
      */
-    'updated_date'?: string | null;
+    'updated_date'?: string;
     /**
      * 
      * @type {Brokerage}
      * @memberof BrokerageAuthorization
      */
-    'brokerage'?: Brokerage | null;
+    'brokerage'?: Brokerage;
     /**
      * Connection Name
      * @type {string}
      * @memberof BrokerageAuthorization
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof BrokerageAuthorization
      */
-    'type'?: string | null;
+    'type'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof BrokerageAuthorization
      */
-    'disabled'?: boolean | null;
+    'disabled'?: boolean;
     /**
      * Disabled date
      * @type {string}
@@ -77,6 +77,6 @@ export interface BrokerageAuthorization {
      * @type {{ [key: string]: any; }}
      * @memberof BrokerageAuthorization
      */
-    'meta'?: { [key: string]: any; } | null;
+    'meta'?: { [key: string]: any; };
 }
 

@@ -26,18 +26,18 @@ export interface Status {
      * @type {number}
      * @memberof Status
      */
-    'version'?: number | null;
+    'version'?: number;
     /**
      * 
      * @type {string}
      * @memberof Status
      */
-    'timestamp'?: string | null;
+    'timestamp'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof Status
      */
-    'online'?: boolean | null;
+    'online'?: boolean;
 }
 

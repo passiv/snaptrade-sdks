@@ -29,18 +29,18 @@ export interface OptionChainInnerChainPerRootInner {
      * @type {string}
      * @memberof OptionChainInnerChainPerRootInner
      */
-    'optionRoot'?: string | null;
+    'optionRoot'?: string;
     /**
      * 
      * @type {Array<OptionChainInnerChainPerRootInnerChainPerStrikePriceInner>}
      * @memberof OptionChainInnerChainPerRootInner
      */
-    'chainPerStrikePrice'?: Array<OptionChainInnerChainPerRootInnerChainPerStrikePriceInner> | null;
+    'chainPerStrikePrice'?: Array<OptionChainInnerChainPerRootInnerChainPerStrikePriceInner>;
     /**
      * 
      * @type {number}
      * @memberof OptionChainInnerChainPerRootInner
      */
-    'multiplier'?: number | null;
+    'multiplier'?: number;
 }
 

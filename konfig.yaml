@@ -9,7 +9,6 @@ filterModels:
 filterRequestBodies:
   - CreateSnapTradeParterAPICredentialsRequestBody
   - MockSignatureRequestBody
-attachNullabletoAllResponseSchemas: true
 allObjectsHaveAdditionalProperties:
   requestBody: false
   exclude:
@@ -66,13 +65,6 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    files:
-      tsconfig.mustache:
-        destinationFilename: tsconfig.json
-      configuration.mustache:
-        destinationFilename: configuration.ts
-      common.mustache:
-        destinationFilename: common.ts
     version: 4.0.0
     outputDirectory: sdks/typescript
     clientState:

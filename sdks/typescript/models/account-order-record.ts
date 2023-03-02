@@ -41,13 +41,13 @@ export interface AccountOrderRecord {
      * @type {string}
      * @memberof AccountOrderRecord
      */
-    'brokerage_order_id'?: string | null;
+    'brokerage_order_id'?: string;
     /**
      * 
      * @type {AccountOrderRecordStatus}
      * @memberof AccountOrderRecord
      */
-    'status'?: AccountOrderRecordStatus | null;
+    'status'?: AccountOrderRecordStatus;
     /**
      * 
      * @type {string}
@@ -65,78 +65,78 @@ export interface AccountOrderRecord {
      * @type {Action}
      * @memberof AccountOrderRecord
      */
-    'action'?: Action | null;
+    'action'?: Action;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'total_quantity'?: number | null;
+    'total_quantity'?: number;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'open_quantity'?: number | null;
+    'open_quantity'?: number;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'canceled_quantity'?: number | null;
+    'canceled_quantity'?: number;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'filled_quantity'?: number | null;
+    'filled_quantity'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'execution_price'?: number | null;
+    'execution_price'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'limit_price'?: number | null;
+    'limit_price'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'stop_price'?: number | null;
+    'stop_price'?: number;
     /**
      * 
      * @type {OrderType}
      * @memberof AccountOrderRecord
      */
-    'order_type'?: OrderType | null;
+    'order_type'?: OrderType;
     /**
      * 
      * @type {TimeInForce}
      * @memberof AccountOrderRecord
      */
-    'time_in_force'?: TimeInForce | null;
+    'time_in_force'?: TimeInForce;
     /**
      * Time
      * @type {string}
      * @memberof AccountOrderRecord
      */
-    'time_placed'?: string | null;
+    'time_placed'?: string;
     /**
      * Time
      * @type {string}
      * @memberof AccountOrderRecord
      */
-    'time_updated'?: string | null;
+    'time_updated'?: string;
     /**
      * Time
      * @type {string}
      * @memberof AccountOrderRecord
      */
-    'expiry_date'?: string | null;
+    'expiry_date'?: string;
 }
 

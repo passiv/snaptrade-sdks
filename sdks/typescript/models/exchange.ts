@@ -32,37 +32,37 @@ export interface Exchange {
      * @type {string}
      * @memberof Exchange
      */
-    'code'?: string | null;
+    'code'?: string;
     /**
      * 
      * @type {string}
      * @memberof Exchange
      */
-    'mic_code'?: string | null;
+    'mic_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof Exchange
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Exchange
      */
-    'timezone'?: string | null;
+    'timezone'?: string;
     /**
      * 
      * @type {string}
      * @memberof Exchange
      */
-    'start_time'?: string | null;
+    'start_time'?: string;
     /**
      * 
      * @type {string}
      * @memberof Exchange
      */
-    'close_time'?: string | null;
+    'close_time'?: string;
     /**
      * 
      * @type {string}

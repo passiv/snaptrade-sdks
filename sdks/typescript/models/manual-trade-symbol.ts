@@ -41,13 +41,13 @@ export interface ManualTradeSymbol {
      * @type {Currency}
      * @memberof ManualTradeSymbol
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {string}
      * @memberof ManualTradeSymbol
      */
-    'local_id'?: string | null;
+    'local_id'?: string;
     /**
      * 
      * @type {string}
@@ -59,6 +59,6 @@ export interface ManualTradeSymbol {
      * @type {string}
      * @memberof ManualTradeSymbol
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
 }
 

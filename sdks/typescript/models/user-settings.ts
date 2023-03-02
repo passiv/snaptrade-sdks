@@ -29,60 +29,60 @@ export interface UserSettings {
      * @type {string}
      * @memberof UserSettings
      */
-    'email'?: string | null;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof UserSettings
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof UserSettings
      */
-    'receive_cash_notification'?: boolean | null;
+    'receive_cash_notification'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof UserSettings
      */
-    'receive_drift_notification'?: boolean | null;
+    'receive_drift_notification'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof UserSettings
      */
-    'user_trial_activated'?: boolean | null;
+    'user_trial_activated'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof UserSettings
      */
-    'activated_trial_date'?: string | null;
+    'activated_trial_date'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof UserSettings
      */
-    'demo'?: boolean | null;
+    'demo'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof UserSettings
      */
-    'api_enabled'?: boolean | null;
+    'api_enabled'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof UserSettings
      */
-    'drift_threshold'?: number | null;
+    'drift_threshold'?: number;
     /**
      * 
      * @type {Currency}
      * @memberof UserSettings
      */
-    'preferred_currency'?: Currency | null;
+    'preferred_currency'?: Currency;
 }
 

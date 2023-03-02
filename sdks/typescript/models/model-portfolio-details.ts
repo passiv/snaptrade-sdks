@@ -33,7 +33,7 @@ export interface ModelPortfolioDetails {
      * @type {ModelPortfolio}
      * @memberof ModelPortfolioDetails
      */
-    'model_portfolio'?: ModelPortfolio | null;
+    'model_portfolio'?: ModelPortfolio;
     /**
      * 
      * @type {Array<ModelPortfolioSecurity>}

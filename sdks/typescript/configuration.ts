@@ -13,28 +13,31 @@
  */
 
 type ApiKey =
-  | string 
+  | string
   | ((keyParamName: string) => string)
   | ((keyParamName: string) => Promise<string>)
   | { [apiKeyName: string]: string | undefined };
+
 export interface ConfigurationParameters {
-    clientId?: string
-    consumerKey?: string
-    PartnerSignature?: string;
-    PartnerTimestamp?: string;
+    consumerKey?: string;
+    clientId?: string;
+    Signature?: string;
+    timestamp?: string;
+    apiKey?: ApiKey;
     username?: string;
     password?: string;
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     basePath?: string;
     baseOptions?: any;
-    userAgent: string;
-    apiKey?: ApiKey;
+    userAgent?: string;
     formDataCtor?: new () => any;
 }
 
 export class Configuration {
-    clientId?: string
-    consumerKey?: string
+    /**
+    * Client state
+    */
+    consumerKey?: string;
     /**
      * parameter for apiKey security
      * @param name security name
@@ -77,10 +80,6 @@ export class Configuration {
      */
     baseOptions?: any;
     /**
-     * Default User-Agent header
-     */
-    userAgent: string = "Konfig/4.0.0/typescript";
-    /**
      * The FormData constructor that will be used to create multipart form data
      * requests. You can inject this here so that execution environments that
      * do not support the FormData class can still run the generated client.
@@ -88,21 +87,29 @@ export class Configuration {
      * @type {new () => FormData}
      */
     formDataCtor?: new () => any;
+    /**
+     * Default User-Agent header
+     */
+    userAgent: string;
 
-    constructor(param: ConfigurationParameters) {
-        this.consumerKey = param.consumerKey;
-        this.apiKey = param.apiKey ? param.apiKey : {}
-        // Support direct assignment of api key to ConfigurationParameters
-        if (typeof this.apiKey === "object") {
-            this.apiKey["PartnerClientId"] = param.clientId
-            this.apiKey["PartnerSignature"] = param.PartnerSignature
-            this.apiKey["PartnerTimestamp"] = param.PartnerTimestamp
+    constructor(param: ConfigurationParameters = {}) {
+        this.consumerKey = param.consumerKey
+        this.apiKey = param.apiKey
+        if (this.apiKey === undefined) {
+            this.apiKey = {}
+            if (param.clientId !== undefined)
+                this.apiKey["clientId"] = param.clientId
+            if (param.Signature !== undefined)
+                this.apiKey["Signature"] = param.Signature
+            if (param.timestamp !== undefined)
+                this.apiKey["timestamp"] = param.timestamp
         }
         this.username = param.username;
         this.password = param.password;
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions;
+        this.userAgent = param.userAgent === undefined ? "Konfig/4.0.0/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 

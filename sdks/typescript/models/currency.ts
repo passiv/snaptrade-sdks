@@ -26,18 +26,18 @@ export interface Currency {
      * @type {string}
      * @memberof Currency
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof Currency
      */
-    'code'?: string | null;
+    'code'?: string;
     /**
      * 
      * @type {string}
      * @memberof Currency
      */
-    'name'?: string | null;
+    'name'?: string;
 }
 

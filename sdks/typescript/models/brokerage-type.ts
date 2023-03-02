@@ -32,6 +32,6 @@ export interface BrokerageType {
      * @type {string}
      * @memberof BrokerageType
      */
-    'name'?: string | null;
+    'name'?: string;
 }
 

@@ -29,18 +29,18 @@ export interface ExchangeRatePairs {
      * @type {Currency}
      * @memberof ExchangeRatePairs
      */
-    'src'?: Currency | null;
+    'src'?: Currency;
     /**
      * 
      * @type {Currency}
      * @memberof ExchangeRatePairs
      */
-    'dst'?: Currency | null;
+    'dst'?: Currency;
     /**
      * 
      * @type {number}
      * @memberof ExchangeRatePairs
      */
-    'exchange_rate'?: number | null;
+    'exchange_rate'?: number;
 }
 

@@ -32,30 +32,30 @@ export interface TradeImpact {
      * @type {Account}
      * @memberof TradeImpact
      */
-    'account'?: Account | null;
+    'account'?: Account;
     /**
      * 
      * @type {Currency}
      * @memberof TradeImpact
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * Remaining balance after executing all trades
      * @type {number}
      * @memberof TradeImpact
      */
-    'remaining_cash'?: number | null;
+    'remaining_cash'?: number;
     /**
      * Total estimated commissions across all trades to make
      * @type {number}
      * @memberof TradeImpact
      */
-    'estimated_commissions'?: number | null;
+    'estimated_commissions'?: number;
     /**
      * Estimated forex fees to pay to excute trades
      * @type {number}
      * @memberof TradeImpact
      */
-    'forex_fees'?: number | null;
+    'forex_fees'?: number;
 }
 

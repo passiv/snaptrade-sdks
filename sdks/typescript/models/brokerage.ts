@@ -35,49 +35,49 @@ export interface Brokerage {
      * @type {string}
      * @memberof Brokerage
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Brokerage
      */
-    'display_name'?: string | null;
+    'display_name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Brokerage
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof Brokerage
      */
-    'aws_s3_logo_url'?: string | null;
+    'aws_s3_logo_url'?: string;
     /**
      * 
      * @type {string}
      * @memberof Brokerage
      */
-    'slug'?: string | null;
+    'slug'?: string;
     /**
      * 
      * @type {string}
      * @memberof Brokerage
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof Brokerage
      */
-    'enabled'?: boolean | null;
+    'enabled'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Brokerage
      */
-    'maintenance_mode'?: boolean | null;
+    'maintenance_mode'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -89,19 +89,19 @@ export interface Brokerage {
      * @type {boolean}
      * @memberof Brokerage
      */
-    'allows_trading'?: boolean | null;
+    'allows_trading'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Brokerage
      */
-    'has_reporting'?: boolean | null;
+    'has_reporting'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Brokerage
      */
-    'is_real_time_connection'?: boolean | null;
+    'is_real_time_connection'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -113,7 +113,7 @@ export interface Brokerage {
      * @type {boolean}
      * @memberof Brokerage
      */
-    'is_scraping_integration'?: boolean | null;
+    'is_scraping_integration'?: boolean;
     /**
      * 
      * @type {string}
@@ -125,12 +125,12 @@ export interface Brokerage {
      * @type {BrokerageType}
      * @memberof Brokerage
      */
-    'brokerage_type'?: BrokerageType | null;
+    'brokerage_type'?: BrokerageType;
     /**
      * List of exchange ID supported by brokerage
      * @type {Array<any>}
      * @memberof Brokerage
      */
-    'exchanges'?: Array<any> | null;
+    'exchanges'?: Array<any>;
 }
 

@@ -32,7 +32,7 @@ export interface OptionsHoldings {
      * @type {string}
      * @memberof OptionsHoldings
      */
-    'id'?: string | null;
+    'id'?: string;
     /**
      * 
      * @type {string}
@@ -44,24 +44,24 @@ export interface OptionsHoldings {
      * @type {OptionsSymbol}
      * @memberof OptionsHoldings
      */
-    'option_symbol'?: OptionsSymbol | null;
+    'option_symbol'?: OptionsSymbol;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof OptionsHoldings
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * 
      * @type {Currency}
      * @memberof OptionsHoldings
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * Average purchase price for this position
      * @type {number}
      * @memberof OptionsHoldings
      */
-    'average_purchase_price'?: number | null;
+    'average_purchase_price'?: number;
 }
 

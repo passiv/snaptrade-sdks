@@ -32,36 +32,36 @@ export interface StrategyQuotes {
      * @type {OptionStrategy}
      * @memberof StrategyQuotes
      */
-    'strategy'?: OptionStrategy | null;
+    'strategy'?: OptionStrategy;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof StrategyQuotes
      */
-    'open_price'?: number | null;
+    'open_price'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof StrategyQuotes
      */
-    'bid_price'?: number | null;
+    'bid_price'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof StrategyQuotes
      */
-    'ask_price'?: number | null;
+    'ask_price'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyQuotes
      */
-    'volatility'?: number | null;
+    'volatility'?: number;
     /**
      * 
      * @type {StrategyQuotesGreek}
      * @memberof StrategyQuotes
      */
-    'greek'?: StrategyQuotesGreek | null;
+    'greek'?: StrategyQuotesGreek;
 }
 

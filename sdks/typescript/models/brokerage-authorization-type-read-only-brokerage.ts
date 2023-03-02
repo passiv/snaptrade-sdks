@@ -32,12 +32,12 @@ export interface BrokerageAuthorizationTypeReadOnlyBrokerage {
      * @type {string}
      * @memberof BrokerageAuthorizationTypeReadOnlyBrokerage
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * Slug of Brokerage. It is usually the name of the brokerage in capital letters
      * @type {string}
      * @memberof BrokerageAuthorizationTypeReadOnlyBrokerage
      */
-    'slug'?: string | null;
+    'slug'?: string;
 }
 

@@ -32,6 +32,6 @@ export interface ModelAssetClass {
      * @type {string}
      * @memberof ModelAssetClass
      */
-    'name'?: string | null;
+    'name'?: string;
 }
 

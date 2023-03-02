@@ -39,19 +39,19 @@ export interface ManualTradeForm {
      * @type {Action}
      * @memberof ManualTradeForm
      */
-    'action'?: Action | null;
+    'action'?: Action;
     /**
      * 
      * @type {OrderType}
      * @memberof ManualTradeForm
      */
-    'order_type'?: OrderType | null;
+    'order_type'?: OrderType;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof ManualTradeForm
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * Stop Price. If stop loss or stop limit order, the price to trigger the stop
      * @type {number}
@@ -63,13 +63,13 @@ export interface ManualTradeForm {
      * @type {TimeInForce}
      * @memberof ManualTradeForm
      */
-    'time_in_force'?: TimeInForce | null;
+    'time_in_force'?: TimeInForce;
     /**
      * Trade Units
      * @type {number}
      * @memberof ManualTradeForm
      */
-    'units'?: number | null;
+    'units'?: number;
     /**
      * 
      * @type {string}

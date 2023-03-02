@@ -29,30 +29,30 @@ export interface PortfolioGroupSettings {
      * @type {boolean}
      * @memberof PortfolioGroupSettings
      */
-    'buyOnly'?: boolean | null;
+    'buyOnly'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof PortfolioGroupSettings
      */
-    'cash_optimizer'?: boolean | null;
+    'cash_optimizer'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof PortfolioGroupSettings
      */
-    'notifyFrequency'?: string | null;
+    'notifyFrequency'?: string;
     /**
      * 
      * @type {number}
      * @memberof PortfolioGroupSettings
      */
-    'driftThreshold'?: number | null;
+    'driftThreshold'?: number;
     /**
      * 
      * @type {Currency}
      * @memberof PortfolioGroupSettings
      */
-    'preferred_currency'?: Currency | null;
+    'preferred_currency'?: Currency;
 }
 

@@ -32,18 +32,18 @@ export interface SecurityType {
      * @type {string}
      * @memberof SecurityType
      */
-    'code'?: string | null;
+    'code'?: string;
     /**
      * 
      * @type {string}
      * @memberof SecurityType
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof SecurityType
      */
-    'is_supported'?: boolean | null;
+    'is_supported'?: boolean;
 }
 

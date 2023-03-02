@@ -38,6 +38,6 @@ export interface DividendAtDate {
      * @type {string}
      * @memberof DividendAtDate
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

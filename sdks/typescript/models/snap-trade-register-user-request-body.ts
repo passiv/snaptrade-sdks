@@ -24,12 +24,12 @@ export interface SnapTradeRegisterUserRequestBody {
      * @type {string}
      * @memberof SnapTradeRegisterUserRequestBody
      */
-    'userId'?: string | null;
+    'userId'?: string;
     /**
      * Open SSH RSA public key
      * @type {string}
      * @memberof SnapTradeRegisterUserRequestBody
      */
-    'rsaPublicKey'?: string | null;
+    'rsaPublicKey'?: string;
 }
 

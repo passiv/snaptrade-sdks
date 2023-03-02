@@ -29,7 +29,7 @@ export interface Balance {
      * @type {Currency}
      * @memberof Balance
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {number}

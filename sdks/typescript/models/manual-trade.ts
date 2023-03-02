@@ -47,42 +47,42 @@ export interface ManualTrade {
      * @type {Account}
      * @memberof ManualTrade
      */
-    'account'?: Account | null;
+    'account'?: Account;
     /**
      * 
      * @type {OrderType}
      * @memberof ManualTrade
      */
-    'order_type'?: OrderType | null;
+    'order_type'?: OrderType;
     /**
      * 
      * @type {TimeInForce}
      * @memberof ManualTrade
      */
-    'time_in_force'?: TimeInForce | null;
+    'time_in_force'?: TimeInForce;
     /**
      * 
      * @type {ManualTradeSymbol}
      * @memberof ManualTrade
      */
-    'symbol'?: ManualTradeSymbol | null;
+    'symbol'?: ManualTradeSymbol;
     /**
      * 
      * @type {Action}
      * @memberof ManualTrade
      */
-    'action'?: Action | null;
+    'action'?: Action;
     /**
      * Trade Units
      * @type {number}
      * @memberof ManualTrade
      */
-    'units'?: number | null;
+    'units'?: number;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof ManualTrade
      */
-    'price'?: number | null;
+    'price'?: number;
 }
 

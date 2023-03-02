@@ -44,13 +44,13 @@ export interface BrokerageSymbol {
      * @type {BrokerageAuthorization}
      * @memberof BrokerageSymbol
      */
-    'brokerage_authorization'?: BrokerageAuthorization | null;
+    'brokerage_authorization'?: BrokerageAuthorization;
     /**
      * 
      * @type {string}
      * @memberof BrokerageSymbol
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {boolean}

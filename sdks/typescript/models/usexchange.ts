@@ -32,37 +32,37 @@ export interface USExchange {
      * @type {string}
      * @memberof USExchange
      */
-    'code'?: string | null;
+    'code'?: string;
     /**
      * 
      * @type {string}
      * @memberof USExchange
      */
-    'mic_code'?: string | null;
+    'mic_code'?: string;
     /**
      * 
      * @type {string}
      * @memberof USExchange
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof USExchange
      */
-    'timezone'?: string | null;
+    'timezone'?: string;
     /**
      * 
      * @type {string}
      * @memberof USExchange
      */
-    'start_time'?: string | null;
+    'start_time'?: string;
     /**
      * 
      * @type {string}
      * @memberof USExchange
      */
-    'close_time'?: string | null;
+    'close_time'?: string;
     /**
      * 
      * @type {string}
@@ -74,6 +74,6 @@ export interface USExchange {
      * @type {boolean}
      * @memberof USExchange
      */
-    'allows_cryptocurrency_symbols'?: boolean | null;
+    'allows_cryptocurrency_symbols'?: boolean;
 }
 

@@ -26,6 +26,6 @@ export interface JWT {
      * @type {string}
      * @memberof JWT
      */
-    'token'?: string | null;
+    'token'?: string;
 }
 

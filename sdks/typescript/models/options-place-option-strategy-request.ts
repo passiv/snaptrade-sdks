@@ -36,7 +36,7 @@ export interface OptionsPlaceOptionStrategyRequest {
      * @type {number}
      * @memberof OptionsPlaceOptionStrategyRequest
      */
-    'price': number | null;
+    'price': number;
 }
 
 export const OptionsPlaceOptionStrategyRequestOrderTypeEnum = {

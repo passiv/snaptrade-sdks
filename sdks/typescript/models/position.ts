@@ -29,7 +29,7 @@ export interface Position {
      * @type {PositionSymbol}
      * @memberof Position
      */
-    'symbol'?: PositionSymbol | null;
+    'symbol'?: PositionSymbol;
     /**
      * 
      * @type {number}
@@ -59,6 +59,6 @@ export interface Position {
      * @type {number}
      * @memberof Position
      */
-    'average_purchase_price'?: number | null;
+    'average_purchase_price'?: number;
 }
 

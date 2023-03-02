@@ -39,13 +39,13 @@ export interface Trade {
      * @type {Account}
      * @memberof Trade
      */
-    'account'?: Account | null;
+    'account'?: Account;
     /**
      * 
      * @type {BrokerageSymbol}
      * @memberof Trade
      */
-    'symbol'?: BrokerageSymbol | null;
+    'symbol'?: BrokerageSymbol;
     /**
      * 
      * @type {UniversalSymbol}

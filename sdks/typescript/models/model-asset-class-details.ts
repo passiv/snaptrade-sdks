@@ -30,7 +30,7 @@ export interface ModelAssetClassDetails {
      * @type {ModelAssetClass}
      * @memberof ModelAssetClassDetails
      */
-    'model_asset_class'?: ModelAssetClass | null;
+    'model_asset_class'?: ModelAssetClass;
     /**
      * 
      * @type {Array<ModelAssetClassTarget>}

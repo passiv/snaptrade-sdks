@@ -32,30 +32,30 @@ export interface Symbol {
      * @type {string}
      * @memberof Symbol
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {string}
      * @memberof Symbol
      */
-    'raw_symbol'?: string | null;
+    'raw_symbol'?: string;
     /**
      * 
      * @type {string}
      * @memberof Symbol
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {Currency}
      * @memberof Symbol
      */
-    'currency'?: Currency | null;
+    'currency'?: Currency;
     /**
      * 
      * @type {Exchange}
      * @memberof Symbol
      */
-    'exchange'?: Exchange | null;
+    'exchange'?: Exchange;
 }
 

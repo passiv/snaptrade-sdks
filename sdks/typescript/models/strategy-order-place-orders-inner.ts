@@ -29,258 +29,258 @@ export interface StrategyOrderPlaceOrdersInner {
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'id'?: number | null;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'symbolId'?: number | null;
+    'symbolId'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'totalQuantity'?: number | null;
+    'totalQuantity'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'openQuantity'?: number | null;
+    'openQuantity'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'filledQuantity'?: number | null;
+    'filledQuantity'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'canceledQuantity'?: number | null;
+    'canceledQuantity'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'side'?: string | null;
+    'side'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'orderType'?: string | null;
+    'orderType'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'limitPrice'?: string | null;
+    'limitPrice'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'stopPrice'?: string | null;
+    'stopPrice'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isAllOrNone'?: boolean | null;
+    'isAllOrNone'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isAnonymous'?: boolean | null;
+    'isAnonymous'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'icebergQuantity'?: string | null;
+    'icebergQuantity'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'minQuantity'?: string | null;
+    'minQuantity'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'avgExecPrice'?: number | null;
+    'avgExecPrice'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'lastExecPrice'?: string | null;
+    'lastExecPrice'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'source'?: string | null;
+    'source'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'timeInForce'?: string | null;
+    'timeInForce'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'gtdDate'?: string | null;
+    'gtdDate'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'state'?: string | null;
+    'state'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'rejectionReason'?: string | null;
+    'rejectionReason'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'chainId'?: number | null;
+    'chainId'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'creationTime'?: string | null;
+    'creationTime'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'updateTime'?: string | null;
+    'updateTime'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'notes'?: string | null;
+    'notes'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'primaryRoute'?: string | null;
+    'primaryRoute'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'secondaryRoute'?: string | null;
+    'secondaryRoute'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'orderRoute'?: string | null;
+    'orderRoute'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'venueHoldingOrder'?: string | null;
+    'venueHoldingOrder'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'comissionCharged'?: number | null;
+    'comissionCharged'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'exchangeOrderId'?: string | null;
+    'exchangeOrderId'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isSignificantShareHolder'?: boolean | null;
+    'isSignificantShareHolder'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isInsider'?: boolean | null;
+    'isInsider'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isLimitOffsetInDollar'?: boolean | null;
+    'isLimitOffsetInDollar'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'userId'?: number | null;
+    'userId'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'placementCommission'?: string | null;
+    'placementCommission'?: string;
     /**
      * 
      * @type {Array<StrategyOrderPlaceOrdersInnerLegsInner>}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'legs'?: Array<StrategyOrderPlaceOrdersInnerLegsInner> | null;
+    'legs'?: Array<StrategyOrderPlaceOrdersInnerLegsInner>;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'strategyType'?: string | null;
+    'strategyType'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'triggerStopPrice'?: string | null;
+    'triggerStopPrice'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'orderGroupId'?: number | null;
+    'orderGroupId'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'orderClass'?: string | null;
+    'orderClass'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof StrategyOrderPlaceOrdersInner
      */
-    'isCrossZero'?: boolean | null;
+    'isCrossZero'?: boolean;
 }
 

@@ -16,7 +16,7 @@ const JSONstringifyOrder = (obj: any) => {
   return JSON.stringify(obj, allKeys);
 };
 
-export function requestHook(request: {
+export function requestAfterHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
   url: string;

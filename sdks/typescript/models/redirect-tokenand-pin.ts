@@ -26,12 +26,12 @@ export interface RedirectTokenandPin {
      * @type {string}
      * @memberof RedirectTokenandPin
      */
-    'token'?: string | null;
+    'token'?: string;
     /**
      * 
      * @type {string}
      * @memberof RedirectTokenandPin
      */
-    'pin'?: string | null;
+    'pin'?: string;
 }
 

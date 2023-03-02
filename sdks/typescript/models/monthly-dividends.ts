@@ -35,6 +35,6 @@ export interface MonthlyDividends {
      * @type {Array<DividendAtDate>}
      * @memberof MonthlyDividends
      */
-    'dividends'?: Array<DividendAtDate> | null;
+    'dividends'?: Array<DividendAtDate>;
 }
 

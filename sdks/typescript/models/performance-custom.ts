@@ -41,31 +41,31 @@ export interface PerformanceCustom {
      * @type {Array<PastValue>}
      * @memberof PerformanceCustom
      */
-    'totalEquityTimeframe'?: Array<PastValue> | null;
+    'totalEquityTimeframe'?: Array<PastValue>;
     /**
      * 
      * @type {NetContributions}
      * @memberof PerformanceCustom
      */
-    'contributions'?: NetContributions | null;
+    'contributions'?: NetContributions;
     /**
      * 
      * @type {Array<PastValue>}
      * @memberof PerformanceCustom
      */
-    'contributionTimeframe'?: Array<PastValue> | null;
+    'contributionTimeframe'?: Array<PastValue>;
     /**
      * 
      * @type {Array<PastValue>}
      * @memberof PerformanceCustom
      */
-    'contributionTimeframeCumulative'?: Array<PastValue> | null;
+    'contributionTimeframeCumulative'?: Array<PastValue>;
     /**
      * 
      * @type {Array<PastValue>}
      * @memberof PerformanceCustom
      */
-    'withdrawalTimeframe'?: Array<PastValue> | null;
+    'withdrawalTimeframe'?: Array<PastValue>;
     /**
      * Current streak of cosecutive months where contributions were made
      * @type {number}
@@ -89,7 +89,7 @@ export interface PerformanceCustom {
      * @type {Array<NetDividend>}
      * @memberof PerformanceCustom
      */
-    'dividends'?: Array<NetDividend> | null;
+    'dividends'?: Array<NetDividend>;
     /**
      * Total dividends received over the timeframe
      * @type {number}
@@ -107,13 +107,13 @@ export interface PerformanceCustom {
      * @type {Array<string>}
      * @memberof PerformanceCustom
      */
-    'badTickers'?: Array<string> | null;
+    'badTickers'?: Array<string>;
     /**
      * 
      * @type {Array<MonthlyDividends>}
      * @memberof PerformanceCustom
      */
-    'dividendTimeline'?: Array<MonthlyDividends> | null;
+    'dividendTimeline'?: Array<MonthlyDividends>;
     /**
      * commissions incurred during the timeframe
      * @type {number}
@@ -143,12 +143,12 @@ export interface PerformanceCustom {
      * @type {Array<SubPeriodReturnRate>}
      * @memberof PerformanceCustom
      */
-    'returnRateTimeframe'?: Array<SubPeriodReturnRate> | null;
+    'returnRateTimeframe'?: Array<SubPeriodReturnRate>;
     /**
      * Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes)
      * @type {boolean}
      * @memberof PerformanceCustom
      */
-    'detailedMode'?: boolean | null;
+    'detailedMode'?: boolean;
 }
 

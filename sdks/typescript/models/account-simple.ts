@@ -32,12 +32,12 @@ export interface AccountSimple {
      * @type {string}
      * @memberof AccountSimple
      */
-    'name'?: string | null;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof AccountSimple
      */
-    'number'?: string | null;
+    'number'?: string;
 }
 

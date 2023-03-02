@@ -26,12 +26,12 @@ export interface SnapTradeAPIDisclaimerAcceptStatus {
      * @type {boolean}
      * @memberof SnapTradeAPIDisclaimerAcceptStatus
      */
-    'accepted'?: boolean | null;
+    'accepted'?: boolean;
     /**
      * 
      * @type {string}
      * @memberof SnapTradeAPIDisclaimerAcceptStatus
      */
-    'timestamp'?: string | null;
+    'timestamp'?: string;
 }
 

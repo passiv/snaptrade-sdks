@@ -26,30 +26,30 @@ export interface StrategyQuotesGreek {
      * @type {number}
      * @memberof StrategyQuotesGreek
      */
-    'delta'?: number | null;
+    'delta'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyQuotesGreek
      */
-    'gamma'?: number | null;
+    'gamma'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyQuotesGreek
      */
-    'theta'?: number | null;
+    'theta'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyQuotesGreek
      */
-    'vega'?: number | null;
+    'vega'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyQuotesGreek
      */
-    'rho'?: number | null;
+    'rho'?: number;
 }
 

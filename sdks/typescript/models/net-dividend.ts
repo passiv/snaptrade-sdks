@@ -41,6 +41,6 @@ export interface NetDividend {
      * @type {string}
      * @memberof NetDividend
      */
-    'currency'?: string | null;
+    'currency'?: string;
 }
 

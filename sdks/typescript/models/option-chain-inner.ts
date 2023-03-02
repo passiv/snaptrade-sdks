@@ -29,30 +29,30 @@ export interface OptionChainInner {
      * @type {string}
      * @memberof OptionChainInner
      */
-    'expiryDate'?: string | null;
+    'expiryDate'?: string;
     /**
      * 
      * @type {string}
      * @memberof OptionChainInner
      */
-    'description'?: string | null;
+    'description'?: string;
     /**
      * 
      * @type {string}
      * @memberof OptionChainInner
      */
-    'listingExchange'?: string | null;
+    'listingExchange'?: string;
     /**
      * 
      * @type {string}
      * @memberof OptionChainInner
      */
-    'optionExerciseType'?: string | null;
+    'optionExerciseType'?: string;
     /**
      * 
      * @type {Array<OptionChainInnerChainPerRootInner>}
      * @memberof OptionChainInner
      */
-    'chainPerRoot'?: Array<OptionChainInnerChainPerRootInner> | null;
+    'chainPerRoot'?: Array<OptionChainInnerChainPerRootInner>;
 }
 

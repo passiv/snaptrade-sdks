@@ -29,66 +29,66 @@ export interface StrategyImpact {
      * @type {number}
      * @memberof StrategyImpact
      */
-    'estimatedCommissions'?: number | null;
+    'estimatedCommissions'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpact
      */
-    'buyingPowerEffect'?: number | null;
+    'buyingPowerEffect'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpact
      */
-    'buyingPowerResult'?: number | null;
+    'buyingPowerResult'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpact
      */
-    'maintExcessEffect'?: number | null;
+    'maintExcessEffect'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpact
      */
-    'maintExcessResult'?: number | null;
+    'maintExcessResult'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpact
      */
-    'tradeValueCalculation'?: string | null;
+    'tradeValueCalculation'?: string;
     /**
      * 
      * @type {Array<StrategyImpactLegsInner>}
      * @memberof StrategyImpact
      */
-    'legs'?: Array<StrategyImpactLegsInner> | null;
+    'legs'?: Array<StrategyImpactLegsInner>;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpact
      */
-    'side'?: string | null;
+    'side'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpact
      */
-    'effect'?: string | null;
+    'effect'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpact
      */
-    'price'?: number | null;
+    'price'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpact
      */
-    'strategy'?: string | null;
+    'strategy'?: string;
 }
 

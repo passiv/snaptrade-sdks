@@ -29,12 +29,12 @@ export interface ModelPortfolioAssetClass {
      * @type {ModelAssetClass}
      * @memberof ModelPortfolioAssetClass
      */
-    'model_asset_class'?: ModelAssetClass | null;
+    'model_asset_class'?: ModelAssetClass;
     /**
      * 
      * @type {number}
      * @memberof ModelPortfolioAssetClass
      */
-    'percent'?: number | null;
+    'percent'?: number;
 }
 

@@ -47,7 +47,7 @@ export interface BrokerageAuthorizationTypeReadOnly {
      * @type {BrokerageAuthorizationTypeReadOnlyBrokerage}
      * @memberof BrokerageAuthorizationTypeReadOnly
      */
-    'brokerage'?: BrokerageAuthorizationTypeReadOnlyBrokerage | null;
+    'brokerage'?: BrokerageAuthorizationTypeReadOnlyBrokerage;
 }
 
 export const BrokerageAuthorizationTypeReadOnlyTypeEnum = {

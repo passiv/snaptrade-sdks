@@ -26,42 +26,42 @@ export interface StrategyImpactLegsInner {
      * @type {number}
      * @memberof StrategyImpactLegsInner
      */
-    'legId'?: number | null;
+    'legId'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpactLegsInner
      */
-    'symbol'?: string | null;
+    'symbol'?: string;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpactLegsInner
      */
-    'symbolId'?: number | null;
+    'symbolId'?: number;
     /**
      * 
      * @type {number}
      * @memberof StrategyImpactLegsInner
      */
-    'legRatioQuantity'?: number | null;
+    'legRatioQuantity'?: number;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpactLegsInner
      */
-    'side'?: string | null;
+    'side'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpactLegsInner
      */
-    'avgExecPrice'?: string | null;
+    'avgExecPrice'?: string;
     /**
      * 
      * @type {string}
      * @memberof StrategyImpactLegsInner
      */
-    'lastExecPrice'?: string | null;
+    'lastExecPrice'?: string;
 }
 
