@@ -59,10 +59,10 @@ const snaptrade = new Snaptrade({
 const response = await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
     'portfolioGroupId': "portfolioGroupId_example",
     'requestBody': {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'symbol': "VAB.TO",
-        'raw_symbol': "VAB",
-        'description': "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol": "VAB.TO",
+        "raw_symbol": "VAB",
+        "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
     },
 })
 console.log(response)
@@ -120,8 +120,8 @@ const response = await snaptrade.portfolioManagement.create({
     'userId': "John.doe@snaptrade.com",
     'userSecret': "USERSECRET123",
     'requestBody': {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'name': "Combined Retirement Portfolio",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name": "Combined Retirement Portfolio",
     },
 })
 console.log(response)
@@ -1524,8 +1524,8 @@ const snaptrade = new Snaptrade({
 const response = await snaptrade.portfolioManagement.savePortfolio({
     'portfolioGroupId': "portfolioGroupId_example",
     'requestBody': {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'name': "Combined Retirement Portfolio",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name": "Combined Retirement Portfolio",
     },
 })
 console.log(response)
@@ -1585,7 +1585,7 @@ const snaptrade = new Snaptrade({
 const response = await snaptrade.portfolioManagement.searchPortfolioSymbols({
     'portfolioGroupId': "portfolioGroupId_example",
     'requestBody': {
-        'substring': "apple",
+        "substring": "apple",
     },
 })
 console.log(response)
@@ -1644,10 +1644,10 @@ const response = await snaptrade.portfolioManagement.setPortfolioTargets({
     'portfolioGroupId': "portfolioGroupId_example",
     'requestBody': [
         {
-            'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            'percent': 90,
-            'is_supported': true,
-            'is_excluded': true,
+            "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "percent": 90,
+            "is_supported": true,
+            "is_excluded": true,
         }
     ],
 })
@@ -1819,10 +1819,10 @@ const response = await snaptrade.portfolioManagement.updatePortfolioTargetById({
     'portfolioGroupId': "portfolioGroupId_example",
     'targetAssetId': "targetAssetId_example",
     'requestBody': {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'percent': 90,
-        'is_supported': true,
-        'is_excluded': true,
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "percent": 90,
+        "is_supported": true,
+        "is_excluded": true,
     },
 })
 console.log(response)

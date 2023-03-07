@@ -16,6 +16,7 @@
   },
   "exclude": [
     "dist",
+    "index.test.ts",
     "node_modules"
   ]
 }

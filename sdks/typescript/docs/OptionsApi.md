@@ -33,8 +33,8 @@ const response = await snaptrade.options.getOptionStrategy({
     'userSecret': "USERSECRET123",
     'accountId': "accountId_example",
     'requestBody': {
-        'underlying_symbol_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'strategy_type': "CUSTOM",
+        "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "strategy_type": "CUSTOM",
     },
 })
 console.log(response)
@@ -275,9 +275,9 @@ const response = await snaptrade.options.placeOptionStrategy({
     'accountId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
     'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
     'requestBody': {
-        'order_type': "Limit",
-        'time_in_force': "DAY",
-        'price': 31.33,
+        "order_type": "Limit",
+        "time_in_force": "DAY",
+        "price": 31.33,
     },
 })
 console.log(response)

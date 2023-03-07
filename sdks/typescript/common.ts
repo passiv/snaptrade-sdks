@@ -42,9 +42,9 @@ export const setApiKeyToObject = async function (object: any, keyParamName: stri
     if (configuration && configuration.apiKey) {
       if (typeof configuration.apiKey === "function")
         object[keyParamName] = await configuration.apiKey(keyParamName);
-      if (typeof configuration.apiKey === "string")
+      else if (typeof configuration.apiKey === "string")
         object[keyParamName] = configuration.apiKey;
-      if (typeof configuration.apiKey === "object") {
+      else if (typeof configuration.apiKey === "object") {
         if (keyParamName in configuration.apiKey)
           object[keyParamName] = configuration.apiKey[keyParamName];
       } else

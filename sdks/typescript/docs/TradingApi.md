@@ -210,13 +210,13 @@ const response = await snaptrade.trading.getOrderImpact({
     'userId': "John.doe@snaptrade.com",
     'userSecret': "USERSECRET123",
     'requestBody': {
-        'account_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'action': "BUY",
-        'order_type': "Limit",
-        'price': 31.33,
-        'stop': 31.33,
-        'time_in_force': "Day",
-        'universal_symbol_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "action": "BUY",
+        "order_type": "Limit",
+        "price": 31.33,
+        "stop": 31.33,
+        "time_in_force": "Day",
+        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     },
 })
 console.log(response)
@@ -341,11 +341,11 @@ const response = await snaptrade.trading.modifyCalculatedTradeById({
     'calculatedTradeId': "calculatedTradeId_example",
     'tradeId': "tradeId_example",
     'requestBody': {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'action': "BUY",
-        'units': 6,
-        'price': 24.81,
-        'sequence': 1,
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "action": "BUY",
+        "units": 6,
+        "price": 24.81,
+        "sequence": 1,
     },
 })
 console.log(response)
@@ -460,13 +460,13 @@ const response = await snaptrade.trading.placeForceOrder({
     'userId': "John.doe@snaptrade.com",
     'userSecret': "USERSECRET123",
     'requestBody': {
-        'account_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'action': "BUY",
-        'order_type': "Limit",
-        'price': 31.33,
-        'stop': 31.33,
-        'time_in_force': "Day",
-        'universal_symbol_id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "action": "BUY",
+        "order_type": "Limit",
+        "price": 31.33,
+        "stop": 31.33,
+        "time_in_force": "Day",
+        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     },
 })
 console.log(response)

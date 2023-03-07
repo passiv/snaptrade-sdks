@@ -238,7 +238,7 @@ const snaptrade = new Snaptrade({
 
 const response = await snaptrade.referenceData.getSymbols({
     'requestBody': {
-        'substring': "apple",
+        "substring": "apple",
     },
 })
 console.log(response)
@@ -554,7 +554,7 @@ const response = await snaptrade.referenceData.symbolSearchUserAccount({
     'userSecret': "USERSECRET123",
     'accountId': "accountId_example",
     'requestBody': {
-        'substring': "apple",
+        "substring": "apple",
     },
 })
 console.log(response)

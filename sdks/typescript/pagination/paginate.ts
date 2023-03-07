@@ -10,7 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { PageInfo, PageParameters, Page } from "./page";
+import { PageBase, PageInfo, PageParameters } from "./page-types";
+import { Page } from "./page";
 import { PageRequest } from "./pageable";
 
 export const paginate = <
@@ -22,7 +23,7 @@ export const paginate = <
 }: {
   request: PageRequest<Data, Parameters>;
   initialParameters: Parameters;
-}): Promise<Page<Data, Parameters>> => {
+}): Promise<PageBase<Data, Parameters>> => {
   return new Promise(async (resolve, reject) => {
     try {
       const data = await request(initialParameters);

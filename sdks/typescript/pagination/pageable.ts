@@ -12,11 +12,11 @@
 
 import { AxiosPromise } from "axios";
 import {
-  Page,
+  PageBase,
   PageInfo,
   PageParameterProperties,
   PageParameters,
-} from "./Page";
+} from "./page-types";
 
 export type PageParametersBase<Parameters> = Parameters & {
   requestBody?: Parameters;
@@ -33,15 +33,15 @@ export abstract class Pageable<
   readonly data: Data;
   protected readonly initialParameters: Parameters;
   private readonly _request: PageRequest<Data, Parameters>;
-  async previous(): Promise<Page<Data, Parameters> | null> {
-    if (!this.hasPrevious()) return null;
-    if (this.previousParameters === null) return null;
+  async previous(): Promise<PageBase<Data, Parameters>> {
+    if (!this.hasPrevious()) return this;
+    if (this.previousParameters === null) return this;
     const response = await this.makeRequest(this.previousParameters);
     return this.withData(response.data);
   }
-  async next(): Promise<Page<Data, Parameters> | null> {
-    if (!this.hasNext()) return null;
-    if (this.nextParameters === null) return null;
+  async next(): Promise<PageBase<Data, Parameters>> {
+    if (!this.hasNext()) return this;
+    if (this.nextParameters === null) return this;
     const response = await this.makeRequest(this.nextParameters);
     return this.withData(response.data);
   }
@@ -83,8 +83,8 @@ export abstract class Pageable<
   /**
    * Helper for creating new page
    */
-  private withData(data: Data): Page<Data, Parameters> {
-    return new Page({
+  private withData(data: Data): PageBase<Data, Parameters> {
+    return this.make({
       data,
       initialParameters: this.initialParameters,
       request: this._request,
@@ -104,4 +104,10 @@ export abstract class Pageable<
     this._request = request;
     this.initialParameters = initialParameters;
   }
+
+  abstract make(parameters: {
+    data: Data;
+    initialParameters: Parameters;
+    request: PageRequest<Data, Parameters>;
+  }): Pageable<Data, Parameters>;
 }
