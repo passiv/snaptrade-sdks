@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Pageable, PageParametersBase } from "./pageable";
+import { Pageable, PageParametersBase, PageRequest } from "./pageable";
 
 /**
  * The set of parameters that appear in a paginated operation (requestBody or parameters)
@@ -32,6 +32,14 @@ export class Page<
   Data extends PageInfo,
   Parameters extends PageParameters
 > extends Pageable<Data, Parameters> {
+  make(parameters: {
+    data: Data;
+    initialParameters: Parameters;
+    request: PageRequest<Data, Parameters>;
+  }): Pageable<Data, Parameters> {
+    throw new Error("Method not implemented.");
+  }
+
   protected get previousParameters(): PageParameterProperties | null {
     throw Error("Stub")
   }
