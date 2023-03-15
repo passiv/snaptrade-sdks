@@ -28,9 +28,9 @@ const snaptrade = new Snaptrade({
 })
 
 const detailBrokerageAuthorizationResponse = await snaptrade.connections.detailBrokerageAuthorization({
-        "authorization_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(detailBrokerageAuthorizationResponse)
@@ -84,8 +84,8 @@ const snaptrade = new Snaptrade({
 })
 
 const listBrokerageAuthorizationsResponse = await snaptrade.connections.listBrokerageAuthorizations({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(listBrokerageAuthorizationsResponse)
@@ -138,9 +138,9 @@ const snaptrade = new Snaptrade({
 })
 
 const removeBrokerageAuthorizationResponse = await snaptrade.connections.removeBrokerageAuthorization({
-        "authorization_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(removeBrokerageAuthorizationResponse)

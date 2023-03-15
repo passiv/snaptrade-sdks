@@ -35,8 +35,8 @@ const snaptrade = new Snaptrade({
 })
 
 const cancelUserAccountOrderResponse = await snaptrade.trading.cancelUserAccountOrder({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
         "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
@@ -202,8 +202,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -266,8 +266,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserAccountQuotesResponse = await snaptrade.trading.getUserAccountQuotes({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "symbols": "symbols_example",
         "accountId": "accountId_example",
     })
@@ -439,8 +439,8 @@ const snaptrade = new Snaptrade({
 })
 
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -503,8 +503,8 @@ const snaptrade = new Snaptrade({
 })
 
 const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(placeOCOOrderResponse)
@@ -560,8 +560,8 @@ const snaptrade = new Snaptrade({
 
 const placeOrderResponse = await snaptrade.trading.placeOrder({
         "tradeId": "tradeId_example",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(placeOrderResponse)

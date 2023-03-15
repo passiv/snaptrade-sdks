@@ -33,8 +33,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getAllUserHoldingsResponse = await snaptrade.accountInformation.getAllUserHoldings({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     })
 
@@ -91,8 +91,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserAccountBalanceResponse = await snaptrade.accountInformation.getUserAccountBalance({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
     })
 
@@ -147,8 +147,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserAccountDetailsResponse = await snaptrade.accountInformation.getUserAccountDetails({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
     })
 
@@ -203,8 +203,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserAccountOrdersResponse = await snaptrade.accountInformation.getUserAccountOrders({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "state": "all",
         "accountId": "accountId_example",
     })
@@ -261,8 +261,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserAccountPositionsResponse = await snaptrade.accountInformation.getUserAccountPositions({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
     })
 
@@ -318,8 +318,8 @@ const snaptrade = new Snaptrade({
 
 const getUserHoldingsResponse = await snaptrade.accountInformation.getUserHoldings({
         "accountId": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(getUserHoldingsResponse)
@@ -375,8 +375,8 @@ const snaptrade = new Snaptrade({
 })
 
 const listUserAccountsResponse = await snaptrade.accountInformation.listUserAccounts({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(listUserAccountsResponse)
@@ -429,8 +429,8 @@ const snaptrade = new Snaptrade({
 })
 
 const updateUserAccountResponse = await snaptrade.accountInformation.updateUserAccount({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
     })
 

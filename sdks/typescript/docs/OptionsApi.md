@@ -30,8 +30,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
         "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "legs": [
@@ -96,8 +96,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
         "symbol": "symbol_example",
     })
@@ -154,10 +154,10 @@ const snaptrade = new Snaptrade({
 })
 
 const getOptionsStrategyQuoteResponse = await snaptrade.options.getOptionsStrategyQuote({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
-        "option_strategy_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(getOptionsStrategyQuoteResponse)
@@ -212,8 +212,8 @@ const snaptrade = new Snaptrade({
 })
 
 const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
     })
 
@@ -268,10 +268,10 @@ const snaptrade = new Snaptrade({
 })
 
 const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
-        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "option_strategy_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "order_type": "Limit",
         "time_in_force": "DAY",
         "price": 31.33,

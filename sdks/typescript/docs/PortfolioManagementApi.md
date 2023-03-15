@@ -114,8 +114,8 @@ const snaptrade = new Snaptrade({
 })
 
 const createResponse = await snaptrade.portfolioManagement.create({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name": "Combined Retirement Portfolio",
     })
@@ -264,7 +264,7 @@ const snaptrade = new Snaptrade({
 })
 
 const deleteAssetClassResponse = await snaptrade.portfolioManagement.deleteAssetClass({
-        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(deleteAssetClassResponse)
@@ -368,7 +368,7 @@ const snaptrade = new Snaptrade({
 })
 
 const deleteModelPortfolioByIdResponse = await snaptrade.portfolioManagement.deleteModelPortfolioById({
-        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(deleteModelPortfolioByIdResponse)
@@ -529,7 +529,7 @@ const snaptrade = new Snaptrade({
 })
 
 const detailAssetClassResponse = await snaptrade.portfolioManagement.detailAssetClass({
-        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(detailAssetClassResponse)
@@ -635,7 +635,7 @@ const snaptrade = new Snaptrade({
 })
 
 const getModelDetailsByIdResponse = await snaptrade.portfolioManagement.getModelDetailsById({
-        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(getModelDetailsByIdResponse)
@@ -1162,8 +1162,8 @@ const snaptrade = new Snaptrade({
 })
 
 const listResponse = await snaptrade.portfolioManagement.list({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(listResponse)
@@ -1411,7 +1411,7 @@ const snaptrade = new Snaptrade({
 })
 
 const modifyModelPortfolioByIdResponse = await snaptrade.portfolioManagement.modifyModelPortfolioById({
-        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(modifyModelPortfolioByIdResponse)
@@ -1637,7 +1637,7 @@ const snaptrade = new Snaptrade({
 })
 
 const updateAssetClassResponse = await snaptrade.portfolioManagement.updateAssetClass({
-        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
     })
 
 console.log(updateAssetClassResponse)

@@ -30,7 +30,7 @@ const snaptrade = new Snaptrade({
 })
 
 const deleteSnapTradeUserResponse = await snaptrade.authentication.deleteSnapTradeUser({
-        "user_id": "John.doe@snaptrade.com",
+        "userId": "John.doe@snaptrade.com",
     })
 
 console.log(deleteSnapTradeUserResponse)
@@ -85,8 +85,8 @@ const snaptrade = new Snaptrade({
 })
 
 const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(getUserJWTResponse)
@@ -191,8 +191,8 @@ const snaptrade = new Snaptrade({
 })
 
 const loginSnapTradeUserResponse = await snaptrade.authentication.loginSnapTradeUser({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "broker": "ALPACA",
         "immediate_redirect": true,
         "custom_redirect": "https://passiv.com",

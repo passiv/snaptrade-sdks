@@ -26,8 +26,8 @@ const snaptrade = new Snaptrade({
 })
 
 const acceptResponse = await snaptrade.apiDisclaimer.accept({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(acceptResponse)

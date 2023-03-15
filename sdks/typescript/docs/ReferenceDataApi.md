@@ -528,8 +528,8 @@ const snaptrade = new Snaptrade({
 })
 
 const symbolSearchUserAccountResponse = await snaptrade.referenceData.symbolSearchUserAccount({
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "accountId": "accountId_example",
         "substring": "apple",
     })

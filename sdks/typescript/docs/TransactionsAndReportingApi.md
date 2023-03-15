@@ -29,11 +29,11 @@ const snaptrade = new Snaptrade({
 })
 
 const getActivitiesResponse = await snaptrade.transactionsAndReporting.getActivities({
-        "start_date": "2022-01-24",
-        "end_date": "2022-01-24",
+        "startDate": "2022-01-24",
+        "endDate": "2022-01-24",
         "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(getActivitiesResponse)
@@ -91,13 +91,13 @@ const snaptrade = new Snaptrade({
 })
 
 const getReportingCustomRangeResponse = await snaptrade.transactionsAndReporting.getReportingCustomRange({
-        "start_date": "2022-01-24",
-        "end_date": "2022-01-24",
+        "startDate": "2022-01-24",
+        "endDate": "2022-01-24",
         "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         "detailed": true,
         "frequency": "monthly",
-        "user_id": "John.doe@snaptrade.com",
-        "user_secret": "USERSECRET123",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
     })
 
 console.log(getReportingCustomRangeResponse)
