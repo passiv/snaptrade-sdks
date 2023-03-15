@@ -62,9 +62,7 @@ request_path_symbol_id = api_client.PathParameter(
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_200 = api_client.OpenApiResponse(

@@ -38,12 +38,23 @@ snaptrade = SnapTrade(
 )
 
 # Return the exchange rate of a currency pair
-response = snaptrade.reference_data.get_currency_exchange_rate_pair(
+get_currency_exchange_rate_pair_response = snaptrade.reference_data.get_currency_exchange_rate_pair(
     path_params = {
         'currencyPair': "currencyPair_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_currency_exchange_rate_pair_response.body["src"])
+    pprint(get_currency_exchange_rate_pair_response.body["dst"])
+    pprint(get_currency_exchange_rate_pair_response.body["exchange_rate"])
+    pprint(get_currency_exchange_rate_pair_response.headers)
+    pprint(get_currency_exchange_rate_pair_response.status)
+except ApiException as e:
+    print("Exception when calling ExchangeRatePairs.get_currency_exchange_rate_pair: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -116,8 +127,28 @@ snaptrade = SnapTrade(
 )
 
 # Get metadata related to Snaptrade partner
-response = snaptrade.reference_data.get_partner_info()
-pprint(response)
+get_partner_info_response = snaptrade.reference_data.get_partner_info()
+try:
+    pprint(get_partner_info_response.body["redirect_uri"])
+    pprint(get_partner_info_response.body["allowed_brokerages"])
+    pprint(get_partner_info_response.body["name"])
+    pprint(get_partner_info_response.body["slug"])
+    pprint(get_partner_info_response.body["logo_url"])
+    pprint(get_partner_info_response.body["pin_required"])
+    pprint(get_partner_info_response.body["can_access_trades"])
+    pprint(get_partner_info_response.body["can_access_holdings"])
+    pprint(get_partner_info_response.body["can_access_account_history"])
+    pprint(get_partner_info_response.body["can_access_reference_data"])
+    pprint(get_partner_info_response.body["can_access_portfolio_management"])
+    pprint(get_partner_info_response.body["can_access_orders"])
+    pprint(get_partner_info_response.headers)
+    pprint(get_partner_info_response.status)
+except ApiException as e:
+    print("Exception when calling PartnerData.get_partner_info: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -219,8 +250,20 @@ snaptrade = SnapTrade(
 )
 
 # List of all security types.
-response = snaptrade.reference_data.get_security_types()
-pprint(response)
+get_security_types_response = snaptrade.reference_data.get_security_types()
+try:
+    pprint(get_security_types_response.body["id"])
+    pprint(get_security_types_response.body["code"])
+    pprint(get_security_types_response.body["description"])
+    pprint(get_security_types_response.body["is_supported"])
+    pprint(get_security_types_response.headers)
+    pprint(get_security_types_response.status)
+except ApiException as e:
+    print("Exception when calling SecurityType.get_security_types: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -286,8 +329,24 @@ snaptrade = SnapTrade(
 )
 
 # Return list of stock exchanges on Passiv and their suffixes
-response = snaptrade.reference_data.get_stock_exchanges()
-pprint(response)
+get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
+try:
+    pprint(get_stock_exchanges_response.body["id"])
+    pprint(get_stock_exchanges_response.body["code"])
+    pprint(get_stock_exchanges_response.body["mic_code"])
+    pprint(get_stock_exchanges_response.body["name"])
+    pprint(get_stock_exchanges_response.body["timezone"])
+    pprint(get_stock_exchanges_response.body["start_time"])
+    pprint(get_stock_exchanges_response.body["close_time"])
+    pprint(get_stock_exchanges_response.body["suffix"])
+    pprint(get_stock_exchanges_response.headers)
+    pprint(get_stock_exchanges_response.status)
+except ApiException as e:
+    print("Exception when calling Exchange.get_stock_exchanges: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -345,12 +404,28 @@ snaptrade = SnapTrade(
 )
 
 # Search for symbols
-response = snaptrade.reference_data.get_symbols(
+get_symbols_response = snaptrade.reference_data.get_symbols(
     body = {
-        'substring': "apple",
+        "substring": "apple",
     },
 )
-pprint(response)
+try:
+    pprint(get_symbols_response.body["id"])
+    pprint(get_symbols_response.body["symbol"])
+    pprint(get_symbols_response.body["raw_symbol"])
+    pprint(get_symbols_response.body["description"])
+    pprint(get_symbols_response.body["currency"])
+    pprint(get_symbols_response.body["exchange"])
+    pprint(get_symbols_response.body["type"])
+    pprint(get_symbols_response.body["currencies"])
+    pprint(get_symbols_response.headers)
+    pprint(get_symbols_response.status)
+except ApiException as e:
+    print("Exception when calling UniversalSymbol.get_symbols: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -432,7 +507,7 @@ snaptrade = SnapTrade(
 )
 
 # Get details of a symbol by the ticker
-response = snaptrade.reference_data.get_symbols_by_ticker(
+get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
     path_params = {
         'ticker': "ticker_example",
     },
@@ -440,7 +515,23 @@ response = snaptrade.reference_data.get_symbols_by_ticker(
         'symbolId': "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     },
 )
-pprint(response)
+try:
+    pprint(get_symbols_by_ticker_response.body["id"])
+    pprint(get_symbols_by_ticker_response.body["symbol"])
+    pprint(get_symbols_by_ticker_response.body["raw_symbol"])
+    pprint(get_symbols_by_ticker_response.body["description"])
+    pprint(get_symbols_by_ticker_response.body["currency"])
+    pprint(get_symbols_by_ticker_response.body["exchange"])
+    pprint(get_symbols_by_ticker_response.body["type"])
+    pprint(get_symbols_by_ticker_response.body["currencies"])
+    pprint(get_symbols_by_ticker_response.headers)
+    pprint(get_symbols_by_ticker_response.status)
+except ApiException as e:
+    print("Exception when calling UniversalSymbol.get_symbols_by_ticker: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -545,12 +636,24 @@ snaptrade = SnapTrade(
 )
 
 # List of all brokerage authorization types
-response = snaptrade.reference_data.list_all_brokerage_authorization_type(
+list_all_brokerage_authorization_type_response = snaptrade.reference_data.list_all_brokerage_authorization_type(
     query_params = {
         'brokerage': "QUESTRADE,ALPACA",
     },
 )
-pprint(response)
+try:
+    pprint(list_all_brokerage_authorization_type_response.body["id"])
+    pprint(list_all_brokerage_authorization_type_response.body["type"])
+    pprint(list_all_brokerage_authorization_type_response.body["auth_type"])
+    pprint(list_all_brokerage_authorization_type_response.body["brokerage"])
+    pprint(list_all_brokerage_authorization_type_response.headers)
+    pprint(list_all_brokerage_authorization_type_response.status)
+except ApiException as e:
+    print("Exception when calling BrokerageAuthorizationTypeReadOnly.list_all_brokerage_authorization_type: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -638,8 +741,34 @@ snaptrade = SnapTrade(
 )
 
 # List of all brokerages.
-response = snaptrade.reference_data.list_all_brokerages()
-pprint(response)
+list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
+try:
+    pprint(list_all_brokerages_response.body["id"])
+    pprint(list_all_brokerages_response.body["name"])
+    pprint(list_all_brokerages_response.body["display_name"])
+    pprint(list_all_brokerages_response.body["description"])
+    pprint(list_all_brokerages_response.body["aws_s3_logo_url"])
+    pprint(list_all_brokerages_response.body["slug"])
+    pprint(list_all_brokerages_response.body["url"])
+    pprint(list_all_brokerages_response.body["enabled"])
+    pprint(list_all_brokerages_response.body["maintenance_mode"])
+    pprint(list_all_brokerages_response.body["allows_fractional_units"])
+    pprint(list_all_brokerages_response.body["allows_trading"])
+    pprint(list_all_brokerages_response.body["has_reporting"])
+    pprint(list_all_brokerages_response.body["is_real_time_connection"])
+    pprint(list_all_brokerages_response.body["allows_trading_through_snaptrade_api"])
+    pprint(list_all_brokerages_response.body["is_scraping_integration"])
+    pprint(list_all_brokerages_response.body["default_currency"])
+    pprint(list_all_brokerages_response.body["brokerage_type"])
+    pprint(list_all_brokerages_response.body["exchanges"])
+    pprint(list_all_brokerages_response.headers)
+    pprint(list_all_brokerages_response.status)
+except ApiException as e:
+    print("Exception when calling Brokerage.list_all_brokerages: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -705,8 +834,19 @@ snaptrade = SnapTrade(
 )
 
 # List of all supported currencies
-response = snaptrade.reference_data.list_all_currencies()
-pprint(response)
+list_all_currencies_response = snaptrade.reference_data.list_all_currencies()
+try:
+    pprint(list_all_currencies_response.body["id"])
+    pprint(list_all_currencies_response.body["code"])
+    pprint(list_all_currencies_response.body["name"])
+    pprint(list_all_currencies_response.headers)
+    pprint(list_all_currencies_response.status)
+except ApiException as e:
+    print("Exception when calling Currency.list_all_currencies: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -772,8 +912,19 @@ snaptrade = SnapTrade(
 )
 
 # Return the exchange rates of all supported currencies
-response = snaptrade.reference_data.list_all_currencies_rates()
-pprint(response)
+list_all_currencies_rates_response = snaptrade.reference_data.list_all_currencies_rates()
+try:
+    pprint(list_all_currencies_rates_response.body["src"])
+    pprint(list_all_currencies_rates_response.body["dst"])
+    pprint(list_all_currencies_rates_response.body["exchange_rate"])
+    pprint(list_all_currencies_rates_response.headers)
+    pprint(list_all_currencies_rates_response.status)
+except ApiException as e:
+    print("Exception when calling ExchangeRatePairs.list_all_currencies_rates: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -831,7 +982,7 @@ snaptrade = SnapTrade(
 )
 
 # Search for symbols that are supported by a brokerage account using a substring
-response = snaptrade.reference_data.symbol_search_user_account(
+symbol_search_user_account_response = snaptrade.reference_data.symbol_search_user_account(
     path_params = {
         'accountId': "accountId_example",
     },
@@ -840,10 +991,26 @@ response = snaptrade.reference_data.symbol_search_user_account(
         'userSecret': "USERSECRET123",
     },
     body = {
-        'substring': "apple",
+        "substring": "apple",
     },
 )
-pprint(response)
+try:
+    pprint(symbol_search_user_account_response.body["id"])
+    pprint(symbol_search_user_account_response.body["symbol"])
+    pprint(symbol_search_user_account_response.body["raw_symbol"])
+    pprint(symbol_search_user_account_response.body["description"])
+    pprint(symbol_search_user_account_response.body["currency"])
+    pprint(symbol_search_user_account_response.body["exchange"])
+    pprint(symbol_search_user_account_response.body["type"])
+    pprint(symbol_search_user_account_response.body["currencies"])
+    pprint(symbol_search_user_account_response.headers)
+    pprint(symbol_search_user_account_response.status)
+except ApiException as e:
+    print("Exception when calling UniversalSymbol.symbol_search_user_account: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

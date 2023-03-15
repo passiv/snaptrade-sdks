@@ -37,9 +37,7 @@ it("getting started", async () => {
   const userId = uuid();
   const { userSecret } = (
     await snaptrade.authentication.registerSnapTradeUser({
-      requestBody: {
-        userId,
-      },
+      userId,
     })
   ).data;
 
@@ -104,7 +102,7 @@ it.skip("getOptionsChain", async () => {
   console.log(accounts.data);
   const accountId = accounts.data[0].id;
   const symbols = await snaptrade.referenceData.getSymbols({
-    requestBody: { substring: "apple" },
+    substring: "apple",
   });
   console.log(symbols);
   const symbol = symbols.data[0].id;

@@ -60,18 +60,27 @@ snaptrade = SnapTrade(
 )
 
 # Adds an asset to exclude to a portfolio group
-response = snaptrade.portfolio_management.add_portfolio_excluded_asset(
+add_portfolio_excluded_asset_response = snaptrade.portfolio_management.add_portfolio_excluded_asset(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
     body = {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'symbol': "VAB.TO",
-        'raw_symbol': "VAB",
-        'description': "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol": "VAB.TO",
+        "raw_symbol": "VAB",
+        "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
     },
 )
-pprint(response)
+try:
+    pprint(add_portfolio_excluded_asset_response.body["symbol"])
+    pprint(add_portfolio_excluded_asset_response.headers)
+    pprint(add_portfolio_excluded_asset_response.status)
+except ApiException as e:
+    print("Exception when calling ExcludedAsset.add_portfolio_excluded_asset: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -154,17 +163,27 @@ snaptrade = SnapTrade(
 )
 
 # Create new portfolio group
-response = snaptrade.portfolio_management.create(
+create_response = snaptrade.portfolio_management.create(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
     body = {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'name': "Combined Retirement Portfolio",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name": "Combined Retirement Portfolio",
     },
 )
-pprint(response)
+try:
+    pprint(create_response.body["id"])
+    pprint(create_response.body["name"])
+    pprint(create_response.headers)
+    pprint(create_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroup.create: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -282,8 +301,18 @@ snaptrade = SnapTrade(
 )
 
 # Create a new model asset class
-response = snaptrade.portfolio_management.create_asset_class()
-pprint(response)
+create_asset_class_response = snaptrade.portfolio_management.create_asset_class()
+try:
+    pprint(create_asset_class_response.body["model_asset_class"])
+    pprint(create_asset_class_response.body["model_asset_class_target"])
+    pprint(create_asset_class_response.headers)
+    pprint(create_asset_class_response.status)
+except ApiException as e:
+    print("Exception when calling ModelAssetClassDetails.create_asset_class: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -335,8 +364,19 @@ snaptrade = SnapTrade(
 )
 
 # Creates a new model portfolio
-response = snaptrade.portfolio_management.create_model_portfolio()
-pprint(response)
+create_model_portfolio_response = snaptrade.portfolio_management.create_model_portfolio()
+try:
+    pprint(create_model_portfolio_response.body["model_portfolio"])
+    pprint(create_model_portfolio_response.body["model_portfolio_security"])
+    pprint(create_model_portfolio_response.body["model_portfolio_asset_class"])
+    pprint(create_model_portfolio_response.headers)
+    pprint(create_model_portfolio_response.status)
+except ApiException as e:
+    print("Exception when calling ModelPortfolioDetails.create_model_portfolio: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -607,12 +647,22 @@ snaptrade = SnapTrade(
 )
 
 # Remove a target portfolio.
-response = snaptrade.portfolio_management.delete_portfoli(
+delete_portfoli_response = snaptrade.portfolio_management.delete_portfoli(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(delete_portfoli_response.body["id"])
+    pprint(delete_portfoli_response.body["name"])
+    pprint(delete_portfoli_response.headers)
+    pprint(delete_portfoli_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroup.delete_portfoli: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -709,13 +759,27 @@ snaptrade = SnapTrade(
 )
 
 # Remove a TargetAsset.
-response = snaptrade.portfolio_management.delete_portfolio_target_by_id(
+delete_portfolio_target_by_id_response = snaptrade.portfolio_management.delete_portfolio_target_by_id(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
         'targetAssetId': "targetAssetId_example",
     },
 )
-pprint(response)
+try:
+    pprint(delete_portfolio_target_by_id_response.body["id"])
+    pprint(delete_portfolio_target_by_id_response.body["symbol"])
+    pprint(delete_portfolio_target_by_id_response.body["percent"])
+    pprint(delete_portfolio_target_by_id_response.body["is_supported"])
+    pprint(delete_portfolio_target_by_id_response.body["is_excluded"])
+    pprint(delete_portfolio_target_by_id_response.body["meta"])
+    pprint(delete_portfolio_target_by_id_response.headers)
+    pprint(delete_portfolio_target_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAsset.delete_portfolio_target_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -820,12 +884,22 @@ snaptrade = SnapTrade(
 )
 
 # Get details of a model asset class
-response = snaptrade.portfolio_management.detail_asset_class(
+detail_asset_class_response = snaptrade.portfolio_management.detail_asset_class(
     path_params = {
         'modelAssetClassId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
     },
 )
-pprint(response)
+try:
+    pprint(detail_asset_class_response.body["model_asset_class"])
+    pprint(detail_asset_class_response.body["model_asset_class_target"])
+    pprint(detail_asset_class_response.headers)
+    pprint(detail_asset_class_response.status)
+except ApiException as e:
+    print("Exception when calling ModelAssetClassDetails.detail_asset_class: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -898,14 +972,30 @@ snaptrade = SnapTrade(
 )
 
 # Return an individual trade
-response = snaptrade.portfolio_management.get_calculated_trade_by_id(
+get_calculated_trade_by_id_response = snaptrade.portfolio_management.get_calculated_trade_by_id(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
         'calculatedTradeId': "calculatedTradeId_example",
         'TradeId': "TradeId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_calculated_trade_by_id_response.body["id"])
+    pprint(get_calculated_trade_by_id_response.body["account"])
+    pprint(get_calculated_trade_by_id_response.body["symbol"])
+    pprint(get_calculated_trade_by_id_response.body["universal_symbol"])
+    pprint(get_calculated_trade_by_id_response.body["action"])
+    pprint(get_calculated_trade_by_id_response.body["units"])
+    pprint(get_calculated_trade_by_id_response.body["price"])
+    pprint(get_calculated_trade_by_id_response.body["sequence"])
+    pprint(get_calculated_trade_by_id_response.headers)
+    pprint(get_calculated_trade_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling Trade.get_calculated_trade_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1000,12 +1090,23 @@ snaptrade = SnapTrade(
 )
 
 # Get details of a model portfolio
-response = snaptrade.portfolio_management.get_model_details_by_id(
+get_model_details_by_id_response = snaptrade.portfolio_management.get_model_details_by_id(
     path_params = {
         'modelPortfolioId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
     },
 )
-pprint(response)
+try:
+    pprint(get_model_details_by_id_response.body["model_portfolio"])
+    pprint(get_model_details_by_id_response.body["model_portfolio_security"])
+    pprint(get_model_details_by_id_response.body["model_portfolio_asset_class"])
+    pprint(get_model_details_by_id_response.headers)
+    pprint(get_model_details_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling ModelPortfolioDetails.get_model_details_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1078,12 +1179,22 @@ snaptrade = SnapTrade(
 )
 
 # Get sum of cash balances in portfolio group
-response = snaptrade.portfolio_management.get_portfolio_balances(
+get_portfolio_balances_response = snaptrade.portfolio_management.get_portfolio_balances(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_balances_response.body["currency"])
+    pprint(get_portfolio_balances_response.body["cash"])
+    pprint(get_portfolio_balances_response.headers)
+    pprint(get_portfolio_balances_response.status)
+except ApiException as e:
+    print("Exception when calling Balance.get_portfolio_balances: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1186,12 +1297,22 @@ snaptrade = SnapTrade(
 )
 
 # Get details of a target portfolio
-response = snaptrade.portfolio_management.get_portfolio_details_by_id(
+get_portfolio_details_by_id_response = snaptrade.portfolio_management.get_portfolio_details_by_id(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_details_by_id_response.body["id"])
+    pprint(get_portfolio_details_by_id_response.body["name"])
+    pprint(get_portfolio_details_by_id_response.headers)
+    pprint(get_portfolio_details_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroup.get_portfolio_details_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1272,12 +1393,31 @@ snaptrade = SnapTrade(
 )
 
 # Return a whole bunch of relevant information relating to a portfolio group.
-response = snaptrade.portfolio_management.get_portfolio_info(
+get_portfolio_info_response = snaptrade.portfolio_management.get_portfolio_info(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_info_response.body["symbols"])
+    pprint(get_portfolio_info_response.body["quotable_symbols"])
+    pprint(get_portfolio_info_response.body["balances"])
+    pprint(get_portfolio_info_response.body["positions"])
+    pprint(get_portfolio_info_response.body["target_positions"])
+    pprint(get_portfolio_info_response.body["ideal_positions"])
+    pprint(get_portfolio_info_response.body["excluded_positions"])
+    pprint(get_portfolio_info_response.body["calculated_trades"])
+    pprint(get_portfolio_info_response.body["brokerage_authorizations"])
+    pprint(get_portfolio_info_response.body["accuracy"])
+    pprint(get_portfolio_info_response.body["settings"])
+    pprint(get_portfolio_info_response.headers)
+    pprint(get_portfolio_info_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroupInfo.get_portfolio_info: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1358,12 +1498,23 @@ snaptrade = SnapTrade(
 )
 
 # Get total of each postions owned in portfolio group
-response = snaptrade.portfolio_management.get_portfolio_positions(
+get_portfolio_positions_response = snaptrade.portfolio_management.get_portfolio_positions(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_positions_response.body["symbol"])
+    pprint(get_portfolio_positions_response.body["price"])
+    pprint(get_portfolio_positions_response.body["units"])
+    pprint(get_portfolio_positions_response.headers)
+    pprint(get_portfolio_positions_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroupPosition.get_portfolio_positions: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1466,12 +1617,25 @@ snaptrade = SnapTrade(
 )
 
 # Get portfolio group settings
-response = snaptrade.portfolio_management.get_portfolio_settings(
+get_portfolio_settings_response = snaptrade.portfolio_management.get_portfolio_settings(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_settings_response.body["buy_only"])
+    pprint(get_portfolio_settings_response.body["cash_optimizer"])
+    pprint(get_portfolio_settings_response.body["notify_frequency"])
+    pprint(get_portfolio_settings_response.body["drift_threshold"])
+    pprint(get_portfolio_settings_response.body["preferred_currency"])
+    pprint(get_portfolio_settings_response.headers)
+    pprint(get_portfolio_settings_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroupSettings.get_portfolio_settings: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1552,13 +1716,27 @@ snaptrade = SnapTrade(
 )
 
 # Get a specific target from a portfolio group
-response = snaptrade.portfolio_management.get_portfolio_target_by_id(
+get_portfolio_target_by_id_response = snaptrade.portfolio_management.get_portfolio_target_by_id(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
         'targetAssetId': "targetAssetId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_target_by_id_response.body["id"])
+    pprint(get_portfolio_target_by_id_response.body["symbol"])
+    pprint(get_portfolio_target_by_id_response.body["percent"])
+    pprint(get_portfolio_target_by_id_response.body["is_supported"])
+    pprint(get_portfolio_target_by_id_response.body["is_excluded"])
+    pprint(get_portfolio_target_by_id_response.body["meta"])
+    pprint(get_portfolio_target_by_id_response.headers)
+    pprint(get_portfolio_target_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAsset.get_portfolio_target_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1647,12 +1825,26 @@ snaptrade = SnapTrade(
 )
 
 # Get all target assets under the specified PortfolioGroup.
-response = snaptrade.portfolio_management.get_portfolio_targets(
+get_portfolio_targets_response = snaptrade.portfolio_management.get_portfolio_targets(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portfolio_targets_response.body["id"])
+    pprint(get_portfolio_targets_response.body["symbol"])
+    pprint(get_portfolio_targets_response.body["percent"])
+    pprint(get_portfolio_targets_response.body["is_supported"])
+    pprint(get_portfolio_targets_response.body["is_excluded"])
+    pprint(get_portfolio_targets_response.body["meta"])
+    pprint(get_portfolio_targets_response.headers)
+    pprint(get_portfolio_targets_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAsset.get_portfolio_targets: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1755,12 +1947,21 @@ snaptrade = SnapTrade(
 )
 
 # Get an array of excluded assets associated with a portfolio group\\
-response = snaptrade.portfolio_management.get_portoflio_excluded_assets(
+get_portoflio_excluded_assets_response = snaptrade.portfolio_management.get_portoflio_excluded_assets(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(get_portoflio_excluded_assets_response.body["symbol"])
+    pprint(get_portoflio_excluded_assets_response.headers)
+    pprint(get_portoflio_excluded_assets_response.status)
+except ApiException as e:
+    print("Exception when calling ExcludedAsset.get_portoflio_excluded_assets: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1847,12 +2048,26 @@ snaptrade = SnapTrade(
 )
 
 # Import target allocation based on portfolio group
-response = snaptrade.portfolio_management.import_model_portfolio(
+import_model_portfolio_response = snaptrade.portfolio_management.import_model_portfolio(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(import_model_portfolio_response.body["id"])
+    pprint(import_model_portfolio_response.body["symbol"])
+    pprint(import_model_portfolio_response.body["percent"])
+    pprint(import_model_portfolio_response.body["is_supported"])
+    pprint(import_model_portfolio_response.body["is_excluded"])
+    pprint(import_model_portfolio_response.body["meta"])
+    pprint(import_model_portfolio_response.headers)
+    pprint(import_model_portfolio_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAsset.import_model_portfolio: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -1939,13 +2154,23 @@ snaptrade = SnapTrade(
 )
 
 # List all portfolio groups
-response = snaptrade.portfolio_management.list(
+list_response = snaptrade.portfolio_management.list(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(list_response.body["id"])
+    pprint(list_response.body["name"])
+    pprint(list_response.headers)
+    pprint(list_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroup.list: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2045,8 +2270,18 @@ snaptrade = SnapTrade(
 )
 
 # List of model asset class
-response = snaptrade.portfolio_management.list_asset_classes()
-pprint(response)
+list_asset_classes_response = snaptrade.portfolio_management.list_asset_classes()
+try:
+    pprint(list_asset_classes_response.body["model_asset_class"])
+    pprint(list_asset_classes_response.body["model_asset_class_target"])
+    pprint(list_asset_classes_response.headers)
+    pprint(list_asset_classes_response.status)
+except ApiException as e:
+    print("Exception when calling ModelAssetClassDetails.list_asset_classes: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -2104,12 +2339,22 @@ snaptrade = SnapTrade(
 )
 
 # List of trades to make to rebalance portfolio group
-response = snaptrade.portfolio_management.list_calculated_trades(
+list_calculated_trades_response = snaptrade.portfolio_management.list_calculated_trades(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(list_calculated_trades_response.body["id"])
+    pprint(list_calculated_trades_response.body["trades"])
+    pprint(list_calculated_trades_response.headers)
+    pprint(list_calculated_trades_response.status)
+except ApiException as e:
+    print("Exception when calling CalculatedTrade.list_calculated_trades: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2182,8 +2427,19 @@ snaptrade = SnapTrade(
 )
 
 # List of model portfolio
-response = snaptrade.portfolio_management.list_model_portfolio()
-pprint(response)
+list_model_portfolio_response = snaptrade.portfolio_management.list_model_portfolio()
+try:
+    pprint(list_model_portfolio_response.body["model_portfolio"])
+    pprint(list_model_portfolio_response.body["model_portfolio_security"])
+    pprint(list_model_portfolio_response.body["model_portfolio_asset_class"])
+    pprint(list_model_portfolio_response.headers)
+    pprint(list_model_portfolio_response.status)
+except ApiException as e:
+    print("Exception when calling ModelPortfolioDetails.list_model_portfolio: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -2241,12 +2497,29 @@ snaptrade = SnapTrade(
 )
 
 # Get all accounts associated with a portfolio group
-response = snaptrade.portfolio_management.list_portfolio_accounts(
+list_portfolio_accounts_response = snaptrade.portfolio_management.list_portfolio_accounts(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(list_portfolio_accounts_response.body["id"])
+    pprint(list_portfolio_accounts_response.body["brokerage_authorization"])
+    pprint(list_portfolio_accounts_response.body["portfolio_group"])
+    pprint(list_portfolio_accounts_response.body["name"])
+    pprint(list_portfolio_accounts_response.body["number"])
+    pprint(list_portfolio_accounts_response.body["institution_name"])
+    pprint(list_portfolio_accounts_response.body["created_date"])
+    pprint(list_portfolio_accounts_response.body["meta"])
+    pprint(list_portfolio_accounts_response.body["cash_restrictions"])
+    pprint(list_portfolio_accounts_response.headers)
+    pprint(list_portfolio_accounts_response.status)
+except ApiException as e:
+    print("Exception when calling Account.list_portfolio_accounts: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2415,16 +2688,26 @@ snaptrade = SnapTrade(
 )
 
 # Update an existing target portfolio.
-response = snaptrade.portfolio_management.save_portfolio(
+save_portfolio_response = snaptrade.portfolio_management.save_portfolio(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
     body = {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'name': "Combined Retirement Portfolio",
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name": "Combined Retirement Portfolio",
     },
 )
-pprint(response)
+try:
+    pprint(save_portfolio_response.body["id"])
+    pprint(save_portfolio_response.body["name"])
+    pprint(save_portfolio_response.headers)
+    pprint(save_portfolio_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroup.save_portfolio: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2531,15 +2814,31 @@ snaptrade = SnapTrade(
 )
 
 # Search for symbols limited to brokerages under the specified portfolio group
-response = snaptrade.portfolio_management.search_portfolio_symbols(
+search_portfolio_symbols_response = snaptrade.portfolio_management.search_portfolio_symbols(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
     body = {
-        'substring': "apple",
+        "substring": "apple",
     },
 )
-pprint(response)
+try:
+    pprint(search_portfolio_symbols_response.body["id"])
+    pprint(search_portfolio_symbols_response.body["symbol"])
+    pprint(search_portfolio_symbols_response.body["raw_symbol"])
+    pprint(search_portfolio_symbols_response.body["description"])
+    pprint(search_portfolio_symbols_response.body["currency"])
+    pprint(search_portfolio_symbols_response.body["exchange"])
+    pprint(search_portfolio_symbols_response.body["type"])
+    pprint(search_portfolio_symbols_response.body["currencies"])
+    pprint(search_portfolio_symbols_response.headers)
+    pprint(search_portfolio_symbols_response.status)
+except ApiException as e:
+    print("Exception when calling UniversalSymbol.search_portfolio_symbols: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2636,20 +2935,28 @@ snaptrade = SnapTrade(
 )
 
 # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-response = snaptrade.portfolio_management.set_portfolio_targets(
+set_portfolio_targets_response = snaptrade.portfolio_management.set_portfolio_targets(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
     body = [
         {
-            'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            'percent': 90,
-            'is_supported': True,
-            'is_excluded': True,
+            "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "percent": 90,
+            "is_supported": True,
+            "is_excluded": True,
         }
     ],
 )
-pprint(response)
+try:
+    pprint(set_portfolio_targets_response.headers)
+    pprint(set_portfolio_targets_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAssetList.set_portfolio_targets: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2838,12 +3145,25 @@ snaptrade = SnapTrade(
 )
 
 # Updates portfolio group settings
-response = snaptrade.portfolio_management.update_portfolio_settings(
+update_portfolio_settings_response = snaptrade.portfolio_management.update_portfolio_settings(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
     },
 )
-pprint(response)
+try:
+    pprint(update_portfolio_settings_response.body["buy_only"])
+    pprint(update_portfolio_settings_response.body["cash_optimizer"])
+    pprint(update_portfolio_settings_response.body["notify_frequency"])
+    pprint(update_portfolio_settings_response.body["drift_threshold"])
+    pprint(update_portfolio_settings_response.body["preferred_currency"])
+    pprint(update_portfolio_settings_response.headers)
+    pprint(update_portfolio_settings_response.status)
+except ApiException as e:
+    print("Exception when calling PortfolioGroupSettings.update_portfolio_settings: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -2924,19 +3244,33 @@ snaptrade = SnapTrade(
 )
 
 # Update a TargetAsset under the specified PortfolioGroup.
-response = snaptrade.portfolio_management.update_portfolio_target_by_id(
+update_portfolio_target_by_id_response = snaptrade.portfolio_management.update_portfolio_target_by_id(
     path_params = {
         'portfolioGroupId': "portfolioGroupId_example",
         'targetAssetId': "targetAssetId_example",
     },
     body = {
-        'id': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'percent': 90,
-        'is_supported': True,
-        'is_excluded': True,
+        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "percent": 90,
+        "is_supported": True,
+        "is_excluded": True,
     },
 )
-pprint(response)
+try:
+    pprint(update_portfolio_target_by_id_response.body["id"])
+    pprint(update_portfolio_target_by_id_response.body["symbol"])
+    pprint(update_portfolio_target_by_id_response.body["percent"])
+    pprint(update_portfolio_target_by_id_response.body["is_supported"])
+    pprint(update_portfolio_target_by_id_response.body["is_excluded"])
+    pprint(update_portfolio_target_by_id_response.body["meta"])
+    pprint(update_portfolio_target_by_id_response.headers)
+    pprint(update_portfolio_target_by_id_response.status)
+except ApiException as e:
+    print("Exception when calling TargetAsset.update_portfolio_target_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

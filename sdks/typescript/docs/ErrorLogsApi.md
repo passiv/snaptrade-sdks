@@ -8,7 +8,8 @@ Method | HTTP request | Description
 
 
 # **listUserErrors**
-> Array<UserErrorLog> listUserErrors()
+
+#### **GET** /snapTrade/listUserErrors
 
 
 ### Example
@@ -24,11 +25,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.errorLogs.listUserErrors({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(listUserErrorsResponse)
 
 ```
 
@@ -44,10 +46,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<UserErrorLog>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

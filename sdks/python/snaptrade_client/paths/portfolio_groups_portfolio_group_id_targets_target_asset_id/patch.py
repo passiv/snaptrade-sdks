@@ -84,11 +84,9 @@ SchemaFor200ResponseBodyApplicationJson = TargetAsset
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: typing.Union[
         SchemaFor200ResponseBodyApplicationJson,
     ]
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -102,9 +100,7 @@ _response_for_200 = api_client.OpenApiResponse(
 
 @dataclass
 class ApiResponseFor400(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_400 = api_client.OpenApiResponse(
@@ -114,9 +110,7 @@ _response_for_400 = api_client.OpenApiResponse(
 
 @dataclass
 class ApiResponseFor404(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_404 = api_client.OpenApiResponse(
@@ -126,9 +120,7 @@ _response_for_404 = api_client.OpenApiResponse(
 
 @dataclass
 class ApiResponseForDefault(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_default = api_client.OpenApiResponse(

@@ -10,7 +10,8 @@ Method | HTTP request | Description
 
 
 # **detailBrokerageAuthorization**
-> BrokerageAuthorization detailBrokerageAuthorization()
+
+#### **GET** /authorizations/{authorizationId}
 
 
 ### Example
@@ -26,12 +27,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.connections.detailBrokerageAuthorization({
-    'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const detailBrokerageAuthorizationResponse = await snaptrade.connections.detailBrokerageAuthorization({
+        "authorization_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(detailBrokerageAuthorizationResponse)
 
 ```
 
@@ -49,10 +51,6 @@ Name | Type | Description  | Notes
 
 **BrokerageAuthorization**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -68,7 +66,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listBrokerageAuthorizations**
-> Array<BrokerageAuthorization> listBrokerageAuthorizations()
+
+#### **GET** /authorizations
 
 
 ### Example
@@ -84,11 +83,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.connections.listBrokerageAuthorizations({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const listBrokerageAuthorizationsResponse = await snaptrade.connections.listBrokerageAuthorizations({
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(listBrokerageAuthorizationsResponse)
 
 ```
 
@@ -105,10 +105,6 @@ Name | Type | Description  | Notes
 
 **Array<BrokerageAuthorization>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -124,7 +120,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **removeBrokerageAuthorization**
-> removeBrokerageAuthorization()
+
+#### **DELETE** /authorizations/{authorizationId}
 
 
 ### Example
@@ -140,12 +137,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.connections.removeBrokerageAuthorization({
-    'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const removeBrokerageAuthorizationResponse = await snaptrade.connections.removeBrokerageAuthorization({
+        "authorization_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(removeBrokerageAuthorizationResponse)
 
 ```
 
@@ -162,10 +160,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

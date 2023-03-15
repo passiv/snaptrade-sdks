@@ -308,27 +308,29 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
  * @export
  * @interface ConnectionsApiDetailBrokerageAuthorizationRequest
  */
-export interface ConnectionsApiDetailBrokerageAuthorizationRequest {
+export type ConnectionsApiDetailBrokerageAuthorizationRequest = {
+    
     /**
-     * The ID of a brokerage authorization object.
-     * @type {string}
-     * @memberof ConnectionsApiDetailBrokerageAuthorization
-     */
+    * The ID of a brokerage authorization object.
+    * @type {string}
+    * @memberof ConnectionsApiDetailBrokerageAuthorization
+    */
     readonly authorizationId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiDetailBrokerageAuthorization
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDetailBrokerageAuthorization
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiDetailBrokerageAuthorization
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDetailBrokerageAuthorization
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -336,20 +338,22 @@ export interface ConnectionsApiDetailBrokerageAuthorizationRequest {
  * @export
  * @interface ConnectionsApiListBrokerageAuthorizationsRequest
  */
-export interface ConnectionsApiListBrokerageAuthorizationsRequest {
+export type ConnectionsApiListBrokerageAuthorizationsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiListBrokerageAuthorizations
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListBrokerageAuthorizations
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiListBrokerageAuthorizations
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListBrokerageAuthorizations
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -357,27 +361,29 @@ export interface ConnectionsApiListBrokerageAuthorizationsRequest {
  * @export
  * @interface ConnectionsApiRemoveBrokerageAuthorizationRequest
  */
-export interface ConnectionsApiRemoveBrokerageAuthorizationRequest {
+export type ConnectionsApiRemoveBrokerageAuthorizationRequest = {
+    
     /**
-     * The ID of the Authorization to delete.
-     * @type {string}
-     * @memberof ConnectionsApiRemoveBrokerageAuthorization
-     */
+    * The ID of the Authorization to delete.
+    * @type {string}
+    * @memberof ConnectionsApiRemoveBrokerageAuthorization
+    */
     readonly authorizationId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiRemoveBrokerageAuthorization
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiRemoveBrokerageAuthorization
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ConnectionsApiRemoveBrokerageAuthorization
-     */
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiRemoveBrokerageAuthorization
+    */
     readonly userSecret: string
+    
 }
 
 /**

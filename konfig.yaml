@@ -48,7 +48,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 7.0.0
+    version: 8.0.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -65,7 +65,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 5.0.0
+    version: 6.0.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

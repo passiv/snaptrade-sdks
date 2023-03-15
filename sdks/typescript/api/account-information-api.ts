@@ -751,27 +751,29 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
  * @export
  * @interface AccountInformationApiGetAllUserHoldingsRequest
  */
-export interface AccountInformationApiGetAllUserHoldingsRequest {
+export type AccountInformationApiGetAllUserHoldingsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetAllUserHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAllUserHoldings
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetAllUserHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAllUserHoldings
+    */
     readonly userSecret: string
-
+    
     /**
-     * Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-     * @type {string}
-     * @memberof AccountInformationApiGetAllUserHoldings
-     */
+    * Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    * @type {string}
+    * @memberof AccountInformationApiGetAllUserHoldings
+    */
     readonly brokerageAuthorizations?: string
+    
 }
 
 /**
@@ -779,27 +781,29 @@ export interface AccountInformationApiGetAllUserHoldingsRequest {
  * @export
  * @interface AccountInformationApiGetUserAccountBalanceRequest
  */
-export interface AccountInformationApiGetUserAccountBalanceRequest {
+export type AccountInformationApiGetUserAccountBalanceRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountBalance
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountBalance
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountBalance
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountBalance
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountBalance
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountBalance
+    */
     readonly accountId: string
+    
 }
 
 /**
@@ -807,27 +811,29 @@ export interface AccountInformationApiGetUserAccountBalanceRequest {
  * @export
  * @interface AccountInformationApiGetUserAccountDetailsRequest
  */
-export interface AccountInformationApiGetUserAccountDetailsRequest {
+export type AccountInformationApiGetUserAccountDetailsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountDetails
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountDetails
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountDetails
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountDetails
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account to get detail of.
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountDetails
-     */
+    * The ID of the account to get detail of.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountDetails
+    */
     readonly accountId: string
+    
 }
 
 /**
@@ -835,34 +841,36 @@ export interface AccountInformationApiGetUserAccountDetailsRequest {
  * @export
  * @interface AccountInformationApiGetUserAccountOrdersRequest
  */
-export interface AccountInformationApiGetUserAccountOrdersRequest {
+export type AccountInformationApiGetUserAccountOrdersRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountOrders
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrders
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountOrders
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrders
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountOrders
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrders
+    */
     readonly accountId: string
-
+    
     /**
-     * defaults value is set to \"all\"
-     * @type {'all' | 'open' | 'executed'}
-     * @memberof AccountInformationApiGetUserAccountOrders
-     */
+    * defaults value is set to \"all\"
+    * @type {'all' | 'open' | 'executed'}
+    * @memberof AccountInformationApiGetUserAccountOrders
+    */
     readonly state?: 'all' | 'open' | 'executed'
+    
 }
 
 /**
@@ -870,27 +878,29 @@ export interface AccountInformationApiGetUserAccountOrdersRequest {
  * @export
  * @interface AccountInformationApiGetUserAccountPositionsRequest
  */
-export interface AccountInformationApiGetUserAccountPositionsRequest {
+export type AccountInformationApiGetUserAccountPositionsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountPositions
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountPositions
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountPositions
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountPositions
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof AccountInformationApiGetUserAccountPositions
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountPositions
+    */
     readonly accountId: string
+    
 }
 
 /**
@@ -898,27 +908,29 @@ export interface AccountInformationApiGetUserAccountPositionsRequest {
  * @export
  * @interface AccountInformationApiGetUserHoldingsRequest
  */
-export interface AccountInformationApiGetUserHoldingsRequest {
+export type AccountInformationApiGetUserHoldingsRequest = {
+    
     /**
-     * The ID of the account to fetch holdings for.
-     * @type {string}
-     * @memberof AccountInformationApiGetUserHoldings
-     */
+    * The ID of the account to fetch holdings for.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserHoldings
+    */
     readonly accountId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserHoldings
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiGetUserHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserHoldings
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -926,20 +938,22 @@ export interface AccountInformationApiGetUserHoldingsRequest {
  * @export
  * @interface AccountInformationApiListUserAccountsRequest
  */
-export interface AccountInformationApiListUserAccountsRequest {
+export type AccountInformationApiListUserAccountsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiListUserAccounts
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiListUserAccounts
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiListUserAccounts
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiListUserAccounts
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -947,27 +961,29 @@ export interface AccountInformationApiListUserAccountsRequest {
  * @export
  * @interface AccountInformationApiUpdateUserAccountRequest
  */
-export interface AccountInformationApiUpdateUserAccountRequest {
+export type AccountInformationApiUpdateUserAccountRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiUpdateUserAccount
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiUpdateUserAccount
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AccountInformationApiUpdateUserAccount
-     */
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiUpdateUserAccount
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account to update.
-     * @type {string}
-     * @memberof AccountInformationApiUpdateUserAccount
-     */
+    * The ID of the account to update.
+    * @type {string}
+    * @memberof AccountInformationApiUpdateUserAccount
+    */
     readonly accountId: string
+    
 }
 
 /**

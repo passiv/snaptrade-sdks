@@ -8,7 +8,8 @@ Method | HTTP request | Description
 
 
 # **accept**
-> SnapTradeAPIDisclaimerAcceptStatus accept(aPIDisclaimerAcceptRequest)
+
+#### **POST** /snapTrade/acceptDisclaimer
 
 
 ### Example
@@ -24,13 +25,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.apiDisclaimer.accept({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
-    },
-})
-console.log(response)
+const acceptResponse = await snaptrade.apiDisclaimer.accept({
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(acceptResponse)
 
 ```
 
@@ -47,10 +47,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **SnapTradeAPIDisclaimerAcceptStatus**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

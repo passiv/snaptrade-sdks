@@ -40,7 +40,8 @@ Method | HTTP request | Description
 
 
 # **addPortfolioExcludedAsset**
-> ExcludedAsset addPortfolioExcludedAsset()
+
+#### **POST** /portfolioGroups/{portfolioGroupId}/excludedassets
 
 
 ### Example
@@ -56,16 +57,15 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'requestBody': {
+const addPortfolioExcludedAssetResponse = await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
+        "portfolioGroupId": "portfolioGroupId_example",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "symbol": "VAB.TO",
         "raw_symbol": "VAB",
         "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
-    },
-})
-console.log(response)
+    })
+
+console.log(addPortfolioExcludedAssetResponse)
 
 ```
 
@@ -82,10 +82,6 @@ Name | Type | Description  | Notes
 
 **ExcludedAsset**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -100,7 +96,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **create**
-> Array<PortfolioGroup> create(requestBody)
+
+#### **POST** /portfolioGroups
 
 
 ### Example
@@ -116,15 +113,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.create({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
+const createResponse = await snaptrade.portfolioManagement.create({
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name": "Combined Retirement Portfolio",
-    },
-})
-console.log(response)
+    })
+
+console.log(createResponse)
 
 ```
 
@@ -142,10 +138,6 @@ Name | Type | Description  | Notes
 
 **Array<PortfolioGroup>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -162,7 +154,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **createAssetClass**
-> ModelAssetClassDetails createAssetClass()
+
+#### **POST** /modelAssetClass
 
 
 ### Example
@@ -178,8 +171,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.createAssetClass()
-console.log(response)
+const createAssetClassResponse = await snaptrade.portfolioManagement.createAssetClass()
+
+console.log(createAssetClassResponse)
 
 ```
 
@@ -191,10 +185,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **ModelAssetClassDetails**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -210,7 +200,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **createModelPortfolio**
-> ModelPortfolioDetails createModelPortfolio()
+
+#### **POST** /modelPortfolio
 
 
 ### Example
@@ -226,8 +217,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.createModelPortfolio()
-console.log(response)
+const createModelPortfolioResponse = await snaptrade.portfolioManagement.createModelPortfolio()
+
+console.log(createModelPortfolioResponse)
 
 ```
 
@@ -239,10 +231,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **ModelPortfolioDetails**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -258,7 +246,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **deleteAssetClass**
-> deleteAssetClass()
+
+#### **DELETE** /modelAssetClass/{modelAssetClassId}
 
 
 ### Example
@@ -274,10 +263,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.deleteAssetClass({
-    'modelAssetClassId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const deleteAssetClassResponse = await snaptrade.portfolioManagement.deleteAssetClass({
+        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(deleteAssetClassResponse)
 
 ```
 
@@ -293,10 +283,6 @@ Name | Type | Description  | Notes
 
 void (empty response body)
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -311,7 +297,8 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **deleteExcludedAsset**
-> deleteExcludedAsset()
+
+#### **DELETE** /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}
 
 
 ### Example
@@ -327,11 +314,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.deleteExcludedAsset({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'symbolId': "symbolId_example",
-})
-console.log(response)
+const deleteExcludedAssetResponse = await snaptrade.portfolioManagement.deleteExcludedAsset({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "symbolId": "symbolId_example",
+    })
+
+console.log(deleteExcludedAssetResponse)
 
 ```
 
@@ -348,10 +336,6 @@ Name | Type | Description  | Notes
 
 void (empty response body)
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -366,7 +350,8 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **deleteModelPortfolioById**
-> deleteModelPortfolioById()
+
+#### **DELETE** /modelPortfolio/{modelPortfolioId}
 
 
 ### Example
@@ -382,10 +367,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.deleteModelPortfolioById({
-    'modelPortfolioId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const deleteModelPortfolioByIdResponse = await snaptrade.portfolioManagement.deleteModelPortfolioById({
+        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(deleteModelPortfolioByIdResponse)
 
 ```
 
@@ -401,10 +387,6 @@ Name | Type | Description  | Notes
 
 void (empty response body)
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -419,7 +401,8 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **deletePortfoli**
-> PortfolioGroup deletePortfoli()
+
+#### **DELETE** /portfolioGroups/{portfolioGroupId}
 
 
 ### Example
@@ -435,10 +418,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.deletePortfoli({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const deletePortfoliResponse = await snaptrade.portfolioManagement.deletePortfoli({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(deletePortfoliResponse)
 
 ```
 
@@ -453,10 +437,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroup**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -475,7 +455,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **deletePortfolioTargetById**
-> TargetAsset deletePortfolioTargetById()
+
+#### **DELETE** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}
 
 
 ### Example
@@ -491,11 +472,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.deletePortfolioTargetById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'targetAssetId': "targetAssetId_example",
-})
-console.log(response)
+const deletePortfolioTargetByIdResponse = await snaptrade.portfolioManagement.deletePortfolioTargetById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "targetAssetId": "targetAssetId_example",
+    })
+
+console.log(deletePortfolioTargetByIdResponse)
 
 ```
 
@@ -511,10 +493,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **TargetAsset**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -533,7 +511,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **detailAssetClass**
-> ModelAssetClassDetails detailAssetClass()
+
+#### **GET** /modelAssetClass/{modelAssetClassId}
 
 
 ### Example
@@ -549,10 +528,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.detailAssetClass({
-    'modelAssetClassId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const detailAssetClassResponse = await snaptrade.portfolioManagement.detailAssetClass({
+        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(detailAssetClassResponse)
 
 ```
 
@@ -568,10 +548,6 @@ Name | Type | Description  | Notes
 
 **ModelAssetClassDetails**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -586,7 +562,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getCalculatedTradeById**
-> Array<Trade> getCalculatedTradeById()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId}
 
 
 ### Example
@@ -602,12 +579,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getCalculatedTradeById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'calculatedTradeId': "calculatedTradeId_example",
-    'tradeId': "TradeId_example",
-})
-console.log(response)
+const getCalculatedTradeByIdResponse = await snaptrade.portfolioManagement.getCalculatedTradeById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "calculatedTradeId": "calculatedTradeId_example",
+        "tradeId": "tradeId_example",
+    })
+
+console.log(getCalculatedTradeByIdResponse)
 
 ```
 
@@ -625,10 +603,6 @@ Name | Type | Description  | Notes
 
 **Array<Trade>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -643,7 +617,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getModelDetailsById**
-> ModelPortfolioDetails getModelDetailsById()
+
+#### **GET** /modelPortfolio/{modelPortfolioId}
 
 
 ### Example
@@ -659,10 +634,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getModelDetailsById({
-    'modelPortfolioId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const getModelDetailsByIdResponse = await snaptrade.portfolioManagement.getModelDetailsById({
+        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(getModelDetailsByIdResponse)
 
 ```
 
@@ -678,10 +654,6 @@ Name | Type | Description  | Notes
 
 **ModelPortfolioDetails**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -696,7 +668,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioBalances**
-> Array<Balance> getPortfolioBalances()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/balances
 
 
 ### Example
@@ -712,10 +685,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioBalances({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioBalancesResponse = await snaptrade.portfolioManagement.getPortfolioBalances({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioBalancesResponse)
 
 ```
 
@@ -730,10 +704,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<Balance>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -752,7 +722,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioDetailsById**
-> PortfolioGroup getPortfolioDetailsById()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}
 
 
 ### Example
@@ -768,10 +739,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioDetailsById({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioDetailsByIdResponse = await snaptrade.portfolioManagement.getPortfolioDetailsById({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioDetailsByIdResponse)
 
 ```
 
@@ -786,10 +758,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroup**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -806,7 +774,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioInfo**
-> PortfolioGroupInfo getPortfolioInfo()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/info
 
 
 ### Example
@@ -822,10 +791,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioInfo({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioInfoResponse = await snaptrade.portfolioManagement.getPortfolioInfo({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioInfoResponse)
 
 ```
 
@@ -840,10 +810,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroupInfo**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -860,7 +826,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioPositions**
-> Array<PortfolioGroupPosition> getPortfolioPositions()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/positions
 
 
 ### Example
@@ -876,10 +843,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioPositions({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioPositionsResponse = await snaptrade.portfolioManagement.getPortfolioPositions({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioPositionsResponse)
 
 ```
 
@@ -894,10 +862,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<PortfolioGroupPosition>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -916,7 +880,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioSettings**
-> PortfolioGroupSettings getPortfolioSettings()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/settings
 
 
 ### Example
@@ -932,10 +897,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioSettings({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioSettingsResponse = await snaptrade.portfolioManagement.getPortfolioSettings({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioSettingsResponse)
 
 ```
 
@@ -950,10 +916,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroupSettings**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -970,7 +932,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioTargetById**
-> TargetAsset getPortfolioTargetById()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}
 
 
 ### Example
@@ -986,11 +949,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioTargetById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'targetAssetId': "targetAssetId_example",
-})
-console.log(response)
+const getPortfolioTargetByIdResponse = await snaptrade.portfolioManagement.getPortfolioTargetById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "targetAssetId": "targetAssetId_example",
+    })
+
+console.log(getPortfolioTargetByIdResponse)
 
 ```
 
@@ -1007,10 +971,6 @@ Name | Type | Description  | Notes
 
 **TargetAsset**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1026,7 +986,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortfolioTargets**
-> Array<TargetAsset> getPortfolioTargets()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/targets
 
 
 ### Example
@@ -1042,10 +1003,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortfolioTargets({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortfolioTargetsResponse = await snaptrade.portfolioManagement.getPortfolioTargets({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortfolioTargetsResponse)
 
 ```
 
@@ -1060,10 +1022,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<TargetAsset>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1082,7 +1040,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPortoflioExcludedAssets**
-> Array<ExcludedAsset> getPortoflioExcludedAssets()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/excludedassets
 
 
 ### Example
@@ -1098,10 +1057,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.getPortoflioExcludedAssets({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const getPortoflioExcludedAssetsResponse = await snaptrade.portfolioManagement.getPortoflioExcludedAssets({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(getPortoflioExcludedAssetsResponse)
 
 ```
 
@@ -1116,10 +1076,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<ExcludedAsset>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1136,7 +1092,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **importModelPortfolio**
-> Array<TargetAsset> importModelPortfolio()
+
+#### **POST** /portfolioGroups/{portfolioGroupId}/import
 
 
 ### Example
@@ -1152,10 +1109,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.importModelPortfolio({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const importModelPortfolioResponse = await snaptrade.portfolioManagement.importModelPortfolio({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(importModelPortfolioResponse)
 
 ```
 
@@ -1170,10 +1128,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<TargetAsset>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1190,7 +1144,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **list**
-> Array<PortfolioGroup> list()
+
+#### **GET** /portfolioGroups
 
 
 ### Example
@@ -1206,11 +1161,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.list({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const listResponse = await snaptrade.portfolioManagement.list({
+        "user_id": "John.doe@snaptrade.com",
+        "user_secret": "USERSECRET123",
+    })
+
+console.log(listResponse)
 
 ```
 
@@ -1227,10 +1183,6 @@ Name | Type | Description  | Notes
 
 **Array<PortfolioGroup>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1246,7 +1198,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listAssetClasses**
-> Array<ModelAssetClassDetails> listAssetClasses()
+
+#### **GET** /modelAssetClass
 
 
 ### Example
@@ -1262,8 +1215,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.listAssetClasses()
-console.log(response)
+const listAssetClassesResponse = await snaptrade.portfolioManagement.listAssetClasses()
+
+console.log(listAssetClassesResponse)
 
 ```
 
@@ -1275,10 +1229,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<ModelAssetClassDetails>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1294,7 +1244,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listCalculatedTrades**
-> CalculatedTrade listCalculatedTrades()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades
 
 
 ### Example
@@ -1310,10 +1261,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.listCalculatedTrades({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const listCalculatedTradesResponse = await snaptrade.portfolioManagement.listCalculatedTrades({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(listCalculatedTradesResponse)
 
 ```
 
@@ -1329,10 +1281,6 @@ Name | Type | Description  | Notes
 
 **CalculatedTrade**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -1347,7 +1295,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listModelPortfolio**
-> Array<ModelPortfolioDetails> listModelPortfolio()
+
+#### **GET** /modelPortfolio
 
 
 ### Example
@@ -1363,8 +1312,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.listModelPortfolio()
-console.log(response)
+const listModelPortfolioResponse = await snaptrade.portfolioManagement.listModelPortfolio()
+
+console.log(listModelPortfolioResponse)
 
 ```
 
@@ -1376,10 +1326,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<ModelPortfolioDetails>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1395,7 +1341,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listPortfolioAccounts**
-> Array<Account> listPortfolioAccounts()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/accounts
 
 
 ### Example
@@ -1411,10 +1358,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.listPortfolioAccounts({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const listPortfolioAccountsResponse = await snaptrade.portfolioManagement.listPortfolioAccounts({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(listPortfolioAccountsResponse)
 
 ```
 
@@ -1429,10 +1377,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<Account>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1449,7 +1393,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **modifyModelPortfolioById**
-> modifyModelPortfolioById(modelPortfolioDetails)
+
+#### **POST** /modelPortfolio/{modelPortfolioId}
 
 
 ### Example
@@ -1465,12 +1410,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.modifyModelPortfolioById({
-    'modelPortfolioId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'requestBody': {
-    },
-})
-console.log(response)
+const modifyModelPortfolioByIdResponse = await snaptrade.portfolioManagement.modifyModelPortfolioById({
+        "model_portfolio_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(modifyModelPortfolioByIdResponse)
 
 ```
 
@@ -1487,10 +1431,6 @@ Name | Type | Description  | Notes
 
 void (empty response body)
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1505,7 +1445,8 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **savePortfolio**
-> PortfolioGroup savePortfolio(requestBody)
+
+#### **PATCH** /portfolioGroups/{portfolioGroupId}
 
 
 ### Example
@@ -1521,14 +1462,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.savePortfolio({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'requestBody': {
+const savePortfolioResponse = await snaptrade.portfolioManagement.savePortfolio({
+        "portfolioGroupId": "portfolioGroupId_example",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name": "Combined Retirement Portfolio",
-    },
-})
-console.log(response)
+    })
+
+console.log(savePortfolioResponse)
 
 ```
 
@@ -1544,10 +1484,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroup**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1566,7 +1502,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **searchPortfolioSymbols**
-> Array<UniversalSymbol> searchPortfolioSymbols()
+
+#### **POST** /portfolioGroups/{portfolioGroupId}/symbols
 
 
 ### Example
@@ -1582,13 +1519,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.searchPortfolioSymbols({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'requestBody': {
+const searchPortfolioSymbolsResponse = await snaptrade.portfolioManagement.searchPortfolioSymbols({
+        "portfolioGroupId": "portfolioGroupId_example",
         "substring": "apple",
-    },
-})
-console.log(response)
+    })
+
+console.log(searchPortfolioSymbolsResponse)
 
 ```
 
@@ -1605,10 +1541,6 @@ Name | Type | Description  | Notes
 
 **Array<UniversalSymbol>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1624,7 +1556,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **setPortfolioTargets**
-> Array<TargetAsset> setPortfolioTargets()
+
+#### **POST** /portfolioGroups/{portfolioGroupId}/targets
 
 
 ### Example
@@ -1640,7 +1573,7 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.setPortfolioTargets({
+const setPortfolioTargetsResponse = await snaptrade.portfolioManagement.setPortfolioTargets({
     'portfolioGroupId': "portfolioGroupId_example",
     'requestBody': [
         {
@@ -1651,7 +1584,8 @@ const response = await snaptrade.portfolioManagement.setPortfolioTargets({
         }
     ],
 })
-console.log(response)
+
+console.log(setPortfolioTargetsResponse)
 
 ```
 
@@ -1667,10 +1601,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<TargetAsset>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1689,7 +1619,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **updateAssetClass**
-> updateAssetClass(modelAssetClassDetails)
+
+#### **POST** /modelAssetClass/{modelAssetClassId}
 
 
 ### Example
@@ -1705,12 +1636,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.updateAssetClass({
-    'modelAssetClassId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'requestBody': {
-    },
-})
-console.log(response)
+const updateAssetClassResponse = await snaptrade.portfolioManagement.updateAssetClass({
+        "model_asset_class_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(updateAssetClassResponse)
 
 ```
 
@@ -1727,10 +1657,6 @@ Name | Type | Description  | Notes
 
 void (empty response body)
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -1745,7 +1671,8 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **updatePortfolioSettings**
-> PortfolioGroupSettings updatePortfolioSettings()
+
+#### **PATCH** /portfolioGroups/{portfolioGroupId}/settings
 
 
 ### Example
@@ -1761,10 +1688,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.updatePortfolioSettings({
-    'portfolioGroupId': "portfolioGroupId_example",
-})
-console.log(response)
+const updatePortfolioSettingsResponse = await snaptrade.portfolioManagement.updatePortfolioSettings({
+        "portfolioGroupId": "portfolioGroupId_example",
+    })
+
+console.log(updatePortfolioSettingsResponse)
 
 ```
 
@@ -1779,10 +1707,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PortfolioGroupSettings**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -1799,7 +1723,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **updatePortfolioTargetById**
-> TargetAsset updatePortfolioTargetById(targetAsset)
+
+#### **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId}
 
 
 ### Example
@@ -1815,17 +1740,16 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.portfolioManagement.updatePortfolioTargetById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'targetAssetId': "targetAssetId_example",
-    'requestBody': {
+const updatePortfolioTargetByIdResponse = await snaptrade.portfolioManagement.updatePortfolioTargetById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "targetAssetId": "targetAssetId_example",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "percent": 90,
         "is_supported": true,
         "is_excluded": true,
-    },
-})
-console.log(response)
+    })
+
+console.log(updatePortfolioTargetByIdResponse)
 
 ```
 
@@ -1842,10 +1766,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **TargetAsset**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

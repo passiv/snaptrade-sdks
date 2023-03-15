@@ -370,7 +370,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async loginSnapTradeUser(requestParameters: AuthenticationApiLoginSnapTradeUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationLoginSnapTradeUser200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -381,7 +381,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.registerSnapTradeUser(requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registerSnapTradeUser(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -451,13 +451,15 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
  * @export
  * @interface AuthenticationApiDeleteSnapTradeUserRequest
  */
-export interface AuthenticationApiDeleteSnapTradeUserRequest {
+export type AuthenticationApiDeleteSnapTradeUserRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationApiDeleteSnapTradeUser
-     */
+    * 
+    * @type {string}
+    * @memberof AuthenticationApiDeleteSnapTradeUser
+    */
     readonly userId: string
+    
 }
 
 /**
@@ -465,20 +467,22 @@ export interface AuthenticationApiDeleteSnapTradeUserRequest {
  * @export
  * @interface AuthenticationApiGetUserJWTRequest
  */
-export interface AuthenticationApiGetUserJWTRequest {
+export type AuthenticationApiGetUserJWTRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationApiGetUserJWT
-     */
+    * 
+    * @type {string}
+    * @memberof AuthenticationApiGetUserJWT
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationApiGetUserJWT
-     */
+    * 
+    * @type {string}
+    * @memberof AuthenticationApiGetUserJWT
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -486,42 +490,32 @@ export interface AuthenticationApiGetUserJWTRequest {
  * @export
  * @interface AuthenticationApiLoginSnapTradeUserRequest
  */
-export interface AuthenticationApiLoginSnapTradeUserRequest {
+export type AuthenticationApiLoginSnapTradeUserRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationApiLoginSnapTradeUser
-     */
+    * 
+    * @type {string}
+    * @memberof AuthenticationApiLoginSnapTradeUser
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationApiLoginSnapTradeUser
-     */
+    * 
+    * @type {string}
+    * @memberof AuthenticationApiLoginSnapTradeUser
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {SnapTradeLoginUserRequestBody}
-     * @memberof AuthenticationApiLoginSnapTradeUser
-     */
-    readonly requestBody?: SnapTradeLoginUserRequestBody
-}
+    
+} & SnapTradeLoginUserRequestBody
 
 /**
  * Request parameters for registerSnapTradeUser operation in AuthenticationApi.
  * @export
  * @interface AuthenticationApiRegisterSnapTradeUserRequest
  */
-export interface AuthenticationApiRegisterSnapTradeUserRequest {
-    /**
-     * 
-     * @type {SnapTradeRegisterUserRequestBody}
-     * @memberof AuthenticationApiRegisterSnapTradeUser
-     */
-    readonly requestBody: SnapTradeRegisterUserRequestBody
-}
+export type AuthenticationApiRegisterSnapTradeUserRequest = {
+    
+} & SnapTradeRegisterUserRequestBody
 
 /**
  * AuthenticationApi - object-oriented interface

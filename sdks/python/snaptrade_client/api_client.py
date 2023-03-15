@@ -827,21 +827,24 @@ class MediaType:
 
 @dataclass
 class ApiResponse:
+    headers: HTTPHeaderDict
+    status: int
     response: urllib3.HTTPResponse
     body: typing.Union[Unset, Schema]
-    headers: typing.Union[Unset, typing.List[HeaderParameter]]
 
     def __init__(
         self,
         response: urllib3.HTTPResponse,
         body: typing.Union[Unset, typing.Type[Schema]],
-        headers: typing.Union[Unset, typing.List[HeaderParameter]]
+        headers: HTTPHeaderDict,
+        status: int
     ):
         """
         pycharm needs this to prevent 'Unexpected argument' warnings
         """
         self.response = response
         self.body = body
+        self.status = status
         self.headers = headers
 
 
@@ -849,7 +852,6 @@ class ApiResponse:
 class ApiResponseWithoutDeserialization(ApiResponse):
     response: urllib3.HTTPResponse
     body: typing.Union[Unset, typing.Type[Schema]] = unset
-    headers: typing.Union[Unset, typing.List[HeaderParameter]] = unset
 
 
 class OpenApiResponse(JSONDetector):
@@ -983,7 +985,7 @@ class OpenApiResponse(JSONDetector):
         return None
 
     def deserialize(self, response: urllib3.HTTPResponse, configuration: Configuration, skip_deserialization = False) -> ApiResponse:
-        content_type = response.getheader('content-type')
+        content_type = response.headers.get('content-type')
         deserialized_body = unset
         streamed = response.supports_chunked_reads()
 
@@ -997,8 +999,9 @@ class OpenApiResponse(JSONDetector):
                 # some specs do not define response content media type schemas
                 return self.response_cls(
                     response=response,
-                    headers=deserialized_headers,
-                    body=unset
+                    body=unset,
+                    headers=response.headers,
+                    status=response.status
                 )
             body_schema = self.__get_schema_for_content_type(content_type)
             if body_schema is None:
@@ -1019,8 +1022,9 @@ class OpenApiResponse(JSONDetector):
             if skip_deserialization:
                 return self.response_cls(
                     response=response,
-                    headers=deserialized_headers,
-                    body=body_data
+                    body=body_data,
+                    headers=response.headers,
+                    status=response.status
                 )
 
             # Execute validation and throw as a side effect if validation fails
@@ -1035,8 +1039,9 @@ class OpenApiResponse(JSONDetector):
 
         return self.response_cls(
             response=response,
-            headers=deserialized_headers,
-            body=deserialized_body
+            body=deserialized_body,
+            headers=response.headers,
+            status=response.status
         )
 
 
@@ -1083,7 +1088,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Konfig/7.0.0/python'
+        self.user_agent = 'Konfig/8.0.0/python'
 
     def __enter__(self):
         return self

@@ -30,7 +30,7 @@ snaptrade = SnapTrade(
 )
 
 # Get detail of a specific brokerage authorizations for the user
-response = snaptrade.connections.detail_brokerage_authorization(
+detail_brokerage_authorization_response = snaptrade.connections.detail_brokerage_authorization(
     path_params = {
         'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
     },
@@ -39,7 +39,24 @@ response = snaptrade.connections.detail_brokerage_authorization(
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(detail_brokerage_authorization_response.body["id"])
+    pprint(detail_brokerage_authorization_response.body["created_date"])
+    pprint(detail_brokerage_authorization_response.body["updated_date"])
+    pprint(detail_brokerage_authorization_response.body["brokerage"])
+    pprint(detail_brokerage_authorization_response.body["name"])
+    pprint(detail_brokerage_authorization_response.body["type"])
+    pprint(detail_brokerage_authorization_response.body["disabled"])
+    pprint(detail_brokerage_authorization_response.body["disabled_date"])
+    pprint(detail_brokerage_authorization_response.body["meta"])
+    pprint(detail_brokerage_authorization_response.headers)
+    pprint(detail_brokerage_authorization_response.status)
+except ApiException as e:
+    print("Exception when calling BrokerageAuthorization.detail_brokerage_authorization: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -148,13 +165,30 @@ snaptrade = SnapTrade(
 )
 
 # List all brokerage authorizations for the user
-response = snaptrade.connections.list_brokerage_authorizations(
+list_brokerage_authorizations_response = snaptrade.connections.list_brokerage_authorizations(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(list_brokerage_authorizations_response.body["id"])
+    pprint(list_brokerage_authorizations_response.body["created_date"])
+    pprint(list_brokerage_authorizations_response.body["updated_date"])
+    pprint(list_brokerage_authorizations_response.body["brokerage"])
+    pprint(list_brokerage_authorizations_response.body["name"])
+    pprint(list_brokerage_authorizations_response.body["type"])
+    pprint(list_brokerage_authorizations_response.body["disabled"])
+    pprint(list_brokerage_authorizations_response.body["disabled_date"])
+    pprint(list_brokerage_authorizations_response.body["meta"])
+    pprint(list_brokerage_authorizations_response.headers)
+    pprint(list_brokerage_authorizations_response.status)
+except ApiException as e:
+    print("Exception when calling BrokerageAuthorization.list_brokerage_authorizations: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

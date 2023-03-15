@@ -138,20 +138,22 @@ export const ErrorLogsApiFactory = function (configuration?: Configuration, base
  * @export
  * @interface ErrorLogsApiListUserErrorsRequest
  */
-export interface ErrorLogsApiListUserErrorsRequest {
+export type ErrorLogsApiListUserErrorsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ErrorLogsApiListUserErrors
-     */
+    * 
+    * @type {string}
+    * @memberof ErrorLogsApiListUserErrors
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ErrorLogsApiListUserErrors
-     */
+    * 
+    * @type {string}
+    * @memberof ErrorLogsApiListUserErrors
+    */
     readonly userSecret: string
+    
 }
 
 /**

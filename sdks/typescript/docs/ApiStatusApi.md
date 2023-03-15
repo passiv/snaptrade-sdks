@@ -8,8 +8,10 @@ Method | HTTP request | Description
 
 
 # **check**
-> Status check()
 
+#### **GET** /
+
+### Description
 Check whether the API is operational and verify timestamps.
 
 ### Example
@@ -25,8 +27,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.apiStatus.check()
-console.log(response)
+const checkResponse = await snaptrade.apiStatus.check()
+
+console.log(checkResponse)
 
 ```
 
@@ -38,10 +41,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Status**
-
-### Authorization
-
-No authorization required
 
 ### HTTP request headers
 
