@@ -810,8 +810,11 @@ paths:
           schema:
             type: string
             format: uuid
+
       requestBody:
-        $ref: "#/components/requestBodies/CancelOrderRequestBody"
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+
+
       responses:
         "200":
           description: Order Record of canceled order
@@ -2630,6 +2633,8 @@ paths:
       responses:
         "200":
           description: Return a 200 status to indicate that the connection was successful
+        "201":
+          description: Return a 201 status to indicate that the connection was successful
   /connectionDeleted:
     post:
       tags:
@@ -2646,6 +2651,8 @@ paths:
           description:
             Return a 200 status to indicate that the connection was deleted
             successfully
+        "201":
+          description: Return a 201 status to indicate that the connection was deleted
   /userRegistered:
     post:
       tags:
@@ -2662,6 +2669,9 @@ paths:
           description:
             Return a 200 status to indicate that the user was registered
             successfully
+        "201":
+          description: Return a 201 status to indicate that user was registered
+            successfully
   /userDeleted:
     post:
       tags:
@@ -2677,6 +2687,8 @@ paths:
         "200":
           description: Return a 200 status to indicate that the user was deleted
             successfully
+        "201":
+          description: Return a 201 status to indicate that the connection was successful
   /accountAdded:
     post:
       tags:
@@ -2693,6 +2705,9 @@ paths:
           description:
             Return a 200 status to indicate that the account was added
             successfully
+        "201":
+          description: Return a 201 status to indicate that the account was added
+            successfull
   /accountDeleted:
     post:
       tags:
@@ -2709,6 +2724,9 @@ paths:
           description:
             Return a 200 status to indicate that the account was deleted
             successfully
+        "201":
+          description: Return a 201 status to indicate that the account was deleted
+            successfully
   /transactionsUpdated:
     post:
       tags:
@@ -2723,6 +2741,8 @@ paths:
       responses:
         "200":
           description: Return a 200 status to indicate that the update was successful
+        "201":
+          description: Return a 201 status to indicate the update was successful
 components:
   securitySchemes:
     PartnerSignature:
@@ -2794,12 +2814,21 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeForm"
+
+
     CancelOrderRequestBody:
+      description: The Order ID to be canceled
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Id"
+            type: object
+            properties:
+              brokerage_order_id:
+                $ref: '#/components/schemas/Id'
+
+
+
     CreateSnapTradeParterAPICredentialsRequestBody:
       required: true
       content:
@@ -4471,7 +4500,7 @@ components:
         Date used to specify timeframe for a reporting call (in YYYY-MM-DD
         format)
       type: string
-      example: 2022-01-24
+      example: "2022-01-24"
     ReportingFrequency:
       description: Optional frequency for the rate of return chart (defaults to
         monthly). Possible values are weekly, monthly, quarterly, yearly.

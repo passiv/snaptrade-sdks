@@ -12,7 +12,8 @@ Method | HTTP request | Description
 
 
 # **getOptionStrategy**
-> StrategyQuotes getOptionStrategy(optionsGetOptionStrategyRequest)
+
+#### **POST** /accounts/{accountId}/optionStrategy
 
 
 ### Example
@@ -28,16 +29,22 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.options.getOptionStrategy({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'requestBody': {
+const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
         "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "legs": [
+            {
+                "action": "BUY_TO_OPEN",
+                "option_symbol_id": "SPY220819P00200000",
+                "quantity": 1,
+            }
+        ],
         "strategy_type": "CUSTOM",
-    },
-})
-console.log(response)
+    })
+
+console.log(getOptionStrategyResponse)
 
 ```
 
@@ -56,10 +63,6 @@ Name | Type | Description  | Notes
 
 **StrategyQuotes**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -75,7 +78,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getOptionsChain**
-> Array<OptionChainInner> getOptionsChain()
+
+#### **GET** /accounts/{accountId}/optionsChain
 
 
 ### Example
@@ -91,13 +95,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.options.getOptionsChain({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'symbol': "symbol_example",
-})
-console.log(response)
+const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+        "symbol": "symbol_example",
+    })
+
+console.log(getOptionsChainResponse)
 
 ```
 
@@ -116,10 +121,6 @@ Name | Type | Description  | Notes
 
 **Array<OptionChainInner>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -135,7 +136,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getOptionsStrategyQuote**
-> StrategyQuotes getOptionsStrategyQuote()
+
+#### **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId}
 
 
 ### Example
@@ -151,13 +153,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.options.getOptionsStrategyQuote({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const getOptionsStrategyQuoteResponse = await snaptrade.options.getOptionsStrategyQuote({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(getOptionsStrategyQuoteResponse)
 
 ```
 
@@ -176,10 +179,6 @@ Name | Type | Description  | Notes
 
 **StrategyQuotes**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -195,7 +194,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listOptionHoldings**
-> OptionsHoldings listOptionHoldings()
+
+#### **GET** /accounts/{accountId}/options
 
 
 ### Example
@@ -211,12 +211,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.options.listOptionHoldings({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-})
-console.log(response)
+const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+    })
+
+console.log(listOptionHoldingsResponse)
 
 ```
 
@@ -234,10 +235,6 @@ Name | Type | Description  | Notes
 
 **OptionsHoldings**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -253,7 +250,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **placeOptionStrategy**
-> StrategyOrderRecord placeOptionStrategy(optionsPlaceOptionStrategyRequest)
+
+#### **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute
 
 
 ### Example
@@ -269,18 +267,17 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.options.placeOptionStrategy({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    'requestBody': {
+const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "order_type": "Limit",
         "time_in_force": "DAY",
         "price": 31.33,
-    },
-})
-console.log(response)
+    })
+
+console.log(placeOptionStrategyResponse)
 
 ```
 
@@ -299,10 +296,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **StrategyOrderRecord**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

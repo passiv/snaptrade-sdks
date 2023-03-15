@@ -15,7 +15,8 @@ Method | HTTP request | Description
 
 
 # **getAllUserHoldings**
-> Array<AccountHoldings> getAllUserHoldings()
+
+#### **GET** /holdings
 
 
 ### Example
@@ -31,12 +32,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getAllUserHoldings({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'brokerageAuthorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-})
-console.log(response)
+const getAllUserHoldingsResponse = await snaptrade.accountInformation.getAllUserHoldings({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    })
+
+console.log(getAllUserHoldingsResponse)
 
 ```
 
@@ -53,10 +55,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<AccountHoldings>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -75,7 +73,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserAccountBalance**
-> Array<Balance> getUserAccountBalance()
+
+#### **GET** /accounts/{accountId}/balances
 
 
 ### Example
@@ -91,12 +90,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getUserAccountBalance({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-})
-console.log(response)
+const getUserAccountBalanceResponse = await snaptrade.accountInformation.getUserAccountBalance({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+    })
+
+console.log(getUserAccountBalanceResponse)
 
 ```
 
@@ -114,10 +114,6 @@ Name | Type | Description  | Notes
 
 **Array<Balance>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -133,7 +129,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserAccountDetails**
-> Array<Account> getUserAccountDetails()
+
+#### **GET** /accounts/{accountId}
 
 
 ### Example
@@ -149,12 +146,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getUserAccountDetails({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-})
-console.log(response)
+const getUserAccountDetailsResponse = await snaptrade.accountInformation.getUserAccountDetails({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+    })
+
+console.log(getUserAccountDetailsResponse)
 
 ```
 
@@ -172,10 +170,6 @@ Name | Type | Description  | Notes
 
 **Array<Account>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -191,7 +185,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserAccountOrders**
-> Array<AccountOrderRecord> getUserAccountOrders()
+
+#### **GET** /accounts/{accountId}/orders
 
 
 ### Example
@@ -207,13 +202,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getUserAccountOrders({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'state': "all",
-})
-console.log(response)
+const getUserAccountOrdersResponse = await snaptrade.accountInformation.getUserAccountOrders({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "state": "all",
+        "accountId": "accountId_example",
+    })
+
+console.log(getUserAccountOrdersResponse)
 
 ```
 
@@ -232,10 +228,6 @@ Name | Type | Description  | Notes
 
 **Array<AccountOrderRecord>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -251,7 +243,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserAccountPositions**
-> Array<Position> getUserAccountPositions()
+
+#### **GET** /accounts/{accountId}/positions
 
 
 ### Example
@@ -267,12 +260,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getUserAccountPositions({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-})
-console.log(response)
+const getUserAccountPositionsResponse = await snaptrade.accountInformation.getUserAccountPositions({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+    })
+
+console.log(getUserAccountPositionsResponse)
 
 ```
 
@@ -290,10 +284,6 @@ Name | Type | Description  | Notes
 
 **Array<Position>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -309,7 +299,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserHoldings**
-> AccountHoldings getUserHoldings()
+
+#### **GET** /accounts/{accountId}/holdings
 
 
 ### Example
@@ -325,12 +316,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.getUserHoldings({
-    'accountId': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const getUserHoldingsResponse = await snaptrade.accountInformation.getUserHoldings({
+        "accountId": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(getUserHoldingsResponse)
 
 ```
 
@@ -347,10 +339,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **AccountHoldings**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -369,7 +357,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listUserAccounts**
-> Array<Account> listUserAccounts()
+
+#### **GET** /accounts
 
 
 ### Example
@@ -385,11 +374,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.listUserAccounts({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const listUserAccountsResponse = await snaptrade.accountInformation.listUserAccounts({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(listUserAccountsResponse)
 
 ```
 
@@ -405,10 +395,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<Account>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -425,7 +411,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **updateUserAccount**
-> Array<Account> updateUserAccount()
+
+#### **PUT** /accounts/{accountId}
 
 
 ### Example
@@ -441,12 +428,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.accountInformation.updateUserAccount({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-})
-console.log(response)
+const updateUserAccountResponse = await snaptrade.accountInformation.updateUserAccount({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+    })
+
+console.log(updateUserAccountResponse)
 
 ```
 
@@ -463,10 +451,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<Account>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

@@ -137,11 +137,9 @@ class SchemaFor200ResponseBody(
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: typing.Union[
         SchemaFor200ResponseBody,
     ]
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -155,9 +153,7 @@ _response_for_200 = api_client.OpenApiResponse(
 
 @dataclass
 class ApiResponseForDefault(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_default = api_client.OpenApiResponse(

@@ -28,7 +28,7 @@ snaptrade = SnapTrade(
 )
 
 # Accept or Reject SnapTrade disclaimer agreement
-response = snaptrade.api_disclaimer.accept(
+accept_response = snaptrade.api_disclaimer.accept(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
@@ -36,7 +36,17 @@ response = snaptrade.api_disclaimer.accept(
     body = {
     },
 )
-pprint(response)
+try:
+    pprint(accept_response.body["accepted"])
+    pprint(accept_response.body["timestamp"])
+    pprint(accept_response.headers)
+    pprint(accept_response.status)
+except ApiException as e:
+    print("Exception when calling SnapTradeAPIDisclaimerAcceptStatus.accept: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

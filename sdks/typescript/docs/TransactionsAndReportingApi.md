@@ -9,8 +9,10 @@ Method | HTTP request | Description
 
 
 # **getActivities**
-> Array<UniversalActivity> getActivities()
 
+#### **GET** /activities
+
+### Description
 Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
 
 ### Example
@@ -26,14 +28,15 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.transactionsAndReporting.getActivities({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'startDate': "2022-01-24T00:00:00.000Z",
-    'endDate': "2022-01-24T00:00:00.000Z",
-    'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-})
-console.log(response)
+const getActivitiesResponse = await snaptrade.transactionsAndReporting.getActivities({
+        "startDate": "2022-01-24",
+        "endDate": "2022-01-24",
+        "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(getActivitiesResponse)
 
 ```
 
@@ -53,10 +56,6 @@ Name | Type | Description  | Notes
 
 **Array<UniversalActivity>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -72,8 +71,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getReportingCustomRange**
-> PerformanceCustom getReportingCustomRange()
 
+#### **GET** /performance/custom
+
+### Description
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
 
 ### Example
@@ -89,16 +90,17 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.transactionsAndReporting.getReportingCustomRange({
-    'startDate': "2022-01-24T00:00:00.000Z",
-    'endDate': "2022-01-24T00:00:00.000Z",
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    'detailed': true,
-    'frequency': "monthly",
-})
-console.log(response)
+const getReportingCustomRangeResponse = await snaptrade.transactionsAndReporting.getReportingCustomRange({
+        "startDate": "2022-01-24",
+        "endDate": "2022-01-24",
+        "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        "detailed": true,
+        "frequency": "monthly",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(getReportingCustomRangeResponse)
 
 ```
 
@@ -119,10 +121,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **PerformanceCustom**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

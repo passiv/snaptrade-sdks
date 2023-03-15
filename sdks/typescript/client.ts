@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { AxiosRequestConfig } from "axios";
 import {
   AccountInformationApi,
   ApiDisclaimerApi,
@@ -52,4 +53,5 @@ export class Snaptrade {
     this.trading = new TradingApi(configuration);
     this.transactionsAndReporting = new TransactionsAndReportingApi(configuration);
   }
+
 }

@@ -12,7 +12,8 @@ Method | HTTP request | Description
 
 
 # **deleteSnapTradeUser**
-> DeleteUserResponse deleteSnapTradeUser()
+
+#### **DELETE** /snapTrade/deleteUser
 
 
 ### Example
@@ -28,10 +29,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.authentication.deleteSnapTradeUser({
-    'userId': "John.doe@snaptrade.com",
-})
-console.log(response)
+const deleteSnapTradeUserResponse = await snaptrade.authentication.deleteSnapTradeUser({
+        "userId": "John.doe@snaptrade.com",
+    })
+
+console.log(deleteSnapTradeUserResponse)
 
 ```
 
@@ -46,10 +48,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **DeleteUserResponse**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -69,7 +67,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserJWT**
-> EncryptedResponse getUserJWT()
+
+#### **GET** /snapTrade/encryptedJWT
 
 
 ### Example
@@ -85,11 +84,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.authentication.getUserJWT({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(getUserJWTResponse)
 
 ```
 
@@ -105,10 +105,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **EncryptedResponse**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -128,7 +124,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listSnapTradeUsers**
-> Array<string> listSnapTradeUsers()
+
+#### **GET** /snapTrade/listUsers
 
 
 ### Example
@@ -144,8 +141,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.authentication.listSnapTradeUsers()
-console.log(response)
+const listSnapTradeUsersResponse = await snaptrade.authentication.listSnapTradeUsers()
+
+console.log(listSnapTradeUsersResponse)
 
 ```
 
@@ -157,10 +155,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<string>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -179,7 +173,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **loginSnapTradeUser**
-> AuthenticationLoginSnapTradeUser200Response loginSnapTradeUser()
+
+#### **POST** /snapTrade/login
 
 
 ### Example
@@ -195,18 +190,17 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.authentication.loginSnapTradeUser({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
+const loginSnapTradeUserResponse = await snaptrade.authentication.loginSnapTradeUser({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "broker": "ALPACA",
         "immediate_redirect": true,
         "custom_redirect": "https://passiv.com",
         "reconnect": "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
         "connection_type": "read",
-    },
-})
-console.log(response)
+    })
+
+console.log(loginSnapTradeUserResponse)
 
 ```
 
@@ -223,10 +217,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **AuthenticationLoginSnapTradeUser200Response**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -246,7 +236,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **registerSnapTradeUser**
-> UserIDandSecret registerSnapTradeUser(snapTradeRegisterUserRequestBody)
+
+#### **POST** /snapTrade/registerUser
 
 
 ### Example
@@ -262,13 +253,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.authentication.registerSnapTradeUser({
-    'requestBody': {
+const registerSnapTradeUserResponse = await snaptrade.authentication.registerSnapTradeUser({
         "user_id": "snaptrade-user-123",
         "rsa_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
-    },
-})
-console.log(response)
+    })
+
+console.log(registerSnapTradeUserResponse)
 
 ```
 
@@ -283,10 +273,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **UserIDandSecret**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

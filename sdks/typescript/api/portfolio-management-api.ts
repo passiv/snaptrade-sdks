@@ -1793,7 +1793,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async addPortfolioExcludedAsset(requestParameters: PortfolioManagementApiAddPortfolioExcludedAssetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExcludedAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addPortfolioExcludedAsset(requestParameters.portfolioGroupId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPortfolioExcludedAsset(requestParameters.portfolioGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1804,7 +1804,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async create(requestParameters: PortfolioManagementApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2075,7 +2075,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async modifyModelPortfolioById(requestParameters: PortfolioManagementApiModifyModelPortfolioByIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyModelPortfolioById(requestParameters.modelPortfolioId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyModelPortfolioById(requestParameters.modelPortfolioId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2086,7 +2086,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async savePortfolio(requestParameters: PortfolioManagementApiSavePortfolioRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioGroup>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortfolio(requestParameters.portfolioGroupId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortfolio(requestParameters.portfolioGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2097,7 +2097,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async searchPortfolioSymbols(requestParameters: PortfolioManagementApiSearchPortfolioSymbolsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPortfolioSymbols(requestParameters.portfolioGroupId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPortfolioSymbols(requestParameters.portfolioGroupId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2119,7 +2119,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async updateAssetClass(requestParameters: PortfolioManagementApiUpdateAssetClassRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAssetClass(requestParameters.modelAssetClassId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAssetClass(requestParameters.modelAssetClassId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2141,7 +2141,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async updatePortfolioTargetById(requestParameters: PortfolioManagementApiUpdatePortfolioTargetByIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TargetAsset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortfolioTargetById(requestParameters.portfolioGroupId, requestParameters.targetAssetId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePortfolioTargetById(requestParameters.portfolioGroupId, requestParameters.targetAssetId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -2488,62 +2488,54 @@ export const PortfolioManagementApiFactory = function (configuration?: Configura
  * @export
  * @interface PortfolioManagementApiAddPortfolioExcludedAssetRequest
  */
-export interface PortfolioManagementApiAddPortfolioExcludedAssetRequest {
+export type PortfolioManagementApiAddPortfolioExcludedAssetRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to exclude an asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiAddPortfolioExcludedAsset
-     */
+    * The ID of the PortfolioGroup under which to exclude an asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiAddPortfolioExcludedAsset
+    */
     readonly portfolioGroupId: string
-
-    /**
-     * 
-     * @type {UniversalSymbol}
-     * @memberof PortfolioManagementApiAddPortfolioExcludedAsset
-     */
-    readonly requestBody?: UniversalSymbol
-}
+    
+} & UniversalSymbol
 
 /**
  * Request parameters for create operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiCreateRequest
  */
-export interface PortfolioManagementApiCreateRequest {
+export type PortfolioManagementApiCreateRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof PortfolioManagementApiCreate
-     */
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiCreate
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof PortfolioManagementApiCreate
-     */
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiCreate
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {{ [key: string]: any; }}
-     * @memberof PortfolioManagementApiCreate
-     */
-    readonly requestBody: { [key: string]: any; }
-}
+    
+} & { [key: string]: any; }
 
 /**
  * Request parameters for deleteAssetClass operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiDeleteAssetClassRequest
  */
-export interface PortfolioManagementApiDeleteAssetClassRequest {
+export type PortfolioManagementApiDeleteAssetClassRequest = {
+    
     /**
-     * The ID of the model asset class to delete.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeleteAssetClass
-     */
+    * The ID of the model asset class to delete.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeleteAssetClass
+    */
     readonly modelAssetClassId: string
+    
 }
 
 /**
@@ -2551,20 +2543,22 @@ export interface PortfolioManagementApiDeleteAssetClassRequest {
  * @export
  * @interface PortfolioManagementApiDeleteExcludedAssetRequest
  */
-export interface PortfolioManagementApiDeleteExcludedAssetRequest {
+export type PortfolioManagementApiDeleteExcludedAssetRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to unexclude an asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeleteExcludedAsset
-     */
+    * The ID of the PortfolioGroup under which to unexclude an asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeleteExcludedAsset
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of the excluded asset Symbol to delete.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeleteExcludedAsset
-     */
+    * The ID of the excluded asset Symbol to delete.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeleteExcludedAsset
+    */
     readonly symbolId: string
+    
 }
 
 /**
@@ -2572,13 +2566,15 @@ export interface PortfolioManagementApiDeleteExcludedAssetRequest {
  * @export
  * @interface PortfolioManagementApiDeleteModelPortfolioByIdRequest
  */
-export interface PortfolioManagementApiDeleteModelPortfolioByIdRequest {
+export type PortfolioManagementApiDeleteModelPortfolioByIdRequest = {
+    
     /**
-     * The ID of the model portfolio to delete.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeleteModelPortfolioById
-     */
+    * The ID of the model portfolio to delete.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeleteModelPortfolioById
+    */
     readonly modelPortfolioId: string
+    
 }
 
 /**
@@ -2586,13 +2582,15 @@ export interface PortfolioManagementApiDeleteModelPortfolioByIdRequest {
  * @export
  * @interface PortfolioManagementApiDeletePortfoliRequest
  */
-export interface PortfolioManagementApiDeletePortfoliRequest {
+export type PortfolioManagementApiDeletePortfoliRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to delete.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeletePortfoli
-     */
+    * The ID of the PortfolioGroup to delete.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeletePortfoli
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2600,20 +2598,22 @@ export interface PortfolioManagementApiDeletePortfoliRequest {
  * @export
  * @interface PortfolioManagementApiDeletePortfolioTargetByIdRequest
  */
-export interface PortfolioManagementApiDeletePortfolioTargetByIdRequest {
+export type PortfolioManagementApiDeletePortfolioTargetByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to remove the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeletePortfolioTargetById
-     */
+    * The ID of the PortfolioGroup under which to remove the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeletePortfolioTargetById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of the TargetAsset to delete.
-     * @type {string}
-     * @memberof PortfolioManagementApiDeletePortfolioTargetById
-     */
+    * The ID of the TargetAsset to delete.
+    * @type {string}
+    * @memberof PortfolioManagementApiDeletePortfolioTargetById
+    */
     readonly targetAssetId: string
+    
 }
 
 /**
@@ -2621,13 +2621,15 @@ export interface PortfolioManagementApiDeletePortfolioTargetByIdRequest {
  * @export
  * @interface PortfolioManagementApiDetailAssetClassRequest
  */
-export interface PortfolioManagementApiDetailAssetClassRequest {
+export type PortfolioManagementApiDetailAssetClassRequest = {
+    
     /**
-     * The ID of the model asset class to get.
-     * @type {string}
-     * @memberof PortfolioManagementApiDetailAssetClass
-     */
+    * The ID of the model asset class to get.
+    * @type {string}
+    * @memberof PortfolioManagementApiDetailAssetClass
+    */
     readonly modelAssetClassId: string
+    
 }
 
 /**
@@ -2635,27 +2637,29 @@ export interface PortfolioManagementApiDetailAssetClassRequest {
  * @export
  * @interface PortfolioManagementApiGetCalculatedTradeByIdRequest
  */
-export interface PortfolioManagementApiGetCalculatedTradeByIdRequest {
+export type PortfolioManagementApiGetCalculatedTradeByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof PortfolioManagementApiGetCalculatedTradeById
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof PortfolioManagementApiGetCalculatedTradeById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of calculated trade to get account impact
-     * @type {string}
-     * @memberof PortfolioManagementApiGetCalculatedTradeById
-     */
+    * The ID of calculated trade to get account impact
+    * @type {string}
+    * @memberof PortfolioManagementApiGetCalculatedTradeById
+    */
     readonly calculatedTradeId: string
-
+    
     /**
-     * The ID of trade object
-     * @type {string}
-     * @memberof PortfolioManagementApiGetCalculatedTradeById
-     */
+    * The ID of trade object
+    * @type {string}
+    * @memberof PortfolioManagementApiGetCalculatedTradeById
+    */
     readonly tradeId: string
+    
 }
 
 /**
@@ -2663,13 +2667,15 @@ export interface PortfolioManagementApiGetCalculatedTradeByIdRequest {
  * @export
  * @interface PortfolioManagementApiGetModelDetailsByIdRequest
  */
-export interface PortfolioManagementApiGetModelDetailsByIdRequest {
+export type PortfolioManagementApiGetModelDetailsByIdRequest = {
+    
     /**
-     * The ID of the model portfolio to get.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetModelDetailsById
-     */
+    * The ID of the model portfolio to get.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetModelDetailsById
+    */
     readonly modelPortfolioId: string
+    
 }
 
 /**
@@ -2677,13 +2683,15 @@ export interface PortfolioManagementApiGetModelDetailsByIdRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioBalancesRequest
  */
-export interface PortfolioManagementApiGetPortfolioBalancesRequest {
+export type PortfolioManagementApiGetPortfolioBalancesRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioBalances
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioBalances
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2691,13 +2699,15 @@ export interface PortfolioManagementApiGetPortfolioBalancesRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioDetailsByIdRequest
  */
-export interface PortfolioManagementApiGetPortfolioDetailsByIdRequest {
+export type PortfolioManagementApiGetPortfolioDetailsByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to get.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioDetailsById
-     */
+    * The ID of the PortfolioGroup to get.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioDetailsById
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2705,13 +2715,15 @@ export interface PortfolioManagementApiGetPortfolioDetailsByIdRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioInfoRequest
  */
-export interface PortfolioManagementApiGetPortfolioInfoRequest {
+export type PortfolioManagementApiGetPortfolioInfoRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioInfo
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioInfo
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2719,13 +2731,15 @@ export interface PortfolioManagementApiGetPortfolioInfoRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioPositionsRequest
  */
-export interface PortfolioManagementApiGetPortfolioPositionsRequest {
+export type PortfolioManagementApiGetPortfolioPositionsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioPositions
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioPositions
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2733,13 +2747,15 @@ export interface PortfolioManagementApiGetPortfolioPositionsRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioSettingsRequest
  */
-export interface PortfolioManagementApiGetPortfolioSettingsRequest {
+export type PortfolioManagementApiGetPortfolioSettingsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to get the settings.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioSettings
-     */
+    * The ID of the PortfolioGroup under which to get the settings.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioSettings
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2747,20 +2763,22 @@ export interface PortfolioManagementApiGetPortfolioSettingsRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioTargetByIdRequest
  */
-export interface PortfolioManagementApiGetPortfolioTargetByIdRequest {
+export type PortfolioManagementApiGetPortfolioTargetByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to get the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioTargetById
-     */
+    * The ID of the PortfolioGroup under which to get the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioTargetById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of the TargetAsset to get.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioTargetById
-     */
+    * The ID of the TargetAsset to get.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioTargetById
+    */
     readonly targetAssetId: string
+    
 }
 
 /**
@@ -2768,13 +2786,15 @@ export interface PortfolioManagementApiGetPortfolioTargetByIdRequest {
  * @export
  * @interface PortfolioManagementApiGetPortfolioTargetsRequest
  */
-export interface PortfolioManagementApiGetPortfolioTargetsRequest {
+export type PortfolioManagementApiGetPortfolioTargetsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortfolioTargets
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortfolioTargets
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2782,13 +2802,15 @@ export interface PortfolioManagementApiGetPortfolioTargetsRequest {
  * @export
  * @interface PortfolioManagementApiGetPortoflioExcludedAssetsRequest
  */
-export interface PortfolioManagementApiGetPortoflioExcludedAssetsRequest {
+export type PortfolioManagementApiGetPortoflioExcludedAssetsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which the excluded assets are linked.
-     * @type {string}
-     * @memberof PortfolioManagementApiGetPortoflioExcludedAssets
-     */
+    * The ID of the PortfolioGroup under which the excluded assets are linked.
+    * @type {string}
+    * @memberof PortfolioManagementApiGetPortoflioExcludedAssets
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2796,13 +2818,15 @@ export interface PortfolioManagementApiGetPortoflioExcludedAssetsRequest {
  * @export
  * @interface PortfolioManagementApiImportModelPortfolioRequest
  */
-export interface PortfolioManagementApiImportModelPortfolioRequest {
+export type PortfolioManagementApiImportModelPortfolioRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiImportModelPortfolio
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiImportModelPortfolio
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2810,20 +2834,22 @@ export interface PortfolioManagementApiImportModelPortfolioRequest {
  * @export
  * @interface PortfolioManagementApiListRequest
  */
-export interface PortfolioManagementApiListRequest {
+export type PortfolioManagementApiListRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof PortfolioManagementApiList
-     */
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiList
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof PortfolioManagementApiList
-     */
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiList
+    */
     readonly userSecret: string
+    
 }
 
 /**
@@ -2831,13 +2857,15 @@ export interface PortfolioManagementApiListRequest {
  * @export
  * @interface PortfolioManagementApiListCalculatedTradesRequest
  */
-export interface PortfolioManagementApiListCalculatedTradesRequest {
+export type PortfolioManagementApiListCalculatedTradesRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof PortfolioManagementApiListCalculatedTrades
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof PortfolioManagementApiListCalculatedTrades
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2845,13 +2873,15 @@ export interface PortfolioManagementApiListCalculatedTradesRequest {
  * @export
  * @interface PortfolioManagementApiListPortfolioAccountsRequest
  */
-export interface PortfolioManagementApiListPortfolioAccountsRequest {
+export type PortfolioManagementApiListPortfolioAccountsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which the accounts are linked.
-     * @type {string}
-     * @memberof PortfolioManagementApiListPortfolioAccounts
-     */
+    * The ID of the PortfolioGroup under which the accounts are linked.
+    * @type {string}
+    * @memberof PortfolioManagementApiListPortfolioAccounts
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2859,82 +2889,66 @@ export interface PortfolioManagementApiListPortfolioAccountsRequest {
  * @export
  * @interface PortfolioManagementApiModifyModelPortfolioByIdRequest
  */
-export interface PortfolioManagementApiModifyModelPortfolioByIdRequest {
+export type PortfolioManagementApiModifyModelPortfolioByIdRequest = {
+    
     /**
-     * The ID of the model portfolio to update.
-     * @type {string}
-     * @memberof PortfolioManagementApiModifyModelPortfolioById
-     */
+    * The ID of the model portfolio to update.
+    * @type {string}
+    * @memberof PortfolioManagementApiModifyModelPortfolioById
+    */
     readonly modelPortfolioId: string
-
-    /**
-     * Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
-     * @type {ModelPortfolioDetails}
-     * @memberof PortfolioManagementApiModifyModelPortfolioById
-     */
-    readonly requestBody: ModelPortfolioDetails
-}
+    
+} & ModelPortfolioDetails
 
 /**
  * Request parameters for savePortfolio operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiSavePortfolioRequest
  */
-export interface PortfolioManagementApiSavePortfolioRequest {
+export type PortfolioManagementApiSavePortfolioRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to update.
-     * @type {string}
-     * @memberof PortfolioManagementApiSavePortfolio
-     */
+    * The ID of the PortfolioGroup to update.
+    * @type {string}
+    * @memberof PortfolioManagementApiSavePortfolio
+    */
     readonly portfolioGroupId: string
-
-    /**
-     * 
-     * @type {{ [key: string]: any; }}
-     * @memberof PortfolioManagementApiSavePortfolio
-     */
-    readonly requestBody: { [key: string]: any; }
-}
+    
+} & { [key: string]: any; }
 
 /**
  * Request parameters for searchPortfolioSymbols operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiSearchPortfolioSymbolsRequest
  */
-export interface PortfolioManagementApiSearchPortfolioSymbolsRequest {
+export type PortfolioManagementApiSearchPortfolioSymbolsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to search under
-     * @type {string}
-     * @memberof PortfolioManagementApiSearchPortfolioSymbols
-     */
+    * The ID of the PortfolioGroup to search under
+    * @type {string}
+    * @memberof PortfolioManagementApiSearchPortfolioSymbols
+    */
     readonly portfolioGroupId: string
-
-    /**
-     * 
-     * @type {SymbolQuery}
-     * @memberof PortfolioManagementApiSearchPortfolioSymbols
-     */
-    readonly requestBody?: SymbolQuery
-}
+    
+} & SymbolQuery
 
 /**
  * Request parameters for setPortfolioTargets operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiSetPortfolioTargetsRequest
  */
-export interface PortfolioManagementApiSetPortfolioTargetsRequest {
+export type PortfolioManagementApiSetPortfolioTargetsRequest = {
     /**
-     * The ID of the PortfolioGroup under which to create the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiSetPortfolioTargets
-     */
+    * The ID of the PortfolioGroup under which to create the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiSetPortfolioTargets
+    */
     readonly portfolioGroupId: string
-
     /**
-     * 
-     * @type {Array<TargetAsset>}
-     * @memberof PortfolioManagementApiSetPortfolioTargets
-     */
+    * 
+    * @type {Array<TargetAsset>}
+    * @memberof PortfolioManagementApiSetPortfolioTargets
+    */
     readonly requestBody?: Array<TargetAsset>
 }
 
@@ -2943,34 +2957,31 @@ export interface PortfolioManagementApiSetPortfolioTargetsRequest {
  * @export
  * @interface PortfolioManagementApiUpdateAssetClassRequest
  */
-export interface PortfolioManagementApiUpdateAssetClassRequest {
+export type PortfolioManagementApiUpdateAssetClassRequest = {
+    
     /**
-     * The ID of the model asset class to update.
-     * @type {string}
-     * @memberof PortfolioManagementApiUpdateAssetClass
-     */
+    * The ID of the model asset class to update.
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdateAssetClass
+    */
     readonly modelAssetClassId: string
-
-    /**
-     * Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
-     * @type {ModelAssetClassDetails}
-     * @memberof PortfolioManagementApiUpdateAssetClass
-     */
-    readonly requestBody: ModelAssetClassDetails
-}
+    
+} & ModelAssetClassDetails
 
 /**
  * Request parameters for updatePortfolioSettings operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiUpdatePortfolioSettingsRequest
  */
-export interface PortfolioManagementApiUpdatePortfolioSettingsRequest {
+export type PortfolioManagementApiUpdatePortfolioSettingsRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to patch the settings.
-     * @type {string}
-     * @memberof PortfolioManagementApiUpdatePortfolioSettings
-     */
+    * The ID of the PortfolioGroup under which to patch the settings.
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdatePortfolioSettings
+    */
     readonly portfolioGroupId: string
+    
 }
 
 /**
@@ -2978,28 +2989,23 @@ export interface PortfolioManagementApiUpdatePortfolioSettingsRequest {
  * @export
  * @interface PortfolioManagementApiUpdatePortfolioTargetByIdRequest
  */
-export interface PortfolioManagementApiUpdatePortfolioTargetByIdRequest {
+export type PortfolioManagementApiUpdatePortfolioTargetByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup under which to patch the target asset.
-     * @type {string}
-     * @memberof PortfolioManagementApiUpdatePortfolioTargetById
-     */
+    * The ID of the PortfolioGroup under which to patch the target asset.
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdatePortfolioTargetById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of the TargetAsset to patch.
-     * @type {string}
-     * @memberof PortfolioManagementApiUpdatePortfolioTargetById
-     */
+    * The ID of the TargetAsset to patch.
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdatePortfolioTargetById
+    */
     readonly targetAssetId: string
-
-    /**
-     * 
-     * @type {TargetAsset}
-     * @memberof PortfolioManagementApiUpdatePortfolioTargetById
-     */
-    readonly requestBody: TargetAsset
-}
+    
+} & TargetAsset
 
 /**
  * PortfolioManagementApi - object-oriented interface

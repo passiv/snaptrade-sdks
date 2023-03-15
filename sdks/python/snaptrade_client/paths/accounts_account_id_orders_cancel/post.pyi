@@ -91,10 +91,59 @@ request_path_account_id = api_client.PathParameter(
     required=True,
 )
 # body param
-SchemaForRequestBodyApplicationJson = schemas.UUIDSchema
 
 
-request_body_body = api_client.RequestBody(
+class SchemaForRequestBodyApplicationJson(
+    schemas.DictSchema
+):
+
+
+    class MetaOapg:
+        
+        class properties:
+            brokerage_order_id = schemas.UUIDSchema
+            __annotations__ = {
+                "brokerage_order_id": brokerage_order_id,
+            }
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
+    
+    @typing.overload
+    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
+    
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_order_id, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+    
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
+        return super().get_item_oapg(name)
+    
+
+    def __new__(
+        cls,
+        *args: typing.Union[dict, frozendict.frozendict, ],
+        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+    ) -> 'SchemaForRequestBodyApplicationJson':
+        return super().__new__(
+            cls,
+            *args,
+            brokerage_order_id=brokerage_order_id,
+            _configuration=_configuration,
+            **kwargs,
+        )
+
+
+request_body_any_type = api_client.RequestBody(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaForRequestBodyApplicationJson),
@@ -106,11 +155,9 @@ SchemaFor200ResponseBodyApplicationJson = AccountOrderRecord
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: typing.Union[
         SchemaFor200ResponseBodyApplicationJson,
     ]
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -125,11 +172,9 @@ SchemaFor400ResponseBodyApplicationJson = Model400FailedRequestResponse
 
 @dataclass
 class ApiResponseFor400(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: typing.Union[
         SchemaFor400ResponseBodyApplicationJson,
     ]
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_400 = api_client.OpenApiResponse(
@@ -143,9 +188,7 @@ _response_for_400 = api_client.OpenApiResponse(
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: schemas.Unset = schemas.unset
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_500 = api_client.OpenApiResponse(
@@ -160,7 +203,7 @@ class BaseApi(api_client.Api):
     @typing.overload
     def _cancel_user_account_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -175,7 +218,7 @@ class BaseApi(api_client.Api):
     @typing.overload
     def _cancel_user_account_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -191,7 +234,7 @@ class BaseApi(api_client.Api):
     @typing.overload
     def _cancel_user_account_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
@@ -204,7 +247,7 @@ class BaseApi(api_client.Api):
     @typing.overload
     def _cancel_user_account_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -219,7 +262,7 @@ class BaseApi(api_client.Api):
 
     def _cancel_user_account_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -276,7 +319,7 @@ class BaseApi(api_client.Api):
                 'The required body parameter has an invalid value of: unset. Set a valid value instead')
         _fields = None
         _body = None
-        serialized_data = request_body_body.serialize(body, content_type)
+        serialized_data = request_body_any_type.serialize(body, content_type)
         _headers.add('Content-Type', content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
@@ -317,7 +360,7 @@ class CancelUserAccountOrder(BaseApi):
     @typing.overload
     def cancel_user_account_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -332,7 +375,7 @@ class CancelUserAccountOrder(BaseApi):
     @typing.overload
     def cancel_user_account_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -348,7 +391,7 @@ class CancelUserAccountOrder(BaseApi):
     @typing.overload
     def cancel_user_account_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
@@ -361,7 +404,7 @@ class CancelUserAccountOrder(BaseApi):
     @typing.overload
     def cancel_user_account_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -376,7 +419,7 @@ class CancelUserAccountOrder(BaseApi):
 
     def cancel_user_account_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -403,7 +446,7 @@ class ApiForpost(BaseApi):
     @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -418,7 +461,7 @@ class ApiForpost(BaseApi):
     @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -434,7 +477,7 @@ class ApiForpost(BaseApi):
     @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
@@ -447,7 +490,7 @@ class ApiForpost(BaseApi):
     @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),
@@ -462,7 +505,7 @@ class ApiForpost(BaseApi):
 
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,str, uuid.UUID, ],
+        body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
         query_params: RequestQueryParams = frozendict.frozendict(),
         path_params: RequestPathParams = frozendict.frozendict(),

@@ -91,6 +91,7 @@ export * from './time-in-force';
 export * from './trade';
 export * from './trade-execution-status';
 export * from './trade-impact';
+export * from './trading-cancel-user-account-order-request';
 export * from './trading-place-ocoorder-request';
 export * from './usexchange';
 export * from './underlying-symbol';

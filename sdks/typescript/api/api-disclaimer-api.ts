@@ -115,7 +115,7 @@ export const ApiDisclaimerApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async accept(requestParameters: ApiDisclaimerApiAcceptRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapTradeAPIDisclaimerAcceptStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.accept(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.accept(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -146,28 +146,23 @@ export const ApiDisclaimerApiFactory = function (configuration?: Configuration, 
  * @export
  * @interface ApiDisclaimerApiAcceptRequest
  */
-export interface ApiDisclaimerApiAcceptRequest {
+export type ApiDisclaimerApiAcceptRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ApiDisclaimerApiAccept
-     */
+    * 
+    * @type {string}
+    * @memberof ApiDisclaimerApiAccept
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ApiDisclaimerApiAccept
-     */
+    * 
+    * @type {string}
+    * @memberof ApiDisclaimerApiAccept
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {APIDisclaimerAcceptRequest}
-     * @memberof ApiDisclaimerApiAccept
-     */
-    readonly requestBody: APIDisclaimerAcceptRequest
-}
+    
+} & APIDisclaimerAcceptRequest
 
 /**
  * ApiDisclaimerApi - object-oriented interface

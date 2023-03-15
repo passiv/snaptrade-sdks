@@ -32,12 +32,22 @@ snaptrade = SnapTrade(
 )
 
 # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-response = snaptrade.authentication.delete_snap_trade_user(
+delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
     query_params = {
         'userId': "John.doe@snaptrade.com",
     },
 )
-pprint(response)
+try:
+    pprint(delete_snap_trade_user_response.body["status"])
+    pprint(delete_snap_trade_user_response.body["user_id"])
+    pprint(delete_snap_trade_user_response.headers)
+    pprint(delete_snap_trade_user_response.status)
+except ApiException as e:
+    print("Exception when calling DeleteUserResponse.delete_snap_trade_user: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -163,13 +173,12 @@ snaptrade = SnapTrade(
 )
 
 # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
-response = snaptrade.authentication.get_user_jwt(
+get_user_jwt_response = snaptrade.authentication.get_user_jwt(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
 ```
 ### Parameters
 
@@ -305,8 +314,16 @@ snaptrade = SnapTrade(
 )
 
 # Get a list of all SnapTrade users you've registered on our platform
-response = snaptrade.authentication.list_snap_trade_users()
-pprint(response)
+list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
+try:
+    pprint(list_snap_trade_users_response.headers)
+    pprint(list_snap_trade_users_response.status)
+except ApiException as e:
+    print("Exception when calling UserList.list_snap_trade_users: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -394,20 +411,19 @@ snaptrade = SnapTrade(
 )
 
 # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-response = snaptrade.authentication.login_snap_trade_user(
+login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
     body = {
-        'broker': "ALPACA",
-        'immediate_redirect': True,
-        'custom_redirect': "https://passiv.com",
-        'reconnect': "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        'connection_type': "read",
+        "broker": "ALPACA",
+        "immediate_redirect": True,
+        "custom_redirect": "https://passiv.com",
+        "reconnect": "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+        "connection_type": "read",
     },
 )
-pprint(response)
 ```
 ### Parameters
 
@@ -561,13 +577,23 @@ snaptrade = SnapTrade(
 )
 
 # Register user with SnapTrade in order to create secure brokerage authorizations
-response = snaptrade.authentication.register_snap_trade_user(
+register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
     body = {
-        'user_id': "snaptrade-user-123",
-        'rsa_public_key': "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
+        "user_id": "snaptrade-user-123",
+        "rsa_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
     },
 )
-pprint(response)
+try:
+    pprint(register_snap_trade_user_response.body["user_id"])
+    pprint(register_snap_trade_user_response.body["user_secret"])
+    pprint(register_snap_trade_user_response.headers)
+    pprint(register_snap_trade_user_response.status)
+except ApiException as e:
+    print("Exception when calling UserIDandSecret.register_snap_trade_user: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

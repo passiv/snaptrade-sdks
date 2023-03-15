@@ -38,6 +38,8 @@ import { TradeExecutionStatus } from '../models';
 // @ts-ignore
 import { TradeImpact } from '../models';
 // @ts-ignore
+import { TradingCancelUserAccountOrderRequest } from '../models';
+// @ts-ignore
 import { TradingPlaceOCOOrderRequest } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -53,19 +55,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
-         * @param {string} body 
+         * @param {TradingCancelUserAccountOrderRequest} tradingCancelUserAccountOrderRequest The Order ID to be canceled
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelUserAccountOrder: async (userId: string, userSecret: string, accountId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelUserAccountOrder: async (userId: string, userSecret: string, accountId: string, tradingCancelUserAccountOrderRequest: TradingCancelUserAccountOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('cancelUserAccountOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('cancelUserAccountOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('cancelUserAccountOrder', 'accountId', accountId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('cancelUserAccountOrder', 'body', body)
+            // verify required parameter 'tradingCancelUserAccountOrderRequest' is not null or undefined
+            assertParamExists('cancelUserAccountOrder', 'tradingCancelUserAccountOrderRequest', tradingCancelUserAccountOrderRequest)
             const localVarPath = `/accounts/{accountId}/orders/cancel`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -102,7 +104,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
 
             requestBeforeHook({
               queryParameters: localVarQueryParameter,
@@ -701,7 +703,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelUserAccountOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelUserAccountOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -734,7 +736,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async getOrderImpact(requestParameters: TradingApiGetOrderImpactRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManualTradeAndImpact>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderImpact(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderImpact(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -756,7 +758,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async modifyCalculatedTradeById(requestParameters: TradingApiModifyCalculatedTradeByIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Trade>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyCalculatedTradeById(requestParameters.portfolioGroupId, requestParameters.calculatedTradeId, requestParameters.tradeId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.modifyCalculatedTradeById(requestParameters.portfolioGroupId, requestParameters.calculatedTradeId, requestParameters.tradeId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -778,7 +780,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -789,7 +791,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOCOOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOCOOrder(requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -921,62 +923,59 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
  * @export
  * @interface TradingApiCancelUserAccountOrderRequest
  */
-export interface TradingApiCancelUserAccountOrderRequest {
+export type TradingApiCancelUserAccountOrderRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiCancelUserAccountOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelUserAccountOrder
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiCancelUserAccountOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelUserAccountOrder
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof TradingApiCancelUserAccountOrder
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof TradingApiCancelUserAccountOrder
+    */
     readonly accountId: string
-
-    /**
-     * 
-     * @type {string}
-     * @memberof TradingApiCancelUserAccountOrder
-     */
-    readonly requestBody: string
-}
+    
+} & TradingCancelUserAccountOrderRequest
 
 /**
  * Request parameters for getCalculatedTradeImpactById operation in TradingApi.
  * @export
  * @interface TradingApiGetCalculatedTradeImpactByIdRequest
  */
-export interface TradingApiGetCalculatedTradeImpactByIdRequest {
+export type TradingApiGetCalculatedTradeImpactByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof TradingApiGetCalculatedTradeImpactById
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof TradingApiGetCalculatedTradeImpactById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of calculated trade to get account impact
-     * @type {string}
-     * @memberof TradingApiGetCalculatedTradeImpactById
-     */
+    * The ID of calculated trade to get account impact
+    * @type {string}
+    * @memberof TradingApiGetCalculatedTradeImpactById
+    */
     readonly calculatedTradeId: string
-
+    
     /**
-     * The ID of trade object
-     * @type {string}
-     * @memberof TradingApiGetCalculatedTradeImpactById
-     */
+    * The ID of trade object
+    * @type {string}
+    * @memberof TradingApiGetCalculatedTradeImpactById
+    */
     readonly tradeId: string
+    
 }
 
 /**
@@ -984,20 +983,22 @@ export interface TradingApiGetCalculatedTradeImpactByIdRequest {
  * @export
  * @interface TradingApiGetCalculatedTradesImpactRequest
  */
-export interface TradingApiGetCalculatedTradesImpactRequest {
+export type TradingApiGetCalculatedTradesImpactRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof TradingApiGetCalculatedTradesImpact
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof TradingApiGetCalculatedTradesImpact
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of calculated trade to get account impact
-     * @type {string}
-     * @memberof TradingApiGetCalculatedTradesImpact
-     */
+    * The ID of calculated trade to get account impact
+    * @type {string}
+    * @memberof TradingApiGetCalculatedTradesImpact
+    */
     readonly calculatedTradeId: string
+    
 }
 
 /**
@@ -1005,69 +1006,66 @@ export interface TradingApiGetCalculatedTradesImpactRequest {
  * @export
  * @interface TradingApiGetOrderImpactRequest
  */
-export interface TradingApiGetOrderImpactRequest {
+export type TradingApiGetOrderImpactRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiGetOrderImpact
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiGetOrderImpact
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiGetOrderImpact
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiGetOrderImpact
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {ManualTradeForm}
-     * @memberof TradingApiGetOrderImpact
-     */
-    readonly requestBody: ManualTradeForm
-}
+    
+} & ManualTradeForm
 
 /**
  * Request parameters for getUserAccountQuotes operation in TradingApi.
  * @export
  * @interface TradingApiGetUserAccountQuotesRequest
  */
-export interface TradingApiGetUserAccountQuotesRequest {
+export type TradingApiGetUserAccountQuotesRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiGetUserAccountQuotes
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiGetUserAccountQuotes
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiGetUserAccountQuotes
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiGetUserAccountQuotes
+    */
     readonly userSecret: string
-
+    
     /**
-     * List of universal_symbol_id or tickers to get quotes for.
-     * @type {string}
-     * @memberof TradingApiGetUserAccountQuotes
-     */
+    * List of universal_symbol_id or tickers to get quotes for.
+    * @type {string}
+    * @memberof TradingApiGetUserAccountQuotes
+    */
     readonly symbols: string
-
+    
     /**
-     * The ID of the account to get quotes.
-     * @type {string}
-     * @memberof TradingApiGetUserAccountQuotes
-     */
+    * The ID of the account to get quotes.
+    * @type {string}
+    * @memberof TradingApiGetUserAccountQuotes
+    */
     readonly accountId: string
-
+    
     /**
-     * Should be set to True if providing tickers.
-     * @type {boolean}
-     * @memberof TradingApiGetUserAccountQuotes
-     */
+    * Should be set to True if providing tickers.
+    * @type {boolean}
+    * @memberof TradingApiGetUserAccountQuotes
+    */
     readonly useTicker?: boolean
+    
 }
 
 /**
@@ -1075,55 +1073,52 @@ export interface TradingApiGetUserAccountQuotesRequest {
  * @export
  * @interface TradingApiModifyCalculatedTradeByIdRequest
  */
-export interface TradingApiModifyCalculatedTradeByIdRequest {
+export type TradingApiModifyCalculatedTradeByIdRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof TradingApiModifyCalculatedTradeById
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof TradingApiModifyCalculatedTradeById
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of calculated trade to get account impact
-     * @type {string}
-     * @memberof TradingApiModifyCalculatedTradeById
-     */
+    * The ID of calculated trade to get account impact
+    * @type {string}
+    * @memberof TradingApiModifyCalculatedTradeById
+    */
     readonly calculatedTradeId: string
-
+    
     /**
-     * The ID of trade object
-     * @type {string}
-     * @memberof TradingApiModifyCalculatedTradeById
-     */
+    * The ID of trade object
+    * @type {string}
+    * @memberof TradingApiModifyCalculatedTradeById
+    */
     readonly tradeId: string
-
-    /**
-     * 
-     * @type {Trade}
-     * @memberof TradingApiModifyCalculatedTradeById
-     */
-    readonly requestBody?: Trade
-}
+    
+} & Trade
 
 /**
  * Request parameters for placeCalculatedTrades operation in TradingApi.
  * @export
  * @interface TradingApiPlaceCalculatedTradesRequest
  */
-export interface TradingApiPlaceCalculatedTradesRequest {
+export type TradingApiPlaceCalculatedTradesRequest = {
+    
     /**
-     * The ID of the PortfolioGroup to perform rebalancing calculations
-     * @type {string}
-     * @memberof TradingApiPlaceCalculatedTrades
-     */
+    * The ID of the PortfolioGroup to perform rebalancing calculations
+    * @type {string}
+    * @memberof TradingApiPlaceCalculatedTrades
+    */
     readonly portfolioGroupId: string
-
+    
     /**
-     * The ID of calculated trade to get account impact
-     * @type {string}
-     * @memberof TradingApiPlaceCalculatedTrades
-     */
+    * The ID of calculated trade to get account impact
+    * @type {string}
+    * @memberof TradingApiPlaceCalculatedTrades
+    */
     readonly calculatedTradeId: string
+    
 }
 
 /**
@@ -1131,83 +1126,75 @@ export interface TradingApiPlaceCalculatedTradesRequest {
  * @export
  * @interface TradingApiPlaceForceOrderRequest
  */
-export interface TradingApiPlaceForceOrderRequest {
+export type TradingApiPlaceForceOrderRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceForceOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceForceOrder
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceForceOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceForceOrder
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {ManualTradeForm}
-     * @memberof TradingApiPlaceForceOrder
-     */
-    readonly requestBody: ManualTradeForm
-}
+    
+} & ManualTradeForm
 
 /**
  * Request parameters for placeOCOOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceOCOOrderRequest
  */
-export interface TradingApiPlaceOCOOrderRequest {
+export type TradingApiPlaceOCOOrderRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceOCOOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceOCOOrder
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceOCOOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceOCOOrder
+    */
     readonly userSecret: string
-
-    /**
-     * 
-     * @type {TradingPlaceOCOOrderRequest}
-     * @memberof TradingApiPlaceOCOOrder
-     */
-    readonly requestBody: TradingPlaceOCOOrderRequest
-}
+    
+} & TradingPlaceOCOOrderRequest
 
 /**
  * Request parameters for placeOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceOrderRequest
  */
-export interface TradingApiPlaceOrderRequest {
+export type TradingApiPlaceOrderRequest = {
+    
     /**
-     * The ID of trade object obtained from trade/impact endpoint
-     * @type {string}
-     * @memberof TradingApiPlaceOrder
-     */
+    * The ID of trade object obtained from trade/impact endpoint
+    * @type {string}
+    * @memberof TradingApiPlaceOrder
+    */
     readonly tradeId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceOrder
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TradingApiPlaceOrder
-     */
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceOrder
+    */
     readonly userSecret: string
+    
 }
 
 /**

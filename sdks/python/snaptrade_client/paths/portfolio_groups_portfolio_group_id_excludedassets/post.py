@@ -76,11 +76,9 @@ SchemaFor200ResponseBodyApplicationJson = ExcludedAsset
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    response: urllib3.HTTPResponse
     body: typing.Union[
         SchemaFor200ResponseBodyApplicationJson,
     ]
-    headers: schemas.Unset = schemas.unset
 
 
 _response_for_200 = api_client.OpenApiResponse(

@@ -404,7 +404,7 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async getOptionStrategy(requestParameters: OptionsApiGetOptionStrategyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyQuotes>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionStrategy(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionStrategy(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -448,7 +448,7 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeOptionStrategy(requestParameters: OptionsApiPlaceOptionStrategyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StrategyOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOptionStrategy(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.optionStrategyId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOptionStrategy(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.optionStrategyId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -519,69 +519,66 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
  * @export
  * @interface OptionsApiGetOptionStrategyRequest
  */
-export interface OptionsApiGetOptionStrategyRequest {
+export type OptionsApiGetOptionStrategyRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionStrategy
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionStrategy
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionStrategy
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionStrategy
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof OptionsApiGetOptionStrategy
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof OptionsApiGetOptionStrategy
+    */
     readonly accountId: string
-
-    /**
-     * 
-     * @type {OptionsGetOptionStrategyRequest}
-     * @memberof OptionsApiGetOptionStrategy
-     */
-    readonly requestBody: OptionsGetOptionStrategyRequest
-}
+    
+} & OptionsGetOptionStrategyRequest
 
 /**
  * Request parameters for getOptionsChain operation in OptionsApi.
  * @export
  * @interface OptionsApiGetOptionsChainRequest
  */
-export interface OptionsApiGetOptionsChainRequest {
+export type OptionsApiGetOptionsChainRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionsChain
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionsChain
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionsChain
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionsChain
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof OptionsApiGetOptionsChain
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof OptionsApiGetOptionsChain
+    */
     readonly accountId: string
-
+    
     /**
-     * Universal symbol ID if symbol
-     * @type {string}
-     * @memberof OptionsApiGetOptionsChain
-     */
+    * Universal symbol ID if symbol
+    * @type {string}
+    * @memberof OptionsApiGetOptionsChain
+    */
     readonly symbol: string
+    
 }
 
 /**
@@ -589,34 +586,36 @@ export interface OptionsApiGetOptionsChainRequest {
  * @export
  * @interface OptionsApiGetOptionsStrategyQuoteRequest
  */
-export interface OptionsApiGetOptionsStrategyQuoteRequest {
+export type OptionsApiGetOptionsStrategyQuoteRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionsStrategyQuote
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionsStrategyQuote
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiGetOptionsStrategyQuote
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionsStrategyQuote
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof OptionsApiGetOptionsStrategyQuote
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof OptionsApiGetOptionsStrategyQuote
+    */
     readonly accountId: string
-
+    
     /**
-     * Option strategy id obtained from response when creating option strategy object
-     * @type {string}
-     * @memberof OptionsApiGetOptionsStrategyQuote
-     */
+    * Option strategy id obtained from response when creating option strategy object
+    * @type {string}
+    * @memberof OptionsApiGetOptionsStrategyQuote
+    */
     readonly optionStrategyId: string
+    
 }
 
 /**
@@ -624,27 +623,29 @@ export interface OptionsApiGetOptionsStrategyQuoteRequest {
  * @export
  * @interface OptionsApiListOptionHoldingsRequest
  */
-export interface OptionsApiListOptionHoldingsRequest {
+export type OptionsApiListOptionHoldingsRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiListOptionHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiListOptionHoldings
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiListOptionHoldings
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiListOptionHoldings
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof OptionsApiListOptionHoldings
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof OptionsApiListOptionHoldings
+    */
     readonly accountId: string
+    
 }
 
 /**
@@ -652,42 +653,37 @@ export interface OptionsApiListOptionHoldingsRequest {
  * @export
  * @interface OptionsApiPlaceOptionStrategyRequest
  */
-export interface OptionsApiPlaceOptionStrategyRequest {
+export type OptionsApiPlaceOptionStrategyRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiPlaceOptionStrategy
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiPlaceOptionStrategy
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof OptionsApiPlaceOptionStrategy
-     */
+    * 
+    * @type {string}
+    * @memberof OptionsApiPlaceOptionStrategy
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof OptionsApiPlaceOptionStrategy
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof OptionsApiPlaceOptionStrategy
+    */
     readonly accountId: string
-
+    
     /**
-     * Option strategy id obtained from response when creating option strategy object
-     * @type {string}
-     * @memberof OptionsApiPlaceOptionStrategy
-     */
+    * Option strategy id obtained from response when creating option strategy object
+    * @type {string}
+    * @memberof OptionsApiPlaceOptionStrategy
+    */
     readonly optionStrategyId: string
-
-    /**
-     * 
-     * @type {OptionsPlaceOptionStrategyRequest}
-     * @memberof OptionsApiPlaceOptionStrategy
-     */
-    readonly requestBody: OptionsPlaceOptionStrategyRequest
-}
+    
+} & OptionsPlaceOptionStrategyRequest
 
 /**
  * OptionsApi - object-oriented interface

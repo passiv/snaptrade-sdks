@@ -18,7 +18,8 @@ Method | HTTP request | Description
 
 
 # **getCurrencyExchangeRatePair**
-> ExchangeRatePairs getCurrencyExchangeRatePair()
+
+#### **GET** /currencies/rates/{currencyPair}
 
 
 ### Example
@@ -34,10 +35,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getCurrencyExchangeRatePair({
-    'currencyPair': "currencyPair_example",
-})
-console.log(response)
+const getCurrencyExchangeRatePairResponse = await snaptrade.referenceData.getCurrencyExchangeRatePair({
+        "currencyPair": "currencyPair_example",
+    })
+
+console.log(getCurrencyExchangeRatePairResponse)
 
 ```
 
@@ -53,10 +55,6 @@ Name | Type | Description  | Notes
 
 **ExchangeRatePairs**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -71,7 +69,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getPartnerInfo**
-> PartnerData getPartnerInfo()
+
+#### **GET** /snapTrade/partners
 
 
 ### Example
@@ -87,8 +86,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getPartnerInfo()
-console.log(response)
+const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo()
+
+console.log(getPartnerInfoResponse)
 
 ```
 
@@ -100,10 +100,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **PartnerData**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -123,7 +119,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getSecurityTypes**
-> Array<SecurityType> getSecurityTypes()
+
+#### **GET** /securityTypes
 
 
 ### Example
@@ -139,8 +136,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getSecurityTypes()
-console.log(response)
+const getSecurityTypesResponse = await snaptrade.referenceData.getSecurityTypes()
+
+console.log(getSecurityTypesResponse)
 
 ```
 
@@ -152,10 +150,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<SecurityType>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -172,7 +166,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getStockExchanges**
-> Array<Exchange> getStockExchanges()
+
+#### **GET** /exchanges
 
 
 ### Example
@@ -188,8 +183,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getStockExchanges()
-console.log(response)
+const getStockExchangesResponse = await snaptrade.referenceData.getStockExchanges()
+
+console.log(getStockExchangesResponse)
 
 ```
 
@@ -201,10 +197,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<Exchange>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -220,7 +212,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getSymbols**
-> Array<UniversalSymbol> getSymbols()
+
+#### **POST** /symbols
 
 
 ### Example
@@ -236,12 +229,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getSymbols({
-    'requestBody': {
+const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
         "substring": "apple",
-    },
-})
-console.log(response)
+    })
+
+console.log(getSymbolsResponse)
 
 ```
 
@@ -256,10 +248,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<UniversalSymbol>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -276,7 +264,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getSymbolsByTicker**
-> UniversalSymbol getSymbolsByTicker()
+
+#### **GET** /symbols/{ticker}
 
 
 ### Example
@@ -292,11 +281,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.getSymbolsByTicker({
-    'ticker': "ticker_example",
-    'symbolId': "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-})
-console.log(response)
+const getSymbolsByTickerResponse = await snaptrade.referenceData.getSymbolsByTicker({
+        "ticker": "ticker_example",
+    })
+
+console.log(getSymbolsByTickerResponse)
 
 ```
 
@@ -312,10 +301,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **UniversalSymbol**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -333,7 +318,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listAllBrokerageAuthorizationType**
-> Array<BrokerageAuthorizationTypeReadOnly> listAllBrokerageAuthorizationType()
+
+#### **GET** /brokerageAuthorizationTypes
 
 
 ### Example
@@ -349,10 +335,11 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.listAllBrokerageAuthorizationType({
-    'brokerage': "QUESTRADE,ALPACA",
-})
-console.log(response)
+const listAllBrokerageAuthorizationTypeResponse = await snaptrade.referenceData.listAllBrokerageAuthorizationType({
+        "brokerage": "QUESTRADE,ALPACA",
+    })
+
+console.log(listAllBrokerageAuthorizationTypeResponse)
 
 ```
 
@@ -367,10 +354,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<BrokerageAuthorizationTypeReadOnly>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -387,7 +370,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listAllBrokerages**
-> Array<Brokerage> listAllBrokerages()
+
+#### **GET** /brokerages
 
 
 ### Example
@@ -403,8 +387,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.listAllBrokerages()
-console.log(response)
+const listAllBrokeragesResponse = await snaptrade.referenceData.listAllBrokerages()
+
+console.log(listAllBrokeragesResponse)
 
 ```
 
@@ -416,10 +401,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<Brokerage>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -436,7 +417,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listAllCurrencies**
-> Array<Currency> listAllCurrencies()
+
+#### **GET** /currencies
 
 
 ### Example
@@ -452,8 +434,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.listAllCurrencies()
-console.log(response)
+const listAllCurrenciesResponse = await snaptrade.referenceData.listAllCurrencies()
+
+console.log(listAllCurrenciesResponse)
 
 ```
 
@@ -465,10 +448,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<Currency>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -485,7 +464,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listAllCurrenciesRates**
-> Array<ExchangeRatePairs> listAllCurrenciesRates()
+
+#### **GET** /currencies/rates
 
 
 ### Example
@@ -501,8 +481,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.listAllCurrenciesRates()
-console.log(response)
+const listAllCurrenciesRatesResponse = await snaptrade.referenceData.listAllCurrenciesRates()
+
+console.log(listAllCurrenciesRatesResponse)
 
 ```
 
@@ -514,10 +495,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **Array<ExchangeRatePairs>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -533,7 +510,8 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **symbolSearchUserAccount**
-> Array<UniversalSymbol> symbolSearchUserAccount()
+
+#### **POST** /accounts/{accountId}/symbols
 
 
 ### Example
@@ -549,15 +527,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.referenceData.symbolSearchUserAccount({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'requestBody': {
+const symbolSearchUserAccountResponse = await snaptrade.referenceData.symbolSearchUserAccount({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
         "substring": "apple",
-    },
-})
-console.log(response)
+    })
+
+console.log(symbolSearchUserAccountResponse)
 
 ```
 
@@ -575,10 +552,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Array<UniversalSymbol>**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

@@ -104,7 +104,7 @@ class ApiException(OpenApiException):
         if api_response:
             self.status = api_response.response.status
             self.reason = api_response.response.reason
-            self.body = api_response.response.data
+            self.body = api_response.body
             self.headers = api_response.response.getheaders()
         else:
             self.status = status

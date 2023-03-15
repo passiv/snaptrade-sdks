@@ -17,7 +17,8 @@ Method | HTTP request | Description
 
 
 # **cancelUserAccountOrder**
-> AccountOrderRecord cancelUserAccountOrder(body)
+
+#### **POST** /accounts/{accountId}/orders/cancel
 
 
 ### Example
@@ -33,13 +34,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.cancelUserAccountOrder({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'accountId': "accountId_example",
-    'requestBody': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-})
-console.log(response)
+const cancelUserAccountOrderResponse = await snaptrade.trading.cancelUserAccountOrder({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "accountId": "accountId_example",
+        "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    })
+
+console.log(cancelUserAccountOrderResponse)
 
 ```
 
@@ -48,7 +50,7 @@ console.log(response)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **string**|  |
+ **tradingCancelUserAccountOrderRequest** | **TradingCancelUserAccountOrderRequest**| The Order ID to be canceled |
  **userId** | [**string**] |  | defaults to undefined
  **userSecret** | [**string**] |  | defaults to undefined
  **accountId** | [**string**] | The ID of the account get positions. | defaults to undefined
@@ -57,10 +59,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **AccountOrderRecord**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -78,7 +76,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getCalculatedTradeImpactById**
-> Trade getCalculatedTradeImpactById()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}
 
 
 ### Example
@@ -94,12 +93,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.getCalculatedTradeImpactById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'calculatedTradeId': "calculatedTradeId_example",
-    'tradeId': "tradeId_example",
-})
-console.log(response)
+const getCalculatedTradeImpactByIdResponse = await snaptrade.trading.getCalculatedTradeImpactById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "calculatedTradeId": "calculatedTradeId_example",
+        "tradeId": "tradeId_example",
+    })
+
+console.log(getCalculatedTradeImpactByIdResponse)
 
 ```
 
@@ -117,10 +117,6 @@ Name | Type | Description  | Notes
 
 **Trade**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -135,7 +131,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getCalculatedTradesImpact**
-> Array<TradeImpact> getCalculatedTradesImpact()
+
+#### **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact
 
 
 ### Example
@@ -151,11 +148,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.getCalculatedTradesImpact({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'calculatedTradeId': "calculatedTradeId_example",
-})
-console.log(response)
+const getCalculatedTradesImpactResponse = await snaptrade.trading.getCalculatedTradesImpact({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "calculatedTradeId": "calculatedTradeId_example",
+    })
+
+console.log(getCalculatedTradesImpactResponse)
 
 ```
 
@@ -172,10 +170,6 @@ Name | Type | Description  | Notes
 
 **Array<TradeImpact>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -190,7 +184,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getOrderImpact**
-> ManualTradeAndImpact getOrderImpact(manualTradeForm)
+
+#### **POST** /trade/impact
 
 
 ### Example
@@ -206,10 +201,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.getOrderImpact({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
+const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -217,9 +211,9 @@ const response = await snaptrade.trading.getOrderImpact({
         "stop": 31.33,
         "time_in_force": "Day",
         "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-})
-console.log(response)
+    })
+
+console.log(getOrderImpactResponse)
 
 ```
 
@@ -236,10 +230,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **ManualTradeAndImpact**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -258,7 +248,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **getUserAccountQuotes**
-> SymbolsQuotes getUserAccountQuotes()
+
+#### **GET** /accounts/{accountId}/quotes
 
 
 ### Example
@@ -274,14 +265,14 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.getUserAccountQuotes({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'symbols': "symbols_example",
-    'accountId': "accountId_example",
-    'useTicker': true,
-})
-console.log(response)
+const getUserAccountQuotesResponse = await snaptrade.trading.getUserAccountQuotes({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+        "symbols": "symbols_example",
+        "accountId": "accountId_example",
+    })
+
+console.log(getUserAccountQuotesResponse)
 
 ```
 
@@ -301,10 +292,6 @@ Name | Type | Description  | Notes
 
 **SymbolsQuotes**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -320,7 +307,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **modifyCalculatedTradeById**
-> Trade modifyCalculatedTradeById()
+
+#### **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId}
 
 
 ### Example
@@ -336,19 +324,18 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.modifyCalculatedTradeById({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'calculatedTradeId': "calculatedTradeId_example",
-    'tradeId': "tradeId_example",
-    'requestBody': {
+const modifyCalculatedTradeByIdResponse = await snaptrade.trading.modifyCalculatedTradeById({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "calculatedTradeId": "calculatedTradeId_example",
+        "tradeId": "tradeId_example",
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "units": 6,
         "price": 24.81,
         "sequence": 1,
-    },
-})
-console.log(response)
+    })
+
+console.log(modifyCalculatedTradeByIdResponse)
 
 ```
 
@@ -367,10 +354,6 @@ Name | Type | Description  | Notes
 
 **Trade**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -385,7 +368,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **placeCalculatedTrades**
-> Array<TradeExecutionStatus> placeCalculatedTrades()
+
+#### **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders
 
 
 ### Example
@@ -401,11 +385,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.placeCalculatedTrades({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'calculatedTradeId': "calculatedTradeId_example",
-})
-console.log(response)
+const placeCalculatedTradesResponse = await snaptrade.trading.placeCalculatedTrades({
+        "portfolioGroupId": "portfolioGroupId_example",
+        "calculatedTradeId": "calculatedTradeId_example",
+    })
+
+console.log(placeCalculatedTradesResponse)
 
 ```
 
@@ -422,10 +407,6 @@ Name | Type | Description  | Notes
 
 **Array<TradeExecutionStatus>**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -440,7 +421,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **placeForceOrder**
-> AccountOrderRecord placeForceOrder(manualTradeForm)
+
+#### **POST** /trade/place
 
 
 ### Example
@@ -456,10 +438,9 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.placeForceOrder({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
+const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -467,9 +448,9 @@ const response = await snaptrade.trading.placeForceOrder({
         "stop": 31.33,
         "time_in_force": "Day",
         "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-})
-console.log(response)
+    })
+
+console.log(placeForceOrderResponse)
 
 ```
 
@@ -486,10 +467,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **AccountOrderRecord**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 
@@ -508,7 +485,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **placeOCOOrder**
-> AccountOrderRecord placeOCOOrder(tradingPlaceOCOOrderRequest)
+
+#### **POST** /trade/oco
 
 
 ### Example
@@ -524,13 +502,12 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.placeOCOOrder({
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-    'requestBody': {
-    },
-})
-console.log(response)
+const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(placeOCOOrderResponse)
 
 ```
 
@@ -548,10 +525,6 @@ Name | Type | Description  | Notes
 
 **AccountOrderRecord**
 
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json
@@ -568,7 +541,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **placeOrder**
-> AccountOrderRecord placeOrder()
+
+#### **POST** /trade/{tradeId}
 
 
 ### Example
@@ -584,12 +558,13 @@ const snaptrade = new Snaptrade({
     clientId: "YOUR_CLIENT_ID",
 })
 
-const response = await snaptrade.trading.placeOrder({
-    'tradeId': "tradeId_example",
-    'userId': "John.doe@snaptrade.com",
-    'userSecret': "USERSECRET123",
-})
-console.log(response)
+const placeOrderResponse = await snaptrade.trading.placeOrder({
+        "tradeId": "tradeId_example",
+        "userId": "John.doe@snaptrade.com",
+        "userSecret": "USERSECRET123",
+    })
+
+console.log(placeOrderResponse)
 
 ```
 
@@ -606,10 +581,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **AccountOrderRecord**
-
-### Authorization
-
-[PartnerClientId](README.md#PartnerClientId), [PartnerSignature](README.md#PartnerSignature), [PartnerTimestamp](README.md#PartnerTimestamp)
 
 ### HTTP request headers
 

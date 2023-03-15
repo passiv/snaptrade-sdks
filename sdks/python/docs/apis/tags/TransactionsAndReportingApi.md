@@ -31,16 +31,39 @@ snaptrade = SnapTrade(
 )
 
 # Get transaction history for a user
-response = snaptrade.transactions_and_reporting.get_activities(
+get_activities_response = snaptrade.transactions_and_reporting.get_activities(
     query_params = {
-        'startDate': "2022-01-24T00:00:00.000Z",
-        'endDate': "2022-01-24T00:00:00.000Z",
+        'startDate': "2022-01-24",
+        'endDate': "2022-01-24",
         'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(get_activities_response.body["id"])
+    pprint(get_activities_response.body["account"])
+    pprint(get_activities_response.body["amount"])
+    pprint(get_activities_response.body["currency"])
+    pprint(get_activities_response.body["description"])
+    pprint(get_activities_response.body["fee"])
+    pprint(get_activities_response.body["institution"])
+    pprint(get_activities_response.body["option_type"])
+    pprint(get_activities_response.body["price"])
+    pprint(get_activities_response.body["settlement_date"])
+    pprint(get_activities_response.body["symbol"])
+    pprint(get_activities_response.body["option_symbol"])
+    pprint(get_activities_response.body["trade_date"])
+    pprint(get_activities_response.body["type"])
+    pprint(get_activities_response.body["units"])
+    pprint(get_activities_response.headers)
+    pprint(get_activities_response.status)
+except ApiException as e:
+    print("Exception when calling UniversalActivity.get_activities: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
@@ -172,10 +195,10 @@ snaptrade = SnapTrade(
 )
 
 # Get performance information for a specific timeframe
-response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
+get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
     query_params = {
-        'startDate': "2022-01-24T00:00:00.000Z",
-        'endDate': "2022-01-24T00:00:00.000Z",
+        'startDate': "2022-01-24",
+        'endDate': "2022-01-24",
         'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         'detailed': True,
         'frequency': "monthly",
@@ -183,7 +206,34 @@ response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(get_reporting_custom_range_response.body["total_equity_timeframe"])
+    pprint(get_reporting_custom_range_response.body["contributions"])
+    pprint(get_reporting_custom_range_response.body["contribution_timeframe"])
+    pprint(get_reporting_custom_range_response.body["contribution_timeframe_cumulative"])
+    pprint(get_reporting_custom_range_response.body["withdrawal_timeframe"])
+    pprint(get_reporting_custom_range_response.body["contribution_streak"])
+    pprint(get_reporting_custom_range_response.body["contribution_months_contributed"])
+    pprint(get_reporting_custom_range_response.body["contribution_total_months"])
+    pprint(get_reporting_custom_range_response.body["dividends"])
+    pprint(get_reporting_custom_range_response.body["dividend_income"])
+    pprint(get_reporting_custom_range_response.body["monthly_dividends"])
+    pprint(get_reporting_custom_range_response.body["bad_tickers"])
+    pprint(get_reporting_custom_range_response.body["dividend_timeline"])
+    pprint(get_reporting_custom_range_response.body["commissions"])
+    pprint(get_reporting_custom_range_response.body["forex_fees"])
+    pprint(get_reporting_custom_range_response.body["fees"])
+    pprint(get_reporting_custom_range_response.body["rate_of_return"])
+    pprint(get_reporting_custom_range_response.body["return_rate_timeframe"])
+    pprint(get_reporting_custom_range_response.body["detailed_mode"])
+    pprint(get_reporting_custom_range_response.headers)
+    pprint(get_reporting_custom_range_response.status)
+except ApiException as e:
+    print("Exception when calling PerformanceCustom.get_reporting_custom_range: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 

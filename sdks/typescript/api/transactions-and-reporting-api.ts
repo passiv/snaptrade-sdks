@@ -265,41 +265,43 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
  * @export
  * @interface TransactionsAndReportingApiGetActivitiesRequest
  */
-export interface TransactionsAndReportingApiGetActivitiesRequest {
+export type TransactionsAndReportingApiGetActivitiesRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetActivities
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetActivities
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
     readonly userSecret: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetActivities
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
     readonly startDate?: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetActivities
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
     readonly endDate?: string
-
+    
     /**
-     * Optional comma seperated list of account IDs used to filter the request on specific accounts
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetActivities
-     */
+    * Optional comma seperated list of account IDs used to filter the request on specific accounts
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
     readonly accounts?: string
+    
 }
 
 /**
@@ -307,55 +309,57 @@ export interface TransactionsAndReportingApiGetActivitiesRequest {
  * @export
  * @interface TransactionsAndReportingApiGetReportingCustomRangeRequest
  */
-export interface TransactionsAndReportingApiGetReportingCustomRangeRequest {
+export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly startDate: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly endDate: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * 
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly userSecret: string
-
+    
     /**
-     * Optional comma seperated list of account IDs used to filter the request on specific accounts
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * Optional comma seperated list of account IDs used to filter the request on specific accounts
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly accounts?: string
-
+    
     /**
-     * Optional, increases frequency of data points for the total value and contribution charts if set to true
-     * @type {boolean}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * Optional, increases frequency of data points for the total value and contribution charts if set to true
+    * @type {boolean}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly detailed?: boolean
-
+    
     /**
-     * Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
-     * @type {string}
-     * @memberof TransactionsAndReportingApiGetReportingCustomRange
-     */
+    * Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetReportingCustomRange
+    */
     readonly frequency?: string
+    
 }
 
 /**

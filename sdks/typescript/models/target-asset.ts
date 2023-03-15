@@ -54,9 +54,9 @@ export interface TargetAsset {
     'is_excluded'?: boolean;
     /**
      * 
-     * @type {object}
+     * @type {{ [key: string]: any; }}
      * @memberof TargetAsset
      */
-    'meta'?: object | null;
+    'meta'?: { [key: string]: any; } | null;
 }
 

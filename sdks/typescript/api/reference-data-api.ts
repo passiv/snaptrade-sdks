@@ -660,7 +660,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async getSymbols(requestParameters: ReferenceDataApiGetSymbolsRequest = {}, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbols(requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbols(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -723,7 +723,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async symbolSearchUserAccount(requestParameters: ReferenceDataApiSymbolSearchUserAccountRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolSearchUserAccount(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.requestBody, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.symbolSearchUserAccount(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -848,13 +848,15 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
  * @export
  * @interface ReferenceDataApiGetCurrencyExchangeRatePairRequest
  */
-export interface ReferenceDataApiGetCurrencyExchangeRatePairRequest {
+export type ReferenceDataApiGetCurrencyExchangeRatePairRequest = {
+    
     /**
-     * A currency pair based on currency code for example, {CAD-USD}
-     * @type {string}
-     * @memberof ReferenceDataApiGetCurrencyExchangeRatePair
-     */
+    * A currency pair based on currency code for example, {CAD-USD}
+    * @type {string}
+    * @memberof ReferenceDataApiGetCurrencyExchangeRatePair
+    */
     readonly currencyPair: string
+    
 }
 
 /**
@@ -862,34 +864,31 @@ export interface ReferenceDataApiGetCurrencyExchangeRatePairRequest {
  * @export
  * @interface ReferenceDataApiGetSymbolsRequest
  */
-export interface ReferenceDataApiGetSymbolsRequest {
-    /**
-     * 
-     * @type {SymbolQuery}
-     * @memberof ReferenceDataApiGetSymbols
-     */
-    readonly requestBody?: SymbolQuery
-}
+export type ReferenceDataApiGetSymbolsRequest = {
+    
+} & SymbolQuery
 
 /**
  * Request parameters for getSymbolsByTicker operation in ReferenceDataApi.
  * @export
  * @interface ReferenceDataApiGetSymbolsByTickerRequest
  */
-export interface ReferenceDataApiGetSymbolsByTickerRequest {
+export type ReferenceDataApiGetSymbolsByTickerRequest = {
+    
     /**
-     * The ticker of the UniversalSymbol to get.
-     * @type {string}
-     * @memberof ReferenceDataApiGetSymbolsByTicker
-     */
+    * The ticker of the UniversalSymbol to get.
+    * @type {string}
+    * @memberof ReferenceDataApiGetSymbolsByTicker
+    */
     readonly ticker: string
-
+    
     /**
-     * OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
-     * @type {string}
-     * @memberof ReferenceDataApiGetSymbolsByTicker
-     */
+    * OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+    * @type {string}
+    * @memberof ReferenceDataApiGetSymbolsByTicker
+    */
     readonly symbolId?: string
+    
 }
 
 /**
@@ -897,13 +896,15 @@ export interface ReferenceDataApiGetSymbolsByTickerRequest {
  * @export
  * @interface ReferenceDataApiListAllBrokerageAuthorizationTypeRequest
  */
-export interface ReferenceDataApiListAllBrokerageAuthorizationTypeRequest {
+export type ReferenceDataApiListAllBrokerageAuthorizationTypeRequest = {
+    
     /**
-     * Comma separated value of brokerage slugs
-     * @type {string}
-     * @memberof ReferenceDataApiListAllBrokerageAuthorizationType
-     */
+    * Comma separated value of brokerage slugs
+    * @type {string}
+    * @memberof ReferenceDataApiListAllBrokerageAuthorizationType
+    */
     readonly brokerage?: string
+    
 }
 
 /**
@@ -911,35 +912,30 @@ export interface ReferenceDataApiListAllBrokerageAuthorizationTypeRequest {
  * @export
  * @interface ReferenceDataApiSymbolSearchUserAccountRequest
  */
-export interface ReferenceDataApiSymbolSearchUserAccountRequest {
+export type ReferenceDataApiSymbolSearchUserAccountRequest = {
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ReferenceDataApiSymbolSearchUserAccount
-     */
+    * 
+    * @type {string}
+    * @memberof ReferenceDataApiSymbolSearchUserAccount
+    */
     readonly userId: string
-
+    
     /**
-     * 
-     * @type {string}
-     * @memberof ReferenceDataApiSymbolSearchUserAccount
-     */
+    * 
+    * @type {string}
+    * @memberof ReferenceDataApiSymbolSearchUserAccount
+    */
     readonly userSecret: string
-
+    
     /**
-     * The ID of the account get positions.
-     * @type {string}
-     * @memberof ReferenceDataApiSymbolSearchUserAccount
-     */
+    * The ID of the account get positions.
+    * @type {string}
+    * @memberof ReferenceDataApiSymbolSearchUserAccount
+    */
     readonly accountId: string
-
-    /**
-     * 
-     * @type {SymbolQuery}
-     * @memberof ReferenceDataApiSymbolSearchUserAccount
-     */
-    readonly requestBody?: SymbolQuery
-}
+    
+} & SymbolQuery
 
 /**
  * ReferenceDataApi - object-oriented interface

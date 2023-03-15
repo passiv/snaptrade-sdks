@@ -105,6 +105,9 @@ conf = snaptrade_client.Configuration(
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
+                 clientId=None,
+                 Signature=None,
+                 timestamp=None,
                  consumer_key=None,
                  client_id=None,
                  disabled_client_side_validations="",
@@ -139,6 +142,12 @@ conf = snaptrade_client.Configuration(
                 self.api_key = {'PartnerClientId': api_key}
             else:
                 self.api_key = api_key
+        if clientId is not None:
+            self.api_key['PartnerClientId'] = clientId
+        if Signature is not None:
+            self.api_key['PartnerSignature'] = Signature
+        if timestamp is not None:
+            self.api_key['PartnerTimestamp'] = timestamp
         if client_id is None:
             raise Exception("client_id is required")
         self.api_key['PartnerClientId'] = client_id
@@ -435,7 +444,7 @@ conf = snaptrade_client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0.0\n"\
-               "SDK Package Version: 7.0.0".\
+               "SDK Package Version: 8.0.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

@@ -28,13 +28,27 @@ snaptrade = SnapTrade(
 )
 
 # Retrieve error logs on behalf of your SnapTrade users
-response = snaptrade.error_logs.list_user_errors(
+list_user_errors_response = snaptrade.error_logs.list_user_errors(
     query_params = {
         'userId': "John.doe@snaptrade.com",
         'userSecret': "USERSECRET123",
     },
 )
-pprint(response)
+try:
+    pprint(list_user_errors_response.body["requested_at"])
+    pprint(list_user_errors_response.body["response"])
+    pprint(list_user_errors_response.body["status_code"])
+    pprint(list_user_errors_response.body["_query_params"])
+    pprint(list_user_errors_response.body["http_method"])
+    pprint(list_user_errors_response.body["endpoint"])
+    pprint(list_user_errors_response.headers)
+    pprint(list_user_errors_response.status)
+except ApiException as e:
+    print("Exception when calling UserErrorLog.list_user_errors: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
 ```
 ### Parameters
 
