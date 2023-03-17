@@ -15,9 +15,7 @@ async function main() {
   const userId = uuid();
   const { userSecret } = (
     await snaptrade.authentication.registerSnapTradeUser({
-      requestBody: {
-        userId,
-      },
+      userId,
     })
   ).data;
 
