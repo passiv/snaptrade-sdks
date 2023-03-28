@@ -480,6 +480,7 @@ try:
     pprint(get_user_account_orders_response.body["status"])
     pprint(get_user_account_orders_response.body["symbol"])
     pprint(get_user_account_orders_response.body["universal_symbol"])
+    pprint(get_user_account_orders_response.body["option_symbol"])
     pprint(get_user_account_orders_response.body["action"])
     pprint(get_user_account_orders_response.body["total_quantity"])
     pprint(get_user_account_orders_response.body["open_quantity"])

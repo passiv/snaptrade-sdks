@@ -2,7 +2,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
+    Connect brokerage accounts to your app for live positions and trading
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
@@ -31,8 +31,10 @@ from urllib3.fields import guess_content_type
 import frozendict
 
 from snaptrade_client import rest
+from snaptrade_client.api_response import ApiResponse
+from snaptrade_client.rest import ResponseWrapper
 from snaptrade_client.configuration import Configuration
-from snaptrade_client.exceptions import ApiTypeError, ApiValueError
+from snaptrade_client.exceptions import ApiTypeError, ApiValueError, MissingRequiredParametersError
 from snaptrade_client.request_after_hook import request_after_hook
 from snaptrade_client.request_before_hook import request_before_hook
 from snaptrade_client.schemas import (
@@ -826,29 +828,6 @@ class MediaType:
 
 
 @dataclass
-class ApiResponse:
-    headers: HTTPHeaderDict
-    status: int
-    response: urllib3.HTTPResponse
-    body: typing.Union[Unset, Schema]
-
-    def __init__(
-        self,
-        response: urllib3.HTTPResponse,
-        body: typing.Union[Unset, typing.Type[Schema]],
-        headers: HTTPHeaderDict,
-        status: int
-    ):
-        """
-        pycharm needs this to prevent 'Unexpected argument' warnings
-        """
-        self.response = response
-        self.body = body
-        self.status = status
-        self.headers = headers
-
-
-@dataclass
 class ApiResponseWithoutDeserialization(ApiResponse):
     response: urllib3.HTTPResponse
     body: typing.Union[Unset, typing.Type[Schema]] = unset
@@ -951,7 +930,8 @@ class OpenApiResponse(JSONDetector):
         """
         Finds the correct SchemaObject for a particular content type. Handles
         the asterisk "*" character that is used to group media types into ranges
-        (https://www.rfc-editor.org/rfc/rfc7231#section-5.3.2)
+        (https://www.rfc-editor.org/rfc/rfc7231#section-5.3.2). Also handles
+        parameters in the form of name=value pairs.
         """
         media_types = self.content.keys()
         matched_media_type = OpenApiResponse.match_content_type(
@@ -980,14 +960,15 @@ class OpenApiResponse(JSONDetector):
             elif '/' in media_type:
                 type_, subtype = media_type.split('/')
                 if (type_ == '*' or type_ == content_type.split('/')[0]) and \
-                (subtype == '*' or subtype == content_type.split('/')[1]):
+                (subtype == '*' or subtype == content_type.split('/')[1].split(';')[0]):
                     return media_type
+
         return None
 
-    def deserialize(self, response: urllib3.HTTPResponse, configuration: Configuration, skip_deserialization = False) -> ApiResponse:
-        content_type = response.headers.get('content-type')
+    def deserialize(self, response: ResponseWrapper, configuration: Configuration, skip_deserialization = False) -> ApiResponse:
+        content_type = response.http_response.headers.get('content-type')
         deserialized_body = unset
-        streamed = response.supports_chunked_reads()
+        streamed = response.http_response.supports_chunked_reads()
 
         deserialized_headers = unset
         if self.headers is not None:
@@ -998,33 +979,35 @@ class OpenApiResponse(JSONDetector):
             if len(self.content) == 0:
                 # some specs do not define response content media type schemas
                 return self.response_cls(
-                    response=response,
+                    round_trip_time=response.round_trip_time,
+                    response=response.http_response,
                     body=unset,
-                    headers=response.headers,
-                    status=response.status
+                    headers=response.http_response.headers,
+                    status=response.http_response.status
                 )
             body_schema = self.__get_schema_for_content_type(content_type)
             if body_schema is None:
                 raise ApiValueError(
                     f"Invalid content_type returned. Content_type='{content_type}' was returned "
-                    f"when only {str(set(self.content))} are defined for status_code={str(response.status)}"
+                    f"when only {str(set(self.content))} are defined for status_code={str(response.http_response.status)}"
                 )
 
             if self._content_type_is_json(content_type):
-                body_data = self.__deserialize_json(response)
+                body_data = self.__deserialize_json(response.http_response)
             elif content_type == 'application/octet-stream':
-                body_data = self.__deserialize_application_octet_stream(response)
+                body_data = self.__deserialize_application_octet_stream(response.http_response)
             elif content_type.startswith('multipart/form-data'):
-                body_data = self.__deserialize_multipart_form_data(response)
+                body_data = self.__deserialize_multipart_form_data(response.http_response)
                 content_type = 'multipart/form-data'
             else:
                 raise NotImplementedError('Deserialization of {} has not yet been implemented'.format(content_type))
             if skip_deserialization:
                 return self.response_cls(
-                    response=response,
+                    round_trip_time=response.round_trip_time,
+                    response=response.http_response,
                     body=body_data,
-                    headers=response.headers,
-                    status=response.status
+                    headers=response.http_response.headers,
+                    status=response.http_response.status
                 )
 
             # Execute validation and throw as a side effect if validation fails
@@ -1035,13 +1018,14 @@ class OpenApiResponse(JSONDetector):
             # Validation passed, set deserialized_body to plain old deserialized data
             deserialized_body = body_data
         elif streamed:
-            response.release_conn()
+            response.http_response.release_conn()
 
         return self.response_cls(
-            response=response,
+            round_trip_time=response.round_trip_time,
+            response=response.http_response,
             body=deserialized_body,
-            headers=response.headers,
-            status=response.status
+            headers=response.http_response.headers,
+            status=response.http_response.status
         )
 
 
@@ -1053,9 +1037,7 @@ class ApiClient:
     the methods and models for each application are generated from the OpenAPI
     templates.
 
-    NOTE: This class is auto generated by Konfig.
-    Ref: https://konfigthis.com
-    Do not edit the class manually.
+    This class is auto generated by Konfig (https://konfigthis.com)
 
     :param configuration: .Configuration object for this client
     :param header_name: a header to pass when making calls to the API.
@@ -1088,7 +1070,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Konfig/8.0.0/python'
+        self.user_agent = 'Konfig/8.1.0/python'
 
     def __enter__(self):
         return self
@@ -1139,7 +1121,7 @@ class ApiClient:
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
         prefix_separator_iterator: PrefixSeparatorIterator = None,
-    ) -> urllib3.HTTPResponse:
+    ) -> ResponseWrapper:
 
         request_before_hook(
             resource_path=resource_path,
@@ -1197,6 +1179,8 @@ class ApiClient:
             stream=stream,
             timeout=timeout,
         )
+
+
         return response
 
     def call_api(
@@ -1213,7 +1197,7 @@ class ApiClient:
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
         prefix_separator_iterator: PrefixSeparatorIterator = None,
-    ) -> urllib3.HTTPResponse:
+    ) -> ResponseWrapper:
         """Makes the HTTP request (synchronous) and returns deserialized data.
 
         To make an async_req request, set the async_req parameter.
@@ -1290,7 +1274,7 @@ class ApiClient:
         body: typing.Optional[typing.Union[str, bytes]] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> urllib3.HTTPResponse:
+    ) -> ResponseWrapper:
         """Makes the HTTP request using RESTClient."""
         if method == "GET":
             return self.rest_client.GET(url,
@@ -1394,10 +1378,8 @@ class ApiClient:
 
 
 class Api:
-    """NOTE: This class is auto generated by Konfig
-    Ref: https://konfigthis.com
-
-    Do not edit the class manually.
+    """NOTE:
+    This class is auto generated by Konfig (https://konfigthis.com)
     """
 
     def __init__(self, api_client: typing.Optional[ApiClient] = None):
@@ -1620,7 +1602,10 @@ class RequestBody(StyleFormSerializer, JSONDetector):
         if isinstance(in_data, media_type.schema):
             cast_in_data = in_data
         elif isinstance(in_data, (dict, frozendict.frozendict)) and in_data:
-            cast_in_data = media_type.schema(**in_data)
+            try:
+                cast_in_data = media_type.schema(**in_data)
+            except TypeError as e:
+                raise MissingRequiredParametersError(e)
         else:
             cast_in_data = media_type.schema(in_data)
         # TODO check for and use encoding if it exists

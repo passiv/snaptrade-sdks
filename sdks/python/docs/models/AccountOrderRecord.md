@@ -14,6 +14,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **status** | [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) | [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
 **symbol** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
+**option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **action** | [**Action**](Action.md) | [**Action**](Action.md) |  | [optional] 
 **total_quantity** | decimal.Decimal, int, float,  | decimal.Decimal,  | Trade Units | [optional] 
 **open_quantity** | decimal.Decimal, int, float,  | decimal.Decimal,  | Trade Units | [optional] 
