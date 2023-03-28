@@ -3,7 +3,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
+    Connect brokerage accounts to your app for live positions and trading
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "snaptrade-python-sdk"
-VERSION = "8.0.0"
+VERSION = "8.1.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -27,13 +27,13 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 REQUIRES = [
-    "certifi >= 14.5.14",
+    "certifi >= 2022.12.7",
     "frozendict ~= 2.3.4",
     "python-dateutil ~= 2.7.0",
     "setuptools >= 21.0.0",
     "typing_extensions ~= 4.3.0",
     "urllib3 ~= 1.26.7",
-]
+    "validators ~= 0.20.0",]
 
 setup(
     name=NAME,
@@ -42,7 +42,8 @@ setup(
     author="Konfig",
     author_email="api@snaptrade.com",
     url="https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python",
-    keywords=["OpenAPI", "Konfig", "SnapTrade"],
+    keywords=["Konfig", "SnapTrade"],
+    license="MIT",
     python_requires=">=3.7",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),

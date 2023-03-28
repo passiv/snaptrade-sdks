@@ -3042,6 +3042,8 @@ components:
           $ref: "#/components/schemas/Id"
         universal_symbol:
           $ref: "#/components/schemas/UniversalSymbol"
+        option_symbol:
+          $ref: "#/components/schemas/OptionsSymbol"
         action:
           $ref: "#/components/schemas/Action"
         total_quantity:
@@ -4999,10 +5001,10 @@ components:
           $ref: "#/components/schemas/Id"
         code:
           type: string
-          example: et
+          example: cs
         description:
           type: string
-          example: ETF
+          example: Common Stock
         is_supported:
           type: boolean
           example: true

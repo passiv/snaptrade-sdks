@@ -35,7 +35,7 @@ generators:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
-    version: 3.0.0
+    version: 3.1.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     git:
@@ -48,7 +48,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 8.0.0
+    version: 8.1.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -56,8 +56,6 @@ generators:
     clientName: SnapTrade
     clientState:
       - consumer_key
-    apiKeyAlias:
-      PartnerClientId: client_id
     git:
       host: github.com
       userId: passiv
@@ -65,7 +63,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 6.1.0
+    version: 6.2.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

@@ -3,7 +3,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
+    Connect brokerage accounts to your app for live positions and trading
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
@@ -23,13 +23,16 @@ import uuid
 from dateutil.parser.isoparser import isoparser, _takes_ascii
 import frozendict
 
-from snaptrade_client.exceptions import (
+from snaptrade_client.exceptions_base import (
     ApiTypeError,
     ApiValueError,
 )
 from snaptrade_client.configuration import (
     Configuration,
 )
+from snaptrade_client.exceptions import SchemaValidationError
+from snaptrade_client.exceptions import render_path
+from snaptrade_client.validation_metadata import ValidationMetadata
 
 
 class Unset(object):
@@ -77,76 +80,6 @@ def update(d: dict, u: dict):
             d[k] = v
         else:
             d[k] = d[k] | v
-
-
-class ValidationMetadata(frozendict.frozendict):
-    """
-    A class storing metadata that is needed to validate OpenApi Schema payloads
-    """
-    def __new__(
-        cls,
-        path_to_item: typing.Tuple[typing.Union[str, int], ...] = tuple(['args[0]']),
-        from_server: bool = False,
-        configuration: typing.Optional[Configuration] = None,
-        seen_classes: typing.FrozenSet[typing.Type] = frozenset(),
-        validated_path_to_schemas: typing.Dict[typing.Tuple[typing.Union[str, int], ...], typing.Set[typing.Type]] = frozendict.frozendict()
-    ):
-        """
-        Args:
-            path_to_item: the path to the current data being instantiated.
-                For {'a': [1]} if the code is handling, 1, then the path is ('args[0]', 'a', 0)
-                This changes from location to location
-            from_server: whether or not this data came form the server
-                True when receiving server data
-                False when instantiating model with client side data not form the server
-                This does not change from location to location
-            configuration: the Configuration instance to use
-                This is needed because in Configuration:
-                - one can disable validation checking
-                This does not change from location to location
-            seen_classes: when deserializing data that matches multiple schemas, this is used to store
-                the schemas that have been traversed. This is used to stop processing when a cycle is seen.
-                This changes from location to location
-            validated_path_to_schemas: stores the already validated schema classes for a given path location
-                This does not change from location to location
-        """
-        return super().__new__(
-            cls,
-            path_to_item=path_to_item,
-            from_server=from_server,
-            configuration=configuration,
-            seen_classes=seen_classes,
-            validated_path_to_schemas=validated_path_to_schemas
-        )
-
-    def validation_ran_earlier(self, cls: type) -> bool:
-        validated_schemas = self.validated_path_to_schemas.get(self.path_to_item, set())
-        validation_ran_earlier = validated_schemas and cls in validated_schemas
-        if validation_ran_earlier:
-            return True
-        if cls in self.seen_classes:
-            return True
-        return False
-
-    @property
-    def path_to_item(self) -> typing.Tuple[typing.Union[str, int], ...]:
-        return self.get('path_to_item')
-
-    @property
-    def from_server(self) -> bool:
-        return self.get('from_server')
-
-    @property
-    def configuration(self) -> typing.Optional[Configuration]:
-        return self.get('configuration')
-
-    @property
-    def seen_classes(self) -> typing.FrozenSet[typing.Type]:
-        return self.get('seen_classes')
-
-    @property
-    def validated_path_to_schemas(self) -> typing.Dict[typing.Tuple[typing.Union[str, int], ...], typing.Set[typing.Type]]:
-        return self.get('validated_path_to_schemas')
 
 
 class Singleton:
@@ -219,6 +152,9 @@ class BoolClass(Singleton):
                 return bool(key[1])
         raise ValueError('Unable to find the boolean value of this instance')
 
+    def __str__(self) -> str:
+        return str(bool(self))
+
 
 class MetaOapgTyped:
     exclusive_maximum: typing.Union[int, float]
@@ -228,6 +164,7 @@ class MetaOapgTyped:
     max_items: int
     min_items: int
     discriminator: typing.Dict[str, typing.Dict[str, typing.Type['Schema']]]
+    x_konfig_strip: bool
 
 
     class properties:
@@ -310,6 +247,7 @@ class Schema:
         )
         return ApiTypeError(
             error_msg,
+            invalid_value=var_value,
             path_to_item=path_to_item,
             valid_classes=valid_classes,
             key_type=key_type,
@@ -876,7 +814,7 @@ class ValidatorBase:
                 constraint_msg=constraint_msg,
                 constraint_value=constraint_value,
                 additional_txt=additional_txt,
-                path_to_item=path_to_item,
+                path_to_item=render_path(path_to_item),
             )
         )
 
@@ -1014,6 +952,8 @@ class StrBase(ValidatorBase):
         Validates that validations pass
         """
         if isinstance(arg, str):
+            if hasattr(cls.MetaOapg, 'x_konfig_strip') and cls.MetaOapg.x_konfig_strip:
+                arg = arg.strip()
             cls.__check_str_validations(arg, validation_metadata)
         return super()._validate_oapg(arg, validation_metadata=validation_metadata)
 
@@ -1570,6 +1510,7 @@ class DictBase(Discriminable, ValidatorBase):
         additional_properties = getattr(cls.MetaOapg, 'additional_properties', UnsetAnyTypeSchema)
         properties = getattr(cls.MetaOapg, 'properties', {})
         property_annotations = getattr(properties, '__annotations__', {})
+        validation_errors = []
         for property_name, value in arg.items():
             path_to_item = validation_metadata.path_to_item+(property_name,)
             if property_name in property_annotations:
@@ -1597,8 +1538,13 @@ class DictBase(Discriminable, ValidatorBase):
             )
             if arg_validation_metadata.validation_ran_earlier(schema):
                 continue
-            other_path_to_schemas = schema._validate_oapg(value, validation_metadata=arg_validation_metadata)
-            update(path_to_schemas, other_path_to_schemas)
+            try:
+                other_path_to_schemas = schema._validate_oapg(value, validation_metadata=arg_validation_metadata)
+                update(path_to_schemas, other_path_to_schemas)
+            except (ApiTypeError, ApiValueError) as e:
+                validation_errors.append(e)
+        if len(validation_errors) > 0:
+            raise SchemaValidationError(validation_errors)
         return path_to_schemas
 
     @classmethod
@@ -2011,8 +1957,8 @@ class ComposedBase(Discriminable):
                 raise not_exception
 
         if discriminated_cls is not None and not updated_vm.validation_ran_earlier(discriminated_cls):
-            # TODO use an exception from this package here
-            assert discriminated_cls in path_to_schemas[updated_vm.path_to_item]
+            if discriminated_cls not in path_to_schemas[updated_vm.path_to_item]:
+                raise ApiValueError("Could not find discriminator in value")
         return path_to_schemas
 
 

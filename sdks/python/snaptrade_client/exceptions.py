@@ -3,7 +3,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
+    Connect brokerage accounts to your app for live positions and trading
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
@@ -11,55 +11,13 @@
 """
 
 
-class OpenApiException(Exception):
-    """The base exception class for all OpenAPIExceptions"""
+import typing
+from snaptrade_client.api_response import ApiResponse
+from snaptrade_client.exceptions_base import OpenApiException, ApiTypeError, ApiValueError, render_path
 
-
-class ApiTypeError(OpenApiException, TypeError):
-    def __init__(self, msg, path_to_item=None, valid_classes=None,
-                 key_type=None):
-        """ Raises an exception for TypeErrors
-
-        Args:
-            msg (str): the exception message
-
-        Keyword Args:
-            path_to_item (list): a list of keys an indices to get to the
-                                 current_item
-                                 None if unset
-            valid_classes (tuple): the primitive classes that current item
-                                   should be an instance of
-                                   None if unset
-            key_type (bool): False if our value is a value in a dict
-                             True if it is a key in a dict
-                             False if our item is an item in a list
-                             None if unset
-        """
-        self.path_to_item = path_to_item
-        self.valid_classes = valid_classes
-        self.key_type = key_type
-        full_msg = msg
-        if path_to_item:
-            full_msg = "{0} at {1}".format(msg, render_path(path_to_item))
-        super(ApiTypeError, self).__init__(full_msg)
-
-
-class ApiValueError(OpenApiException, ValueError):
-    def __init__(self, msg, path_to_item=None):
-        """
-        Args:
-            msg (str): the exception message
-
-        Keyword Args:
-            path_to_item (list) the path to the exception in the
-                received_data dict. None if unset
-        """
-
-        self.path_to_item = path_to_item
-        full_msg = msg
-        if path_to_item:
-            full_msg = "{0} at {1}".format(msg, render_path(path_to_item))
-        super(ApiValueError, self).__init__(full_msg)
+class ClientConfigurationError(OpenApiException):
+    def __init__(self, msg):
+        super(ClientConfigurationError, self).__init__(msg)
 
 
 class ApiAttributeError(OpenApiException, AttributeError):
@@ -100,17 +58,19 @@ class ApiKeyError(OpenApiException, KeyError):
 
 class ApiException(OpenApiException):
 
-    def __init__(self, status=None, reason=None, api_response: 'snaptrade_client.api_client.ApiResponse' = None):
+    def __init__(self, status=None, reason=None, api_response: ApiResponse = None):
         if api_response:
-            self.status = api_response.response.status
+            self.status = api_response.status
             self.reason = api_response.response.reason
             self.body = api_response.body
             self.headers = api_response.response.getheaders()
+            self.round_trip_time = api_response.round_trip_time
         else:
             self.status = status
             self.reason = reason
             self.body = None
             self.headers = None
+            self.round_trip_time = None
 
     def __str__(self):
         """Custom error messages for exception"""
@@ -126,12 +86,63 @@ class ApiException(OpenApiException):
         return error_message
 
 
-def render_path(path_to_item):
-    """Returns a string representation of a path"""
-    result = ""
-    for pth in path_to_item:
-        if isinstance(pth, int):
-            result += "[{0}]".format(pth)
-        else:
-            result += "['{0}']".format(pth)
-    return result
+class InvalidHostConfigurationError(ClientConfigurationError):
+    def __init__(self, host: str, reason: str):
+        self.host = host
+        self.reason = reason
+        super().__init__('Invalid host: "{}", {}'.format(self.host, self.reason))
+
+
+class MissingRequiredParametersError(TypeError):
+    def __init__(self, error: TypeError):
+        self.error = error
+        error_str = str(error)
+        self.msg = error_str
+        if "__new__()" in error_str:
+            # parse error to reformat
+            missing_parameters = error_str.split(":")[1].strip()
+            number_of_parameters = error_str.split("missing")[1].split("required")[0].strip()
+            self.msg = "Missing {} required parameter{}: {}".format(number_of_parameters, "s" if int(number_of_parameters) > 1 else "", missing_parameters)
+        super().__init__(self.msg)
+
+class SchemaValidationError(OpenApiException):
+    def __init__(self, validation_errors: typing.List[typing.Union[ApiValueError, ApiTypeError]]):
+        """ Aggregates schema validation errors
+
+        Args:
+            msg (str): the exception message
+
+        Keyword Args:
+            path_to_item (list): a list of keys an indices to get to the
+                                 current_item
+                                 None if unset
+            valid_classes (tuple): the primitive classes that current item
+                                   should be an instance of
+                                   None if unset
+            key_type (bool): False if our value is a value in a dict
+                             True if it is a key in a dict
+                             False if our item is an item in a list
+                             None if unset
+        """
+        self.validation_errors = validation_errors
+        self.type_errors: typing.List[ApiTypeError] = []
+        self.value_errors: typing.List[ApiValueError] = []
+        for error in validation_errors:
+            if isinstance(error, ApiTypeError):
+                self.type_errors.append(error)
+            elif isinstance(error, ApiValueError):
+                self.value_errors.append(error)
+        sub_msgs: typing.List[str] = []
+        if len(self.type_errors) > 0:
+            for type_error in self.type_errors:
+                classes = ", ".join([cls.__name__ for cls in type_error.valid_classes])
+                msg = 'Got {}({}) for required type {} at {}'.format(
+                    type(type_error.invalid_value).__name__, type_error.invalid_value, classes, render_path(type_error.path_to_item))
+                sub_msgs.append(msg)
+        if len(self.value_errors) > 0:
+            for value_error in self.value_errors:
+                sub_msgs.append(value_error.full_msg)
+        sub_msg = ". ".join(sub_msgs)
+        num_validation_errors = len(self.validation_errors)
+        self.msg = "{} invalid argument{}. {}".format(num_validation_errors, "s" if num_validation_errors > 1 else "", sub_msg)
+        super().__init__(self.msg)

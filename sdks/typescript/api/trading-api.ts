@@ -16,7 +16,7 @@ import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'ax
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -82,13 +82,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
@@ -151,13 +151,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
 
     
@@ -205,13 +205,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
 
     
@@ -260,13 +260,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
@@ -331,13 +331,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
@@ -406,13 +406,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
 
     
@@ -463,13 +463,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
 
     
@@ -518,13 +518,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
@@ -584,13 +584,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
@@ -651,13 +651,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject(localVarQueryParameter, "clientId", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
 
             // authentication PartnerSignature required
-            await setApiKeyToObject(localVarHeaderParameter, "Signature", configuration)
+            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
 
             // authentication PartnerTimestamp required
-            await setApiKeyToObject(localVarQueryParameter, "timestamp", configuration)
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;

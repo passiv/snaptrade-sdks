@@ -20,6 +20,9 @@ import { AccountOrderRecordStatus } from './account-order-record-status';
 import { Action } from './action';
 // May contain unused imports in some cases
 // @ts-ignore
+import { OptionsSymbol } from './options-symbol';
+// May contain unused imports in some cases
+// @ts-ignore
 import { OrderType } from './order-type';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -60,6 +63,12 @@ export interface AccountOrderRecord {
      * @memberof AccountOrderRecord
      */
     'universal_symbol'?: UniversalSymbol;
+    /**
+     * 
+     * @type {OptionsSymbol}
+     * @memberof AccountOrderRecord
+     */
+    'option_symbol'?: OptionsSymbol;
     /**
      * 
      * @type {Action}

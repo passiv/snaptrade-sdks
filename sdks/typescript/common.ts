@@ -14,7 +14,7 @@
 
 import { Configuration } from "./configuration";
 import { RequiredError, RequestArgs } from "./base";
-import { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { requestAfterHook } from "./requestAfterHook";
 
 /**
@@ -38,20 +38,35 @@ export const assertParamExists = function (functionName: string, paramName: stri
  *
  * @export
  */
-export const setApiKeyToObject = async function (object: any, keyParamName: string, configuration?: Configuration) {
-    if (configuration && configuration.apiKey) {
-      if (typeof configuration.apiKey === "function")
-        object[keyParamName] = await configuration.apiKey(keyParamName);
-      else if (typeof configuration.apiKey === "string")
-        object[keyParamName] = configuration.apiKey;
-      else if (typeof configuration.apiKey === "object") {
-        if (keyParamName in configuration.apiKey)
-          object[keyParamName] = configuration.apiKey[keyParamName];
-      } else
-        throw Error(
-          `Unexpected type ${typeof configuration.apiKey} for Configuration.apiKey`
-        );
-    }
+export const setApiKeyToObject = async function ({
+  object,
+  key,
+  type,
+  keyParamName,
+  configuration,
+}: {
+  object: any
+  key?: string
+  type?: "Cookie",
+  keyParamName: string
+  configuration?: Configuration
+}) {
+  key = key ? key : keyParamName
+  if (configuration && configuration.apiKey) {
+    if (typeof configuration.apiKey === 'function')
+      object[key] = await configuration.apiKey(keyParamName)
+    else if (typeof configuration.apiKey === 'string')
+      object[key] = configuration.apiKey
+    else if (typeof configuration.apiKey === 'object') {
+      if (keyParamName in configuration.apiKey)
+        object[key] = configuration.apiKey[keyParamName]
+    } else
+      throw Error(
+        `Unexpected type ${typeof configuration.apiKey} for Configuration.apiKey`
+      )
+  }
+  if (type === "Cookie")
+    object[key] = `${keyParamName}=${object[key]}`
 }
 
 /**

@@ -2,7 +2,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading  # noqa: E501
+    Connect brokerage accounts to your app for live positions and trading
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
