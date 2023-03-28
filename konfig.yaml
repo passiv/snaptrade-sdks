@@ -35,7 +35,7 @@ generators:
         destinationFilename: src/main/java/com/konfigthis/client/JSON.java
       pom.mustache:
         destinationFilename: pom.xml
-    version: 3.1.0
+    version: 3.0.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     git:
