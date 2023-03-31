@@ -1159,6 +1159,37 @@ paths:
           description: The specified authorizationId was not found.
         default:
           description: Unexpected error.
+  "/sessionEvents":
+    get:
+      tags:
+        - Connections
+      summary: List all session events for the partner
+      operationId: Connections_sessionEvents
+      parameters:
+        - in: query
+          required: true
+          name: PartnerClientId
+          schema:
+            $ref: "#/components/schemas/ClientID"
+        - in: query
+          required: false
+          name: userId
+          description: Optional comma seperated list of user IDs used to filter the
+            request on specific users
+          schema:
+            $ref: "#/components/schemas/AccountIDs"
+      responses:
+        "200":
+          description: A list of all Session Events for the Partner.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: "#/components/schemas/SessionEvent"
+        default:
+          description: Unexpected error.
   "/brokerages":
     get:
       tags:
@@ -2532,6 +2563,14 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountIDs"
         - in: query
+          required: false
+          name: brokerageAuthorizations
+          description:
+            Optional comma seperated list of brokerage authorization IDs used to filter the
+            request on only accounts that belong to those authorizations
+          schema:
+            $ref: "#/components/schemas/BrokerageAuthIDs"
+        - in: query
           required: true
           name: userId
           schema:
@@ -3011,6 +3050,10 @@ components:
           example: Q6542138443
     AccountIDs:
       description: Comma seperated list of account IDs
+      type: string
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+    BrokerageAuthIDs:
+      description: Comma seperated list of brokerage authorization IDs
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
     AccountHoldings:
@@ -4168,6 +4211,27 @@ components:
           type: object
           example:
             identifier: 123456
+    SessionEvent:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        session_event_type:
+          type: string
+          enum:
+            - DISCLAIMER_ACCEPTED
+            - BROKERAGE_CONNECTION_INITIATED
+            - BROKERAGE_AUTHENTICATION
+            - MFA_AUTHORIZATION
+            - CONNECTION_SUCCESSFUL
+            - CONNECTION_FAILED
+            - PARTNER_REDIRECT
+        session_id:
+          $ref: "#/components/schemas/Id"
+        user_id:
+          $ref: "#/components/schemas/SnapTradeUserID"
+        created_date:
+          $ref: "#/components/schemas/Time"
     BrokerageSymbol:
       description: Brokerage symbol
       type: object
