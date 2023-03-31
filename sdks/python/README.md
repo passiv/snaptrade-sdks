@@ -2,7 +2,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 - API version: 1.0.0
-- Package version: 8.1.0
+- Package version: 8.2.0
 
 ## Requirements.
 
@@ -14,9 +14,9 @@ Python >=3.7
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install snaptrade-python-sdk==8.1.0
+pip install snaptrade-python-sdk==8.2.0
 ```
-(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==8.1.0`)
+(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==8.2.0`)
 
 Then import the package:
 ```python
@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**detail_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#detail_brokerage_authorization) | **get** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 *ConnectionsApi* | [**list_brokerage_authorizations**](docs/apis/tags/ConnectionsApi.md#list_brokerage_authorizations) | **get** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**remove_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#remove_brokerage_authorization) | **delete** /authorizations/{authorizationId} | Remove a brokerage authorization.
+*ConnectionsApi* | [**session_events**](docs/apis/tags/ConnectionsApi.md#session_events) | **get** /sessionEvents | List all session events for the partner
 *ErrorLogsApi* | [**list_user_errors**](docs/apis/tags/ErrorLogsApi.md#list_user_errors) | **get** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
 *OptionsApi* | [**get_option_strategy**](docs/apis/tags/OptionsApi.md#get_option_strategy) | **post** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order
 *OptionsApi* | [**get_options_chain**](docs/apis/tags/OptionsApi.md#get_options_chain) | **get** /accounts/{accountId}/optionsChain | Get the options chain
@@ -170,6 +171,7 @@ Class | Method | HTTP request | Description
  - [Action](docs/models/Action.md)
  - [Balance](docs/models/Balance.md)
  - [Brokerage](docs/models/Brokerage.md)
+ - [BrokerageAuthIDs](docs/models/BrokerageAuthIDs.md)
  - [BrokerageAuthorization](docs/models/BrokerageAuthorization.md)
  - [BrokerageAuthorizationType](docs/models/BrokerageAuthorizationType.md)
  - [BrokerageAuthorizationTypeReadOnly](docs/models/BrokerageAuthorizationTypeReadOnly.md)
@@ -233,6 +235,7 @@ Class | Method | HTTP request | Description
  - [ReportingFrequency](docs/models/ReportingFrequency.md)
  - [RsaPublicKey](docs/models/RsaPublicKey.md)
  - [SecurityType](docs/models/SecurityType.md)
+ - [SessionEvent](docs/models/SessionEvent.md)
  - [Signature](docs/models/Signature.md)
  - [SignedContent](docs/models/SignedContent.md)
  - [SnapTradeAPIDisclaimerAcceptStatus](docs/models/SnapTradeAPIDisclaimerAcceptStatus.md)
@@ -276,7 +279,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
+ Authentication schemes defined for the API:
 ## PartnerClientId
 
 - **Type**: API key
@@ -290,7 +293,7 @@ Class | Method | HTTP request | Description
 - **API key parameter name**: Signature
 - **Location**: HTTP header
 
- Authentication schemes defined for the API:
+
 ## PartnerTimestamp
 
 - **Type**: API key

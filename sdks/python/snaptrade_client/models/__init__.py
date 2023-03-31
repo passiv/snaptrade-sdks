@@ -20,6 +20,7 @@ from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
+from snaptrade_client.model.brokerage_auth_ids import BrokerageAuthIDs
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
 from snaptrade_client.model.brokerage_authorization_type import BrokerageAuthorizationType
 from snaptrade_client.model.brokerage_authorization_type_read_only import BrokerageAuthorizationTypeReadOnly
@@ -83,6 +84,7 @@ from snaptrade_client.model.reporting_date import ReportingDate
 from snaptrade_client.model.reporting_frequency import ReportingFrequency
 from snaptrade_client.model.rsa_public_key import RsaPublicKey
 from snaptrade_client.model.security_type import SecurityType
+from snaptrade_client.model.session_event import SessionEvent
 from snaptrade_client.model.signature import Signature
 from snaptrade_client.model.signed_content import SignedContent
 from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus

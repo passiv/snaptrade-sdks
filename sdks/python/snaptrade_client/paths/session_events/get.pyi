@@ -29,31 +29,21 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.universal_activity import UniversalActivity
-
-from . import path
+from snaptrade_client.model.session_event import SessionEvent
 
 # Query params
-StartDateSchema = schemas.StrSchema
-EndDateSchema = schemas.StrSchema
-AccountsSchema = schemas.StrSchema
-BrokerageAuthorizationsSchema = schemas.StrSchema
+PartnerClientIdSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
-UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
+        'PartnerClientId': typing.Union[PartnerClientIdSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
-        'startDate': typing.Union[StartDateSchema, str, ],
-        'endDate': typing.Union[EndDateSchema, str, ],
-        'accounts': typing.Union[AccountsSchema, str, ],
-        'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
+        'userId': typing.Union[UserIdSchema, str, ],
     },
     total=False
 )
@@ -63,49 +53,19 @@ class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams)
     pass
 
 
-request_query_start_date = api_client.QueryParameter(
-    name="startDate",
+request_query_partner_client_id = api_client.QueryParameter(
+    name="PartnerClientId",
     style=api_client.ParameterStyle.FORM,
-    schema=StartDateSchema,
-    explode=True,
-)
-request_query_end_date = api_client.QueryParameter(
-    name="endDate",
-    style=api_client.ParameterStyle.FORM,
-    schema=EndDateSchema,
-    explode=True,
-)
-request_query_accounts = api_client.QueryParameter(
-    name="accounts",
-    style=api_client.ParameterStyle.FORM,
-    schema=AccountsSchema,
-    explode=True,
-)
-request_query_brokerage_authorizations = api_client.QueryParameter(
-    name="brokerageAuthorizations",
-    style=api_client.ParameterStyle.FORM,
-    schema=BrokerageAuthorizationsSchema,
+    schema=PartnerClientIdSchema,
+    required=True,
     explode=True,
 )
 request_query_user_id = api_client.QueryParameter(
     name="userId",
     style=api_client.ParameterStyle.FORM,
     schema=UserIdSchema,
-    required=True,
     explode=True,
 )
-request_query_user_secret = api_client.QueryParameter(
-    name="userSecret",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserSecretSchema,
-    required=True,
-    explode=True,
-)
-_auth = [
-    'PartnerClientId',
-    'PartnerSignature',
-    'PartnerTimestamp',
-]
 
 
 class SchemaFor200ResponseBodyApplicationJson(
@@ -115,13 +75,45 @@ class SchemaFor200ResponseBodyApplicationJson(
 
     class MetaOapg:
         
-        @staticmethod
-        def items() -> typing.Type['UniversalActivity']:
-            return UniversalActivity
+        
+        class items(
+            schemas.ComposedSchema,
+        ):
+        
+        
+            class MetaOapg:
+                
+                @classmethod
+                @functools.lru_cache()
+                def any_of(cls):
+                    # we need this here to make our import statements work
+                    # we must store _composed_schemas in here so the code is only run
+                    # when we invoke this method. If we kept this at the class
+                    # level we would get an error because the class level
+                    # code would be run when this module is imported, and these composed
+                    # classes don't exist yet because their module has not finished
+                    # loading
+                    return [
+                        SessionEvent,
+                    ]
+        
+        
+            def __new__(
+                cls,
+                *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                _configuration: typing.Optional[schemas.Configuration] = None,
+                **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+            ) -> 'items':
+                return super().__new__(
+                    cls,
+                    *args,
+                    _configuration=_configuration,
+                    **kwargs,
+                )
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['UniversalActivity'], typing.List['UniversalActivity']],
+        arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]], typing.List[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]]],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
@@ -130,7 +122,7 @@ class SchemaFor200ResponseBodyApplicationJson(
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> 'UniversalActivity':
+    def __getitem__(self, i: int) -> MetaOapg.items:
         return super().__getitem__(i)
 
 
@@ -158,10 +150,6 @@ class ApiResponseForDefault(api_client.ApiResponse):
 _response_for_default = api_client.OpenApiResponse(
     response_cls=ApiResponseForDefault,
 )
-_status_code_to_response = {
-    '200': _response_for_200,
-    'default': _response_for_default,
-}
 _all_accept_content_types = (
     'application/json',
 )
@@ -169,7 +157,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
     @typing.overload
-    def _get_activities_oapg(
+    def _session_events_oapg(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -182,7 +170,7 @@ class BaseApi(api_client.Api):
     ]: ...
 
     @typing.overload
-    def _get_activities_oapg(
+    def _session_events_oapg(
         self,
         skip_deserialization: typing_extensions.Literal[True],
         query_params: RequestQueryParams = frozendict.frozendict(),
@@ -192,7 +180,7 @@ class BaseApi(api_client.Api):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def _get_activities_oapg(
+    def _session_events_oapg(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -205,7 +193,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def _get_activities_oapg(
+    def _session_events_oapg(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -214,7 +202,7 @@ class BaseApi(api_client.Api):
         skip_deserialization: bool = True,
     ):
         """
-        Get transaction history for a user
+        List all session events for the partner
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -224,12 +212,8 @@ class BaseApi(api_client.Api):
 
         prefix_separator_iterator = None
         for parameter in (
-            request_query_start_date,
-            request_query_end_date,
-            request_query_accounts,
-            request_query_brokerage_authorizations,
+            request_query_partner_client_id,
             request_query_user_id,
-            request_query_user_secret,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -285,11 +269,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetActivities(BaseApi):
+class SessionEvents(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     @typing.overload
-    def get_activities(
+    def session_events(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -302,7 +286,7 @@ class GetActivities(BaseApi):
     ]: ...
 
     @typing.overload
-    def get_activities(
+    def session_events(
         self,
         skip_deserialization: typing_extensions.Literal[True],
         query_params: RequestQueryParams = frozendict.frozendict(),
@@ -312,7 +296,7 @@ class GetActivities(BaseApi):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def get_activities(
+    def session_events(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -325,7 +309,7 @@ class GetActivities(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def get_activities(
+    def session_events(
         self,
         query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -333,7 +317,7 @@ class GetActivities(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = True,
     ):
-        return self._get_activities_oapg(
+        return self._session_events_oapg(
             query_params=query_params,
             accept_content_types=accept_content_types,
             stream=stream,
@@ -390,7 +374,7 @@ class ApiForget(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = True,
     ):
-        return self._get_activities_oapg(
+        return self._session_events_oapg(
             query_params=query_params,
             accept_content_types=accept_content_types,
             stream=stream,

@@ -21,6 +21,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
 import { BrokerageAuthorization } from '../models';
+// @ts-ignore
+import { ConnectionsSessionEvents200ResponseInner } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
@@ -60,13 +62,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -79,12 +78,11 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -120,13 +118,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -139,12 +134,11 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -184,13 +178,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -203,12 +194,65 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List all session events for the partner
+         * @param {string} partnerClientId 
+         * @param {string} [userId] Optional comma seperated list of user IDs used to filter the request on specific users
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sessionEvents: async (partnerClientId: string, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'partnerClientId' is not null or undefined
+            assertParamExists('sessionEvents', 'partnerClientId', partnerClientId)
+            const localVarPath = `/sessionEvents`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            if (partnerClientId !== undefined) {
+                localVarQueryParameter['PartnerClientId'] = partnerClientId;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -260,6 +304,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary List all session events for the partner
+         * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sessionEvents(requestParameters.partnerClientId, requestParameters.userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -299,6 +354,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List all session events for the partner
+         * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>> {
+            return localVarFp.sessionEvents(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -387,6 +452,29 @@ export type ConnectionsApiRemoveBrokerageAuthorizationRequest = {
 }
 
 /**
+ * Request parameters for sessionEvents operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiSessionEventsRequest
+ */
+export type ConnectionsApiSessionEventsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiSessionEvents
+    */
+    readonly partnerClientId: string
+    
+    /**
+    * Optional comma seperated list of user IDs used to filter the request on specific users
+    * @type {string}
+    * @memberof ConnectionsApiSessionEvents
+    */
+    readonly userId?: string
+    
+}
+
+/**
  * ConnectionsApi - object-oriented interface
  * @export
  * @class ConnectionsApi
@@ -427,5 +515,17 @@ export class ConnectionsApi extends BaseAPI {
      */
     public removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).removeBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List all session events for the partner
+     * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApi
+     */
+    public sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).sessionEvents(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

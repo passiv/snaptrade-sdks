@@ -34,27 +34,30 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# List all accounts for the user, plus balances and positions for each account.
-get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-        'brokerage_authorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    },
-)
 try:
+    # List all accounts for the user, plus balances and positions for each account.
+    get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+            'brokerage_authorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        },
+    )
+    pprint(get_all_user_holdings_response.body)
     pprint(get_all_user_holdings_response.body["account"])
     pprint(get_all_user_holdings_response.body["balances"])
     pprint(get_all_user_holdings_response.body["positions"])
     pprint(get_all_user_holdings_response.body["total_value"])
     pprint(get_all_user_holdings_response.headers)
     pprint(get_all_user_holdings_response.status)
+    pprint(get_all_user_holdings_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountHoldings.get_all_user_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -189,27 +192,30 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get all cash balances of an investment account
-get_user_account_balance_response = snaptrade.account_information.get_user_account_balance(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get all cash balances of an investment account
+    get_user_account_balance_response = snaptrade.account_information.get_user_account_balance(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_user_account_balance_response.body)
     pprint(get_user_account_balance_response.body["currency"])
     pprint(get_user_account_balance_response.body["cash"])
     pprint(get_user_account_balance_response.headers)
     pprint(get_user_account_balance_response.status)
+    pprint(get_user_account_balance_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Balance.get_user_account_balance: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -323,17 +329,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Return details of a specific investment account
-get_user_account_details_response = snaptrade.account_information.get_user_account_details(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Return details of a specific investment account
+    get_user_account_details_response = snaptrade.account_information.get_user_account_details(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_user_account_details_response.body)
     pprint(get_user_account_details_response.body["id"])
     pprint(get_user_account_details_response.body["brokerage_authorization"])
     pprint(get_user_account_details_response.body["portfolio_group"])
@@ -345,12 +352,14 @@ try:
     pprint(get_user_account_details_response.body["cash_restrictions"])
     pprint(get_user_account_details_response.headers)
     pprint(get_user_account_details_response.status)
+    pprint(get_user_account_details_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Account.get_user_account_details: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -464,18 +473,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get all history of orders placed in account
-get_user_account_orders_response = snaptrade.account_information.get_user_account_orders(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-        'state': "all",
-    },
-)
 try:
+    # Get all history of orders placed in account
+    get_user_account_orders_response = snaptrade.account_information.get_user_account_orders(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+            'state': "all",
+        },
+    )
+    pprint(get_user_account_orders_response.body)
     pprint(get_user_account_orders_response.body["brokerage_order_id"])
     pprint(get_user_account_orders_response.body["status"])
     pprint(get_user_account_orders_response.body["symbol"])
@@ -496,12 +506,14 @@ try:
     pprint(get_user_account_orders_response.body["expiry_date"])
     pprint(get_user_account_orders_response.headers)
     pprint(get_user_account_orders_response.status)
+    pprint(get_user_account_orders_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountOrderRecord.get_user_account_orders: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -623,17 +635,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get all positions of an investment account
-get_user_account_positions_response = snaptrade.account_information.get_user_account_positions(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get all positions of an investment account
+    get_user_account_positions_response = snaptrade.account_information.get_user_account_positions(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_user_account_positions_response.body)
     pprint(get_user_account_positions_response.body["symbol"])
     pprint(get_user_account_positions_response.body["units"])
     pprint(get_user_account_positions_response.body["price"])
@@ -642,12 +655,14 @@ try:
     pprint(get_user_account_positions_response.body["average_purchase_price"])
     pprint(get_user_account_positions_response.headers)
     pprint(get_user_account_positions_response.status)
+    pprint(get_user_account_positions_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Position.get_user_account_positions: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -761,29 +776,32 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# List balances, positions and orders for the specified account.
-get_user_holdings_response = snaptrade.account_information.get_user_holdings(
-    path_params = {
-        'accountId': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # List balances, positions and orders for the specified account.
+    get_user_holdings_response = snaptrade.account_information.get_user_holdings(
+        path_params = {
+            'accountId': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_user_holdings_response.body)
     pprint(get_user_holdings_response.body["account"])
     pprint(get_user_holdings_response.body["balances"])
     pprint(get_user_holdings_response.body["positions"])
     pprint(get_user_holdings_response.body["total_value"])
     pprint(get_user_holdings_response.headers)
     pprint(get_user_holdings_response.status)
+    pprint(get_user_holdings_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountHoldings.get_user_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -919,14 +937,15 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# List all investment accounts for the user
-list_user_accounts_response = snaptrade.account_information.list_user_accounts(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # List all investment accounts for the user
+    list_user_accounts_response = snaptrade.account_information.list_user_accounts(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(list_user_accounts_response.body)
     pprint(list_user_accounts_response.body["id"])
     pprint(list_user_accounts_response.body["brokerage_authorization"])
     pprint(list_user_accounts_response.body["portfolio_group"])
@@ -938,12 +957,14 @@ try:
     pprint(list_user_accounts_response.body["cash_restrictions"])
     pprint(list_user_accounts_response.headers)
     pprint(list_user_accounts_response.status)
+    pprint(list_user_accounts_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Account.list_user_accounts: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -1042,17 +1063,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Update details of an investment account
-update_user_account_response = snaptrade.account_information.update_user_account(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Update details of an investment account
+    update_user_account_response = snaptrade.account_information.update_user_account(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(update_user_account_response.body)
     pprint(update_user_account_response.body["id"])
     pprint(update_user_account_response.body["brokerage_authorization"])
     pprint(update_user_account_response.body["portfolio_group"])
@@ -1064,12 +1086,14 @@ try:
     pprint(update_user_account_response.body["cash_restrictions"])
     pprint(update_user_account_response.headers)
     pprint(update_user_account_response.status)
+    pprint(update_user_account_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Account.update_user_account: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

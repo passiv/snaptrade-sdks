@@ -44,27 +44,32 @@ export const setApiKeyToObject = async function ({
   type,
   keyParamName,
   configuration,
+  prefix
 }: {
   object: any
   key?: string
-  type?: "Cookie",
+  type?: "Cookie"
   keyParamName: string
   configuration?: Configuration
+  prefix?: string
 }) {
   key = key ? key : keyParamName
+  let apiKey: string | null | undefined = null
   if (configuration && configuration.apiKey) {
     if (typeof configuration.apiKey === 'function')
-      object[key] = await configuration.apiKey(keyParamName)
+      apiKey = await configuration.apiKey(keyParamName)
     else if (typeof configuration.apiKey === 'string')
-      object[key] = configuration.apiKey
+      apiKey = configuration.apiKey
     else if (typeof configuration.apiKey === 'object') {
       if (keyParamName in configuration.apiKey)
-        object[key] = configuration.apiKey[keyParamName]
+        apiKey = configuration.apiKey[keyParamName]
     } else
       throw Error(
         `Unexpected type ${typeof configuration.apiKey} for Configuration.apiKey`
       )
   }
+  if (!apiKey) return
+  object[key] = prefix !== undefined ? `${prefix}${apiKey}` : apiKey
   if (type === "Cookie")
     object[key] = `${keyParamName}=${object[key]}`
 }

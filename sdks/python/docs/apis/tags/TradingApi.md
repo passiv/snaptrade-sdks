@@ -36,20 +36,22 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Cancel open order in account
-cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-)
+    }
 try:
+    # Cancel open order in account
+    cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(cancel_user_account_order_response.body)
     pprint(cancel_user_account_order_response.body["brokerage_order_id"])
     pprint(cancel_user_account_order_response.body["status"])
     pprint(cancel_user_account_order_response.body["symbol"])
@@ -70,12 +72,14 @@ try:
     pprint(cancel_user_account_order_response.body["expiry_date"])
     pprint(cancel_user_account_order_response.headers)
     pprint(cancel_user_account_order_response.status)
+    pprint(cancel_user_account_order_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountOrderRecord.cancel_user_account_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -214,15 +218,16 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Return details of a specific trade before it's placed
-get_calculated_trade_impact_by_id_response = snaptrade.trading.get_calculated_trade_impact_by_id(
-    path_params = {
-        'portfolioGroupId': "portfolioGroupId_example",
-        'calculatedTradeId': "calculatedTradeId_example",
-        'tradeId': "tradeId_example",
-    },
-)
 try:
+    # Return details of a specific trade before it's placed
+    get_calculated_trade_impact_by_id_response = snaptrade.trading.get_calculated_trade_impact_by_id(
+        path_params = {
+            'portfolioGroupId': "portfolioGroupId_example",
+            'calculatedTradeId': "calculatedTradeId_example",
+            'tradeId': "tradeId_example",
+        },
+    )
+    pprint(get_calculated_trade_impact_by_id_response.body)
     pprint(get_calculated_trade_impact_by_id_response.body["id"])
     pprint(get_calculated_trade_impact_by_id_response.body["account"])
     pprint(get_calculated_trade_impact_by_id_response.body["symbol"])
@@ -233,12 +238,14 @@ try:
     pprint(get_calculated_trade_impact_by_id_response.body["sequence"])
     pprint(get_calculated_trade_impact_by_id_response.headers)
     pprint(get_calculated_trade_impact_by_id_response.status)
+    pprint(get_calculated_trade_impact_by_id_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Trade.get_calculated_trade_impact_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -326,14 +333,15 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Return the impact of placing a series of trades on the portfolio
-get_calculated_trades_impact_response = snaptrade.trading.get_calculated_trades_impact(
-    path_params = {
-        'portfolioGroupId': "portfolioGroupId_example",
-        'calculatedTradeId': "calculatedTradeId_example",
-    },
-)
 try:
+    # Return the impact of placing a series of trades on the portfolio
+    get_calculated_trades_impact_response = snaptrade.trading.get_calculated_trades_impact(
+        path_params = {
+            'portfolioGroupId': "portfolioGroupId_example",
+            'calculatedTradeId': "calculatedTradeId_example",
+        },
+    )
+    pprint(get_calculated_trades_impact_response.body)
     pprint(get_calculated_trades_impact_response.body["account"])
     pprint(get_calculated_trades_impact_response.body["currency"])
     pprint(get_calculated_trades_impact_response.body["remaining_cash"])
@@ -341,12 +349,14 @@ try:
     pprint(get_calculated_trades_impact_response.body["forex_fees"])
     pprint(get_calculated_trades_impact_response.headers)
     pprint(get_calculated_trades_impact_response.status)
+    pprint(get_calculated_trades_impact_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling TradeImpact.get_calculated_trades_impact: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -432,13 +442,7 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Check impact of trades on account.
-get_order_impact_response = snaptrade.trading.get_order_impact(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -446,20 +450,30 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
         "stop": 31.33,
         "time_in_force": "Day",
         "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-)
+    }
 try:
+    # Check impact of trades on account.
+    get_order_impact_response = snaptrade.trading.get_order_impact(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(get_order_impact_response.body)
     pprint(get_order_impact_response.body["trade"])
     pprint(get_order_impact_response.body["trade_impacts"])
     pprint(get_order_impact_response.body["combined_remaining_balance"])
     pprint(get_order_impact_response.headers)
     pprint(get_order_impact_response.status)
+    pprint(get_order_impact_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling ManualTradeAndImpact.get_order_impact: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -590,19 +604,20 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get symbol quotes
-get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-        'symbols': "symbols_example",
-        'use_ticker': True,
-    },
-)
 try:
+    # Get symbol quotes
+    get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+            'symbols': "symbols_example",
+            'use_ticker': True,
+        },
+    )
+    pprint(get_user_account_quotes_response.body)
     pprint(get_user_account_quotes_response.body["symbol"])
     pprint(get_user_account_quotes_response.body["bid_price"])
     pprint(get_user_account_quotes_response.body["ask_price"])
@@ -611,12 +626,14 @@ try:
     pprint(get_user_account_quotes_response.body["ask_size"])
     pprint(get_user_account_quotes_response.headers)
     pprint(get_user_account_quotes_response.status)
+    pprint(get_user_account_quotes_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling SymbolsQuotes.get_user_account_quotes: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -740,22 +757,24 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Modify units of a trade before it is placed
-modify_calculated_trade_by_id_response = snaptrade.trading.modify_calculated_trade_by_id(
-    path_params = {
-        'portfolioGroupId': "portfolioGroupId_example",
-        'calculatedTradeId': "calculatedTradeId_example",
-        'tradeId': "tradeId_example",
-    },
-    body = {
+body = {
         "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "units": 6,
         "price": 24.81,
         "sequence": 1,
-    },
-)
+    }
 try:
+    # Modify units of a trade before it is placed
+    modify_calculated_trade_by_id_response = snaptrade.trading.modify_calculated_trade_by_id(
+        path_params = {
+            'portfolioGroupId': "portfolioGroupId_example",
+            'calculatedTradeId': "calculatedTradeId_example",
+            'tradeId': "tradeId_example",
+        },
+        body=body
+    )
+    pprint(modify_calculated_trade_by_id_response.body)
     pprint(modify_calculated_trade_by_id_response.body["id"])
     pprint(modify_calculated_trade_by_id_response.body["account"])
     pprint(modify_calculated_trade_by_id_response.body["symbol"])
@@ -766,12 +785,14 @@ try:
     pprint(modify_calculated_trade_by_id_response.body["sequence"])
     pprint(modify_calculated_trade_by_id_response.headers)
     pprint(modify_calculated_trade_by_id_response.status)
+    pprint(modify_calculated_trade_by_id_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Trade.modify_calculated_trade_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -869,14 +890,15 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Place orders for the CalculatedTrades in series
-place_calculated_trades_response = snaptrade.trading.place_calculated_trades(
-    path_params = {
-        'portfolioGroupId': "portfolioGroupId_example",
-        'calculatedTradeId': "calculatedTradeId_example",
-    },
-)
 try:
+    # Place orders for the CalculatedTrades in series
+    place_calculated_trades_response = snaptrade.trading.place_calculated_trades(
+        path_params = {
+            'portfolioGroupId': "portfolioGroupId_example",
+            'calculatedTradeId': "calculatedTradeId_example",
+        },
+    )
+    pprint(place_calculated_trades_response.body)
     pprint(place_calculated_trades_response.body["symbol"])
     pprint(place_calculated_trades_response.body["universal_symbol"])
     pprint(place_calculated_trades_response.body["trade"])
@@ -888,12 +910,14 @@ try:
     pprint(place_calculated_trades_response.body["meta"])
     pprint(place_calculated_trades_response.headers)
     pprint(place_calculated_trades_response.status)
+    pprint(place_calculated_trades_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling TradeExecutionStatus.place_calculated_trades: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -979,13 +1003,7 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Place a trade with NO validation.
-place_force_order_response = snaptrade.trading.place_force_order(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "action": "BUY",
         "order_type": "Limit",
@@ -993,9 +1011,17 @@ place_force_order_response = snaptrade.trading.place_force_order(
         "stop": 31.33,
         "time_in_force": "Day",
         "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-)
+    }
 try:
+    # Place a trade with NO validation.
+    place_force_order_response = snaptrade.trading.place_force_order(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(place_force_order_response.body)
     pprint(place_force_order_response.body["brokerage_order_id"])
     pprint(place_force_order_response.body["status"])
     pprint(place_force_order_response.body["symbol"])
@@ -1016,12 +1042,14 @@ try:
     pprint(place_force_order_response.body["expiry_date"])
     pprint(place_force_order_response.headers)
     pprint(place_force_order_response.status)
+    pprint(place_force_order_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountOrderRecord.place_force_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -1152,16 +1180,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Place a OCO (One Cancels Other) order
-place_oco_order_response = snaptrade.trading.place_oco_order(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
-    },
-)
+body = {
+    }
 try:
+    # Place a OCO (One Cancels Other) order
+    place_oco_order_response = snaptrade.trading.place_oco_order(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(place_oco_order_response.body)
     pprint(place_oco_order_response.body["brokerage_order_id"])
     pprint(place_oco_order_response.body["status"])
     pprint(place_oco_order_response.body["symbol"])
@@ -1182,12 +1212,14 @@ try:
     pprint(place_oco_order_response.body["expiry_date"])
     pprint(place_oco_order_response.headers)
     pprint(place_oco_order_response.status)
+    pprint(place_oco_order_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountOrderRecord.place_oco_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -1312,17 +1344,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Place order
-place_order_response = snaptrade.trading.place_order(
-    path_params = {
-        'tradeId': "tradeId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Place order
+    place_order_response = snaptrade.trading.place_order(
+        path_params = {
+            'tradeId': "tradeId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(place_order_response.body)
     pprint(place_order_response.body["brokerage_order_id"])
     pprint(place_order_response.body["status"])
     pprint(place_order_response.body["symbol"])
@@ -1343,12 +1376,14 @@ try:
     pprint(place_order_response.body["expiry_date"])
     pprint(place_order_response.headers)
     pprint(place_order_response.status)
+    pprint(place_order_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AccountOrderRecord.place_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

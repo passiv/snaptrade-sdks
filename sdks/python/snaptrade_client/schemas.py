@@ -514,6 +514,7 @@ if typing.TYPE_CHECKING:
     # qty 1
     NoneMixin = NoneClass
     FrozenDictMixin = frozendict.frozendict
+    IntMixin = int
     TupleMixin = tuple
     StrMixin = str
     DecimalMixin = decimal.Decimal
@@ -656,6 +657,8 @@ else:
         _types = {str}
     class DecimalMixin:
         _types = {decimal.Decimal}
+    class IntMixin:
+        _types = {int}
     class BoolMixin:
         _types = {BoolClass}
     class BytesMixin:
@@ -1756,7 +1759,7 @@ def cast_to_allowed_types(
             return BoolClass.TRUE
         return BoolClass.FALSE
     elif isinstance(arg, int):
-        return decimal.Decimal(arg)
+        return arg
     elif isinstance(arg, float):
         decimal_from_float = decimal.Decimal(arg)
         if decimal_from_float.as_integer_ratio()[1] == 1:
@@ -2062,7 +2065,7 @@ class IntBase:
         return super()._validate_oapg(arg, validation_metadata=validation_metadata)
 
 
-class IntSchema(IntBase, NumberSchema):
+class IntSchema(IntBase, NumberBase, Schema, IntMixin):
 
     @classmethod
     def from_openapi_data_oapg(cls, arg: int, _configuration: typing.Optional[Configuration] = None):

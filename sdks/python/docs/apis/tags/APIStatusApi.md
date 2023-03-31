@@ -29,20 +29,23 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get API Status
-check_response = snaptrade.api_status.check()
 try:
+    # Get API Status
+    check_response = snaptrade.api_status.check()
+    pprint(check_response.body)
     pprint(check_response.body["version"])
     pprint(check_response.body["timestamp"])
     pprint(check_response.body["online"])
     pprint(check_response.headers)
     pprint(check_response.status)
+    pprint(check_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling Status.check: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 This endpoint does not need any parameter.

@@ -61,13 +61,10 @@ export const ApiDisclaimerApiAxiosParamCreator = function (configuration?: Confi
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -82,14 +79,14 @@ export const ApiDisclaimerApiAxiosParamCreator = function (configuration?: Confi
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aPIDisclaimerAcceptRequest, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: aPIDisclaimerAcceptRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(aPIDisclaimerAcceptRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {

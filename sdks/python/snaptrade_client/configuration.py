@@ -144,11 +144,11 @@ conf = snaptrade_client.Configuration(
                 self.api_key = {'PartnerClientId': api_key}
             else:
                 self.api_key = api_key
-        if client_id is not None:
+        if client_id:
             self.api_key['PartnerClientId'] = client_id
-        if signature is not None:
+        if signature:
             self.api_key['PartnerSignature'] = signature
-        if timestamp is not None:
+        if timestamp:
             self.api_key['PartnerTimestamp'] = timestamp
         """dict to store API key(s)
         """
@@ -443,7 +443,7 @@ conf = snaptrade_client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0.0\n"\
-               "SDK Package Version: 8.1.0".\
+               "SDK Package Version: 8.2.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

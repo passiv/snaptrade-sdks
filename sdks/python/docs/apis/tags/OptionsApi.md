@@ -31,16 +31,7 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Creates an option strategy object that will be used to place an option strategy order
-get_option_strategy_response = snaptrade.options.get_option_strategy(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "legs": [
             {
@@ -50,9 +41,20 @@ get_option_strategy_response = snaptrade.options.get_option_strategy(
             }
         ],
         "strategy_type": "CUSTOM",
-    },
-)
+    }
 try:
+    # Creates an option strategy object that will be used to place an option strategy order
+    get_option_strategy_response = snaptrade.options.get_option_strategy(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(get_option_strategy_response.body)
     pprint(get_option_strategy_response.body["strategy"])
     pprint(get_option_strategy_response.body["open_price"])
     pprint(get_option_strategy_response.body["bid_price"])
@@ -61,12 +63,14 @@ try:
     pprint(get_option_strategy_response.body["greek"])
     pprint(get_option_strategy_response.headers)
     pprint(get_option_strategy_response.status)
+    pprint(get_option_strategy_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling StrategyQuotes.get_option_strategy: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -205,26 +209,29 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get the options chain
-get_options_chain_response = snaptrade.options.get_options_chain(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-        'symbol': "symbol_example",
-    },
-)
 try:
+    # Get the options chain
+    get_options_chain_response = snaptrade.options.get_options_chain(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+            'symbol': "symbol_example",
+        },
+    )
+    pprint(get_options_chain_response.body)
     pprint(get_options_chain_response.headers)
     pprint(get_options_chain_response.status)
+    pprint(get_options_chain_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling OptionChain.get_options_chain: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -340,18 +347,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get latest market data of option strategy
-get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-    path_params = {
-        'accountId': "accountId_example",
-        'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get latest market data of option strategy
+    get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
+        path_params = {
+            'accountId': "accountId_example",
+            'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_options_strategy_quote_response.body)
     pprint(get_options_strategy_quote_response.body["strategy"])
     pprint(get_options_strategy_quote_response.body["open_price"])
     pprint(get_options_strategy_quote_response.body["bid_price"])
@@ -360,12 +368,14 @@ try:
     pprint(get_options_strategy_quote_response.body["greek"])
     pprint(get_options_strategy_quote_response.headers)
     pprint(get_options_strategy_quote_response.status)
+    pprint(get_options_strategy_quote_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling StrategyQuotes.get_options_strategy_quote: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -481,17 +491,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get the options holdings in the account
-list_option_holdings_response = snaptrade.options.list_option_holdings(
-    path_params = {
-        'accountId': "accountId_example",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get the options holdings in the account
+    list_option_holdings_response = snaptrade.options.list_option_holdings(
+        path_params = {
+            'accountId': "accountId_example",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(list_option_holdings_response.body)
     pprint(list_option_holdings_response.body["id"])
     pprint(list_option_holdings_response.body["symbol"])
     pprint(list_option_holdings_response.body["option_symbol"])
@@ -500,12 +511,14 @@ try:
     pprint(list_option_holdings_response.body["average_purchase_price"])
     pprint(list_option_holdings_response.headers)
     pprint(list_option_holdings_response.status)
+    pprint(list_option_holdings_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling OptionsHoldings.list_option_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -613,23 +626,25 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Place an option strategy order on the brokerage
-place_option_strategy_response = snaptrade.options.place_option_strategy(
-    path_params = {
-        'accountId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "order_type": "Limit",
         "time_in_force": "DAY",
         "price": 31.33,
-    },
-)
+    }
 try:
+    # Place an option strategy order on the brokerage
+    place_option_strategy_response = snaptrade.options.place_option_strategy(
+        path_params = {
+            'accountId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
+    pprint(place_option_strategy_response.body)
     pprint(place_option_strategy_response.body["strategy"])
     pprint(place_option_strategy_response.body["status"])
     pprint(place_option_strategy_response.body["filled_quantity"])
@@ -643,12 +658,14 @@ try:
     pprint(place_option_strategy_response.body["time_updated"])
     pprint(place_option_strategy_response.headers)
     pprint(place_option_strategy_response.status)
+    pprint(place_option_strategy_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling StrategyOrderRecord.place_option_strategy: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

@@ -32,6 +32,7 @@ const getActivitiesResponse = await snaptrade.transactionsAndReporting.getActivi
         "startDate": "2022-01-24",
         "endDate": "2022-01-24",
         "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         "userId": "John.doe@snaptrade.com",
         "userSecret": "USERSECRET123",
     })
@@ -50,6 +51,7 @@ Name | Type | Description  | Notes
  **startDate** | [**string**] |  | (optional) defaults to undefined
  **endDate** | [**string**] |  | (optional) defaults to undefined
  **accounts** | [**string**] | Optional comma seperated list of account IDs used to filter the request on specific accounts | (optional) defaults to undefined
+ **brokerageAuthorizations** | [**string**] | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | (optional) defaults to undefined
 
 
 ### Return type
