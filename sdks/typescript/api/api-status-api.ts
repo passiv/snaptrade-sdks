@@ -52,12 +52,11 @@ export const ApiStatusApiAxiosParamCreator = function (configuration?: Configura
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);

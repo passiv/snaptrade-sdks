@@ -31,23 +31,26 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-    },
-)
 try:
+    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+        },
+    )
+    pprint(delete_snap_trade_user_response.body)
     pprint(delete_snap_trade_user_response.body["status"])
     pprint(delete_snap_trade_user_response.body["user_id"])
     pprint(delete_snap_trade_user_response.headers)
     pprint(delete_snap_trade_user_response.status)
+    pprint(delete_snap_trade_user_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling DeleteUserResponse.delete_snap_trade_user: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -172,13 +175,14 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Obtains an encrypted JWT tokens that should be decrypted on a user's local device
-get_user_jwt_response = snaptrade.authentication.get_user_jwt(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
+try:
+    # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    get_user_jwt_response = snaptrade.authentication.get_user_jwt(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
 ```
 ### Parameters
 
@@ -313,17 +317,20 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get a list of all SnapTrade users you've registered on our platform
-list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
 try:
+    # Get a list of all SnapTrade users you've registered on our platform
+    list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
+    pprint(list_snap_trade_users_response.body)
     pprint(list_snap_trade_users_response.headers)
     pprint(list_snap_trade_users_response.status)
+    pprint(list_snap_trade_users_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling UserList.list_snap_trade_users: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 This endpoint does not need any parameter.
@@ -410,20 +417,22 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-    body = {
+body = {
         "broker": "ALPACA",
         "immediate_redirect": True,
         "custom_redirect": "https://passiv.com",
         "reconnect": "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
         "connection_type": "read",
-    },
-)
+    }
+try:
+    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+        body=body
+    )
 ```
 ### Parameters
 
@@ -576,24 +585,28 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Register user with SnapTrade in order to create secure brokerage authorizations
-register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
-    body = {
+body = {
         "user_id": "snaptrade-user-123",
         "rsa_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
-    },
-)
+    }
 try:
+    # Register user with SnapTrade in order to create secure brokerage authorizations
+    register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
+        body=body
+    )
+    pprint(register_snap_trade_user_response.body)
     pprint(register_snap_trade_user_response.body["user_id"])
     pprint(register_snap_trade_user_response.body["user_secret"])
     pprint(register_snap_trade_user_response.headers)
     pprint(register_snap_trade_user_response.status)
+    pprint(register_snap_trade_user_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling UserIDandSecret.register_snap_trade_user: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

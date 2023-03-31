@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**detail_brokerage_authorization**](#detail_brokerage_authorization) | **get** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 [**list_brokerage_authorizations**](#list_brokerage_authorizations) | **get** /authorizations | List all brokerage authorizations for the user
 [**remove_brokerage_authorization**](#remove_brokerage_authorization) | **delete** /authorizations/{authorizationId} | Remove a brokerage authorization.
+[**session_events**](#session_events) | **get** /sessionEvents | List all session events for the partner
 
 # **detail_brokerage_authorization**
 <a name="detail_brokerage_authorization"></a>
@@ -29,17 +30,18 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get detail of a specific brokerage authorizations for the user
-detail_brokerage_authorization_response = snaptrade.connections.detail_brokerage_authorization(
-    path_params = {
-        'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get detail of a specific brokerage authorizations for the user
+    detail_brokerage_authorization_response = snaptrade.connections.detail_brokerage_authorization(
+        path_params = {
+            'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(detail_brokerage_authorization_response.body)
     pprint(detail_brokerage_authorization_response.body["id"])
     pprint(detail_brokerage_authorization_response.body["created_date"])
     pprint(detail_brokerage_authorization_response.body["updated_date"])
@@ -51,12 +53,14 @@ try:
     pprint(detail_brokerage_authorization_response.body["meta"])
     pprint(detail_brokerage_authorization_response.headers)
     pprint(detail_brokerage_authorization_response.status)
+    pprint(detail_brokerage_authorization_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling BrokerageAuthorization.detail_brokerage_authorization: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -164,14 +168,15 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# List all brokerage authorizations for the user
-list_brokerage_authorizations_response = snaptrade.connections.list_brokerage_authorizations(
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # List all brokerage authorizations for the user
+    list_brokerage_authorizations_response = snaptrade.connections.list_brokerage_authorizations(
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(list_brokerage_authorizations_response.body)
     pprint(list_brokerage_authorizations_response.body["id"])
     pprint(list_brokerage_authorizations_response.body["created_date"])
     pprint(list_brokerage_authorizations_response.body["updated_date"])
@@ -183,12 +188,14 @@ try:
     pprint(list_brokerage_authorizations_response.body["meta"])
     pprint(list_brokerage_authorizations_response.headers)
     pprint(list_brokerage_authorizations_response.status)
+    pprint(list_brokerage_authorizations_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling BrokerageAuthorization.list_brokerage_authorizations: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -287,16 +294,17 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Remove a brokerage authorization.
-snaptrade.connections.remove_brokerage_authorization(
-    path_params = {
-        'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    },
-    query_params = {
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
+try:
+    # Remove a brokerage authorization.
+    snaptrade.connections.remove_brokerage_authorization(
+        path_params = {
+            'authorizationId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        },
+        query_params = {
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
 ```
 ### Parameters
 
@@ -381,6 +389,125 @@ body | Unset | body was not defined |
 headers | Unset | headers were not defined |
 
 #### remove_brokerage_authorization.ApiResponseForDefault
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | Unset | body was not defined |
+headers | Unset | headers were not defined |
+
+### Authorization
+
+[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
+
+[[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
+
+# **session_events**
+<a name="session_events"></a>
+> [bool, date, datetime, dict, float, int, list, str, none_type] session_events(partner_client_id)
+
+List all session events for the partner
+
+### Example
+
+```python
+from pprint import pprint
+from snaptrade_client import SnapTrade
+
+snaptrade = SnapTrade(
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host = "https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
+)
+
+try:
+    # List all session events for the partner
+    session_events_response = snaptrade.connections.session_events(
+        query_params = {
+            'PartnerClientId': "PASSIVTEST",
+            'userId': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        },
+    )
+```
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+query_params | RequestQueryParams | |
+accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
+stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
+timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
+skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### query_params
+#### RequestQueryParams
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+PartnerClientId | PartnerClientIdSchema | | 
+userId | UserIdSchema | | optional
+
+
+# PartnerClientIdSchema
+
+SnapTrade Client ID (generated and provided to partner by Passiv)
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade Client ID (generated and provided to partner by Passiv) | 
+
+# UserIdSchema
+
+Comma seperated list of account IDs
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | Comma seperated list of account IDs | 
+
+### Return Types, Responses
+
+Code | Class | Description
+------------- | ------------- | -------------
+n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
+200 | [ApiResponseFor200](#session_events.ApiResponseFor200) | A list of all Session Events for the Partner.
+default | [ApiResponseForDefault](#session_events.ApiResponseForDefault) | Unexpected error.
+
+#### session_events.ApiResponseFor200
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor200ResponseBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+list, tuple,  | tuple,  |  | 
+
+### Tuple Items
+Class Name | Input Type | Accessed Type | Description | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+[items](#items) | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO |  | 
+
+# items
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO |  | 
+
+### Composed Schemas (allOf/anyOf/oneOf/not)
+#### anyOf
+Class Name | Input Type | Accessed Type | Description | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+[SessionEvent](../../models/SessionEvent.md) | [**SessionEvent**](../../models/SessionEvent.md) | [**SessionEvent**](../../models/SessionEvent.md) |  | 
+
+#### session_events.ApiResponseForDefault
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 response | urllib3.HTTPResponse | Raw response |

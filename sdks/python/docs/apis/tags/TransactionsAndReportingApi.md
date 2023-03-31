@@ -30,17 +30,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get transaction history for a user
-get_activities_response = snaptrade.transactions_and_reporting.get_activities(
-    query_params = {
-        'startDate': "2022-01-24",
-        'endDate': "2022-01-24",
-        'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get transaction history for a user
+    get_activities_response = snaptrade.transactions_and_reporting.get_activities(
+        query_params = {
+            'startDate': "2022-01-24",
+            'endDate': "2022-01-24",
+            'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            'brokerageAuthorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_activities_response.body)
     pprint(get_activities_response.body["id"])
     pprint(get_activities_response.body["account"])
     pprint(get_activities_response.body["amount"])
@@ -58,12 +60,14 @@ try:
     pprint(get_activities_response.body["units"])
     pprint(get_activities_response.headers)
     pprint(get_activities_response.status)
+    pprint(get_activities_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling UniversalActivity.get_activities: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -83,6 +87,7 @@ Name | Type | Description  | Notes
 startDate | StartDateSchema | | optional
 endDate | EndDateSchema | | optional
 accounts | AccountsSchema | | optional
+brokerageAuthorizations | BrokerageAuthorizationsSchema | | optional
 userId | UserIdSchema | | 
 userSecret | UserSecretSchema | | 
 
@@ -113,6 +118,15 @@ Comma seperated list of account IDs
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 str,  | str,  | Comma seperated list of account IDs | 
+
+# BrokerageAuthorizationsSchema
+
+Comma seperated list of brokerage authorization IDs
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | Comma seperated list of brokerage authorization IDs | 
 
 # UserIdSchema
 
@@ -194,19 +208,20 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-# Get performance information for a specific timeframe
-get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
-    query_params = {
-        'startDate': "2022-01-24",
-        'endDate': "2022-01-24",
-        'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        'detailed': True,
-        'frequency': "monthly",
-        'userId': "John.doe@snaptrade.com",
-        'userSecret': "USERSECRET123",
-    },
-)
 try:
+    # Get performance information for a specific timeframe
+    get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
+        query_params = {
+            'startDate': "2022-01-24",
+            'endDate': "2022-01-24",
+            'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            'detailed': True,
+            'frequency': "monthly",
+            'userId': "John.doe@snaptrade.com",
+            'userSecret': "USERSECRET123",
+        },
+    )
+    pprint(get_reporting_custom_range_response.body)
     pprint(get_reporting_custom_range_response.body["total_equity_timeframe"])
     pprint(get_reporting_custom_range_response.body["contributions"])
     pprint(get_reporting_custom_range_response.body["contribution_timeframe"])
@@ -228,12 +243,14 @@ try:
     pprint(get_reporting_custom_range_response.body["detailed_mode"])
     pprint(get_reporting_custom_range_response.headers)
     pprint(get_reporting_custom_range_response.status)
+    pprint(get_reporting_custom_range_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling PerformanceCustom.get_reporting_custom_range: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
     pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

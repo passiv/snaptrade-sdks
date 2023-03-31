@@ -39,10 +39,11 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {string} [startDate] 
          * @param {string} [endDate] 
          * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
+         * @param {string} [brokerageAuthorizations] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getActivities: async (userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getActivities: async (userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getActivities', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -61,13 +62,10 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (startDate !== undefined) {
                 localVarQueryParameter['startDate'] = startDate;
             }
@@ -78,6 +76,10 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
 
             if (accounts !== undefined) {
                 localVarQueryParameter['accounts'] = accounts;
+            }
+
+            if (brokerageAuthorizations !== undefined) {
+                localVarQueryParameter['brokerageAuthorizations'] = brokerageAuthorizations;
             }
 
             if (userId !== undefined) {
@@ -92,12 +94,11 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -142,13 +143,10 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (startDate !== undefined) {
                 localVarQueryParameter['startDate'] = startDate;
             }
@@ -181,12 +179,11 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -213,7 +210,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
          * @throws {RequiredError}
          */
         async getActivities(requestParameters: TransactionsAndReportingApiGetActivitiesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalActivity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.accounts, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.accounts, requestParameters.brokerageAuthorizations, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -301,6 +298,13 @@ export type TransactionsAndReportingApiGetActivitiesRequest = {
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly accounts?: string
+    
+    /**
+    * Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
+    readonly brokerageAuthorizations?: string
     
 }
 

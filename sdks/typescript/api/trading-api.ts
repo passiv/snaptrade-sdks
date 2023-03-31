@@ -83,13 +83,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -104,14 +101,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: tradingCancelUserAccountOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -152,23 +149,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -206,23 +199,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -261,13 +250,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -282,14 +268,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: manualTradeForm,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -332,13 +318,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -359,12 +342,11 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -407,27 +389,24 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(trade, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: trade,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(trade, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -464,23 +443,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -519,13 +494,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -540,14 +512,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: manualTradeForm,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -585,13 +557,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -606,14 +575,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceOCOOrderRequest, localVarRequestOptions, configuration)
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                requestBody: tradingPlaceOCOOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceOCOOrderRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -652,13 +621,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication PartnerClientId required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-
             // authentication PartnerSignature required
-            await setApiKeyToObject({object: localVarHeaderParameter, keyParamName: "Signature", configuration})
-
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -671,12 +637,11 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
             requestBeforeHook({
-              queryParameters: localVarQueryParameter,
-              requestConfig: localVarRequestOptions,
-              path: localVarPath,
-              configuration
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);

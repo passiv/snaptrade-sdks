@@ -31,6 +31,7 @@ class PathValues(str, enum.Enum):
     ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE = "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute"
     AUTHORIZATIONS = "/authorizations"
     AUTHORIZATIONS_AUTHORIZATION_ID = "/authorizations/{authorizationId}"
+    SESSION_EVENTS = "/sessionEvents"
     BROKERAGES = "/brokerages"
     BROKERAGE_AUTHORIZATION_TYPES = "/brokerageAuthorizationTypes"
     CURRENCIES = "/currencies"

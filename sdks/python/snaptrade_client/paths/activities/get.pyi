@@ -35,6 +35,7 @@ from snaptrade_client.model.universal_activity import UniversalActivity
 StartDateSchema = schemas.StrSchema
 EndDateSchema = schemas.StrSchema
 AccountsSchema = schemas.StrSchema
+BrokerageAuthorizationsSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
@@ -50,6 +51,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
         'startDate': typing.Union[StartDateSchema, str, ],
         'endDate': typing.Union[EndDateSchema, str, ],
         'accounts': typing.Union[AccountsSchema, str, ],
+        'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
     },
     total=False
 )
@@ -75,6 +77,12 @@ request_query_accounts = api_client.QueryParameter(
     name="accounts",
     style=api_client.ParameterStyle.FORM,
     schema=AccountsSchema,
+    explode=True,
+)
+request_query_brokerage_authorizations = api_client.QueryParameter(
+    name="brokerageAuthorizations",
+    style=api_client.ParameterStyle.FORM,
+    schema=BrokerageAuthorizationsSchema,
     explode=True,
 )
 request_query_user_id = api_client.QueryParameter(
@@ -208,6 +216,7 @@ class BaseApi(api_client.Api):
             request_query_start_date,
             request_query_end_date,
             request_query_accounts,
+            request_query_brokerage_authorizations,
             request_query_user_id,
             request_query_user_secret,
         ):

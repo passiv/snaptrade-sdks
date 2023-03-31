@@ -26,6 +26,7 @@ from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_stra
 from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_strategy_id_execute import AccountsAccountIdOptionStrategyOptionStrategyIdExecute
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
+from snaptrade_client.apis.paths.session_events import SessionEvents
 from snaptrade_client.apis.paths.brokerages import Brokerages
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
 from snaptrade_client.apis.paths.currencies import Currencies
@@ -93,6 +94,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
@@ -161,6 +163,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,

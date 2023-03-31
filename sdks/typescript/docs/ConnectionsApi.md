@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
+[**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | List all session events for the partner
 
 
 # **detailBrokerageAuthorization**
@@ -173,6 +174,60 @@ void (empty response body)
 **204** | Brokerage authorization object has been successfully deleted |  -  |
 **400** | The specified authorizationId is invalid (not a UUID string). |  -  |
 **404** | The specified authorizationId was not found. |  -  |
+**0** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+# **sessionEvents**
+
+#### **GET** /sessionEvents
+
+
+### Example
+
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk"
+
+const snaptrade = new Snaptrade({
+    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+    // basePath: "https://api.snaptrade.com/api/v1",
+    consumerKey: "YOUR_CONSUMER_KEY",
+    clientId: "YOUR_CLIENT_ID",
+})
+
+const sessionEventsResponse = await snaptrade.connections.sessionEvents({
+        "partnerClientId": "PASSIVTEST",
+        "userId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+    })
+
+console.log(sessionEventsResponse)
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **partnerClientId** | [**string**] |  | defaults to undefined
+ **userId** | [**string**] | Optional comma seperated list of user IDs used to filter the request on specific users | (optional) defaults to undefined
+
+
+### Return type
+
+**Array<ConnectionsSessionEvents200ResponseInner>**
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A list of all Session Events for the Partner. |  -  |
 **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
