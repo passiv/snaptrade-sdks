@@ -46,7 +46,7 @@ try:
     pprint(list_user_errors_response.status)
     pprint(list_user_errors_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UserErrorLog.list_user_errors: %s\n" % e)
+    print("Exception when calling ErrorLogsApi.list_user_errors: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

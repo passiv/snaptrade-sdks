@@ -74,7 +74,7 @@ try:
     pprint(cancel_user_account_order_response.status)
     pprint(cancel_user_account_order_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountOrderRecord.cancel_user_account_order: %s\n" % e)
+    print("Exception when calling TradingApi.cancel_user_account_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -240,7 +240,7 @@ try:
     pprint(get_calculated_trade_impact_by_id_response.status)
     pprint(get_calculated_trade_impact_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Trade.get_calculated_trade_impact_by_id: %s\n" % e)
+    print("Exception when calling TradingApi.get_calculated_trade_impact_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -351,7 +351,7 @@ try:
     pprint(get_calculated_trades_impact_response.status)
     pprint(get_calculated_trades_impact_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TradeImpact.get_calculated_trades_impact: %s\n" % e)
+    print("Exception when calling TradingApi.get_calculated_trades_impact: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -468,7 +468,7 @@ try:
     pprint(get_order_impact_response.status)
     pprint(get_order_impact_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ManualTradeAndImpact.get_order_impact: %s\n" % e)
+    print("Exception when calling TradingApi.get_order_impact: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -628,7 +628,7 @@ try:
     pprint(get_user_account_quotes_response.status)
     pprint(get_user_account_quotes_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling SymbolsQuotes.get_user_account_quotes: %s\n" % e)
+    print("Exception when calling TradingApi.get_user_account_quotes: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -787,7 +787,7 @@ try:
     pprint(modify_calculated_trade_by_id_response.status)
     pprint(modify_calculated_trade_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Trade.modify_calculated_trade_by_id: %s\n" % e)
+    print("Exception when calling TradingApi.modify_calculated_trade_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -912,7 +912,7 @@ try:
     pprint(place_calculated_trades_response.status)
     pprint(place_calculated_trades_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TradeExecutionStatus.place_calculated_trades: %s\n" % e)
+    print("Exception when calling TradingApi.place_calculated_trades: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1044,7 +1044,7 @@ try:
     pprint(place_force_order_response.status)
     pprint(place_force_order_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountOrderRecord.place_force_order: %s\n" % e)
+    print("Exception when calling TradingApi.place_force_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1214,7 +1214,7 @@ try:
     pprint(place_oco_order_response.status)
     pprint(place_oco_order_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountOrderRecord.place_oco_order: %s\n" % e)
+    print("Exception when calling TradingApi.place_oco_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1378,7 +1378,7 @@ try:
     pprint(place_order_response.status)
     pprint(place_order_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountOrderRecord.place_order: %s\n" % e)
+    print("Exception when calling TradingApi.place_order: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

@@ -52,7 +52,7 @@ try:
     pprint(get_all_user_holdings_response.status)
     pprint(get_all_user_holdings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountHoldings.get_all_user_holdings: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_all_user_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -210,7 +210,7 @@ try:
     pprint(get_user_account_balance_response.status)
     pprint(get_user_account_balance_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Balance.get_user_account_balance: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_user_account_balance: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -354,7 +354,7 @@ try:
     pprint(get_user_account_details_response.status)
     pprint(get_user_account_details_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Account.get_user_account_details: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_user_account_details: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -508,7 +508,7 @@ try:
     pprint(get_user_account_orders_response.status)
     pprint(get_user_account_orders_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountOrderRecord.get_user_account_orders: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_user_account_orders: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -657,7 +657,7 @@ try:
     pprint(get_user_account_positions_response.status)
     pprint(get_user_account_positions_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Position.get_user_account_positions: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_user_account_positions: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -796,7 +796,7 @@ try:
     pprint(get_user_holdings_response.status)
     pprint(get_user_holdings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountHoldings.get_user_holdings: %s\n" % e)
+    print("Exception when calling AccountInformationApi.get_user_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -959,7 +959,7 @@ try:
     pprint(list_user_accounts_response.status)
     pprint(list_user_accounts_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Account.list_user_accounts: %s\n" % e)
+    print("Exception when calling AccountInformationApi.list_user_accounts: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1088,7 +1088,7 @@ try:
     pprint(update_user_account_response.status)
     pprint(update_user_account_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Account.update_user_account: %s\n" % e)
+    print("Exception when calling AccountInformationApi.update_user_account: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

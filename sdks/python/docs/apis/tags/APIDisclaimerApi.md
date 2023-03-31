@@ -45,7 +45,7 @@ try:
     pprint(accept_response.status)
     pprint(accept_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling SnapTradeAPIDisclaimerAcceptStatus.accept: %s\n" % e)
+    print("Exception when calling APIDisclaimerApi.accept: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

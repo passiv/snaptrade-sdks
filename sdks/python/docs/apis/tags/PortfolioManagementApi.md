@@ -79,7 +79,7 @@ try:
     pprint(add_portfolio_excluded_asset_response.status)
     pprint(add_portfolio_excluded_asset_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ExcludedAsset.add_portfolio_excluded_asset: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.add_portfolio_excluded_asset: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -186,7 +186,7 @@ try:
     pprint(create_response.status)
     pprint(create_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroup.create: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.create: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -318,7 +318,7 @@ try:
     pprint(create_asset_class_response.status)
     pprint(create_asset_class_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelAssetClassDetails.create_asset_class: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.create_asset_class: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -385,7 +385,7 @@ try:
     pprint(create_model_portfolio_response.status)
     pprint(create_model_portfolio_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelPortfolioDetails.create_model_portfolio: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.create_model_portfolio: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -448,6 +448,16 @@ try:
             'modelAssetClassId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
         },
     )
+    pprint(delete_asset_class_response.headers)
+    pprint(delete_asset_class_response.status)
+    pprint(delete_asset_class_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling PortfolioManagementApi.delete_asset_class: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -520,6 +530,16 @@ try:
             'symbolId': "symbolId_example",
         },
     )
+    pprint(delete_excluded_asset_response.headers)
+    pprint(delete_excluded_asset_response.status)
+    pprint(delete_excluded_asset_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling PortfolioManagementApi.delete_excluded_asset: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -599,6 +619,16 @@ try:
             'modelPortfolioId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
         },
     )
+    pprint(delete_model_portfolio_by_id_response.headers)
+    pprint(delete_model_portfolio_by_id_response.status)
+    pprint(delete_model_portfolio_by_id_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling PortfolioManagementApi.delete_model_portfolio_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -677,7 +707,7 @@ try:
     pprint(delete_portfoli_response.status)
     pprint(delete_portfoli_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroup.delete_portfoli: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.delete_portfoli: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -797,7 +827,7 @@ try:
     pprint(delete_portfolio_target_by_id_response.status)
     pprint(delete_portfolio_target_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAsset.delete_portfolio_target_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.delete_portfolio_target_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -920,7 +950,7 @@ try:
     pprint(detail_asset_class_response.status)
     pprint(detail_asset_class_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelAssetClassDetails.detail_asset_class: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.detail_asset_class: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1019,7 +1049,7 @@ try:
     pprint(get_calculated_trade_by_id_response.status)
     pprint(get_calculated_trade_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Trade.get_calculated_trade_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_calculated_trade_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1133,7 +1163,7 @@ try:
     pprint(get_model_details_by_id_response.status)
     pprint(get_model_details_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelPortfolioDetails.get_model_details_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_model_details_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1224,7 +1254,7 @@ try:
     pprint(get_portfolio_balances_response.status)
     pprint(get_portfolio_balances_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Balance.get_portfolio_balances: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_balances: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1345,7 +1375,7 @@ try:
     pprint(get_portfolio_details_by_id_response.status)
     pprint(get_portfolio_details_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroup.get_portfolio_details_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_details_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1453,7 +1483,7 @@ try:
     pprint(get_portfolio_info_response.status)
     pprint(get_portfolio_info_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroupInfo.get_portfolio_info: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_info: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1553,7 +1583,7 @@ try:
     pprint(get_portfolio_positions_response.status)
     pprint(get_portfolio_positions_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroupPosition.get_portfolio_positions: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_positions: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1677,7 +1707,7 @@ try:
     pprint(get_portfolio_settings_response.status)
     pprint(get_portfolio_settings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroupSettings.get_portfolio_settings: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_settings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1781,7 +1811,7 @@ try:
     pprint(get_portfolio_target_by_id_response.status)
     pprint(get_portfolio_target_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAsset.get_portfolio_target_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_target_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1892,7 +1922,7 @@ try:
     pprint(get_portfolio_targets_response.status)
     pprint(get_portfolio_targets_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAsset.get_portfolio_targets: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portfolio_targets: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2012,7 +2042,7 @@ try:
     pprint(get_portoflio_excluded_assets_response.status)
     pprint(get_portoflio_excluded_assets_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ExcludedAsset.get_portoflio_excluded_assets: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.get_portoflio_excluded_assets: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2121,7 +2151,7 @@ try:
     pprint(import_model_portfolio_response.status)
     pprint(import_model_portfolio_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAsset.import_model_portfolio: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.import_model_portfolio: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2227,7 +2257,7 @@ try:
     pprint(list_response.status)
     pprint(list_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroup.list: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.list: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2341,7 +2371,7 @@ try:
     pprint(list_asset_classes_response.status)
     pprint(list_asset_classes_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelAssetClassDetails.list_asset_classes: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.list_asset_classes: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2417,7 +2447,7 @@ try:
     pprint(list_calculated_trades_response.status)
     pprint(list_calculated_trades_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling CalculatedTrade.list_calculated_trades: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.list_calculated_trades: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2505,7 +2535,7 @@ try:
     pprint(list_model_portfolio_response.status)
     pprint(list_model_portfolio_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ModelPortfolioDetails.list_model_portfolio: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.list_model_portfolio: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2588,7 +2618,7 @@ try:
     pprint(list_portfolio_accounts_response.status)
     pprint(list_portfolio_accounts_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Account.list_portfolio_accounts: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.list_portfolio_accounts: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2689,6 +2719,16 @@ try:
         },
         body=body
     )
+    pprint(modify_model_portfolio_by_id_response.headers)
+    pprint(modify_model_portfolio_by_id_response.status)
+    pprint(modify_model_portfolio_by_id_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling PortfolioManagementApi.modify_model_portfolio_by_id: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -2782,7 +2822,7 @@ try:
     pprint(save_portfolio_response.status)
     pprint(save_portfolio_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroup.save_portfolio: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.save_portfolio: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -2917,7 +2957,7 @@ try:
     pprint(search_portfolio_symbols_response.status)
     pprint(search_portfolio_symbols_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UniversalSymbol.search_portfolio_symbols: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.search_portfolio_symbols: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -3039,7 +3079,7 @@ try:
     pprint(set_portfolio_targets_response.status)
     pprint(set_portfolio_targets_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAssetList.set_portfolio_targets: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.set_portfolio_targets: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -3160,6 +3200,16 @@ try:
         },
         body=body
     )
+    pprint(update_asset_class_response.headers)
+    pprint(update_asset_class_response.status)
+    pprint(update_asset_class_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling PortfolioManagementApi.update_asset_class: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -3251,7 +3301,7 @@ try:
     pprint(update_portfolio_settings_response.status)
     pprint(update_portfolio_settings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PortfolioGroupSettings.update_portfolio_settings: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.update_portfolio_settings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -3362,7 +3412,7 @@ try:
     pprint(update_portfolio_target_by_id_response.status)
     pprint(update_portfolio_target_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TargetAsset.update_portfolio_target_by_id: %s\n" % e)
+    print("Exception when calling PortfolioManagementApi.update_portfolio_target_by_id: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

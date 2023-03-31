@@ -65,7 +65,7 @@ try:
     pprint(get_option_strategy_response.status)
     pprint(get_option_strategy_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling StrategyQuotes.get_option_strategy: %s\n" % e)
+    print("Exception when calling OptionsApi.get_option_strategy: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -226,7 +226,7 @@ try:
     pprint(get_options_chain_response.status)
     pprint(get_options_chain_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling OptionChain.get_options_chain: %s\n" % e)
+    print("Exception when calling OptionsApi.get_options_chain: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -370,7 +370,7 @@ try:
     pprint(get_options_strategy_quote_response.status)
     pprint(get_options_strategy_quote_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling StrategyQuotes.get_options_strategy_quote: %s\n" % e)
+    print("Exception when calling OptionsApi.get_options_strategy_quote: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -513,7 +513,7 @@ try:
     pprint(list_option_holdings_response.status)
     pprint(list_option_holdings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling OptionsHoldings.list_option_holdings: %s\n" % e)
+    print("Exception when calling OptionsApi.list_option_holdings: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -660,7 +660,7 @@ try:
     pprint(place_option_strategy_response.status)
     pprint(place_option_strategy_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling StrategyOrderRecord.place_option_strategy: %s\n" % e)
+    print("Exception when calling OptionsApi.place_option_strategy: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

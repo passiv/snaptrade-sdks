@@ -52,7 +52,7 @@ try:
     pprint(get_currency_exchange_rate_pair_response.status)
     pprint(get_currency_exchange_rate_pair_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ExchangeRatePairs.get_currency_exchange_rate_pair: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_currency_exchange_rate_pair: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -149,7 +149,7 @@ try:
     pprint(get_partner_info_response.status)
     pprint(get_partner_info_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PartnerData.get_partner_info: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_partner_info: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -267,7 +267,7 @@ try:
     pprint(get_security_types_response.status)
     pprint(get_security_types_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling SecurityType.get_security_types: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_security_types: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -353,7 +353,7 @@ try:
     pprint(get_stock_exchanges_response.status)
     pprint(get_stock_exchanges_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Exchange.get_stock_exchanges: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_stock_exchanges: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -436,7 +436,7 @@ try:
     pprint(get_symbols_response.status)
     pprint(get_symbols_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UniversalSymbol.get_symbols: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_symbols: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -545,7 +545,7 @@ try:
     pprint(get_symbols_by_ticker_response.status)
     pprint(get_symbols_by_ticker_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UniversalSymbol.get_symbols_by_ticker: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.get_symbols_by_ticker: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -670,7 +670,7 @@ try:
     pprint(list_all_brokerage_authorization_type_response.status)
     pprint(list_all_brokerage_authorization_type_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling BrokerageAuthorizationTypeReadOnly.list_all_brokerage_authorization_type: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.list_all_brokerage_authorization_type: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -788,7 +788,7 @@ try:
     pprint(list_all_brokerages_response.status)
     pprint(list_all_brokerages_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Brokerage.list_all_brokerages: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.list_all_brokerages: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -869,7 +869,7 @@ try:
     pprint(list_all_currencies_response.status)
     pprint(list_all_currencies_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Currency.list_all_currencies: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.list_all_currencies: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -950,7 +950,7 @@ try:
     pprint(list_all_currencies_rates_response.status)
     pprint(list_all_currencies_rates_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ExchangeRatePairs.list_all_currencies_rates: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.list_all_currencies_rates: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -1040,7 +1040,7 @@ try:
     pprint(symbol_search_user_account_response.status)
     pprint(symbol_search_user_account_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UniversalSymbol.symbol_search_user_account: %s\n" % e)
+    print("Exception when calling ReferenceDataApi.symbol_search_user_account: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

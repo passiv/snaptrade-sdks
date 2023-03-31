@@ -40,7 +40,7 @@ try:
     pprint(check_response.status)
     pprint(check_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling Status.check: %s\n" % e)
+    print("Exception when calling APIStatusApi.check: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

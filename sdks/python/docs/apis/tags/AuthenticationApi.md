@@ -45,7 +45,7 @@ try:
     pprint(delete_snap_trade_user_response.status)
     pprint(delete_snap_trade_user_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling DeleteUserResponse.delete_snap_trade_user: %s\n" % e)
+    print("Exception when calling AuthenticationApi.delete_snap_trade_user: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -183,6 +183,16 @@ try:
             'userSecret': "USERSECRET123",
         },
     )
+    pprint(get_user_jwt_response.headers)
+    pprint(get_user_jwt_response.status)
+    pprint(get_user_jwt_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling AuthenticationApi.get_user_jwt: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -325,7 +335,7 @@ try:
     pprint(list_snap_trade_users_response.status)
     pprint(list_snap_trade_users_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UserList.list_snap_trade_users: %s\n" % e)
+    print("Exception when calling AuthenticationApi.list_snap_trade_users: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -433,6 +443,16 @@ try:
         },
         body=body
     )
+    pprint(login_snap_trade_user_response.headers)
+    pprint(login_snap_trade_user_response.status)
+    pprint(login_snap_trade_user_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling AuthenticationApi.login_snap_trade_user: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -601,7 +621,7 @@ try:
     pprint(register_snap_trade_user_response.status)
     pprint(register_snap_trade_user_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UserIDandSecret.register_snap_trade_user: %s\n" % e)
+    print("Exception when calling AuthenticationApi.register_snap_trade_user: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

@@ -55,7 +55,7 @@ try:
     pprint(detail_brokerage_authorization_response.status)
     pprint(detail_brokerage_authorization_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling BrokerageAuthorization.detail_brokerage_authorization: %s\n" % e)
+    print("Exception when calling ConnectionsApi.detail_brokerage_authorization: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -190,7 +190,7 @@ try:
     pprint(list_brokerage_authorizations_response.status)
     pprint(list_brokerage_authorizations_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling BrokerageAuthorization.list_brokerage_authorizations: %s\n" % e)
+    print("Exception when calling ConnectionsApi.list_brokerage_authorizations: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -305,6 +305,16 @@ try:
             'userSecret': "USERSECRET123",
         },
     )
+    pprint(remove_brokerage_authorization_response.headers)
+    pprint(remove_brokerage_authorization_response.status)
+    pprint(remove_brokerage_authorization_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling ConnectionsApi.remove_brokerage_authorization: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 
@@ -429,6 +439,16 @@ try:
             'userId': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         },
     )
+    pprint(session_events_response.headers)
+    pprint(session_events_response.status)
+    pprint(session_events_response.round_trip_time)
+except ApiException as e:
+    print("Exception when calling ConnectionsApi.session_events: %s\n" % e)
+    pprint(e.body)
+    pprint(e.headers)
+    pprint(e.status)
+    pprint(e.reason)
+    pprint(e.round_trip_time)
 ```
 ### Parameters
 

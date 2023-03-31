@@ -62,7 +62,7 @@ try:
     pprint(get_activities_response.status)
     pprint(get_activities_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling UniversalActivity.get_activities: %s\n" % e)
+    print("Exception when calling TransactionsAndReportingApi.get_activities: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -245,7 +245,7 @@ try:
     pprint(get_reporting_custom_range_response.status)
     pprint(get_reporting_custom_range_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling PerformanceCustom.get_reporting_custom_range: %s\n" % e)
+    print("Exception when calling TransactionsAndReportingApi.get_reporting_custom_range: %s\n" % e)
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

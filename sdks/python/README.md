@@ -2,7 +2,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 - API version: 1.0.0
-- Package version: 8.2.0
+- Package version: 8.3.0
 
 ## Requirements.
 
@@ -14,9 +14,9 @@ Python >=3.7
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install snaptrade-python-sdk==8.2.0
+pip install snaptrade-python-sdk==8.3.0
 ```
-(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==8.2.0`)
+(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==8.3.0`)
 
 Then import the package:
 ```python
