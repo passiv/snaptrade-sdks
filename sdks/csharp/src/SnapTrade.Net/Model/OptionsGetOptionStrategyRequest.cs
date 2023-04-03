@@ -57,6 +57,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [JsonConstructorAttribute]
         protected OptionsGetOptionStrategyRequest() { }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsGetOptionStrategyRequest" /> class.
         /// </summary>

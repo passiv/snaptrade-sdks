@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class SecurityType : Dictionary<String, Object>, IEquatable<SecurityType>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="SecurityType" /> class.
+            /// </summary>
+        public SecurityType()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SecurityType" /> class.
         /// </summary>
         /// <param name="id">id.</param>

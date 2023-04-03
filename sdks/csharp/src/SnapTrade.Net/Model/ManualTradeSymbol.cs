@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ManualTradeSymbol : Dictionary<String, Object>, IEquatable<ManualTradeSymbol>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ManualTradeSymbol" /> class.
+            /// </summary>
+        public ManualTradeSymbol()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeSymbol" /> class.
         /// </summary>
         /// <param name="brokerageSymbolId">brokerageSymbolId.</param>

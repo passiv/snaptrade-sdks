@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ModelPortfolioDetails : IEquatable<ModelPortfolioDetails>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ModelPortfolioDetails" /> class.
+            /// </summary>
+        public ModelPortfolioDetails()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ModelPortfolioDetails" /> class.
         /// </summary>
         /// <param name="modelPortfolio">modelPortfolio.</param>

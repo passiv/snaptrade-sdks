@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class UserIDandSecret : Dictionary<String, Object>, IEquatable<UserIDandSecret>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="UserIDandSecret" /> class.
+            /// </summary>
+        public UserIDandSecret()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UserIDandSecret" /> class.
         /// </summary>
         /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>

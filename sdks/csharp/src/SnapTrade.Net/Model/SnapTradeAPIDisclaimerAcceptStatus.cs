@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeAPIDisclaimerAcceptStatus : Dictionary<String, Object>, IEquatable<SnapTradeAPIDisclaimerAcceptStatus>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="SnapTradeAPIDisclaimerAcceptStatus" /> class.
+            /// </summary>
+        public SnapTradeAPIDisclaimerAcceptStatus()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeAPIDisclaimerAcceptStatus" /> class.
         /// </summary>
         /// <param name="accepted">accepted.</param>

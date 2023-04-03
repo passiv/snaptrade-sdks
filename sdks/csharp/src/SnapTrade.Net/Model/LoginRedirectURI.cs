@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class LoginRedirectURI : IEquatable<LoginRedirectURI>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="LoginRedirectURI" /> class.
+            /// </summary>
+        public LoginRedirectURI()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LoginRedirectURI" /> class.
         /// </summary>
         /// <param name="redirectURI">redirectURI.</param>

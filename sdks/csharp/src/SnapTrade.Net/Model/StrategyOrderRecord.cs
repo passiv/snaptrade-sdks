@@ -225,6 +225,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public TimeInForceEnum? TimeInForce { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="StrategyOrderRecord" /> class.
+            /// </summary>
+        public StrategyOrderRecord()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderRecord" /> class.
         /// </summary>
         /// <param name="strategy">strategy.</param>

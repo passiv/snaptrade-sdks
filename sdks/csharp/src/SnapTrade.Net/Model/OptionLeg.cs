@@ -71,6 +71,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public ActionEnum? Action { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="OptionLeg" /> class.
+            /// </summary>
+        public OptionLeg()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionLeg" /> class.
         /// </summary>
         /// <param name="action">action.</param>

@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class TradeImpact : Dictionary<String, Object>, IEquatable<TradeImpact>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="TradeImpact" /> class.
+            /// </summary>
+        public TradeImpact()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TradeImpact" /> class.
         /// </summary>
         /// <param name="account">account.</param>

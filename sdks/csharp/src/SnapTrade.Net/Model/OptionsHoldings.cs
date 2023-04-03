@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class OptionsHoldings : Dictionary<String, Object>, IEquatable<OptionsHoldings>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="OptionsHoldings" /> class.
+            /// </summary>
+        public OptionsHoldings()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionsHoldings" /> class.
         /// </summary>
         /// <param name="id">Options information.</param>

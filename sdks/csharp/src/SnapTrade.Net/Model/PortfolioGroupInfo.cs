@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class PortfolioGroupInfo : Dictionary<String, Object>, IEquatable<PortfolioGroupInfo>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="PortfolioGroupInfo" /> class.
+            /// </summary>
+        public PortfolioGroupInfo()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PortfolioGroupInfo" /> class.
         /// </summary>
         /// <param name="symbols">symbols.</param>

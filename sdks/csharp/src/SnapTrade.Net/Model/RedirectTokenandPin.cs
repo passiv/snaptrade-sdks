@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class RedirectTokenandPin : Dictionary<String, Object>, IEquatable<RedirectTokenandPin>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="RedirectTokenandPin" /> class.
+            /// </summary>
+        public RedirectTokenandPin()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RedirectTokenandPin" /> class.
         /// </summary>
         /// <param name="token">token.</param>

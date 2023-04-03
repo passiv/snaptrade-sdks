@@ -59,6 +59,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="BrokerageAuthorizationType" /> class.
+            /// </summary>
+        public BrokerageAuthorizationType()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationType" /> class.
         /// </summary>
         /// <param name="type">type.</param>

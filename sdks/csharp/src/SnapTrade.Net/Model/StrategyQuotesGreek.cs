@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class StrategyQuotesGreek : Dictionary<String, Object>, IEquatable<StrategyQuotesGreek>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="StrategyQuotesGreek" /> class.
+            /// </summary>
+        public StrategyQuotesGreek()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StrategyQuotesGreek" /> class.
         /// </summary>
         /// <param name="delta">delta.</param>

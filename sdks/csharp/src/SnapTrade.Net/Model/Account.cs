@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class Account : Dictionary<String, Object>, IEquatable<Account>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="Account" /> class.
+            /// </summary>
+        public Account()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         /// <param name="id">id.</param>

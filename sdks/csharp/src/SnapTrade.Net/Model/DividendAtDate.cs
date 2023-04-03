@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class DividendAtDate : Dictionary<String, Object>, IEquatable<DividendAtDate>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="DividendAtDate" /> class.
+            /// </summary>
+        public DividendAtDate()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DividendAtDate" /> class.
         /// </summary>
         /// <param name="symbol">The ticker of the symbol that the dividend came from.</param>

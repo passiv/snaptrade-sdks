@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class UniversalSymbolTicker : Dictionary<String, Object>, IEquatable<UniversalSymbolTicker>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="UniversalSymbolTicker" /> class.
+            /// </summary>
+        public UniversalSymbolTicker()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UniversalSymbolTicker" /> class.
         /// </summary>
         /// <param name="id">id.</param>

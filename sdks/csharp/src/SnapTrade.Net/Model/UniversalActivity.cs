@@ -155,6 +155,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="UniversalActivity" /> class.
+            /// </summary>
+        public UniversalActivity()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UniversalActivity" /> class.
         /// </summary>
         /// <param name="id">id.</param>

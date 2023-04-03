@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeHoldingsTotalValue : Dictionary<String, Object>, IEquatable<SnapTradeHoldingsTotalValue>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="SnapTradeHoldingsTotalValue" /> class.
+            /// </summary>
+        public SnapTradeHoldingsTotalValue()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeHoldingsTotalValue" /> class.
         /// </summary>
         /// <param name="value">value.</param>

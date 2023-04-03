@@ -59,6 +59,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="CashRestriction" /> class.
+            /// </summary>
+        public CashRestriction()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CashRestriction" /> class.
         /// </summary>
         /// <param name="id">id.</param>

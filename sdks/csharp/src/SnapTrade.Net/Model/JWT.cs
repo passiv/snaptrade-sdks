@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class JWT : Dictionary<String, Object>, IEquatable<JWT>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="JWT" /> class.
+            /// </summary>
+        public JWT()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="JWT" /> class.
         /// </summary>
         /// <param name="token">token.</param>

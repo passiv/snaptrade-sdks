@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class UserSettings : Dictionary<String, Object>, IEquatable<UserSettings>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="UserSettings" /> class.
+            /// </summary>
+        public UserSettings()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UserSettings" /> class.
         /// </summary>
         /// <param name="email">email.</param>

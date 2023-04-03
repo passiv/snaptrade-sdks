@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class OptionStrategy : Dictionary<String, Object>, IEquatable<OptionStrategy>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="OptionStrategy" /> class.
+            /// </summary>
+        public OptionStrategy()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionStrategy" /> class.
         /// </summary>
         /// <param name="id">id.</param>

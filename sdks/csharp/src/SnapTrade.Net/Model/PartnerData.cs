@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class PartnerData : Dictionary<String, Object>, IEquatable<PartnerData>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="PartnerData" /> class.
+            /// </summary>
+        public PartnerData()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PartnerData" /> class.
         /// </summary>
         /// <param name="redirectUri">URI to redirect user back to after user is done adding brokerage connections.</param>

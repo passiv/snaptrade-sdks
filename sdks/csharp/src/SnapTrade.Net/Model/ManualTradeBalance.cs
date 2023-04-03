@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ManualTradeBalance : Dictionary<String, Object>, IEquatable<ManualTradeBalance>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ManualTradeBalance" /> class.
+            /// </summary>
+        public ManualTradeBalance()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeBalance" /> class.
         /// </summary>
         /// <param name="account">account.</param>

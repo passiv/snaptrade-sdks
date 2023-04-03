@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class EncryptedResponseEncryptedMessageData : Dictionary<String, Object>, IEquatable<EncryptedResponseEncryptedMessageData>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="EncryptedResponseEncryptedMessageData" /> class.
+            /// </summary>
+        public EncryptedResponseEncryptedMessageData()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="EncryptedResponseEncryptedMessageData" /> class.
         /// </summary>
         /// <param name="encryptedMessage">encryptedMessage.</param>

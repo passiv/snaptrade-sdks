@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class UserErrorLog : Dictionary<String, Object>, IEquatable<UserErrorLog>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="UserErrorLog" /> class.
+            /// </summary>
+        public UserErrorLog()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UserErrorLog" /> class.
         /// </summary>
         /// <param name="requestedAt">requestedAt.</param>

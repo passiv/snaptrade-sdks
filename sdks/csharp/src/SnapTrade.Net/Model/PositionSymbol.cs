@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class PositionSymbol : Dictionary<String, Object>, IEquatable<PositionSymbol>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="PositionSymbol" /> class.
+            /// </summary>
+        public PositionSymbol()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PositionSymbol" /> class.
         /// </summary>
         /// <param name="id">id.</param>

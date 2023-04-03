@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class StrategyOrderPlace : Dictionary<String, Object>, IEquatable<StrategyOrderPlace>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="StrategyOrderPlace" /> class.
+            /// </summary>
+        public StrategyOrderPlace()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderPlace" /> class.
         /// </summary>
         /// <param name="orderId">orderId.</param>

@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class Symbol : Dictionary<String, Object>, IEquatable<Symbol>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="Symbol" /> class.
+            /// </summary>
+        public Symbol()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Symbol" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>

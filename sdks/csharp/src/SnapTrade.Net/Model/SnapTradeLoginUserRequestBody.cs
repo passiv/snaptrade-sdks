@@ -59,6 +59,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="SnapTradeLoginUserRequestBody" /> class.
+            /// </summary>
+        public SnapTradeLoginUserRequestBody()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
         /// <param name="broker">broker.</param>

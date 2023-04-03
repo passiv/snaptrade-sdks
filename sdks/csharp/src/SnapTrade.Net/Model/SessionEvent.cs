@@ -89,6 +89,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "session_event_type", EmitDefaultValue = false)]
         public SessionEventTypeEnum? SessionEventType { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="SessionEvent" /> class.
+            /// </summary>
+        public SessionEvent()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SessionEvent" /> class.
         /// </summary>
         /// <param name="id">id.</param>

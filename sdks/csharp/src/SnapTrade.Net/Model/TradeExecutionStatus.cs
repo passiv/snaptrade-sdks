@@ -107,6 +107,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public ActionEnum? Action { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="TradeExecutionStatus" /> class.
+            /// </summary>
+        public TradeExecutionStatus()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TradeExecutionStatus" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>

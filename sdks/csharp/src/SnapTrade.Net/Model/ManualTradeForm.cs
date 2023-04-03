@@ -51,6 +51,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public TimeInForce? TimeInForce { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="ManualTradeForm" /> class.
+            /// </summary>
+        public ManualTradeForm()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeForm" /> class.
         /// </summary>
         /// <param name="accountId">accountId.</param>

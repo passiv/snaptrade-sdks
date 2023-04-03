@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class MonthlyDividends : Dictionary<String, Object>, IEquatable<MonthlyDividends>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="MonthlyDividends" /> class.
+            /// </summary>
+        public MonthlyDividends()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MonthlyDividends" /> class.
         /// </summary>
         /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>

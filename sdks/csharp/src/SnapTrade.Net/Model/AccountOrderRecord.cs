@@ -57,6 +57,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public TimeInForce? TimeInForce { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="AccountOrderRecord" /> class.
+            /// </summary>
+        public AccountOrderRecord()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">Order id returned by brokerage.</param>

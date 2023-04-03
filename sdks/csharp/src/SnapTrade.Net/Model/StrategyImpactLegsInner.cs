@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class StrategyImpactLegsInner : Dictionary<String, Object>, IEquatable<StrategyImpactLegsInner>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="StrategyImpactLegsInner" /> class.
+            /// </summary>
+        public StrategyImpactLegsInner()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StrategyImpactLegsInner" /> class.
         /// </summary>
         /// <param name="legId">legId.</param>

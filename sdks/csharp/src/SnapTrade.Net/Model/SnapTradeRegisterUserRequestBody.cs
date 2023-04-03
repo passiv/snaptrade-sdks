@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeRegisterUserRequestBody : IEquatable<SnapTradeRegisterUserRequestBody>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="SnapTradeRegisterUserRequestBody" /> class.
+            /// </summary>
+        public SnapTradeRegisterUserRequestBody()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeRegisterUserRequestBody" /> class.
         /// </summary>
         /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>

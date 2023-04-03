@@ -51,6 +51,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public Action? Action { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="ManualTrade" /> class.
+            /// </summary>
+        public ManualTrade()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTrade" /> class.
         /// </summary>
         /// <param name="id">id.</param>

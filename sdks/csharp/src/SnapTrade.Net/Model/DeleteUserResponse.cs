@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class DeleteUserResponse : Dictionary<String, Object>, IEquatable<DeleteUserResponse>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="DeleteUserResponse" /> class.
+            /// </summary>
+        public DeleteUserResponse()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DeleteUserResponse" /> class.
         /// </summary>
         /// <param name="status">Delete status.</param>

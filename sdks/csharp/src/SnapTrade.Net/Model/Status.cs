@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class Status : Dictionary<String, Object>, IEquatable<Status>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="Status" /> class.
+            /// </summary>
+        public Status()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Status" /> class.
         /// </summary>
         /// <param name="version">version.</param>

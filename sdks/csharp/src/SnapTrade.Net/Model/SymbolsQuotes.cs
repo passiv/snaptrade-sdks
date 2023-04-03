@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class SymbolsQuotes : Dictionary<String, Object>, IEquatable<SymbolsQuotes>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="SymbolsQuotes" /> class.
+            /// </summary>
+        public SymbolsQuotes()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SymbolsQuotes" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>

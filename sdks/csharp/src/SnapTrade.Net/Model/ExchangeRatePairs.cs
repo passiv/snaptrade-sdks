@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ExchangeRatePairs : Dictionary<String, Object>, IEquatable<ExchangeRatePairs>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ExchangeRatePairs" /> class.
+            /// </summary>
+        public ExchangeRatePairs()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ExchangeRatePairs" /> class.
         /// </summary>
         /// <param name="src">src.</param>

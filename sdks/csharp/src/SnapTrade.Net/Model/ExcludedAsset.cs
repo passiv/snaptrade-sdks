@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ExcludedAsset : Dictionary<String, Object>, IEquatable<ExcludedAsset>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ExcludedAsset" /> class.
+            /// </summary>
+        public ExcludedAsset()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ExcludedAsset" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>

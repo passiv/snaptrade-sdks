@@ -63,6 +63,14 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "model_type", EmitDefaultValue = false)]
         public ModelTypeEnum? ModelType { get; set; }
         /// <summary>
+            /// Default constructor for <see cref="ModelPortfolio" /> class.
+            /// </summary>
+        public ModelPortfolio()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ModelPortfolio" /> class.
         /// </summary>
         /// <param name="id">id.</param>

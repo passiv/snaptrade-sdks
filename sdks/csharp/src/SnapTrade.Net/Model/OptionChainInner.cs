@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class OptionChainInner : Dictionary<String, Object>, IEquatable<OptionChainInner>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="OptionChainInner" /> class.
+            /// </summary>
+        public OptionChainInner()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionChainInner" /> class.
         /// </summary>
         /// <param name="expiryDate">expiryDate.</param>

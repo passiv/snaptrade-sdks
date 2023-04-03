@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class Model401FailedRequestResponse : Dictionary<String, Object>, IEquatable<Model401FailedRequestResponse>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="Model401FailedRequestResponse" /> class.
+            /// </summary>
+        public Model401FailedRequestResponse()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Model401FailedRequestResponse" /> class.
         /// </summary>
         /// <param name="defaultDetail">defaultDetail.</param>

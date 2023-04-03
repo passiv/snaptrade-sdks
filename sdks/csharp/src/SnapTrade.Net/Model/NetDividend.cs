@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class NetDividend : Dictionary<String, Object>, IEquatable<NetDividend>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="NetDividend" /> class.
+            /// </summary>
+        public NetDividend()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="NetDividend" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>

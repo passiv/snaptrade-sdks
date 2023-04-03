@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class BrokerageAuthorizationTypeReadOnlyBrokerage : Dictionary<String, Object>, IEquatable<BrokerageAuthorizationTypeReadOnlyBrokerage>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="BrokerageAuthorizationTypeReadOnlyBrokerage" /> class.
+            /// </summary>
+        public BrokerageAuthorizationTypeReadOnlyBrokerage()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationTypeReadOnlyBrokerage" /> class.
         /// </summary>
         /// <param name="id">id.</param>

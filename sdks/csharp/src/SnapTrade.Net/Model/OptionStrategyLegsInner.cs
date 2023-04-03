@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class OptionStrategyLegsInner : IEquatable<OptionStrategyLegsInner>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="OptionStrategyLegsInner" /> class.
+            /// </summary>
+        public OptionStrategyLegsInner()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionStrategyLegsInner" /> class.
         /// </summary>
         /// <param name="optionSymbolId">optionSymbolId.</param>

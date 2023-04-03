@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class OptionChainInnerChainPerRootInner : Dictionary<String, Object>, IEquatable<OptionChainInnerChainPerRootInner>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="OptionChainInnerChainPerRootInner" /> class.
+            /// </summary>
+        public OptionChainInnerChainPerRootInner()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionChainInnerChainPerRootInner" /> class.
         /// </summary>
         /// <param name="optionRoot">optionRoot.</param>

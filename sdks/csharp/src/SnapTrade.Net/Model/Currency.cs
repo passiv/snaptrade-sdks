@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class Currency : Dictionary<String, Object>, IEquatable<Currency>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="Currency" /> class.
+            /// </summary>
+        public Currency()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class.
         /// </summary>
         /// <param name="id">id.</param>

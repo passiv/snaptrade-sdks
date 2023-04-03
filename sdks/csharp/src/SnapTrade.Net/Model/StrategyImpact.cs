@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class StrategyImpact : Dictionary<String, Object>, IEquatable<StrategyImpact>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="StrategyImpact" /> class.
+            /// </summary>
+        public StrategyImpact()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="StrategyImpact" /> class.
         /// </summary>
         /// <param name="estimatedCommissions">estimatedCommissions.</param>

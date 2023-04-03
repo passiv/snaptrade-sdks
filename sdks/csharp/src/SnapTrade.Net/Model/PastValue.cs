@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class PastValue : Dictionary<String, Object>, IEquatable<PastValue>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="PastValue" /> class.
+            /// </summary>
+        public PastValue()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PastValue" /> class.
         /// </summary>
         /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>

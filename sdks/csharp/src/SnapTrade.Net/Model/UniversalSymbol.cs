@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class UniversalSymbol : IEquatable<UniversalSymbol>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="UniversalSymbol" /> class.
+            /// </summary>
+        public UniversalSymbol()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UniversalSymbol" /> class.
         /// </summary>
         /// <param name="id">id.</param>

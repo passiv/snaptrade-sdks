@@ -33,6 +33,14 @@ namespace SnapTrade.Net.Model
     public partial class ManualTradeAndImpact : Dictionary<String, Object>, IEquatable<ManualTradeAndImpact>, IValidatableObject
     {
         /// <summary>
+            /// Default constructor for <see cref="ManualTradeAndImpact" /> class.
+            /// </summary>
+        public ManualTradeAndImpact()
+        {
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeAndImpact" /> class.
         /// </summary>
         /// <param name="trade">trade.</param>
