@@ -23,6 +23,14 @@ requiredEnvironmentVariables:
   - SNAPTRADE_TEST_USER_SECRET
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
+  csharp:
+    version: 1.0.0
+    packageName: SnapTrade.Net
+    logoPath: logo.jpg
+    outputDirectory: sdks/csharp
+    git:
+      userId: passiv
+      repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
     files:
       Configuration.mustache:
