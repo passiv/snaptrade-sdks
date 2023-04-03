@@ -20,6 +20,7 @@ using Xunit;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Api;
 using SnapTrade.Net.Model;
+using System.Diagnostics;
 
 namespace SnapTrade.Net.Test.Api
 {
@@ -60,11 +61,22 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GettingStartedTest()
         {
-            Status status = apiStatusApi.Check();
-            Console.WriteLine(string.Format("SnapTrade is online: {0}", status.Online.ToString()));
-            string uuid = Guid.NewGuid().ToString();
-            UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
-            Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+            try
+            {
+                Status status = apiStatusApi.Check();
+                Console.WriteLine(string.Format("test: {0}", status));
+                Console.WriteLine(status.ToJson());
+                Console.WriteLine(string.Format("SnapTrade is online: {0}", status.Online.ToString()));
+                string uuid = Guid.NewGuid().ToString();
+                UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
+                Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+            }
+            catch (ApiException e)
+            {
+                Debug.Print("Exception when calling APIDisclaimerApi.Accept: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
         }
 
     }

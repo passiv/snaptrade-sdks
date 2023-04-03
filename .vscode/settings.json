@@ -3,18 +3,11 @@
   "files.associations": {
     ".konfigignore": "ignore"
   },
-  "python.testing.pytestArgs": [
-    "sdks/python"
-  ],
+  "python.testing.pytestArgs": ["sdks/python"],
+  "dotnet-test-explorer.testProjectPath": "**/*.sln",
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
-  "python.testing.unittestArgs": [
-    "-v",
-    "-s",
-    "./python",
-    "-p",
-    "test_*.py"
-  ],
+  "python.testing.unittestArgs": ["-v", "-s", "./python", "-p", "test_*.py"],
   "java.compile.nullAnalysis.mode": "automatic",
   "yaml.schemas": {
     "swaggerviewer:openapi": "file:///home/asutherland8219/snaptrade-sdks/api.yaml"
