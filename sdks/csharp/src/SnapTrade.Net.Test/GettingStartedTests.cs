@@ -33,13 +33,23 @@ namespace SnapTrade.Net.Test.Api
     public class GettingStartedTests : IDisposable
     {
         private APIStatusApi apiStatusApi;
+        private AuthenticationApi authenticationApi;
+        private PortfolioManagementApi portfolioManagementApi;
+        private APIDisclaimerApi apiDisclaimerApi;
+        private AccountInformationApi accountInformationApi;
 
         public GettingStartedTests()
         {
             Configuration configuration = new Configuration();
-            configuration.ApiKey.Add("clientId", "YOUR_API_KEY");
-            string clientSecret = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
-            apiStatusApi = new APIStatusApi();
+            string clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
+            string consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+            configuration.ApiKey.Add("clientId", clientId);
+            configuration.ConsumerKey = consumerKey;
+            apiStatusApi = new APIStatusApi(configuration);
+            authenticationApi = new AuthenticationApi(configuration);
+            portfolioManagementApi = new PortfolioManagementApi(configuration);
+            apiDisclaimerApi = new APIDisclaimerApi(configuration);
+            accountInformationApi = new AccountInformationApi(configuration);
         }
 
         public void Dispose()
@@ -47,76 +57,15 @@ namespace SnapTrade.Net.Test.Api
             // Cleanup when everything is done.
         }
 
-        /// <summary>
-        /// Test an instance of GettingStarted
-        /// </summary>
         [Fact]
-        public void InstanceTest()
+        public void GettingStartedTest()
         {
-            // TODO uncomment below to test 'IsType' GettingStarted
-            //Assert.IsType<GettingStarted>(instance);
+            Status status = apiStatusApi.Check();
+            Console.WriteLine(string.Format("SnapTrade is online: {0}", status.Online.ToString()));
+            string uuid = Guid.NewGuid().ToString();
+            UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
+            Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
         }
 
-        /// <summary>
-        /// Test DeleteSnapTradeUser
-        /// </summary>
-        [Fact]
-        public void DeleteSnapTradeUserTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string userId = null;
-            //var response = instance.DeleteSnapTradeUser(userId);
-            //Assert.IsType<DeleteUserResponse>(response);
-        }
-
-        /// <summary>
-        /// Test GetUserJWT
-        /// </summary>
-        [Fact]
-        public void GetUserJWTTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string userId = null;
-            //string userSecret = null;
-            //var response = instance.GetUserJWT(userId, userSecret);
-            //Assert.IsType<EncryptedResponse>(response);
-        }
-
-        /// <summary>
-        /// Test ListSnapTradeUsers
-        /// </summary>
-        [Fact]
-        public void ListSnapTradeUsersTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.ListSnapTradeUsers();
-            //Assert.IsType<List<string>>(response);
-        }
-
-        /// <summary>
-        /// Test LoginSnapTradeUser
-        /// </summary>
-        [Fact]
-        public void LoginSnapTradeUserTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string userId = null;
-            //string userSecret = null;
-            //SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null;
-            //var response = instance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
-            //Assert.IsType<AuthenticationLoginSnapTradeUser200Response>(response);
-        }
-
-        /// <summary>
-        /// Test RegisterSnapTradeUser
-        /// </summary>
-        [Fact]
-        public void RegisterSnapTradeUserTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = null;
-            //var response = instance.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
-            //Assert.IsType<UserIDandSecret>(response);
-        }
     }
 }

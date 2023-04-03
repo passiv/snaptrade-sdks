@@ -263,6 +263,9 @@ namespace SnapTrade.Net.Client
         /// <value>The access token.</value>
         public virtual string AccessToken { get; set; }
 
+        /// <value>Client state</value>
+        public virtual string ConsumerKey { get; set; }
+
         /// <summary>
         /// Gets or sets the temporary folder path to store the files downloaded from the server.
         /// </summary>

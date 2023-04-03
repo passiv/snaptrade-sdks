@@ -28,6 +28,8 @@ generators:
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
+    clientState:
+      - ConsumerKey
     git:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
