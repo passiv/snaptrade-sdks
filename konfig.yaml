@@ -26,7 +26,7 @@ generators:
   csharp:
     version: 1.0.0
     packageName: SnapTrade.Net
-    logoPath: logo.jpg
+    logoPath: logo.png
     outputDirectory: sdks/csharp
     git:
       userId: passiv
