@@ -65,8 +65,6 @@ namespace SnapTrade.Net.Test.Api
             {
                 Status status = apiStatusApi.Check();
                 Console.WriteLine(status.ToJson());
-                if (status.Online)
-                    Console.WriteLine(string.Format("SnapTrade is online: {0}", status.Online));
                 string uuid = Guid.NewGuid().ToString();
                 UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
                 Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
