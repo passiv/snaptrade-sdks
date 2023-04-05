@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Symbols and Tickers Quotes object
     /// </summary>
     [DataContract(Name = "SymbolsQuotes")]
-    public partial class SymbolsQuotes : Dictionary<String, Object>, IEquatable<SymbolsQuotes>, IValidatableObject
+    public partial class SymbolsQuotes : IEquatable<SymbolsQuotes>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="SymbolsQuotes" /> class.
-            /// </summary>
-        public SymbolsQuotes()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SymbolsQuotes" /> class.
         /// </summary>

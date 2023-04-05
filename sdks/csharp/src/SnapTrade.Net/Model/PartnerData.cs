@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// SnapTrade Partner metadata
     /// </summary>
     [DataContract(Name = "PartnerData")]
-    public partial class PartnerData : Dictionary<String, Object>, IEquatable<PartnerData>, IValidatableObject
+    public partial class PartnerData : IEquatable<PartnerData>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PartnerData" /> class.
-            /// </summary>
-        public PartnerData()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PartnerData" /> class.
         /// </summary>

@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Underlying Symbol
     /// </summary>
     [DataContract(Name = "UnderlyingSymbol")]
-    public partial class UnderlyingSymbol : Dictionary<String, Object>, IEquatable<UnderlyingSymbol>, IValidatableObject
+    public partial class UnderlyingSymbol : IEquatable<UnderlyingSymbol>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="UnderlyingSymbol" /> class.
-            /// </summary>
-        public UnderlyingSymbol()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderlyingSymbol" /> class.
         /// </summary>

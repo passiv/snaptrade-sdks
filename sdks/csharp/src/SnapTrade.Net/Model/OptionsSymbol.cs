@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Options Symbol
     /// </summary>
     [DataContract(Name = "OptionsSymbol")]
-    public partial class OptionsSymbol : Dictionary<String, Object>, IEquatable<OptionsSymbol>, IValidatableObject
+    public partial class OptionsSymbol : IEquatable<OptionsSymbol>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="OptionsSymbol" /> class.
-            /// </summary>
-        public OptionsSymbol()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsSymbol" /> class.
         /// </summary>

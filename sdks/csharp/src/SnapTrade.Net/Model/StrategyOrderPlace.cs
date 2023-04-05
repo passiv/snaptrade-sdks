@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// The reponse for a correctly placed order
     /// </summary>
     [DataContract(Name = "StrategyOrderPlace")]
-    public partial class StrategyOrderPlace : Dictionary<String, Object>, IEquatable<StrategyOrderPlace>, IValidatableObject
+    public partial class StrategyOrderPlace : IEquatable<StrategyOrderPlace>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="StrategyOrderPlace" /> class.
-            /// </summary>
-        public StrategyOrderPlace()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderPlace" /> class.
         /// </summary>

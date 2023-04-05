@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Currency
     /// </summary>
     [DataContract(Name = "Currency")]
-    public partial class Currency : Dictionary<String, Object>, IEquatable<Currency>, IValidatableObject
+    public partial class Currency : IEquatable<Currency>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="Currency" /> class.
-            /// </summary>
-        public Currency()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class.
         /// </summary>

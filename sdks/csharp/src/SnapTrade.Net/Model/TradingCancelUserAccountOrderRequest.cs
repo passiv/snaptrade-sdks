@@ -33,14 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class TradingCancelUserAccountOrderRequest : IEquatable<TradingCancelUserAccountOrderRequest>, IValidatableObject
     {
         /// <summary>
-            /// Default constructor for <see cref="TradingCancelUserAccountOrderRequest" /> class.
-            /// </summary>
-        public TradingCancelUserAccountOrderRequest()
-        {
-        }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TradingCancelUserAccountOrderRequest" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">brokerageOrderId.</param>

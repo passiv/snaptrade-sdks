@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// An API error log for a specific SnapTrade user.
     /// </summary>
     [DataContract(Name = "UserErrorLog")]
-    public partial class UserErrorLog : Dictionary<String, Object>, IEquatable<UserErrorLog>, IValidatableObject
+    public partial class UserErrorLog : IEquatable<UserErrorLog>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="UserErrorLog" /> class.
-            /// </summary>
-        public UserErrorLog()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserErrorLog" /> class.
         /// </summary>

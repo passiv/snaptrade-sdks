@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Status of user acceptance of SnapTrade API disclaimer
     /// </summary>
     [DataContract(Name = "SnapTradeAPIDisclaimerAcceptStatus")]
-    public partial class SnapTradeAPIDisclaimerAcceptStatus : Dictionary<String, Object>, IEquatable<SnapTradeAPIDisclaimerAcceptStatus>, IValidatableObject
+    public partial class SnapTradeAPIDisclaimerAcceptStatus : IEquatable<SnapTradeAPIDisclaimerAcceptStatus>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="SnapTradeAPIDisclaimerAcceptStatus" /> class.
-            /// </summary>
-        public SnapTradeAPIDisclaimerAcceptStatus()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeAPIDisclaimerAcceptStatus" /> class.
         /// </summary>

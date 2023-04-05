@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// Record of order in brokerageaccount
     /// </summary>
     [DataContract(Name = "AccountOrderRecord")]
-    public partial class AccountOrderRecord : Dictionary<String, Object>, IEquatable<AccountOrderRecord>, IValidatableObject
+    public partial class AccountOrderRecord : IEquatable<AccountOrderRecord>, IValidatableObject
     {
 
         /// <summary>
@@ -56,14 +56,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public TimeInForce? TimeInForce { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="AccountOrderRecord" /> class.
-            /// </summary>
-        public AccountOrderRecord()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>

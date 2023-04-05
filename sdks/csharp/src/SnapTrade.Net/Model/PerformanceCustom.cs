@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Performance Custom Response Object
     /// </summary>
     [DataContract(Name = "PerformanceCustom")]
-    public partial class PerformanceCustom : Dictionary<String, Object>, IEquatable<PerformanceCustom>, IValidatableObject
+    public partial class PerformanceCustom : IEquatable<PerformanceCustom>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PerformanceCustom" /> class.
-            /// </summary>
-        public PerformanceCustom()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PerformanceCustom" /> class.
         /// </summary>

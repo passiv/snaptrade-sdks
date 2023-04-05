@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Brokerage symbol
     /// </summary>
     [DataContract(Name = "BrokerageSymbol")]
-    public partial class BrokerageSymbol : Dictionary<String, Object>, IEquatable<BrokerageSymbol>, IValidatableObject
+    public partial class BrokerageSymbol : IEquatable<BrokerageSymbol>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageSymbol" /> class.
-            /// </summary>
-        public BrokerageSymbol()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageSymbol" /> class.
         /// </summary>

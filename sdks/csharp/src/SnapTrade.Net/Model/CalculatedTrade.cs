@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Array of trades to make to rebalance portfolio
     /// </summary>
     [DataContract(Name = "CalculatedTrade")]
-    public partial class CalculatedTrade : Dictionary<String, Object>, IEquatable<CalculatedTrade>, IValidatableObject
+    public partial class CalculatedTrade : IEquatable<CalculatedTrade>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="CalculatedTrade" /> class.
-            /// </summary>
-        public CalculatedTrade()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculatedTrade" /> class.
         /// </summary>

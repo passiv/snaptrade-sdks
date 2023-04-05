@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// StrategyOrderPlaceOrdersInnerLegsInner
     /// </summary>
     [DataContract(Name = "StrategyOrderPlace_orders_inner_legs_inner")]
-    public partial class StrategyOrderPlaceOrdersInnerLegsInner : Dictionary<String, Object>, IEquatable<StrategyOrderPlaceOrdersInnerLegsInner>, IValidatableObject
+    public partial class StrategyOrderPlaceOrdersInnerLegsInner : IEquatable<StrategyOrderPlaceOrdersInnerLegsInner>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="StrategyOrderPlaceOrdersInnerLegsInner" /> class.
-            /// </summary>
-        public StrategyOrderPlaceOrdersInnerLegsInner()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderPlaceOrdersInnerLegsInner" /> class.
         /// </summary>

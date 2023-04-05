@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// MonthlyDividends
     /// </summary>
     [DataContract(Name = "MonthlyDividends")]
-    public partial class MonthlyDividends : Dictionary<String, Object>, IEquatable<MonthlyDividends>, IValidatableObject
+    public partial class MonthlyDividends : IEquatable<MonthlyDividends>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="MonthlyDividends" /> class.
-            /// </summary>
-        public MonthlyDividends()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MonthlyDividends" /> class.
         /// </summary>

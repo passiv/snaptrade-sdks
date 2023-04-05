@@ -610,8 +610,8 @@ namespace SnapTrade.Net.Api
                 SnapTrade.Net.Client.GlobalConfiguration.Instance,
                 new SnapTrade.Net.Client.Configuration { BasePath = basePath }
             );
-            this.Client = new SnapTrade.Net.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new SnapTrade.Net.Client.ApiClient(this.Configuration.BasePath);
+            this.Client = new SnapTrade.Net.Client.ApiClient(this.Configuration);
+            this.AsynchronousClient = new SnapTrade.Net.Client.ApiClient(this.Configuration);
             this.ExceptionFactory = SnapTrade.Net.Client.Configuration.DefaultExceptionFactory;
         }
 
@@ -629,8 +629,8 @@ namespace SnapTrade.Net.Api
                 SnapTrade.Net.Client.GlobalConfiguration.Instance,
                 configuration
             );
-            this.Client = new SnapTrade.Net.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new SnapTrade.Net.Client.ApiClient(this.Configuration.BasePath);
+            this.Client = new SnapTrade.Net.Client.ApiClient(this.Configuration);
+            this.AsynchronousClient = new SnapTrade.Net.Client.ApiClient(this.Configuration);
             ExceptionFactory = SnapTrade.Net.Client.Configuration.DefaultExceptionFactory;
         }
 

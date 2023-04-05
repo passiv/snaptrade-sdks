@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Stock Exchange
     /// </summary>
     [DataContract(Name = "Exchange")]
-    public partial class Exchange : Dictionary<String, Object>, IEquatable<Exchange>, IValidatableObject
+    public partial class Exchange : IEquatable<Exchange>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="Exchange" /> class.
-            /// </summary>
-        public Exchange()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Exchange" /> class.
         /// </summary>

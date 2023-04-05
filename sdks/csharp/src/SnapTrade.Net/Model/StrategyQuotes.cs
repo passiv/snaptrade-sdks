@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// StrategyQuotes
     /// </summary>
     [DataContract(Name = "StrategyQuotes")]
-    public partial class StrategyQuotes : Dictionary<String, Object>, IEquatable<StrategyQuotes>, IValidatableObject
+    public partial class StrategyQuotes : IEquatable<StrategyQuotes>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="StrategyQuotes" /> class.
-            /// </summary>
-        public StrategyQuotes()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyQuotes" /> class.
         /// </summary>

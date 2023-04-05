@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// BrokerageAuthorizationTypeReadOnly
     /// </summary>
     [DataContract(Name = "BrokerageAuthorizationTypeReadOnly")]
-    public partial class BrokerageAuthorizationTypeReadOnly : Dictionary<String, Object>, IEquatable<BrokerageAuthorizationTypeReadOnly>, IValidatableObject
+    public partial class BrokerageAuthorizationTypeReadOnly : IEquatable<BrokerageAuthorizationTypeReadOnly>, IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -96,14 +96,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "auth_type", EmitDefaultValue = false)]
         public AuthTypeEnum? AuthType { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageAuthorizationTypeReadOnly" /> class.
-            /// </summary>
-        public BrokerageAuthorizationTypeReadOnly()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationTypeReadOnly" /> class.
         /// </summary>

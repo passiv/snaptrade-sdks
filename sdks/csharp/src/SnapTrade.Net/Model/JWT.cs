@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// JWT Token. Used to acess resources in private endpoints available only through the Passiv app
     /// </summary>
     [DataContract(Name = "JWT")]
-    public partial class JWT : Dictionary<String, Object>, IEquatable<JWT>, IValidatableObject
+    public partial class JWT : IEquatable<JWT>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="JWT" /> class.
-            /// </summary>
-        public JWT()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JWT" /> class.
         /// </summary>

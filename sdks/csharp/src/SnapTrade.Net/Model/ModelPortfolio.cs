@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// ModelPortfolio
     /// </summary>
     [DataContract(Name = "ModelPortfolio")]
-    public partial class ModelPortfolio : Dictionary<String, Object>, IEquatable<ModelPortfolio>, IValidatableObject
+    public partial class ModelPortfolio : IEquatable<ModelPortfolio>, IValidatableObject
     {
         /// <summary>
         /// Enum definitions -&gt; [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio]
@@ -62,14 +62,6 @@ namespace SnapTrade.Net.Model
         /// <value>Enum definitions -&gt; [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio]</value>
         [DataMember(Name = "model_type", EmitDefaultValue = false)]
         public ModelTypeEnum? ModelType { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="ModelPortfolio" /> class.
-            /// </summary>
-        public ModelPortfolio()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelPortfolio" /> class.
         /// </summary>

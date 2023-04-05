@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// OptionChainInnerChainPerRootInner
     /// </summary>
     [DataContract(Name = "OptionChain_inner_chainPerRoot_inner")]
-    public partial class OptionChainInnerChainPerRootInner : Dictionary<String, Object>, IEquatable<OptionChainInnerChainPerRootInner>, IValidatableObject
+    public partial class OptionChainInnerChainPerRootInner : IEquatable<OptionChainInnerChainPerRootInner>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="OptionChainInnerChainPerRootInner" /> class.
-            /// </summary>
-        public OptionChainInnerChainPerRootInner()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionChainInnerChainPerRootInner" /> class.
         /// </summary>

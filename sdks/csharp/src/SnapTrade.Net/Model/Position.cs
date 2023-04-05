@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Account Position
     /// </summary>
     [DataContract(Name = "Position")]
-    public partial class Position : Dictionary<String, Object>, IEquatable<Position>, IValidatableObject
+    public partial class Position : IEquatable<Position>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="Position" /> class.
-            /// </summary>
-        public Position()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Position" /> class.
         /// </summary>

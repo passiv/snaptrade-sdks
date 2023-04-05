@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// Strategy order record
     /// </summary>
     [DataContract(Name = "StrategyOrderRecord")]
-    public partial class StrategyOrderRecord : Dictionary<String, Object>, IEquatable<StrategyOrderRecord>, IValidatableObject
+    public partial class StrategyOrderRecord : IEquatable<StrategyOrderRecord>, IValidatableObject
     {
         /// <summary>
         /// Defines Status
@@ -224,14 +224,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public TimeInForceEnum? TimeInForce { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="StrategyOrderRecord" /> class.
-            /// </summary>
-        public StrategyOrderRecord()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderRecord" /> class.
         /// </summary>

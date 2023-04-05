@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// An excluded asset in a portfolio group
     /// </summary>
     [DataContract(Name = "ExcludedAsset")]
-    public partial class ExcludedAsset : Dictionary<String, Object>, IEquatable<ExcludedAsset>, IValidatableObject
+    public partial class ExcludedAsset : IEquatable<ExcludedAsset>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="ExcludedAsset" /> class.
-            /// </summary>
-        public ExcludedAsset()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcludedAsset" /> class.
         /// </summary>

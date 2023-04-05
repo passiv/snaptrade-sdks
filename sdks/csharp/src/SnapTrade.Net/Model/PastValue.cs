@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// PastValue
     /// </summary>
     [DataContract(Name = "PastValue")]
-    public partial class PastValue : Dictionary<String, Object>, IEquatable<PastValue>, IValidatableObject
+    public partial class PastValue : IEquatable<PastValue>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PastValue" /> class.
-            /// </summary>
-        public PastValue()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PastValue" /> class.
         /// </summary>

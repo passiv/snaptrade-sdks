@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Passiv user account settings
     /// </summary>
     [DataContract(Name = "UserSettings")]
-    public partial class UserSettings : Dictionary<String, Object>, IEquatable<UserSettings>, IValidatableObject
+    public partial class UserSettings : IEquatable<UserSettings>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="UserSettings" /> class.
-            /// </summary>
-        public UserSettings()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserSettings" /> class.
         /// </summary>

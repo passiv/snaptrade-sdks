@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Response when delete user is successful
     /// </summary>
     [DataContract(Name = "DeleteUserResponse")]
-    public partial class DeleteUserResponse : Dictionary<String, Object>, IEquatable<DeleteUserResponse>, IValidatableObject
+    public partial class DeleteUserResponse : IEquatable<DeleteUserResponse>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="DeleteUserResponse" /> class.
-            /// </summary>
-        public DeleteUserResponse()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteUserResponse" /> class.
         /// </summary>

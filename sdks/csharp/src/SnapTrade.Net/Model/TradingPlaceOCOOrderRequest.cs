@@ -33,14 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class TradingPlaceOCOOrderRequest : IEquatable<TradingPlaceOCOOrderRequest>, IValidatableObject
     {
         /// <summary>
-            /// Default constructor for <see cref="TradingPlaceOCOOrderRequest" /> class.
-            /// </summary>
-        public TradingPlaceOCOOrderRequest()
-        {
-        }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TradingPlaceOCOOrderRequest" /> class.
         /// </summary>
         /// <param name="firstTradeId">The ID of first trade object obtained from trade/impact endpoint.</param>

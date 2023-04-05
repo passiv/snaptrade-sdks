@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// SessionEvent
     /// </summary>
     [DataContract(Name = "SessionEvent")]
-    public partial class SessionEvent : Dictionary<String, Object>, IEquatable<SessionEvent>, IValidatableObject
+    public partial class SessionEvent : IEquatable<SessionEvent>, IValidatableObject
     {
         /// <summary>
         /// Defines SessionEventType
@@ -88,14 +88,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "session_event_type", EmitDefaultValue = false)]
         public SessionEventTypeEnum? SessionEventType { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="SessionEvent" /> class.
-            /// </summary>
-        public SessionEvent()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionEvent" /> class.
         /// </summary>

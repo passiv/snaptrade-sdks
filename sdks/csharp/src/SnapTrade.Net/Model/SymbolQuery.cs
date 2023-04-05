@@ -33,14 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class SymbolQuery : IEquatable<SymbolQuery>, IValidatableObject
     {
         /// <summary>
-            /// Default constructor for <see cref="SymbolQuery" /> class.
-            /// </summary>
-        public SymbolQuery()
-        {
-        }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SymbolQuery" /> class.
         /// </summary>
         /// <param name="substring">substring.</param>

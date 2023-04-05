@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// Execution status of a trade
     /// </summary>
     [DataContract(Name = "TradeExecutionStatus")]
-    public partial class TradeExecutionStatus : Dictionary<String, Object>, IEquatable<TradeExecutionStatus>, IValidatableObject
+    public partial class TradeExecutionStatus : IEquatable<TradeExecutionStatus>, IValidatableObject
     {
         /// <summary>
         /// Execution state of a trade
@@ -106,14 +106,6 @@ namespace SnapTrade.Net.Model
         /// <value>Action of executed trade</value>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public ActionEnum? Action { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="TradeExecutionStatus" /> class.
-            /// </summary>
-        public TradeExecutionStatus()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TradeExecutionStatus" /> class.
         /// </summary>

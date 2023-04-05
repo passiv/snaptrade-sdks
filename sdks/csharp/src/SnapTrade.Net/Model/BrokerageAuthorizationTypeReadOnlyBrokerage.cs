@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// BrokerageAuthorizationTypeReadOnlyBrokerage
     /// </summary>
     [DataContract(Name = "BrokerageAuthorizationTypeReadOnly_brokerage")]
-    public partial class BrokerageAuthorizationTypeReadOnlyBrokerage : Dictionary<String, Object>, IEquatable<BrokerageAuthorizationTypeReadOnlyBrokerage>, IValidatableObject
+    public partial class BrokerageAuthorizationTypeReadOnlyBrokerage : IEquatable<BrokerageAuthorizationTypeReadOnlyBrokerage>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageAuthorizationTypeReadOnlyBrokerage" /> class.
-            /// </summary>
-        public BrokerageAuthorizationTypeReadOnlyBrokerage()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationTypeReadOnlyBrokerage" /> class.
         /// </summary>

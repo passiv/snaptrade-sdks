@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// ModelAssetClassTarget
     /// </summary>
     [DataContract(Name = "ModelAssetClassTarget")]
-    public partial class ModelAssetClassTarget : Dictionary<String, Object>, IEquatable<ModelAssetClassTarget>, IValidatableObject
+    public partial class ModelAssetClassTarget : IEquatable<ModelAssetClassTarget>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="ModelAssetClassTarget" /> class.
-            /// </summary>
-        public ModelAssetClassTarget()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelAssetClassTarget" /> class.
         /// </summary>

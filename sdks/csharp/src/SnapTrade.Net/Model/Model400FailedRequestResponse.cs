@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Example for failed request response
     /// </summary>
     [DataContract(Name = "400FailedRequestResponse")]
-    public partial class Model400FailedRequestResponse : Dictionary<String, Object>, IEquatable<Model400FailedRequestResponse>, IValidatableObject
+    public partial class Model400FailedRequestResponse : IEquatable<Model400FailedRequestResponse>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="Model400FailedRequestResponse" /> class.
-            /// </summary>
-        public Model400FailedRequestResponse()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Model400FailedRequestResponse" /> class.
         /// </summary>

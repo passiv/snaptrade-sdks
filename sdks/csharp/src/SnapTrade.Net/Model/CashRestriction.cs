@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// Cash restriction rules that apply to this account when undergoing portfolio rebalance calculations.
     /// </summary>
     [DataContract(Name = "CashRestriction")]
-    public partial class CashRestriction : Dictionary<String, Object>, IEquatable<CashRestriction>, IValidatableObject
+    public partial class CashRestriction : IEquatable<CashRestriction>, IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -58,14 +58,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="CashRestriction" /> class.
-            /// </summary>
-        public CashRestriction()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CashRestriction" /> class.
         /// </summary>

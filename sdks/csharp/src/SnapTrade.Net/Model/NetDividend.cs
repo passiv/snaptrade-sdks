@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Object representing total dividends received during a timeframe
     /// </summary>
     [DataContract(Name = "NetDividend")]
-    public partial class NetDividend : Dictionary<String, Object>, IEquatable<NetDividend>, IValidatableObject
+    public partial class NetDividend : IEquatable<NetDividend>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="NetDividend" /> class.
-            /// </summary>
-        public NetDividend()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NetDividend" /> class.
         /// </summary>

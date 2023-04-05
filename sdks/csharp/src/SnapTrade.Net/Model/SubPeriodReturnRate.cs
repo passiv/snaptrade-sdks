@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// SubPeriodReturnRate
     /// </summary>
     [DataContract(Name = "SubPeriodReturnRate")]
-    public partial class SubPeriodReturnRate : Dictionary<String, Object>, IEquatable<SubPeriodReturnRate>, IValidatableObject
+    public partial class SubPeriodReturnRate : IEquatable<SubPeriodReturnRate>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="SubPeriodReturnRate" /> class.
-            /// </summary>
-        public SubPeriodReturnRate()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SubPeriodReturnRate" /> class.
         /// </summary>

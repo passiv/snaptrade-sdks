@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// NetContributions
     /// </summary>
     [DataContract(Name = "NetContributions")]
-    public partial class NetContributions : Dictionary<String, Object>, IEquatable<NetContributions>, IValidatableObject
+    public partial class NetContributions : IEquatable<NetContributions>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="NetContributions" /> class.
-            /// </summary>
-        public NetContributions()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NetContributions" /> class.
         /// </summary>

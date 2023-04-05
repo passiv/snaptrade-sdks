@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// A manual trade object
     /// </summary>
     [DataContract(Name = "ManualTrade")]
-    public partial class ManualTrade : Dictionary<String, Object>, IEquatable<ManualTrade>, IValidatableObject
+    public partial class ManualTrade : IEquatable<ManualTrade>, IValidatableObject
     {
 
         /// <summary>
@@ -50,14 +50,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public Action? Action { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="ManualTrade" /> class.
-            /// </summary>
-        public ManualTrade()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTrade" /> class.
         /// </summary>

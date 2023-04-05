@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Response when register user is successful
     /// </summary>
     [DataContract(Name = "RedirectTokenandPin")]
-    public partial class RedirectTokenandPin : Dictionary<String, Object>, IEquatable<RedirectTokenandPin>, IValidatableObject
+    public partial class RedirectTokenandPin : IEquatable<RedirectTokenandPin>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="RedirectTokenandPin" /> class.
-            /// </summary>
-        public RedirectTokenandPin()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectTokenandPin" /> class.
         /// </summary>

@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Balance
     /// </summary>
     [DataContract(Name = "ManualTradeBalance")]
-    public partial class ManualTradeBalance : Dictionary<String, Object>, IEquatable<ManualTradeBalance>, IValidatableObject
+    public partial class ManualTradeBalance : IEquatable<ManualTradeBalance>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="ManualTradeBalance" /> class.
-            /// </summary>
-        public ManualTradeBalance()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeBalance" /> class.
         /// </summary>

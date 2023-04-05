@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Symbol returned in position object
     /// </summary>
     [DataContract(Name = "PositionSymbol")]
-    public partial class PositionSymbol : Dictionary<String, Object>, IEquatable<PositionSymbol>, IValidatableObject
+    public partial class PositionSymbol : IEquatable<PositionSymbol>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PositionSymbol" /> class.
-            /// </summary>
-        public PositionSymbol()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionSymbol" /> class.
         /// </summary>

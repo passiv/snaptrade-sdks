@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// StrategyImpactLegsInner
     /// </summary>
     [DataContract(Name = "StrategyImpact_legs_inner")]
-    public partial class StrategyImpactLegsInner : Dictionary<String, Object>, IEquatable<StrategyImpactLegsInner>, IValidatableObject
+    public partial class StrategyImpactLegsInner : IEquatable<StrategyImpactLegsInner>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="StrategyImpactLegsInner" /> class.
-            /// </summary>
-        public StrategyImpactLegsInner()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyImpactLegsInner" /> class.
         /// </summary>

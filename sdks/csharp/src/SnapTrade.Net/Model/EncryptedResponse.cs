@@ -33,14 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class EncryptedResponse : IEquatable<EncryptedResponse>, IValidatableObject
     {
         /// <summary>
-            /// Default constructor for <see cref="EncryptedResponse" /> class.
-            /// </summary>
-        public EncryptedResponse()
-        {
-        }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EncryptedResponse" /> class.
         /// </summary>
         /// <param name="encryptedSharedKey">encryptedSharedKey.</param>

@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// ModelPortfolioSecurity
     /// </summary>
     [DataContract(Name = "ModelPortfolioSecurity")]
-    public partial class ModelPortfolioSecurity : Dictionary<String, Object>, IEquatable<ModelPortfolioSecurity>, IValidatableObject
+    public partial class ModelPortfolioSecurity : IEquatable<ModelPortfolioSecurity>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="ModelPortfolioSecurity" /> class.
-            /// </summary>
-        public ModelPortfolioSecurity()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelPortfolioSecurity" /> class.
         /// </summary>

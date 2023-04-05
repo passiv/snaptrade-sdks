@@ -11,7 +11,6 @@ namespace SnapTrade.Net.Client
         {
             string timestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
             request.AddQueryParameter("timestamp", timestamp);
-
         }
     }
 }

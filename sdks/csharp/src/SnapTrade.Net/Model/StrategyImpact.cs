@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// The strategy impact
     /// </summary>
     [DataContract(Name = "StrategyImpact")]
-    public partial class StrategyImpact : Dictionary<String, Object>, IEquatable<StrategyImpact>, IValidatableObject
+    public partial class StrategyImpact : IEquatable<StrategyImpact>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="StrategyImpact" /> class.
-            /// </summary>
-        public StrategyImpact()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyImpact" /> class.
         /// </summary>

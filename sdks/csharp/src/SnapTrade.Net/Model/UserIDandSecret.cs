@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Response when register user is successful
     /// </summary>
     [DataContract(Name = "UserIDandSecret")]
-    public partial class UserIDandSecret : Dictionary<String, Object>, IEquatable<UserIDandSecret>, IValidatableObject
+    public partial class UserIDandSecret : IEquatable<UserIDandSecret>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="UserIDandSecret" /> class.
-            /// </summary>
-        public UserIDandSecret()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserIDandSecret" /> class.
         /// </summary>

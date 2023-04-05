@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// BrokerageAuthorization
     /// </summary>
     [DataContract(Name = "BrokerageAuthorization")]
-    public partial class BrokerageAuthorization : Dictionary<String, Object>, IEquatable<BrokerageAuthorization>, IValidatableObject
+    public partial class BrokerageAuthorization : IEquatable<BrokerageAuthorization>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageAuthorization" /> class.
-            /// </summary>
-        public BrokerageAuthorization()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorization" /> class.
         /// </summary>

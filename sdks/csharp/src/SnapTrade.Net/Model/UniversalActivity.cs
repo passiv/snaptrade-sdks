@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// A transaction or activity from an institution
     /// </summary>
     [DataContract(Name = "UniversalActivity")]
-    public partial class UniversalActivity : Dictionary<String, Object>, IEquatable<UniversalActivity>, IValidatableObject
+    public partial class UniversalActivity : IEquatable<UniversalActivity>, IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -154,14 +154,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="UniversalActivity" /> class.
-            /// </summary>
-        public UniversalActivity()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalActivity" /> class.
         /// </summary>

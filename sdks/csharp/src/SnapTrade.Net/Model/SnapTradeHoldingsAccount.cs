@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// SnapTradeUser Investment Account
     /// </summary>
     [DataContract(Name = "SnapTradeHoldingsAccount")]
-    public partial class SnapTradeHoldingsAccount : Dictionary<String, Object>, IEquatable<SnapTradeHoldingsAccount>, IValidatableObject
+    public partial class SnapTradeHoldingsAccount : IEquatable<SnapTradeHoldingsAccount>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="SnapTradeHoldingsAccount" /> class.
-            /// </summary>
-        public SnapTradeHoldingsAccount()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeHoldingsAccount" /> class.
         /// </summary>

@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Summary of all relevant information about a portfolio group.
     /// </summary>
     [DataContract(Name = "PortfolioGroupInfo")]
-    public partial class PortfolioGroupInfo : Dictionary<String, Object>, IEquatable<PortfolioGroupInfo>, IValidatableObject
+    public partial class PortfolioGroupInfo : IEquatable<PortfolioGroupInfo>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PortfolioGroupInfo" /> class.
-            /// </summary>
-        public PortfolioGroupInfo()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PortfolioGroupInfo" /> class.
         /// </summary>

@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// Option Leg
     /// </summary>
     [DataContract(Name = "OptionLeg")]
-    public partial class OptionLeg : Dictionary<String, Object>, IEquatable<OptionLeg>, IValidatableObject
+    public partial class OptionLeg : IEquatable<OptionLeg>, IValidatableObject
     {
         /// <summary>
         /// Defines Action
@@ -70,14 +70,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public ActionEnum? Action { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="OptionLeg" /> class.
-            /// </summary>
-        public OptionLeg()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionLeg" /> class.
         /// </summary>

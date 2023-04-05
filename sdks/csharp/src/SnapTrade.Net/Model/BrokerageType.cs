@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Type of brokerage
     /// </summary>
     [DataContract(Name = "BrokerageType")]
-    public partial class BrokerageType : Dictionary<String, Object>, IEquatable<BrokerageType>, IValidatableObject
+    public partial class BrokerageType : IEquatable<BrokerageType>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageType" /> class.
-            /// </summary>
-        public BrokerageType()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageType" /> class.
         /// </summary>

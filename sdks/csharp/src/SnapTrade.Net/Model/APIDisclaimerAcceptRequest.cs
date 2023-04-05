@@ -33,14 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class APIDisclaimerAcceptRequest : IEquatable<APIDisclaimerAcceptRequest>, IValidatableObject
     {
         /// <summary>
-            /// Default constructor for <see cref="APIDisclaimerAcceptRequest" /> class.
-            /// </summary>
-        public APIDisclaimerAcceptRequest()
-        {
-        }
-
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="APIDisclaimerAcceptRequest" /> class.
         /// </summary>
         /// <param name="accepted">A boolean that indicates whether this user has accepted the disclaimer or not..</param>

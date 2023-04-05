@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Impact of a group of trade
     /// </summary>
     [DataContract(Name = "TradeImpact")]
-    public partial class TradeImpact : Dictionary<String, Object>, IEquatable<TradeImpact>, IValidatableObject
+    public partial class TradeImpact : IEquatable<TradeImpact>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="TradeImpact" /> class.
-            /// </summary>
-        public TradeImpact()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TradeImpact" /> class.
         /// </summary>

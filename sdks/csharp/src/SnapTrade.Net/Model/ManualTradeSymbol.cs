@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Manual trade symbol object
     /// </summary>
     [DataContract(Name = "ManualTradeSymbol")]
-    public partial class ManualTradeSymbol : Dictionary<String, Object>, IEquatable<ManualTradeSymbol>, IValidatableObject
+    public partial class ManualTradeSymbol : IEquatable<ManualTradeSymbol>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="ManualTradeSymbol" /> class.
-            /// </summary>
-        public ManualTradeSymbol()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeSymbol" /> class.
         /// </summary>

@@ -30,16 +30,8 @@ namespace SnapTrade.Net.Model
     /// Details of a security held
     /// </summary>
     [DataContract(Name = "PortfolioGroupPosition")]
-    public partial class PortfolioGroupPosition : Dictionary<String, Object>, IEquatable<PortfolioGroupPosition>, IValidatableObject
+    public partial class PortfolioGroupPosition : IEquatable<PortfolioGroupPosition>, IValidatableObject
     {
-        /// <summary>
-            /// Default constructor for <see cref="PortfolioGroupPosition" /> class.
-            /// </summary>
-        public PortfolioGroupPosition()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PortfolioGroupPosition" /> class.
         /// </summary>

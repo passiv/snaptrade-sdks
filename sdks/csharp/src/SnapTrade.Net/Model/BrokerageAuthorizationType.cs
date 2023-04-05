@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Model
     /// BrokerageAuthorizationType
     /// </summary>
     [DataContract(Name = "BrokerageAuthorizationType")]
-    public partial class BrokerageAuthorizationType : Dictionary<String, Object>, IEquatable<BrokerageAuthorizationType>, IValidatableObject
+    public partial class BrokerageAuthorizationType : IEquatable<BrokerageAuthorizationType>, IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -58,14 +58,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
-        /// <summary>
-            /// Default constructor for <see cref="BrokerageAuthorizationType" /> class.
-            /// </summary>
-        public BrokerageAuthorizationType()
-        {
-        }
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationType" /> class.
         /// </summary>
