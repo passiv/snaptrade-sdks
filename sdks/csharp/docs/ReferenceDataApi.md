@@ -24,6 +24,7 @@ Return the exchange rate of a currency pair
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -37,19 +38,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
             var currencyPair = "currencyPair_example";  // string | A currency pair based on currency code for example, {CAD-USD}
@@ -60,10 +54,10 @@ namespace Example
                 ExchangeRatePairs result = apiInstance.GetCurrencyExchangeRatePair(currencyPair);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetCurrencyExchangeRatePair: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -126,6 +120,7 @@ Get metadata related to Snaptrade partner
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -139,19 +134,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -161,10 +149,10 @@ namespace Example
                 PartnerData result = apiInstance.GetPartnerInfo();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetPartnerInfo: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -227,6 +215,7 @@ List of all security types.
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -240,19 +229,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -262,10 +244,10 @@ namespace Example
                 List<SecurityType> result = apiInstance.GetSecurityTypes();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetSecurityTypes: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -325,6 +307,7 @@ Return list of stock exchanges on Passiv and their suffixes
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -338,19 +321,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -360,10 +336,10 @@ namespace Example
                 List<Exchange> result = apiInstance.GetStockExchanges();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetStockExchanges: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -422,6 +398,7 @@ Search for symbols
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -435,19 +412,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
             var symbolQuery = new SymbolQuery(); // SymbolQuery |  (optional) 
@@ -458,10 +428,10 @@ namespace Example
                 List<UniversalSymbol> result = apiInstance.GetSymbols(symbolQuery);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetSymbols: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -525,6 +495,7 @@ Get details of a symbol by the ticker
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -538,19 +509,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
             var ticker = "ticker_example";  // Guid | The ticker of the UniversalSymbol to get.
@@ -562,10 +526,10 @@ namespace Example
                 UniversalSymbol result = apiInstance.GetSymbolsByTicker(ticker, symbolId);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.GetSymbolsByTicker: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -631,6 +595,7 @@ List of all brokerage authorization types
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -644,19 +609,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
             var brokerage = QUESTRADE,ALPACA;  // string | Comma separated value of brokerage slugs (optional) 
@@ -667,10 +625,10 @@ namespace Example
                 List<BrokerageAuthorizationTypeReadOnly> result = apiInstance.ListAllBrokerageAuthorizationType(brokerage);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.ListAllBrokerageAuthorizationType: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -734,6 +692,7 @@ List of all brokerages.
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -747,19 +706,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -769,10 +721,10 @@ namespace Example
                 List<Brokerage> result = apiInstance.ListAllBrokerages();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.ListAllBrokerages: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -832,6 +784,7 @@ List of all supported currencies
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -845,19 +798,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -867,10 +813,10 @@ namespace Example
                 List<Currency> result = apiInstance.ListAllCurrencies();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.ListAllCurrencies: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -930,6 +876,7 @@ Return the exchange rates of all supported currencies
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -943,19 +890,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
 
@@ -965,10 +905,10 @@ namespace Example
                 List<ExchangeRatePairs> result = apiInstance.ListAllCurrenciesRates();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.ListAllCurrenciesRates: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -1027,6 +967,7 @@ Search for symbols that are supported by a brokerage account using a substring
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -1040,19 +981,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new ReferenceDataApi(config);
             var userId = "userId_example";  // string | 
@@ -1066,10 +1000,10 @@ namespace Example
                 List<UniversalSymbol> result = apiInstance.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ReferenceDataApi.SymbolSearchUserAccount: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }

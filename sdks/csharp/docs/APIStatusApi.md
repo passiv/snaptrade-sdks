@@ -16,6 +16,7 @@ Check whether the API is operational and verify timestamps.
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -29,7 +30,13 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+
             var apiInstance = new APIStatusApi(config);
 
             try
@@ -38,10 +45,10 @@ namespace Example
                 Status result = apiInstance.Check();
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling APIStatusApi.Check: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }

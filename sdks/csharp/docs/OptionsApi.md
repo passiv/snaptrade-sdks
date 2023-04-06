@@ -18,6 +18,7 @@ Creates an option strategy object that will be used to place an option strategy 
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -31,19 +32,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
@@ -57,10 +51,10 @@ namespace Example
                 StrategyQuotes result = apiInstance.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling OptionsApi.GetOptionStrategy: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -127,6 +121,7 @@ Get the options chain
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -140,19 +135,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
@@ -166,10 +154,10 @@ namespace Example
                 List<OptionChainInner> result = apiInstance.GetOptionsChain(userId, userSecret, accountId, symbol);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling OptionsApi.GetOptionsChain: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -236,6 +224,7 @@ Get latest market data of option strategy
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -249,19 +238,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
@@ -275,10 +257,10 @@ namespace Example
                 StrategyQuotes result = apiInstance.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling OptionsApi.GetOptionsStrategyQuote: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -345,6 +327,7 @@ Get the options holdings in the account
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -358,19 +341,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
@@ -383,10 +359,10 @@ namespace Example
                 OptionsHoldings result = apiInstance.ListOptionHoldings(userId, userSecret, accountId);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling OptionsApi.ListOptionHoldings: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
@@ -452,6 +428,7 @@ Place an option strategy order on the brokerage
 
 ### Example
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using SnapTrade.Net.Api;
@@ -465,19 +442,12 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "https://api.snaptrade.com/api/v1";
-            // Configure API key authorization: PartnerClientId
-            config.AddApiKey("clientId", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("clientId", "Bearer");
-            // Configure API key authorization: PartnerSignature
-            config.AddApiKey("Signature", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("Signature", "Bearer");
-            // Configure API key authorization: PartnerTimestamp
-            config.AddApiKey("timestamp", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("timestamp", "Bearer");
+
+            // Configure custom BasePath if desired
+            // config.BasePath = "https://api.snaptrade.com/api/v1";
+
+            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
@@ -492,10 +462,10 @@ namespace Example
                 StrategyOrderRecord result = apiInstance.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
                 Debug.WriteLine(result);
             }
-            catch (ApiException  e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling OptionsApi.PlaceOptionStrategy: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
         }
