@@ -4032,6 +4032,8 @@ components:
       description: Symbol
       type: object
       properties:
+        id:
+          $ref: "#/components/schemas/Id"
         symbol:
           type: string
           example: VAB.TO
@@ -4131,7 +4133,7 @@ components:
           example: Questrade
         description:
           type: string
-          example: Questrade is GREAT!
+          example: Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada's largest discount broker.
         aws_s3_logo_url:
           type: string
           format: url
