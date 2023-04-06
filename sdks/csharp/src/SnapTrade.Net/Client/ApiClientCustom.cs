@@ -28,7 +28,6 @@ namespace SnapTrade.Net.Client
                     requestBody = parameter;
                 }
             }
-            if (requestBody == null) return;
             string query = string.Join("&", request.Parameters
                 .Where(p => p.Type == ParameterType.QueryString)
                 .Select(p => $"{p.Name}={p.Value}"));
@@ -36,7 +35,7 @@ namespace SnapTrade.Net.Client
 
             var json = new
             {
-                content = requestBody.Value,
+                content = requestBody == null ? null : requestBody.Value,
                 query = query,
                 path = path
             };

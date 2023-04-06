@@ -48,8 +48,6 @@ namespace SnapTrade.Net.Test.Api
             configuration.ConsumerKey = consumerKey;
             apiStatusApi = new APIStatusApi(configuration);
             authenticationApi = new AuthenticationApi(configuration);
-            portfolioManagementApi = new PortfolioManagementApi(configuration);
-            apiDisclaimerApi = new APIDisclaimerApi(configuration);
             accountInformationApi = new AccountInformationApi(configuration);
         }
 
@@ -68,6 +66,12 @@ namespace SnapTrade.Net.Test.Api
                 string uuid = Guid.NewGuid().ToString();
                 UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
                 Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+                var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
+                Console.WriteLine(redirectUri);
+                var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
+                Console.WriteLine(holdings);
+                var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
+                Console.WriteLine(deleteResponse);
             }
             catch (ApiException e)
             {
