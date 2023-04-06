@@ -24,7 +24,7 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   csharp:
-    version: 1.1.0
+    version: 1.2.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
