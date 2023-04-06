@@ -32,6 +32,12 @@ export interface Symbol {
      * @type {string}
      * @memberof Symbol
      */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Symbol
+     */
     'symbol'?: string;
     /**
      * 

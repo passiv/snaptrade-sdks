@@ -49,6 +49,7 @@ import { Trade } from '../models';
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { PortfolioManagementApiCustom } from "./portfolio-management-api-custom";
 /**
  * PortfolioManagementApi - axios parameter creator
  * @export
@@ -2889,7 +2890,7 @@ export type PortfolioManagementApiUpdatePortfolioTargetByIdRequest = {
  * @class PortfolioManagementApi
  * @extends {BaseAPI}
  */
-export class PortfolioManagementApi extends BaseAPI {
+export class PortfolioManagementApi extends PortfolioManagementApiCustom {
     /**
      * 
      * @summary Adds an asset to exclude to a portfolio group

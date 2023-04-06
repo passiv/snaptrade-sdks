@@ -43,6 +43,7 @@ import { TradingCancelUserAccountOrderRequest } from '../models';
 import { TradingPlaceOCOOrderRequest } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { TradingApiCustom } from "./trading-api-custom";
 /**
  * TradingApi - axios parameter creator
  * @export
@@ -1168,7 +1169,7 @@ export type TradingApiPlaceOrderRequest = {
  * @class TradingApi
  * @extends {BaseAPI}
  */
-export class TradingApi extends BaseAPI {
+export class TradingApi extends TradingApiCustom {
     /**
      * 
      * @summary Cancel open order in account

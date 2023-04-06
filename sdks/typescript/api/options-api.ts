@@ -33,6 +33,7 @@ import { StrategyOrderRecord } from '../models';
 import { StrategyQuotes } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { OptionsApiCustom } from "./options-api-custom";
 /**
  * OptionsApi - axios parameter creator
  * @export
@@ -673,7 +674,7 @@ export type OptionsApiPlaceOptionStrategyRequest = {
  * @class OptionsApi
  * @extends {BaseAPI}
  */
-export class OptionsApi extends BaseAPI {
+export class OptionsApi extends OptionsApiCustom {
     /**
      * 
      * @summary Creates an option strategy object that will be used to place an option strategy order

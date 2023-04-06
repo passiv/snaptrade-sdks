@@ -23,6 +23,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { Status } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { ApiStatusApiCustom } from "./api-status-api-custom";
 /**
  * ApiStatusApi - axios parameter creator
  * @export
@@ -113,7 +114,7 @@ export const ApiStatusApiFactory = function (configuration?: Configuration, base
  * @class ApiStatusApi
  * @extends {BaseAPI}
  */
-export class ApiStatusApi extends BaseAPI {
+export class ApiStatusApi extends ApiStatusApiCustom {
     /**
      * Check whether the API is operational and verify timestamps.
      * @summary Get API Status

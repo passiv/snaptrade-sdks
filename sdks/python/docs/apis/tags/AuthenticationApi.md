@@ -159,7 +159,7 @@ headers | Unset | headers were not defined |
 <a name="get_user_jwt"></a>
 > EncryptedResponse get_user_jwt(user_iduser_secret)
 
-Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
 
 ### Example
 
@@ -311,7 +311,7 @@ headers | Unset | headers were not defined |
 <a name="list_snap_trade_users"></a>
 > UserList list_snap_trade_users()
 
-Get a list of all SnapTrade users you've registered on our platform
+Get a list of all SnapTrade users you&#x27;ve registered on our platform
 
 ### Example
 

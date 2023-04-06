@@ -35,13 +35,15 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Symbol" /> class.
         /// </summary>
+        /// <param name="id">id.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="rawSymbol">rawSymbol.</param>
         /// <param name="name">name.</param>
         /// <param name="currency">currency.</param>
         /// <param name="exchange">exchange.</param>
-        public Symbol(string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange)) : base()
+        public Symbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange)) : base()
         {
+            this.Id = id;
             this._Symbol = symbol;
             this.RawSymbol = rawSymbol;
             this.Name = name;
@@ -49,6 +51,12 @@ namespace SnapTrade.Net.Model
             this.Exchange = exchange;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or Sets _Symbol
@@ -95,6 +103,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class Symbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  _Symbol: ").Append(_Symbol).Append("\n");
             sb.Append("  RawSymbol: ").Append(RawSymbol).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -137,6 +146,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
+                ) && base.Equals(input) && 
+                (
                     this._Symbol == input._Symbol ||
                     (this._Symbol != null &&
                     this._Symbol.Equals(input._Symbol))
@@ -173,6 +187,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Id != null)
+                {
+                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
+                }
                 if (this._Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this._Symbol.GetHashCode();

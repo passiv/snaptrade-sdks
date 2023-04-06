@@ -25,6 +25,7 @@ import { BrokerageAuthorization } from '../models';
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { ConnectionsApiCustom } from "./connections-api-custom";
 /**
  * ConnectionsApi - axios parameter creator
  * @export
@@ -480,7 +481,7 @@ export type ConnectionsApiSessionEventsRequest = {
  * @class ConnectionsApi
  * @extends {BaseAPI}
  */
-export class ConnectionsApi extends BaseAPI {
+export class ConnectionsApi extends ConnectionsApiCustom {
     /**
      * 
      * @summary Get detail of a specific brokerage authorizations for the user

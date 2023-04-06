@@ -35,6 +35,7 @@ import { Model403FailedRequestResponse } from '../models';
 import { Position } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { AccountInformationApiCustom } from "./account-information-api-custom";
 /**
  * AccountInformationApi - axios parameter creator
  * @export
@@ -960,7 +961,7 @@ export type AccountInformationApiUpdateUserAccountRequest = {
  * @class AccountInformationApi
  * @extends {BaseAPI}
  */
-export class AccountInformationApi extends BaseAPI {
+export class AccountInformationApi extends AccountInformationApiCustom {
     /**
      * 
      * @summary List all accounts for the user, plus balances and positions for each account.

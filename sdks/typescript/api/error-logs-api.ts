@@ -23,6 +23,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { UserErrorLog } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { ErrorLogsApiCustom } from "./error-logs-api-custom";
 /**
  * ErrorLogsApi - axios parameter creator
  * @export
@@ -158,7 +159,7 @@ export type ErrorLogsApiListUserErrorsRequest = {
  * @class ErrorLogsApi
  * @extends {BaseAPI}
  */
-export class ErrorLogsApi extends BaseAPI {
+export class ErrorLogsApi extends ErrorLogsApiCustom {
     /**
      * 
      * @summary Retrieve error logs on behalf of your SnapTrade users
