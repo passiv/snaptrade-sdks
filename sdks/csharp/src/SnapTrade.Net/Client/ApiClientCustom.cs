@@ -31,7 +31,12 @@ namespace SnapTrade.Net.Client
             string query = string.Join("&", request.Parameters
                 .Where(p => p.Type == ParameterType.QueryString)
                 .Select(p => $"{p.Name}={p.Value}"));
-            string path = "/api/v1" + request.Resource;
+            var resourceUrl = request.Resource;
+            foreach (var parameter in request.Parameters.Where(p => p.Type == ParameterType.UrlSegment))
+            {
+                resourceUrl = resourceUrl.Replace("{" + parameter.Name + "}", parameter.Value.ToString());
+            }
+            string path = "/api/v1" + resourceUrl;
 
             var json = new
             {

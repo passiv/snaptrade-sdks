@@ -39,16 +39,28 @@ namespace SnapTrade.Net.Test.Api
         private APIDisclaimerApi apiDisclaimerApi;
         private AccountInformationApi accountInformationApi;
 
+        private ReferenceDataApi referenceDataApi;
+
+        private OptionsApi optionsApi;
+
+        private string testUserId;
+
+        private string testUserSecret;
+
         public GettingStartedTests()
         {
             Configuration configuration = new Configuration();
             string clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
             string consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+            this.testUserId = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_ID");
+            this.testUserSecret = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_SECRET");
             configuration.ApiKey.Add("clientId", clientId);
             configuration.ConsumerKey = consumerKey;
             apiStatusApi = new APIStatusApi(configuration);
             authenticationApi = new AuthenticationApi(configuration);
             accountInformationApi = new AccountInformationApi(configuration);
+            referenceDataApi = new ReferenceDataApi(configuration);
+            optionsApi = new OptionsApi(configuration);
         }
 
         public void Dispose()
@@ -59,26 +71,37 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GettingStartedTest()
         {
-            try
-            {
-                Status status = apiStatusApi.Check();
-                Console.WriteLine(status.ToJson());
-                string uuid = Guid.NewGuid().ToString();
-                UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
-                Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
-                var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
-                Console.WriteLine(redirectUri);
-                var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
-                Console.WriteLine(holdings);
-                var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
-                Console.WriteLine(deleteResponse);
-            }
-            catch (ApiException e)
-            {
-                Debug.Print("Exception when calling APIDisclaimerApi.Accept: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
+            Status status = apiStatusApi.Check();
+            Console.WriteLine(status.ToJson());
+            string uuid = Guid.NewGuid().ToString();
+            UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
+            Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+            var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
+            Console.WriteLine(redirectUri);
+            var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(holdings);
+            var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
+            Console.WriteLine(deleteResponse);
+        }
+
+        [Fact]
+        public void GetUserAccountBalance()
+        {
+            var accounts = accountInformationApi.ListUserAccounts(this.testUserId, this.testUserSecret);
+            Console.WriteLine(accounts);
+            var response = accountInformationApi.GetUserAccountBalance(this.testUserId, this.testUserSecret, accounts[0].Id);
+            Console.WriteLine(response);
+        }
+
+        [Fact(Skip = "Getting 500 error code")]
+        public void GetOptionsChain()
+        {
+            var accounts = accountInformationApi.ListUserAccounts(this.testUserId, this.testUserSecret);
+            Console.WriteLine(accounts.ToString());
+            var symbols = referenceDataApi.GetSymbols(new SymbolQuery("apple"));
+            Console.WriteLine(symbols.ToString());
+            var optionsChain = optionsApi.GetOptionsChain(this.testUserId, this.testUserSecret, accounts[0].Id, symbols[0].Id);
+            Console.WriteLine(optionsChain);
         }
 
     }
