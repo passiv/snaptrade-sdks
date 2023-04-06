@@ -1,35 +1,23 @@
-## snaptrade-typescript-sdk@6.3.0
+## snaptrade-typescript-sdk@6.4.0
+Connect brokerage accounts to your app for live positions and trading
 
-This library that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
-Environment
-* Node.js
-* Webpack
-* Browserify
+**Important note: this library is can be used in both the client-side or server-side, but using it
+in client-side browser code is not recommended as you would expose security credentials.**
 
-Language level
-* ES5 - you must have a Promises/A+ library installed
-* ES6
+### Installing
 
-Module system
-* CommonJS
-* ES6 module system
-
-### Building
-
-To build and compile the typescript sources to javascript use:
+#### npm
 ```
-npm install
-npm run build
+npm install snaptrade-typescript-sdk --save
 ```
 
-### Consuming
-
-navigate to the folder of your consuming project and run the following command.
-
+#### yarn
 ```
-npm install snaptrade-typescript-sdk@6.3.0 --save
+yarn add snaptrade-typescript-sdk
 ```
+
+
 
 ### Getting Started
 
@@ -196,5 +184,4 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**placeOrder**](docs/TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order
 *TransactionsAndReportingApi* | [**getActivities**](docs/TransactionsAndReportingApi.md#getActivities) | **GET** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**getReportingCustomRange**](docs/TransactionsAndReportingApi.md#getReportingCustomRange) | **GET** /performance/custom | Get performance information for a specific timeframe
-
 

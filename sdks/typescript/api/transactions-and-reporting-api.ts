@@ -25,6 +25,7 @@ import { PerformanceCustom } from '../models';
 import { UniversalActivity } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { TransactionsAndReportingApiCustom } from "./transactions-and-reporting-api-custom";
 /**
  * TransactionsAndReportingApi - axios parameter creator
  * @export
@@ -372,7 +373,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
  * @class TransactionsAndReportingApi
  * @extends {BaseAPI}
  */
-export class TransactionsAndReportingApi extends BaseAPI {
+export class TransactionsAndReportingApi extends TransactionsAndReportingApiCustom {
     /**
      * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
      * @summary Get transaction history for a user

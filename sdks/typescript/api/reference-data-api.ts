@@ -45,6 +45,7 @@ import { SymbolQuery } from '../models';
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { ReferenceDataApiCustom } from "./reference-data-api-custom";
 /**
  * ReferenceDataApi - axios parameter creator
  * @export
@@ -901,7 +902,7 @@ export type ReferenceDataApiSymbolSearchUserAccountRequest = {
  * @class ReferenceDataApi
  * @extends {BaseAPI}
  */
-export class ReferenceDataApi extends BaseAPI {
+export class ReferenceDataApi extends ReferenceDataApiCustom {
     /**
      * 
      * @summary Return the exchange rate of a currency pair

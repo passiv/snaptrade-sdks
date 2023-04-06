@@ -10,6 +10,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  | Symbol |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
+**id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **symbol** | str,  | str,  |  | [optional] 
 **raw_symbol** | str,  | str,  |  | [optional] 
 **name** | str,  | str,  |  | [optional] 

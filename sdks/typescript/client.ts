@@ -25,8 +25,9 @@ import {
   TransactionsAndReportingApi,
 } from "./api";
 import { Configuration, ConfigurationParameters } from "./configuration";
+import { SnaptradeCustom } from "./client-custom";
 
-export class Snaptrade {
+export class Snaptrade extends SnaptradeCustom {
   readonly accountInformation: AccountInformationApi;
   readonly apiDisclaimer: ApiDisclaimerApi;
   readonly apiStatus: ApiStatusApi;
@@ -40,6 +41,7 @@ export class Snaptrade {
   readonly transactionsAndReporting: TransactionsAndReportingApi;
 
   constructor(configurationParameters: ConfigurationParameters) {
+    super(configurationParameters);
     const configuration = new Configuration(configurationParameters);
     this.accountInformation = new AccountInformationApi(configuration);
     this.apiDisclaimer = new ApiDisclaimerApi(configuration);

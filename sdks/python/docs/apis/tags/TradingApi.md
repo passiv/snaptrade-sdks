@@ -202,7 +202,7 @@ headers | Unset | headers were not defined |
 <a name="get_calculated_trade_impact_by_id"></a>
 > Trade get_calculated_trade_impact_by_id(portfolio_group_idcalculated_trade_idtrade_id)
 
-Return details of a specific trade before it's placed
+Return details of a specific trade before it&#x27;s placed
 
 ### Example
 

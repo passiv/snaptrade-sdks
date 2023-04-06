@@ -25,6 +25,7 @@ import { APIDisclaimerAcceptRequest } from '../models';
 import { SnapTradeAPIDisclaimerAcceptStatus } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { ApiDisclaimerApiCustom } from "./api-disclaimer-api-custom";
 /**
  * ApiDisclaimerApi - axios parameter creator
  * @export
@@ -167,7 +168,7 @@ export type ApiDisclaimerApiAcceptRequest = {
  * @class ApiDisclaimerApi
  * @extends {BaseAPI}
  */
-export class ApiDisclaimerApi extends BaseAPI {
+export class ApiDisclaimerApi extends ApiDisclaimerApiCustom {
     /**
      * 
      * @summary Accept or Reject SnapTrade disclaimer agreement

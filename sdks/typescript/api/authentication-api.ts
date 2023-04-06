@@ -39,6 +39,7 @@ import { SnapTradeRegisterUserRequestBody } from '../models';
 import { UserIDandSecret } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
+import { AuthenticationApiCustom } from "./authentication-api-custom";
 /**
  * AuthenticationApi - axios parameter creator
  * @export
@@ -505,7 +506,7 @@ export type AuthenticationApiRegisterSnapTradeUserRequest = {
  * @class AuthenticationApi
  * @extends {BaseAPI}
  */
-export class AuthenticationApi extends BaseAPI {
+export class AuthenticationApi extends AuthenticationApiCustom {
     /**
      * 
      * @summary Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user

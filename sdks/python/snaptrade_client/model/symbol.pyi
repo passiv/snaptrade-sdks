@@ -37,6 +37,7 @@ class Symbol(
     class MetaOapg:
         
         class properties:
+            id = schemas.UUIDSchema
             symbol = schemas.StrSchema
             raw_symbol = schemas.StrSchema
             name = schemas.StrSchema
@@ -49,6 +50,7 @@ class Symbol(
             def exchange() -> typing.Type['Exchange']:
                 return Exchange
             __annotations__ = {
+                "id": id,
                 "symbol": symbol,
                 "raw_symbol": raw_symbol,
                 "name": name,
@@ -56,6 +58,9 @@ class Symbol(
                 "exchange": exchange,
             }
         additional_properties = schemas.AnyTypeSchema
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
@@ -75,9 +80,12 @@ class Symbol(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
@@ -97,12 +105,13 @@ class Symbol(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
         raw_symbol: typing.Union[MetaOapg.properties.raw_symbol, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
@@ -114,6 +123,7 @@ class Symbol(
         return super().__new__(
             cls,
             *args,
+            id=id,
             symbol=symbol,
             raw_symbol=raw_symbol,
             name=name,

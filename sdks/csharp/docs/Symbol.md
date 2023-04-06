@@ -5,6 +5,7 @@ Symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | **Guid** |  | [optional] 
 **_Symbol** | **string** |  | [optional] 
 **RawSymbol** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 

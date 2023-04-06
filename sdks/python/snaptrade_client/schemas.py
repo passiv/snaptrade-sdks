@@ -642,8 +642,8 @@ if typing.TYPE_CHECKING:
     # qty 6
     class NoneFrozenDictTupleStrDecimalBoolMixin(NoneClass, frozendict.frozendict, tuple, str, decimal.Decimal, BoolClass):
         pass
-    # qty 8
-    class NoneFrozenDictTupleStrDecimalBoolFileBytesMixin(NoneClass, frozendict.frozendict, tuple, str, decimal.Decimal, BoolClass, FileIO, bytes):
+    # qty 9
+    class NoneFrozenDictTupleStrIntDecimalBoolFileBytesMixin(NoneClass, frozendict.frozendict, tuple, str, int, decimal.Decimal, BoolClass, FileIO, bytes):
         pass
 else:
     # qty 1
@@ -786,9 +786,9 @@ else:
     # qty 6
     class NoneFrozenDictTupleStrDecimalBoolMixin:
         _types = {NoneClass, frozendict.frozendict, tuple, str, decimal.Decimal, BoolClass}
-    # qty 8
-    class NoneFrozenDictTupleStrDecimalBoolFileBytesMixin:
-        _types = {NoneClass, frozendict.frozendict, tuple, str, decimal.Decimal, BoolClass, FileIO, bytes}
+    # qty 9
+    class NoneFrozenDictTupleStrIntDecimalBoolFileBytesMixin:
+        _types = {NoneClass, frozendict.frozendict, tuple, str, int, decimal.Decimal, BoolClass, FileIO, bytes}
 
 
 class ValidatorBase:
@@ -2017,6 +2017,7 @@ class NoneSchema(
 class NumberSchema(
     NumberBase,
     Schema,
+    IntMixin,
     DecimalMixin
 ):
     """
@@ -2341,7 +2342,7 @@ class AnyTypeSchema(
     BoolBase,
     NoneBase,
     Schema,
-    NoneFrozenDictTupleStrDecimalBoolFileBytesMixin
+    NoneFrozenDictTupleStrIntDecimalBoolFileBytesMixin
 ):
     # Python representation of a schema defined as true or {}
     pass
