@@ -27,6 +27,9 @@ namespace SnapTrade.Net.Client
         /// <value>Access token.</value>
         string AccessToken { get; }
 
+        /// <value>Client state</value>
+        string ConsumerKey { get; }
+
         /// <summary>
         /// Gets the API key.
         /// </summary>
