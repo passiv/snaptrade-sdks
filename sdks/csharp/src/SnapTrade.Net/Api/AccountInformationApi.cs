@@ -517,7 +517,7 @@ namespace SnapTrade.Net.Api
             );
             this.Client = new SnapTrade.Net.Client.ApiClient(this.Configuration);
             this.AsynchronousClient = new SnapTrade.Net.Client.ApiClient(this.Configuration);
-            ExceptionFactory = SnapTrade.Net.Client.Configuration.DefaultExceptionFactory;
+            this.ExceptionFactory = SnapTrade.Net.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
