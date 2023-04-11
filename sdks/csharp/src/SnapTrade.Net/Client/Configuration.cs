@@ -58,6 +58,12 @@ namespace SnapTrade.Net.Client
                     string.Format("Error calling {0}: {1}", methodName, response.RawContent),
                     response.RawContent, response.Headers);
             }
+
+            // This occurs when response was successful but something happened in the client library
+            // (e.g. deserialization error)
+            if (response.Exception != null)
+                throw response.Exception;
+
             return null;
         };
 
@@ -176,7 +182,8 @@ namespace SnapTrade.Net.Client
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
-        public virtual string BasePath {
+        public virtual string BasePath
+        {
             get { return _basePath; }
             set { _basePath = value; }
         }
@@ -519,7 +526,7 @@ namespace SnapTrade.Net.Client
         {
             string report = "C# SDK (SnapTrade.Net) Debug Report:\n";
             report += "    OS: " + System.Environment.OSVersion + "\n";
-            report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
+            report += "    .NET Framework Version: " + System.Environment.Version + "\n";
             report += "    Version of the API: 1.0.0\n";
             report += "    SDK Package Version: 2.0.0\n";
 

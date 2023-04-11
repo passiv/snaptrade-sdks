@@ -139,14 +139,7 @@ namespace SnapTrade.Net.Client
             }
 
             // at this point, it must be a model (json)
-            try
-            {
-                return JsonConvert.DeserializeObject(response.Content, type, _serializerSettings);
-            }
-            catch (Exception e)
-            {
-                throw new ApiException(500, e.Message);
-            }
+            return JsonConvert.DeserializeObject(response.Content, type, _serializerSettings);
         }
 
         public ISerializer Serializer => this;
@@ -402,6 +395,11 @@ namespace SnapTrade.Net.Client
                 Cookies = new List<Cookie>()
             };
 
+            if (response.ErrorException != null)
+            {
+                transformed.Exception = response.ErrorException;
+            }
+
             if (response.Headers != null)
             {
                 foreach (var responseHeader in response.Headers)
@@ -484,7 +482,7 @@ namespace SnapTrade.Net.Client
             {
                 try
                 {
-                    response.Data = (T) typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
+                    response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
                 }
                 catch (Exception ex)
                 {
@@ -577,7 +575,7 @@ namespace SnapTrade.Net.Client
             // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
             if (typeof(SnapTrade.Net.Model.AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
             {
-                response.Data = (T) typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
+                response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
             }
             else if (typeof(T).Name == "Stream") // for binary response
             {
