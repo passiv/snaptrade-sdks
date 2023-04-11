@@ -4570,6 +4570,7 @@ components:
       type: string
       format: date
       example: "2022-01-24"
+      format: date
     ReportingFrequency:
       description: Optional frequency for the rate of return chart (defaults to
         monthly). Possible values are weekly, monthly, quarterly, yearly.
