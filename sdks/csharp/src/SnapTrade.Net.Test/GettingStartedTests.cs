@@ -39,6 +39,8 @@ namespace SnapTrade.Net.Test.Api
         private APIDisclaimerApi apiDisclaimerApi;
         private AccountInformationApi accountInformationApi;
 
+        private TransactionsAndReportingApi transactionsAndReportingApi;
+
         private ReferenceDataApi referenceDataApi;
 
         private OptionsApi optionsApi;
@@ -59,6 +61,7 @@ namespace SnapTrade.Net.Test.Api
             apiStatusApi = new APIStatusApi(configuration);
             authenticationApi = new AuthenticationApi(configuration);
             accountInformationApi = new AccountInformationApi(configuration);
+            transactionsAndReportingApi = new TransactionsAndReportingApi(configuration);
             referenceDataApi = new ReferenceDataApi(configuration);
             optionsApi = new OptionsApi(configuration);
         }
@@ -91,6 +94,16 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(accounts);
             var response = accountInformationApi.GetUserAccountBalance(this.testUserId, this.testUserSecret, accounts[0].Id);
             Console.WriteLine(response);
+        }
+
+
+        [Fact]
+        async public void GetActivitiesAsync()
+        {
+            var from = DateTime.Now.AddYears(-1);
+            var to = DateTime.Now;
+            var activities = await transactionsAndReportingApi.GetActivitiesAsync(this.testUserId, this.testUserSecret, from, to);
+            Console.WriteLine(activities);
         }
 
         [Fact(Skip = "Getting 500 error code")]
