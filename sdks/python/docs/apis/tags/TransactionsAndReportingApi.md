@@ -34,8 +34,8 @@ try:
     # Get transaction history for a user
     get_activities_response = snaptrade.transactions_and_reporting.get_activities(
         query_params = {
-            'startDate': "Sun Jan 23 16:00:00 PST 2022",
-            'endDate': "Sun Jan 23 16:00:00 PST 2022",
+            'startDate': "2022-01-24",
+            'endDate': "2022-01-24",
             'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
             'brokerageAuthorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
             'userId': "John.doe@snaptrade.com",
@@ -212,8 +212,8 @@ try:
     # Get performance information for a specific timeframe
     get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
         query_params = {
-            'startDate': "Sun Jan 23 16:00:00 PST 2022",
-            'endDate': "Sun Jan 23 16:00:00 PST 2022",
+            'startDate': "2022-01-24",
+            'endDate': "2022-01-24",
             'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
             'detailed': True,
             'frequency': "monthly",
