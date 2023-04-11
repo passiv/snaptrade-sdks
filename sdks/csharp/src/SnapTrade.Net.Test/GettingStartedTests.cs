@@ -96,6 +96,15 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(response);
         }
 
+        [Fact]
+        async public void GetUserHoldings()
+        {
+            var accounts = await accountInformationApi.ListUserAccountsAsync(this.testUserId, this.testUserSecret);
+            Console.WriteLine(accounts);
+            var response = await accountInformationApi.GetUserHoldingsAsync(accounts[0].Id, this.testUserId, this.testUserSecret);
+            Console.WriteLine(response);
+        }
+
 
         [Fact]
         async public void GetActivitiesAsync()
