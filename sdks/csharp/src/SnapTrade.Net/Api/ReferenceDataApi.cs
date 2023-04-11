@@ -1498,7 +1498,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("ticker", SnapTrade.Net.Client.ClientUtils.ParameterToString(ticker)); // path parameter
             if (symbolId != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbolId", symbolId));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbolId", symbolId, "uuid"));
             }
 
             localVarRequestOptions.Operation = "ReferenceDataApi.GetSymbolsByTicker";
@@ -1586,7 +1586,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("ticker", SnapTrade.Net.Client.ClientUtils.ParameterToString(ticker)); // path parameter
             if (symbolId != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbolId", symbolId));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbolId", symbolId, "uuid"));
             }
 
             localVarRequestOptions.Operation = "ReferenceDataApi.GetSymbolsByTicker";
@@ -1669,7 +1669,7 @@ namespace SnapTrade.Net.Api
 
             if (brokerage != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerage", brokerage));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerage", brokerage, ""));
             }
 
             localVarRequestOptions.Operation = "ReferenceDataApi.ListAllBrokerageAuthorizationType";
@@ -1754,7 +1754,7 @@ namespace SnapTrade.Net.Api
 
             if (brokerage != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerage", brokerage));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerage", brokerage, ""));
             }
 
             localVarRequestOptions.Operation = "ReferenceDataApi.ListAllBrokerageAuthorizationType";
@@ -2323,8 +2323,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = symbolQuery;
 
             localVarRequestOptions.Operation = "ReferenceDataApi.SymbolSearchUserAccount";
@@ -2427,8 +2427,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = symbolQuery;
 
             localVarRequestOptions.Operation = "ReferenceDataApi.SymbolSearchUserAccount";

@@ -43,8 +43,9 @@ namespace SnapTrade.Net.Client
         /// <param name="collectionFormat">The swagger-supported collection format, one of: csv, tsv, ssv, pipes, multi</param>
         /// <param name="name">Key name.</param>
         /// <param name="value">Value object.</param>
+        /// <param name="dataFormat">The "format" field of a JSON Schema</param>
         /// <returns>A multimap of keys with 1..n associated values.</returns>
-        public static Multimap<string, string> ParameterToMultiMap(string collectionFormat, string name, object value)
+        public static Multimap<string, string> ParameterToMultiMap(string collectionFormat, string name, object value, string dataFormat = default(string))
         {
             var parameters = new Multimap<string, string>();
 
@@ -72,7 +73,7 @@ namespace SnapTrade.Net.Client
             }
             else
             {
-                parameters.Add(name, ParameterToString(value));
+                parameters.Add(name, ParameterToString(value, dataFormat: dataFormat));
             }
 
             return parameters;
@@ -85,15 +86,24 @@ namespace SnapTrade.Net.Client
         /// </summary>
         /// <param name="obj">The parameter (header, path, query, form).</param>
         /// <param name="configuration">An optional configuration instance, providing formatting options used in processing.</param>
+        /// <param name="dataFormat">The "format" field from OAS</param>
         /// <returns>Formatted string.</returns>
-        public static string ParameterToString(object obj, IReadableConfiguration configuration = null)
+        public static string ParameterToString(object obj, IReadableConfiguration configuration = null, string dataFormat = default(string))
         {
             if (obj is DateTime dateTime)
+            {
+                // Format for 'date' openapi formats ss defined by full-date - RFC3339
+                // see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#data-types
+                if (dataFormat == "date")
+                {
+                    return dateTime.ToString(OpenAPIDateConverter.RFC3339FullDateFormat);
+                }
                 // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
                 // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
                 // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
                 // For example: 2009-06-15T13:45:30.0000000
                 return dateTime.ToString((configuration ?? GlobalConfiguration.Instance).DateTimeFormat);
+            }
             if (obj is DateTimeOffset dateTimeOffset)
                 // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
                 // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")

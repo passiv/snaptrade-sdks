@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
         /// <param name="dividends">dividends.</param>
-        public MonthlyDividends(string date = default(string), List<DividendAtDate> dividends = default(List<DividendAtDate>)) : base()
+        public MonthlyDividends(DateTime date = default(DateTime), List<DividendAtDate> dividends = default(List<DividendAtDate>)) : base()
         {
             this.Date = date;
             this.Dividends = dividends;
@@ -49,7 +49,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
         [DataMember(Name = "date", EmitDefaultValue = false)]
-        public string Date { get; set; }
+        [JsonConverter(typeof(OpenAPIDateConverter))]
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or Sets Dividends

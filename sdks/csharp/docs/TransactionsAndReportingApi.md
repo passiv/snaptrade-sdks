@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getactivities"></a>
 # **GetActivities**
-> List&lt;UniversalActivity&gt; GetActivities (string userId, string userSecret, string startDate = null, string endDate = null, string accounts = null, string brokerageAuthorizations = null)
+> List&lt;UniversalActivity&gt; GetActivities (string userId, string userSecret, DateTime? startDate = null, DateTime? endDate = null, string accounts = null, string brokerageAuthorizations = null)
 
 Get transaction history for a user
 
@@ -41,8 +41,8 @@ namespace Example
             var apiInstance = new TransactionsAndReportingApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
-            var startDate = "startDate_example";  // string |  (optional) 
-            var endDate = "endDate_example";  // string |  (optional) 
+            var startDate = DateTime.Parse("2013-10-20");  // DateTime? |  (optional) 
+            var endDate = DateTime.Parse("2013-10-20");  // DateTime? |  (optional) 
             var accounts = "accounts_example";  // string | Optional comma seperated list of account IDs used to filter the request on specific accounts (optional) 
             var brokerageAuthorizations = "brokerageAuthorizations_example";  // string | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional) 
 
@@ -89,8 +89,8 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **startDate** | **string** |  | [optional]  |
-| **endDate** | **string** |  | [optional]  |
+| **startDate** | **DateTime?** |  | [optional]  |
+| **endDate** | **DateTime?** |  | [optional]  |
 | **accounts** | **string** | Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional]  |
 | **brokerageAuthorizations** | **string** | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional]  |
 
@@ -118,7 +118,7 @@ catch (ApiException e)
 
 <a name="getreportingcustomrange"></a>
 # **GetReportingCustomRange**
-> PerformanceCustom GetReportingCustomRange (string startDate, string endDate, string userId, string userSecret, string accounts = null, bool? detailed = null, string frequency = null)
+> PerformanceCustom GetReportingCustomRange (DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = null, bool? detailed = null, string frequency = null)
 
 Get performance information for a specific timeframe
 
@@ -148,8 +148,8 @@ namespace Example
             config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new TransactionsAndReportingApi(config);
-            var startDate = "startDate_example";  // string | 
-            var endDate = "endDate_example";  // string | 
+            var startDate = DateTime.Parse("2013-10-20");  // DateTime | 
+            var endDate = DateTime.Parse("2013-10-20");  // DateTime | 
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accounts = "accounts_example";  // string | Optional comma seperated list of account IDs used to filter the request on specific accounts (optional) 
@@ -197,8 +197,8 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **startDate** | **string** |  |  |
-| **endDate** | **string** |  |  |
+| **startDate** | **DateTime** |  |  |
+| **endDate** | **DateTime** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accounts** | **string** | Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional]  |

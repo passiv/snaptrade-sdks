@@ -26,7 +26,7 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   csharp:
-    version: 1.3.0
+    version: 2.0.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -92,3 +92,7 @@ generators:
       script:
         - yarn test
 specPath: api.yaml
+fixConfig:
+  update:
+    $.components.schemas.ReportingDate:
+      format: date

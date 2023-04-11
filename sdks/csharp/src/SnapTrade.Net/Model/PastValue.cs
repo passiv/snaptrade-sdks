@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
         /// <param name="value">value.</param>
         /// <param name="currency">currency.</param>
-        public PastValue(string date = default(string), decimal value = default(decimal), string currency = default(string)) : base()
+        public PastValue(DateTime date = default(DateTime), decimal value = default(decimal), string currency = default(string)) : base()
         {
             this.Date = date;
             this.Value = value;
@@ -51,7 +51,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
         [DataMember(Name = "date", EmitDefaultValue = false)]
-        public string Date { get; set; }
+        [JsonConverter(typeof(OpenAPIDateConverter))]
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Gets or Sets Value

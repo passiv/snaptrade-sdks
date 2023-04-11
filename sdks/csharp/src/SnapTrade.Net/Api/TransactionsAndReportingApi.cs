@@ -42,7 +42,7 @@ namespace SnapTrade.Net.Api
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalActivity&gt;</returns>
-        List<UniversalActivity> GetActivities(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
+        List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
 
         /// <summary>
         /// Get transaction history for a user
@@ -59,7 +59,7 @@ namespace SnapTrade.Net.Api
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
+        ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
         /// <summary>
         /// Get performance information for a specific timeframe
         /// </summary>
@@ -76,7 +76,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PerformanceCustom</returns>
-        PerformanceCustom GetReportingCustomRange(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
+        PerformanceCustom GetReportingCustomRange(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
 
         /// <summary>
         /// Get performance information for a specific timeframe
@@ -94,7 +94,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PerformanceCustom</returns>
-        ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
+        ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -120,7 +120,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get transaction history for a user
@@ -138,7 +138,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get performance information for a specific timeframe
         /// </summary>
@@ -156,7 +156,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PerformanceCustom</returns>
-        System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get performance information for a specific timeframe
@@ -175,7 +175,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PerformanceCustom)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -308,7 +308,7 @@ namespace SnapTrade.Net.Api
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalActivity&gt;</returns>
-        public List<UniversalActivity> GetActivities(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
+        public List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = GetActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
             return localVarResponse.Data;
@@ -326,7 +326,7 @@ namespace SnapTrade.Net.Api
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -364,22 +364,22 @@ namespace SnapTrade.Net.Api
 
             if (startDate != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
             }
             if (endDate != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             }
             if (accounts != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts, ""));
             }
             if (brokerageAuthorizations != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations, ""));
             }
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "TransactionsAndReportingApi.GetActivities";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -427,7 +427,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = await GetActivitiesWithHttpInfoAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -446,7 +446,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, string startDate = default(string), string endDate = default(string), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -485,22 +485,22 @@ namespace SnapTrade.Net.Api
 
             if (startDate != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
             }
             if (endDate != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             }
             if (accounts != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts, ""));
             }
             if (brokerageAuthorizations != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations, ""));
             }
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "TransactionsAndReportingApi.GetActivities";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -549,7 +549,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PerformanceCustom</returns>
-        public PerformanceCustom GetReportingCustomRange(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
+        public PerformanceCustom GetReportingCustomRange(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<PerformanceCustom> localVarResponse = GetReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
             return localVarResponse.Data;
@@ -568,20 +568,8 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PerformanceCustom</returns>
-        public SnapTrade.Net.Client.ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
         {
-            // verify the required parameter 'startDate' is set
-            if (startDate == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'startDate' when calling TransactionsAndReportingApi->GetReportingCustomRange");
-            }
-
-            // verify the required parameter 'endDate' is set
-            if (endDate == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'endDate' when calling TransactionsAndReportingApi->GetReportingCustomRange");
-            }
-
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -616,22 +604,22 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             if (accounts != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts, ""));
             }
             if (detailed != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "detailed", detailed));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "detailed", detailed, ""));
             }
             if (frequency != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "frequency", frequency));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "frequency", frequency, ""));
             }
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "TransactionsAndReportingApi.GetReportingCustomRange";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -680,7 +668,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PerformanceCustom</returns>
-        public async System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<PerformanceCustom> localVarResponse = await GetReportingCustomRangeWithHttpInfoAsync(startDate, endDate, userId, userSecret, accounts, detailed, frequency, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -700,20 +688,8 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PerformanceCustom)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(string startDate, string endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            // verify the required parameter 'startDate' is set
-            if (startDate == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'startDate' when calling TransactionsAndReportingApi->GetReportingCustomRange");
-            }
-
-            // verify the required parameter 'endDate' is set
-            if (endDate == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'endDate' when calling TransactionsAndReportingApi->GetReportingCustomRange");
-            }
-
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -749,22 +725,22 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             if (accounts != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "accounts", accounts, ""));
             }
             if (detailed != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "detailed", detailed));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "detailed", detailed, ""));
             }
             if (frequency != null)
             {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "frequency", frequency));
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "frequency", frequency, ""));
             }
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "TransactionsAndReportingApi.GetReportingCustomRange";
             localVarRequestOptions.OperationIndex = operationIndex;

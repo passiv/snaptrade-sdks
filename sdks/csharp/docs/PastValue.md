@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
+**Date** | **DateTime** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
 **Value** | **decimal** |  | [optional] 
 **Currency** | **string** |  | [optional] 
 

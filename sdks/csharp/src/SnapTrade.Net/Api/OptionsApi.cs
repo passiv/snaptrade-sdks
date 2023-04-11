@@ -511,8 +511,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = optionsGetOptionStrategyRequest;
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionStrategy";
@@ -621,8 +621,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = optionsGetOptionStrategyRequest;
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionStrategy";
@@ -722,9 +722,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, "uuid"));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -825,9 +825,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, "uuid"));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -927,8 +927,8 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsStrategyQuote";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1030,8 +1030,8 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsStrategyQuote";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1128,8 +1128,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.ListOptionHoldings";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1228,8 +1228,8 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.ListOptionHoldings";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1338,8 +1338,8 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = optionsPlaceOptionStrategyRequest;
 
             localVarRequestOptions.Operation = "OptionsApi.PlaceOptionStrategy";
@@ -1451,8 +1451,8 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = optionsPlaceOptionStrategyRequest;
 
             localVarRequestOptions.Operation = "OptionsApi.PlaceOptionStrategy";

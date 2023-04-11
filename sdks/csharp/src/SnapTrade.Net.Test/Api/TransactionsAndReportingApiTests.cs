@@ -64,8 +64,8 @@ namespace SnapTrade.Net.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string userId = null;
             //string userSecret = null;
-            //string startDate = null;
-            //string endDate = null;
+            //DateTime? startDate = null;
+            //DateTime? endDate = null;
             //string accounts = null;
             //string brokerageAuthorizations = null;
             //var response = instance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
@@ -79,8 +79,8 @@ namespace SnapTrade.Net.Test.Api
         public void GetReportingCustomRangeTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //string startDate = null;
-            //string endDate = null;
+            //DateTime startDate = null;
+            //DateTime endDate = null;
             //string userId = null;
             //string userSecret = null;
             //string accounts = null;
