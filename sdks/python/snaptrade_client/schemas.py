@@ -463,7 +463,7 @@ class Schema:
         __from_server = False
         __validated_path_to_schemas = {}
         __arg = cast_to_allowed_types(
-            __arg, __from_server, __validated_path_to_schemas)
+            __arg, __from_server, __validated_path_to_schemas, schema=cls)
         __validation_metadata = ValidationMetadata(
             configuration=_configuration, from_server=__from_server, validated_path_to_schemas=__validated_path_to_schemas)
         __path_to_schemas = cls.__get_new_cls(__arg, __validation_metadata)
@@ -1707,6 +1707,7 @@ def cast_to_allowed_types(
     from_server: bool,
     validated_path_to_schemas: typing.Dict[typing.Tuple[typing.Union[str, int], ...], typing.Set[typing.Union['Schema', str, decimal.Decimal, BoolClass, NoneClass, frozendict.frozendict, tuple]]],
     path_to_item: typing.Tuple[typing.Union[str, int], ...] = tuple(['args[0]']),
+    schema: Schema = None
 ) -> typing.Union[frozendict.frozendict, tuple, decimal.Decimal, str, bytes, BoolClass, NoneClass, FileIO]:
     """
     Casts the input payload arg into the allowed types
@@ -1773,7 +1774,14 @@ def cast_to_allowed_types(
         return NoneClass.NONE
     elif isinstance(arg, (date, datetime)):
         if not from_server:
-            return arg.isoformat()
+            # if schema itself is the DateTimeSchema class then convert to isoformat
+            # if schema itself is the DateSchema class then convert to yyyy-mm-dd using strftime
+            if schema is None:
+                return arg.isoformat()
+            if schema is DateTimeSchema:
+                return arg.isoformat()
+            if schema is DateSchema:
+                return arg.strftime('%Y-%m-%d')
         raise type_error
     elif isinstance(arg, uuid.UUID):
         if not from_server:
