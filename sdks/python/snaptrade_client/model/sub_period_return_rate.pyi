@@ -35,8 +35,8 @@ class SubPeriodReturnRate(
     class MetaOapg:
         
         class properties:
-            periodStart = schemas.StrSchema
-            periodEnd = schemas.StrSchema
+            periodStart = schemas.DateSchema
+            periodEnd = schemas.DateSchema
             
             
             class rateOfReturn(
@@ -98,8 +98,8 @@ class SubPeriodReturnRate(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        periodStart: typing.Union[MetaOapg.properties.periodStart, str, schemas.Unset] = schemas.unset,
-        periodEnd: typing.Union[MetaOapg.properties.periodEnd, str, schemas.Unset] = schemas.unset,
+        periodStart: typing.Union[MetaOapg.properties.periodStart, str, date, schemas.Unset] = schemas.unset,
+        periodEnd: typing.Union[MetaOapg.properties.periodEnd, str, date, schemas.Unset] = schemas.unset,
         rateOfReturn: typing.Union[MetaOapg.properties.rateOfReturn, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],

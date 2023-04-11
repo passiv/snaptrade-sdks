@@ -22,4 +22,4 @@ import uuid  # noqa: F401
 import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
-ReportingDate = schemas.StrSchema
+ReportingDate = schemas.DateSchema

@@ -11,7 +11,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  | SnapTradeUser Investme
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
-**brokerage_authorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] 
+**brokerage_authorization** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **portfolio_group** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **name** | None, str,  | NoneClass, str,  |  | [optional] 
 **number** | str,  | str,  |  | [optional] 

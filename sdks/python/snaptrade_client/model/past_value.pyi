@@ -35,7 +35,7 @@ class PastValue(
     class MetaOapg:
         
         class properties:
-            date = schemas.StrSchema
+            date = schemas.DateSchema
             value = schemas.NumberSchema
             currency = schemas.StrSchema
             __annotations__ = {
@@ -79,7 +79,7 @@ class PastValue(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        date: typing.Union[MetaOapg.properties.date, str, schemas.Unset] = schemas.unset,
+        date: typing.Union[MetaOapg.properties.date, str, date, schemas.Unset] = schemas.unset,
         value: typing.Union[MetaOapg.properties.value, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         currency: typing.Union[MetaOapg.properties.currency, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,

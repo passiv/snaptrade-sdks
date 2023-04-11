@@ -61,7 +61,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 8.4.0
+    version: 9.0.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true

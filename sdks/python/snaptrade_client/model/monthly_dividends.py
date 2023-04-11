@@ -35,7 +35,7 @@ class MonthlyDividends(
     class MetaOapg:
         
         class properties:
-            date = schemas.StrSchema
+            date = schemas.DateSchema
             
             
             class dividends(
@@ -96,7 +96,7 @@ class MonthlyDividends(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        date: typing.Union[MetaOapg.properties.date, str, schemas.Unset] = schemas.unset,
+        date: typing.Union[MetaOapg.properties.date, str, date, schemas.Unset] = schemas.unset,
         dividends: typing.Union[MetaOapg.properties.dividends, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],

@@ -38,10 +38,7 @@ class SnapTradeHoldingsAccount(
         
         class properties:
             id = schemas.UUIDSchema
-        
-            @staticmethod
-            def brokerage_authorization() -> typing.Type['BrokerageAuthorization']:
-                return BrokerageAuthorization
+            brokerage_authorization = schemas.UUIDSchema
             portfolio_group = schemas.UUIDSchema
             
             
@@ -109,7 +106,7 @@ class SnapTradeHoldingsAccount(
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["brokerage_authorization"]) -> 'BrokerageAuthorization': ...
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_authorization"]) -> MetaOapg.properties.brokerage_authorization: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["portfolio_group"]) -> MetaOapg.properties.portfolio_group: ...
@@ -137,7 +134,7 @@ class SnapTradeHoldingsAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_authorization"]) -> typing.Union['BrokerageAuthorization', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_authorization"]) -> typing.Union[MetaOapg.properties.brokerage_authorization, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["portfolio_group"]) -> typing.Union[MetaOapg.properties.portfolio_group, schemas.Unset]: ...
@@ -164,7 +161,7 @@ class SnapTradeHoldingsAccount(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        brokerage_authorization: typing.Union['BrokerageAuthorization', schemas.Unset] = schemas.unset,
+        brokerage_authorization: typing.Union[MetaOapg.properties.brokerage_authorization, str, uuid.UUID, schemas.Unset] = schemas.unset,
         portfolio_group: typing.Union[MetaOapg.properties.portfolio_group, str, uuid.UUID, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, None, str, schemas.Unset] = schemas.unset,
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
@@ -186,5 +183,3 @@ class SnapTradeHoldingsAccount(
             _configuration=_configuration,
             **kwargs,
         )
-
-from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization

@@ -32,8 +32,8 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.universal_activity import UniversalActivity
 
 # Query params
-StartDateSchema = schemas.StrSchema
-EndDateSchema = schemas.StrSchema
+StartDateSchema = schemas.DateSchema
+EndDateSchema = schemas.DateSchema
 AccountsSchema = schemas.StrSchema
 BrokerageAuthorizationsSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
@@ -48,8 +48,8 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
-        'startDate': typing.Union[StartDateSchema, str, ],
-        'endDate': typing.Union[EndDateSchema, str, ],
+        'startDate': typing.Union[StartDateSchema, str, date, ],
+        'endDate': typing.Union[EndDateSchema, str, date, ],
         'accounts': typing.Union[AccountsSchema, str, ],
         'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
     },

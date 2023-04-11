@@ -32,8 +32,8 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.performance_custom import PerformanceCustom
 
 # Query params
-StartDateSchema = schemas.StrSchema
-EndDateSchema = schemas.StrSchema
+StartDateSchema = schemas.DateSchema
+EndDateSchema = schemas.DateSchema
 AccountsSchema = schemas.StrSchema
 DetailedSchema = schemas.BoolSchema
 FrequencySchema = schemas.StrSchema
@@ -42,8 +42,8 @@ UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'startDate': typing.Union[StartDateSchema, str, ],
-        'endDate': typing.Union[EndDateSchema, str, ],
+        'startDate': typing.Union[StartDateSchema, str, date, ],
+        'endDate': typing.Union[EndDateSchema, str, date, ],
         'userId': typing.Union[UserIdSchema, str, ],
         'userSecret': typing.Union[UserSecretSchema, str, ],
     }
