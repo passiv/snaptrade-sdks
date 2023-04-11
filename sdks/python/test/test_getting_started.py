@@ -149,6 +149,20 @@ class TestGettingStarted(unittest.TestCase):
         pprint(response)
         # assert that response is not None
         self.assertIsNotNone(response)
+        # instantiate two variables of type "string" in "Sun Jan 23 16:00:00 PST 2022" format, one date that is 1 year ago and another that is today
+        from_date = (datetime.date.today() - datetime.timedelta(days=365)).strftime("%a %b %d %H:%M:%S %Z %Y")
+        to_date = datetime.date.today().strftime("%a %b %d %H:%M:%S %Z %Y")
+        # print both from_date and to_date
+        print(from_date)
+        print(to_date)
+        # call the get_activities method and assert that an exception is thrown 
+        with self.assertRaises(Exception):
+            snaptrade.transactions_and_reporting.get_activities(query_params={
+                "userId": user_id,
+                "userSecret": user_secret,
+                "startDate": from_date,
+                "endDate": to_date
+            })
 
     @unittest.skip(reason="getting 500 internal server error")
     def test_get_options_chain(self):
