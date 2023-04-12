@@ -33,128 +33,6 @@ namespace SnapTrade.Net.Model
     public partial class UniversalActivity : IEquatable<UniversalActivity>, IValidatableObject
     {
         /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum DIVIDEND for value: DIVIDEND
-            /// </summary>
-            [EnumMember(Value = "DIVIDEND")]
-            DIVIDEND = 1,
-
-            /// <summary>
-            /// Enum BUY for value: BUY
-            /// </summary>
-            [EnumMember(Value = "BUY")]
-            BUY = 2,
-
-            /// <summary>
-            /// Enum SELL for value: SELL
-            /// </summary>
-            [EnumMember(Value = "SELL")]
-            SELL = 3,
-
-            /// <summary>
-            /// Enum CONTRIBUTION for value: CONTRIBUTION
-            /// </summary>
-            [EnumMember(Value = "CONTRIBUTION")]
-            CONTRIBUTION = 4,
-
-            /// <summary>
-            /// Enum WITHDRAWAL for value: WITHDRAWAL
-            /// </summary>
-            [EnumMember(Value = "WITHDRAWAL")]
-            WITHDRAWAL = 5,
-
-            /// <summary>
-            /// Enum EXTERNALASSETTRANSFERIN for value: EXTERNAL_ASSET_TRANSFER_IN
-            /// </summary>
-            [EnumMember(Value = "EXTERNAL_ASSET_TRANSFER_IN")]
-            EXTERNALASSETTRANSFERIN = 6,
-
-            /// <summary>
-            /// Enum EXTERNALASSETTRANSFEROUT for value: EXTERNAL_ASSET_TRANSFER_OUT
-            /// </summary>
-            [EnumMember(Value = "EXTERNAL_ASSET_TRANSFER_OUT")]
-            EXTERNALASSETTRANSFEROUT = 7,
-
-            /// <summary>
-            /// Enum INTERNALCASHTRANSFERIN for value: INTERNAL_CASH_TRANSFER_IN
-            /// </summary>
-            [EnumMember(Value = "INTERNAL_CASH_TRANSFER_IN")]
-            INTERNALCASHTRANSFERIN = 8,
-
-            /// <summary>
-            /// Enum INTERNALCASHTRANSFEROUT for value: INTERNAL_CASH_TRANSFER_OUT
-            /// </summary>
-            [EnumMember(Value = "INTERNAL_CASH_TRANSFER_OUT")]
-            INTERNALCASHTRANSFEROUT = 9,
-
-            /// <summary>
-            /// Enum INTERNALASSETTRANSFERIN for value: INTERNAL_ASSET_TRANSFER_IN
-            /// </summary>
-            [EnumMember(Value = "INTERNAL_ASSET_TRANSFER_IN")]
-            INTERNALASSETTRANSFERIN = 10,
-
-            /// <summary>
-            /// Enum INTERNALASSETTRANSFEROUT for value: INTERNAL_ASSET_TRANSFER_OUT
-            /// </summary>
-            [EnumMember(Value = "INTERNAL_ASSET_TRANSFER_OUT")]
-            INTERNALASSETTRANSFEROUT = 11,
-
-            /// <summary>
-            /// Enum INTEREST for value: INTEREST
-            /// </summary>
-            [EnumMember(Value = "INTEREST")]
-            INTEREST = 12,
-
-            /// <summary>
-            /// Enum REBATE for value: REBATE
-            /// </summary>
-            [EnumMember(Value = "REBATE")]
-            REBATE = 13,
-
-            /// <summary>
-            /// Enum GOVGRANT for value: GOV_GRANT
-            /// </summary>
-            [EnumMember(Value = "GOV_GRANT")]
-            GOVGRANT = 14,
-
-            /// <summary>
-            /// Enum TAX for value: TAX
-            /// </summary>
-            [EnumMember(Value = "TAX")]
-            TAX = 15,
-
-            /// <summary>
-            /// Enum FEE for value: FEE
-            /// </summary>
-            [EnumMember(Value = "FEE")]
-            FEE = 16,
-
-            /// <summary>
-            /// Enum REI for value: REI
-            /// </summary>
-            [EnumMember(Value = "REI")]
-            REI = 17,
-
-            /// <summary>
-            /// Enum FXT for value: FXT
-            /// </summary>
-            [EnumMember(Value = "FXT")]
-            FXT = 18
-
-        }
-
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
-        public TypeEnum? Type { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="UniversalActivity" /> class.
         /// </summary>
         /// <param name="id">id.</param>
@@ -170,9 +48,9 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="tradeDate">tradeDate.</param>
-        /// <param name="type">type.</param>
+        /// <param name="type">Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT.</param>
         /// <param name="units">Usually but not necessarily an integer.</param>
-        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), TypeEnum? type = default(TypeEnum?), decimal units = default(decimal)) : base()
+        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -270,6 +148,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "trade_date", EmitDefaultValue = true)]
         public string TradeDate { get; set; }
+
+        /// <summary>
+        /// Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+        /// </summary>
+        /// <value>Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT</value>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// Usually but not necessarily an integer
@@ -409,7 +294,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
@@ -473,7 +359,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.TradeDate.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                if (this.Type != null)
+                {
+                    hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.Units.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {

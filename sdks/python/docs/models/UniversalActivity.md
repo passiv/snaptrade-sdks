@@ -23,7 +23,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **symbol** | [**Symbol**](Symbol.md) | [**Symbol**](Symbol.md) |  | [optional] 
 **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **trade_date** | None, str,  | NoneClass, str,  |  | [optional] 
-**type** | str,  | str,  |  | [optional] must be one of ["DIVIDEND", "BUY", "SELL", "CONTRIBUTION", "WITHDRAWAL", "EXTERNAL_ASSET_TRANSFER_IN", "EXTERNAL_ASSET_TRANSFER_OUT", "INTERNAL_CASH_TRANSFER_IN", "INTERNAL_CASH_TRANSFER_OUT", "INTERNAL_ASSET_TRANSFER_IN", "INTERNAL_ASSET_TRANSFER_OUT", "INTEREST", "REBATE", "GOV_GRANT", "TAX", "FEE", "REI", "FXT", ] 
+**type** | str,  | str,  | Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional] 
 **units** | decimal.Decimal, int, float,  | decimal.Decimal,  | Usually but not necessarily an integer | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
