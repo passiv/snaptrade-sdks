@@ -88,6 +88,53 @@ it("getUserAccountBalance", async () => {
   console.log(response.data);
 });
 
+it("getActivities", async () => {
+  const snaptrade = new Snaptrade({
+    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+    clientId: process.env.SNAPTRADE_CLIENT_ID,
+  });
+  const userId = process.env.SNAPTRADE_TEST_USER_ID;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  let activities = await snaptrade.transactionsAndReporting.getActivities({
+    userId,
+    userSecret,
+  });
+  console.log(activities.data);
+  expect(activities).not.toBeNull();
+  // create two variables "startDate" and "endDate" that are strings representing 1 year ago and today in yyyy-mm-dd format using today's date
+  const startDate = "2020-01-01";
+  const endDate = "2020-12-31";
+  activities = await snaptrade.transactionsAndReporting.getActivities({
+    userId,
+    userSecret,
+    startDate,
+    endDate,
+  });
+  console.log(activities.data);
+  expect(activities).not.toBeNull();
+});
+
+it("getUserHoldings", async () => {
+  const snaptrade = new Snaptrade({
+    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+    clientId: process.env.SNAPTRADE_CLIENT_ID,
+  });
+  const userId = process.env.SNAPTRADE_TEST_USER_ID;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const accounts = await snaptrade.accountInformation.listUserAccounts({
+    userId,
+    userSecret,
+  });
+  const holdings = await snaptrade.accountInformation.getUserHoldings({
+    userId,
+    userSecret,
+    accountId: accounts.data[0].id,
+  });
+  // assert holdings is not null with jest
+  expect(holdings).not.toBeNull();
+  console.log(holdings.data);
+});
+
 it.skip("getOptionsChain", async () => {
   const snaptrade = new Snaptrade({
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
