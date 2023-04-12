@@ -89,13 +89,13 @@ export interface Brokerage {
      * @type {boolean}
      * @memberof Brokerage
      */
-    'allows_trading'?: boolean;
+    'allows_trading'?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof Brokerage
      */
-    'has_reporting'?: boolean;
+    'has_reporting'?: boolean | null;
     /**
      * 
      * @type {boolean}

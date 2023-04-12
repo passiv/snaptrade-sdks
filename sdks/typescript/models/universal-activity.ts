@@ -112,11 +112,11 @@ export interface UniversalActivity {
      */
     'trade_date'?: string | null;
     /**
-     * 
+     * Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
      * @type {string}
      * @memberof UniversalActivity
      */
-    'type'?: UniversalActivityTypeEnum;
+    'type'?: string;
     /**
      * Usually but not necessarily an integer
      * @type {number}
@@ -124,28 +124,4 @@ export interface UniversalActivity {
      */
     'units'?: number;
 }
-
-export const UniversalActivityTypeEnum = {
-    Dividend: 'DIVIDEND',
-    Buy: 'BUY',
-    Sell: 'SELL',
-    Contribution: 'CONTRIBUTION',
-    Withdrawal: 'WITHDRAWAL',
-    ExternalAssetTransferIn: 'EXTERNAL_ASSET_TRANSFER_IN',
-    ExternalAssetTransferOut: 'EXTERNAL_ASSET_TRANSFER_OUT',
-    InternalCashTransferIn: 'INTERNAL_CASH_TRANSFER_IN',
-    InternalCashTransferOut: 'INTERNAL_CASH_TRANSFER_OUT',
-    InternalAssetTransferIn: 'INTERNAL_ASSET_TRANSFER_IN',
-    InternalAssetTransferOut: 'INTERNAL_ASSET_TRANSFER_OUT',
-    Interest: 'INTEREST',
-    Rebate: 'REBATE',
-    GovGrant: 'GOV_GRANT',
-    Tax: 'TAX',
-    Fee: 'FEE',
-    Rei: 'REI',
-    Fxt: 'FXT'
-} as const;
-
-export type UniversalActivityTypeEnum = typeof UniversalActivityTypeEnum[keyof typeof UniversalActivityTypeEnum];
-
 

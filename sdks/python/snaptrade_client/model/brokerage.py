@@ -64,8 +64,46 @@ class Brokerage(
                         *args,
                         _configuration=_configuration,
                     )
-            allows_trading = schemas.BoolSchema
-            has_reporting = schemas.BoolSchema
+            
+            
+            class allows_trading(
+                schemas.BoolBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneBoolMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, bool, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'allows_trading':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class has_reporting(
+                schemas.BoolBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneBoolMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, bool, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'has_reporting':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             is_real_time_connection = schemas.BoolSchema
             
             
@@ -272,8 +310,8 @@ class Brokerage(
         enabled: typing.Union[MetaOapg.properties.enabled, bool, schemas.Unset] = schemas.unset,
         maintenance_mode: typing.Union[MetaOapg.properties.maintenance_mode, bool, schemas.Unset] = schemas.unset,
         allows_fractional_units: typing.Union[MetaOapg.properties.allows_fractional_units, None, bool, schemas.Unset] = schemas.unset,
-        allows_trading: typing.Union[MetaOapg.properties.allows_trading, bool, schemas.Unset] = schemas.unset,
-        has_reporting: typing.Union[MetaOapg.properties.has_reporting, bool, schemas.Unset] = schemas.unset,
+        allows_trading: typing.Union[MetaOapg.properties.allows_trading, None, bool, schemas.Unset] = schemas.unset,
+        has_reporting: typing.Union[MetaOapg.properties.has_reporting, None, bool, schemas.Unset] = schemas.unset,
         is_real_time_connection: typing.Union[MetaOapg.properties.is_real_time_connection, bool, schemas.Unset] = schemas.unset,
         allows_trading_through_snaptrade_api: typing.Union[MetaOapg.properties.allows_trading_through_snaptrade_api, None, bool, schemas.Unset] = schemas.unset,
         is_scraping_integration: typing.Union[MetaOapg.properties.is_scraping_integration, bool, schemas.Unset] = schemas.unset,

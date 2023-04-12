@@ -53,7 +53,7 @@ namespace SnapTrade.Net.Model
         /// <param name="defaultCurrency">defaultCurrency.</param>
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">List of exchange ID supported by brokerage.</param>
-        public Brokerage(Guid id = default(Guid), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool allowsTrading = default(bool), bool hasReporting = default(bool), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), Guid defaultCurrency = default(Guid), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
+        public Brokerage(Guid id = default(Guid), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), Guid defaultCurrency = default(Guid), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -140,13 +140,13 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets AllowsTrading
         /// </summary>
         [DataMember(Name = "allows_trading", EmitDefaultValue = true)]
-        public bool AllowsTrading { get; set; }
+        public bool? AllowsTrading { get; set; }
 
         /// <summary>
         /// Gets or Sets HasReporting
         /// </summary>
         [DataMember(Name = "has_reporting", EmitDefaultValue = true)]
-        public bool HasReporting { get; set; }
+        public bool? HasReporting { get; set; }
 
         /// <summary>
         /// Gets or Sets IsRealTimeConnection
@@ -304,11 +304,13 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.AllowsTrading == input.AllowsTrading ||
-                    this.AllowsTrading.Equals(input.AllowsTrading)
+                    (this.AllowsTrading != null &&
+                    this.AllowsTrading.Equals(input.AllowsTrading))
                 ) && base.Equals(input) && 
                 (
                     this.HasReporting == input.HasReporting ||
-                    this.HasReporting.Equals(input.HasReporting)
+                    (this.HasReporting != null &&
+                    this.HasReporting.Equals(input.HasReporting))
                 ) && base.Equals(input) && 
                 (
                     this.IsRealTimeConnection == input.IsRealTimeConnection ||
@@ -385,8 +387,14 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.AllowsFractionalUnits.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.AllowsTrading.GetHashCode();
-                hashCode = (hashCode * 59) + this.HasReporting.GetHashCode();
+                if (this.AllowsTrading != null)
+                {
+                    hashCode = (hashCode * 59) + this.AllowsTrading.GetHashCode();
+                }
+                if (this.HasReporting != null)
+                {
+                    hashCode = (hashCode * 59) + this.HasReporting.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.IsRealTimeConnection.GetHashCode();
                 if (this.AllowsTradingThroughSnaptradeApi != null)
                 {

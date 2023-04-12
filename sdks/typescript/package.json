@@ -1,8 +1,11 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Client for SnapTrade",
   "author": "Konfig",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript"
