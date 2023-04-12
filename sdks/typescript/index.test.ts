@@ -112,6 +112,19 @@ it("getActivities", async () => {
   });
   console.log(activities.data);
   expect(activities).not.toBeNull();
+  // create two variables "startDate" and "endDate" that are Date instances representing 1 year ago and today
+  const endDate2 = new Date();
+  // create variable startDate2 which is 1 year before endDate2
+  const startDate2 = new Date(endDate2);
+  startDate2.setFullYear(startDate2.getFullYear() - 1);
+  activities = await snaptrade.transactionsAndReporting.getActivities({
+    userId,
+    userSecret,
+    startDate: startDate2,
+    endDate: endDate2,
+  });
+  console.log(activities.data);
+  expect(activities).not.toBeNull();
 });
 
 it("getUserHoldings", async () => {

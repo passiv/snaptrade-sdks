@@ -12,9 +12,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { BrokerageAuthorization } from './brokerage-authorization';
 
 /**
  * SnapTradeUser Investment Account
@@ -32,10 +29,10 @@ export interface SnapTradeHoldingsAccount {
     'id'?: string;
     /**
      * 
-     * @type {BrokerageAuthorization}
+     * @type {string}
      * @memberof SnapTradeHoldingsAccount
      */
-    'brokerage_authorization'?: BrokerageAuthorization;
+    'brokerage_authorization'?: string;
     /**
      * 
      * @type {string}

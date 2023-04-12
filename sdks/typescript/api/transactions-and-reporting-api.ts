@@ -37,14 +37,14 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @summary Get transaction history for a user
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} [startDate] 
-         * @param {string} [endDate] 
+         * @param {string | Date} [startDate] 
+         * @param {string | Date} [endDate] 
          * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
          * @param {string} [brokerageAuthorizations] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getActivities: async (userId: string, userSecret: string, startDate?: string, endDate?: string, accounts?: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getActivities: async (userId: string, userSecret: string, startDate?: string | Date, endDate?: string | Date, accounts?: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getActivities', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -68,11 +68,15 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
             if (startDate !== undefined) {
-                localVarQueryParameter['startDate'] = startDate;
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString().substr(0,10) :
+                    startDate;
             }
 
             if (endDate !== undefined) {
-                localVarQueryParameter['endDate'] = endDate;
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substr(0,10) :
+                    endDate;
             }
 
             if (accounts !== undefined) {
@@ -111,8 +115,8 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
         /**
          * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
          * @summary Get performance information for a specific timeframe
-         * @param {string} startDate 
-         * @param {string} endDate 
+         * @param {string | Date} startDate 
+         * @param {string | Date} endDate 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
@@ -121,7 +125,7 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReportingCustomRange: async (startDate: string, endDate: string, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReportingCustomRange: async (startDate: string | Date, endDate: string | Date, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'startDate' is not null or undefined
             assertParamExists('getReportingCustomRange', 'startDate', startDate)
             // verify required parameter 'endDate' is not null or undefined
@@ -149,11 +153,15 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
             if (startDate !== undefined) {
-                localVarQueryParameter['startDate'] = startDate;
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString().substr(0,10) :
+                    startDate;
             }
 
             if (endDate !== undefined) {
-                localVarQueryParameter['endDate'] = endDate;
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substr(0,10) :
+                    endDate;
             }
 
             if (accounts !== undefined) {
@@ -281,17 +289,17 @@ export type TransactionsAndReportingApiGetActivitiesRequest = {
     
     /**
     * 
-    * @type {string}
+    * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetActivities
     */
-    readonly startDate?: string
+    readonly startDate?: string | Date
     
     /**
     * 
-    * @type {string}
+    * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetActivities
     */
-    readonly endDate?: string
+    readonly endDate?: string | Date
     
     /**
     * Optional comma seperated list of account IDs used to filter the request on specific accounts
@@ -318,17 +326,17 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
     
     /**
     * 
-    * @type {string}
+    * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetReportingCustomRange
     */
-    readonly startDate: string
+    readonly startDate: string | Date
     
     /**
     * 
-    * @type {string}
+    * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetReportingCustomRange
     */
-    readonly endDate: string
+    readonly endDate: string | Date
     
     /**
     * 

@@ -48,8 +48,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | [**string**] |  | defaults to undefined
  **userSecret** | [**string**] |  | defaults to undefined
- **startDate** | [**string**] |  | (optional) defaults to undefined
- **endDate** | [**string**] |  | (optional) defaults to undefined
+ **startDate** | [**string | Date**] |  | (optional) defaults to undefined
+ **endDate** | [**string | Date**] |  | (optional) defaults to undefined
  **accounts** | [**string**] | Optional comma seperated list of account IDs used to filter the request on specific accounts | (optional) defaults to undefined
  **brokerageAuthorizations** | [**string**] | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | (optional) defaults to undefined
 
@@ -111,8 +111,8 @@ console.log(getReportingCustomRangeResponse)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startDate** | [**string**] |  | defaults to undefined
- **endDate** | [**string**] |  | defaults to undefined
+ **startDate** | [**string | Date**] |  | defaults to undefined
+ **endDate** | [**string | Date**] |  | defaults to undefined
  **userId** | [**string**] |  | defaults to undefined
  **userSecret** | [**string**] |  | defaults to undefined
  **accounts** | [**string**] | Optional comma seperated list of account IDs used to filter the request on specific accounts | (optional) defaults to undefined
