@@ -4153,21 +4153,23 @@ components:
           example: true
         allows_fractional_units:
           type: boolean
-          example: true
           nullable: true
+          example: true
         allows_trading:
           type: boolean
+          nullable: true
           example: true
         has_reporting:
           type: boolean
+          nullable: true
           example: true
         is_real_time_connection:
           type: boolean
           example: true
         allows_trading_through_snaptrade_api:
           type: boolean
-          example: true
           nullable: true
+          example: true
         is_scraping_integration:
           type: boolean
           example: true
@@ -4568,8 +4570,8 @@ components:
         Date used to specify timeframe for a reporting call (in YYYY-MM-DD
         format)
       type: string
-      format: date
       example: "2022-01-24"
+      format: date
     ReportingFrequency:
       description: Optional frequency for the rate of return chart (defaults to
         monthly). Possible values are weekly, monthly, quarterly, yearly.
@@ -4911,7 +4913,8 @@ components:
           nullable: true
         type:
           type: string
-          enum:
+          description:
+            Potential values include
             - DIVIDEND
             - BUY
             - SELL
