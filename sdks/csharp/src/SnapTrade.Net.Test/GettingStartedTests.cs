@@ -77,6 +77,12 @@ namespace SnapTrade.Net.Test.Api
             Status status = apiStatusApi.Check();
             Console.WriteLine(status.ToJson());
             Assert.NotNull(status);
+            ApiResponse<Status> response = apiStatusApi.CheckWithHttpInfo();
+            Console.WriteLine("Status Code: " + response.StatusCode);
+            Console.WriteLine("Response Headers: " + response.Headers);
+            Console.WriteLine("Response Data: " + response.Data);
+            Console.WriteLine("Response RawContent: " + response.RawContent);
+            Assert.NotNull(response);
         }
 
         [Fact]
