@@ -72,6 +72,14 @@ namespace SnapTrade.Net.Test.Api
         }
 
         [Fact]
+        public void ApiStatusCheck()
+        {
+            Status status = apiStatusApi.Check();
+            Console.WriteLine(status.ToJson());
+            Assert.NotNull(status);
+        }
+
+        [Fact]
         public void GettingStartedTest()
         {
             Status status = apiStatusApi.Check();
