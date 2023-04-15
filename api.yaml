@@ -3004,6 +3004,18 @@ components:
         amount:
           type: number
           example: 100
+    AccountSyncStatus:
+      description: Status of account
+      properties:
+        transactions:
+          $ref: "#/components/schemas/TransactionsStatus"
+    TransactionsStatus:
+      description: Status of account transaction sync
+      properties:
+        initial_sync_completed:
+          type: boolean
+        last_successful_sync:
+          $ref: "#/components/schemas/ReportingDate"
     Account:
       description: SnapTradeUser Investment Account
       type: object
@@ -3048,6 +3060,8 @@ components:
         number:
           type: string
           example: Q6542138443
+        sync_status:
+          $ref: "#/components/schemas/AccountSyncStatus"
     AccountIDs:
       description: Comma seperated list of account IDs
       type: string
@@ -3560,6 +3574,8 @@ components:
         institution_name:
           type: string
           example: Alpaca
+        sync_status:
+          $ref: "#/components/schemas/AccountSyncStatus"
         meta:
           type: object
           example:
