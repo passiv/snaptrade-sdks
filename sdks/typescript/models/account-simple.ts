@@ -12,6 +12,9 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { AccountSyncStatus } from './account-sync-status';
 
 /**
  * SnapTradeUser Investment Account
@@ -39,5 +42,11 @@ export interface AccountSimple {
      * @memberof AccountSimple
      */
     'number'?: string;
+    /**
+     * 
+     * @type {AccountSyncStatus}
+     * @memberof AccountSimple
+     */
+    'sync_status'?: AccountSyncStatus;
 }
 

@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
+
 filterTags:
   - Webhooks
   - Development Tools
@@ -24,7 +26,7 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   csharp:
-    version: 3.0.0
+    version: 3.1.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -59,7 +61,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 10.0.0
+    version: 10.1.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -74,7 +76,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.0.0
+    version: 8.1.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

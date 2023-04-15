@@ -106,6 +106,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'InstitutionName'
         }
         /// <summary>
+        /// Test the property 'SyncStatus'
+        /// </summary>
+        [Fact]
+        public void SyncStatusTest()
+        {
+            // TODO unit test for the property 'SyncStatus'
+        }
+        /// <summary>
         /// Test the property 'Meta'
         /// </summary>
         [Fact]

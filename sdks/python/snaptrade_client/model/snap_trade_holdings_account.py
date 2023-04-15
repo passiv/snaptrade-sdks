@@ -62,6 +62,10 @@ class SnapTradeHoldingsAccount(
                     )
             number = schemas.StrSchema
             institution_name = schemas.StrSchema
+        
+            @staticmethod
+            def sync_status() -> typing.Type['AccountSyncStatus']:
+                return AccountSyncStatus
             
             
             class meta(
@@ -98,6 +102,7 @@ class SnapTradeHoldingsAccount(
                 "name": name,
                 "number": number,
                 "institution_name": institution_name,
+                "sync_status": sync_status,
                 "meta": meta,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -121,12 +126,15 @@ class SnapTradeHoldingsAccount(
     def __getitem__(self, name: typing_extensions.Literal["institution_name"]) -> MetaOapg.properties.institution_name: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["sync_status"]) -> 'AccountSyncStatus': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["meta"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -149,12 +157,15 @@ class SnapTradeHoldingsAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["institution_name"]) -> typing.Union[MetaOapg.properties.institution_name, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["sync_status"]) -> typing.Union['AccountSyncStatus', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["meta"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -166,6 +177,7 @@ class SnapTradeHoldingsAccount(
         name: typing.Union[MetaOapg.properties.name, None, str, schemas.Unset] = schemas.unset,
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
         institution_name: typing.Union[MetaOapg.properties.institution_name, str, schemas.Unset] = schemas.unset,
+        sync_status: typing.Union['AccountSyncStatus', schemas.Unset] = schemas.unset,
         meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -179,7 +191,10 @@ class SnapTradeHoldingsAccount(
             name=name,
             number=number,
             institution_name=institution_name,
+            sync_status=sync_status,
             meta=meta,
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.account_sync_status import AccountSyncStatus

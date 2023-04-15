@@ -40,10 +40,15 @@ class AccountSimple(
             id = schemas.UUIDSchema
             name = schemas.StrSchema
             number = schemas.StrSchema
+        
+            @staticmethod
+            def sync_status() -> typing.Type['AccountSyncStatus']:
+                return AccountSyncStatus
             __annotations__ = {
                 "id": id,
                 "name": name,
                 "number": number,
+                "sync_status": sync_status,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -57,9 +62,12 @@ class AccountSimple(
     def __getitem__(self, name: typing_extensions.Literal["number"]) -> MetaOapg.properties.number: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["sync_status"]) -> 'AccountSyncStatus': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["sync_status"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -73,9 +81,12 @@ class AccountSimple(
     def get_item_oapg(self, name: typing_extensions.Literal["number"]) -> typing.Union[MetaOapg.properties.number, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["sync_status"]) -> typing.Union['AccountSyncStatus', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["sync_status"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -84,6 +95,7 @@ class AccountSimple(
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
+        sync_status: typing.Union['AccountSyncStatus', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'AccountSimple':
@@ -93,6 +105,9 @@ class AccountSimple(
             id=id,
             name=name,
             number=number,
+            sync_status=sync_status,
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.account_sync_status import AccountSyncStatus

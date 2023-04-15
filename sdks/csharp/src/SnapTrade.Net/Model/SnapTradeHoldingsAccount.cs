@@ -41,8 +41,9 @@ namespace SnapTrade.Net.Model
         /// <param name="name">name.</param>
         /// <param name="number">number.</param>
         /// <param name="institutionName">institutionName.</param>
+        /// <param name="syncStatus">syncStatus.</param>
         /// <param name="meta">meta.</param>
-        public SnapTradeHoldingsAccount(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public SnapTradeHoldingsAccount(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -50,6 +51,7 @@ namespace SnapTrade.Net.Model
             this.Name = name;
             this.Number = number;
             this.InstitutionName = institutionName;
+            this.SyncStatus = syncStatus;
             this.Meta = meta;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -91,6 +93,12 @@ namespace SnapTrade.Net.Model
         public string InstitutionName { get; set; }
 
         /// <summary>
+        /// Gets or Sets SyncStatus
+        /// </summary>
+        [DataMember(Name = "sync_status", EmitDefaultValue = false)]
+        public AccountSyncStatus SyncStatus { get; set; }
+
+        /// <summary>
         /// Gets or Sets Meta
         /// </summary>
         [DataMember(Name = "meta", EmitDefaultValue = false)]
@@ -117,6 +125,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  InstitutionName: ").Append(InstitutionName).Append("\n");
+            sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -185,6 +194,11 @@ namespace SnapTrade.Net.Model
                     this.InstitutionName.Equals(input.InstitutionName))
                 ) && base.Equals(input) && 
                 (
+                    this.SyncStatus == input.SyncStatus ||
+                    (this.SyncStatus != null &&
+                    this.SyncStatus.Equals(input.SyncStatus))
+                ) && base.Equals(input) && 
+                (
                     this.Meta == input.Meta ||
                     this.Meta != null &&
                     input.Meta != null &&
@@ -225,6 +239,10 @@ namespace SnapTrade.Net.Model
                 if (this.InstitutionName != null)
                 {
                     hashCode = (hashCode * 59) + this.InstitutionName.GetHashCode();
+                }
+                if (this.SyncStatus != null)
+                {
+                    hashCode = (hashCode * 59) + this.SyncStatus.GetHashCode();
                 }
                 if (this.Meta != null)
                 {

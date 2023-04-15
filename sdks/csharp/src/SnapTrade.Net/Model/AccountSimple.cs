@@ -38,11 +38,13 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="number">number.</param>
-        public AccountSimple(Guid id = default(Guid), string name = default(string), string number = default(string)) : base()
+        /// <param name="syncStatus">syncStatus.</param>
+        public AccountSimple(Guid id = default(Guid), string name = default(string), string number = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
         {
             this.Id = id;
             this.Name = name;
             this.Number = number;
+            this.SyncStatus = syncStatus;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -65,6 +67,12 @@ namespace SnapTrade.Net.Model
         public string Number { get; set; }
 
         /// <summary>
+        /// Gets or Sets SyncStatus
+        /// </summary>
+        [DataMember(Name = "sync_status", EmitDefaultValue = false)]
+        public AccountSyncStatus SyncStatus { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -82,6 +90,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
+            sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -132,6 +141,11 @@ namespace SnapTrade.Net.Model
                     this.Number == input.Number ||
                     (this.Number != null &&
                     this.Number.Equals(input.Number))
+                ) && base.Equals(input) && 
+                (
+                    this.SyncStatus == input.SyncStatus ||
+                    (this.SyncStatus != null &&
+                    this.SyncStatus.Equals(input.SyncStatus))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -156,6 +170,10 @@ namespace SnapTrade.Net.Model
                 if (this.Number != null)
                 {
                     hashCode = (hashCode * 59) + this.Number.GetHashCode();
+                }
+                if (this.SyncStatus != null)
+                {
+                    hashCode = (hashCode * 59) + this.SyncStatus.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

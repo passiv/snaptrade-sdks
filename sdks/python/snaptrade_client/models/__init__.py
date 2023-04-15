@@ -17,6 +17,7 @@ from snaptrade_client.model.account_ids import AccountIDs
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.account_simple import AccountSimple
+from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
@@ -113,6 +114,7 @@ from snaptrade_client.model.timestamp import Timestamp
 from snaptrade_client.model.trade import Trade
 from snaptrade_client.model.trade_execution_status import TradeExecutionStatus
 from snaptrade_client.model.trade_impact import TradeImpact
+from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.units import Units

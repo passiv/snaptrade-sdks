@@ -2,7 +2,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 - API version: 1.0.0
-- Package version: 10.0.0
+- Package version: 10.1.0
 
 ## Requirements.
 
@@ -14,9 +14,9 @@ Python >=3.7
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install snaptrade-python-sdk==10.0.0
+pip install snaptrade-python-sdk==10.1.0
 ```
-(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==10.0.0`)
+(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==10.1.0`)
 
 Then import the package:
 ```python
@@ -168,6 +168,7 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecord](docs/models/AccountOrderRecord.md)
  - [AccountOrderRecordStatus](docs/models/AccountOrderRecordStatus.md)
  - [AccountSimple](docs/models/AccountSimple.md)
+ - [AccountSyncStatus](docs/models/AccountSyncStatus.md)
  - [Action](docs/models/Action.md)
  - [Balance](docs/models/Balance.md)
  - [Brokerage](docs/models/Brokerage.md)
@@ -264,6 +265,7 @@ Class | Method | HTTP request | Description
  - [Trade](docs/models/Trade.md)
  - [TradeExecutionStatus](docs/models/TradeExecutionStatus.md)
  - [TradeImpact](docs/models/TradeImpact.md)
+ - [TransactionsStatus](docs/models/TransactionsStatus.md)
  - [USExchange](docs/models/USExchange.md)
  - [UnderlyingSymbol](docs/models/UnderlyingSymbol.md)
  - [Units](docs/models/Units.md)
