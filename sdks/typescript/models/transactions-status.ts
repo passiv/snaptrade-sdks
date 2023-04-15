@@ -26,7 +26,7 @@ export interface TransactionsStatus {
      */
     'initial_sync_completed'?: boolean;
     /**
-     * 
+     * Date in YYYY-MM-DD format or null
      * @type {string}
      * @memberof TransactionsStatus
      */
