@@ -38,7 +38,31 @@ class TransactionsStatus(
         
         class properties:
             initial_sync_completed = schemas.BoolSchema
-            last_successful_sync = schemas.DateSchema
+            
+            
+            class last_successful_sync(
+                schemas.DateBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'date'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, date, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'last_successful_sync':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "initial_sync_completed": initial_sync_completed,
                 "last_successful_sync": last_successful_sync,
@@ -76,7 +100,7 @@ class TransactionsStatus(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         initial_sync_completed: typing.Union[MetaOapg.properties.initial_sync_completed, bool, schemas.Unset] = schemas.unset,
-        last_successful_sync: typing.Union[MetaOapg.properties.last_successful_sync, str, date, schemas.Unset] = schemas.unset,
+        last_successful_sync: typing.Union[MetaOapg.properties.last_successful_sync, None, str, date, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'TransactionsStatus':

@@ -36,8 +36,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="TransactionsStatus" /> class.
         /// </summary>
         /// <param name="initialSyncCompleted">initialSyncCompleted.</param>
-        /// <param name="lastSuccessfulSync">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
-        public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime lastSuccessfulSync = default(DateTime))
+        /// <param name="lastSuccessfulSync">lastSuccessfulSync.</param>
+        public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
@@ -50,12 +50,11 @@ namespace SnapTrade.Net.Model
         public bool InitialSyncCompleted { get; set; }
 
         /// <summary>
-        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+        /// Gets or Sets LastSuccessfulSync
         /// </summary>
-        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
-        [DataMember(Name = "last_successful_sync", EmitDefaultValue = false)]
+        [DataMember(Name = "last_successful_sync", EmitDefaultValue = true)]
         [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime LastSuccessfulSync { get; set; }
+        public DateTime? LastSuccessfulSync { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

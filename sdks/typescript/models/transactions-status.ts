@@ -26,10 +26,10 @@ export interface TransactionsStatus {
      */
     'initial_sync_completed'?: boolean;
     /**
-     * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * 
      * @type {string}
      * @memberof TransactionsStatus
      */
-    'last_successful_sync'?: string;
+    'last_successful_sync'?: string | null;
 }
 

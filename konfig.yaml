@@ -96,3 +96,9 @@ fixConfig:
   update:
     $.components.schemas.ReportingDate:
       format: date
+  modify:
+    $.components.schemas.TransactionsStatus.properties.last_successful_sync:
+      type: string
+      example: "2022-01-24"
+      format: date
+      nullable: true
