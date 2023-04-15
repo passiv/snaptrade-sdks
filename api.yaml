@@ -3015,7 +3015,7 @@ components:
         initial_sync_completed:
           type: boolean
         last_successful_sync:
-          $ref: "#/components/schemas/ReportingDate"
+          $ref: "#/components/schemas/SyncStatusDate"
     Account:
       description: SnapTradeUser Investment Account
       type: object
@@ -4613,6 +4613,13 @@ components:
         substring:
           type: string
           example: apple
+    SyncStatusDate:
+      description:
+        Date in YYYY-MM-DD format or null
+      type: string
+      example: "2022-01-24"
+      format: date
+      nullable: true
     TargetAsset:
       description: Target percentage of a certain asset
       type: object
