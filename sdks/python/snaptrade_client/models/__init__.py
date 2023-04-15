@@ -106,6 +106,7 @@ from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate
 from snaptrade_client.model.symbol import Symbol
 from snaptrade_client.model.symbol_query import SymbolQuery
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes
+from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.target_asset import TargetAsset
 from snaptrade_client.model.target_asset_list import TargetAssetList
 from snaptrade_client.model.time import Time

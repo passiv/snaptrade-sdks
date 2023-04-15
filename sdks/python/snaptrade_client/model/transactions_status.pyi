@@ -38,31 +38,10 @@ class TransactionsStatus(
         
         class properties:
             initial_sync_completed = schemas.BoolSchema
-            
-            
-            class last_successful_sync(
-                schemas.DateBase,
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                class MetaOapg:
-                    format = 'date'
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, date, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'last_successful_sync':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
+        
+            @staticmethod
+            def last_successful_sync() -> typing.Type['SyncStatusDate']:
+                return SyncStatusDate
             __annotations__ = {
                 "initial_sync_completed": initial_sync_completed,
                 "last_successful_sync": last_successful_sync,
@@ -73,7 +52,7 @@ class TransactionsStatus(
     def __getitem__(self, name: typing_extensions.Literal["initial_sync_completed"]) -> MetaOapg.properties.initial_sync_completed: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["last_successful_sync"]) -> MetaOapg.properties.last_successful_sync: ...
+    def __getitem__(self, name: typing_extensions.Literal["last_successful_sync"]) -> 'SyncStatusDate': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -87,7 +66,7 @@ class TransactionsStatus(
     def get_item_oapg(self, name: typing_extensions.Literal["initial_sync_completed"]) -> typing.Union[MetaOapg.properties.initial_sync_completed, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["last_successful_sync"]) -> typing.Union[MetaOapg.properties.last_successful_sync, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["last_successful_sync"]) -> typing.Union['SyncStatusDate', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -100,7 +79,7 @@ class TransactionsStatus(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         initial_sync_completed: typing.Union[MetaOapg.properties.initial_sync_completed, bool, schemas.Unset] = schemas.unset,
-        last_successful_sync: typing.Union[MetaOapg.properties.last_successful_sync, None, str, date, schemas.Unset] = schemas.unset,
+        last_successful_sync: typing.Union['SyncStatusDate', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'TransactionsStatus':
@@ -112,3 +91,5 @@ class TransactionsStatus(
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.sync_status_date import SyncStatusDate
