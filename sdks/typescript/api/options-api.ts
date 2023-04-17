@@ -22,6 +22,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { OptionChainInner } from '../models';
 // @ts-ignore
+import { OptionLeg } from '../models';
+// @ts-ignore
 import { OptionsGetOptionStrategyRequest } from '../models';
 // @ts-ignore
 import { OptionsHoldings } from '../models';

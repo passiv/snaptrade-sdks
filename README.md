@@ -4,9 +4,9 @@
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
 |Java|3.0.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/3.0.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
-|Python|10.2.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.2.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
-|TypeScript|8.2.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.2.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
-|C#|3.2.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.2.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
+|Python|10.3.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.3.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
+|TypeScript|8.3.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.3.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
+|C#|3.3.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.3.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
 
 
 ## How to regenerate SDKs
@@ -26,7 +26,7 @@
 Logging into https://api.konfigthis.com
 Email: dylan@konfigthis.com
 Password: **************
-Successfuly logged in as dylan@konfigthis.com
+Successfully logged in as dylan@konfigthis.com
 ```
 
 4. Generate SDKs with `konfig generate`

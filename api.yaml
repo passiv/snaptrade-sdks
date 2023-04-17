@@ -3048,6 +3048,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/CashRestriction"
+        sync_status:
+          $ref: "#/components/schemas/AccountSyncStatus"
     AccountSimple:
       description: SnapTradeUser Investment Account
       type: object

@@ -44,7 +44,8 @@ namespace SnapTrade.Net.Model
         /// <param name="createdDate">createdDate.</param>
         /// <param name="meta">meta.</param>
         /// <param name="cashRestrictions">cashRestrictions.</param>
-        public Account(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), string createdDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>)) : base()
+        /// <param name="syncStatus">syncStatus.</param>
+        public Account(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), string createdDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -55,6 +56,7 @@ namespace SnapTrade.Net.Model
             this.CreatedDate = createdDate;
             this.Meta = meta;
             this.CashRestrictions = cashRestrictions;
+            this.SyncStatus = syncStatus;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -113,6 +115,12 @@ namespace SnapTrade.Net.Model
         public List<CashRestriction> CashRestrictions { get; set; }
 
         /// <summary>
+        /// Gets or Sets SyncStatus
+        /// </summary>
+        [DataMember(Name = "sync_status", EmitDefaultValue = false)]
+        public AccountSyncStatus SyncStatus { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -136,6 +144,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
+            sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -218,6 +227,11 @@ namespace SnapTrade.Net.Model
                     this.CashRestrictions != null &&
                     input.CashRestrictions != null &&
                     this.CashRestrictions.SequenceEqual(input.CashRestrictions)
+                ) && base.Equals(input) && 
+                (
+                    this.SyncStatus == input.SyncStatus ||
+                    (this.SyncStatus != null &&
+                    this.SyncStatus.Equals(input.SyncStatus))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -266,6 +280,10 @@ namespace SnapTrade.Net.Model
                 if (this.CashRestrictions != null)
                 {
                     hashCode = (hashCode * 59) + this.CashRestrictions.GetHashCode();
+                }
+                if (this.SyncStatus != null)
+                {
+                    hashCode = (hashCode * 59) + this.SyncStatus.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

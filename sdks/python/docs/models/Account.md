@@ -19,6 +19,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **created_date** | str,  | str,  |  | [optional] 
 **[meta](#meta)** | dict, frozendict.frozendict,  | frozendict.frozendict,  |  | [optional] 
 **[cash_restrictions](#cash_restrictions)** | list, tuple,  | tuple,  |  | [optional] 
+**sync_status** | [**AccountSyncStatus**](AccountSyncStatus.md) | [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 # meta

@@ -14,6 +14,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountSyncStatus } from './account-sync-status';
+// May contain unused imports in some cases
+// @ts-ignore
 import { CashRestriction } from './cash-restriction';
 
 /**
@@ -78,5 +81,11 @@ export interface Account {
      * @memberof Account
      */
     'cash_restrictions'?: Array<CashRestriction>;
+    /**
+     * 
+     * @type {AccountSyncStatus}
+     * @memberof Account
+     */
+    'sync_status'?: AccountSyncStatus;
 }
 

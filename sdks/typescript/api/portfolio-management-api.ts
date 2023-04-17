@@ -26,11 +26,25 @@ import { Balance } from '../models';
 // @ts-ignore
 import { CalculatedTrade } from '../models';
 // @ts-ignore
+import { Currency } from '../models';
+// @ts-ignore
+import { Exchange } from '../models';
+// @ts-ignore
 import { ExcludedAsset } from '../models';
+// @ts-ignore
+import { ModelAssetClass } from '../models';
 // @ts-ignore
 import { ModelAssetClassDetails } from '../models';
 // @ts-ignore
+import { ModelAssetClassTarget } from '../models';
+// @ts-ignore
+import { ModelPortfolio } from '../models';
+// @ts-ignore
+import { ModelPortfolioAssetClass } from '../models';
+// @ts-ignore
 import { ModelPortfolioDetails } from '../models';
+// @ts-ignore
+import { ModelPortfolioSecurity } from '../models';
 // @ts-ignore
 import { PortfolioGroup } from '../models';
 // @ts-ignore
@@ -39,6 +53,8 @@ import { PortfolioGroupInfo } from '../models';
 import { PortfolioGroupPosition } from '../models';
 // @ts-ignore
 import { PortfolioGroupSettings } from '../models';
+// @ts-ignore
+import { SecurityType } from '../models';
 // @ts-ignore
 import { SymbolQuery } from '../models';
 // @ts-ignore
