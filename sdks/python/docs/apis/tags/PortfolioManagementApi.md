@@ -2614,6 +2614,7 @@ try:
     pprint(list_portfolio_accounts_response.body["created_date"])
     pprint(list_portfolio_accounts_response.body["meta"])
     pprint(list_portfolio_accounts_response.body["cash_restrictions"])
+    pprint(list_portfolio_accounts_response.body["sync_status"])
     pprint(list_portfolio_accounts_response.headers)
     pprint(list_portfolio_accounts_response.status)
     pprint(list_portfolio_accounts_response.round_trip_time)

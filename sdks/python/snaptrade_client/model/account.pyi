@@ -99,6 +99,10 @@ class Account(
             
                 def __getitem__(self, i: int) -> 'CashRestriction':
                     return super().__getitem__(i)
+        
+            @staticmethod
+            def sync_status() -> typing.Type['AccountSyncStatus']:
+                return AccountSyncStatus
             __annotations__ = {
                 "id": id,
                 "brokerage_authorization": brokerage_authorization,
@@ -109,6 +113,7 @@ class Account(
                 "created_date": created_date,
                 "meta": meta,
                 "cash_restrictions": cash_restrictions,
+                "sync_status": sync_status,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -140,9 +145,12 @@ class Account(
     def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> MetaOapg.properties.cash_restrictions: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["sync_status"]) -> 'AccountSyncStatus': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["created_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["created_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["sync_status"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -174,9 +182,12 @@ class Account(
     def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union[MetaOapg.properties.cash_restrictions, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["sync_status"]) -> typing.Union['AccountSyncStatus', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["created_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["created_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["sync_status"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -191,6 +202,7 @@ class Account(
         created_date: typing.Union[MetaOapg.properties.created_date, str, schemas.Unset] = schemas.unset,
         meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         cash_restrictions: typing.Union[MetaOapg.properties.cash_restrictions, list, tuple, schemas.Unset] = schemas.unset,
+        sync_status: typing.Union['AccountSyncStatus', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Account':
@@ -206,8 +218,10 @@ class Account(
             created_date=created_date,
             meta=meta,
             cash_restrictions=cash_restrictions,
+            sync_status=sync_status,
             _configuration=_configuration,
             **kwargs,
         )
 
+from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.cash_restriction import CashRestriction

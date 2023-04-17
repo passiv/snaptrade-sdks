@@ -20,7 +20,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { Account } from '../models';
+// @ts-ignore
 import { AccountOrderRecord } from '../models';
+// @ts-ignore
+import { Action } from '../models';
+// @ts-ignore
+import { BrokerageSymbol } from '../models';
 // @ts-ignore
 import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
@@ -30,7 +36,11 @@ import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { OrderType } from '../models';
+// @ts-ignore
 import { SymbolsQuotes } from '../models';
+// @ts-ignore
+import { TimeInForce } from '../models';
 // @ts-ignore
 import { Trade } from '../models';
 // @ts-ignore
@@ -41,6 +51,8 @@ import { TradeImpact } from '../models';
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingPlaceOCOOrderRequest } from '../models';
+// @ts-ignore
+import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 import { TradingApiCustom } from "./trading-api-custom";
