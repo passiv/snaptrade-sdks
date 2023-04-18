@@ -30,7 +30,7 @@ namespace SnapTrade.Net.Client
             }
             string query = string.Join("&", request.Parameters
                 .Where(p => p.Type == ParameterType.QueryString)
-                .Select(p => $"{p.Name}={p.Value}"));
+                .Select(p => $"{p.Name}={Uri.EscapeDataString((string)p.Value)}"));
             var resourceUrl = request.Resource;
             foreach (var parameter in request.Parameters.Where(p => p.Type == ParameterType.UrlSegment))
             {

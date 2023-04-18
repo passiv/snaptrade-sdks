@@ -102,6 +102,23 @@ namespace SnapTrade.Net.Test.Api
         }
 
         [Fact]
+        public void GettingStartedWithEmailUserIdTest()
+        {
+            Status status = apiStatusApi.Check();
+            Console.WriteLine(status.ToJson());
+            string uuid = Guid.NewGuid().ToString();
+            string userId = $"{uuid}+test2@gmail.com";
+            UserIDandSecret userIDandSecret = authenticationApi.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(userId));
+            Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+            var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
+            Console.WriteLine(redirectUri);
+            var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(holdings);
+            var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
+            Console.WriteLine(deleteResponse);
+        }
+
+        [Fact]
         public void GetUserAccountBalance()
         {
             var accounts = accountInformationApi.ListUserAccounts(this.testUserId, this.testUserSecret);
