@@ -36,14 +36,14 @@ from . import path
 # Query params
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
-SymbolsSchema = schemas.UUIDSchema
+SymbolsSchema = schemas.StrSchema
 UseTickerSchema = schemas.BoolSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
         'userId': typing.Union[UserIdSchema, str, ],
         'userSecret': typing.Union[UserSecretSchema, str, ],
-        'symbols': typing.Union[SymbolsSchema, str, uuid.UUID, ],
+        'symbols': typing.Union[SymbolsSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(

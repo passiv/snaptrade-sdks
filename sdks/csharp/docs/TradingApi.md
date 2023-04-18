@@ -422,7 +422,7 @@ catch (ApiException e)
 
 <a name="getuseraccountquotes"></a>
 # **GetUserAccountQuotes**
-> SymbolsQuotes GetUserAccountQuotes (string userId, string userSecret, Guid symbols, Guid accountId, bool? useTicker = null)
+> SymbolsQuotes GetUserAccountQuotes (string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = null)
 
 Get symbol quotes
 
@@ -452,7 +452,7 @@ namespace Example
             var apiInstance = new TradingApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
-            var symbols = "symbols_example";  // Guid | List of universal_symbol_id or tickers to get quotes for.
+            var symbols = "symbols_example";  // string | List of universal_symbol_id or tickers to get quotes for.
             var accountId = "accountId_example";  // Guid | The ID of the account to get quotes.
             var useTicker = true;  // bool? | Should be set to True if providing tickers. (optional) 
 
@@ -499,7 +499,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **symbols** | **Guid** | List of universal_symbol_id or tickers to get quotes for. |  |
+| **symbols** | **string** | List of universal_symbol_id or tickers to get quotes for. |  |
 | **accountId** | **Guid** | The ID of the account to get quotes. |  |
 | **useTicker** | **bool?** | Should be set to True if providing tickers. | [optional]  |
 

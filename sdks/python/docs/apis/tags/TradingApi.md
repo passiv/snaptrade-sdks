@@ -680,7 +680,7 @@ str,  | str,  | SnapTrade User Secret (generated when registering user) |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
+str,  | str,  |  | 
 
 # UseTickerSchema
 

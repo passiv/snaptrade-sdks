@@ -120,7 +120,7 @@ namespace SnapTrade.Net.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string userId = null;
             //string userSecret = null;
-            //Guid symbols = null;
+            //string symbols = null;
             //Guid accountId = null;
             //bool? useTicker = null;
             //var response = instance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
