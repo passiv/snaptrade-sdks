@@ -764,7 +764,6 @@ paths:
           description: List of universal_symbol_id or tickers to get quotes for.
           schema:
             type: string
-            format: uuid
         - in: query
           name: use_ticker
           description: Should be set to True if providing tickers.
