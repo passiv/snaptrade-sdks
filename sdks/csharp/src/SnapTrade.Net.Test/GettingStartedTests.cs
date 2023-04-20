@@ -127,6 +127,13 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(response);
         }
 
+        [Fact(Skip = "Fails in deserialization")]
+        async public void GetAllUserHoldings()
+        {
+            var accounts = await accountInformationApi.GetAllUserHoldingsAsync(this.testUserId, this.testUserSecret);
+            Console.WriteLine(accounts);
+        }
+
         [Fact]
         async public void GetUserHoldings()
         {
