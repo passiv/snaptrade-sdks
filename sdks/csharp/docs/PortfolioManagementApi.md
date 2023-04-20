@@ -75,13 +75,19 @@ namespace Example
             {
                 // Adds an asset to exclude to a portfolio group
                 ExcludedAsset result = apiInstance.AddPortfolioExcludedAsset(portfolioGroupId, universalSymbol);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.AddPortfolioExcludedAsset: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.AddPortfolioExcludedAsset: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -174,13 +180,19 @@ namespace Example
             {
                 // Create new portfolio group
                 List<PortfolioGroup> result = apiInstance.Create(userId, userSecret, requestBody);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.Create: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.Create: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -273,13 +285,19 @@ namespace Example
             {
                 // Create a new model asset class
                 ModelAssetClassDetails result = apiInstance.CreateAssetClass();
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.CreateAssetClass: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.CreateAssetClass: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -364,13 +382,19 @@ namespace Example
             {
                 // Creates a new model portfolio
                 ModelPortfolioDetails result = apiInstance.CreateModelPortfolio();
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.CreateModelPortfolio: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.CreateModelPortfolio: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -459,9 +483,15 @@ namespace Example
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DeleteAssetClass: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DeleteAssetClass: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -552,9 +582,15 @@ namespace Example
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DeleteExcludedAsset: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DeleteExcludedAsset: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -645,9 +681,15 @@ namespace Example
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DeleteModelPortfolioById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DeleteModelPortfolioById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -734,13 +776,19 @@ namespace Example
             {
                 // Remove a target portfolio.
                 PortfolioGroup result = apiInstance.DeletePortfoli(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DeletePortfoli: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DeletePortfoli: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -834,13 +882,19 @@ namespace Example
             {
                 // Remove a TargetAsset.
                 TargetAsset result = apiInstance.DeletePortfolioTargetById(portfolioGroupId, targetAssetId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DeletePortfolioTargetById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DeletePortfolioTargetById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -934,13 +988,19 @@ namespace Example
             {
                 // Get details of a model asset class
                 ModelAssetClassDetails result = apiInstance.DetailAssetClass(modelAssetClassId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.DetailAssetClass: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.DetailAssetClass: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1032,13 +1092,19 @@ namespace Example
             {
                 // Return an individual trade
                 List<Trade> result = apiInstance.GetCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetCalculatedTradeById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetCalculatedTradeById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1130,13 +1196,19 @@ namespace Example
             {
                 // Get details of a model portfolio
                 ModelPortfolioDetails result = apiInstance.GetModelDetailsById(modelPortfolioId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetModelDetailsById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetModelDetailsById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1226,13 +1298,19 @@ namespace Example
             {
                 // Get sum of cash balances in portfolio group
                 List<Balance> result = apiInstance.GetPortfolioBalances(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioBalances: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioBalances: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1325,13 +1403,19 @@ namespace Example
             {
                 // Get details of a target portfolio
                 PortfolioGroup result = apiInstance.GetPortfolioDetailsById(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioDetailsById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioDetailsById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1422,13 +1506,19 @@ namespace Example
             {
                 // Return a whole bunch of relevant information relating to a portfolio group.
                 PortfolioGroupInfo result = apiInstance.GetPortfolioInfo(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioInfo: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioInfo: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1519,13 +1609,19 @@ namespace Example
             {
                 // Get total of each postions owned in portfolio group
                 List<PortfolioGroupPosition> result = apiInstance.GetPortfolioPositions(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioPositions: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioPositions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1618,13 +1714,19 @@ namespace Example
             {
                 // Get portfolio group settings
                 PortfolioGroupSettings result = apiInstance.GetPortfolioSettings(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioSettings: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioSettings: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1716,13 +1818,19 @@ namespace Example
             {
                 // Get a specific target from a portfolio group
                 TargetAsset result = apiInstance.GetPortfolioTargetById(portfolioGroupId, targetAssetId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioTargetById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioTargetById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1814,13 +1922,19 @@ namespace Example
             {
                 // Get all target assets under the specified PortfolioGroup.
                 List<TargetAsset> result = apiInstance.GetPortfolioTargets(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioTargets: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioTargets: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -1913,13 +2027,19 @@ namespace Example
             {
                 // Get an array of excluded assets associated with a portfolio group\\
                 List<ExcludedAsset> result = apiInstance.GetPortoflioExcludedAssets(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.GetPortoflioExcludedAssets: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortoflioExcludedAssets: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2010,13 +2130,19 @@ namespace Example
             {
                 // Import target allocation based on portfolio group
                 List<TargetAsset> result = apiInstance.ImportModelPortfolio(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ImportModelPortfolio: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ImportModelPortfolio: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2108,13 +2234,19 @@ namespace Example
             {
                 // List all portfolio groups
                 List<PortfolioGroup> result = apiInstance.List(userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.List: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.List: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2205,13 +2337,19 @@ namespace Example
             {
                 // List of model asset class
                 List<ModelAssetClassDetails> result = apiInstance.ListAssetClasses();
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ListAssetClasses: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ListAssetClasses: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2297,13 +2435,19 @@ namespace Example
             {
                 // List of trades to make to rebalance portfolio group
                 CalculatedTrade result = apiInstance.ListCalculatedTrades(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ListCalculatedTrades: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ListCalculatedTrades: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2392,13 +2536,19 @@ namespace Example
             {
                 // List of model portfolio
                 List<ModelPortfolioDetails> result = apiInstance.ListModelPortfolio();
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ListModelPortfolio: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ListModelPortfolio: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2484,13 +2634,19 @@ namespace Example
             {
                 // Get all accounts associated with a portfolio group
                 List<Account> result = apiInstance.ListPortfolioAccounts(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ListPortfolioAccounts: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ListPortfolioAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2585,9 +2741,15 @@ namespace Example
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.ModifyModelPortfolioById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.ModifyModelPortfolioById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2676,13 +2838,19 @@ namespace Example
             {
                 // Update an existing target portfolio.
                 PortfolioGroup result = apiInstance.SavePortfolio(portfolioGroupId, requestBody);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.SavePortfolio: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.SavePortfolio: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2777,13 +2945,19 @@ namespace Example
             {
                 // Search for symbols limited to brokerages under the specified portfolio group
                 List<UniversalSymbol> result = apiInstance.SearchPortfolioSymbols(portfolioGroupId, symbolQuery);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.SearchPortfolioSymbols: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.SearchPortfolioSymbols: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2876,13 +3050,19 @@ namespace Example
             {
                 // Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
                 List<TargetAsset> result = apiInstance.SetPortfolioTargets(portfolioGroupId, targetAsset);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.SetPortfolioTargets: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.SetPortfolioTargets: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -2980,9 +3160,15 @@ namespace Example
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.UpdateAssetClass: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.UpdateAssetClass: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -3070,13 +3256,19 @@ namespace Example
             {
                 // Updates portfolio group settings
                 PortfolioGroupSettings result = apiInstance.UpdatePortfolioSettings(portfolioGroupId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.UpdatePortfolioSettings: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.UpdatePortfolioSettings: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -3169,13 +3361,19 @@ namespace Example
             {
                 // Update a TargetAsset under the specified PortfolioGroup.
                 TargetAsset result = apiInstance.UpdatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling PortfolioManagementApi.UpdatePortfolioTargetById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling PortfolioManagementApi.UpdatePortfolioTargetById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }

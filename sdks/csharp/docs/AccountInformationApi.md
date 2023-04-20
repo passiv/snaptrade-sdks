@@ -51,13 +51,19 @@ namespace Example
             {
                 // List all accounts for the user, plus balances and positions for each account.
                 List<AccountHoldings> result = apiInstance.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetAllUserHoldings: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetAllUserHoldings: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -154,13 +160,19 @@ namespace Example
             {
                 // Get all cash balances of an investment account
                 List<Balance> result = apiInstance.GetUserAccountBalance(userId, userSecret, accountId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetUserAccountBalance: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountBalance: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -255,13 +267,19 @@ namespace Example
             {
                 // Return details of a specific investment account
                 List<Account> result = apiInstance.GetUserAccountDetails(userId, userSecret, accountId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetUserAccountDetails: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountDetails: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -357,13 +375,19 @@ namespace Example
             {
                 // Get all history of orders placed in account
                 List<AccountOrderRecord> result = apiInstance.GetUserAccountOrders(userId, userSecret, accountId, state);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetUserAccountOrders: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountOrders: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -459,13 +483,19 @@ namespace Example
             {
                 // Get all positions of an investment account
                 List<Position> result = apiInstance.GetUserAccountPositions(userId, userSecret, accountId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetUserAccountPositions: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountPositions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -560,13 +590,19 @@ namespace Example
             {
                 // List balances, positions and orders for the specified account.
                 AccountHoldings result = apiInstance.GetUserHoldings(accountId, userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.GetUserHoldings: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserHoldings: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -662,13 +698,19 @@ namespace Example
             {
                 // List all investment accounts for the user
                 List<Account> result = apiInstance.ListUserAccounts(userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.ListUserAccounts: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.ListUserAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -762,13 +804,19 @@ namespace Example
             {
                 // Update details of an investment account
                 List<Account> result = apiInstance.UpdateUserAccount(userId, userSecret, accountId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AccountInformationApi.UpdateUserAccount: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AccountInformationApi.UpdateUserAccount: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }

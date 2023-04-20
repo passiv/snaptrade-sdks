@@ -54,13 +54,19 @@ namespace Example
             {
                 // Cancel open order in account
                 AccountOrderRecord result = apiInstance.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.CancelUserAccountOrder: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.CancelUserAccountOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -157,13 +163,19 @@ namespace Example
             {
                 // Return details of a specific trade before it's placed
                 Trade result = apiInstance.GetCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.GetCalculatedTradeImpactById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.GetCalculatedTradeImpactById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -256,13 +268,19 @@ namespace Example
             {
                 // Return the impact of placing a series of trades on the portfolio
                 List<TradeImpact> result = apiInstance.GetCalculatedTradesImpact(portfolioGroupId, calculatedTradeId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.GetCalculatedTradesImpact: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.GetCalculatedTradesImpact: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -355,13 +373,19 @@ namespace Example
             {
                 // Check impact of trades on account.
                 ManualTradeAndImpact result = apiInstance.GetOrderImpact(userId, userSecret, manualTradeForm);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.GetOrderImpact: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.GetOrderImpact: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -460,13 +484,19 @@ namespace Example
             {
                 // Get symbol quotes
                 SymbolsQuotes result = apiInstance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.GetUserAccountQuotes: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.GetUserAccountQuotes: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -564,13 +594,19 @@ namespace Example
             {
                 // Modify units of a trade before it is placed
                 Trade result = apiInstance.ModifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.ModifyCalculatedTradeById: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.ModifyCalculatedTradeById: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -664,13 +700,19 @@ namespace Example
             {
                 // Place orders for the CalculatedTrades in series
                 List<TradeExecutionStatus> result = apiInstance.PlaceCalculatedTrades(portfolioGroupId, calculatedTradeId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.PlaceCalculatedTrades: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.PlaceCalculatedTrades: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -763,13 +805,19 @@ namespace Example
             {
                 // Place a trade with NO validation.
                 AccountOrderRecord result = apiInstance.PlaceForceOrder(userId, userSecret, manualTradeForm);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.PlaceForceOrder: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.PlaceForceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -866,13 +914,19 @@ namespace Example
             {
                 // Place a OCO (One Cancels Other) order
                 AccountOrderRecord result = apiInstance.PlaceOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.PlaceOCOOrder: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.PlaceOCOOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -968,13 +1022,19 @@ namespace Example
             {
                 // Place order
                 AccountOrderRecord result = apiInstance.PlaceOrder(tradeId, userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling TradingApi.PlaceOrder: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling TradingApi.PlaceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }

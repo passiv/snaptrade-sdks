@@ -43,13 +43,19 @@ namespace Example
             {
                 // Retrieve error logs on behalf of your SnapTrade users
                 List<UserErrorLog> result = apiInstance.ListUserErrors(userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling ErrorLogsApi.ListUserErrors: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling ErrorLogsApi.ListUserErrors: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }

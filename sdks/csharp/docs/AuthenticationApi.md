@@ -46,13 +46,19 @@ namespace Example
             {
                 // Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
                 DeleteUserResponse result = apiInstance.DeleteSnapTradeUser(userId);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AuthenticationApi.DeleteSnapTradeUser: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AuthenticationApi.DeleteSnapTradeUser: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -147,13 +153,19 @@ namespace Example
             {
                 // Obtains an encrypted JWT tokens that should be decrypted on a user's local device
                 EncryptedResponse result = apiInstance.GetUserJWT(userId, userSecret);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AuthenticationApi.GetUserJWT: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AuthenticationApi.GetUserJWT: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -247,13 +259,19 @@ namespace Example
             {
                 // Get a list of all SnapTrade users you've registered on our platform
                 List<string> result = apiInstance.ListSnapTradeUsers();
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AuthenticationApi.ListSnapTradeUsers: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AuthenticationApi.ListSnapTradeUsers: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -344,13 +362,19 @@ namespace Example
             {
                 // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
                 AuthenticationLoginSnapTradeUser200Response result = apiInstance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AuthenticationApi.LoginSnapTradeUser: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AuthenticationApi.LoginSnapTradeUser: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
@@ -446,13 +470,19 @@ namespace Example
             {
                 // Register user with SnapTrade in order to create secure brokerage authorizations
                 UserIDandSecret result = apiInstance.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
-                Debug.WriteLine(result);
+                Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling AuthenticationApi.RegisterSnapTradeUser: " + e.Message);
-                Debug.Print("Status Code: "+ e.ErrorCode);
-                Debug.Print(e.StackTrace);
+                Console.WriteLine("Exception when calling AuthenticationApi.RegisterSnapTradeUser: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
             }
         }
     }
