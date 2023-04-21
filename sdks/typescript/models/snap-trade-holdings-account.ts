@@ -15,6 +15,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { AccountSyncStatus } from './account-sync-status';
+// May contain unused imports in some cases
+// @ts-ignore
+import { BrokerageAuthorization } from './brokerage-authorization';
 
 /**
  * SnapTradeUser Investment Account
@@ -32,10 +35,10 @@ export interface SnapTradeHoldingsAccount {
     'id'?: string;
     /**
      * 
-     * @type {string}
+     * @type {BrokerageAuthorization}
      * @memberof SnapTradeHoldingsAccount
      */
-    'brokerage_authorization'?: string;
+    'brokerage_authorization'?: BrokerageAuthorization;
     /**
      * 
      * @type {string}

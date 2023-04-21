@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+import json
 from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client import api_client, exceptions
@@ -36,6 +37,7 @@ from . import path
 # Query params
 PartnerClientIdSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
+SessionIdSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -46,6 +48,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'userId': typing.Union[UserIdSchema, str, ],
+        'sessionId': typing.Union[SessionIdSchema, str, ],
     },
     total=False
 )
@@ -66,6 +69,12 @@ request_query_user_id = api_client.QueryParameter(
     name="userId",
     style=api_client.ParameterStyle.FORM,
     schema=UserIdSchema,
+    explode=True,
+)
+request_query_session_id = api_client.QueryParameter(
+    name="sessionId",
+    style=api_client.ParameterStyle.FORM,
+    schema=SessionIdSchema,
     explode=True,
 )
 _auth = [
@@ -225,6 +234,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_partner_client_id,
             request_query_user_id,
+            request_query_session_id,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:

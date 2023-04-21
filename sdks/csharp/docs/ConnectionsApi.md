@@ -328,7 +328,7 @@ void (empty response body)
 
 <a name="sessionevents"></a>
 # **SessionEvents**
-> List&lt;ConnectionsSessionEvents200ResponseInner&gt; SessionEvents (string partnerClientId, string userId = null)
+> List&lt;ConnectionsSessionEvents200ResponseInner&gt; SessionEvents (string partnerClientId, string userId = null, string sessionId = null)
 
 List all session events for the partner
 
@@ -358,11 +358,12 @@ namespace Example
             var apiInstance = new ConnectionsApi(config);
             var partnerClientId = "partnerClientId_example";  // string | 
             var userId = "userId_example";  // string | Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
+            var sessionId = "sessionId_example";  // string | Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
 
             try
             {
                 // List all session events for the partner
-                List<ConnectionsSessionEvents200ResponseInner> result = apiInstance.SessionEvents(partnerClientId, userId);
+                List<ConnectionsSessionEvents200ResponseInner> result = apiInstance.SessionEvents(partnerClientId, userId, sessionId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -389,7 +390,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List all session events for the partner
-    ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> response = apiInstance.SessionEventsWithHttpInfo(partnerClientId, userId);
+    ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> response = apiInstance.SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -408,6 +409,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **partnerClientId** | **string** |  |  |
 | **userId** | **string** | Optional comma seperated list of user IDs used to filter the request on specific users | [optional]  |
+| **sessionId** | **string** | Optional comma seperated list of session IDs used to filter the request on specific users | [optional]  |
 
 ### Return type
 

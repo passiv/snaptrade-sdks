@@ -759,7 +759,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_holdings**
 <a name="get_user_holdings"></a>
-> AccountHoldings get_user_holdings(account_iduser_iduser_secret)
+> AccountHoldingsAccount get_user_holdings(account_iduser_iduser_secret)
 
 List balances, positions and orders for the specified account.
 
@@ -876,7 +876,7 @@ headers | Unset | headers were not defined |
 # SchemaFor200ResponseBodyApplicationJson
 Type | Description  | Notes
 ------------- | ------------- | -------------
-[**AccountHoldings**](../../models/AccountHoldings.md) |  | 
+[**AccountHoldingsAccount**](../../models/AccountHoldingsAccount.md) |  | 
 
 
 #### get_user_holdings.ApiResponseFor400

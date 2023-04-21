@@ -39,40 +39,40 @@ namespace SnapTrade.Net.Model
         public enum SessionEventTypeEnum
         {
             /// <summary>
+            /// Enum CONNECTIONFAILED for value: CONNECTION_FAILED
+            /// </summary>
+            [EnumMember(Value = "CONNECTION_FAILED")]
+            CONNECTIONFAILED = 1,
+
+            /// <summary>
             /// Enum DISCLAIMERACCEPTED for value: DISCLAIMER_ACCEPTED
             /// </summary>
             [EnumMember(Value = "DISCLAIMER_ACCEPTED")]
-            DISCLAIMERACCEPTED = 1,
+            DISCLAIMERACCEPTED = 2,
 
             /// <summary>
             /// Enum BROKERAGECONNECTIONINITIATED for value: BROKERAGE_CONNECTION_INITIATED
             /// </summary>
             [EnumMember(Value = "BROKERAGE_CONNECTION_INITIATED")]
-            BROKERAGECONNECTIONINITIATED = 2,
+            BROKERAGECONNECTIONINITIATED = 3,
 
             /// <summary>
             /// Enum BROKERAGEAUTHENTICATION for value: BROKERAGE_AUTHENTICATION
             /// </summary>
             [EnumMember(Value = "BROKERAGE_AUTHENTICATION")]
-            BROKERAGEAUTHENTICATION = 3,
+            BROKERAGEAUTHENTICATION = 4,
 
             /// <summary>
             /// Enum MFAAUTHORIZATION for value: MFA_AUTHORIZATION
             /// </summary>
             [EnumMember(Value = "MFA_AUTHORIZATION")]
-            MFAAUTHORIZATION = 4,
+            MFAAUTHORIZATION = 5,
 
             /// <summary>
             /// Enum CONNECTIONSUCCESSFUL for value: CONNECTION_SUCCESSFUL
             /// </summary>
             [EnumMember(Value = "CONNECTION_SUCCESSFUL")]
-            CONNECTIONSUCCESSFUL = 5,
-
-            /// <summary>
-            /// Enum CONNECTIONFAILED for value: CONNECTION_FAILED
-            /// </summary>
-            [EnumMember(Value = "CONNECTION_FAILED")]
-            CONNECTIONFAILED = 6,
+            CONNECTIONSUCCESSFUL = 6,
 
             /// <summary>
             /// Enum PARTNERREDIRECT for value: PARTNER_REDIRECT
@@ -96,13 +96,15 @@ namespace SnapTrade.Net.Model
         /// <param name="sessionId">sessionId.</param>
         /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
         /// <param name="createdDate">Time.</param>
-        public SessionEvent(Guid id = default(Guid), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), Guid sessionId = default(Guid), string userId = default(string), string createdDate = default(string)) : base()
+        /// <param name="brokerageStatusCode">brokerageStatusCode.</param>
+        public SessionEvent(Guid id = default(Guid), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), Guid sessionId = default(Guid), string userId = default(string), string createdDate = default(string), int? brokerageStatusCode = default(int?)) : base()
         {
             this.Id = id;
             this.SessionEventType = sessionEventType;
             this.SessionId = sessionId;
             this.UserId = userId;
             this.CreatedDate = createdDate;
+            this.BrokerageStatusCode = brokerageStatusCode;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -133,6 +135,12 @@ namespace SnapTrade.Net.Model
         public string CreatedDate { get; set; }
 
         /// <summary>
+        /// Gets or Sets BrokerageStatusCode
+        /// </summary>
+        [DataMember(Name = "brokerage_status_code", EmitDefaultValue = true)]
+        public int? BrokerageStatusCode { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -152,6 +160,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  SessionId: ").Append(SessionId).Append("\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
+            sb.Append("  BrokerageStatusCode: ").Append(BrokerageStatusCode).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -211,6 +220,11 @@ namespace SnapTrade.Net.Model
                     this.CreatedDate == input.CreatedDate ||
                     (this.CreatedDate != null &&
                     this.CreatedDate.Equals(input.CreatedDate))
+                ) && base.Equals(input) && 
+                (
+                    this.BrokerageStatusCode == input.BrokerageStatusCode ||
+                    (this.BrokerageStatusCode != null &&
+                    this.BrokerageStatusCode.Equals(input.BrokerageStatusCode))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -240,6 +254,10 @@ namespace SnapTrade.Net.Model
                 if (this.CreatedDate != null)
                 {
                     hashCode = (hashCode * 59) + this.CreatedDate.GetHashCode();
+                }
+                if (this.BrokerageStatusCode != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageStatusCode.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

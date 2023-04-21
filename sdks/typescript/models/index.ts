@@ -1,6 +1,7 @@
 export * from './apidisclaimer-accept-request';
 export * from './account';
 export * from './account-holdings';
+export * from './account-holdings-account';
 export * from './account-order-record';
 export * from './account-order-record-status';
 export * from './account-simple';
@@ -73,6 +74,7 @@ export * from './security-type';
 export * from './session-event';
 export * from './snap-trade-apidisclaimer-accept-status';
 export * from './snap-trade-holdings-account';
+export * from './snap-trade-holdings-account-account-id';
 export * from './snap-trade-holdings-total-value';
 export * from './snap-trade-login-user-request-body';
 export * from './snap-trade-register-user-request-body';

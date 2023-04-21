@@ -2,7 +2,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 - API version: 1.0.0
-- Package version: 10.4.0
+- Package version: 10.5.0
 
 ## Requirements.
 
@@ -14,9 +14,9 @@ Python >=3.7
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install snaptrade-python-sdk==10.4.0
+pip install snaptrade-python-sdk==10.5.0
 ```
-(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==10.4.0`)
+(you may need to run `pip` with root permission: `sudo pip install snaptrade-python-sdk==10.5.0`)
 
 Then import the package:
 ```python
@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
 
  - [Account](docs/models/Account.md)
  - [AccountHoldings](docs/models/AccountHoldings.md)
+ - [AccountHoldingsAccount](docs/models/AccountHoldingsAccount.md)
  - [AccountIDs](docs/models/AccountIDs.md)
  - [AccountOrderRecord](docs/models/AccountOrderRecord.md)
  - [AccountOrderRecordStatus](docs/models/AccountOrderRecordStatus.md)
@@ -241,6 +242,7 @@ Class | Method | HTTP request | Description
  - [SignedContent](docs/models/SignedContent.md)
  - [SnapTradeAPIDisclaimerAcceptStatus](docs/models/SnapTradeAPIDisclaimerAcceptStatus.md)
  - [SnapTradeHoldingsAccount](docs/models/SnapTradeHoldingsAccount.md)
+ - [SnapTradeHoldingsAccountAccountId](docs/models/SnapTradeHoldingsAccountAccountId.md)
  - [SnapTradeHoldingsTotalValue](docs/models/SnapTradeHoldingsTotalValue.md)
  - [SnapTradeLoginUserRequestBody](docs/models/SnapTradeLoginUserRequestBody.md)
  - [SnapTradeRegisterUserRequestBody](docs/models/SnapTradeRegisterUserRequestBody.md)

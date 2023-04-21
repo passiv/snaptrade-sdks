@@ -437,6 +437,7 @@ try:
         query_params = {
             'PartnerClientId': "PASSIVTEST",
             'userId': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            'sessionId': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
         },
     )
     pprint(session_events_response.headers)
@@ -467,6 +468,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 PartnerClientId | PartnerClientIdSchema | | 
 userId | UserIdSchema | | optional
+sessionId | SessionIdSchema | | optional
 
 
 # PartnerClientIdSchema
@@ -479,6 +481,15 @@ Input Type | Accessed Type | Description | Notes
 str,  | str,  | SnapTrade Client ID (generated and provided to partner by Passiv) | 
 
 # UserIdSchema
+
+Comma seperated list of account IDs
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | Comma seperated list of account IDs | 
+
+# SessionIdSchema
 
 Comma seperated list of account IDs
 

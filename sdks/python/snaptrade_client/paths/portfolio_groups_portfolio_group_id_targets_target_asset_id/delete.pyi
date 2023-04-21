@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+import json
 from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client import api_client, exceptions

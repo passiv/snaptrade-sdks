@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+import json
 from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client import api_client, exceptions
@@ -253,7 +254,10 @@ class BaseApi(api_client.Api):
                                                    skip_deserialization=skip_deserialization
                                                )
         else:
+            # If response data is JSON then deserialize for SDK consumer convenience
+            is_json = api_client.JSONDetector._content_type_is_json(response.http_response.headers.get('Content-Type', ''))
             api_response = api_client.ApiResponseWithoutDeserialization(
+                body=json.loads(response.http_response.data) if is_json else response.http_response.data,
                 response=response.http_response,
                 round_trip_time=response.round_trip_time,
                 status=response.http_response.status,
