@@ -130,24 +130,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetAllUserHoldings()
         {
-            try
-            {
-                // List all accounts for the user, plus balances and positions for each account.
-                List<AccountHoldings> result = accountInformationApi.GetAllUserHoldings(this.testUserId, this.testUserSecret);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AccountInformationApi.GetAllUserHoldings: " + e.Message);
-                Console.WriteLine("Status Code: " + e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
+            // List all accounts for the user, plus balances and positions for each account.
+            List<AccountHoldings> result = accountInformationApi.GetAllUserHoldings(this.testUserId, this.testUserSecret);
+            Console.WriteLine(result);
         }
 
         [Fact]
