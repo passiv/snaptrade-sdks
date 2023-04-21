@@ -229,11 +229,11 @@ class Schema:
         if key_type:
             key_or_value = "key"
         valid_classes_phrase = cls.__get_valid_classes_phrase(valid_classes)
-        msg = "Invalid type. Required {1} type {2} and " "passed type was {3}".format(
-            var_name,
+        msg = "Invalid type. Required {0} type {1} and " "passed type was {2} for \"{3}\"".format(
             key_or_value,
             valid_classes_phrase,
             type(var_value).__name__,
+            var_name,
         )
         return msg
 

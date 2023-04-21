@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+import json
 
 from snaptrade_client import api_client, exceptions
 from datetime import date, datetime  # noqa: F401

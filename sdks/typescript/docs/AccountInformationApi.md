@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**AccountHoldings**
+**AccountHoldingsAccount**
 
 ### HTTP request headers
 

@@ -51,15 +51,21 @@ export interface SessionEvent {
      * @memberof SessionEvent
      */
     'created_date'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SessionEvent
+     */
+    'brokerage_status_code'?: number | null;
 }
 
 export const SessionEventSessionEventTypeEnum = {
+    ConnectionFailed: 'CONNECTION_FAILED',
     DisclaimerAccepted: 'DISCLAIMER_ACCEPTED',
     BrokerageConnectionInitiated: 'BROKERAGE_CONNECTION_INITIATED',
     BrokerageAuthentication: 'BROKERAGE_AUTHENTICATION',
     MfaAuthorization: 'MFA_AUTHORIZATION',
     ConnectionSuccessful: 'CONNECTION_SUCCESSFUL',
-    ConnectionFailed: 'CONNECTION_FAILED',
     PartnerRedirect: 'PARTNER_REDIRECT'
 } as const;
 

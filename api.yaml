@@ -484,7 +484,7 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
-  "/accounts/{accountId}/holdings":
+  /accounts/{accountId}/holdings:
     get:
       tags:
         - Account Information
@@ -515,7 +515,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccountHoldings"
+                $ref: "#/components/schemas/AccountHoldingsAccount"
         "400":
           description: Bad Request
           content:
@@ -1174,6 +1174,13 @@ paths:
           required: false
           name: userId
           description: Optional comma seperated list of user IDs used to filter the
+            request on specific users
+          schema:
+            $ref: "#/components/schemas/AccountIDs"
+        - in: query
+          required: false
+          name: sessionId
+          description: Optional comma seperated list of session IDs used to filter the
             request on specific users
           schema:
             $ref: "#/components/schemas/AccountIDs"
@@ -3087,6 +3094,22 @@ components:
             $ref: "#/components/schemas/Position"
         total_value:
           $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
+    AccountHoldingsAccount:
+      description: Account Holdings with Account ID
+      type: object
+      properties:
+        account:
+          $ref: "#/components/schemas/SnapTradeHoldingsAccountAccountId"
+        balances:
+          type: array
+          items:
+            $ref: "#/components/schemas/Balance"
+        positions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Position"
+        total_value:
+          $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
     AccountOrderRecord:
       description: Record of order in brokerageaccount
       type: object
@@ -3562,7 +3585,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         brokerage_authorization:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/BrokerageAuthorization"
         portfolio_group:
           $ref: "#/components/schemas/Id"
         name:
@@ -3583,6 +3606,40 @@ components:
             type: Margin
             status: ACTIVE
             institution_name: Alpaca
+
+    SnapTradeHoldingsAccountAccountId:
+      description: Holdings with account ID
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        brokerage_authorization:
+          format: uuid
+          type: string
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
+        portfolio_group:
+          $ref: "#/components/schemas/Id"
+        name:
+          type: string
+          example: Registered Retirement Savings Account
+          nullable: true
+        number:
+          type: string
+          example: Q6542138443
+        institution_name:
+          type: string
+          example: Alpaca
+        meta:
+          type: object
+          example:
+            type: Margin
+            status: ACTIVE
+            institution_name: Alpaca
+        cash_restrictions:
+          $ref: "#/components/schemas/CashRestriction"
+        created_date:
+          $ref: "#/components/schemas/Time"
+
     SnapTradeHoldingsTotalValue:
       description: Total Value of the account
       type: object
@@ -4240,12 +4297,12 @@ components:
         session_event_type:
           type: string
           enum:
+            - CONNECTION_FAILED
             - DISCLAIMER_ACCEPTED
             - BROKERAGE_CONNECTION_INITIATED
             - BROKERAGE_AUTHENTICATION
             - MFA_AUTHORIZATION
             - CONNECTION_SUCCESSFUL
-            - CONNECTION_FAILED
             - PARTNER_REDIRECT
         session_id:
           $ref: "#/components/schemas/Id"
@@ -4253,6 +4310,10 @@ components:
           $ref: "#/components/schemas/SnapTradeUserID"
         created_date:
           $ref: "#/components/schemas/Time"
+        brokerage_status_code:
+          type: integer
+          nullable: true
+          example: 400
     BrokerageSymbol:
       description: Brokerage symbol
       type: object

@@ -554,7 +554,7 @@ catch (ApiException e)
 
 <a name="getuserholdings"></a>
 # **GetUserHoldings**
-> AccountHoldings GetUserHoldings (Guid accountId, string userId, string userSecret)
+> AccountHoldingsAccount GetUserHoldings (Guid accountId, string userId, string userSecret)
 
 List balances, positions and orders for the specified account.
 
@@ -589,7 +589,7 @@ namespace Example
             try
             {
                 // List balances, positions and orders for the specified account.
-                AccountHoldings result = apiInstance.GetUserHoldings(accountId, userId, userSecret);
+                AccountHoldingsAccount result = apiInstance.GetUserHoldings(accountId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -616,7 +616,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List balances, positions and orders for the specified account.
-    ApiResponse<AccountHoldings> response = apiInstance.GetUserHoldingsWithHttpInfo(accountId, userId, userSecret);
+    ApiResponse<AccountHoldingsAccount> response = apiInstance.GetUserHoldingsWithHttpInfo(accountId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -639,7 +639,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**AccountHoldings**](AccountHoldings.md)
+[**AccountHoldingsAccount**](AccountHoldingsAccount.md)
 
 ### Authorization
 

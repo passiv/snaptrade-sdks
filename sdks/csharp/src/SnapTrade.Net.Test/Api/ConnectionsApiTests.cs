@@ -104,7 +104,8 @@ namespace SnapTrade.Net.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string partnerClientId = null;
             //string userId = null;
-            //var response = instance.SessionEvents(partnerClientId, userId);
+            //string sessionId = null;
+            //var response = instance.SessionEvents(partnerClientId, userId, sessionId);
             //Assert.IsType<List<ConnectionsSessionEvents200ResponseInner>>(response);
         }
     }

@@ -24,6 +24,8 @@ import { Account } from '../models';
 // @ts-ignore
 import { AccountHoldings } from '../models';
 // @ts-ignore
+import { AccountHoldingsAccount } from '../models';
+// @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
 import { Balance } from '../models';
@@ -596,7 +598,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldings>> {
+        async getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldingsAccount>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserHoldings(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -689,7 +691,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<AccountHoldings> {
+        getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<AccountHoldingsAccount> {
             return localVarFp.getUserHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

@@ -199,6 +199,7 @@ const snaptrade = new Snaptrade({
 const sessionEventsResponse = await snaptrade.connections.sessionEvents({
         "partnerClientId": "PASSIVTEST",
         "userId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        "sessionId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     })
 
 console.log(sessionEventsResponse)
@@ -212,6 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **partnerClientId** | [**string**] |  | defaults to undefined
  **userId** | [**string**] | Optional comma seperated list of user IDs used to filter the request on specific users | (optional) defaults to undefined
+ **sessionId** | [**string**] | Optional comma seperated list of session IDs used to filter the request on specific users | (optional) defaults to undefined
 
 
 ### Return type

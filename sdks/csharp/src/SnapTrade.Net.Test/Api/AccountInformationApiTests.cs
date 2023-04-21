@@ -137,7 +137,7 @@ namespace SnapTrade.Net.Test.Api
             //string userId = null;
             //string userSecret = null;
             //var response = instance.GetUserHoldings(accountId, userId, userSecret);
-            //Assert.IsType<AccountHoldings>(response);
+            //Assert.IsType<AccountHoldingsAccount>(response);
         }
 
         /// <summary>

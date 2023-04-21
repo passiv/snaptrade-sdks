@@ -13,6 +13,7 @@
 
 from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_holdings import AccountHoldings
+from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.model.account_ids import AccountIDs
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
@@ -90,6 +91,7 @@ from snaptrade_client.model.signature import Signature
 from snaptrade_client.model.signed_content import SignedContent
 from snaptrade_client.model.snap_trade_api_disclaimer_accept_status import SnapTradeAPIDisclaimerAcceptStatus
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount
+from snaptrade_client.model.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody

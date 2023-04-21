@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <param name="institutionName">institutionName.</param>
         /// <param name="syncStatus">syncStatus.</param>
         /// <param name="meta">meta.</param>
-        public SnapTradeHoldingsAccount(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public SnapTradeHoldingsAccount(Guid id = default(Guid), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -66,7 +66,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets BrokerageAuthorization
         /// </summary>
         [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
-        public Guid BrokerageAuthorization { get; set; }
+        public BrokerageAuthorization BrokerageAuthorization { get; set; }
 
         /// <summary>
         /// Gets or Sets PortfolioGroup

@@ -46,14 +46,18 @@ class SessionEvent(
             
                 class MetaOapg:
                     enum_value_to_name = {
+                        "CONNECTION_FAILED": "CONNECTION_FAILED",
                         "DISCLAIMER_ACCEPTED": "DISCLAIMER_ACCEPTED",
                         "BROKERAGE_CONNECTION_INITIATED": "BROKERAGE_CONNECTION_INITIATED",
                         "BROKERAGE_AUTHENTICATION": "BROKERAGE_AUTHENTICATION",
                         "MFA_AUTHORIZATION": "MFA_AUTHORIZATION",
                         "CONNECTION_SUCCESSFUL": "CONNECTION_SUCCESSFUL",
-                        "CONNECTION_FAILED": "CONNECTION_FAILED",
                         "PARTNER_REDIRECT": "PARTNER_REDIRECT",
                     }
+                
+                @schemas.classproperty
+                def CONNECTION_FAILED(cls):
+                    return cls("CONNECTION_FAILED")
                 
                 @schemas.classproperty
                 def DISCLAIMER_ACCEPTED(cls):
@@ -76,21 +80,38 @@ class SessionEvent(
                     return cls("CONNECTION_SUCCESSFUL")
                 
                 @schemas.classproperty
-                def CONNECTION_FAILED(cls):
-                    return cls("CONNECTION_FAILED")
-                
-                @schemas.classproperty
                 def PARTNER_REDIRECT(cls):
                     return cls("PARTNER_REDIRECT")
             session_id = schemas.UUIDSchema
             user_id = schemas.StrSchema
             created_date = schemas.StrSchema
+            
+            
+            class brokerage_status_code(
+                schemas.IntBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneDecimalMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, decimal.Decimal, int, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'brokerage_status_code':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "id": id,
                 "session_event_type": session_event_type,
                 "session_id": session_id,
                 "user_id": user_id,
                 "created_date": created_date,
+                "brokerage_status_code": brokerage_status_code,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -110,9 +131,12 @@ class SessionEvent(
     def __getitem__(self, name: typing_extensions.Literal["created_date"]) -> MetaOapg.properties.created_date: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_status_code"]) -> MetaOapg.properties.brokerage_status_code: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["session_event_type"], typing_extensions.Literal["session_id"], typing_extensions.Literal["user_id"], typing_extensions.Literal["created_date"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["session_event_type"], typing_extensions.Literal["session_id"], typing_extensions.Literal["user_id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["brokerage_status_code"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -132,9 +156,12 @@ class SessionEvent(
     def get_item_oapg(self, name: typing_extensions.Literal["created_date"]) -> typing.Union[MetaOapg.properties.created_date, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_status_code"]) -> typing.Union[MetaOapg.properties.brokerage_status_code, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["session_event_type"], typing_extensions.Literal["session_id"], typing_extensions.Literal["user_id"], typing_extensions.Literal["created_date"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["session_event_type"], typing_extensions.Literal["session_id"], typing_extensions.Literal["user_id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["brokerage_status_code"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -145,6 +172,7 @@ class SessionEvent(
         session_id: typing.Union[MetaOapg.properties.session_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         user_id: typing.Union[MetaOapg.properties.user_id, str, schemas.Unset] = schemas.unset,
         created_date: typing.Union[MetaOapg.properties.created_date, str, schemas.Unset] = schemas.unset,
+        brokerage_status_code: typing.Union[MetaOapg.properties.brokerage_status_code, None, decimal.Decimal, int, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'SessionEvent':
@@ -156,6 +184,7 @@ class SessionEvent(
             session_id=session_id,
             user_id=user_id,
             created_date=created_date,
+            brokerage_status_code=brokerage_status_code,
             _configuration=_configuration,
             **kwargs,
         )

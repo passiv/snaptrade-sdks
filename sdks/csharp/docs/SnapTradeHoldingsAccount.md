@@ -6,7 +6,7 @@ SnapTradeUser Investment Account
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **Guid** |  | [optional] 
-**BrokerageAuthorization** | **Guid** |  | [optional] 
+**BrokerageAuthorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] 
 **PortfolioGroup** | **Guid** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Number** | **string** |  | [optional] 

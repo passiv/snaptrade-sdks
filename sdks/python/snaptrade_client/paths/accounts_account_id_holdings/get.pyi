@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+import json
 from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client import api_client, exceptions
@@ -29,7 +30,7 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.account_holdings import AccountHoldings
+from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse
 
@@ -95,7 +96,7 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-SchemaFor200ResponseBodyApplicationJson = AccountHoldings
+SchemaFor200ResponseBodyApplicationJson = AccountHoldingsAccount
 
 
 @dataclass
@@ -270,7 +271,10 @@ class BaseApi(api_client.Api):
                                                    skip_deserialization=skip_deserialization
                                                )
         else:
+            # If response data is JSON then deserialize for SDK consumer convenience
+            is_json = api_client.JSONDetector._content_type_is_json(response.http_response.headers.get('Content-Type', ''))
             api_response = api_client.ApiResponseWithoutDeserialization(
+                body=json.loads(response.http_response.data) if is_json else response.http_response.data,
                 response=response.http_response,
                 round_trip_time=response.round_trip_time,
                 status=response.http_response.status,

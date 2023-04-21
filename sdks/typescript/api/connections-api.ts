@@ -213,10 +213,11 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
          * @summary List all session events for the partner
          * @param {string} partnerClientId 
          * @param {string} [userId] Optional comma seperated list of user IDs used to filter the request on specific users
+         * @param {string} [sessionId] Optional comma seperated list of session IDs used to filter the request on specific users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sessionEvents: async (partnerClientId: string, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sessionEvents: async (partnerClientId: string, userId?: string, sessionId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'partnerClientId' is not null or undefined
             assertParamExists('sessionEvents', 'partnerClientId', partnerClientId)
             const localVarPath = `/sessionEvents`;
@@ -243,6 +244,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
+            }
+
+            if (sessionId !== undefined) {
+                localVarQueryParameter['sessionId'] = sessionId;
             }
 
 
@@ -313,7 +318,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sessionEvents(requestParameters.partnerClientId, requestParameters.userId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sessionEvents(requestParameters.partnerClientId, requestParameters.userId, requestParameters.sessionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -472,6 +477,13 @@ export type ConnectionsApiSessionEventsRequest = {
     * @memberof ConnectionsApiSessionEvents
     */
     readonly userId?: string
+    
+    /**
+    * Optional comma seperated list of session IDs used to filter the request on specific users
+    * @type {string}
+    * @memberof ConnectionsApiSessionEvents
+    */
+    readonly sessionId?: string
     
 }
 
