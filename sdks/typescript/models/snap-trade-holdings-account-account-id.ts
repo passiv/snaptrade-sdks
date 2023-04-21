@@ -68,10 +68,10 @@ export interface SnapTradeHoldingsAccountAccountId {
     'meta'?: { [key: string]: any; };
     /**
      * 
-     * @type {CashRestriction}
+     * @type {Array<CashRestriction>}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
-    'cash_restrictions'?: CashRestriction;
+    'cash_restrictions'?: Array<CashRestriction>;
     /**
      * Time
      * @type {string}
