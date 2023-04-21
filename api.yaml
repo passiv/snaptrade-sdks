@@ -1177,6 +1177,13 @@ paths:
             request on specific users
           schema:
             $ref: "#/components/schemas/AccountIDs"
+        - in: query
+          required: false
+          name: sessionId
+          description: Optional comma seperated list of session IDs used to filter the
+            request on specific users
+          schema:
+            $ref: "#/components/schemas/AccountIDs"
       responses:
         "200":
           description: A list of all Session Events for the Partner.
@@ -4240,12 +4247,12 @@ components:
         session_event_type:
           type: string
           enum:
+            - CONNECTION_FAILED
             - DISCLAIMER_ACCEPTED
             - BROKERAGE_CONNECTION_INITIATED
             - BROKERAGE_AUTHENTICATION
             - MFA_AUTHORIZATION
             - CONNECTION_SUCCESSFUL
-            - CONNECTION_FAILED
             - PARTNER_REDIRECT
         session_id:
           $ref: "#/components/schemas/Id"
@@ -4253,6 +4260,10 @@ components:
           $ref: "#/components/schemas/SnapTradeUserID"
         created_date:
           $ref: "#/components/schemas/Time"
+        brokerage_status_code:
+          type: integer
+          nullable: true
+          example: 400
     BrokerageSymbol:
       description: Brokerage symbol
       type: object
