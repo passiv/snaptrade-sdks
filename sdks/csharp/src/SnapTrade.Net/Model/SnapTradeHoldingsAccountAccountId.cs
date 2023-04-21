@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">meta.</param>
         /// <param name="cashRestrictions">cashRestrictions.</param>
         /// <param name="createdDate">Time.</param>
-        public SnapTradeHoldingsAccountAccountId(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), CashRestriction cashRestrictions = default(CashRestriction), string createdDate = default(string)) : base()
+        public SnapTradeHoldingsAccountAccountId(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), string createdDate = default(string)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -104,7 +104,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets CashRestrictions
         /// </summary>
         [DataMember(Name = "cash_restrictions", EmitDefaultValue = false)]
-        public CashRestriction CashRestrictions { get; set; }
+        public List<CashRestriction> CashRestrictions { get; set; }
 
         /// <summary>
         /// Time
@@ -211,8 +211,9 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.CashRestrictions == input.CashRestrictions ||
-                    (this.CashRestrictions != null &&
-                    this.CashRestrictions.Equals(input.CashRestrictions))
+                    this.CashRestrictions != null &&
+                    input.CashRestrictions != null &&
+                    this.CashRestrictions.SequenceEqual(input.CashRestrictions)
                 ) && base.Equals(input) && 
                 (
                     this.CreatedDate == input.CreatedDate ||

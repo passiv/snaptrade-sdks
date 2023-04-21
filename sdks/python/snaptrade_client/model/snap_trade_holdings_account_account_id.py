@@ -91,10 +91,32 @@ class SnapTradeHoldingsAccountAccountId(
                         _configuration=_configuration,
                         **kwargs,
                     )
-        
-            @staticmethod
-            def items() -> typing.Type['CashRestriction']:
-                return CashRestriction
+            
+            
+            class cash_restrictions(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['CashRestriction']:
+                        return CashRestriction
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['CashRestriction'], typing.List['CashRestriction']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'cash_restrictions':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'CashRestriction':
+                    return super().__getitem__(i)
             created_date = schemas.StrSchema
             __annotations__ = {
                 "id": id,
@@ -104,7 +126,7 @@ class SnapTradeHoldingsAccountAccountId(
                 "number": number,
                 "institution_name": institution_name,
                 "meta": meta,
-                "items": items,
+                "cash_restrictions": cash_restrictions,
                 "created_date": created_date,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -131,7 +153,7 @@ class SnapTradeHoldingsAccountAccountId(
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["items"]) -> 'CashRestriction': ...
+    def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> MetaOapg.properties.cash_restrictions: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["created_date"]) -> MetaOapg.properties.created_date: ...
@@ -139,7 +161,7 @@ class SnapTradeHoldingsAccountAccountId(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["items"], typing_extensions.Literal["created_date"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["created_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -165,7 +187,7 @@ class SnapTradeHoldingsAccountAccountId(
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["items"]) -> typing.Union['CashRestriction', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union[MetaOapg.properties.cash_restrictions, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["created_date"]) -> typing.Union[MetaOapg.properties.created_date, schemas.Unset]: ...
@@ -173,7 +195,7 @@ class SnapTradeHoldingsAccountAccountId(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["items"], typing_extensions.Literal["created_date"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["created_date"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -186,7 +208,7 @@ class SnapTradeHoldingsAccountAccountId(
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
         institution_name: typing.Union[MetaOapg.properties.institution_name, str, schemas.Unset] = schemas.unset,
         meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
-        items: typing.Union['CashRestriction', schemas.Unset] = schemas.unset,
+        cash_restrictions: typing.Union[MetaOapg.properties.cash_restrictions, list, tuple, schemas.Unset] = schemas.unset,
         created_date: typing.Union[MetaOapg.properties.created_date, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -201,7 +223,7 @@ class SnapTradeHoldingsAccountAccountId(
             number=number,
             institution_name=institution_name,
             meta=meta,
-            items=items,
+            cash_restrictions=cash_restrictions,
             created_date=created_date,
             _configuration=_configuration,
             **kwargs,
