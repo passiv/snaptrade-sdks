@@ -3636,7 +3636,9 @@ components:
             status: ACTIVE
             institution_name: Alpaca
         cash_restrictions:
-          $ref: "#/components/schemas/CashRestriction"
+          type: array
+          items:
+            $ref: "#/components/schemas/CashRestriction"
         created_date:
           $ref: "#/components/schemas/Time"
 
