@@ -3195,6 +3195,7 @@ components:
           $ref: "#/components/schemas/Currency"
         average_purchase_price:
           type: number
+          nullable: true
           example: 108.3353
           description: Average purchase price for this position
 
@@ -3215,6 +3216,7 @@ components:
         currency:
             $ref: "#/components/schemas/Currency"
         average_purchase_price:
+          nullable: true
           type: number
           example: 108.3353
           description: Average purchase price for this position
@@ -3988,6 +3990,7 @@ components:
           example: 1.44
         average_purchase_price:
           type: number
+          nullable: true
           example: 108.3353
           description:
             Average purchase price for this position. Either returned by the
