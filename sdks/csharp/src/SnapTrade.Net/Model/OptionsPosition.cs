@@ -42,7 +42,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">units.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsPosition(Guid symbol = default(Guid), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal price = default(decimal), decimal units = default(decimal), Currency currency = default(Currency), decimal averagePurchasePrice = default(decimal)) : base()
+        public OptionsPosition(Guid symbol = default(Guid), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal price = default(decimal), decimal units = default(decimal), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
         {
             this.Symbol = symbol;
             this.Description = description;
@@ -95,8 +95,8 @@ namespace SnapTrade.Net.Model
         /// Average purchase price for this position
         /// </summary>
         /// <value>Average purchase price for this position</value>
-        [DataMember(Name = "average_purchase_price", EmitDefaultValue = false)]
-        public decimal AveragePurchasePrice { get; set; }
+        [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
+        public decimal? AveragePurchasePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -186,7 +186,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.AveragePurchasePrice == input.AveragePurchasePrice ||
-                    this.AveragePurchasePrice.Equals(input.AveragePurchasePrice)
+                    (this.AveragePurchasePrice != null &&
+                    this.AveragePurchasePrice.Equals(input.AveragePurchasePrice))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -218,7 +219,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                if (this.AveragePurchasePrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                }
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

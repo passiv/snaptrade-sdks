@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.TRADE_OCO
+path = PathValues._TRADE_OCO

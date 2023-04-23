@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.MODEL_ASSET_CLASS
+path = PathValues._MODEL_ASSET_CLASS

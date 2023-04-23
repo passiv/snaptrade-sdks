@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN
+path = PathValues._ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN

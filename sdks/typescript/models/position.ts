@@ -59,6 +59,6 @@ export interface Position {
      * @type {number}
      * @memberof Position
      */
-    'average_purchase_price'?: number;
+    'average_purchase_price'?: number | null;
 }
 

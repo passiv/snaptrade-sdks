@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.SECURITY_TYPES
+path = PathValues._SECURITY_TYPES

@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.MODEL_PORTFOLIO
+path = PathValues._MODEL_PORTFOLIO

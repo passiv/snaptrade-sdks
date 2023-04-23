@@ -121,7 +121,26 @@ class Position(
                         *args,
                         _configuration=_configuration,
                     )
-            average_purchase_price = schemas.NumberSchema
+            
+            
+            class average_purchase_price(
+                schemas.NumberBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneDecimalMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'average_purchase_price':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "symbol": symbol,
                 "units": units,
@@ -189,7 +208,7 @@ class Position(
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         open_pnl: typing.Union[MetaOapg.properties.open_pnl, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         fractional_units: typing.Union[MetaOapg.properties.fractional_units, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Position':

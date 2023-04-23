@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.BROKERAGE_AUTHORIZATION_TYPES
+path = PathValues._BROKERAGE_AUTHORIZATION_TYPES

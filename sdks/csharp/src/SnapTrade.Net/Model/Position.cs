@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="openPnl">openPnl.</param>
         /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions..</param>
-        public Position(PositionSymbol symbol = default(PositionSymbol), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?), decimal averagePurchasePrice = default(decimal)) : base()
+        public Position(PositionSymbol symbol = default(PositionSymbol), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?), decimal? averagePurchasePrice = default(decimal?)) : base()
         {
             this.Symbol = symbol;
             this.Units = units;
@@ -88,8 +88,8 @@ namespace SnapTrade.Net.Model
         /// Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
         /// </summary>
         /// <value>Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.</value>
-        [DataMember(Name = "average_purchase_price", EmitDefaultValue = false)]
-        public decimal AveragePurchasePrice { get; set; }
+        [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
+        public decimal? AveragePurchasePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -175,7 +175,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.AveragePurchasePrice == input.AveragePurchasePrice ||
-                    this.AveragePurchasePrice.Equals(input.AveragePurchasePrice)
+                    (this.AveragePurchasePrice != null &&
+                    this.AveragePurchasePrice.Equals(input.AveragePurchasePrice))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -209,7 +210,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.FractionalUnits.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                if (this.AveragePurchasePrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                }
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

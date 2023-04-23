@@ -26,7 +26,7 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 generators:
   csharp:
-    version: 3.6.0
+    version: 3.7.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -61,7 +61,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 10.5.0
+    version: 10.6.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -76,7 +76,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.5.0
+    version: 8.6.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

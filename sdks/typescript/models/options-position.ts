@@ -68,6 +68,6 @@ export interface OptionsPosition {
      * @type {number}
      * @memberof OptionsPosition
      */
-    'average_purchase_price'?: number;
+    'average_purchase_price'?: number | null;
 }
 

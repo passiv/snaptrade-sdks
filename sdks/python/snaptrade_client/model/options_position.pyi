@@ -49,7 +49,26 @@ class OptionsPosition(
             @staticmethod
             def currency() -> typing.Type['Currency']:
                 return Currency
-            average_purchase_price = schemas.NumberSchema
+            
+            
+            class average_purchase_price(
+                schemas.NumberBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneDecimalMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'average_purchase_price':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "symbol": symbol,
                 "description": description,
@@ -125,7 +144,7 @@ class OptionsPosition(
         price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
-        average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'OptionsPosition':

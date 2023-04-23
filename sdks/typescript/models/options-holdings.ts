@@ -62,6 +62,6 @@ export interface OptionsHoldings {
      * @type {number}
      * @memberof OptionsHoldings
      */
-    'average_purchase_price'?: number;
+    'average_purchase_price'?: number | null;
 }
 

@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.CURRENCIES_RATES_CURRENCY_PAIR
+path = PathValues._CURRENCIES_RATES_CURRENCY_PAIR

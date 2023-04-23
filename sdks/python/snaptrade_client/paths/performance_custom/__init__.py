@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.PERFORMANCE_CUSTOM
+path = PathValues._PERFORMANCE_CUSTOM
