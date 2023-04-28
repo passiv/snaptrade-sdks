@@ -1,25 +1,24 @@
-## snaptrade-typescript-sdk@8.6.0
+# snaptrade-typescript-sdk@8.7.0
+
 Connect brokerage accounts to your app for live positions and trading
+## Installing
 
-
-**Important note: this library is can be used in both the client-side or server-side, but using it
-in client-side browser code is not recommended as you would expose security credentials.**
-
-### Installing
-
-#### npm
+### npm
 ```
 npm install snaptrade-typescript-sdk --save
 ```
 
-#### yarn
+### yarn
 ```
 yarn add snaptrade-typescript-sdk
 ```
 
+**Important note: this library is can be used in both the client-side or server-side, but using it
+in client-side browser code is not recommended as you would expose security credentials.**
 
 
-### Getting Started
+
+## Getting Started
 
 ```typescript
 const { Snaptrade } = require("snaptrade-typescript-sdk");
@@ -94,7 +93,6 @@ function getUserId() {
 }
 
 main();
-
 ```
 
 ## Documentation for API Endpoints

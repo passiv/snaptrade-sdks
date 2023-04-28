@@ -29,19 +29,21 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # List all accounts for the user, plus balances and positions for each account.
-    get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-            'brokerage_authorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        },
+    get_all_user_holdings_response = (
+        snaptrade.account_information.get_all_user_holdings(
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+                "brokerage_authorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            },
+        )
     )
     pprint(get_all_user_holdings_response.body)
     pprint(get_all_user_holdings_response.body["account"])
@@ -52,7 +54,9 @@ try:
     pprint(get_all_user_holdings_response.status)
     pprint(get_all_user_holdings_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountInformationApi.get_all_user_holdings: %s\n" % e)
+    print(
+        "Exception when calling AccountInformationApi.get_all_user_holdings: %s\n" % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -187,21 +191,23 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Get all cash balances of an investment account
-    get_user_account_balance_response = snaptrade.account_information.get_user_account_balance(
-        path_params = {
-            'accountId': "accountId_example",
-        },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-        },
+    get_user_account_balance_response = (
+        snaptrade.account_information.get_user_account_balance(
+            path_params={
+                "accountId": "accountId_example",
+            },
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+            },
+        )
     )
     pprint(get_user_account_balance_response.body)
     pprint(get_user_account_balance_response.body["currency"])
@@ -210,7 +216,10 @@ try:
     pprint(get_user_account_balance_response.status)
     pprint(get_user_account_balance_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountInformationApi.get_user_account_balance: %s\n" % e)
+    print(
+        "Exception when calling AccountInformationApi.get_user_account_balance: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -324,21 +333,23 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Return details of a specific investment account
-    get_user_account_details_response = snaptrade.account_information.get_user_account_details(
-        path_params = {
-            'accountId': "accountId_example",
-        },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-        },
+    get_user_account_details_response = (
+        snaptrade.account_information.get_user_account_details(
+            path_params={
+                "accountId": "accountId_example",
+            },
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+            },
+        )
     )
     pprint(get_user_account_details_response.body)
     pprint(get_user_account_details_response.body["id"])
@@ -355,7 +366,10 @@ try:
     pprint(get_user_account_details_response.status)
     pprint(get_user_account_details_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountInformationApi.get_user_account_details: %s\n" % e)
+    print(
+        "Exception when calling AccountInformationApi.get_user_account_details: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -469,22 +483,24 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Get all history of orders placed in account
-    get_user_account_orders_response = snaptrade.account_information.get_user_account_orders(
-        path_params = {
-            'accountId': "accountId_example",
-        },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-            'state': "all",
-        },
+    get_user_account_orders_response = (
+        snaptrade.account_information.get_user_account_orders(
+            path_params={
+                "accountId": "accountId_example",
+            },
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+                "state": "all",
+            },
+        )
     )
     pprint(get_user_account_orders_response.body)
     pprint(get_user_account_orders_response.body["brokerage_order_id"])
@@ -509,7 +525,9 @@ try:
     pprint(get_user_account_orders_response.status)
     pprint(get_user_account_orders_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountInformationApi.get_user_account_orders: %s\n" % e)
+    print(
+        "Exception when calling AccountInformationApi.get_user_account_orders: %s\n" % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -631,21 +649,23 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Get all positions of an investment account
-    get_user_account_positions_response = snaptrade.account_information.get_user_account_positions(
-        path_params = {
-            'accountId': "accountId_example",
-        },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-        },
+    get_user_account_positions_response = (
+        snaptrade.account_information.get_user_account_positions(
+            path_params={
+                "accountId": "accountId_example",
+            },
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+            },
+        )
     )
     pprint(get_user_account_positions_response.body)
     pprint(get_user_account_positions_response.body["symbol"])
@@ -658,7 +678,10 @@ try:
     pprint(get_user_account_positions_response.status)
     pprint(get_user_account_positions_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling AccountInformationApi.get_user_account_positions: %s\n" % e)
+    print(
+        "Exception when calling AccountInformationApi.get_user_account_positions: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -772,7 +795,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -780,12 +803,12 @@ snaptrade = SnapTrade(
 try:
     # List balances, positions and orders for the specified account.
     get_user_holdings_response = snaptrade.account_information.get_user_holdings(
-        path_params = {
-            'accountId': "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        path_params={
+            "accountId": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(get_user_holdings_response.body)
@@ -933,7 +956,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -941,9 +964,9 @@ snaptrade = SnapTrade(
 try:
     # List all investment accounts for the user
     list_user_accounts_response = snaptrade.account_information.list_user_accounts(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(list_user_accounts_response.body)
@@ -1060,7 +1083,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -1068,12 +1091,12 @@ snaptrade = SnapTrade(
 try:
     # Update details of an investment account
     update_user_account_response = snaptrade.account_information.update_user_account(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(update_user_account_response.body)

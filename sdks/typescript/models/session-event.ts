@@ -57,6 +57,12 @@ export interface SessionEvent {
      * @memberof SessionEvent
      */
     'brokerage_status_code'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SessionEvent
+     */
+    'brokerage_authorization_id'?: string;
 }
 
 export const SessionEventSessionEventTypeEnum = {

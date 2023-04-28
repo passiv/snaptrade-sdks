@@ -18,6 +18,9 @@ import { Currency } from './currency';
 // May contain unused imports in some cases
 // @ts-ignore
 import { Exchange } from './exchange';
+// May contain unused imports in some cases
+// @ts-ignore
+import { SecurityType } from './security-type';
 
 /**
  * Symbol
@@ -63,5 +66,11 @@ export interface Symbol {
      * @memberof Symbol
      */
     'exchange'?: Exchange;
+    /**
+     * 
+     * @type {SecurityType}
+     * @memberof Symbol
+     */
+    'type'?: SecurityType;
 }
 

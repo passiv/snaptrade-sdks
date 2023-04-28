@@ -105,6 +105,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'BrokerageStatusCode'
         }
+        /// <summary>
+        /// Test the property 'BrokerageAuthorizationId'
+        /// </summary>
+        [Fact]
+        public void BrokerageAuthorizationIdTest()
+        {
+            // TODO unit test for the property 'BrokerageAuthorizationId'
+        }
 
     }
 

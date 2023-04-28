@@ -19,23 +19,23 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const detailBrokerageAuthorizationResponse = await snaptrade.connections.detailBrokerageAuthorization({
-        "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const detailBrokerageAuthorizationResponse =
+  await snaptrade.connections.detailBrokerageAuthorization({
+    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(detailBrokerageAuthorizationResponse)
-
+console.log(detailBrokerageAuthorizationResponse);
 ```
 
 
@@ -75,22 +75,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listBrokerageAuthorizationsResponse = await snaptrade.connections.listBrokerageAuthorizations({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const listBrokerageAuthorizationsResponse =
+  await snaptrade.connections.listBrokerageAuthorizations({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(listBrokerageAuthorizationsResponse)
-
+console.log(listBrokerageAuthorizationsResponse);
 ```
 
 
@@ -129,23 +129,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const removeBrokerageAuthorizationResponse = await snaptrade.connections.removeBrokerageAuthorization({
-        "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const removeBrokerageAuthorizationResponse =
+  await snaptrade.connections.removeBrokerageAuthorization({
+    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(removeBrokerageAuthorizationResponse)
-
+console.log(removeBrokerageAuthorizationResponse);
 ```
 
 
@@ -187,23 +187,24 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const sessionEventsResponse = await snaptrade.connections.sessionEvents({
-        "partnerClientId": "PASSIVTEST",
-        "userId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        "sessionId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    })
+  partnerClientId: "PASSIVTEST",
+  userId:
+    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+  sessionId:
+    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+});
 
-console.log(sessionEventsResponse)
-
+console.log(sessionEventsResponse);
 ```
 
 

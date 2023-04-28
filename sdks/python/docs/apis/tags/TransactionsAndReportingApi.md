@@ -25,7 +25,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -33,13 +33,13 @@ snaptrade = SnapTrade(
 try:
     # Get transaction history for a user
     get_activities_response = snaptrade.transactions_and_reporting.get_activities(
-        query_params = {
-            'startDate': "2022-01-24",
-            'endDate': "2022-01-24",
-            'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            'brokerageAuthorizations': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "startDate": "2022-01-24",
+            "endDate": "2022-01-24",
+            "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(get_activities_response.body)
@@ -203,7 +203,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -211,21 +211,23 @@ snaptrade = SnapTrade(
 try:
     # Get performance information for a specific timeframe
     get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
-        query_params = {
-            'startDate': "2022-01-24",
-            'endDate': "2022-01-24",
-            'accounts': "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            'detailed': True,
-            'frequency': "monthly",
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "startDate": "2022-01-24",
+            "endDate": "2022-01-24",
+            "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+            "detailed": True,
+            "frequency": "monthly",
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(get_reporting_custom_range_response.body)
     pprint(get_reporting_custom_range_response.body["total_equity_timeframe"])
     pprint(get_reporting_custom_range_response.body["contributions"])
     pprint(get_reporting_custom_range_response.body["contribution_timeframe"])
-    pprint(get_reporting_custom_range_response.body["contribution_timeframe_cumulative"])
+    pprint(
+        get_reporting_custom_range_response.body["contribution_timeframe_cumulative"]
+    )
     pprint(get_reporting_custom_range_response.body["withdrawal_timeframe"])
     pprint(get_reporting_custom_range_response.body["contribution_streak"])
     pprint(get_reporting_custom_range_response.body["contribution_months_contributed"])
@@ -245,7 +247,10 @@ try:
     pprint(get_reporting_custom_range_response.status)
     pprint(get_reporting_custom_range_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TransactionsAndReportingApi.get_reporting_custom_range: %s\n" % e)
+    print(
+        "Exception when calling TransactionsAndReportingApi.get_reporting_custom_range: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

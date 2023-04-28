@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS_TARGET_ASSET_ID
+path = PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS_TARGET_ASSET_ID

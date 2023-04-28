@@ -33,6 +33,7 @@ from snaptrade_client.configuration import (
 from snaptrade_client.exceptions import SchemaValidationError
 from snaptrade_client.exceptions import render_path
 from snaptrade_client.validation_metadata import ValidationMetadata
+from snaptrade_client.exceptions import AnyOfValidationError
 
 
 class Unset(object):
@@ -174,9 +175,9 @@ class MetaOapgTyped:
     additional_properties: typing.Optional[typing.Type['Schema']]
     max_properties: int
     min_properties: int
-    all_of: typing.List[typing.Type['Schema']]
-    one_of: typing.List[typing.Type['Schema']]
-    any_of: typing.List[typing.Type['Schema']]
+    all_of: typing.Callable[[], typing.List[typing.Type['Schema']]]
+    one_of: typing.Callable[[], typing.List[typing.Type['Schema']]]
+    any_of: typing.Callable[[], typing.List[typing.Type['Schema']]]
     not_schema: typing.Type['Schema']
     max_length: int
     min_length: int
@@ -451,27 +452,27 @@ class Schema:
         Note: double underscores are used here because pycharm thinks that these variables
         are instance properties if they are named normally :(
         """
-        __kwargs = cls.__remove_unsets(kwargs)
-        if not args and not __kwargs:
+        _kwargs = cls.__remove_unsets(kwargs)
+        if not args and not _kwargs:
             raise TypeError(
                 'No input given. args or kwargs must be given.'
             )
-        if not __kwargs and args and not isinstance(args[0], dict):
-            __arg = args[0]
+        if not _kwargs and args and not isinstance(args[0], dict):
+            _arg = args[0]
         else:
-            __arg = cls.__get_input_dict(*args, **__kwargs)
-        __from_server = False
-        __validated_path_to_schemas = {}
-        __arg = cast_to_allowed_types(
-            __arg, __from_server, __validated_path_to_schemas, schema=cls)
-        __validation_metadata = ValidationMetadata(
-            configuration=_configuration, from_server=__from_server, validated_path_to_schemas=__validated_path_to_schemas)
-        __path_to_schemas = cls.__get_new_cls(__arg, __validation_metadata)
-        __new_cls = __path_to_schemas[__validation_metadata.path_to_item]
-        return __new_cls._get_new_instance_without_conversion_oapg(
-            __arg,
-            __validation_metadata.path_to_item,
-            __path_to_schemas
+            _arg = cls.__get_input_dict(*args, **_kwargs)
+        _from_server = False
+        _validated_path_to_schemas = {}
+        _arg = cast_to_allowed_types(
+            _arg, _from_server, _validated_path_to_schemas, schema=cls)
+        _validation_metadata = ValidationMetadata(
+            configuration=_configuration, from_server=_from_server, validated_path_to_schemas=_validated_path_to_schemas)
+        _path_to_schemas = cls.__get_new_cls(_arg, _validation_metadata)
+        _new_cls = _path_to_schemas[_validation_metadata.path_to_item]
+        return _new_cls._get_new_instance_without_conversion_oapg(
+            _arg,
+            _validation_metadata.path_to_item,
+            _path_to_schemas
         )
 
     def __init__(
@@ -522,6 +523,8 @@ if typing.TYPE_CHECKING:
     BytesMixin = bytes
     FileMixin = FileIO
     # qty 2
+    class NumberMixin(decimal.Decimal, int):
+        pass
     class BinaryMixin(bytes, FileIO):
         pass
     class NoneFrozenDictMixin(NoneClass, frozendict.frozendict):
@@ -666,6 +669,8 @@ else:
     class FileMixin:
         _types = {FileIO}
     # qty 2
+    class NumberMixin:
+        _types = {decimal.Decimal, int}
     class BinaryMixin:
         _types = {bytes, FileIO}
     class NoneFrozenDictMixin:
@@ -1852,6 +1857,7 @@ class ComposedBase(Discriminable):
         validation_metadata: ValidationMetadata
     ):
         anyof_classes = []
+        exceptions: typing.List[typing.Union[ApiTypeError, ApiValueError]] = []
         path_to_schemas = defaultdict(set)
         for anyof_cls in cls.MetaOapg.any_of():
             if validation_metadata.validation_ran_earlier(anyof_cls):
@@ -1863,14 +1869,12 @@ class ComposedBase(Discriminable):
             except (ApiValueError, ApiTypeError) as ex:
                 if discriminated_cls is not None and anyof_cls is discriminated_cls:
                     raise ex
+                exceptions.append(ex)
                 continue
             anyof_classes.append(anyof_cls)
             update(path_to_schemas, other_path_to_schemas)
         if not anyof_classes:
-            raise ApiValueError(
-                "Invalid inputs given to generate an instance of {}. None "
-                "of the anyOf schemas matched the input data.".format(cls)
-            )
+            raise AnyOfValidationError(error_list=exceptions)
         return path_to_schemas
 
     @classmethod
@@ -2025,8 +2029,7 @@ class NoneSchema(
 class NumberSchema(
     NumberBase,
     Schema,
-    IntMixin,
-    DecimalMixin
+    NumberMixin
 ):
     """
     This is used for type: number with no format

@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._SYMBOLS_TICKER
+path = PathValues.SYMBOLS_TICKER

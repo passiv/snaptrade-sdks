@@ -26,33 +26,33 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "legs": [
-            {
-                "action": "BUY_TO_OPEN",
-                "option_symbol_id": "SPY220819P00200000",
-                "quantity": 1,
-            }
-        ],
-        "strategy_type": "CUSTOM",
-    }
+    "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    "legs": [
+        {
+            "action": "BUY_TO_OPEN",
+            "option_symbol_id": "SPY220819P00200000",
+            "quantity": 1,
+        }
+    ],
+    "strategy_type": "CUSTOM",
+}
 try:
     # Creates an option strategy object that will be used to place an option strategy order
     get_option_strategy_response = snaptrade.options.get_option_strategy(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(get_option_strategy_response.body)
     pprint(get_option_strategy_response.body["strategy"])
@@ -204,7 +204,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -212,13 +212,13 @@ snaptrade = SnapTrade(
 try:
     # Get the options chain
     get_options_chain_response = snaptrade.options.get_options_chain(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-            'symbol': "symbol_example",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
+            "symbol": "symbol_example",
         },
     )
     pprint(get_options_chain_response.body)
@@ -342,7 +342,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -350,13 +350,13 @@ snaptrade = SnapTrade(
 try:
     # Get latest market data of option strategy
     get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-        path_params = {
-            'accountId': "accountId_example",
-            'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        path_params={
+            "accountId": "accountId_example",
+            "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(get_options_strategy_quote_response.body)
@@ -486,7 +486,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -494,12 +494,12 @@ snaptrade = SnapTrade(
 try:
     # Get the options holdings in the account
     list_option_holdings_response = snaptrade.options.list_option_holdings(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(list_option_holdings_response.body)
@@ -621,28 +621,28 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "order_type": "Limit",
-        "time_in_force": "DAY",
-        "price": 31.33,
-    }
+    "order_type": "Limit",
+    "time_in_force": "DAY",
+    "price": 31.33,
+}
 try:
     # Place an option strategy order on the brokerage
     place_option_strategy_response = snaptrade.options.place_option_strategy(
-        path_params = {
-            'accountId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            'optionStrategyId': "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        path_params={
+            "accountId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(place_option_strategy_response.body)
     pprint(place_option_strategy_response.body["strategy"])

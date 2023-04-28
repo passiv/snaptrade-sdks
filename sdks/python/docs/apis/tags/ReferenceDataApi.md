@@ -32,17 +32,19 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Return the exchange rate of a currency pair
-    get_currency_exchange_rate_pair_response = snaptrade.reference_data.get_currency_exchange_rate_pair(
-        path_params = {
-            'currencyPair': "currencyPair_example",
-        },
+    get_currency_exchange_rate_pair_response = (
+        snaptrade.reference_data.get_currency_exchange_rate_pair(
+            path_params={
+                "currencyPair": "currencyPair_example",
+            },
+        )
     )
     pprint(get_currency_exchange_rate_pair_response.body)
     pprint(get_currency_exchange_rate_pair_response.body["src"])
@@ -52,7 +54,10 @@ try:
     pprint(get_currency_exchange_rate_pair_response.status)
     pprint(get_currency_exchange_rate_pair_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ReferenceDataApi.get_currency_exchange_rate_pair: %s\n" % e)
+    print(
+        "Exception when calling ReferenceDataApi.get_currency_exchange_rate_pair: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -124,7 +129,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -250,7 +255,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -332,7 +337,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -410,19 +415,17 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "substring": "apple",
-    }
+    "substring": "apple",
+}
 try:
     # Search for symbols
-    get_symbols_response = snaptrade.reference_data.get_symbols(
-        body=body
-    )
+    get_symbols_response = snaptrade.reference_data.get_symbols(body=body)
     pprint(get_symbols_response.body)
     pprint(get_symbols_response.body["id"])
     pprint(get_symbols_response.body["symbol"])
@@ -517,7 +520,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -525,11 +528,11 @@ snaptrade = SnapTrade(
 try:
     # Get details of a symbol by the ticker
     get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
-        path_params = {
-            'ticker': "ticker_example",
+        path_params={
+            "ticker": "ticker_example",
         },
-        query_params = {
-            'symbolId': "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        query_params={
+            "symbolId": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
         },
     )
     pprint(get_symbols_by_ticker_response.body)
@@ -649,17 +652,19 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # List of all brokerage authorization types
-    list_all_brokerage_authorization_type_response = snaptrade.reference_data.list_all_brokerage_authorization_type(
-        query_params = {
-            'brokerage': "QUESTRADE,ALPACA",
-        },
+    list_all_brokerage_authorization_type_response = (
+        snaptrade.reference_data.list_all_brokerage_authorization_type(
+            query_params={
+                "brokerage": "QUESTRADE,ALPACA",
+            },
+        )
     )
     pprint(list_all_brokerage_authorization_type_response.body)
     pprint(list_all_brokerage_authorization_type_response.body["id"])
@@ -670,7 +675,10 @@ try:
     pprint(list_all_brokerage_authorization_type_response.status)
     pprint(list_all_brokerage_authorization_type_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ReferenceDataApi.list_all_brokerage_authorization_type: %s\n" % e)
+    print(
+        "Exception when calling ReferenceDataApi.list_all_brokerage_authorization_type: %s\n"
+        % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -757,7 +765,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -853,7 +861,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -934,14 +942,16 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Return the exchange rates of all supported currencies
-    list_all_currencies_rates_response = snaptrade.reference_data.list_all_currencies_rates()
+    list_all_currencies_rates_response = (
+        snaptrade.reference_data.list_all_currencies_rates()
+    )
     pprint(list_all_currencies_rates_response.body)
     pprint(list_all_currencies_rates_response.body["src"])
     pprint(list_all_currencies_rates_response.body["dst"])
@@ -1007,25 +1017,27 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "substring": "apple",
-    }
+    "substring": "apple",
+}
 try:
     # Search for symbols that are supported by a brokerage account using a substring
-    symbol_search_user_account_response = snaptrade.reference_data.symbol_search_user_account(
-        path_params = {
-            'accountId': "accountId_example",
-        },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-        },
-        body=body
+    symbol_search_user_account_response = (
+        snaptrade.reference_data.symbol_search_user_account(
+            path_params={
+                "accountId": "accountId_example",
+            },
+            query_params={
+                "userId": "John.doe@snaptrade.com",
+                "userSecret": "USERSECRET123",
+            },
+            body=body,
+        )
     )
     pprint(symbol_search_user_account_response.body)
     pprint(symbol_search_user_account_response.body["id"])
@@ -1040,7 +1052,9 @@ try:
     pprint(symbol_search_user_account_response.status)
     pprint(symbol_search_user_account_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling ReferenceDataApi.symbol_search_user_account: %s\n" % e)
+    print(
+        "Exception when calling ReferenceDataApi.symbol_search_user_account: %s\n" % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)

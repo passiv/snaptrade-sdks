@@ -22,7 +22,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -30,9 +30,9 @@ snaptrade = SnapTrade(
 try:
     # Retrieve error logs on behalf of your SnapTrade users
     list_user_errors_response = snaptrade.error_logs.list_user_errors(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(list_user_errors_response.body)

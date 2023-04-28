@@ -41,7 +41,8 @@ namespace SnapTrade.Net.Model
         /// <param name="name">name.</param>
         /// <param name="currency">currency.</param>
         /// <param name="exchange">exchange.</param>
-        public Symbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange)) : base()
+        /// <param name="type">type.</param>
+        public Symbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType)) : base()
         {
             this.Id = id;
             this._Symbol = symbol;
@@ -49,6 +50,7 @@ namespace SnapTrade.Net.Model
             this.Name = name;
             this.Currency = currency;
             this.Exchange = exchange;
+            this.Type = type;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -89,6 +91,12 @@ namespace SnapTrade.Net.Model
         public Exchange Exchange { get; set; }
 
         /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public SecurityType Type { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -109,6 +117,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Exchange: ").Append(Exchange).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -174,6 +183,11 @@ namespace SnapTrade.Net.Model
                     this.Exchange == input.Exchange ||
                     (this.Exchange != null &&
                     this.Exchange.Equals(input.Exchange))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -210,6 +224,10 @@ namespace SnapTrade.Net.Model
                 if (this.Exchange != null)
                 {
                     hashCode = (hashCode * 59) + this.Exchange.GetHashCode();
+                }
+                if (this.Type != null)
+                {
+                    hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

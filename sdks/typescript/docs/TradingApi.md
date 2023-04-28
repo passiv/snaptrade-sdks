@@ -25,24 +25,24 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const cancelUserAccountOrderResponse = await snaptrade.trading.cancelUserAccountOrder({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-        "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const cancelUserAccountOrderResponse =
+  await snaptrade.trading.cancelUserAccountOrder({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+    brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(cancelUserAccountOrderResponse)
-
+console.log(cancelUserAccountOrderResponse);
 ```
 
 
@@ -84,23 +84,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getCalculatedTradeImpactByIdResponse = await snaptrade.trading.getCalculatedTradeImpactById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "calculatedTradeId": "calculatedTradeId_example",
-        "tradeId": "tradeId_example",
-    })
+const getCalculatedTradeImpactByIdResponse =
+  await snaptrade.trading.getCalculatedTradeImpactById({
+    portfolioGroupId: "portfolioGroupId_example",
+    calculatedTradeId: "calculatedTradeId_example",
+    tradeId: "tradeId_example",
+  });
 
-console.log(getCalculatedTradeImpactByIdResponse)
-
+console.log(getCalculatedTradeImpactByIdResponse);
 ```
 
 
@@ -139,22 +139,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getCalculatedTradesImpactResponse = await snaptrade.trading.getCalculatedTradesImpact({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "calculatedTradeId": "calculatedTradeId_example",
-    })
+const getCalculatedTradesImpactResponse =
+  await snaptrade.trading.getCalculatedTradesImpact({
+    portfolioGroupId: "portfolioGroupId_example",
+    calculatedTradeId: "calculatedTradeId_example",
+  });
 
-console.log(getCalculatedTradesImpactResponse)
-
+console.log(getCalculatedTradesImpactResponse);
 ```
 
 
@@ -192,29 +192,28 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "order_type": "Limit",
-        "price": 31.33,
-        "stop": 31.33,
-        "time_in_force": "Day",
-        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  action: "BUY",
+  order_type: "Limit",
+  price: 31.33,
+  stop: 31.33,
+  time_in_force: "Day",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+});
 
-console.log(getOrderImpactResponse)
-
+console.log(getOrderImpactResponse);
 ```
 
 
@@ -256,24 +255,24 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserAccountQuotesResponse = await snaptrade.trading.getUserAccountQuotes({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "symbols": "symbols_example",
-        "accountId": "accountId_example",
-    })
+const getUserAccountQuotesResponse =
+  await snaptrade.trading.getUserAccountQuotes({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    symbols: "symbols_example",
+    accountId: "accountId_example",
+  });
 
-console.log(getUserAccountQuotesResponse)
-
+console.log(getUserAccountQuotesResponse);
 ```
 
 
@@ -315,28 +314,28 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const modifyCalculatedTradeByIdResponse = await snaptrade.trading.modifyCalculatedTradeById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "calculatedTradeId": "calculatedTradeId_example",
-        "tradeId": "tradeId_example",
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "units": 6,
-        "price": 24.81,
-        "sequence": 1,
-    })
+const modifyCalculatedTradeByIdResponse =
+  await snaptrade.trading.modifyCalculatedTradeById({
+    portfolioGroupId: "portfolioGroupId_example",
+    calculatedTradeId: "calculatedTradeId_example",
+    tradeId: "tradeId_example",
+    id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    action: "BUY",
+    units: 6,
+    price: 24.81,
+    sequence: 1,
+  });
 
-console.log(modifyCalculatedTradeByIdResponse)
-
+console.log(modifyCalculatedTradeByIdResponse);
 ```
 
 
@@ -376,22 +375,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const placeCalculatedTradesResponse = await snaptrade.trading.placeCalculatedTrades({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "calculatedTradeId": "calculatedTradeId_example",
-    })
+const placeCalculatedTradesResponse =
+  await snaptrade.trading.placeCalculatedTrades({
+    portfolioGroupId: "portfolioGroupId_example",
+    calculatedTradeId: "calculatedTradeId_example",
+  });
 
-console.log(placeCalculatedTradesResponse)
-
+console.log(placeCalculatedTradesResponse);
 ```
 
 
@@ -429,29 +428,28 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "order_type": "Limit",
-        "price": 31.33,
-        "stop": 31.33,
-        "time_in_force": "Day",
-        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  action: "BUY",
+  order_type: "Limit",
+  price: 31.33,
+  stop: 31.33,
+  time_in_force: "Day",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+});
 
-console.log(placeForceOrderResponse)
-
+console.log(placeForceOrderResponse);
 ```
 
 
@@ -493,22 +491,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+});
 
-console.log(placeOCOOrderResponse)
-
+console.log(placeOCOOrderResponse);
 ```
 
 
@@ -549,23 +546,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const placeOrderResponse = await snaptrade.trading.placeOrder({
-        "tradeId": "tradeId_example",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+  tradeId: "tradeId_example",
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+});
 
-console.log(placeOrderResponse)
-
+console.log(placeOrderResponse);
 ```
 
 

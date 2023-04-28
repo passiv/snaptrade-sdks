@@ -22,21 +22,20 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    }
+body = {}
 try:
     # Accept or Reject SnapTrade disclaimer agreement
     accept_response = snaptrade.api_disclaimer.accept(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(accept_response.body)
     pprint(accept_response.body["accepted"])

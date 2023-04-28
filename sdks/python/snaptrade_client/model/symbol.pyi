@@ -49,6 +49,10 @@ class Symbol(
             @staticmethod
             def exchange() -> typing.Type['Exchange']:
                 return Exchange
+        
+            @staticmethod
+            def type() -> typing.Type['SecurityType']:
+                return SecurityType
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -56,6 +60,7 @@ class Symbol(
                 "name": name,
                 "currency": currency,
                 "exchange": exchange,
+                "type": type,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -78,9 +83,12 @@ class Symbol(
     def __getitem__(self, name: typing_extensions.Literal["exchange"]) -> 'Exchange': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["type"]) -> 'SecurityType': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -103,9 +111,12 @@ class Symbol(
     def get_item_oapg(self, name: typing_extensions.Literal["exchange"]) -> typing.Union['Exchange', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union['SecurityType', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -117,6 +128,7 @@ class Symbol(
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
+        type: typing.Union['SecurityType', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Symbol':
@@ -129,9 +141,11 @@ class Symbol(
             name=name,
             currency=currency,
             exchange=exchange,
+            type=type,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.exchange import Exchange
+from snaptrade_client.model.security_type import SecurityType

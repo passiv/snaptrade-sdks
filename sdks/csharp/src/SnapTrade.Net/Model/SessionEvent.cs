@@ -97,7 +97,8 @@ namespace SnapTrade.Net.Model
         /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
         /// <param name="createdDate">Time.</param>
         /// <param name="brokerageStatusCode">brokerageStatusCode.</param>
-        public SessionEvent(Guid id = default(Guid), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), Guid sessionId = default(Guid), string userId = default(string), string createdDate = default(string), int? brokerageStatusCode = default(int?)) : base()
+        /// <param name="brokerageAuthorizationId">brokerageAuthorizationId.</param>
+        public SessionEvent(Guid id = default(Guid), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), Guid sessionId = default(Guid), string userId = default(string), string createdDate = default(string), int? brokerageStatusCode = default(int?), Guid brokerageAuthorizationId = default(Guid)) : base()
         {
             this.Id = id;
             this.SessionEventType = sessionEventType;
@@ -105,6 +106,7 @@ namespace SnapTrade.Net.Model
             this.UserId = userId;
             this.CreatedDate = createdDate;
             this.BrokerageStatusCode = brokerageStatusCode;
+            this.BrokerageAuthorizationId = brokerageAuthorizationId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -141,6 +143,12 @@ namespace SnapTrade.Net.Model
         public int? BrokerageStatusCode { get; set; }
 
         /// <summary>
+        /// Gets or Sets BrokerageAuthorizationId
+        /// </summary>
+        [DataMember(Name = "brokerage_authorization_id", EmitDefaultValue = false)]
+        public Guid BrokerageAuthorizationId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -161,6 +169,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
             sb.Append("  BrokerageStatusCode: ").Append(BrokerageStatusCode).Append("\n");
+            sb.Append("  BrokerageAuthorizationId: ").Append(BrokerageAuthorizationId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -225,6 +234,11 @@ namespace SnapTrade.Net.Model
                     this.BrokerageStatusCode == input.BrokerageStatusCode ||
                     (this.BrokerageStatusCode != null &&
                     this.BrokerageStatusCode.Equals(input.BrokerageStatusCode))
+                ) && base.Equals(input) && 
+                (
+                    this.BrokerageAuthorizationId == input.BrokerageAuthorizationId ||
+                    (this.BrokerageAuthorizationId != null &&
+                    this.BrokerageAuthorizationId.Equals(input.BrokerageAuthorizationId))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -258,6 +272,10 @@ namespace SnapTrade.Net.Model
                 if (this.BrokerageStatusCode != null)
                 {
                     hashCode = (hashCode * 59) + this.BrokerageStatusCode.GetHashCode();
+                }
+                if (this.BrokerageAuthorizationId != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageAuthorizationId.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

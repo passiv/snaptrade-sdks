@@ -23,23 +23,23 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getAllUserHoldingsResponse = await snaptrade.accountInformation.getAllUserHoldings({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    })
+const getAllUserHoldingsResponse =
+  await snaptrade.accountInformation.getAllUserHoldings({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    brokerageAuthorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
 
-console.log(getAllUserHoldingsResponse)
-
+console.log(getAllUserHoldingsResponse);
 ```
 
 
@@ -81,23 +81,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserAccountBalanceResponse = await snaptrade.accountInformation.getUserAccountBalance({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-    })
+const getUserAccountBalanceResponse =
+  await snaptrade.accountInformation.getUserAccountBalance({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+  });
 
-console.log(getUserAccountBalanceResponse)
-
+console.log(getUserAccountBalanceResponse);
 ```
 
 
@@ -137,23 +137,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserAccountDetailsResponse = await snaptrade.accountInformation.getUserAccountDetails({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-    })
+const getUserAccountDetailsResponse =
+  await snaptrade.accountInformation.getUserAccountDetails({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+  });
 
-console.log(getUserAccountDetailsResponse)
-
+console.log(getUserAccountDetailsResponse);
 ```
 
 
@@ -193,24 +193,24 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserAccountOrdersResponse = await snaptrade.accountInformation.getUserAccountOrders({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "state": "all",
-        "accountId": "accountId_example",
-    })
+const getUserAccountOrdersResponse =
+  await snaptrade.accountInformation.getUserAccountOrders({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    state: "all",
+    accountId: "accountId_example",
+  });
 
-console.log(getUserAccountOrdersResponse)
-
+console.log(getUserAccountOrdersResponse);
 ```
 
 
@@ -251,23 +251,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserAccountPositionsResponse = await snaptrade.accountInformation.getUserAccountPositions({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-    })
+const getUserAccountPositionsResponse =
+  await snaptrade.accountInformation.getUserAccountPositions({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+  });
 
-console.log(getUserAccountPositionsResponse)
-
+console.log(getUserAccountPositionsResponse);
 ```
 
 
@@ -307,23 +307,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getUserHoldingsResponse = await snaptrade.accountInformation.getUserHoldings({
-        "accountId": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const getUserHoldingsResponse =
+  await snaptrade.accountInformation.getUserHoldings({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(getUserHoldingsResponse)
-
+console.log(getUserHoldingsResponse);
 ```
 
 
@@ -365,22 +365,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listUserAccountsResponse = await snaptrade.accountInformation.listUserAccounts({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const listUserAccountsResponse =
+  await snaptrade.accountInformation.listUserAccounts({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(listUserAccountsResponse)
-
+console.log(listUserAccountsResponse);
 ```
 
 
@@ -419,23 +419,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const updateUserAccountResponse = await snaptrade.accountInformation.updateUserAccount({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-    })
+const updateUserAccountResponse =
+  await snaptrade.accountInformation.updateUserAccount({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+  });
 
-console.log(updateUserAccountResponse)
-
+console.log(updateUserAccountResponse);
 ```
 
 

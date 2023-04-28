@@ -14,6 +14,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **user_id** | str,  | str,  | SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#x27;s unique to a user | [optional] 
 **created_date** | str,  | str,  | Time | [optional] 
 **brokerage_status_code** | None, decimal.Decimal, int,  | NoneClass, decimal.Decimal,  |  | [optional] 
+**brokerage_authorization_id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
