@@ -19,26 +19,28 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getActivitiesResponse = await snaptrade.transactionsAndReporting.getActivities({
-        "startDate": "2022-01-24",
-        "endDate": "2022-01-24",
-        "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const getActivitiesResponse =
+  await snaptrade.transactionsAndReporting.getActivities({
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    accounts:
+      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+    brokerageAuthorizations:
+      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(getActivitiesResponse)
-
+console.log(getActivitiesResponse);
 ```
 
 
@@ -83,27 +85,28 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getReportingCustomRangeResponse = await snaptrade.transactionsAndReporting.getReportingCustomRange({
-        "startDate": "2022-01-24",
-        "endDate": "2022-01-24",
-        "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        "detailed": true,
-        "frequency": "monthly",
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+const getReportingCustomRangeResponse =
+  await snaptrade.transactionsAndReporting.getReportingCustomRange({
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    accounts:
+      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+    detailed: true,
+    frequency: "monthly",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
-console.log(getReportingCustomRangeResponse)
-
+console.log(getReportingCustomRangeResponse);
 ```
 
 

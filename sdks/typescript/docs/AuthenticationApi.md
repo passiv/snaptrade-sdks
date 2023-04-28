@@ -20,21 +20,21 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deleteSnapTradeUserResponse = await snaptrade.authentication.deleteSnapTradeUser({
-        "userId": "John.doe@snaptrade.com",
-    })
+const deleteSnapTradeUserResponse =
+  await snaptrade.authentication.deleteSnapTradeUser({
+    userId: "John.doe@snaptrade.com",
+  });
 
-console.log(deleteSnapTradeUserResponse)
-
+console.log(deleteSnapTradeUserResponse);
 ```
 
 
@@ -75,22 +75,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+});
 
-console.log(getUserJWTResponse)
-
+console.log(getUserJWTResponse);
 ```
 
 
@@ -132,19 +131,19 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listSnapTradeUsersResponse = await snaptrade.authentication.listSnapTradeUsers()
+const listSnapTradeUsersResponse =
+  await snaptrade.authentication.listSnapTradeUsers();
 
-console.log(listSnapTradeUsersResponse)
-
+console.log(listSnapTradeUsersResponse);
 ```
 
 
@@ -181,27 +180,27 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const loginSnapTradeUserResponse = await snaptrade.authentication.loginSnapTradeUser({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "broker": "ALPACA",
-        "immediate_redirect": true,
-        "custom_redirect": "https://passiv.com",
-        "reconnect": "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        "connection_type": "read",
-    })
+const loginSnapTradeUserResponse =
+  await snaptrade.authentication.loginSnapTradeUser({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    broker: "ALPACA",
+    immediate_redirect: true,
+    custom_redirect: "https://passiv.com",
+    reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connection_type: "read",
+  });
 
-console.log(loginSnapTradeUserResponse)
-
+console.log(loginSnapTradeUserResponse);
 ```
 
 
@@ -244,22 +243,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const registerSnapTradeUserResponse = await snaptrade.authentication.registerSnapTradeUser({
-        "user_id": "snaptrade-user-123",
-        "rsa_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
-    })
+const registerSnapTradeUserResponse =
+  await snaptrade.authentication.registerSnapTradeUser({
+    user_id: "snaptrade-user-123",
+    rsa_public_key:
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
+  });
 
-console.log(registerSnapTradeUserResponse)
-
+console.log(registerSnapTradeUserResponse);
 ```
 
 

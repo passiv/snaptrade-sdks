@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._TRADE_PLACE
+path = PathValues.TRADE_PLACE

@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._SNAP_TRADE_LIST_USER_ERRORS
+path = PathValues.SNAP_TRADE_LIST_USER_ERRORS

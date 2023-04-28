@@ -1070,7 +1070,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Konfig/10.6.0/python'
+        self.user_agent = 'Konfig/10.7.0/python'
 
     def __enter__(self):
         return self

@@ -48,25 +48,25 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const addPortfolioExcludedAssetResponse = await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "symbol": "VAB.TO",
-        "raw_symbol": "VAB",
-        "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
-    })
+const addPortfolioExcludedAssetResponse =
+  await snaptrade.portfolioManagement.addPortfolioExcludedAsset({
+    portfolioGroupId: "portfolioGroupId_example",
+    id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol: "VAB.TO",
+    raw_symbol: "VAB",
+    description: "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+  });
 
-console.log(addPortfolioExcludedAssetResponse)
-
+console.log(addPortfolioExcludedAssetResponse);
 ```
 
 
@@ -104,24 +104,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const createResponse = await snaptrade.portfolioManagement.create({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "name": "Combined Retirement Portfolio",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  name: "Combined Retirement Portfolio",
+});
 
-console.log(createResponse)
-
+console.log(createResponse);
 ```
 
 
@@ -162,19 +161,19 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const createAssetClassResponse = await snaptrade.portfolioManagement.createAssetClass()
+const createAssetClassResponse =
+  await snaptrade.portfolioManagement.createAssetClass();
 
-console.log(createAssetClassResponse)
-
+console.log(createAssetClassResponse);
 ```
 
 
@@ -208,19 +207,19 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const createModelPortfolioResponse = await snaptrade.portfolioManagement.createModelPortfolio()
+const createModelPortfolioResponse =
+  await snaptrade.portfolioManagement.createModelPortfolio();
 
-console.log(createModelPortfolioResponse)
-
+console.log(createModelPortfolioResponse);
 ```
 
 
@@ -254,21 +253,21 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deleteAssetClassResponse = await snaptrade.portfolioManagement.deleteAssetClass({
-        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const deleteAssetClassResponse =
+  await snaptrade.portfolioManagement.deleteAssetClass({
+    modelAssetClassId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(deleteAssetClassResponse)
-
+console.log(deleteAssetClassResponse);
 ```
 
 
@@ -305,22 +304,22 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deleteExcludedAssetResponse = await snaptrade.portfolioManagement.deleteExcludedAsset({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "symbolId": "symbolId_example",
-    })
+const deleteExcludedAssetResponse =
+  await snaptrade.portfolioManagement.deleteExcludedAsset({
+    portfolioGroupId: "portfolioGroupId_example",
+    symbolId: "symbolId_example",
+  });
 
-console.log(deleteExcludedAssetResponse)
-
+console.log(deleteExcludedAssetResponse);
 ```
 
 
@@ -358,21 +357,21 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deleteModelPortfolioByIdResponse = await snaptrade.portfolioManagement.deleteModelPortfolioById({
-        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const deleteModelPortfolioByIdResponse =
+  await snaptrade.portfolioManagement.deleteModelPortfolioById({
+    modelPortfolioId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(deleteModelPortfolioByIdResponse)
-
+console.log(deleteModelPortfolioByIdResponse);
 ```
 
 
@@ -409,21 +408,21 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deletePortfoliResponse = await snaptrade.portfolioManagement.deletePortfoli({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const deletePortfoliResponse =
+  await snaptrade.portfolioManagement.deletePortfoli({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(deletePortfoliResponse)
-
+console.log(deletePortfoliResponse);
 ```
 
 
@@ -463,22 +462,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const deletePortfolioTargetByIdResponse = await snaptrade.portfolioManagement.deletePortfolioTargetById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "targetAssetId": "targetAssetId_example",
-    })
+const deletePortfolioTargetByIdResponse =
+  await snaptrade.portfolioManagement.deletePortfolioTargetById({
+    portfolioGroupId: "portfolioGroupId_example",
+    targetAssetId: "targetAssetId_example",
+  });
 
-console.log(deletePortfolioTargetByIdResponse)
-
+console.log(deletePortfolioTargetByIdResponse);
 ```
 
 
@@ -519,21 +518,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const detailAssetClassResponse = await snaptrade.portfolioManagement.detailAssetClass({
-        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const detailAssetClassResponse =
+  await snaptrade.portfolioManagement.detailAssetClass({
+    modelAssetClassId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(detailAssetClassResponse)
-
+console.log(detailAssetClassResponse);
 ```
 
 
@@ -570,23 +569,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getCalculatedTradeByIdResponse = await snaptrade.portfolioManagement.getCalculatedTradeById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "calculatedTradeId": "calculatedTradeId_example",
-        "tradeId": "tradeId_example",
-    })
+const getCalculatedTradeByIdResponse =
+  await snaptrade.portfolioManagement.getCalculatedTradeById({
+    portfolioGroupId: "portfolioGroupId_example",
+    calculatedTradeId: "calculatedTradeId_example",
+    tradeId: "tradeId_example",
+  });
 
-console.log(getCalculatedTradeByIdResponse)
-
+console.log(getCalculatedTradeByIdResponse);
 ```
 
 
@@ -625,21 +624,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getModelDetailsByIdResponse = await snaptrade.portfolioManagement.getModelDetailsById({
-        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const getModelDetailsByIdResponse =
+  await snaptrade.portfolioManagement.getModelDetailsById({
+    modelPortfolioId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(getModelDetailsByIdResponse)
-
+console.log(getModelDetailsByIdResponse);
 ```
 
 
@@ -676,21 +675,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioBalancesResponse = await snaptrade.portfolioManagement.getPortfolioBalances({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioBalancesResponse =
+  await snaptrade.portfolioManagement.getPortfolioBalances({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioBalancesResponse)
-
+console.log(getPortfolioBalancesResponse);
 ```
 
 
@@ -730,21 +729,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioDetailsByIdResponse = await snaptrade.portfolioManagement.getPortfolioDetailsById({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioDetailsByIdResponse =
+  await snaptrade.portfolioManagement.getPortfolioDetailsById({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioDetailsByIdResponse)
-
+console.log(getPortfolioDetailsByIdResponse);
 ```
 
 
@@ -782,21 +781,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioInfoResponse = await snaptrade.portfolioManagement.getPortfolioInfo({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioInfoResponse =
+  await snaptrade.portfolioManagement.getPortfolioInfo({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioInfoResponse)
-
+console.log(getPortfolioInfoResponse);
 ```
 
 
@@ -834,21 +833,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioPositionsResponse = await snaptrade.portfolioManagement.getPortfolioPositions({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioPositionsResponse =
+  await snaptrade.portfolioManagement.getPortfolioPositions({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioPositionsResponse)
-
+console.log(getPortfolioPositionsResponse);
 ```
 
 
@@ -888,21 +887,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioSettingsResponse = await snaptrade.portfolioManagement.getPortfolioSettings({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioSettingsResponse =
+  await snaptrade.portfolioManagement.getPortfolioSettings({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioSettingsResponse)
-
+console.log(getPortfolioSettingsResponse);
 ```
 
 
@@ -940,22 +939,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioTargetByIdResponse = await snaptrade.portfolioManagement.getPortfolioTargetById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "targetAssetId": "targetAssetId_example",
-    })
+const getPortfolioTargetByIdResponse =
+  await snaptrade.portfolioManagement.getPortfolioTargetById({
+    portfolioGroupId: "portfolioGroupId_example",
+    targetAssetId: "targetAssetId_example",
+  });
 
-console.log(getPortfolioTargetByIdResponse)
-
+console.log(getPortfolioTargetByIdResponse);
 ```
 
 
@@ -994,21 +993,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortfolioTargetsResponse = await snaptrade.portfolioManagement.getPortfolioTargets({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortfolioTargetsResponse =
+  await snaptrade.portfolioManagement.getPortfolioTargets({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortfolioTargetsResponse)
-
+console.log(getPortfolioTargetsResponse);
 ```
 
 
@@ -1048,21 +1047,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPortoflioExcludedAssetsResponse = await snaptrade.portfolioManagement.getPortoflioExcludedAssets({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const getPortoflioExcludedAssetsResponse =
+  await snaptrade.portfolioManagement.getPortoflioExcludedAssets({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(getPortoflioExcludedAssetsResponse)
-
+console.log(getPortoflioExcludedAssetsResponse);
 ```
 
 
@@ -1100,21 +1099,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const importModelPortfolioResponse = await snaptrade.portfolioManagement.importModelPortfolio({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const importModelPortfolioResponse =
+  await snaptrade.portfolioManagement.importModelPortfolio({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(importModelPortfolioResponse)
-
+console.log(importModelPortfolioResponse);
 ```
 
 
@@ -1152,22 +1151,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const listResponse = await snaptrade.portfolioManagement.list({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+});
 
-console.log(listResponse)
-
+console.log(listResponse);
 ```
 
 
@@ -1206,19 +1204,19 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listAssetClassesResponse = await snaptrade.portfolioManagement.listAssetClasses()
+const listAssetClassesResponse =
+  await snaptrade.portfolioManagement.listAssetClasses();
 
-console.log(listAssetClassesResponse)
-
+console.log(listAssetClassesResponse);
 ```
 
 
@@ -1252,21 +1250,21 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listCalculatedTradesResponse = await snaptrade.portfolioManagement.listCalculatedTrades({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const listCalculatedTradesResponse =
+  await snaptrade.portfolioManagement.listCalculatedTrades({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(listCalculatedTradesResponse)
-
+console.log(listCalculatedTradesResponse);
 ```
 
 
@@ -1303,19 +1301,19 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listModelPortfolioResponse = await snaptrade.portfolioManagement.listModelPortfolio()
+const listModelPortfolioResponse =
+  await snaptrade.portfolioManagement.listModelPortfolio();
 
-console.log(listModelPortfolioResponse)
-
+console.log(listModelPortfolioResponse);
 ```
 
 
@@ -1349,21 +1347,21 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listPortfolioAccountsResponse = await snaptrade.portfolioManagement.listPortfolioAccounts({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const listPortfolioAccountsResponse =
+  await snaptrade.portfolioManagement.listPortfolioAccounts({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(listPortfolioAccountsResponse)
-
+console.log(listPortfolioAccountsResponse);
 ```
 
 
@@ -1401,21 +1399,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const modifyModelPortfolioByIdResponse = await snaptrade.portfolioManagement.modifyModelPortfolioById({
-        "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const modifyModelPortfolioByIdResponse =
+  await snaptrade.portfolioManagement.modifyModelPortfolioById({
+    modelPortfolioId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(modifyModelPortfolioByIdResponse)
-
+console.log(modifyModelPortfolioByIdResponse);
 ```
 
 
@@ -1453,23 +1451,24 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const savePortfolioResponse = await snaptrade.portfolioManagement.savePortfolio({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "name": "Combined Retirement Portfolio",
-    })
+const savePortfolioResponse = await snaptrade.portfolioManagement.savePortfolio(
+  {
+    portfolioGroupId: "portfolioGroupId_example",
+    id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    name: "Combined Retirement Portfolio",
+  }
+);
 
-console.log(savePortfolioResponse)
-
+console.log(savePortfolioResponse);
 ```
 
 
@@ -1510,22 +1509,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const searchPortfolioSymbolsResponse = await snaptrade.portfolioManagement.searchPortfolioSymbols({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "substring": "apple",
-    })
+const searchPortfolioSymbolsResponse =
+  await snaptrade.portfolioManagement.searchPortfolioSymbols({
+    portfolioGroupId: "portfolioGroupId_example",
+    substring: "apple",
+  });
 
-console.log(searchPortfolioSymbolsResponse)
-
+console.log(searchPortfolioSymbolsResponse);
 ```
 
 
@@ -1564,29 +1563,29 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const setPortfolioTargetsResponse = await snaptrade.portfolioManagement.setPortfolioTargets({
-    'portfolioGroupId': "portfolioGroupId_example",
-    'requestBody': [
-        {
-            "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            "percent": 90,
-            "is_supported": true,
-            "is_excluded": true,
-        }
+const setPortfolioTargetsResponse =
+  await snaptrade.portfolioManagement.setPortfolioTargets({
+    portfolioGroupId: "portfolioGroupId_example",
+    requestBody: [
+      {
+        id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        percent: 90,
+        is_supported: true,
+        is_excluded: true,
+      },
     ],
-})
+  });
 
-console.log(setPortfolioTargetsResponse)
-
+console.log(setPortfolioTargetsResponse);
 ```
 
 
@@ -1627,21 +1626,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const updateAssetClassResponse = await snaptrade.portfolioManagement.updateAssetClass({
-        "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const updateAssetClassResponse =
+  await snaptrade.portfolioManagement.updateAssetClass({
+    modelAssetClassId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(updateAssetClassResponse)
-
+console.log(updateAssetClassResponse);
 ```
 
 
@@ -1679,21 +1678,21 @@ void (empty response body)
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const updatePortfolioSettingsResponse = await snaptrade.portfolioManagement.updatePortfolioSettings({
-        "portfolioGroupId": "portfolioGroupId_example",
-    })
+const updatePortfolioSettingsResponse =
+  await snaptrade.portfolioManagement.updatePortfolioSettings({
+    portfolioGroupId: "portfolioGroupId_example",
+  });
 
-console.log(updatePortfolioSettingsResponse)
-
+console.log(updatePortfolioSettingsResponse);
 ```
 
 
@@ -1731,26 +1730,26 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const updatePortfolioTargetByIdResponse = await snaptrade.portfolioManagement.updatePortfolioTargetById({
-        "portfolioGroupId": "portfolioGroupId_example",
-        "targetAssetId": "targetAssetId_example",
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "percent": 90,
-        "is_supported": true,
-        "is_excluded": true,
-    })
+const updatePortfolioTargetByIdResponse =
+  await snaptrade.portfolioManagement.updatePortfolioTargetById({
+    portfolioGroupId: "portfolioGroupId_example",
+    targetAssetId: "targetAssetId_example",
+    id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    percent: 90,
+    is_supported: true,
+    is_excluded: true,
+  });
 
-console.log(updatePortfolioTargetByIdResponse)
-
+console.log(updatePortfolioTargetByIdResponse);
 ```
 
 

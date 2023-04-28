@@ -4126,6 +4126,8 @@ components:
           $ref: "#/components/schemas/Currency"
         exchange:
           $ref: "#/components/schemas/Exchange"
+        type:
+          $ref: "#/components/schemas/SecurityType"
     Timestamp:
       externalDocs:
         url: https://en.wikipedia.org/wiki/Unix_time
@@ -4319,6 +4321,8 @@ components:
           type: integer
           nullable: true
           example: 400
+        brokerage_authorization_id:
+          $ref: "#/components/schemas/Id"
     BrokerageSymbol:
       description: Brokerage symbol
       type: object

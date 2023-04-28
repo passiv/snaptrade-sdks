@@ -86,6 +86,24 @@ class ApiException(OpenApiException):
         return error_message
 
 
+class AnyOfValidationError(OpenApiException):
+    def __init__(self, error_list: typing.List[typing.Union[ApiTypeError, ApiValueError]]):
+        self.error_list = error_list
+        sub_msgs: typing.List[str] = []
+        for type_error in error_list:
+            sub_msgs.append(str(type_error))
+        num_validation_errors = len(self.error_list)
+        if num_validation_errors == 1:
+            super().__init__(sub_msgs[0])
+        else:
+            # create a string that says how many validation errors there were and
+            # prints each sub_msg out using a bulleted list of messages
+            msg = "{} validation error{} detected: \n".format(num_validation_errors, "s" if num_validation_errors > 1 else "")
+            for i, sub_msg in enumerate(sub_msgs):
+                msg += " {}. {}\n".format(i+1, sub_msg)
+            super().__init__(msg)
+
+
 class InvalidHostConfigurationError(ClientConfigurationError):
     def __init__(self, host: str, reason: str):
         self.host = host

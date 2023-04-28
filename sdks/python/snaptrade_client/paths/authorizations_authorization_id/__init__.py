@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._AUTHORIZATIONS_AUTHORIZATION_ID
+path = PathValues.AUTHORIZATIONS_AUTHORIZATION_ID

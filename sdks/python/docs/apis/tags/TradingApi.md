@@ -31,25 +31,25 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    }
+    "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+}
 try:
     # Cancel open order in account
     cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(cancel_user_account_order_response.body)
     pprint(cancel_user_account_order_response.body["brokerage_order_id"])
@@ -213,19 +213,21 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Return details of a specific trade before it's placed
-    get_calculated_trade_impact_by_id_response = snaptrade.trading.get_calculated_trade_impact_by_id(
-        path_params = {
-            'portfolioGroupId': "portfolioGroupId_example",
-            'calculatedTradeId': "calculatedTradeId_example",
-            'tradeId': "tradeId_example",
-        },
+    get_calculated_trade_impact_by_id_response = (
+        snaptrade.trading.get_calculated_trade_impact_by_id(
+            path_params={
+                "portfolioGroupId": "portfolioGroupId_example",
+                "calculatedTradeId": "calculatedTradeId_example",
+                "tradeId": "tradeId_example",
+            },
+        )
     )
     pprint(get_calculated_trade_impact_by_id_response.body)
     pprint(get_calculated_trade_impact_by_id_response.body["id"])
@@ -240,7 +242,9 @@ try:
     pprint(get_calculated_trade_impact_by_id_response.status)
     pprint(get_calculated_trade_impact_by_id_response.round_trip_time)
 except ApiException as e:
-    print("Exception when calling TradingApi.get_calculated_trade_impact_by_id: %s\n" % e)
+    print(
+        "Exception when calling TradingApi.get_calculated_trade_impact_by_id: %s\n" % e
+    )
     pprint(e.body)
     pprint(e.headers)
     pprint(e.status)
@@ -328,18 +332,20 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 try:
     # Return the impact of placing a series of trades on the portfolio
-    get_calculated_trades_impact_response = snaptrade.trading.get_calculated_trades_impact(
-        path_params = {
-            'portfolioGroupId': "portfolioGroupId_example",
-            'calculatedTradeId': "calculatedTradeId_example",
-        },
+    get_calculated_trades_impact_response = (
+        snaptrade.trading.get_calculated_trades_impact(
+            path_params={
+                "portfolioGroupId": "portfolioGroupId_example",
+                "calculatedTradeId": "calculatedTradeId_example",
+            },
+        )
     )
     pprint(get_calculated_trades_impact_response.body)
     pprint(get_calculated_trades_impact_response.body["account"])
@@ -437,28 +443,28 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "order_type": "Limit",
-        "price": 31.33,
-        "stop": 31.33,
-        "time_in_force": "Day",
-        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    }
+    "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    "action": "BUY",
+    "order_type": "Limit",
+    "price": 31.33,
+    "stop": 31.33,
+    "time_in_force": "Day",
+    "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+}
 try:
     # Check impact of trades on account.
     get_order_impact_response = snaptrade.trading.get_order_impact(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(get_order_impact_response.body)
     pprint(get_order_impact_response.body["trade"])
@@ -599,7 +605,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -607,14 +613,14 @@ snaptrade = SnapTrade(
 try:
     # Get symbol quotes
     get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
-        path_params = {
-            'accountId': "accountId_example",
+        path_params={
+            "accountId": "accountId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
-            'symbols': "symbols_example",
-            'use_ticker': True,
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
+            "symbols": "symbols_example",
+            "use_ticker": True,
         },
     )
     pprint(get_user_account_quotes_response.body)
@@ -752,27 +758,29 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "units": 6,
-        "price": 24.81,
-        "sequence": 1,
-    }
+    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    "action": "BUY",
+    "units": 6,
+    "price": 24.81,
+    "sequence": 1,
+}
 try:
     # Modify units of a trade before it is placed
-    modify_calculated_trade_by_id_response = snaptrade.trading.modify_calculated_trade_by_id(
-        path_params = {
-            'portfolioGroupId': "portfolioGroupId_example",
-            'calculatedTradeId': "calculatedTradeId_example",
-            'tradeId': "tradeId_example",
-        },
-        body=body
+    modify_calculated_trade_by_id_response = (
+        snaptrade.trading.modify_calculated_trade_by_id(
+            path_params={
+                "portfolioGroupId": "portfolioGroupId_example",
+                "calculatedTradeId": "calculatedTradeId_example",
+                "tradeId": "tradeId_example",
+            },
+            body=body,
+        )
     )
     pprint(modify_calculated_trade_by_id_response.body)
     pprint(modify_calculated_trade_by_id_response.body["id"])
@@ -885,7 +893,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -893,9 +901,9 @@ snaptrade = SnapTrade(
 try:
     # Place orders for the CalculatedTrades in series
     place_calculated_trades_response = snaptrade.trading.place_calculated_trades(
-        path_params = {
-            'portfolioGroupId': "portfolioGroupId_example",
-            'calculatedTradeId': "calculatedTradeId_example",
+        path_params={
+            "portfolioGroupId": "portfolioGroupId_example",
+            "calculatedTradeId": "calculatedTradeId_example",
         },
     )
     pprint(place_calculated_trades_response.body)
@@ -998,28 +1006,28 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
 body = {
-        "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "action": "BUY",
-        "order_type": "Limit",
-        "price": 31.33,
-        "stop": 31.33,
-        "time_in_force": "Day",
-        "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    }
+    "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    "action": "BUY",
+    "order_type": "Limit",
+    "price": 31.33,
+    "stop": 31.33,
+    "time_in_force": "Day",
+    "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+}
 try:
     # Place a trade with NO validation.
     place_force_order_response = snaptrade.trading.place_force_order(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(place_force_order_response.body)
     pprint(place_force_order_response.body["brokerage_order_id"])
@@ -1175,21 +1183,20 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    }
+body = {}
 try:
     # Place a OCO (One Cancels Other) order
     place_oco_order_response = snaptrade.trading.place_oco_order(
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
-        body=body
+        body=body,
     )
     pprint(place_oco_order_response.body)
     pprint(place_oco_order_response.body["brokerage_order_id"])
@@ -1339,7 +1346,7 @@ from snaptrade_client import SnapTrade
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
     # See configuration.py for a list of all supported configuration parameters.
-    host = "https://api.snaptrade.com/api/v1",
+    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -1347,12 +1354,12 @@ snaptrade = SnapTrade(
 try:
     # Place order
     place_order_response = snaptrade.trading.place_order(
-        path_params = {
-            'tradeId': "tradeId_example",
+        path_params={
+            "tradeId": "tradeId_example",
         },
-        query_params = {
-            'userId': "John.doe@snaptrade.com",
-            'userSecret': "USERSECRET123",
+        query_params={
+            "userId": "John.doe@snaptrade.com",
+            "userSecret": "USERSECRET123",
         },
     )
     pprint(place_order_response.body)

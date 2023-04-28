@@ -4,4 +4,4 @@
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues._SESSION_EVENTS
+path = PathValues.SESSION_EVENTS

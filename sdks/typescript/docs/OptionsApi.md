@@ -20,32 +20,31 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-        "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "legs": [
-            {
-                "action": "BUY_TO_OPEN",
-                "option_symbol_id": "SPY220819P00200000",
-                "quantity": 1,
-            }
-        ],
-        "strategy_type": "CUSTOM",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  accountId: "accountId_example",
+  underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  legs: [
+    {
+      action: "BUY_TO_OPEN",
+      option_symbol_id: "SPY220819P00200000",
+      quantity: 1,
+    },
+  ],
+  strategy_type: "CUSTOM",
+});
 
-console.log(getOptionStrategyResponse)
-
+console.log(getOptionStrategyResponse);
 ```
 
 
@@ -86,24 +85,23 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-        "symbol": "symbol_example",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  accountId: "accountId_example",
+  symbol: "symbol_example",
+});
 
-console.log(getOptionsChainResponse)
-
+console.log(getOptionsChainResponse);
 ```
 
 
@@ -144,24 +142,24 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getOptionsStrategyQuoteResponse = await snaptrade.options.getOptionsStrategyQuote({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    })
+const getOptionsStrategyQuoteResponse =
+  await snaptrade.options.getOptionsStrategyQuote({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+    optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  });
 
-console.log(getOptionsStrategyQuoteResponse)
-
+console.log(getOptionsStrategyQuoteResponse);
 ```
 
 
@@ -202,23 +200,22 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-    })
+  userId: "John.doe@snaptrade.com",
+  userSecret: "USERSECRET123",
+  accountId: "accountId_example",
+});
 
-console.log(listOptionHoldingsResponse)
-
+console.log(listOptionHoldingsResponse);
 ```
 
 
@@ -258,27 +255,28 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "order_type": "Limit",
-        "time_in_force": "DAY",
-        "price": 31.33,
-    })
+const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
+  {
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type: "Limit",
+    time_in_force: "DAY",
+    price: 31.33,
+  }
+);
 
-console.log(placeOptionStrategyResponse)
-
+console.log(placeOptionStrategyResponse);
 ```
 
 

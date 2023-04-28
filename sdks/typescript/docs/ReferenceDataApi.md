@@ -26,21 +26,21 @@ Method | HTTP request | Description
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getCurrencyExchangeRatePairResponse = await snaptrade.referenceData.getCurrencyExchangeRatePair({
-        "currencyPair": "currencyPair_example",
-    })
+const getCurrencyExchangeRatePairResponse =
+  await snaptrade.referenceData.getCurrencyExchangeRatePair({
+    currencyPair: "currencyPair_example",
+  });
 
-console.log(getCurrencyExchangeRatePairResponse)
-
+console.log(getCurrencyExchangeRatePairResponse);
 ```
 
 
@@ -77,19 +77,18 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo()
+const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 
-console.log(getPartnerInfoResponse)
-
+console.log(getPartnerInfoResponse);
 ```
 
 
@@ -127,19 +126,19 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getSecurityTypesResponse = await snaptrade.referenceData.getSecurityTypes()
+const getSecurityTypesResponse =
+  await snaptrade.referenceData.getSecurityTypes();
 
-console.log(getSecurityTypesResponse)
-
+console.log(getSecurityTypesResponse);
 ```
 
 
@@ -174,19 +173,19 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getStockExchangesResponse = await snaptrade.referenceData.getStockExchanges()
+const getStockExchangesResponse =
+  await snaptrade.referenceData.getStockExchanges();
 
-console.log(getStockExchangesResponse)
-
+console.log(getStockExchangesResponse);
 ```
 
 
@@ -220,21 +219,20 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
 const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
-        "substring": "apple",
-    })
+  substring: "apple",
+});
 
-console.log(getSymbolsResponse)
-
+console.log(getSymbolsResponse);
 ```
 
 
@@ -272,21 +270,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const getSymbolsByTickerResponse = await snaptrade.referenceData.getSymbolsByTicker({
-        "ticker": "ticker_example",
-    })
+const getSymbolsByTickerResponse =
+  await snaptrade.referenceData.getSymbolsByTicker({
+    ticker: "ticker_example",
+  });
 
-console.log(getSymbolsByTickerResponse)
-
+console.log(getSymbolsByTickerResponse);
 ```
 
 
@@ -326,21 +324,21 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listAllBrokerageAuthorizationTypeResponse = await snaptrade.referenceData.listAllBrokerageAuthorizationType({
-        "brokerage": "QUESTRADE,ALPACA",
-    })
+const listAllBrokerageAuthorizationTypeResponse =
+  await snaptrade.referenceData.listAllBrokerageAuthorizationType({
+    brokerage: "QUESTRADE,ALPACA",
+  });
 
-console.log(listAllBrokerageAuthorizationTypeResponse)
-
+console.log(listAllBrokerageAuthorizationTypeResponse);
 ```
 
 
@@ -378,19 +376,19 @@ Name | Type | Description  | Notes
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listAllBrokeragesResponse = await snaptrade.referenceData.listAllBrokerages()
+const listAllBrokeragesResponse =
+  await snaptrade.referenceData.listAllBrokerages();
 
-console.log(listAllBrokeragesResponse)
-
+console.log(listAllBrokeragesResponse);
 ```
 
 
@@ -425,19 +423,19 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listAllCurrenciesResponse = await snaptrade.referenceData.listAllCurrencies()
+const listAllCurrenciesResponse =
+  await snaptrade.referenceData.listAllCurrencies();
 
-console.log(listAllCurrenciesResponse)
-
+console.log(listAllCurrenciesResponse);
 ```
 
 
@@ -472,19 +470,19 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const listAllCurrenciesRatesResponse = await snaptrade.referenceData.listAllCurrenciesRates()
+const listAllCurrenciesRatesResponse =
+  await snaptrade.referenceData.listAllCurrenciesRates();
 
-console.log(listAllCurrenciesRatesResponse)
-
+console.log(listAllCurrenciesRatesResponse);
 ```
 
 
@@ -518,24 +516,24 @@ This endpoint does not need any parameter.
 
 
 ```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk"
+import { Snaptrade } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-    // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-    // basePath: "https://api.snaptrade.com/api/v1",
-    consumerKey: "YOUR_CONSUMER_KEY",
-    clientId: "YOUR_CLIENT_ID",
-})
+  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
+  // basePath: "https://api.snaptrade.com/api/v1",
+  consumerKey: "YOUR_CONSUMER_KEY",
+  clientId: "YOUR_CLIENT_ID",
+});
 
-const symbolSearchUserAccountResponse = await snaptrade.referenceData.symbolSearchUserAccount({
-        "userId": "John.doe@snaptrade.com",
-        "userSecret": "USERSECRET123",
-        "accountId": "accountId_example",
-        "substring": "apple",
-    })
+const symbolSearchUserAccountResponse =
+  await snaptrade.referenceData.symbolSearchUserAccount({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+    accountId: "accountId_example",
+    substring: "apple",
+  });
 
-console.log(symbolSearchUserAccountResponse)
-
+console.log(symbolSearchUserAccountResponse);
 ```
 
 
