@@ -176,51 +176,18 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
-    def _session_events_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
 
-    @typing.overload
     def _session_events_oapg(
         self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _session_events_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _session_events_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         List all session events for the partner
         :param skip_deserialization: If true then api_response.response will be set but
@@ -257,7 +224,6 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -293,114 +259,50 @@ class BaseApi(api_client.Api):
 class SessionEvents(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def session_events(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def session_events(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def session_events(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        partner_client_id: typing.Any = None,
+        user_id: typing.Any = None,
+        session_id: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def session_events(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if partner_client_id is not None:
+            query_params["PartnerClientId"] = partner_client_id
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if session_id is not None:
+            query_params["sessionId"] = session_id
         return self._session_events_oapg(
             query_params=query_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def get(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def get(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def get(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        partner_client_id: typing.Any = None,
+        user_id: typing.Any = None,
+        session_id: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def get(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if partner_client_id is not None:
+            query_params["PartnerClientId"] = partner_client_id
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if session_id is not None:
+            query_params["sessionId"] = session_id
         return self._session_events_oapg(
             query_params=query_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

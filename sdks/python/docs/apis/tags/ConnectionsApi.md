@@ -34,13 +34,9 @@ try:
     # Get detail of a specific brokerage authorizations for the user
     detail_brokerage_authorization_response = (
         snaptrade.connections.detail_brokerage_authorization(
-            path_params={
-                "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
+            authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
         )
     )
     pprint(detail_brokerage_authorization_response.body)
@@ -176,10 +172,8 @@ try:
     # List all brokerage authorizations for the user
     list_brokerage_authorizations_response = (
         snaptrade.connections.list_brokerage_authorizations(
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
         )
     )
     pprint(list_brokerage_authorizations_response.body)
@@ -305,13 +299,9 @@ snaptrade = SnapTrade(
 try:
     # Remove a brokerage authorization.
     snaptrade.connections.remove_brokerage_authorization(
-        path_params={
-            "authorizationId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(remove_brokerage_authorization_response.headers)
     pprint(remove_brokerage_authorization_response.status)
@@ -444,11 +434,9 @@ snaptrade = SnapTrade(
 try:
     # List all session events for the partner
     session_events_response = snaptrade.connections.session_events(
-        query_params={
-            "PartnerClientId": "PASSIVTEST",
-            "userId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            "sessionId": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        },
+        partner_client_id="PASSIVTEST",
+        user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     )
     pprint(session_events_response.headers)
     pprint(session_events_response.status)

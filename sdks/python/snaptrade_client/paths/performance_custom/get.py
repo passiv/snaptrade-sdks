@@ -154,51 +154,18 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
-    def _get_reporting_custom_range_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
 
-    @typing.overload
     def _get_reporting_custom_range_oapg(
         self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _get_reporting_custom_range_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _get_reporting_custom_range_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Get performance information for a specific timeframe
         :param skip_deserialization: If true then api_response.response will be set but
@@ -239,7 +206,6 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -275,114 +241,74 @@ class BaseApi(api_client.Api):
 class GetReportingCustomRange(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def get_reporting_custom_range(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def get_reporting_custom_range(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def get_reporting_custom_range(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        start_date: typing.Any = None,
+        end_date: typing.Any = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        accounts: typing.Any = None,
+        detailed: typing.Any = None,
+        frequency: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def get_reporting_custom_range(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if start_date is not None:
+            query_params["startDate"] = start_date
+        if end_date is not None:
+            query_params["endDate"] = end_date
+        if accounts is not None:
+            query_params["accounts"] = accounts
+        if detailed is not None:
+            query_params["detailed"] = detailed
+        if frequency is not None:
+            query_params["frequency"] = frequency
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._get_reporting_custom_range_oapg(
             query_params=query_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def get(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def get(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def get(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        start_date: typing.Any = None,
+        end_date: typing.Any = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        accounts: typing.Any = None,
+        detailed: typing.Any = None,
+        frequency: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def get(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if start_date is not None:
+            query_params["startDate"] = start_date
+        if end_date is not None:
+            query_params["endDate"] = end_date
+        if accounts is not None:
+            query_params["accounts"] = accounts
+        if detailed is not None:
+            query_params["detailed"] = detailed
+        if frequency is not None:
+            query_params["frequency"] = frequency
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._get_reporting_custom_range_oapg(
             query_params=query_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

@@ -41,9 +41,7 @@ try:
     # Return the exchange rate of a currency pair
     get_currency_exchange_rate_pair_response = (
         snaptrade.reference_data.get_currency_exchange_rate_pair(
-            path_params={
-                "currencyPair": "currencyPair_example",
-            },
+            currency_pair="currencyPair_example",
         )
     )
     pprint(get_currency_exchange_rate_pair_response.body)
@@ -420,12 +418,11 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "substring": "apple",
-}
 try:
     # Search for symbols
-    get_symbols_response = snaptrade.reference_data.get_symbols(body=body)
+    get_symbols_response = snaptrade.reference_data.get_symbols(
+        substring="apple",
+    )
     pprint(get_symbols_response.body)
     pprint(get_symbols_response.body["id"])
     pprint(get_symbols_response.body["symbol"])
@@ -528,12 +525,8 @@ snaptrade = SnapTrade(
 try:
     # Get details of a symbol by the ticker
     get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
-        path_params={
-            "ticker": "ticker_example",
-        },
-        query_params={
-            "symbolId": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-        },
+        ticker="ticker_example",
+        symbol_id="046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     )
     pprint(get_symbols_by_ticker_response.body)
     pprint(get_symbols_by_ticker_response.body["id"])
@@ -661,9 +654,7 @@ try:
     # List of all brokerage authorization types
     list_all_brokerage_authorization_type_response = (
         snaptrade.reference_data.list_all_brokerage_authorization_type(
-            query_params={
-                "brokerage": "QUESTRADE,ALPACA",
-            },
+            brokerage="QUESTRADE,ALPACA",
         )
     )
     pprint(list_all_brokerage_authorization_type_response.body)
@@ -1022,21 +1013,14 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "substring": "apple",
-}
 try:
     # Search for symbols that are supported by a brokerage account using a substring
     symbol_search_user_account_response = (
         snaptrade.reference_data.symbol_search_user_account(
-            path_params={
-                "accountId": "accountId_example",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
-            body=body,
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            account_id="accountId_example",
+            substring="apple",
         )
     )
     pprint(symbol_search_user_account_response.body)

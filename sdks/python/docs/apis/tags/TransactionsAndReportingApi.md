@@ -33,14 +33,12 @@ snaptrade = SnapTrade(
 try:
     # Get transaction history for a user
     get_activities_response = snaptrade.transactions_and_reporting.get_activities(
-        query_params={
-            "startDate": "2022-01-24",
-            "endDate": "2022-01-24",
-            "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            "brokerageAuthorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
+        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     )
     pprint(get_activities_response.body)
     pprint(get_activities_response.body["id"])
@@ -211,15 +209,13 @@ snaptrade = SnapTrade(
 try:
     # Get performance information for a specific timeframe
     get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
-        query_params={
-            "startDate": "2022-01-24",
-            "endDate": "2022-01-24",
-            "accounts": "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-            "detailed": True,
-            "frequency": "monthly",
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        start_date="2022-01-24",
+        end_date="2022-01-24",
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        detailed=True,
+        frequency="monthly",
     )
     pprint(get_reporting_custom_range_response.body)
     pprint(get_reporting_custom_range_response.body["total_equity_timeframe"])

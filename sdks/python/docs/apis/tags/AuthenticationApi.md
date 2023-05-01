@@ -34,9 +34,7 @@ snaptrade = SnapTrade(
 try:
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-        },
+        user_id="John.doe@snaptrade.com",
     )
     pprint(delete_snap_trade_user_response.body)
     pprint(delete_snap_trade_user_response.body["status"])
@@ -178,10 +176,8 @@ snaptrade = SnapTrade(
 try:
     # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
     get_user_jwt_response = snaptrade.authentication.get_user_jwt(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(get_user_jwt_response.headers)
     pprint(get_user_jwt_response.status)
@@ -427,21 +423,16 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "broker": "ALPACA",
-    "immediate_redirect": True,
-    "custom_redirect": "https://passiv.com",
-    "reconnect": "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-    "connection_type": "read",
-}
 try:
     # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
     login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        broker="ALPACA",
+        immediate_redirect=True,
+        custom_redirect="https://passiv.com",
+        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+        connection_type="read",
     )
     pprint(login_snap_trade_user_response.headers)
     pprint(login_snap_trade_user_response.status)
@@ -605,14 +596,11 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "user_id": "snaptrade-user-123",
-    "rsa_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
-}
 try:
     # Register user with SnapTrade in order to create secure brokerage authorizations
-    register_snap_trade_user_response = (
-        snaptrade.authentication.register_snap_trade_user(body=body)
+    register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
+        user_id="snaptrade-user-123",
+        rsa_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
     )
     pprint(register_snap_trade_user_response.body)
     pprint(register_snap_trade_user_response.body["user_id"])

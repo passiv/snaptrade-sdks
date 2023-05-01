@@ -116,51 +116,18 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
-    def _import_model_portfolio_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
 
-    @typing.overload
     def _import_model_portfolio_oapg(
         self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _import_model_portfolio_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _import_model_portfolio_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Import target allocation based on portfolio group
         :param skip_deserialization: If true then api_response.response will be set but
@@ -194,7 +161,6 @@ class BaseApi(api_client.Api):
             method='post'.upper(),
             headers=_headers,
             auth_settings=_auth,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -230,114 +196,38 @@ class BaseApi(api_client.Api):
 class ImportModelPortfolio(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def import_model_portfolio(
         self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def import_model_portfolio(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def import_model_portfolio(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        portfolio_group_id: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def import_model_portfolio(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if portfolio_group_id is not None:
+            path_params["portfolioGroupId"] = portfolio_group_id
         return self._import_model_portfolio_oapg(
             path_params=path_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def post(
         self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def post(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def post(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        portfolio_group_id: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def post(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if portfolio_group_id is not None:
+            path_params["portfolioGroupId"] = portfolio_group_id
         return self._import_model_portfolio_oapg(
             path_params=path_params,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

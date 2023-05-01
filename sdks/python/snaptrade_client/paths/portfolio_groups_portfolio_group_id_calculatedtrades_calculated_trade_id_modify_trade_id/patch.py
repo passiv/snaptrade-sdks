@@ -117,72 +117,19 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
+
     def _modify_calculated_trade_by_id_oapg(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def _modify_calculated_trade_by_id_oapg(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def _modify_calculated_trade_by_id_oapg(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _modify_calculated_trade_by_id_oapg(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        content_type: str = 'application/json',
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _modify_calculated_trade_by_id_oapg(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Modify units of a trade before it is placed
         :param skip_deserialization: If true then api_response.response will be set but
@@ -230,7 +177,6 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -261,160 +207,104 @@ class BaseApi(api_client.Api):
 class ModifyCalculatedTradeById(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def modify_calculated_trade_by_id(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def modify_calculated_trade_by_id(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def modify_calculated_trade_by_id(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def modify_calculated_trade_by_id(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        portfolio_group_id: typing.Any = None,
+        calculated_trade_id: typing.Any = None,
+        trade_id: typing.Any = None,
+        id: typing.Any = None,
+        account: typing.Any = None,
+        symbol: typing.Any = None,
+        universal_symbol: typing.Any = None,
+        action: typing.Any = None,
+        units: typing.Any = None,
+        price: typing.Any = None,
+        sequence: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def modify_calculated_trade_by_id(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and id is not None:
+            body["id"] = id
+        if isinstance(body, dict) and account is not None:
+            body["account"] = account
+        if isinstance(body, dict) and symbol is not None:
+            body["symbol"] = symbol
+        if isinstance(body, dict) and universal_symbol is not None:
+            body["universal_symbol"] = universal_symbol
+        if isinstance(body, dict) and action is not None:
+            body["action"] = action
+        if isinstance(body, dict) and units is not None:
+            body["units"] = units
+        if isinstance(body, dict) and price is not None:
+            body["price"] = price
+        if isinstance(body, dict) and sequence is not None:
+            body["sequence"] = sequence
+        if portfolio_group_id is not None:
+            path_params["portfolioGroupId"] = portfolio_group_id
+        if calculated_trade_id is not None:
+            path_params["calculatedTradeId"] = calculated_trade_id
+        if trade_id is not None:
+            path_params["tradeId"] = trade_id
         return self._modify_calculated_trade_by_id_oapg(
             body=body,
             path_params=path_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForpatch(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def patch(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def patch(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def patch(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def patch(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        portfolio_group_id: typing.Any = None,
+        calculated_trade_id: typing.Any = None,
+        trade_id: typing.Any = None,
+        id: typing.Any = None,
+        account: typing.Any = None,
+        symbol: typing.Any = None,
+        universal_symbol: typing.Any = None,
+        action: typing.Any = None,
+        units: typing.Any = None,
+        price: typing.Any = None,
+        sequence: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def patch(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and id is not None:
+            body["id"] = id
+        if isinstance(body, dict) and account is not None:
+            body["account"] = account
+        if isinstance(body, dict) and symbol is not None:
+            body["symbol"] = symbol
+        if isinstance(body, dict) and universal_symbol is not None:
+            body["universal_symbol"] = universal_symbol
+        if isinstance(body, dict) and action is not None:
+            body["action"] = action
+        if isinstance(body, dict) and units is not None:
+            body["units"] = units
+        if isinstance(body, dict) and price is not None:
+            body["price"] = price
+        if isinstance(body, dict) and sequence is not None:
+            body["sequence"] = sequence
+        if portfolio_group_id is not None:
+            path_params["portfolioGroupId"] = portfolio_group_id
+        if calculated_trade_id is not None:
+            path_params["calculatedTradeId"] = calculated_trade_id
+        if trade_id is not None:
+            path_params["tradeId"] = trade_id
         return self._modify_calculated_trade_by_id_oapg(
             body=body,
             path_params=path_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

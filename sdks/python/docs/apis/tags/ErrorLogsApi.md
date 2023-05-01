@@ -30,10 +30,8 @@ snaptrade = SnapTrade(
 try:
     # Retrieve error logs on behalf of your SnapTrade users
     list_user_errors_response = snaptrade.error_logs.list_user_errors(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(list_user_errors_response.body)
     pprint(list_user_errors_response.body["requested_at"])

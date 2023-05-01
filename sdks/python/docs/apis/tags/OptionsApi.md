@@ -31,28 +31,21 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "underlying_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "legs": [
-        {
-            "action": "BUY_TO_OPEN",
-            "option_symbol_id": "SPY220819P00200000",
-            "quantity": 1,
-        }
-    ],
-    "strategy_type": "CUSTOM",
-}
 try:
     # Creates an option strategy object that will be used to place an option strategy order
     get_option_strategy_response = snaptrade.options.get_option_strategy(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        underlying_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        legs=[
+            {
+                "action": "BUY_TO_OPEN",
+                "option_symbol_id": "SPY220819P00200000",
+                "quantity": 1,
+            }
+        ],
+        strategy_type="CUSTOM",
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
     )
     pprint(get_option_strategy_response.body)
     pprint(get_option_strategy_response.body["strategy"])
@@ -212,14 +205,10 @@ snaptrade = SnapTrade(
 try:
     # Get the options chain
     get_options_chain_response = snaptrade.options.get_options_chain(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-            "symbol": "symbol_example",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
+        symbol="symbol_example",
     )
     pprint(get_options_chain_response.body)
     pprint(get_options_chain_response.headers)
@@ -350,14 +339,10 @@ snaptrade = SnapTrade(
 try:
     # Get latest market data of option strategy
     get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-        path_params={
-            "accountId": "accountId_example",
-            "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
+        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(get_options_strategy_quote_response.body)
     pprint(get_options_strategy_quote_response.body["strategy"])
@@ -494,13 +479,9 @@ snaptrade = SnapTrade(
 try:
     # Get the options holdings in the account
     list_option_holdings_response = snaptrade.options.list_option_holdings(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
     )
     pprint(list_option_holdings_response.body)
     pprint(list_option_holdings_response.body["id"])
@@ -626,23 +607,16 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "order_type": "Limit",
-    "time_in_force": "DAY",
-    "price": 31.33,
-}
 try:
     # Place an option strategy order on the brokerage
     place_option_strategy_response = snaptrade.options.place_option_strategy(
-        path_params={
-            "accountId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            "optionStrategyId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        order_type="Limit",
+        time_in_force="DAY",
+        price=31.33,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(place_option_strategy_response.body)
     pprint(place_option_strategy_response.body["strategy"])

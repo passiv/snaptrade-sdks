@@ -149,72 +149,19 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
+
     def _place_force_order_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def _place_force_order_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def _place_force_order_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _place_force_order_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        content_type: str = 'application/json',
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _place_force_order_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Place a trade with NO validation.
         :param skip_deserialization: If true then api_response.response will be set but
@@ -264,7 +211,6 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -295,160 +241,98 @@ class BaseApi(api_client.Api):
 class PlaceForceOrder(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def place_force_order(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def place_force_order(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def place_force_order(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def place_force_order(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        account_id: typing.Any = None,
+        action: typing.Any = None,
+        order_type: typing.Any = None,
+        price: typing.Any = None,
+        stop: typing.Any = None,
+        time_in_force: typing.Any = None,
+        units: typing.Any = None,
+        universal_symbol_id: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def place_force_order(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and account_id is not None:
+            body["account_id"] = account_id
+        if isinstance(body, dict) and action is not None:
+            body["action"] = action
+        if isinstance(body, dict) and order_type is not None:
+            body["order_type"] = order_type
+        if isinstance(body, dict) and price is not None:
+            body["price"] = price
+        if isinstance(body, dict) and stop is not None:
+            body["stop"] = stop
+        if isinstance(body, dict) and time_in_force is not None:
+            body["time_in_force"] = time_in_force
+        if isinstance(body, dict) and units is not None:
+            body["units"] = units
+        if isinstance(body, dict) and universal_symbol_id is not None:
+            body["universal_symbol_id"] = universal_symbol_id
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._place_force_order_oapg(
             body=body,
             query_params=query_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        account_id: typing.Any = None,
+        action: typing.Any = None,
+        order_type: typing.Any = None,
+        price: typing.Any = None,
+        stop: typing.Any = None,
+        time_in_force: typing.Any = None,
+        units: typing.Any = None,
+        universal_symbol_id: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and account_id is not None:
+            body["account_id"] = account_id
+        if isinstance(body, dict) and action is not None:
+            body["action"] = action
+        if isinstance(body, dict) and order_type is not None:
+            body["order_type"] = order_type
+        if isinstance(body, dict) and price is not None:
+            body["price"] = price
+        if isinstance(body, dict) and stop is not None:
+            body["stop"] = stop
+        if isinstance(body, dict) and time_in_force is not None:
+            body["time_in_force"] = time_in_force
+        if isinstance(body, dict) and units is not None:
+            body["units"] = units
+        if isinstance(body, dict) and universal_symbol_id is not None:
+            body["universal_symbol_id"] = universal_symbol_id
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._place_force_order_oapg(
             body=body,
             query_params=query_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

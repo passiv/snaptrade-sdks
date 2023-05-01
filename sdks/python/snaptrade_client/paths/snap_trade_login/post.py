@@ -217,72 +217,19 @@ _all_accept_content_types = (
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
+
     def _login_snap_trade_user_oapg(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def _login_snap_trade_user_oapg(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def _login_snap_trade_user_oapg(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _login_snap_trade_user_oapg(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        content_type: str = 'application/json',
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _login_snap_trade_user_oapg(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
         :param skip_deserialization: If true then api_response.response will be set but
@@ -330,7 +277,6 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -361,160 +307,80 @@ class BaseApi(api_client.Api):
 class LoginSnapTradeUser(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def login_snap_trade_user(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def login_snap_trade_user(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def login_snap_trade_user(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def login_snap_trade_user(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        broker: typing.Any = None,
+        immediate_redirect: typing.Any = None,
+        custom_redirect: typing.Any = None,
+        reconnect: typing.Any = None,
+        connection_type: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def login_snap_trade_user(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and broker is not None:
+            body["broker"] = broker
+        if isinstance(body, dict) and immediate_redirect is not None:
+            body["immediateRedirect"] = immediate_redirect
+        if isinstance(body, dict) and custom_redirect is not None:
+            body["customRedirect"] = custom_redirect
+        if isinstance(body, dict) and reconnect is not None:
+            body["reconnect"] = reconnect
+        if isinstance(body, dict) and connection_type is not None:
+            body["connectionType"] = connection_type
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._login_snap_trade_user_oapg(
             body=body,
             query_params=query_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def post(
         self,
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def post(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def post(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def post(
-        self,
-        content_type: str = ...,
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson,  None, dict, list, schemas.Primitive] = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        broker: typing.Any = None,
+        immediate_redirect: typing.Any = None,
+        custom_redirect: typing.Any = None,
+        reconnect: typing.Any = None,
+        connection_type: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def post(
-        self,
-        content_type: str = 'application/json',
-        body: typing.Union[SchemaForRequestBodyApplicationJson, schemas.Unset] = schemas.unset,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and broker is not None:
+            body["broker"] = broker
+        if isinstance(body, dict) and immediate_redirect is not None:
+            body["immediateRedirect"] = immediate_redirect
+        if isinstance(body, dict) and custom_redirect is not None:
+            body["customRedirect"] = custom_redirect
+        if isinstance(body, dict) and reconnect is not None:
+            body["reconnect"] = reconnect
+        if isinstance(body, dict) and connection_type is not None:
+            body["connectionType"] = connection_type
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
         return self._login_snap_trade_user_oapg(
             body=body,
             query_params=query_params,
-            content_type=content_type,
-            accept_content_types=accept_content_types,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

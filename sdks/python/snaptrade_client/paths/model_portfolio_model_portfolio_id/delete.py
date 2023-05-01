@@ -78,45 +78,16 @@ _status_code_to_response = {
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
-    def _delete_model_portfolio_by_id_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-    ]: ...
 
-    @typing.overload
     def _delete_model_portfolio_by_id_oapg(
         self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _delete_model_portfolio_by_id_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _delete_model_portfolio_by_id_oapg(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Deletes a model portfolio
         :param skip_deserialization: If true then api_response.response will be set but
@@ -144,7 +115,6 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method='delete'.upper(),
             auth_settings=_auth,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -175,100 +145,36 @@ class BaseApi(api_client.Api):
 class DeleteModelPortfolioById(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def delete_model_portfolio_by_id(
         self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-    ]: ...
-
-    @typing.overload
-    def delete_model_portfolio_by_id(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def delete_model_portfolio_by_id(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        model_portfolio_id: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def delete_model_portfolio_by_id(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if model_portfolio_id is not None:
+            path_params["modelPortfolioId"] = model_portfolio_id
         return self._delete_model_portfolio_by_id_oapg(
             path_params=path_params,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiFordelete(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def delete(
         self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-    ]: ...
-
-    @typing.overload
-    def delete(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def delete(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        model_portfolio_id: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def delete(
-        self,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if model_portfolio_id is not None:
+            path_params["modelPortfolioId"] = model_portfolio_id
         return self._delete_model_portfolio_by_id_oapg(
             path_params=path_params,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

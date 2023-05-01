@@ -92,67 +92,18 @@ _status_code_to_response = {
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
+
     def _modify_model_portfolio_by_id_oapg(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def _modify_model_portfolio_by_id_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def _modify_model_portfolio_by_id_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _modify_model_portfolio_by_id_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        content_type: str = 'application/json',
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _modify_model_portfolio_by_id_oapg(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Updates model portfolio object
         :param skip_deserialization: If true then api_response.response will be set but
@@ -197,7 +148,6 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -228,148 +178,62 @@ class BaseApi(api_client.Api):
 class ModifyModelPortfolioById(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def modify_model_portfolio_by_id(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def modify_model_portfolio_by_id(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def modify_model_portfolio_by_id(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def modify_model_portfolio_by_id(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        model_portfolio_id: typing.Any = None,
+        model_portfolio: typing.Any = None,
+        model_portfolio_security: typing.Any = None,
+        model_portfolio_asset_class: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def modify_model_portfolio_by_id(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and model_portfolio is not None:
+            body["model_portfolio"] = model_portfolio
+        if isinstance(body, dict) and model_portfolio_security is not None:
+            body["model_portfolio_security"] = model_portfolio_security
+        if isinstance(body, dict) and model_portfolio_asset_class is not None:
+            body["model_portfolio_asset_class"] = model_portfolio_asset_class
+        if model_portfolio_id is not None:
+            path_params["modelPortfolioId"] = model_portfolio_id
         return self._modify_model_portfolio_by_id_oapg(
             body=body,
             path_params=path_params,
-            content_type=content_type,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def post(
         self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: typing_extensions.Literal["application/json"] = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor200,
-    ]: ...
-
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        skip_deserialization: typing_extensions.Literal[True],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = ...,
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        body: typing.Union[SchemaForRequestBodyApplicationJson, None, dict, list, schemas.Primitive] = None,
+        model_portfolio_id: typing.Any = None,
+        model_portfolio: typing.Any = None,
+        model_portfolio_security: typing.Any = None,
+        model_portfolio_asset_class: typing.Any = None,
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def post(
-        self,
-        body: typing.Union[SchemaForRequestBodyApplicationJson,],
-        content_type: str = 'application/json',
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if body is None:
+            body = {}
+        if isinstance(body, dict) and model_portfolio is not None:
+            body["model_portfolio"] = model_portfolio
+        if isinstance(body, dict) and model_portfolio_security is not None:
+            body["model_portfolio_security"] = model_portfolio_security
+        if isinstance(body, dict) and model_portfolio_asset_class is not None:
+            body["model_portfolio_asset_class"] = model_portfolio_asset_class
+        if model_portfolio_id is not None:
+            path_params["modelPortfolioId"] = model_portfolio_id
         return self._modify_model_portfolio_by_id_oapg(
             body=body,
             path_params=path_params,
-            content_type=content_type,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

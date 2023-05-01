@@ -38,11 +38,9 @@ try:
     # List all accounts for the user, plus balances and positions for each account.
     get_all_user_holdings_response = (
         snaptrade.account_information.get_all_user_holdings(
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-                "brokerage_authorizations": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
     )
     pprint(get_all_user_holdings_response.body)
@@ -200,13 +198,9 @@ try:
     # Get all cash balances of an investment account
     get_user_account_balance_response = (
         snaptrade.account_information.get_user_account_balance(
-            path_params={
-                "accountId": "accountId_example",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            account_id="accountId_example",
         )
     )
     pprint(get_user_account_balance_response.body)
@@ -342,13 +336,9 @@ try:
     # Return details of a specific investment account
     get_user_account_details_response = (
         snaptrade.account_information.get_user_account_details(
-            path_params={
-                "accountId": "accountId_example",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            account_id="accountId_example",
         )
     )
     pprint(get_user_account_details_response.body)
@@ -492,14 +482,10 @@ try:
     # Get all history of orders placed in account
     get_user_account_orders_response = (
         snaptrade.account_information.get_user_account_orders(
-            path_params={
-                "accountId": "accountId_example",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-                "state": "all",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            account_id="accountId_example",
+            state="all",
         )
     )
     pprint(get_user_account_orders_response.body)
@@ -658,13 +644,9 @@ try:
     # Get all positions of an investment account
     get_user_account_positions_response = (
         snaptrade.account_information.get_user_account_positions(
-            path_params={
-                "accountId": "accountId_example",
-            },
-            query_params={
-                "userId": "John.doe@snaptrade.com",
-                "userSecret": "USERSECRET123",
-            },
+            user_id="John.doe@snaptrade.com",
+            user_secret="USERSECRET123",
+            account_id="accountId_example",
         )
     )
     pprint(get_user_account_positions_response.body)
@@ -803,13 +785,9 @@ snaptrade = SnapTrade(
 try:
     # List balances, positions and orders for the specified account.
     get_user_holdings_response = snaptrade.account_information.get_user_holdings(
-        path_params={
-            "accountId": "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(get_user_holdings_response.body)
     pprint(get_user_holdings_response.body["account"])
@@ -964,10 +942,8 @@ snaptrade = SnapTrade(
 try:
     # List all investment accounts for the user
     list_user_accounts_response = snaptrade.account_information.list_user_accounts(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(list_user_accounts_response.body)
     pprint(list_user_accounts_response.body["id"])
@@ -1091,13 +1067,9 @@ snaptrade = SnapTrade(
 try:
     # Update details of an investment account
     update_user_account_response = snaptrade.account_information.update_user_account(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
     )
     pprint(update_user_account_response.body)
     pprint(update_user_account_response.body["id"])

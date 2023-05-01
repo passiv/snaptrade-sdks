@@ -18,6 +18,7 @@ import io
 import re
 import types
 import typing
+import typing_extensions
 import uuid
 
 from dateutil.parser.isoparser import isoparser, _takes_ascii
@@ -34,7 +35,9 @@ from snaptrade_client.exceptions import SchemaValidationError
 from snaptrade_client.exceptions import render_path
 from snaptrade_client.validation_metadata import ValidationMetadata
 from snaptrade_client.exceptions import AnyOfValidationError
+from snaptrade_client.exceptions import MissingRequiredPropertiesError
 
+Primitive: typing_extensions.TypeAlias = typing.Union[int, float, bool, str]
 
 class Unset(object):
     """
@@ -1444,7 +1447,7 @@ class Discriminable:
 class DictBase(Discriminable, ValidatorBase):
 
     @classmethod
-    def __validate_arg_presence(cls, arg):
+    def __validate_arg_presence(cls, arg, validation_metadata: ValidationMetadata):
         """
         Ensures that:
         - all required arguments are passed in
@@ -1481,11 +1484,12 @@ class DictBase(Discriminable, ValidatorBase):
         missing_required_arguments = list(required_property_names - seen_required_properties)
         if missing_required_arguments:
             missing_required_arguments.sort()
-            raise ApiTypeError(
-                "{} is missing {} required argument{}: {}".format(
+            raise MissingRequiredPropertiesError(
+                "{} is missing {} required propert{}{}: {}".format(
                     cls.__name__,
                     len(missing_required_arguments),
-                    "s" if len(missing_required_arguments) > 1 else "",
+                    "ies" if len(missing_required_arguments) > 1 else "y",
+                    " at '{}'".format('.'.join([str(i) for i in validation_metadata.path_to_item[1:]])) if len(validation_metadata.path_to_item) > 1 else "",
                     missing_required_arguments
                 )
             )
@@ -1549,7 +1553,7 @@ class DictBase(Discriminable, ValidatorBase):
             try:
                 other_path_to_schemas = schema._validate_oapg(value, validation_metadata=arg_validation_metadata)
                 update(path_to_schemas, other_path_to_schemas)
-            except (ApiTypeError, ApiValueError) as e:
+            except (ApiTypeError, ApiValueError, MissingRequiredPropertiesError) as e:
                 validation_errors.append(e)
         if len(validation_errors) > 0:
             raise SchemaValidationError(validation_errors)
@@ -1609,7 +1613,7 @@ class DictBase(Discriminable, ValidatorBase):
         _path_to_schemas = super()._validate_oapg(arg, validation_metadata=validation_metadata)
         if not isinstance(arg, frozendict.frozendict):
             return _path_to_schemas
-        cls.__validate_arg_presence(arg)
+        cls.__validate_arg_presence(arg, validation_metadata)
         other_path_to_schemas = cls.__validate_args(arg, validation_metadata=validation_metadata)
         update(_path_to_schemas, other_path_to_schemas)
         try:

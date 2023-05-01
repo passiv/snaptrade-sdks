@@ -111,6 +111,11 @@ class InvalidHostConfigurationError(ClientConfigurationError):
         super().__init__('Invalid host: "{}", {}'.format(self.host, self.reason))
 
 
+class MissingRequiredPropertiesError(TypeError):
+    def __init__(self, msg: str):
+        super().__init__(msg)
+
+
 class MissingRequiredParametersError(TypeError):
     def __init__(self, error: TypeError):
         self.error = error
@@ -145,12 +150,18 @@ class SchemaValidationError(OpenApiException):
         self.validation_errors = validation_errors
         self.type_errors: typing.List[ApiTypeError] = []
         self.value_errors: typing.List[ApiValueError] = []
+        self.missing_required_properties_errors: typing.List[MissingRequiredPropertiesError] = []
         for error in validation_errors:
             if isinstance(error, ApiTypeError):
                 self.type_errors.append(error)
             elif isinstance(error, ApiValueError):
                 self.value_errors.append(error)
+            elif isinstance(error, MissingRequiredPropertiesError):
+                self.missing_required_properties_errors.append(error)
         sub_msgs: typing.List[str] = []
+        if len(self.missing_required_properties_errors) > 0:
+            for error in self.missing_required_properties_errors:
+                sub_msgs.append(str(error))
         if len(self.type_errors) > 0:
             for type_error in self.type_errors:
                 classes = ", ".join([cls.__name__ for cls in type_error.valid_classes])

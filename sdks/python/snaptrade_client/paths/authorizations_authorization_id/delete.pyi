@@ -134,51 +134,18 @@ _response_for_default = api_client.OpenApiResponse(
 
 
 class BaseApi(api_client.Api):
-    @typing.overload
-    def _remove_brokerage_authorization_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-        ApiResponseForDefault,
-    ]: ...
 
-    @typing.overload
     def _remove_brokerage_authorization_oapg(
         self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
+        skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def _remove_brokerage_authorization_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def _remove_brokerage_authorization_oapg(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
         """
         Remove a brokerage authorization.
         :param skip_deserialization: If true then api_response.response will be set but
@@ -222,7 +189,6 @@ class BaseApi(api_client.Api):
             method='delete'.upper(),
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
-            stream=stream,
             timeout=timeout,
         )
 
@@ -258,114 +224,54 @@ class BaseApi(api_client.Api):
 class RemoveBrokerageAuthorization(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @typing.overload
     def remove_brokerage_authorization(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def remove_brokerage_authorization(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def remove_brokerage_authorization(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        authorization_id: typing.Any = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def remove_brokerage_authorization(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
+        if authorization_id is not None:
+            path_params["authorizationId"] = authorization_id
         return self._remove_brokerage_authorization_oapg(
             query_params=query_params,
             path_params=path_params,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 
 class ApiFordelete(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @typing.overload
     def delete(
         self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: typing_extensions.Literal[False] = ...,
-    ) -> typing.Union[
-        ApiResponseFor204,
-        ApiResponseForDefault,
-    ]: ...
-
-    @typing.overload
-    def delete(
-        self,
-        skip_deserialization: typing_extensions.Literal[True],
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-    ) -> api_client.ApiResponseWithoutDeserialization: ...
-
-    @typing.overload
-    def delete(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = ...,
+        authorization_id: typing.Any = None,
+        user_id: typing.Any = None,
+        user_secret: typing.Any = None,
+        query_params: typing.Union[RequestQueryParams, dict] = {},
+        path_params: typing.Union[RequestPathParams, dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
-    ]: ...
-
-    def delete(
-        self,
-        query_params: RequestQueryParams = frozendict.frozendict(),
-        path_params: RequestPathParams = frozendict.frozendict(),
-        stream: bool = False,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
-        skip_deserialization: bool = True,
-    ):
+    ]:
+        if user_id is not None:
+            query_params["userId"] = user_id
+        if user_secret is not None:
+            query_params["userSecret"] = user_secret
+        if authorization_id is not None:
+            path_params["authorizationId"] = authorization_id
         return self._remove_brokerage_authorization_oapg(
             query_params=query_params,
             path_params=path_params,
-            stream=stream,
-            timeout=timeout,
-            skip_deserialization=skip_deserialization
         )
 
 

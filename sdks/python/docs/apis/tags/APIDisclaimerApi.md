@@ -27,15 +27,12 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {}
 try:
     # Accept or Reject SnapTrade disclaimer agreement
     accept_response = snaptrade.api_disclaimer.accept(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        accepted=True,
     )
     pprint(accept_response.body)
     pprint(accept_response.body["accepted"])

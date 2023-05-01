@@ -36,20 +36,13 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "brokerage_order_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-}
 try:
     # Cancel open order in account
     cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="accountId_example",
+        brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(cancel_user_account_order_response.body)
     pprint(cancel_user_account_order_response.body["brokerage_order_id"])
@@ -222,11 +215,9 @@ try:
     # Return details of a specific trade before it's placed
     get_calculated_trade_impact_by_id_response = (
         snaptrade.trading.get_calculated_trade_impact_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "calculatedTradeId": "calculatedTradeId_example",
-                "tradeId": "tradeId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
+            calculated_trade_id="calculatedTradeId_example",
+            trade_id="tradeId_example",
         )
     )
     pprint(get_calculated_trade_impact_by_id_response.body)
@@ -341,10 +332,8 @@ try:
     # Return the impact of placing a series of trades on the portfolio
     get_calculated_trades_impact_response = (
         snaptrade.trading.get_calculated_trades_impact(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "calculatedTradeId": "calculatedTradeId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
+            calculated_trade_id="calculatedTradeId_example",
         )
     )
     pprint(get_calculated_trades_impact_response.body)
@@ -448,23 +437,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "action": "BUY",
-    "order_type": "Limit",
-    "price": 31.33,
-    "stop": 31.33,
-    "time_in_force": "Day",
-    "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-}
 try:
     # Check impact of trades on account.
     get_order_impact_response = snaptrade.trading.get_order_impact(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        action="BUY",
+        order_type="Limit",
+        price=31.33,
+        stop=31.33,
+        time_in_force="Day",
+        units=3.14,
+        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(get_order_impact_response.body)
     pprint(get_order_impact_response.body["trade"])
@@ -613,15 +598,11 @@ snaptrade = SnapTrade(
 try:
     # Get symbol quotes
     get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
-        path_params={
-            "accountId": "accountId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-            "symbols": "symbols_example",
-            "use_ticker": True,
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        symbols="symbols_example",
+        account_id="accountId_example",
+        use_ticker=True,
     )
     pprint(get_user_account_quotes_response.body)
     pprint(get_user_account_quotes_response.body["symbol"])
@@ -763,23 +744,38 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "action": "BUY",
-    "units": 6,
-    "price": 24.81,
-    "sequence": 1,
-}
 try:
     # Modify units of a trade before it is placed
     modify_calculated_trade_by_id_response = (
         snaptrade.trading.modify_calculated_trade_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "calculatedTradeId": "calculatedTradeId_example",
-                "tradeId": "tradeId_example",
+            portfolio_group_id="portfolioGroupId_example",
+            calculated_trade_id="calculatedTradeId_example",
+            trade_id="tradeId_example",
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            account={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "brokerage_authorization": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "portfolio_group": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "name": "Registered Retirement Savings Account",
+                "number": "Q6542138443",
+                "institution_name": "Alpaca",
+                "created_date": "2021-06-04T16:26:46.523Z",
             },
-            body=body,
+            symbol={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+                "allows_fractional_units": True,
+            },
+            universal_symbol={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "symbol": "VAB.TO",
+                "raw_symbol": "VAB",
+                "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+            },
+            action="BUY",
+            units=6,
+            price=24.81,
+            sequence=1,
         )
     )
     pprint(modify_calculated_trade_by_id_response.body)
@@ -901,10 +897,8 @@ snaptrade = SnapTrade(
 try:
     # Place orders for the CalculatedTrades in series
     place_calculated_trades_response = snaptrade.trading.place_calculated_trades(
-        path_params={
-            "portfolioGroupId": "portfolioGroupId_example",
-            "calculatedTradeId": "calculatedTradeId_example",
-        },
+        portfolio_group_id="portfolioGroupId_example",
+        calculated_trade_id="calculatedTradeId_example",
     )
     pprint(place_calculated_trades_response.body)
     pprint(place_calculated_trades_response.body["symbol"])
@@ -1011,23 +1005,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "account_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "action": "BUY",
-    "order_type": "Limit",
-    "price": 31.33,
-    "stop": 31.33,
-    "time_in_force": "Day",
-    "universal_symbol_id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-}
 try:
     # Place a trade with NO validation.
     place_force_order_response = snaptrade.trading.place_force_order(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        action="BUY",
+        order_type="Limit",
+        price=31.33,
+        stop=31.33,
+        time_in_force="Day",
+        units=3.14,
+        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(place_force_order_response.body)
     pprint(place_force_order_response.body["brokerage_order_id"])
@@ -1188,15 +1178,13 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {}
 try:
     # Place a OCO (One Cancels Other) order
     place_oco_order_response = snaptrade.trading.place_oco_order(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        first_trade_id=None,
+        second_trade_id=None,
     )
     pprint(place_oco_order_response.body)
     pprint(place_oco_order_response.body["brokerage_order_id"])
@@ -1354,13 +1342,9 @@ snaptrade = SnapTrade(
 try:
     # Place order
     place_order_response = snaptrade.trading.place_order(
-        path_params={
-            "tradeId": "tradeId_example",
-        },
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        trade_id="tradeId_example",
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(place_order_response.body)
     pprint(place_order_response.body["brokerage_order_id"])

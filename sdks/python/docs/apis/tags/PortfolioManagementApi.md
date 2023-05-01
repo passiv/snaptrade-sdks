@@ -59,20 +59,43 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "symbol": "VAB.TO",
-    "raw_symbol": "VAB",
-    "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
-}
 try:
     # Adds an asset to exclude to a portfolio group
     add_portfolio_excluded_asset_response = (
         snaptrade.portfolio_management.add_portfolio_excluded_asset(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            symbol="VAB.TO",
+            raw_symbol="VAB",
+            description="VANGUARD CDN AGGREGATE BOND INDEX ETF",
+            currency={
+                "id": "87b24961-b51e-4db8-9226-f198f6518a89",
+                "code": "USD",
+                "name": "US Dollar",
             },
-            body=body,
+            exchange={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "code": "TSX",
+                "mic_code": "XTSE",
+                "name": "Toronto Stock Exchange",
+                "timezone": "America/New_York",
+                "start_time": "09:30:00",
+                "close_time": "57600",
+                "suffix": ".TO",
+            },
+            type={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "code": "cs",
+                "description": "Common Stock",
+                "is_supported": True,
+            },
+            currencies=[
+                {
+                    "id": "87b24961-b51e-4db8-9226-f198f6518a89",
+                    "code": "USD",
+                    "name": "US Dollar",
+                }
+            ],
         )
     )
     pprint(add_portfolio_excluded_asset_response.body)
@@ -171,18 +194,13 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "name": "Combined Retirement Portfolio",
-}
 try:
     # Create new portfolio group
     create_response = snaptrade.portfolio_management.create(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
-        body=body,
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
+        id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        name="Combined Retirement Portfolio",
     )
     pprint(create_response.body)
     pprint(create_response.body["id"])
@@ -453,9 +471,7 @@ snaptrade = SnapTrade(
 try:
     # Deletes a model asset class
     snaptrade.portfolio_management.delete_asset_class(
-        path_params={
-            "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(delete_asset_class_response.headers)
     pprint(delete_asset_class_response.status)
@@ -534,10 +550,8 @@ snaptrade = SnapTrade(
 try:
     # Unexclude an asset from a portfolio group
     snaptrade.portfolio_management.delete_excluded_asset(
-        path_params={
-            "portfolioGroupId": "portfolioGroupId_example",
-            "symbolId": "symbolId_example",
-        },
+        portfolio_group_id="portfolioGroupId_example",
+        symbol_id="symbolId_example",
     )
     pprint(delete_excluded_asset_response.headers)
     pprint(delete_excluded_asset_response.status)
@@ -626,9 +640,7 @@ snaptrade = SnapTrade(
 try:
     # Deletes a model portfolio
     snaptrade.portfolio_management.delete_model_portfolio_by_id(
-        path_params={
-            "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
+        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(delete_model_portfolio_by_id_response.headers)
     pprint(delete_model_portfolio_by_id_response.status)
@@ -710,9 +722,7 @@ snaptrade = SnapTrade(
 try:
     # Remove a target portfolio.
     delete_portfoli_response = snaptrade.portfolio_management.delete_portfoli(
-        path_params={
-            "portfolioGroupId": "portfolioGroupId_example",
-        },
+        portfolio_group_id="portfolioGroupId_example",
     )
     pprint(delete_portfoli_response.body)
     pprint(delete_portfoli_response.body["id"])
@@ -826,10 +836,8 @@ try:
     # Remove a TargetAsset.
     delete_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.delete_portfolio_target_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "targetAssetId": "targetAssetId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
+            target_asset_id="targetAssetId_example",
         )
     )
     pprint(delete_portfolio_target_by_id_response.body)
@@ -958,9 +966,7 @@ snaptrade = SnapTrade(
 try:
     # Get details of a model asset class
     detail_asset_class_response = snaptrade.portfolio_management.detail_asset_class(
-        path_params={
-            "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        },
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     )
     pprint(detail_asset_class_response.body)
     pprint(detail_asset_class_response.body["model_asset_class"])
@@ -1050,11 +1056,9 @@ try:
     # Return an individual trade
     get_calculated_trade_by_id_response = (
         snaptrade.portfolio_management.get_calculated_trade_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "calculatedTradeId": "calculatedTradeId_example",
-                "TradeId": "TradeId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
+            calculated_trade_id="calculatedTradeId_example",
+            trade_id="TradeId_example",
         )
     )
     pprint(get_calculated_trade_by_id_response.body)
@@ -1176,9 +1180,7 @@ try:
     # Get details of a model portfolio
     get_model_details_by_id_response = (
         snaptrade.portfolio_management.get_model_details_by_id(
-            path_params={
-                "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-            },
+            model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
         )
     )
     pprint(get_model_details_by_id_response.body)
@@ -1273,9 +1275,7 @@ try:
     # Get sum of cash balances in portfolio group
     get_portfolio_balances_response = (
         snaptrade.portfolio_management.get_portfolio_balances(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portfolio_balances_response.body)
@@ -1398,9 +1398,7 @@ try:
     # Get details of a target portfolio
     get_portfolio_details_by_id_response = (
         snaptrade.portfolio_management.get_portfolio_details_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portfolio_details_by_id_response.body)
@@ -1501,9 +1499,7 @@ snaptrade = SnapTrade(
 try:
     # Return a whole bunch of relevant information relating to a portfolio group.
     get_portfolio_info_response = snaptrade.portfolio_management.get_portfolio_info(
-        path_params={
-            "portfolioGroupId": "portfolioGroupId_example",
-        },
+        portfolio_group_id="portfolioGroupId_example",
     )
     pprint(get_portfolio_info_response.body)
     pprint(get_portfolio_info_response.body["symbols"])
@@ -1610,9 +1606,7 @@ try:
     # Get total of each postions owned in portfolio group
     get_portfolio_positions_response = (
         snaptrade.portfolio_management.get_portfolio_positions(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portfolio_positions_response.body)
@@ -1737,9 +1731,7 @@ try:
     # Get portfolio group settings
     get_portfolio_settings_response = (
         snaptrade.portfolio_management.get_portfolio_settings(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portfolio_settings_response.body)
@@ -1843,10 +1835,8 @@ try:
     # Get a specific target from a portfolio group
     get_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.get_portfolio_target_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "targetAssetId": "targetAssetId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
+            target_asset_id="targetAssetId_example",
         )
     )
     pprint(get_portfolio_target_by_id_response.body)
@@ -1960,9 +1950,7 @@ try:
     # Get all target assets under the specified PortfolioGroup.
     get_portfolio_targets_response = (
         snaptrade.portfolio_management.get_portfolio_targets(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portfolio_targets_response.body)
@@ -2089,9 +2077,7 @@ try:
     # Get an array of excluded assets associated with a portfolio group\\
     get_portoflio_excluded_assets_response = (
         snaptrade.portfolio_management.get_portoflio_excluded_assets(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(get_portoflio_excluded_assets_response.body)
@@ -2198,9 +2184,7 @@ try:
     # Import target allocation based on portfolio group
     import_model_portfolio_response = (
         snaptrade.portfolio_management.import_model_portfolio(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(import_model_portfolio_response.body)
@@ -2310,10 +2294,8 @@ snaptrade = SnapTrade(
 try:
     # List all portfolio groups
     list_response = snaptrade.portfolio_management.list(
-        query_params={
-            "userId": "John.doe@snaptrade.com",
-            "userSecret": "USERSECRET123",
-        },
+        user_id="John.doe@snaptrade.com",
+        user_secret="USERSECRET123",
     )
     pprint(list_response.body)
     pprint(list_response.body["id"])
@@ -2502,9 +2484,7 @@ try:
     # List of trades to make to rebalance portfolio group
     list_calculated_trades_response = (
         snaptrade.portfolio_management.list_calculated_trades(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(list_calculated_trades_response.body)
@@ -2674,9 +2654,7 @@ try:
     # Get all accounts associated with a portfolio group
     list_portfolio_accounts_response = (
         snaptrade.portfolio_management.list_portfolio_accounts(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(list_portfolio_accounts_response.body)
@@ -2788,14 +2766,25 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {}
 try:
     # Updates model portfolio object
     snaptrade.portfolio_management.modify_model_portfolio_by_id(
-        path_params={
-            "modelPortfolioId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_portfolio={
+            "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "name": "Passiv 5x Aggressive Growth Fund",
+            "model_type": -1,
         },
-        body=body,
+        model_portfolio_security=[
+            {
+                "percent": 100,
+            }
+        ],
+        model_portfolio_asset_class=[
+            {
+                "percent": 100,
+            }
+        ],
     )
     pprint(modify_model_portfolio_by_id_response.headers)
     pprint(modify_model_portfolio_by_id_response.status)
@@ -2884,17 +2873,12 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "name": "Combined Retirement Portfolio",
-}
 try:
     # Update an existing target portfolio.
     save_portfolio_response = snaptrade.portfolio_management.save_portfolio(
-        path_params={
-            "portfolioGroupId": "portfolioGroupId_example",
-        },
-        body=body,
+        portfolio_group_id="portfolioGroupId_example",
+        id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        name="Combined Retirement Portfolio",
     )
     pprint(save_portfolio_response.body)
     pprint(save_portfolio_response.body["id"])
@@ -3014,17 +2998,12 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "substring": "apple",
-}
 try:
     # Search for symbols limited to brokerages under the specified portfolio group
     search_portfolio_symbols_response = (
         snaptrade.portfolio_management.search_portfolio_symbols(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
-            body=body,
+            portfolio_group_id="portfolioGroupId_example",
+            substring="apple",
         )
     )
     pprint(search_portfolio_symbols_response.body)
@@ -3144,22 +3123,19 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = [
-    {
-        "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-        "percent": 90,
-        "is_supported": True,
-        "is_excluded": True,
-    }
-]
 try:
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     set_portfolio_targets_response = (
         snaptrade.portfolio_management.set_portfolio_targets(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
-            body=body,
+            body=[
+                {
+                    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                    "percent": 90,
+                    "is_supported": True,
+                    "is_excluded": True,
+                }
+            ],
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(set_portfolio_targets_response.body)
@@ -3280,14 +3256,15 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {}
 try:
     # Updates model asset class objects
     snaptrade.portfolio_management.update_asset_class(
-        path_params={
-            "modelAssetClassId": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_asset_class={
+            "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "name": "Bonds",
         },
-        body=body,
+        model_asset_class_target=[{}],
     )
     pprint(update_asset_class_response.headers)
     pprint(update_asset_class_response.status)
@@ -3377,9 +3354,7 @@ try:
     # Updates portfolio group settings
     update_portfolio_settings_response = (
         snaptrade.portfolio_management.update_portfolio_settings(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-            },
+            portfolio_group_id="portfolioGroupId_example",
         )
     )
     pprint(update_portfolio_settings_response.body)
@@ -3480,21 +3455,22 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
-body = {
-    "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    "percent": 90,
-    "is_supported": True,
-    "is_excluded": True,
-}
 try:
     # Update a TargetAsset under the specified PortfolioGroup.
     update_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.update_portfolio_target_by_id(
-            path_params={
-                "portfolioGroupId": "portfolioGroupId_example",
-                "targetAssetId": "targetAssetId_example",
+            portfolio_group_id="portfolioGroupId_example",
+            target_asset_id="targetAssetId_example",
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            symbol={
+                "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
+                "symbol": "VAB.TO",
+                "raw_symbol": "VAB",
+                "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
             },
-            body=body,
+            percent=90,
+            is_supported=True,
+            is_excluded=True,
         )
     )
     pprint(update_portfolio_target_by_id_response.body)
