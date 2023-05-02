@@ -62,12 +62,11 @@ generators:
       script:
         - mvn test
   python:
-    version: 10.8.0
+    version: 10.9.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
-    # keepAllParametersOptional: true
     clientName: SnapTrade
     clientState:
       - consumer_key
