@@ -2053,37 +2053,6 @@ paths:
                 $ref: "#/components/schemas/PortfolioGroupInfo"
         default:
           description: Unexpected error.
-  "/portfolioGroups/{portfolioGroupId}/positions":
-    get:
-      tags:
-        - Portfolio Management
-      summary: Get total of each postions owned in portfolio group
-      operationId: PortfolioManagement_getPortfolioPositions
-      parameters:
-        - in: path
-          name: portfolioGroupId
-          required: true
-          description: The ID of the PortfolioGroup under which to create the target asset.
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Totals of each postions owned in portfolio group
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PortfolioGroupPosition"
-        "400":
-          description:
-            The specified portfolioGroupId is invalid (not a UUID string) or
-            the input data is invalid.
-        "404":
-          description: The specified portfolioGroupId was not found.
-        default:
-          description: Unexpected error.
   "/portfolioGroups/{portfolioGroupId}/settings":
     get:
       tags:
