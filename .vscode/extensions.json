@@ -1,3 +1,6 @@
 {
-  "recommendations": ["stoplight.spectral", "redhat.vscode-yaml"]
+  "recommendations": [
+    "stoplight.spectral",
+    "redhat.vscode-yaml"
+  ]
 }
