@@ -238,18 +238,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetPortfolioPositions
-        /// </summary>
-        [Fact]
-        public void GetPortfolioPositionsTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //Guid portfolioGroupId = null;
-            //var response = instance.GetPortfolioPositions(portfolioGroupId);
-            //Assert.IsType<List<PortfolioGroupPosition>>(response);
-        }
-
-        /// <summary>
         /// Test GetPortfolioSettings
         /// </summary>
         [Fact]

@@ -27,7 +27,7 @@ outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
   csharp:
-    version: 3.9.0
+    version: 3.10.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
