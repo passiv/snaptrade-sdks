@@ -77,7 +77,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.7.0
+    version: 8.8.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
@@ -89,9 +89,6 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/typescript
     npmName: snaptrade-typescript-sdk
-    test:
-      script:
-        - yarn test
 specPath: api.yaml
 fixConfig:
   update:

@@ -19,7 +19,6 @@ Method | HTTP request | Description
 [**getPortfolioBalances**](PortfolioManagementApi.md#getPortfolioBalances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
 [**getPortfolioDetailsById**](PortfolioManagementApi.md#getPortfolioDetailsById) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
 [**getPortfolioInfo**](PortfolioManagementApi.md#getPortfolioInfo) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-[**getPortfolioPositions**](PortfolioManagementApi.md#getPortfolioPositions) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group
 [**getPortfolioSettings**](PortfolioManagementApi.md#getPortfolioSettings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
 [**getPortfolioTargetById**](PortfolioManagementApi.md#getPortfolioTargetById) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
 [**getPortfolioTargets**](PortfolioManagementApi.md#getPortfolioTargets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
@@ -820,60 +819,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Portfolio group target allocation has been updated |  -  |
-**0** | Unexpected error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-# **getPortfolioPositions**
-
-#### **GET** /portfolioGroups/{portfolioGroupId}/positions
-
-
-### Example
-
-
-```typescript
-import { Snaptrade } from "snaptrade-typescript-sdk";
-
-const snaptrade = new Snaptrade({
-  // Defining the base path is optional and defaults to https://api.snaptrade.com/api/v1
-  // basePath: "https://api.snaptrade.com/api/v1",
-  consumerKey: "YOUR_CONSUMER_KEY",
-  clientId: "YOUR_CLIENT_ID",
-});
-
-const getPortfolioPositionsResponse =
-  await snaptrade.portfolioManagement.getPortfolioPositions({
-    portfolioGroupId: "portfolioGroupId_example",
-  });
-
-console.log(getPortfolioPositionsResponse);
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **portfolioGroupId** | [**string**] | The ID of the PortfolioGroup under which to create the target asset. | defaults to undefined
-
-
-### Return type
-
-**Array<PortfolioGroupPosition>**
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Totals of each postions owned in portfolio group |  -  |
-**400** | The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. |  -  |
-**404** | The specified portfolioGroupId was not found. |  -  |
 **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

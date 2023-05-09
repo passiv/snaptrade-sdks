@@ -50,8 +50,6 @@ import { PortfolioGroup } from '../models';
 // @ts-ignore
 import { PortfolioGroupInfo } from '../models';
 // @ts-ignore
-import { PortfolioGroupPosition } from '../models';
-// @ts-ignore
 import { PortfolioGroupSettings } from '../models';
 // @ts-ignore
 import { SecurityType } from '../models';
@@ -757,52 +755,6 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             // verify required parameter 'portfolioGroupId' is not null or undefined
             assertParamExists('getPortfolioInfo', 'portfolioGroupId', portfolioGroupId)
             const localVarPath = `/portfolioGroups/{portfolioGroupId}/info`
-                .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get total of each postions owned in portfolio group
-         * @param {string} portfolioGroupId The ID of the PortfolioGroup under which to create the target asset.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getPortfolioPositions: async (portfolioGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'portfolioGroupId' is not null or undefined
-            assertParamExists('getPortfolioPositions', 'portfolioGroupId', portfolioGroupId)
-            const localVarPath = `/portfolioGroups/{portfolioGroupId}/positions`
                 .replace(`{${"portfolioGroupId"}}`, encodeURIComponent(String(portfolioGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1843,17 +1795,6 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
         },
         /**
          * 
-         * @summary Get total of each postions owned in portfolio group
-         * @param {PortfolioManagementApiGetPortfolioPositionsRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getPortfolioPositions(requestParameters: PortfolioManagementApiGetPortfolioPositionsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PortfolioGroupPosition>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPortfolioPositions(requestParameters.portfolioGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Get portfolio group settings
          * @param {PortfolioManagementApiGetPortfolioSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2194,16 +2135,6 @@ export const PortfolioManagementApiFactory = function (configuration?: Configura
          */
         getPortfolioInfo(requestParameters: PortfolioManagementApiGetPortfolioInfoRequest, options?: AxiosRequestConfig): AxiosPromise<PortfolioGroupInfo> {
             return localVarFp.getPortfolioInfo(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get total of each postions owned in portfolio group
-         * @param {PortfolioManagementApiGetPortfolioPositionsRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getPortfolioPositions(requestParameters: PortfolioManagementApiGetPortfolioPositionsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<PortfolioGroupPosition>> {
-            return localVarFp.getPortfolioPositions(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2614,22 +2545,6 @@ export type PortfolioManagementApiGetPortfolioInfoRequest = {
     * The ID of the PortfolioGroup under which to create the target asset.
     * @type {string}
     * @memberof PortfolioManagementApiGetPortfolioInfo
-    */
-    readonly portfolioGroupId: string
-    
-}
-
-/**
- * Request parameters for getPortfolioPositions operation in PortfolioManagementApi.
- * @export
- * @interface PortfolioManagementApiGetPortfolioPositionsRequest
- */
-export type PortfolioManagementApiGetPortfolioPositionsRequest = {
-    
-    /**
-    * The ID of the PortfolioGroup under which to create the target asset.
-    * @type {string}
-    * @memberof PortfolioManagementApiGetPortfolioPositions
     */
     readonly portfolioGroupId: string
     
@@ -3083,18 +2998,6 @@ export class PortfolioManagementApi extends PortfolioManagementApiCustom {
      */
     public getPortfolioInfo(requestParameters: PortfolioManagementApiGetPortfolioInfoRequest, options?: AxiosRequestConfig) {
         return PortfolioManagementApiFp(this.configuration).getPortfolioInfo(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get total of each postions owned in portfolio group
-     * @param {PortfolioManagementApiGetPortfolioPositionsRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PortfolioManagementApi
-     */
-    public getPortfolioPositions(requestParameters: PortfolioManagementApiGetPortfolioPositionsRequest, options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).getPortfolioPositions(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

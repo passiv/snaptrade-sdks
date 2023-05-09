@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "8.7.0",
+  "version": "8.8.0",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
@@ -17,6 +17,9 @@
     "snaptrade-typescript-sdk"
   ],
   "license": "Unlicense",
+  "files": [
+    "./dist/**/*"
+  ],
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {

@@ -1,4 +1,4 @@
-# snaptrade-typescript-sdk@8.7.0
+# snaptrade-typescript-sdk@8.8.0
 
 Connect brokerage accounts to your app for live positions and trading
 ## Installing
@@ -141,7 +141,6 @@ Class | Method | HTTP request | Description
 *PortfolioManagementApi* | [**getPortfolioBalances**](docs/PortfolioManagementApi.md#getPortfolioBalances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
 *PortfolioManagementApi* | [**getPortfolioDetailsById**](docs/PortfolioManagementApi.md#getPortfolioDetailsById) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
 *PortfolioManagementApi* | [**getPortfolioInfo**](docs/PortfolioManagementApi.md#getPortfolioInfo) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-*PortfolioManagementApi* | [**getPortfolioPositions**](docs/PortfolioManagementApi.md#getPortfolioPositions) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group
 *PortfolioManagementApi* | [**getPortfolioSettings**](docs/PortfolioManagementApi.md#getPortfolioSettings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
 *PortfolioManagementApi* | [**getPortfolioTargetById**](docs/PortfolioManagementApi.md#getPortfolioTargetById) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
 *PortfolioManagementApi* | [**getPortfolioTargets**](docs/PortfolioManagementApi.md#getPortfolioTargets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
