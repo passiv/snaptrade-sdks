@@ -6,7 +6,7 @@
   "python.testing.pytestArgs": [
     "sdks/python",
     "-o",
-    "cache_dir=python/.pytest_cache"
+    "cache_dir=sdks/python/.pytest_cache"
   ],
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
@@ -21,12 +21,9 @@
   "python.testing.unittestArgs": [
     "-v",
     "-s",
-    "./python",
+    "./sdks/python",
     "-p",
     "test_*.py"
   ],
-  "java.compile.nullAnalysis.mode": "automatic",
-  "yaml.schemas": {
-    "swaggerviewer:openapi": "file:///home/asutherland8219/snaptrade-sdks/api.yaml"
-  }
+  "java.compile.nullAnalysis.mode": "automatic"
 }
