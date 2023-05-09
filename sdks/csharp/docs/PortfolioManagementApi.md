@@ -19,7 +19,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetPortfolioBalances**](PortfolioManagementApi.md#getportfoliobalances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group |
 | [**GetPortfolioDetailsById**](PortfolioManagementApi.md#getportfoliodetailsbyid) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio |
 | [**GetPortfolioInfo**](PortfolioManagementApi.md#getportfolioinfo) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group. |
-| [**GetPortfolioPositions**](PortfolioManagementApi.md#getportfoliopositions) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group |
 | [**GetPortfolioSettings**](PortfolioManagementApi.md#getportfoliosettings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings |
 | [**GetPortfolioTargetById**](PortfolioManagementApi.md#getportfoliotargetbyid) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group |
 | [**GetPortfolioTargets**](PortfolioManagementApi.md#getportfoliotargets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup. |
@@ -1569,111 +1568,6 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Portfolio group target allocation has been updated |  -  |
-| **0** | Unexpected error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a name="getportfoliopositions"></a>
-# **GetPortfolioPositions**
-> List&lt;PortfolioGroupPosition&gt; GetPortfolioPositions (Guid portfolioGroupId)
-
-Get total of each postions owned in portfolio group
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Api;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class GetPortfolioPositionsExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-
-            // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
-
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
-
-            var apiInstance = new PortfolioManagementApi(config);
-            var portfolioGroupId = "portfolioGroupId_example";  // Guid | The ID of the PortfolioGroup under which to create the target asset.
-
-            try
-            {
-                // Get total of each postions owned in portfolio group
-                List<PortfolioGroupPosition> result = apiInstance.GetPortfolioPositions(portfolioGroupId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling PortfolioManagementApi.GetPortfolioPositions: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the GetPortfolioPositionsWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Get total of each postions owned in portfolio group
-    ApiResponse<List<PortfolioGroupPosition>> response = apiInstance.GetPortfolioPositionsWithHttpInfo(portfolioGroupId);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling PortfolioManagementApi.GetPortfolioPositionsWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **portfolioGroupId** | **Guid** | The ID of the PortfolioGroup under which to create the target asset. |  |
-
-### Return type
-
-[**List&lt;PortfolioGroupPosition&gt;**](PortfolioGroupPosition.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Totals of each postions owned in portfolio group |  -  |
-| **400** | The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. |  -  |
-| **404** | The specified portfolioGroupId was not found. |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

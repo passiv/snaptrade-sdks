@@ -116,7 +116,7 @@ namespace SnapTrade.Net.Client
         public Configuration()
         {
             Proxy = null;
-            UserAgent = WebUtility.UrlEncode("Konfig/3.9.0/csharp");
+            UserAgent = "Konfig/3.9.0/csharp";
             BasePath = "https://api.snaptrade.com/api/v1";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
