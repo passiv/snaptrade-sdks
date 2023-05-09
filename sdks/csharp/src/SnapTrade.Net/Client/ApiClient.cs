@@ -453,11 +453,11 @@ namespace SnapTrade.Net.Client
                 CookieContainer = cookies,
                 MaxTimeout = configuration.Timeout,
                 Proxy = configuration.Proxy,
-                UserAgent = configuration.UserAgent
             };
 
             RestClient client = new RestClient(clientOptions)
                 .UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration));
+            client.AddDefaultHeader("User-Agent", configuration.UserAgent);
 
             InterceptRequest(req);
 
@@ -548,11 +548,11 @@ namespace SnapTrade.Net.Client
                 ClientCertificates = configuration.ClientCertificates,
                 MaxTimeout = configuration.Timeout,
                 Proxy = configuration.Proxy,
-                UserAgent = configuration.UserAgent
             };
 
             RestClient client = new RestClient(clientOptions)
                 .UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration));
+            client.AddDefaultHeader("User-Agent", configuration.UserAgent);
 
             InterceptRequest(req);
 
