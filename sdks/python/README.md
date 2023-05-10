@@ -75,6 +75,50 @@ deleted_response = snaptrade.authentication.delete_snap_trade_user(
 pprint(deleted_response.body)
 ```
 
+## Async
+
+`async` support is available by prepending `a` to any method.
+
+```python
+from pprint import pprint
+from snaptrade_client import SnapTrade, ApiException
+
+snaptrade = SnapTrade(
+    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+    # See configuration.py for a list of all supported configuration parameters.
+    host="https://api.snaptrade.com/api/v1",
+    consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
+)
+
+
+async def main():
+    try:
+        # Accept or Reject SnapTrade disclaimer agreement
+        accept_response = await snaptrade.api_disclaimer.aaccept(
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            accepted=True,  # optional
+        )
+        pprint(accept_response.body)
+        pprint(accept_response.body["accepted"])
+        pprint(accept_response.body["timestamp"])
+        pprint(accept_response.headers)
+        pprint(accept_response.status)
+        pprint(accept_response.round_trip_time)
+    except ApiException as e:
+        print("Exception when calling APIDisclaimerApi.accept: %s\n" % e)
+        pprint(e.body)
+        pprint(e.headers)
+        pprint(e.status)
+        pprint(e.reason)
+        pprint(e.round_trip_time)
+
+
+asyncio.run(main())
+```
+
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
