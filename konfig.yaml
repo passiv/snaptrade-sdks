@@ -26,6 +26,14 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
+  php:
+    version: 1.0.0
+    outputDirectory: sdks/php
+    packageName: snaptrade-php-sdk
+    invokerPackage: SnapTrade
+    git:
+      userId: passiv
+      repoId: snaptrade-php-sdk
   csharp:
     version: 3.10.0
     packageName: SnapTrade.Net
