@@ -1,3 +1,6 @@
 [submodule "php"]
 	path = php
 	url = https://github.com/passiv/snaptrade-php-sdk.git
+[submodule "sdks/php"]
+	path = sdks/php
+	url = https://github.com/passiv/snaptrade-php-sdk.git
