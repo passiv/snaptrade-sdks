@@ -11,8 +11,6 @@ Method | HTTP request | Description
 [**session_events**](#session_events) | **get** /sessionEvents | List all session events for the partner
 
 # **detail_brokerage_authorization**
-<a name="detail_brokerage_authorization"></a>
-> BrokerageAuthorization detail_brokerage_authorization(authorization_iduser_iduser_secret)
 
 Get detail of a specific brokerage authorizations for the user
 
@@ -20,7 +18,7 @@ Get detail of a specific brokerage authorizations for the user
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -34,9 +32,9 @@ try:
     # Get detail of a specific brokerage authorizations for the user
     detail_brokerage_authorization_response = (
         snaptrade.connections.detail_brokerage_authorization(
-            authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
+            authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
         )
     )
     pprint(detail_brokerage_authorization_response.body)
@@ -149,8 +147,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_brokerage_authorizations**
-<a name="list_brokerage_authorizations"></a>
-> [BrokerageAuthorization] list_brokerage_authorizations(user_iduser_secret)
 
 List all brokerage authorizations for the user
 
@@ -158,7 +154,7 @@ List all brokerage authorizations for the user
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -172,8 +168,8 @@ try:
     # List all brokerage authorizations for the user
     list_brokerage_authorizations_response = (
         snaptrade.connections.list_brokerage_authorizations(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
         )
     )
     pprint(list_brokerage_authorizations_response.body)
@@ -277,8 +273,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **remove_brokerage_authorization**
-<a name="remove_brokerage_authorization"></a>
-> remove_brokerage_authorization(authorization_iduser_iduser_secret)
 
 Remove a brokerage authorization.
 
@@ -286,7 +280,7 @@ Remove a brokerage authorization.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -299,9 +293,9 @@ snaptrade = SnapTrade(
 try:
     # Remove a brokerage authorization.
     snaptrade.connections.remove_brokerage_authorization(
-        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(remove_brokerage_authorization_response.headers)
     pprint(remove_brokerage_authorization_response.status)
@@ -412,8 +406,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **session_events**
-<a name="session_events"></a>
-> [bool, date, datetime, dict, float, int, list, str, none_type] session_events(partner_client_id)
 
 List all session events for the partner
 
@@ -421,7 +413,7 @@ List all session events for the partner
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -434,9 +426,9 @@ snaptrade = SnapTrade(
 try:
     # List all session events for the partner
     session_events_response = snaptrade.connections.session_events(
-        partner_client_id="PASSIVTEST",
-        user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        partner_client_id="PASSIVTEST",  # required
+        user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
+        session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
     )
     pprint(session_events_response.headers)
     pprint(session_events_response.status)

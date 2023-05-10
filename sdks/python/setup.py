@@ -30,7 +30,6 @@ REQUIRES = [
     "certifi >= 2022.12.7",
     "frozendict ~= 2.3.4",
     "python-dateutil ~= 2.8.2",
-    "setuptools >= 21.0.0",
     "typing_extensions ~= 4.3.0",
     "urllib3 ~= 1.26.7",
     "validators ~= 0.20.0",]

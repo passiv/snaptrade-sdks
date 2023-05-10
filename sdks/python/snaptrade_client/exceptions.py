@@ -12,7 +12,7 @@
 
 
 import typing
-from snaptrade_client.api_response import ApiResponse
+from snaptrade_client.api_response import ApiResponse, AsyncApiResponse
 from snaptrade_client.exceptions_base import OpenApiException, ApiTypeError, ApiValueError, render_path
 
 class ClientConfigurationError(OpenApiException):
@@ -58,12 +58,12 @@ class ApiKeyError(OpenApiException, KeyError):
 
 class ApiException(OpenApiException):
 
-    def __init__(self, status=None, reason=None, api_response: ApiResponse = None):
+    def __init__(self, status=None, reason=None, api_response: typing.Optional[typing.Union[ApiResponse, AsyncApiResponse]] = None):
         if api_response:
             self.status = api_response.status
             self.reason = api_response.response.reason
             self.body = api_response.body
-            self.headers = api_response.response.getheaders()
+            self.headers = api_response.response.headers
             self.round_trip_time = api_response.round_trip_time
         else:
             self.status = status
@@ -111,12 +111,12 @@ class InvalidHostConfigurationError(ClientConfigurationError):
         super().__init__('Invalid host: "{}", {}'.format(self.host, self.reason))
 
 
-class MissingRequiredPropertiesError(TypeError):
+class MissingRequiredPropertiesError(ApiTypeError):
     def __init__(self, msg: str):
         super().__init__(msg)
 
 
-class MissingRequiredParametersError(TypeError):
+class MissingRequiredParametersError(ApiTypeError):
     def __init__(self, error: TypeError):
         self.error = error
         error_str = str(error)

@@ -8,8 +8,6 @@ Method | HTTP request | Description
 [**check**](#check) | **get** / | Get API Status
 
 # **check**
-<a name="check"></a>
-> Status check()
 
 Get API Status
 
@@ -19,7 +17,7 @@ Check whether the API is operational and verify timestamps.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1

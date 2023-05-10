@@ -57,7 +57,6 @@ class PathValues(str, enum.Enum):
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS_SYMBOL_ID = "/portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId}"
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_IMPORT = "/portfolioGroups/{portfolioGroupId}/import"
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_INFO = "/portfolioGroups/{portfolioGroupId}/info"
-    PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_POSITIONS = "/portfolioGroups/{portfolioGroupId}/positions"
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SETTINGS = "/portfolioGroups/{portfolioGroupId}/settings"
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SYMBOLS = "/portfolioGroups/{portfolioGroupId}/symbols"
     PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS = "/portfolioGroups/{portfolioGroupId}/targets"

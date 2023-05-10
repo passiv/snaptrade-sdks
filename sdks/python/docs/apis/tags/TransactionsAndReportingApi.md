@@ -9,8 +9,6 @@ Method | HTTP request | Description
 [**get_reporting_custom_range**](#get_reporting_custom_range) | **get** /performance/custom | Get performance information for a specific timeframe
 
 # **get_activities**
-<a name="get_activities"></a>
-> [UniversalActivity] get_activities(user_iduser_secret)
 
 Get transaction history for a user
 
@@ -20,7 +18,7 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -33,12 +31,12 @@ snaptrade = SnapTrade(
 try:
     # Get transaction history for a user
     get_activities_response = snaptrade.transactions_and_reporting.get_activities(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        start_date="2022-01-24",  # optional
+        end_date="2022-01-24",  # optional
+        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
+        brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
     )
     pprint(get_activities_response.body)
     pprint(get_activities_response.body["id"])
@@ -185,8 +183,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_reporting_custom_range**
-<a name="get_reporting_custom_range"></a>
-> PerformanceCustom get_reporting_custom_range(start_dateend_dateuser_iduser_secret)
 
 Get performance information for a specific timeframe
 
@@ -196,7 +192,7 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -209,13 +205,13 @@ snaptrade = SnapTrade(
 try:
     # Get performance information for a specific timeframe
     get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-        detailed=True,
-        frequency="monthly",
+        start_date="2022-01-24",  # required
+        end_date="2022-01-24",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
+        detailed=True,  # optional
+        frequency="monthly",  # optional
     )
     pprint(get_reporting_custom_range_response.body)
     pprint(get_reporting_custom_range_response.body["total_equity_timeframe"])

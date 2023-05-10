@@ -15,8 +15,6 @@ Method | HTTP request | Description
 [**update_user_account**](#update_user_account) | **put** /accounts/{accountId} | Update details of an investment account
 
 # **get_all_user_holdings**
-<a name="get_all_user_holdings"></a>
-> [AccountHoldings] get_all_user_holdings(user_iduser_secret)
 
 List all accounts for the user, plus balances and positions for each account.
 
@@ -24,7 +22,7 @@ List all accounts for the user, plus balances and positions for each account.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -38,9 +36,9 @@ try:
     # List all accounts for the user, plus balances and positions for each account.
     get_all_user_holdings_response = (
         snaptrade.account_information.get_all_user_holdings(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",  # optional
         )
     )
     pprint(get_all_user_holdings_response.body)
@@ -175,8 +173,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_account_balance**
-<a name="get_user_account_balance"></a>
-> [Balance] get_user_account_balance(user_iduser_secretaccount_id)
 
 Get all cash balances of an investment account
 
@@ -184,7 +180,7 @@ Get all cash balances of an investment account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -198,9 +194,9 @@ try:
     # Get all cash balances of an investment account
     get_user_account_balance_response = (
         snaptrade.account_information.get_user_account_balance(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            account_id="accountId_example",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            account_id="accountId_example",  # required
         )
     )
     pprint(get_user_account_balance_response.body)
@@ -313,8 +309,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_account_details**
-<a name="get_user_account_details"></a>
-> [Account] get_user_account_details(user_iduser_secretaccount_id)
 
 Return details of a specific investment account
 
@@ -322,7 +316,7 @@ Return details of a specific investment account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -336,9 +330,9 @@ try:
     # Return details of a specific investment account
     get_user_account_details_response = (
         snaptrade.account_information.get_user_account_details(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            account_id="accountId_example",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            account_id="accountId_example",  # required
         )
     )
     pprint(get_user_account_details_response.body)
@@ -459,8 +453,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_account_orders**
-<a name="get_user_account_orders"></a>
-> [AccountOrderRecord] get_user_account_orders(user_iduser_secretaccount_id)
 
 Get all history of orders placed in account
 
@@ -468,7 +460,7 @@ Get all history of orders placed in account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -482,10 +474,10 @@ try:
     # Get all history of orders placed in account
     get_user_account_orders_response = (
         snaptrade.account_information.get_user_account_orders(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            account_id="accountId_example",
-            state="all",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            account_id="accountId_example",  # required
+            state="all",  # optional
         )
     )
     pprint(get_user_account_orders_response.body)
@@ -621,8 +613,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_account_positions**
-<a name="get_user_account_positions"></a>
-> [Position] get_user_account_positions(user_iduser_secretaccount_id)
 
 Get all positions of an investment account
 
@@ -630,7 +620,7 @@ Get all positions of an investment account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -644,9 +634,9 @@ try:
     # Get all positions of an investment account
     get_user_account_positions_response = (
         snaptrade.account_information.get_user_account_positions(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            account_id="accountId_example",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            account_id="accountId_example",  # required
         )
     )
     pprint(get_user_account_positions_response.body)
@@ -763,8 +753,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_holdings**
-<a name="get_user_holdings"></a>
-> AccountHoldingsAccount get_user_holdings(account_iduser_iduser_secret)
 
 List balances, positions and orders for the specified account.
 
@@ -772,7 +760,7 @@ List balances, positions and orders for the specified account.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -785,9 +773,9 @@ snaptrade = SnapTrade(
 try:
     # List balances, positions and orders for the specified account.
     get_user_holdings_response = snaptrade.account_information.get_user_holdings(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(get_user_holdings_response.body)
     pprint(get_user_holdings_response.body["account"])
@@ -920,8 +908,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_user_accounts**
-<a name="list_user_accounts"></a>
-> [Account] list_user_accounts(user_iduser_secret)
 
 List all investment accounts for the user
 
@@ -929,7 +915,7 @@ List all investment accounts for the user
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -942,8 +928,8 @@ snaptrade = SnapTrade(
 try:
     # List all investment accounts for the user
     list_user_accounts_response = snaptrade.account_information.list_user_accounts(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(list_user_accounts_response.body)
     pprint(list_user_accounts_response.body["id"])
@@ -1045,8 +1031,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **update_user_account**
-<a name="update_user_account"></a>
-> [Account] update_user_account(user_iduser_secretaccount_id)
 
 Update details of an investment account
 
@@ -1054,7 +1038,7 @@ Update details of an investment account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1067,9 +1051,9 @@ snaptrade = SnapTrade(
 try:
     # Update details of an investment account
     update_user_account_response = snaptrade.account_information.update_user_account(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
     )
     pprint(update_user_account_response.body)
     pprint(update_user_account_response.body["id"])

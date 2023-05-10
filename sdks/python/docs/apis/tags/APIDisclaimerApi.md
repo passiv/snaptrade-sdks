@@ -8,8 +8,6 @@ Method | HTTP request | Description
 [**accept**](#accept) | **post** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
 
 # **accept**
-<a name="accept"></a>
-> SnapTradeAPIDisclaimerAcceptStatus accept(user_iduser_secretany_type)
 
 Accept or Reject SnapTrade disclaimer agreement
 
@@ -17,7 +15,7 @@ Accept or Reject SnapTrade disclaimer agreement
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -30,9 +28,9 @@ snaptrade = SnapTrade(
 try:
     # Accept or Reject SnapTrade disclaimer agreement
     accept_response = snaptrade.api_disclaimer.accept(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        accepted=True,
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        accepted=True,  # optional
     )
     pprint(accept_response.body)
     pprint(accept_response.body["accepted"])

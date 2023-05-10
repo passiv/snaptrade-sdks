@@ -8,8 +8,6 @@ Method | HTTP request | Description
 [**list_user_errors**](#list_user_errors) | **get** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
 
 # **list_user_errors**
-<a name="list_user_errors"></a>
-> [UserErrorLog] list_user_errors(user_iduser_secret)
 
 Retrieve error logs on behalf of your SnapTrade users
 
@@ -17,7 +15,7 @@ Retrieve error logs on behalf of your SnapTrade users
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -30,8 +28,8 @@ snaptrade = SnapTrade(
 try:
     # Retrieve error logs on behalf of your SnapTrade users
     list_user_errors_response = snaptrade.error_logs.list_user_errors(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(list_user_errors_response.body)
     pprint(list_user_errors_response.body["requested_at"])

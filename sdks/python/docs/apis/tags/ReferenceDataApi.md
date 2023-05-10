@@ -18,8 +18,6 @@ Method | HTTP request | Description
 [**symbol_search_user_account**](#symbol_search_user_account) | **post** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
 
 # **get_currency_exchange_rate_pair**
-<a name="get_currency_exchange_rate_pair"></a>
-> ExchangeRatePairs get_currency_exchange_rate_pair(currency_pair)
 
 Return the exchange rate of a currency pair
 
@@ -27,7 +25,7 @@ Return the exchange rate of a currency pair
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -41,7 +39,7 @@ try:
     # Return the exchange rate of a currency pair
     get_currency_exchange_rate_pair_response = (
         snaptrade.reference_data.get_currency_exchange_rate_pair(
-            currency_pair="currencyPair_example",
+            currency_pair="currencyPair_example",  # required
         )
     )
     pprint(get_currency_exchange_rate_pair_response.body)
@@ -113,8 +111,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_partner_info**
-<a name="get_partner_info"></a>
-> PartnerData get_partner_info()
 
 Get metadata related to Snaptrade partner
 
@@ -122,7 +118,7 @@ Get metadata related to Snaptrade partner
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -239,8 +235,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_security_types**
-<a name="get_security_types"></a>
-> [SecurityType] get_security_types()
 
 List of all security types.
 
@@ -248,7 +242,7 @@ List of all security types.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -321,8 +315,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_stock_exchanges**
-<a name="get_stock_exchanges"></a>
-> [Exchange] get_stock_exchanges()
 
 Return list of stock exchanges on Passiv and their suffixes
 
@@ -330,7 +322,7 @@ Return list of stock exchanges on Passiv and their suffixes
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -399,8 +391,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_symbols**
-<a name="get_symbols"></a>
-> [UniversalSymbol] get_symbols()
 
 Search for symbols
 
@@ -408,7 +398,7 @@ Search for symbols
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -421,7 +411,7 @@ snaptrade = SnapTrade(
 try:
     # Search for symbols
     get_symbols_response = snaptrade.reference_data.get_symbols(
-        substring="apple",
+        substring="apple",  # optional
     )
     pprint(get_symbols_response.body)
     pprint(get_symbols_response.body["id"])
@@ -503,8 +493,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_symbols_by_ticker**
-<a name="get_symbols_by_ticker"></a>
-> UniversalSymbol get_symbols_by_ticker(ticker)
 
 Get details of a symbol by the ticker
 
@@ -512,7 +500,7 @@ Get details of a symbol by the ticker
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -525,8 +513,8 @@ snaptrade = SnapTrade(
 try:
     # Get details of a symbol by the ticker
     get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
-        ticker="ticker_example",
-        symbol_id="046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        ticker="ticker_example",  # required
+        symbol_id="046b6c7f-0b8a-43b9-b35d-6489e6daee91",  # optional
     )
     pprint(get_symbols_by_ticker_response.body)
     pprint(get_symbols_by_ticker_response.body["id"])
@@ -631,8 +619,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_all_brokerage_authorization_type**
-<a name="list_all_brokerage_authorization_type"></a>
-> [BrokerageAuthorizationTypeReadOnly] list_all_brokerage_authorization_type()
 
 List of all brokerage authorization types
 
@@ -640,7 +626,7 @@ List of all brokerage authorization types
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -654,7 +640,7 @@ try:
     # List of all brokerage authorization types
     list_all_brokerage_authorization_type_response = (
         snaptrade.reference_data.list_all_brokerage_authorization_type(
-            brokerage="QUESTRADE,ALPACA",
+            brokerage="QUESTRADE,ALPACA",  # optional
         )
     )
     pprint(list_all_brokerage_authorization_type_response.body)
@@ -742,8 +728,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_all_brokerages**
-<a name="list_all_brokerages"></a>
-> [Brokerage] list_all_brokerages()
 
 List of all brokerages.
 
@@ -751,7 +735,7 @@ List of all brokerages.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -838,8 +822,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_all_currencies**
-<a name="list_all_currencies"></a>
-> [Currency] list_all_currencies()
 
 List of all supported currencies
 
@@ -847,7 +829,7 @@ List of all supported currencies
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -919,8 +901,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_all_currencies_rates**
-<a name="list_all_currencies_rates"></a>
-> [ExchangeRatePairs] list_all_currencies_rates()
 
 Return the exchange rates of all supported currencies
 
@@ -928,7 +908,7 @@ Return the exchange rates of all supported currencies
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -994,8 +974,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **symbol_search_user_account**
-<a name="symbol_search_user_account"></a>
-> [UniversalSymbol] symbol_search_user_account(user_iduser_secretaccount_id)
 
 Search for symbols that are supported by a brokerage account using a substring
 
@@ -1003,7 +981,7 @@ Search for symbols that are supported by a brokerage account using a substring
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1017,10 +995,10 @@ try:
     # Search for symbols that are supported by a brokerage account using a substring
     symbol_search_user_account_response = (
         snaptrade.reference_data.symbol_search_user_account(
-            user_id="John.doe@snaptrade.com",
-            user_secret="USERSECRET123",
-            account_id="accountId_example",
-            substring="apple",
+            user_id="John.doe@snaptrade.com",  # required
+            user_secret="USERSECRET123",  # required
+            account_id="accountId_example",  # required
+            substring="apple",  # optional
         )
     )
     pprint(symbol_search_user_account_response.body)

@@ -68,6 +68,7 @@ generators:
     setSkipSerializationToTrueByDefault: true
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
     clientName: SnapTrade
+    keepAllParametersOptional: true
     clientState:
       - consumer_key
     git:

@@ -17,8 +17,6 @@ Method | HTTP request | Description
 [**place_order**](#place_order) | **post** /trade/{tradeId} | Place order
 
 # **cancel_user_account_order**
-<a name="cancel_user_account_order"></a>
-> AccountOrderRecord cancel_user_account_order(user_iduser_secretaccount_idany_type)
 
 Cancel open order in account
 
@@ -26,7 +24,7 @@ Cancel open order in account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -39,10 +37,10 @@ snaptrade = SnapTrade(
 try:
     # Cancel open order in account
     cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
-        brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
+        brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
     )
     pprint(cancel_user_account_order_response.body)
     pprint(cancel_user_account_order_response.body["brokerage_order_id"])
@@ -192,8 +190,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_calculated_trade_impact_by_id**
-<a name="get_calculated_trade_impact_by_id"></a>
-> Trade get_calculated_trade_impact_by_id(portfolio_group_idcalculated_trade_idtrade_id)
 
 Return details of a specific trade before it&#x27;s placed
 
@@ -201,7 +197,7 @@ Return details of a specific trade before it&#x27;s placed
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -215,9 +211,9 @@ try:
     # Return details of a specific trade before it's placed
     get_calculated_trade_impact_by_id_response = (
         snaptrade.trading.get_calculated_trade_impact_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            calculated_trade_id="calculatedTradeId_example",
-            trade_id="tradeId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            calculated_trade_id="calculatedTradeId_example",  # required
+            trade_id="tradeId_example",  # required
         )
     )
     pprint(get_calculated_trade_impact_by_id_response.body)
@@ -309,8 +305,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_calculated_trades_impact**
-<a name="get_calculated_trades_impact"></a>
-> [TradeImpact] get_calculated_trades_impact(portfolio_group_idcalculated_trade_id)
 
 Return the impact of placing a series of trades on the portfolio
 
@@ -318,7 +312,7 @@ Return the impact of placing a series of trades on the portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -332,8 +326,8 @@ try:
     # Return the impact of placing a series of trades on the portfolio
     get_calculated_trades_impact_response = (
         snaptrade.trading.get_calculated_trades_impact(
-            portfolio_group_id="portfolioGroupId_example",
-            calculated_trade_id="calculatedTradeId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            calculated_trade_id="calculatedTradeId_example",  # required
         )
     )
     pprint(get_calculated_trades_impact_response.body)
@@ -418,8 +412,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_order_impact**
-<a name="get_order_impact"></a>
-> ManualTradeAndImpact get_order_impact(user_iduser_secretmanual_trade_form)
 
 Check impact of trades on account.
 
@@ -427,7 +419,7 @@ Check impact of trades on account.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -440,16 +432,16 @@ snaptrade = SnapTrade(
 try:
     # Check impact of trades on account.
     get_order_impact_response = snaptrade.trading.get_order_impact(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        action="BUY",
-        order_type="Limit",
-        price=31.33,
-        stop=31.33,
-        time_in_force="Day",
-        units=3.14,
-        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
+        action="BUY",  # optional
+        order_type="Limit",  # optional
+        price=31.33,  # optional
+        stop=31.33,  # optional
+        time_in_force="Day",  # optional
+        units=3.14,  # optional
+        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
     )
     pprint(get_order_impact_response.body)
     pprint(get_order_impact_response.body["trade"])
@@ -576,8 +568,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_account_quotes**
-<a name="get_user_account_quotes"></a>
-> SymbolsQuotes get_user_account_quotes(user_iduser_secretsymbolsaccount_id)
 
 Get symbol quotes
 
@@ -585,7 +575,7 @@ Get symbol quotes
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -598,11 +588,11 @@ snaptrade = SnapTrade(
 try:
     # Get symbol quotes
     get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        symbols="symbols_example",
-        account_id="accountId_example",
-        use_ticker=True,
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        symbols="symbols_example",  # required
+        account_id="accountId_example",  # required
+        use_ticker=True,  # optional
     )
     pprint(get_user_account_quotes_response.body)
     pprint(get_user_account_quotes_response.body["symbol"])
@@ -725,8 +715,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **modify_calculated_trade_by_id**
-<a name="modify_calculated_trade_by_id"></a>
-> Trade modify_calculated_trade_by_id(portfolio_group_idcalculated_trade_idtrade_id)
 
 Modify units of a trade before it is placed
 
@@ -734,7 +722,7 @@ Modify units of a trade before it is placed
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -748,10 +736,10 @@ try:
     # Modify units of a trade before it is placed
     modify_calculated_trade_by_id_response = (
         snaptrade.trading.modify_calculated_trade_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            calculated_trade_id="calculatedTradeId_example",
-            trade_id="tradeId_example",
-            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            calculated_trade_id="calculatedTradeId_example",  # required
+            trade_id="tradeId_example",  # required
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
             account={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "brokerage_authorization": "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -760,22 +748,22 @@ try:
                 "number": "Q6542138443",
                 "institution_name": "Alpaca",
                 "created_date": "2021-06-04T16:26:46.523Z",
-            },
+            },  # optional
             symbol={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
                 "allows_fractional_units": True,
-            },
+            },  # optional
             universal_symbol={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "symbol": "VAB.TO",
                 "raw_symbol": "VAB",
                 "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
-            },
-            action="BUY",
-            units=6,
-            price=24.81,
-            sequence=1,
+            },  # optional
+            action="BUY",  # optional
+            units=6,  # optional
+            price=24.81,  # optional
+            sequence=1,  # optional
         )
     )
     pprint(modify_calculated_trade_by_id_response.body)
@@ -875,8 +863,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **place_calculated_trades**
-<a name="place_calculated_trades"></a>
-> [TradeExecutionStatus] place_calculated_trades(portfolio_group_idcalculated_trade_id)
 
 Place orders for the CalculatedTrades in series
 
@@ -884,7 +870,7 @@ Place orders for the CalculatedTrades in series
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -897,8 +883,8 @@ snaptrade = SnapTrade(
 try:
     # Place orders for the CalculatedTrades in series
     place_calculated_trades_response = snaptrade.trading.place_calculated_trades(
-        portfolio_group_id="portfolioGroupId_example",
-        calculated_trade_id="calculatedTradeId_example",
+        portfolio_group_id="portfolioGroupId_example",  # required
+        calculated_trade_id="calculatedTradeId_example",  # required
     )
     pprint(place_calculated_trades_response.body)
     pprint(place_calculated_trades_response.body["symbol"])
@@ -986,8 +972,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **place_force_order**
-<a name="place_force_order"></a>
-> AccountOrderRecord place_force_order(user_iduser_secretmanual_trade_form)
 
 Place a trade with NO validation.
 
@@ -995,7 +979,7 @@ Place a trade with NO validation.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1008,16 +992,16 @@ snaptrade = SnapTrade(
 try:
     # Place a trade with NO validation.
     place_force_order_response = snaptrade.trading.place_force_order(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        action="BUY",
-        order_type="Limit",
-        price=31.33,
-        stop=31.33,
-        time_in_force="Day",
-        units=3.14,
-        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
+        action="BUY",  # optional
+        order_type="Limit",  # optional
+        price=31.33,  # optional
+        stop=31.33,  # optional
+        time_in_force="Day",  # optional
+        units=3.14,  # optional
+        universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
     )
     pprint(place_force_order_response.body)
     pprint(place_force_order_response.body["brokerage_order_id"])
@@ -1159,8 +1143,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **place_oco_order**
-<a name="place_oco_order"></a>
-> AccountOrderRecord place_oco_order(user_iduser_secretany_type)
 
 Place a OCO (One Cancels Other) order
 
@@ -1168,7 +1150,7 @@ Place a OCO (One Cancels Other) order
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1181,10 +1163,10 @@ snaptrade = SnapTrade(
 try:
     # Place a OCO (One Cancels Other) order
     place_oco_order_response = snaptrade.trading.place_oco_order(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        first_trade_id=None,
-        second_trade_id=None,
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        first_trade_id=None,  # optional
+        second_trade_id=None,  # optional
     )
     pprint(place_oco_order_response.body)
     pprint(place_oco_order_response.body["brokerage_order_id"])
@@ -1320,8 +1302,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **place_order**
-<a name="place_order"></a>
-> AccountOrderRecord place_order(trade_iduser_iduser_secret)
 
 Place order
 
@@ -1329,7 +1309,7 @@ Place order
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1342,9 +1322,9 @@ snaptrade = SnapTrade(
 try:
     # Place order
     place_order_response = snaptrade.trading.place_order(
-        trade_id="tradeId_example",
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        trade_id="tradeId_example",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(place_order_response.body)
     pprint(place_order_response.body["brokerage_order_id"])

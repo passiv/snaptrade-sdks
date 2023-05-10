@@ -52,7 +52,6 @@ from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_excludedass
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_excludedassets_symbol_id import PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_import import PortfolioGroupsPortfolioGroupIdImport
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_info import PortfolioGroupsPortfolioGroupIdInfo
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_positions import PortfolioGroupsPortfolioGroupIdPositions
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_settings import PortfolioGroupsPortfolioGroupIdSettings
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_symbols import PortfolioGroupsPortfolioGroupIdSymbols
 from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_targets import PortfolioGroupsPortfolioGroupIdTargets
@@ -120,7 +119,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS_SYMBOL_ID: PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_IMPORT: PortfolioGroupsPortfolioGroupIdImport,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_INFO: PortfolioGroupsPortfolioGroupIdInfo,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_POSITIONS: PortfolioGroupsPortfolioGroupIdPositions,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SETTINGS: PortfolioGroupsPortfolioGroupIdSettings,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SYMBOLS: PortfolioGroupsPortfolioGroupIdSymbols,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS: PortfolioGroupsPortfolioGroupIdTargets,
@@ -189,7 +187,6 @@ path_to_api = PathToApi(
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS_SYMBOL_ID: PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_IMPORT: PortfolioGroupsPortfolioGroupIdImport,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_INFO: PortfolioGroupsPortfolioGroupIdInfo,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_POSITIONS: PortfolioGroupsPortfolioGroupIdPositions,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SETTINGS: PortfolioGroupsPortfolioGroupIdSettings,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SYMBOLS: PortfolioGroupsPortfolioGroupIdSymbols,
         PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS: PortfolioGroupsPortfolioGroupIdTargets,

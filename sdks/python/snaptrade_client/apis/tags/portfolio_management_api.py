@@ -25,7 +25,6 @@ from snaptrade_client.paths.model_portfolio_model_portfolio_id.get import GetMod
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id_balances.get import GetPortfolioBalances
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id.get import GetPortfolioDetailsById
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id_info.get import GetPortfolioInfo
-from snaptrade_client.paths.portfolio_groups_portfolio_group_id_positions.get import GetPortfolioPositions
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id_settings.get import GetPortfolioSettings
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id_targets_target_asset_id.get import GetPortfolioTargetById
 from snaptrade_client.paths.portfolio_groups_portfolio_group_id_targets.get import GetPortfolioTargets
@@ -61,7 +60,6 @@ class PortfolioManagementApi(
     GetPortfolioBalances,
     GetPortfolioDetailsById,
     GetPortfolioInfo,
-    GetPortfolioPositions,
     GetPortfolioSettings,
     GetPortfolioTargetById,
     GetPortfolioTargets,

@@ -20,7 +20,6 @@ Method | HTTP request | Description
 [**get_portfolio_balances**](#get_portfolio_balances) | **get** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
 [**get_portfolio_details_by_id**](#get_portfolio_details_by_id) | **get** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
 [**get_portfolio_info**](#get_portfolio_info) | **get** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-[**get_portfolio_positions**](#get_portfolio_positions) | **get** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group
 [**get_portfolio_settings**](#get_portfolio_settings) | **get** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
 [**get_portfolio_target_by_id**](#get_portfolio_target_by_id) | **get** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
 [**get_portfolio_targets**](#get_portfolio_targets) | **get** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
@@ -40,8 +39,6 @@ Method | HTTP request | Description
 [**update_portfolio_target_by_id**](#update_portfolio_target_by_id) | **patch** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup.
 
 # **add_portfolio_excluded_asset**
-<a name="add_portfolio_excluded_asset"></a>
-> ExcludedAsset add_portfolio_excluded_asset(portfolio_group_id)
 
 Adds an asset to exclude to a portfolio group
 
@@ -49,7 +46,7 @@ Adds an asset to exclude to a portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -63,16 +60,16 @@ try:
     # Adds an asset to exclude to a portfolio group
     add_portfolio_excluded_asset_response = (
         snaptrade.portfolio_management.add_portfolio_excluded_asset(
-            portfolio_group_id="portfolioGroupId_example",
-            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-            symbol="VAB.TO",
-            raw_symbol="VAB",
-            description="VANGUARD CDN AGGREGATE BOND INDEX ETF",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
+            symbol="VAB.TO",  # optional
+            raw_symbol="VAB",  # optional
+            description="VANGUARD CDN AGGREGATE BOND INDEX ETF",  # optional
             currency={
                 "id": "87b24961-b51e-4db8-9226-f198f6518a89",
                 "code": "USD",
                 "name": "US Dollar",
-            },
+            },  # optional
             exchange={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "code": "TSX",
@@ -82,20 +79,20 @@ try:
                 "start_time": "09:30:00",
                 "close_time": "57600",
                 "suffix": ".TO",
-            },
+            },  # optional
             type={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "code": "cs",
                 "description": "Common Stock",
                 "is_supported": True,
-            },
+            },  # optional
             currencies=[
                 {
                     "id": "87b24961-b51e-4db8-9226-f198f6518a89",
                     "code": "USD",
                     "name": "US Dollar",
                 }
-            ],
+            ],  # optional
         )
     )
     pprint(add_portfolio_excluded_asset_response.body)
@@ -175,8 +172,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **create**
-<a name="create"></a>
-> [PortfolioGroup] create(user_iduser_secretportfolio_group)
 
 Create new portfolio group
 
@@ -184,7 +179,7 @@ Create new portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -197,10 +192,10 @@ snaptrade = SnapTrade(
 try:
     # Create new portfolio group
     create_response = snaptrade.portfolio_management.create(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        name="Combined Retirement Portfolio",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
+        name="Combined Retirement Portfolio",  # optional
     )
     pprint(create_response.body)
     pprint(create_response.body["id"])
@@ -312,8 +307,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **create_asset_class**
-<a name="create_asset_class"></a>
-> ModelAssetClassDetails create_asset_class()
 
 Create a new model asset class
 
@@ -321,7 +314,7 @@ Create a new model asset class
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -378,8 +371,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **create_model_portfolio**
-<a name="create_model_portfolio"></a>
-> ModelPortfolioDetails create_model_portfolio()
 
 Creates a new model portfolio
 
@@ -387,7 +378,7 @@ Creates a new model portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -449,8 +440,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **delete_asset_class**
-<a name="delete_asset_class"></a>
-> delete_asset_class(model_asset_class_id)
 
 Deletes a model asset class
 
@@ -458,7 +447,7 @@ Deletes a model asset class
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -471,7 +460,7 @@ snaptrade = SnapTrade(
 try:
     # Deletes a model asset class
     snaptrade.portfolio_management.delete_asset_class(
-        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
     )
     pprint(delete_asset_class_response.headers)
     pprint(delete_asset_class_response.status)
@@ -528,8 +517,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **delete_excluded_asset**
-<a name="delete_excluded_asset"></a>
-> delete_excluded_asset(portfolio_group_idsymbol_id)
 
 Unexclude an asset from a portfolio group
 
@@ -537,7 +524,7 @@ Unexclude an asset from a portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -550,8 +537,8 @@ snaptrade = SnapTrade(
 try:
     # Unexclude an asset from a portfolio group
     snaptrade.portfolio_management.delete_excluded_asset(
-        portfolio_group_id="portfolioGroupId_example",
-        symbol_id="symbolId_example",
+        portfolio_group_id="portfolioGroupId_example",  # required
+        symbol_id="symbolId_example",  # required
     )
     pprint(delete_excluded_asset_response.headers)
     pprint(delete_excluded_asset_response.status)
@@ -618,8 +605,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **delete_model_portfolio_by_id**
-<a name="delete_model_portfolio_by_id"></a>
-> delete_model_portfolio_by_id(model_portfolio_id)
 
 Deletes a model portfolio
 
@@ -627,7 +612,7 @@ Deletes a model portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -640,7 +625,7 @@ snaptrade = SnapTrade(
 try:
     # Deletes a model portfolio
     snaptrade.portfolio_management.delete_model_portfolio_by_id(
-        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
     )
     pprint(delete_model_portfolio_by_id_response.headers)
     pprint(delete_model_portfolio_by_id_response.status)
@@ -700,8 +685,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **delete_portfoli**
-<a name="delete_portfoli"></a>
-> PortfolioGroup delete_portfoli(portfolio_group_id)
 
 Remove a target portfolio.
 
@@ -709,7 +692,7 @@ Remove a target portfolio.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -722,7 +705,7 @@ snaptrade = SnapTrade(
 try:
     # Remove a target portfolio.
     delete_portfoli_response = snaptrade.portfolio_management.delete_portfoli(
-        portfolio_group_id="portfolioGroupId_example",
+        portfolio_group_id="portfolioGroupId_example",  # required
     )
     pprint(delete_portfoli_response.body)
     pprint(delete_portfoli_response.body["id"])
@@ -813,8 +796,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **delete_portfolio_target_by_id**
-<a name="delete_portfolio_target_by_id"></a>
-> TargetAsset delete_portfolio_target_by_id(portfolio_group_idtarget_asset_id)
 
 Remove a TargetAsset.
 
@@ -822,7 +803,7 @@ Remove a TargetAsset.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -836,8 +817,8 @@ try:
     # Remove a TargetAsset.
     delete_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.delete_portfolio_target_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            target_asset_id="targetAssetId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            target_asset_id="targetAssetId_example",  # required
         )
     )
     pprint(delete_portfolio_target_by_id_response.body)
@@ -944,8 +925,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **detail_asset_class**
-<a name="detail_asset_class"></a>
-> ModelAssetClassDetails detail_asset_class(model_asset_class_id)
 
 Get details of a model asset class
 
@@ -953,7 +932,7 @@ Get details of a model asset class
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -966,7 +945,7 @@ snaptrade = SnapTrade(
 try:
     # Get details of a model asset class
     detail_asset_class_response = snaptrade.portfolio_management.detail_asset_class(
-        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
     )
     pprint(detail_asset_class_response.body)
     pprint(detail_asset_class_response.body["model_asset_class"])
@@ -1033,8 +1012,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_calculated_trade_by_id**
-<a name="get_calculated_trade_by_id"></a>
-> [Trade] get_calculated_trade_by_id(portfolio_group_idcalculated_trade_idtrade_id)
 
 Return an individual trade
 
@@ -1042,7 +1019,7 @@ Return an individual trade
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1056,9 +1033,9 @@ try:
     # Return an individual trade
     get_calculated_trade_by_id_response = (
         snaptrade.portfolio_management.get_calculated_trade_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            calculated_trade_id="calculatedTradeId_example",
-            trade_id="TradeId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            calculated_trade_id="calculatedTradeId_example",  # required
+            trade_id="TradeId_example",  # required
         )
     )
     pprint(get_calculated_trade_by_id_response.body)
@@ -1157,8 +1134,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_model_details_by_id**
-<a name="get_model_details_by_id"></a>
-> ModelPortfolioDetails get_model_details_by_id(model_portfolio_id)
 
 Get details of a model portfolio
 
@@ -1166,7 +1141,7 @@ Get details of a model portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1180,7 +1155,7 @@ try:
     # Get details of a model portfolio
     get_model_details_by_id_response = (
         snaptrade.portfolio_management.get_model_details_by_id(
-            model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
         )
     )
     pprint(get_model_details_by_id_response.body)
@@ -1252,8 +1227,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portfolio_balances**
-<a name="get_portfolio_balances"></a>
-> [Balance] get_portfolio_balances(portfolio_group_id)
 
 Get sum of cash balances in portfolio group
 
@@ -1261,7 +1234,7 @@ Get sum of cash balances in portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1275,7 +1248,7 @@ try:
     # Get sum of cash balances in portfolio group
     get_portfolio_balances_response = (
         snaptrade.portfolio_management.get_portfolio_balances(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(get_portfolio_balances_response.body)
@@ -1375,8 +1348,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portfolio_details_by_id**
-<a name="get_portfolio_details_by_id"></a>
-> PortfolioGroup get_portfolio_details_by_id(portfolio_group_id)
 
 Get details of a target portfolio
 
@@ -1384,7 +1355,7 @@ Get details of a target portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1398,7 +1369,7 @@ try:
     # Get details of a target portfolio
     get_portfolio_details_by_id_response = (
         snaptrade.portfolio_management.get_portfolio_details_by_id(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(get_portfolio_details_by_id_response.body)
@@ -1477,8 +1448,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portfolio_info**
-<a name="get_portfolio_info"></a>
-> PortfolioGroupInfo get_portfolio_info(portfolio_group_id)
 
 Return a whole bunch of relevant information relating to a portfolio group.
 
@@ -1486,7 +1455,7 @@ Return a whole bunch of relevant information relating to a portfolio group.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1499,7 +1468,7 @@ snaptrade = SnapTrade(
 try:
     # Return a whole bunch of relevant information relating to a portfolio group.
     get_portfolio_info_response = snaptrade.portfolio_management.get_portfolio_info(
-        portfolio_group_id="portfolioGroupId_example",
+        portfolio_group_id="portfolioGroupId_example",  # required
     )
     pprint(get_portfolio_info_response.body)
     pprint(get_portfolio_info_response.body["symbols"])
@@ -1582,134 +1551,7 @@ headers | Unset | headers were not defined |
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
-# **get_portfolio_positions**
-<a name="get_portfolio_positions"></a>
-> [PortfolioGroupPosition] get_portfolio_positions(portfolio_group_id)
-
-Get total of each postions owned in portfolio group
-
-### Example
-
-```python
-from pprint import pprint
-from snaptrade_client import SnapTrade
-
-snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
-    consumer_key="YOUR_CONSUMER_KEY",
-    client_id="YOUR_CLIENT_ID",
-)
-
-try:
-    # Get total of each postions owned in portfolio group
-    get_portfolio_positions_response = (
-        snaptrade.portfolio_management.get_portfolio_positions(
-            portfolio_group_id="portfolioGroupId_example",
-        )
-    )
-    pprint(get_portfolio_positions_response.body)
-    pprint(get_portfolio_positions_response.body["symbol"])
-    pprint(get_portfolio_positions_response.body["price"])
-    pprint(get_portfolio_positions_response.body["units"])
-    pprint(get_portfolio_positions_response.headers)
-    pprint(get_portfolio_positions_response.status)
-    pprint(get_portfolio_positions_response.round_trip_time)
-except ApiException as e:
-    print(
-        "Exception when calling PortfolioManagementApi.get_portfolio_positions: %s\n"
-        % e
-    )
-    pprint(e.body)
-    pprint(e.headers)
-    pprint(e.status)
-    pprint(e.reason)
-    pprint(e.round_trip_time)
-```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-portfolioGroupId | PortfolioGroupIdSchema | | 
-
-# PortfolioGroupIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_portfolio_positions.ApiResponseFor200) | Totals of each postions owned in portfolio group
-400 | [ApiResponseFor400](#get_portfolio_positions.ApiResponseFor400) | The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid.
-404 | [ApiResponseFor404](#get_portfolio_positions.ApiResponseFor404) | The specified portfolioGroupId was not found.
-default | [ApiResponseForDefault](#get_portfolio_positions.ApiResponseForDefault) | Unexpected error.
-
-#### get_portfolio_positions.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) | [**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) | [**PortfolioGroupPosition**](../../models/PortfolioGroupPosition.md) |  | 
-
-#### get_portfolio_positions.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-#### get_portfolio_positions.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-#### get_portfolio_positions.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
-
-[[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
-
 # **get_portfolio_settings**
-<a name="get_portfolio_settings"></a>
-> PortfolioGroupSettings get_portfolio_settings(portfolio_group_id)
 
 Get portfolio group settings
 
@@ -1717,7 +1559,7 @@ Get portfolio group settings
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1731,7 +1573,7 @@ try:
     # Get portfolio group settings
     get_portfolio_settings_response = (
         snaptrade.portfolio_management.get_portfolio_settings(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(get_portfolio_settings_response.body)
@@ -1812,8 +1654,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portfolio_target_by_id**
-<a name="get_portfolio_target_by_id"></a>
-> TargetAsset get_portfolio_target_by_id(portfolio_group_idtarget_asset_id)
 
 Get a specific target from a portfolio group
 
@@ -1821,7 +1661,7 @@ Get a specific target from a portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1835,8 +1675,8 @@ try:
     # Get a specific target from a portfolio group
     get_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.get_portfolio_target_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            target_asset_id="targetAssetId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            target_asset_id="targetAssetId_example",  # required
         )
     )
     pprint(get_portfolio_target_by_id_response.body)
@@ -1927,8 +1767,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portfolio_targets**
-<a name="get_portfolio_targets"></a>
-> [TargetAsset] get_portfolio_targets(portfolio_group_id)
 
 Get all target assets under the specified PortfolioGroup.
 
@@ -1936,7 +1774,7 @@ Get all target assets under the specified PortfolioGroup.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -1950,7 +1788,7 @@ try:
     # Get all target assets under the specified PortfolioGroup.
     get_portfolio_targets_response = (
         snaptrade.portfolio_management.get_portfolio_targets(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(get_portfolio_targets_response.body)
@@ -2054,8 +1892,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_portoflio_excluded_assets**
-<a name="get_portoflio_excluded_assets"></a>
-> [ExcludedAsset] get_portoflio_excluded_assets(portfolio_group_id)
 
 Get an array of excluded assets associated with a portfolio group\\
 
@@ -2063,7 +1899,7 @@ Get an array of excluded assets associated with a portfolio group\\
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2077,7 +1913,7 @@ try:
     # Get an array of excluded assets associated with a portfolio group\\
     get_portoflio_excluded_assets_response = (
         snaptrade.portfolio_management.get_portoflio_excluded_assets(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(get_portoflio_excluded_assets_response.body)
@@ -2161,8 +1997,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **import_model_portfolio**
-<a name="import_model_portfolio"></a>
-> [TargetAsset] import_model_portfolio(portfolio_group_id)
 
 Import target allocation based on portfolio group
 
@@ -2170,7 +2004,7 @@ Import target allocation based on portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2184,7 +2018,7 @@ try:
     # Import target allocation based on portfolio group
     import_model_portfolio_response = (
         snaptrade.portfolio_management.import_model_portfolio(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(import_model_portfolio_response.body)
@@ -2272,8 +2106,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list**
-<a name="list"></a>
-> [PortfolioGroup] list(user_iduser_secret)
 
 List all portfolio groups
 
@@ -2281,7 +2113,7 @@ List all portfolio groups
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2294,8 +2126,8 @@ snaptrade = SnapTrade(
 try:
     # List all portfolio groups
     list_response = snaptrade.portfolio_management.list(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(list_response.body)
     pprint(list_response.body["id"])
@@ -2389,8 +2221,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_asset_classes**
-<a name="list_asset_classes"></a>
-> [ModelAssetClassDetails] list_asset_classes()
 
 List of model asset class
 
@@ -2398,7 +2228,7 @@ List of model asset class
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2461,8 +2291,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_calculated_trades**
-<a name="list_calculated_trades"></a>
-> CalculatedTrade list_calculated_trades(portfolio_group_id)
 
 List of trades to make to rebalance portfolio group
 
@@ -2470,7 +2298,7 @@ List of trades to make to rebalance portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2484,7 +2312,7 @@ try:
     # List of trades to make to rebalance portfolio group
     list_calculated_trades_response = (
         snaptrade.portfolio_management.list_calculated_trades(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(list_calculated_trades_response.body)
@@ -2554,8 +2382,6 @@ Type | Description  | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_model_portfolio**
-<a name="list_model_portfolio"></a>
-> [ModelPortfolioDetails] list_model_portfolio()
 
 List of model portfolio
 
@@ -2563,7 +2389,7 @@ List of model portfolio
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2631,8 +2457,6 @@ Class Name | Input Type | Accessed Type | Description | Notes
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_portfolio_accounts**
-<a name="list_portfolio_accounts"></a>
-> [Account] list_portfolio_accounts(portfolio_group_id)
 
 Get all accounts associated with a portfolio group
 
@@ -2640,7 +2464,7 @@ Get all accounts associated with a portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2654,7 +2478,7 @@ try:
     # Get all accounts associated with a portfolio group
     list_portfolio_accounts_response = (
         snaptrade.portfolio_management.list_portfolio_accounts(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(list_portfolio_accounts_response.body)
@@ -2747,8 +2571,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **modify_model_portfolio_by_id**
-<a name="modify_model_portfolio_by_id"></a>
-> modify_model_portfolio_by_id(model_portfolio_idmodel_portfolio_details)
 
 Updates model portfolio object
 
@@ -2756,7 +2578,7 @@ Updates model portfolio object
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2769,22 +2591,22 @@ snaptrade = SnapTrade(
 try:
     # Updates model portfolio object
     snaptrade.portfolio_management.modify_model_portfolio_by_id(
-        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_portfolio_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
         model_portfolio={
             "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
             "name": "Passiv 5x Aggressive Growth Fund",
             "model_type": -1,
-        },
+        },  # optional
         model_portfolio_security=[
             {
                 "percent": 100,
             }
-        ],
+        ],  # optional
         model_portfolio_asset_class=[
             {
                 "percent": 100,
             }
-        ],
+        ],  # optional
     )
     pprint(modify_model_portfolio_by_id_response.headers)
     pprint(modify_model_portfolio_by_id_response.status)
@@ -2854,8 +2676,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **save_portfolio**
-<a name="save_portfolio"></a>
-> PortfolioGroup save_portfolio(portfolio_group_idportfolio_group)
 
 Update an existing target portfolio.
 
@@ -2863,7 +2683,7 @@ Update an existing target portfolio.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -2876,9 +2696,9 @@ snaptrade = SnapTrade(
 try:
     # Update an existing target portfolio.
     save_portfolio_response = snaptrade.portfolio_management.save_portfolio(
-        portfolio_group_id="portfolioGroupId_example",
-        id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        name="Combined Retirement Portfolio",
+        portfolio_group_id="portfolioGroupId_example",  # required
+        id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
+        name="Combined Retirement Portfolio",  # optional
     )
     pprint(save_portfolio_response.body)
     pprint(save_portfolio_response.body["id"])
@@ -2979,8 +2799,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **search_portfolio_symbols**
-<a name="search_portfolio_symbols"></a>
-> [UniversalSymbol] search_portfolio_symbols(portfolio_group_id)
 
 Search for symbols limited to brokerages under the specified portfolio group
 
@@ -2988,7 +2806,7 @@ Search for symbols limited to brokerages under the specified portfolio group
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -3002,8 +2820,8 @@ try:
     # Search for symbols limited to brokerages under the specified portfolio group
     search_portfolio_symbols_response = (
         snaptrade.portfolio_management.search_portfolio_symbols(
-            portfolio_group_id="portfolioGroupId_example",
-            substring="apple",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            substring="apple",  # optional
         )
     )
     pprint(search_portfolio_symbols_response.body)
@@ -3104,8 +2922,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **set_portfolio_targets**
-<a name="set_portfolio_targets"></a>
-> TargetAssetList set_portfolio_targets(portfolio_group_id)
 
 Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
 
@@ -3113,7 +2929,7 @@ Set a new list of target assets under the specified PortfolioGroup. All existing
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -3134,8 +2950,8 @@ try:
                     "is_supported": True,
                     "is_excluded": True,
                 }
-            ],
-            portfolio_group_id="portfolioGroupId_example",
+            ],  # optional
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(set_portfolio_targets_response.body)
@@ -3237,8 +3053,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **update_asset_class**
-<a name="update_asset_class"></a>
-> update_asset_class(model_asset_class_idmodel_asset_class_details)
 
 Updates model asset class objects
 
@@ -3246,7 +3060,7 @@ Updates model asset class objects
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -3259,12 +3073,12 @@ snaptrade = SnapTrade(
 try:
     # Updates model asset class objects
     snaptrade.portfolio_management.update_asset_class(
-        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
         model_asset_class={
             "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
             "name": "Bonds",
-        },
-        model_asset_class_target=[{}],
+        },  # optional
+        model_asset_class_target=[{}],  # optional
     )
     pprint(update_asset_class_response.headers)
     pprint(update_asset_class_response.status)
@@ -3331,8 +3145,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **update_portfolio_settings**
-<a name="update_portfolio_settings"></a>
-> PortfolioGroupSettings update_portfolio_settings(portfolio_group_id)
 
 Updates portfolio group settings
 
@@ -3340,7 +3152,7 @@ Updates portfolio group settings
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -3354,7 +3166,7 @@ try:
     # Updates portfolio group settings
     update_portfolio_settings_response = (
         snaptrade.portfolio_management.update_portfolio_settings(
-            portfolio_group_id="portfolioGroupId_example",
+            portfolio_group_id="portfolioGroupId_example",  # required
         )
     )
     pprint(update_portfolio_settings_response.body)
@@ -3436,8 +3248,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **update_portfolio_target_by_id**
-<a name="update_portfolio_target_by_id"></a>
-> TargetAsset update_portfolio_target_by_id(portfolio_group_idtarget_asset_idtarget_asset)
 
 Update a TargetAsset under the specified PortfolioGroup.
 
@@ -3445,7 +3255,7 @@ Update a TargetAsset under the specified PortfolioGroup.
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -3459,18 +3269,18 @@ try:
     # Update a TargetAsset under the specified PortfolioGroup.
     update_portfolio_target_by_id_response = (
         snaptrade.portfolio_management.update_portfolio_target_by_id(
-            portfolio_group_id="portfolioGroupId_example",
-            target_asset_id="targetAssetId_example",
-            id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+            portfolio_group_id="portfolioGroupId_example",  # required
+            target_asset_id="targetAssetId_example",  # required
+            id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # optional
             symbol={
                 "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
                 "symbol": "VAB.TO",
                 "raw_symbol": "VAB",
                 "description": "VANGUARD CDN AGGREGATE BOND INDEX ETF",
-            },
-            percent=90,
-            is_supported=True,
-            is_excluded=True,
+            },  # optional
+            percent=90,  # optional
+            is_supported=True,  # optional
+            is_excluded=True,  # optional
         )
     )
     pprint(update_portfolio_target_by_id_response.body)

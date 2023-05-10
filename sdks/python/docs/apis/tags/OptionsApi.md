@@ -12,8 +12,6 @@ Method | HTTP request | Description
 [**place_option_strategy**](#place_option_strategy) | **post** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 
 # **get_option_strategy**
-<a name="get_option_strategy"></a>
-> StrategyQuotes get_option_strategy(user_iduser_secretaccount_idany_type)
 
 Creates an option strategy object that will be used to place an option strategy order
 
@@ -21,7 +19,7 @@ Creates an option strategy object that will be used to place an option strategy 
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -34,18 +32,18 @@ snaptrade = SnapTrade(
 try:
     # Creates an option strategy object that will be used to place an option strategy order
     get_option_strategy_response = snaptrade.options.get_option_strategy(
-        underlying_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        underlying_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
         legs=[
             {
                 "action": "BUY_TO_OPEN",
                 "option_symbol_id": "SPY220819P00200000",
                 "quantity": 1,
             }
-        ],
-        strategy_type="CUSTOM",
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
+        ],  # required
+        strategy_type="CUSTOM",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
     )
     pprint(get_option_strategy_response.body)
     pprint(get_option_strategy_response.body["strategy"])
@@ -183,8 +181,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_options_chain**
-<a name="get_options_chain"></a>
-> OptionChain get_options_chain(user_iduser_secretaccount_idsymbol)
 
 Get the options chain
 
@@ -192,7 +188,7 @@ Get the options chain
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -205,10 +201,10 @@ snaptrade = SnapTrade(
 try:
     # Get the options chain
     get_options_chain_response = snaptrade.options.get_options_chain(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
-        symbol="symbol_example",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
+        symbol="symbol_example",  # required
     )
     pprint(get_options_chain_response.body)
     pprint(get_options_chain_response.headers)
@@ -317,8 +313,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_options_strategy_quote**
-<a name="get_options_strategy_quote"></a>
-> StrategyQuotes get_options_strategy_quote(user_iduser_secretaccount_idoption_strategy_id)
 
 Get latest market data of option strategy
 
@@ -326,7 +320,7 @@ Get latest market data of option strategy
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -339,10 +333,10 @@ snaptrade = SnapTrade(
 try:
     # Get latest market data of option strategy
     get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
-        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
+        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
     )
     pprint(get_options_strategy_quote_response.body)
     pprint(get_options_strategy_quote_response.body["strategy"])
@@ -457,8 +451,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_option_holdings**
-<a name="list_option_holdings"></a>
-> OptionsHoldings list_option_holdings(user_iduser_secretaccount_id)
 
 Get the options holdings in the account
 
@@ -466,7 +458,7 @@ Get the options holdings in the account
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -479,9 +471,9 @@ snaptrade = SnapTrade(
 try:
     # Get the options holdings in the account
     list_option_holdings_response = snaptrade.options.list_option_holdings(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="accountId_example",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="accountId_example",  # required
     )
     pprint(list_option_holdings_response.body)
     pprint(list_option_holdings_response.body["id"])
@@ -588,8 +580,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **place_option_strategy**
-<a name="place_option_strategy"></a>
-> StrategyOrderRecord place_option_strategy(user_iduser_secretaccount_idoption_strategy_idany_type)
 
 Place an option strategy order on the brokerage
 
@@ -597,7 +587,7 @@ Place an option strategy order on the brokerage
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -610,13 +600,13 @@ snaptrade = SnapTrade(
 try:
     # Place an option strategy order on the brokerage
     place_option_strategy_response = snaptrade.options.place_option_strategy(
-        order_type="Limit",
-        time_in_force="DAY",
-        price=31.33,
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        order_type="Limit",  # required
+        time_in_force="DAY",  # required
+        price=31.33,  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
+        option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
     )
     pprint(place_option_strategy_response.body)
     pprint(place_option_strategy_response.body["strategy"])

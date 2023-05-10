@@ -20,8 +20,10 @@ import atexit
 from multiprocessing.pool import ThreadPool
 import re
 import tempfile
+import time
 import typing
 import typing_extensions
+import aiohttp
 import urllib3
 from urllib3._collections import HTTPHeaderDict
 from urllib.parse import urlparse, quote
@@ -31,8 +33,8 @@ from urllib3.fields import guess_content_type
 import frozendict
 
 from snaptrade_client import rest
-from snaptrade_client.api_response import ApiResponse
-from snaptrade_client.rest import ResponseWrapper
+from snaptrade_client.api_response import ApiResponse, AsyncApiResponse
+from snaptrade_client.rest import AsyncResponseWrapper, ResponseWrapper
 from snaptrade_client.configuration import Configuration
 from snaptrade_client.exceptions import ApiTypeError, ApiValueError, MissingRequiredParametersError
 from snaptrade_client.request_after_hook import request_after_hook
@@ -50,6 +52,13 @@ from snaptrade_client.schemas import (
     unset,
 )
 
+@dataclass
+class MappedArgs:
+    body: typing.Any = None
+    query: typing.Optional[dict] = None
+    path: typing.Optional[dict] = None
+    header: typing.Optional[dict] = None
+    cookie: typing.Optional[dict] = None
 
 class RequestField(RequestFieldBase):
     def __eq__(self, other):
@@ -829,8 +838,11 @@ class MediaType:
 
 @dataclass
 class ApiResponseWithoutDeserialization(ApiResponse):
-    response: urllib3.HTTPResponse
-    body: typing.Union[Unset, typing.Type[Schema]] = unset
+    pass
+
+@dataclass
+class ApiResponseWithoutDeserializationAsync(AsyncApiResponse):
+    pass
 
 
 class OpenApiResponse(JSONDetector):
@@ -839,6 +851,7 @@ class OpenApiResponse(JSONDetector):
     def __init__(
         self,
         response_cls: typing.Type[ApiResponse] = ApiResponse,
+        response_cls_async: typing.Type[AsyncApiResponse] = AsyncApiResponse,
         content: typing.Optional[typing.Dict[str, MediaType]] = None,
         headers: typing.Optional[typing.List[HeaderParameter]] = None,
     ):
@@ -847,11 +860,12 @@ class OpenApiResponse(JSONDetector):
             raise ValueError('Invalid value for content, the content dict must have >= 1 entry')
         self.content = content
         self.response_cls = response_cls
+        self.response_cls_async = response_cls_async
 
     @staticmethod
-    def __deserialize_json(response: urllib3.HTTPResponse) -> typing.Any:
+    def __deserialize_json(response: bytes) -> typing.Any:
         # python must be >= 3.9 so we can pass in bytes into json.loads
-        return json.loads(response.data)
+        return json.loads(response)
 
     @staticmethod
     def __file_name_from_response_url(response_url: typing.Optional[str]) -> typing.Optional[str]:
@@ -911,9 +925,9 @@ class OpenApiResponse(JSONDetector):
 
     @staticmethod
     def __deserialize_multipart_form_data(
-        response: urllib3.HTTPResponse
+        response: bytes
     ) -> typing.Dict[str, typing.Any]:
-        msg = email.message_from_bytes(response.data)
+        msg = email.message_from_bytes(response)
         return {
             part.get_param("name", header="Content-Disposition"): part.get_payload(
                 decode=True
@@ -965,6 +979,59 @@ class OpenApiResponse(JSONDetector):
 
         return None
 
+    async def deserialize_async(self, response: AsyncResponseWrapper, configuration: Configuration, skip_deserialization = False) -> AsyncApiResponse:
+        """
+        Deserializes an HTTP response body into an object.
+        """
+        content_type = response.http_response.content_type
+        deserialized_body = unset
+        if self.content is not None:
+            if len(self.content) == 0:
+                # some specs do not define response content media type schemas
+                return self.response_cls_async(
+                    round_trip_time=response.round_trip_time,
+                    response=response.http_response,
+                    body=unset,
+                    headers=response.http_response.headers,
+                    status=response.http_response.status
+                )
+            body_schema = self.__get_schema_for_content_type(content_type)
+            if body_schema is None:
+                raise ApiValueError(
+                    f"Invalid content_type returned. Content_type='{content_type}' was returned "
+                    f"when only {str(set(self.content))} are defined for status_code={str(response.http_response.status)}"
+                )
+            if self._content_type_is_json(content_type):
+                body_data = self.__deserialize_json(await response.http_response.read())
+            elif content_type.startswith('multipart/form-data'):
+                body_data = self.__deserialize_multipart_form_data(await response.http_response.read())
+            else:
+                raise NotImplementedError('Deserialization of {} has not yet been implemented'.format(content_type))
+            if skip_deserialization:
+                return self.response_cls_async(
+                    round_trip_time=response.round_trip_time,
+                    response=response.http_response,
+                    body=body_data,
+                    headers=response.http_response.headers,
+                    status=response.http_response.status
+                )
+            # Execute validation and throw as a side effect if validation fails
+            body_schema.from_openapi_data_oapg(
+                body_data,
+                _configuration=configuration
+            )
+            # Validation passed, set deserialized_body to plain old deserialized data
+            deserialized_body = body_data
+
+        return self.response_cls_async(
+            round_trip_time=response.round_trip_time,
+            response=response.http_response,
+            body=deserialized_body,
+            headers=response.http_response.headers,
+            status=response.http_response.status
+        )
+
+
     def deserialize(self, response: ResponseWrapper, configuration: Configuration, skip_deserialization = False) -> ApiResponse:
         content_type = response.http_response.headers.get('content-type')
         deserialized_body = unset
@@ -993,11 +1060,11 @@ class OpenApiResponse(JSONDetector):
                 )
 
             if self._content_type_is_json(content_type):
-                body_data = self.__deserialize_json(response.http_response)
+                body_data = self.__deserialize_json(response.http_response.data)
             elif content_type == 'application/octet-stream':
                 body_data = self.__deserialize_application_octet_stream(response.http_response)
             elif content_type.startswith('multipart/form-data'):
-                body_data = self.__deserialize_multipart_form_data(response.http_response)
+                body_data = self.__deserialize_multipart_form_data(response.http_response.data)
                 content_type = 'multipart/form-data'
             else:
                 raise NotImplementedError('Deserialization of {} has not yet been implemented'.format(content_type))
@@ -1108,6 +1175,81 @@ class ApiClient:
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
 
+    async def __async_call_api(
+        self,
+        resource_path: str,
+        method: str,
+        headers: typing.Optional[HTTPHeaderDict] = None,
+        serialized_body: typing.Optional[typing.Union[str, bytes]] = None,
+        body: typing.Any = None,
+        fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
+        auth_settings: typing.Optional[typing.List[str]] = None,
+        stream: bool = False,
+        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        host: typing.Optional[str] = None,
+        prefix_separator_iterator: PrefixSeparatorIterator = None,
+    ) -> AsyncResponseWrapper:
+
+        request_before_hook(
+            resource_path=resource_path,
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            headers=headers,
+        )
+
+        # header parameters
+        used_headers = HTTPHeaderDict(self.default_headers)
+        if self.cookie:
+            headers['Cookie'] = self.cookie
+
+        # auth setting
+        resource_path = self.update_params_for_auth(
+            used_headers,
+            auth_settings,
+            resource_path,
+            method,
+            body,
+            prefix_separator_iterator
+        )
+
+        # must happen after cookie setting and auth setting in case user is overriding those
+        if headers:
+            used_headers.update(headers)
+
+        # request url
+        if host is None:
+            url = self.configuration.host + resource_path
+        else:
+            # use server/host defined in path or operation instead
+            url = host + resource_path
+
+        request_after_hook(
+            resource_path=resource_path,
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            headers=used_headers,
+        )
+
+        # perform request and return response
+        response = await self.async_request(
+            method,
+            url,
+            headers=used_headers,
+            fields=fields,
+            body=serialized_body,
+            stream=stream,
+            timeout=timeout,
+        )
+
+
+        return response
+
     def __call_api(
         self,
         resource_path: str,
@@ -1183,7 +1325,7 @@ class ApiClient:
 
         return response
 
-    def call_api(
+    async def async_call_api(
         self,
         resource_path: str,
         method: str,
@@ -1192,15 +1334,12 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
-        async_req: typing.Optional[bool] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
         prefix_separator_iterator: PrefixSeparatorIterator = None,
-    ) -> ResponseWrapper:
+    ) -> AsyncResponseWrapper:
         """Makes the HTTP request (synchronous) and returns deserialized data.
-
-        To make an async_req request, set the async_req parameter.
 
         :param resource_path: Path to method endpoint.
         :param method: Method to call.
@@ -1210,8 +1349,6 @@ class ApiClient:
         :param fields: Request post form parameters,
             for `application/x-www-form-urlencoded`, `multipart/form-data`.
         :param auth_settings: Auth Settings names for the request.
-        :param async_req: execute request asynchronously
-        :type async_req: bool, optional TODO remove, unused
         :param stream: if True, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Also when True, if the openapi spec describes a file download,
@@ -1224,45 +1361,128 @@ class ApiClient:
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
         :param host: api endpoint host
-        :return:
-            If async_req parameter is True,
-            the request will be called asynchronously.
-            The method will return the request thread.
-            If parameter async_req is False or missing,
-            then the method will return the response directly.
+        :return: response
         """
+        return await self.__async_call_api(
+            resource_path,
+            method,
+            headers,
+            serialized_body,
+            body,
+            fields,
+            auth_settings,
+            stream,
+            timeout,
+            host,
+            prefix_separator_iterator,
+        )
 
-        if not async_req:
-            return self.__call_api(
-                resource_path,
-                method,
-                headers,
-                serialized_body,
-                body,
-                fields,
-                auth_settings,
-                stream,
-                timeout,
-                host,
-                prefix_separator_iterator,
-            )
+    def call_api(
+        self,
+        resource_path: str,
+        method: str,
+        headers: typing.Optional[HTTPHeaderDict] = None,
+        serialized_body: typing.Optional[typing.Union[str, bytes]] = None,
+        body: typing.Any = None,
+        fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
+        auth_settings: typing.Optional[typing.List[str]] = None,
+        stream: bool = False,
+        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        host: typing.Optional[str] = None,
+        prefix_separator_iterator: PrefixSeparatorIterator = None,
+    ) -> ResponseWrapper:
+        """Makes the HTTP request (synchronous) and returns deserialized data.
 
-        return self.pool.apply_async(
-            self.__call_api,
-            (
-                resource_path,
-                method,
-                headers,
-                serialized_body,
-                body,
-                json,
-                fields,
-                auth_settings,
-                stream,
-                timeout,
-                host,
-                prefix_separator_iterator,
-            )
+        :param resource_path: Path to method endpoint.
+        :param method: Method to call.
+        :param headers: Header parameters to be
+            placed in the request header.
+        :param body: Request body.
+        :param fields: Request post form parameters,
+            for `application/x-www-form-urlencoded`, `multipart/form-data`.
+        :param auth_settings: Auth Settings names for the request.
+        :param stream: if True, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Also when True, if the openapi spec describes a file download,
+                                 the data will be written to a local filesystme file and the BinarySchema
+                                 instance will also inherit from FileSchema and FileIO
+                                 Default is False.
+        :type stream: bool, optional
+        :param timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param host: api endpoint host
+        :return: response
+        """
+        return self.__call_api(
+            resource_path,
+            method,
+            headers,
+            serialized_body,
+            body,
+            fields,
+            auth_settings,
+            stream,
+            timeout,
+            host,
+            prefix_separator_iterator,
+        )
+
+    def fields_to_dict(self, fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]]):
+        """Converts fields to dict.
+
+        :param fields: fields
+        :return: dict
+        """
+        if fields is None:
+            return None
+        return {k: v for k, v in fields}
+
+    async def async_request(
+        self,
+        method: str,
+        url: str,
+        headers: typing.Optional[HTTPHeaderDict] = None,
+        fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
+        body: typing.Optional[typing.Union[str, bytes]] = None,
+        stream: bool = False,
+        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+    ) -> AsyncResponseWrapper:
+        if body and fields:
+            raise ApiValueError("body parameter cannot be used with fields parameter")
+        data = None
+        if body:
+            data=body
+        if fields:
+            data=self.fields_to_dict(fields)
+        session = aiohttp.ClientSession()
+        t1 = time.time()
+        if method == "GET":
+            session.get(url)
+            response = await session.get(url, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "HEAD":
+            response = await session.head(url, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "OPTIONS":
+            response = await session.options(url, data=data, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "POST":
+            response = await session.post(url, data=data, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "PUT":
+            response = await session.put(url, data=data, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "PATCH":
+            response = await session.patch(url, data=data, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        elif method == "DELETE":
+            response = await session.delete(url, data=data, headers=headers)
+            return AsyncResponseWrapper(response, time.time() - t1, session)
+        raise ApiValueError(
+            "http method must be `GET`, `HEAD`, `OPTIONS`,"
+            " `POST`, `PATCH`, `PUT` or `DELETE`."
         )
 
     def request(

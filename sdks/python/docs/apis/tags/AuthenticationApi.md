@@ -12,8 +12,6 @@ Method | HTTP request | Description
 [**register_snap_trade_user**](#register_snap_trade_user) | **post** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
 
 # **delete_snap_trade_user**
-<a name="delete_snap_trade_user"></a>
-> DeleteUserResponse delete_snap_trade_user(user_id)
 
 Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 
@@ -21,7 +19,7 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -34,7 +32,7 @@ snaptrade = SnapTrade(
 try:
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
-        user_id="John.doe@snaptrade.com",
+        user_id="John.doe@snaptrade.com",  # required
     )
     pprint(delete_snap_trade_user_response.body)
     pprint(delete_snap_trade_user_response.body["status"])
@@ -154,8 +152,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_user_jwt**
-<a name="get_user_jwt"></a>
-> EncryptedResponse get_user_jwt(user_iduser_secret)
 
 Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
 
@@ -163,7 +159,7 @@ Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local 
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -176,8 +172,8 @@ snaptrade = SnapTrade(
 try:
     # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
     get_user_jwt_response = snaptrade.authentication.get_user_jwt(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(get_user_jwt_response.headers)
     pprint(get_user_jwt_response.status)
@@ -304,8 +300,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **list_snap_trade_users**
-<a name="list_snap_trade_users"></a>
-> UserList list_snap_trade_users()
 
 Get a list of all SnapTrade users you&#x27;ve registered on our platform
 
@@ -313,7 +307,7 @@ Get a list of all SnapTrade users you&#x27;ve registered on our platform
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -404,8 +398,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **login_snap_trade_user**
-<a name="login_snap_trade_user"></a>
-> bool, date, datetime, dict, float, int, list, str, none_type login_snap_trade_user(user_iduser_secret)
 
 Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
 
@@ -413,7 +405,7 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -426,13 +418,13 @@ snaptrade = SnapTrade(
 try:
     # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
     login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
-        user_id="John.doe@snaptrade.com",
-        user_secret="USERSECRET123",
-        broker="ALPACA",
-        immediate_redirect=True,
-        custom_redirect="https://passiv.com",
-        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        connection_type="read",
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+        broker="ALPACA",  # optional
+        immediate_redirect=True,  # optional
+        custom_redirect="https://passiv.com",  # optional
+        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",  # optional
+        connection_type="read",  # optional
     )
     pprint(login_snap_trade_user_response.headers)
     pprint(login_snap_trade_user_response.status)
@@ -577,8 +569,6 @@ headers | Unset | headers were not defined |
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **register_snap_trade_user**
-<a name="register_snap_trade_user"></a>
-> UserIDandSecret register_snap_trade_user(snap_trade_register_user_request_body)
 
 Register user with SnapTrade in order to create secure brokerage authorizations
 
@@ -586,7 +576,7 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 
 ```python
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
@@ -599,8 +589,8 @@ snaptrade = SnapTrade(
 try:
     # Register user with SnapTrade in order to create secure brokerage authorizations
     register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
-        user_id="snaptrade-user-123",
-        rsa_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
+        user_id="snaptrade-user-123",  # optional
+        rsa_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",  # optional
     )
     pprint(register_snap_trade_user_response.body)
     pprint(register_snap_trade_user_response.body["user_id"])
