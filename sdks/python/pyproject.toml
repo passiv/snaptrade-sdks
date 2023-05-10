@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "snaptrade-python-sdk"
-version = "10.10.0"
+version = "10.11.0"
 description = "Connect brokerage accounts to your app for live positions and trading"
 authors = ["SnapTrade <api@snaptrade.com>"]
 license = "MIT"
