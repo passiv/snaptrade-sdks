@@ -31,6 +31,9 @@ generators:
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
+    apiDocumentationAuthenticationPartial: snippets/phpDocAuthPartial.php
+    clientState:
+      - consumerKey
     git:
       userId: passiv
       repoId: snaptrade-php-sdk
@@ -98,8 +101,21 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/typescript
     npmName: snaptrade-typescript-sdk
-specPath: api.yaml
+specInputPath: api.yaml
+specPath: api-fixed.yaml
 fixConfig:
   update:
     $.components.schemas.ReportingDate:
       format: date
+    $.paths./modelAssetClass.get:
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
