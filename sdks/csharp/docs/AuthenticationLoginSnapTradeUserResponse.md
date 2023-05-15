@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.AuthenticationLoginSnapTradeUser200Response
+# SnapTrade.Net.Model.AuthenticationLoginSnapTradeUserResponse
 
 ## Properties
 

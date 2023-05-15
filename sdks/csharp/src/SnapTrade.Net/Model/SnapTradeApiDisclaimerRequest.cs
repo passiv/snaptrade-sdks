@@ -27,16 +27,16 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// APIDisclaimerAcceptRequest
+    /// SnapTradeApiDisclaimerRequest
     /// </summary>
-    [DataContract(Name = "APIDisclaimer_accept_request")]
-    public partial class APIDisclaimerAcceptRequest : IEquatable<APIDisclaimerAcceptRequest>, IValidatableObject
+    [DataContract(Name = "SnapTradeApiDisclaimerRequest")]
+    public partial class SnapTradeApiDisclaimerRequest : IEquatable<SnapTradeApiDisclaimerRequest>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="APIDisclaimerAcceptRequest" /> class.
+        /// Initializes a new instance of the <see cref="SnapTradeApiDisclaimerRequest" /> class.
         /// </summary>
         /// <param name="accepted">A boolean that indicates whether this user has accepted the disclaimer or not..</param>
-        public APIDisclaimerAcceptRequest(bool accepted = default(bool))
+        public SnapTradeApiDisclaimerRequest(bool accepted = default(bool))
         {
             this.Accepted = accepted;
         }
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class APIDisclaimerAcceptRequest {\n");
+            sb.Append("class SnapTradeApiDisclaimerRequest {\n");
             sb.Append("  Accepted: ").Append(Accepted).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -77,15 +77,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as APIDisclaimerAcceptRequest);
+            return this.Equals(input as SnapTradeApiDisclaimerRequest);
         }
 
         /// <summary>
-        /// Returns true if APIDisclaimerAcceptRequest instances are equal
+        /// Returns true if SnapTradeApiDisclaimerRequest instances are equal
         /// </summary>
-        /// <param name="input">Instance of APIDisclaimerAcceptRequest to be compared</param>
+        /// <param name="input">Instance of SnapTradeApiDisclaimerRequest to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(APIDisclaimerAcceptRequest input)
+        public bool Equals(SnapTradeApiDisclaimerRequest input)
         {
             if (input == null)
             {

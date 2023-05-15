@@ -58,6 +58,14 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
+        }
+        /// <summary>
         /// Test the property 'Id'
         /// </summary>
         [Fact]
@@ -80,14 +88,6 @@ namespace SnapTrade.Net.Test.Model
         public void BrokerageAuthorizationTest()
         {
             // TODO unit test for the property 'BrokerageAuthorization'
-        }
-        /// <summary>
-        /// Test the property 'Description'
-        /// </summary>
-        [Fact]
-        public void DescriptionTest()
-        {
-            // TODO unit test for the property 'Description'
         }
         /// <summary>
         /// Test the property 'AllowsFractionalUnits'

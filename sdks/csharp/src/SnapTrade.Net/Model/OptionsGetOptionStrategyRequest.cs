@@ -29,7 +29,7 @@ namespace SnapTrade.Net.Model
     /// <summary>
     /// OptionsGetOptionStrategyRequest
     /// </summary>
-    [DataContract(Name = "Options_getOptionStrategy_request")]
+    [DataContract(Name = "OptionsGetOptionStrategyRequest")]
     public partial class OptionsGetOptionStrategyRequest : IEquatable<OptionsGetOptionStrategyRequest>, IValidatableObject
     {
         /// <summary>

@@ -35,11 +35,11 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalActivity" /> class.
         /// </summary>
+        /// <param name="description">description.</param>
         /// <param name="id">id.</param>
         /// <param name="account">account.</param>
         /// <param name="amount">amount.</param>
         /// <param name="currency">currency.</param>
-        /// <param name="description">description.</param>
         /// <param name="fee">fee.</param>
         /// <param name="institution">institution.</param>
         /// <param name="optionType">If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string.</param>
@@ -50,13 +50,13 @@ namespace SnapTrade.Net.Model
         /// <param name="tradeDate">tradeDate.</param>
         /// <param name="type">Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT.</param>
         /// <param name="units">Usually but not necessarily an integer.</param>
-        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
+        public UniversalActivity(string description = default(string), string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
         {
+            this.Description = description;
             this.Id = id;
             this.Account = account;
             this.Amount = amount;
             this.Currency = currency;
-            this.Description = description;
             this.Fee = fee;
             this.Institution = institution;
             this.OptionType = optionType;
@@ -69,6 +69,12 @@ namespace SnapTrade.Net.Model
             this.Units = units;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -93,12 +99,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public Currency Currency { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Fee
@@ -178,11 +178,11 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class UniversalActivity {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Fee: ").Append(Fee).Append("\n");
             sb.Append("  Institution: ").Append(Institution).Append("\n");
             sb.Append("  OptionType: ").Append(OptionType).Append("\n");
@@ -230,6 +230,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -248,11 +253,6 @@ namespace SnapTrade.Net.Model
                     this.Currency == input.Currency ||
                     (this.Currency != null &&
                     this.Currency.Equals(input.Currency))
-                ) && base.Equals(input) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.Fee == input.Fee ||
@@ -313,6 +313,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
+                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -328,10 +332,6 @@ namespace SnapTrade.Net.Model
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Fee.GetHashCode();
                 if (this.Institution != null)

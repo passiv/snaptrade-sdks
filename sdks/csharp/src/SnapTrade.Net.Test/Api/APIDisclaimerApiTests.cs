@@ -64,8 +64,8 @@ namespace SnapTrade.Net.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string userId = null;
             //string userSecret = null;
-            //APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest = null;
-            //var response = instance.Accept(userId, userSecret, aPIDisclaimerAcceptRequest);
+            //SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest = null;
+            //var response = instance.Accept(userId, userSecret, snapTradeApiDisclaimerRequest);
             //Assert.IsType<SnapTradeAPIDisclaimerAcceptStatus>(response);
         }
     }

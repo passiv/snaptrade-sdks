@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExpiryDate** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
+**ExpiryDate** | **string** |  | [optional] 
 **ListingExchange** | **string** |  | [optional] 
 **OptionExerciseType** | **string** |  | [optional] 
 **ChainPerRoot** | [**List&lt;OptionChainInnerChainPerRootInner&gt;**](OptionChainInnerChainPerRootInner.md) |  | [optional] 

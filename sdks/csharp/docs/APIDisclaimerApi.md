@@ -8,7 +8,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="accept"></a>
 # **Accept**
-> SnapTradeAPIDisclaimerAcceptStatus Accept (string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest)
+> SnapTradeAPIDisclaimerAcceptStatus Accept (string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest)
 
 Accept or Reject SnapTrade disclaimer agreement
 
@@ -38,12 +38,12 @@ namespace Example
             var apiInstance = new APIDisclaimerApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
-            var aPIDisclaimerAcceptRequest = new APIDisclaimerAcceptRequest(); // APIDisclaimerAcceptRequest | 
+            var snapTradeApiDisclaimerRequest = new SnapTradeApiDisclaimerRequest(); // SnapTradeApiDisclaimerRequest | 
 
             try
             {
                 // Accept or Reject SnapTrade disclaimer agreement
-                SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.Accept(userId, userSecret, aPIDisclaimerAcceptRequest);
+                SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.Accept(userId, userSecret, snapTradeApiDisclaimerRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -70,7 +70,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Accept or Reject SnapTrade disclaimer agreement
-    ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> response = apiInstance.AcceptWithHttpInfo(userId, userSecret, aPIDisclaimerAcceptRequest);
+    ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> response = apiInstance.AcceptWithHttpInfo(userId, userSecret, snapTradeApiDisclaimerRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -89,7 +89,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **aPIDisclaimerAcceptRequest** | [**APIDisclaimerAcceptRequest**](APIDisclaimerAcceptRequest.md) |  |  |
+| **snapTradeApiDisclaimerRequest** | [**SnapTradeApiDisclaimerRequest**](SnapTradeApiDisclaimerRequest.md) |  |  |
 
 ### Return type
 

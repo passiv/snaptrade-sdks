@@ -95,8 +95,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AuthenticationLoginSnapTradeUser200Response</returns>
-        AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
+        /// <returns>AuthenticationLoginSnapTradeUserResponse</returns>
+        AuthenticationLoginSnapTradeUserResponse LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
 
         /// <summary>
         /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
@@ -109,8 +109,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AuthenticationLoginSnapTradeUser200Response</returns>
-        ApiResponse<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
+        /// <returns>ApiResponse of AuthenticationLoginSnapTradeUserResponse</returns>
+        ApiResponse<AuthenticationLoginSnapTradeUserResponse> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
         /// <summary>
         /// Register user with SnapTrade in order to create secure brokerage authorizations
         /// </summary>
@@ -227,8 +227,8 @@ namespace SnapTrade.Net.Api
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AuthenticationLoginSnapTradeUser200Response</returns>
-        System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of AuthenticationLoginSnapTradeUserResponse</returns>
+        System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUserResponse> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
@@ -242,8 +242,8 @@ namespace SnapTrade.Net.Api
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUser200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AuthenticationLoginSnapTradeUser200Response>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUserResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AuthenticationLoginSnapTradeUserResponse>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register user with SnapTrade in order to create secure brokerage authorizations
         /// </summary>
@@ -919,10 +919,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AuthenticationLoginSnapTradeUser200Response</returns>
-        public AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0)
+        /// <returns>AuthenticationLoginSnapTradeUserResponse</returns>
+        public AuthenticationLoginSnapTradeUserResponse LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUser200Response> localVarResponse = LoginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
+            SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUserResponse> localVarResponse = LoginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
             return localVarResponse.Data;
         }
 
@@ -934,8 +934,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AuthenticationLoginSnapTradeUser200Response</returns>
-        public SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0)
+        /// <returns>ApiResponse of AuthenticationLoginSnapTradeUserResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUserResponse> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -996,7 +996,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<AuthenticationLoginSnapTradeUser200Response>("/snapTrade/login", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<AuthenticationLoginSnapTradeUserResponse>("/snapTrade/login", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("LoginSnapTradeUser", localVarResponse);
@@ -1018,10 +1018,10 @@ namespace SnapTrade.Net.Api
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AuthenticationLoginSnapTradeUser200Response</returns>
-        public async System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of AuthenticationLoginSnapTradeUserResponse</returns>
+        public async System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUserResponse> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUser200Response> localVarResponse = await LoginSnapTradeUserWithHttpInfoAsync(userId, userSecret, snapTradeLoginUserRequestBody, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUserResponse> localVarResponse = await LoginSnapTradeUserWithHttpInfoAsync(userId, userSecret, snapTradeLoginUserRequestBody, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1034,8 +1034,8 @@ namespace SnapTrade.Net.Api
         /// <param name="snapTradeLoginUserRequestBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUser200Response)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUser200Response>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUserResponse)</returns>
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AuthenticationLoginSnapTradeUserResponse>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1097,7 +1097,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<AuthenticationLoginSnapTradeUser200Response>("/snapTrade/login", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AuthenticationLoginSnapTradeUserResponse>("/snapTrade/login", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

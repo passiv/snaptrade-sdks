@@ -5,10 +5,10 @@ Universal symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Description** | **string** |  | [optional] 
 **Id** | **Guid** |  | [optional] 
 **Symbol** | **string** |  | [optional] 
 **RawSymbol** | **string** |  | [optional] 
-**Description** | **string** |  | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **Exchange** | [**Exchange**](Exchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | [optional] 

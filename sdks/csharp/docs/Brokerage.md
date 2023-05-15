@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Description** | **string** |  | [optional] 
 **Id** | **Guid** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **DisplayName** | **string** |  | [optional] 
-**Description** | **string** |  | [optional] 
 **AwsS3LogoUrl** | **string** |  | [optional] 
 **Slug** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 

@@ -33,10 +33,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SnapTradeAPIDisclaimerAcceptStatus</returns>
-        SnapTradeAPIDisclaimerAcceptStatus Accept(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0);
+        SnapTradeAPIDisclaimerAcceptStatus Accept(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0);
 
         /// <summary>
         /// Accept or Reject SnapTrade disclaimer agreement
@@ -47,10 +47,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SnapTradeAPIDisclaimerAcceptStatus</returns>
-        ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> AcceptWithHttpInfo(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0);
+        ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> AcceptWithHttpInfo(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -69,11 +69,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SnapTradeAPIDisclaimerAcceptStatus</returns>
-        System.Threading.Tasks.Task<SnapTradeAPIDisclaimerAcceptStatus> AcceptAsync(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SnapTradeAPIDisclaimerAcceptStatus> AcceptAsync(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Accept or Reject SnapTrade disclaimer agreement
@@ -84,11 +84,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SnapTradeAPIDisclaimerAcceptStatus)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SnapTradeAPIDisclaimerAcceptStatus>> AcceptWithHttpInfoAsync(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SnapTradeAPIDisclaimerAcceptStatus>> AcceptWithHttpInfoAsync(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -215,12 +215,12 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SnapTradeAPIDisclaimerAcceptStatus</returns>
-        public SnapTradeAPIDisclaimerAcceptStatus Accept(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0)
+        public SnapTradeAPIDisclaimerAcceptStatus Accept(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResponse = AcceptWithHttpInfo(userId, userSecret, aPIDisclaimerAcceptRequest);
+            SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResponse = AcceptWithHttpInfo(userId, userSecret, snapTradeApiDisclaimerRequest);
             return localVarResponse.Data;
         }
 
@@ -230,10 +230,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SnapTradeAPIDisclaimerAcceptStatus</returns>
-        public SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> AcceptWithHttpInfo(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> AcceptWithHttpInfo(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -247,10 +247,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling APIDisclaimerApi->Accept");
             }
 
-            // verify the required parameter 'aPIDisclaimerAcceptRequest' is set
-            if (aPIDisclaimerAcceptRequest == null)
+            // verify the required parameter 'snapTradeApiDisclaimerRequest' is set
+            if (snapTradeApiDisclaimerRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'aPIDisclaimerAcceptRequest' when calling APIDisclaimerApi->Accept");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'snapTradeApiDisclaimerRequest' when calling APIDisclaimerApi->Accept");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -278,7 +278,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = aPIDisclaimerAcceptRequest;
+            localVarRequestOptions.Data = snapTradeApiDisclaimerRequest;
 
             localVarRequestOptions.Operation = "APIDisclaimerApi.Accept";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -319,13 +319,13 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SnapTradeAPIDisclaimerAcceptStatus</returns>
-        public async System.Threading.Tasks.Task<SnapTradeAPIDisclaimerAcceptStatus> AcceptAsync(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTradeAPIDisclaimerAcceptStatus> AcceptAsync(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResponse = await AcceptWithHttpInfoAsync(userId, userSecret, aPIDisclaimerAcceptRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus> localVarResponse = await AcceptWithHttpInfoAsync(userId, userSecret, snapTradeApiDisclaimerRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -335,11 +335,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="aPIDisclaimerAcceptRequest"></param>
+        /// <param name="snapTradeApiDisclaimerRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SnapTradeAPIDisclaimerAcceptStatus)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus>> AcceptWithHttpInfoAsync(string userId, string userSecret, APIDisclaimerAcceptRequest aPIDisclaimerAcceptRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SnapTradeAPIDisclaimerAcceptStatus>> AcceptWithHttpInfoAsync(string userId, string userSecret, SnapTradeApiDisclaimerRequest snapTradeApiDisclaimerRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -353,10 +353,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling APIDisclaimerApi->Accept");
             }
 
-            // verify the required parameter 'aPIDisclaimerAcceptRequest' is set
-            if (aPIDisclaimerAcceptRequest == null)
+            // verify the required parameter 'snapTradeApiDisclaimerRequest' is set
+            if (snapTradeApiDisclaimerRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'aPIDisclaimerAcceptRequest' when calling APIDisclaimerApi->Accept");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'snapTradeApiDisclaimerRequest' when calling APIDisclaimerApi->Accept");
             }
 
 
@@ -385,7 +385,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = aPIDisclaimerAcceptRequest;
+            localVarRequestOptions.Data = snapTradeApiDisclaimerRequest;
 
             localVarRequestOptions.Operation = "APIDisclaimerApi.Accept";
             localVarRequestOptions.OperationIndex = operationIndex;

@@ -27,17 +27,17 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// TradingPlaceOCOOrderRequest
+    /// TradingPlaceOcoOrderRequest
     /// </summary>
-    [DataContract(Name = "Trading_placeOCOOrder_request")]
-    public partial class TradingPlaceOCOOrderRequest : IEquatable<TradingPlaceOCOOrderRequest>, IValidatableObject
+    [DataContract(Name = "TradingPlaceOcoOrderRequest")]
+    public partial class TradingPlaceOcoOrderRequest : IEquatable<TradingPlaceOcoOrderRequest>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingPlaceOCOOrderRequest" /> class.
+        /// Initializes a new instance of the <see cref="TradingPlaceOcoOrderRequest" /> class.
         /// </summary>
         /// <param name="firstTradeId">The ID of first trade object obtained from trade/impact endpoint.</param>
         /// <param name="secondTradeId">The ID of second trade object obtained from trade/impact endpoint.</param>
-        public TradingPlaceOCOOrderRequest(Object firstTradeId = default(Object), Object secondTradeId = default(Object))
+        public TradingPlaceOcoOrderRequest(Object firstTradeId = default(Object), Object secondTradeId = default(Object))
         {
             this.FirstTradeId = firstTradeId;
             this.SecondTradeId = secondTradeId;
@@ -64,7 +64,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class TradingPlaceOCOOrderRequest {\n");
+            sb.Append("class TradingPlaceOcoOrderRequest {\n");
             sb.Append("  FirstTradeId: ").Append(FirstTradeId).Append("\n");
             sb.Append("  SecondTradeId: ").Append(SecondTradeId).Append("\n");
             sb.Append("}\n");
@@ -87,15 +87,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TradingPlaceOCOOrderRequest);
+            return this.Equals(input as TradingPlaceOcoOrderRequest);
         }
 
         /// <summary>
-        /// Returns true if TradingPlaceOCOOrderRequest instances are equal
+        /// Returns true if TradingPlaceOcoOrderRequest instances are equal
         /// </summary>
-        /// <param name="input">Instance of TradingPlaceOCOOrderRequest to be compared</param>
+        /// <param name="input">Instance of TradingPlaceOcoOrderRequest to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TradingPlaceOCOOrderRequest input)
+        public bool Equals(TradingPlaceOcoOrderRequest input)
         {
             if (input == null)
             {

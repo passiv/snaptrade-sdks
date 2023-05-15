@@ -102,7 +102,7 @@ namespace SnapTrade.Net.Test.Api
             //string userSecret = null;
             //SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null;
             //var response = instance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
-            //Assert.IsType<AuthenticationLoginSnapTradeUser200Response>(response);
+            //Assert.IsType<AuthenticationLoginSnapTradeUserResponse>(response);
         }
 
         /// <summary>

@@ -35,18 +35,24 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityType" /> class.
         /// </summary>
+        /// <param name="description">description.</param>
         /// <param name="id">id.</param>
         /// <param name="code">code.</param>
-        /// <param name="description">description.</param>
         /// <param name="isSupported">isSupported.</param>
-        public SecurityType(Guid id = default(Guid), string code = default(string), string description = default(string), bool isSupported = default(bool)) : base()
+        public SecurityType(string description = default(string), Guid id = default(Guid), string code = default(string), bool isSupported = default(bool)) : base()
         {
+            this.Description = description;
             this.Id = id;
             this.Code = code;
-            this.Description = description;
             this.IsSupported = isSupported;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -59,12 +65,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets IsSupported
@@ -87,9 +87,9 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class SecurityType {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  IsSupported: ").Append(IsSupported).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -128,6 +128,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -136,11 +141,6 @@ namespace SnapTrade.Net.Model
                     this.Code == input.Code ||
                     (this.Code != null &&
                     this.Code.Equals(input.Code))
-                ) && base.Equals(input) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.IsSupported == input.IsSupported ||
@@ -158,6 +158,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
+                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -165,10 +169,6 @@ namespace SnapTrade.Net.Model
                 if (this.Code != null)
                 {
                     hashCode = (hashCode * 59) + this.Code.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsSupported.GetHashCode();
                 if (this.AdditionalProperties != null)

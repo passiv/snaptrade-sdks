@@ -178,8 +178,8 @@ namespace SnapTrade.Net.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string userId = null;
             //string userSecret = null;
-            //TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = null;
-            //var response = instance.PlaceOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
+            //TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest = null;
+            //var response = instance.PlaceOCOOrder(userId, userSecret, tradingPlaceOcoOrderRequest);
             //Assert.IsType<AccountOrderRecord>(response);
         }
 

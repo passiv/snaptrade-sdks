@@ -46,7 +46,7 @@ namespace SnapTrade.Net.Model
         /// <param name="listingExchange">listingExchange.</param>
         /// <param name="isQuotable">isQuotable.</param>
         /// <param name="isTradable">isTradable.</param>
-        public OptionsSymbol(Guid id = default(Guid), string ticker = default(string), int strikePrice = default(int), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), Object securityType = default(Object), Object listingExchange = default(Object), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        public OptionsSymbol(Guid id = default(Guid), string ticker = default(string), decimal strikePrice = default(decimal), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), Object securityType = default(Object), Object listingExchange = default(Object), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
             this.Id = id;
             this.Ticker = ticker;
@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets StrikePrice
         /// </summary>
         [DataMember(Name = "strike_price", EmitDefaultValue = false)]
-        public int StrikePrice { get; set; }
+        public decimal StrikePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets ExpirationDate

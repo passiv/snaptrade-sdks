@@ -28,18 +28,18 @@ using System.Reflection;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// AuthenticationLoginSnapTradeUser200Response
+    /// AuthenticationLoginSnapTradeUserResponse
     /// </summary>
-    [JsonConverter(typeof(AuthenticationLoginSnapTradeUser200ResponseJsonConverter))]
-    [DataContract(Name = "Authentication_loginSnapTradeUser_200_response")]
-    public partial class AuthenticationLoginSnapTradeUser200Response : AbstractOpenAPISchema, IEquatable<AuthenticationLoginSnapTradeUser200Response>, IValidatableObject
+    [JsonConverter(typeof(AuthenticationLoginSnapTradeUserResponseJsonConverter))]
+    [DataContract(Name = "AuthenticationLoginSnapTradeUserResponse")]
+    public partial class AuthenticationLoginSnapTradeUserResponse : AbstractOpenAPISchema, IEquatable<AuthenticationLoginSnapTradeUserResponse>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AuthenticationLoginSnapTradeUser200Response" /> class
+        /// Initializes a new instance of the <see cref="AuthenticationLoginSnapTradeUserResponse" /> class
         /// with the <see cref="LoginRedirectURI" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of LoginRedirectURI.</param>
-        public AuthenticationLoginSnapTradeUser200Response(LoginRedirectURI actualInstance)
+        public AuthenticationLoginSnapTradeUserResponse(LoginRedirectURI actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -47,11 +47,11 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AuthenticationLoginSnapTradeUser200Response" /> class
+        /// Initializes a new instance of the <see cref="AuthenticationLoginSnapTradeUserResponse" /> class
         /// with the <see cref="EncryptedResponse" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of EncryptedResponse.</param>
-        public AuthenticationLoginSnapTradeUser200Response(EncryptedResponse actualInstance)
+        public AuthenticationLoginSnapTradeUserResponse(EncryptedResponse actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -114,7 +114,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class AuthenticationLoginSnapTradeUser200Response {\n");
+            sb.Append("class AuthenticationLoginSnapTradeUserResponse {\n");
             sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -126,21 +126,21 @@ namespace SnapTrade.Net.Model
         /// <returns>JSON string presentation of the object</returns>
         public override string ToJson()
         {
-            return JsonConvert.SerializeObject(this.ActualInstance, AuthenticationLoginSnapTradeUser200Response.SerializerSettings);
+            return JsonConvert.SerializeObject(this.ActualInstance, AuthenticationLoginSnapTradeUserResponse.SerializerSettings);
         }
 
         /// <summary>
-        /// Converts the JSON string into an instance of AuthenticationLoginSnapTradeUser200Response
+        /// Converts the JSON string into an instance of AuthenticationLoginSnapTradeUserResponse
         /// </summary>
         /// <param name="jsonString">JSON string</param>
-        /// <returns>An instance of AuthenticationLoginSnapTradeUser200Response</returns>
-        public static AuthenticationLoginSnapTradeUser200Response FromJson(string jsonString)
+        /// <returns>An instance of AuthenticationLoginSnapTradeUserResponse</returns>
+        public static AuthenticationLoginSnapTradeUserResponse FromJson(string jsonString)
         {
-            AuthenticationLoginSnapTradeUser200Response newAuthenticationLoginSnapTradeUser200Response = null;
+            AuthenticationLoginSnapTradeUserResponse newAuthenticationLoginSnapTradeUserResponse = null;
 
             if (string.IsNullOrEmpty(jsonString))
             {
-                return newAuthenticationLoginSnapTradeUser200Response;
+                return newAuthenticationLoginSnapTradeUserResponse;
             }
             int match = 0;
             List<string> matchedTypes = new List<string>();
@@ -150,11 +150,11 @@ namespace SnapTrade.Net.Model
                 // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
                 if (typeof(EncryptedResponse).GetProperty("AdditionalProperties") == null)
                 {
-                    newAuthenticationLoginSnapTradeUser200Response = new AuthenticationLoginSnapTradeUser200Response(JsonConvert.DeserializeObject<EncryptedResponse>(jsonString, AuthenticationLoginSnapTradeUser200Response.SerializerSettings));
+                    newAuthenticationLoginSnapTradeUserResponse = new AuthenticationLoginSnapTradeUserResponse(JsonConvert.DeserializeObject<EncryptedResponse>(jsonString, AuthenticationLoginSnapTradeUserResponse.SerializerSettings));
                 }
                 else
                 {
-                    newAuthenticationLoginSnapTradeUser200Response = new AuthenticationLoginSnapTradeUser200Response(JsonConvert.DeserializeObject<EncryptedResponse>(jsonString, AuthenticationLoginSnapTradeUser200Response.AdditionalPropertiesSerializerSettings));
+                    newAuthenticationLoginSnapTradeUserResponse = new AuthenticationLoginSnapTradeUserResponse(JsonConvert.DeserializeObject<EncryptedResponse>(jsonString, AuthenticationLoginSnapTradeUserResponse.AdditionalPropertiesSerializerSettings));
                 }
                 matchedTypes.Add("EncryptedResponse");
                 match++;
@@ -170,11 +170,11 @@ namespace SnapTrade.Net.Model
                 // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
                 if (typeof(LoginRedirectURI).GetProperty("AdditionalProperties") == null)
                 {
-                    newAuthenticationLoginSnapTradeUser200Response = new AuthenticationLoginSnapTradeUser200Response(JsonConvert.DeserializeObject<LoginRedirectURI>(jsonString, AuthenticationLoginSnapTradeUser200Response.SerializerSettings));
+                    newAuthenticationLoginSnapTradeUserResponse = new AuthenticationLoginSnapTradeUserResponse(JsonConvert.DeserializeObject<LoginRedirectURI>(jsonString, AuthenticationLoginSnapTradeUserResponse.SerializerSettings));
                 }
                 else
                 {
-                    newAuthenticationLoginSnapTradeUser200Response = new AuthenticationLoginSnapTradeUser200Response(JsonConvert.DeserializeObject<LoginRedirectURI>(jsonString, AuthenticationLoginSnapTradeUser200Response.AdditionalPropertiesSerializerSettings));
+                    newAuthenticationLoginSnapTradeUserResponse = new AuthenticationLoginSnapTradeUserResponse(JsonConvert.DeserializeObject<LoginRedirectURI>(jsonString, AuthenticationLoginSnapTradeUserResponse.AdditionalPropertiesSerializerSettings));
                 }
                 matchedTypes.Add("LoginRedirectURI");
                 match++;
@@ -195,7 +195,7 @@ namespace SnapTrade.Net.Model
             }
 
             // deserialization is considered successful at this point if no exception has been thrown.
-            return newAuthenticationLoginSnapTradeUser200Response;
+            return newAuthenticationLoginSnapTradeUserResponse;
         }
 
         /// <summary>
@@ -205,15 +205,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AuthenticationLoginSnapTradeUser200Response);
+            return this.Equals(input as AuthenticationLoginSnapTradeUserResponse);
         }
 
         /// <summary>
-        /// Returns true if AuthenticationLoginSnapTradeUser200Response instances are equal
+        /// Returns true if AuthenticationLoginSnapTradeUserResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of AuthenticationLoginSnapTradeUser200Response to be compared</param>
+        /// <param name="input">Instance of AuthenticationLoginSnapTradeUserResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(AuthenticationLoginSnapTradeUser200Response input)
+        public bool Equals(AuthenticationLoginSnapTradeUserResponse input)
         {
             if (input == null)
                 return false;
@@ -248,9 +248,9 @@ namespace SnapTrade.Net.Model
     }
 
     /// <summary>
-    /// Custom JSON converter for AuthenticationLoginSnapTradeUser200Response
+    /// Custom JSON converter for AuthenticationLoginSnapTradeUserResponse
     /// </summary>
-    public class AuthenticationLoginSnapTradeUser200ResponseJsonConverter : JsonConverter
+    public class AuthenticationLoginSnapTradeUserResponseJsonConverter : JsonConverter
     {
         /// <summary>
         /// To write the JSON string
@@ -260,7 +260,7 @@ namespace SnapTrade.Net.Model
         /// <param name="serializer">JSON Serializer</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue((string)(typeof(AuthenticationLoginSnapTradeUser200Response).GetMethod("ToJson").Invoke(value, null)));
+            writer.WriteRawValue((string)(typeof(AuthenticationLoginSnapTradeUserResponse).GetMethod("ToJson").Invoke(value, null)));
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace SnapTrade.Net.Model
         {
             if(reader.TokenType != JsonToken.Null)
             {
-                return AuthenticationLoginSnapTradeUser200Response.FromJson(JObject.Load(reader).ToString(Formatting.None));
+                return AuthenticationLoginSnapTradeUserResponse.FromJson(JObject.Load(reader).ToString(Formatting.None));
             }
             return null;
         }

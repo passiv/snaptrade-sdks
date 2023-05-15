@@ -326,7 +326,7 @@ This endpoint does not need any parameter.
 
 <a name="loginsnaptradeuser"></a>
 # **LoginSnapTradeUser**
-> AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser (string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null)
+> AuthenticationLoginSnapTradeUserResponse LoginSnapTradeUser (string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null)
 
 Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
 
@@ -361,7 +361,7 @@ namespace Example
             try
             {
                 // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-                AuthenticationLoginSnapTradeUser200Response result = apiInstance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
+                AuthenticationLoginSnapTradeUserResponse result = apiInstance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -388,7 +388,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-    ApiResponse<AuthenticationLoginSnapTradeUser200Response> response = apiInstance.LoginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
+    ApiResponse<AuthenticationLoginSnapTradeUserResponse> response = apiInstance.LoginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -411,7 +411,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**AuthenticationLoginSnapTradeUser200Response**](AuthenticationLoginSnapTradeUser200Response.md)
+[**AuthenticationLoginSnapTradeUserResponse**](AuthenticationLoginSnapTradeUserResponse.md)
 
 ### Authorization
 

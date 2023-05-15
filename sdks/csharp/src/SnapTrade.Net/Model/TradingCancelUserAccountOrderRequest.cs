@@ -29,7 +29,7 @@ namespace SnapTrade.Net.Model
     /// <summary>
     /// TradingCancelUserAccountOrderRequest
     /// </summary>
-    [DataContract(Name = "Trading_cancelUserAccountOrder_request")]
+    [DataContract(Name = "TradingCancelUserAccountOrderRequest")]
     public partial class TradingCancelUserAccountOrderRequest : IEquatable<TradingCancelUserAccountOrderRequest>, IValidatableObject
     {
         /// <summary>

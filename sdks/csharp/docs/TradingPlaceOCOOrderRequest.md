@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.TradingPlaceOCOOrderRequest
+# SnapTrade.Net.Model.TradingPlaceOcoOrderRequest
 
 ## Properties
 

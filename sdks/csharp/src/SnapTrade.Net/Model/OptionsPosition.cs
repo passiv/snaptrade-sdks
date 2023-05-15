@@ -35,17 +35,17 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsPosition" /> class.
         /// </summary>
-        /// <param name="symbol">symbol.</param>
         /// <param name="description">description.</param>
+        /// <param name="symbol">symbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         /// <param name="units">units.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsPosition(Guid symbol = default(Guid), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal price = default(decimal), decimal units = default(decimal), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
+        public OptionsPosition(string description = default(string), Guid symbol = default(Guid), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal price = default(decimal), decimal units = default(decimal), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
         {
-            this.Symbol = symbol;
             this.Description = description;
+            this.Symbol = symbol;
             this.OptionSymbol = optionSymbol;
             this.Price = price;
             this.Units = units;
@@ -55,16 +55,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Symbol
-        /// </summary>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public Guid Symbol { get; set; }
-
-        /// <summary>
         /// Gets or Sets Description
         /// </summary>
         [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Symbol
+        /// </summary>
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        public Guid Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets OptionSymbol
@@ -113,8 +113,8 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionsPosition {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
@@ -157,14 +157,14 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Symbol == input.Symbol ||
-                    (this.Symbol != null &&
-                    this.Symbol.Equals(input.Symbol))
-                ) && base.Equals(input) && 
-                (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
+                    this.Symbol == input.Symbol ||
+                    (this.Symbol != null &&
+                    this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
                     this.OptionSymbol == input.OptionSymbol ||
@@ -201,13 +201,13 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Symbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
-                }
                 if (this.Description != null)
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
+                }
+                if (this.Symbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
                 if (this.OptionSymbol != null)
                 {

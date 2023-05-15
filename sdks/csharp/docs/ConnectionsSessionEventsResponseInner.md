@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.ConnectionsSessionEvents200ResponseInner
+# SnapTrade.Net.Model.ConnectionsSessionEventsResponseInner
 
 ## Properties
 
