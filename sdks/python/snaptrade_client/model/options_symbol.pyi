@@ -39,7 +39,7 @@ class OptionsSymbol(
         class properties:
             id = schemas.UUIDSchema
             ticker = schemas.StrSchema
-            strike_price = schemas.IntSchema
+            strike_price = schemas.NumberSchema
             expiration_date = schemas.StrSchema
             is_mini_option = schemas.BoolSchema
         
@@ -150,7 +150,7 @@ class OptionsSymbol(
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         ticker: typing.Union[MetaOapg.properties.ticker, str, schemas.Unset] = schemas.unset,
-        strike_price: typing.Union[MetaOapg.properties.strike_price, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        strike_price: typing.Union[MetaOapg.properties.strike_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         expiration_date: typing.Union[MetaOapg.properties.expiration_date, str, schemas.Unset] = schemas.unset,
         is_mini_option: typing.Union[MetaOapg.properties.is_mini_option, bool, schemas.Unset] = schemas.unset,
         underlying_symbol: typing.Union['UnderlyingSymbol', schemas.Unset] = schemas.unset,

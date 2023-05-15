@@ -164,10 +164,13 @@ class SchemaValidationError(OpenApiException):
                 sub_msgs.append(str(error))
         if len(self.type_errors) > 0:
             for type_error in self.type_errors:
-                classes = ", ".join([cls.__name__ for cls in type_error.valid_classes])
-                msg = 'Got {}({}) for required type {} at {}'.format(
-                    type(type_error.invalid_value).__name__, type_error.invalid_value, classes, render_path(type_error.path_to_item))
-                sub_msgs.append(msg)
+                if isinstance(type_error, MissingRequiredPropertiesError) or isinstance(type_error, MissingRequiredParametersError):
+                    sub_msgs.append(str(type_error))
+                else:
+                    classes = ", ".join([cls.__name__ for cls in type_error.valid_classes])
+                    msg = 'Got {}({}) for required type {} at {}'.format(
+                        type(type_error.invalid_value).__name__, type_error.invalid_value, classes, render_path(type_error.path_to_item))
+                    sub_msgs.append(msg)
         if len(self.value_errors) > 0:
             for value_error in self.value_errors:
                 sub_msgs.append(value_error.full_msg)
