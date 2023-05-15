@@ -12,7 +12,7 @@ Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **ticker** | str,  | str,  |  | [optional] 
-**strike_price** | decimal.Decimal, int,  | decimal.Decimal,  |  | [optional] 
+**strike_price** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
 **expiration_date** | str,  | str,  |  | [optional] 
 **is_mini_option** | bool,  | BoolClass,  |  | [optional] 
 **underlying_symbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional] 

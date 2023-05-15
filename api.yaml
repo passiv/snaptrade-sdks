@@ -5085,7 +5085,7 @@ components:
           type: string
           example: SPY 220819P00200000
         strike_price:
-          type: integer
+          type: number
           example: 200
         expiration_date:
           type: string

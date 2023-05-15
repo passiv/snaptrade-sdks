@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **Guid** |  | [optional] 
 **Ticker** | **string** |  | [optional] 
-**StrikePrice** | **int** |  | [optional] 
+**StrikePrice** | **decimal** |  | [optional] 
 **ExpirationDate** | **string** |  | [optional] 
 **IsMiniOption** | **bool** |  | [optional] 
 **UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional] 

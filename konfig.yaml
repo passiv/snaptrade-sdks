@@ -27,7 +27,7 @@ outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
   php:
-    version: 1.0.0
+    version: 1.1.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -38,7 +38,7 @@ generators:
       userId: passiv
       repoId: snaptrade-php-sdk
   csharp:
-    version: 3.10.0
+    version: 3.11.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -73,7 +73,7 @@ generators:
       script:
         - mvn test
   python:
-    version: 10.11.0
+    version: 10.12.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -101,21 +101,4 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/typescript
     npmName: snaptrade-typescript-sdk
-specInputPath: api.yaml
-specPath: api-fixed.yaml
-fixConfig:
-  update:
-    $.components.schemas.ReportingDate:
-      format: date
-    $.paths./modelAssetClass.get:
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
+specPath: api.yaml

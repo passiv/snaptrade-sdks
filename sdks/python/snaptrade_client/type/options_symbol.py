@@ -25,7 +25,7 @@ OptionalOptionsSymbol = TypedDict("OptionalOptionsSymbol", {
 
     "ticker": str,
 
-    "strike_price": int,
+    "strike_price": typing.Union[int, float],
 
     "expiration_date": str,
 
