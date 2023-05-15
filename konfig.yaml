@@ -27,7 +27,7 @@ outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
   php:
-    version: 1.0.0
+    version: 1.1.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -113,9 +113,9 @@ fixConfig:
           required: true
           name: userId
           schema:
-            $ref: "#/components/schemas/UserID"
+            $ref: '#/components/schemas/UserID'
         - in: query
           required: true
           name: userSecret
           schema:
-            $ref: "#/components/schemas/UserSecret"
+            $ref: '#/components/schemas/UserSecret'
