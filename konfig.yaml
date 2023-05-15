@@ -27,7 +27,7 @@ outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
   php:
-    version: 1.1.0
+    version: 1.2.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
