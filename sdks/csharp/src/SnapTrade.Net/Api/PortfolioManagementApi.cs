@@ -465,11 +465,9 @@ namespace SnapTrade.Net.Api
         /// List of model asset class
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ModelAssetClassDetails&gt;</returns>
-        List<ModelAssetClassDetails> ListAssetClasses(string userId, string userSecret, int operationIndex = 0);
+        List<ModelAssetClassDetails> ListAssetClasses(int operationIndex = 0);
 
         /// <summary>
         /// List of model asset class
@@ -478,11 +476,9 @@ namespace SnapTrade.Net.Api
         /// 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ModelAssetClassDetails&gt;</returns>
-        ApiResponse<List<ModelAssetClassDetails>> ListAssetClassesWithHttpInfo(string userId, string userSecret, int operationIndex = 0);
+        ApiResponse<List<ModelAssetClassDetails>> ListAssetClassesWithHttpInfo(int operationIndex = 0);
         /// <summary>
         /// List of trades to make to rebalance portfolio group
         /// </summary>
@@ -1250,12 +1246,10 @@ namespace SnapTrade.Net.Api
         /// 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ModelAssetClassDetails&gt;</returns>
-        System.Threading.Tasks.Task<List<ModelAssetClassDetails>> ListAssetClassesAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<ModelAssetClassDetails>> ListAssetClassesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List of model asset class
@@ -1264,12 +1258,10 @@ namespace SnapTrade.Net.Api
         /// 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ModelAssetClassDetails&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ModelAssetClassDetails>>> ListAssetClassesWithHttpInfoAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<ModelAssetClassDetails>>> ListAssetClassesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List of trades to make to rebalance portfolio group
         /// </summary>
@@ -5152,13 +5144,11 @@ namespace SnapTrade.Net.Api
         /// List of model asset class 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ModelAssetClassDetails&gt;</returns>
-        public List<ModelAssetClassDetails> ListAssetClasses(string userId, string userSecret, int operationIndex = 0)
+        public List<ModelAssetClassDetails> ListAssetClasses(int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> localVarResponse = ListAssetClassesWithHttpInfo(userId, userSecret);
+            SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> localVarResponse = ListAssetClassesWithHttpInfo();
             return localVarResponse.Data;
         }
 
@@ -5166,24 +5156,10 @@ namespace SnapTrade.Net.Api
         /// List of model asset class 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ModelAssetClassDetails&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> ListAssetClassesWithHttpInfo(string userId, string userSecret, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> ListAssetClassesWithHttpInfo(int operationIndex = 0)
         {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling PortfolioManagementApi->ListAssetClasses");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling PortfolioManagementApi->ListAssetClasses");
-            }
-
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
@@ -5206,8 +5182,6 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "PortfolioManagementApi.ListAssetClasses";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -5246,14 +5220,12 @@ namespace SnapTrade.Net.Api
         /// List of model asset class 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ModelAssetClassDetails&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ModelAssetClassDetails>> ListAssetClassesAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<ModelAssetClassDetails>> ListAssetClassesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> localVarResponse = await ListAssetClassesWithHttpInfoAsync(userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>> localVarResponse = await ListAssetClassesWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -5261,25 +5233,11 @@ namespace SnapTrade.Net.Api
         /// List of model asset class 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ModelAssetClassDetails&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>>> ListAssetClassesWithHttpInfoAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<ModelAssetClassDetails>>> ListAssetClassesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling PortfolioManagementApi->ListAssetClasses");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling PortfolioManagementApi->ListAssetClasses");
-            }
-
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
@@ -5303,8 +5261,6 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
 
             localVarRequestOptions.Operation = "PortfolioManagementApi.ListAssetClasses";
             localVarRequestOptions.OperationIndex = operationIndex;

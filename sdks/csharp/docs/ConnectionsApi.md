@@ -328,7 +328,7 @@ void (empty response body)
 
 <a name="sessionevents"></a>
 # **SessionEvents**
-> List&lt;ConnectionsSessionEventsResponseInner&gt; SessionEvents (string partnerClientId, string userId = null, string sessionId = null)
+> List&lt;ConnectionsSessionEvents200ResponseInner&gt; SessionEvents (string partnerClientId, string userId = null, string sessionId = null)
 
 List all session events for the partner
 
@@ -363,7 +363,7 @@ namespace Example
             try
             {
                 // List all session events for the partner
-                List<ConnectionsSessionEventsResponseInner> result = apiInstance.SessionEvents(partnerClientId, userId, sessionId);
+                List<ConnectionsSessionEvents200ResponseInner> result = apiInstance.SessionEvents(partnerClientId, userId, sessionId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -390,7 +390,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List all session events for the partner
-    ApiResponse<List<ConnectionsSessionEventsResponseInner>> response = apiInstance.SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
+    ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> response = apiInstance.SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -413,7 +413,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;ConnectionsSessionEventsResponseInner&gt;**](ConnectionsSessionEventsResponseInner.md)
+[**List&lt;ConnectionsSessionEvents200ResponseInner&gt;**](ConnectionsSessionEvents200ResponseInner.md)
 
 ### Authorization
 

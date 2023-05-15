@@ -5,8 +5,8 @@ Option Holdings
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | **string** |  | [optional] 
 **Symbol** | **Guid** |  | [optional] 
+**Description** | **string** |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **Price** | **decimal** | Trade Price if limit or stop limit order | [optional] 
 **Units** | **decimal** |  | [optional] 

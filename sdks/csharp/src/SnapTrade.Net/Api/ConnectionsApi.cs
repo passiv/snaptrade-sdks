@@ -105,8 +105,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        List<ConnectionsSessionEventsResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
+        /// <returns>List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        List<ConnectionsSessionEvents200ResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
 
         /// <summary>
         /// List all session events for the partner
@@ -119,8 +119,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        ApiResponse<List<ConnectionsSessionEventsResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
+        /// <returns>ApiResponse of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -227,8 +227,8 @@ namespace SnapTrade.Net.Api
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        System.Threading.Tasks.Task<List<ConnectionsSessionEventsResponseInner>> SessionEventsAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        System.Threading.Tasks.Task<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List all session events for the partner
@@ -242,8 +242,8 @@ namespace SnapTrade.Net.Api
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEventsResponseInner&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ConnectionsSessionEventsResponseInner>>> SessionEventsWithHttpInfoAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEvents200ResponseInner&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<ConnectionsSessionEvents200ResponseInner>>> SessionEventsWithHttpInfoAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -956,10 +956,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        public List<ConnectionsSessionEventsResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
+        /// <returns>List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        public List<ConnectionsSessionEvents200ResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEventsResponseInner>> localVarResponse = SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
+            SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> localVarResponse = SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
             return localVarResponse.Data;
         }
 
@@ -971,8 +971,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEventsResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
+        /// <returns>ApiResponse of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        public SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'partnerClientId' is set
             if (partnerClientId == null)
@@ -1032,7 +1032,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<ConnectionsSessionEventsResponseInner>>("/sessionEvents", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<List<ConnectionsSessionEvents200ResponseInner>>("/sessionEvents", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("SessionEvents", localVarResponse);
@@ -1054,10 +1054,10 @@ namespace SnapTrade.Net.Api
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;ConnectionsSessionEventsResponseInner&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ConnectionsSessionEventsResponseInner>> SessionEventsAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
+        public async System.Threading.Tasks.Task<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEventsResponseInner>> localVarResponse = await SessionEventsWithHttpInfoAsync(partnerClientId, userId, sessionId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> localVarResponse = await SessionEventsWithHttpInfoAsync(partnerClientId, userId, sessionId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1070,8 +1070,8 @@ namespace SnapTrade.Net.Api
         /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEventsResponseInner&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEventsResponseInner>>> SessionEventsWithHttpInfoAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEvents200ResponseInner&gt;)</returns>
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEvents200ResponseInner>>> SessionEventsWithHttpInfoAsync(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'partnerClientId' is set
             if (partnerClientId == null)
@@ -1132,7 +1132,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<ConnectionsSessionEventsResponseInner>>("/sessionEvents", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<ConnectionsSessionEvents200ResponseInner>>("/sessionEvents", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

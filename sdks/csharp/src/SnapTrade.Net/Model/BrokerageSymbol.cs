@@ -35,26 +35,20 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageSymbol" /> class.
         /// </summary>
-        /// <param name="description">description.</param>
         /// <param name="id">id.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="brokerageAuthorization">brokerageAuthorization.</param>
+        /// <param name="description">description.</param>
         /// <param name="allowsFractionalUnits">allowsFractionalUnits.</param>
-        public BrokerageSymbol(string description = default(string), Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), bool? allowsFractionalUnits = default(bool?)) : base()
+        public BrokerageSymbol(Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?)) : base()
         {
-            this.Description = description;
             this.Id = id;
             this.Symbol = symbol;
             this.BrokerageAuthorization = brokerageAuthorization;
+            this.Description = description;
             this.AllowsFractionalUnits = allowsFractionalUnits;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -73,6 +67,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
         public BrokerageAuthorization BrokerageAuthorization { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets AllowsFractionalUnits
@@ -95,10 +95,10 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class BrokerageSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  BrokerageAuthorization: ").Append(BrokerageAuthorization).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  AllowsFractionalUnits: ").Append(AllowsFractionalUnits).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -137,11 +137,6 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -155,6 +150,11 @@ namespace SnapTrade.Net.Model
                     this.BrokerageAuthorization == input.BrokerageAuthorization ||
                     (this.BrokerageAuthorization != null &&
                     this.BrokerageAuthorization.Equals(input.BrokerageAuthorization))
+                ) && base.Equals(input) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.AllowsFractionalUnits == input.AllowsFractionalUnits ||
@@ -173,10 +173,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -188,6 +184,10 @@ namespace SnapTrade.Net.Model
                 if (this.BrokerageAuthorization != null)
                 {
                     hashCode = (hashCode * 59) + this.BrokerageAuthorization.GetHashCode();
+                }
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.AllowsFractionalUnits != null)
                 {

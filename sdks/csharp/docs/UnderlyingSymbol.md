@@ -5,9 +5,9 @@ Underlying Symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | **string** |  | [optional] 
 **Id** | **Guid** |  | [optional] 
 **Symbol** | **string** |  | [optional] 
+**Description** | **string** |  | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **Exchange** | [**USExchange**](USExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | [optional] 

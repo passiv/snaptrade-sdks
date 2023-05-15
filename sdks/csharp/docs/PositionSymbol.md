@@ -5,8 +5,8 @@ Symbol returned in position object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | **string** |  | [optional] 
 **Id** | **Guid** |  | [optional] 
+**Description** | **string** |  | [optional] 
 **Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **LocalId** | **string** |  | [optional] 
 **IsQuotable** | **bool** |  | [optional] 

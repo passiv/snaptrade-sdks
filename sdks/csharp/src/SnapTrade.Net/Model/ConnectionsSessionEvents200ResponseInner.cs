@@ -28,18 +28,18 @@ using System.Reflection;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// ConnectionsSessionEventsResponseInner
+    /// ConnectionsSessionEvents200ResponseInner
     /// </summary>
-    [JsonConverter(typeof(ConnectionsSessionEventsResponseInnerJsonConverter))]
-    [DataContract(Name = "ConnectionsSessionEventsResponse_inner")]
-    public partial class ConnectionsSessionEventsResponseInner : AbstractOpenAPISchema, IEquatable<ConnectionsSessionEventsResponseInner>, IValidatableObject
+    [JsonConverter(typeof(ConnectionsSessionEvents200ResponseInnerJsonConverter))]
+    [DataContract(Name = "Connections_sessionEvents_200_response_inner")]
+    public partial class ConnectionsSessionEvents200ResponseInner : AbstractOpenAPISchema, IEquatable<ConnectionsSessionEvents200ResponseInner>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectionsSessionEventsResponseInner" /> class
+        /// Initializes a new instance of the <see cref="ConnectionsSessionEvents200ResponseInner" /> class
         /// with the <see cref="SessionEvent" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of SessionEvent.</param>
-        public ConnectionsSessionEventsResponseInner(SessionEvent actualInstance)
+        public ConnectionsSessionEvents200ResponseInner(SessionEvent actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "anyOf";
@@ -88,7 +88,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ConnectionsSessionEventsResponseInner {\n");
+            sb.Append("class ConnectionsSessionEvents200ResponseInner {\n");
             sb.Append("  ActualInstance: ").Append(this.ActualInstance).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -100,28 +100,28 @@ namespace SnapTrade.Net.Model
         /// <returns>JSON string presentation of the object</returns>
         public override string ToJson()
         {
-            return JsonConvert.SerializeObject(this.ActualInstance, ConnectionsSessionEventsResponseInner.SerializerSettings);
+            return JsonConvert.SerializeObject(this.ActualInstance, ConnectionsSessionEvents200ResponseInner.SerializerSettings);
         }
 
         /// <summary>
-        /// Converts the JSON string into an instance of ConnectionsSessionEventsResponseInner
+        /// Converts the JSON string into an instance of ConnectionsSessionEvents200ResponseInner
         /// </summary>
         /// <param name="jsonString">JSON string</param>
-        /// <returns>An instance of ConnectionsSessionEventsResponseInner</returns>
-        public static ConnectionsSessionEventsResponseInner FromJson(string jsonString)
+        /// <returns>An instance of ConnectionsSessionEvents200ResponseInner</returns>
+        public static ConnectionsSessionEvents200ResponseInner FromJson(string jsonString)
         {
-            ConnectionsSessionEventsResponseInner newConnectionsSessionEventsResponseInner = null;
+            ConnectionsSessionEvents200ResponseInner newConnectionsSessionEvents200ResponseInner = null;
 
             if (string.IsNullOrEmpty(jsonString))
             {
-                return newConnectionsSessionEventsResponseInner;
+                return newConnectionsSessionEvents200ResponseInner;
             }
 
             try
             {
-                newConnectionsSessionEventsResponseInner = new ConnectionsSessionEventsResponseInner(JsonConvert.DeserializeObject<SessionEvent>(jsonString, ConnectionsSessionEventsResponseInner.SerializerSettings));
+                newConnectionsSessionEvents200ResponseInner = new ConnectionsSessionEvents200ResponseInner(JsonConvert.DeserializeObject<SessionEvent>(jsonString, ConnectionsSessionEvents200ResponseInner.SerializerSettings));
                 // deserialization is considered successful at this point if no exception has been thrown.
-                return newConnectionsSessionEventsResponseInner;
+                return newConnectionsSessionEvents200ResponseInner;
             }
             catch (Exception exception)
             {
@@ -140,15 +140,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ConnectionsSessionEventsResponseInner);
+            return this.Equals(input as ConnectionsSessionEvents200ResponseInner);
         }
 
         /// <summary>
-        /// Returns true if ConnectionsSessionEventsResponseInner instances are equal
+        /// Returns true if ConnectionsSessionEvents200ResponseInner instances are equal
         /// </summary>
-        /// <param name="input">Instance of ConnectionsSessionEventsResponseInner to be compared</param>
+        /// <param name="input">Instance of ConnectionsSessionEvents200ResponseInner to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ConnectionsSessionEventsResponseInner input)
+        public bool Equals(ConnectionsSessionEvents200ResponseInner input)
         {
             if (input == null)
                 return false;
@@ -183,9 +183,9 @@ namespace SnapTrade.Net.Model
     }
 
     /// <summary>
-    /// Custom JSON converter for ConnectionsSessionEventsResponseInner
+    /// Custom JSON converter for ConnectionsSessionEvents200ResponseInner
     /// </summary>
-    public class ConnectionsSessionEventsResponseInnerJsonConverter : JsonConverter
+    public class ConnectionsSessionEvents200ResponseInnerJsonConverter : JsonConverter
     {
         /// <summary>
         /// To write the JSON string
@@ -195,7 +195,7 @@ namespace SnapTrade.Net.Model
         /// <param name="serializer">JSON Serializer</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue((string)(typeof(ConnectionsSessionEventsResponseInner).GetMethod("ToJson").Invoke(value, null)));
+            writer.WriteRawValue((string)(typeof(ConnectionsSessionEvents200ResponseInner).GetMethod("ToJson").Invoke(value, null)));
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace SnapTrade.Net.Model
         {
             if(reader.TokenType != JsonToken.Null)
             {
-                return ConnectionsSessionEventsResponseInner.FromJson(JObject.Load(reader).ToString(Formatting.None));
+                return ConnectionsSessionEvents200ResponseInner.FromJson(JObject.Load(reader).ToString(Formatting.None));
             }
             return null;
         }

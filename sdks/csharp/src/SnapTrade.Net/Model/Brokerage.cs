@@ -35,10 +35,10 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Brokerage" /> class.
         /// </summary>
-        /// <param name="description">description.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="displayName">displayName.</param>
+        /// <param name="description">description.</param>
         /// <param name="awsS3LogoUrl">awsS3LogoUrl.</param>
         /// <param name="slug">slug.</param>
         /// <param name="url">url.</param>
@@ -53,12 +53,12 @@ namespace SnapTrade.Net.Model
         /// <param name="defaultCurrency">defaultCurrency.</param>
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">List of exchange ID supported by brokerage.</param>
-        public Brokerage(string description = default(string), Guid id = default(Guid), string name = default(string), string displayName = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), Guid defaultCurrency = default(Guid), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
+        public Brokerage(Guid id = default(Guid), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), Guid defaultCurrency = default(Guid), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
         {
-            this.Description = description;
             this.Id = id;
             this.Name = name;
             this.DisplayName = displayName;
+            this.Description = description;
             this.AwsS3LogoUrl = awsS3LogoUrl;
             this.Slug = slug;
             this.Url = url;
@@ -77,12 +77,6 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
-
-        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
@@ -99,6 +93,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "display_name", EmitDefaultValue = false)]
         public string DisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets AwsS3LogoUrl
@@ -200,10 +200,10 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class Brokerage {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  AwsS3LogoUrl: ").Append(AwsS3LogoUrl).Append("\n");
             sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
@@ -255,11 +255,6 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -273,6 +268,11 @@ namespace SnapTrade.Net.Model
                     this.DisplayName == input.DisplayName ||
                     (this.DisplayName != null &&
                     this.DisplayName.Equals(input.DisplayName))
+                ) && base.Equals(input) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.AwsS3LogoUrl == input.AwsS3LogoUrl ||
@@ -353,10 +353,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -368,6 +364,10 @@ namespace SnapTrade.Net.Model
                 if (this.DisplayName != null)
                 {
                     hashCode = (hashCode * 59) + this.DisplayName.GetHashCode();
+                }
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.AwsS3LogoUrl != null)
                 {

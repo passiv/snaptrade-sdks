@@ -878,7 +878,7 @@ catch (ApiException e)
 
 <a name="placeocoorder"></a>
 # **PlaceOCOOrder**
-> AccountOrderRecord PlaceOCOOrder (string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest)
+> AccountOrderRecord PlaceOCOOrder (string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest)
 
 Place a OCO (One Cancels Other) order
 
@@ -908,12 +908,12 @@ namespace Example
             var apiInstance = new TradingApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
-            var tradingPlaceOcoOrderRequest = new TradingPlaceOcoOrderRequest(); // TradingPlaceOcoOrderRequest | 
+            var tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(); // TradingPlaceOCOOrderRequest | 
 
             try
             {
                 // Place a OCO (One Cancels Other) order
-                AccountOrderRecord result = apiInstance.PlaceOCOOrder(userId, userSecret, tradingPlaceOcoOrderRequest);
+                AccountOrderRecord result = apiInstance.PlaceOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -940,7 +940,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place a OCO (One Cancels Other) order
-    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOcoOrderRequest);
+    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -959,7 +959,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **tradingPlaceOcoOrderRequest** | [**TradingPlaceOcoOrderRequest**](TradingPlaceOcoOrderRequest.md) |  |  |
+| **tradingPlaceOCOOrderRequest** | [**TradingPlaceOCOOrderRequest**](TradingPlaceOCOOrderRequest.md) |  |  |
 
 ### Return type
 

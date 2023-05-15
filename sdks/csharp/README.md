@@ -67,12 +67,12 @@ namespace Example
             var apiInstance = new APIDisclaimerApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
-            var snapTradeApiDisclaimerRequest = new SnapTradeApiDisclaimerRequest(); // SnapTradeApiDisclaimerRequest | 
+            var aPIDisclaimerAcceptRequest = new APIDisclaimerAcceptRequest(); // APIDisclaimerAcceptRequest | 
 
             try
             {
                 // Accept or Reject SnapTrade disclaimer agreement
-                SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.Accept(userId, userSecret, snapTradeApiDisclaimerRequest);
+                SnapTradeAPIDisclaimerAcceptStatus result = apiInstance.Accept(userId, userSecret, aPIDisclaimerAcceptRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -182,6 +182,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Model.APIDisclaimerAcceptRequest](docs/APIDisclaimerAcceptRequest.md)
  - [Model.Account](docs/Account.md)
  - [Model.AccountHoldings](docs/AccountHoldings.md)
  - [Model.AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
@@ -190,7 +191,7 @@ Class | Method | HTTP request | Description
  - [Model.AccountSimple](docs/AccountSimple.md)
  - [Model.AccountSyncStatus](docs/AccountSyncStatus.md)
  - [Model.Action](docs/Action.md)
- - [Model.AuthenticationLoginSnapTradeUserResponse](docs/AuthenticationLoginSnapTradeUserResponse.md)
+ - [Model.AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Model.Balance](docs/Balance.md)
  - [Model.Brokerage](docs/Brokerage.md)
  - [Model.BrokerageAuthorization](docs/BrokerageAuthorization.md)
@@ -201,8 +202,7 @@ Class | Method | HTTP request | Description
  - [Model.BrokerageType](docs/BrokerageType.md)
  - [Model.CalculatedTrade](docs/CalculatedTrade.md)
  - [Model.CashRestriction](docs/CashRestriction.md)
- - [Model.ConnectionsSessionEventsResponseInner](docs/ConnectionsSessionEventsResponseInner.md)
- - [Model.CreateSnapTradeParterApiCredentialsRequest](docs/CreateSnapTradeParterApiCredentialsRequest.md)
+ - [Model.ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [Model.Currency](docs/Currency.md)
  - [Model.DeleteUserResponse](docs/DeleteUserResponse.md)
  - [Model.DividendAtDate](docs/DividendAtDate.md)
@@ -257,7 +257,6 @@ Class | Method | HTTP request | Description
  - [Model.SecurityType](docs/SecurityType.md)
  - [Model.SessionEvent](docs/SessionEvent.md)
  - [Model.SnapTradeAPIDisclaimerAcceptStatus](docs/SnapTradeAPIDisclaimerAcceptStatus.md)
- - [Model.SnapTradeApiDisclaimerRequest](docs/SnapTradeApiDisclaimerRequest.md)
  - [Model.SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
  - [Model.SnapTradeHoldingsAccountAccountId](docs/SnapTradeHoldingsAccountAccountId.md)
  - [Model.SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
@@ -282,7 +281,7 @@ Class | Method | HTTP request | Description
  - [Model.TradeExecutionStatus](docs/TradeExecutionStatus.md)
  - [Model.TradeImpact](docs/TradeImpact.md)
  - [Model.TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
- - [Model.TradingPlaceOcoOrderRequest](docs/TradingPlaceOcoOrderRequest.md)
+ - [Model.TradingPlaceOCOOrderRequest](docs/TradingPlaceOCOOrderRequest.md)
  - [Model.TransactionsStatus](docs/TransactionsStatus.md)
  - [Model.USExchange](docs/USExchange.md)
  - [Model.UnderlyingSymbol](docs/UnderlyingSymbol.md)

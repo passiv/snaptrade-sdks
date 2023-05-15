@@ -229,10 +229,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord PlaceOCOOrder(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0);
+        AccountOrderRecord PlaceOCOOrder(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0);
 
         /// <summary>
         /// Place a OCO (One Cancels Other) order
@@ -243,10 +243,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> PlaceOCOOrderWithHttpInfo(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> PlaceOCOOrderWithHttpInfo(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0);
         /// <summary>
         /// Place order
         /// </summary>
@@ -525,11 +525,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> PlaceOCOOrderAsync(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> PlaceOCOOrderAsync(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place a OCO (One Cancels Other) order
@@ -540,11 +540,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOCOOrderWithHttpInfoAsync(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOCOOrderWithHttpInfoAsync(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place order
         /// </summary>
@@ -2262,12 +2262,12 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord PlaceOCOOrder(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0)
+        public AccountOrderRecord PlaceOCOOrder(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOcoOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
             return localVarResponse.Data;
         }
 
@@ -2277,10 +2277,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceOCOOrderWithHttpInfo(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceOCOOrderWithHttpInfo(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2294,10 +2294,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceOCOOrder");
             }
 
-            // verify the required parameter 'tradingPlaceOcoOrderRequest' is set
-            if (tradingPlaceOcoOrderRequest == null)
+            // verify the required parameter 'tradingPlaceOCOOrderRequest' is set
+            if (tradingPlaceOCOOrderRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceOcoOrderRequest' when calling TradingApi->PlaceOCOOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceOCOOrderRequest' when calling TradingApi->PlaceOCOOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -2325,7 +2325,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceOcoOrderRequest;
+            localVarRequestOptions.Data = tradingPlaceOCOOrderRequest;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceOCOOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -2366,13 +2366,13 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceOCOOrderAsync(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceOCOOrderAsync(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceOCOOrderWithHttpInfoAsync(userId, userSecret, tradingPlaceOcoOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceOCOOrderWithHttpInfoAsync(userId, userSecret, tradingPlaceOCOOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2382,11 +2382,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="tradingPlaceOcoOrderRequest"></param>
+        /// <param name="tradingPlaceOCOOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceOCOOrderWithHttpInfoAsync(string userId, string userSecret, TradingPlaceOcoOrderRequest tradingPlaceOcoOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceOCOOrderWithHttpInfoAsync(string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2400,10 +2400,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceOCOOrder");
             }
 
-            // verify the required parameter 'tradingPlaceOcoOrderRequest' is set
-            if (tradingPlaceOcoOrderRequest == null)
+            // verify the required parameter 'tradingPlaceOCOOrderRequest' is set
+            if (tradingPlaceOCOOrderRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceOcoOrderRequest' when calling TradingApi->PlaceOCOOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceOCOOrderRequest' when calling TradingApi->PlaceOCOOrder");
             }
 
 
@@ -2432,7 +2432,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceOcoOrderRequest;
+            localVarRequestOptions.Data = tradingPlaceOCOOrderRequest;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceOCOOrder";
             localVarRequestOptions.OperationIndex = operationIndex;

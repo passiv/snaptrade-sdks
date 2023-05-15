@@ -5,11 +5,11 @@ A transaction or activity from an institution
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Account** | [**AccountSimple**](AccountSimple.md) |  | [optional] 
 **Amount** | **decimal?** |  | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
+**Description** | **string** |  | [optional] 
 **Fee** | **decimal** |  | [optional] 
 **Institution** | **string** |  | [optional] 
 **OptionType** | **string** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] 

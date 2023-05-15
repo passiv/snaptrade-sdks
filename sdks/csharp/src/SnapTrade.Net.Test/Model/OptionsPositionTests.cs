@@ -58,20 +58,20 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Description'
-        /// </summary>
-        [Fact]
-        public void DescriptionTest()
-        {
-            // TODO unit test for the property 'Description'
-        }
-        /// <summary>
         /// Test the property 'Symbol'
         /// </summary>
         [Fact]
         public void SymbolTest()
         {
             // TODO unit test for the property 'Symbol'
+        }
+        /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
         }
         /// <summary>
         /// Test the property 'OptionSymbol'

@@ -35,28 +35,22 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeSymbol" /> class.
         /// </summary>
-        /// <param name="description">description.</param>
         /// <param name="brokerageSymbolId">brokerageSymbolId.</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
         /// <param name="currency">currency.</param>
         /// <param name="localId">localId.</param>
+        /// <param name="description">description.</param>
         /// <param name="symbol">symbol.</param>
-        public ManualTradeSymbol(string description = default(string), Guid brokerageSymbolId = default(Guid), Guid universalSymbolId = default(Guid), Currency currency = default(Currency), string localId = default(string), string symbol = default(string)) : base()
+        public ManualTradeSymbol(Guid brokerageSymbolId = default(Guid), Guid universalSymbolId = default(Guid), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
         {
-            this.Description = description;
             this.BrokerageSymbolId = brokerageSymbolId;
             this.UniversalSymbolId = universalSymbolId;
             this.Currency = currency;
             this.LocalId = localId;
+            this.Description = description;
             this.Symbol = symbol;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = true)]
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageSymbolId
@@ -83,6 +77,12 @@ namespace SnapTrade.Net.Model
         public string LocalId { get; set; }
 
         /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = true)]
+        public string Description { get; set; }
+
+        /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
@@ -103,11 +103,11 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  BrokerageSymbolId: ").Append(BrokerageSymbolId).Append("\n");
             sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  LocalId: ").Append(LocalId).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -146,11 +146,6 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.BrokerageSymbolId == input.BrokerageSymbolId ||
                     (this.BrokerageSymbolId != null &&
                     this.BrokerageSymbolId.Equals(input.BrokerageSymbolId))
@@ -171,6 +166,11 @@ namespace SnapTrade.Net.Model
                     this.LocalId.Equals(input.LocalId))
                 ) && base.Equals(input) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
@@ -187,10 +187,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
                 if (this.BrokerageSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.BrokerageSymbolId.GetHashCode();
@@ -206,6 +202,10 @@ namespace SnapTrade.Net.Model
                 if (this.LocalId != null)
                 {
                     hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
+                }
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.Symbol != null)
                 {

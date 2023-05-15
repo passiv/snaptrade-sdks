@@ -35,15 +35,15 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionChainInner" /> class.
         /// </summary>
-        /// <param name="description">description.</param>
         /// <param name="expiryDate">expiryDate.</param>
+        /// <param name="description">description.</param>
         /// <param name="listingExchange">listingExchange.</param>
         /// <param name="optionExerciseType">optionExerciseType.</param>
         /// <param name="chainPerRoot">chainPerRoot.</param>
-        public OptionChainInner(string description = default(string), string expiryDate = default(string), string listingExchange = default(string), string optionExerciseType = default(string), List<OptionChainInnerChainPerRootInner> chainPerRoot = default(List<OptionChainInnerChainPerRootInner>)) : base()
+        public OptionChainInner(string expiryDate = default(string), string description = default(string), string listingExchange = default(string), string optionExerciseType = default(string), List<OptionChainInnerChainPerRootInner> chainPerRoot = default(List<OptionChainInnerChainPerRootInner>)) : base()
         {
-            this.Description = description;
             this.ExpiryDate = expiryDate;
+            this.Description = description;
             this.ListingExchange = listingExchange;
             this.OptionExerciseType = optionExerciseType;
             this.ChainPerRoot = chainPerRoot;
@@ -51,16 +51,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
-
-        /// <summary>
         /// Gets or Sets ExpiryDate
         /// </summary>
         [DataMember(Name = "expiryDate", EmitDefaultValue = false)]
         public string ExpiryDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets ListingExchange
@@ -95,8 +95,8 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionChainInner {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  ListingExchange: ").Append(ListingExchange).Append("\n");
             sb.Append("  OptionExerciseType: ").Append(OptionExerciseType).Append("\n");
             sb.Append("  ChainPerRoot: ").Append(ChainPerRoot).Append("\n");
@@ -137,14 +137,14 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.ExpiryDate == input.ExpiryDate ||
                     (this.ExpiryDate != null &&
                     this.ExpiryDate.Equals(input.ExpiryDate))
+                ) && base.Equals(input) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.ListingExchange == input.ListingExchange ||
@@ -174,13 +174,13 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
                 if (this.ExpiryDate != null)
                 {
                     hashCode = (hashCode * 59) + this.ExpiryDate.GetHashCode();
+                }
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.ListingExchange != null)
                 {

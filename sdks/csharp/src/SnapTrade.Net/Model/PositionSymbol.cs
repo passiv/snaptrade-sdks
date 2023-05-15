@@ -35,16 +35,16 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionSymbol" /> class.
         /// </summary>
-        /// <param name="description">description.</param>
         /// <param name="id">id.</param>
+        /// <param name="description">description.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="localId">localId.</param>
         /// <param name="isQuotable">isQuotable.</param>
         /// <param name="isTradable">isTradable.</param>
-        public PositionSymbol(string description = default(string), Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        public PositionSymbol(Guid id = default(Guid), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
-            this.Description = description;
             this.Id = id;
+            this.Description = description;
             this.Symbol = symbol;
             this.LocalId = localId;
             this.IsQuotable = isQuotable;
@@ -53,16 +53,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
-
-        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
@@ -103,8 +103,8 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PositionSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  IsQuotable: ").Append(IsQuotable).Append("\n");
@@ -146,14 +146,14 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
+                ) && base.Equals(input) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
@@ -185,13 +185,13 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
+                }
+                if (this.Description != null)
+                {
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.Symbol != null)
                 {

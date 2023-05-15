@@ -318,9 +318,7 @@ namespace SnapTrade.Net.Test.Api
         public void ListAssetClassesTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //string userId = null;
-            //string userSecret = null;
-            //var response = instance.ListAssetClasses(userId, userSecret);
+            //var response = instance.ListAssetClasses();
             //Assert.IsType<List<ModelAssetClassDetails>>(response);
         }
 

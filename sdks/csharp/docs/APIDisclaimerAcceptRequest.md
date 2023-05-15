@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.SnapTradeApiDisclaimerRequest
+# SnapTrade.Net.Model.APIDisclaimerAcceptRequest
 
 ## Properties
 

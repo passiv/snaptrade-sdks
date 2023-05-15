@@ -2198,7 +2198,7 @@ catch (ApiException e)
 
 <a name="listassetclasses"></a>
 # **ListAssetClasses**
-> List&lt;ModelAssetClassDetails&gt; ListAssetClasses (string userId, string userSecret)
+> List&lt;ModelAssetClassDetails&gt; ListAssetClasses ()
 
 List of model asset class
 
@@ -2226,13 +2226,11 @@ namespace Example
             config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new PortfolioManagementApi(config);
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // List of model asset class
-                List<ModelAssetClassDetails> result = apiInstance.ListAssetClasses(userId, userSecret);
+                List<ModelAssetClassDetails> result = apiInstance.ListAssetClasses();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -2259,7 +2257,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List of model asset class
-    ApiResponse<List<ModelAssetClassDetails>> response = apiInstance.ListAssetClassesWithHttpInfo(userId, userSecret);
+    ApiResponse<List<ModelAssetClassDetails>> response = apiInstance.ListAssetClassesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -2273,12 +2271,7 @@ catch (ApiException e)
 ```
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 [**List&lt;ModelAssetClassDetails&gt;**](ModelAssetClassDetails.md)
