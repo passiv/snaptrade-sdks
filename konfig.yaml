@@ -25,6 +25,8 @@ requiredEnvironmentVariables:
   - SNAPTRADE_TEST_USER_SECRET
 outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
+tagPriority:
+  - Account Information
 generators:
   ruby:
     moduleName: SnapTrade
@@ -45,7 +47,7 @@ generators:
       userId: passiv
       repoId: snaptrade-php-sdk
   csharp:
-    version: 3.11.0
+    version: 3.12.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
