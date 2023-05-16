@@ -1,0 +1,32 @@
+# OpenapiClient::Trade
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  | [optional] |
+| **account** | [**Account**](Account.md) |  | [optional] |
+| **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
+| **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **action** | **String** |  | [optional] |
+| **units** | **Integer** |  | [optional] |
+| **price** | **Float** |  | [optional] |
+| **sequence** | **Integer** |  | [optional] |
+
+## Example
+
+```ruby
+require 'openapi_client'
+
+instance = OpenapiClient::Trade.new(
+  id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
+  account: null,
+  symbol: null,
+  universal_symbol: null,
+  action: BUY,
+  units: 6,
+  price: 24.81,
+  sequence: 1
+)
+```
+

@@ -26,6 +26,13 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 generators:
+  ruby:
+    moduleName: SnapTrade
+    version: 1.0.0
+    outputDirectory: sdks/ruby
+    git:
+      userId: passiv
+      repoId: snaptrade-sdks/tree/master/sdks/ruby
   php:
     version: 1.2.0
     outputDirectory: sdks/php
