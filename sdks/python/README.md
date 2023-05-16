@@ -1,4 +1,4 @@
-# snaptrade-python-sdk@10.12.0
+# snaptrade-python-sdk@10.13.0
 Connect brokerage accounts to your app for live positions and trading
 
 
@@ -9,7 +9,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.12.0
+pip install snaptrade-python-sdk==10.13.0
 ```
 
 ## Getting Started
@@ -58,10 +58,6 @@ res = snaptrade.portfolio_management.list(
 )
 pprint(res.body)
 
-snaptrade.api_disclaimer.accept(
-    query_params={"userId": user_id, "userSecret": user_secret}, body={"accepted": True}
-)
-
 # 5) Obtaining account holdings data
 holdings = snaptrade.account_information.get_all_user_holdings(
     query_params={"userId": user_id, "userSecret": user_secret}
@@ -80,6 +76,7 @@ pprint(deleted_response.body)
 `async` support is available by prepending `a` to any method.
 
 ```python
+import asyncio
 from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
@@ -94,20 +91,25 @@ snaptrade = SnapTrade(
 
 async def main():
     try:
-        # Accept or Reject SnapTrade disclaimer agreement
-        accept_response = await snaptrade.api_disclaimer.aaccept(
+        # List all accounts for the user, plus balances and positions for each account.
+        get_all_user_holdings_response = await snaptrade.account_information.aget_all_user_holdings(
             user_id="John.doe@snaptrade.com",  # required
             user_secret="USERSECRET123",  # required
-            accepted=True,  # optional
+            brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",  # optional
         )
-        pprint(accept_response.body)
-        pprint(accept_response.body["accepted"])
-        pprint(accept_response.body["timestamp"])
-        pprint(accept_response.headers)
-        pprint(accept_response.status)
-        pprint(accept_response.round_trip_time)
+        pprint(get_all_user_holdings_response.body)
+        pprint(get_all_user_holdings_response.body["account"])
+        pprint(get_all_user_holdings_response.body["balances"])
+        pprint(get_all_user_holdings_response.body["positions"])
+        pprint(get_all_user_holdings_response.body["total_value"])
+        pprint(get_all_user_holdings_response.headers)
+        pprint(get_all_user_holdings_response.status)
+        pprint(get_all_user_holdings_response.round_trip_time)
     except ApiException as e:
-        print("Exception when calling APIDisclaimerApi.accept: %s\n" % e)
+        print(
+            "Exception when calling AccountInformationApi.get_all_user_holdings: %s\n"
+            % e
+        )
         pprint(e.body)
         pprint(e.headers)
         pprint(e.status)
@@ -125,8 +127,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APIDisclaimerApi* | [**accept**](docs/apis/tags/APIDisclaimerApi.md#accept) | **post** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
-*APIStatusApi* | [**check**](docs/apis/tags/APIStatusApi.md#check) | **get** / | Get API Status
 *AccountInformationApi* | [**get_all_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_all_user_holdings) | **get** /holdings | List all accounts for the user, plus balances and positions for each account.
 *AccountInformationApi* | [**get_user_account_balance**](docs/apis/tags/AccountInformationApi.md#get_user_account_balance) | **get** /accounts/{accountId}/balances | Get all cash balances of an investment account
 *AccountInformationApi* | [**get_user_account_details**](docs/apis/tags/AccountInformationApi.md#get_user_account_details) | **get** /accounts/{accountId} | Return details of a specific investment account
@@ -135,6 +135,8 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**get_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_user_holdings) | **get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *AccountInformationApi* | [**list_user_accounts**](docs/apis/tags/AccountInformationApi.md#list_user_accounts) | **get** /accounts | List all investment accounts for the user
 *AccountInformationApi* | [**update_user_account**](docs/apis/tags/AccountInformationApi.md#update_user_account) | **put** /accounts/{accountId} | Update details of an investment account
+*APIDisclaimerApi* | [**accept**](docs/apis/tags/APIDisclaimerApi.md#accept) | **post** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
+*APIStatusApi* | [**check**](docs/apis/tags/APIStatusApi.md#check) | **get** / | Get API Status
 *AuthenticationApi* | [**delete_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#delete_snap_trade_user) | **delete** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *AuthenticationApi* | [**get_user_jwt**](docs/apis/tags/AuthenticationApi.md#get_user_jwt) | **get** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
 *AuthenticationApi* | [**list_snap_trade_users**](docs/apis/tags/AuthenticationApi.md#list_snap_trade_users) | **get** /snapTrade/listUsers | Get a list of all SnapTrade users you&#x27;ve registered on our platform
