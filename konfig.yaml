@@ -36,7 +36,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/ruby
   php:
-    version: 1.2.0
+    version: 1.3.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
