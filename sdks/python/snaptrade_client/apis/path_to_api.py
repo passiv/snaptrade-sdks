@@ -2,7 +2,6 @@ import typing_extensions
 
 from snaptrade_client.paths import PathValues
 from snaptrade_client.apis.paths.root import Root
-from snaptrade_client.apis.paths.snap_trade_accept_disclaimer import SnapTradeAcceptDisclaimer
 from snaptrade_client.apis.paths.snap_trade_list_users import SnapTradeListUsers
 from snaptrade_client.apis.paths.snap_trade_register_user import SnapTradeRegisterUser
 from snaptrade_client.apis.paths.snap_trade_delete_user import SnapTradeDeleteUser
@@ -69,7 +68,6 @@ PathToApi = typing_extensions.TypedDict(
     'PathToApi',
     {
         PathValues._: Root,
-        PathValues.SNAP_TRADE_ACCEPT_DISCLAIMER: SnapTradeAcceptDisclaimer,
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_REGISTER_USER: SnapTradeRegisterUser,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
@@ -137,7 +135,6 @@ PathToApi = typing_extensions.TypedDict(
 path_to_api = PathToApi(
     {
         PathValues._: Root,
-        PathValues.SNAP_TRADE_ACCEPT_DISCLAIMER: SnapTradeAcceptDisclaimer,
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_REGISTER_USER: SnapTradeRegisterUser,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,

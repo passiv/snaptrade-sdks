@@ -14,7 +14,6 @@
 
 
 export * from './api/account-information-api';
-export * from './api/api-disclaimer-api';
 export * from './api/api-status-api';
 export * from './api/authentication-api';
 export * from './api/connections-api';

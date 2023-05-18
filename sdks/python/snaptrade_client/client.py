@@ -17,7 +17,6 @@ from snaptrade_client.configuration import Configuration
 from snaptrade_client.api_client import ApiClient
 from snaptrade_client.type_util import copy_signature
 from snaptrade_client.apis.tags.account_information_api import AccountInformationApi
-from snaptrade_client.apis.tags.api_disclaimer_api import APIDisclaimerApi
 from snaptrade_client.apis.tags.api_status_api import APIStatusApi
 from snaptrade_client.apis.tags.authentication_api import AuthenticationApi
 from snaptrade_client.apis.tags.connections_api import ConnectionsApi
@@ -40,7 +39,6 @@ class SnapTrade(ClientCustom):
             raise Exception("configuration is required")
         api_client = ApiClient(configuration)
         self.account_information: AccountInformationApi = AccountInformationApi(api_client)
-        self.api_disclaimer: APIDisclaimerApi = APIDisclaimerApi(api_client)
         self.api_status: APIStatusApi = APIStatusApi(api_client)
         self.authentication: AuthenticationApi = AuthenticationApi(api_client)
         self.connections: ConnectionsApi = ConnectionsApi(api_client)

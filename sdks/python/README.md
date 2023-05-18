@@ -1,4 +1,4 @@
-# snaptrade-python-sdk@10.13.0
+# snaptrade-python-sdk@10.14.0
 Connect brokerage accounts to your app for live positions and trading
 
 
@@ -9,7 +9,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.13.0
+pip install snaptrade-python-sdk==10.14.0
 ```
 
 ## Getting Started
@@ -135,7 +135,6 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**get_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_user_holdings) | **get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *AccountInformationApi* | [**list_user_accounts**](docs/apis/tags/AccountInformationApi.md#list_user_accounts) | **get** /accounts | List all investment accounts for the user
 *AccountInformationApi* | [**update_user_account**](docs/apis/tags/AccountInformationApi.md#update_user_account) | **put** /accounts/{accountId} | Update details of an investment account
-*APIDisclaimerApi* | [**accept**](docs/apis/tags/APIDisclaimerApi.md#accept) | **post** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
 *APIStatusApi* | [**check**](docs/apis/tags/APIStatusApi.md#check) | **get** / | Get API Status
 *AuthenticationApi* | [**delete_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#delete_snap_trade_user) | **delete** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *AuthenticationApi* | [**get_user_jwt**](docs/apis/tags/AuthenticationApi.md#get_user_jwt) | **get** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device

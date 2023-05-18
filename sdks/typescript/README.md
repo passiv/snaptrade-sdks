@@ -1,4 +1,4 @@
-# snaptrade-typescript-sdk@8.8.0
+# snaptrade-typescript-sdk@8.9.0
 
 Connect brokerage accounts to your app for live positions and trading
 ## Installing
@@ -109,7 +109,6 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**getUserHoldings**](docs/AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *AccountInformationApi* | [**listUserAccounts**](docs/AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List all investment accounts for the user
 *AccountInformationApi* | [**updateUserAccount**](docs/AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account
-*ApiDisclaimerApi* | [**accept**](docs/ApiDisclaimerApi.md#accept) | **POST** /snapTrade/acceptDisclaimer | Accept or Reject SnapTrade disclaimer agreement
 *ApiStatusApi* | [**check**](docs/ApiStatusApi.md#check) | **GET** / | Get API Status
 *AuthenticationApi* | [**deleteSnapTradeUser**](docs/AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *AuthenticationApi* | [**getUserJWT**](docs/AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user\&#39;s local device
