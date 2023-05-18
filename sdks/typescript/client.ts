@@ -13,7 +13,6 @@
 import { AxiosRequestConfig } from "axios";
 import {
   AccountInformationApi,
-  ApiDisclaimerApi,
   ApiStatusApi,
   AuthenticationApi,
   ConnectionsApi,
@@ -29,7 +28,6 @@ import { SnaptradeCustom } from "./client-custom";
 
 export class Snaptrade extends SnaptradeCustom {
   readonly accountInformation: AccountInformationApi;
-  readonly apiDisclaimer: ApiDisclaimerApi;
   readonly apiStatus: ApiStatusApi;
   readonly authentication: AuthenticationApi;
   readonly connections: ConnectionsApi;
@@ -44,7 +42,6 @@ export class Snaptrade extends SnaptradeCustom {
     super(configurationParameters);
     const configuration = new Configuration(configurationParameters);
     this.accountInformation = new AccountInformationApi(configuration);
-    this.apiDisclaimer = new ApiDisclaimerApi(configuration);
     this.apiStatus = new ApiStatusApi(configuration);
     this.authentication = new AuthenticationApi(configuration);
     this.connections = new ConnectionsApi(configuration);

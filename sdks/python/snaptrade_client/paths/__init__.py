@@ -7,7 +7,6 @@ import enum
 
 class PathValues(str, enum.Enum):
     _ = "/"
-    SNAP_TRADE_ACCEPT_DISCLAIMER = "/snapTrade/acceptDisclaimer"
     SNAP_TRADE_LIST_USERS = "/snapTrade/listUsers"
     SNAP_TRADE_REGISTER_USER = "/snapTrade/registerUser"
     SNAP_TRADE_DELETE_USER = "/snapTrade/deleteUser"

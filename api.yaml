@@ -69,34 +69,6 @@ paths:
                 $ref: "#/components/schemas/Status"
         default:
           description: Unexpected error.
-  /snapTrade/acceptDisclaimer:
-    post:
-      tags:
-        - API Disclaimer
-      summary: Accept or Reject SnapTrade disclaimer agreement
-      operationId: APIDisclaimer_accept
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-      requestBody:
-        $ref: "#/components/requestBodies/SnapTradeAPIDisclaimerAcceptRequestBody"
-      responses:
-        "200":
-          description: Returns timestamp for when user accepted SnapTrade disclaimer
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SnapTradeAPIDisclaimerAcceptStatus"
-        "500":
-          description: Unexpected Error. Please contact support
   /snapTrade/apiCredentials:
     get:
       tags:
