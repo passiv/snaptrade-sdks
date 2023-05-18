@@ -69,10 +69,6 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(res.body)
 
-        snaptrade.api_disclaimer.accept(
-            user_id=user_id, user_secret=user_secret, accepted=True
-        )
-
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(
             user_id=user_id, user_secret=user_secret
@@ -122,11 +118,6 @@ class TestGettingStarted(unittest.TestCase):
             query_params={"userId": user_id, "userSecret": user_secret}
         )
         pprint(res.body)
-
-        snaptrade.api_disclaimer.accept(
-            query_params={"userId": user_id, "userSecret": user_secret},
-            body={"accepted": True},
-        )
 
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(
