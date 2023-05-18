@@ -1,4 +1,4 @@
-# OpenapiClient::BrokerageAuthorizationType
+# SnapTrade::BrokerageAuthorizationType
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::BrokerageAuthorizationType.new(
+instance = SnapTrade::BrokerageAuthorizationType.new(
   type: null
 )
 ```

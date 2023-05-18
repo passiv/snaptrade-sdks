@@ -1,4 +1,4 @@
-# OpenapiClient::ManualTrade
+# SnapTrade::ManualTrade
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ManualTrade.new(
+instance = SnapTrade::ManualTrade.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   account: null,
   order_type: null,

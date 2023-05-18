@@ -1,4 +1,4 @@
-# OpenapiClient::UniversalSymbol
+# SnapTrade::UniversalSymbol
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UniversalSymbol.new(
+instance = SnapTrade::UniversalSymbol.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   symbol: VAB.TO,
   raw_symbol: VAB,

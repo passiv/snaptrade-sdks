@@ -1,4 +1,4 @@
-# OpenapiClient::PerformanceCustom
+# SnapTrade::PerformanceCustom
 
 ## Properties
 
@@ -27,9 +27,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PerformanceCustom.new(
+instance = SnapTrade::PerformanceCustom.new(
   total_equity_timeframe: null,
   contributions: null,
   contribution_timeframe: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::Model404FailedRequestResponse
+# SnapTrade::Model404FailedRequestResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Model404FailedRequestResponse.new(
+instance = SnapTrade::Model404FailedRequestResponse.new(
   default_detail: The requested resource does not exist.,
   default_code: 1011
 )

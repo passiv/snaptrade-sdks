@@ -1,4 +1,4 @@
-# OpenapiClient::UserErrorLog
+# SnapTrade::UserErrorLog
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UserErrorLog.new(
+instance = SnapTrade::UserErrorLog.new(
   requested_at: 2022-01-21T20:11:19.217Z,
   response: null,
   status_code: 200,

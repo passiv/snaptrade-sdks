@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyOrderRecord
+# SnapTrade::StrategyOrderRecord
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyOrderRecord.new(
+instance = SnapTrade::StrategyOrderRecord.new(
   strategy: null,
   status: null,
   filled_quantity: 10,

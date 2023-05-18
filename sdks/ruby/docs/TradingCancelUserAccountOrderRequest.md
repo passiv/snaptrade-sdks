@@ -1,4 +1,4 @@
-# OpenapiClient::TradingCancelUserAccountOrderRequest
+# SnapTrade::TradingCancelUserAccountOrderRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TradingCancelUserAccountOrderRequest.new(
+instance = SnapTrade::TradingCancelUserAccountOrderRequest.new(
   brokerage_order_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
 )
 ```

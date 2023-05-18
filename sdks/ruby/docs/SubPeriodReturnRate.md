@@ -1,4 +1,4 @@
-# OpenapiClient::SubPeriodReturnRate
+# SnapTrade::SubPeriodReturnRate
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SubPeriodReturnRate.new(
+instance = SnapTrade::SubPeriodReturnRate.new(
   period_start: Sun Jan 23 16:00:00 PST 2022,
   period_end: Sun Jan 23 16:00:00 PST 2022,
   rate_of_return: 0.012312367452

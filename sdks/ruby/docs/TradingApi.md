@@ -1,4 +1,4 @@
-# OpenapiClient::TradingApi
+# SnapTrade::TradingApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -26,9 +26,9 @@ Cancel open order in account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -45,17 +45,17 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-trading_cancel_user_account_order_request = OpenapiClient::TradingCancelUserAccountOrderRequest.new # TradingCancelUserAccountOrderRequest | The Order ID to be canceled
+trading_cancel_user_account_order_request = SnapTrade::TradingCancelUserAccountOrderRequest.new # TradingCancelUserAccountOrderRequest | The Order ID to be canceled
 
 begin
   # Cancel open order in account
   result = api_instance.cancel_user_account_order(user_id, user_secret, account_id, trading_cancel_user_account_order_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->cancel_user_account_order: #{e}"
 end
 ```
@@ -73,7 +73,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AccountOrderRecord>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->cancel_user_account_order_with_http_info: #{e}"
 end
 ```
@@ -111,9 +111,9 @@ Return details of a specific trade before it's placed
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -130,7 +130,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
 calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
 trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object
@@ -139,7 +139,7 @@ begin
   # Return details of a specific trade before it's placed
   result = api_instance.get_calculated_trade_impact_by_id(portfolio_group_id, calculated_trade_id, trade_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_calculated_trade_impact_by_id: #{e}"
 end
 ```
@@ -157,7 +157,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Trade>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_calculated_trade_impact_by_id_with_http_info: #{e}"
 end
 ```
@@ -194,9 +194,9 @@ Return the impact of placing a series of trades on the portfolio
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -213,7 +213,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
 calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
 
@@ -221,7 +221,7 @@ begin
   # Return the impact of placing a series of trades on the portfolio
   result = api_instance.get_calculated_trades_impact(portfolio_group_id, calculated_trade_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_calculated_trades_impact: #{e}"
 end
 ```
@@ -239,7 +239,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<TradeImpact>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_calculated_trades_impact_with_http_info: #{e}"
 end
 ```
@@ -275,9 +275,9 @@ Check impact of trades on account.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -294,16 +294,16 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
-manual_trade_form = OpenapiClient::ManualTradeForm.new # ManualTradeForm | 
+manual_trade_form = SnapTrade::ManualTradeForm.new # ManualTradeForm | 
 
 begin
   # Check impact of trades on account.
   result = api_instance.get_order_impact(user_id, user_secret, manual_trade_form)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_order_impact: #{e}"
 end
 ```
@@ -321,7 +321,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ManualTradeAndImpact>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_order_impact_with_http_info: #{e}"
 end
 ```
@@ -358,9 +358,9 @@ Get symbol quotes
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -377,7 +377,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 symbols = 'symbols_example' # String | List of universal_symbol_id or tickers to get quotes for.
@@ -390,7 +390,7 @@ begin
   # Get symbol quotes
   result = api_instance.get_user_account_quotes(user_id, user_secret, symbols, account_id, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_user_account_quotes: #{e}"
 end
 ```
@@ -408,7 +408,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SymbolsQuotes>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->get_user_account_quotes_with_http_info: #{e}"
 end
 ```
@@ -447,9 +447,9 @@ Modify units of a trade before it is placed
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -466,19 +466,19 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
 calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
 trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object
 opts = {
-  trade: OpenapiClient::Trade.new # Trade | 
+  trade: SnapTrade::Trade.new # Trade | 
 }
 
 begin
   # Modify units of a trade before it is placed
   result = api_instance.modify_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->modify_calculated_trade_by_id: #{e}"
 end
 ```
@@ -496,7 +496,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Trade>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->modify_calculated_trade_by_id_with_http_info: #{e}"
 end
 ```
@@ -534,9 +534,9 @@ Place orders for the CalculatedTrades in series
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -553,7 +553,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
 calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
 
@@ -561,7 +561,7 @@ begin
   # Place orders for the CalculatedTrades in series
   result = api_instance.place_calculated_trades(portfolio_group_id, calculated_trade_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_calculated_trades: #{e}"
 end
 ```
@@ -579,7 +579,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<TradeExecutionStatus>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_calculated_trades_with_http_info: #{e}"
 end
 ```
@@ -615,9 +615,9 @@ Place a trade with NO validation.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -634,16 +634,16 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
-manual_trade_form = OpenapiClient::ManualTradeForm.new # ManualTradeForm | 
+manual_trade_form = SnapTrade::ManualTradeForm.new # ManualTradeForm | 
 
 begin
   # Place a trade with NO validation.
   result = api_instance.place_force_order(user_id, user_secret, manual_trade_form)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_force_order: #{e}"
 end
 ```
@@ -661,7 +661,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AccountOrderRecord>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_force_order_with_http_info: #{e}"
 end
 ```
@@ -698,9 +698,9 @@ Place a OCO (One Cancels Other) order
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -717,16 +717,16 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
-trading_place_oco_order_request = OpenapiClient::TradingPlaceOCOOrderRequest.new # TradingPlaceOCOOrderRequest | 
+trading_place_oco_order_request = SnapTrade::TradingPlaceOCOOrderRequest.new # TradingPlaceOCOOrderRequest | 
 
 begin
   # Place a OCO (One Cancels Other) order
   result = api_instance.place_oco_order(user_id, user_secret, trading_place_oco_order_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_oco_order: #{e}"
 end
 ```
@@ -744,7 +744,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AccountOrderRecord>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_oco_order_with_http_info: #{e}"
 end
 ```
@@ -781,9 +781,9 @@ Place order
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -800,7 +800,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TradingApi.new
+api_instance = SnapTrade::TradingApi.new
 trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object obtained from trade/impact endpoint
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
@@ -809,7 +809,7 @@ begin
   # Place order
   result = api_instance.place_order(trade_id, user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_order: #{e}"
 end
 ```
@@ -827,7 +827,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AccountOrderRecord>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TradingApi->place_order_with_http_info: #{e}"
 end
 ```

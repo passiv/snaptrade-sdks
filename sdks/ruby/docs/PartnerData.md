@@ -1,4 +1,4 @@
-# OpenapiClient::PartnerData
+# SnapTrade::PartnerData
 
 ## Properties
 
@@ -20,9 +20,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PartnerData.new(
+instance = SnapTrade::PartnerData.new(
   redirect_uri: https://example.com/oauth/snaptrade,
   allowed_brokerages: null,
   name: Wealthy Chimpmunk,

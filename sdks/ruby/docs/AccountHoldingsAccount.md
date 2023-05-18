@@ -1,4 +1,4 @@
-# OpenapiClient::AccountHoldingsAccount
+# SnapTrade::AccountHoldingsAccount
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::AccountHoldingsAccount.new(
+instance = SnapTrade::AccountHoldingsAccount.new(
   account: null,
   balances: null,
   positions: null,

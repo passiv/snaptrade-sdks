@@ -1,4 +1,4 @@
-# OpenapiClient::NetDividend
+# SnapTrade::NetDividend
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::NetDividend.new(
+instance = SnapTrade::NetDividend.new(
   symbol: null,
   amount: 165.05,
   currency: USD

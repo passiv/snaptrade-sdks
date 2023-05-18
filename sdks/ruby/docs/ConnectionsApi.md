@@ -1,4 +1,4 @@
-# OpenapiClient::ConnectionsApi
+# SnapTrade::ConnectionsApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -20,9 +20,9 @@ Get detail of a specific brokerage authorizations for the user
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -39,7 +39,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ConnectionsApi.new
+api_instance = SnapTrade::ConnectionsApi.new
 authorization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of a brokerage authorization object.
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
@@ -48,7 +48,7 @@ begin
   # Get detail of a specific brokerage authorizations for the user
   result = api_instance.detail_brokerage_authorization(authorization_id, user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->detail_brokerage_authorization: #{e}"
 end
 ```
@@ -66,7 +66,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BrokerageAuthorization>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->detail_brokerage_authorization_with_http_info: #{e}"
 end
 ```
@@ -103,9 +103,9 @@ List all brokerage authorizations for the user
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -122,7 +122,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ConnectionsApi.new
+api_instance = SnapTrade::ConnectionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 
@@ -130,7 +130,7 @@ begin
   # List all brokerage authorizations for the user
   result = api_instance.list_brokerage_authorizations(user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->list_brokerage_authorizations: #{e}"
 end
 ```
@@ -148,7 +148,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<BrokerageAuthorization>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->list_brokerage_authorizations_with_http_info: #{e}"
 end
 ```
@@ -184,9 +184,9 @@ Remove a brokerage authorization.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -203,7 +203,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ConnectionsApi.new
+api_instance = SnapTrade::ConnectionsApi.new
 authorization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the Authorization to delete.
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
@@ -211,7 +211,7 @@ user_secret = 'user_secret_example' # String |
 begin
   # Remove a brokerage authorization.
   api_instance.remove_brokerage_authorization(authorization_id, user_id, user_secret)
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->remove_brokerage_authorization: #{e}"
 end
 ```
@@ -229,7 +229,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->remove_brokerage_authorization_with_http_info: #{e}"
 end
 ```
@@ -266,9 +266,9 @@ List all session events for the partner
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -285,7 +285,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ConnectionsApi.new
+api_instance = SnapTrade::ConnectionsApi.new
 partner_client_id = 'partner_client_id_example' # String | 
 opts = {
   user_id: 'user_id_example', # String | Optional comma seperated list of user IDs used to filter the request on specific users
@@ -296,7 +296,7 @@ begin
   # List all session events for the partner
   result = api_instance.session_events(partner_client_id, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->session_events: #{e}"
 end
 ```
@@ -314,7 +314,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<ConnectionsSessionEvents200ResponseInner>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ConnectionsApi->session_events_with_http_info: #{e}"
 end
 ```

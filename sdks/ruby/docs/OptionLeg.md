@@ -1,4 +1,4 @@
-# OpenapiClient::OptionLeg
+# SnapTrade::OptionLeg
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionLeg.new(
+instance = SnapTrade::OptionLeg.new(
   action: null,
   option_symbol_id: SPY220819P00200000,
   quantity: 1

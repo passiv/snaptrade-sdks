@@ -1,4 +1,4 @@
-# OpenapiClient::MonthlyDividends
+# SnapTrade::MonthlyDividends
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::MonthlyDividends.new(
+instance = SnapTrade::MonthlyDividends.new(
   date: Sun Jan 23 16:00:00 PST 2022,
   dividends: null
 )

@@ -1,4 +1,4 @@
-# OpenapiClient::PositionSymbol
+# SnapTrade::PositionSymbol
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PositionSymbol.new(
+instance = SnapTrade::PositionSymbol.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   description: VANGUARD CDN AGGREGATE BOND INDEX ETF,
   symbol: null,

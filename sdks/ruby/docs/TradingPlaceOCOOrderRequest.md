@@ -1,4 +1,4 @@
-# OpenapiClient::TradingPlaceOCOOrderRequest
+# SnapTrade::TradingPlaceOCOOrderRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TradingPlaceOCOOrderRequest.new(
+instance = SnapTrade::TradingPlaceOCOOrderRequest.new(
   first_trade_id: null,
   second_trade_id: null
 )

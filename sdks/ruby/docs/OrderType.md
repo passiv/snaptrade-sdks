@@ -1,4 +1,4 @@
-# OpenapiClient::OrderType
+# SnapTrade::OrderType
 
 ## Properties
 
@@ -8,8 +8,8 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OrderType.new()
+instance = SnapTrade::OrderType.new()
 ```
 

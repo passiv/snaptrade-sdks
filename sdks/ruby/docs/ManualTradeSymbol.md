@@ -1,4 +1,4 @@
-# OpenapiClient::ManualTradeSymbol
+# SnapTrade::ManualTradeSymbol
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ManualTradeSymbol.new(
+instance = SnapTrade::ManualTradeSymbol.new(
   brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   currency: null,

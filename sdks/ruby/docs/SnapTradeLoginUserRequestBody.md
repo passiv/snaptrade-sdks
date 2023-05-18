@@ -1,4 +1,4 @@
-# OpenapiClient::SnapTradeLoginUserRequestBody
+# SnapTrade::SnapTradeLoginUserRequestBody
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SnapTradeLoginUserRequestBody.new(
+instance = SnapTrade::SnapTradeLoginUserRequestBody.new(
   broker: ALPACA,
   immediate_redirect: true,
   custom_redirect: https://passiv.com,

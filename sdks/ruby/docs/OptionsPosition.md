@@ -1,4 +1,4 @@
-# OpenapiClient::OptionsPosition
+# SnapTrade::OptionsPosition
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionsPosition.new(
+instance = SnapTrade::OptionsPosition.new(
   symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   description: SPY PUT Aug 2022,
   option_symbol: null,

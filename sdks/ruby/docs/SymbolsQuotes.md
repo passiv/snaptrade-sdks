@@ -1,4 +1,4 @@
-# OpenapiClient::SymbolsQuotes
+# SnapTrade::SymbolsQuotes
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SymbolsQuotes.new(
+instance = SnapTrade::SymbolsQuotes.new(
   symbol: null,
   bid_price: 8.43,
   ask_price: 8.43,

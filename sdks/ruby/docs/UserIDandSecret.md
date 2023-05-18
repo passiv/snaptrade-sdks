@@ -1,4 +1,4 @@
-# OpenapiClient::UserIDandSecret
+# SnapTrade::UserIDandSecret
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UserIDandSecret.new(
+instance = SnapTrade::UserIDandSecret.new(
   user_id: snaptrade-user-123,
   user_secret: h81@cx1lkalablakwjaltkejraj11&#x3D;
 )

@@ -1,4 +1,4 @@
-# OpenapiClient::OptionChainInnerChainPerRootInner
+# SnapTrade::OptionChainInnerChainPerRootInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionChainInnerChainPerRootInner.new(
+instance = SnapTrade::OptionChainInnerChainPerRootInner.new(
   option_root: AAPL,
   chain_per_strike_price: null,
   multiplier: 100

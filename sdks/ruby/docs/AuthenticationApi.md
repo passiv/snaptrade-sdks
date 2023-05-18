@@ -1,4 +1,4 @@
-# OpenapiClient::AuthenticationApi
+# SnapTrade::AuthenticationApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -21,9 +21,9 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -40,14 +40,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthenticationApi.new
+api_instance = SnapTrade::AuthenticationApi.new
 user_id = 'user_id_example' # String | 
 
 begin
   # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
   result = api_instance.delete_snap_trade_user(user_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->delete_snap_trade_user: #{e}"
 end
 ```
@@ -65,7 +65,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteUserResponse>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->delete_snap_trade_user_with_http_info: #{e}"
 end
 ```
@@ -100,9 +100,9 @@ Obtains an encrypted JWT tokens that should be decrypted on a user's local devic
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -119,7 +119,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthenticationApi.new
+api_instance = SnapTrade::AuthenticationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 
@@ -127,7 +127,7 @@ begin
   # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
   result = api_instance.get_user_jwt(user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->get_user_jwt: #{e}"
 end
 ```
@@ -145,7 +145,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EncryptedResponse>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->get_user_jwt_with_http_info: #{e}"
 end
 ```
@@ -181,9 +181,9 @@ Get a list of all SnapTrade users you've registered on our platform
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -200,13 +200,13 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthenticationApi.new
+api_instance = SnapTrade::AuthenticationApi.new
 
 begin
   # Get a list of all SnapTrade users you've registered on our platform
   result = api_instance.list_snap_trade_users
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->list_snap_trade_users: #{e}"
 end
 ```
@@ -224,7 +224,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array&lt;String&gt;
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->list_snap_trade_users_with_http_info: #{e}"
 end
 ```
@@ -257,9 +257,9 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -276,18 +276,18 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthenticationApi.new
+api_instance = SnapTrade::AuthenticationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 opts = {
-  snap_trade_login_user_request_body: OpenapiClient::SnapTradeLoginUserRequestBody.new # SnapTradeLoginUserRequestBody | 
+  snap_trade_login_user_request_body: SnapTrade::SnapTradeLoginUserRequestBody.new # SnapTradeLoginUserRequestBody | 
 }
 
 begin
   # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
   result = api_instance.login_snap_trade_user(user_id, user_secret, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->login_snap_trade_user: #{e}"
 end
 ```
@@ -305,7 +305,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AuthenticationLoginSnapTradeUser200Response>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->login_snap_trade_user_with_http_info: #{e}"
 end
 ```
@@ -342,9 +342,9 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -361,14 +361,14 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AuthenticationApi.new
-snap_trade_register_user_request_body = OpenapiClient::SnapTradeRegisterUserRequestBody.new # SnapTradeRegisterUserRequestBody | 
+api_instance = SnapTrade::AuthenticationApi.new
+snap_trade_register_user_request_body = SnapTrade::SnapTradeRegisterUserRequestBody.new # SnapTradeRegisterUserRequestBody | 
 
 begin
   # Register user with SnapTrade in order to create secure brokerage authorizations
   result = api_instance.register_snap_trade_user(snap_trade_register_user_request_body)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->register_snap_trade_user: #{e}"
 end
 ```
@@ -386,7 +386,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UserIDandSecret>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AuthenticationApi->register_snap_trade_user_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# OpenapiClient::Action
+# SnapTrade::Action
 
 ## Properties
 
@@ -8,8 +8,8 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Action.new()
+instance = SnapTrade::Action.new()
 ```
 

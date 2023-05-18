@@ -1,4 +1,4 @@
-# OpenapiClient::OptionChainInner
+# SnapTrade::OptionChainInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionChainInner.new(
+instance = SnapTrade::OptionChainInner.new(
   expiry_date: 2022-07-08T04:00:00.000Z,
   description: APPLE INC,
   listing_exchange: OPRA,

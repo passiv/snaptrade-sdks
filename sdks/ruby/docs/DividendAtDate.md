@@ -1,4 +1,4 @@
-# OpenapiClient::DividendAtDate
+# SnapTrade::DividendAtDate
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::DividendAtDate.new(
+instance = SnapTrade::DividendAtDate.new(
   symbol: AAPL,
   amount: 6.82,
   currency: CAD

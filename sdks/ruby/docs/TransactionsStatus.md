@@ -1,4 +1,4 @@
-# OpenapiClient::TransactionsStatus
+# SnapTrade::TransactionsStatus
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TransactionsStatus.new(
+instance = SnapTrade::TransactionsStatus.new(
   initial_sync_completed: null,
   last_successful_sync: Sun Jan 23 16:00:00 PST 2022
 )

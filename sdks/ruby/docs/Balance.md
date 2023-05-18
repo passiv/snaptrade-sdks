@@ -1,4 +1,4 @@
-# OpenapiClient::Balance
+# SnapTrade::Balance
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Balance.new(
+instance = SnapTrade::Balance.new(
   currency: null,
   cash: 300.71
 )

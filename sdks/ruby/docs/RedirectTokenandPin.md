@@ -1,4 +1,4 @@
-# OpenapiClient::RedirectTokenandPin
+# SnapTrade::RedirectTokenandPin
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::RedirectTokenandPin.new(
+instance = SnapTrade::RedirectTokenandPin.new(
   token: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B,
   pin: usERdeFiP@1in9
 )

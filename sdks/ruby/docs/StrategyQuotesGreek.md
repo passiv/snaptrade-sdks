@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyQuotesGreek
+# SnapTrade::StrategyQuotesGreek
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyQuotesGreek.new(
+instance = SnapTrade::StrategyQuotesGreek.new(
   delta: 0.1,
   gamma: 0.1,
   theta: 0.1,

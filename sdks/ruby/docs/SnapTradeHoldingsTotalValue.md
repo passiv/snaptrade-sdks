@@ -1,4 +1,4 @@
-# OpenapiClient::SnapTradeHoldingsTotalValue
+# SnapTrade::SnapTradeHoldingsTotalValue
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SnapTradeHoldingsTotalValue.new(
+instance = SnapTrade::SnapTradeHoldingsTotalValue.new(
   value: 32600.71,
   currency: USD
 )

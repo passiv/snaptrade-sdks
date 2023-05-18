@@ -1,4 +1,4 @@
-# OpenapiClient::PastValue
+# SnapTrade::PastValue
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PastValue.new(
+instance = SnapTrade::PastValue.new(
   date: Sun Jan 23 16:00:00 PST 2022,
   value: 52.74,
   currency: CAD

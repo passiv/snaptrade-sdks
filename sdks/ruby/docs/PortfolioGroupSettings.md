@@ -1,4 +1,4 @@
-# OpenapiClient::PortfolioGroupSettings
+# SnapTrade::PortfolioGroupSettings
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PortfolioGroupSettings.new(
+instance = SnapTrade::PortfolioGroupSettings.new(
   buy_only: true,
   cash_optimizer: true,
   notify_frequency: 7 00:00:00,

@@ -1,4 +1,4 @@
-# OpenapiClient::Currency
+# SnapTrade::Currency
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Currency.new(
+instance = SnapTrade::Currency.new(
   id: 87b24961-b51e-4db8-9226-f198f6518a89,
   code: USD,
   name: US Dollar

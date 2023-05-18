@@ -1,4 +1,4 @@
-# OpenapiClient::ExchangeRatePairs
+# SnapTrade::ExchangeRatePairs
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ExchangeRatePairs.new(
+instance = SnapTrade::ExchangeRatePairs.new(
   src: null,
   dst: null,
   exchange_rate: 1.32

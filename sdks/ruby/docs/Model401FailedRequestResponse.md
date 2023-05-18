@@ -1,4 +1,4 @@
-# OpenapiClient::Model401FailedRequestResponse
+# SnapTrade::Model401FailedRequestResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Model401FailedRequestResponse.new(
+instance = SnapTrade::Model401FailedRequestResponse.new(
   default_detail: Unable to verify signature sent,
   default_code: 1076
 )

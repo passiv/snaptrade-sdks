@@ -1,4 +1,4 @@
-# OpenapiClient::ModelAssetClass
+# SnapTrade::ModelAssetClass
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ModelAssetClass.new(
+instance = SnapTrade::ModelAssetClass.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   name: Bonds
 )

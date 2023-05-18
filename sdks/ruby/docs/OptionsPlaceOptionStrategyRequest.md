@@ -1,4 +1,4 @@
-# OpenapiClient::OptionsPlaceOptionStrategyRequest
+# SnapTrade::OptionsPlaceOptionStrategyRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionsPlaceOptionStrategyRequest.new(
+instance = SnapTrade::OptionsPlaceOptionStrategyRequest.new(
   order_type: null,
   time_in_force: null,
   price: 31.33

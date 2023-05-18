@@ -1,4 +1,4 @@
-# OpenapiClient::APIStatusApi
+# SnapTrade::APIStatusApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -19,15 +19,15 @@ Check whether the API is operational and verify timestamps.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 
-api_instance = OpenapiClient::APIStatusApi.new
+api_instance = SnapTrade::APIStatusApi.new
 
 begin
   # Get API Status
   result = api_instance.check
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling APIStatusApi->check: #{e}"
 end
 ```
@@ -45,7 +45,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Status>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling APIStatusApi->check_with_http_info: #{e}"
 end
 ```

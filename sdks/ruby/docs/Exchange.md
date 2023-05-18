@@ -1,4 +1,4 @@
-# OpenapiClient::Exchange
+# SnapTrade::Exchange
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Exchange.new(
+instance = SnapTrade::Exchange.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   code: TSX,
   mic_code: XTSE,

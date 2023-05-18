@@ -1,4 +1,4 @@
-# OpenapiClient::BrokerageType
+# SnapTrade::BrokerageType
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::BrokerageType.new(
+instance = SnapTrade::BrokerageType.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   name: Traditional Brokerage
 )

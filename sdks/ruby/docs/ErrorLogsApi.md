@@ -1,4 +1,4 @@
-# OpenapiClient::ErrorLogsApi
+# SnapTrade::ErrorLogsApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -17,9 +17,9 @@ Retrieve error logs on behalf of your SnapTrade users
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -36,7 +36,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::ErrorLogsApi.new
+api_instance = SnapTrade::ErrorLogsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 
@@ -44,7 +44,7 @@ begin
   # Retrieve error logs on behalf of your SnapTrade users
   result = api_instance.list_user_errors(user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ErrorLogsApi->list_user_errors: #{e}"
 end
 ```
@@ -62,7 +62,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<UserErrorLog>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling ErrorLogsApi->list_user_errors_with_http_info: #{e}"
 end
 ```

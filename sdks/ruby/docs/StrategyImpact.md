@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyImpact
+# SnapTrade::StrategyImpact
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyImpact.new(
+instance = SnapTrade::StrategyImpact.new(
   estimated_commissions: 11.95,
   buying_power_effect: -156.3435,
   buying_power_result: 8800.0882,

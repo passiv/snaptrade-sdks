@@ -1,4 +1,4 @@
-# OpenapiClient::TimeInForce
+# SnapTrade::TimeInForce
 
 ## Properties
 
@@ -8,8 +8,8 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TimeInForce.new()
+instance = SnapTrade::TimeInForce.new()
 ```
 

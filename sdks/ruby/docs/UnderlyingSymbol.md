@@ -1,4 +1,4 @@
-# OpenapiClient::UnderlyingSymbol
+# SnapTrade::UnderlyingSymbol
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UnderlyingSymbol.new(
+instance = SnapTrade::UnderlyingSymbol.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   symbol: SPY,
   description: SPDR S&amp;P 500 ETF Trust,

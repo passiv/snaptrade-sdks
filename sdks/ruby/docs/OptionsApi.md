@@ -1,4 +1,4 @@
-# OpenapiClient::OptionsApi
+# SnapTrade::OptionsApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -21,9 +21,9 @@ Creates an option strategy object that will be used to place an option strategy 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -40,17 +40,17 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OptionsApi.new
+api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-options_get_option_strategy_request = OpenapiClient::OptionsGetOptionStrategyRequest.new({underlying_symbol_id: '2bcd7cc3-e922-4976-bce1-9858296801c3', legs: [OpenapiClient::OptionLeg.new], strategy_type: 'CUSTOM'}) # OptionsGetOptionStrategyRequest | 
+options_get_option_strategy_request = SnapTrade::OptionsGetOptionStrategyRequest.new({underlying_symbol_id: '2bcd7cc3-e922-4976-bce1-9858296801c3', legs: [SnapTrade::OptionLeg.new], strategy_type: 'CUSTOM'}) # OptionsGetOptionStrategyRequest | 
 
 begin
   # Creates an option strategy object that will be used to place an option strategy order
   result = api_instance.get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_option_strategy: #{e}"
 end
 ```
@@ -68,7 +68,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StrategyQuotes>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_option_strategy_with_http_info: #{e}"
 end
 ```
@@ -106,9 +106,9 @@ Get the options chain
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -125,7 +125,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OptionsApi.new
+api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -135,7 +135,7 @@ begin
   # Get the options chain
   result = api_instance.get_options_chain(user_id, user_secret, account_id, symbol)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_options_chain: #{e}"
 end
 ```
@@ -153,7 +153,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<OptionChainInner>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_options_chain_with_http_info: #{e}"
 end
 ```
@@ -191,9 +191,9 @@ Get latest market data of option strategy
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -210,7 +210,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OptionsApi.new
+api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -220,7 +220,7 @@ begin
   # Get latest market data of option strategy
   result = api_instance.get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_options_strategy_quote: #{e}"
 end
 ```
@@ -238,7 +238,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StrategyQuotes>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->get_options_strategy_quote_with_http_info: #{e}"
 end
 ```
@@ -276,9 +276,9 @@ Get the options holdings in the account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -295,7 +295,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OptionsApi.new
+api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -304,7 +304,7 @@ begin
   # Get the options holdings in the account
   result = api_instance.list_option_holdings(user_id, user_secret, account_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->list_option_holdings: #{e}"
 end
 ```
@@ -322,7 +322,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <OptionsHoldings>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->list_option_holdings_with_http_info: #{e}"
 end
 ```
@@ -359,9 +359,9 @@ Place an option strategy order on the brokerage
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -378,18 +378,18 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::OptionsApi.new
+api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
 option_strategy_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Option strategy id obtained from response when creating option strategy object
-options_place_option_strategy_request = OpenapiClient::OptionsPlaceOptionStrategyRequest.new({order_type: 'Limit', time_in_force: 'DAY', price: 31.33}) # OptionsPlaceOptionStrategyRequest | 
+options_place_option_strategy_request = SnapTrade::OptionsPlaceOptionStrategyRequest.new({order_type: 'Limit', time_in_force: 'DAY', price: 31.33}) # OptionsPlaceOptionStrategyRequest | 
 
 begin
   # Place an option strategy order on the brokerage
   result = api_instance.place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->place_option_strategy: #{e}"
 end
 ```
@@ -407,7 +407,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StrategyOrderRecord>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling OptionsApi->place_option_strategy_with_http_info: #{e}"
 end
 ```

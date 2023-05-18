@@ -1,4 +1,4 @@
-# OpenapiClient::SnapTradeAPIDisclaimerAcceptStatus
+# SnapTrade::SnapTradeAPIDisclaimerAcceptStatus
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SnapTradeAPIDisclaimerAcceptStatus.new(
+instance = SnapTrade::SnapTradeAPIDisclaimerAcceptStatus.new(
   accepted: null,
   timestamp: 2022-01-21T20:11:19.217Z
 )

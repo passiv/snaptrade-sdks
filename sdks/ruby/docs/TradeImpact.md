@@ -1,4 +1,4 @@
-# OpenapiClient::TradeImpact
+# SnapTrade::TradeImpact
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TradeImpact.new(
+instance = SnapTrade::TradeImpact.new(
   account: null,
   currency: null,
   remaining_cash: 1.01,

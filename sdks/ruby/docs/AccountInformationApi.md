@@ -1,4 +1,4 @@
-# OpenapiClient::AccountInformationApi
+# SnapTrade::AccountInformationApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -24,9 +24,9 @@ List all accounts for the user, plus balances and positions for each account.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -43,7 +43,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 opts = {
@@ -54,7 +54,7 @@ begin
   # List all accounts for the user, plus balances and positions for each account.
   result = api_instance.get_all_user_holdings(user_id, user_secret, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_all_user_holdings: #{e}"
 end
 ```
@@ -72,7 +72,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<AccountHoldings>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_all_user_holdings_with_http_info: #{e}"
 end
 ```
@@ -109,9 +109,9 @@ Get all cash balances of an investment account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -128,7 +128,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -137,7 +137,7 @@ begin
   # Get all cash balances of an investment account
   result = api_instance.get_user_account_balance(user_id, user_secret, account_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_balance: #{e}"
 end
 ```
@@ -155,7 +155,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Balance>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_balance_with_http_info: #{e}"
 end
 ```
@@ -192,9 +192,9 @@ Return details of a specific investment account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -211,7 +211,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account to get detail of.
@@ -220,7 +220,7 @@ begin
   # Return details of a specific investment account
   result = api_instance.get_user_account_details(user_id, user_secret, account_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_details: #{e}"
 end
 ```
@@ -238,7 +238,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Account>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_details_with_http_info: #{e}"
 end
 ```
@@ -275,9 +275,9 @@ Get all history of orders placed in account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -294,7 +294,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -306,7 +306,7 @@ begin
   # Get all history of orders placed in account
   result = api_instance.get_user_account_orders(user_id, user_secret, account_id, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_orders: #{e}"
 end
 ```
@@ -324,7 +324,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<AccountOrderRecord>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_orders_with_http_info: #{e}"
 end
 ```
@@ -362,9 +362,9 @@ Get all positions of an investment account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -381,7 +381,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
@@ -390,7 +390,7 @@ begin
   # Get all positions of an investment account
   result = api_instance.get_user_account_positions(user_id, user_secret, account_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_positions: #{e}"
 end
 ```
@@ -408,7 +408,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Position>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_account_positions_with_http_info: #{e}"
 end
 ```
@@ -445,9 +445,9 @@ List balances, positions and orders for the specified account.
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -464,7 +464,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 account_id = '917c8734-8470-4a3e-a18f-57c3f2ee6631' # String | The ID of the account to fetch holdings for.
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
@@ -473,7 +473,7 @@ begin
   # List balances, positions and orders for the specified account.
   result = api_instance.get_user_holdings(account_id, user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_holdings: #{e}"
 end
 ```
@@ -491,7 +491,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AccountHoldingsAccount>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->get_user_holdings_with_http_info: #{e}"
 end
 ```
@@ -528,9 +528,9 @@ List all investment accounts for the user
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -547,7 +547,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 
@@ -555,7 +555,7 @@ begin
   # List all investment accounts for the user
   result = api_instance.list_user_accounts(user_id, user_secret)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->list_user_accounts: #{e}"
 end
 ```
@@ -573,7 +573,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Account>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->list_user_accounts_with_http_info: #{e}"
 end
 ```
@@ -609,9 +609,9 @@ Update details of an investment account
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -628,7 +628,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::AccountInformationApi.new
+api_instance = SnapTrade::AccountInformationApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account to update.
@@ -637,7 +637,7 @@ begin
   # Update details of an investment account
   result = api_instance.update_user_account(user_id, user_secret, account_id)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->update_user_account: #{e}"
 end
 ```
@@ -655,7 +655,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<Account>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling AccountInformationApi->update_user_account_with_http_info: #{e}"
 end
 ```

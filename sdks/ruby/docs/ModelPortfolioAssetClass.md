@@ -1,4 +1,4 @@
-# OpenapiClient::ModelPortfolioAssetClass
+# SnapTrade::ModelPortfolioAssetClass
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ModelPortfolioAssetClass.new(
+instance = SnapTrade::ModelPortfolioAssetClass.new(
   model_asset_class: null,
   percent: 100
 )

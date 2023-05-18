@@ -1,4 +1,4 @@
-# OpenapiClient::UniversalActivity
+# SnapTrade::UniversalActivity
 
 ## Properties
 
@@ -23,9 +23,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UniversalActivity.new(
+instance = SnapTrade::UniversalActivity.new(
   id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6,
   account: null,
   amount: 263.82,

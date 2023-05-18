@@ -1,4 +1,4 @@
-# OpenapiClient::EncryptedResponse
+# SnapTrade::EncryptedResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::EncryptedResponse.new(
+instance = SnapTrade::EncryptedResponse.new(
   encrypted_shared_key: 5UEaY9QGzcNTr8y2jGDUI79jY1OdfK9x,
   encrypted_message_data: null
 )

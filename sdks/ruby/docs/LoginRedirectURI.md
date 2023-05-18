@@ -1,4 +1,4 @@
-# OpenapiClient::LoginRedirectURI
+# SnapTrade::LoginRedirectURI
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::LoginRedirectURI.new(
+instance = SnapTrade::LoginRedirectURI.new(
   redirect_uri: https://app.passiv.com/snapTrade/redeemToken?token&#x3D;this$token1does2ntactu4allyexist&#x3D;&#x3D;&amp;clientId&#x3D;example,
   session_id: null
 )

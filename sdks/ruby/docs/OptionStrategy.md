@@ -1,4 +1,4 @@
-# OpenapiClient::OptionStrategy
+# SnapTrade::OptionStrategy
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionStrategy.new(
+instance = SnapTrade::OptionStrategy.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   underlying_symbol_id: null,
   strategy_type: BUTTERFLY,

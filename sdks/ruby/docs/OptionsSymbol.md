@@ -1,4 +1,4 @@
-# OpenapiClient::OptionsSymbol
+# SnapTrade::OptionsSymbol
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionsSymbol.new(
+instance = SnapTrade::OptionsSymbol.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   ticker: SPY 220819P00200000,
   strike_price: 200,

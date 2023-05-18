@@ -1,4 +1,4 @@
-# OpenapiClient::ExcludedAsset
+# SnapTrade::ExcludedAsset
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ExcludedAsset.new(
+instance = SnapTrade::ExcludedAsset.new(
   symbol: null
 )
 ```

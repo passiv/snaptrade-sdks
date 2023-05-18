@@ -1,4 +1,4 @@
-# OpenapiClient::ModelPortfolioSecurity
+# SnapTrade::ModelPortfolioSecurity
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::ModelPortfolioSecurity.new(
+instance = SnapTrade::ModelPortfolioSecurity.new(
   symbol: null,
   percent: 100
 )

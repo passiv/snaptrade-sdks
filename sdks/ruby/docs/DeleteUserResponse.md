@@ -1,4 +1,4 @@
-# OpenapiClient::DeleteUserResponse
+# SnapTrade::DeleteUserResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::DeleteUserResponse.new(
+instance = SnapTrade::DeleteUserResponse.new(
   status: deleted,
   user_id: snaptrade-user-123
 )

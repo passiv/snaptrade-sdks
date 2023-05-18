@@ -1,4 +1,4 @@
-# OpenapiClient::TradeExecutionStatus
+# SnapTrade::TradeExecutionStatus
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::TradeExecutionStatus.new(
+instance = SnapTrade::TradeExecutionStatus.new(
   symbol: null,
   universal_symbol: null,
   trade: null,

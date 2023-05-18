@@ -1,4 +1,4 @@
-# OpenapiClient::NetContributions
+# SnapTrade::NetContributions
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::NetContributions.new(
+instance = SnapTrade::NetContributions.new(
   date: Sun Jan 23 16:00:00 PST 2022,
   contributions: 524.74,
   currency: CAD

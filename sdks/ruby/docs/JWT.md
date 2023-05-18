@@ -1,4 +1,4 @@
-# OpenapiClient::JWT
+# SnapTrade::JWT
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::JWT.new(
+instance = SnapTrade::JWT.new(
   token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImZSbUdsbWFyU1dtZDY5RDkyeGZWbVdCWUxCS0x0QiIsImV4cCI6MTU0MDA1NTMxOSwiZW1haWwiOiJ3b29kQHN5bmNocm92ZXJnZS5jb20iLCJvcmlnX2lhdCI6MTUzNzM3NjkxOX0.ZSn85i3kSBvEP5wuhWOE8_w903N1G1AfiVlD3fmri78
 )
 ```

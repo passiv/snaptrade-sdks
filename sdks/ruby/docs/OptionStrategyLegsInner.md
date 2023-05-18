@@ -1,4 +1,4 @@
-# OpenapiClient::OptionStrategyLegsInner
+# SnapTrade::OptionStrategyLegsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionStrategyLegsInner.new(
+instance = SnapTrade::OptionStrategyLegsInner.new(
   option_symbol_id: AAPLC20221111,
   index: 1,
   action: BUY_TO_OPEN,

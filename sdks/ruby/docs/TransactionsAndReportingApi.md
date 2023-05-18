@@ -1,4 +1,4 @@
-# OpenapiClient::TransactionsAndReportingApi
+# SnapTrade::TransactionsAndReportingApi
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -20,9 +20,9 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -39,7 +39,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TransactionsAndReportingApi.new
+api_instance = SnapTrade::TransactionsAndReportingApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 opts = {
@@ -53,7 +53,7 @@ begin
   # Get transaction history for a user
   result = api_instance.get_activities(user_id, user_secret, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TransactionsAndReportingApi->get_activities: #{e}"
 end
 ```
@@ -71,7 +71,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<UniversalActivity>>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TransactionsAndReportingApi->get_activities_with_http_info: #{e}"
 end
 ```
@@ -113,9 +113,9 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 
 ```ruby
 require 'time'
-require 'openapi_client'
+require 'snap_trade'
 # setup authorization
-OpenapiClient.configure do |config|
+SnapTrade.configure do |config|
   # Configure API key authorization: PartnerClientId
   config.api_key['PartnerClientId'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -132,7 +132,7 @@ OpenapiClient.configure do |config|
   # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
 end
 
-api_instance = OpenapiClient::TransactionsAndReportingApi.new
+api_instance = SnapTrade::TransactionsAndReportingApi.new
 start_date = Date.parse('2013-10-20') # Date | 
 end_date = Date.parse('2013-10-20') # Date | 
 user_id = 'user_id_example' # String | 
@@ -147,7 +147,7 @@ begin
   # Get performance information for a specific timeframe
   result = api_instance.get_reporting_custom_range(start_date, end_date, user_id, user_secret, opts)
   p result
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TransactionsAndReportingApi->get_reporting_custom_range: #{e}"
 end
 ```
@@ -165,7 +165,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PerformanceCustom>
-rescue OpenapiClient::ApiError => e
+rescue SnapTrade::ApiError => e
   puts "Error when calling TransactionsAndReportingApi->get_reporting_custom_range_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyQuotes
+# SnapTrade::StrategyQuotes
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyQuotes.new(
+instance = SnapTrade::StrategyQuotes.new(
   strategy: null,
   open_price: 31.33,
   bid_price: 31.33,

@@ -1,4 +1,4 @@
-# OpenapiClient::Status
+# SnapTrade::Status
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Status.new(
+instance = SnapTrade::Status.new(
   version: 151,
   timestamp: 2022-11-04T01:47:00.377Z,
   online: true

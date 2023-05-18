@@ -1,4 +1,4 @@
-# OpenapiClient::AccountOrderRecordStatus
+# SnapTrade::AccountOrderRecordStatus
 
 ## Properties
 
@@ -8,8 +8,8 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::AccountOrderRecordStatus.new()
+instance = SnapTrade::AccountOrderRecordStatus.new()
 ```
 

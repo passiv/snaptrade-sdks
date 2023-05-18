@@ -1,4 +1,4 @@
-# OpenapiClient::SymbolQuery
+# SnapTrade::SymbolQuery
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SymbolQuery.new(
+instance = SnapTrade::SymbolQuery.new(
   substring: apple
 )
 ```

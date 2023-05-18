@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyImpactLegsInner
+# SnapTrade::StrategyImpactLegsInner
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyImpactLegsInner.new(
+instance = SnapTrade::StrategyImpactLegsInner.new(
   leg_id: 0,
   symbol: AC21Oct22C30.00.MX,
   symbol_id: 41790511,

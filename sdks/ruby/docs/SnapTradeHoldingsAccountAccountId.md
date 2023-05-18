@@ -1,4 +1,4 @@
-# OpenapiClient::SnapTradeHoldingsAccountAccountId
+# SnapTrade::SnapTradeHoldingsAccountAccountId
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SnapTradeHoldingsAccountAccountId.new(
+instance = SnapTrade::SnapTradeHoldingsAccountAccountId.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89,
   portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3,

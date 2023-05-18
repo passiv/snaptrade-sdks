@@ -1,4 +1,4 @@
-# OpenapiClient::OptionsHoldings
+# SnapTrade::OptionsHoldings
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::OptionsHoldings.new(
+instance = SnapTrade::OptionsHoldings.new(
   id: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d,
   symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   option_symbol: null,

@@ -1,4 +1,4 @@
-# OpenapiClient::UserSettings
+# SnapTrade::UserSettings
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::UserSettings.new(
+instance = SnapTrade::UserSettings.new(
   email: ops@getpassiv.com,
   name: James Bond,
   receive_cash_notification: true,

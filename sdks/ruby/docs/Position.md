@@ -1,4 +1,4 @@
-# OpenapiClient::Position
+# SnapTrade::Position
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Position.new(
+instance = SnapTrade::Position.new(
   symbol: null,
   units: 40,
   price: 113.15,

@@ -1,4 +1,4 @@
-# OpenapiClient::PortfolioGroupInfo
+# SnapTrade::PortfolioGroupInfo
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::PortfolioGroupInfo.new(
+instance = SnapTrade::PortfolioGroupInfo.new(
   symbols: null,
   quotable_symbols: null,
   balances: null,

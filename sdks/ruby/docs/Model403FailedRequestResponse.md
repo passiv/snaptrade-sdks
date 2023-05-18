@@ -1,4 +1,4 @@
-# OpenapiClient::Model403FailedRequestResponse
+# SnapTrade::Model403FailedRequestResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::Model403FailedRequestResponse.new(
+instance = SnapTrade::Model403FailedRequestResponse.new(
   default_detail: User does not have permission to access this resource,
   default_code: 1066
 )

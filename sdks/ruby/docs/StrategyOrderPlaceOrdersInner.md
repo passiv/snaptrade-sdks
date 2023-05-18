@@ -1,4 +1,4 @@
-# OpenapiClient::StrategyOrderPlaceOrdersInner
+# SnapTrade::StrategyOrderPlaceOrdersInner
 
 ## Properties
 
@@ -51,9 +51,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::StrategyOrderPlaceOrdersInner.new(
+instance = SnapTrade::StrategyOrderPlaceOrdersInner.new(
   id: 1069605761,
   symbol: AC.TO,
   symbol_id: 7960447,

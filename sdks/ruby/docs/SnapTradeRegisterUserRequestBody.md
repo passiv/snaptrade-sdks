@@ -1,4 +1,4 @@
-# OpenapiClient::SnapTradeRegisterUserRequestBody
+# SnapTrade::SnapTradeRegisterUserRequestBody
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'openapi_client'
+require 'snap_trade'
 
-instance = OpenapiClient::SnapTradeRegisterUserRequestBody.new(
+instance = SnapTrade::SnapTradeRegisterUserRequestBody.new(
   user_id: snaptrade-user-123,
   rsa_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw&#x3D;&#x3D;
 )
