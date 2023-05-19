@@ -49,44 +49,6 @@ describe SnapTrade::ApiClient do
     end
   end
 
-  describe 'params_encoding in #build_request' do
-    let(:config) { SnapTrade::Configuration.new }
-    let(:api_client) { SnapTrade::ApiClient.new(config) }
-
-    it 'defaults to nil' do
-      expect(SnapTrade::Configuration.default.params_encoding).to eq(nil)
-      expect(config.params_encoding).to eq(nil)
-
-      request = api_client.build_request(:get, '/test')
-      expect(request.options[:params_encoding]).to eq(nil)
-    end
-
-    it 'can be customized' do
-      config.params_encoding = :multi
-      request = api_client.build_request(:get, '/test')
-      expect(request.options[:params_encoding]).to eq(:multi)
-    end
-  end
-
-  describe 'timeout in #build_request' do
-    let(:config) { SnapTrade::Configuration.new }
-    let(:api_client) { SnapTrade::ApiClient.new(config) }
-
-    it 'defaults to 0' do
-      expect(SnapTrade::Configuration.default.timeout).to eq(0)
-      expect(config.timeout).to eq(0)
-
-      request = api_client.build_request(:get, '/test')
-      expect(request.options[:timeout]).to eq(0)
-    end
-
-    it 'can be customized' do
-      config.timeout = 100
-      request = api_client.build_request(:get, '/test')
-      expect(request.options[:timeout]).to eq(100)
-    end
-  end
-
   describe '#deserialize' do
     it "handles Array<Integer>" do
       api_client = SnapTrade::ApiClient.new

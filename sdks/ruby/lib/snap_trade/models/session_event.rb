@@ -29,28 +29,6 @@ module SnapTrade
 
     attr_accessor :brokerage_authorization_id
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -73,7 +51,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'session_event_type' => :'String',
+        :'session_event_type' => :'SessionEventType',
         :'session_id' => :'String',
         :'user_id' => :'String',
         :'created_date' => :'String',
@@ -143,19 +121,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      session_event_type_validator = EnumAttributeValidator.new('String', ["CONNECTION_FAILED", "DISCLAIMER_ACCEPTED", "BROKERAGE_CONNECTION_INITIATED", "BROKERAGE_AUTHENTICATION", "MFA_AUTHORIZATION", "CONNECTION_SUCCESSFUL", "PARTNER_REDIRECT"])
-      return false unless session_event_type_validator.valid?(@session_event_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] session_event_type Object to be assigned
-    def session_event_type=(session_event_type)
-      validator = EnumAttributeValidator.new('String', ["CONNECTION_FAILED", "DISCLAIMER_ACCEPTED", "BROKERAGE_CONNECTION_INITIATED", "BROKERAGE_AUTHENTICATION", "MFA_AUTHORIZATION", "CONNECTION_SUCCESSFUL", "PARTNER_REDIRECT"])
-      unless validator.valid?(session_event_type)
-        fail ArgumentError, "invalid value for \"session_event_type\", must be one of #{validator.allowable_values}."
-      end
-      @session_event_type = session_event_type
     end
 
     # Checks equality by comparing each attribute.

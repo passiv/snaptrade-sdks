@@ -20,28 +20,6 @@ module SnapTrade
     # Trade Price if limit or stop limit order
     attr_accessor :price
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -59,8 +37,8 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'order_type' => :'String',
-        :'time_in_force' => :'String',
+        :'order_type' => :'OrderStrategyExecuteBodyOrderType',
+        :'time_in_force' => :'OrderStrategyExecuteBodyTimeInForce',
         :'price' => :'Float'
       }
     end
@@ -122,33 +100,9 @@ module SnapTrade
     # @return true if the model is valid
     def valid?
       return false if @order_type.nil?
-      order_type_validator = EnumAttributeValidator.new('String', ["Limit", "Market", "NetDebit", "NetCredit"])
-      return false unless order_type_validator.valid?(@order_type)
       return false if @time_in_force.nil?
-      time_in_force_validator = EnumAttributeValidator.new('String', ["DAY", "GTC"])
-      return false unless time_in_force_validator.valid?(@time_in_force)
       return false if @price.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] order_type Object to be assigned
-    def order_type=(order_type)
-      validator = EnumAttributeValidator.new('String', ["Limit", "Market", "NetDebit", "NetCredit"])
-      unless validator.valid?(order_type)
-        fail ArgumentError, "invalid value for \"order_type\", must be one of #{validator.allowable_values}."
-      end
-      @order_type = order_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] time_in_force Object to be assigned
-    def time_in_force=(time_in_force)
-      validator = EnumAttributeValidator.new('String', ["DAY", "GTC"])
-      unless validator.valid?(time_in_force)
-        fail ArgumentError, "invalid value for \"time_in_force\", must be one of #{validator.allowable_values}."
-      end
-      @time_in_force = time_in_force
     end
 
     # Checks equality by comparing each attribute.

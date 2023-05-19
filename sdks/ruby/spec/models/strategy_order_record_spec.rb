@@ -30,10 +30,6 @@ describe SnapTrade::StrategyOrderRecord do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PENDING", "ACCEPTED", "FAILED", "REJECTED", "CANCELED", "PARTIAL_CANCELED", "CANCEL_PENDING", "EXECUTED", "PARTIAL", "REPLACE_PENDING", "REPLACED", "STOPPED", "SUSPENDED", "EXPIRED", "QUEUED", "TRIGGERED", "ACTIVATED", "PENDING_RISK_REVIEW", "CONTINGENT_ORDER"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.status = value }.not_to raise_error
-      # end
     end
   end
 
@@ -58,20 +54,12 @@ describe SnapTrade::StrategyOrderRecord do
   describe 'test attribute "order_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["Limit", "Market", "NetDebit", "NetCredit"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.order_type = value }.not_to raise_error
-      # end
     end
   end
 
   describe 'test attribute "time_in_force"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["DAY", "GTC"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.time_in_force = value }.not_to raise_error
-      # end
     end
   end
 

@@ -17,30 +17,7 @@ module SnapTrade
 
     attr_accessor :name
 
-    # Enum definitions -> [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio]
     attr_accessor :model_type
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -61,7 +38,7 @@ module SnapTrade
       {
         :'id' => :'String',
         :'name' => :'String',
-        :'model_type' => :'Integer'
+        :'model_type' => :'ModelType'
       }
     end
 
@@ -97,7 +74,7 @@ module SnapTrade
       if attributes.key?(:'model_type')
         self.model_type = attributes[:'model_type']
       else
-        self.model_type = MODEL_TYPE::NMINUS_1
+        self.model_type = ModelType::NMINUS_1
       end
     end
 
@@ -111,19 +88,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      model_type_validator = EnumAttributeValidator.new('Integer', [-1, 0, 1])
-      return false unless model_type_validator.valid?(@model_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] model_type Object to be assigned
-    def model_type=(model_type)
-      validator = EnumAttributeValidator.new('Integer', [-1, 0, 1])
-      unless validator.valid?(model_type)
-        fail ArgumentError, "invalid value for \"model_type\", must be one of #{validator.allowable_values}."
-      end
-      @model_type = model_type
     end
 
     # Checks equality by comparing each attribute.

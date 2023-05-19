@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **type** | **String** |  | [optional] |
-| **auth_type** | **String** |  | [optional] |
+| **type** | [**BrokerageAuthorizationTypeReadOnlyType**](BrokerageAuthorizationTypeReadOnlyType.md) |  | [optional] |
+| **auth_type** | [**AuthType**](AuthType.md) |  | [optional] |
 | **brokerage** | [**BrokerageAuthorizationTypeReadOnlyBrokerage**](BrokerageAuthorizationTypeReadOnlyBrokerage.md) |  | [optional] |
 
 ## Example

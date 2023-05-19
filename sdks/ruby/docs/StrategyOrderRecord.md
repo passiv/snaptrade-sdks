@@ -5,12 +5,12 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **strategy** | [**OptionStrategy**](OptionStrategy.md) |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | [**StrategyOrderRecordStatus**](StrategyOrderRecordStatus.md) |  | [optional] |
 | **filled_quantity** | **Float** |  | [optional] |
 | **open_quantity** | **Float** |  | [optional] |
 | **closed_quantity** | **Float** |  | [optional] |
-| **order_type** | **String** |  | [optional] |
-| **time_in_force** | **String** |  | [optional] |
+| **order_type** | [**StrategyOrderRecordOrderType**](StrategyOrderRecordOrderType.md) |  | [optional] |
+| **time_in_force** | [**StrategyOrderRecordTimeInForce**](StrategyOrderRecordTimeInForce.md) |  | [optional] |
 | **limit_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **execution_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **time_placed** | **String** | Time | [optional] |

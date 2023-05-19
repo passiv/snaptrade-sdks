@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **action** | **String** |  | [optional] |
+| **action** | [**OptionLegAction**](OptionLegAction.md) |  | [optional] |
 | **option_symbol_id** | **String** | Obtained from calling options chain endpoint (option_id) | [optional] |
 | **quantity** | **Float** |  | [optional] |
 

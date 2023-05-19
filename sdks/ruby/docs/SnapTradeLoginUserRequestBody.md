@@ -8,7 +8,7 @@
 | **immediate_redirect** | **Boolean** |  | [optional] |
 | **custom_redirect** | **String** |  | [optional] |
 | **reconnect** | **String** |  | [optional] |
-| **connection_type** | **String** |  | [optional] |
+| **connection_type** | [**ConnectionType**](ConnectionType.md) |  | [optional] |
 
 ## Example
 

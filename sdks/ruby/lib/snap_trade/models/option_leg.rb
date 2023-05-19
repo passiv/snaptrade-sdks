@@ -21,28 +21,6 @@ module SnapTrade
 
     attr_accessor :quantity
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,7 +38,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'action' => :'String',
+        :'action' => :'OptionLegAction',
         :'option_symbol_id' => :'String',
         :'quantity' => :'Float'
       }
@@ -110,19 +88,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      action_validator = EnumAttributeValidator.new('String', ["BUY_TO_OPEN", "BUY_TO_CLOSE", "SELL_TO_OPEN", "SELL_TO_CLOSE"])
-      return false unless action_validator.valid?(@action)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] action Object to be assigned
-    def action=(action)
-      validator = EnumAttributeValidator.new('String', ["BUY_TO_OPEN", "BUY_TO_CLOSE", "SELL_TO_OPEN", "SELL_TO_CLOSE"])
-      unless validator.valid?(action)
-        fail ArgumentError, "invalid value for \"action\", must be one of #{validator.allowable_values}."
-      end
-      @action = action
     end
 
     # Checks equality by comparing each attribute.

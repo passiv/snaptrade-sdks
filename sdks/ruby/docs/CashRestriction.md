@@ -7,7 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **account** | **String** |  | [optional] |
 | **currency** | **String** |  | [optional] |
-| **type** | **String** |  | [optional] |
+| **type** | [**Type**](Type.md) |  | [optional] |
 | **amount** | **Float** |  | [optional] |
 
 ## Example

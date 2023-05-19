@@ -44,7 +44,7 @@ api_instance = SnapTrade::OptionsApi.new
 user_id = 'user_id_example' # String | 
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-options_get_option_strategy_request = SnapTrade::OptionsGetOptionStrategyRequest.new({underlying_symbol_id: '2bcd7cc3-e922-4976-bce1-9858296801c3', legs: [SnapTrade::OptionLeg.new], strategy_type: 'CUSTOM'}) # OptionsGetOptionStrategyRequest | 
+options_get_option_strategy_request = SnapTrade::OptionsGetOptionStrategyRequest.new({underlying_symbol_id: '2bcd7cc3-e922-4976-bce1-9858296801c3', legs: [SnapTrade::OptionLeg.new], strategy_type: SnapTrade::StrategyType::CUSTOM}) # OptionsGetOptionStrategyRequest | 
 
 begin
   # Creates an option strategy object that will be used to place an option strategy order
@@ -383,7 +383,7 @@ user_id = 'user_id_example' # String |
 user_secret = 'user_secret_example' # String | 
 account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
 option_strategy_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Option strategy id obtained from response when creating option strategy object
-options_place_option_strategy_request = SnapTrade::OptionsPlaceOptionStrategyRequest.new({order_type: 'Limit', time_in_force: 'DAY', price: 31.33}) # OptionsPlaceOptionStrategyRequest | 
+options_place_option_strategy_request = SnapTrade::OptionsPlaceOptionStrategyRequest.new({order_type: SnapTrade::OrderStrategyExecuteBodyOrderType::LIMIT, time_in_force: SnapTrade::OrderStrategyExecuteBodyTimeInForce::DAY, price: 31.33}) # OptionsPlaceOptionStrategyRequest | 
 
 begin
   # Place an option strategy order on the brokerage

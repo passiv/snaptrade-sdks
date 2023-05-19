@@ -19,28 +19,6 @@ module SnapTrade
 
     attr_accessor :strategy_type
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,7 +38,7 @@ module SnapTrade
       {
         :'underlying_symbol_id' => :'String',
         :'legs' => :'Array<OptionLeg>',
-        :'strategy_type' => :'String'
+        :'strategy_type' => :'StrategyType'
       }
     end
 
@@ -125,19 +103,7 @@ module SnapTrade
       return false if @underlying_symbol_id.nil?
       return false if @legs.nil?
       return false if @strategy_type.nil?
-      strategy_type_validator = EnumAttributeValidator.new('String', ["CUSTOM"])
-      return false unless strategy_type_validator.valid?(@strategy_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] strategy_type Object to be assigned
-    def strategy_type=(strategy_type)
-      validator = EnumAttributeValidator.new('String', ["CUSTOM"])
-      unless validator.valid?(strategy_type)
-        fail ArgumentError, "invalid value for \"strategy_type\", must be one of #{validator.allowable_values}."
-      end
-      @strategy_type = strategy_type
     end
 
     # Checks equality by comparing each attribute.

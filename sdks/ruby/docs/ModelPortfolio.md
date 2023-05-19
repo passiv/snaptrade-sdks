@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
-| **model_type** | **Integer** | Enum definitions -&gt; [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio] | [optional][default to MODEL_TYPE::NMINUS_1] |
+| **model_type** | [**ModelType**](ModelType.md) |  | [optional][default to ModelType::NMINUS_1] |
 
 ## Example
 

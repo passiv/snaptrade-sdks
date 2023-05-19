@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **order_type** | **String** |  |  |
-| **time_in_force** | **String** |  |  |
+| **order_type** | [**OrderStrategyExecuteBodyOrderType**](OrderStrategyExecuteBodyOrderType.md) |  |  |
+| **time_in_force** | [**OrderStrategyExecuteBodyTimeInForce**](OrderStrategyExecuteBodyTimeInForce.md) |  |  |
 | **price** | **Float** | Trade Price if limit or stop limit order |  |
 
 ## Example

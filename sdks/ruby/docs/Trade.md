@@ -8,7 +8,7 @@
 | **account** | [**Account**](Account.md) |  | [optional] |
 | **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
 | **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
-| **action** | **String** |  | [optional] |
+| **action** | [**TradeAction**](TradeAction.md) |  | [optional] |
 | **units** | **Integer** |  | [optional] |
 | **price** | **Float** |  | [optional] |
 | **sequence** | **Integer** |  | [optional] |
@@ -23,7 +23,7 @@ instance = SnapTrade::Trade.new(
   account: null,
   symbol: null,
   universal_symbol: null,
-  action: BUY,
+  action: null,
   units: 6,
   price: 24.81,
   sequence: 1

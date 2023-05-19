@@ -36,10 +36,6 @@ describe SnapTrade::OptionsGetOptionStrategyRequest do
   describe 'test attribute "strategy_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CUSTOM"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.strategy_type = value }.not_to raise_error
-      # end
     end
   end
 

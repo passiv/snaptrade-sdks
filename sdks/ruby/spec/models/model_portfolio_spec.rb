@@ -36,10 +36,6 @@ describe SnapTrade::ModelPortfolio do
   describe 'test attribute "model_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Integer', [-1, 0, 1])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.model_type = value }.not_to raise_error
-      # end
     end
   end
 

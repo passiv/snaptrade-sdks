@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** |  | [optional] |
+| **type** | [**BrokerageAuthorizationTypeType**](BrokerageAuthorizationTypeType.md) |  | [optional] |
 
 ## Example
 

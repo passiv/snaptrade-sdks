@@ -21,28 +21,6 @@ module SnapTrade
 
     attr_accessor :brokerage
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -62,8 +40,8 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'type' => :'String',
-        :'auth_type' => :'String',
+        :'type' => :'BrokerageAuthorizationTypeReadOnlyType',
+        :'auth_type' => :'AuthType',
         :'brokerage' => :'BrokerageAuthorizationTypeReadOnlyBrokerage'
       }
     end
@@ -116,31 +94,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ["read", "trade"])
-      return false unless type_validator.valid?(@type)
-      auth_type_validator = EnumAttributeValidator.new('String', ["OAUTH", "SCRAPE", "UNOFFICIAL_API", "TOKEN"])
-      return false unless auth_type_validator.valid?(@auth_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["read", "trade"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] auth_type Object to be assigned
-    def auth_type=(auth_type)
-      validator = EnumAttributeValidator.new('String', ["OAUTH", "SCRAPE", "UNOFFICIAL_API", "TOKEN"])
-      unless validator.valid?(auth_type)
-        fail ArgumentError, "invalid value for \"auth_type\", must be one of #{validator.allowable_values}."
-      end
-      @auth_type = auth_type
     end
 
     # Checks equality by comparing each attribute.

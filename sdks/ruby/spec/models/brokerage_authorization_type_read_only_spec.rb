@@ -30,20 +30,12 @@ describe SnapTrade::BrokerageAuthorizationTypeReadOnly do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["read", "trade"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.type = value }.not_to raise_error
-      # end
     end
   end
 
   describe 'test attribute "auth_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["OAUTH", "SCRAPE", "UNOFFICIAL_API", "TOKEN"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.auth_type = value }.not_to raise_error
-      # end
     end
   end
 

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **session_event_type** | **String** |  | [optional] |
+| **session_event_type** | [**SessionEventType**](SessionEventType.md) |  | [optional] |
 | **session_id** | **String** |  | [optional] |
 | **user_id** | **String** | SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user | [optional] |
 | **created_date** | **String** | Time | [optional] |

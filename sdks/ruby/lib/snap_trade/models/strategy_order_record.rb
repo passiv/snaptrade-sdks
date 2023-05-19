@@ -40,28 +40,6 @@ module SnapTrade
     # Time
     attr_accessor :time_updated
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -88,12 +66,12 @@ module SnapTrade
     def self.openapi_types
       {
         :'strategy' => :'OptionStrategy',
-        :'status' => :'String',
+        :'status' => :'StrategyOrderRecordStatus',
         :'filled_quantity' => :'Float',
         :'open_quantity' => :'Float',
         :'closed_quantity' => :'Float',
-        :'order_type' => :'String',
-        :'time_in_force' => :'String',
+        :'order_type' => :'StrategyOrderRecordOrderType',
+        :'time_in_force' => :'StrategyOrderRecordTimeInForce',
         :'limit_price' => :'Float',
         :'execution_price' => :'Float',
         :'time_placed' => :'String',
@@ -177,43 +155,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ["PENDING", "ACCEPTED", "FAILED", "REJECTED", "CANCELED", "PARTIAL_CANCELED", "CANCEL_PENDING", "EXECUTED", "PARTIAL", "REPLACE_PENDING", "REPLACED", "STOPPED", "SUSPENDED", "EXPIRED", "QUEUED", "TRIGGERED", "ACTIVATED", "PENDING_RISK_REVIEW", "CONTINGENT_ORDER"])
-      return false unless status_validator.valid?(@status)
-      order_type_validator = EnumAttributeValidator.new('String', ["Limit", "Market", "NetDebit", "NetCredit"])
-      return false unless order_type_validator.valid?(@order_type)
-      time_in_force_validator = EnumAttributeValidator.new('String', ["DAY", "GTC"])
-      return false unless time_in_force_validator.valid?(@time_in_force)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["PENDING", "ACCEPTED", "FAILED", "REJECTED", "CANCELED", "PARTIAL_CANCELED", "CANCEL_PENDING", "EXECUTED", "PARTIAL", "REPLACE_PENDING", "REPLACED", "STOPPED", "SUSPENDED", "EXPIRED", "QUEUED", "TRIGGERED", "ACTIVATED", "PENDING_RISK_REVIEW", "CONTINGENT_ORDER"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] order_type Object to be assigned
-    def order_type=(order_type)
-      validator = EnumAttributeValidator.new('String', ["Limit", "Market", "NetDebit", "NetCredit"])
-      unless validator.valid?(order_type)
-        fail ArgumentError, "invalid value for \"order_type\", must be one of #{validator.allowable_values}."
-      end
-      @order_type = order_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] time_in_force Object to be assigned
-    def time_in_force=(time_in_force)
-      validator = EnumAttributeValidator.new('String', ["DAY", "GTC"])
-      unless validator.valid?(time_in_force)
-        fail ArgumentError, "invalid value for \"time_in_force\", must be one of #{validator.allowable_values}."
-      end
-      @time_in_force = time_in_force
     end
 
     # Checks equality by comparing each attribute.

@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **underlying_symbol_id** | **String** |  |  |
 | **legs** | [**Array&lt;OptionLeg&gt;**](OptionLeg.md) |  |  |
-| **strategy_type** | **String** |  |  |
+| **strategy_type** | [**StrategyType**](StrategyType.md) |  |  |
 
 ## Example
 

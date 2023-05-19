@@ -30,10 +30,6 @@ describe SnapTrade::ConnectionsSessionEvents200ResponseInner do
   describe 'test attribute "session_event_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CONNECTION_FAILED", "DISCLAIMER_ACCEPTED", "BROKERAGE_CONNECTION_INITIATED", "BROKERAGE_AUTHENTICATION", "MFA_AUTHORIZATION", "CONNECTION_SUCCESSFUL", "PARTNER_REDIRECT"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.session_event_type = value }.not_to raise_error
-      # end
     end
   end
 
