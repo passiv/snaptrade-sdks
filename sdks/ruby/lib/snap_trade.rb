@@ -8,6 +8,8 @@ Contact: api@snaptrade.com
 
 =end
 
+require 'forwardable'
+
 # Common files
 require 'snap_trade/api_client'
 require 'snap_trade/api_error'
@@ -142,8 +144,8 @@ require 'snap_trade/models/user_i_dand_secret'
 require 'snap_trade/models/user_settings'
 
 # APIs
-require 'snap_trade/api/api_status_api'
 require 'snap_trade/api/account_information_api'
+require 'snap_trade/api/api_status_api'
 require 'snap_trade/api/authentication_api'
 require 'snap_trade/api/connections_api'
 require 'snap_trade/api/error_logs_api'
@@ -154,7 +156,14 @@ require 'snap_trade/api/trading_api'
 require 'snap_trade/api/transactions_and_reporting_api'
 
 module SnapTrade
+  @config = Configuration.default
   class << self
+    extend Forwardable
+    def_delegators :@config, :client_id, :client_id= # api key
+    def_delegators :@config, :signature, :signature= # api key
+    def_delegators :@config, :timestamp, :timestamp= # api key
+    def_delegators :@config, :consumer_key, :consumer_key= # client state from konfig.yaml
+
     # Customize default settings for the SDK using block.
     #   SnapTrade.configure do |config|
     #     config.username = "xxx"
@@ -167,6 +176,33 @@ module SnapTrade
       else
         Configuration.default
       end
+    end
+  end
+
+  class Client
+    attr_accessor :account_information
+    attr_accessor :api_status
+    attr_accessor :authentication
+    attr_accessor :connections
+    attr_accessor :error_logs
+    attr_accessor :options
+    attr_accessor :portfolio_management
+    attr_accessor :reference_data
+    attr_accessor :trading
+    attr_accessor :transactions_and_reporting
+
+    def initialize(config = Configuration.default)
+      @api_client = ApiClient::new(config)
+      @account_information = SnapTrade::AccountInformationApi.new(@api_client)
+      @api_status = SnapTrade::APIStatusApi.new(@api_client)
+      @authentication = SnapTrade::AuthenticationApi.new(@api_client)
+      @connections = SnapTrade::ConnectionsApi.new(@api_client)
+      @error_logs = SnapTrade::ErrorLogsApi.new(@api_client)
+      @options = SnapTrade::OptionsApi.new(@api_client)
+      @portfolio_management = SnapTrade::PortfolioManagementApi.new(@api_client)
+      @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
+      @trading = SnapTrade::TradingApi.new(@api_client)
+      @transactions_and_reporting = SnapTrade::TransactionsAndReportingApi.new(@api_client)
     end
   end
 end

@@ -31,6 +31,21 @@ module SnapTrade
     # Default server operation variables
     attr_accessor :server_operation_variables
 
+    def client_id=(value)
+      @api_key['PartnerClientId'] = value
+    end
+
+    def signature=(value)
+      @api_key['PartnerSignature'] = value
+    end
+
+    def timestamp=(value)
+      @api_key['PartnerTimestamp'] = value
+    end
+
+    # client state configured through konfig.yaml
+    attr_accessor :consumer_key
+
     # Defines API keys used with API Key authentications.
     #
     # @return [Hash] key: parameter name, value: parameter value (API key)

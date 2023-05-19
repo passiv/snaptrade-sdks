@@ -2063,4 +2063,7 @@ module SnapTrade
       return data, status_code, headers
     end
   end
+
+  # top-level client access to avoid having the user to insantiate their own API instances
+  PortfolioManagement = PortfolioManagementApi::new
 end

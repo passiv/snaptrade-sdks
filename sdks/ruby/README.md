@@ -18,14 +18,37 @@ gem 'snap_trade', '~> 1.0.0'
 # Load the gem
 require 'snap_trade'
 
-api_instance = SnapTrade::APIStatusApi.new
+# Setup authorization
+SnapTrade.configure do |config|
+  # Configure API key authorization: PartnerClientId
+  config.api_key['PartnerClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
+
+  # Configure API key authorization: PartnerSignature
+  config.api_key['PartnerSignature'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+
+  # Configure API key authorization: PartnerTimestamp
+  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
+end
+
+api_instance = SnapTrade::AccountInformationApi.new
+user_id = 'user_id_example' # String | 
+user_secret = 'user_secret_example' # String | 
+opts = {
+  brokerage_authorizations: '917c8734-8470-4a3e-a18f-57c3f2ee6631' # String | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+}
 
 begin
-  #Get API Status
-  result = api_instance.check
+  #List all accounts for the user, plus balances and positions for each account.
+  result = api_instance.get_all_user_holdings(user_id, user_secret, opts)
   p result
 rescue SnapTrade::ApiError => e
-  puts "Exception when calling APIStatusApi->check: #{e}"
+  puts "Exception when calling AccountInformationApi->get_all_user_holdings: #{e}"
 end
 
 ```
@@ -36,7 +59,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SnapTrade::APIStatusApi* | [**check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
 *SnapTrade::AccountInformationApi* | [**get_all_user_holdings**](docs/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
 *SnapTrade::AccountInformationApi* | [**get_user_account_balance**](docs/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
 *SnapTrade::AccountInformationApi* | [**get_user_account_details**](docs/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
@@ -45,6 +67,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *SnapTrade::AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user
 *SnapTrade::AccountInformationApi* | [**update_user_account**](docs/AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account
+*SnapTrade::APIStatusApi* | [**check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
 *SnapTrade::AuthenticationApi* | [**delete_snap_trade_user**](docs/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
 *SnapTrade::AuthenticationApi* | [**get_user_jwt**](docs/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user's local device
 *SnapTrade::AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you've registered on our platform
