@@ -9,6 +9,7 @@ Contact: api@snaptrade.com
 =end
 
 require 'cgi'
+require_relative '../api_client_custom'
 
 module SnapTrade
   class AuthenticationApi
@@ -18,7 +19,7 @@ module SnapTrade
       @api_client = api_client
     end
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-    # @param user_id [String] 
+    # @param user_id [String]
     # @param [Hash] opts the optional parameters
     # @return [DeleteUserResponse]
     def delete_snap_trade_user(user_id, opts = {})
@@ -27,7 +28,7 @@ module SnapTrade
     end
 
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-    # @param user_id [String] 
+    # @param user_id [String]
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteUserResponse, Integer, Hash)>] DeleteUserResponse data, response status code and response headers
     def delete_snap_trade_user_with_http_info(user_id, opts = {})
@@ -80,8 +81,8 @@ module SnapTrade
     end
 
     # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [EncryptedResponse]
     def get_user_jwt(user_id, user_secret, opts = {})
@@ -90,8 +91,8 @@ module SnapTrade
     end
 
     # Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [Array<(EncryptedResponse, Integer, Hash)>] EncryptedResponse data, response status code and response headers
     def get_user_jwt_with_http_info(user_id, user_secret, opts = {})
@@ -204,10 +205,10 @@ module SnapTrade
     end
 
     # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
-    # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body 
+    # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body
     # @return [AuthenticationLoginSnapTradeUser200Response]
     def login_snap_trade_user(user_id, user_secret, opts = {})
       data, _status_code, _headers = login_snap_trade_user_with_http_info(user_id, user_secret, opts)
@@ -215,10 +216,10 @@ module SnapTrade
     end
 
     # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
-    # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body 
+    # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body
     # @return [Array<(AuthenticationLoginSnapTradeUser200Response, Integer, Hash)>] AuthenticationLoginSnapTradeUser200Response data, response status code and response headers
     def login_snap_trade_user_with_http_info(user_id, user_secret, opts = {})
       if @api_client.config.debugging
@@ -280,7 +281,7 @@ module SnapTrade
     end
 
     # Register user with SnapTrade in order to create secure brokerage authorizations
-    # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
+    # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody]
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
     def register_snap_trade_user(snap_trade_register_user_request_body, opts = {})
@@ -289,7 +290,7 @@ module SnapTrade
     end
 
     # Register user with SnapTrade in order to create secure brokerage authorizations
-    # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
+    # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody]
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers
     def register_snap_trade_user_with_http_info(snap_trade_register_user_request_body, opts = {})

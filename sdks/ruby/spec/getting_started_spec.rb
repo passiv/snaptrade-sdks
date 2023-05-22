@@ -11,6 +11,7 @@ Contact: api@snaptrade.com
 require 'spec_helper'
 require 'json'
 require 'securerandom'
+require 'debug'
 
 # Unit tests for SnapTrade::APIStatusApi
 describe 'GettingStarted' do
@@ -38,6 +39,7 @@ describe 'GettingStarted' do
       body = SnapTrade::SnapTradeRegisterUserRequestBody.new
       body.user_id = uuid
       response = SnapTrade::Authentication.register_snap_trade_user(body)
+      puts response
     end
   end
 

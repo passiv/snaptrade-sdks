@@ -15,6 +15,7 @@ require 'tempfile'
 require 'time'
 require 'faraday'
 require 'faraday/multipart' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2.0')
+require_relative './api_client_custom'
 
 module SnapTrade
   class ApiClient
@@ -114,6 +115,9 @@ module SnapTrade
       request.url url
       request.params = query_params
       download_file(request) if opts[:return_type] == 'File' || opts[:return_type] == 'Binary'
+
+      ApiClientCustom.request_hook(request, @config)
+
       request
     end
 
