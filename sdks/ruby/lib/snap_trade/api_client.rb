@@ -13,9 +13,9 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'time'
+require_relative './api_client_custom'
 require 'faraday'
 require 'faraday/multipart' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2.0')
-require_relative './api_client_custom'
 
 module SnapTrade
   class ApiClient

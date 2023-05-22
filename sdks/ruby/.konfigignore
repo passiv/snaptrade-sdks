@@ -1,1 +1,2 @@
 spec/getting_started_spec.rb
+lib/snap_trade/api_client_custom.rb
