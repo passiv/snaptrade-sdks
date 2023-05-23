@@ -13,49 +13,33 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user |
 | [**update_user_account**](AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
-
 ## get_all_user_holdings
-
-> <Array<AccountHoldings>> get_all_user_holdings(user_id, user_secret, opts)
 
 List all accounts for the user, plus balances and positions for each account.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-opts = {
-  brokerage_authorizations: '917c8734-8470-4a3e-a18f-57c3f2ee6631' # String | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-}
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 
 begin
   # List all accounts for the user, plus balances and positions for each account.
-  result = api_instance.get_all_user_holdings(user_id, user_secret, opts)
+  result = SnapTrade::AccountInformation.get_all_user_holdings(
+    user_id: user_id,
+    user_secret: user_secret,
+    brokerage_authorizations: brokerage_authorizations,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_all_user_holdings: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_all_user_holdings: #{e}"
 end
 ```
 
@@ -63,17 +47,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<AccountHoldings>>, Integer, Hash)> get_all_user_holdings_with_http_info(user_id, user_secret, opts)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+
 begin
   # List all accounts for the user, plus balances and positions for each account.
-  data, status_code, headers = api_instance.get_all_user_holdings_with_http_info(user_id, user_secret, opts)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_all_user_holdings_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    brokerage_authorizations: brokerage_authorizations,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<AccountHoldings>>
+  p data # => Array<AccountHoldings>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_all_user_holdings_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_all_user_holdings: #{e}"
 end
 ```
 
@@ -89,56 +79,33 @@ end
 
 [**Array&lt;AccountHoldings&gt;**](AccountHoldings.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_user_account_balance
-
-> <Array<Balance>> get_user_account_balance(user_id, user_secret, account_id)
 
 Get all cash balances of an investment account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Get all cash balances of an investment account
-  result = api_instance.get_user_account_balance(user_id, user_secret, account_id)
+  result = SnapTrade::AccountInformation.get_user_account_balance(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_balance: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_balance: #{e}"
 end
 ```
 
@@ -146,17 +113,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Balance>>, Integer, Hash)> get_user_account_balance_with_http_info(user_id, user_secret, account_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Get all cash balances of an investment account
-  data, status_code, headers = api_instance.get_user_account_balance_with_http_info(user_id, user_secret, account_id)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_balance_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Balance>>
+  p data # => Array<Balance>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_balance_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_balance: #{e}"
 end
 ```
 
@@ -172,56 +145,33 @@ end
 
 [**Array&lt;Balance&gt;**](Balance.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
 ## get_user_account_details
-
-> <Array<Account>> get_user_account_details(user_id, user_secret, account_id)
 
 Return details of a specific investment account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account to get detail of.
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Return details of a specific investment account
-  result = api_instance.get_user_account_details(user_id, user_secret, account_id)
+  result = SnapTrade::AccountInformation.get_user_account_details(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_details: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_details: #{e}"
 end
 ```
 
@@ -229,17 +179,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Account>>, Integer, Hash)> get_user_account_details_with_http_info(user_id, user_secret, account_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Return details of a specific investment account
-  data, status_code, headers = api_instance.get_user_account_details_with_http_info(user_id, user_secret, account_id)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_details_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Account>>
+  p data # => Array<Account>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_details_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_details: #{e}"
 end
 ```
 
@@ -255,59 +211,35 @@ end
 
 [**Array&lt;Account&gt;**](Account.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_user_account_orders
-
-> <Array<AccountOrderRecord>> get_user_account_orders(user_id, user_secret, account_id, opts)
 
 Get all history of orders placed in account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-opts = {
-  state: 'all' # String | defaults value is set to \"all\"
-}
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+state = "all"
 
 begin
   # Get all history of orders placed in account
-  result = api_instance.get_user_account_orders(user_id, user_secret, account_id, opts)
+  result = SnapTrade::AccountInformation.get_user_account_orders(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    state: state,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_orders: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_orders: #{e}"
 end
 ```
 
@@ -315,17 +247,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<AccountOrderRecord>>, Integer, Hash)> get_user_account_orders_with_http_info(user_id, user_secret, account_id, opts)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+state = "all"
+
 begin
   # Get all history of orders placed in account
-  data, status_code, headers = api_instance.get_user_account_orders_with_http_info(user_id, user_secret, account_id, opts)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_orders_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    state: state,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<AccountOrderRecord>>
+  p data # => Array<AccountOrderRecord>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_orders_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_orders: #{e}"
 end
 ```
 
@@ -342,56 +282,33 @@ end
 
 [**Array&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_user_account_positions
-
-> <Array<Position>> get_user_account_positions(user_id, user_secret, account_id)
 
 Get all positions of an investment account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Get all positions of an investment account
-  result = api_instance.get_user_account_positions(user_id, user_secret, account_id)
+  result = SnapTrade::AccountInformation.get_user_account_positions(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_positions: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_positions: #{e}"
 end
 ```
 
@@ -399,17 +316,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Position>>, Integer, Hash)> get_user_account_positions_with_http_info(user_id, user_secret, account_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Get all positions of an investment account
-  data, status_code, headers = api_instance.get_user_account_positions_with_http_info(user_id, user_secret, account_id)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_positions_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Position>>
+  p data # => Array<Position>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_account_positions_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_account_positions: #{e}"
 end
 ```
 
@@ -425,56 +348,33 @@ end
 
 [**Array&lt;Position&gt;**](Position.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
 ## get_user_holdings
-
-> <AccountHoldingsAccount> get_user_holdings(account_id, user_id, user_secret)
 
 List balances, positions and orders for the specified account.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-account_id = '917c8734-8470-4a3e-a18f-57c3f2ee6631' # String | The ID of the account to fetch holdings for.
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+account_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List balances, positions and orders for the specified account.
-  result = api_instance.get_user_holdings(account_id, user_id, user_secret)
+  result = SnapTrade::AccountInformation.get_user_holdings(
+    account_id: account_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_holdings: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_holdings: #{e}"
 end
 ```
 
@@ -482,17 +382,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AccountHoldingsAccount>, Integer, Hash)> get_user_holdings_with_http_info(account_id, user_id, user_secret)
-
 ```ruby
+account_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # List balances, positions and orders for the specified account.
-  data, status_code, headers = api_instance.get_user_holdings_with_http_info(account_id, user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::AccountInformation.get_user_holdings_with_http_info(
+    account_id: account_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AccountHoldingsAccount>
+  p data # => AccountHoldingsAccount
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->get_user_holdings_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_user_holdings: #{e}"
 end
 ```
 
@@ -508,55 +414,31 @@ end
 
 [**AccountHoldingsAccount**](AccountHoldingsAccount.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_user_accounts
-
-> <Array<Account>> list_user_accounts(user_id, user_secret)
 
 List all investment accounts for the user
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List all investment accounts for the user
-  result = api_instance.list_user_accounts(user_id, user_secret)
+  result = SnapTrade::AccountInformation.list_user_accounts(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->list_user_accounts: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.list_user_accounts: #{e}"
 end
 ```
 
@@ -564,17 +446,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Account>>, Integer, Hash)> list_user_accounts_with_http_info(user_id, user_secret)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # List all investment accounts for the user
-  data, status_code, headers = api_instance.list_user_accounts_with_http_info(user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::AccountInformation.list_user_accounts_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Account>>
+  p data # => Array<Account>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->list_user_accounts_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.list_user_accounts: #{e}"
 end
 ```
 
@@ -589,56 +475,33 @@ end
 
 [**Array&lt;Account&gt;**](Account.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## update_user_account
-
-> <Array<Account>> update_user_account(user_id, user_secret, account_id)
 
 Update details of an investment account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account to update.
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Update details of an investment account
-  result = api_instance.update_user_account(user_id, user_secret, account_id)
+  result = SnapTrade::AccountInformation.update_user_account(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->update_user_account: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.update_user_account: #{e}"
 end
 ```
 
@@ -646,17 +509,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Account>>, Integer, Hash)> update_user_account_with_http_info(user_id, user_secret, account_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Update details of an investment account
-  data, status_code, headers = api_instance.update_user_account_with_http_info(user_id, user_secret, account_id)
+  data, status_code, headers, response = SnapTrade::AccountInformation.update_user_account_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Account>>
+  p data # => Array<Account>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling AccountInformationApi->update_user_account_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.update_user_account: #{e}"
 end
 ```
 
@@ -671,13 +540,4 @@ end
 ### Return type
 
 [**Array&lt;Account&gt;**](Account.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 

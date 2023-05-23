@@ -15,42 +15,27 @@ gem 'snap_trade', '~> 1.0.0'
 ## Getting Started
 
 ```ruby
-# Load the gem
 require 'snap_trade'
 
-# Setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
-
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::AccountInformationApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-opts = {
-  brokerage_authorizations: '917c8734-8470-4a3e-a18f-57c3f2ee6631' # String | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-}
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 
 begin
-  #List all accounts for the user, plus balances and positions for each account.
-  result = api_instance.get_all_user_holdings(user_id, user_secret, opts)
+  # List all accounts for the user, plus balances and positions for each account.
+  result = SnapTrade::AccountInformation.get_all_user_holdings(
+    user_id: user_id,
+    user_secret: user_secret,
+    brokerage_authorizations: brokerage_authorizations,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Exception when calling AccountInformationApi->get_all_user_holdings: #{e}"
+  puts "Exception when calling SnapTrade::AccountInformation.get_all_user_holdings: #{e}"
 end
-
 ```
 
 ## Documentation for API Endpoints

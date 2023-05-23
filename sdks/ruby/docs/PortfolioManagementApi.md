@@ -37,48 +37,69 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**update_portfolio_settings**](PortfolioManagementApi.md#update_portfolio_settings) | **PATCH** /portfolioGroups/{portfolioGroupId}/settings | Updates portfolio group settings |
 | [**update_portfolio_target_by_id**](PortfolioManagementApi.md#update_portfolio_target_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup. |
 
-
 ## add_portfolio_excluded_asset
-
-> <ExcludedAsset> add_portfolio_excluded_asset(portfolio_group_id, opts)
 
 Adds an asset to exclude to a portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to exclude an asset.
-opts = {
-  universal_symbol: SnapTrade::UniversalSymbol.new # UniversalSymbol | 
-}
+portfolio_group_id = "portfolioGroupId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+symbol = "VAB.TO"
+raw_symbol = "VAB"
+description = "VANGUARD CDN AGGREGATE BOND INDEX ETF"
+currency = {
+        "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+        "code" => "USD",
+        "name" => "US Dollar",
+    }
+exchange = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "code" => "TSX",
+        "mic_code" => "XTSE",
+        "name" => "Toronto Stock Exchange",
+        "timezone" => "America/New_York",
+        "start_time" => "09:30:00",
+        "close_time" => "57600",
+        "suffix" => ".TO",
+    }
+type = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "code" => "cs",
+        "description" => "Common Stock",
+        "is_supported" => True,
+    }
+currencies = [
+        {
+            "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+            "code" => "USD",
+            "name" => "US Dollar",
+        }
+    ]
 
 begin
   # Adds an asset to exclude to a portfolio group
-  result = api_instance.add_portfolio_excluded_asset(portfolio_group_id, opts)
+  result = SnapTrade::PortfolioManagement.add_portfolio_excluded_asset(
+    portfolio_group_id: portfolio_group_id,
+    id: id,
+    symbol: symbol,
+    raw_symbol: raw_symbol,
+    description: description,
+    currency: currency,
+    exchange: exchange,
+    type: type,
+    currencies: currencies,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->add_portfolio_excluded_asset: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.add_portfolio_excluded_asset: #{e}"
 end
 ```
 
@@ -86,17 +107,59 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ExcludedAsset>, Integer, Hash)> add_portfolio_excluded_asset_with_http_info(portfolio_group_id, opts)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+symbol = "VAB.TO"
+raw_symbol = "VAB"
+description = "VANGUARD CDN AGGREGATE BOND INDEX ETF"
+currency = {
+        "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+        "code" => "USD",
+        "name" => "US Dollar",
+    }
+exchange = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "code" => "TSX",
+        "mic_code" => "XTSE",
+        "name" => "Toronto Stock Exchange",
+        "timezone" => "America/New_York",
+        "start_time" => "09:30:00",
+        "close_time" => "57600",
+        "suffix" => ".TO",
+    }
+type = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "code" => "cs",
+        "description" => "Common Stock",
+        "is_supported" => True,
+    }
+currencies = [
+        {
+            "id" => "87b24961-b51e-4db8-9226-f198f6518a89",
+            "code" => "USD",
+            "name" => "US Dollar",
+        }
+    ]
+
 begin
   # Adds an asset to exclude to a portfolio group
-  data, status_code, headers = api_instance.add_portfolio_excluded_asset_with_http_info(portfolio_group_id, opts)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.add_portfolio_excluded_asset_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    id: id,
+    symbol: symbol,
+    raw_symbol: raw_symbol,
+    description: description,
+    currency: currency,
+    exchange: exchange,
+    type: type,
+    currencies: currencies,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ExcludedAsset>
+  p data # => ExcludedAsset
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->add_portfolio_excluded_asset_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.add_portfolio_excluded_asset: #{e}"
 end
 ```
 
@@ -111,56 +174,35 @@ end
 
 [**ExcludedAsset**](ExcludedAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## create
-
-> <Array<PortfolioGroup>> create(user_id, user_secret, request_body)
 
 Create new portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-request_body = { key: 3.56} # Hash<String, Object> | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+name = "Combined Retirement Portfolio"
 
 begin
   # Create new portfolio group
-  result = api_instance.create(user_id, user_secret, request_body)
+  result = SnapTrade::PortfolioManagement.create(
+    user_id: user_id,
+    user_secret: user_secret,
+    id: id,
+    name: name,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create: #{e}"
 end
 ```
 
@@ -168,17 +210,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<PortfolioGroup>>, Integer, Hash)> create_with_http_info(user_id, user_secret, request_body)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+name = "Combined Retirement Portfolio"
+
 begin
   # Create new portfolio group
-  data, status_code, headers = api_instance.create_with_http_info(user_id, user_secret, request_body)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.create_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    id: id,
+    name: name,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<PortfolioGroup>>
+  p data # => Array<PortfolioGroup>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create: #{e}"
 end
 ```
 
@@ -194,53 +244,26 @@ end
 
 [**Array&lt;PortfolioGroup&gt;**](PortfolioGroup.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## create_asset_class
-
-> <ModelAssetClassDetails> create_asset_class
 
 Create a new model asset class
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
 
 begin
   # Create a new model asset class
-  result = api_instance.create_asset_class
+  result = SnapTrade::PortfolioManagement.create_asset_class
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create_asset_class: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create_asset_class: #{e}"
 end
 ```
 
@@ -248,17 +271,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ModelAssetClassDetails>, Integer, Hash)> create_asset_class_with_http_info
-
 ```ruby
+
 begin
   # Create a new model asset class
-  data, status_code, headers = api_instance.create_asset_class_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.create_asset_class_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ModelAssetClassDetails>
+  p data # => ModelAssetClassDetails
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create_asset_class_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create_asset_class: #{e}"
 end
 ```
 
@@ -270,53 +292,26 @@ This endpoint does not need any parameter.
 
 [**ModelAssetClassDetails**](ModelAssetClassDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## create_model_portfolio
-
-> <ModelPortfolioDetails> create_model_portfolio
 
 Creates a new model portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
 
 begin
   # Creates a new model portfolio
-  result = api_instance.create_model_portfolio
+  result = SnapTrade::PortfolioManagement.create_model_portfolio
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create_model_portfolio: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create_model_portfolio: #{e}"
 end
 ```
 
@@ -324,17 +319,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ModelPortfolioDetails>, Integer, Hash)> create_model_portfolio_with_http_info
-
 ```ruby
+
 begin
   # Creates a new model portfolio
-  data, status_code, headers = api_instance.create_model_portfolio_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.create_model_portfolio_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ModelPortfolioDetails>
+  p data # => ModelPortfolioDetails
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->create_model_portfolio_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.create_model_portfolio: #{e}"
 end
 ```
 
@@ -346,53 +340,28 @@ This endpoint does not need any parameter.
 
 [**ModelPortfolioDetails**](ModelPortfolioDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## delete_asset_class
-
-> delete_asset_class(model_asset_class_id)
 
 Deletes a model asset class
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_asset_class_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model asset class to delete.
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Deletes a model asset class
-  api_instance.delete_asset_class(model_asset_class_id)
+  SnapTrade::PortfolioManagement.delete_asset_class(
+    model_asset_class_id: model_asset_class_id,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_asset_class: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_asset_class: #{e}"
 end
 ```
 
@@ -400,17 +369,19 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_asset_class_with_http_info(model_asset_class_id)
-
 ```ruby
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Deletes a model asset class
-  data, status_code, headers = api_instance.delete_asset_class_with_http_info(model_asset_class_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.delete_asset_class_with_http_info(
+    model_asset_class_id: model_asset_class_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_asset_class_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_asset_class: #{e}"
 end
 ```
 
@@ -424,54 +395,30 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
 ## delete_excluded_asset
-
-> delete_excluded_asset(portfolio_group_id, symbol_id)
 
 Unexclude an asset from a portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to unexclude an asset.
-symbol_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the excluded asset Symbol to delete.
+portfolio_group_id = "portfolioGroupId_example"
+symbol_id = "symbolId_example"
 
 begin
   # Unexclude an asset from a portfolio group
-  api_instance.delete_excluded_asset(portfolio_group_id, symbol_id)
+  SnapTrade::PortfolioManagement.delete_excluded_asset(
+    portfolio_group_id: portfolio_group_id,
+    symbol_id: symbol_id,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_excluded_asset: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_excluded_asset: #{e}"
 end
 ```
 
@@ -479,17 +426,21 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_excluded_asset_with_http_info(portfolio_group_id, symbol_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+symbol_id = "symbolId_example"
+
 begin
   # Unexclude an asset from a portfolio group
-  data, status_code, headers = api_instance.delete_excluded_asset_with_http_info(portfolio_group_id, symbol_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.delete_excluded_asset_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    symbol_id: symbol_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_excluded_asset_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_excluded_asset: #{e}"
 end
 ```
 
@@ -504,53 +455,28 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
 ## delete_model_portfolio_by_id
-
-> delete_model_portfolio_by_id(model_portfolio_id)
 
 Deletes a model portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_portfolio_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model portfolio to delete.
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Deletes a model portfolio
-  api_instance.delete_model_portfolio_by_id(model_portfolio_id)
+  SnapTrade::PortfolioManagement.delete_model_portfolio_by_id(
+    model_portfolio_id: model_portfolio_id,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_model_portfolio_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_model_portfolio_by_id: #{e}"
 end
 ```
 
@@ -558,17 +484,19 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_model_portfolio_by_id_with_http_info(model_portfolio_id)
-
 ```ruby
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Deletes a model portfolio
-  data, status_code, headers = api_instance.delete_model_portfolio_by_id_with_http_info(model_portfolio_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.delete_model_portfolio_by_id_with_http_info(
+    model_portfolio_id: model_portfolio_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_model_portfolio_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_model_portfolio_by_id: #{e}"
 end
 ```
 
@@ -582,54 +510,29 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
 ## delete_portfoli
-
-> <PortfolioGroup> delete_portfoli(portfolio_group_id)
 
 Remove a target portfolio.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to delete.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Remove a target portfolio.
-  result = api_instance.delete_portfoli(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.delete_portfoli(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_portfoli: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_portfoli: #{e}"
 end
 ```
 
@@ -637,17 +540,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroup>, Integer, Hash)> delete_portfoli_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Remove a target portfolio.
-  data, status_code, headers = api_instance.delete_portfoli_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.delete_portfoli_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroup>
+  p data # => PortfolioGroup
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_portfoli_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_portfoli: #{e}"
 end
 ```
 
@@ -661,55 +566,31 @@ end
 
 [**PortfolioGroup**](PortfolioGroup.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## delete_portfolio_target_by_id
-
-> <TargetAsset> delete_portfolio_target_by_id(portfolio_group_id, target_asset_id)
 
 Remove a TargetAsset.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to remove the target asset.
-target_asset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the TargetAsset to delete.
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
 
 begin
   # Remove a TargetAsset.
-  result = api_instance.delete_portfolio_target_by_id(portfolio_group_id, target_asset_id)
+  result = SnapTrade::PortfolioManagement.delete_portfolio_target_by_id(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_portfolio_target_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -717,17 +598,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TargetAsset>, Integer, Hash)> delete_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
+
 begin
   # Remove a TargetAsset.
-  data, status_code, headers = api_instance.delete_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.delete_portfolio_target_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TargetAsset>
+  p data # => TargetAsset
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->delete_portfolio_target_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.delete_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -742,54 +627,29 @@ end
 
 [**TargetAsset**](TargetAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## detail_asset_class
-
-> <ModelAssetClassDetails> detail_asset_class(model_asset_class_id)
 
 Get details of a model asset class
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_asset_class_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model asset class to get.
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Get details of a model asset class
-  result = api_instance.detail_asset_class(model_asset_class_id)
+  result = SnapTrade::PortfolioManagement.detail_asset_class(
+    model_asset_class_id: model_asset_class_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->detail_asset_class: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.detail_asset_class: #{e}"
 end
 ```
 
@@ -797,17 +657,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ModelAssetClassDetails>, Integer, Hash)> detail_asset_class_with_http_info(model_asset_class_id)
-
 ```ruby
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Get details of a model asset class
-  data, status_code, headers = api_instance.detail_asset_class_with_http_info(model_asset_class_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.detail_asset_class_with_http_info(
+    model_asset_class_id: model_asset_class_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ModelAssetClassDetails>
+  p data # => ModelAssetClassDetails
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->detail_asset_class_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.detail_asset_class: #{e}"
 end
 ```
 
@@ -821,56 +683,33 @@ end
 
 [**ModelAssetClassDetails**](ModelAssetClassDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_calculated_trade_by_id
-
-> <Array<Trade>> get_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id)
 
 Return an individual trade
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
-calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
-trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "TradeId_example"
 
 begin
   # Return an individual trade
-  result = api_instance.get_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id)
+  result = SnapTrade::PortfolioManagement.get_calculated_trade_by_id(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_calculated_trade_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_calculated_trade_by_id: #{e}"
 end
 ```
 
@@ -878,17 +717,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Trade>>, Integer, Hash)> get_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "TradeId_example"
+
 begin
   # Return an individual trade
-  data, status_code, headers = api_instance.get_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_calculated_trade_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Trade>>
+  p data # => Array<Trade>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_calculated_trade_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_calculated_trade_by_id: #{e}"
 end
 ```
 
@@ -904,54 +749,29 @@ end
 
 [**Array&lt;Trade&gt;**](Trade.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_model_details_by_id
-
-> <ModelPortfolioDetails> get_model_details_by_id(model_portfolio_id)
 
 Get details of a model portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_portfolio_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model portfolio to get.
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Get details of a model portfolio
-  result = api_instance.get_model_details_by_id(model_portfolio_id)
+  result = SnapTrade::PortfolioManagement.get_model_details_by_id(
+    model_portfolio_id: model_portfolio_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_model_details_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_model_details_by_id: #{e}"
 end
 ```
 
@@ -959,17 +779,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ModelPortfolioDetails>, Integer, Hash)> get_model_details_by_id_with_http_info(model_portfolio_id)
-
 ```ruby
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Get details of a model portfolio
-  data, status_code, headers = api_instance.get_model_details_by_id_with_http_info(model_portfolio_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_model_details_by_id_with_http_info(
+    model_portfolio_id: model_portfolio_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ModelPortfolioDetails>
+  p data # => ModelPortfolioDetails
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_model_details_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_model_details_by_id: #{e}"
 end
 ```
 
@@ -983,54 +805,29 @@ end
 
 [**ModelPortfolioDetails**](ModelPortfolioDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_portfolio_balances
-
-> <Array<Balance>> get_portfolio_balances(portfolio_group_id)
 
 Get sum of cash balances in portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to create the target asset.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get sum of cash balances in portfolio group
-  result = api_instance.get_portfolio_balances(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_balances(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_balances: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_balances: #{e}"
 end
 ```
 
@@ -1038,17 +835,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Balance>>, Integer, Hash)> get_portfolio_balances_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get sum of cash balances in portfolio group
-  data, status_code, headers = api_instance.get_portfolio_balances_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_balances_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Balance>>
+  p data # => Array<Balance>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_balances_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_balances: #{e}"
 end
 ```
 
@@ -1062,54 +861,29 @@ end
 
 [**Array&lt;Balance&gt;**](Balance.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_portfolio_details_by_id
-
-> <PortfolioGroup> get_portfolio_details_by_id(portfolio_group_id)
 
 Get details of a target portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to get.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get details of a target portfolio
-  result = api_instance.get_portfolio_details_by_id(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_details_by_id(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_details_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_details_by_id: #{e}"
 end
 ```
 
@@ -1117,17 +891,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroup>, Integer, Hash)> get_portfolio_details_by_id_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get details of a target portfolio
-  data, status_code, headers = api_instance.get_portfolio_details_by_id_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_details_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroup>
+  p data # => PortfolioGroup
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_details_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_details_by_id: #{e}"
 end
 ```
 
@@ -1141,54 +917,29 @@ end
 
 [**PortfolioGroup**](PortfolioGroup.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
 ## get_portfolio_info
-
-> <PortfolioGroupInfo> get_portfolio_info(portfolio_group_id)
 
 Return a whole bunch of relevant information relating to a portfolio group.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to create the target asset.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Return a whole bunch of relevant information relating to a portfolio group.
-  result = api_instance.get_portfolio_info(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_info: #{e}"
 end
 ```
 
@@ -1196,17 +947,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroupInfo>, Integer, Hash)> get_portfolio_info_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Return a whole bunch of relevant information relating to a portfolio group.
-  data, status_code, headers = api_instance.get_portfolio_info_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_info_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroupInfo>
+  p data # => PortfolioGroupInfo
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_info_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_info: #{e}"
 end
 ```
 
@@ -1220,54 +973,29 @@ end
 
 [**PortfolioGroupInfo**](PortfolioGroupInfo.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_portfolio_settings
-
-> <PortfolioGroupSettings> get_portfolio_settings(portfolio_group_id)
 
 Get portfolio group settings
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to get the settings.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get portfolio group settings
-  result = api_instance.get_portfolio_settings(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_settings(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_settings: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_settings: #{e}"
 end
 ```
 
@@ -1275,17 +1003,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroupSettings>, Integer, Hash)> get_portfolio_settings_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get portfolio group settings
-  data, status_code, headers = api_instance.get_portfolio_settings_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_settings_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroupSettings>
+  p data # => PortfolioGroupSettings
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_settings_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_settings: #{e}"
 end
 ```
 
@@ -1299,55 +1029,31 @@ end
 
 [**PortfolioGroupSettings**](PortfolioGroupSettings.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_portfolio_target_by_id
-
-> <TargetAsset> get_portfolio_target_by_id(portfolio_group_id, target_asset_id)
 
 Get a specific target from a portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to get the target asset.
-target_asset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the TargetAsset to get.
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
 
 begin
   # Get a specific target from a portfolio group
-  result = api_instance.get_portfolio_target_by_id(portfolio_group_id, target_asset_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_target_by_id(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_target_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -1355,17 +1061,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TargetAsset>, Integer, Hash)> get_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
+
 begin
   # Get a specific target from a portfolio group
-  data, status_code, headers = api_instance.get_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_target_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TargetAsset>
+  p data # => TargetAsset
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_target_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -1380,54 +1090,29 @@ end
 
 [**TargetAsset**](TargetAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
 ## get_portfolio_targets
-
-> <Array<TargetAsset>> get_portfolio_targets(portfolio_group_id)
 
 Get all target assets under the specified PortfolioGroup.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to create the target asset.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get all target assets under the specified PortfolioGroup.
-  result = api_instance.get_portfolio_targets(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portfolio_targets(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_targets: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_targets: #{e}"
 end
 ```
 
@@ -1435,17 +1120,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<TargetAsset>>, Integer, Hash)> get_portfolio_targets_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get all target assets under the specified PortfolioGroup.
-  data, status_code, headers = api_instance.get_portfolio_targets_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portfolio_targets_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<TargetAsset>>
+  p data # => Array<TargetAsset>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portfolio_targets_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portfolio_targets: #{e}"
 end
 ```
 
@@ -1459,54 +1146,29 @@ end
 
 [**Array&lt;TargetAsset&gt;**](TargetAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_portoflio_excluded_assets
-
-> <Array<ExcludedAsset>> get_portoflio_excluded_assets(portfolio_group_id)
 
 Get an array of excluded assets associated with a portfolio group\\
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which the excluded assets are linked.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get an array of excluded assets associated with a portfolio group\\
-  result = api_instance.get_portoflio_excluded_assets(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.get_portoflio_excluded_assets(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portoflio_excluded_assets: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portoflio_excluded_assets: #{e}"
 end
 ```
 
@@ -1514,17 +1176,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ExcludedAsset>>, Integer, Hash)> get_portoflio_excluded_assets_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get an array of excluded assets associated with a portfolio group\\
-  data, status_code, headers = api_instance.get_portoflio_excluded_assets_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.get_portoflio_excluded_assets_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ExcludedAsset>>
+  p data # => Array<ExcludedAsset>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->get_portoflio_excluded_assets_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.get_portoflio_excluded_assets: #{e}"
 end
 ```
 
@@ -1538,54 +1202,29 @@ end
 
 [**Array&lt;ExcludedAsset&gt;**](ExcludedAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## import_model_portfolio
-
-> <Array<TargetAsset>> import_model_portfolio(portfolio_group_id)
 
 Import target allocation based on portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to create the target asset.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Import target allocation based on portfolio group
-  result = api_instance.import_model_portfolio(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.import_model_portfolio(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->import_model_portfolio: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.import_model_portfolio: #{e}"
 end
 ```
 
@@ -1593,17 +1232,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<TargetAsset>>, Integer, Hash)> import_model_portfolio_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Import target allocation based on portfolio group
-  data, status_code, headers = api_instance.import_model_portfolio_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.import_model_portfolio_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<TargetAsset>>
+  p data # => Array<TargetAsset>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->import_model_portfolio_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.import_model_portfolio: #{e}"
 end
 ```
 
@@ -1617,55 +1258,31 @@ end
 
 [**Array&lt;TargetAsset&gt;**](TargetAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list
-
-> <Array<PortfolioGroup>> list(user_id, user_secret)
 
 List all portfolio groups
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List all portfolio groups
-  result = api_instance.list(user_id, user_secret)
+  result = SnapTrade::PortfolioManagement.list(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list: #{e}"
 end
 ```
 
@@ -1673,17 +1290,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<PortfolioGroup>>, Integer, Hash)> list_with_http_info(user_id, user_secret)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # List all portfolio groups
-  data, status_code, headers = api_instance.list_with_http_info(user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<PortfolioGroup>>
+  p data # => Array<PortfolioGroup>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list: #{e}"
 end
 ```
 
@@ -1698,53 +1319,26 @@ end
 
 [**Array&lt;PortfolioGroup&gt;**](PortfolioGroup.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_asset_classes
-
-> <Array<ModelAssetClassDetails>> list_asset_classes
 
 List of model asset class
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
 
 begin
   # List of model asset class
-  result = api_instance.list_asset_classes
+  result = SnapTrade::PortfolioManagement.list_asset_classes
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_asset_classes: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_asset_classes: #{e}"
 end
 ```
 
@@ -1752,17 +1346,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ModelAssetClassDetails>>, Integer, Hash)> list_asset_classes_with_http_info
-
 ```ruby
+
 begin
   # List of model asset class
-  data, status_code, headers = api_instance.list_asset_classes_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_asset_classes_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ModelAssetClassDetails>>
+  p data # => Array<ModelAssetClassDetails>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_asset_classes_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_asset_classes: #{e}"
 end
 ```
 
@@ -1774,54 +1367,29 @@ This endpoint does not need any parameter.
 
 [**Array&lt;ModelAssetClassDetails&gt;**](ModelAssetClassDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_calculated_trades
-
-> <CalculatedTrade> list_calculated_trades(portfolio_group_id)
 
 List of trades to make to rebalance portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # List of trades to make to rebalance portfolio group
-  result = api_instance.list_calculated_trades(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.list_calculated_trades(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_calculated_trades: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_calculated_trades: #{e}"
 end
 ```
 
@@ -1829,17 +1397,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CalculatedTrade>, Integer, Hash)> list_calculated_trades_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # List of trades to make to rebalance portfolio group
-  data, status_code, headers = api_instance.list_calculated_trades_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_calculated_trades_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CalculatedTrade>
+  p data # => CalculatedTrade
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_calculated_trades_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_calculated_trades: #{e}"
 end
 ```
 
@@ -1853,53 +1423,26 @@ end
 
 [**CalculatedTrade**](CalculatedTrade.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_model_portfolio
-
-> <Array<ModelPortfolioDetails>> list_model_portfolio
 
 List of model portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
 
 begin
   # List of model portfolio
-  result = api_instance.list_model_portfolio
+  result = SnapTrade::PortfolioManagement.list_model_portfolio
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_model_portfolio: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_model_portfolio: #{e}"
 end
 ```
 
@@ -1907,17 +1450,16 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ModelPortfolioDetails>>, Integer, Hash)> list_model_portfolio_with_http_info
-
 ```ruby
+
 begin
   # List of model portfolio
-  data, status_code, headers = api_instance.list_model_portfolio_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_model_portfolio_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ModelPortfolioDetails>>
+  p data # => Array<ModelPortfolioDetails>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_model_portfolio_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_model_portfolio: #{e}"
 end
 ```
 
@@ -1929,54 +1471,29 @@ This endpoint does not need any parameter.
 
 [**Array&lt;ModelPortfolioDetails&gt;**](ModelPortfolioDetails.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_portfolio_accounts
-
-> <Array<Account>> list_portfolio_accounts(portfolio_group_id)
 
 Get all accounts associated with a portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which the accounts are linked.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Get all accounts associated with a portfolio group
-  result = api_instance.list_portfolio_accounts(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.list_portfolio_accounts(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_portfolio_accounts: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_portfolio_accounts: #{e}"
 end
 ```
 
@@ -1984,17 +1501,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<Account>>, Integer, Hash)> list_portfolio_accounts_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Get all accounts associated with a portfolio group
-  data, status_code, headers = api_instance.list_portfolio_accounts_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_portfolio_accounts_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<Account>>
+  p data # => Array<Account>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->list_portfolio_accounts_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.list_portfolio_accounts: #{e}"
 end
 ```
 
@@ -2008,54 +1527,46 @@ end
 
 [**Array&lt;Account&gt;**](Account.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## modify_model_portfolio_by_id
-
-> modify_model_portfolio_by_id(model_portfolio_id, model_portfolio_details)
 
 Updates model portfolio object
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_portfolio_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model portfolio to update.
-model_portfolio_details = SnapTrade::ModelPortfolioDetails.new # ModelPortfolioDetails | Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+model_portfolio = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Passiv 5x Aggressive Growth Fund",
+        "model_type" => -1,
+    }
+model_portfolio_security = [
+        {
+            "percent" => 100,
+        }
+    ]
+model_portfolio_asset_class = [
+        {
+            "percent" => 100,
+        }
+    ]
 
 begin
   # Updates model portfolio object
-  api_instance.modify_model_portfolio_by_id(model_portfolio_id, model_portfolio_details)
+  SnapTrade::PortfolioManagement.modify_model_portfolio_by_id(
+    model_portfolio_id: model_portfolio_id,
+    model_portfolio: model_portfolio,
+    model_portfolio_security: model_portfolio_security,
+    model_portfolio_asset_class: model_portfolio_asset_class,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->modify_model_portfolio_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.modify_model_portfolio_by_id: #{e}"
 end
 ```
 
@@ -2063,17 +1574,37 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> modify_model_portfolio_by_id_with_http_info(model_portfolio_id, model_portfolio_details)
-
 ```ruby
+model_portfolio_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+model_portfolio = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Passiv 5x Aggressive Growth Fund",
+        "model_type" => -1,
+    }
+model_portfolio_security = [
+        {
+            "percent" => 100,
+        }
+    ]
+model_portfolio_asset_class = [
+        {
+            "percent" => 100,
+        }
+    ]
+
 begin
   # Updates model portfolio object
-  data, status_code, headers = api_instance.modify_model_portfolio_by_id_with_http_info(model_portfolio_id, model_portfolio_details)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.modify_model_portfolio_by_id_with_http_info(
+    model_portfolio_id: model_portfolio_id,
+    model_portfolio: model_portfolio,
+    model_portfolio_security: model_portfolio_security,
+    model_portfolio_asset_class: model_portfolio_asset_class,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->modify_model_portfolio_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.modify_model_portfolio_by_id: #{e}"
 end
 ```
 
@@ -2088,55 +1619,33 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
-
-
 ## save_portfolio
-
-> <PortfolioGroup> save_portfolio(portfolio_group_id, request_body)
 
 Update an existing target portfolio.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to update.
-request_body = { key: 3.56} # Hash<String, Object> | 
+portfolio_group_id = "portfolioGroupId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+name = "Combined Retirement Portfolio"
 
 begin
   # Update an existing target portfolio.
-  result = api_instance.save_portfolio(portfolio_group_id, request_body)
+  result = SnapTrade::PortfolioManagement.save_portfolio(
+    portfolio_group_id: portfolio_group_id,
+    id: id,
+    name: name,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->save_portfolio: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.save_portfolio: #{e}"
 end
 ```
 
@@ -2144,17 +1653,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroup>, Integer, Hash)> save_portfolio_with_http_info(portfolio_group_id, request_body)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+name = "Combined Retirement Portfolio"
+
 begin
   # Update an existing target portfolio.
-  data, status_code, headers = api_instance.save_portfolio_with_http_info(portfolio_group_id, request_body)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.save_portfolio_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    id: id,
+    name: name,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroup>
+  p data # => PortfolioGroup
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->save_portfolio_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.save_portfolio: #{e}"
 end
 ```
 
@@ -2169,57 +1684,31 @@ end
 
 [**PortfolioGroup**](PortfolioGroup.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## search_portfolio_symbols
-
-> <Array<UniversalSymbol>> search_portfolio_symbols(portfolio_group_id, opts)
 
 Search for symbols limited to brokerages under the specified portfolio group
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to search under
-opts = {
-  symbol_query: SnapTrade::SymbolQuery.new # SymbolQuery | 
-}
+portfolio_group_id = "portfolioGroupId_example"
+substring = "apple"
 
 begin
   # Search for symbols limited to brokerages under the specified portfolio group
-  result = api_instance.search_portfolio_symbols(portfolio_group_id, opts)
+  result = SnapTrade::PortfolioManagement.search_portfolio_symbols(
+    portfolio_group_id: portfolio_group_id,
+    substring: substring,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->search_portfolio_symbols: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.search_portfolio_symbols: #{e}"
 end
 ```
 
@@ -2227,17 +1716,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<UniversalSymbol>>, Integer, Hash)> search_portfolio_symbols_with_http_info(portfolio_group_id, opts)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+substring = "apple"
+
 begin
   # Search for symbols limited to brokerages under the specified portfolio group
-  data, status_code, headers = api_instance.search_portfolio_symbols_with_http_info(portfolio_group_id, opts)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.search_portfolio_symbols_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    substring: substring,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<UniversalSymbol>>
+  p data # => Array<UniversalSymbol>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->search_portfolio_symbols_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.search_portfolio_symbols: #{e}"
 end
 ```
 
@@ -2252,57 +1745,38 @@ end
 
 [**Array&lt;UniversalSymbol&gt;**](UniversalSymbol.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## set_portfolio_targets
-
-> <Array<TargetAsset>> set_portfolio_targets(portfolio_group_id, opts)
 
 Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to create the target asset.
-opts = {
-  target_asset: [SnapTrade::TargetAsset.new] # Array<TargetAsset> | 
-}
+portfolio_group_id = "portfolioGroupId_example"
+body = [
+        {
+            "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "percent" => 90,
+            "is_supported" => True,
+            "is_excluded" => True,
+        }
+    ]
 
 begin
   # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-  result = api_instance.set_portfolio_targets(portfolio_group_id, opts)
+  result = SnapTrade::PortfolioManagement.set_portfolio_targets(
+    portfolio_group_id: portfolio_group_id,
+    body: body,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->set_portfolio_targets: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.set_portfolio_targets: #{e}"
 end
 ```
 
@@ -2310,17 +1784,28 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<TargetAsset>>, Integer, Hash)> set_portfolio_targets_with_http_info(portfolio_group_id, opts)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+body = [
+        {
+            "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            "percent" => 90,
+            "is_supported" => True,
+            "is_excluded" => True,
+        }
+    ]
+
 begin
   # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-  data, status_code, headers = api_instance.set_portfolio_targets_with_http_info(portfolio_group_id, opts)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.set_portfolio_targets_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    body: body,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<TargetAsset>>
+  p data # => Array<TargetAsset>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->set_portfolio_targets_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.set_portfolio_targets: #{e}"
 end
 ```
 
@@ -2335,54 +1820,38 @@ end
 
 [**Array&lt;TargetAsset&gt;**](TargetAsset.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## update_asset_class
-
-> update_asset_class(model_asset_class_id, model_asset_class_details)
 
 Updates model asset class objects
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-model_asset_class_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the model asset class to update.
-model_asset_class_details = SnapTrade::ModelAssetClassDetails.new # ModelAssetClassDetails | Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+model_asset_class = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Bonds",
+    }
+model_asset_class_target = [
+        {
+        }
+    ]
 
 begin
   # Updates model asset class objects
-  api_instance.update_asset_class(model_asset_class_id, model_asset_class_details)
+  SnapTrade::PortfolioManagement.update_asset_class(
+    model_asset_class_id: model_asset_class_id,
+    model_asset_class: model_asset_class,
+    model_asset_class_target: model_asset_class_target,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_asset_class: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_asset_class: #{e}"
 end
 ```
 
@@ -2390,17 +1859,29 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> update_asset_class_with_http_info(model_asset_class_id, model_asset_class_details)
-
 ```ruby
+model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+model_asset_class = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Bonds",
+    }
+model_asset_class_target = [
+        {
+        }
+    ]
+
 begin
   # Updates model asset class objects
-  data, status_code, headers = api_instance.update_asset_class_with_http_info(model_asset_class_id, model_asset_class_details)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.update_asset_class_with_http_info(
+    model_asset_class_id: model_asset_class_id,
+    model_asset_class: model_asset_class,
+    model_asset_class_target: model_asset_class_target,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_asset_class_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_asset_class: #{e}"
 end
 ```
 
@@ -2415,54 +1896,29 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
-
-
 ## update_portfolio_settings
-
-> <PortfolioGroupSettings> update_portfolio_settings(portfolio_group_id)
 
 Updates portfolio group settings
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to patch the settings.
+portfolio_group_id = "portfolioGroupId_example"
 
 begin
   # Updates portfolio group settings
-  result = api_instance.update_portfolio_settings(portfolio_group_id)
+  result = SnapTrade::PortfolioManagement.update_portfolio_settings(
+    portfolio_group_id: portfolio_group_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_portfolio_settings: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_portfolio_settings: #{e}"
 end
 ```
 
@@ -2470,17 +1926,19 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PortfolioGroupSettings>, Integer, Hash)> update_portfolio_settings_with_http_info(portfolio_group_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+
 begin
   # Updates portfolio group settings
-  data, status_code, headers = api_instance.update_portfolio_settings_with_http_info(portfolio_group_id)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.update_portfolio_settings_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PortfolioGroupSettings>
+  p data # => PortfolioGroupSettings
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_portfolio_settings_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_portfolio_settings: #{e}"
 end
 ```
 
@@ -2494,56 +1952,46 @@ end
 
 [**PortfolioGroupSettings**](PortfolioGroupSettings.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
 ## update_portfolio_target_by_id
-
-> <TargetAsset> update_portfolio_target_by_id(portfolio_group_id, target_asset_id, target_asset)
 
 Update a TargetAsset under the specified PortfolioGroup.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::PortfolioManagementApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup under which to patch the target asset.
-target_asset_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the TargetAsset to patch.
-target_asset = SnapTrade::TargetAsset.new # TargetAsset | 
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+    }
+percent = 90
+is_supported = True
+is_excluded = True
 
 begin
   # Update a TargetAsset under the specified PortfolioGroup.
-  result = api_instance.update_portfolio_target_by_id(portfolio_group_id, target_asset_id, target_asset)
+  result = SnapTrade::PortfolioManagement.update_portfolio_target_by_id(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+    id: id,
+    symbol: symbol,
+    percent: percent,
+    is_supported: is_supported,
+    is_excluded: is_excluded,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_portfolio_target_by_id: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -2551,17 +1999,36 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TargetAsset>, Integer, Hash)> update_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id, target_asset)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+target_asset_id = "targetAssetId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+    }
+percent = 90
+is_supported = True
+is_excluded = True
+
 begin
   # Update a TargetAsset under the specified PortfolioGroup.
-  data, status_code, headers = api_instance.update_portfolio_target_by_id_with_http_info(portfolio_group_id, target_asset_id, target_asset)
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.update_portfolio_target_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    target_asset_id: target_asset_id,
+    id: id,
+    symbol: symbol,
+    percent: percent,
+    is_supported: is_supported,
+    is_excluded: is_excluded,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TargetAsset>
+  p data # => TargetAsset
 rescue SnapTrade::ApiError => e
-  puts "Error when calling PortfolioManagementApi->update_portfolio_target_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::PortfolioManagement.update_portfolio_target_by_id: #{e}"
 end
 ```
 
@@ -2576,13 +2043,4 @@ end
 ### Return type
 
 [**TargetAsset**](TargetAsset.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 

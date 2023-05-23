@@ -10,48 +10,45 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**list_option_holdings**](OptionsApi.md#list_option_holdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
 | [**place_option_strategy**](OptionsApi.md#place_option_strategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage |
 
-
 ## get_option_strategy
-
-> <StrategyQuotes> get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request)
 
 Creates an option strategy object that will be used to place an option strategy order
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::OptionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-options_get_option_strategy_request = SnapTrade::OptionsGetOptionStrategyRequest.new({underlying_symbol_id: '2bcd7cc3-e922-4976-bce1-9858296801c3', legs: [SnapTrade::OptionLeg.new], strategy_type: SnapTrade::StrategyType::CUSTOM}) # OptionsGetOptionStrategyRequest | 
+underlying_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+legs = [
+        {
+            "action" => "BUY_TO_OPEN",
+            "option_symbol_id" => "SPY220819P00200000",
+            "quantity" => 1,
+        }
+    ]
+strategy_type = "CUSTOM"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Creates an option strategy object that will be used to place an option strategy order
-  result = api_instance.get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request)
+  result = SnapTrade::Options.get_option_strategy(
+    underlying_symbol_id: underlying_symbol_id,
+    legs: legs,
+    strategy_type: strategy_type,
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_option_strategy: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_option_strategy: #{e}"
 end
 ```
 
@@ -59,17 +56,35 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StrategyQuotes>, Integer, Hash)> get_option_strategy_with_http_info(user_id, user_secret, account_id, options_get_option_strategy_request)
-
 ```ruby
+underlying_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+legs = [
+        {
+            "action" => "BUY_TO_OPEN",
+            "option_symbol_id" => "SPY220819P00200000",
+            "quantity" => 1,
+        }
+    ]
+strategy_type = "CUSTOM"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Creates an option strategy object that will be used to place an option strategy order
-  data, status_code, headers = api_instance.get_option_strategy_with_http_info(user_id, user_secret, account_id, options_get_option_strategy_request)
+  data, status_code, headers, response = SnapTrade::Options.get_option_strategy_with_http_info(
+    underlying_symbol_id: underlying_symbol_id,
+    legs: legs,
+    strategy_type: strategy_type,
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <StrategyQuotes>
+  p data # => StrategyQuotes
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_option_strategy_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_option_strategy: #{e}"
 end
 ```
 
@@ -86,57 +101,35 @@ end
 
 [**StrategyQuotes**](StrategyQuotes.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## get_options_chain
-
-> <Array<OptionChainInner>> get_options_chain(user_id, user_secret, account_id, symbol)
 
 Get the options chain
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::OptionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-symbol = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Universal symbol ID if symbol
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+symbol = "symbol_example"
 
 begin
   # Get the options chain
-  result = api_instance.get_options_chain(user_id, user_secret, account_id, symbol)
+  result = SnapTrade::Options.get_options_chain(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    symbol: symbol,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_options_chain: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_options_chain: #{e}"
 end
 ```
 
@@ -144,17 +137,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<OptionChainInner>>, Integer, Hash)> get_options_chain_with_http_info(user_id, user_secret, account_id, symbol)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+symbol = "symbol_example"
+
 begin
   # Get the options chain
-  data, status_code, headers = api_instance.get_options_chain_with_http_info(user_id, user_secret, account_id, symbol)
+  data, status_code, headers, response = SnapTrade::Options.get_options_chain_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    symbol: symbol,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<OptionChainInner>>
+  p data # => Array<OptionChainInner>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_options_chain_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_options_chain: #{e}"
 end
 ```
 
@@ -171,57 +172,35 @@ end
 
 [**Array&lt;OptionChainInner&gt;**](OptionChainInner.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_options_strategy_quote
-
-> <StrategyQuotes> get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id)
 
 Get latest market data of option strategy
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::OptionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-option_strategy_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Option strategy id obtained from response when creating option strategy object
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Get latest market data of option strategy
-  result = api_instance.get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id)
+  result = SnapTrade::Options.get_options_strategy_quote(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    option_strategy_id: option_strategy_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_options_strategy_quote: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_options_strategy_quote: #{e}"
 end
 ```
 
@@ -229,17 +208,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StrategyQuotes>, Integer, Hash)> get_options_strategy_quote_with_http_info(user_id, user_secret, account_id, option_strategy_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Get latest market data of option strategy
-  data, status_code, headers = api_instance.get_options_strategy_quote_with_http_info(user_id, user_secret, account_id, option_strategy_id)
+  data, status_code, headers, response = SnapTrade::Options.get_options_strategy_quote_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    option_strategy_id: option_strategy_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <StrategyQuotes>
+  p data # => StrategyQuotes
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->get_options_strategy_quote_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Options.get_options_strategy_quote: #{e}"
 end
 ```
 
@@ -256,56 +243,33 @@ end
 
 [**StrategyQuotes**](StrategyQuotes.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_option_holdings
-
-> <OptionsHoldings> list_option_holdings(user_id, user_secret, account_id)
 
 Get the options holdings in the account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::OptionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
 
 begin
   # Get the options holdings in the account
-  result = api_instance.list_option_holdings(user_id, user_secret, account_id)
+  result = SnapTrade::Options.list_option_holdings(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->list_option_holdings: #{e}"
+  puts "Exception when calling SnapTrade::Options.list_option_holdings: #{e}"
 end
 ```
 
@@ -313,17 +277,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<OptionsHoldings>, Integer, Hash)> list_option_holdings_with_http_info(user_id, user_secret, account_id)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+
 begin
   # Get the options holdings in the account
-  data, status_code, headers = api_instance.list_option_holdings_with_http_info(user_id, user_secret, account_id)
+  data, status_code, headers, response = SnapTrade::Options.list_option_holdings_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <OptionsHoldings>
+  p data # => OptionsHoldings
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->list_option_holdings_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Options.list_option_holdings: #{e}"
 end
 ```
 
@@ -339,58 +309,41 @@ end
 
 [**OptionsHoldings**](OptionsHoldings.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## place_option_strategy
-
-> <StrategyOrderRecord> place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
 
 Place an option strategy order on the brokerage
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::OptionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-option_strategy_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Option strategy id obtained from response when creating option strategy object
-options_place_option_strategy_request = SnapTrade::OptionsPlaceOptionStrategyRequest.new({order_type: SnapTrade::OrderStrategyExecuteBodyOrderType::LIMIT, time_in_force: SnapTrade::OrderStrategyExecuteBodyTimeInForce::DAY, price: 31.33}) # OptionsPlaceOptionStrategyRequest | 
+order_type = "Limit"
+time_in_force = "DAY"
+price = 31.33
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Place an option strategy order on the brokerage
-  result = api_instance.place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
+  result = SnapTrade::Options.place_option_strategy(
+    order_type: order_type,
+    time_in_force: time_in_force,
+    price: price,
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    option_strategy_id: option_strategy_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->place_option_strategy: #{e}"
+  puts "Exception when calling SnapTrade::Options.place_option_strategy: #{e}"
 end
 ```
 
@@ -398,17 +351,31 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StrategyOrderRecord>, Integer, Hash)> place_option_strategy_with_http_info(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
-
 ```ruby
+order_type = "Limit"
+time_in_force = "DAY"
+price = 31.33
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Place an option strategy order on the brokerage
-  data, status_code, headers = api_instance.place_option_strategy_with_http_info(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request)
+  data, status_code, headers, response = SnapTrade::Options.place_option_strategy_with_http_info(
+    order_type: order_type,
+    time_in_force: time_in_force,
+    price: price,
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    option_strategy_id: option_strategy_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <StrategyOrderRecord>
+  p data # => StrategyOrderRecord
 rescue SnapTrade::ApiError => e
-  puts "Error when calling OptionsApi->place_option_strategy_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Options.place_option_strategy: #{e}"
 end
 ```
 
@@ -425,13 +392,4 @@ end
 ### Return type
 
 [**StrategyOrderRecord**](StrategyOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 

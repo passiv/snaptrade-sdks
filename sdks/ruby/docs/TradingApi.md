@@ -15,48 +15,35 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**place_oco_order**](TradingApi.md#place_oco_order) | **POST** /trade/oco | Place a OCO (One Cancels Other) order |
 | [**place_order**](TradingApi.md#place_order) | **POST** /trade/{tradeId} | Place order |
 
-
 ## cancel_user_account_order
-
-> <AccountOrderRecord> cancel_user_account_order(user_id, user_secret, account_id, trading_cancel_user_account_order_request)
 
 Cancel open order in account
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account get positions.
-trading_cancel_user_account_order_request = SnapTrade::TradingCancelUserAccountOrderRequest.new # TradingCancelUserAccountOrderRequest | The Order ID to be canceled
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Cancel open order in account
-  result = api_instance.cancel_user_account_order(user_id, user_secret, account_id, trading_cancel_user_account_order_request)
+  result = SnapTrade::Trading.cancel_user_account_order(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    brokerage_order_id: brokerage_order_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->cancel_user_account_order: #{e}"
+  puts "Exception when calling SnapTrade::Trading.cancel_user_account_order: #{e}"
 end
 ```
 
@@ -64,17 +51,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AccountOrderRecord>, Integer, Hash)> cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "accountId_example"
+brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Cancel open order in account
-  data, status_code, headers = api_instance.cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request)
+  data, status_code, headers, response = SnapTrade::Trading.cancel_user_account_order_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    brokerage_order_id: brokerage_order_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AccountOrderRecord>
+  p data # => AccountOrderRecord
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->cancel_user_account_order_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.cancel_user_account_order: #{e}"
 end
 ```
 
@@ -91,56 +86,33 @@ end
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## get_calculated_trade_impact_by_id
-
-> <Trade> get_calculated_trade_impact_by_id(portfolio_group_id, calculated_trade_id, trade_id)
 
 Return details of a specific trade before it's placed
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
-calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
-trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "tradeId_example"
 
 begin
   # Return details of a specific trade before it's placed
-  result = api_instance.get_calculated_trade_impact_by_id(portfolio_group_id, calculated_trade_id, trade_id)
+  result = SnapTrade::Trading.get_calculated_trade_impact_by_id(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_calculated_trade_impact_by_id: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_calculated_trade_impact_by_id: #{e}"
 end
 ```
 
@@ -148,17 +120,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Trade>, Integer, Hash)> get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "tradeId_example"
+
 begin
   # Return details of a specific trade before it's placed
-  data, status_code, headers = api_instance.get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id)
+  data, status_code, headers, response = SnapTrade::Trading.get_calculated_trade_impact_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Trade>
+  p data # => Trade
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_calculated_trade_impact_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_calculated_trade_impact_by_id: #{e}"
 end
 ```
 
@@ -174,55 +152,31 @@ end
 
 [**Trade**](Trade.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_calculated_trades_impact
-
-> <Array<TradeImpact>> get_calculated_trades_impact(portfolio_group_id, calculated_trade_id)
 
 Return the impact of placing a series of trades on the portfolio
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
-calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
 
 begin
   # Return the impact of placing a series of trades on the portfolio
-  result = api_instance.get_calculated_trades_impact(portfolio_group_id, calculated_trade_id)
+  result = SnapTrade::Trading.get_calculated_trades_impact(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_calculated_trades_impact: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_calculated_trades_impact: #{e}"
 end
 ```
 
@@ -230,17 +184,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<TradeImpact>>, Integer, Hash)> get_calculated_trades_impact_with_http_info(portfolio_group_id, calculated_trade_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+
 begin
   # Return the impact of placing a series of trades on the portfolio
-  data, status_code, headers = api_instance.get_calculated_trades_impact_with_http_info(portfolio_group_id, calculated_trade_id)
+  data, status_code, headers, response = SnapTrade::Trading.get_calculated_trades_impact_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<TradeImpact>>
+  p data # => Array<TradeImpact>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_calculated_trades_impact_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_calculated_trades_impact: #{e}"
 end
 ```
 
@@ -255,56 +213,47 @@ end
 
 [**Array&lt;TradeImpact&gt;**](TradeImpact.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## get_order_impact
-
-> <ManualTradeAndImpact> get_order_impact(user_id, user_secret, manual_trade_form)
 
 Check impact of trades on account.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-manual_trade_form = SnapTrade::ManualTradeForm.new # ManualTradeForm | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+action = "BUY"
+order_type = "Limit"
+price = 31.33
+stop = 31.33
+time_in_force = "Day"
+units = 3.14
+universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Check impact of trades on account.
-  result = api_instance.get_order_impact(user_id, user_secret, manual_trade_form)
+  result = SnapTrade::Trading.get_order_impact(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    action: action,
+    order_type: order_type,
+    price: price,
+    stop: stop,
+    time_in_force: time_in_force,
+    units: units,
+    universal_symbol_id: universal_symbol_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_order_impact: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_order_impact: #{e}"
 end
 ```
 
@@ -312,17 +261,37 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ManualTradeAndImpact>, Integer, Hash)> get_order_impact_with_http_info(user_id, user_secret, manual_trade_form)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+action = "BUY"
+order_type = "Limit"
+price = 31.33
+stop = 31.33
+time_in_force = "Day"
+units = 3.14
+universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Check impact of trades on account.
-  data, status_code, headers = api_instance.get_order_impact_with_http_info(user_id, user_secret, manual_trade_form)
+  data, status_code, headers, response = SnapTrade::Trading.get_order_impact_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    action: action,
+    order_type: order_type,
+    price: price,
+    stop: stop,
+    time_in_force: time_in_force,
+    units: units,
+    universal_symbol_id: universal_symbol_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ManualTradeAndImpact>
+  p data # => ManualTradeAndImpact
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_order_impact_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_order_impact: #{e}"
 end
 ```
 
@@ -338,60 +307,37 @@ end
 
 [**ManualTradeAndImpact**](ManualTradeAndImpact.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## get_user_account_quotes
-
-> <SymbolsQuotes> get_user_account_quotes(user_id, user_secret, symbols, account_id, opts)
 
 Get symbol quotes
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-symbols = 'symbols_example' # String | List of universal_symbol_id or tickers to get quotes for.
-account_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the account to get quotes.
-opts = {
-  use_ticker: true # Boolean | Should be set to True if providing tickers.
-}
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+symbols = "symbols_example"
+account_id = "accountId_example"
+use_ticker = True
 
 begin
   # Get symbol quotes
-  result = api_instance.get_user_account_quotes(user_id, user_secret, symbols, account_id, opts)
+  result = SnapTrade::Trading.get_user_account_quotes(
+    user_id: user_id,
+    user_secret: user_secret,
+    symbols: symbols,
+    account_id: account_id,
+    use_ticker: use_ticker,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_user_account_quotes: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_user_account_quotes: #{e}"
 end
 ```
 
@@ -399,17 +345,27 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SymbolsQuotes>, Integer, Hash)> get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+symbols = "symbols_example"
+account_id = "accountId_example"
+use_ticker = True
+
 begin
   # Get symbol quotes
-  data, status_code, headers = api_instance.get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
+  data, status_code, headers, response = SnapTrade::Trading.get_user_account_quotes_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    symbols: symbols,
+    account_id: account_id,
+    use_ticker: use_ticker,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SymbolsQuotes>
+  p data # => SymbolsQuotes
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->get_user_account_quotes_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.get_user_account_quotes: #{e}"
 end
 ```
 
@@ -427,59 +383,66 @@ end
 
 [**SymbolsQuotes**](SymbolsQuotes.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## modify_calculated_trade_by_id
-
-> <Trade> modify_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, opts)
 
 Modify units of a trade before it is placed
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
-calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
-trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object
-opts = {
-  trade: SnapTrade::Trade.new # Trade | 
-}
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "tradeId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+account = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "brokerage_authorization" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "portfolio_group" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Registered Retirement Savings Account",
+        "number" => "Q6542138443",
+        "institution_name" => "Alpaca",
+        "created_date" => "2021-06-04T16:26:46.523Z",
+    }
+symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "allows_fractional_units" => True,
+    }
+universal_symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+    }
+action = "BUY"
+units = 6
+price = 24.81
+sequence = 1
 
 begin
   # Modify units of a trade before it is placed
-  result = api_instance.modify_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, opts)
+  result = SnapTrade::Trading.modify_calculated_trade_by_id(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+    id: id,
+    account: account,
+    symbol: symbol,
+    universal_symbol: universal_symbol,
+    action: action,
+    units: units,
+    price: price,
+    sequence: sequence,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->modify_calculated_trade_by_id: #{e}"
+  puts "Exception when calling SnapTrade::Trading.modify_calculated_trade_by_id: #{e}"
 end
 ```
 
@@ -487,17 +450,56 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Trade>, Integer, Hash)> modify_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+trade_id = "tradeId_example"
+id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+account = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "brokerage_authorization" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "portfolio_group" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "name" => "Registered Retirement Savings Account",
+        "number" => "Q6542138443",
+        "institution_name" => "Alpaca",
+        "created_date" => "2021-06-04T16:26:46.523Z",
+    }
+symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+        "allows_fractional_units" => True,
+    }
+universal_symbol = {
+        "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        "symbol" => "VAB.TO",
+        "raw_symbol" => "VAB",
+        "description" => "VANGUARD CDN AGGREGATE BOND INDEX ETF",
+    }
+action = "BUY"
+units = 6
+price = 24.81
+sequence = 1
+
 begin
   # Modify units of a trade before it is placed
-  data, status_code, headers = api_instance.modify_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts)
+  data, status_code, headers, response = SnapTrade::Trading.modify_calculated_trade_by_id_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+    trade_id: trade_id,
+    id: id,
+    account: account,
+    symbol: symbol,
+    universal_symbol: universal_symbol,
+    action: action,
+    units: units,
+    price: price,
+    sequence: sequence,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Trade>
+  p data # => Trade
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->modify_calculated_trade_by_id_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.modify_calculated_trade_by_id: #{e}"
 end
 ```
 
@@ -514,55 +516,31 @@ end
 
 [**Trade**](Trade.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## place_calculated_trades
-
-> <Array<TradeExecutionStatus>> place_calculated_trades(portfolio_group_id, calculated_trade_id)
 
 Place orders for the CalculatedTrades in series
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-portfolio_group_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the PortfolioGroup to perform rebalancing calculations
-calculated_trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of calculated trade to get account impact
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
 
 begin
   # Place orders for the CalculatedTrades in series
-  result = api_instance.place_calculated_trades(portfolio_group_id, calculated_trade_id)
+  result = SnapTrade::Trading.place_calculated_trades(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_calculated_trades: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_calculated_trades: #{e}"
 end
 ```
 
@@ -570,17 +548,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<TradeExecutionStatus>>, Integer, Hash)> place_calculated_trades_with_http_info(portfolio_group_id, calculated_trade_id)
-
 ```ruby
+portfolio_group_id = "portfolioGroupId_example"
+calculated_trade_id = "calculatedTradeId_example"
+
 begin
   # Place orders for the CalculatedTrades in series
-  data, status_code, headers = api_instance.place_calculated_trades_with_http_info(portfolio_group_id, calculated_trade_id)
+  data, status_code, headers, response = SnapTrade::Trading.place_calculated_trades_with_http_info(
+    portfolio_group_id: portfolio_group_id,
+    calculated_trade_id: calculated_trade_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<TradeExecutionStatus>>
+  p data # => Array<TradeExecutionStatus>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_calculated_trades_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_calculated_trades: #{e}"
 end
 ```
 
@@ -595,56 +577,47 @@ end
 
 [**Array&lt;TradeExecutionStatus&gt;**](TradeExecutionStatus.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## place_force_order
-
-> <AccountOrderRecord> place_force_order(user_id, user_secret, manual_trade_form)
 
 Place a trade with NO validation.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-manual_trade_form = SnapTrade::ManualTradeForm.new # ManualTradeForm | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+action = "BUY"
+order_type = "Limit"
+price = 31.33
+stop = 31.33
+time_in_force = "Day"
+units = 3.14
+universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 
 begin
   # Place a trade with NO validation.
-  result = api_instance.place_force_order(user_id, user_secret, manual_trade_form)
+  result = SnapTrade::Trading.place_force_order(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    action: action,
+    order_type: order_type,
+    price: price,
+    stop: stop,
+    time_in_force: time_in_force,
+    units: units,
+    universal_symbol_id: universal_symbol_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_force_order: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_force_order: #{e}"
 end
 ```
 
@@ -652,17 +625,37 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AccountOrderRecord>, Integer, Hash)> place_force_order_with_http_info(user_id, user_secret, manual_trade_form)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+action = "BUY"
+order_type = "Limit"
+price = 31.33
+stop = 31.33
+time_in_force = "Day"
+units = 3.14
+universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+
 begin
   # Place a trade with NO validation.
-  data, status_code, headers = api_instance.place_force_order_with_http_info(user_id, user_secret, manual_trade_form)
+  data, status_code, headers, response = SnapTrade::Trading.place_force_order_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    account_id: account_id,
+    action: action,
+    order_type: order_type,
+    price: price,
+    stop: stop,
+    time_in_force: time_in_force,
+    units: units,
+    universal_symbol_id: universal_symbol_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AccountOrderRecord>
+  p data # => AccountOrderRecord
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_force_order_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_force_order: #{e}"
 end
 ```
 
@@ -678,56 +671,35 @@ end
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## place_oco_order
-
-> <AccountOrderRecord> place_oco_order(user_id, user_secret, trading_place_oco_order_request)
 
 Place a OCO (One Cancels Other) order
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
-trading_place_oco_order_request = SnapTrade::TradingPlaceOCOOrderRequest.new # TradingPlaceOCOOrderRequest | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+first_trade_id = None
+second_trade_id = None
 
 begin
   # Place a OCO (One Cancels Other) order
-  result = api_instance.place_oco_order(user_id, user_secret, trading_place_oco_order_request)
+  result = SnapTrade::Trading.place_oco_order(
+    user_id: user_id,
+    user_secret: user_secret,
+    first_trade_id: first_trade_id,
+    second_trade_id: second_trade_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_oco_order: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_oco_order: #{e}"
 end
 ```
 
@@ -735,17 +707,25 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AccountOrderRecord>, Integer, Hash)> place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+first_trade_id = None
+second_trade_id = None
+
 begin
   # Place a OCO (One Cancels Other) order
-  data, status_code, headers = api_instance.place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request)
+  data, status_code, headers, response = SnapTrade::Trading.place_oco_order_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+    first_trade_id: first_trade_id,
+    second_trade_id: second_trade_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AccountOrderRecord>
+  p data # => AccountOrderRecord
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_oco_order_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_oco_order: #{e}"
 end
 ```
 
@@ -761,56 +741,33 @@ end
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
 ## place_order
-
-> <AccountOrderRecord> place_order(trade_id, user_id, user_secret)
 
 Place order
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::TradingApi.new
-trade_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of trade object obtained from trade/impact endpoint
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+trade_id = "tradeId_example"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Place order
-  result = api_instance.place_order(trade_id, user_id, user_secret)
+  result = SnapTrade::Trading.place_order(
+    trade_id: trade_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_order: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_order: #{e}"
 end
 ```
 
@@ -818,17 +775,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AccountOrderRecord>, Integer, Hash)> place_order_with_http_info(trade_id, user_id, user_secret)
-
 ```ruby
+trade_id = "tradeId_example"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # Place order
-  data, status_code, headers = api_instance.place_order_with_http_info(trade_id, user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::Trading.place_order_with_http_info(
+    trade_id: trade_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AccountOrderRecord>
+  p data # => AccountOrderRecord
 rescue SnapTrade::ApiError => e
-  puts "Error when calling TradingApi->place_order_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Trading.place_order: #{e}"
 end
 ```
 
@@ -843,13 +806,4 @@ end
 ### Return type
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 

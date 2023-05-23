@@ -9,47 +9,33 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**remove_brokerage_authorization**](ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization. |
 | [**session_events**](ConnectionsApi.md#session_events) | **GET** /sessionEvents | List all session events for the partner |
 
-
 ## detail_brokerage_authorization
-
-> <BrokerageAuthorization> detail_brokerage_authorization(authorization_id, user_id, user_secret)
 
 Get detail of a specific brokerage authorizations for the user
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::ConnectionsApi.new
-authorization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of a brokerage authorization object.
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Get detail of a specific brokerage authorizations for the user
-  result = api_instance.detail_brokerage_authorization(authorization_id, user_id, user_secret)
+  result = SnapTrade::Connections.detail_brokerage_authorization(
+    authorization_id: authorization_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->detail_brokerage_authorization: #{e}"
+  puts "Exception when calling SnapTrade::Connections.detail_brokerage_authorization: #{e}"
 end
 ```
 
@@ -57,17 +43,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BrokerageAuthorization>, Integer, Hash)> detail_brokerage_authorization_with_http_info(authorization_id, user_id, user_secret)
-
 ```ruby
+authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # Get detail of a specific brokerage authorizations for the user
-  data, status_code, headers = api_instance.detail_brokerage_authorization_with_http_info(authorization_id, user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::Connections.detail_brokerage_authorization_with_http_info(
+    authorization_id: authorization_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <BrokerageAuthorization>
+  p data # => BrokerageAuthorization
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->detail_brokerage_authorization_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Connections.detail_brokerage_authorization: #{e}"
 end
 ```
 
@@ -83,55 +75,31 @@ end
 
 [**BrokerageAuthorization**](BrokerageAuthorization.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## list_brokerage_authorizations
-
-> <Array<BrokerageAuthorization>> list_brokerage_authorizations(user_id, user_secret)
 
 List all brokerage authorizations for the user
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::ConnectionsApi.new
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List all brokerage authorizations for the user
-  result = api_instance.list_brokerage_authorizations(user_id, user_secret)
+  result = SnapTrade::Connections.list_brokerage_authorizations(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->list_brokerage_authorizations: #{e}"
+  puts "Exception when calling SnapTrade::Connections.list_brokerage_authorizations: #{e}"
 end
 ```
 
@@ -139,17 +107,21 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<BrokerageAuthorization>>, Integer, Hash)> list_brokerage_authorizations_with_http_info(user_id, user_secret)
-
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # List all brokerage authorizations for the user
-  data, status_code, headers = api_instance.list_brokerage_authorizations_with_http_info(user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::Connections.list_brokerage_authorizations_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<BrokerageAuthorization>>
+  p data # => Array<BrokerageAuthorization>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->list_brokerage_authorizations_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Connections.list_brokerage_authorizations: #{e}"
 end
 ```
 
@@ -164,55 +136,32 @@ end
 
 [**Array&lt;BrokerageAuthorization&gt;**](BrokerageAuthorization.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## remove_brokerage_authorization
-
-> remove_brokerage_authorization(authorization_id, user_id, user_secret)
 
 Remove a brokerage authorization.
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::ConnectionsApi.new
-authorization_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | The ID of the Authorization to delete.
-user_id = 'user_id_example' # String | 
-user_secret = 'user_secret_example' # String | 
+authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Remove a brokerage authorization.
-  api_instance.remove_brokerage_authorization(authorization_id, user_id, user_secret)
+  SnapTrade::Connections.remove_brokerage_authorization(
+    authorization_id: authorization_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->remove_brokerage_authorization: #{e}"
+  puts "Exception when calling SnapTrade::Connections.remove_brokerage_authorization: #{e}"
 end
 ```
 
@@ -220,17 +169,23 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> remove_brokerage_authorization_with_http_info(authorization_id, user_id, user_secret)
-
 ```ruby
+authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
+
 begin
   # Remove a brokerage authorization.
-  data, status_code, headers = api_instance.remove_brokerage_authorization_with_http_info(authorization_id, user_id, user_secret)
+  data, status_code, headers, response = SnapTrade::Connections.remove_brokerage_authorization_with_http_info(
+    authorization_id: authorization_id,
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->remove_brokerage_authorization_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Connections.remove_brokerage_authorization: #{e}"
 end
 ```
 
@@ -246,58 +201,33 @@ end
 
 nil (empty response body)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
 ## session_events
-
-> <Array<ConnectionsSessionEvents200ResponseInner>> session_events(partner_client_id, opts)
 
 List all session events for the partner
 
-### Examples
+### Example
 
 ```ruby
-require 'time'
 require 'snap_trade'
-# setup authorization
-SnapTrade.configure do |config|
-  # Configure API key authorization: PartnerClientId
-  config.api_key['PartnerClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerClientId'] = 'Bearer'
 
-  # Configure API key authorization: PartnerSignature
-  config.api_key['PartnerSignature'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerSignature'] = 'Bearer'
+SnapTrade.client_id = 'YOUR API KEY'
+SnapTrade.signature = 'YOUR API KEY'
+SnapTrade.timestamp = 'YOUR API KEY'
 
-  # Configure API key authorization: PartnerTimestamp
-  config.api_key['PartnerTimestamp'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['PartnerTimestamp'] = 'Bearer'
-end
-
-api_instance = SnapTrade::ConnectionsApi.new
-partner_client_id = 'partner_client_id_example' # String | 
-opts = {
-  user_id: 'user_id_example', # String | Optional comma seperated list of user IDs used to filter the request on specific users
-  session_id: 'session_id_example' # String | Optional comma seperated list of session IDs used to filter the request on specific users
-}
+partner_client_id = "PASSIVTEST"
+user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 
 begin
   # List all session events for the partner
-  result = api_instance.session_events(partner_client_id, opts)
+  result = SnapTrade::Connections.session_events(
+    partner_client_id: partner_client_id,
+    user_id: user_id,
+    session_id: session_id,
+  )
   p result
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->session_events: #{e}"
+  puts "Exception when calling SnapTrade::Connections.session_events: #{e}"
 end
 ```
 
@@ -305,17 +235,23 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<ConnectionsSessionEvents200ResponseInner>>, Integer, Hash)> session_events_with_http_info(partner_client_id, opts)
-
 ```ruby
+partner_client_id = "PASSIVTEST"
+user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+
 begin
   # List all session events for the partner
-  data, status_code, headers = api_instance.session_events_with_http_info(partner_client_id, opts)
+  data, status_code, headers, response = SnapTrade::Connections.session_events_with_http_info(
+    partner_client_id: partner_client_id,
+    user_id: user_id,
+    session_id: session_id,
+  )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<ConnectionsSessionEvents200ResponseInner>>
+  p data # => Array<ConnectionsSessionEvents200ResponseInner>
 rescue SnapTrade::ApiError => e
-  puts "Error when calling ConnectionsApi->session_events_with_http_info: #{e}"
+  puts "Exception when calling SnapTrade::Connections.session_events: #{e}"
 end
 ```
 
@@ -330,13 +266,4 @@ end
 ### Return type
 
 [**Array&lt;ConnectionsSessionEvents200ResponseInner&gt;**](ConnectionsSessionEvents200ResponseInner.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
