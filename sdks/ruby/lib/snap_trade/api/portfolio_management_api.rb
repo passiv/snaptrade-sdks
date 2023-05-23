@@ -28,7 +28,7 @@ module SnapTrade
     # @param exchange [Exchange] 
     # @param type [SecurityType] 
     # @param currencies [Array<Currency>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def add_portfolio_excluded_asset(portfolio_group_id:, id: SENTINEL, symbol: SENTINEL, raw_symbol: SENTINEL, description: SENTINEL, currency: SENTINEL, exchange: SENTINEL, type: SENTINEL, currencies: SENTINEL, extra: {}
 )
       _body = {}
@@ -56,7 +56,7 @@ module SnapTrade
     # @param exchange [Exchange] 
     # @param type [SecurityType] 
     # @param currencies [Array<Currency>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def add_portfolio_excluded_asset_with_http_info(portfolio_group_id:, id: SENTINEL, symbol: SENTINEL, raw_symbol: SENTINEL, description: SENTINEL, currency: SENTINEL, exchange: SENTINEL, type: SENTINEL, currencies: SENTINEL, extra: {}
 )
       _body = {}
@@ -147,7 +147,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param id [String] 
     # @param name [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create(user_id:, user_secret:, id: SENTINEL, name: SENTINEL, extra: {}
 )
       _body = {}
@@ -164,7 +164,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param id [String] 
     # @param name [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_with_http_info(user_id:, user_secret:, id: SENTINEL, name: SENTINEL, extra: {}
 )
       _body = {}
@@ -257,7 +257,7 @@ module SnapTrade
 
 
     # Create a new model asset class
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_asset_class(extra: {}
 )
 
@@ -266,7 +266,7 @@ module SnapTrade
     end
 
     # Create a new model asset class
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_asset_class_with_http_info(extra: {}
 )
 
@@ -330,7 +330,7 @@ module SnapTrade
 
 
     # Creates a new model portfolio
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_model_portfolio(extra: {}
 )
 
@@ -339,7 +339,7 @@ module SnapTrade
     end
 
     # Creates a new model portfolio
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_model_portfolio_with_http_info(extra: {}
 )
 
@@ -404,7 +404,7 @@ module SnapTrade
 
     # Deletes a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_asset_class(model_asset_class_id:, extra: {}
 )
 
@@ -414,7 +414,7 @@ module SnapTrade
 
     # Deletes a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_asset_class_with_http_info(model_asset_class_id:, extra: {}
 )
 
@@ -484,7 +484,7 @@ module SnapTrade
     # Unexclude an asset from a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to unexclude an asset.
     # @param symbol_id [String] The ID of the excluded asset Symbol to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_excluded_asset(portfolio_group_id:, symbol_id:, extra: {}
 )
 
@@ -495,7 +495,7 @@ module SnapTrade
     # Unexclude an asset from a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to unexclude an asset.
     # @param symbol_id [String] The ID of the excluded asset Symbol to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_excluded_asset_with_http_info(portfolio_group_id:, symbol_id:, extra: {}
 )
 
@@ -570,7 +570,7 @@ module SnapTrade
 
     # Deletes a model portfolio
     # @param model_portfolio_id [String] The ID of the model portfolio to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_model_portfolio_by_id(model_portfolio_id:, extra: {}
 )
 
@@ -580,7 +580,7 @@ module SnapTrade
 
     # Deletes a model portfolio
     # @param model_portfolio_id [String] The ID of the model portfolio to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_model_portfolio_by_id_with_http_info(model_portfolio_id:, extra: {}
 )
 
@@ -649,7 +649,7 @@ module SnapTrade
 
     # Remove a target portfolio.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_portfoli(portfolio_group_id:, extra: {}
 )
 
@@ -659,7 +659,7 @@ module SnapTrade
 
     # Remove a target portfolio.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_portfoli_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -731,7 +731,7 @@ module SnapTrade
     # Remove a TargetAsset.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to remove the target asset.
     # @param target_asset_id [String] The ID of the TargetAsset to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, extra: {}
 )
 
@@ -742,7 +742,7 @@ module SnapTrade
     # Remove a TargetAsset.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to remove the target asset.
     # @param target_asset_id [String] The ID of the TargetAsset to delete.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, extra: {}
 )
 
@@ -819,7 +819,7 @@ module SnapTrade
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_asset_class(model_asset_class_id:, extra: {}
 )
 
@@ -829,7 +829,7 @@ module SnapTrade
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_asset_class_with_http_info(model_asset_class_id:, extra: {}
 )
 
@@ -902,7 +902,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param trade_id [String] The ID of trade object
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_calculated_trade_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
 )
 
@@ -914,7 +914,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param trade_id [String] The ID of trade object
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_calculated_trade_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
 )
 
@@ -997,7 +997,7 @@ module SnapTrade
 
     # Get details of a model portfolio
     # @param model_portfolio_id [String] The ID of the model portfolio to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_model_details_by_id(model_portfolio_id:, extra: {}
 )
 
@@ -1007,7 +1007,7 @@ module SnapTrade
 
     # Get details of a model portfolio
     # @param model_portfolio_id [String] The ID of the model portfolio to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_model_details_by_id_with_http_info(model_portfolio_id:, extra: {}
 )
 
@@ -1078,7 +1078,7 @@ module SnapTrade
 
     # Get sum of cash balances in portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_balances(portfolio_group_id:, extra: {}
 )
 
@@ -1088,7 +1088,7 @@ module SnapTrade
 
     # Get sum of cash balances in portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_balances_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1159,7 +1159,7 @@ module SnapTrade
 
     # Get details of a target portfolio
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_details_by_id(portfolio_group_id:, extra: {}
 )
 
@@ -1169,7 +1169,7 @@ module SnapTrade
 
     # Get details of a target portfolio
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_details_by_id_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1240,7 +1240,7 @@ module SnapTrade
 
     # Return a whole bunch of relevant information relating to a portfolio group.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_info(portfolio_group_id:, extra: {}
 )
 
@@ -1250,7 +1250,7 @@ module SnapTrade
 
     # Return a whole bunch of relevant information relating to a portfolio group.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_info_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1321,7 +1321,7 @@ module SnapTrade
 
     # Get portfolio group settings
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to get the settings.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_settings(portfolio_group_id:, extra: {}
 )
 
@@ -1331,7 +1331,7 @@ module SnapTrade
 
     # Get portfolio group settings
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to get the settings.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_settings_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1403,7 +1403,7 @@ module SnapTrade
     # Get a specific target from a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to get the target asset.
     # @param target_asset_id [String] The ID of the TargetAsset to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, extra: {}
 )
 
@@ -1414,7 +1414,7 @@ module SnapTrade
     # Get a specific target from a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to get the target asset.
     # @param target_asset_id [String] The ID of the TargetAsset to get.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, extra: {}
 )
 
@@ -1491,7 +1491,7 @@ module SnapTrade
 
     # Get all target assets under the specified PortfolioGroup.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_targets(portfolio_group_id:, extra: {}
 )
 
@@ -1501,7 +1501,7 @@ module SnapTrade
 
     # Get all target assets under the specified PortfolioGroup.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portfolio_targets_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1572,7 +1572,7 @@ module SnapTrade
 
     # Get an array of excluded assets associated with a portfolio group\\
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which the excluded assets are linked.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portoflio_excluded_assets(portfolio_group_id:, extra: {}
 )
 
@@ -1582,7 +1582,7 @@ module SnapTrade
 
     # Get an array of excluded assets associated with a portfolio group\\
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which the excluded assets are linked.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_portoflio_excluded_assets_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1653,7 +1653,7 @@ module SnapTrade
 
     # Import target allocation based on portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def import_model_portfolio(portfolio_group_id:, extra: {}
 )
 
@@ -1663,7 +1663,7 @@ module SnapTrade
 
     # Import target allocation based on portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def import_model_portfolio_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1735,7 +1735,7 @@ module SnapTrade
     # List all portfolio groups
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list(user_id:, user_secret:, extra: {}
 )
 
@@ -1746,7 +1746,7 @@ module SnapTrade
     # List all portfolio groups
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_with_http_info(user_id:, user_secret:, extra: {}
 )
 
@@ -1824,7 +1824,7 @@ module SnapTrade
 
 
     # List of model asset class
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_asset_classes(extra: {}
 )
 
@@ -1833,7 +1833,7 @@ module SnapTrade
     end
 
     # List of model asset class
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_asset_classes_with_http_info(extra: {}
 )
 
@@ -1898,7 +1898,7 @@ module SnapTrade
 
     # List of trades to make to rebalance portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_calculated_trades(portfolio_group_id:, extra: {}
 )
 
@@ -1908,7 +1908,7 @@ module SnapTrade
 
     # List of trades to make to rebalance portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_calculated_trades_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -1978,7 +1978,7 @@ module SnapTrade
 
 
     # List of model portfolio
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_model_portfolio(extra: {}
 )
 
@@ -1987,7 +1987,7 @@ module SnapTrade
     end
 
     # List of model portfolio
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_model_portfolio_with_http_info(extra: {}
 )
 
@@ -2052,7 +2052,7 @@ module SnapTrade
 
     # Get all accounts associated with a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which the accounts are linked.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_portfolio_accounts(portfolio_group_id:, extra: {}
 )
 
@@ -2062,7 +2062,7 @@ module SnapTrade
 
     # Get all accounts associated with a portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which the accounts are linked.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_portfolio_accounts_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -2136,7 +2136,7 @@ module SnapTrade
     # @param model_portfolio [ModelPortfolio] 
     # @param model_portfolio_security [Array<ModelPortfolioSecurity>] 
     # @param model_portfolio_asset_class [Array<ModelPortfolioAssetClass>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_model_portfolio_by_id(model_portfolio_id:, model_portfolio: SENTINEL, model_portfolio_security: SENTINEL, model_portfolio_asset_class: SENTINEL, extra: {}
 )
       _body = {}
@@ -2154,7 +2154,7 @@ module SnapTrade
     # @param model_portfolio [ModelPortfolio] 
     # @param model_portfolio_security [Array<ModelPortfolioSecurity>] 
     # @param model_portfolio_asset_class [Array<ModelPortfolioAssetClass>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_model_portfolio_by_id_with_http_info(model_portfolio_id:, model_portfolio: SENTINEL, model_portfolio_security: SENTINEL, model_portfolio_asset_class: SENTINEL, extra: {}
 )
       _body = {}
@@ -2241,7 +2241,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to update.
     # @param id [String] 
     # @param name [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def save_portfolio(portfolio_group_id:, id: SENTINEL, name: SENTINEL, extra: {}
 )
       _body = {}
@@ -2257,7 +2257,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to update.
     # @param id [String] 
     # @param name [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def save_portfolio_with_http_info(portfolio_group_id:, id: SENTINEL, name: SENTINEL, extra: {}
 )
       _body = {}
@@ -2344,7 +2344,7 @@ module SnapTrade
     # Search for symbols limited to brokerages under the specified portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to search under
     # @param substring [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def search_portfolio_symbols(portfolio_group_id:, substring: SENTINEL, extra: {}
 )
       _body = {}
@@ -2358,7 +2358,7 @@ module SnapTrade
     # Search for symbols limited to brokerages under the specified portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to search under
     # @param substring [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def search_portfolio_symbols_with_http_info(portfolio_group_id:, substring: SENTINEL, extra: {}
 )
       _body = {}
@@ -2439,7 +2439,7 @@ module SnapTrade
 
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def set_portfolio_targets(portfolio_group_id:, extra: {}
 )
       _body = {}
@@ -2451,7 +2451,7 @@ module SnapTrade
 
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def set_portfolio_targets_with_http_info(portfolio_group_id:, extra: {}
 )
       _body = {}
@@ -2533,7 +2533,7 @@ module SnapTrade
     # @param model_asset_class_id [String] The ID of the model asset class to update.
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_asset_class(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {}
 )
       _body = {}
@@ -2549,7 +2549,7 @@ module SnapTrade
     # @param model_asset_class_id [String] The ID of the model asset class to update.
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_asset_class_with_http_info(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {}
 )
       _body = {}
@@ -2633,7 +2633,7 @@ module SnapTrade
 
     # Updates portfolio group settings
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to patch the settings.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_settings(portfolio_group_id:, extra: {}
 )
 
@@ -2643,7 +2643,7 @@ module SnapTrade
 
     # Updates portfolio group settings
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to patch the settings.
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_settings_with_http_info(portfolio_group_id:, extra: {}
 )
 
@@ -2720,7 +2720,7 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {}
 )
       _body = {}
@@ -2743,7 +2743,7 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {}
 )
       _body = {}

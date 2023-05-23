@@ -20,7 +20,7 @@ module SnapTrade
 
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     # @param user_id [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user(user_id:, extra: {}
 )
 
@@ -30,7 +30,7 @@ module SnapTrade
 
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     # @param user_id [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user_with_http_info(user_id:, extra: {}
 )
 
@@ -103,7 +103,7 @@ module SnapTrade
     # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_jwt(user_id:, user_secret:, extra: {}
 )
 
@@ -114,7 +114,7 @@ module SnapTrade
     # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_jwt_with_http_info(user_id:, user_secret:, extra: {}
 )
 
@@ -192,7 +192,7 @@ module SnapTrade
 
 
     # Get a list of all SnapTrade users you've registered on our platform
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {}
 )
 
@@ -201,7 +201,7 @@ module SnapTrade
     end
 
     # Get a list of all SnapTrade users you've registered on our platform
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {}
 )
 
@@ -272,7 +272,7 @@ module SnapTrade
     # @param custom_redirect [String] 
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {}
 )
       _body = {}
@@ -295,7 +295,7 @@ module SnapTrade
     # @param custom_redirect [String] 
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {}
 )
       _body = {}
@@ -389,7 +389,7 @@ module SnapTrade
     # Register user with SnapTrade in order to create secure brokerage authorizations
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {}
 )
       _body = {}
@@ -404,7 +404,7 @@ module SnapTrade
     # Register user with SnapTrade in order to create secure brokerage authorizations
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user_with_http_info(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {}
 )
       _body = {}

@@ -22,7 +22,7 @@ module SnapTrade
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_brokerage_authorization(authorization_id:, user_id:, user_secret:, extra: {}
 )
 
@@ -34,7 +34,7 @@ module SnapTrade
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_brokerage_authorization_with_http_info(authorization_id:, user_id:, user_secret:, extra: {}
 )
 
@@ -120,7 +120,7 @@ module SnapTrade
     # List all brokerage authorizations for the user
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_brokerage_authorizations(user_id:, user_secret:, extra: {}
 )
 
@@ -131,7 +131,7 @@ module SnapTrade
     # List all brokerage authorizations for the user
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_brokerage_authorizations_with_http_info(user_id:, user_secret:, extra: {}
 )
 
@@ -212,7 +212,7 @@ module SnapTrade
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def remove_brokerage_authorization(authorization_id:, user_id:, user_secret:, extra: {}
 )
 
@@ -224,7 +224,7 @@ module SnapTrade
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def remove_brokerage_authorization_with_http_info(authorization_id:, user_id:, user_secret:, extra: {}
 )
 
@@ -309,9 +309,11 @@ module SnapTrade
     # @param partner_client_id [String] 
     # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
     # @param session_id [String] Optional comma seperated list of session IDs used to filter the request on specific users
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def session_events(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {}
 )
+      extra[:user_id] = user_id if user_id != SENTINEL
+      extra[:session_id] = session_id if session_id != SENTINEL
 
       data, _status_code, _headers = session_events_with_http_info_impl(partner_client_id, extra)
       data
@@ -321,9 +323,11 @@ module SnapTrade
     # @param partner_client_id [String] 
     # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
     # @param session_id [String] Optional comma seperated list of session IDs used to filter the request on specific users
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def session_events_with_http_info(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {}
 )
+      extra[:user_id] = user_id if user_id != SENTINEL
+      extra[:session_id] = session_id if session_id != SENTINEL
 
       session_events_with_http_info_impl(partner_client_id, extra)
     end

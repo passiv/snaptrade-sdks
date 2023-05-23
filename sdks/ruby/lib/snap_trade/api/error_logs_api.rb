@@ -21,7 +21,7 @@ module SnapTrade
     # Retrieve error logs on behalf of your SnapTrade users
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_user_errors(user_id:, user_secret:, extra: {}
 )
 
@@ -32,7 +32,7 @@ module SnapTrade
     # Retrieve error logs on behalf of your SnapTrade users
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_user_errors_with_http_info(user_id:, user_secret:, extra: {}
 )
 
