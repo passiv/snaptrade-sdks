@@ -25,6 +25,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
+    # @param body [OptionsGetOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
@@ -44,6 +45,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
+    # @param body [OptionsGetOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
@@ -134,11 +136,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#get_option_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -240,11 +242,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#get_options_chain\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -345,11 +347,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#get_options_strategy_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -442,11 +444,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#list_option_holdings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -458,6 +460,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_option_strategy(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
       _body = {}
@@ -478,6 +481,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_option_strategy_with_http_info(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
       _body = {}
@@ -574,11 +578,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#place_option_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
   end
 

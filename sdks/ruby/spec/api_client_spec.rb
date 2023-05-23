@@ -15,6 +15,7 @@ describe SnapTrade::ApiClient do
     context 'URL stuff' do
       context 'host' do
         it 'removes http from host' do
+
           configuration = SnapTrade::Configuration.new
           configuration.host = 'http://example.com'
           expect(configuration.host).to eq('example.com')
@@ -28,8 +29,8 @@ describe SnapTrade::ApiClient do
 
         it 'removes trailing path from host' do
           configuration = SnapTrade::Configuration.new
-          configuration.host = 'hobo.com/v4'
-          expect(configuration.host).to eq('hobo.com')
+          configuration.host = 'hello.com/v4'
+          expect(configuration.host).to eq('hello.com')
         end
       end
 

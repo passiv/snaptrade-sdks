@@ -89,11 +89,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_currency_exchange_rate_pair\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -160,11 +160,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_partner_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -231,11 +231,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_security_types\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -302,16 +302,17 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_stock_exchanges\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
     # Search for symbols
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols(substring: SENTINEL, extra: {})
       _body = {}
@@ -324,6 +325,7 @@ module SnapTrade
 
     # Search for symbols
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_with_http_info(substring: SENTINEL, extra: {})
       _body = {}
@@ -388,11 +390,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_symbols\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -474,11 +476,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#get_symbols_by_ticker\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -552,11 +554,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#list_all_brokerage_authorization_type\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -623,11 +625,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#list_all_brokerages\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -694,11 +696,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#list_all_currencies\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -765,11 +767,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#list_all_currencies_rates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -778,6 +780,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def symbol_search_user_account(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
       _body = {}
@@ -793,6 +796,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def symbol_search_user_account_with_http_info(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
       _body = {}
@@ -877,11 +881,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ReferenceDataApi#symbol_search_user_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
   end
 

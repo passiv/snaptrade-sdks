@@ -90,11 +90,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AuthenticationApi#delete_snap_trade_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -179,11 +179,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AuthenticationApi#get_user_jwt\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -250,11 +250,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AuthenticationApi#list_snap_trade_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -266,6 +266,7 @@ module SnapTrade
     # @param custom_redirect [String] 
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
+    # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
       _body = {}
@@ -288,6 +289,7 @@ module SnapTrade
     # @param custom_redirect [String] 
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
+    # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
       _body = {}
@@ -370,17 +372,18 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AuthenticationApi#login_snap_trade_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
     # Register user with SnapTrade in order to create secure brokerage authorizations
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
+    # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
       _body = {}
@@ -395,6 +398,7 @@ module SnapTrade
     # Register user with SnapTrade in order to create secure brokerage authorizations
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
+    # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user_with_http_info(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
       _body = {}
@@ -464,11 +468,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AuthenticationApi#register_snap_trade_user\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
   end
 

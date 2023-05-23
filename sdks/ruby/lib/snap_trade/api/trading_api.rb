@@ -23,6 +23,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param brokerage_order_id [String] 
+    # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
@@ -38,6 +39,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param brokerage_order_id [String] 
+    # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
@@ -126,11 +128,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#cancel_user_account_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -221,11 +223,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#get_calculated_trade_impact_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -308,11 +310,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#get_calculated_trades_impact\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -327,6 +329,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
+    # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
@@ -355,6 +358,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
+    # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
@@ -444,11 +448,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#get_order_impact\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -557,11 +561,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#get_user_account_quotes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -577,6 +581,7 @@ module SnapTrade
     # @param units [Integer] 
     # @param price [Float] 
     # @param sequence [Integer] 
+    # @param body [Trade] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_calculated_trade_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {})
       _body = {}
@@ -606,6 +611,7 @@ module SnapTrade
     # @param units [Integer] 
     # @param price [Float] 
     # @param sequence [Integer] 
+    # @param body [Trade] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_calculated_trade_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {})
       _body = {}
@@ -695,11 +701,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#modify_calculated_trade_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -782,11 +788,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_calculated_trades\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -801,6 +807,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
+    # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
@@ -829,6 +836,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
+    # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
@@ -918,11 +926,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_force_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -931,6 +939,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
     # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
+    # @param body [TradingPlaceOCOOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_oco_order(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
       _body = {}
@@ -947,6 +956,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
     # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
+    # @param body [TradingPlaceOCOOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_oco_order_with_http_info(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
       _body = {}
@@ -1030,11 +1040,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_oco_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1127,11 +1137,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
   end
 

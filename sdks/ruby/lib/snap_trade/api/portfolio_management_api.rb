@@ -28,6 +28,7 @@ module SnapTrade
     # @param exchange [Exchange] 
     # @param type [SecurityType] 
     # @param currencies [Array<Currency>] 
+    # @param body [UniversalSymbol] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def add_portfolio_excluded_asset(portfolio_group_id:, id: SENTINEL, symbol: SENTINEL, raw_symbol: SENTINEL, description: SENTINEL, currency: SENTINEL, exchange: SENTINEL, type: SENTINEL, currencies: SENTINEL, extra: {})
       _body = {}
@@ -55,6 +56,7 @@ module SnapTrade
     # @param exchange [Exchange] 
     # @param type [SecurityType] 
     # @param currencies [Array<Currency>] 
+    # @param body [UniversalSymbol] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def add_portfolio_excluded_asset_with_http_info(portfolio_group_id:, id: SENTINEL, symbol: SENTINEL, raw_symbol: SENTINEL, description: SENTINEL, currency: SENTINEL, exchange: SENTINEL, type: SENTINEL, currencies: SENTINEL, extra: {})
       _body = {}
@@ -132,11 +134,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#add_portfolio_excluded_asset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -145,6 +147,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param id [String] 
     # @param name [String] 
+    # @param body [Hash<String, Object>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create(user_id:, user_secret:, id: SENTINEL, name: SENTINEL, extra: {})
       _body = {}
@@ -161,6 +164,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param id [String] 
     # @param name [String] 
+    # @param body [Hash<String, Object>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def create_with_http_info(user_id:, user_secret:, id: SENTINEL, name: SENTINEL, extra: {})
       _body = {}
@@ -244,11 +248,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -315,11 +319,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#create_asset_class\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -386,11 +390,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#create_model_portfolio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -463,11 +467,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#delete_asset_class\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -548,11 +552,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#delete_excluded_asset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -625,11 +629,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#delete_model_portfolio_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -704,11 +708,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#delete_portfoli\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -791,11 +795,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#delete_portfolio_target_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -870,11 +874,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#detail_asset_class\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -965,11 +969,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_calculated_trade_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1044,11 +1048,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_model_details_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1123,11 +1127,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_balances\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1202,11 +1206,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_details_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1281,11 +1285,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1360,11 +1364,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1447,11 +1451,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_target_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1526,11 +1530,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portfolio_targets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1605,11 +1609,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#get_portoflio_excluded_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1684,11 +1688,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#import_model_portfolio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1773,11 +1777,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1844,11 +1848,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#list_asset_classes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1923,11 +1927,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#list_calculated_trades\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -1994,11 +1998,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#list_model_portfolio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2073,11 +2077,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#list_portfolio_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2086,6 +2090,7 @@ module SnapTrade
     # @param model_portfolio [ModelPortfolio] 
     # @param model_portfolio_security [Array<ModelPortfolioSecurity>] 
     # @param model_portfolio_asset_class [Array<ModelPortfolioAssetClass>] 
+    # @param body [ModelPortfolioDetails] Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_model_portfolio_by_id(model_portfolio_id:, model_portfolio: SENTINEL, model_portfolio_security: SENTINEL, model_portfolio_asset_class: SENTINEL, extra: {})
       _body = {}
@@ -2103,6 +2108,7 @@ module SnapTrade
     # @param model_portfolio [ModelPortfolio] 
     # @param model_portfolio_security [Array<ModelPortfolioSecurity>] 
     # @param model_portfolio_asset_class [Array<ModelPortfolioAssetClass>] 
+    # @param body [ModelPortfolioDetails] Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def modify_model_portfolio_by_id_with_http_info(model_portfolio_id:, model_portfolio: SENTINEL, model_portfolio_security: SENTINEL, model_portfolio_asset_class: SENTINEL, extra: {})
       _body = {}
@@ -2177,11 +2183,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#modify_model_portfolio_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2189,6 +2195,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to update.
     # @param id [String] 
     # @param name [String] 
+    # @param body [Hash<String, Object>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def save_portfolio(portfolio_group_id:, id: SENTINEL, name: SENTINEL, extra: {})
       _body = {}
@@ -2204,6 +2211,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to update.
     # @param id [String] 
     # @param name [String] 
+    # @param body [Hash<String, Object>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def save_portfolio_with_http_info(portfolio_group_id:, id: SENTINEL, name: SENTINEL, extra: {})
       _body = {}
@@ -2279,17 +2287,18 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#save_portfolio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
     # Search for symbols limited to brokerages under the specified portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to search under
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def search_portfolio_symbols(portfolio_group_id:, substring: SENTINEL, extra: {})
       _body = {}
@@ -2303,6 +2312,7 @@ module SnapTrade
     # Search for symbols limited to brokerages under the specified portfolio group
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to search under
     # @param substring [String] 
+    # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def search_portfolio_symbols_with_http_info(portfolio_group_id:, substring: SENTINEL, extra: {})
       _body = {}
@@ -2373,16 +2383,17 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#search_portfolio_symbols\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
+    # @param body [Array<TargetAsset>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def set_portfolio_targets(portfolio_group_id:, body: SENTINEL, extra: {})
       extra[:target_asset] = body if body != SENTINEL
@@ -2393,6 +2404,7 @@ module SnapTrade
 
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
+    # @param body [Array<TargetAsset>] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def set_portfolio_targets_with_http_info(portfolio_group_id:, body: SENTINEL, extra: {})
       extra[:target_asset] = body if body != SENTINEL
@@ -2461,11 +2473,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#set_portfolio_targets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2473,6 +2485,7 @@ module SnapTrade
     # @param model_asset_class_id [String] The ID of the model asset class to update.
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
+    # @param body [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_asset_class(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
       _body = {}
@@ -2488,6 +2501,7 @@ module SnapTrade
     # @param model_asset_class_id [String] The ID of the model asset class to update.
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
+    # @param body [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_asset_class_with_http_info(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
       _body = {}
@@ -2561,11 +2575,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#update_asset_class\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2640,11 +2654,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#update_portfolio_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
@@ -2656,6 +2670,7 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
+    # @param body [TargetAsset] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {})
       _body = {}
@@ -2678,6 +2693,7 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
+    # @param body [TargetAsset] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {})
       _body = {}
@@ -2762,11 +2778,11 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PortfolioManagementApi#update_portfolio_target_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
   end
 
