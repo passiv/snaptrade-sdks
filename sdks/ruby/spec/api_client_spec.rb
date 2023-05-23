@@ -15,35 +15,41 @@ describe SnapTrade::ApiClient do
     context 'URL stuff' do
       context 'host' do
         it 'removes http from host' do
-          SnapTrade.configure { |c| c.host = 'http://example.com' }
-          expect(SnapTrade::Configuration.default.host).to eq('example.com')
+          configuration = SnapTrade::Configuration.new
+          configuration.host = 'http://example.com'
+          expect(configuration.host).to eq('example.com')
         end
 
         it 'removes https from host' do
-          SnapTrade.configure { |c| c.host = 'https://wookiee.com' }
-          expect(SnapTrade::ApiClient.default.config.host).to eq('wookiee.com')
+          configuration = SnapTrade::Configuration.new
+          configuration.host = 'https://wookiee.com'
+          expect(configuration.host).to eq('wookiee.com')
         end
 
         it 'removes trailing path from host' do
-          SnapTrade.configure { |c| c.host = 'hobo.com/v4' }
-          expect(SnapTrade::Configuration.default.host).to eq('hobo.com')
+          configuration = SnapTrade::Configuration.new
+          configuration.host = 'hobo.com/v4'
+          expect(configuration.host).to eq('hobo.com')
         end
       end
 
       context 'base_path' do
         it "prepends a slash to base_path" do
-          SnapTrade.configure { |c| c.base_path = 'v4/dog' }
-          expect(SnapTrade::Configuration.default.base_path).to eq('/v4/dog')
+          configuration = SnapTrade::Configuration.new
+          configuration.base_path = 'v4/dog'
+          expect(configuration.base_path).to eq('/v4/dog')
         end
 
         it "doesn't prepend a slash if one is already there" do
-          SnapTrade.configure { |c| c.base_path = '/v4/dog' }
-          expect(SnapTrade::Configuration.default.base_path).to eq('/v4/dog')
+          configuration = SnapTrade::Configuration.new
+          configuration.base_path = '/v4/dog'
+          expect(configuration.base_path).to eq('/v4/dog')
         end
 
         it "ends up as a blank string if nil" do
-          SnapTrade.configure { |c| c.base_path = nil }
-          expect(SnapTrade::Configuration.default.base_path).to eq('')
+          configuration = SnapTrade::Configuration.new
+          configuration.base_path = nil
+          expect(configuration.base_path).to eq('')
         end
       end
     end
