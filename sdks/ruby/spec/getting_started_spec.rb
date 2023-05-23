@@ -32,7 +32,13 @@ describe 'GettingStarted' do
 
       data = snaptrade.portfolio_management.set_portfolio_targets(
         portfolio_group_id: SecureRandom.uuid,
-        body: []
+        body: [{
+          "id" => SecureRandom.uuid,
+          "symbol" => {
+            "id" => SecureRandom.uuid,
+            "symbol" => "VOO"
+          }
+        }]
       )
       puts data
       expect(data).not_to be_nil
