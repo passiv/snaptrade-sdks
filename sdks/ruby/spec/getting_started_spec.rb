@@ -22,6 +22,43 @@ describe 'GettingStarted' do
     # run after each test
   end
 
+  describe 'non object body parameter' do
+    it 'should work' do
+      configuration = SnapTrade::Configuration.new
+      configuration.client_id = ENV["SNAPTRADE_CLIENT_ID"]
+      configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
+      configuration.host = "http://127.0.0.1:4010"
+      snaptrade = SnapTrade::Client.new(configuration)
+
+      data = snaptrade.portfolio_management.set_portfolio_targets(
+        portfolio_group_id: SecureRandom.uuid,
+        body: []
+      )
+      puts data
+      expect(data).not_to be_nil
+    end
+  end
+
+  describe 'optional non body parameters should be passed' do
+    it 'should pass' do
+      configuration = SnapTrade::Configuration.new
+      configuration.client_id = ENV["SNAPTRADE_CLIENT_ID"]
+      configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
+      configuration.host = "http://127.0.0.1:4010"
+      snaptrade = SnapTrade::Client.new(configuration)
+
+      data, status_code, headers, response = snaptrade.account_information.get_user_account_orders_with_http_info(
+        user_id: "a",
+        user_secret: "b",
+        account_id: SecureRandom.uuid,
+        state: "all"
+      )
+      puts data
+      expect(response.env.url.query).to include("state=all")
+      expect(data).not_to be_nil
+    end
+  end
+
   # integration test for getting started flow
   describe 'getting started flow static pattern' do
     it 'should work' do
