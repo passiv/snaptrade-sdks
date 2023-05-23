@@ -21,8 +21,7 @@ module SnapTrade
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def delete_snap_trade_user(user_id:, extra: {}
-)
+    def delete_snap_trade_user(user_id:, extra: {})
 
       data, _status_code, _headers = delete_snap_trade_user_with_http_info_impl(user_id, extra)
       data
@@ -31,8 +30,7 @@ module SnapTrade
     # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def delete_snap_trade_user_with_http_info(user_id:, extra: {}
-)
+    def delete_snap_trade_user_with_http_info(user_id:, extra: {})
 
       delete_snap_trade_user_with_http_info_impl(user_id, extra)
     end
@@ -104,8 +102,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_jwt(user_id:, user_secret:, extra: {}
-)
+    def get_user_jwt(user_id:, user_secret:, extra: {})
 
       data, _status_code, _headers = get_user_jwt_with_http_info_impl(user_id, user_secret, extra)
       data
@@ -115,8 +112,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_jwt_with_http_info(user_id:, user_secret:, extra: {}
-)
+    def get_user_jwt_with_http_info(user_id:, user_secret:, extra: {})
 
       get_user_jwt_with_http_info_impl(user_id, user_secret, extra)
     end
@@ -193,8 +189,7 @@ module SnapTrade
 
     # Get a list of all SnapTrade users you've registered on our platform
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_snap_trade_users(extra: {}
-)
+    def list_snap_trade_users(extra: {})
 
       data, _status_code, _headers = list_snap_trade_users_with_http_info_impl(extra)
       data
@@ -202,8 +197,7 @@ module SnapTrade
 
     # Get a list of all SnapTrade users you've registered on our platform
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_snap_trade_users_with_http_info(extra: {}
-)
+    def list_snap_trade_users_with_http_info(extra: {})
 
       list_snap_trade_users_with_http_info_impl(extra)
     end
@@ -273,8 +267,7 @@ module SnapTrade
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {}
-)
+    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -296,8 +289,7 @@ module SnapTrade
     # @param reconnect [String] 
     # @param connection_type [ConnectionType] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {}
-)
+    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -390,8 +382,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {}
-)
+    def register_snap_trade_user(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL
@@ -405,8 +396,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user_with_http_info(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {}
-)
+    def register_snap_trade_user_with_http_info(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL

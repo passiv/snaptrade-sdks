@@ -21,8 +21,7 @@ module SnapTrade
     # Get API Status
     # Check whether the API is operational and verify timestamps.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def check(extra: {}
-)
+    def check(extra: {})
 
       data, _status_code, _headers = check_with_http_info_impl(extra)
       data
@@ -31,8 +30,7 @@ module SnapTrade
     # Get API Status
     # Check whether the API is operational and verify timestamps.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def check_with_http_info(extra: {}
-)
+    def check_with_http_info(extra: {})
 
       check_with_http_info_impl(extra)
     end

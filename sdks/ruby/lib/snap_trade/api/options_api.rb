@@ -26,8 +26,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
@@ -46,8 +45,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
@@ -150,8 +148,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {}
-)
+    def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {})
 
       data, _status_code, _headers = get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
       data
@@ -163,8 +160,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {}
-)
+    def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
 
       get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
     end
@@ -258,8 +254,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
-)
+    def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
 
       data, _status_code, _headers = get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
       data
@@ -271,8 +266,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
-)
+    def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
 
       get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
     end
@@ -364,8 +358,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_option_holdings(user_id:, user_secret:, account_id:, extra: {}
-)
+    def list_option_holdings(user_id:, user_secret:, account_id:, extra: {})
 
       data, _status_code, _headers = list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
@@ -376,8 +369,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_option_holdings_with_http_info(user_id:, user_secret:, account_id:, extra: {}
-)
+    def list_option_holdings_with_http_info(user_id:, user_secret:, account_id:, extra: {})
 
       list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
@@ -467,8 +459,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
-)
+    def place_option_strategy(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
@@ -488,8 +479,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy_with_http_info(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
-)
+    def place_option_strategy_with_http_info(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL

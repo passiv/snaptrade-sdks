@@ -27,8 +27,7 @@ module SnapTrade
     # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {}
-)
+    def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
       extra[:end_date] = end_date if end_date != SENTINEL
       extra[:accounts] = accounts if accounts != SENTINEL
@@ -47,8 +46,7 @@ module SnapTrade
     # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {}
-)
+    def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
       extra[:end_date] = end_date if end_date != SENTINEL
       extra[:accounts] = accounts if accounts != SENTINEL
@@ -151,8 +149,7 @@ module SnapTrade
     # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_reporting_custom_range(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {}
-)
+    def get_reporting_custom_range(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {})
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:detailed] = detailed if detailed != SENTINEL
       extra[:frequency] = frequency if frequency != SENTINEL
@@ -171,8 +168,7 @@ module SnapTrade
     # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_reporting_custom_range_with_http_info(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {}
-)
+    def get_reporting_custom_range_with_http_info(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {})
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:detailed] = detailed if detailed != SENTINEL
       extra[:frequency] = frequency if frequency != SENTINEL

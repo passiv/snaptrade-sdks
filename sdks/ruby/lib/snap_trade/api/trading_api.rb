@@ -24,8 +24,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param brokerage_order_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {}
-)
+    def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       trading_cancel_user_account_order_request = _body
@@ -40,8 +39,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param brokerage_order_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {}
-)
+    def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       trading_cancel_user_account_order_request = _body
@@ -141,8 +139,7 @@ module SnapTrade
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param trade_id [String] The ID of trade object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_calculated_trade_impact_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
-)
+    def get_calculated_trade_impact_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {})
 
       data, _status_code, _headers = get_calculated_trade_impact_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
       data
@@ -153,8 +150,7 @@ module SnapTrade
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param trade_id [String] The ID of trade object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
-)
+    def get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {})
 
       get_calculated_trade_impact_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
     end
@@ -237,8 +233,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_calculated_trades_impact(portfolio_group_id:, calculated_trade_id:, extra: {}
-)
+    def get_calculated_trades_impact(portfolio_group_id:, calculated_trade_id:, extra: {})
 
       data, _status_code, _headers = get_calculated_trades_impact_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
       data
@@ -248,8 +243,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_calculated_trades_impact_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {}
-)
+    def get_calculated_trades_impact_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {})
 
       get_calculated_trades_impact_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
     end
@@ -334,8 +328,7 @@ module SnapTrade
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
-)
+    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -363,8 +356,7 @@ module SnapTrade
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
-)
+    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -467,8 +459,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get quotes.
     # @param use_ticker [Boolean] Should be set to True if providing tickers.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_quotes(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {}
-)
+    def get_user_account_quotes(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
 
       data, _status_code, _headers = get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
@@ -482,8 +473,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get quotes.
     # @param use_ticker [Boolean] Should be set to True if providing tickers.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_quotes_with_http_info(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {}
-)
+    def get_user_account_quotes_with_http_info(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
 
       get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
@@ -588,8 +578,7 @@ module SnapTrade
     # @param price [Float] 
     # @param sequence [Integer] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def modify_calculated_trade_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {}
-)
+    def modify_calculated_trade_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {})
       _body = {}
       _body[:id] = id if id != SENTINEL
       _body[:account] = account if account != SENTINEL
@@ -618,8 +607,7 @@ module SnapTrade
     # @param price [Float] 
     # @param sequence [Integer] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def modify_calculated_trade_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {}
-)
+    def modify_calculated_trade_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {})
       _body = {}
       _body[:id] = id if id != SENTINEL
       _body[:account] = account if account != SENTINEL
@@ -719,8 +707,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_calculated_trades(portfolio_group_id:, calculated_trade_id:, extra: {}
-)
+    def place_calculated_trades(portfolio_group_id:, calculated_trade_id:, extra: {})
 
       data, _status_code, _headers = place_calculated_trades_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
       data
@@ -730,8 +717,7 @@ module SnapTrade
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_calculated_trades_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {}
-)
+    def place_calculated_trades_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {})
 
       place_calculated_trades_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
     end
@@ -816,8 +802,7 @@ module SnapTrade
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
-)
+    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -845,8 +830,7 @@ module SnapTrade
     # @param units [Float] Trade Units
     # @param universal_symbol_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
-)
+    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -948,8 +932,7 @@ module SnapTrade
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
     # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_oco_order(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {}
-)
+    def place_oco_order(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
       _body = {}
       _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
       _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
@@ -965,8 +948,7 @@ module SnapTrade
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
     # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_oco_order_with_http_info(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {}
-)
+    def place_oco_order_with_http_info(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
       _body = {}
       _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
       _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
@@ -1061,8 +1043,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_order(trade_id:, user_id:, user_secret:, extra: {}
-)
+    def place_order(trade_id:, user_id:, user_secret:, extra: {})
 
       data, _status_code, _headers = place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
       data
@@ -1073,8 +1054,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_order_with_http_info(trade_id:, user_id:, user_secret:, extra: {}
-)
+    def place_order_with_http_info(trade_id:, user_id:, user_secret:, extra: {})
 
       place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
     end

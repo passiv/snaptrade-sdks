@@ -23,8 +23,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_all_user_holdings(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {}
-)
+    def get_all_user_holdings(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
 
       data, _status_code, _headers = get_all_user_holdings_with_http_info_impl(user_id, user_secret, extra)
@@ -36,8 +35,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_all_user_holdings_with_http_info(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {}
-)
+    def get_all_user_holdings_with_http_info(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
 
       get_all_user_holdings_with_http_info_impl(user_id, user_secret, extra)
@@ -121,8 +119,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_balance(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_balance(user_id:, user_secret:, account_id:, extra: {})
 
       data, _status_code, _headers = get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
@@ -133,8 +130,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_balance_with_http_info(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_balance_with_http_info(user_id:, user_secret:, account_id:, extra: {})
 
       get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
@@ -220,8 +216,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_details(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_details(user_id:, user_secret:, account_id:, extra: {})
 
       data, _status_code, _headers = get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
@@ -232,8 +227,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_details_with_http_info(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_details_with_http_info(user_id:, user_secret:, account_id:, extra: {})
 
       get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
@@ -320,8 +314,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {}
-)
+    def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
 
       data, _status_code, _headers = get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -334,8 +327,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {}
-)
+    def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
 
       get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -429,8 +421,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_positions(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_positions(user_id:, user_secret:, account_id:, extra: {})
 
       data, _status_code, _headers = get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
@@ -441,8 +432,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_positions_with_http_info(user_id:, user_secret:, account_id:, extra: {}
-)
+    def get_user_account_positions_with_http_info(user_id:, user_secret:, account_id:, extra: {})
 
       get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
@@ -528,8 +518,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_holdings(account_id:, user_id:, user_secret:, extra: {}
-)
+    def get_user_holdings(account_id:, user_id:, user_secret:, extra: {})
 
       data, _status_code, _headers = get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
       data
@@ -540,8 +529,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_holdings_with_http_info(account_id:, user_id:, user_secret:, extra: {}
-)
+    def get_user_holdings_with_http_info(account_id:, user_id:, user_secret:, extra: {})
 
       get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
     end
@@ -626,8 +614,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_user_accounts(user_id:, user_secret:, extra: {}
-)
+    def list_user_accounts(user_id:, user_secret:, extra: {})
 
       data, _status_code, _headers = list_user_accounts_with_http_info_impl(user_id, user_secret, extra)
       data
@@ -637,8 +624,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_user_accounts_with_http_info(user_id:, user_secret:, extra: {}
-)
+    def list_user_accounts_with_http_info(user_id:, user_secret:, extra: {})
 
       list_user_accounts_with_http_info_impl(user_id, user_secret, extra)
     end
@@ -718,8 +704,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_user_account(user_id:, user_secret:, account_id:, extra: {}
-)
+    def update_user_account(user_id:, user_secret:, account_id:, extra: {})
 
       data, _status_code, _headers = update_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
@@ -730,8 +715,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_user_account_with_http_info(user_id:, user_secret:, account_id:, extra: {}
-)
+    def update_user_account_with_http_info(user_id:, user_secret:, account_id:, extra: {})
 
       update_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
     end

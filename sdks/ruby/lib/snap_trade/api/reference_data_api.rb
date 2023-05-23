@@ -21,8 +21,7 @@ module SnapTrade
     # Return the exchange rate of a currency pair
     # @param currency_pair [String] A currency pair based on currency code for example, {CAD-USD}
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_currency_exchange_rate_pair(currency_pair:, extra: {}
-)
+    def get_currency_exchange_rate_pair(currency_pair:, extra: {})
 
       data, _status_code, _headers = get_currency_exchange_rate_pair_with_http_info_impl(currency_pair, extra)
       data
@@ -31,8 +30,7 @@ module SnapTrade
     # Return the exchange rate of a currency pair
     # @param currency_pair [String] A currency pair based on currency code for example, {CAD-USD}
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_currency_exchange_rate_pair_with_http_info(currency_pair:, extra: {}
-)
+    def get_currency_exchange_rate_pair_with_http_info(currency_pair:, extra: {})
 
       get_currency_exchange_rate_pair_with_http_info_impl(currency_pair, extra)
     end
@@ -101,8 +99,7 @@ module SnapTrade
 
     # Get metadata related to Snaptrade partner
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_partner_info(extra: {}
-)
+    def get_partner_info(extra: {})
 
       data, _status_code, _headers = get_partner_info_with_http_info_impl(extra)
       data
@@ -110,8 +107,7 @@ module SnapTrade
 
     # Get metadata related to Snaptrade partner
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_partner_info_with_http_info(extra: {}
-)
+    def get_partner_info_with_http_info(extra: {})
 
       get_partner_info_with_http_info_impl(extra)
     end
@@ -174,8 +170,7 @@ module SnapTrade
 
     # List of all security types.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_security_types(extra: {}
-)
+    def get_security_types(extra: {})
 
       data, _status_code, _headers = get_security_types_with_http_info_impl(extra)
       data
@@ -183,8 +178,7 @@ module SnapTrade
 
     # List of all security types.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_security_types_with_http_info(extra: {}
-)
+    def get_security_types_with_http_info(extra: {})
 
       get_security_types_with_http_info_impl(extra)
     end
@@ -247,8 +241,7 @@ module SnapTrade
 
     # Return list of stock exchanges on Passiv and their suffixes
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_stock_exchanges(extra: {}
-)
+    def get_stock_exchanges(extra: {})
 
       data, _status_code, _headers = get_stock_exchanges_with_http_info_impl(extra)
       data
@@ -256,8 +249,7 @@ module SnapTrade
 
     # Return list of stock exchanges on Passiv and their suffixes
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_stock_exchanges_with_http_info(extra: {}
-)
+    def get_stock_exchanges_with_http_info(extra: {})
 
       get_stock_exchanges_with_http_info_impl(extra)
     end
@@ -321,8 +313,7 @@ module SnapTrade
     # Search for symbols
     # @param substring [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols(substring: SENTINEL, extra: {}
-)
+    def get_symbols(substring: SENTINEL, extra: {})
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
@@ -334,8 +325,7 @@ module SnapTrade
     # Search for symbols
     # @param substring [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols_with_http_info(substring: SENTINEL, extra: {}
-)
+    def get_symbols_with_http_info(substring: SENTINEL, extra: {})
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
@@ -410,8 +400,7 @@ module SnapTrade
     # @param ticker [String] The ticker of the UniversalSymbol to get.
     # @param symbol_id [String] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols_by_ticker(ticker:, symbol_id: SENTINEL, extra: {}
-)
+    def get_symbols_by_ticker(ticker:, symbol_id: SENTINEL, extra: {})
       extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
 
       data, _status_code, _headers = get_symbols_by_ticker_with_http_info_impl(ticker, extra)
@@ -422,8 +411,7 @@ module SnapTrade
     # @param ticker [String] The ticker of the UniversalSymbol to get.
     # @param symbol_id [String] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols_by_ticker_with_http_info(ticker:, symbol_id: SENTINEL, extra: {}
-)
+    def get_symbols_by_ticker_with_http_info(ticker:, symbol_id: SENTINEL, extra: {})
       extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
 
       get_symbols_by_ticker_with_http_info_impl(ticker, extra)
@@ -497,8 +485,7 @@ module SnapTrade
     # List of all brokerage authorization types
     # @param brokerage [String] Comma separated value of brokerage slugs
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerage_authorization_type(brokerage: SENTINEL, extra: {}
-)
+    def list_all_brokerage_authorization_type(brokerage: SENTINEL, extra: {})
       extra[:brokerage] = brokerage if brokerage != SENTINEL
 
       data, _status_code, _headers = list_all_brokerage_authorization_type_with_http_info_impl(extra)
@@ -508,8 +495,7 @@ module SnapTrade
     # List of all brokerage authorization types
     # @param brokerage [String] Comma separated value of brokerage slugs
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerage_authorization_type_with_http_info(brokerage: SENTINEL, extra: {}
-)
+    def list_all_brokerage_authorization_type_with_http_info(brokerage: SENTINEL, extra: {})
       extra[:brokerage] = brokerage if brokerage != SENTINEL
 
       list_all_brokerage_authorization_type_with_http_info_impl(extra)
@@ -576,8 +562,7 @@ module SnapTrade
 
     # List of all brokerages.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerages(extra: {}
-)
+    def list_all_brokerages(extra: {})
 
       data, _status_code, _headers = list_all_brokerages_with_http_info_impl(extra)
       data
@@ -585,8 +570,7 @@ module SnapTrade
 
     # List of all brokerages.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerages_with_http_info(extra: {}
-)
+    def list_all_brokerages_with_http_info(extra: {})
 
       list_all_brokerages_with_http_info_impl(extra)
     end
@@ -649,8 +633,7 @@ module SnapTrade
 
     # List of all supported currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_currencies(extra: {}
-)
+    def list_all_currencies(extra: {})
 
       data, _status_code, _headers = list_all_currencies_with_http_info_impl(extra)
       data
@@ -658,8 +641,7 @@ module SnapTrade
 
     # List of all supported currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_currencies_with_http_info(extra: {}
-)
+    def list_all_currencies_with_http_info(extra: {})
 
       list_all_currencies_with_http_info_impl(extra)
     end
@@ -722,8 +704,7 @@ module SnapTrade
 
     # Return the exchange rates of all supported currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_currencies_rates(extra: {}
-)
+    def list_all_currencies_rates(extra: {})
 
       data, _status_code, _headers = list_all_currencies_rates_with_http_info_impl(extra)
       data
@@ -731,8 +712,7 @@ module SnapTrade
 
     # Return the exchange rates of all supported currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_currencies_rates_with_http_info(extra: {}
-)
+    def list_all_currencies_rates_with_http_info(extra: {})
 
       list_all_currencies_rates_with_http_info_impl(extra)
     end
@@ -799,8 +779,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param substring [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def symbol_search_user_account(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {}
-)
+    def symbol_search_user_account(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
@@ -815,8 +794,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param substring [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def symbol_search_user_account_with_http_info(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {}
-)
+    def symbol_search_user_account_with_http_info(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
