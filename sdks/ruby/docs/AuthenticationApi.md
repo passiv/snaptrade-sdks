@@ -19,9 +19,8 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 
@@ -75,9 +74,8 @@ Obtains an encrypted JWT tokens that should be decrypted on a user's local devic
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -136,9 +134,8 @@ Get a list of all SnapTrade users you've registered on our platform
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -184,9 +181,8 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -266,9 +262,8 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "snaptrade-user-123"
 rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="

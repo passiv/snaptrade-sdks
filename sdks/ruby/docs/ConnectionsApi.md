@@ -18,9 +18,8 @@ Get detail of a specific brokerage authorizations for the user
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 user_id = "John.doe@snaptrade.com"
@@ -84,9 +83,8 @@ List all brokerage authorizations for the user
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -145,9 +143,8 @@ Remove a brokerage authorization.
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 authorization_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 user_id = "John.doe@snaptrade.com"
@@ -210,9 +207,8 @@ List all session events for the partner
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 partner_client_id = "PASSIVTEST"
 user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"

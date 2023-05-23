@@ -25,9 +25,8 @@ Return the exchange rate of a currency pair
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 currency_pair = "currencyPair_example"
 
@@ -81,9 +80,8 @@ Get metadata related to Snaptrade partner
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -129,9 +127,8 @@ List of all security types.
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -177,9 +174,8 @@ Return list of stock exchanges on Passiv and their suffixes
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -225,9 +221,8 @@ Search for symbols
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 substring = "apple"
 
@@ -281,9 +276,8 @@ Get details of a symbol by the ticker
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 ticker = "ticker_example"
 symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
@@ -342,9 +336,8 @@ List of all brokerage authorization types
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 brokerage = "QUESTRADE,ALPACA"
 
@@ -398,9 +391,8 @@ List of all brokerages.
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -446,9 +438,8 @@ List of all supported currencies
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -494,9 +485,8 @@ Return the exchange rates of all supported currencies
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
@@ -542,9 +532,8 @@ Search for symbols that are supported by a brokerage account using a substring
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"

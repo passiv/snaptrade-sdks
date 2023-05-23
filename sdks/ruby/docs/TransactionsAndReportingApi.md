@@ -18,9 +18,8 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -101,9 +100,8 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 start_date = "2022-01-24"
 end_date = "2022-01-24"

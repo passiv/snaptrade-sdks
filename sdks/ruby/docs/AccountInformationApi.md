@@ -22,9 +22,8 @@ List all accounts for the user, plus balances and positions for each account.
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -88,9 +87,8 @@ Get all cash balances of an investment account
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -154,9 +152,8 @@ Return details of a specific investment account
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -220,9 +217,8 @@ Get all history of orders placed in account
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -291,9 +287,8 @@ Get all positions of an investment account
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -357,9 +352,8 @@ List balances, positions and orders for the specified account.
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 account_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 user_id = "John.doe@snaptrade.com"
@@ -423,9 +417,8 @@ List all investment accounts for the user
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
@@ -484,9 +477,8 @@ Update details of an investment account
 ```ruby
 require 'snap_trade'
 
-SnapTrade.client_id = 'YOUR API KEY'
-SnapTrade.signature = 'YOUR API KEY'
-SnapTrade.timestamp = 'YOUR API KEY'
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"

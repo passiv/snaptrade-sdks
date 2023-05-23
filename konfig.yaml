@@ -33,6 +33,7 @@ generators:
     moduleName: SnapTrade
     version: 1.0.0
     outputDirectory: sdks/ruby
+    apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     git:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/ruby

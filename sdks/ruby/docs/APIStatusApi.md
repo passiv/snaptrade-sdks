@@ -17,6 +17,8 @@ Check whether the API is operational and verify timestamps.
 ```ruby
 require 'snap_trade'
 
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
