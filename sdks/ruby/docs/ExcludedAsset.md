@@ -9,7 +9,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::ExcludedAsset.new(
   symbol: null

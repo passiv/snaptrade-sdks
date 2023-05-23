@@ -20,7 +20,7 @@ List all accounts for the user, plus balances and positions for each account.
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -85,7 +85,7 @@ Get all cash balances of an investment account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -150,7 +150,7 @@ Return details of a specific investment account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -215,7 +215,7 @@ Get all history of orders placed in account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -285,7 +285,7 @@ Get all positions of an investment account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -350,7 +350,7 @@ List balances, positions and orders for the specified account.
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -415,7 +415,7 @@ List all investment accounts for the user
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -475,7 +475,7 @@ Update details of an investment account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"

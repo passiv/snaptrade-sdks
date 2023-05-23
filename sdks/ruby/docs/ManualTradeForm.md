@@ -16,7 +16,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::ManualTradeForm.new(
   account_id: 2bcd7cc3-e922-4976-bce1-9858296801c3,

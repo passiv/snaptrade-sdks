@@ -23,7 +23,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::UniversalActivity.new(
   id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6,

@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::ModelPortfolioAssetClass.new(
   model_asset_class: null,

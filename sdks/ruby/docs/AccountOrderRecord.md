@@ -26,7 +26,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::AccountOrderRecord.new(
   brokerage_order_id: null,

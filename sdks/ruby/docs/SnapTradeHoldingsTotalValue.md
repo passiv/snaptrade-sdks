@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::SnapTradeHoldingsTotalValue.new(
   value: 32600.71,

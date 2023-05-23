@@ -23,7 +23,7 @@ Return the exchange rate of a currency pair
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -78,7 +78,7 @@ Get metadata related to Snaptrade partner
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -125,7 +125,7 @@ List of all security types.
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -172,7 +172,7 @@ Return list of stock exchanges on Passiv and their suffixes
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -219,7 +219,7 @@ Search for symbols
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -274,7 +274,7 @@ Get details of a symbol by the ticker
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -334,7 +334,7 @@ List of all brokerage authorization types
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -389,7 +389,7 @@ List of all brokerages.
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -436,7 +436,7 @@ List of all supported currencies
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -483,7 +483,7 @@ Return the exchange rates of all supported currencies
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -530,7 +530,7 @@ Search for symbols that are supported by a brokerage account using a substring
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"

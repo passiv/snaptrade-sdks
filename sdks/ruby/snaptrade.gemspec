@@ -11,10 +11,10 @@ Contact: api@snaptrade.com
 =end
 
 $:.push File.expand_path("../lib", __FILE__)
-require "snap_trade/version"
+require "snaptrade/version"
 
 Gem::Specification.new do |s|
-  s.name        = "snap_trade"
+  s.name        = "snaptrade"
   s.version     = SnapTrade::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["SnapTrade"]

@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::EncryptedResponseEncryptedMessageData.new(
   encrypted_message: 9Xy05vqZOfp0OpW5fLAaDw&#x3D;&#x3D;,

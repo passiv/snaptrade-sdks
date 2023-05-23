@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::ModelPortfolioDetails.new(
   model_portfolio: null,

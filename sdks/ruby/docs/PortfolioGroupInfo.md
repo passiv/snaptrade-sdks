@@ -19,7 +19,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::PortfolioGroupInfo.new(
   symbols: null,

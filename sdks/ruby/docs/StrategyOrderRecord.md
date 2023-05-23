@@ -19,7 +19,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyOrderRecord.new(
   strategy: null,

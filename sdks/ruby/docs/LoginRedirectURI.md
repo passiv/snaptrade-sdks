@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::LoginRedirectURI.new(
   redirect_uri: https://app.passiv.com/snapTrade/redeemToken?token&#x3D;this$token1does2ntactu4allyexist&#x3D;&#x3D;&amp;clientId&#x3D;example,

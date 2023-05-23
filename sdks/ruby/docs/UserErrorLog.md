@@ -14,7 +14,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::UserErrorLog.new(
   requested_at: 2022-01-21T20:11:19.217Z,

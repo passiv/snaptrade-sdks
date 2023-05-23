@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::Model404FailedRequestResponse.new(
   default_detail: The requested resource does not exist.,

@@ -8,7 +8,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyOrderRecordOrderType.new()
 ```

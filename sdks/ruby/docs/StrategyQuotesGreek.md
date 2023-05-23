@@ -13,7 +13,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyQuotesGreek.new(
   delta: 0.1,

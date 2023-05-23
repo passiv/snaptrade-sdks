@@ -27,7 +27,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::PerformanceCustom.new(
   total_equity_timeframe: null,

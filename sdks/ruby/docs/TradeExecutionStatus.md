@@ -17,7 +17,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::TradeExecutionStatus.new(
   symbol: null,

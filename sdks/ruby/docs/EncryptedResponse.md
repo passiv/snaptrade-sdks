@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::EncryptedResponse.new(
   encrypted_shared_key: 5UEaY9QGzcNTr8y2jGDUI79jY1OdfK9x,

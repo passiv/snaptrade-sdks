@@ -17,7 +17,7 @@ Creates an option strategy object that will be used to place an option strategy 
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -107,7 +107,7 @@ Get the options chain
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -177,7 +177,7 @@ Get latest market data of option strategy
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -247,7 +247,7 @@ Get the options holdings in the account
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -312,7 +312,7 @@ Place an option strategy order on the brokerage
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"

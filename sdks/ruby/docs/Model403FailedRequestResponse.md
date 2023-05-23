@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::Model403FailedRequestResponse.new(
   default_detail: User does not have permission to access this resource,

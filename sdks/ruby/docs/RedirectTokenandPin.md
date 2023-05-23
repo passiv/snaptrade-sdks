@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::RedirectTokenandPin.new(
   token: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B,

@@ -20,7 +20,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::PartnerData.new(
   redirect_uri: https://example.com/oauth/snaptrade,

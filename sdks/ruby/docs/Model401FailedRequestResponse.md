@@ -10,7 +10,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::Model401FailedRequestResponse.new(
   default_detail: Unable to verify signature sent,

@@ -15,7 +15,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyImpactLegsInner.new(
   leg_id: 0,

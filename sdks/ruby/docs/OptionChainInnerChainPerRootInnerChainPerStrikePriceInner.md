@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.new(
   strike_price: 70,

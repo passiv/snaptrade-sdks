@@ -16,7 +16,7 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -98,7 +98,7 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"

@@ -19,7 +19,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyImpact.new(
   estimated_commissions: 11.95,

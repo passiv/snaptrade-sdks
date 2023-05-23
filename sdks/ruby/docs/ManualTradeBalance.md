@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::ManualTradeBalance.new(
   account: null,

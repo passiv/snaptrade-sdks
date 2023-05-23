@@ -12,7 +12,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::AccountHoldings.new(
   account: null,

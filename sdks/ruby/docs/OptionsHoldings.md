@@ -14,7 +14,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::OptionsHoldings.new(
   id: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d,

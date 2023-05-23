@@ -17,7 +17,7 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -72,7 +72,7 @@ Obtains an encrypted JWT tokens that should be decrypted on a user's local devic
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -132,7 +132,7 @@ Get a list of all SnapTrade users you've registered on our platform
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -179,7 +179,7 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
@@ -260,7 +260,7 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 ### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"

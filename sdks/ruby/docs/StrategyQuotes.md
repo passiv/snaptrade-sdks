@@ -14,7 +14,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyQuotes.new(
   strategy: null,

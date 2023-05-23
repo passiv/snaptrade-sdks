@@ -13,7 +13,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::PortfolioGroupSettings.new(
   buy_only: true,

@@ -51,7 +51,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::StrategyOrderPlaceOrdersInner.new(
   id: 1069605761,

@@ -9,7 +9,7 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade::AuthenticationLoginSnapTradeUser200Response.openapi_one_of
 # =>
@@ -26,7 +26,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 SnapTrade::AuthenticationLoginSnapTradeUser200Response.build(data)
 # => #<EncryptedResponse:0x00007fdd4aab02a0>

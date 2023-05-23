@@ -18,7 +18,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::UserSettings.new(
   email: ops@getpassiv.com,

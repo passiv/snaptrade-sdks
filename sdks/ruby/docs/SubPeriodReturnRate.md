@@ -11,7 +11,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::SubPeriodReturnRate.new(
   period_start: Sun Jan 23 16:00:00 PST 2022,

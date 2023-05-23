@@ -12,7 +12,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::OptionStrategyLegsInner.new(
   option_symbol_id: AAPLC20221111,

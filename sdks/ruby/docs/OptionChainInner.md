@@ -13,7 +13,7 @@
 ## Example
 
 ```ruby
-require 'snap_trade'
+require 'snaptrade'
 
 instance = SnapTrade::OptionChainInner.new(
   expiry_date: 2022-07-08T04:00:00.000Z,
