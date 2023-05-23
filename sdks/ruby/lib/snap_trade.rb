@@ -157,8 +157,14 @@ require 'snap_trade/api/transactions_and_reporting_api'
 
 module SnapTrade
   @config = Configuration.default
+  SENTINEL = Object.new
   class << self
     extend Forwardable
+
+    def is_sentinel(value)
+      value == SENTINEL
+    end
+
     def_delegators :@config, :client_id, :client_id= # api key
     def_delegators :@config, :signature, :signature= # api key
     def_delegators :@config, :timestamp, :timestamp= # api key

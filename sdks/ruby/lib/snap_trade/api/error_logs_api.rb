@@ -17,12 +17,34 @@ module SnapTrade
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+
+    # Retrieve error logs on behalf of your SnapTrade users
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def list_user_errors(user_id:, user_secret:, extra: {}
+)
+
+      data, _status_code, _headers = list_user_errors_with_http_info_impl(user_id, user_secret, extra)
+      data
+    end
+
+    # Retrieve error logs on behalf of your SnapTrade users
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def list_user_errors_with_http_info(user_id:, user_secret:, extra: {}
+)
+
+      list_user_errors_with_http_info_impl(user_id, user_secret, extra)
+    end
+
     # Retrieve error logs on behalf of your SnapTrade users
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<UserErrorLog>]
-    def list_user_errors(user_id, user_secret, opts = {})
+    def list_user_errors_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = list_user_errors_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -32,7 +54,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<UserErrorLog>, Integer, Hash)>] Array<UserErrorLog> data, response status code and response headers
-    def list_user_errors_with_http_info(user_id, user_secret, opts = {})
+    def list_user_errors_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ErrorLogsApi.list_user_errors ...'
       end

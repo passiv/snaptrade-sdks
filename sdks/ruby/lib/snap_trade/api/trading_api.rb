@@ -17,6 +17,38 @@ module SnapTrade
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+
+    # Cancel open order in account
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
+      trading_cancel_user_account_order_request = _body
+
+      data, _status_code, _headers = cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+      data
+    end
+
+    # Cancel open order in account
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
+      trading_cancel_user_account_order_request = _body
+
+      cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+    end
+
     # Cancel open order in account
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -24,7 +56,7 @@ module SnapTrade
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def cancel_user_account_order(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    def cancel_user_account_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
       data, _status_code, _headers = cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts)
       data
     end
@@ -36,7 +68,7 @@ module SnapTrade
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.cancel_user_account_order ...'
       end
@@ -71,7 +103,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -103,13 +135,37 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Return details of a specific trade before it's placed
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param trade_id [String] The ID of trade object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_calculated_trade_impact_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
+)
+
+      data, _status_code, _headers = get_calculated_trade_impact_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
+      data
+    end
+
+    # Return details of a specific trade before it's placed
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param trade_id [String] The ID of trade object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, extra: {}
+)
+
+      get_calculated_trade_impact_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
+    end
+
     # Return details of a specific trade before it's placed
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param trade_id [String] The ID of trade object
     # @param [Hash] opts the optional parameters
     # @return [Trade]
-    def get_calculated_trade_impact_by_id(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
+    def get_calculated_trade_impact_by_id_impl(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
       data, _status_code, _headers = get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts)
       data
     end
@@ -120,7 +176,7 @@ module SnapTrade
     # @param trade_id [String] The ID of trade object
     # @param [Hash] opts the optional parameters
     # @return [Array<(Trade, Integer, Hash)>] Trade data, response status code and response headers
-    def get_calculated_trade_impact_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
+    def get_calculated_trade_impact_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_calculated_trade_impact_by_id ...'
       end
@@ -176,12 +232,34 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Return the impact of placing a series of trades on the portfolio
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_calculated_trades_impact(portfolio_group_id:, calculated_trade_id:, extra: {}
+)
+
+      data, _status_code, _headers = get_calculated_trades_impact_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
+      data
+    end
+
+    # Return the impact of placing a series of trades on the portfolio
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_calculated_trades_impact_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {}
+)
+
+      get_calculated_trades_impact_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
+    end
+
     # Return the impact of placing a series of trades on the portfolio
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] opts the optional parameters
     # @return [Array<TradeImpact>]
-    def get_calculated_trades_impact(portfolio_group_id, calculated_trade_id, opts = {})
+    def get_calculated_trades_impact_impl(portfolio_group_id, calculated_trade_id, opts = {})
       data, _status_code, _headers = get_calculated_trades_impact_with_http_info(portfolio_group_id, calculated_trade_id, opts)
       data
     end
@@ -191,7 +269,7 @@ module SnapTrade
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<TradeImpact>, Integer, Hash)>] Array<TradeImpact> data, response status code and response headers
-    def get_calculated_trades_impact_with_http_info(portfolio_group_id, calculated_trade_id, opts = {})
+    def get_calculated_trades_impact_with_http_info_impl(portfolio_group_id, calculated_trade_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_calculated_trades_impact ...'
       end
@@ -243,13 +321,71 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Check impact of trades on account.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param action [Action] 
+    # @param order_type [OrderType] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    # @param time_in_force [TimeInForce] 
+    # @param units [Float] Trade Units
+    # @param universal_symbol_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      manual_trade_form = _body
+
+      data, _status_code, _headers = get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+      data
+    end
+
+    # Check impact of trades on account.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param action [Action] 
+    # @param order_type [OrderType] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    # @param time_in_force [TimeInForce] 
+    # @param units [Float] Trade Units
+    # @param universal_symbol_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      manual_trade_form = _body
+
+      get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+    end
+
     # Check impact of trades on account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [ManualTradeAndImpact]
-    def get_order_impact(user_id, user_secret, manual_trade_form, opts = {})
+    def get_order_impact_impl(user_id, user_secret, manual_trade_form, opts = {})
       data, _status_code, _headers = get_order_impact_with_http_info(user_id, user_secret, manual_trade_form, opts)
       data
     end
@@ -260,7 +396,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ManualTradeAndImpact, Integer, Hash)>] ManualTradeAndImpact data, response status code and response headers
-    def get_order_impact_with_http_info(user_id, user_secret, manual_trade_form, opts = {})
+    def get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_order_impact ...'
       end
@@ -291,7 +427,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -323,6 +459,34 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Get symbol quotes
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
+    # @param account_id [String] The ID of the account to get quotes.
+    # @param use_ticker [Boolean] Should be set to True if providing tickers.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_user_account_quotes(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {}
+)
+
+      data, _status_code, _headers = get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
+      data
+    end
+
+    # Get symbol quotes
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
+    # @param account_id [String] The ID of the account to get quotes.
+    # @param use_ticker [Boolean] Should be set to True if providing tickers.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_user_account_quotes_with_http_info(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {}
+)
+
+      get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
+    end
+
     # Get symbol quotes
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -331,7 +495,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
     # @return [SymbolsQuotes]
-    def get_user_account_quotes(user_id, user_secret, symbols, account_id, opts = {})
+    def get_user_account_quotes_impl(user_id, user_secret, symbols, account_id, opts = {})
       data, _status_code, _headers = get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
       data
     end
@@ -344,7 +508,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
     # @return [Array<(SymbolsQuotes, Integer, Hash)>] SymbolsQuotes data, response status code and response headers
-    def get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts = {})
+    def get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_user_account_quotes ...'
       end
@@ -408,6 +572,66 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Modify units of a trade before it is placed
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param trade_id [String] The ID of trade object
+    # @param id [String] 
+    # @param account [Account] 
+    # @param symbol [BrokerageSymbol] 
+    # @param universal_symbol [UniversalSymbol] 
+    # @param action [TradeAction] 
+    # @param units [Integer] 
+    # @param price [Float] 
+    # @param sequence [Integer] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def modify_calculated_trade_by_id(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:id] = id if id != SENTINEL
+      _body[:account] = account if account != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:universal_symbol] = universal_symbol if universal_symbol != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:sequence] = sequence if sequence != SENTINEL
+      extra[:trade] = _body if !_body.empty?
+
+      data, _status_code, _headers = modify_calculated_trade_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
+      data
+    end
+
+    # Modify units of a trade before it is placed
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param trade_id [String] The ID of trade object
+    # @param id [String] 
+    # @param account [Account] 
+    # @param symbol [BrokerageSymbol] 
+    # @param universal_symbol [UniversalSymbol] 
+    # @param action [TradeAction] 
+    # @param units [Integer] 
+    # @param price [Float] 
+    # @param sequence [Integer] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def modify_calculated_trade_by_id_with_http_info(portfolio_group_id:, calculated_trade_id:, trade_id:, id: SENTINEL, account: SENTINEL, symbol: SENTINEL, universal_symbol: SENTINEL, action: SENTINEL, units: SENTINEL, price: SENTINEL, sequence: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:id] = id if id != SENTINEL
+      _body[:account] = account if account != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:universal_symbol] = universal_symbol if universal_symbol != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:sequence] = sequence if sequence != SENTINEL
+      extra[:trade] = _body if !_body.empty?
+
+      modify_calculated_trade_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, extra)
+    end
+
     # Modify units of a trade before it is placed
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
@@ -415,7 +639,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Trade] :trade 
     # @return [Trade]
-    def modify_calculated_trade_by_id(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
+    def modify_calculated_trade_by_id_impl(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
       data, _status_code, _headers = modify_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts)
       data
     end
@@ -427,7 +651,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Trade] :trade 
     # @return [Array<(Trade, Integer, Hash)>] Trade data, response status code and response headers
-    def modify_calculated_trade_by_id_with_http_info(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
+    def modify_calculated_trade_by_id_with_http_info_impl(portfolio_group_id, calculated_trade_id, trade_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.modify_calculated_trade_by_id ...'
       end
@@ -456,7 +680,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -488,12 +712,34 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Place orders for the CalculatedTrades in series
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_calculated_trades(portfolio_group_id:, calculated_trade_id:, extra: {}
+)
+
+      data, _status_code, _headers = place_calculated_trades_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
+      data
+    end
+
+    # Place orders for the CalculatedTrades in series
+    # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
+    # @param calculated_trade_id [String] The ID of calculated trade to get account impact
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_calculated_trades_with_http_info(portfolio_group_id:, calculated_trade_id:, extra: {}
+)
+
+      place_calculated_trades_with_http_info_impl(portfolio_group_id, calculated_trade_id, extra)
+    end
+
     # Place orders for the CalculatedTrades in series
     # @param portfolio_group_id [String] The ID of the PortfolioGroup to perform rebalancing calculations
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] opts the optional parameters
     # @return [Array<TradeExecutionStatus>]
-    def place_calculated_trades(portfolio_group_id, calculated_trade_id, opts = {})
+    def place_calculated_trades_impl(portfolio_group_id, calculated_trade_id, opts = {})
       data, _status_code, _headers = place_calculated_trades_with_http_info(portfolio_group_id, calculated_trade_id, opts)
       data
     end
@@ -503,7 +749,7 @@ module SnapTrade
     # @param calculated_trade_id [String] The ID of calculated trade to get account impact
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<TradeExecutionStatus>, Integer, Hash)>] Array<TradeExecutionStatus> data, response status code and response headers
-    def place_calculated_trades_with_http_info(portfolio_group_id, calculated_trade_id, opts = {})
+    def place_calculated_trades_with_http_info_impl(portfolio_group_id, calculated_trade_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_calculated_trades ...'
       end
@@ -555,13 +801,71 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Place a trade with NO validation.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param action [Action] 
+    # @param order_type [OrderType] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    # @param time_in_force [TimeInForce] 
+    # @param units [Float] Trade Units
+    # @param universal_symbol_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      manual_trade_form = _body
+
+      data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+      data
+    end
+
+    # Place a trade with NO validation.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param action [Action] 
+    # @param order_type [OrderType] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    # @param time_in_force [TimeInForce] 
+    # @param units [Float] Trade Units
+    # @param universal_symbol_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      manual_trade_form = _body
+
+      place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+    end
+
     # Place a trade with NO validation.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def place_force_order(user_id, user_secret, manual_trade_form, opts = {})
+    def place_force_order_impl(user_id, user_secret, manual_trade_form, opts = {})
       data, _status_code, _headers = place_force_order_with_http_info(user_id, user_secret, manual_trade_form, opts)
       data
     end
@@ -572,7 +876,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_force_order_with_http_info(user_id, user_secret, manual_trade_form, opts = {})
+    def place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_force_order ...'
       end
@@ -603,7 +907,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -635,13 +939,47 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Place a OCO (One Cancels Other) order
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
+    # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_oco_order(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
+      _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
+      trading_place_oco_order_request = _body
+
+      data, _status_code, _headers = place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
+      data
+    end
+
+    # Place a OCO (One Cancels Other) order
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
+    # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_oco_order_with_http_info(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {}
+)
+      _body = {}
+      _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
+      _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
+      trading_place_oco_order_request = _body
+
+      place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
+    end
+
     # Place a OCO (One Cancels Other) order
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def place_oco_order(user_id, user_secret, trading_place_oco_order_request, opts = {})
+    def place_oco_order_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
       data, _status_code, _headers = place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request, opts)
       data
     end
@@ -652,7 +990,7 @@ module SnapTrade
     # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request, opts = {})
+    def place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_oco_order ...'
       end
@@ -683,7 +1021,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -715,13 +1053,37 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Place order
+    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_order(trade_id:, user_id:, user_secret:, extra: {}
+)
+
+      data, _status_code, _headers = place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Place order
+    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_order_with_http_info(trade_id:, user_id:, user_secret:, extra: {}
+)
+
+      place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
+    end
+
     # Place order
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def place_order(trade_id, user_id, user_secret, opts = {})
+    def place_order_impl(trade_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = place_order_with_http_info(trade_id, user_id, user_secret, opts)
       data
     end
@@ -732,7 +1094,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_order_with_http_info(trade_id, user_id, user_secret, opts = {})
+    def place_order_with_http_info_impl(trade_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_order ...'
       end

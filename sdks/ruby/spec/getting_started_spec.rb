@@ -36,26 +36,28 @@ describe 'GettingStarted' do
 
       # 3) Create a new user
       user_id = SecureRandom.uuid
-      response = SnapTrade::Authentication.register_snap_trade_user({ "userId" => user_id })
+      response = SnapTrade::Authentication.register_snap_trade_user(user_id: user_id)
       puts response
 
       # 4) Get a redirect URI
-      redirect_uri = SnapTrade::Authentication.login_snap_trade_user(user_id, response.user_secret)
+      redirect_uri = SnapTrade::Authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
 
-      SnapTrade::PortfolioManagement.create(user_id, response.user_secret, {
-        "id" => SecureRandom.uuid,
-        "name" => "MyPortfolio"
-      })
-      portfolios = SnapTrade::PortfolioManagement.list(user_id, response.user_secret)
+      SnapTrade::PortfolioManagement.create(
+        user_id: user_id,
+        user_secret: response.user_secret,
+        id: SecureRandom.uuid,
+        name: "MyPortfolio"
+      )
+      portfolios = SnapTrade::PortfolioManagement.list(user_id: user_id, user_secret: response.user_secret)
       puts portfolios
 
       # 5) Obtaining account holdings data
-      holdings = SnapTrade::AccountInformation.get_all_user_holdings(user_id, response.user_secret)
+      holdings = SnapTrade::AccountInformation.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)
       puts holdings
 
       # 6) Deleting a user
-      deleted_response = SnapTrade::Authentication.delete_snap_trade_user(user_id)
+      deleted_response = SnapTrade::Authentication.delete_snap_trade_user(user_id: user_id)
       puts deleted_response
     end
   end
@@ -75,26 +77,23 @@ describe 'GettingStarted' do
 
       # 3) Create a new user
       user_id = SecureRandom.uuid
-      response = snaptrade.authentication.register_snap_trade_user({ "userId" => user_id })
+      response = snaptrade.authentication.register_snap_trade_user(user_id: user_id)
       puts response
 
       # 4) Get a redirect URI
-      redirect_uri = snaptrade.authentication.login_snap_trade_user(user_id, response.user_secret)
+      redirect_uri = snaptrade.authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
 
-      snaptrade.portfolio_management.create(user_id, response.user_secret, {
-        "id" => SecureRandom.uuid,
-        "name" => "MyPortfolio"
-      })
-      portfolios = snaptrade.portfolio_management.list(user_id, response.user_secret)
+      snaptrade.portfolio_management.create(user_id: user_id, user_secret: response.user_secret, id: SecureRandom.uuid, name: "MyPortfolio")
+      portfolios = snaptrade.portfolio_management.list(user_id: user_id, user_secret: response.user_secret)
       puts portfolios
 
       # 5) Obtaining account holdings data
-      holdings = snaptrade.account_information.get_all_user_holdings(user_id, response.user_secret)
+      holdings = snaptrade.account_information.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)
       puts holdings
 
       # 6) Deleting a user
-      deleted_response = snaptrade.authentication.delete_snap_trade_user(user_id)
+      deleted_response = snaptrade.authentication.delete_snap_trade_user(user_id: user_id)
       puts deleted_response
     end
   end

@@ -17,6 +17,46 @@ module SnapTrade
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+
+    # Creates an option strategy object that will be used to place an option strategy order
+    # @param underlying_symbol_id [String] 
+    # @param legs [Array<OptionLeg>] 
+    # @param strategy_type [StrategyType] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {}
+)
+      _body = {}
+      _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
+      options_get_option_strategy_request = _body
+
+      data, _status_code, _headers = get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
+      data
+    end
+
+    # Creates an option strategy object that will be used to place an option strategy order
+    # @param underlying_symbol_id [String] 
+    # @param legs [Array<OptionLeg>] 
+    # @param strategy_type [StrategyType] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {}
+)
+      _body = {}
+      _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
+      options_get_option_strategy_request = _body
+
+      get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
+    end
+
     # Creates an option strategy object that will be used to place an option strategy order
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -24,7 +64,7 @@ module SnapTrade
     # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [StrategyQuotes]
-    def get_option_strategy(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
+    def get_option_strategy_impl(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
       data, _status_code, _headers = get_option_strategy_with_http_info(user_id, user_secret, account_id, options_get_option_strategy_request, opts)
       data
     end
@@ -36,7 +76,7 @@ module SnapTrade
     # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
-    def get_option_strategy_with_http_info(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
+    def get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_strategy ...'
       end
@@ -71,7 +111,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters
@@ -103,6 +143,32 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Get the options chain
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param symbol [String] Universal symbol ID if symbol
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {}
+)
+
+      data, _status_code, _headers = get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
+      data
+    end
+
+    # Get the options chain
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param symbol [String] Universal symbol ID if symbol
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {}
+)
+
+      get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
+    end
+
     # Get the options chain
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -110,7 +176,7 @@ module SnapTrade
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] opts the optional parameters
     # @return [Array<OptionChainInner>]
-    def get_options_chain(user_id, user_secret, account_id, symbol, opts = {})
+    def get_options_chain_impl(user_id, user_secret, account_id, symbol, opts = {})
       data, _status_code, _headers = get_options_chain_with_http_info(user_id, user_secret, account_id, symbol, opts)
       data
     end
@@ -122,7 +188,7 @@ module SnapTrade
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<OptionChainInner>, Integer, Hash)>] Array<OptionChainInner> data, response status code and response headers
-    def get_options_chain_with_http_info(user_id, user_secret, account_id, symbol, opts = {})
+    def get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.get_options_chain ...'
       end
@@ -185,6 +251,32 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Get latest market data of option strategy
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
+)
+
+      data, _status_code, _headers = get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
+      data
+    end
+
+    # Get latest market data of option strategy
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
+)
+
+      get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
+    end
+
     # Get latest market data of option strategy
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -192,7 +284,7 @@ module SnapTrade
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] opts the optional parameters
     # @return [StrategyQuotes]
-    def get_options_strategy_quote(user_id, user_secret, account_id, option_strategy_id, opts = {})
+    def get_options_strategy_quote_impl(user_id, user_secret, account_id, option_strategy_id, opts = {})
       data, _status_code, _headers = get_options_strategy_quote_with_http_info(user_id, user_secret, account_id, option_strategy_id, opts)
       data
     end
@@ -204,7 +296,7 @@ module SnapTrade
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] opts the optional parameters
     # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
-    def get_options_strategy_quote_with_http_info(user_id, user_secret, account_id, option_strategy_id, opts = {})
+    def get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.get_options_strategy_quote ...'
       end
@@ -266,13 +358,37 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Get the options holdings in the account
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def list_option_holdings(user_id:, user_secret:, account_id:, extra: {}
+)
+
+      data, _status_code, _headers = list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # Get the options holdings in the account
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def list_option_holdings_with_http_info(user_id:, user_secret:, account_id:, extra: {}
+)
+
+      list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
     # Get the options holdings in the account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [OptionsHoldings]
-    def list_option_holdings(user_id, user_secret, account_id, opts = {})
+    def list_option_holdings_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = list_option_holdings_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -283,7 +399,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(OptionsHoldings, Integer, Hash)>] OptionsHoldings data, response status code and response headers
-    def list_option_holdings_with_http_info(user_id, user_secret, account_id, opts = {})
+    def list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.list_option_holdings ...'
       end
@@ -341,6 +457,48 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Place an option strategy order on the brokerage
+    # @param order_type [OrderStrategyExecuteBodyOrderType] 
+    # @param time_in_force [OrderStrategyExecuteBodyTimeInForce] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_option_strategy(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
+)
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      options_place_option_strategy_request = _body
+
+      data, _status_code, _headers = place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
+      data
+    end
+
+    # Place an option strategy order on the brokerage
+    # @param order_type [OrderStrategyExecuteBodyOrderType] 
+    # @param time_in_force [OrderStrategyExecuteBodyTimeInForce] 
+    # @param price [Float] Trade Price if limit or stop limit order
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] The ID of the account get positions.
+    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def place_option_strategy_with_http_info(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {}
+)
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      options_place_option_strategy_request = _body
+
+      place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
+    end
+
     # Place an option strategy order on the brokerage
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -349,7 +507,7 @@ module SnapTrade
     # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [StrategyOrderRecord]
-    def place_option_strategy(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
+    def place_option_strategy_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
       data, _status_code, _headers = place_option_strategy_with_http_info(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts)
       data
     end
@@ -362,7 +520,7 @@ module SnapTrade
     # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(StrategyOrderRecord, Integer, Hash)>] StrategyOrderRecord data, response status code and response headers
-    def place_option_strategy_with_http_info(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
+    def place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.place_option_strategy ...'
       end
@@ -401,7 +559,7 @@ module SnapTrade
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?
-          header_params['Content-Type'] = content_type
+        header_params['Content-Type'] = content_type
       end
 
       # form parameters

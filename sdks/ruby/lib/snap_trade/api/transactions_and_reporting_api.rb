@@ -17,6 +17,38 @@ module SnapTrade
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+
+    # Get transaction history for a user
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param start_date [Date] 
+    # @param end_date [Date] 
+    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {}
+)
+
+      data, _status_code, _headers = get_activities_with_http_info_impl(user_id, user_secret, extra)
+      data
+    end
+
+    # Get transaction history for a user
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param start_date [Date] 
+    # @param end_date [Date] 
+    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, extra: {}
+)
+
+      get_activities_with_http_info_impl(user_id, user_secret, extra)
+    end
+
     # Get transaction history for a user
     # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
     # @param user_id [String] 
@@ -27,7 +59,7 @@ module SnapTrade
     # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
     # @return [Array<UniversalActivity>]
-    def get_activities(user_id, user_secret, opts = {})
+    def get_activities_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_activities_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -42,7 +74,7 @@ module SnapTrade
     # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
     # @return [Array<(Array<UniversalActivity>, Integer, Hash)>] Array<UniversalActivity> data, response status code and response headers
-    def get_activities_with_http_info(user_id, user_secret, opts = {})
+    def get_activities_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TransactionsAndReportingApi.get_activities ...'
       end
@@ -100,6 +132,40 @@ module SnapTrade
       return data, status_code, headers
     end
 
+
+    # Get performance information for a specific timeframe
+    # Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+    # @param start_date [Date] 
+    # @param end_date [Date] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
+    # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_reporting_custom_range(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {}
+)
+
+      data, _status_code, _headers = get_reporting_custom_range_with_http_info_impl(start_date, end_date, user_id, user_secret, extra)
+      data
+    end
+
+    # Get performance information for a specific timeframe
+    # Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+    # @param start_date [Date] 
+    # @param end_date [Date] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
+    # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
+    # @param [Hash] extra additional parameters to pass along through :header_params or :query_params
+    def get_reporting_custom_range_with_http_info(start_date:, end_date:, user_id:, user_secret:, accounts: SENTINEL, detailed: SENTINEL, frequency: SENTINEL, extra: {}
+)
+
+      get_reporting_custom_range_with_http_info_impl(start_date, end_date, user_id, user_secret, extra)
+    end
+
     # Get performance information for a specific timeframe
     # Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
     # @param start_date [Date] 
@@ -111,7 +177,7 @@ module SnapTrade
     # @option opts [Boolean] :detailed Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @option opts [String] :frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @return [PerformanceCustom]
-    def get_reporting_custom_range(start_date, end_date, user_id, user_secret, opts = {})
+    def get_reporting_custom_range_impl(start_date, end_date, user_id, user_secret, opts = {})
       data, _status_code, _headers = get_reporting_custom_range_with_http_info(start_date, end_date, user_id, user_secret, opts)
       data
     end
@@ -127,7 +193,7 @@ module SnapTrade
     # @option opts [Boolean] :detailed Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @option opts [String] :frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @return [Array<(PerformanceCustom, Integer, Hash)>] PerformanceCustom data, response status code and response headers
-    def get_reporting_custom_range_with_http_info(start_date, end_date, user_id, user_secret, opts = {})
+    def get_reporting_custom_range_with_http_info_impl(start_date, end_date, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TransactionsAndReportingApi.get_reporting_custom_range ...'
       end
