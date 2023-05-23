@@ -31,7 +31,7 @@ tagPriority:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 0.1.0
+    version: 0.1.1
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
