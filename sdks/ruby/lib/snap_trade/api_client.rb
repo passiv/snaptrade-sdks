@@ -77,7 +77,7 @@ module SnapTrade
       else
         data = nil
       end
-      return data, response.status, response.headers
+      return data, response.status, response.headers, response
     end
 
     # Builds the HTTP request

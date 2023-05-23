@@ -196,6 +196,17 @@ module SnapTrade
     def host=(host)
       # remove http(s):// and anything after a slash
       @host = host.sub(/https?:\/\//, '').split('/').first
+
+      # try to set @scheme and @base_path if possible
+      begin
+        uri = URI.parse(host)
+        @scheme = uri.scheme
+        @base_path = uri.path
+      rescue InvalidURIError
+      end
+
+      # unset server_index so host is used when getting request url (see ApiClient#build_request_url)
+      @server_index = nil
     end
 
     def base_path=(base_path)

@@ -19,8 +19,8 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances and positions for each account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_all_user_holdings(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
@@ -31,8 +31,8 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances and positions for each account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_all_user_holdings_with_http_info(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
@@ -42,8 +42,8 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances and positions for each account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<AccountHoldings>]
@@ -53,8 +53,8 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances and positions for each account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<(Array<AccountHoldings>, Integer, Hash)>] Array<AccountHoldings> data, response status code and response headers
@@ -115,29 +115,27 @@ module SnapTrade
 
 
     # Get all cash balances of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance(user_id:, user_secret:, account_id:, extra: {})
-
       data, _status_code, _headers = get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
     # Get all cash balances of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance_with_http_info(user_id:, user_secret:, account_id:, extra: {})
-
       get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # Get all cash balances of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<Balance>]
@@ -147,8 +145,8 @@ module SnapTrade
     end
 
     # Get all cash balances of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Balance>, Integer, Hash)>] Array<Balance> data, response status code and response headers
@@ -212,29 +210,27 @@ module SnapTrade
 
 
     # Return details of a specific investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_details(user_id:, user_secret:, account_id:, extra: {})
-
       data, _status_code, _headers = get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
     # Return details of a specific investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_details_with_http_info(user_id:, user_secret:, account_id:, extra: {})
-
       get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # Return details of a specific investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
     # @return [Array<Account>]
@@ -244,8 +240,8 @@ module SnapTrade
     end
 
     # Return details of a specific investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
@@ -309,8 +305,8 @@ module SnapTrade
 
 
     # Get all history of orders placed in account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -322,8 +318,8 @@ module SnapTrade
     end
 
     # Get all history of orders placed in account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -334,8 +330,8 @@ module SnapTrade
     end
 
     # Get all history of orders placed in account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
@@ -346,8 +342,8 @@ module SnapTrade
     end
 
     # Get all history of orders placed in account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
@@ -408,38 +404,36 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AccountInformationApi#get_user_account_orders\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
-      return data, status_code, headers
+      return data, status_code, headers, response
     end
 
 
     # Get all positions of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions(user_id:, user_secret:, account_id:, extra: {})
-
       data, _status_code, _headers = get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
     # Get all positions of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions_with_http_info(user_id:, user_secret:, account_id:, extra: {})
-
       get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # Get all positions of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<Position>]
@@ -449,8 +443,8 @@ module SnapTrade
     end
 
     # Get all positions of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Position>, Integer, Hash)>] Array<Position> data, response status code and response headers
@@ -515,29 +509,27 @@ module SnapTrade
 
     # List balances, positions and orders for the specified account.
     # @param account_id [String] The ID of the account to fetch holdings for.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_holdings(account_id:, user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
       data
     end
 
     # List balances, positions and orders for the specified account.
     # @param account_id [String] The ID of the account to fetch holdings for.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_holdings_with_http_info(account_id:, user_id:, user_secret:, extra: {})
-
       get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
     end
 
     # List balances, positions and orders for the specified account.
     # @param account_id [String] The ID of the account to fetch holdings for.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [AccountHoldingsAccount]
     def get_user_holdings_impl(account_id, user_id, user_secret, opts = {})
@@ -547,8 +539,8 @@ module SnapTrade
 
     # List balances, positions and orders for the specified account.
     # @param account_id [String] The ID of the account to fetch holdings for.
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountHoldingsAccount, Integer, Hash)>] AccountHoldingsAccount data, response status code and response headers
     def get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, opts = {})
@@ -611,27 +603,25 @@ module SnapTrade
 
 
     # List all investment accounts for the user
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_user_accounts(user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = list_user_accounts_with_http_info_impl(user_id, user_secret, extra)
       data
     end
 
     # List all investment accounts for the user
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_user_accounts_with_http_info(user_id:, user_secret:, extra: {})
-
       list_user_accounts_with_http_info_impl(user_id, user_secret, extra)
     end
 
     # List all investment accounts for the user
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [Array<Account>]
     def list_user_accounts_impl(user_id, user_secret, opts = {})
@@ -640,8 +630,8 @@ module SnapTrade
     end
 
     # List all investment accounts for the user
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
     def list_user_accounts_with_http_info_impl(user_id, user_secret, opts = {})
@@ -700,29 +690,27 @@ module SnapTrade
 
 
     # Update details of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_user_account(user_id:, user_secret:, account_id:, extra: {})
-
       data, _status_code, _headers = update_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
     # Update details of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def update_user_account_with_http_info(user_id:, user_secret:, account_id:, extra: {})
-
       update_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # Update details of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] opts the optional parameters
     # @return [Array<Account>]
@@ -732,8 +720,8 @@ module SnapTrade
     end
 
     # Update details of an investment account
-    # @param user_id [String] 
-    # @param user_secret [String] 
+    # @param user_id [String]
+    # @param user_secret [String]
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers

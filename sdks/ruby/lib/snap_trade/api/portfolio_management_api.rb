@@ -2384,9 +2384,8 @@ module SnapTrade
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def set_portfolio_targets(portfolio_group_id:, extra: {})
-      _body = {}
-      extra[:target_asset] = _body if !_body.empty?
+    def set_portfolio_targets(portfolio_group_id:, body: SENTINEL, extra: {})
+      extra[:target_asset] = body if body != SENTINEL
 
       data, _status_code, _headers = set_portfolio_targets_with_http_info_impl(portfolio_group_id, extra)
       data
@@ -2395,9 +2394,8 @@ module SnapTrade
     # Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
     # @param portfolio_group_id [String] The ID of the PortfolioGroup under which to create the target asset.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def set_portfolio_targets_with_http_info(portfolio_group_id:, extra: {})
-      _body = {}
-      extra[:target_asset] = _body if !_body.empty?
+    def set_portfolio_targets_with_http_info(portfolio_group_id:, body: SENTINEL, extra: {})
+      extra[:target_asset] = body if body != SENTINEL
 
       set_portfolio_targets_with_http_info_impl(portfolio_group_id, extra)
     end
