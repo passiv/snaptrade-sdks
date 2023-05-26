@@ -3049,6 +3049,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Position"
+        orders:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountOrderRecord"
         total_value:
           $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
     AccountOrderRecord:
