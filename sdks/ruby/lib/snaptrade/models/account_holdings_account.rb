@@ -20,6 +20,8 @@ module SnapTrade
 
     attr_accessor :positions
 
+    attr_accessor :orders
+
     attr_accessor :total_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -28,6 +30,7 @@ module SnapTrade
         :'account' => :'account',
         :'balances' => :'balances',
         :'positions' => :'positions',
+        :'orders' => :'orders',
         :'total_value' => :'total_value'
       }
     end
@@ -43,6 +46,7 @@ module SnapTrade
         :'account' => :'SnapTradeHoldingsAccountAccountId',
         :'balances' => :'Array<Balance>',
         :'positions' => :'Array<Position>',
+        :'orders' => :'Array<AccountOrderRecord>',
         :'total_value' => :'SnapTradeHoldingsTotalValue'
       }
     end
@@ -84,6 +88,12 @@ module SnapTrade
         end
       end
 
+      if attributes.key?(:'orders')
+        if (value = attributes[:'orders']).is_a?(Array)
+          self.orders = value
+        end
+      end
+
       if attributes.key?(:'total_value')
         self.total_value = attributes[:'total_value']
       end
@@ -110,6 +120,7 @@ module SnapTrade
           account == o.account &&
           balances == o.balances &&
           positions == o.positions &&
+          orders == o.orders &&
           total_value == o.total_value
     end
 
@@ -122,7 +133,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account, balances, positions, total_value].hash
+      [account, balances, positions, orders, total_value].hash
     end
 
     # Builds the object from hash
