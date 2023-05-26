@@ -454,10 +454,6 @@ namespace SnapTrade.Net.Client
                 MaxTimeout = configuration.Timeout,
                 Proxy = configuration.Proxy,
             };
-            if (!configuration.VerifySsl)
-            {
-                clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-            };
 
             RestClient client = new RestClient(clientOptions)
                 .UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration));
@@ -552,10 +548,6 @@ namespace SnapTrade.Net.Client
                 ClientCertificates = configuration.ClientCertificates,
                 MaxTimeout = configuration.Timeout,
                 Proxy = configuration.Proxy,
-            };
-            if (!configuration.VerifySsl)
-            {
-                clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
             };
 
             RestClient client = new RestClient(clientOptions)

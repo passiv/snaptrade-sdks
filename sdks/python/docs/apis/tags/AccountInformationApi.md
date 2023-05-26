@@ -781,6 +781,7 @@ try:
     pprint(get_user_holdings_response.body["account"])
     pprint(get_user_holdings_response.body["balances"])
     pprint(get_user_holdings_response.body["positions"])
+    pprint(get_user_holdings_response.body["orders"])
     pprint(get_user_holdings_response.body["total_value"])
     pprint(get_user_holdings_response.headers)
     pprint(get_user_holdings_response.status)

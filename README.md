@@ -4,11 +4,11 @@
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
 |Java|3.0.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/3.0.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
-|Ruby|1.0.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.0.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
-|Python|10.14.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.14.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
-|TypeScript|8.9.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.9.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
+|Ruby|1.1.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.1.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
+|Python|10.15.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.15.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
+|TypeScript|8.10.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.10.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
 |C#|3.14.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.14.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
-|PHP|1.4.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.4.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
+|PHP|1.5.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.5.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
 
 
 ## How to regenerate SDKs

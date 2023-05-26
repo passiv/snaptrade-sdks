@@ -121,7 +121,6 @@ namespace SnapTrade.Net.Client
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
-            VerifySsl = true;
             Servers = new List<IReadOnlyDictionary<string, object>>()
             {
                 {
@@ -237,12 +236,6 @@ namespace SnapTrade.Net.Client
         /// </summary>
         /// <value>The password.</value>
         public virtual string Password { get; set; }
-
-        /// <summary>
-        /// Gets or sets the verifySsl flag.
-        /// </summary>
-        /// <value>verifySsl flag.</value>
-        public virtual bool VerifySsl { get; set; }
 
         /// <summary>
         /// Gets the API key with prefix.
@@ -592,7 +585,6 @@ namespace SnapTrade.Net.Client
                 UserAgent = second.UserAgent ?? first.UserAgent,
                 Username = second.Username ?? first.Username,
                 Password = second.Password ?? first.Password,
-                VerifySsl = second.VerifySsl && first.VerifySsl,
                 AccessToken = second.AccessToken ?? first.AccessToken,
                 ConsumerKey = second.ConsumerKey ?? first.ConsumerKey,
                 TempFolderPath = second.TempFolderPath ?? first.TempFolderPath,

@@ -14,6 +14,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { AccountOrderRecord } from './account-order-record';
+// May contain unused imports in some cases
+// @ts-ignore
 import { Balance } from './balance';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -51,6 +54,12 @@ export interface AccountHoldingsAccount {
      * @memberof AccountHoldingsAccount
      */
     'positions'?: Array<Position>;
+    /**
+     * 
+     * @type {Array<AccountOrderRecord>}
+     * @memberof AccountHoldingsAccount
+     */
+    'orders'?: Array<AccountOrderRecord>;
     /**
      * 
      * @type {SnapTradeHoldingsTotalValue}

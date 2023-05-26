@@ -38,12 +38,14 @@ namespace SnapTrade.Net.Model
         /// <param name="account">account.</param>
         /// <param name="balances">balances.</param>
         /// <param name="positions">positions.</param>
+        /// <param name="orders">orders.</param>
         /// <param name="totalValue">totalValue.</param>
-        public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
+        public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
         {
             this.Account = account;
             this.Balances = balances;
             this.Positions = positions;
+            this.Orders = orders;
             this.TotalValue = totalValue;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -65,6 +67,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "positions", EmitDefaultValue = false)]
         public List<Position> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Orders
+        /// </summary>
+        [DataMember(Name = "orders", EmitDefaultValue = false)]
+        public List<AccountOrderRecord> Orders { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalValue
@@ -90,6 +98,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Balances: ").Append(Balances).Append("\n");
             sb.Append("  Positions: ").Append(Positions).Append("\n");
+            sb.Append("  Orders: ").Append(Orders).Append("\n");
             sb.Append("  TotalValue: ").Append(TotalValue).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -145,6 +154,12 @@ namespace SnapTrade.Net.Model
                     this.Positions.SequenceEqual(input.Positions)
                 ) && base.Equals(input) && 
                 (
+                    this.Orders == input.Orders ||
+                    this.Orders != null &&
+                    input.Orders != null &&
+                    this.Orders.SequenceEqual(input.Orders)
+                ) && base.Equals(input) && 
+                (
                     this.TotalValue == input.TotalValue ||
                     (this.TotalValue != null &&
                     this.TotalValue.Equals(input.TotalValue))
@@ -172,6 +187,10 @@ namespace SnapTrade.Net.Model
                 if (this.Positions != null)
                 {
                     hashCode = (hashCode * 59) + this.Positions.GetHashCode();
+                }
+                if (this.Orders != null)
+                {
+                    hashCode = (hashCode * 59) + this.Orders.GetHashCode();
                 }
                 if (this.TotalValue != null)
                 {
