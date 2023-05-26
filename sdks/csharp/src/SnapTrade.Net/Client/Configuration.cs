@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "3.13.0";
+        public const string Version = "3.14.0";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -116,11 +116,12 @@ namespace SnapTrade.Net.Client
         public Configuration()
         {
             Proxy = null;
-            UserAgent = "Konfig/3.13.0/csharp";
+            UserAgent = "Konfig/3.14.0/csharp";
             BasePath = "https://api.snaptrade.com/api/v1";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
+            VerifySsl = true;
             Servers = new List<IReadOnlyDictionary<string, object>>()
             {
                 {
@@ -236,6 +237,12 @@ namespace SnapTrade.Net.Client
         /// </summary>
         /// <value>The password.</value>
         public virtual string Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets the verifySsl flag.
+        /// </summary>
+        /// <value>verifySsl flag.</value>
+        public virtual bool VerifySsl { get; set; }
 
         /// <summary>
         /// Gets the API key with prefix.
@@ -527,7 +534,7 @@ namespace SnapTrade.Net.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 1.0.0\n";
-            report += "    SDK Package Version: 3.13.0\n";
+            report += "    SDK Package Version: 3.14.0\n";
 
             return report;
         }
@@ -585,6 +592,7 @@ namespace SnapTrade.Net.Client
                 UserAgent = second.UserAgent ?? first.UserAgent,
                 Username = second.Username ?? first.Username,
                 Password = second.Password ?? first.Password,
+                VerifySsl = second.VerifySsl && first.VerifySsl,
                 AccessToken = second.AccessToken ?? first.AccessToken,
                 ConsumerKey = second.ConsumerKey ?? first.ConsumerKey,
                 TempFolderPath = second.TempFolderPath ?? first.TempFolderPath,
