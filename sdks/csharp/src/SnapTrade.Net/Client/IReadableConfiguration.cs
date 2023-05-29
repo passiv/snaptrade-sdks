@@ -104,6 +104,12 @@ namespace SnapTrade.Net.Client
         string Password { get; }
 
         /// <summary>
+        /// Gets the verifySsl flag.
+        /// </summary>
+        /// <value>VerifySsl.</value>
+        bool VerifySsl { get; }
+
+        /// <summary>
         /// Get the servers associated with the operation.
         /// </summary>
         /// <value>Operation servers.</value>

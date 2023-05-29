@@ -52,7 +52,7 @@ generators:
       userId: passiv
       repoId: snaptrade-php-sdk
   csharp:
-    version: 3.14.0
+    version: 3.15.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
