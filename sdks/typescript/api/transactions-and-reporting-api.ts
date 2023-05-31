@@ -41,10 +41,11 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {string | Date} [endDate] 
          * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
          * @param {string} [brokerageAuthorizations] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+         * @param {string} [type] Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getActivities: async (userId: string, userSecret: string, startDate?: string | Date, endDate?: string | Date, accounts?: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getActivities: async (userId: string, userSecret: string, startDate?: string | Date, endDate?: string | Date, accounts?: string, brokerageAuthorizations?: string, type?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getActivities', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -85,6 +86,10 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
 
             if (brokerageAuthorizations !== undefined) {
                 localVarQueryParameter['brokerageAuthorizations'] = brokerageAuthorizations;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
             }
 
             if (userId !== undefined) {
@@ -219,7 +224,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
          * @throws {RequiredError}
          */
         async getActivities(requestParameters: TransactionsAndReportingApiGetActivitiesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalActivity>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.accounts, requestParameters.brokerageAuthorizations, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.accounts, requestParameters.brokerageAuthorizations, requestParameters.type, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -314,6 +319,13 @@ export type TransactionsAndReportingApiGetActivitiesRequest = {
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly brokerageAuthorizations?: string
+    
+    /**
+    * Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    * @type {string}
+    * @memberof TransactionsAndReportingApiGetActivities
+    */
+    readonly type?: string
     
 }
 

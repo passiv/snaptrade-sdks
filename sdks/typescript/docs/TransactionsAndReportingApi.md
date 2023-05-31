@@ -36,6 +36,7 @@ const getActivitiesResponse =
       "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     brokerageAuthorizations:
       "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
+    type: "DIVIDEND",
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
   });
@@ -54,6 +55,7 @@ Name | Type | Description  | Notes
  **endDate** | [**string | Date**] |  | (optional) defaults to undefined
  **accounts** | [**string**] | Optional comma seperated list of account IDs used to filter the request on specific accounts | (optional) defaults to undefined
  **brokerageAuthorizations** | [**string**] | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | (optional) defaults to undefined
+ **type** | [**string**] | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | (optional) defaults to undefined
 
 
 ### Return type

@@ -40,6 +40,7 @@ StartDateSchema = schemas.DateSchema
 EndDateSchema = schemas.DateSchema
 AccountsSchema = schemas.StrSchema
 BrokerageAuthorizationsSchema = schemas.StrSchema
+TypeSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
@@ -56,6 +57,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
         'endDate': typing.Union[EndDateSchema, str, date, ],
         'accounts': typing.Union[AccountsSchema, str, ],
         'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
+        'type': typing.Union[TypeSchema, str, ],
     },
     total=False
 )
@@ -87,6 +89,12 @@ request_query_brokerage_authorizations = api_client.QueryParameter(
     name="brokerageAuthorizations",
     style=api_client.ParameterStyle.FORM,
     schema=BrokerageAuthorizationsSchema,
+    explode=True,
+)
+request_query_type = api_client.QueryParameter(
+    name="type",
+    style=api_client.ParameterStyle.FORM,
+    schema=TypeSchema,
     explode=True,
 )
 request_query_user_id = api_client.QueryParameter(
@@ -179,6 +187,7 @@ class BaseApi(api_client.Api):
         end_date: typing.Optional[date] = None,
         accounts: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
+        type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -191,6 +200,8 @@ class BaseApi(api_client.Api):
             _query_params["accounts"] = accounts
         if brokerage_authorizations is not None:
             _query_params["brokerageAuthorizations"] = brokerage_authorizations
+        if type is not None:
+            _query_params["type"] = type
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
@@ -226,6 +237,7 @@ class BaseApi(api_client.Api):
             request_query_end_date,
             request_query_accounts,
             request_query_brokerage_authorizations,
+            request_query_type,
             request_query_user_id,
             request_query_user_secret,
         ):
@@ -330,6 +342,7 @@ class BaseApi(api_client.Api):
             request_query_end_date,
             request_query_accounts,
             request_query_brokerage_authorizations,
+            request_query_type,
             request_query_user_id,
             request_query_user_secret,
         ):
@@ -396,6 +409,7 @@ class GetActivities(BaseApi):
         end_date: typing.Optional[date] = None,
         accounts: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
+        type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -411,6 +425,7 @@ class GetActivities(BaseApi):
             end_date=end_date,
             accounts=accounts,
             brokerage_authorizations=brokerage_authorizations,
+            type=type,
         )
         return await self._aget_activities_oapg(
             query_params=args.query,
@@ -424,6 +439,7 @@ class GetActivities(BaseApi):
         end_date: typing.Optional[date] = None,
         accounts: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
+        type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -438,6 +454,7 @@ class GetActivities(BaseApi):
             end_date=end_date,
             accounts=accounts,
             brokerage_authorizations=brokerage_authorizations,
+            type=type,
         )
         return self._get_activities_oapg(
             query_params=args.query,
@@ -454,6 +471,7 @@ class ApiForget(BaseApi):
         end_date: typing.Optional[date] = None,
         accounts: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
+        type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -469,6 +487,7 @@ class ApiForget(BaseApi):
             end_date=end_date,
             accounts=accounts,
             brokerage_authorizations=brokerage_authorizations,
+            type=type,
         )
         return await self._aget_activities_oapg(
             query_params=args.query,
@@ -482,6 +501,7 @@ class ApiForget(BaseApi):
         end_date: typing.Optional[date] = None,
         accounts: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
+        type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -496,6 +516,7 @@ class ApiForget(BaseApi):
             end_date=end_date,
             accounts=accounts,
             brokerage_authorizations=brokerage_authorizations,
+            type=type,
         )
         return self._get_activities_oapg(
             query_params=args.query,
