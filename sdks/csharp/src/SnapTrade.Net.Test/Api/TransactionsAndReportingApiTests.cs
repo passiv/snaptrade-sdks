@@ -68,7 +68,8 @@ namespace SnapTrade.Net.Test.Api
             //DateTime? endDate = null;
             //string accounts = null;
             //string brokerageAuthorizations = null;
-            //var response = instance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
+            //string type = null;
+            //var response = instance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
             //Assert.IsType<List<UniversalActivity>>(response);
         }
 

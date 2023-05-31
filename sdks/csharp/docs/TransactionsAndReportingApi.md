@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getactivities"></a>
 # **GetActivities**
-> List&lt;UniversalActivity&gt; GetActivities (string userId, string userSecret, DateTime? startDate = null, DateTime? endDate = null, string accounts = null, string brokerageAuthorizations = null)
+> List&lt;UniversalActivity&gt; GetActivities (string userId, string userSecret, DateTime? startDate = null, DateTime? endDate = null, string accounts = null, string brokerageAuthorizations = null, string type = null)
 
 Get transaction history for a user
 
@@ -45,11 +45,12 @@ namespace Example
             var endDate = DateTime.Parse("2013-10-20");  // DateTime? |  (optional) 
             var accounts = "accounts_example";  // string | Optional comma seperated list of account IDs used to filter the request on specific accounts (optional) 
             var brokerageAuthorizations = "brokerageAuthorizations_example";  // string | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional) 
+            var type = DIVIDEND;  // string | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional) 
 
             try
             {
                 // Get transaction history for a user
-                List<UniversalActivity> result = apiInstance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
+                List<UniversalActivity> result = apiInstance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -76,7 +77,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get transaction history for a user
-    ApiResponse<List<UniversalActivity>> response = apiInstance.GetActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
+    ApiResponse<List<UniversalActivity>> response = apiInstance.GetActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -99,6 +100,7 @@ catch (ApiException e)
 | **endDate** | **DateTime?** |  | [optional]  |
 | **accounts** | **string** | Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional]  |
 | **brokerageAuthorizations** | **string** | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional]  |
+| **type** | **string** | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional]  |
 
 ### Return type
 

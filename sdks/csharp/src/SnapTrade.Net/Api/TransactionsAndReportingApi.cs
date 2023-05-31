@@ -40,9 +40,10 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalActivity&gt;</returns>
-        List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
+        List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0);
 
         /// <summary>
         /// Get transaction history for a user
@@ -57,9 +58,10 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0);
+        ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0);
         /// <summary>
         /// Get performance information for a specific timeframe
         /// </summary>
@@ -117,10 +119,11 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get transaction history for a user
@@ -135,10 +138,11 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get performance information for a specific timeframe
         /// </summary>
@@ -306,11 +310,12 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalActivity&gt;</returns>
-        public List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
+        public List<UniversalActivity> GetActivities(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = GetActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations);
+            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = GetActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
             return localVarResponse.Data;
         }
 
@@ -324,9 +329,10 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> GetActivitiesWithHttpInfo(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -377,6 +383,10 @@ namespace SnapTrade.Net.Api
             if (brokerageAuthorizations != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations, ""));
+            }
+            if (type != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
             }
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
@@ -424,12 +434,13 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<UniversalActivity>> GetActivitiesAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = await GetActivitiesWithHttpInfoAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = await GetActivitiesWithHttpInfoAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -443,10 +454,11 @@ namespace SnapTrade.Net.Api
         /// <param name="endDate"> (optional)</param>
         /// <param name="accounts">Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)</param>
         /// <param name="brokerageAuthorizations">Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)</param>
+        /// <param name="type">Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>>> GetActivitiesWithHttpInfoAsync(string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string accounts = default(string), string brokerageAuthorizations = default(string), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -498,6 +510,10 @@ namespace SnapTrade.Net.Api
             if (brokerageAuthorizations != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "brokerageAuthorizations", brokerageAuthorizations, ""));
+            }
+            if (type != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
             }
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));

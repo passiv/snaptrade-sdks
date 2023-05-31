@@ -27,6 +27,7 @@ start_date = "2022-01-24"
 end_date = "2022-01-24"
 accounts = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+type = "DIVIDEND"
 
 begin
   # Get transaction history for a user
@@ -37,6 +38,7 @@ begin
     end_date: end_date,
     accounts: accounts,
     brokerage_authorizations: brokerage_authorizations,
+    type: type,
   )
   p result
 rescue SnapTrade::ApiError => e
@@ -55,6 +57,7 @@ start_date = "2022-01-24"
 end_date = "2022-01-24"
 accounts = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+type = "DIVIDEND"
 
 begin
   # Get transaction history for a user
@@ -65,6 +68,7 @@ begin
     end_date: end_date,
     accounts: accounts,
     brokerage_authorizations: brokerage_authorizations,
+    type: type,
   )
   p status_code # => 2xx
   p headers # => { ... }
@@ -84,6 +88,7 @@ end
 | **end_date** | **Date** |  | [optional] |
 | **accounts** | **String** | Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional] |
 | **brokerage_authorizations** | **String** | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional] |
+| **type** | **String** | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional] |
 
 ### Return type
 

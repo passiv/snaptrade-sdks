@@ -37,6 +37,7 @@ try:
         end_date="2022-01-24",  # optional
         accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
         brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
+        type="DIVIDEND",  # optional
     )
     pprint(get_activities_response.body)
     pprint(get_activities_response.body["id"])
@@ -84,6 +85,7 @@ startDate | StartDateSchema | | optional
 endDate | EndDateSchema | | optional
 accounts | AccountsSchema | | optional
 brokerageAuthorizations | BrokerageAuthorizationsSchema | | optional
+type | TypeSchema | | optional
 userId | UserIdSchema | | 
 userSecret | UserSecretSchema | | 
 
@@ -123,6 +125,13 @@ Comma seperated list of brokerage authorization IDs
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 str,  | str,  | Comma seperated list of brokerage authorization IDs | 
+
+# TypeSchema
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  |  | 
 
 # UserIdSchema
 
