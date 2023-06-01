@@ -4968,6 +4968,11 @@ components:
         settlement_date:
           type: string
           example: 2022-01-06T05:00:00Z
+        external_reference_id:
+          type: string
+          nullable: true
+          description: Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         symbol:
           $ref: "#/components/schemas/Symbol"
         option_symbol:
