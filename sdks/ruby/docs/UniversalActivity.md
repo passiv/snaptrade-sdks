@@ -14,6 +14,7 @@
 | **option_type** | **String** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] |
 | **price** | **Float** |  | [optional] |
 | **settlement_date** | **String** |  | [optional] |
+| **external_reference_id** | **String** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id | [optional] |
 | **symbol** | [**Symbol**](Symbol.md) |  | [optional] |
 | **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] |
 | **trade_date** | **String** |  | [optional] |
@@ -36,6 +37,7 @@ instance = SnapTrade::UniversalActivity.new(
   option_type: BUY_TO_OPEN,
   price: 0.4,
   settlement_date: 2022-01-06T05:00:00.000Z,
+  external_reference_id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6,
   symbol: null,
   option_symbol: null,
   trade_date: 2022-01-06T05:00:00.000Z,

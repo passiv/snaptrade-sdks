@@ -20,6 +20,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **option_type** | str,  | str,  | If an option transaction, then it&#x27;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] 
 **price** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
 **settlement_date** | str,  | str,  |  | [optional] 
+**external_reference_id** | None, str,  | NoneClass, str,  | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id | [optional] 
 **symbol** | [**Symbol**](Symbol.md) | [**Symbol**](Symbol.md) |  | [optional] 
 **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **trade_date** | None, str,  | NoneClass, str,  |  | [optional] 

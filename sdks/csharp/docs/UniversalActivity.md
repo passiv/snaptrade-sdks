@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **OptionType** | **string** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] 
 **Price** | **decimal** |  | [optional] 
 **SettlementDate** | **string** |  | [optional] 
+**ExternalReferenceId** | **string** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id | [optional] 
 **Symbol** | [**Symbol**](Symbol.md) |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **TradeDate** | **string** |  | [optional] 

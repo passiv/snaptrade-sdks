@@ -50,6 +50,7 @@ try:
     pprint(get_activities_response.body["option_type"])
     pprint(get_activities_response.body["price"])
     pprint(get_activities_response.body["settlement_date"])
+    pprint(get_activities_response.body["external_reference_id"])
     pprint(get_activities_response.body["symbol"])
     pprint(get_activities_response.body["option_symbol"])
     pprint(get_activities_response.body["trade_date"])

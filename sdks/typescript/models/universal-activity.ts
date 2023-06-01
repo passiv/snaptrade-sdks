@@ -94,6 +94,12 @@ export interface UniversalActivity {
      */
     'settlement_date'?: string;
     /**
+     * Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+     * @type {string}
+     * @memberof UniversalActivity
+     */
+    'external_reference_id'?: string | null;
+    /**
      * 
      * @type {Symbol}
      * @memberof UniversalActivity

@@ -45,12 +45,13 @@ namespace SnapTrade.Net.Model
         /// <param name="optionType">If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string.</param>
         /// <param name="price">price.</param>
         /// <param name="settlementDate">settlementDate.</param>
+        /// <param name="externalReferenceId">Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="tradeDate">tradeDate.</param>
         /// <param name="type">Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT.</param>
         /// <param name="units">Usually but not necessarily an integer.</param>
-        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
+        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), string externalReferenceId = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -62,6 +63,7 @@ namespace SnapTrade.Net.Model
             this.OptionType = optionType;
             this.Price = price;
             this.SettlementDate = settlementDate;
+            this.ExternalReferenceId = externalReferenceId;
             this.Symbol = symbol;
             this.OptionSymbol = optionSymbol;
             this.TradeDate = tradeDate;
@@ -132,6 +134,13 @@ namespace SnapTrade.Net.Model
         public string SettlementDate { get; set; }
 
         /// <summary>
+        /// Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+        /// </summary>
+        /// <value>Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id</value>
+        [DataMember(Name = "external_reference_id", EmitDefaultValue = true)]
+        public string ExternalReferenceId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
@@ -188,6 +197,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OptionType: ").Append(OptionType).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  SettlementDate: ").Append(SettlementDate).Append("\n");
+            sb.Append("  ExternalReferenceId: ").Append(ExternalReferenceId).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  TradeDate: ").Append(TradeDate).Append("\n");
@@ -278,6 +288,11 @@ namespace SnapTrade.Net.Model
                     this.SettlementDate.Equals(input.SettlementDate))
                 ) && base.Equals(input) && 
                 (
+                    this.ExternalReferenceId == input.ExternalReferenceId ||
+                    (this.ExternalReferenceId != null &&
+                    this.ExternalReferenceId.Equals(input.ExternalReferenceId))
+                ) && base.Equals(input) && 
+                (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
@@ -346,6 +361,10 @@ namespace SnapTrade.Net.Model
                 if (this.SettlementDate != null)
                 {
                     hashCode = (hashCode * 59) + this.SettlementDate.GetHashCode();
+                }
+                if (this.ExternalReferenceId != null)
+                {
+                    hashCode = (hashCode * 59) + this.ExternalReferenceId.GetHashCode();
                 }
                 if (this.Symbol != null)
                 {

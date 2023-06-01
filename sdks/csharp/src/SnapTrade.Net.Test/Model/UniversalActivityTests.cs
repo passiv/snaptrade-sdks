@@ -138,6 +138,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'SettlementDate'
         }
         /// <summary>
+        /// Test the property 'ExternalReferenceId'
+        /// </summary>
+        [Fact]
+        public void ExternalReferenceIdTest()
+        {
+            // TODO unit test for the property 'ExternalReferenceId'
+        }
+        /// <summary>
         /// Test the property 'Symbol'
         /// </summary>
         [Fact]

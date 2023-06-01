@@ -45,6 +45,9 @@ class OptionalUniversalActivity(TypedDict, total=False):
 
     settlement_date: str
 
+    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+    external_reference_id: typing.Optional[str]
+
     symbol: Symbol
 
     option_symbol: OptionsSymbol

@@ -35,6 +35,9 @@ module SnapTrade
 
     attr_accessor :settlement_date
 
+    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+    attr_accessor :external_reference_id
+
     attr_accessor :symbol
 
     attr_accessor :option_symbol
@@ -60,6 +63,7 @@ module SnapTrade
         :'option_type' => :'option_type',
         :'price' => :'price',
         :'settlement_date' => :'settlement_date',
+        :'external_reference_id' => :'external_reference_id',
         :'symbol' => :'symbol',
         :'option_symbol' => :'option_symbol',
         :'trade_date' => :'trade_date',
@@ -86,6 +90,7 @@ module SnapTrade
         :'option_type' => :'String',
         :'price' => :'Float',
         :'settlement_date' => :'String',
+        :'external_reference_id' => :'String',
         :'symbol' => :'Symbol',
         :'option_symbol' => :'OptionsSymbol',
         :'trade_date' => :'String',
@@ -98,6 +103,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'amount',
+        :'external_reference_id',
         :'trade_date',
       ])
     end
@@ -157,6 +163,10 @@ module SnapTrade
         self.settlement_date = attributes[:'settlement_date']
       end
 
+      if attributes.key?(:'external_reference_id')
+        self.external_reference_id = attributes[:'external_reference_id']
+      end
+
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
       end
@@ -206,6 +216,7 @@ module SnapTrade
           option_type == o.option_type &&
           price == o.price &&
           settlement_date == o.settlement_date &&
+          external_reference_id == o.external_reference_id &&
           symbol == o.symbol &&
           option_symbol == o.option_symbol &&
           trade_date == o.trade_date &&
@@ -222,7 +233,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, amount, currency, description, fee, institution, option_type, price, settlement_date, symbol, option_symbol, trade_date, type, units].hash
+      [id, account, amount, currency, description, fee, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
     end
 
     # Builds the object from hash
