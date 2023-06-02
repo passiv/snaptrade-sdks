@@ -86,20 +86,7 @@ export interface TradeExecutionStatus {
     'meta'?: { [key: string]: any; };
 }
 
-export const TradeExecutionStatusStateEnum = {
-    Executed: 'Executed',
-    Canceled: 'Canceled',
-    Rejected: 'Rejected',
-    Failed: 'Failed',
-    NotExecuted: 'Not Executed'
-} as const;
-
-export type TradeExecutionStatusStateEnum = typeof TradeExecutionStatusStateEnum[keyof typeof TradeExecutionStatusStateEnum];
-export const TradeExecutionStatusActionEnum = {
-    Buy: 'BUY',
-    Sell: 'SELL'
-} as const;
-
-export type TradeExecutionStatusActionEnum = typeof TradeExecutionStatusActionEnum[keyof typeof TradeExecutionStatusActionEnum];
+type TradeExecutionStatusStateEnum = 'Executed' | 'Canceled' | 'Rejected' | 'Failed' | 'Not Executed'
+type TradeExecutionStatusActionEnum = 'BUY' | 'SELL'
 
 

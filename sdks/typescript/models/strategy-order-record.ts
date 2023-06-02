@@ -92,42 +92,8 @@ export interface StrategyOrderRecord {
     'time_updated'?: string;
 }
 
-export const StrategyOrderRecordStatusEnum = {
-    Pending: 'PENDING',
-    Accepted: 'ACCEPTED',
-    Failed: 'FAILED',
-    Rejected: 'REJECTED',
-    Canceled: 'CANCELED',
-    PartialCanceled: 'PARTIAL_CANCELED',
-    CancelPending: 'CANCEL_PENDING',
-    Executed: 'EXECUTED',
-    Partial: 'PARTIAL',
-    ReplacePending: 'REPLACE_PENDING',
-    Replaced: 'REPLACED',
-    Stopped: 'STOPPED',
-    Suspended: 'SUSPENDED',
-    Expired: 'EXPIRED',
-    Queued: 'QUEUED',
-    Triggered: 'TRIGGERED',
-    Activated: 'ACTIVATED',
-    PendingRiskReview: 'PENDING_RISK_REVIEW',
-    ContingentOrder: 'CONTINGENT_ORDER'
-} as const;
-
-export type StrategyOrderRecordStatusEnum = typeof StrategyOrderRecordStatusEnum[keyof typeof StrategyOrderRecordStatusEnum];
-export const StrategyOrderRecordOrderTypeEnum = {
-    Limit: 'Limit',
-    Market: 'Market',
-    NetDebit: 'NetDebit',
-    NetCredit: 'NetCredit'
-} as const;
-
-export type StrategyOrderRecordOrderTypeEnum = typeof StrategyOrderRecordOrderTypeEnum[keyof typeof StrategyOrderRecordOrderTypeEnum];
-export const StrategyOrderRecordTimeInForceEnum = {
-    Day: 'DAY',
-    Gtc: 'GTC'
-} as const;
-
-export type StrategyOrderRecordTimeInForceEnum = typeof StrategyOrderRecordTimeInForceEnum[keyof typeof StrategyOrderRecordTimeInForceEnum];
+type StrategyOrderRecordStatusEnum = 'PENDING' | 'ACCEPTED' | 'FAILED' | 'REJECTED' | 'CANCELED' | 'PARTIAL_CANCELED' | 'CANCEL_PENDING' | 'EXECUTED' | 'PARTIAL' | 'REPLACE_PENDING' | 'REPLACED' | 'STOPPED' | 'SUSPENDED' | 'EXPIRED' | 'QUEUED' | 'TRIGGERED' | 'ACTIVATED' | 'PENDING_RISK_REVIEW' | 'CONTINGENT_ORDER'
+type StrategyOrderRecordOrderTypeEnum = 'Limit' | 'Market' | 'NetDebit' | 'NetCredit'
+type StrategyOrderRecordTimeInForceEnum = 'DAY' | 'GTC'
 
 

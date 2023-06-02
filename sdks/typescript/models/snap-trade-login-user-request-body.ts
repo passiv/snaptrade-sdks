@@ -51,11 +51,6 @@ export interface SnapTradeLoginUserRequestBody {
     'connectionType'?: SnapTradeLoginUserRequestBodyConnectionTypeEnum;
 }
 
-export const SnapTradeLoginUserRequestBodyConnectionTypeEnum = {
-    Read: 'read',
-    Trade: 'trade'
-} as const;
-
-export type SnapTradeLoginUserRequestBodyConnectionTypeEnum = typeof SnapTradeLoginUserRequestBodyConnectionTypeEnum[keyof typeof SnapTradeLoginUserRequestBodyConnectionTypeEnum];
+type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade'
 
 

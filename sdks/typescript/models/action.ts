@@ -18,13 +18,5 @@
  * @export
  * @enum {string}
  */
-
-export const Action = {
-    Buy: 'BUY',
-    Sell: 'SELL'
-} as const;
-
-export type Action = typeof Action[keyof typeof Action];
-
-
+export type Action = 'BUY' | 'SELL'
 

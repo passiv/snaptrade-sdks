@@ -50,19 +50,7 @@ export interface BrokerageAuthorizationTypeReadOnly {
     'brokerage'?: BrokerageAuthorizationTypeReadOnlyBrokerage;
 }
 
-export const BrokerageAuthorizationTypeReadOnlyTypeEnum = {
-    Read: 'read',
-    Trade: 'trade'
-} as const;
-
-export type BrokerageAuthorizationTypeReadOnlyTypeEnum = typeof BrokerageAuthorizationTypeReadOnlyTypeEnum[keyof typeof BrokerageAuthorizationTypeReadOnlyTypeEnum];
-export const BrokerageAuthorizationTypeReadOnlyAuthTypeEnum = {
-    Oauth: 'OAUTH',
-    Scrape: 'SCRAPE',
-    UnofficialApi: 'UNOFFICIAL_API',
-    Token: 'TOKEN'
-} as const;
-
-export type BrokerageAuthorizationTypeReadOnlyAuthTypeEnum = typeof BrokerageAuthorizationTypeReadOnlyAuthTypeEnum[keyof typeof BrokerageAuthorizationTypeReadOnlyAuthTypeEnum];
+type BrokerageAuthorizationTypeReadOnlyTypeEnum = 'read' | 'trade'
+type BrokerageAuthorizationTypeReadOnlyAuthTypeEnum = 'OAUTH' | 'SCRAPE' | 'UNOFFICIAL_API' | 'TOKEN'
 
 

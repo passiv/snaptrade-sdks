@@ -41,13 +41,6 @@ export interface OptionLeg {
     'quantity'?: number;
 }
 
-export const OptionLegActionEnum = {
-    BuyToOpen: 'BUY_TO_OPEN',
-    BuyToClose: 'BUY_TO_CLOSE',
-    SellToOpen: 'SELL_TO_OPEN',
-    SellToClose: 'SELL_TO_CLOSE'
-} as const;
-
-export type OptionLegActionEnum = typeof OptionLegActionEnum[keyof typeof OptionLegActionEnum];
+type OptionLegActionEnum = 'BUY_TO_OPEN' | 'BUY_TO_CLOSE' | 'SELL_TO_OPEN' | 'SELL_TO_CLOSE'
 
 

@@ -53,11 +53,6 @@ export interface CashRestriction {
     'amount'?: number;
 }
 
-export const CashRestrictionTypeEnum = {
-    AllocateMax: 'ALLOCATE_MAX',
-    RetainMin: 'RETAIN_MIN'
-} as const;
-
-export type CashRestrictionTypeEnum = typeof CashRestrictionTypeEnum[keyof typeof CashRestrictionTypeEnum];
+type CashRestrictionTypeEnum = 'ALLOCATE_MAX' | 'RETAIN_MIN'
 
 

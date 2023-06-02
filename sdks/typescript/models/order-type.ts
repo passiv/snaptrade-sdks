@@ -18,15 +18,5 @@
  * @export
  * @enum {string}
  */
-
-export const OrderType = {
-    Limit: 'Limit',
-    Market: 'Market',
-    StopLimit: 'StopLimit',
-    StopLoss: 'StopLoss'
-} as const;
-
-export type OrderType = typeof OrderType[keyof typeof OrderType];
-
-
+export type OrderType = 'Limit' | 'Market' | 'StopLimit' | 'StopLoss'
 

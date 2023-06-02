@@ -29,11 +29,6 @@ export interface BrokerageAuthorizationType {
     'type'?: BrokerageAuthorizationTypeTypeEnum;
 }
 
-export const BrokerageAuthorizationTypeTypeEnum = {
-    Read: 'read',
-    Trade: 'trade'
-} as const;
-
-export type BrokerageAuthorizationTypeTypeEnum = typeof BrokerageAuthorizationTypeTypeEnum[keyof typeof BrokerageAuthorizationTypeTypeEnum];
+type BrokerageAuthorizationTypeTypeEnum = 'read' | 'trade'
 
 

@@ -41,12 +41,6 @@ export interface ModelPortfolio {
     'model_type'?: ModelPortfolioModelTypeEnum;
 }
 
-export const ModelPortfolioModelTypeEnum = {
-    NUMBER_MINUS_1: -1,
-    NUMBER_0: 0,
-    NUMBER_1: 1
-} as const;
-
-export type ModelPortfolioModelTypeEnum = typeof ModelPortfolioModelTypeEnum[keyof typeof ModelPortfolioModelTypeEnum];
+type ModelPortfolioModelTypeEnum = -1 | 0 | 1
 
 

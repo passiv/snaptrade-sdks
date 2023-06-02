@@ -65,16 +65,6 @@ export interface SessionEvent {
     'brokerage_authorization_id'?: string;
 }
 
-export const SessionEventSessionEventTypeEnum = {
-    ConnectionFailed: 'CONNECTION_FAILED',
-    DisclaimerAccepted: 'DISCLAIMER_ACCEPTED',
-    BrokerageConnectionInitiated: 'BROKERAGE_CONNECTION_INITIATED',
-    BrokerageAuthentication: 'BROKERAGE_AUTHENTICATION',
-    MfaAuthorization: 'MFA_AUTHORIZATION',
-    ConnectionSuccessful: 'CONNECTION_SUCCESSFUL',
-    PartnerRedirect: 'PARTNER_REDIRECT'
-} as const;
-
-export type SessionEventSessionEventTypeEnum = typeof SessionEventSessionEventTypeEnum[keyof typeof SessionEventSessionEventTypeEnum];
+type SessionEventSessionEventTypeEnum = 'CONNECTION_FAILED' | 'DISCLAIMER_ACCEPTED' | 'BROKERAGE_CONNECTION_INITIATED' | 'BROKERAGE_AUTHENTICATION' | 'MFA_AUTHORIZATION' | 'CONNECTION_SUCCESSFUL' | 'PARTNER_REDIRECT'
 
 

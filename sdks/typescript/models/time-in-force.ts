@@ -18,14 +18,5 @@
  * @export
  * @enum {string}
  */
-
-export const TimeInForce = {
-    Day: 'Day',
-    Fok: 'FOK',
-    Gtc: 'GTC'
-} as const;
-
-export type TimeInForce = typeof TimeInForce[keyof typeof TimeInForce];
-
-
+export type TimeInForce = 'Day' | 'FOK' | 'GTC'
 

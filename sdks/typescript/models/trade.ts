@@ -78,11 +78,6 @@ export interface Trade {
     'sequence'?: number;
 }
 
-export const TradeActionEnum = {
-    Buy: 'BUY',
-    Sell: 'SELL'
-} as const;
-
-export type TradeActionEnum = typeof TradeActionEnum[keyof typeof TradeActionEnum];
+type TradeActionEnum = 'BUY' | 'SELL'
 
 

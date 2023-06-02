@@ -42,10 +42,6 @@ export interface OptionsGetOptionStrategyRequest {
     'strategy_type': OptionsGetOptionStrategyRequestStrategyTypeEnum;
 }
 
-export const OptionsGetOptionStrategyRequestStrategyTypeEnum = {
-    Custom: 'CUSTOM'
-} as const;
-
-export type OptionsGetOptionStrategyRequestStrategyTypeEnum = typeof OptionsGetOptionStrategyRequestStrategyTypeEnum[keyof typeof OptionsGetOptionStrategyRequestStrategyTypeEnum];
+type OptionsGetOptionStrategyRequestStrategyTypeEnum = 'CUSTOM'
 
 

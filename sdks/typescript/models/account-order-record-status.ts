@@ -18,31 +18,5 @@
  * @export
  * @enum {string}
  */
-
-export const AccountOrderRecordStatus = {
-    None: 'NONE',
-    Pending: 'PENDING',
-    Accepted: 'ACCEPTED',
-    Failed: 'FAILED',
-    Rejected: 'REJECTED',
-    Canceled: 'CANCELED',
-    PartialCanceled: 'PARTIAL_CANCELED',
-    CancelPending: 'CANCEL_PENDING',
-    Executed: 'EXECUTED',
-    Partial: 'PARTIAL',
-    ReplacePending: 'REPLACE_PENDING',
-    Replaced: 'REPLACED',
-    Stopped: 'STOPPED',
-    Suspended: 'SUSPENDED',
-    Expired: 'EXPIRED',
-    Queued: 'QUEUED',
-    Triggered: 'TRIGGERED',
-    Activated: 'ACTIVATED',
-    PendingRiskReview: 'PENDING_RISK_REVIEW',
-    ContingentOrder: 'CONTINGENT_ORDER'
-} as const;
-
-export type AccountOrderRecordStatus = typeof AccountOrderRecordStatus[keyof typeof AccountOrderRecordStatus];
-
-
+export type AccountOrderRecordStatus = 'NONE' | 'PENDING' | 'ACCEPTED' | 'FAILED' | 'REJECTED' | 'CANCELED' | 'PARTIAL_CANCELED' | 'CANCEL_PENDING' | 'EXECUTED' | 'PARTIAL' | 'REPLACE_PENDING' | 'REPLACED' | 'STOPPED' | 'SUSPENDED' | 'EXPIRED' | 'QUEUED' | 'TRIGGERED' | 'ACTIVATED' | 'PENDING_RISK_REVIEW' | 'CONTINGENT_ORDER'
 

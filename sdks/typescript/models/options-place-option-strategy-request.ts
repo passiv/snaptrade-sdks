@@ -39,19 +39,7 @@ export interface OptionsPlaceOptionStrategyRequest {
     'price': number;
 }
 
-export const OptionsPlaceOptionStrategyRequestOrderTypeEnum = {
-    Limit: 'Limit',
-    Market: 'Market',
-    NetDebit: 'NetDebit',
-    NetCredit: 'NetCredit'
-} as const;
-
-export type OptionsPlaceOptionStrategyRequestOrderTypeEnum = typeof OptionsPlaceOptionStrategyRequestOrderTypeEnum[keyof typeof OptionsPlaceOptionStrategyRequestOrderTypeEnum];
-export const OptionsPlaceOptionStrategyRequestTimeInForceEnum = {
-    Day: 'DAY',
-    Gtc: 'GTC'
-} as const;
-
-export type OptionsPlaceOptionStrategyRequestTimeInForceEnum = typeof OptionsPlaceOptionStrategyRequestTimeInForceEnum[keyof typeof OptionsPlaceOptionStrategyRequestTimeInForceEnum];
+type OptionsPlaceOptionStrategyRequestOrderTypeEnum = 'Limit' | 'Market' | 'NetDebit' | 'NetCredit'
+type OptionsPlaceOptionStrategyRequestTimeInForceEnum = 'DAY' | 'GTC'
 
 
