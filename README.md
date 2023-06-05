@@ -4,11 +4,11 @@
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
 |Java|3.0.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/3.0.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
-|Ruby|1.3.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.3.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
-|Python|10.17.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.17.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
-|TypeScript|8.13.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.13.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
-|C#|3.17.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.17.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
-|PHP|1.7.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.7.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
+|Ruby|1.4.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.4.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
+|Python|10.18.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.18.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
+|TypeScript|8.14.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.14.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
+|C#|3.18.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.18.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
+|PHP|1.8.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.8.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
 
 
 ## How to regenerate SDKs

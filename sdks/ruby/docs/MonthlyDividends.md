@@ -13,7 +13,7 @@
 require 'snaptrade'
 
 instance = SnapTrade::MonthlyDividends.new(
-  date: Sun Jan 23 16:00:00 PST 2022,
+  date: Sun Jan 23 17:00:00 MST 2022,
   dividends: null
 )
 ```

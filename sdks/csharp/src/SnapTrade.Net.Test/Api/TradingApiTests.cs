@@ -121,7 +121,7 @@ namespace SnapTrade.Net.Test.Api
             //string userId = null;
             //string userSecret = null;
             //string symbols = null;
-            //Guid accountId = null;
+            //string accountId = null;
             //bool? useTicker = null;
             //var response = instance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
             //Assert.IsType<SymbolsQuotes>(response);

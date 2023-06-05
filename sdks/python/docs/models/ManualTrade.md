@@ -11,7 +11,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  | A manual trade object 
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
-**account** | [**Account**](Account.md) | [**Account**](Account.md) |  | [optional] 
+**account** | str,  | str,  |  | [optional] 
 **order_type** | [**OrderType**](OrderType.md) | [**OrderType**](OrderType.md) |  | [optional] 
 **time_in_force** | [**TimeInForce**](TimeInForce.md) | [**TimeInForce**](TimeInForce.md) |  | [optional] 
 **symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
