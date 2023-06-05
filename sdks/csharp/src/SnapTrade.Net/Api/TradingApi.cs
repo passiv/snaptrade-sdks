@@ -134,7 +134,7 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SymbolsQuotes</returns>
-        SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0);
+        SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// Get symbol quotes
@@ -150,7 +150,7 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SymbolsQuotes</returns>
-        ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0);
+        ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
         /// <summary>
         /// Modify units of a trade before it is placed
         /// </summary>
@@ -411,7 +411,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SymbolsQuotes</returns>
-        System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get symbol quotes
@@ -428,7 +428,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SymbolsQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Modify units of a trade before it is placed
         /// </summary>
@@ -1477,7 +1477,7 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SymbolsQuotes</returns>
-        public SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0)
+        public SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> localVarResponse = GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
             return localVarResponse.Data;
@@ -1494,7 +1494,7 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SymbolsQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1512,6 +1512,12 @@ namespace SnapTrade.Net.Api
             if (symbols == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbols' when calling TradingApi->GetUserAccountQuotes");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetUserAccountQuotes");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1590,7 +1596,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SymbolsQuotes</returns>
-        public async System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> localVarResponse = await GetUserAccountQuotesWithHttpInfoAsync(userId, userSecret, symbols, accountId, useTicker, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1608,7 +1614,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SymbolsQuotes)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, Guid accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1626,6 +1632,12 @@ namespace SnapTrade.Net.Api
             if (symbols == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbols' when calling TradingApi->GetUserAccountQuotes");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetUserAccountQuotes");
             }
 
 

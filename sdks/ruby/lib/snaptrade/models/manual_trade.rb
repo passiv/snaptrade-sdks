@@ -55,7 +55,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'account' => :'Account',
+        :'account' => :'String',
         :'order_type' => :'OrderType',
         :'time_in_force' => :'TimeInForce',
         :'symbol' => :'ManualTradeSymbol',

@@ -14,9 +14,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Account } from './account';
-// May contain unused imports in some cases
-// @ts-ignore
 import { Action } from './action';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -44,10 +41,10 @@ export interface ManualTrade {
     'id'?: string;
     /**
      * 
-     * @type {Account}
+     * @type {string}
      * @memberof ManualTrade
      */
-    'account'?: Account;
+    'account'?: string;
     /**
      * 
      * @type {OrderType}

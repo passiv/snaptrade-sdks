@@ -15,7 +15,6 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.account import Account
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type import OrderType
@@ -27,7 +26,7 @@ class RequiredManualTrade(TypedDict):
 class OptionalManualTrade(TypedDict, total=False):
     id: str
 
-    account: Account
+    account: str
 
     order_type: OrderType
 

@@ -38,10 +38,7 @@ class ManualTrade(
         
         class properties:
             id = schemas.UUIDSchema
-        
-            @staticmethod
-            def account() -> typing.Type['Account']:
-                return Account
+            account = schemas.StrSchema
         
             @staticmethod
             def order_type() -> typing.Type['OrderType']:
@@ -76,7 +73,7 @@ class ManualTrade(
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["account"]) -> 'Account': ...
+    def __getitem__(self, name: typing_extensions.Literal["account"]) -> MetaOapg.properties.account: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
@@ -107,7 +104,7 @@ class ManualTrade(
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union['Account', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union[MetaOapg.properties.account, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderType', schemas.Unset]: ...
@@ -137,7 +134,7 @@ class ManualTrade(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        account: typing.Union['Account', schemas.Unset] = schemas.unset,
+        account: typing.Union[MetaOapg.properties.account, str, schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
         symbol: typing.Union['ManualTradeSymbol', schemas.Unset] = schemas.unset,
@@ -162,7 +159,6 @@ class ManualTrade(
             **kwargs,
         )
 
-from snaptrade_client.model.account import Account
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.order_type import OrderType

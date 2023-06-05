@@ -678,7 +678,7 @@ accountId | AccountIdSchema | |
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
+str,  | str,  |  | 
 
 ### Return Types, Responses
 

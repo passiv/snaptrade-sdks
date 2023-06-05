@@ -61,7 +61,7 @@ namespace SnapTrade.Net.Model
         /// <param name="action">action.</param>
         /// <param name="units">Trade Units.</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(Guid id = default(Guid), Account account = default(Account), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), ManualTradeSymbol symbol = default(ManualTradeSymbol), Action? action = default(Action?), decimal units = default(decimal), decimal price = default(decimal)) : base()
+        public ManualTrade(Guid id = default(Guid), string account = default(string), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), ManualTradeSymbol symbol = default(ManualTradeSymbol), Action? action = default(Action?), decimal units = default(decimal), decimal price = default(decimal)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -84,7 +84,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Account
         /// </summary>
         [DataMember(Name = "account", EmitDefaultValue = false)]
-        public Account Account { get; set; }
+        public string Account { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol

@@ -6,7 +6,7 @@ A manual trade object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **Guid** |  | [optional] 
-**Account** | [**Account**](Account.md) |  | [optional] 
+**Account** | **string** |  | [optional] 
 **OrderType** | **OrderType** |  | [optional] 
 **TimeInForce** | **TimeInForce** |  | [optional] 
 **Symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
