@@ -747,7 +747,6 @@ paths:
           description: The ID of the account to get quotes.
           schema:
             type: string
-            format: uuid
       responses:
         "200":
           description: Returns quotes object with different prices
@@ -4784,7 +4783,8 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         account:
-          $ref: "#/components/schemas/Account"
+          type: string
+          example: 2bcd7cc3-e922-4976-bce1-9855556801c3
         order_type:
           $ref: "#/components/schemas/OrderType"
         time_in_force:
