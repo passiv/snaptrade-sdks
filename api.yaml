@@ -4925,6 +4925,7 @@ components:
     Price:
       description: Trade Price if limit or stop limit order
       type: number
+      nullable: true
       example: 31.33
     StopPrice:
       description:
