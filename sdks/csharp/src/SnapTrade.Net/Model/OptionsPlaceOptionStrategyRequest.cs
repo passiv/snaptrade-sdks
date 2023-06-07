@@ -107,10 +107,15 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">Trade Price if limit or stop limit order (required).</param>
-        public OptionsPlaceOptionStrategyRequest(OrderTypeEnum orderType = default(OrderTypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal price = default(decimal))
+        public OptionsPlaceOptionStrategyRequest(OrderTypeEnum orderType = default(OrderTypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal? price = default(decimal?))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
+            // to ensure "price" is required (not null)
+            if (price == null)
+            {
+                throw new ArgumentNullException("price is a required property for OptionsPlaceOptionStrategyRequest and cannot be null");
+            }
             this.Price = price;
         }
 
@@ -119,7 +124,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "price", IsRequired = true, EmitDefaultValue = true)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -177,7 +182,8 @@ namespace SnapTrade.Net.Model
                 ) && 
                 (
                     this.Price == input.Price ||
-                    this.Price.Equals(input.Price)
+                    (this.Price != null &&
+                    this.Price.Equals(input.Price))
                 );
         }
 
@@ -192,7 +198,10 @@ namespace SnapTrade.Net.Model
                 int hashCode = 41;
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
-                hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                if (this.Price != null)
+                {
+                    hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                }
                 return hashCode;
             }
         }

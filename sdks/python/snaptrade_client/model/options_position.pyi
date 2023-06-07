@@ -43,7 +43,10 @@ class OptionsPosition(
             @staticmethod
             def option_symbol() -> typing.Type['OptionsSymbol']:
                 return OptionsSymbol
-            price = schemas.NumberSchema
+        
+            @staticmethod
+            def price() -> typing.Type['Price']:
+                return Price
             units = schemas.NumberSchema
         
             @staticmethod
@@ -90,7 +93,7 @@ class OptionsPosition(
     def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbol': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
@@ -118,7 +121,7 @@ class OptionsPosition(
     def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbol', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
@@ -141,7 +144,7 @@ class OptionsPosition(
         symbol: typing.Union[MetaOapg.properties.symbol, str, uuid.UUID, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
         option_symbol: typing.Union['OptionsSymbol', schemas.Unset] = schemas.unset,
-        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        price: typing.Union['Price', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -164,3 +167,4 @@ class OptionsPosition(
 
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.price import Price

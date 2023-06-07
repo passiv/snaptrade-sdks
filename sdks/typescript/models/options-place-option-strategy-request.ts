@@ -36,7 +36,7 @@ export interface OptionsPlaceOptionStrategyRequest {
      * @type {number}
      * @memberof OptionsPlaceOptionStrategyRequest
      */
-    'price': number;
+    'price': number | null;
 }
 
 type OptionsPlaceOptionStrategyRequestOrderTypeEnum = 'Limit' | 'Market' | 'NetDebit' | 'NetCredit'

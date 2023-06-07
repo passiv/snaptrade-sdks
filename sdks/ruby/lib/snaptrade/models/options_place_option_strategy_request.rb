@@ -46,6 +46,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'price'
       ])
     end
 
@@ -89,10 +90,6 @@ module SnapTrade
         invalid_properties.push('invalid value for "time_in_force", time_in_force cannot be nil.')
       end
 
-      if @price.nil?
-        invalid_properties.push('invalid value for "price", price cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -101,7 +98,6 @@ module SnapTrade
     def valid?
       return false if @order_type.nil?
       return false if @time_in_force.nil?
-      return false if @price.nil?
       true
     end
 

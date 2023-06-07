@@ -18,6 +18,7 @@ from typing_extensions import TypedDict, Literal
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type import OrderType
+from snaptrade_client.type.price import Price
 from snaptrade_client.type.time_in_force import TimeInForce
 
 class RequiredManualTrade(TypedDict):
@@ -39,8 +40,7 @@ class OptionalManualTrade(TypedDict, total=False):
     # Trade Units
     units: typing.Union[int, float]
 
-    # Trade Price if limit or stop limit order
-    price: typing.Union[int, float]
+    price: Price
 
 class ManualTrade(RequiredManualTrade, OptionalManualTrade):
     pass

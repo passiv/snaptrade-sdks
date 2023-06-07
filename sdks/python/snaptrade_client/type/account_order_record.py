@@ -19,6 +19,7 @@ from snaptrade_client.type.account_order_record_status import AccountOrderRecord
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
+from snaptrade_client.type.price import Price
 from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
@@ -51,14 +52,11 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # Trade Units
     filled_quantity: typing.Union[int, float]
 
-    # Trade Price if limit or stop limit order
-    execution_price: typing.Union[int, float]
+    execution_price: Price
 
-    # Trade Price if limit or stop limit order
-    limit_price: typing.Union[int, float]
+    limit_price: Price
 
-    # Trade Price if limit or stop limit order
-    stop_price: typing.Union[int, float]
+    stop_price: Price
 
     order_type: OrderType
 

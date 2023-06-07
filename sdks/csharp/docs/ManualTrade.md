@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
 **Action** | **Action** |  | [optional] 
 **Units** | **decimal** | Trade Units | [optional] 
-**Price** | **decimal** | Trade Price if limit or stop limit order | [optional] 
+**Price** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsHoldings(string id = default(string), Guid symbol = default(Guid), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal price = default(decimal), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
+        public OptionsHoldings(string id = default(string), Guid symbol = default(Guid), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal? price = default(decimal?), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -75,8 +75,8 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        [DataMember(Name = "price", EmitDefaultValue = true)]
+        public decimal? Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -165,7 +165,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.Price == input.Price ||
-                    this.Price.Equals(input.Price)
+                    (this.Price != null &&
+                    this.Price.Equals(input.Price))
                 ) && base.Equals(input) && 
                 (
                     this.Currency == input.Currency ||
@@ -201,7 +202,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                if (this.Price != null)
+                {
+                    hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                }
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();

@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.options_symbol import OptionsSymbol
+from snaptrade_client.type.price import Price
 
 class RequiredOptionsPosition(TypedDict):
     pass
@@ -28,8 +29,7 @@ class OptionalOptionsPosition(TypedDict, total=False):
 
     option_symbol: OptionsSymbol
 
-    # Trade Price if limit or stop limit order
-    price: typing.Union[int, float]
+    price: Price
 
     units: typing.Union[int, float]
 

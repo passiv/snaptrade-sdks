@@ -13,7 +13,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **symbol** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **description** | str,  | str,  |  | [optional] 
 **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
-**price** | decimal.Decimal, int, float,  | decimal.Decimal,  | Trade Price if limit or stop limit order | [optional] 
+**price** | [**Price**](Price.md) | [**Price**](Price.md) |  | [optional] 
 **units** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
 **currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | [optional] 
 **average_purchase_price** | None, decimal.Decimal, int, float,  | NoneClass, decimal.Decimal,  | Average purchase price for this position | [optional] 

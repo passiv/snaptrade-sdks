@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **ClosedQuantity** | **decimal** |  | [optional] 
 **OrderType** | **string** |  | [optional] 
 **TimeInForce** | **string** |  | [optional] 
-**LimitPrice** | **decimal** | Trade Price if limit or stop limit order | [optional] 
-**ExecutionPrice** | **decimal** | Trade Price if limit or stop limit order | [optional] 
+**LimitPrice** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
+**ExecutionPrice** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
 **TimePlaced** | **string** | Time | [optional] 
 **TimeUpdated** | **string** | Time | [optional] 
 

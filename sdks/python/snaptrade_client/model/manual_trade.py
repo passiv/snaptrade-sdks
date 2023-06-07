@@ -56,7 +56,10 @@ class ManualTrade(
             def action() -> typing.Type['Action']:
                 return Action
             units = schemas.NumberSchema
-            price = schemas.NumberSchema
+        
+            @staticmethod
+            def price() -> typing.Type['Price']:
+                return Price
             __annotations__ = {
                 "id": id,
                 "account": account,
@@ -91,7 +94,7 @@ class ManualTrade(
     def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -122,7 +125,7 @@ class ManualTrade(
     def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -140,7 +143,7 @@ class ManualTrade(
         symbol: typing.Union['ManualTradeSymbol', schemas.Unset] = schemas.unset,
         action: typing.Union['Action', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        price: typing.Union['Price', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ManualTrade':
@@ -162,4 +165,5 @@ class ManualTrade(
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.order_type import OrderType
+from snaptrade_client.model.price import Price
 from snaptrade_client.model.time_in_force import TimeInForce

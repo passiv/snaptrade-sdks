@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Options information | [optional] 
 **Symbol** | **Guid** |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
-**Price** | **decimal** | Trade Price if limit or stop limit order | [optional] 
+**Price** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **AveragePurchasePrice** | **decimal?** | Average purchase price for this position | [optional] 
 

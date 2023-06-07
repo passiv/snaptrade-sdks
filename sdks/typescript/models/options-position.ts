@@ -50,7 +50,7 @@ export interface OptionsPosition {
      * @type {number}
      * @memberof OptionsPosition
      */
-    'price'?: number;
+    'price'?: number | null;
     /**
      * 
      * @type {number}

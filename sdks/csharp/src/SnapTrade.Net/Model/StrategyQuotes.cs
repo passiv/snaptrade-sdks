@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="askPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="volatility">volatility.</param>
         /// <param name="greek">greek.</param>
-        public StrategyQuotes(OptionStrategy strategy = default(OptionStrategy), decimal openPrice = default(decimal), decimal bidPrice = default(decimal), decimal askPrice = default(decimal), decimal volatility = default(decimal), StrategyQuotesGreek greek = default(StrategyQuotesGreek)) : base()
+        public StrategyQuotes(OptionStrategy strategy = default(OptionStrategy), decimal? openPrice = default(decimal?), decimal? bidPrice = default(decimal?), decimal? askPrice = default(decimal?), decimal volatility = default(decimal), StrategyQuotesGreek greek = default(StrategyQuotesGreek)) : base()
         {
             this.Strategy = strategy;
             this.OpenPrice = openPrice;
@@ -62,22 +62,22 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "open_price", EmitDefaultValue = false)]
-        public decimal OpenPrice { get; set; }
+        [DataMember(Name = "open_price", EmitDefaultValue = true)]
+        public decimal? OpenPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "bid_price", EmitDefaultValue = false)]
-        public decimal BidPrice { get; set; }
+        [DataMember(Name = "bid_price", EmitDefaultValue = true)]
+        public decimal? BidPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "ask_price", EmitDefaultValue = false)]
-        public decimal AskPrice { get; set; }
+        [DataMember(Name = "ask_price", EmitDefaultValue = true)]
+        public decimal? AskPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets Volatility
@@ -155,15 +155,18 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.OpenPrice == input.OpenPrice ||
-                    this.OpenPrice.Equals(input.OpenPrice)
+                    (this.OpenPrice != null &&
+                    this.OpenPrice.Equals(input.OpenPrice))
                 ) && base.Equals(input) && 
                 (
                     this.BidPrice == input.BidPrice ||
-                    this.BidPrice.Equals(input.BidPrice)
+                    (this.BidPrice != null &&
+                    this.BidPrice.Equals(input.BidPrice))
                 ) && base.Equals(input) && 
                 (
                     this.AskPrice == input.AskPrice ||
-                    this.AskPrice.Equals(input.AskPrice)
+                    (this.AskPrice != null &&
+                    this.AskPrice.Equals(input.AskPrice))
                 ) && base.Equals(input) && 
                 (
                     this.Volatility == input.Volatility ||
@@ -190,9 +193,18 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Strategy.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.OpenPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.BidPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.AskPrice.GetHashCode();
+                if (this.OpenPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.OpenPrice.GetHashCode();
+                }
+                if (this.BidPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.BidPrice.GetHashCode();
+                }
+                if (this.AskPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.AskPrice.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.Volatility.GetHashCode();
                 if (this.Greek != null)
                 {

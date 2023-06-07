@@ -238,7 +238,7 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
-        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), decimal filledQuantity = default(decimal), decimal openQuantity = default(decimal), decimal closedQuantity = default(decimal), OrderTypeEnum? orderType = default(OrderTypeEnum?), TimeInForceEnum? timeInForce = default(TimeInForceEnum?), decimal limitPrice = default(decimal), decimal executionPrice = default(decimal), string timePlaced = default(string), string timeUpdated = default(string)) : base()
+        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), decimal filledQuantity = default(decimal), decimal openQuantity = default(decimal), decimal closedQuantity = default(decimal), OrderTypeEnum? orderType = default(OrderTypeEnum?), TimeInForceEnum? timeInForce = default(TimeInForceEnum?), decimal? limitPrice = default(decimal?), decimal? executionPrice = default(decimal?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
         {
             this.Strategy = strategy;
             this.Status = status;
@@ -282,15 +282,15 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "limit_price", EmitDefaultValue = false)]
-        public decimal LimitPrice { get; set; }
+        [DataMember(Name = "limit_price", EmitDefaultValue = true)]
+        public decimal? LimitPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "execution_price", EmitDefaultValue = false)]
-        public decimal ExecutionPrice { get; set; }
+        [DataMember(Name = "execution_price", EmitDefaultValue = true)]
+        public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
         /// Time
@@ -399,11 +399,13 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.LimitPrice == input.LimitPrice ||
-                    this.LimitPrice.Equals(input.LimitPrice)
+                    (this.LimitPrice != null &&
+                    this.LimitPrice.Equals(input.LimitPrice))
                 ) && base.Equals(input) && 
                 (
                     this.ExecutionPrice == input.ExecutionPrice ||
-                    this.ExecutionPrice.Equals(input.ExecutionPrice)
+                    (this.ExecutionPrice != null &&
+                    this.ExecutionPrice.Equals(input.ExecutionPrice))
                 ) && base.Equals(input) && 
                 (
                     this.TimePlaced == input.TimePlaced ||
@@ -437,8 +439,14 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.ClosedQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
-                hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();
+                if (this.LimitPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
+                }
+                if (this.ExecutionPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();
+                }
                 if (this.TimePlaced != null)
                 {
                     hashCode = (hashCode * 59) + this.TimePlaced.GetHashCode();

@@ -14,7 +14,7 @@ require 'snaptrade'
 
 instance = SnapTrade::TransactionsStatus.new(
   initial_sync_completed: null,
-  last_successful_sync: Sun Jan 23 17:00:00 MST 2022
+  last_successful_sync: Sun Jan 23 16:00:00 PST 2022
 )
 ```
 

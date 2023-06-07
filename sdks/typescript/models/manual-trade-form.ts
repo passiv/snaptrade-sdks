@@ -51,7 +51,7 @@ export interface ManualTradeForm {
      * @type {number}
      * @memberof ManualTradeForm
      */
-    'price'?: number;
+    'price'?: number | null;
     /**
      * Stop Price. If stop loss or stop limit order, the price to trigger the stop
      * @type {number}

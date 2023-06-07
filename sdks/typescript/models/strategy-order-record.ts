@@ -71,13 +71,13 @@ export interface StrategyOrderRecord {
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'limit_price'?: number;
+    'limit_price'?: number | null;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof StrategyOrderRecord
      */
-    'execution_price'?: number;
+    'execution_price'?: number | null;
     /**
      * Time
      * @type {string}

@@ -13,7 +13,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **account_id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
 **action** | [**Action**](Action.md) | [**Action**](Action.md) |  | [optional] 
 **order_type** | [**OrderType**](OrderType.md) | [**OrderType**](OrderType.md) |  | [optional] 
-**price** | decimal.Decimal, int, float,  | decimal.Decimal,  | Trade Price if limit or stop limit order | [optional] 
+**price** | [**Price**](Price.md) | [**Price**](Price.md) |  | [optional] 
 **stop** | [**StopPrice**](StopPrice.md) | [**StopPrice**](StopPrice.md) |  | [optional] 
 **time_in_force** | [**TimeInForce**](TimeInForce.md) | [**TimeInForce**](TimeInForce.md) |  | [optional] 
 **units** | decimal.Decimal, int, float,  | decimal.Decimal,  | Trade Units | [optional] 

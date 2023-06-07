@@ -77,7 +77,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), Guid symbol = default(Guid), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), Action? action = default(Action?), decimal totalQuantity = default(decimal), decimal openQuantity = default(decimal), decimal canceledQuantity = default(decimal), decimal filledQuantity = default(decimal), decimal executionPrice = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), Guid symbol = default(Guid), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), Action? action = default(Action?), decimal totalQuantity = default(decimal), decimal openQuantity = default(decimal), decimal canceledQuantity = default(decimal), decimal filledQuantity = default(decimal), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -157,22 +157,22 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "execution_price", EmitDefaultValue = false)]
-        public decimal ExecutionPrice { get; set; }
+        [DataMember(Name = "execution_price", EmitDefaultValue = true)]
+        public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "limit_price", EmitDefaultValue = false)]
-        public decimal LimitPrice { get; set; }
+        [DataMember(Name = "limit_price", EmitDefaultValue = true)]
+        public decimal? LimitPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "stop_price", EmitDefaultValue = false)]
-        public decimal StopPrice { get; set; }
+        [DataMember(Name = "stop_price", EmitDefaultValue = true)]
+        public decimal? StopPrice { get; set; }
 
         /// <summary>
         /// Time
@@ -310,15 +310,18 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.ExecutionPrice == input.ExecutionPrice ||
-                    this.ExecutionPrice.Equals(input.ExecutionPrice)
+                    (this.ExecutionPrice != null &&
+                    this.ExecutionPrice.Equals(input.ExecutionPrice))
                 ) && base.Equals(input) && 
                 (
                     this.LimitPrice == input.LimitPrice ||
-                    this.LimitPrice.Equals(input.LimitPrice)
+                    (this.LimitPrice != null &&
+                    this.LimitPrice.Equals(input.LimitPrice))
                 ) && base.Equals(input) && 
                 (
                     this.StopPrice == input.StopPrice ||
-                    this.StopPrice.Equals(input.StopPrice)
+                    (this.StopPrice != null &&
+                    this.StopPrice.Equals(input.StopPrice))
                 ) && base.Equals(input) && 
                 (
                     this.OrderType == input.OrderType ||
@@ -377,9 +380,18 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.CanceledQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.FilledQuantity.GetHashCode();
-                hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                if (this.ExecutionPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();
+                }
+                if (this.LimitPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
+                }
+                if (this.StopPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.TimePlaced != null)

@@ -104,19 +104,19 @@ export interface AccountOrderRecord {
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'execution_price'?: number;
+    'execution_price'?: number | null;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'limit_price'?: number;
+    'limit_price'?: number | null;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'stop_price'?: number;
+    'stop_price'?: number | null;
     /**
      * 
      * @type {OrderType}

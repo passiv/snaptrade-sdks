@@ -39,6 +39,7 @@ from snaptrade_client.model.account_order_record import AccountOrderRecord as Ac
 from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
+from snaptrade_client.model.price import Price as PriceSchema
 
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.time_in_force import TimeInForce
@@ -47,6 +48,7 @@ from snaptrade_client.type.model400_failed_request_response import Model400Faile
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
+from snaptrade_client.type.price import Price
 from snaptrade_client.type.order_type import OrderType
 
 # Query params
@@ -190,7 +192,7 @@ class BaseApi(api_client.Api):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
         order_type: typing.Optional[OrderType] = None,
-        price: typing.Optional[typing.Union[int, float]] = None,
+        price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -434,7 +436,7 @@ class PlaceForceOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
         order_type: typing.Optional[OrderType] = None,
-        price: typing.Optional[typing.Union[int, float]] = None,
+        price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -472,7 +474,7 @@ class PlaceForceOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
         order_type: typing.Optional[OrderType] = None,
-        price: typing.Optional[typing.Union[int, float]] = None,
+        price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -512,7 +514,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
         order_type: typing.Optional[OrderType] = None,
-        price: typing.Optional[typing.Union[int, float]] = None,
+        price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -550,7 +552,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
         order_type: typing.Optional[OrderType] = None,
-        price: typing.Optional[typing.Union[int, float]] = None,
+        price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,

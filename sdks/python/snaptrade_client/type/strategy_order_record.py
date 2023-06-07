@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.option_strategy import OptionStrategy
+from snaptrade_client.type.price import Price
 
 class RequiredStrategyOrderRecord(TypedDict):
     pass
@@ -35,11 +36,9 @@ class OptionalStrategyOrderRecord(TypedDict, total=False):
 
     time_in_force: str
 
-    # Trade Price if limit or stop limit order
-    limit_price: typing.Union[int, float]
+    limit_price: Price
 
-    # Trade Price if limit or stop limit order
-    execution_price: typing.Union[int, float]
+    execution_price: Price
 
     # Time
     time_placed: str

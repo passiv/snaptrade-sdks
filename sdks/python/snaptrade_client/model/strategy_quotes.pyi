@@ -39,9 +39,18 @@ class StrategyQuotes(
             @staticmethod
             def strategy() -> typing.Type['OptionStrategy']:
                 return OptionStrategy
-            open_price = schemas.NumberSchema
-            bid_price = schemas.NumberSchema
-            ask_price = schemas.NumberSchema
+        
+            @staticmethod
+            def open_price() -> typing.Type['Price']:
+                return Price
+        
+            @staticmethod
+            def bid_price() -> typing.Type['Price']:
+                return Price
+        
+            @staticmethod
+            def ask_price() -> typing.Type['Price']:
+                return Price
             volatility = schemas.NumberSchema
             
             
@@ -146,13 +155,13 @@ class StrategyQuotes(
     def __getitem__(self, name: typing_extensions.Literal["strategy"]) -> 'OptionStrategy': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["open_price"]) -> MetaOapg.properties.open_price: ...
+    def __getitem__(self, name: typing_extensions.Literal["open_price"]) -> 'Price': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["bid_price"]) -> MetaOapg.properties.bid_price: ...
+    def __getitem__(self, name: typing_extensions.Literal["bid_price"]) -> 'Price': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["ask_price"]) -> MetaOapg.properties.ask_price: ...
+    def __getitem__(self, name: typing_extensions.Literal["ask_price"]) -> 'Price': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["volatility"]) -> MetaOapg.properties.volatility: ...
@@ -171,13 +180,13 @@ class StrategyQuotes(
     def get_item_oapg(self, name: typing_extensions.Literal["strategy"]) -> typing.Union['OptionStrategy', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["open_price"]) -> typing.Union[MetaOapg.properties.open_price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["open_price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bid_price"]) -> typing.Union[MetaOapg.properties.bid_price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["bid_price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ask_price"]) -> typing.Union[MetaOapg.properties.ask_price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["ask_price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["volatility"]) -> typing.Union[MetaOapg.properties.volatility, schemas.Unset]: ...
@@ -195,9 +204,9 @@ class StrategyQuotes(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         strategy: typing.Union['OptionStrategy', schemas.Unset] = schemas.unset,
-        open_price: typing.Union[MetaOapg.properties.open_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        bid_price: typing.Union[MetaOapg.properties.bid_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        ask_price: typing.Union[MetaOapg.properties.ask_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        open_price: typing.Union['Price', schemas.Unset] = schemas.unset,
+        bid_price: typing.Union['Price', schemas.Unset] = schemas.unset,
+        ask_price: typing.Union['Price', schemas.Unset] = schemas.unset,
         volatility: typing.Union[MetaOapg.properties.volatility, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         greek: typing.Union[MetaOapg.properties.greek, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -217,3 +226,4 @@ class StrategyQuotes(
         )
 
 from snaptrade_client.model.option_strategy import OptionStrategy
+from snaptrade_client.model.price import Price

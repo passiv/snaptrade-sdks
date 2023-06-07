@@ -61,7 +61,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">timeInForce.</param>
         /// <param name="units">Trade Units.</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
-        public ManualTradeForm(Guid accountId = default(Guid), Action? action = default(Action?), OrderType? orderType = default(OrderType?), decimal price = default(decimal), decimal? stop = default(decimal?), TimeInForce? timeInForce = default(TimeInForce?), decimal units = default(decimal), Guid universalSymbolId = default(Guid))
+        public ManualTradeForm(Guid accountId = default(Guid), Action? action = default(Action?), OrderType? orderType = default(OrderType?), decimal? price = default(decimal?), decimal? stop = default(decimal?), TimeInForce? timeInForce = default(TimeInForce?), decimal units = default(decimal), Guid universalSymbolId = default(Guid))
         {
             this.AccountId = accountId;
             this.Action = action;
@@ -83,8 +83,8 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        [DataMember(Name = "price", EmitDefaultValue = true)]
+        public decimal? Price { get; set; }
 
         /// <summary>
         /// Stop Price. If stop loss or stop limit order, the price to trigger the stop
@@ -172,7 +172,8 @@ namespace SnapTrade.Net.Model
                 ) && 
                 (
                     this.Price == input.Price ||
-                    this.Price.Equals(input.Price)
+                    (this.Price != null &&
+                    this.Price.Equals(input.Price))
                 ) && 
                 (
                     this.Stop == input.Stop ||
@@ -209,7 +210,10 @@ namespace SnapTrade.Net.Model
                 }
                 hashCode = (hashCode * 59) + this.Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
-                hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                if (this.Price != null)
+                {
+                    hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                }
                 if (this.Stop != null)
                 {
                     hashCode = (hashCode * 59) + this.Stop.GetHashCode();

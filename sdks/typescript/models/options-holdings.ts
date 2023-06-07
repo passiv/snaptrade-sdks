@@ -50,7 +50,7 @@ export interface OptionsHoldings {
      * @type {number}
      * @memberof OptionsHoldings
      */
-    'price'?: number;
+    'price'?: number | null;
     /**
      * 
      * @type {Currency}

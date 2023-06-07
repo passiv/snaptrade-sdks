@@ -80,6 +80,6 @@ export interface ManualTrade {
      * @type {number}
      * @memberof ManualTrade
      */
-    'price'?: number;
+    'price'?: number | null;
 }
 

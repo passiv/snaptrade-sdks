@@ -117,6 +117,9 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'execution_price',
+        :'limit_price',
+        :'stop_price',
       ])
     end
 

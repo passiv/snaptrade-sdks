@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.option_strategy import OptionStrategy
+from snaptrade_client.type.price import Price
 
 class RequiredStrategyQuotes(TypedDict):
     pass
@@ -23,14 +24,11 @@ class RequiredStrategyQuotes(TypedDict):
 class OptionalStrategyQuotes(TypedDict, total=False):
     strategy: OptionStrategy
 
-    # Trade Price if limit or stop limit order
-    open_price: typing.Union[int, float]
+    open_price: Price
 
-    # Trade Price if limit or stop limit order
-    bid_price: typing.Union[int, float]
+    bid_price: Price
 
-    # Trade Price if limit or stop limit order
-    ask_price: typing.Union[int, float]
+    ask_price: Price
 
     volatility: typing.Union[int, float]
 
