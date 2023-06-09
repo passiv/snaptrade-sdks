@@ -8,7 +8,7 @@
 |Python|10.19.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.19.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
 |TypeScript|8.15.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.15.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
 |C#|3.19.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.19.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
-|PHP|1.10.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.10.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
+|PHP|1.11.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.11.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
 
 
 ## How to regenerate SDKs
