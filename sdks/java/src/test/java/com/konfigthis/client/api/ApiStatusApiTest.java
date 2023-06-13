@@ -13,9 +13,13 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Status;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +32,14 @@ import java.util.Map;
 @Disabled
 public class ApiStatusApiTest {
 
-    private final ApiStatusApi api = new ApiStatusApi();
+    private static ApiStatusApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new ApiStatusApi(apiClient);
+    }
 
     /**
      * Get API Status
@@ -39,7 +50,8 @@ public class ApiStatusApiTest {
      */
     @Test
     public void checkTest() throws ApiException {
-        Status response = api.check();
+        Status response = api.check()
+                .execute();
         // TODO: test validations
     }
 

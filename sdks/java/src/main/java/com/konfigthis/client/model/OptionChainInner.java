@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -76,6 +77,10 @@ public class OptionChainInner {
   }
 
   public OptionChainInner expiryDate(String expiryDate) {
+
+    
+    
+    
     
     this.expiryDate = expiryDate;
     return this;
@@ -94,11 +99,19 @@ public class OptionChainInner {
 
 
   public void setExpiryDate(String expiryDate) {
+
+    
+    
+    
     this.expiryDate = expiryDate;
   }
 
 
   public OptionChainInner description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -117,11 +130,19 @@ public class OptionChainInner {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public OptionChainInner listingExchange(String listingExchange) {
+
+    
+    
+    
     
     this.listingExchange = listingExchange;
     return this;
@@ -140,11 +161,19 @@ public class OptionChainInner {
 
 
   public void setListingExchange(String listingExchange) {
+
+    
+    
+    
     this.listingExchange = listingExchange;
   }
 
 
   public OptionChainInner optionExerciseType(String optionExerciseType) {
+
+    
+    
+    
     
     this.optionExerciseType = optionExerciseType;
     return this;
@@ -163,11 +192,19 @@ public class OptionChainInner {
 
 
   public void setOptionExerciseType(String optionExerciseType) {
+
+    
+    
+    
     this.optionExerciseType = optionExerciseType;
   }
 
 
   public OptionChainInner chainPerRoot(List<OptionChainInnerChainPerRootInner> chainPerRoot) {
+
+    
+    
+    
     
     this.chainPerRoot = chainPerRoot;
     return this;
@@ -194,6 +231,10 @@ public class OptionChainInner {
 
 
   public void setChainPerRoot(List<OptionChainInnerChainPerRootInner> chainPerRoot) {
+
+    
+    
+    
     this.chainPerRoot = chainPerRoot;
   }
 

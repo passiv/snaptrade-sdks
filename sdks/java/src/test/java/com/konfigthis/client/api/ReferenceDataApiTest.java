@@ -13,14 +13,14 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model401FailedRequestResponse;
-import com.konfigthis.client.model.Model404FailedRequestResponse;
 import com.konfigthis.client.model.PartnerData;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.SymbolQuery;
@@ -28,6 +28,7 @@ import java.util.UUID;
 import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,14 @@ import java.util.Map;
 @Disabled
 public class ReferenceDataApiTest {
 
-    private final ReferenceDataApi api = new ReferenceDataApi();
+    private static ReferenceDataApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new ReferenceDataApi(apiClient);
+    }
 
     /**
      * Return the exchange rate of a currency pair
@@ -50,7 +58,8 @@ public class ReferenceDataApiTest {
     @Test
     public void getCurrencyExchangeRatePairTest() throws ApiException {
         String currencyPair = null;
-        ExchangeRatePairs response = api.getCurrencyExchangeRatePair(currencyPair);
+        ExchangeRatePairs response = api.getCurrencyExchangeRatePair(currencyPair)
+                .execute();
         // TODO: test validations
     }
 
@@ -61,7 +70,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void getPartnerInfoTest() throws ApiException {
-        PartnerData response = api.getPartnerInfo();
+        PartnerData response = api.getPartnerInfo()
+                .execute();
         // TODO: test validations
     }
 
@@ -72,7 +82,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void getSecurityTypesTest() throws ApiException {
-        List<SecurityType> response = api.getSecurityTypes();
+        List<SecurityType> response = api.getSecurityTypes()
+                .execute();
         // TODO: test validations
     }
 
@@ -83,7 +94,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void getStockExchangesTest() throws ApiException {
-        List<Exchange> response = api.getStockExchanges();
+        List<Exchange> response = api.getStockExchanges()
+                .execute();
         // TODO: test validations
     }
 
@@ -94,8 +106,10 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void getSymbolsTest() throws ApiException {
-        SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.getSymbols(symbolQuery);
+        String substring = null;
+        List<UniversalSymbol> response = api.getSymbols()
+                .substring(substring)
+                .execute();
         // TODO: test validations
     }
 
@@ -108,7 +122,9 @@ public class ReferenceDataApiTest {
     public void getSymbolsByTickerTest() throws ApiException {
         UUID ticker = null;
         UUID symbolId = null;
-        UniversalSymbol response = api.getSymbolsByTicker(ticker, symbolId);
+        UniversalSymbol response = api.getSymbolsByTicker(ticker)
+                .symbolId(symbolId)
+                .execute();
         // TODO: test validations
     }
 
@@ -120,7 +136,9 @@ public class ReferenceDataApiTest {
     @Test
     public void listAllBrokerageAuthorizationTypeTest() throws ApiException {
         String brokerage = null;
-        List<BrokerageAuthorizationTypeReadOnly> response = api.listAllBrokerageAuthorizationType(brokerage);
+        List<BrokerageAuthorizationTypeReadOnly> response = api.listAllBrokerageAuthorizationType()
+                .brokerage(brokerage)
+                .execute();
         // TODO: test validations
     }
 
@@ -131,7 +149,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void listAllBrokeragesTest() throws ApiException {
-        List<Brokerage> response = api.listAllBrokerages();
+        List<Brokerage> response = api.listAllBrokerages()
+                .execute();
         // TODO: test validations
     }
 
@@ -142,7 +161,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void listAllCurrenciesTest() throws ApiException {
-        List<Currency> response = api.listAllCurrencies();
+        List<Currency> response = api.listAllCurrencies()
+                .execute();
         // TODO: test validations
     }
 
@@ -153,7 +173,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void listAllCurrenciesRatesTest() throws ApiException {
-        List<ExchangeRatePairs> response = api.listAllCurrenciesRates();
+        List<ExchangeRatePairs> response = api.listAllCurrenciesRates()
+                .execute();
         // TODO: test validations
     }
 
@@ -167,8 +188,10 @@ public class ReferenceDataApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
+        String substring = null;
+        List<UniversalSymbol> response = api.symbolSearchUserAccount(userId, userSecret, accountId)
+                .substring(substring)
+                .execute();
         // TODO: test validations
     }
 

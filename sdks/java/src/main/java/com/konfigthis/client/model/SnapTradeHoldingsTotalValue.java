@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ import com.konfigthis.client.JSON;
 public class SnapTradeHoldingsTotalValue {
   public static final String SERIALIZED_NAME_VALUE = "value";
   @SerializedName(SERIALIZED_NAME_VALUE)
-  private BigDecimal value;
+  private Double value;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -62,9 +62,23 @@ public class SnapTradeHoldingsTotalValue {
   public SnapTradeHoldingsTotalValue() {
   }
 
-  public SnapTradeHoldingsTotalValue value(BigDecimal value) {
+  public SnapTradeHoldingsTotalValue value(Double value) {
+
+    
+    
+    
     
     this.value = value;
+    return this;
+  }
+
+  public SnapTradeHoldingsTotalValue value(Integer value) {
+
+    
+    
+    
+    
+    this.value = value.doubleValue();
     return this;
   }
 
@@ -75,17 +89,25 @@ public class SnapTradeHoldingsTotalValue {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "32600.71", value = "")
 
-  public BigDecimal getValue() {
+  public Double getValue() {
     return value;
   }
 
 
-  public void setValue(BigDecimal value) {
+  public void setValue(Double value) {
+
+    
+    
+    
     this.value = value;
   }
 
 
   public SnapTradeHoldingsTotalValue currency(String currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -104,6 +126,10 @@ public class SnapTradeHoldingsTotalValue {
 
 
   public void setCurrency(String currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 

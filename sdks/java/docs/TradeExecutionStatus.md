@@ -14,8 +14,8 @@ Execution status of a trade
 |**state** | [**StateEnum**](#StateEnum) | Execution state of a trade |  [optional] |
 |**filledUnits** | **Integer** | Number of filled units |  [optional] |
 |**action** | [**ActionEnum**](#ActionEnum) | Action of executed trade |  [optional] |
-|**price** | **BigDecimal** | Price of execution |  [optional] |
-|**commissions** | **BigDecimal** | Fees paid from executing trade |  [optional] |
+|**price** | **Double** | Price of execution |  [optional] |
+|**commissions** | **Double** | Fees paid from executing trade |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** | Other misc. data |  [optional] |
 
 

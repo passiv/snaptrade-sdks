@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+from snaptrade_client.request_before_hook import request_before_hook
 import json
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
@@ -133,15 +134,31 @@ class BaseApi(api_client.Api):
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
         # TODO add cookie handling
+        method = 'delete'.upper()
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            auth_settings=_auth,
+            headers=_headers,
+        )
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
-            method='delete'.upper(),
+            method=method,
             auth_settings=_auth,
             timeout=timeout,
         )
-        
+    
         if stream:
+            if not 200 <= response.http_response.status <= 299:
+                body = (await response.http_response.content.read()).decode("utf-8")
+                raise exceptions.ApiStreamingException(
+                    status=response.http_response.status,
+                    reason=response.http_response.reason,
+                    body=body,
+                )
+    
             async def stream_iterator():
                 """
                 iterates over response.http_response.content and closes connection once iteration has finished
@@ -186,6 +203,7 @@ class BaseApi(api_client.Api):
     
         return api_response
 
+
     def _delete_model_portfolio_by_id_oapg(
         self,
         path_params: typing.Optional[dict] = {},
@@ -218,10 +236,18 @@ class BaseApi(api_client.Api):
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
         # TODO add cookie handling
+        method = 'delete'.upper()
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            auth_settings=_auth,
+            headers=_headers,
+        )
     
         response = self.api_client.call_api(
             resource_path=used_path,
-            method='delete'.upper(),
+            method=method,
             auth_settings=_auth,
             timeout=timeout,
         )
@@ -248,6 +274,7 @@ class BaseApi(api_client.Api):
             raise exceptions.ApiException(api_response=api_response)
     
         return api_response
+
 
 class DeleteModelPortfolioById(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names

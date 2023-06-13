@@ -20,39 +20,40 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for Model400FailedRequestResponse
+ * Model tests for TransactionsStatus
  */
-public class Model400FailedRequestResponseTest {
-    private final Model400FailedRequestResponse model = new Model400FailedRequestResponse();
+public class TransactionsStatusTest {
+    private final TransactionsStatus model = new TransactionsStatus();
 
     /**
-     * Model tests for Model400FailedRequestResponse
+     * Model tests for TransactionsStatus
      */
     @Test
-    public void testModel400FailedRequestResponse() {
-        // TODO: test Model400FailedRequestResponse
+    public void testTransactionsStatus() {
+        // TODO: test TransactionsStatus
     }
 
     /**
-     * Test the property 'defaultDetail'
+     * Test the property 'initialSyncCompleted'
      */
     @Test
-    public void defaultDetailTest() {
-        // TODO: test defaultDetail
+    public void initialSyncCompletedTest() {
+        // TODO: test initialSyncCompleted
     }
 
     /**
-     * Test the property 'defaultCode'
+     * Test the property 'lastSuccessfulSync'
      */
     @Test
-    public void defaultCodeTest() {
-        // TODO: test defaultCode
+    public void lastSuccessfulSyncTest() {
+        // TODO: test lastSuccessfulSync
     }
 
 }

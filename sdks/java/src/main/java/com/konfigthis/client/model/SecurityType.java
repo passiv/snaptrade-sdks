@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -71,6 +72,10 @@ public class SecurityType {
   }
 
   public SecurityType id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -89,11 +94,19 @@ public class SecurityType {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public SecurityType code(String code) {
+
+    
+    
+    
     
     this.code = code;
     return this;
@@ -104,7 +117,7 @@ public class SecurityType {
    * @return code
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "et", value = "")
+  @ApiModelProperty(example = "cs", value = "")
 
   public String getCode() {
     return code;
@@ -112,11 +125,19 @@ public class SecurityType {
 
 
   public void setCode(String code) {
+
+    
+    
+    
     this.code = code;
   }
 
 
   public SecurityType description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -127,7 +148,7 @@ public class SecurityType {
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "ETF", value = "")
+  @ApiModelProperty(example = "Common Stock", value = "")
 
   public String getDescription() {
     return description;
@@ -135,11 +156,19 @@ public class SecurityType {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public SecurityType isSupported(Boolean isSupported) {
+
+    
+    
+    
     
     this.isSupported = isSupported;
     return this;
@@ -158,6 +187,10 @@ public class SecurityType {
 
 
   public void setIsSupported(Boolean isSupported) {
+
+    
+    
+    
     this.isSupported = isSupported;
   }
 

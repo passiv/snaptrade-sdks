@@ -8,16 +8,16 @@ The strategy impact
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**estimatedCommissions** | **BigDecimal** |  |  [optional] |
-|**buyingPowerEffect** | **BigDecimal** |  |  [optional] |
-|**buyingPowerResult** | **BigDecimal** |  |  [optional] |
-|**maintExcessEffect** | **BigDecimal** |  |  [optional] |
-|**maintExcessResult** | **BigDecimal** |  |  [optional] |
+|**estimatedCommissions** | **Double** |  |  [optional] |
+|**buyingPowerEffect** | **Double** |  |  [optional] |
+|**buyingPowerResult** | **Double** |  |  [optional] |
+|**maintExcessEffect** | **Double** |  |  [optional] |
+|**maintExcessResult** | **Double** |  |  [optional] |
 |**tradeValueCalculation** | **String** |  |  [optional] |
 |**legs** | **List&lt;StrategyImpactLegsInner&gt;** |  |  [optional] |
 |**side** | **String** |  |  [optional] |
 |**effect** | **String** |  |  [optional] |
-|**price** | **BigDecimal** |  |  [optional] |
+|**price** | **Double** |  |  [optional] |
 |**strategy** | **String** |  |  [optional] |
 
 

@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -58,6 +59,10 @@ public class SymbolQuery {
   }
 
   public SymbolQuery substring(String substring) {
+
+    
+    
+    
     
     this.substring = substring;
     return this;
@@ -76,6 +81,10 @@ public class SymbolQuery {
 
 
   public void setSubstring(String substring) {
+
+    
+    
+    
     this.substring = substring;
   }
 

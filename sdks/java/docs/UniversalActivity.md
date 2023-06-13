@@ -10,44 +10,20 @@ A transaction or activity from an institution
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** |  |  [optional] |
 |**account** | **AccountSimple** |  |  [optional] |
-|**amount** | **BigDecimal** |  |  [optional] |
+|**amount** | **Double** |  |  [optional] |
 |**currency** | **Currency** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
-|**fee** | **BigDecimal** |  |  [optional] |
+|**fee** | **Double** |  |  [optional] |
 |**institution** | **String** |  |  [optional] |
 |**optionType** | **String** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string |  [optional] |
-|**price** | **BigDecimal** |  |  [optional] |
+|**price** | **Double** |  |  [optional] |
 |**settlementDate** | **String** |  |  [optional] |
+|**externalReferenceId** | **String** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id |  [optional] |
 |**symbol** | **Symbol** |  |  [optional] |
 |**optionSymbol** | **OptionsSymbol** |  |  [optional] |
 |**tradeDate** | **String** |  |  [optional] |
-|**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
-|**units** | **BigDecimal** | Usually but not necessarily an integer |  [optional] |
-
-
-
-## Enum: TypeEnum
-
-| Name | Value |
-|---- | -----|
-| DIVIDEND | &quot;DIVIDEND&quot; |
-| BUY | &quot;BUY&quot; |
-| SELL | &quot;SELL&quot; |
-| CONTRIBUTION | &quot;CONTRIBUTION&quot; |
-| WITHDRAWAL | &quot;WITHDRAWAL&quot; |
-| EXTERNAL_ASSET_TRANSFER_IN | &quot;EXTERNAL_ASSET_TRANSFER_IN&quot; |
-| EXTERNAL_ASSET_TRANSFER_OUT | &quot;EXTERNAL_ASSET_TRANSFER_OUT&quot; |
-| INTERNAL_CASH_TRANSFER_IN | &quot;INTERNAL_CASH_TRANSFER_IN&quot; |
-| INTERNAL_CASH_TRANSFER_OUT | &quot;INTERNAL_CASH_TRANSFER_OUT&quot; |
-| INTERNAL_ASSET_TRANSFER_IN | &quot;INTERNAL_ASSET_TRANSFER_IN&quot; |
-| INTERNAL_ASSET_TRANSFER_OUT | &quot;INTERNAL_ASSET_TRANSFER_OUT&quot; |
-| INTEREST | &quot;INTEREST&quot; |
-| REBATE | &quot;REBATE&quot; |
-| GOV_GRANT | &quot;GOV_GRANT&quot; |
-| TAX | &quot;TAX&quot; |
-| FEE | &quot;FEE&quot; |
-| REI | &quot;REI&quot; |
-| FXT | &quot;FXT&quot; |
+|**type** | **String** | Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT |  [optional] |
+|**units** | **Double** | Usually but not necessarily an integer |  [optional] |
 
 
 

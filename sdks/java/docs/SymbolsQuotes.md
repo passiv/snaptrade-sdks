@@ -9,11 +9,11 @@ Symbols and Tickers Quotes object
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
-|**bidPrice** | **BigDecimal** |  |  [optional] |
-|**askPrice** | **BigDecimal** |  |  [optional] |
-|**lastTradePrice** | **BigDecimal** |  |  [optional] |
-|**bidSize** | **BigDecimal** |  |  [optional] |
-|**askSize** | **BigDecimal** |  |  [optional] |
+|**bidPrice** | **Double** |  |  [optional] |
+|**askPrice** | **Double** |  |  [optional] |
+|**lastTradePrice** | **Double** |  |  [optional] |
+|**bidSize** | **Double** |  |  [optional] |
+|**askSize** | **Double** |  |  [optional] |
 
 
 

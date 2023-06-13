@@ -17,6 +17,7 @@ SnapTradeUser Investment Account
 |**createdDate** | **String** |  |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** |  |  [optional] |
 |**cashRestrictions** | **List&lt;CashRestriction&gt;** |  |  [optional] |
+|**syncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  |  [optional] |
 
 
 

@@ -40,11 +40,20 @@ public class ErrorLogsApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public ErrorLogsApi() {
+    public ErrorLogsApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public ErrorLogsApi(ApiClient apiClient) {
+    public ErrorLogsApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -72,20 +81,7 @@ public class ErrorLogsApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for listUserErrors
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listUserErrorsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listUserErrorsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -153,62 +149,110 @@ public class ErrorLogsApi {
 
     }
 
-    /**
-     * Retrieve error logs on behalf of your SnapTrade users
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return List&lt;UserErrorLog&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<UserErrorLog> listUserErrors(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<UserErrorLog>> localVarResp = listUserErrorsWithHttpInfo(userId, userSecret);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Retrieve error logs on behalf of your SnapTrade users
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;List&lt;UserErrorLog&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<UserErrorLog>> listUserErrorsWithHttpInfo(String userId, String userSecret) throws ApiException {
+    private ApiResponse<List<UserErrorLog>> listUserErrorsWithHttpInfo(String userId, String userSecret) throws ApiException {
         okhttp3.Call localVarCall = listUserErrorsValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<UserErrorLog>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call listUserErrorsAsync(String userId, String userSecret, final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listUserErrorsValidateBeforeCall(userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<List<UserErrorLog>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class ListUserErrorsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+
+        private ListUserErrorsRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for listUserErrors
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listUserErrorsCall(userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute listUserErrors request
+         * @return List&lt;UserErrorLog&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UserErrorLog> execute() throws ApiException {
+            ApiResponse<List<UserErrorLog>> localVarResp = listUserErrorsWithHttpInfo(userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listUserErrors request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UserErrorLog&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UserErrorLog>> executeWithHttpInfo() throws ApiException {
+            return listUserErrorsWithHttpInfo(userId, userSecret);
+        }
+
+        /**
+         * Execute listUserErrors request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
+            return listUserErrorsAsync(userId, userSecret, _callback);
+        }
+    }
+
     /**
-     * Retrieve error logs on behalf of your SnapTrade users (asynchronously)
+     * Retrieve error logs on behalf of your SnapTrade users
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return ListUserErrorsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listUserErrorsAsync(String userId, String userSecret, final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
+    public ListUserErrorsRequestBuilder listUserErrors(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = listUserErrorsValidateBeforeCall(userId, userSecret, _callback);
-        Type localVarReturnType = new TypeToken<List<UserErrorLog>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new ListUserErrorsRequestBuilder(userId, userSecret);
     }
 }

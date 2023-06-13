@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,6 +64,10 @@ public class LoginRedirectURI {
   }
 
   public LoginRedirectURI redirectURI(Object redirectURI) {
+
+    
+    
+    
     
     this.redirectURI = redirectURI;
     return this;
@@ -81,11 +86,19 @@ public class LoginRedirectURI {
 
 
   public void setRedirectURI(Object redirectURI) {
+
+    
+    
+    
     this.redirectURI = redirectURI;
   }
 
 
   public LoginRedirectURI sessionId(String sessionId) {
+
+    
+    
+    
     
     this.sessionId = sessionId;
     return this;
@@ -104,6 +117,10 @@ public class LoginRedirectURI {
 
 
   public void setSessionId(String sessionId) {
+
+    
+    
+    
     this.sessionId = sessionId;
   }
 

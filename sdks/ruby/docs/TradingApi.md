@@ -358,7 +358,7 @@ begin
   )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => SymbolsQuotes
+  p data # => Array<SymbolsQuotesInner>
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.get_user_account_quotes: #{e}"
 end
@@ -376,7 +376,7 @@ end
 
 ### Return type
 
-[**SymbolsQuotes**](SymbolsQuotes.md)
+[**Array&lt;SymbolsQuotesInner&gt;**](SymbolsQuotesInner.md)
 
 ## modify_calculated_trade_by_id
 

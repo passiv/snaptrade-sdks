@@ -10,9 +10,9 @@ Impact of a group of trade
 |------------ | ------------- | ------------- | -------------|
 |**account** | **Account** |  |  [optional] |
 |**currency** | **Currency** |  |  [optional] |
-|**remainingCash** | **BigDecimal** | Remaining balance after executing all trades |  [optional] |
-|**estimatedCommissions** | **BigDecimal** | Total estimated commissions across all trades to make |  [optional] |
-|**forexFees** | **BigDecimal** | Estimated forex fees to pay to excute trades |  [optional] |
+|**remainingCash** | **Double** | Remaining balance after executing all trades |  [optional] |
+|**estimatedCommissions** | **Double** | Total estimated commissions across all trades to make |  [optional] |
+|**forexFees** | **Double** | Estimated forex fees to pay to excute trades |  [optional] |
 
 
 

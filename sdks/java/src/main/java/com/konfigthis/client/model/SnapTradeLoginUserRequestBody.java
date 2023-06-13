@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -121,6 +122,10 @@ public class SnapTradeLoginUserRequestBody {
   }
 
   public SnapTradeLoginUserRequestBody broker(String broker) {
+
+    
+    
+    
     
     this.broker = broker;
     return this;
@@ -139,11 +144,19 @@ public class SnapTradeLoginUserRequestBody {
 
 
   public void setBroker(String broker) {
+
+    
+    
+    
     this.broker = broker;
   }
 
 
   public SnapTradeLoginUserRequestBody immediateRedirect(Boolean immediateRedirect) {
+
+    
+    
+    
     
     this.immediateRedirect = immediateRedirect;
     return this;
@@ -162,11 +175,19 @@ public class SnapTradeLoginUserRequestBody {
 
 
   public void setImmediateRedirect(Boolean immediateRedirect) {
+
+    
+    
+    
     this.immediateRedirect = immediateRedirect;
   }
 
 
   public SnapTradeLoginUserRequestBody customRedirect(String customRedirect) {
+
+    
+    
+    
     
     this.customRedirect = customRedirect;
     return this;
@@ -185,11 +206,19 @@ public class SnapTradeLoginUserRequestBody {
 
 
   public void setCustomRedirect(String customRedirect) {
+
+    
+    
+    
     this.customRedirect = customRedirect;
   }
 
 
   public SnapTradeLoginUserRequestBody reconnect(String reconnect) {
+
+    
+    
+    
     
     this.reconnect = reconnect;
     return this;
@@ -208,11 +237,19 @@ public class SnapTradeLoginUserRequestBody {
 
 
   public void setReconnect(String reconnect) {
+
+    
+    
+    
     this.reconnect = reconnect;
   }
 
 
   public SnapTradeLoginUserRequestBody connectionType(ConnectionTypeEnum connectionType) {
+
+    
+    
+    
     
     this.connectionType = connectionType;
     return this;
@@ -231,6 +268,10 @@ public class SnapTradeLoginUserRequestBody {
 
 
   public void setConnectionType(ConnectionTypeEnum connectionType) {
+
+    
+    
+    
     this.connectionType = connectionType;
   }
 

@@ -11,10 +11,10 @@ Option Holdings
 |**symbol** | **UUID** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**optionSymbol** | **OptionsSymbol** |  |  [optional] |
-|**price** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**units** | **BigDecimal** |  |  [optional] |
+|**price** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**units** | **Double** |  |  [optional] |
 |**currency** | **Currency** |  |  [optional] |
-|**averagePurchasePrice** | **BigDecimal** | Average purchase price for this position |  [optional] |
+|**averagePurchasePrice** | **Double** | Average purchase price for this position |  [optional] |
 
 
 

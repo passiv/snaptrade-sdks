@@ -13,16 +13,26 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.CalculatedTrade;
+import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExcludedAsset;
+import com.konfigthis.client.model.ModelAssetClass;
 import com.konfigthis.client.model.ModelAssetClassDetails;
+import com.konfigthis.client.model.ModelAssetClassTarget;
+import com.konfigthis.client.model.ModelPortfolio;
+import com.konfigthis.client.model.ModelPortfolioAssetClass;
 import com.konfigthis.client.model.ModelPortfolioDetails;
+import com.konfigthis.client.model.ModelPortfolioSecurity;
 import com.konfigthis.client.model.PortfolioGroup;
 import com.konfigthis.client.model.PortfolioGroupInfo;
-import com.konfigthis.client.model.PortfolioGroupPosition;
 import com.konfigthis.client.model.PortfolioGroupSettings;
+import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.SymbolQuery;
 import com.konfigthis.client.model.TargetAsset;
 import com.konfigthis.client.model.Trade;
@@ -30,6 +40,7 @@ import java.util.UUID;
 import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +53,14 @@ import java.util.Map;
 @Disabled
 public class PortfolioManagementApiTest {
 
-    private final PortfolioManagementApi api = new PortfolioManagementApi();
+    private static PortfolioManagementApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new PortfolioManagementApi(apiClient);
+    }
 
     /**
      * Adds an asset to exclude to a portfolio group
@@ -52,21 +70,24 @@ public class PortfolioManagementApiTest {
     @Test
     public void addPortfolioExcludedAssetTest() throws ApiException {
         UUID portfolioGroupId = null;
-        UniversalSymbol universalSymbol = null;
-        ExcludedAsset response = api.addPortfolioExcludedAsset(portfolioGroupId, universalSymbol);
-        // TODO: test validations
-    }
-
-    /**
-     * List all portfolio groups
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void callListTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        List<PortfolioGroup> response = api.callList(userId, userSecret);
+        UUID id = null;
+        String symbol = null;
+        String rawSymbol = null;
+        String description = null;
+        Currency currency = null;
+        Exchange exchange = null;
+        SecurityType type = null;
+        List<Currency> currencies = null;
+        ExcludedAsset response = api.addPortfolioExcludedAsset(portfolioGroupId)
+                .id(id)
+                .symbol(symbol)
+                .rawSymbol(rawSymbol)
+                .description(description)
+                .currency(currency)
+                .exchange(exchange)
+                .type(type)
+                .currencies(currencies)
+                .execute();
         // TODO: test validations
     }
 
@@ -79,8 +100,12 @@ public class PortfolioManagementApiTest {
     public void createTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        Map<String, Object> requestBody = null;
-        List<PortfolioGroup> response = api.create(userId, userSecret, requestBody);
+        UUID id = null;
+        String name = null;
+        List<PortfolioGroup> response = api.create(userId, userSecret)
+                .id(id)
+                .name(name)
+                .execute();
         // TODO: test validations
     }
 
@@ -91,7 +116,8 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void createAssetClassTest() throws ApiException {
-        ModelAssetClassDetails response = api.createAssetClass();
+        ModelAssetClassDetails response = api.createAssetClass()
+                .execute();
         // TODO: test validations
     }
 
@@ -102,7 +128,8 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void createModelPortfolioTest() throws ApiException {
-        ModelPortfolioDetails response = api.createModelPortfolio();
+        ModelPortfolioDetails response = api.createModelPortfolio()
+                .execute();
         // TODO: test validations
     }
 
@@ -114,7 +141,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void deleteAssetClassTest() throws ApiException {
         UUID modelAssetClassId = null;
-        api.deleteAssetClass(modelAssetClassId);
+        api.deleteAssetClass(modelAssetClassId)
+                .execute();
         // TODO: test validations
     }
 
@@ -127,7 +155,8 @@ public class PortfolioManagementApiTest {
     public void deleteExcludedAssetTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID symbolId = null;
-        api.deleteExcludedAsset(portfolioGroupId, symbolId);
+        api.deleteExcludedAsset(portfolioGroupId, symbolId)
+                .execute();
         // TODO: test validations
     }
 
@@ -139,7 +168,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void deleteModelPortfolioByIdTest() throws ApiException {
         UUID modelPortfolioId = null;
-        api.deleteModelPortfolioById(modelPortfolioId);
+        api.deleteModelPortfolioById(modelPortfolioId)
+                .execute();
         // TODO: test validations
     }
 
@@ -151,7 +181,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void deletePortfoliTest() throws ApiException {
         UUID portfolioGroupId = null;
-        PortfolioGroup response = api.deletePortfoli(portfolioGroupId);
+        PortfolioGroup response = api.deletePortfoli(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -164,7 +195,8 @@ public class PortfolioManagementApiTest {
     public void deletePortfolioTargetByIdTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID targetAssetId = null;
-        TargetAsset response = api.deletePortfolioTargetById(portfolioGroupId, targetAssetId);
+        TargetAsset response = api.deletePortfolioTargetById(portfolioGroupId, targetAssetId)
+                .execute();
         // TODO: test validations
     }
 
@@ -176,7 +208,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void detailAssetClassTest() throws ApiException {
         UUID modelAssetClassId = null;
-        ModelAssetClassDetails response = api.detailAssetClass(modelAssetClassId);
+        ModelAssetClassDetails response = api.detailAssetClass(modelAssetClassId)
+                .execute();
         // TODO: test validations
     }
 
@@ -190,7 +223,8 @@ public class PortfolioManagementApiTest {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
         UUID tradeId = null;
-        List<Trade> response = api.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId);
+        List<Trade> response = api.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+                .execute();
         // TODO: test validations
     }
 
@@ -202,7 +236,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getModelDetailsByIdTest() throws ApiException {
         UUID modelPortfolioId = null;
-        ModelPortfolioDetails response = api.getModelDetailsById(modelPortfolioId);
+        ModelPortfolioDetails response = api.getModelDetailsById(modelPortfolioId)
+                .execute();
         // TODO: test validations
     }
 
@@ -214,7 +249,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortfolioBalancesTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<Balance> response = api.getPortfolioBalances(portfolioGroupId);
+        List<Balance> response = api.getPortfolioBalances(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -226,7 +262,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortfolioDetailsByIdTest() throws ApiException {
         UUID portfolioGroupId = null;
-        PortfolioGroup response = api.getPortfolioDetailsById(portfolioGroupId);
+        PortfolioGroup response = api.getPortfolioDetailsById(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -238,19 +275,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortfolioInfoTest() throws ApiException {
         UUID portfolioGroupId = null;
-        PortfolioGroupInfo response = api.getPortfolioInfo(portfolioGroupId);
-        // TODO: test validations
-    }
-
-    /**
-     * Get total of each postions owned in portfolio group
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getPortfolioPositionsTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        List<PortfolioGroupPosition> response = api.getPortfolioPositions(portfolioGroupId);
+        PortfolioGroupInfo response = api.getPortfolioInfo(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -262,7 +288,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortfolioSettingsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        PortfolioGroupSettings response = api.getPortfolioSettings(portfolioGroupId);
+        PortfolioGroupSettings response = api.getPortfolioSettings(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -275,7 +302,8 @@ public class PortfolioManagementApiTest {
     public void getPortfolioTargetByIdTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID targetAssetId = null;
-        TargetAsset response = api.getPortfolioTargetById(portfolioGroupId, targetAssetId);
+        TargetAsset response = api.getPortfolioTargetById(portfolioGroupId, targetAssetId)
+                .execute();
         // TODO: test validations
     }
 
@@ -287,7 +315,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortfolioTargetsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<TargetAsset> response = api.getPortfolioTargets(portfolioGroupId);
+        List<TargetAsset> response = api.getPortfolioTargets(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -299,7 +328,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void getPortoflioExcludedAssetsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<ExcludedAsset> response = api.getPortoflioExcludedAssets(portfolioGroupId);
+        List<ExcludedAsset> response = api.getPortoflioExcludedAssets(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -311,7 +341,22 @@ public class PortfolioManagementApiTest {
     @Test
     public void importModelPortfolioTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<TargetAsset> response = api.importModelPortfolio(portfolioGroupId);
+        List<TargetAsset> response = api.importModelPortfolio(portfolioGroupId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List all portfolio groups
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        List<PortfolioGroup> response = api.list(userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 
@@ -322,7 +367,8 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void listAssetClassesTest() throws ApiException {
-        List<ModelAssetClassDetails> response = api.listAssetClasses();
+        List<ModelAssetClassDetails> response = api.listAssetClasses()
+                .execute();
         // TODO: test validations
     }
 
@@ -334,7 +380,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void listCalculatedTradesTest() throws ApiException {
         UUID portfolioGroupId = null;
-        CalculatedTrade response = api.listCalculatedTrades(portfolioGroupId);
+        CalculatedTrade response = api.listCalculatedTrades(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -345,7 +392,8 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void listModelPortfolioTest() throws ApiException {
-        List<ModelPortfolioDetails> response = api.listModelPortfolio();
+        List<ModelPortfolioDetails> response = api.listModelPortfolio()
+                .execute();
         // TODO: test validations
     }
 
@@ -357,7 +405,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void listPortfolioAccountsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<Account> response = api.listPortfolioAccounts(portfolioGroupId);
+        List<Account> response = api.listPortfolioAccounts(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -369,8 +418,14 @@ public class PortfolioManagementApiTest {
     @Test
     public void modifyModelPortfolioByIdTest() throws ApiException {
         UUID modelPortfolioId = null;
-        ModelPortfolioDetails modelPortfolioDetails = null;
-        api.modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails);
+        ModelPortfolio modelPortfolio = null;
+        List<ModelPortfolioSecurity> modelPortfolioSecurity = null;
+        List<ModelPortfolioAssetClass> modelPortfolioAssetClass = null;
+        api.modifyModelPortfolioById(modelPortfolioId)
+                .modelPortfolio(modelPortfolio)
+                .modelPortfolioSecurity(modelPortfolioSecurity)
+                .modelPortfolioAssetClass(modelPortfolioAssetClass)
+                .execute();
         // TODO: test validations
     }
 
@@ -382,8 +437,12 @@ public class PortfolioManagementApiTest {
     @Test
     public void savePortfolioTest() throws ApiException {
         UUID portfolioGroupId = null;
-        Map<String, Object> requestBody = null;
-        PortfolioGroup response = api.savePortfolio(portfolioGroupId, requestBody);
+        UUID id = null;
+        String name = null;
+        PortfolioGroup response = api.savePortfolio(portfolioGroupId)
+                .id(id)
+                .name(name)
+                .execute();
         // TODO: test validations
     }
 
@@ -395,8 +454,10 @@ public class PortfolioManagementApiTest {
     @Test
     public void searchPortfolioSymbolsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        SymbolQuery symbolQuery = null;
-        List<UniversalSymbol> response = api.searchPortfolioSymbols(portfolioGroupId, symbolQuery);
+        String substring = null;
+        List<UniversalSymbol> response = api.searchPortfolioSymbols(portfolioGroupId)
+                .substring(substring)
+                .execute();
         // TODO: test validations
     }
 
@@ -408,8 +469,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void setPortfolioTargetsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        List<TargetAsset> targetAsset = null;
-        List<TargetAsset> response = api.setPortfolioTargets(portfolioGroupId, targetAsset);
+        List<TargetAsset> response = api.setPortfolioTargets(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -421,8 +482,12 @@ public class PortfolioManagementApiTest {
     @Test
     public void updateAssetClassTest() throws ApiException {
         UUID modelAssetClassId = null;
-        ModelAssetClassDetails modelAssetClassDetails = null;
-        api.updateAssetClass(modelAssetClassId, modelAssetClassDetails);
+        ModelAssetClass modelAssetClass = null;
+        List<ModelAssetClassTarget> modelAssetClassTarget = null;
+        api.updateAssetClass(modelAssetClassId)
+                .modelAssetClass(modelAssetClass)
+                .modelAssetClassTarget(modelAssetClassTarget)
+                .execute();
         // TODO: test validations
     }
 
@@ -434,7 +499,8 @@ public class PortfolioManagementApiTest {
     @Test
     public void updatePortfolioSettingsTest() throws ApiException {
         UUID portfolioGroupId = null;
-        PortfolioGroupSettings response = api.updatePortfolioSettings(portfolioGroupId);
+        PortfolioGroupSettings response = api.updatePortfolioSettings(portfolioGroupId)
+                .execute();
         // TODO: test validations
     }
 
@@ -447,8 +513,18 @@ public class PortfolioManagementApiTest {
     public void updatePortfolioTargetByIdTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID targetAssetId = null;
-        TargetAsset targetAsset = null;
-        TargetAsset response = api.updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset);
+        UUID id = null;
+        UniversalSymbol symbol = null;
+        Double percent = null;
+        Boolean isSupported = null;
+        Boolean isExcluded = null;
+        TargetAsset response = api.updatePortfolioTargetById(portfolioGroupId, targetAssetId)
+                .id(id)
+                .symbol(symbol)
+                .percent(percent)
+                .isSupported(isSupported)
+                .isExcluded(isExcluded)
+                .execute();
         // TODO: test validations
     }
 

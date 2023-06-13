@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountSyncStatus;
 import com.konfigthis.client.model.CashRestriction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -39,6 +40,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -92,10 +94,18 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
   private List<CashRestriction> cashRestrictions = null;
 
+  public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
+  @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
+  private AccountSyncStatus syncStatus;
+
   public Account() {
   }
 
   public Account id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -114,11 +124,19 @@ public class Account {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public Account brokerageAuthorization(UUID brokerageAuthorization) {
+
+    
+    
+    
     
     this.brokerageAuthorization = brokerageAuthorization;
     return this;
@@ -137,11 +155,19 @@ public class Account {
 
 
   public void setBrokerageAuthorization(UUID brokerageAuthorization) {
+
+    
+    
+    
     this.brokerageAuthorization = brokerageAuthorization;
   }
 
 
   public Account portfolioGroup(UUID portfolioGroup) {
+
+    
+    
+    
     
     this.portfolioGroup = portfolioGroup;
     return this;
@@ -160,11 +186,19 @@ public class Account {
 
 
   public void setPortfolioGroup(UUID portfolioGroup) {
+
+    
+    
+    
     this.portfolioGroup = portfolioGroup;
   }
 
 
   public Account name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -183,11 +217,19 @@ public class Account {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public Account number(String number) {
+
+    
+    
+    
     
     this.number = number;
     return this;
@@ -206,11 +248,19 @@ public class Account {
 
 
   public void setNumber(String number) {
+
+    
+    
+    
     this.number = number;
   }
 
 
   public Account institutionName(String institutionName) {
+
+    
+    
+    
     
     this.institutionName = institutionName;
     return this;
@@ -229,11 +279,19 @@ public class Account {
 
 
   public void setInstitutionName(String institutionName) {
+
+    
+    
+    
     this.institutionName = institutionName;
   }
 
 
   public Account createdDate(String createdDate) {
+
+    
+    
+    
     
     this.createdDate = createdDate;
     return this;
@@ -252,11 +310,19 @@ public class Account {
 
 
   public void setCreatedDate(String createdDate) {
+
+    
+    
+    
     this.createdDate = createdDate;
   }
 
 
   public Account meta(Map<String, Object> meta) {
+
+    
+    
+    
     
     this.meta = meta;
     return this;
@@ -283,11 +349,19 @@ public class Account {
 
 
   public void setMeta(Map<String, Object> meta) {
+
+    
+    
+    
     this.meta = meta;
   }
 
 
   public Account cashRestrictions(List<CashRestriction> cashRestrictions) {
+
+    
+    
+    
     
     this.cashRestrictions = cashRestrictions;
     return this;
@@ -314,7 +388,42 @@ public class Account {
 
 
   public void setCashRestrictions(List<CashRestriction> cashRestrictions) {
+
+    
+    
+    
     this.cashRestrictions = cashRestrictions;
+  }
+
+
+  public Account syncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    
+    this.syncStatus = syncStatus;
+    return this;
+  }
+
+   /**
+   * Get syncStatus
+   * @return syncStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountSyncStatus getSyncStatus() {
+    return syncStatus;
+  }
+
+
+  public void setSyncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    this.syncStatus = syncStatus;
   }
 
   /**
@@ -380,13 +489,14 @@ public class Account {
         Objects.equals(this.institutionName, account.institutionName) &&
         Objects.equals(this.createdDate, account.createdDate) &&
         Objects.equals(this.meta, account.meta) &&
-        Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
+        Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
+        Objects.equals(this.syncStatus, account.syncStatus)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, createdDate, meta, cashRestrictions, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, createdDate, meta, cashRestrictions, syncStatus, additionalProperties);
   }
 
   @Override
@@ -402,6 +512,7 @@ public class Account {
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
+    sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -434,6 +545,7 @@ public class Account {
     openapiFields.add("created_date");
     openapiFields.add("meta");
     openapiFields.add("cash_restrictions");
+    openapiFields.add("sync_status");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -475,6 +587,10 @@ public class Account {
       // ensure the optional json data is an array if present
       if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
+      }
+      // validate the optional field `sync_status`
+      if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {
+        AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       }
   }
 

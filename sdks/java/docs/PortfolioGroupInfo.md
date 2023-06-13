@@ -17,7 +17,7 @@ Summary of all relevant information about a portfolio group.
 |**excludedPositions** | **List&lt;ExcludedAsset&gt;** |  |  [optional] |
 |**calculatedTrades** | **List&lt;CalculatedTrade&gt;** |  |  [optional] |
 |**brokerageAuthorizations** | **List&lt;BrokerageAuthorization&gt;** |  |  [optional] |
-|**accuracy** | **BigDecimal** |  |  [optional] |
+|**accuracy** | **Double** |  |  [optional] |
 |**settings** | **PortfolioGroupSettings** |  |  [optional] |
 
 

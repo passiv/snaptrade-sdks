@@ -88,7 +88,7 @@ describe 'TradingApi' do
   # @param account_id The ID of the account to get quotes.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
-  # @return [SymbolsQuotes]
+  # @return [Array<SymbolsQuotesInner>]
   describe 'get_user_account_quotes test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

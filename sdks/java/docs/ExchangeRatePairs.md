@@ -10,7 +10,7 @@ The exchange rate of a pair of currencies
 |------------ | ------------- | ------------- | -------------|
 |**src** | **Currency** |  |  [optional] |
 |**dst** | **Currency** |  |  [optional] |
-|**exchangeRate** | **BigDecimal** |  |  [optional] |
+|**exchangeRate** | **Double** |  |  [optional] |
 
 
 

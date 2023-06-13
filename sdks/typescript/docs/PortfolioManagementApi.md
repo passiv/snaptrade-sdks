@@ -170,14 +170,21 @@ const snaptrade = new Snaptrade({
 });
 
 const createAssetClassResponse =
-  await snaptrade.portfolioManagement.createAssetClass();
+  await snaptrade.portfolioManagement.createAssetClass({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
 console.log(createAssetClassResponse);
 ```
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | [**string**] |  | defaults to undefined
+ **userSecret** | [**string**] |  | defaults to undefined
 
 
 ### Return type
@@ -529,6 +536,8 @@ const snaptrade = new Snaptrade({
 const detailAssetClassResponse =
   await snaptrade.portfolioManagement.detailAssetClass({
     modelAssetClassId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
   });
 
 console.log(detailAssetClassResponse);
@@ -540,6 +549,8 @@ console.log(detailAssetClassResponse);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **modelAssetClassId** | [**string**] | The ID of the model asset class to get. | defaults to undefined
+ **userId** | [**string**] |  | defaults to undefined
+ **userSecret** | [**string**] |  | defaults to undefined
 
 
 ### Return type
@@ -1159,14 +1170,21 @@ const snaptrade = new Snaptrade({
 });
 
 const listAssetClassesResponse =
-  await snaptrade.portfolioManagement.listAssetClasses();
+  await snaptrade.portfolioManagement.listAssetClasses({
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
+  });
 
 console.log(listAssetClassesResponse);
 ```
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | [**string**] |  | defaults to undefined
+ **userSecret** | [**string**] |  | defaults to undefined
 
 
 ### Return type
@@ -1583,6 +1601,8 @@ const snaptrade = new Snaptrade({
 const updateAssetClassResponse =
   await snaptrade.portfolioManagement.updateAssetClass({
     modelAssetClassId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "John.doe@snaptrade.com",
+    userSecret: "USERSECRET123",
   });
 
 console.log(updateAssetClassResponse);
@@ -1595,6 +1615,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **modelAssetClassDetails** | **ModelAssetClassDetails**| Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array |
  **modelAssetClassId** | [**string**] | The ID of the model asset class to update. | defaults to undefined
+ **userId** | [**string**] |  | defaults to undefined
+ **userSecret** | [**string**] |  | defaults to undefined
 
 
 ### Return type

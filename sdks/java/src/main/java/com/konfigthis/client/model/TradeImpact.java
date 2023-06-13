@@ -24,7 +24,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,20 +63,24 @@ public class TradeImpact {
 
   public static final String SERIALIZED_NAME_REMAINING_CASH = "remaining_cash";
   @SerializedName(SERIALIZED_NAME_REMAINING_CASH)
-  private BigDecimal remainingCash;
+  private Double remainingCash;
 
   public static final String SERIALIZED_NAME_ESTIMATED_COMMISSIONS = "estimated_commissions";
   @SerializedName(SERIALIZED_NAME_ESTIMATED_COMMISSIONS)
-  private BigDecimal estimatedCommissions;
+  private Double estimatedCommissions;
 
   public static final String SERIALIZED_NAME_FOREX_FEES = "forex_fees";
   @SerializedName(SERIALIZED_NAME_FOREX_FEES)
-  private BigDecimal forexFees;
+  private Double forexFees;
 
   public TradeImpact() {
   }
 
   public TradeImpact account(Account account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -95,11 +99,19 @@ public class TradeImpact {
 
 
   public void setAccount(Account account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public TradeImpact currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -118,13 +130,31 @@ public class TradeImpact {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
-  public TradeImpact remainingCash(BigDecimal remainingCash) {
+  public TradeImpact remainingCash(Double remainingCash) {
+
+    
+    
+    
     
     this.remainingCash = remainingCash;
+    return this;
+  }
+
+  public TradeImpact remainingCash(Integer remainingCash) {
+
+    
+    
+    
+    
+    this.remainingCash = remainingCash.doubleValue();
     return this;
   }
 
@@ -135,19 +165,37 @@ public class TradeImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1.01", value = "Remaining balance after executing all trades")
 
-  public BigDecimal getRemainingCash() {
+  public Double getRemainingCash() {
     return remainingCash;
   }
 
 
-  public void setRemainingCash(BigDecimal remainingCash) {
+  public void setRemainingCash(Double remainingCash) {
+
+    
+    
+    
     this.remainingCash = remainingCash;
   }
 
 
-  public TradeImpact estimatedCommissions(BigDecimal estimatedCommissions) {
+  public TradeImpact estimatedCommissions(Double estimatedCommissions) {
+
+    
+    
+    
     
     this.estimatedCommissions = estimatedCommissions;
+    return this;
+  }
+
+  public TradeImpact estimatedCommissions(Integer estimatedCommissions) {
+
+    
+    
+    
+    
+    this.estimatedCommissions = estimatedCommissions.doubleValue();
     return this;
   }
 
@@ -158,19 +206,37 @@ public class TradeImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10.05", value = "Total estimated commissions across all trades to make")
 
-  public BigDecimal getEstimatedCommissions() {
+  public Double getEstimatedCommissions() {
     return estimatedCommissions;
   }
 
 
-  public void setEstimatedCommissions(BigDecimal estimatedCommissions) {
+  public void setEstimatedCommissions(Double estimatedCommissions) {
+
+    
+    
+    
     this.estimatedCommissions = estimatedCommissions;
   }
 
 
-  public TradeImpact forexFees(BigDecimal forexFees) {
+  public TradeImpact forexFees(Double forexFees) {
+
+    
+    
+    
     
     this.forexFees = forexFees;
+    return this;
+  }
+
+  public TradeImpact forexFees(Integer forexFees) {
+
+    
+    
+    
+    
+    this.forexFees = forexFees.doubleValue();
     return this;
   }
 
@@ -181,12 +247,16 @@ public class TradeImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "2.01", value = "Estimated forex fees to pay to excute trades")
 
-  public BigDecimal getForexFees() {
+  public Double getForexFees() {
     return forexFees;
   }
 
 
-  public void setForexFees(BigDecimal forexFees) {
+  public void setForexFees(Double forexFees) {
+
+    
+    
+    
     this.forexFees = forexFees;
   }
 

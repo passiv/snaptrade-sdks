@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -66,6 +67,10 @@ public class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
   }
 
   public OptionChainInnerChainPerRootInnerChainPerStrikePriceInner strikePrice(Integer strikePrice) {
+
+    
+    
+    
     
     this.strikePrice = strikePrice;
     return this;
@@ -84,11 +89,19 @@ public class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
 
 
   public void setStrikePrice(Integer strikePrice) {
+
+    
+    
+    
     this.strikePrice = strikePrice;
   }
 
 
   public OptionChainInnerChainPerRootInnerChainPerStrikePriceInner callSymbolId(Integer callSymbolId) {
+
+    
+    
+    
     
     this.callSymbolId = callSymbolId;
     return this;
@@ -107,11 +120,19 @@ public class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
 
 
   public void setCallSymbolId(Integer callSymbolId) {
+
+    
+    
+    
     this.callSymbolId = callSymbolId;
   }
 
 
   public OptionChainInnerChainPerRootInnerChainPerStrikePriceInner putSymbolId(Integer putSymbolId) {
+
+    
+    
+    
     
     this.putSymbolId = putSymbolId;
     return this;
@@ -130,6 +151,10 @@ public class OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
 
 
   public void setPutSymbolId(Integer putSymbolId) {
+
+    
+    
+    
     this.putSymbolId = putSymbolId;
   }
 

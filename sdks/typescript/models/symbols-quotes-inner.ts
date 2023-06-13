@@ -17,47 +17,45 @@
 import { UniversalSymbol } from './universal-symbol';
 
 /**
- * Symbols and Tickers Quotes object
+ * 
  * @export
- * @interface SymbolsQuotes
+ * @interface SymbolsQuotesInner
  */
-export interface SymbolsQuotes {
-    [key: string]: any;
-
+export interface SymbolsQuotesInner {
     /**
      * 
      * @type {UniversalSymbol}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'symbol'?: UniversalSymbol;
     /**
      * 
      * @type {number}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'bid_price'?: number;
     /**
      * 
      * @type {number}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'ask_price'?: number;
     /**
      * 
      * @type {number}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'last_trade_price'?: number;
     /**
      * 
      * @type {number}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'bid_size'?: number;
     /**
      * 
      * @type {number}
-     * @memberof SymbolsQuotes
+     * @memberof SymbolsQuotesInner
      */
     'ask_size'?: number;
 }

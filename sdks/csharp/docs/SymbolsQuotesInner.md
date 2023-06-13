@@ -1,5 +1,4 @@
-# SnapTrade.Net.Model.SymbolsQuotes
-Symbols and Tickers Quotes object
+# SnapTrade.Net.Model.SymbolsQuotesInner
 
 ## Properties
 

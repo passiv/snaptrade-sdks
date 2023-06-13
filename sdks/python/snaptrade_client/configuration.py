@@ -505,7 +505,7 @@ conf = snaptrade_client.Configuration(
         """Fix base path."""
         self._base_path = check_url(value)
         self.server_index = None
-        
+
 def check_url(url: str):
     parsed = urlparse(url)
     if parsed.query != '':

@@ -251,7 +251,7 @@ catch (ApiException e)
 
 <a name="createassetclass"></a>
 # **CreateAssetClass**
-> ModelAssetClassDetails CreateAssetClass ()
+> ModelAssetClassDetails CreateAssetClass (string userId, string userSecret)
 
 Create a new model asset class
 
@@ -279,11 +279,13 @@ namespace Example
             config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new PortfolioManagementApi(config);
+            var userId = "userId_example";  // string | 
+            var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // Create a new model asset class
-                ModelAssetClassDetails result = apiInstance.CreateAssetClass();
+                ModelAssetClassDetails result = apiInstance.CreateAssetClass(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -310,7 +312,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Create a new model asset class
-    ApiResponse<ModelAssetClassDetails> response = apiInstance.CreateAssetClassWithHttpInfo();
+    ApiResponse<ModelAssetClassDetails> response = apiInstance.CreateAssetClassWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -324,7 +326,12 @@ catch (ApiException e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
 ### Return type
 
 [**ModelAssetClassDetails**](ModelAssetClassDetails.md)
@@ -953,7 +960,7 @@ catch (ApiException e)
 
 <a name="detailassetclass"></a>
 # **DetailAssetClass**
-> ModelAssetClassDetails DetailAssetClass (Guid modelAssetClassId)
+> ModelAssetClassDetails DetailAssetClass (Guid modelAssetClassId, string userId, string userSecret)
 
 Get details of a model asset class
 
@@ -982,11 +989,13 @@ namespace Example
 
             var apiInstance = new PortfolioManagementApi(config);
             var modelAssetClassId = "modelAssetClassId_example";  // Guid | The ID of the model asset class to get.
+            var userId = "userId_example";  // string | 
+            var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // Get details of a model asset class
-                ModelAssetClassDetails result = apiInstance.DetailAssetClass(modelAssetClassId);
+                ModelAssetClassDetails result = apiInstance.DetailAssetClass(modelAssetClassId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -1013,7 +1022,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get details of a model asset class
-    ApiResponse<ModelAssetClassDetails> response = apiInstance.DetailAssetClassWithHttpInfo(modelAssetClassId);
+    ApiResponse<ModelAssetClassDetails> response = apiInstance.DetailAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1031,6 +1040,8 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **modelAssetClassId** | **Guid** | The ID of the model asset class to get. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
 
 ### Return type
 
@@ -2198,7 +2209,7 @@ catch (ApiException e)
 
 <a name="listassetclasses"></a>
 # **ListAssetClasses**
-> List&lt;ModelAssetClassDetails&gt; ListAssetClasses ()
+> List&lt;ModelAssetClassDetails&gt; ListAssetClasses (string userId, string userSecret)
 
 List of model asset class
 
@@ -2226,11 +2237,13 @@ namespace Example
             config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
             var apiInstance = new PortfolioManagementApi(config);
+            var userId = "userId_example";  // string | 
+            var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // List of model asset class
-                List<ModelAssetClassDetails> result = apiInstance.ListAssetClasses();
+                List<ModelAssetClassDetails> result = apiInstance.ListAssetClasses(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -2257,7 +2270,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List of model asset class
-    ApiResponse<List<ModelAssetClassDetails>> response = apiInstance.ListAssetClassesWithHttpInfo();
+    ApiResponse<List<ModelAssetClassDetails>> response = apiInstance.ListAssetClassesWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -2271,7 +2284,12 @@ catch (ApiException e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
 ### Return type
 
 [**List&lt;ModelAssetClassDetails&gt;**](ModelAssetClassDetails.md)
@@ -3016,7 +3034,7 @@ catch (ApiException e)
 
 <a name="updateassetclass"></a>
 # **UpdateAssetClass**
-> void UpdateAssetClass (Guid modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails)
+> void UpdateAssetClass (Guid modelAssetClassId, string userId, string userSecret, ModelAssetClassDetails modelAssetClassDetails)
 
 Updates model asset class objects
 
@@ -3045,12 +3063,14 @@ namespace Example
 
             var apiInstance = new PortfolioManagementApi(config);
             var modelAssetClassId = "modelAssetClassId_example";  // Guid | The ID of the model asset class to update.
+            var userId = "userId_example";  // string | 
+            var userSecret = "userSecret_example";  // string | 
             var modelAssetClassDetails = new ModelAssetClassDetails(); // ModelAssetClassDetails | Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
 
             try
             {
                 // Updates model asset class objects
-                apiInstance.UpdateAssetClass(modelAssetClassId, modelAssetClassDetails);
+                apiInstance.UpdateAssetClass(modelAssetClassId, userId, userSecret, modelAssetClassDetails);
             }
             catch (ApiException e)
             {
@@ -3076,7 +3096,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Updates model asset class objects
-    apiInstance.UpdateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
+    apiInstance.UpdateAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret, modelAssetClassDetails);
 }
 catch (ApiException e)
 {
@@ -3091,6 +3111,8 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **modelAssetClassId** | **Guid** | The ID of the model asset class to update. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
 | **modelAssetClassDetails** | [**ModelAssetClassDetails**](ModelAssetClassDetails.md) | Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array |  |
 
 ### Return type

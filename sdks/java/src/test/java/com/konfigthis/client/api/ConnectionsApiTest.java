@@ -13,10 +13,15 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.BrokerageAuthorization;
+import com.konfigthis.client.model.ConnectionsSessionEvents200ResponseInner;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +34,14 @@ import java.util.Map;
 @Disabled
 public class ConnectionsApiTest {
 
-    private final ConnectionsApi api = new ConnectionsApi();
+    private static ConnectionsApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new ConnectionsApi(apiClient);
+    }
 
     /**
      * Get detail of a specific brokerage authorizations for the user
@@ -41,7 +53,8 @@ public class ConnectionsApiTest {
         UUID authorizationId = null;
         String userId = null;
         String userSecret = null;
-        BrokerageAuthorization response = api.detailBrokerageAuthorization(authorizationId, userId, userSecret);
+        BrokerageAuthorization response = api.detailBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 
@@ -54,7 +67,8 @@ public class ConnectionsApiTest {
     public void listBrokerageAuthorizationsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<BrokerageAuthorization> response = api.listBrokerageAuthorizations(userId, userSecret);
+        List<BrokerageAuthorization> response = api.listBrokerageAuthorizations(userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 
@@ -68,7 +82,25 @@ public class ConnectionsApiTest {
         UUID authorizationId = null;
         String userId = null;
         String userSecret = null;
-        api.removeBrokerageAuthorization(authorizationId, userId, userSecret);
+        api.removeBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List all session events for the partner
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sessionEventsTest() throws ApiException {
+        String partnerClientId = null;
+        String userId = null;
+        String sessionId = null;
+        List<ConnectionsSessionEvents200ResponseInner> response = api.sessionEvents(partnerClientId)
+                .userId(userId)
+                .sessionId(sessionId)
+                .execute();
         // TODO: test validations
     }
 

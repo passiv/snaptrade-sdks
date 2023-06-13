@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -81,6 +82,10 @@ public class PositionSymbol {
   }
 
   public PositionSymbol id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -99,11 +104,19 @@ public class PositionSymbol {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public PositionSymbol description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -122,11 +135,19 @@ public class PositionSymbol {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public PositionSymbol symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -145,11 +166,19 @@ public class PositionSymbol {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public PositionSymbol localId(String localId) {
+
+    
+    
+    
     
     this.localId = localId;
     return this;
@@ -168,11 +197,19 @@ public class PositionSymbol {
 
 
   public void setLocalId(String localId) {
+
+    
+    
+    
     this.localId = localId;
   }
 
 
   public PositionSymbol isQuotable(Boolean isQuotable) {
+
+    
+    
+    
     
     this.isQuotable = isQuotable;
     return this;
@@ -191,11 +228,19 @@ public class PositionSymbol {
 
 
   public void setIsQuotable(Boolean isQuotable) {
+
+    
+    
+    
     this.isQuotable = isQuotable;
   }
 
 
   public PositionSymbol isTradable(Boolean isTradable) {
+
+    
+    
+    
     
     this.isTradable = isTradable;
     return this;
@@ -214,6 +259,10 @@ public class PositionSymbol {
 
 
   public void setIsTradable(Boolean isTradable) {
+
+    
+    
+    
     this.isTradable = isTradable;
   }
 

@@ -25,7 +25,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -182,11 +182,11 @@ public class TradeExecutionStatus {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_COMMISSIONS = "commissions";
   @SerializedName(SERIALIZED_NAME_COMMISSIONS)
-  private BigDecimal commissions;
+  private Double commissions;
 
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
@@ -196,6 +196,10 @@ public class TradeExecutionStatus {
   }
 
   public TradeExecutionStatus symbol(BrokerageSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -214,11 +218,19 @@ public class TradeExecutionStatus {
 
 
   public void setSymbol(BrokerageSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public TradeExecutionStatus universalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     
     this.universalSymbol = universalSymbol;
     return this;
@@ -237,11 +249,19 @@ public class TradeExecutionStatus {
 
 
   public void setUniversalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     this.universalSymbol = universalSymbol;
   }
 
 
   public TradeExecutionStatus trade(Trade trade) {
+
+    
+    
+    
     
     this.trade = trade;
     return this;
@@ -260,11 +280,19 @@ public class TradeExecutionStatus {
 
 
   public void setTrade(Trade trade) {
+
+    
+    
+    
     this.trade = trade;
   }
 
 
   public TradeExecutionStatus state(StateEnum state) {
+
+    
+    
+    
     
     this.state = state;
     return this;
@@ -283,11 +311,19 @@ public class TradeExecutionStatus {
 
 
   public void setState(StateEnum state) {
+
+    
+    
+    
     this.state = state;
   }
 
 
   public TradeExecutionStatus filledUnits(Integer filledUnits) {
+
+    
+    
+    
     
     this.filledUnits = filledUnits;
     return this;
@@ -306,11 +342,19 @@ public class TradeExecutionStatus {
 
 
   public void setFilledUnits(Integer filledUnits) {
+
+    
+    
+    
     this.filledUnits = filledUnits;
   }
 
 
   public TradeExecutionStatus action(ActionEnum action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -329,13 +373,31 @@ public class TradeExecutionStatus {
 
 
   public void setAction(ActionEnum action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
-  public TradeExecutionStatus price(BigDecimal price) {
+  public TradeExecutionStatus price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public TradeExecutionStatus price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -346,19 +408,37 @@ public class TradeExecutionStatus {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "23.44", value = "Price of execution")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
-  public TradeExecutionStatus commissions(BigDecimal commissions) {
+  public TradeExecutionStatus commissions(Double commissions) {
+
+    
+    
+    
     
     this.commissions = commissions;
+    return this;
+  }
+
+  public TradeExecutionStatus commissions(Integer commissions) {
+
+    
+    
+    
+    
+    this.commissions = commissions.doubleValue();
     return this;
   }
 
@@ -369,17 +449,25 @@ public class TradeExecutionStatus {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "23.44", value = "Fees paid from executing trade")
 
-  public BigDecimal getCommissions() {
+  public Double getCommissions() {
     return commissions;
   }
 
 
-  public void setCommissions(BigDecimal commissions) {
+  public void setCommissions(Double commissions) {
+
+    
+    
+    
     this.commissions = commissions;
   }
 
 
   public TradeExecutionStatus meta(Map<String, Object> meta) {
+
+    
+    
+    
     
     this.meta = meta;
     return this;
@@ -406,6 +494,10 @@ public class TradeExecutionStatus {
 
 
   public void setMeta(Map<String, Object> meta) {
+
+    
+    
+    
     this.meta = meta;
   }
 

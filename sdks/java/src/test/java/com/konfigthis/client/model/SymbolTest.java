@@ -19,9 +19,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
+import com.konfigthis.client.model.SecurityType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +40,14 @@ public class SymbolTest {
     @Test
     public void testSymbol() {
         // TODO: test Symbol
+    }
+
+    /**
+     * Test the property 'id'
+     */
+    @Test
+    public void idTest() {
+        // TODO: test id
     }
 
     /**
@@ -78,6 +88,14 @@ public class SymbolTest {
     @Test
     public void exchangeTest() {
         // TODO: test exchange
+    }
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
     }
 
 }

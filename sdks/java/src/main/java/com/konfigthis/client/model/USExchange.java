@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -92,6 +93,10 @@ public class USExchange {
   }
 
   public USExchange id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -110,11 +115,19 @@ public class USExchange {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public USExchange code(String code) {
+
+    
+    
+    
     
     this.code = code;
     return this;
@@ -133,11 +146,19 @@ public class USExchange {
 
 
   public void setCode(String code) {
+
+    
+    
+    
     this.code = code;
   }
 
 
   public USExchange micCode(String micCode) {
+
+    
+    
+    
     
     this.micCode = micCode;
     return this;
@@ -156,11 +177,19 @@ public class USExchange {
 
 
   public void setMicCode(String micCode) {
+
+    
+    
+    
     this.micCode = micCode;
   }
 
 
   public USExchange name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -179,11 +208,19 @@ public class USExchange {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public USExchange timezone(String timezone) {
+
+    
+    
+    
     
     this.timezone = timezone;
     return this;
@@ -202,11 +239,19 @@ public class USExchange {
 
 
   public void setTimezone(String timezone) {
+
+    
+    
+    
     this.timezone = timezone;
   }
 
 
   public USExchange startTime(String startTime) {
+
+    
+    
+    
     
     this.startTime = startTime;
     return this;
@@ -225,11 +270,19 @@ public class USExchange {
 
 
   public void setStartTime(String startTime) {
+
+    
+    
+    
     this.startTime = startTime;
   }
 
 
   public USExchange closeTime(String closeTime) {
+
+    
+    
+    
     
     this.closeTime = closeTime;
     return this;
@@ -248,11 +301,19 @@ public class USExchange {
 
 
   public void setCloseTime(String closeTime) {
+
+    
+    
+    
     this.closeTime = closeTime;
   }
 
 
   public USExchange suffix(String suffix) {
+
+    
+    
+    
     
     this.suffix = suffix;
     return this;
@@ -271,11 +332,19 @@ public class USExchange {
 
 
   public void setSuffix(String suffix) {
+
+    
+    
+    
     this.suffix = suffix;
   }
 
 
   public USExchange allowsCryptocurrencySymbols(Boolean allowsCryptocurrencySymbols) {
+
+    
+    
+    
     
     this.allowsCryptocurrencySymbols = allowsCryptocurrencySymbols;
     return this;
@@ -294,6 +363,10 @@ public class USExchange {
 
 
   public void setAllowsCryptocurrencySymbols(Boolean allowsCryptocurrencySymbols) {
+
+    
+    
+    
     this.allowsCryptocurrencySymbols = allowsCryptocurrencySymbols;
   }
 

@@ -12,7 +12,7 @@ Cash restriction rules that apply to this account when undergoing portfolio reba
 |**account** | **UUID** |  |  [optional] |
 |**currency** | **UUID** |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
-|**amount** | **BigDecimal** |  |  [optional] |
+|**amount** | **Double** |  |  [optional] |
 
 
 

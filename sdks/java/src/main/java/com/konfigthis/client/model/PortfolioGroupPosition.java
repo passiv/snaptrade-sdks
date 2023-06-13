@@ -23,7 +23,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -36,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class PortfolioGroupPosition {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
@@ -69,6 +69,10 @@ public class PortfolioGroupPosition {
   }
 
   public PortfolioGroupPosition symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -87,13 +91,31 @@ public class PortfolioGroupPosition {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
-  public PortfolioGroupPosition price(BigDecimal price) {
+  public PortfolioGroupPosition price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public PortfolioGroupPosition price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -104,17 +126,25 @@ public class PortfolioGroupPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "24.81", value = "Last known market price for the symbol")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
   public PortfolioGroupPosition units(Integer units) {
+
+    
+    
+    
     
     this.units = units;
     return this;
@@ -133,6 +163,10 @@ public class PortfolioGroupPosition {
 
 
   public void setUnits(Integer units) {
+
+    
+    
+    
     this.units = units;
   }
 

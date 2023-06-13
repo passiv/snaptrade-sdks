@@ -187,10 +187,16 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         /**
          * 
          * @summary Create a new model asset class
+         * @param {string} userId 
+         * @param {string} userSecret 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAssetClass: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAssetClass: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('createAssetClass', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('createAssetClass', 'userSecret', userSecret)
             const localVarPath = `/modelAssetClass`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -209,6 +215,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -510,12 +524,18 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
          * 
          * @summary Get details of a model asset class
          * @param {string} modelAssetClassId The ID of the model asset class to get.
+         * @param {string} userId 
+         * @param {string} userSecret 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        detailAssetClass: async (modelAssetClassId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        detailAssetClass: async (modelAssetClassId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'modelAssetClassId' is not null or undefined
             assertParamExists('detailAssetClass', 'modelAssetClassId', modelAssetClassId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('detailAssetClass', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('detailAssetClass', 'userSecret', userSecret)
             const localVarPath = `/modelAssetClass/{modelAssetClassId}`
                 .replace(`{${"modelAssetClassId"}}`, encodeURIComponent(String(modelAssetClassId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -535,6 +555,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1083,10 +1111,16 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
         /**
          * 
          * @summary List of model asset class
+         * @param {string} userId 
+         * @param {string} userSecret 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAssetClasses: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listAssetClasses: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('listAssetClasses', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('listAssetClasses', 'userSecret', userSecret)
             const localVarPath = `/modelAssetClass`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1105,6 +1139,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1468,13 +1510,19 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
          * 
          * @summary Updates model asset class objects
          * @param {string} modelAssetClassId The ID of the model asset class to update.
+         * @param {string} userId 
+         * @param {string} userSecret 
          * @param {ModelAssetClassDetails} modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateAssetClass: async (modelAssetClassId: string, modelAssetClassDetails: ModelAssetClassDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateAssetClass: async (modelAssetClassId: string, userId: string, userSecret: string, modelAssetClassDetails: ModelAssetClassDetails, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'modelAssetClassId' is not null or undefined
             assertParamExists('updateAssetClass', 'modelAssetClassId', modelAssetClassId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('updateAssetClass', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('updateAssetClass', 'userSecret', userSecret)
             // verify required parameter 'modelAssetClassDetails' is not null or undefined
             assertParamExists('updateAssetClass', 'modelAssetClassDetails', modelAssetClassDetails)
             const localVarPath = `/modelAssetClass/{modelAssetClassId}`
@@ -1496,6 +1544,14 @@ export const PortfolioManagementApiAxiosParamCreator = function (configuration?:
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1655,11 +1711,12 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
         /**
          * 
          * @summary Create a new model asset class
+         * @param {PortfolioManagementApiCreateAssetClassRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createAssetClass(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAssetClass(options);
+        async createAssetClass(requestParameters: PortfolioManagementApiCreateAssetClassRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAssetClass(requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1735,7 +1792,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async detailAssetClass(requestParameters: PortfolioManagementApiDetailAssetClassRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelAssetClassDetails>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.detailAssetClass(requestParameters.modelAssetClassId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.detailAssetClass(requestParameters.modelAssetClassId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1862,11 +1919,12 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
         /**
          * 
          * @summary List of model asset class
+         * @param {PortfolioManagementApiListAssetClassesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAssetClasses(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelAssetClassDetails>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAssetClasses(options);
+        async listAssetClasses(requestParameters: PortfolioManagementApiListAssetClassesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ModelAssetClassDetails>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAssetClasses(requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1953,7 +2011,7 @@ export const PortfolioManagementApiFp = function(configuration?: Configuration) 
          * @throws {RequiredError}
          */
         async updateAssetClass(requestParameters: PortfolioManagementApiUpdateAssetClassRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAssetClass(requestParameters.modelAssetClassId, requestParameters, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAssetClass(requestParameters.modelAssetClassId, requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2011,11 +2069,12 @@ export const PortfolioManagementApiFactory = function (configuration?: Configura
         /**
          * 
          * @summary Create a new model asset class
+         * @param {PortfolioManagementApiCreateAssetClassRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createAssetClass(options?: AxiosRequestConfig): AxiosPromise<ModelAssetClassDetails> {
-            return localVarFp.createAssetClass(options).then((request) => request(axios, basePath));
+        createAssetClass(requestParameters: PortfolioManagementApiCreateAssetClassRequest, options?: AxiosRequestConfig): AxiosPromise<ModelAssetClassDetails> {
+            return localVarFp.createAssetClass(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2199,11 +2258,12 @@ export const PortfolioManagementApiFactory = function (configuration?: Configura
         /**
          * 
          * @summary List of model asset class
+         * @param {PortfolioManagementApiListAssetClassesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAssetClasses(options?: AxiosRequestConfig): AxiosPromise<Array<ModelAssetClassDetails>> {
-            return localVarFp.listAssetClasses(options).then((request) => request(axios, basePath));
+        listAssetClasses(requestParameters: PortfolioManagementApiListAssetClassesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<ModelAssetClassDetails>> {
+            return localVarFp.listAssetClasses(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2347,6 +2407,29 @@ export type PortfolioManagementApiCreateRequest = {
 } & { [key: string]: any; }
 
 /**
+ * Request parameters for createAssetClass operation in PortfolioManagementApi.
+ * @export
+ * @interface PortfolioManagementApiCreateAssetClassRequest
+ */
+export type PortfolioManagementApiCreateAssetClassRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiCreateAssetClass
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiCreateAssetClass
+    */
+    readonly userSecret: string
+    
+}
+
+/**
  * Request parameters for deleteAssetClass operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiDeleteAssetClassRequest
@@ -2453,6 +2536,20 @@ export type PortfolioManagementApiDetailAssetClassRequest = {
     * @memberof PortfolioManagementApiDetailAssetClass
     */
     readonly modelAssetClassId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiDetailAssetClass
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiDetailAssetClass
+    */
+    readonly userSecret: string
     
 }
 
@@ -2661,6 +2758,29 @@ export type PortfolioManagementApiListRequest = {
 }
 
 /**
+ * Request parameters for listAssetClasses operation in PortfolioManagementApi.
+ * @export
+ * @interface PortfolioManagementApiListAssetClassesRequest
+ */
+export type PortfolioManagementApiListAssetClassesRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiListAssetClasses
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiListAssetClasses
+    */
+    readonly userSecret: string
+    
+}
+
+/**
  * Request parameters for listCalculatedTrades operation in PortfolioManagementApi.
  * @export
  * @interface PortfolioManagementApiListCalculatedTradesRequest
@@ -2774,6 +2894,20 @@ export type PortfolioManagementApiUpdateAssetClassRequest = {
     */
     readonly modelAssetClassId: string
     
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdateAssetClass
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof PortfolioManagementApiUpdateAssetClass
+    */
+    readonly userSecret: string
+    
 } & ModelAssetClassDetails
 
 /**
@@ -2849,12 +2983,13 @@ export class PortfolioManagementApi extends PortfolioManagementApiCustom {
     /**
      * 
      * @summary Create a new model asset class
+     * @param {PortfolioManagementApiCreateAssetClassRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortfolioManagementApi
      */
-    public createAssetClass(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).createAssetClass(options).then((request) => request(this.axios, this.basePath));
+    public createAssetClass(requestParameters: PortfolioManagementApiCreateAssetClassRequest, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).createAssetClass(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3075,12 +3210,13 @@ export class PortfolioManagementApi extends PortfolioManagementApiCustom {
     /**
      * 
      * @summary List of model asset class
+     * @param {PortfolioManagementApiListAssetClassesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortfolioManagementApi
      */
-    public listAssetClasses(options?: AxiosRequestConfig) {
-        return PortfolioManagementApiFp(this.configuration).listAssetClasses(options).then((request) => request(this.axios, this.basePath));
+    public listAssetClasses(requestParameters: PortfolioManagementApiListAssetClassesRequest, options?: AxiosRequestConfig) {
+        return PortfolioManagementApiFp(this.configuration).listAssetClasses(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

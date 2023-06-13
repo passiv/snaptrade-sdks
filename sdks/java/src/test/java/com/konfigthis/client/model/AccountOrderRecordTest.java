@@ -19,14 +19,15 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.OptionsSymbol;
 import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -75,6 +76,14 @@ public class AccountOrderRecordTest {
     @Test
     public void universalSymbolTest() {
         // TODO: test universalSymbol
+    }
+
+    /**
+     * Test the property 'optionSymbol'
+     */
+    @Test
+    public void optionSymbolTest() {
+        // TODO: test optionSymbol
     }
 
     /**

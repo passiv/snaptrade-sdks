@@ -38,7 +38,7 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { OrderType } from '../models';
 // @ts-ignore
-import { SymbolsQuotes } from '../models';
+import { SymbolsQuotesInner } from '../models';
 // @ts-ignore
 import { TimeInForce } from '../models';
 // @ts-ignore
@@ -724,7 +724,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SymbolsQuotes>> {
+        async getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SymbolsQuotesInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountQuotes(requestParameters.userId, requestParameters.userSecret, requestParameters.symbols, requestParameters.accountId, requestParameters.useTicker, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -840,7 +840,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig): AxiosPromise<SymbolsQuotes> {
+        getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
             return localVarFp.getUserAccountQuotes(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

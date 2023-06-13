@@ -24,8 +24,8 @@ import com.konfigthis.client.model.OptionsSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class OptionsHoldings {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -76,12 +77,16 @@ public class OptionsHoldings {
 
   public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
-  private BigDecimal averagePurchasePrice;
+  private Double averagePurchasePrice;
 
   public OptionsHoldings() {
   }
 
   public OptionsHoldings id(String id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -100,11 +105,19 @@ public class OptionsHoldings {
 
 
   public void setId(String id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public OptionsHoldings symbol(UUID symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -123,11 +136,19 @@ public class OptionsHoldings {
 
 
   public void setSymbol(UUID symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public OptionsHoldings optionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
     
     this.optionSymbol = optionSymbol;
     return this;
@@ -146,13 +167,31 @@ public class OptionsHoldings {
 
 
   public void setOptionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
     this.optionSymbol = optionSymbol;
   }
 
 
-  public OptionsHoldings price(BigDecimal price) {
+  public OptionsHoldings price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public OptionsHoldings price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -163,17 +202,25 @@ public class OptionsHoldings {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
   public OptionsHoldings currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -192,13 +239,31 @@ public class OptionsHoldings {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
-  public OptionsHoldings averagePurchasePrice(BigDecimal averagePurchasePrice) {
+  public OptionsHoldings averagePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     
     this.averagePurchasePrice = averagePurchasePrice;
+    return this;
+  }
+
+  public OptionsHoldings averagePurchasePrice(Integer averagePurchasePrice) {
+
+    
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice.doubleValue();
     return this;
   }
 
@@ -209,12 +274,16 @@ public class OptionsHoldings {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "108.3353", value = "Average purchase price for this position")
 
-  public BigDecimal getAveragePurchasePrice() {
+  public Double getAveragePurchasePrice() {
     return averagePurchasePrice;
   }
 
 
-  public void setAveragePurchasePrice(BigDecimal averagePurchasePrice) {
+  public void setAveragePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     this.averagePurchasePrice = averagePurchasePrice;
   }
 
@@ -282,9 +351,20 @@ public class OptionsHoldings {
         Objects.equals(this.additionalProperties, optionsHoldings.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, symbol, optionSymbol, price, currency, averagePurchasePrice, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

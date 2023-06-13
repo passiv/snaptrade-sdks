@@ -13,7 +13,11 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.OptionChainInner;
+import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsHoldings;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
@@ -22,6 +26,7 @@ import com.konfigthis.client.model.StrategyQuotes;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +39,14 @@ import java.util.Map;
 @Disabled
 public class OptionsApiTest {
 
-    private final OptionsApi api = new OptionsApi();
+    private static OptionsApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new OptionsApi(apiClient);
+    }
 
     /**
      * Creates an option strategy object that will be used to place an option strategy order
@@ -43,11 +55,14 @@ public class OptionsApiTest {
      */
     @Test
     public void getOptionStrategyTest() throws ApiException {
+        UUID underlyingSymbolId = null;
+        List<OptionLeg> legs = null;
+        String strategyType = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = null;
-        StrategyQuotes response = api.getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+        StrategyQuotes response = api.getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 
@@ -62,7 +77,8 @@ public class OptionsApiTest {
         String userSecret = null;
         UUID accountId = null;
         UUID symbol = null;
-        List<OptionChainInner> response = api.getOptionsChain(userId, userSecret, accountId, symbol);
+        List<OptionChainInner> response = api.getOptionsChain(userId, userSecret, accountId, symbol)
+                .execute();
         // TODO: test validations
     }
 
@@ -77,7 +93,8 @@ public class OptionsApiTest {
         String userSecret = null;
         UUID accountId = null;
         UUID optionStrategyId = null;
-        StrategyQuotes response = api.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
+        StrategyQuotes response = api.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
+                .execute();
         // TODO: test validations
     }
 
@@ -91,7 +108,8 @@ public class OptionsApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        OptionsHoldings response = api.listOptionHoldings(userId, userSecret, accountId);
+        OptionsHoldings response = api.listOptionHoldings(userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 
@@ -102,12 +120,15 @@ public class OptionsApiTest {
      */
     @Test
     public void placeOptionStrategyTest() throws ApiException {
+        String orderType = null;
+        String timeInForce = null;
+        Double price = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
         UUID optionStrategyId = null;
-        OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = null;
-        StrategyOrderRecord response = api.placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
+        StrategyOrderRecord response = api.placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+                .execute();
         // TODO: test validations
     }
 

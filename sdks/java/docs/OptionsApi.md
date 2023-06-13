@@ -13,15 +13,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getOptionStrategy"></a>
 # **getOptionStrategy**
-> StrategyQuotes getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest)
+> StrategyQuotes getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest).execute();
 
 Creates an option strategy object that will be used to place an option strategy order
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -29,35 +29,51 @@ import com.konfigthis.client.api.OptionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest(); // OptionsGetOptionStrategyRequest | 
+    OptionsApi api = new OptionsApi(apiClient);
+    UUID underlyingSymbolId = UUID.randomUUID();
+    List<OptionLeg> legs = Arrays.asList();
+    String strategyType = "CUSTOM";
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     try {
-      StrategyQuotes result = apiInstance.getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+      StrategyQuotes result = api
+              .getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#getOptionStrategy");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<StrategyQuotes> response = api
+              .getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionStrategy");
       System.err.println("Status code: " + e.getCode());
@@ -99,15 +115,15 @@ public class Example {
 
 <a name="getOptionsChain"></a>
 # **getOptionsChain**
-> List&lt;OptionChainInner&gt; getOptionsChain(userId, userSecret, accountId, symbol)
+> List&lt;OptionChainInner&gt; getOptionsChain(userId, userSecret, accountId, symbol).execute();
 
 Get the options chain
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -115,35 +131,49 @@ import com.konfigthis.client.api.OptionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    UUID symbol = UUID.randomUUID(); // UUID | Universal symbol ID if symbol
+    OptionsApi api = new OptionsApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID symbol = UUID.randomUUID(); // Universal symbol ID if symbol
     try {
-      List<OptionChainInner> result = apiInstance.getOptionsChain(userId, userSecret, accountId, symbol);
+      List<OptionChainInner> result = api
+              .getOptionsChain(userId, userSecret, accountId, symbol)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#getOptionsChain");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<OptionChainInner>> response = api
+              .getOptionsChain(userId, userSecret, accountId, symbol)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionsChain");
       System.err.println("Status code: " + e.getCode());
@@ -185,15 +215,15 @@ public class Example {
 
 <a name="getOptionsStrategyQuote"></a>
 # **getOptionsStrategyQuote**
-> StrategyQuotes getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
+> StrategyQuotes getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId).execute();
 
 Get latest market data of option strategy
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -201,35 +231,49 @@ import com.konfigthis.client.api.OptionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    UUID optionStrategyId = UUID.randomUUID(); // UUID | Option strategy id obtained from response when creating option strategy object
+    OptionsApi api = new OptionsApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID optionStrategyId = UUID.randomUUID(); // Option strategy id obtained from response when creating option strategy object
     try {
-      StrategyQuotes result = apiInstance.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
+      StrategyQuotes result = api
+              .getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#getOptionsStrategyQuote");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<StrategyQuotes> response = api
+              .getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionsStrategyQuote");
       System.err.println("Status code: " + e.getCode());
@@ -271,15 +315,15 @@ public class Example {
 
 <a name="listOptionHoldings"></a>
 # **listOptionHoldings**
-> OptionsHoldings listOptionHoldings(userId, userSecret, accountId)
+> OptionsHoldings listOptionHoldings(userId, userSecret, accountId).execute();
 
 Get the options holdings in the account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -287,34 +331,48 @@ import com.konfigthis.client.api.OptionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    OptionsApi api = new OptionsApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     try {
-      OptionsHoldings result = apiInstance.listOptionHoldings(userId, userSecret, accountId);
+      OptionsHoldings result = api
+              .listOptionHoldings(userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#listOptionHoldings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<OptionsHoldings> response = api
+              .listOptionHoldings(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#listOptionHoldings");
       System.err.println("Status code: " + e.getCode());
@@ -355,15 +413,15 @@ public class Example {
 
 <a name="placeOptionStrategy"></a>
 # **placeOptionStrategy**
-> StrategyOrderRecord placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest)
+> StrategyOrderRecord placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest).execute();
 
 Place an option strategy order on the brokerage
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -371,36 +429,52 @@ import com.konfigthis.client.api.OptionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    OptionsApi apiInstance = new OptionsApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    UUID optionStrategyId = UUID.randomUUID(); // UUID | Option strategy id obtained from response when creating option strategy object
-    OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(); // OptionsPlaceOptionStrategyRequest | 
+    OptionsApi api = new OptionsApi(apiClient);
+    String orderType = "Limit";
+    String timeInForce = "DAY";
+    Double price = 3.4D; // Trade Price if limit or stop limit order
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID optionStrategyId = UUID.randomUUID(); // Option strategy id obtained from response when creating option strategy object
     try {
-      StrategyOrderRecord result = apiInstance.placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
+      StrategyOrderRecord result = api
+              .placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#placeOptionStrategy");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<StrategyOrderRecord> response = api
+              .placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#placeOptionStrategy");
       System.err.println("Status code: " + e.getCode());

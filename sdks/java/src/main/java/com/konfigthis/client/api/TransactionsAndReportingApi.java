@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import java.time.LocalDate;
 import com.konfigthis.client.model.PerformanceCustom;
 import com.konfigthis.client.model.UniversalActivity;
 
@@ -41,11 +42,20 @@ public class TransactionsAndReportingApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public TransactionsAndReportingApi() {
+    public TransactionsAndReportingApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public TransactionsAndReportingApi(ApiClient apiClient) {
+    public TransactionsAndReportingApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -73,24 +83,7 @@ public class TransactionsAndReportingApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for getActivities
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param startDate  (optional)
-     * @param endDate  (optional)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getActivitiesCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getActivitiesCall(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -127,6 +120,14 @@ public class TransactionsAndReportingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("accounts", accounts));
         }
 
+        if (brokerageAuthorizations != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("brokerageAuthorizations", brokerageAuthorizations));
+        }
+
+        if (type != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("type", type));
+        }
+
         if (userId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
         }
@@ -155,7 +156,7 @@ public class TransactionsAndReportingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getActivitiesValidateBeforeCall(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getActivitiesValidateBeforeCall(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getActivities(Async)");
@@ -166,66 +167,160 @@ public class TransactionsAndReportingApi {
             throw new ApiException("Missing the required parameter 'userSecret' when calling getActivities(Async)");
         }
 
-        return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, _callback);
+        return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
 
     }
 
-    /**
-     * Get transaction history for a user
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param startDate  (optional)
-     * @param endDate  (optional)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @return List&lt;UniversalActivity&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<UniversalActivity> getActivities(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
-        ApiResponse<List<UniversalActivity>> localVarResp = getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get transaction history for a user
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param startDate  (optional)
-     * @param endDate  (optional)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @return ApiResponse&lt;List&lt;UniversalActivity&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<UniversalActivity>> getActivitiesWithHttpInfo(String userId, String userSecret, String startDate, String endDate, String accounts) throws ApiException {
-        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, null);
+    private ApiResponse<List<UniversalActivity>> getActivitiesWithHttpInfo(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type) throws ApiException {
+        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, null);
         Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call getActivitiesAsync(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type, final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
+        Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class GetActivitiesRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private String accounts;
+        private String brokerageAuthorizations;
+        private String type;
+
+        private GetActivitiesRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set startDate
+         * @param startDate  (optional)
+         * @return GetActivitiesRequestBuilder
+         */
+        public GetActivitiesRequestBuilder startDate(LocalDate startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+        
+        /**
+         * Set endDate
+         * @param endDate  (optional)
+         * @return GetActivitiesRequestBuilder
+         */
+        public GetActivitiesRequestBuilder endDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+        
+        /**
+         * Set accounts
+         * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+         * @return GetActivitiesRequestBuilder
+         */
+        public GetActivitiesRequestBuilder accounts(String accounts) {
+            this.accounts = accounts;
+            return this;
+        }
+        
+        /**
+         * Set brokerageAuthorizations
+         * @param brokerageAuthorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+         * @return GetActivitiesRequestBuilder
+         */
+        public GetActivitiesRequestBuilder brokerageAuthorizations(String brokerageAuthorizations) {
+            this.brokerageAuthorizations = brokerageAuthorizations;
+            return this;
+        }
+        
+        /**
+         * Set type
+         * @param type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+         * @return GetActivitiesRequestBuilder
+         */
+        public GetActivitiesRequestBuilder type(String type) {
+            this.type = type;
+            return this;
+        }
+        
+        /**
+         * Build call for getActivities
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
+        }
+
+
+        /**
+         * Execute getActivities request
+         * @return List&lt;UniversalActivity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UniversalActivity> execute() throws ApiException {
+            ApiResponse<List<UniversalActivity>> localVarResp = getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getActivities request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UniversalActivity&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UniversalActivity>> executeWithHttpInfo() throws ApiException {
+            return getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
+        }
+
+        /**
+         * Execute getActivities request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+            return getActivitiesAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
+        }
+    }
+
     /**
-     * Get transaction history for a user (asynchronously)
+     * Get transaction history for a user
      * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param startDate  (optional)
-     * @param endDate  (optional)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return GetActivitiesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -233,33 +328,16 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getActivitiesAsync(String userId, String userSecret, String startDate, String endDate, String accounts, final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+    public GetActivitiesRequestBuilder getActivities(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = getActivitiesValidateBeforeCall(userId, userSecret, startDate, endDate, accounts, _callback);
-        Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new GetActivitiesRequestBuilder(userId, userSecret);
     }
-    /**
-     * Build call for getReportingCustomRange
-     * @param startDate  (required)
-     * @param endDate  (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
-     * @param frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getReportingCustomRangeCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getReportingCustomRangeCall(LocalDate startDate, LocalDate endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -332,7 +410,7 @@ public class TransactionsAndReportingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getReportingCustomRangeValidateBeforeCall(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getReportingCustomRangeValidateBeforeCall(LocalDate startDate, LocalDate endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'startDate' is set
         if (startDate == null) {
             throw new ApiException("Missing the required parameter 'startDate' when calling getReportingCustomRange(Async)");
@@ -357,68 +435,140 @@ public class TransactionsAndReportingApi {
 
     }
 
-    /**
-     * Get performance information for a specific timeframe
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
-     * @param startDate  (required)
-     * @param endDate  (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
-     * @param frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
-     * @return PerformanceCustom
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PerformanceCustom getReportingCustomRange(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
-        ApiResponse<PerformanceCustom> localVarResp = getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get performance information for a specific timeframe
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
-     * @param startDate  (required)
-     * @param endDate  (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
-     * @param frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
-     * @return ApiResponse&lt;PerformanceCustom&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PerformanceCustom> getReportingCustomRangeWithHttpInfo(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
+    private ApiResponse<PerformanceCustom> getReportingCustomRangeWithHttpInfo(LocalDate startDate, LocalDate endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency) throws ApiException {
         okhttp3.Call localVarCall = getReportingCustomRangeValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, null);
         Type localVarReturnType = new TypeToken<PerformanceCustom>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call getReportingCustomRangeAsync(LocalDate startDate, LocalDate endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback<PerformanceCustom> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getReportingCustomRangeValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
+        Type localVarReturnType = new TypeToken<PerformanceCustom>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class GetReportingCustomRangeRequestBuilder {
+        private final LocalDate startDate;
+        private final LocalDate endDate;
+        private final String userId;
+        private final String userSecret;
+        private String accounts;
+        private Boolean detailed;
+        private String frequency;
+
+        private GetReportingCustomRangeRequestBuilder(LocalDate startDate, LocalDate endDate, String userId, String userSecret) {
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set accounts
+         * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+         * @return GetReportingCustomRangeRequestBuilder
+         */
+        public GetReportingCustomRangeRequestBuilder accounts(String accounts) {
+            this.accounts = accounts;
+            return this;
+        }
+        
+        /**
+         * Set detailed
+         * @param detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
+         * @return GetReportingCustomRangeRequestBuilder
+         */
+        public GetReportingCustomRangeRequestBuilder detailed(Boolean detailed) {
+            this.detailed = detailed;
+            return this;
+        }
+        
+        /**
+         * Set frequency
+         * @param frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
+         * @return GetReportingCustomRangeRequestBuilder
+         */
+        public GetReportingCustomRangeRequestBuilder frequency(String frequency) {
+            this.frequency = frequency;
+            return this;
+        }
+        
+        /**
+         * Build call for getReportingCustomRange
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getReportingCustomRangeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
+        }
+
+
+        /**
+         * Execute getReportingCustomRange request
+         * @return PerformanceCustom
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public PerformanceCustom execute() throws ApiException {
+            ApiResponse<PerformanceCustom> localVarResp = getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getReportingCustomRange request with HTTP info returned
+         * @return ApiResponse&lt;PerformanceCustom&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PerformanceCustom> executeWithHttpInfo() throws ApiException {
+            return getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+        }
+
+        /**
+         * Execute getReportingCustomRange request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PerformanceCustom> _callback) throws ApiException {
+            return getReportingCustomRangeAsync(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
+        }
+    }
+
     /**
-     * Get performance information for a specific timeframe (asynchronously)
+     * Get performance information for a specific timeframe
      * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
      * @param startDate  (required)
      * @param endDate  (required)
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
-     * @param detailed Optional, increases frequency of data points for the total value and contribution charts if set to true (optional)
-     * @param frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return GetReportingCustomRangeRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -426,11 +576,15 @@ public class TransactionsAndReportingApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getReportingCustomRangeAsync(String startDate, String endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback<PerformanceCustom> _callback) throws ApiException {
+    public GetReportingCustomRangeRequestBuilder getReportingCustomRange(LocalDate startDate, LocalDate endDate, String userId, String userSecret) throws IllegalArgumentException {
+        if (startDate == null) throw new IllegalArgumentException("\"startDate\" is required but got null");
+        if (endDate == null) throw new IllegalArgumentException("\"endDate\" is required but got null");
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = getReportingCustomRangeValidateBeforeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
-        Type localVarReturnType = new TypeToken<PerformanceCustom>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new GetReportingCustomRangeRequestBuilder(startDate, endDate, userId, userSecret);
     }
 }

@@ -12,14 +12,15 @@ Record of order in brokerageaccount
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**symbol** | **UUID** |  |  [optional] |
 |**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
+|**optionSymbol** | **OptionsSymbol** |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
-|**totalQuantity** | **BigDecimal** | Trade Units |  [optional] |
-|**openQuantity** | **BigDecimal** | Trade Units |  [optional] |
-|**canceledQuantity** | **BigDecimal** | Trade Units |  [optional] |
-|**filledQuantity** | **BigDecimal** | Trade Units |  [optional] |
-|**executionPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**limitPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**stopPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
+|**totalQuantity** | **Double** | Trade Units |  [optional] |
+|**openQuantity** | **Double** | Trade Units |  [optional] |
+|**canceledQuantity** | **Double** | Trade Units |  [optional] |
+|**filledQuantity** | **Double** | Trade Units |  [optional] |
+|**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**stopPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**orderType** | **OrderType** |  |  [optional] |
 |**timeInForce** | **TimeInForce** |  |  [optional] |
 |**timePlaced** | **String** | Time |  [optional] |

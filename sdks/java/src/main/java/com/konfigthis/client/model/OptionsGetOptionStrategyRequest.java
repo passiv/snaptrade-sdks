@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -114,6 +115,10 @@ public class OptionsGetOptionStrategyRequest {
   }
 
   public OptionsGetOptionStrategyRequest underlyingSymbolId(UUID underlyingSymbolId) {
+
+    
+    
+    
     
     this.underlyingSymbolId = underlyingSymbolId;
     return this;
@@ -132,11 +137,19 @@ public class OptionsGetOptionStrategyRequest {
 
 
   public void setUnderlyingSymbolId(UUID underlyingSymbolId) {
+
+    
+    
+    
     this.underlyingSymbolId = underlyingSymbolId;
   }
 
 
   public OptionsGetOptionStrategyRequest legs(List<OptionLeg> legs) {
+
+    
+    
+    
     
     this.legs = legs;
     return this;
@@ -160,11 +173,19 @@ public class OptionsGetOptionStrategyRequest {
 
 
   public void setLegs(List<OptionLeg> legs) {
+
+    
+    
+    
     this.legs = legs;
   }
 
 
   public OptionsGetOptionStrategyRequest strategyType(StrategyTypeEnum strategyType) {
+
+    
+    
+    
     
     this.strategyType = strategyType;
     return this;
@@ -183,6 +204,10 @@ public class OptionsGetOptionStrategyRequest {
 
 
   public void setStrategyType(StrategyTypeEnum strategyType) {
+
+    
+    
+    
     this.strategyType = strategyType;
   }
 

@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -67,6 +68,10 @@ public class Currency {
   }
 
   public Currency id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -85,11 +90,19 @@ public class Currency {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public Currency code(String code) {
+
+    
+    
+    
     
     this.code = code;
     return this;
@@ -108,11 +121,19 @@ public class Currency {
 
 
   public void setCode(String code) {
+
+    
+    
+    
     this.code = code;
   }
 
 
   public Currency name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -131,6 +152,10 @@ public class Currency {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 

@@ -10,7 +10,7 @@ Balance
 |------------ | ------------- | ------------- | -------------|
 |**account** | **Account** |  |  [optional] |
 |**currency** | **Currency** |  |  [optional] |
-|**cash** | **BigDecimal** | Cash |  [optional] |
+|**cash** | **Double** | Cash |  [optional] |
 
 
 

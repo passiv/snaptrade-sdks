@@ -231,7 +231,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [SnapTrade::Symbol](docs/Symbol.md)
  - [SnapTrade::SymbolQuery](docs/SymbolQuery.md)
- - [SnapTrade::SymbolsQuotes](docs/SymbolsQuotes.md)
+ - [SnapTrade::SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [SnapTrade::TargetAsset](docs/TargetAsset.md)
  - [SnapTrade::TimeInForce](docs/TimeInForce.md)
  - [SnapTrade::Trade](docs/Trade.md)

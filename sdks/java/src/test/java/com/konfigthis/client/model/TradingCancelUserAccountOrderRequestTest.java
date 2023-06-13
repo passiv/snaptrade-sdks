@@ -20,39 +20,31 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for Model403FailedRequestResponse
+ * Model tests for TradingCancelUserAccountOrderRequest
  */
-public class Model403FailedRequestResponseTest {
-    private final Model403FailedRequestResponse model = new Model403FailedRequestResponse();
+public class TradingCancelUserAccountOrderRequestTest {
+    private final TradingCancelUserAccountOrderRequest model = new TradingCancelUserAccountOrderRequest();
 
     /**
-     * Model tests for Model403FailedRequestResponse
+     * Model tests for TradingCancelUserAccountOrderRequest
      */
     @Test
-    public void testModel403FailedRequestResponse() {
-        // TODO: test Model403FailedRequestResponse
+    public void testTradingCancelUserAccountOrderRequest() {
+        // TODO: test TradingCancelUserAccountOrderRequest
     }
 
     /**
-     * Test the property 'defaultDetail'
+     * Test the property 'brokerageOrderId'
      */
     @Test
-    public void defaultDetailTest() {
-        // TODO: test defaultDetail
-    }
-
-    /**
-     * Test the property 'defaultCode'
-     */
-    @Test
-    public void defaultCodeTest() {
-        // TODO: test defaultCode
+    public void brokerageOrderIdTest() {
+        // TODO: test brokerageOrderId
     }
 
 }

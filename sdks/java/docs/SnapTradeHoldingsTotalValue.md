@@ -8,7 +8,7 @@ Total Value of the account
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**value** | **BigDecimal** |  |  [optional] |
+|**value** | **Double** |  |  [optional] |
 |**currency** | **String** |  |  [optional] |
 
 

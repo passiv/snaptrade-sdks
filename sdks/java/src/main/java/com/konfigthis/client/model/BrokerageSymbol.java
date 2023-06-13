@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -78,6 +79,10 @@ public class BrokerageSymbol {
   }
 
   public BrokerageSymbol id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -96,11 +101,19 @@ public class BrokerageSymbol {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public BrokerageSymbol symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -119,11 +132,19 @@ public class BrokerageSymbol {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public BrokerageSymbol brokerageAuthorization(BrokerageAuthorization brokerageAuthorization) {
+
+    
+    
+    
     
     this.brokerageAuthorization = brokerageAuthorization;
     return this;
@@ -142,11 +163,19 @@ public class BrokerageSymbol {
 
 
   public void setBrokerageAuthorization(BrokerageAuthorization brokerageAuthorization) {
+
+    
+    
+    
     this.brokerageAuthorization = brokerageAuthorization;
   }
 
 
   public BrokerageSymbol description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -165,11 +194,19 @@ public class BrokerageSymbol {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public BrokerageSymbol allowsFractionalUnits(Boolean allowsFractionalUnits) {
+
+    
+    
+    
     
     this.allowsFractionalUnits = allowsFractionalUnits;
     return this;
@@ -188,6 +225,10 @@ public class BrokerageSymbol {
 
 
   public void setAllowsFractionalUnits(Boolean allowsFractionalUnits) {
+
+    
+    
+    
     this.allowsFractionalUnits = allowsFractionalUnits;
   }
 

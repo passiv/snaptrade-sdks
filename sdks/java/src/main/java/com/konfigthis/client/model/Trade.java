@@ -25,7 +25,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.google.gson.Gson;
@@ -38,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -128,7 +128,7 @@ public class Trade {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_SEQUENCE = "sequence";
   @SerializedName(SERIALIZED_NAME_SEQUENCE)
@@ -138,6 +138,10 @@ public class Trade {
   }
 
   public Trade id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -156,11 +160,19 @@ public class Trade {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public Trade account(Account account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -179,11 +191,19 @@ public class Trade {
 
 
   public void setAccount(Account account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public Trade symbol(BrokerageSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -202,11 +222,19 @@ public class Trade {
 
 
   public void setSymbol(BrokerageSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public Trade universalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     
     this.universalSymbol = universalSymbol;
     return this;
@@ -225,11 +253,19 @@ public class Trade {
 
 
   public void setUniversalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     this.universalSymbol = universalSymbol;
   }
 
 
   public Trade action(ActionEnum action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -248,11 +284,19 @@ public class Trade {
 
 
   public void setAction(ActionEnum action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
   public Trade units(Integer units) {
+
+    
+    
+    
     
     this.units = units;
     return this;
@@ -271,13 +315,31 @@ public class Trade {
 
 
   public void setUnits(Integer units) {
+
+    
+    
+    
     this.units = units;
   }
 
 
-  public Trade price(BigDecimal price) {
+  public Trade price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public Trade price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -288,17 +350,25 @@ public class Trade {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "24.81", value = "")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
   public Trade sequence(Integer sequence) {
+
+    
+    
+    
     
     this.sequence = sequence;
     return this;
@@ -317,6 +387,10 @@ public class Trade {
 
 
   public void setSequence(Integer sequence) {
+
+    
+    
+    
     this.sequence = sequence;
   }
 

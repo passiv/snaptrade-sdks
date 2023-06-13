@@ -23,7 +23,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -65,7 +65,7 @@ public class PortfolioGroupSettings {
 
   public static final String SERIALIZED_NAME_DRIFT_THRESHOLD = "driftThreshold";
   @SerializedName(SERIALIZED_NAME_DRIFT_THRESHOLD)
-  private BigDecimal driftThreshold;
+  private Double driftThreshold;
 
   public static final String SERIALIZED_NAME_PREFERRED_CURRENCY = "preferred_currency";
   @SerializedName(SERIALIZED_NAME_PREFERRED_CURRENCY)
@@ -75,6 +75,10 @@ public class PortfolioGroupSettings {
   }
 
   public PortfolioGroupSettings buyOnly(Boolean buyOnly) {
+
+    
+    
+    
     
     this.buyOnly = buyOnly;
     return this;
@@ -93,11 +97,19 @@ public class PortfolioGroupSettings {
 
 
   public void setBuyOnly(Boolean buyOnly) {
+
+    
+    
+    
     this.buyOnly = buyOnly;
   }
 
 
   public PortfolioGroupSettings cashOptimizer(Boolean cashOptimizer) {
+
+    
+    
+    
     
     this.cashOptimizer = cashOptimizer;
     return this;
@@ -116,11 +128,19 @@ public class PortfolioGroupSettings {
 
 
   public void setCashOptimizer(Boolean cashOptimizer) {
+
+    
+    
+    
     this.cashOptimizer = cashOptimizer;
   }
 
 
   public PortfolioGroupSettings notifyFrequency(String notifyFrequency) {
+
+    
+    
+    
     
     this.notifyFrequency = notifyFrequency;
     return this;
@@ -139,13 +159,39 @@ public class PortfolioGroupSettings {
 
 
   public void setNotifyFrequency(String notifyFrequency) {
+
+    
+    
+    
     this.notifyFrequency = notifyFrequency;
   }
 
 
-  public PortfolioGroupSettings driftThreshold(BigDecimal driftThreshold) {
+  public PortfolioGroupSettings driftThreshold(Double driftThreshold) {
+
+    if (driftThreshold < 0) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
+    }
+    if (driftThreshold > 100) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
+    }
+    
     
     this.driftThreshold = driftThreshold;
+    return this;
+  }
+
+  public PortfolioGroupSettings driftThreshold(Integer driftThreshold) {
+
+    if (driftThreshold < 0) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
+    }
+    if (driftThreshold > 100) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
+    }
+    
+    
+    this.driftThreshold = driftThreshold.doubleValue();
     return this;
   }
 
@@ -158,17 +204,29 @@ public class PortfolioGroupSettings {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "90", value = "")
 
-  public BigDecimal getDriftThreshold() {
+  public Double getDriftThreshold() {
     return driftThreshold;
   }
 
 
-  public void setDriftThreshold(BigDecimal driftThreshold) {
+  public void setDriftThreshold(Double driftThreshold) {
+
+    if (driftThreshold < 0) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
+    }
+    if (driftThreshold > 100) {
+      throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
+    }
+    
     this.driftThreshold = driftThreshold;
   }
 
 
   public PortfolioGroupSettings preferredCurrency(Currency preferredCurrency) {
+
+    
+    
+    
     
     this.preferredCurrency = preferredCurrency;
     return this;
@@ -187,6 +245,10 @@ public class PortfolioGroupSettings {
 
 
   public void setPreferredCurrency(Currency preferredCurrency) {
+
+    
+    
+    
     this.preferredCurrency = preferredCurrency;
   }
 

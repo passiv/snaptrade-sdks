@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class SnapTradeAPIDisclaimerAcceptStatus {
   }
 
   public SnapTradeAPIDisclaimerAcceptStatus accepted(Boolean accepted) {
+
+    
+    
+    
     
     this.accepted = accepted;
     return this;
@@ -80,11 +85,19 @@ public class SnapTradeAPIDisclaimerAcceptStatus {
 
 
   public void setAccepted(Boolean accepted) {
+
+    
+    
+    
     this.accepted = accepted;
   }
 
 
   public SnapTradeAPIDisclaimerAcceptStatus timestamp(String timestamp) {
+
+    
+    
+    
     
     this.timestamp = timestamp;
     return this;
@@ -103,6 +116,10 @@ public class SnapTradeAPIDisclaimerAcceptStatus {
 
 
   public void setTimestamp(String timestamp) {
+
+    
+    
+    
     this.timestamp = timestamp;
   }
 

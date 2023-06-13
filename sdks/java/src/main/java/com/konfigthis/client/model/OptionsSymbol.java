@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public class OptionsSymbol {
 
   public static final String SERIALIZED_NAME_STRIKE_PRICE = "strike_price";
   @SerializedName(SERIALIZED_NAME_STRIKE_PRICE)
-  private Integer strikePrice;
+  private Double strikePrice;
 
   public static final String SERIALIZED_NAME_EXPIRATION_DATE = "expiration_date";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_DATE)
@@ -101,6 +102,10 @@ public class OptionsSymbol {
   }
 
   public OptionsSymbol id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -119,11 +124,19 @@ public class OptionsSymbol {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public OptionsSymbol ticker(String ticker) {
+
+    
+    
+    
     
     this.ticker = ticker;
     return this;
@@ -142,13 +155,31 @@ public class OptionsSymbol {
 
 
   public void setTicker(String ticker) {
+
+    
+    
+    
     this.ticker = ticker;
   }
 
 
-  public OptionsSymbol strikePrice(Integer strikePrice) {
+  public OptionsSymbol strikePrice(Double strikePrice) {
+
+    
+    
+    
     
     this.strikePrice = strikePrice;
+    return this;
+  }
+
+  public OptionsSymbol strikePrice(Integer strikePrice) {
+
+    
+    
+    
+    
+    this.strikePrice = strikePrice.doubleValue();
     return this;
   }
 
@@ -159,17 +190,25 @@ public class OptionsSymbol {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "200", value = "")
 
-  public Integer getStrikePrice() {
+  public Double getStrikePrice() {
     return strikePrice;
   }
 
 
-  public void setStrikePrice(Integer strikePrice) {
+  public void setStrikePrice(Double strikePrice) {
+
+    
+    
+    
     this.strikePrice = strikePrice;
   }
 
 
   public OptionsSymbol expirationDate(String expirationDate) {
+
+    
+    
+    
     
     this.expirationDate = expirationDate;
     return this;
@@ -188,11 +227,19 @@ public class OptionsSymbol {
 
 
   public void setExpirationDate(String expirationDate) {
+
+    
+    
+    
     this.expirationDate = expirationDate;
   }
 
 
   public OptionsSymbol isMiniOption(Boolean isMiniOption) {
+
+    
+    
+    
     
     this.isMiniOption = isMiniOption;
     return this;
@@ -211,11 +258,19 @@ public class OptionsSymbol {
 
 
   public void setIsMiniOption(Boolean isMiniOption) {
+
+    
+    
+    
     this.isMiniOption = isMiniOption;
   }
 
 
   public OptionsSymbol underlyingSymbol(UnderlyingSymbol underlyingSymbol) {
+
+    
+    
+    
     
     this.underlyingSymbol = underlyingSymbol;
     return this;
@@ -234,11 +289,19 @@ public class OptionsSymbol {
 
 
   public void setUnderlyingSymbol(UnderlyingSymbol underlyingSymbol) {
+
+    
+    
+    
     this.underlyingSymbol = underlyingSymbol;
   }
 
 
   public OptionsSymbol localId(String localId) {
+
+    
+    
+    
     
     this.localId = localId;
     return this;
@@ -257,11 +320,19 @@ public class OptionsSymbol {
 
 
   public void setLocalId(String localId) {
+
+    
+    
+    
     this.localId = localId;
   }
 
 
   public OptionsSymbol securityType(Object securityType) {
+
+    
+    
+    
     
     this.securityType = securityType;
     return this;
@@ -280,11 +351,19 @@ public class OptionsSymbol {
 
 
   public void setSecurityType(Object securityType) {
+
+    
+    
+    
     this.securityType = securityType;
   }
 
 
   public OptionsSymbol listingExchange(Object listingExchange) {
+
+    
+    
+    
     
     this.listingExchange = listingExchange;
     return this;
@@ -303,11 +382,19 @@ public class OptionsSymbol {
 
 
   public void setListingExchange(Object listingExchange) {
+
+    
+    
+    
     this.listingExchange = listingExchange;
   }
 
 
   public OptionsSymbol isQuotable(Boolean isQuotable) {
+
+    
+    
+    
     
     this.isQuotable = isQuotable;
     return this;
@@ -326,11 +413,19 @@ public class OptionsSymbol {
 
 
   public void setIsQuotable(Boolean isQuotable) {
+
+    
+    
+    
     this.isQuotable = isQuotable;
   }
 
 
   public OptionsSymbol isTradable(Boolean isTradable) {
+
+    
+    
+    
     
     this.isTradable = isTradable;
     return this;
@@ -349,6 +444,10 @@ public class OptionsSymbol {
 
 
   public void setIsTradable(Boolean isTradable) {
+
+    
+    
+    
     this.isTradable = isTradable;
   }
 

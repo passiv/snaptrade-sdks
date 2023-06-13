@@ -10,13 +10,13 @@ Strategy order record
 |------------ | ------------- | ------------- | -------------|
 |**strategy** | **OptionStrategy** |  |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) |  |  [optional] |
-|**filledQuantity** | **BigDecimal** |  |  [optional] |
-|**openQuantity** | **BigDecimal** |  |  [optional] |
-|**closedQuantity** | **BigDecimal** |  |  [optional] |
+|**filledQuantity** | **Double** |  |  [optional] |
+|**openQuantity** | **Double** |  |  [optional] |
+|**closedQuantity** | **Double** |  |  [optional] |
 |**orderType** | [**OrderTypeEnum**](#OrderTypeEnum) |  |  [optional] |
 |**timeInForce** | [**TimeInForceEnum**](#TimeInForceEnum) |  |  [optional] |
-|**limitPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**executionPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
+|**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**timePlaced** | **String** | Time |  [optional] |
 |**timeUpdated** | **String** | Time |  [optional] |
 

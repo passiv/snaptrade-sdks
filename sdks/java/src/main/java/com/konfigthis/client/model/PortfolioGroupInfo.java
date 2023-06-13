@@ -30,7 +30,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +43,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -99,7 +99,7 @@ public class PortfolioGroupInfo {
 
   public static final String SERIALIZED_NAME_ACCURACY = "accuracy";
   @SerializedName(SERIALIZED_NAME_ACCURACY)
-  private BigDecimal accuracy;
+  private Double accuracy;
 
   public static final String SERIALIZED_NAME_SETTINGS = "settings";
   @SerializedName(SERIALIZED_NAME_SETTINGS)
@@ -109,6 +109,10 @@ public class PortfolioGroupInfo {
   }
 
   public PortfolioGroupInfo symbols(List<UniversalSymbol> symbols) {
+
+    
+    
+    
     
     this.symbols = symbols;
     return this;
@@ -135,11 +139,19 @@ public class PortfolioGroupInfo {
 
 
   public void setSymbols(List<UniversalSymbol> symbols) {
+
+    
+    
+    
     this.symbols = symbols;
   }
 
 
   public PortfolioGroupInfo quotableSymbols(List<UniversalSymbol> quotableSymbols) {
+
+    
+    
+    
     
     this.quotableSymbols = quotableSymbols;
     return this;
@@ -166,11 +178,19 @@ public class PortfolioGroupInfo {
 
 
   public void setQuotableSymbols(List<UniversalSymbol> quotableSymbols) {
+
+    
+    
+    
     this.quotableSymbols = quotableSymbols;
   }
 
 
   public PortfolioGroupInfo balances(List<Balance> balances) {
+
+    
+    
+    
     
     this.balances = balances;
     return this;
@@ -197,11 +217,19 @@ public class PortfolioGroupInfo {
 
 
   public void setBalances(List<Balance> balances) {
+
+    
+    
+    
     this.balances = balances;
   }
 
 
   public PortfolioGroupInfo positions(List<Position> positions) {
+
+    
+    
+    
     
     this.positions = positions;
     return this;
@@ -228,11 +256,19 @@ public class PortfolioGroupInfo {
 
 
   public void setPositions(List<Position> positions) {
+
+    
+    
+    
     this.positions = positions;
   }
 
 
   public PortfolioGroupInfo targetPositions(List<TargetAsset> targetPositions) {
+
+    
+    
+    
     
     this.targetPositions = targetPositions;
     return this;
@@ -259,11 +295,19 @@ public class PortfolioGroupInfo {
 
 
   public void setTargetPositions(List<TargetAsset> targetPositions) {
+
+    
+    
+    
     this.targetPositions = targetPositions;
   }
 
 
   public PortfolioGroupInfo idealPositions(List<Position> idealPositions) {
+
+    
+    
+    
     
     this.idealPositions = idealPositions;
     return this;
@@ -290,11 +334,19 @@ public class PortfolioGroupInfo {
 
 
   public void setIdealPositions(List<Position> idealPositions) {
+
+    
+    
+    
     this.idealPositions = idealPositions;
   }
 
 
   public PortfolioGroupInfo excludedPositions(List<ExcludedAsset> excludedPositions) {
+
+    
+    
+    
     
     this.excludedPositions = excludedPositions;
     return this;
@@ -321,11 +373,19 @@ public class PortfolioGroupInfo {
 
 
   public void setExcludedPositions(List<ExcludedAsset> excludedPositions) {
+
+    
+    
+    
     this.excludedPositions = excludedPositions;
   }
 
 
   public PortfolioGroupInfo calculatedTrades(List<CalculatedTrade> calculatedTrades) {
+
+    
+    
+    
     
     this.calculatedTrades = calculatedTrades;
     return this;
@@ -352,11 +412,19 @@ public class PortfolioGroupInfo {
 
 
   public void setCalculatedTrades(List<CalculatedTrade> calculatedTrades) {
+
+    
+    
+    
     this.calculatedTrades = calculatedTrades;
   }
 
 
   public PortfolioGroupInfo brokerageAuthorizations(List<BrokerageAuthorization> brokerageAuthorizations) {
+
+    
+    
+    
     
     this.brokerageAuthorizations = brokerageAuthorizations;
     return this;
@@ -383,13 +451,31 @@ public class PortfolioGroupInfo {
 
 
   public void setBrokerageAuthorizations(List<BrokerageAuthorization> brokerageAuthorizations) {
+
+    
+    
+    
     this.brokerageAuthorizations = brokerageAuthorizations;
   }
 
 
-  public PortfolioGroupInfo accuracy(BigDecimal accuracy) {
+  public PortfolioGroupInfo accuracy(Double accuracy) {
+
+    
+    
+    
     
     this.accuracy = accuracy;
+    return this;
+  }
+
+  public PortfolioGroupInfo accuracy(Integer accuracy) {
+
+    
+    
+    
+    
+    this.accuracy = accuracy.doubleValue();
     return this;
   }
 
@@ -400,17 +486,25 @@ public class PortfolioGroupInfo {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.962", value = "")
 
-  public BigDecimal getAccuracy() {
+  public Double getAccuracy() {
     return accuracy;
   }
 
 
-  public void setAccuracy(BigDecimal accuracy) {
+  public void setAccuracy(Double accuracy) {
+
+    
+    
+    
     this.accuracy = accuracy;
   }
 
 
   public PortfolioGroupInfo settings(PortfolioGroupSettings settings) {
+
+    
+    
+    
     
     this.settings = settings;
     return this;
@@ -429,6 +523,10 @@ public class PortfolioGroupInfo {
 
 
   public void setSettings(PortfolioGroupSettings settings) {
+
+    
+    
+    
     this.settings = settings;
   }
 

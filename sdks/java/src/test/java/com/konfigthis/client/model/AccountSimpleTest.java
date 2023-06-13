@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountSyncStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -61,6 +62,14 @@ public class AccountSimpleTest {
     @Test
     public void numberTest() {
         // TODO: test number
+    }
+
+    /**
+     * Test the property 'syncStatus'
+     */
+    @Test
+    public void syncStatusTest() {
+        // TODO: test syncStatus
     }
 
 }

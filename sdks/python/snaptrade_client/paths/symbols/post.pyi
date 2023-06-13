@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+from snaptrade_client.request_before_hook import request_before_hook
 import json
 from urllib3._collections import HTTPHeaderDict
 
@@ -154,19 +155,29 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
+        method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
     
         _fields = None
         _body = None
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            body=body,
+            auth_settings=_auth,
+            headers=_headers,
+        )
         if body is not schemas.unset:
             serialized_data = request_body_symbol_query.serialize(body, content_type)
-            _headers.add('Content-Type', content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
-                _body = serialized_data['body']    
+                _body = serialized_data['body']
+    
         response = await self.api_client.async_call_api(
             resource_path=used_path,
-            method='post'.upper(),
+            method=method,
             headers=_headers,
             fields=_fields,
             serialized_body=_body,
@@ -174,8 +185,16 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             timeout=timeout,
         )
-        
+    
         if stream:
+            if not 200 <= response.http_response.status <= 299:
+                body = (await response.http_response.content.read()).decode("utf-8")
+                raise exceptions.ApiStreamingException(
+                    status=response.http_response.status,
+                    reason=response.http_response.reason,
+                    body=body,
+                )
+    
             async def stream_iterator():
                 """
                 iterates over response.http_response.content and closes connection once iteration has finished
@@ -225,6 +244,7 @@ class BaseApi(api_client.Api):
     
         return api_response
 
+
     def _get_symbols_oapg(
         self,
         body: typing.Any = None,
@@ -251,19 +271,29 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
+        method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
     
         _fields = None
         _body = None
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            body=body,
+            auth_settings=_auth,
+            headers=_headers,
+        )
         if body is not schemas.unset:
             serialized_data = request_body_symbol_query.serialize(body, content_type)
-            _headers.add('Content-Type', content_type)
             if 'fields' in serialized_data:
                 _fields = serialized_data['fields']
             elif 'body' in serialized_data:
-                _body = serialized_data['body']    
+                _body = serialized_data['body']
+    
         response = self.api_client.call_api(
             resource_path=used_path,
-            method='post'.upper(),
+            method=method,
             headers=_headers,
             fields=_fields,
             serialized_body=_body,
@@ -299,6 +329,7 @@ class BaseApi(api_client.Api):
             raise exceptions.ApiException(api_response=api_response)
     
         return api_response
+
 
 class GetSymbols(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names

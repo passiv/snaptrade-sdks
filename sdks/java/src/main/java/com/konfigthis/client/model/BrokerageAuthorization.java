@@ -38,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -94,6 +95,10 @@ public class BrokerageAuthorization {
   }
 
   public BrokerageAuthorization id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -112,11 +117,19 @@ public class BrokerageAuthorization {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public BrokerageAuthorization createdDate(String createdDate) {
+
+    
+    
+    
     
     this.createdDate = createdDate;
     return this;
@@ -135,11 +148,19 @@ public class BrokerageAuthorization {
 
 
   public void setCreatedDate(String createdDate) {
+
+    
+    
+    
     this.createdDate = createdDate;
   }
 
 
   public BrokerageAuthorization updatedDate(String updatedDate) {
+
+    
+    
+    
     
     this.updatedDate = updatedDate;
     return this;
@@ -158,11 +179,19 @@ public class BrokerageAuthorization {
 
 
   public void setUpdatedDate(String updatedDate) {
+
+    
+    
+    
     this.updatedDate = updatedDate;
   }
 
 
   public BrokerageAuthorization brokerage(Brokerage brokerage) {
+
+    
+    
+    
     
     this.brokerage = brokerage;
     return this;
@@ -181,11 +210,19 @@ public class BrokerageAuthorization {
 
 
   public void setBrokerage(Brokerage brokerage) {
+
+    
+    
+    
     this.brokerage = brokerage;
   }
 
 
   public BrokerageAuthorization name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -204,11 +241,19 @@ public class BrokerageAuthorization {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public BrokerageAuthorization type(String type) {
+
+    
+    
+    
     
     this.type = type;
     return this;
@@ -227,11 +272,19 @@ public class BrokerageAuthorization {
 
 
   public void setType(String type) {
+
+    
+    
+    
     this.type = type;
   }
 
 
   public BrokerageAuthorization disabled(Boolean disabled) {
+
+    
+    
+    
     
     this.disabled = disabled;
     return this;
@@ -250,11 +303,19 @@ public class BrokerageAuthorization {
 
 
   public void setDisabled(Boolean disabled) {
+
+    
+    
+    
     this.disabled = disabled;
   }
 
 
   public BrokerageAuthorization disabledDate(String disabledDate) {
+
+    
+    
+    
     
     this.disabledDate = disabledDate;
     return this;
@@ -273,11 +334,19 @@ public class BrokerageAuthorization {
 
 
   public void setDisabledDate(String disabledDate) {
+
+    
+    
+    
     this.disabledDate = disabledDate;
   }
 
 
   public BrokerageAuthorization meta(Map<String, Object> meta) {
+
+    
+    
+    
     
     this.meta = meta;
     return this;
@@ -304,6 +373,10 @@ public class BrokerageAuthorization {
 
 
   public void setMeta(Map<String, Object> meta) {
+
+    
+    
+    
     this.meta = meta;
   }
 

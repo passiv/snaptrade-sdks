@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -56,7 +56,7 @@ public class OptionStrategyLegsInner {
 
   public static final String SERIALIZED_NAME_INDEX = "index";
   @SerializedName(SERIALIZED_NAME_INDEX)
-  private BigDecimal index;
+  private Double index;
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
@@ -64,12 +64,16 @@ public class OptionStrategyLegsInner {
 
   public static final String SERIALIZED_NAME_QUANTITY = "quantity";
   @SerializedName(SERIALIZED_NAME_QUANTITY)
-  private BigDecimal quantity;
+  private Double quantity;
 
   public OptionStrategyLegsInner() {
   }
 
   public OptionStrategyLegsInner optionSymbolId(String optionSymbolId) {
+
+    
+    
+    
     
     this.optionSymbolId = optionSymbolId;
     return this;
@@ -88,13 +92,31 @@ public class OptionStrategyLegsInner {
 
 
   public void setOptionSymbolId(String optionSymbolId) {
+
+    
+    
+    
     this.optionSymbolId = optionSymbolId;
   }
 
 
-  public OptionStrategyLegsInner index(BigDecimal index) {
+  public OptionStrategyLegsInner index(Double index) {
+
+    
+    
+    
     
     this.index = index;
+    return this;
+  }
+
+  public OptionStrategyLegsInner index(Integer index) {
+
+    
+    
+    
+    
+    this.index = index.doubleValue();
     return this;
   }
 
@@ -105,17 +127,25 @@ public class OptionStrategyLegsInner {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1", value = "")
 
-  public BigDecimal getIndex() {
+  public Double getIndex() {
     return index;
   }
 
 
-  public void setIndex(BigDecimal index) {
+  public void setIndex(Double index) {
+
+    
+    
+    
     this.index = index;
   }
 
 
   public OptionStrategyLegsInner action(String action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -134,13 +164,31 @@ public class OptionStrategyLegsInner {
 
 
   public void setAction(String action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
-  public OptionStrategyLegsInner quantity(BigDecimal quantity) {
+  public OptionStrategyLegsInner quantity(Double quantity) {
+
+    
+    
+    
     
     this.quantity = quantity;
+    return this;
+  }
+
+  public OptionStrategyLegsInner quantity(Integer quantity) {
+
+    
+    
+    
+    
+    this.quantity = quantity.doubleValue();
     return this;
   }
 
@@ -151,12 +199,16 @@ public class OptionStrategyLegsInner {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "")
 
-  public BigDecimal getQuantity() {
+  public Double getQuantity() {
     return quantity;
   }
 
 
-  public void setQuantity(BigDecimal quantity) {
+  public void setQuantity(Double quantity) {
+
+    
+    
+    
     this.quantity = quantity;
   }
 

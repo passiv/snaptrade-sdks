@@ -14,7 +14,7 @@ A trade object
 |**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**action** | [**ActionEnum**](#ActionEnum) |  |  [optional] |
 |**units** | **Integer** |  |  [optional] |
-|**price** | **BigDecimal** |  |  [optional] |
+|**price** | **Double** |  |  [optional] |
 |**sequence** | **Integer** |  |  [optional] |
 
 

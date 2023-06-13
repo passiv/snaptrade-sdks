@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -169,6 +170,10 @@ public class BrokerageAuthorizationTypeReadOnly {
   }
 
   public BrokerageAuthorizationTypeReadOnly id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -187,11 +192,19 @@ public class BrokerageAuthorizationTypeReadOnly {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public BrokerageAuthorizationTypeReadOnly type(TypeEnum type) {
+
+    
+    
+    
     
     this.type = type;
     return this;
@@ -210,11 +223,19 @@ public class BrokerageAuthorizationTypeReadOnly {
 
 
   public void setType(TypeEnum type) {
+
+    
+    
+    
     this.type = type;
   }
 
 
   public BrokerageAuthorizationTypeReadOnly authType(AuthTypeEnum authType) {
+
+    
+    
+    
     
     this.authType = authType;
     return this;
@@ -233,11 +254,19 @@ public class BrokerageAuthorizationTypeReadOnly {
 
 
   public void setAuthType(AuthTypeEnum authType) {
+
+    
+    
+    
     this.authType = authType;
   }
 
 
   public BrokerageAuthorizationTypeReadOnly brokerage(BrokerageAuthorizationTypeReadOnlyBrokerage brokerage) {
+
+    
+    
+    
     
     this.brokerage = brokerage;
     return this;
@@ -256,6 +285,10 @@ public class BrokerageAuthorizationTypeReadOnly {
 
 
   public void setBrokerage(BrokerageAuthorizationTypeReadOnlyBrokerage brokerage) {
+
+    
+    
+    
     this.brokerage = brokerage;
   }
 

@@ -23,7 +23,6 @@ import com.konfigthis.client.model.StrategyImpactLegsInner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -56,23 +56,23 @@ import com.konfigthis.client.JSON;
 public class StrategyImpact {
   public static final String SERIALIZED_NAME_ESTIMATED_COMMISSIONS = "estimatedCommissions";
   @SerializedName(SERIALIZED_NAME_ESTIMATED_COMMISSIONS)
-  private BigDecimal estimatedCommissions;
+  private Double estimatedCommissions;
 
   public static final String SERIALIZED_NAME_BUYING_POWER_EFFECT = "buyingPowerEffect";
   @SerializedName(SERIALIZED_NAME_BUYING_POWER_EFFECT)
-  private BigDecimal buyingPowerEffect;
+  private Double buyingPowerEffect;
 
   public static final String SERIALIZED_NAME_BUYING_POWER_RESULT = "buyingPowerResult";
   @SerializedName(SERIALIZED_NAME_BUYING_POWER_RESULT)
-  private BigDecimal buyingPowerResult;
+  private Double buyingPowerResult;
 
   public static final String SERIALIZED_NAME_MAINT_EXCESS_EFFECT = "maintExcessEffect";
   @SerializedName(SERIALIZED_NAME_MAINT_EXCESS_EFFECT)
-  private BigDecimal maintExcessEffect;
+  private Double maintExcessEffect;
 
   public static final String SERIALIZED_NAME_MAINT_EXCESS_RESULT = "maintExcessResult";
   @SerializedName(SERIALIZED_NAME_MAINT_EXCESS_RESULT)
-  private BigDecimal maintExcessResult;
+  private Double maintExcessResult;
 
   public static final String SERIALIZED_NAME_TRADE_VALUE_CALCULATION = "tradeValueCalculation";
   @SerializedName(SERIALIZED_NAME_TRADE_VALUE_CALCULATION)
@@ -92,7 +92,7 @@ public class StrategyImpact {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_STRATEGY = "strategy";
   @SerializedName(SERIALIZED_NAME_STRATEGY)
@@ -101,9 +101,23 @@ public class StrategyImpact {
   public StrategyImpact() {
   }
 
-  public StrategyImpact estimatedCommissions(BigDecimal estimatedCommissions) {
+  public StrategyImpact estimatedCommissions(Double estimatedCommissions) {
+
+    
+    
+    
     
     this.estimatedCommissions = estimatedCommissions;
+    return this;
+  }
+
+  public StrategyImpact estimatedCommissions(Integer estimatedCommissions) {
+
+    
+    
+    
+    
+    this.estimatedCommissions = estimatedCommissions.doubleValue();
     return this;
   }
 
@@ -114,19 +128,37 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "11.95", value = "")
 
-  public BigDecimal getEstimatedCommissions() {
+  public Double getEstimatedCommissions() {
     return estimatedCommissions;
   }
 
 
-  public void setEstimatedCommissions(BigDecimal estimatedCommissions) {
+  public void setEstimatedCommissions(Double estimatedCommissions) {
+
+    
+    
+    
     this.estimatedCommissions = estimatedCommissions;
   }
 
 
-  public StrategyImpact buyingPowerEffect(BigDecimal buyingPowerEffect) {
+  public StrategyImpact buyingPowerEffect(Double buyingPowerEffect) {
+
+    
+    
+    
     
     this.buyingPowerEffect = buyingPowerEffect;
+    return this;
+  }
+
+  public StrategyImpact buyingPowerEffect(Integer buyingPowerEffect) {
+
+    
+    
+    
+    
+    this.buyingPowerEffect = buyingPowerEffect.doubleValue();
     return this;
   }
 
@@ -137,19 +169,37 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "-156.3435", value = "")
 
-  public BigDecimal getBuyingPowerEffect() {
+  public Double getBuyingPowerEffect() {
     return buyingPowerEffect;
   }
 
 
-  public void setBuyingPowerEffect(BigDecimal buyingPowerEffect) {
+  public void setBuyingPowerEffect(Double buyingPowerEffect) {
+
+    
+    
+    
     this.buyingPowerEffect = buyingPowerEffect;
   }
 
 
-  public StrategyImpact buyingPowerResult(BigDecimal buyingPowerResult) {
+  public StrategyImpact buyingPowerResult(Double buyingPowerResult) {
+
+    
+    
+    
     
     this.buyingPowerResult = buyingPowerResult;
+    return this;
+  }
+
+  public StrategyImpact buyingPowerResult(Integer buyingPowerResult) {
+
+    
+    
+    
+    
+    this.buyingPowerResult = buyingPowerResult.doubleValue();
     return this;
   }
 
@@ -160,19 +210,37 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "8800.0882", value = "")
 
-  public BigDecimal getBuyingPowerResult() {
+  public Double getBuyingPowerResult() {
     return buyingPowerResult;
   }
 
 
-  public void setBuyingPowerResult(BigDecimal buyingPowerResult) {
+  public void setBuyingPowerResult(Double buyingPowerResult) {
+
+    
+    
+    
     this.buyingPowerResult = buyingPowerResult;
   }
 
 
-  public StrategyImpact maintExcessEffect(BigDecimal maintExcessEffect) {
+  public StrategyImpact maintExcessEffect(Double maintExcessEffect) {
+
+    
+    
+    
     
     this.maintExcessEffect = maintExcessEffect;
+    return this;
+  }
+
+  public StrategyImpact maintExcessEffect(Integer maintExcessEffect) {
+
+    
+    
+    
+    
+    this.maintExcessEffect = maintExcessEffect.doubleValue();
     return this;
   }
 
@@ -183,19 +251,37 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "-46.95", value = "")
 
-  public BigDecimal getMaintExcessEffect() {
+  public Double getMaintExcessEffect() {
     return maintExcessEffect;
   }
 
 
-  public void setMaintExcessEffect(BigDecimal maintExcessEffect) {
+  public void setMaintExcessEffect(Double maintExcessEffect) {
+
+    
+    
+    
     this.maintExcessEffect = maintExcessEffect;
   }
 
 
-  public StrategyImpact maintExcessResult(BigDecimal maintExcessResult) {
+  public StrategyImpact maintExcessResult(Double maintExcessResult) {
+
+    
+    
+    
     
     this.maintExcessResult = maintExcessResult;
+    return this;
+  }
+
+  public StrategyImpact maintExcessResult(Integer maintExcessResult) {
+
+    
+    
+    
+    
+    this.maintExcessResult = maintExcessResult.doubleValue();
     return this;
   }
 
@@ -206,17 +292,25 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "2642.669129", value = "")
 
-  public BigDecimal getMaintExcessResult() {
+  public Double getMaintExcessResult() {
     return maintExcessResult;
   }
 
 
-  public void setMaintExcessResult(BigDecimal maintExcessResult) {
+  public void setMaintExcessResult(Double maintExcessResult) {
+
+    
+    
+    
     this.maintExcessResult = maintExcessResult;
   }
 
 
   public StrategyImpact tradeValueCalculation(String tradeValueCalculation) {
+
+    
+    
+    
     
     this.tradeValueCalculation = tradeValueCalculation;
     return this;
@@ -235,11 +329,19 @@ public class StrategyImpact {
 
 
   public void setTradeValueCalculation(String tradeValueCalculation) {
+
+    
+    
+    
     this.tradeValueCalculation = tradeValueCalculation;
   }
 
 
   public StrategyImpact legs(List<StrategyImpactLegsInner> legs) {
+
+    
+    
+    
     
     this.legs = legs;
     return this;
@@ -266,11 +368,19 @@ public class StrategyImpact {
 
 
   public void setLegs(List<StrategyImpactLegsInner> legs) {
+
+    
+    
+    
     this.legs = legs;
   }
 
 
   public StrategyImpact side(String side) {
+
+    
+    
+    
     
     this.side = side;
     return this;
@@ -289,11 +399,19 @@ public class StrategyImpact {
 
 
   public void setSide(String side) {
+
+    
+    
+    
     this.side = side;
   }
 
 
   public StrategyImpact effect(String effect) {
+
+    
+    
+    
     
     this.effect = effect;
     return this;
@@ -312,13 +430,31 @@ public class StrategyImpact {
 
 
   public void setEffect(String effect) {
+
+    
+    
+    
     this.effect = effect;
   }
 
 
-  public StrategyImpact price(BigDecimal price) {
+  public StrategyImpact price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public StrategyImpact price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -329,17 +465,25 @@ public class StrategyImpact {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.35", value = "")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
   public StrategyImpact strategy(String strategy) {
+
+    
+    
+    
     
     this.strategy = strategy;
     return this;
@@ -358,6 +502,10 @@ public class StrategyImpact {
 
 
   public void setStrategy(String strategy) {
+
+    
+    
+    
     this.strategy = strategy;
   }
 

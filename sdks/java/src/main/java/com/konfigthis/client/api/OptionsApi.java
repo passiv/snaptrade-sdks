@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import com.konfigthis.client.model.OptionChainInner;
+import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsHoldings;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
@@ -46,11 +47,20 @@ public class OptionsApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public OptionsApi() {
+    public OptionsApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public OptionsApi(ApiClient apiClient) {
+    public OptionsApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -78,23 +88,7 @@ public class OptionsApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for getOptionStrategy
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionsGetOptionStrategyRequest  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getOptionStrategyCall(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOptionStrategyCall(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -174,90 +168,149 @@ public class OptionsApi {
 
     }
 
-    /**
-     * Creates an option strategy object that will be used to place an option strategy order
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionsGetOptionStrategyRequest  (required)
-     * @return StrategyQuotes
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public StrategyQuotes getOptionStrategy(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest) throws ApiException {
-        ApiResponse<StrategyQuotes> localVarResp = getOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Creates an option strategy object that will be used to place an option strategy order
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionsGetOptionStrategyRequest  (required)
-     * @return ApiResponse&lt;StrategyQuotes&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<StrategyQuotes> getOptionStrategyWithHttpInfo(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest) throws ApiException {
+    private ApiResponse<StrategyQuotes> getOptionStrategyWithHttpInfo(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest) throws ApiException {
         okhttp3.Call localVarCall = getOptionStrategyValidateBeforeCall(userId, userSecret, accountId, optionsGetOptionStrategyRequest, null);
         Type localVarReturnType = new TypeToken<StrategyQuotes>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Creates an option strategy object that will be used to place an option strategy order (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionsGetOptionStrategyRequest  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getOptionStrategyAsync(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, final ApiCallback<StrategyQuotes> _callback) throws ApiException {
+    private okhttp3.Call getOptionStrategyAsync(String userId, String userSecret, UUID accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, final ApiCallback<StrategyQuotes> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getOptionStrategyValidateBeforeCall(userId, userSecret, accountId, optionsGetOptionStrategyRequest, _callback);
         Type localVarReturnType = new TypeToken<StrategyQuotes>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetOptionStrategyRequestBuilder {
+        private final UUID underlyingSymbolId;
+        private final List<OptionLeg> legs;
+        private final String strategyType;
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private GetOptionStrategyRequestBuilder(UUID underlyingSymbolId, List<OptionLeg> legs, String strategyType, String userId, String userSecret, UUID accountId) {
+            this.underlyingSymbolId = underlyingSymbolId;
+            this.legs = legs;
+            this.strategyType = strategyType;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for getOptionStrategy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = buildBodyParams();
+            return getOptionStrategyCall(userId, userSecret, accountId, optionsGetOptionStrategyRequest, _callback);
+        }
+
+        private OptionsGetOptionStrategyRequest buildBodyParams() {
+            OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest();
+            optionsGetOptionStrategyRequest.underlyingSymbolId(this.underlyingSymbolId);
+            optionsGetOptionStrategyRequest.legs(this.legs);
+            optionsGetOptionStrategyRequest.strategyType(this.strategyType);
+            return optionsGetOptionStrategyRequest;
+        }
+
+        /**
+         * Execute getOptionStrategy request
+         * @return StrategyQuotes
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public StrategyQuotes execute() throws ApiException {
+            OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = buildBodyParams();
+            ApiResponse<StrategyQuotes> localVarResp = getOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getOptionStrategy request with HTTP info returned
+         * @return ApiResponse&lt;StrategyQuotes&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<StrategyQuotes> executeWithHttpInfo() throws ApiException {
+            OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = buildBodyParams();
+            return getOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+        }
+
+        /**
+         * Execute getOptionStrategy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<StrategyQuotes> _callback) throws ApiException {
+            OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = buildBodyParams();
+            return getOptionStrategyAsync(userId, userSecret, accountId, optionsGetOptionStrategyRequest, _callback);
+        }
+    }
+
     /**
-     * Build call for getOptionsChain
+     * Creates an option strategy object that will be used to place an option strategy order
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param symbol Universal symbol ID if symbol (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param optionsGetOptionStrategyRequest  (required)
+     * @return GetOptionStrategyRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getOptionsChainCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
+    public GetOptionStrategyRequestBuilder getOptionStrategy(UUID underlyingSymbolId, List<OptionLeg> legs, String strategyType, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (underlyingSymbolId == null) throw new IllegalArgumentException("\"underlyingSymbolId\" is required but got null");
+            
+
+        if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
+        if (strategyType == null) throw new IllegalArgumentException("\"strategyType\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new GetOptionStrategyRequestBuilder(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId);
+    }
+    private okhttp3.Call getOptionsChainCall(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -340,90 +393,130 @@ public class OptionsApi {
 
     }
 
-    /**
-     * Get the options chain
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbol Universal symbol ID if symbol (required)
-     * @return List&lt;OptionChainInner&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<OptionChainInner> getOptionsChain(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
-        ApiResponse<List<OptionChainInner>> localVarResp = getOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get the options chain
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbol Universal symbol ID if symbol (required)
-     * @return ApiResponse&lt;List&lt;OptionChainInner&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<OptionChainInner>> getOptionsChainWithHttpInfo(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
+    private ApiResponse<List<OptionChainInner>> getOptionsChainWithHttpInfo(String userId, String userSecret, UUID accountId, UUID symbol) throws ApiException {
         okhttp3.Call localVarCall = getOptionsChainValidateBeforeCall(userId, userSecret, accountId, symbol, null);
         Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get the options chain (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbol Universal symbol ID if symbol (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getOptionsChainAsync(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
+    private okhttp3.Call getOptionsChainAsync(String userId, String userSecret, UUID accountId, UUID symbol, final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getOptionsChainValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
         Type localVarReturnType = new TypeToken<List<OptionChainInner>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetOptionsChainRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+        private final UUID symbol;
+
+        private GetOptionsChainRequestBuilder(String userId, String userSecret, UUID accountId, UUID symbol) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.symbol = symbol;
+        }
+
+        /**
+         * Build call for getOptionsChain
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getOptionsChainCall(userId, userSecret, accountId, symbol, _callback);
+        }
+
+
+        /**
+         * Execute getOptionsChain request
+         * @return List&lt;OptionChainInner&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<OptionChainInner> execute() throws ApiException {
+            ApiResponse<List<OptionChainInner>> localVarResp = getOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getOptionsChain request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;OptionChainInner&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<OptionChainInner>> executeWithHttpInfo() throws ApiException {
+            return getOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
+        }
+
+        /**
+         * Execute getOptionsChain request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
+            return getOptionsChainAsync(userId, userSecret, accountId, symbol, _callback);
+        }
+    }
+
     /**
-     * Build call for getOptionsStrategyQuote
+     * Get the options chain
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param symbol Universal symbol ID if symbol (required)
+     * @return GetOptionsChainRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getOptionsStrategyQuoteCall(String userId, String userSecret, UUID accountId, UUID optionStrategyId, final ApiCallback _callback) throws ApiException {
+    public GetOptionsChainRequestBuilder getOptionsChain(String userId, String userSecret, UUID accountId, UUID symbol) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
+            
+
+        return new GetOptionsChainRequestBuilder(userId, userSecret, accountId, symbol);
+    }
+    private okhttp3.Call getOptionsStrategyQuoteCall(String userId, String userSecret, UUID accountId, UUID optionStrategyId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -503,89 +596,130 @@ public class OptionsApi {
 
     }
 
-    /**
-     * Get latest market data of option strategy
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @return StrategyQuotes
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public StrategyQuotes getOptionsStrategyQuote(String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws ApiException {
-        ApiResponse<StrategyQuotes> localVarResp = getOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get latest market data of option strategy
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @return ApiResponse&lt;StrategyQuotes&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<StrategyQuotes> getOptionsStrategyQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws ApiException {
+    private ApiResponse<StrategyQuotes> getOptionsStrategyQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws ApiException {
         okhttp3.Call localVarCall = getOptionsStrategyQuoteValidateBeforeCall(userId, userSecret, accountId, optionStrategyId, null);
         Type localVarReturnType = new TypeToken<StrategyQuotes>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get latest market data of option strategy (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getOptionsStrategyQuoteAsync(String userId, String userSecret, UUID accountId, UUID optionStrategyId, final ApiCallback<StrategyQuotes> _callback) throws ApiException {
+    private okhttp3.Call getOptionsStrategyQuoteAsync(String userId, String userSecret, UUID accountId, UUID optionStrategyId, final ApiCallback<StrategyQuotes> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getOptionsStrategyQuoteValidateBeforeCall(userId, userSecret, accountId, optionStrategyId, _callback);
         Type localVarReturnType = new TypeToken<StrategyQuotes>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetOptionsStrategyQuoteRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+        private final UUID optionStrategyId;
+
+        private GetOptionsStrategyQuoteRequestBuilder(String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.optionStrategyId = optionStrategyId;
+        }
+
+        /**
+         * Build call for getOptionsStrategyQuote
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getOptionsStrategyQuoteCall(userId, userSecret, accountId, optionStrategyId, _callback);
+        }
+
+
+        /**
+         * Execute getOptionsStrategyQuote request
+         * @return StrategyQuotes
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public StrategyQuotes execute() throws ApiException {
+            ApiResponse<StrategyQuotes> localVarResp = getOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getOptionsStrategyQuote request with HTTP info returned
+         * @return ApiResponse&lt;StrategyQuotes&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<StrategyQuotes> executeWithHttpInfo() throws ApiException {
+            return getOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
+        }
+
+        /**
+         * Execute getOptionsStrategyQuote request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<StrategyQuotes> _callback) throws ApiException {
+            return getOptionsStrategyQuoteAsync(userId, userSecret, accountId, optionStrategyId, _callback);
+        }
+    }
+
     /**
-     * Build call for listOptionHoldings
+     * Get latest market data of option strategy
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
+     * @return GetOptionsStrategyQuoteRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listOptionHoldingsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    public GetOptionsStrategyQuoteRequestBuilder getOptionsStrategyQuote(String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (optionStrategyId == null) throw new IllegalArgumentException("\"optionStrategyId\" is required but got null");
+            
+
+        return new GetOptionsStrategyQuoteRequestBuilder(userId, userSecret, accountId, optionStrategyId);
+    }
+    private okhttp3.Call listOptionHoldingsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -659,88 +793,124 @@ public class OptionsApi {
 
     }
 
-    /**
-     * Get the options holdings in the account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return OptionsHoldings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public OptionsHoldings listOptionHoldings(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<OptionsHoldings> localVarResp = listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get the options holdings in the account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return ApiResponse&lt;OptionsHoldings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<OptionsHoldings> listOptionHoldingsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<OptionsHoldings> listOptionHoldingsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get the options holdings in the account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listOptionHoldingsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<OptionsHoldings> _callback) throws ApiException {
+    private okhttp3.Call listOptionHoldingsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<OptionsHoldings> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, _callback);
         Type localVarReturnType = new TypeToken<OptionsHoldings>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListOptionHoldingsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private ListOptionHoldingsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for listOptionHoldings
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listOptionHoldingsCall(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute listOptionHoldings request
+         * @return OptionsHoldings
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public OptionsHoldings execute() throws ApiException {
+            ApiResponse<OptionsHoldings> localVarResp = listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listOptionHoldings request with HTTP info returned
+         * @return ApiResponse&lt;OptionsHoldings&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OptionsHoldings> executeWithHttpInfo() throws ApiException {
+            return listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute listOptionHoldings request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OptionsHoldings> _callback) throws ApiException {
+            return listOptionHoldingsAsync(userId, userSecret, accountId, _callback);
+        }
+    }
+
     /**
-     * Build call for placeOptionStrategy
+     * Get the options holdings in the account
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @param optionsPlaceOptionStrategyRequest  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @return ListOptionHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call placeOptionStrategyCall(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, final ApiCallback _callback) throws ApiException {
+    public ListOptionHoldingsRequestBuilder listOptionHoldings(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new ListOptionHoldingsRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call placeOptionStrategyCall(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -826,62 +996,125 @@ public class OptionsApi {
 
     }
 
-    /**
-     * Place an option strategy order on the brokerage
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @param optionsPlaceOptionStrategyRequest  (required)
-     * @return StrategyOrderRecord
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public StrategyOrderRecord placeOptionStrategy(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest) throws ApiException {
-        ApiResponse<StrategyOrderRecord> localVarResp = placeOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Place an option strategy order on the brokerage
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
-     * @param optionsPlaceOptionStrategyRequest  (required)
-     * @return ApiResponse&lt;StrategyOrderRecord&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<StrategyOrderRecord> placeOptionStrategyWithHttpInfo(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest) throws ApiException {
+    private ApiResponse<StrategyOrderRecord> placeOptionStrategyWithHttpInfo(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest) throws ApiException {
         okhttp3.Call localVarCall = placeOptionStrategyValidateBeforeCall(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, null);
         Type localVarReturnType = new TypeToken<StrategyOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call placeOptionStrategyAsync(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, final ApiCallback<StrategyOrderRecord> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeOptionStrategyValidateBeforeCall(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, _callback);
+        Type localVarReturnType = new TypeToken<StrategyOrderRecord>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class PlaceOptionStrategyRequestBuilder {
+        private final String orderType;
+        private final String timeInForce;
+        private final Double price;
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+        private final UUID optionStrategyId;
+
+        private PlaceOptionStrategyRequestBuilder(String orderType, String timeInForce, double price, String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.price = price;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.optionStrategyId = optionStrategyId;
+        }
+
+        /**
+         * Build call for placeOptionStrategy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = buildBodyParams();
+            return placeOptionStrategyCall(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, _callback);
+        }
+
+        private OptionsPlaceOptionStrategyRequest buildBodyParams() {
+            OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest();
+            optionsPlaceOptionStrategyRequest.orderType(this.orderType);
+            optionsPlaceOptionStrategyRequest.timeInForce(this.timeInForce);
+            optionsPlaceOptionStrategyRequest.price(this.price);
+            return optionsPlaceOptionStrategyRequest;
+        }
+
+        /**
+         * Execute placeOptionStrategy request
+         * @return StrategyOrderRecord
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public StrategyOrderRecord execute() throws ApiException {
+            OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = buildBodyParams();
+            ApiResponse<StrategyOrderRecord> localVarResp = placeOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeOptionStrategy request with HTTP info returned
+         * @return ApiResponse&lt;StrategyOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<StrategyOrderRecord> executeWithHttpInfo() throws ApiException {
+            OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = buildBodyParams();
+            return placeOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
+        }
+
+        /**
+         * Execute placeOptionStrategy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<StrategyOrderRecord> _callback) throws ApiException {
+            OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = buildBodyParams();
+            return placeOptionStrategyAsync(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, _callback);
+        }
+    }
+
     /**
-     * Place an option strategy order on the brokerage (asynchronously)
+     * Place an option strategy order on the brokerage
      * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
      * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
      * @param optionsPlaceOptionStrategyRequest  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return PlaceOptionStrategyRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -889,11 +1122,26 @@ public class OptionsApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call placeOptionStrategyAsync(String userId, String userSecret, UUID accountId, UUID optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, final ApiCallback<StrategyOrderRecord> _callback) throws ApiException {
+    public PlaceOptionStrategyRequestBuilder placeOptionStrategy(String orderType, String timeInForce, double price, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = placeOptionStrategyValidateBeforeCall(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, _callback);
-        Type localVarReturnType = new TypeToken<StrategyOrderRecord>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+            
+
+        
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (optionStrategyId == null) throw new IllegalArgumentException("\"optionStrategyId\" is required but got null");
+            
+
+        return new PlaceOptionStrategyRequestBuilder(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId);
     }
 }

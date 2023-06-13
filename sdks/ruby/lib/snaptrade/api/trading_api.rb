@@ -490,7 +490,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get quotes.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
-    # @return [SymbolsQuotes]
+    # @return [Array<SymbolsQuotesInner>]
     def get_user_account_quotes_impl(user_id, user_secret, symbols, account_id, opts = {})
       data, _status_code, _headers = get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
       data
@@ -503,7 +503,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get quotes.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
-    # @return [Array<(SymbolsQuotes, Integer, Hash)>] SymbolsQuotes data, response status code and response headers
+    # @return [Array<(Array<SymbolsQuotesInner>, Integer, Hash)>] Array<SymbolsQuotesInner> data, response status code and response headers
     def get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_user_account_quotes ...'
@@ -546,7 +546,7 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SymbolsQuotes'
+      return_type = opts[:debug_return_type] || 'Array<SymbolsQuotesInner>'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']

@@ -19,7 +19,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.ManualTradeSymbol;
 import com.konfigthis.client.model.OrderType;
@@ -27,8 +26,8 @@ import com.konfigthis.client.model.TimeInForce;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,6 +39,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,7 +63,7 @@ public class ManualTrade {
 
   public static final String SERIALIZED_NAME_ACCOUNT = "account";
   @SerializedName(SERIALIZED_NAME_ACCOUNT)
-  private Account account;
+  private String account;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -83,16 +83,20 @@ public class ManualTrade {
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
-  private BigDecimal units;
+  private Double units;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public ManualTrade() {
   }
 
   public ManualTrade id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -111,11 +115,19 @@ public class ManualTrade {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
-  public ManualTrade account(Account account) {
+  public ManualTrade account(String account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -126,19 +138,27 @@ public class ManualTrade {
    * @return account
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9855556801c3", value = "")
 
-  public Account getAccount() {
+  public String getAccount() {
     return account;
   }
 
 
-  public void setAccount(Account account) {
+  public void setAccount(String account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public ManualTrade orderType(OrderType orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -157,11 +177,19 @@ public class ManualTrade {
 
 
   public void setOrderType(OrderType orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
   public ManualTrade timeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -180,11 +208,19 @@ public class ManualTrade {
 
 
   public void setTimeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
   public ManualTrade symbol(ManualTradeSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -203,11 +239,19 @@ public class ManualTrade {
 
 
   public void setSymbol(ManualTradeSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public ManualTrade action(Action action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -226,13 +270,31 @@ public class ManualTrade {
 
 
   public void setAction(Action action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
-  public ManualTrade units(BigDecimal units) {
+  public ManualTrade units(Double units) {
+
+    
+    
+    
     
     this.units = units;
+    return this;
+  }
+
+  public ManualTrade units(Integer units) {
+
+    
+    
+    
+    
+    this.units = units.doubleValue();
     return this;
   }
 
@@ -243,19 +305,37 @@ public class ManualTrade {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getUnits() {
+  public Double getUnits() {
     return units;
   }
 
 
-  public void setUnits(BigDecimal units) {
+  public void setUnits(Double units) {
+
+    
+    
+    
     this.units = units;
   }
 
 
-  public ManualTrade price(BigDecimal price) {
+  public ManualTrade price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public ManualTrade price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -266,12 +346,16 @@ public class ManualTrade {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
@@ -341,9 +425,20 @@ public class ManualTrade {
         Objects.equals(this.additionalProperties, manualTrade.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(id, account, orderType, timeInForce, symbol, action, units, price, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -408,6 +503,9 @@ public class ManualTrade {
       }
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      if ((jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) && !jsonObj.get("account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account").toString()));
       }
   }
 

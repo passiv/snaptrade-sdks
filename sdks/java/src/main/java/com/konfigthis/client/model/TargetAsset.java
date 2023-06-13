@@ -23,7 +23,8 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -37,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -64,7 +66,7 @@ public class TargetAsset {
 
   public static final String SERIALIZED_NAME_PERCENT = "percent";
   @SerializedName(SERIALIZED_NAME_PERCENT)
-  private BigDecimal percent;
+  private Double percent;
 
   public static final String SERIALIZED_NAME_IS_SUPPORTED = "is_supported";
   @SerializedName(SERIALIZED_NAME_IS_SUPPORTED)
@@ -76,12 +78,16 @@ public class TargetAsset {
 
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
-  private Object meta;
+  private Map<String, Object> meta = null;
 
   public TargetAsset() {
   }
 
   public TargetAsset id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -100,11 +106,19 @@ public class TargetAsset {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public TargetAsset symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -123,13 +137,39 @@ public class TargetAsset {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
-  public TargetAsset percent(BigDecimal percent) {
+  public TargetAsset percent(Double percent) {
+
+    if (percent < 0) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
+    }
+    if (percent > 100) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
+    }
+    
     
     this.percent = percent;
+    return this;
+  }
+
+  public TargetAsset percent(Integer percent) {
+
+    if (percent < 0) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
+    }
+    if (percent > 100) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
+    }
+    
+    
+    this.percent = percent.doubleValue();
     return this;
   }
 
@@ -142,17 +182,29 @@ public class TargetAsset {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "90", value = "")
 
-  public BigDecimal getPercent() {
+  public Double getPercent() {
     return percent;
   }
 
 
-  public void setPercent(BigDecimal percent) {
+  public void setPercent(Double percent) {
+
+    if (percent < 0) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
+    }
+    if (percent > 100) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
+    }
+    
     this.percent = percent;
   }
 
 
   public TargetAsset isSupported(Boolean isSupported) {
+
+    
+    
+    
     
     this.isSupported = isSupported;
     return this;
@@ -171,11 +223,19 @@ public class TargetAsset {
 
 
   public void setIsSupported(Boolean isSupported) {
+
+    
+    
+    
     this.isSupported = isSupported;
   }
 
 
   public TargetAsset isExcluded(Boolean isExcluded) {
+
+    
+    
+    
     
     this.isExcluded = isExcluded;
     return this;
@@ -194,13 +254,29 @@ public class TargetAsset {
 
 
   public void setIsExcluded(Boolean isExcluded) {
+
+    
+    
+    
     this.isExcluded = isExcluded;
   }
 
 
-  public TargetAsset meta(Object meta) {
+  public TargetAsset meta(Map<String, Object> meta) {
+
+    
+    
+    
     
     this.meta = meta;
+    return this;
+  }
+
+  public TargetAsset putMetaItem(String key, Object metaItem) {
+    if (this.meta == null) {
+      this.meta = new HashMap<>();
+    }
+    this.meta.put(key, metaItem);
     return this;
   }
 
@@ -211,12 +287,16 @@ public class TargetAsset {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Object getMeta() {
+  public Map<String, Object> getMeta() {
     return meta;
   }
 
 
-  public void setMeta(Object meta) {
+  public void setMeta(Map<String, Object> meta) {
+
+    
+    
+    
     this.meta = meta;
   }
 

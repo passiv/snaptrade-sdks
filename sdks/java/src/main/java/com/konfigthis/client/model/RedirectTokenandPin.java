@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class RedirectTokenandPin {
   }
 
   public RedirectTokenandPin token(String token) {
+
+    
+    
+    
     
     this.token = token;
     return this;
@@ -80,11 +85,19 @@ public class RedirectTokenandPin {
 
 
   public void setToken(String token) {
+
+    
+    
+    
     this.token = token;
   }
 
 
   public RedirectTokenandPin pin(String pin) {
+
+    
+    
+    
     
     this.pin = pin;
     return this;
@@ -103,6 +116,10 @@ public class RedirectTokenandPin {
 
 
   public void setPin(String pin) {
+
+    
+    
+    
     this.pin = pin;
   }
 

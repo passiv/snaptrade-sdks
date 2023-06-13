@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -70,6 +71,10 @@ public class ManualTradeAndImpact {
   }
 
   public ManualTradeAndImpact trade(ManualTrade trade) {
+
+    
+    
+    
     
     this.trade = trade;
     return this;
@@ -88,11 +93,19 @@ public class ManualTradeAndImpact {
 
 
   public void setTrade(ManualTrade trade) {
+
+    
+    
+    
     this.trade = trade;
   }
 
 
   public ManualTradeAndImpact tradeImpacts(List<ManualTrade> tradeImpacts) {
+
+    
+    
+    
     
     this.tradeImpacts = tradeImpacts;
     return this;
@@ -119,11 +132,19 @@ public class ManualTradeAndImpact {
 
 
   public void setTradeImpacts(List<ManualTrade> tradeImpacts) {
+
+    
+    
+    
     this.tradeImpacts = tradeImpacts;
   }
 
 
   public ManualTradeAndImpact combinedRemainingBalance(ManualTradeBalance combinedRemainingBalance) {
+
+    
+    
+    
     
     this.combinedRemainingBalance = combinedRemainingBalance;
     return this;
@@ -142,6 +163,10 @@ public class ManualTradeAndImpact {
 
 
   public void setCombinedRemainingBalance(ManualTradeBalance combinedRemainingBalance) {
+
+    
+    
+    
     this.combinedRemainingBalance = combinedRemainingBalance;
   }
 

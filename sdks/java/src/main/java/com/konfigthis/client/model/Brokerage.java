@@ -38,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -130,6 +131,10 @@ public class Brokerage {
   }
 
   public Brokerage id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -148,11 +153,19 @@ public class Brokerage {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public Brokerage name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -171,11 +184,19 @@ public class Brokerage {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public Brokerage displayName(String displayName) {
+
+    
+    
+    
     
     this.displayName = displayName;
     return this;
@@ -194,11 +215,19 @@ public class Brokerage {
 
 
   public void setDisplayName(String displayName) {
+
+    
+    
+    
     this.displayName = displayName;
   }
 
 
   public Brokerage description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -209,7 +238,7 @@ public class Brokerage {
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Questrade is GREAT!", value = "")
+  @ApiModelProperty(example = "Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada's largest discount broker.", value = "")
 
   public String getDescription() {
     return description;
@@ -217,11 +246,19 @@ public class Brokerage {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public Brokerage awsS3LogoUrl(String awsS3LogoUrl) {
+
+    
+    
+    
     
     this.awsS3LogoUrl = awsS3LogoUrl;
     return this;
@@ -240,11 +277,19 @@ public class Brokerage {
 
 
   public void setAwsS3LogoUrl(String awsS3LogoUrl) {
+
+    
+    
+    
     this.awsS3LogoUrl = awsS3LogoUrl;
   }
 
 
   public Brokerage slug(String slug) {
+
+    
+    
+    
     
     this.slug = slug;
     return this;
@@ -263,11 +308,19 @@ public class Brokerage {
 
 
   public void setSlug(String slug) {
+
+    
+    
+    
     this.slug = slug;
   }
 
 
   public Brokerage url(String url) {
+
+    
+    
+    
     
     this.url = url;
     return this;
@@ -286,11 +339,19 @@ public class Brokerage {
 
 
   public void setUrl(String url) {
+
+    
+    
+    
     this.url = url;
   }
 
 
   public Brokerage enabled(Boolean enabled) {
+
+    
+    
+    
     
     this.enabled = enabled;
     return this;
@@ -309,11 +370,19 @@ public class Brokerage {
 
 
   public void setEnabled(Boolean enabled) {
+
+    
+    
+    
     this.enabled = enabled;
   }
 
 
   public Brokerage maintenanceMode(Boolean maintenanceMode) {
+
+    
+    
+    
     
     this.maintenanceMode = maintenanceMode;
     return this;
@@ -332,11 +401,19 @@ public class Brokerage {
 
 
   public void setMaintenanceMode(Boolean maintenanceMode) {
+
+    
+    
+    
     this.maintenanceMode = maintenanceMode;
   }
 
 
   public Brokerage allowsFractionalUnits(Boolean allowsFractionalUnits) {
+
+    
+    
+    
     
     this.allowsFractionalUnits = allowsFractionalUnits;
     return this;
@@ -355,11 +432,19 @@ public class Brokerage {
 
 
   public void setAllowsFractionalUnits(Boolean allowsFractionalUnits) {
+
+    
+    
+    
     this.allowsFractionalUnits = allowsFractionalUnits;
   }
 
 
   public Brokerage allowsTrading(Boolean allowsTrading) {
+
+    
+    
+    
     
     this.allowsTrading = allowsTrading;
     return this;
@@ -378,11 +463,19 @@ public class Brokerage {
 
 
   public void setAllowsTrading(Boolean allowsTrading) {
+
+    
+    
+    
     this.allowsTrading = allowsTrading;
   }
 
 
   public Brokerage hasReporting(Boolean hasReporting) {
+
+    
+    
+    
     
     this.hasReporting = hasReporting;
     return this;
@@ -401,11 +494,19 @@ public class Brokerage {
 
 
   public void setHasReporting(Boolean hasReporting) {
+
+    
+    
+    
     this.hasReporting = hasReporting;
   }
 
 
   public Brokerage isRealTimeConnection(Boolean isRealTimeConnection) {
+
+    
+    
+    
     
     this.isRealTimeConnection = isRealTimeConnection;
     return this;
@@ -424,11 +525,19 @@ public class Brokerage {
 
 
   public void setIsRealTimeConnection(Boolean isRealTimeConnection) {
+
+    
+    
+    
     this.isRealTimeConnection = isRealTimeConnection;
   }
 
 
   public Brokerage allowsTradingThroughSnaptradeApi(Boolean allowsTradingThroughSnaptradeApi) {
+
+    
+    
+    
     
     this.allowsTradingThroughSnaptradeApi = allowsTradingThroughSnaptradeApi;
     return this;
@@ -447,11 +556,19 @@ public class Brokerage {
 
 
   public void setAllowsTradingThroughSnaptradeApi(Boolean allowsTradingThroughSnaptradeApi) {
+
+    
+    
+    
     this.allowsTradingThroughSnaptradeApi = allowsTradingThroughSnaptradeApi;
   }
 
 
   public Brokerage isScrapingIntegration(Boolean isScrapingIntegration) {
+
+    
+    
+    
     
     this.isScrapingIntegration = isScrapingIntegration;
     return this;
@@ -470,11 +587,19 @@ public class Brokerage {
 
 
   public void setIsScrapingIntegration(Boolean isScrapingIntegration) {
+
+    
+    
+    
     this.isScrapingIntegration = isScrapingIntegration;
   }
 
 
   public Brokerage defaultCurrency(UUID defaultCurrency) {
+
+    
+    
+    
     
     this.defaultCurrency = defaultCurrency;
     return this;
@@ -493,11 +618,19 @@ public class Brokerage {
 
 
   public void setDefaultCurrency(UUID defaultCurrency) {
+
+    
+    
+    
     this.defaultCurrency = defaultCurrency;
   }
 
 
   public Brokerage brokerageType(BrokerageType brokerageType) {
+
+    
+    
+    
     
     this.brokerageType = brokerageType;
     return this;
@@ -516,11 +649,19 @@ public class Brokerage {
 
 
   public void setBrokerageType(BrokerageType brokerageType) {
+
+    
+    
+    
     this.brokerageType = brokerageType;
   }
 
 
   public Brokerage exchanges(List<Object> exchanges) {
+
+    
+    
+    
     
     this.exchanges = exchanges;
     return this;
@@ -547,6 +688,10 @@ public class Brokerage {
 
 
   public void setExchanges(List<Object> exchanges) {
+
+    
+    
+    
     this.exchanges = exchanges;
   }
 

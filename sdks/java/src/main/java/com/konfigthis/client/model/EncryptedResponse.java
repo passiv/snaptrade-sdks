@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,6 +64,10 @@ public class EncryptedResponse {
   }
 
   public EncryptedResponse encryptedSharedKey(String encryptedSharedKey) {
+
+    
+    
+    
     
     this.encryptedSharedKey = encryptedSharedKey;
     return this;
@@ -81,11 +86,19 @@ public class EncryptedResponse {
 
 
   public void setEncryptedSharedKey(String encryptedSharedKey) {
+
+    
+    
+    
     this.encryptedSharedKey = encryptedSharedKey;
   }
 
 
   public EncryptedResponse encryptedMessageData(EncryptedResponseEncryptedMessageData encryptedMessageData) {
+
+    
+    
+    
     
     this.encryptedMessageData = encryptedMessageData;
     return this;
@@ -104,6 +117,10 @@ public class EncryptedResponse {
 
 
   public void setEncryptedMessageData(EncryptedResponseEncryptedMessageData encryptedMessageData) {
+
+    
+    
+    
     this.encryptedMessageData = encryptedMessageData;
   }
 

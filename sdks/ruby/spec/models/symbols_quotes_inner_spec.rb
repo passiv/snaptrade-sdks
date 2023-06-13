@@ -12,13 +12,13 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::SymbolsQuotes
-describe SnapTrade::SymbolsQuotes do
-  let(:instance) { SnapTrade::SymbolsQuotes.new }
+# Unit tests for SnapTrade::SymbolsQuotesInner
+describe SnapTrade::SymbolsQuotesInner do
+  let(:instance) { SnapTrade::SymbolsQuotesInner.new }
 
-  describe 'test an instance of SymbolsQuotes' do
-    it 'should create an instance of SymbolsQuotes' do
-      expect(instance).to be_instance_of(SnapTrade::SymbolsQuotes)
+  describe 'test an instance of SymbolsQuotesInner' do
+    it 'should create an instance of SymbolsQuotesInner' do
+      expect(instance).to be_instance_of(SnapTrade::SymbolsQuotesInner)
     end
   end
   describe 'test attribute "symbol"' do

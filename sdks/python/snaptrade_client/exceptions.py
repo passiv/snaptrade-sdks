@@ -56,6 +56,18 @@ class ApiKeyError(OpenApiException, KeyError):
         super(ApiKeyError, self).__init__(full_msg)
 
 
+class ApiStreamingException(OpenApiException):
+
+    def __init__(self, status=None, reason=None, body=None):
+        self.status = status
+        self.reason = reason
+        self.body = body
+
+    def __str__(self):
+        """Custom error messages for exception"""
+        return "({0})\n Reason: {1}\n Body: {2}".format(self.status, self.reason, self.body)
+
+
 class ApiException(OpenApiException):
 
     def __init__(self, status=None, reason=None, api_response: typing.Optional[typing.Union[ApiResponse, AsyncApiResponse]] = None):

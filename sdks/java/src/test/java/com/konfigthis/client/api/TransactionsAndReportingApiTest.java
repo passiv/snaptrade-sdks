@@ -13,10 +13,15 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import java.time.LocalDate;
 import com.konfigthis.client.model.PerformanceCustom;
 import com.konfigthis.client.model.UniversalActivity;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +34,14 @@ import java.util.Map;
 @Disabled
 public class TransactionsAndReportingApiTest {
 
-    private final TransactionsAndReportingApi api = new TransactionsAndReportingApi();
+    private static TransactionsAndReportingApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new TransactionsAndReportingApi(apiClient);
+    }
 
     /**
      * Get transaction history for a user
@@ -42,10 +54,18 @@ public class TransactionsAndReportingApiTest {
     public void getActivitiesTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        String startDate = null;
-        String endDate = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
         String accounts = null;
-        List<UniversalActivity> response = api.getActivities(userId, userSecret, startDate, endDate, accounts);
+        String brokerageAuthorizations = null;
+        String type = null;
+        List<UniversalActivity> response = api.getActivities(userId, userSecret)
+                .startDate(startDate)
+                .endDate(endDate)
+                .accounts(accounts)
+                .brokerageAuthorizations(brokerageAuthorizations)
+                .type(type)
+                .execute();
         // TODO: test validations
     }
 
@@ -58,14 +78,18 @@ public class TransactionsAndReportingApiTest {
      */
     @Test
     public void getReportingCustomRangeTest() throws ApiException {
-        String startDate = null;
-        String endDate = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
         String userId = null;
         String userSecret = null;
         String accounts = null;
         Boolean detailed = null;
         String frequency = null;
-        PerformanceCustom response = api.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+        PerformanceCustom response = api.getReportingCustomRange(startDate, endDate, userId, userSecret)
+                .accounts(accounts)
+                .detailed(detailed)
+                .frequency(frequency)
+                .execute();
         // TODO: test validations
     }
 

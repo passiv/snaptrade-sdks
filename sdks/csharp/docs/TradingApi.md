@@ -446,7 +446,7 @@ catch (ApiException e)
 
 <a name="getuseraccountquotes"></a>
 # **GetUserAccountQuotes**
-> SymbolsQuotes GetUserAccountQuotes (string userId, string userSecret, string symbols, string accountId, bool? useTicker = null)
+> List&lt;SymbolsQuotesInner&gt; GetUserAccountQuotes (string userId, string userSecret, string symbols, string accountId, bool? useTicker = null)
 
 Get symbol quotes
 
@@ -483,7 +483,7 @@ namespace Example
             try
             {
                 // Get symbol quotes
-                SymbolsQuotes result = apiInstance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
+                List<SymbolsQuotesInner> result = apiInstance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -510,7 +510,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get symbol quotes
-    ApiResponse<SymbolsQuotes> response = apiInstance.GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
+    ApiResponse<List<SymbolsQuotesInner>> response = apiInstance.GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -535,7 +535,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**SymbolsQuotes**](SymbolsQuotes.md)
+[**List&lt;SymbolsQuotesInner&gt;**](SymbolsQuotesInner.md)
 
 ### Authorization
 

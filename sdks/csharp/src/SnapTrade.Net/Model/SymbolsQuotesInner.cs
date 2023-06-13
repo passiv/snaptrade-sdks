@@ -27,13 +27,13 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Symbols and Tickers Quotes object
+    /// SymbolsQuotesInner
     /// </summary>
-    [DataContract(Name = "SymbolsQuotes")]
-    public partial class SymbolsQuotes : IEquatable<SymbolsQuotes>, IValidatableObject
+    [DataContract(Name = "SymbolsQuotes_inner")]
+    public partial class SymbolsQuotesInner : IEquatable<SymbolsQuotesInner>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SymbolsQuotes" /> class.
+        /// Initializes a new instance of the <see cref="SymbolsQuotesInner" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
         /// <param name="bidPrice">bidPrice.</param>
@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="lastTradePrice">lastTradePrice.</param>
         /// <param name="bidSize">bidSize.</param>
         /// <param name="askSize">askSize.</param>
-        public SymbolsQuotes(UniversalSymbol symbol = default(UniversalSymbol), decimal bidPrice = default(decimal), decimal askPrice = default(decimal), decimal lastTradePrice = default(decimal), decimal bidSize = default(decimal), decimal askSize = default(decimal)) : base()
+        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), decimal bidPrice = default(decimal), decimal askPrice = default(decimal), decimal lastTradePrice = default(decimal), decimal bidSize = default(decimal), decimal askSize = default(decimal))
         {
             this.Symbol = symbol;
             this.BidPrice = bidPrice;
@@ -49,7 +49,6 @@ namespace SnapTrade.Net.Model
             this.LastTradePrice = lastTradePrice;
             this.BidSize = bidSize;
             this.AskSize = askSize;
-            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -89,27 +88,19 @@ namespace SnapTrade.Net.Model
         public decimal AskSize { get; set; }
 
         /// <summary>
-        /// Gets or Sets additional properties
-        /// </summary>
-        [JsonExtensionData]
-        public IDictionary<string, object> AdditionalProperties { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class SymbolsQuotes {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("class SymbolsQuotesInner {\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  BidPrice: ").Append(BidPrice).Append("\n");
             sb.Append("  AskPrice: ").Append(AskPrice).Append("\n");
             sb.Append("  LastTradePrice: ").Append(LastTradePrice).Append("\n");
             sb.Append("  BidSize: ").Append(BidSize).Append("\n");
             sb.Append("  AskSize: ").Append(AskSize).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +109,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -130,47 +121,46 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SymbolsQuotes);
+            return this.Equals(input as SymbolsQuotesInner);
         }
 
         /// <summary>
-        /// Returns true if SymbolsQuotes instances are equal
+        /// Returns true if SymbolsQuotesInner instances are equal
         /// </summary>
-        /// <param name="input">Instance of SymbolsQuotes to be compared</param>
+        /// <param name="input">Instance of SymbolsQuotesInner to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SymbolsQuotes input)
+        public bool Equals(SymbolsQuotesInner input)
         {
             if (input == null)
             {
                 return false;
             }
-            return base.Equals(input) && 
+            return 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.BidPrice == input.BidPrice ||
                     this.BidPrice.Equals(input.BidPrice)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.AskPrice == input.AskPrice ||
                     this.AskPrice.Equals(input.AskPrice)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.LastTradePrice == input.LastTradePrice ||
                     this.LastTradePrice.Equals(input.LastTradePrice)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.BidSize == input.BidSize ||
                     this.BidSize.Equals(input.BidSize)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.AskSize == input.AskSize ||
                     this.AskSize.Equals(input.AskSize)
-                )
-                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
+                );
         }
 
         /// <summary>
@@ -181,7 +171,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
@@ -191,10 +181,6 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.LastTradePrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.BidSize.GetHashCode();
                 hashCode = (hashCode * 59) + this.AskSize.GetHashCode();
-                if (this.AdditionalProperties != null)
-                {
-                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
-                }
                 return hashCode;
             }
         }

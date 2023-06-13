@@ -38,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -70,6 +71,10 @@ public class ModelPortfolioDetails {
   }
 
   public ModelPortfolioDetails modelPortfolio(ModelPortfolio modelPortfolio) {
+
+    
+    
+    
     
     this.modelPortfolio = modelPortfolio;
     return this;
@@ -88,11 +93,19 @@ public class ModelPortfolioDetails {
 
 
   public void setModelPortfolio(ModelPortfolio modelPortfolio) {
+
+    
+    
+    
     this.modelPortfolio = modelPortfolio;
   }
 
 
   public ModelPortfolioDetails modelPortfolioSecurity(List<ModelPortfolioSecurity> modelPortfolioSecurity) {
+
+    
+    
+    
     
     this.modelPortfolioSecurity = modelPortfolioSecurity;
     return this;
@@ -119,11 +132,19 @@ public class ModelPortfolioDetails {
 
 
   public void setModelPortfolioSecurity(List<ModelPortfolioSecurity> modelPortfolioSecurity) {
+
+    
+    
+    
     this.modelPortfolioSecurity = modelPortfolioSecurity;
   }
 
 
   public ModelPortfolioDetails modelPortfolioAssetClass(List<ModelPortfolioAssetClass> modelPortfolioAssetClass) {
+
+    
+    
+    
     
     this.modelPortfolioAssetClass = modelPortfolioAssetClass;
     return this;
@@ -150,6 +171,10 @@ public class ModelPortfolioDetails {
 
 
   public void setModelPortfolioAssetClass(List<ModelPortfolioAssetClass> modelPortfolioAssetClass) {
+
+    
+    
+    
     this.modelPortfolioAssetClass = modelPortfolioAssetClass;
   }
 

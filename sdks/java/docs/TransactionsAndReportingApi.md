@@ -10,7 +10,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getActivities"></a>
 # **getActivities**
-> List&lt;UniversalActivity&gt; getActivities(userId, userSecret, startDate, endDate, accounts)
+> List&lt;UniversalActivity&gt; getActivities(userId, userSecret).startDate(startDate).endDate(endDate).accounts(accounts).brokerageAuthorizations(brokerageAuthorizations).type(type).execute();
 
 Get transaction history for a user
 
@@ -18,9 +18,9 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -28,36 +28,62 @@ import com.konfigthis.client.api.TransactionsAndReportingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TransactionsAndReportingApi apiInstance = new TransactionsAndReportingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    String startDate = "startDate_example"; // String | 
-    String endDate = "endDate_example"; // String | 
-    String accounts = "accounts_example"; // String | Optional comma seperated list of account IDs used to filter the request on specific accounts
+    TransactionsAndReportingApi api = new TransactionsAndReportingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    LocalDate startDate = LocalDate.now();
+    LocalDate endDate = LocalDate.now();
+    String accounts = "accounts_example"; // Optional comma seperated list of account IDs used to filter the request on specific accounts
+    String brokerageAuthorizations = "brokerageAuthorizations_example"; // Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+    String type = "DIVIDEND"; // Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
     try {
-      List<UniversalActivity> result = apiInstance.getActivities(userId, userSecret, startDate, endDate, accounts);
+      List<UniversalActivity> result = api
+              .getActivities(userId, userSecret)
+              .startDate(startDate)
+              .endDate(endDate)
+              .accounts(accounts)
+              .brokerageAuthorizations(brokerageAuthorizations)
+              .type(type)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TransactionsAndReportingApi#getActivities");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<UniversalActivity>> response = api
+              .getActivities(userId, userSecret)
+              .startDate(startDate)
+              .endDate(endDate)
+              .accounts(accounts)
+              .brokerageAuthorizations(brokerageAuthorizations)
+              .type(type)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TransactionsAndReportingApi#getActivities");
       System.err.println("Status code: " + e.getCode());
@@ -75,9 +101,11 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **startDate** | **String**|  | [optional] |
-| **endDate** | **String**|  | [optional] |
+| **startDate** | **LocalDate**|  | [optional] |
+| **endDate** | **LocalDate**|  | [optional] |
 | **accounts** | **String**| Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional] |
+| **brokerageAuthorizations** | **String**| Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional] |
+| **type** | **String**| Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional] |
 
 ### Return type
 
@@ -100,7 +128,7 @@ public class Example {
 
 <a name="getReportingCustomRange"></a>
 # **getReportingCustomRange**
-> PerformanceCustom getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency)
+> PerformanceCustom getReportingCustomRange(startDate, endDate, userId, userSecret).accounts(accounts).detailed(detailed).frequency(frequency).execute();
 
 Get performance information for a specific timeframe
 
@@ -108,9 +136,9 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -118,38 +146,58 @@ import com.konfigthis.client.api.TransactionsAndReportingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TransactionsAndReportingApi apiInstance = new TransactionsAndReportingApi(defaultClient);
-    String startDate = "startDate_example"; // String | 
-    String endDate = "endDate_example"; // String | 
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    String accounts = "accounts_example"; // String | Optional comma seperated list of account IDs used to filter the request on specific accounts
-    Boolean detailed = true; // Boolean | Optional, increases frequency of data points for the total value and contribution charts if set to true
-    String frequency = "frequency_example"; // String | Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
+    TransactionsAndReportingApi api = new TransactionsAndReportingApi(apiClient);
+    LocalDate startDate = LocalDate.now();
+    LocalDate endDate = LocalDate.now();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    String accounts = "accounts_example"; // Optional comma seperated list of account IDs used to filter the request on specific accounts
+    Boolean detailed = true; // Optional, increases frequency of data points for the total value and contribution charts if set to true
+    String frequency = "frequency_example"; // Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     try {
-      PerformanceCustom result = apiInstance.getReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+      PerformanceCustom result = api
+              .getReportingCustomRange(startDate, endDate, userId, userSecret)
+              .accounts(accounts)
+              .detailed(detailed)
+              .frequency(frequency)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TransactionsAndReportingApi#getReportingCustomRange");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PerformanceCustom> response = api
+              .getReportingCustomRange(startDate, endDate, userId, userSecret)
+              .accounts(accounts)
+              .detailed(detailed)
+              .frequency(frequency)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TransactionsAndReportingApi#getReportingCustomRange");
       System.err.println("Status code: " + e.getCode());
@@ -165,8 +213,8 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **startDate** | **String**|  | |
-| **endDate** | **String**|  | |
+| **startDate** | **LocalDate**|  | |
+| **endDate** | **LocalDate**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accounts** | **String**| Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional] |

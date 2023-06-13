@@ -24,8 +24,8 @@ import com.konfigthis.client.model.OptionsSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -68,11 +69,11 @@ public class OptionsPosition {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
-  private BigDecimal units;
+  private Double units;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -80,12 +81,16 @@ public class OptionsPosition {
 
   public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
-  private BigDecimal averagePurchasePrice;
+  private Double averagePurchasePrice;
 
   public OptionsPosition() {
   }
 
   public OptionsPosition symbol(UUID symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -104,11 +109,19 @@ public class OptionsPosition {
 
 
   public void setSymbol(UUID symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public OptionsPosition description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -127,11 +140,19 @@ public class OptionsPosition {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public OptionsPosition optionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
     
     this.optionSymbol = optionSymbol;
     return this;
@@ -150,13 +171,31 @@ public class OptionsPosition {
 
 
   public void setOptionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
     this.optionSymbol = optionSymbol;
   }
 
 
-  public OptionsPosition price(BigDecimal price) {
+  public OptionsPosition price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public OptionsPosition price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -167,19 +206,37 @@ public class OptionsPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
-  public OptionsPosition units(BigDecimal units) {
+  public OptionsPosition units(Double units) {
+
+    
+    
+    
     
     this.units = units;
+    return this;
+  }
+
+  public OptionsPosition units(Integer units) {
+
+    
+    
+    
+    
+    this.units = units.doubleValue();
     return this;
   }
 
@@ -190,17 +247,25 @@ public class OptionsPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "")
 
-  public BigDecimal getUnits() {
+  public Double getUnits() {
     return units;
   }
 
 
-  public void setUnits(BigDecimal units) {
+  public void setUnits(Double units) {
+
+    
+    
+    
     this.units = units;
   }
 
 
   public OptionsPosition currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -219,13 +284,31 @@ public class OptionsPosition {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
-  public OptionsPosition averagePurchasePrice(BigDecimal averagePurchasePrice) {
+  public OptionsPosition averagePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     
     this.averagePurchasePrice = averagePurchasePrice;
+    return this;
+  }
+
+  public OptionsPosition averagePurchasePrice(Integer averagePurchasePrice) {
+
+    
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice.doubleValue();
     return this;
   }
 
@@ -236,12 +319,16 @@ public class OptionsPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "108.3353", value = "Average purchase price for this position")
 
-  public BigDecimal getAveragePurchasePrice() {
+  public Double getAveragePurchasePrice() {
     return averagePurchasePrice;
   }
 
 
-  public void setAveragePurchasePrice(BigDecimal averagePurchasePrice) {
+  public void setAveragePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     this.averagePurchasePrice = averagePurchasePrice;
   }
 
@@ -310,9 +397,20 @@ public class OptionsPosition {
         Objects.equals(this.additionalProperties, optionsPosition.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(symbol, description, optionSymbol, price, units, currency, averagePurchasePrice, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

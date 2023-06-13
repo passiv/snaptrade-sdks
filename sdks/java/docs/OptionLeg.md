@@ -10,7 +10,7 @@ Option Leg
 |------------ | ------------- | ------------- | -------------|
 |**action** | [**ActionEnum**](#ActionEnum) |  |  [optional] |
 |**optionSymbolId** | **String** | Obtained from calling options chain endpoint (option_id) |  [optional] |
-|**quantity** | **BigDecimal** |  |  [optional] |
+|**quantity** | **Double** |  |  [optional] |
 
 
 

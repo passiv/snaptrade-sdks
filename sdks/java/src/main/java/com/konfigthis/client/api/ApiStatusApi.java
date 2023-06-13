@@ -40,11 +40,20 @@ public class ApiStatusApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public ApiStatusApi() {
+    public ApiStatusApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public ApiStatusApi(ApiClient apiClient) {
+    public ApiStatusApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -72,19 +81,7 @@ public class ApiStatusApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for check
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call checkCall(final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call checkCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -134,47 +131,95 @@ public class ApiStatusApi {
 
     }
 
-    /**
-     * Get API Status
-     * Check whether the API is operational and verify timestamps.
-     * @return Status
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public Status check() throws ApiException {
-        ApiResponse<Status> localVarResp = checkWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get API Status
-     * Check whether the API is operational and verify timestamps.
-     * @return ApiResponse&lt;Status&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Status> checkWithHttpInfo() throws ApiException {
+    private ApiResponse<Status> checkWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = checkValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<Status>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call checkAsync(final ApiCallback<Status> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = checkValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<Status>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class CheckRequestBuilder {
+
+        private CheckRequestBuilder() {
+        }
+
+        /**
+         * Build call for check
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return checkCall(_callback);
+        }
+
+
+        /**
+         * Execute check request
+         * @return Status
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public Status execute() throws ApiException {
+            ApiResponse<Status> localVarResp = checkWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute check request with HTTP info returned
+         * @return ApiResponse&lt;Status&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Status> executeWithHttpInfo() throws ApiException {
+            return checkWithHttpInfo();
+        }
+
+        /**
+         * Execute check request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> API is alive and kicking in some fashion </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Status> _callback) throws ApiException {
+            return checkAsync(_callback);
+        }
+    }
+
     /**
-     * Get API Status (asynchronously)
+     * Get API Status
      * Check whether the API is operational and verify timestamps.
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return CheckRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -182,11 +227,7 @@ public class ApiStatusApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call checkAsync(final ApiCallback<Status> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = checkValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<Status>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+    public CheckRequestBuilder check() throws IllegalArgumentException {
+        return new CheckRequestBuilder();
     }
 }

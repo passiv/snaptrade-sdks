@@ -22,7 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -53,20 +54,24 @@ import com.konfigthis.client.JSON;
 public class SubPeriodReturnRate {
   public static final String SERIALIZED_NAME_PERIOD_START = "periodStart";
   @SerializedName(SERIALIZED_NAME_PERIOD_START)
-  private String periodStart;
+  private LocalDate periodStart;
 
   public static final String SERIALIZED_NAME_PERIOD_END = "periodEnd";
   @SerializedName(SERIALIZED_NAME_PERIOD_END)
-  private String periodEnd;
+  private LocalDate periodEnd;
 
   public static final String SERIALIZED_NAME_RATE_OF_RETURN = "rateOfReturn";
   @SerializedName(SERIALIZED_NAME_RATE_OF_RETURN)
-  private BigDecimal rateOfReturn;
+  private Double rateOfReturn;
 
   public SubPeriodReturnRate() {
   }
 
-  public SubPeriodReturnRate periodStart(String periodStart) {
+  public SubPeriodReturnRate periodStart(LocalDate periodStart) {
+
+    
+    
+    
     
     this.periodStart = periodStart;
     return this;
@@ -77,19 +82,27 @@ public class SubPeriodReturnRate {
    * @return periodStart
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-24T00:00:00.000Z", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
-  public String getPeriodStart() {
+  public LocalDate getPeriodStart() {
     return periodStart;
   }
 
 
-  public void setPeriodStart(String periodStart) {
+  public void setPeriodStart(LocalDate periodStart) {
+
+    
+    
+    
     this.periodStart = periodStart;
   }
 
 
-  public SubPeriodReturnRate periodEnd(String periodEnd) {
+  public SubPeriodReturnRate periodEnd(LocalDate periodEnd) {
+
+    
+    
+    
     
     this.periodEnd = periodEnd;
     return this;
@@ -100,21 +113,39 @@ public class SubPeriodReturnRate {
    * @return periodEnd
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-24T00:00:00.000Z", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
-  public String getPeriodEnd() {
+  public LocalDate getPeriodEnd() {
     return periodEnd;
   }
 
 
-  public void setPeriodEnd(String periodEnd) {
+  public void setPeriodEnd(LocalDate periodEnd) {
+
+    
+    
+    
     this.periodEnd = periodEnd;
   }
 
 
-  public SubPeriodReturnRate rateOfReturn(BigDecimal rateOfReturn) {
+  public SubPeriodReturnRate rateOfReturn(Double rateOfReturn) {
+
+    
+    
+    
     
     this.rateOfReturn = rateOfReturn;
+    return this;
+  }
+
+  public SubPeriodReturnRate rateOfReturn(Integer rateOfReturn) {
+
+    
+    
+    
+    
+    this.rateOfReturn = rateOfReturn.doubleValue();
     return this;
   }
 
@@ -125,12 +156,16 @@ public class SubPeriodReturnRate {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.012312367452", value = "The return rate for the given period")
 
-  public BigDecimal getRateOfReturn() {
+  public Double getRateOfReturn() {
     return rateOfReturn;
   }
 
 
-  public void setRateOfReturn(BigDecimal rateOfReturn) {
+  public void setRateOfReturn(Double rateOfReturn) {
+
+    
+    
+    
     this.rateOfReturn = rateOfReturn;
   }
 
@@ -260,12 +295,6 @@ public class SubPeriodReturnRate {
         if (!SubPeriodReturnRate.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SubPeriodReturnRate is not found in the empty JSON string", SubPeriodReturnRate.openapiRequiredFields.toString()));
         }
-      }
-      if ((jsonObj.get("periodStart") != null && !jsonObj.get("periodStart").isJsonNull()) && !jsonObj.get("periodStart").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `periodStart` to be a primitive type in the JSON string but got `%s`", jsonObj.get("periodStart").toString()));
-      }
-      if ((jsonObj.get("periodEnd") != null && !jsonObj.get("periodEnd").isJsonNull()) && !jsonObj.get("periodEnd").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `periodEnd` to be a primitive type in the JSON string but got `%s`", jsonObj.get("periodEnd").toString()));
       }
   }
 

@@ -24,7 +24,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -37,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -64,12 +64,16 @@ public class ManualTradeBalance {
 
   public static final String SERIALIZED_NAME_CASH = "cash";
   @SerializedName(SERIALIZED_NAME_CASH)
-  private BigDecimal cash;
+  private Double cash;
 
   public ManualTradeBalance() {
   }
 
   public ManualTradeBalance account(Account account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -88,11 +92,19 @@ public class ManualTradeBalance {
 
 
   public void setAccount(Account account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public ManualTradeBalance currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -111,13 +123,31 @@ public class ManualTradeBalance {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
-  public ManualTradeBalance cash(BigDecimal cash) {
+  public ManualTradeBalance cash(Double cash) {
+
+    
+    
+    
     
     this.cash = cash;
+    return this;
+  }
+
+  public ManualTradeBalance cash(Integer cash) {
+
+    
+    
+    
+    
+    this.cash = cash.doubleValue();
     return this;
   }
 
@@ -128,12 +158,16 @@ public class ManualTradeBalance {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1.11", value = "Cash")
 
-  public BigDecimal getCash() {
+  public Double getCash() {
     return cash;
   }
 
 
-  public void setCash(BigDecimal cash) {
+  public void setCash(Double cash) {
+
+    
+    
+    
     this.cash = cash;
   }
 

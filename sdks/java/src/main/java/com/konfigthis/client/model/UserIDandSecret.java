@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class UserIDandSecret {
   }
 
   public UserIDandSecret userId(String userId) {
+
+    
+    
+    
     
     this.userId = userId;
     return this;
@@ -80,11 +85,19 @@ public class UserIDandSecret {
 
 
   public void setUserId(String userId) {
+
+    
+    
+    
     this.userId = userId;
   }
 
 
   public UserIDandSecret userSecret(String userSecret) {
+
+    
+    
+    
     
     this.userSecret = userSecret;
     return this;
@@ -103,6 +116,10 @@ public class UserIDandSecret {
 
 
   public void setUserSecret(String userSecret) {
+
+    
+    
+    
     this.userSecret = userSecret;
   }
 

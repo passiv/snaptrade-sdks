@@ -124,7 +124,7 @@ namespace SnapTrade.Net.Test.Api
             //string accountId = null;
             //bool? useTicker = null;
             //var response = instance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
-            //Assert.IsType<SymbolsQuotes>(response);
+            //Assert.IsType<List<SymbolsQuotesInner>>(response);
         }
 
         /// <summary>

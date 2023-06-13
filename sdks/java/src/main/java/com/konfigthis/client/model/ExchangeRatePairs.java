@@ -23,7 +23,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,12 +62,16 @@ public class ExchangeRatePairs {
 
   public static final String SERIALIZED_NAME_EXCHANGE_RATE = "exchange_rate";
   @SerializedName(SERIALIZED_NAME_EXCHANGE_RATE)
-  private BigDecimal exchangeRate;
+  private Double exchangeRate;
 
   public ExchangeRatePairs() {
   }
 
   public ExchangeRatePairs src(Currency src) {
+
+    
+    
+    
     
     this.src = src;
     return this;
@@ -86,11 +90,19 @@ public class ExchangeRatePairs {
 
 
   public void setSrc(Currency src) {
+
+    
+    
+    
     this.src = src;
   }
 
 
   public ExchangeRatePairs dst(Currency dst) {
+
+    
+    
+    
     
     this.dst = dst;
     return this;
@@ -109,13 +121,31 @@ public class ExchangeRatePairs {
 
 
   public void setDst(Currency dst) {
+
+    
+    
+    
     this.dst = dst;
   }
 
 
-  public ExchangeRatePairs exchangeRate(BigDecimal exchangeRate) {
+  public ExchangeRatePairs exchangeRate(Double exchangeRate) {
+
+    
+    
+    
     
     this.exchangeRate = exchangeRate;
+    return this;
+  }
+
+  public ExchangeRatePairs exchangeRate(Integer exchangeRate) {
+
+    
+    
+    
+    
+    this.exchangeRate = exchangeRate.doubleValue();
     return this;
   }
 
@@ -126,12 +156,16 @@ public class ExchangeRatePairs {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1.32", value = "")
 
-  public BigDecimal getExchangeRate() {
+  public Double getExchangeRate() {
     return exchangeRate;
   }
 
 
-  public void setExchangeRate(BigDecimal exchangeRate) {
+  public void setExchangeRate(Double exchangeRate) {
+
+    
+    
+    
     this.exchangeRate = exchangeRate;
   }
 

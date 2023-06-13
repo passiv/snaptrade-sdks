@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -115,6 +116,10 @@ public class ModelPortfolio {
   }
 
   public ModelPortfolio id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -133,11 +138,19 @@ public class ModelPortfolio {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public ModelPortfolio name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -156,11 +169,19 @@ public class ModelPortfolio {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public ModelPortfolio modelType(ModelTypeEnum modelType) {
+
+    
+    
+    
     
     this.modelType = modelType;
     return this;
@@ -179,6 +200,10 @@ public class ModelPortfolio {
 
 
   public void setModelType(ModelTypeEnum modelType) {
+
+    
+    
+    
     this.modelType = modelType;
   }
 

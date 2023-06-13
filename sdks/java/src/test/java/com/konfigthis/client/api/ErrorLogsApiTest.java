@@ -13,9 +13,13 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.UserErrorLog;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +32,14 @@ import java.util.Map;
 @Disabled
 public class ErrorLogsApiTest {
 
-    private final ErrorLogsApi api = new ErrorLogsApi();
+    private static ErrorLogsApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new ErrorLogsApi(apiClient);
+    }
 
     /**
      * Retrieve error logs on behalf of your SnapTrade users
@@ -39,7 +50,8 @@ public class ErrorLogsApiTest {
     public void listUserErrorsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<UserErrorLog> response = api.listUserErrors(userId, userSecret);
+        List<UserErrorLog> response = api.listUserErrors(userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 

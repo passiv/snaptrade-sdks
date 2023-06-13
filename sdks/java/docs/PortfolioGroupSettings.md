@@ -10,7 +10,7 @@
 |**buyOnly** | **Boolean** |  |  [optional] |
 |**cashOptimizer** | **Boolean** |  |  [optional] |
 |**notifyFrequency** | **String** |  |  [optional] |
-|**driftThreshold** | **BigDecimal** |  |  [optional] |
+|**driftThreshold** | **Double** |  |  [optional] |
 |**preferredCurrency** | **Currency** |  |  [optional] |
 
 

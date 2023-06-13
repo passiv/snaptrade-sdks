@@ -1,4 +1,4 @@
-# SnapTrade::SymbolsQuotes
+# SnapTrade::SymbolsQuotesInner
 
 ## Properties
 
@@ -16,7 +16,7 @@
 ```ruby
 require 'snaptrade'
 
-instance = SnapTrade::SymbolsQuotes.new(
+instance = SnapTrade::SymbolsQuotesInner.new(
   symbol: null,
   bid_price: 8.43,
   ask_price: 8.43,

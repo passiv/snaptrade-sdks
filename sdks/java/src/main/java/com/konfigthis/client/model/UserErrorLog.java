@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class UserErrorLog {
 
   public static final String SERIALIZED_NAME_STATUS_CODE = "statusCode";
   @SerializedName(SERIALIZED_NAME_STATUS_CODE)
-  private BigDecimal statusCode;
+  private Double statusCode;
 
   public static final String SERIALIZED_NAME_QUERY_PARAMS = "queryParams";
   @SerializedName(SERIALIZED_NAME_QUERY_PARAMS)
@@ -79,6 +79,10 @@ public class UserErrorLog {
   }
 
   public UserErrorLog requestedAt(String requestedAt) {
+
+    
+    
+    
     
     this.requestedAt = requestedAt;
     return this;
@@ -97,11 +101,19 @@ public class UserErrorLog {
 
 
   public void setRequestedAt(String requestedAt) {
+
+    
+    
+    
     this.requestedAt = requestedAt;
   }
 
 
   public UserErrorLog response(String response) {
+
+    
+    
+    
     
     this.response = response;
     return this;
@@ -120,13 +132,31 @@ public class UserErrorLog {
 
 
   public void setResponse(String response) {
+
+    
+    
+    
     this.response = response;
   }
 
 
-  public UserErrorLog statusCode(BigDecimal statusCode) {
+  public UserErrorLog statusCode(Double statusCode) {
+
+    
+    
+    
     
     this.statusCode = statusCode;
+    return this;
+  }
+
+  public UserErrorLog statusCode(Integer statusCode) {
+
+    
+    
+    
+    
+    this.statusCode = statusCode.doubleValue();
     return this;
   }
 
@@ -137,17 +167,25 @@ public class UserErrorLog {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "200", value = "")
 
-  public BigDecimal getStatusCode() {
+  public Double getStatusCode() {
     return statusCode;
   }
 
 
-  public void setStatusCode(BigDecimal statusCode) {
+  public void setStatusCode(Double statusCode) {
+
+    
+    
+    
     this.statusCode = statusCode;
   }
 
 
   public UserErrorLog queryParams(String queryParams) {
+
+    
+    
+    
     
     this.queryParams = queryParams;
     return this;
@@ -166,11 +204,19 @@ public class UserErrorLog {
 
 
   public void setQueryParams(String queryParams) {
+
+    
+    
+    
     this.queryParams = queryParams;
   }
 
 
   public UserErrorLog httpMethod(String httpMethod) {
+
+    
+    
+    
     
     this.httpMethod = httpMethod;
     return this;
@@ -189,11 +235,19 @@ public class UserErrorLog {
 
 
   public void setHttpMethod(String httpMethod) {
+
+    
+    
+    
     this.httpMethod = httpMethod;
   }
 
 
   public UserErrorLog endpoint(String endpoint) {
+
+    
+    
+    
     
     this.endpoint = endpoint;
     return this;
@@ -212,6 +266,10 @@ public class UserErrorLog {
 
 
   public void setEndpoint(String endpoint) {
+
+    
+    
+    
     this.endpoint = endpoint;
   }
 

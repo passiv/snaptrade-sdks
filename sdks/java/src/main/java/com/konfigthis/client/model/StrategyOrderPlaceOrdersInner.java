@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -228,6 +229,10 @@ public class StrategyOrderPlaceOrdersInner {
   }
 
   public StrategyOrderPlaceOrdersInner id(Integer id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -246,11 +251,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setId(Integer id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public StrategyOrderPlaceOrdersInner symbol(String symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -269,11 +282,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setSymbol(String symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public StrategyOrderPlaceOrdersInner symbolId(Integer symbolId) {
+
+    
+    
+    
     
     this.symbolId = symbolId;
     return this;
@@ -292,11 +313,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setSymbolId(Integer symbolId) {
+
+    
+    
+    
     this.symbolId = symbolId;
   }
 
 
   public StrategyOrderPlaceOrdersInner totalQuantity(Integer totalQuantity) {
+
+    
+    
+    
     
     this.totalQuantity = totalQuantity;
     return this;
@@ -315,11 +344,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setTotalQuantity(Integer totalQuantity) {
+
+    
+    
+    
     this.totalQuantity = totalQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner openQuantity(Integer openQuantity) {
+
+    
+    
+    
     
     this.openQuantity = openQuantity;
     return this;
@@ -338,11 +375,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setOpenQuantity(Integer openQuantity) {
+
+    
+    
+    
     this.openQuantity = openQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner filledQuantity(Integer filledQuantity) {
+
+    
+    
+    
     
     this.filledQuantity = filledQuantity;
     return this;
@@ -361,11 +406,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setFilledQuantity(Integer filledQuantity) {
+
+    
+    
+    
     this.filledQuantity = filledQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner canceledQuantity(Integer canceledQuantity) {
+
+    
+    
+    
     
     this.canceledQuantity = canceledQuantity;
     return this;
@@ -384,11 +437,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setCanceledQuantity(Integer canceledQuantity) {
+
+    
+    
+    
     this.canceledQuantity = canceledQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner side(String side) {
+
+    
+    
+    
     
     this.side = side;
     return this;
@@ -407,11 +468,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setSide(String side) {
+
+    
+    
+    
     this.side = side;
   }
 
 
   public StrategyOrderPlaceOrdersInner orderType(String orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -430,11 +499,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setOrderType(String orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
   public StrategyOrderPlaceOrdersInner limitPrice(String limitPrice) {
+
+    
+    
+    
     
     this.limitPrice = limitPrice;
     return this;
@@ -453,11 +530,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setLimitPrice(String limitPrice) {
+
+    
+    
+    
     this.limitPrice = limitPrice;
   }
 
 
   public StrategyOrderPlaceOrdersInner stopPrice(String stopPrice) {
+
+    
+    
+    
     
     this.stopPrice = stopPrice;
     return this;
@@ -476,11 +561,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setStopPrice(String stopPrice) {
+
+    
+    
+    
     this.stopPrice = stopPrice;
   }
 
 
   public StrategyOrderPlaceOrdersInner isAllOrNone(Boolean isAllOrNone) {
+
+    
+    
+    
     
     this.isAllOrNone = isAllOrNone;
     return this;
@@ -499,11 +592,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsAllOrNone(Boolean isAllOrNone) {
+
+    
+    
+    
     this.isAllOrNone = isAllOrNone;
   }
 
 
   public StrategyOrderPlaceOrdersInner isAnonymous(Boolean isAnonymous) {
+
+    
+    
+    
     
     this.isAnonymous = isAnonymous;
     return this;
@@ -522,11 +623,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsAnonymous(Boolean isAnonymous) {
+
+    
+    
+    
     this.isAnonymous = isAnonymous;
   }
 
 
   public StrategyOrderPlaceOrdersInner icebergQuantity(String icebergQuantity) {
+
+    
+    
+    
     
     this.icebergQuantity = icebergQuantity;
     return this;
@@ -545,11 +654,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIcebergQuantity(String icebergQuantity) {
+
+    
+    
+    
     this.icebergQuantity = icebergQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner minQuantity(String minQuantity) {
+
+    
+    
+    
     
     this.minQuantity = minQuantity;
     return this;
@@ -568,11 +685,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setMinQuantity(String minQuantity) {
+
+    
+    
+    
     this.minQuantity = minQuantity;
   }
 
 
   public StrategyOrderPlaceOrdersInner avgExecPrice(Integer avgExecPrice) {
+
+    
+    
+    
     
     this.avgExecPrice = avgExecPrice;
     return this;
@@ -591,11 +716,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setAvgExecPrice(Integer avgExecPrice) {
+
+    
+    
+    
     this.avgExecPrice = avgExecPrice;
   }
 
 
   public StrategyOrderPlaceOrdersInner lastExecPrice(String lastExecPrice) {
+
+    
+    
+    
     
     this.lastExecPrice = lastExecPrice;
     return this;
@@ -614,11 +747,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setLastExecPrice(String lastExecPrice) {
+
+    
+    
+    
     this.lastExecPrice = lastExecPrice;
   }
 
 
   public StrategyOrderPlaceOrdersInner source(String source) {
+
+    
+    
+    
     
     this.source = source;
     return this;
@@ -637,11 +778,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setSource(String source) {
+
+    
+    
+    
     this.source = source;
   }
 
 
   public StrategyOrderPlaceOrdersInner timeInForce(String timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -660,11 +809,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setTimeInForce(String timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
   public StrategyOrderPlaceOrdersInner gtdDate(String gtdDate) {
+
+    
+    
+    
     
     this.gtdDate = gtdDate;
     return this;
@@ -683,11 +840,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setGtdDate(String gtdDate) {
+
+    
+    
+    
     this.gtdDate = gtdDate;
   }
 
 
   public StrategyOrderPlaceOrdersInner state(String state) {
+
+    
+    
+    
     
     this.state = state;
     return this;
@@ -706,11 +871,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setState(String state) {
+
+    
+    
+    
     this.state = state;
   }
 
 
   public StrategyOrderPlaceOrdersInner rejectionReason(String rejectionReason) {
+
+    
+    
+    
     
     this.rejectionReason = rejectionReason;
     return this;
@@ -729,11 +902,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setRejectionReason(String rejectionReason) {
+
+    
+    
+    
     this.rejectionReason = rejectionReason;
   }
 
 
   public StrategyOrderPlaceOrdersInner chainId(Integer chainId) {
+
+    
+    
+    
     
     this.chainId = chainId;
     return this;
@@ -752,11 +933,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setChainId(Integer chainId) {
+
+    
+    
+    
     this.chainId = chainId;
   }
 
 
   public StrategyOrderPlaceOrdersInner creationTime(String creationTime) {
+
+    
+    
+    
     
     this.creationTime = creationTime;
     return this;
@@ -775,11 +964,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setCreationTime(String creationTime) {
+
+    
+    
+    
     this.creationTime = creationTime;
   }
 
 
   public StrategyOrderPlaceOrdersInner updateTime(String updateTime) {
+
+    
+    
+    
     
     this.updateTime = updateTime;
     return this;
@@ -798,11 +995,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setUpdateTime(String updateTime) {
+
+    
+    
+    
     this.updateTime = updateTime;
   }
 
 
   public StrategyOrderPlaceOrdersInner notes(String notes) {
+
+    
+    
+    
     
     this.notes = notes;
     return this;
@@ -821,11 +1026,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setNotes(String notes) {
+
+    
+    
+    
     this.notes = notes;
   }
 
 
   public StrategyOrderPlaceOrdersInner primaryRoute(String primaryRoute) {
+
+    
+    
+    
     
     this.primaryRoute = primaryRoute;
     return this;
@@ -844,11 +1057,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setPrimaryRoute(String primaryRoute) {
+
+    
+    
+    
     this.primaryRoute = primaryRoute;
   }
 
 
   public StrategyOrderPlaceOrdersInner secondaryRoute(String secondaryRoute) {
+
+    
+    
+    
     
     this.secondaryRoute = secondaryRoute;
     return this;
@@ -867,11 +1088,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setSecondaryRoute(String secondaryRoute) {
+
+    
+    
+    
     this.secondaryRoute = secondaryRoute;
   }
 
 
   public StrategyOrderPlaceOrdersInner orderRoute(String orderRoute) {
+
+    
+    
+    
     
     this.orderRoute = orderRoute;
     return this;
@@ -890,11 +1119,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setOrderRoute(String orderRoute) {
+
+    
+    
+    
     this.orderRoute = orderRoute;
   }
 
 
   public StrategyOrderPlaceOrdersInner venueHoldingOrder(String venueHoldingOrder) {
+
+    
+    
+    
     
     this.venueHoldingOrder = venueHoldingOrder;
     return this;
@@ -913,11 +1150,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setVenueHoldingOrder(String venueHoldingOrder) {
+
+    
+    
+    
     this.venueHoldingOrder = venueHoldingOrder;
   }
 
 
   public StrategyOrderPlaceOrdersInner comissionCharged(Integer comissionCharged) {
+
+    
+    
+    
     
     this.comissionCharged = comissionCharged;
     return this;
@@ -936,11 +1181,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setComissionCharged(Integer comissionCharged) {
+
+    
+    
+    
     this.comissionCharged = comissionCharged;
   }
 
 
   public StrategyOrderPlaceOrdersInner exchangeOrderId(String exchangeOrderId) {
+
+    
+    
+    
     
     this.exchangeOrderId = exchangeOrderId;
     return this;
@@ -959,11 +1212,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setExchangeOrderId(String exchangeOrderId) {
+
+    
+    
+    
     this.exchangeOrderId = exchangeOrderId;
   }
 
 
   public StrategyOrderPlaceOrdersInner isSignificantShareHolder(Boolean isSignificantShareHolder) {
+
+    
+    
+    
     
     this.isSignificantShareHolder = isSignificantShareHolder;
     return this;
@@ -982,11 +1243,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsSignificantShareHolder(Boolean isSignificantShareHolder) {
+
+    
+    
+    
     this.isSignificantShareHolder = isSignificantShareHolder;
   }
 
 
   public StrategyOrderPlaceOrdersInner isInsider(Boolean isInsider) {
+
+    
+    
+    
     
     this.isInsider = isInsider;
     return this;
@@ -1005,11 +1274,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsInsider(Boolean isInsider) {
+
+    
+    
+    
     this.isInsider = isInsider;
   }
 
 
   public StrategyOrderPlaceOrdersInner isLimitOffsetInDollar(Boolean isLimitOffsetInDollar) {
+
+    
+    
+    
     
     this.isLimitOffsetInDollar = isLimitOffsetInDollar;
     return this;
@@ -1028,11 +1305,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsLimitOffsetInDollar(Boolean isLimitOffsetInDollar) {
+
+    
+    
+    
     this.isLimitOffsetInDollar = isLimitOffsetInDollar;
   }
 
 
   public StrategyOrderPlaceOrdersInner userId(Integer userId) {
+
+    
+    
+    
     
     this.userId = userId;
     return this;
@@ -1051,11 +1336,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setUserId(Integer userId) {
+
+    
+    
+    
     this.userId = userId;
   }
 
 
   public StrategyOrderPlaceOrdersInner placementCommission(String placementCommission) {
+
+    
+    
+    
     
     this.placementCommission = placementCommission;
     return this;
@@ -1074,11 +1367,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setPlacementCommission(String placementCommission) {
+
+    
+    
+    
     this.placementCommission = placementCommission;
   }
 
 
   public StrategyOrderPlaceOrdersInner legs(List<StrategyOrderPlaceOrdersInnerLegsInner> legs) {
+
+    
+    
+    
     
     this.legs = legs;
     return this;
@@ -1105,11 +1406,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setLegs(List<StrategyOrderPlaceOrdersInnerLegsInner> legs) {
+
+    
+    
+    
     this.legs = legs;
   }
 
 
   public StrategyOrderPlaceOrdersInner strategyType(String strategyType) {
+
+    
+    
+    
     
     this.strategyType = strategyType;
     return this;
@@ -1128,11 +1437,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setStrategyType(String strategyType) {
+
+    
+    
+    
     this.strategyType = strategyType;
   }
 
 
   public StrategyOrderPlaceOrdersInner triggerStopPrice(String triggerStopPrice) {
+
+    
+    
+    
     
     this.triggerStopPrice = triggerStopPrice;
     return this;
@@ -1151,11 +1468,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setTriggerStopPrice(String triggerStopPrice) {
+
+    
+    
+    
     this.triggerStopPrice = triggerStopPrice;
   }
 
 
   public StrategyOrderPlaceOrdersInner orderGroupId(Integer orderGroupId) {
+
+    
+    
+    
     
     this.orderGroupId = orderGroupId;
     return this;
@@ -1174,11 +1499,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setOrderGroupId(Integer orderGroupId) {
+
+    
+    
+    
     this.orderGroupId = orderGroupId;
   }
 
 
   public StrategyOrderPlaceOrdersInner orderClass(String orderClass) {
+
+    
+    
+    
     
     this.orderClass = orderClass;
     return this;
@@ -1197,11 +1530,19 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setOrderClass(String orderClass) {
+
+    
+    
+    
     this.orderClass = orderClass;
   }
 
 
   public StrategyOrderPlaceOrdersInner isCrossZero(Boolean isCrossZero) {
+
+    
+    
+    
     
     this.isCrossZero = isCrossZero;
     return this;
@@ -1220,6 +1561,10 @@ public class StrategyOrderPlaceOrdersInner {
 
 
   public void setIsCrossZero(Boolean isCrossZero) {
+
+    
+    
+    
     this.isCrossZero = isCrossZero;
   }
 

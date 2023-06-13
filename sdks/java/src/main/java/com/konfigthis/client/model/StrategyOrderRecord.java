@@ -23,7 +23,7 @@ import com.konfigthis.client.model.OptionStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -143,15 +144,15 @@ public class StrategyOrderRecord {
 
   public static final String SERIALIZED_NAME_FILLED_QUANTITY = "filled_quantity";
   @SerializedName(SERIALIZED_NAME_FILLED_QUANTITY)
-  private BigDecimal filledQuantity;
+  private Double filledQuantity;
 
   public static final String SERIALIZED_NAME_OPEN_QUANTITY = "open_quantity";
   @SerializedName(SERIALIZED_NAME_OPEN_QUANTITY)
-  private BigDecimal openQuantity;
+  private Double openQuantity;
 
   public static final String SERIALIZED_NAME_CLOSED_QUANTITY = "closed_quantity";
   @SerializedName(SERIALIZED_NAME_CLOSED_QUANTITY)
-  private BigDecimal closedQuantity;
+  private Double closedQuantity;
 
   /**
    * Gets or Sets orderType
@@ -261,11 +262,11 @@ public class StrategyOrderRecord {
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private BigDecimal limitPrice;
+  private Double limitPrice;
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
-  private BigDecimal executionPrice;
+  private Double executionPrice;
 
   public static final String SERIALIZED_NAME_TIME_PLACED = "time_placed";
   @SerializedName(SERIALIZED_NAME_TIME_PLACED)
@@ -279,6 +280,10 @@ public class StrategyOrderRecord {
   }
 
   public StrategyOrderRecord strategy(OptionStrategy strategy) {
+
+    
+    
+    
     
     this.strategy = strategy;
     return this;
@@ -297,11 +302,19 @@ public class StrategyOrderRecord {
 
 
   public void setStrategy(OptionStrategy strategy) {
+
+    
+    
+    
     this.strategy = strategy;
   }
 
 
   public StrategyOrderRecord status(StatusEnum status) {
+
+    
+    
+    
     
     this.status = status;
     return this;
@@ -320,13 +333,31 @@ public class StrategyOrderRecord {
 
 
   public void setStatus(StatusEnum status) {
+
+    
+    
+    
     this.status = status;
   }
 
 
-  public StrategyOrderRecord filledQuantity(BigDecimal filledQuantity) {
+  public StrategyOrderRecord filledQuantity(Double filledQuantity) {
+
+    
+    
+    
     
     this.filledQuantity = filledQuantity;
+    return this;
+  }
+
+  public StrategyOrderRecord filledQuantity(Integer filledQuantity) {
+
+    
+    
+    
+    
+    this.filledQuantity = filledQuantity.doubleValue();
     return this;
   }
 
@@ -337,19 +368,37 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "")
 
-  public BigDecimal getFilledQuantity() {
+  public Double getFilledQuantity() {
     return filledQuantity;
   }
 
 
-  public void setFilledQuantity(BigDecimal filledQuantity) {
+  public void setFilledQuantity(Double filledQuantity) {
+
+    
+    
+    
     this.filledQuantity = filledQuantity;
   }
 
 
-  public StrategyOrderRecord openQuantity(BigDecimal openQuantity) {
+  public StrategyOrderRecord openQuantity(Double openQuantity) {
+
+    
+    
+    
     
     this.openQuantity = openQuantity;
+    return this;
+  }
+
+  public StrategyOrderRecord openQuantity(Integer openQuantity) {
+
+    
+    
+    
+    
+    this.openQuantity = openQuantity.doubleValue();
     return this;
   }
 
@@ -360,19 +409,37 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "")
 
-  public BigDecimal getOpenQuantity() {
+  public Double getOpenQuantity() {
     return openQuantity;
   }
 
 
-  public void setOpenQuantity(BigDecimal openQuantity) {
+  public void setOpenQuantity(Double openQuantity) {
+
+    
+    
+    
     this.openQuantity = openQuantity;
   }
 
 
-  public StrategyOrderRecord closedQuantity(BigDecimal closedQuantity) {
+  public StrategyOrderRecord closedQuantity(Double closedQuantity) {
+
+    
+    
+    
     
     this.closedQuantity = closedQuantity;
+    return this;
+  }
+
+  public StrategyOrderRecord closedQuantity(Integer closedQuantity) {
+
+    
+    
+    
+    
+    this.closedQuantity = closedQuantity.doubleValue();
     return this;
   }
 
@@ -383,17 +450,25 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "")
 
-  public BigDecimal getClosedQuantity() {
+  public Double getClosedQuantity() {
     return closedQuantity;
   }
 
 
-  public void setClosedQuantity(BigDecimal closedQuantity) {
+  public void setClosedQuantity(Double closedQuantity) {
+
+    
+    
+    
     this.closedQuantity = closedQuantity;
   }
 
 
   public StrategyOrderRecord orderType(OrderTypeEnum orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -412,11 +487,19 @@ public class StrategyOrderRecord {
 
 
   public void setOrderType(OrderTypeEnum orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
   public StrategyOrderRecord timeInForce(TimeInForceEnum timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -435,13 +518,31 @@ public class StrategyOrderRecord {
 
 
   public void setTimeInForce(TimeInForceEnum timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
-  public StrategyOrderRecord limitPrice(BigDecimal limitPrice) {
+  public StrategyOrderRecord limitPrice(Double limitPrice) {
+
+    
+    
+    
     
     this.limitPrice = limitPrice;
+    return this;
+  }
+
+  public StrategyOrderRecord limitPrice(Integer limitPrice) {
+
+    
+    
+    
+    
+    this.limitPrice = limitPrice.doubleValue();
     return this;
   }
 
@@ -452,19 +553,37 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getLimitPrice() {
+  public Double getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(BigDecimal limitPrice) {
+  public void setLimitPrice(Double limitPrice) {
+
+    
+    
+    
     this.limitPrice = limitPrice;
   }
 
 
-  public StrategyOrderRecord executionPrice(BigDecimal executionPrice) {
+  public StrategyOrderRecord executionPrice(Double executionPrice) {
+
+    
+    
+    
     
     this.executionPrice = executionPrice;
+    return this;
+  }
+
+  public StrategyOrderRecord executionPrice(Integer executionPrice) {
+
+    
+    
+    
+    
+    this.executionPrice = executionPrice.doubleValue();
     return this;
   }
 
@@ -475,17 +594,25 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getExecutionPrice() {
+  public Double getExecutionPrice() {
     return executionPrice;
   }
 
 
-  public void setExecutionPrice(BigDecimal executionPrice) {
+  public void setExecutionPrice(Double executionPrice) {
+
+    
+    
+    
     this.executionPrice = executionPrice;
   }
 
 
   public StrategyOrderRecord timePlaced(String timePlaced) {
+
+    
+    
+    
     
     this.timePlaced = timePlaced;
     return this;
@@ -504,11 +631,19 @@ public class StrategyOrderRecord {
 
 
   public void setTimePlaced(String timePlaced) {
+
+    
+    
+    
     this.timePlaced = timePlaced;
   }
 
 
   public StrategyOrderRecord timeUpdated(String timeUpdated) {
+
+    
+    
+    
     
     this.timeUpdated = timeUpdated;
     return this;
@@ -527,6 +662,10 @@ public class StrategyOrderRecord {
 
 
   public void setTimeUpdated(String timeUpdated) {
+
+    
+    
+    
     this.timeUpdated = timeUpdated;
   }
 
@@ -599,9 +738,20 @@ public class StrategyOrderRecord {
         Objects.equals(this.additionalProperties, strategyOrderRecord.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(strategy, status, filledQuantity, openQuantity, closedQuantity, orderType, timeInForce, limitPrice, executionPrice, timePlaced, timeUpdated, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

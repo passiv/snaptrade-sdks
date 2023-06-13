@@ -40,6 +40,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -93,6 +94,10 @@ public class UniversalSymbol {
   }
 
   public UniversalSymbol id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -111,11 +116,19 @@ public class UniversalSymbol {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public UniversalSymbol symbol(String symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -134,11 +147,19 @@ public class UniversalSymbol {
 
 
   public void setSymbol(String symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public UniversalSymbol rawSymbol(String rawSymbol) {
+
+    
+    
+    
     
     this.rawSymbol = rawSymbol;
     return this;
@@ -157,11 +178,19 @@ public class UniversalSymbol {
 
 
   public void setRawSymbol(String rawSymbol) {
+
+    
+    
+    
     this.rawSymbol = rawSymbol;
   }
 
 
   public UniversalSymbol description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -180,11 +209,19 @@ public class UniversalSymbol {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public UniversalSymbol currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -203,11 +240,19 @@ public class UniversalSymbol {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
   public UniversalSymbol exchange(Exchange exchange) {
+
+    
+    
+    
     
     this.exchange = exchange;
     return this;
@@ -226,11 +271,19 @@ public class UniversalSymbol {
 
 
   public void setExchange(Exchange exchange) {
+
+    
+    
+    
     this.exchange = exchange;
   }
 
 
   public UniversalSymbol type(SecurityType type) {
+
+    
+    
+    
     
     this.type = type;
     return this;
@@ -249,11 +302,19 @@ public class UniversalSymbol {
 
 
   public void setType(SecurityType type) {
+
+    
+    
+    
     this.type = type;
   }
 
 
   public UniversalSymbol currencies(List<Currency> currencies) {
+
+    
+    
+    
     
     this.currencies = currencies;
     return this;
@@ -280,6 +341,10 @@ public class UniversalSymbol {
 
 
   public void setCurrencies(List<Currency> currencies) {
+
+    
+    
+    
     this.currencies = currencies;
   }
 

@@ -13,6 +13,7 @@
 from dataclasses import dataclass
 import typing_extensions
 import urllib3
+from snaptrade_client.request_before_hook import request_before_hook
 import json
 from urllib3._collections import HTTPHeaderDict
 
@@ -37,6 +38,42 @@ from snaptrade_client.type.model_asset_class_details import ModelAssetClassDetai
 
 from . import path
 
+# Query params
+UserIdSchema = schemas.StrSchema
+UserSecretSchema = schemas.StrSchema
+RequestRequiredQueryParams = typing_extensions.TypedDict(
+    'RequestRequiredQueryParams',
+    {
+        'userId': typing.Union[UserIdSchema, str, ],
+        'userSecret': typing.Union[UserSecretSchema, str, ],
+    }
+)
+RequestOptionalQueryParams = typing_extensions.TypedDict(
+    'RequestOptionalQueryParams',
+    {
+    },
+    total=False
+)
+
+
+class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
+    pass
+
+
+request_query_user_id = api_client.QueryParameter(
+    name="userId",
+    style=api_client.ParameterStyle.FORM,
+    schema=UserIdSchema,
+    required=True,
+    explode=True,
+)
+request_query_user_secret = api_client.QueryParameter(
+    name="userSecret",
+    style=api_client.ParameterStyle.FORM,
+    schema=UserSecretSchema,
+    required=True,
+    explode=True,
+)
 _auth = [
     'PartnerClientId',
     'PartnerSignature',
@@ -75,12 +112,22 @@ class BaseApi(api_client.Api):
 
     def _create_asset_class_mapped_args(
         self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
+        _query_params = {}
+        if user_id is not None:
+            _query_params["userId"] = user_id
+        if user_secret is not None:
+            _query_params["userSecret"] = user_secret
+        args.query = query_params if query_params else _query_params
         return args
 
     async def _acreate_asset_class_oapg(
         self,
+        query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -96,23 +143,55 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_user_id,
+            request_query_user_secret,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
+        method = 'post'.upper()
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            auth_settings=_auth,
+            headers=_headers,
+        )
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
-            method='post'.upper(),
+            method=method,
             headers=_headers,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
-        
+    
         if stream:
+            if not 200 <= response.http_response.status <= 299:
+                body = (await response.http_response.content.read()).decode("utf-8")
+                raise exceptions.ApiStreamingException(
+                    status=response.http_response.status,
+                    reason=response.http_response.reason,
+                    body=body,
+                )
+    
             async def stream_iterator():
                 """
                 iterates over response.http_response.content and closes connection once iteration has finished
@@ -157,8 +236,10 @@ class BaseApi(api_client.Api):
     
         return api_response
 
+
     def _create_asset_class_oapg(
         self,
+        query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -173,19 +254,43 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
+        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
+    
+        prefix_separator_iterator = None
+        for parameter in (
+            request_query_user_id,
+            request_query_user_secret,
+        ):
+            parameter_data = query_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
+            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
+            for serialized_value in serialized_data.values():
+                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
+        method = 'post'.upper()
+        request_before_hook(
+            resource_path=used_path,
+            method=method,
+            configuration=self.api_client.configuration,
+            auth_settings=_auth,
+            headers=_headers,
+        )
     
         response = self.api_client.call_api(
             resource_path=used_path,
-            method='post'.upper(),
+            method=method,
             headers=_headers,
             auth_settings=_auth,
+            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
     
@@ -212,30 +317,45 @@ class BaseApi(api_client.Api):
     
         return api_response
 
+
 class CreateAssetClass(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def acreate_asset_class(
         self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._create_asset_class_mapped_args(
+            query_params=query_params,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._acreate_asset_class_oapg(
+            query_params=args.query,
         )
     
     def create_asset_class(
         self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._create_asset_class_mapped_args(
+            query_params=query_params,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._create_asset_class_oapg(
+            query_params=args.query,
         )
 
 class ApiForpost(BaseApi):
@@ -243,24 +363,38 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
         args = self._create_asset_class_mapped_args(
+            query_params=query_params,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._acreate_asset_class_oapg(
+            query_params=args.query,
         )
     
     def post(
         self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._create_asset_class_mapped_args(
+            query_params=query_params,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._create_asset_class_oapg(
+            query_params=args.query,
         )
 

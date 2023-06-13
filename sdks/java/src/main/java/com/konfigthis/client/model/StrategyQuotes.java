@@ -24,7 +24,7 @@ import com.konfigthis.client.model.StrategyQuotesGreek;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -58,19 +59,19 @@ public class StrategyQuotes {
 
   public static final String SERIALIZED_NAME_OPEN_PRICE = "open_price";
   @SerializedName(SERIALIZED_NAME_OPEN_PRICE)
-  private BigDecimal openPrice;
+  private Double openPrice;
 
   public static final String SERIALIZED_NAME_BID_PRICE = "bid_price";
   @SerializedName(SERIALIZED_NAME_BID_PRICE)
-  private BigDecimal bidPrice;
+  private Double bidPrice;
 
   public static final String SERIALIZED_NAME_ASK_PRICE = "ask_price";
   @SerializedName(SERIALIZED_NAME_ASK_PRICE)
-  private BigDecimal askPrice;
+  private Double askPrice;
 
   public static final String SERIALIZED_NAME_VOLATILITY = "volatility";
   @SerializedName(SERIALIZED_NAME_VOLATILITY)
-  private BigDecimal volatility;
+  private Double volatility;
 
   public static final String SERIALIZED_NAME_GREEK = "greek";
   @SerializedName(SERIALIZED_NAME_GREEK)
@@ -80,6 +81,10 @@ public class StrategyQuotes {
   }
 
   public StrategyQuotes strategy(OptionStrategy strategy) {
+
+    
+    
+    
     
     this.strategy = strategy;
     return this;
@@ -98,13 +103,31 @@ public class StrategyQuotes {
 
 
   public void setStrategy(OptionStrategy strategy) {
+
+    
+    
+    
     this.strategy = strategy;
   }
 
 
-  public StrategyQuotes openPrice(BigDecimal openPrice) {
+  public StrategyQuotes openPrice(Double openPrice) {
+
+    
+    
+    
     
     this.openPrice = openPrice;
+    return this;
+  }
+
+  public StrategyQuotes openPrice(Integer openPrice) {
+
+    
+    
+    
+    
+    this.openPrice = openPrice.doubleValue();
     return this;
   }
 
@@ -115,19 +138,37 @@ public class StrategyQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getOpenPrice() {
+  public Double getOpenPrice() {
     return openPrice;
   }
 
 
-  public void setOpenPrice(BigDecimal openPrice) {
+  public void setOpenPrice(Double openPrice) {
+
+    
+    
+    
     this.openPrice = openPrice;
   }
 
 
-  public StrategyQuotes bidPrice(BigDecimal bidPrice) {
+  public StrategyQuotes bidPrice(Double bidPrice) {
+
+    
+    
+    
     
     this.bidPrice = bidPrice;
+    return this;
+  }
+
+  public StrategyQuotes bidPrice(Integer bidPrice) {
+
+    
+    
+    
+    
+    this.bidPrice = bidPrice.doubleValue();
     return this;
   }
 
@@ -138,19 +179,37 @@ public class StrategyQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getBidPrice() {
+  public Double getBidPrice() {
     return bidPrice;
   }
 
 
-  public void setBidPrice(BigDecimal bidPrice) {
+  public void setBidPrice(Double bidPrice) {
+
+    
+    
+    
     this.bidPrice = bidPrice;
   }
 
 
-  public StrategyQuotes askPrice(BigDecimal askPrice) {
+  public StrategyQuotes askPrice(Double askPrice) {
+
+    
+    
+    
     
     this.askPrice = askPrice;
+    return this;
+  }
+
+  public StrategyQuotes askPrice(Integer askPrice) {
+
+    
+    
+    
+    
+    this.askPrice = askPrice.doubleValue();
     return this;
   }
 
@@ -161,19 +220,37 @@ public class StrategyQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getAskPrice() {
+  public Double getAskPrice() {
     return askPrice;
   }
 
 
-  public void setAskPrice(BigDecimal askPrice) {
+  public void setAskPrice(Double askPrice) {
+
+    
+    
+    
     this.askPrice = askPrice;
   }
 
 
-  public StrategyQuotes volatility(BigDecimal volatility) {
+  public StrategyQuotes volatility(Double volatility) {
+
+    
+    
+    
     
     this.volatility = volatility;
+    return this;
+  }
+
+  public StrategyQuotes volatility(Integer volatility) {
+
+    
+    
+    
+    
+    this.volatility = volatility.doubleValue();
     return this;
   }
 
@@ -184,17 +261,25 @@ public class StrategyQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.141", value = "")
 
-  public BigDecimal getVolatility() {
+  public Double getVolatility() {
     return volatility;
   }
 
 
-  public void setVolatility(BigDecimal volatility) {
+  public void setVolatility(Double volatility) {
+
+    
+    
+    
     this.volatility = volatility;
   }
 
 
   public StrategyQuotes greek(StrategyQuotesGreek greek) {
+
+    
+    
+    
     
     this.greek = greek;
     return this;
@@ -213,6 +298,10 @@ public class StrategyQuotes {
 
 
   public void setGreek(StrategyQuotesGreek greek) {
+
+    
+    
+    
     this.greek = greek;
   }
 
@@ -280,9 +369,20 @@ public class StrategyQuotes {
         Objects.equals(this.additionalProperties, strategyQuotes.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(strategy, openPrice, bidPrice, askPrice, volatility, greek, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

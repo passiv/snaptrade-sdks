@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -158,12 +158,16 @@ public class OptionsPlaceOptionStrategyRequest {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public OptionsPlaceOptionStrategyRequest() {
   }
 
   public OptionsPlaceOptionStrategyRequest orderType(OrderTypeEnum orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -182,11 +186,19 @@ public class OptionsPlaceOptionStrategyRequest {
 
 
   public void setOrderType(OrderTypeEnum orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
   public OptionsPlaceOptionStrategyRequest timeInForce(TimeInForceEnum timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -205,13 +217,31 @@ public class OptionsPlaceOptionStrategyRequest {
 
 
   public void setTimeInForce(TimeInForceEnum timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
-  public OptionsPlaceOptionStrategyRequest price(BigDecimal price) {
+  public OptionsPlaceOptionStrategyRequest price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public OptionsPlaceOptionStrategyRequest price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -219,15 +249,19 @@ public class OptionsPlaceOptionStrategyRequest {
    * Trade Price if limit or stop limit order
    * @return price
   **/
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", required = true, value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 

@@ -23,7 +23,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -36,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -59,12 +59,16 @@ public class Balance {
 
   public static final String SERIALIZED_NAME_CASH = "cash";
   @SerializedName(SERIALIZED_NAME_CASH)
-  private BigDecimal cash;
+  private Double cash;
 
   public Balance() {
   }
 
   public Balance currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -83,13 +87,31 @@ public class Balance {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
-  public Balance cash(BigDecimal cash) {
+  public Balance cash(Double cash) {
+
+    
+    
+    
     
     this.cash = cash;
+    return this;
+  }
+
+  public Balance cash(Integer cash) {
+
+    
+    
+    
+    
+    this.cash = cash.doubleValue();
     return this;
   }
 
@@ -100,12 +122,16 @@ public class Balance {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "300.71", value = "")
 
-  public BigDecimal getCash() {
+  public Double getCash() {
     return cash;
   }
 
 
-  public void setCash(BigDecimal cash) {
+  public void setCash(Double cash) {
+
+    
+    
+    
     this.cash = cash;
   }
 

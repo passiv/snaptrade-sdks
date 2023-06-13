@@ -11,6 +11,7 @@ SnapTradeUser Investment Account
 |**id** | **UUID** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
 |**number** | **String** |  |  [optional] |
+|**syncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  |  [optional] |
 
 
 

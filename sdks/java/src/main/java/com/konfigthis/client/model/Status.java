@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -66,6 +67,10 @@ public class Status {
   }
 
   public Status version(Integer version) {
+
+    
+    
+    
     
     this.version = version;
     return this;
@@ -84,11 +89,19 @@ public class Status {
 
 
   public void setVersion(Integer version) {
+
+    
+    
+    
     this.version = version;
   }
 
 
   public Status timestamp(String timestamp) {
+
+    
+    
+    
     
     this.timestamp = timestamp;
     return this;
@@ -107,11 +120,19 @@ public class Status {
 
 
   public void setTimestamp(String timestamp) {
+
+    
+    
+    
     this.timestamp = timestamp;
   }
 
 
   public Status online(Boolean online) {
+
+    
+    
+    
     
     this.online = online;
     return this;
@@ -130,6 +151,10 @@ public class Status {
 
 
   public void setOnline(Boolean online) {
+
+    
+    
+    
     this.online = online;
   }
 

@@ -31,9 +31,6 @@ import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model401FailedRequestResponse;
-import com.konfigthis.client.model.Model404FailedRequestResponse;
 import com.konfigthis.client.model.PartnerData;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.SymbolQuery;
@@ -52,11 +49,20 @@ public class ReferenceDataApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public ReferenceDataApi() {
+    public ReferenceDataApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public ReferenceDataApi(ApiClient apiClient) {
+    public ReferenceDataApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -84,19 +90,7 @@ public class ReferenceDataApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for getCurrencyExchangeRatePair
-     * @param currencyPair A currency pair based on currency code for example, {CAD-USD} (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getCurrencyExchangeRatePairCall(String currencyPair, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getCurrencyExchangeRatePairCall(String currencyPair, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -152,77 +146,107 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Return the exchange rate of a currency pair
-     * 
-     * @param currencyPair A currency pair based on currency code for example, {CAD-USD} (required)
-     * @return ExchangeRatePairs
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public ExchangeRatePairs getCurrencyExchangeRatePair(String currencyPair) throws ApiException {
-        ApiResponse<ExchangeRatePairs> localVarResp = getCurrencyExchangeRatePairWithHttpInfo(currencyPair);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return the exchange rate of a currency pair
-     * 
-     * @param currencyPair A currency pair based on currency code for example, {CAD-USD} (required)
-     * @return ApiResponse&lt;ExchangeRatePairs&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ExchangeRatePairs> getCurrencyExchangeRatePairWithHttpInfo(String currencyPair) throws ApiException {
+    private ApiResponse<ExchangeRatePairs> getCurrencyExchangeRatePairWithHttpInfo(String currencyPair) throws ApiException {
         okhttp3.Call localVarCall = getCurrencyExchangeRatePairValidateBeforeCall(currencyPair, null);
         Type localVarReturnType = new TypeToken<ExchangeRatePairs>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return the exchange rate of a currency pair (asynchronously)
-     * 
-     * @param currencyPair A currency pair based on currency code for example, {CAD-USD} (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getCurrencyExchangeRatePairAsync(String currencyPair, final ApiCallback<ExchangeRatePairs> _callback) throws ApiException {
+    private okhttp3.Call getCurrencyExchangeRatePairAsync(String currencyPair, final ApiCallback<ExchangeRatePairs> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getCurrencyExchangeRatePairValidateBeforeCall(currencyPair, _callback);
         Type localVarReturnType = new TypeToken<ExchangeRatePairs>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetCurrencyExchangeRatePairRequestBuilder {
+        private final String currencyPair;
+
+        private GetCurrencyExchangeRatePairRequestBuilder(String currencyPair) {
+            this.currencyPair = currencyPair;
+        }
+
+        /**
+         * Build call for getCurrencyExchangeRatePair
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getCurrencyExchangeRatePairCall(currencyPair, _callback);
+        }
+
+
+        /**
+         * Execute getCurrencyExchangeRatePair request
+         * @return ExchangeRatePairs
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public ExchangeRatePairs execute() throws ApiException {
+            ApiResponse<ExchangeRatePairs> localVarResp = getCurrencyExchangeRatePairWithHttpInfo(currencyPair);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getCurrencyExchangeRatePair request with HTTP info returned
+         * @return ApiResponse&lt;ExchangeRatePairs&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ExchangeRatePairs> executeWithHttpInfo() throws ApiException {
+            return getCurrencyExchangeRatePairWithHttpInfo(currencyPair);
+        }
+
+        /**
+         * Execute getCurrencyExchangeRatePair request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ExchangeRatePairs> _callback) throws ApiException {
+            return getCurrencyExchangeRatePairAsync(currencyPair, _callback);
+        }
+    }
+
     /**
-     * Build call for getPartnerInfo
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Return the exchange rate of a currency pair
+     * 
+     * @param currencyPair A currency pair based on currency code for example, {CAD-USD} (required)
+     * @return GetCurrencyExchangeRatePairRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPartnerInfoCall(final ApiCallback _callback) throws ApiException {
+    public GetCurrencyExchangeRatePairRequestBuilder getCurrencyExchangeRatePair(String currencyPair) throws IllegalArgumentException {
+        if (currencyPair == null) throw new IllegalArgumentException("\"currencyPair\" is required but got null");
+            
+
+        return new GetCurrencyExchangeRatePairRequestBuilder(currencyPair);
+    }
+    private okhttp3.Call getPartnerInfoCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -272,83 +296,106 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Get metadata related to Snaptrade partner
-     * 
-     * @return PartnerData
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PartnerData getPartnerInfo() throws ApiException {
-        ApiResponse<PartnerData> localVarResp = getPartnerInfoWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get metadata related to Snaptrade partner
-     * 
-     * @return ApiResponse&lt;PartnerData&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PartnerData> getPartnerInfoWithHttpInfo() throws ApiException {
+    private ApiResponse<PartnerData> getPartnerInfoWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getPartnerInfoValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<PartnerData>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get metadata related to Snaptrade partner (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPartnerInfoAsync(final ApiCallback<PartnerData> _callback) throws ApiException {
+    private okhttp3.Call getPartnerInfoAsync(final ApiCallback<PartnerData> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPartnerInfoValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<PartnerData>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPartnerInfoRequestBuilder {
+
+        private GetPartnerInfoRequestBuilder() {
+        }
+
+        /**
+         * Build call for getPartnerInfo
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPartnerInfoCall(_callback);
+        }
+
+
+        /**
+         * Execute getPartnerInfo request
+         * @return PartnerData
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public PartnerData execute() throws ApiException {
+            ApiResponse<PartnerData> localVarResp = getPartnerInfoWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPartnerInfo request with HTTP info returned
+         * @return ApiResponse&lt;PartnerData&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PartnerData> executeWithHttpInfo() throws ApiException {
+            return getPartnerInfoWithHttpInfo();
+        }
+
+        /**
+         * Execute getPartnerInfo request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PartnerData> _callback) throws ApiException {
+            return getPartnerInfoAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for getSecurityTypes
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get metadata related to Snaptrade partner
+     * 
+     * @return GetPartnerInfoRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSecurityTypesCall(final ApiCallback _callback) throws ApiException {
+    public GetPartnerInfoRequestBuilder getPartnerInfo() throws IllegalArgumentException {
+        return new GetPartnerInfoRequestBuilder();
+    }
+    private okhttp3.Call getSecurityTypesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -398,73 +445,106 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * List of all security types.
-     * 
-     * @return List&lt;SecurityType&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<SecurityType> getSecurityTypes() throws ApiException {
-        ApiResponse<List<SecurityType>> localVarResp = getSecurityTypesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of all security types.
-     * 
-     * @return ApiResponse&lt;List&lt;SecurityType&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<SecurityType>> getSecurityTypesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<SecurityType>> getSecurityTypesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getSecurityTypesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<SecurityType>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of all security types. (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getSecurityTypesAsync(final ApiCallback<List<SecurityType>> _callback) throws ApiException {
+    private okhttp3.Call getSecurityTypesAsync(final ApiCallback<List<SecurityType>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getSecurityTypesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<SecurityType>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetSecurityTypesRequestBuilder {
+
+        private GetSecurityTypesRequestBuilder() {
+        }
+
+        /**
+         * Build call for getSecurityTypes
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getSecurityTypesCall(_callback);
+        }
+
+
+        /**
+         * Execute getSecurityTypes request
+         * @return List&lt;SecurityType&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<SecurityType> execute() throws ApiException {
+            ApiResponse<List<SecurityType>> localVarResp = getSecurityTypesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getSecurityTypes request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;SecurityType&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<SecurityType>> executeWithHttpInfo() throws ApiException {
+            return getSecurityTypesWithHttpInfo();
+        }
+
+        /**
+         * Execute getSecurityTypes request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<SecurityType>> _callback) throws ApiException {
+            return getSecurityTypesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for getStockExchanges
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of all security types.
+     * 
+     * @return GetSecurityTypesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getStockExchangesCall(final ApiCallback _callback) throws ApiException {
+    public GetSecurityTypesRequestBuilder getSecurityTypes() throws IllegalArgumentException {
+        return new GetSecurityTypesRequestBuilder();
+    }
+    private okhttp3.Call getStockExchangesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -514,72 +594,101 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Return list of stock exchanges on Passiv and their suffixes
-     * 
-     * @return List&lt;Exchange&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Exchange> getStockExchanges() throws ApiException {
-        ApiResponse<List<Exchange>> localVarResp = getStockExchangesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return list of stock exchanges on Passiv and their suffixes
-     * 
-     * @return ApiResponse&lt;List&lt;Exchange&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Exchange>> getStockExchangesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<Exchange>> getStockExchangesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = getStockExchangesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<Exchange>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return list of stock exchanges on Passiv and their suffixes (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getStockExchangesAsync(final ApiCallback<List<Exchange>> _callback) throws ApiException {
+    private okhttp3.Call getStockExchangesAsync(final ApiCallback<List<Exchange>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getStockExchangesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<Exchange>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetStockExchangesRequestBuilder {
+
+        private GetStockExchangesRequestBuilder() {
+        }
+
+        /**
+         * Build call for getStockExchanges
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getStockExchangesCall(_callback);
+        }
+
+
+        /**
+         * Execute getStockExchanges request
+         * @return List&lt;Exchange&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Exchange> execute() throws ApiException {
+            ApiResponse<List<Exchange>> localVarResp = getStockExchangesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getStockExchanges request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Exchange&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Exchange>> executeWithHttpInfo() throws ApiException {
+            return getStockExchangesWithHttpInfo();
+        }
+
+        /**
+         * Execute getStockExchanges request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Exchange>> _callback) throws ApiException {
+            return getStockExchangesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for getSymbols
-     * @param symbolQuery  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Return list of stock exchanges on Passiv and their suffixes
+     * 
+     * @return GetStockExchangesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all supported stock exchanges </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSymbolsCall(SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
+    public GetStockExchangesRequestBuilder getStockExchanges() throws IllegalArgumentException {
+        return new GetStockExchangesRequestBuilder();
+    }
+    private okhttp3.Call getSymbolsCall(SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -630,80 +739,126 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Search for symbols
-     * 
-     * @param symbolQuery  (optional)
-     * @return List&lt;UniversalSymbol&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<UniversalSymbol> getSymbols(SymbolQuery symbolQuery) throws ApiException {
-        ApiResponse<List<UniversalSymbol>> localVarResp = getSymbolsWithHttpInfo(symbolQuery);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Search for symbols
-     * 
-     * @param symbolQuery  (optional)
-     * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<UniversalSymbol>> getSymbolsWithHttpInfo(SymbolQuery symbolQuery) throws ApiException {
+    private ApiResponse<List<UniversalSymbol>> getSymbolsWithHttpInfo(SymbolQuery symbolQuery) throws ApiException {
         okhttp3.Call localVarCall = getSymbolsValidateBeforeCall(symbolQuery, null);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Search for symbols (asynchronously)
-     * 
-     * @param symbolQuery  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getSymbolsAsync(SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+    private okhttp3.Call getSymbolsAsync(SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getSymbolsValidateBeforeCall(symbolQuery, _callback);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetSymbolsRequestBuilder {
+        private String substring;
+
+        private GetSymbolsRequestBuilder() {
+        }
+
+        /**
+         * Set substring
+         * @param substring  (optional)
+         * @return GetSymbolsRequestBuilder
+         */
+        public GetSymbolsRequestBuilder substring(String substring) {
+            this.substring = substring;
+            return this;
+        }
+        
+        /**
+         * Build call for getSymbols
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return getSymbolsCall(symbolQuery, _callback);
+        }
+
+        private SymbolQuery buildBodyParams() {
+            SymbolQuery symbolQuery = new SymbolQuery();
+            symbolQuery.substring(this.substring);
+            return symbolQuery;
+        }
+
+        /**
+         * Execute getSymbols request
+         * @return List&lt;UniversalSymbol&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UniversalSymbol> execute() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            ApiResponse<List<UniversalSymbol>> localVarResp = getSymbolsWithHttpInfo(symbolQuery);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getSymbols request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UniversalSymbol>> executeWithHttpInfo() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return getSymbolsWithHttpInfo(symbolQuery);
+        }
+
+        /**
+         * Execute getSymbols request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return getSymbolsAsync(symbolQuery, _callback);
+        }
+    }
+
     /**
-     * Build call for getSymbolsByTicker
-     * @param ticker The ticker of the UniversalSymbol to get. (required)
-     * @param symbolId OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Search for symbols
+     * 
+     * @return GetSymbolsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSymbolsByTickerCall(UUID ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
+    public GetSymbolsRequestBuilder getSymbols() throws IllegalArgumentException {
+        return new GetSymbolsRequestBuilder();
+    }
+    private okhttp3.Call getSymbolsByTickerCall(UUID ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -763,84 +918,128 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Get details of a symbol by the ticker
-     * 
-     * @param ticker The ticker of the UniversalSymbol to get. (required)
-     * @param symbolId OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)
-     * @return UniversalSymbol
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public UniversalSymbol getSymbolsByTicker(UUID ticker, UUID symbolId) throws ApiException {
-        ApiResponse<UniversalSymbol> localVarResp = getSymbolsByTickerWithHttpInfo(ticker, symbolId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get details of a symbol by the ticker
-     * 
-     * @param ticker The ticker of the UniversalSymbol to get. (required)
-     * @param symbolId OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)
-     * @return ApiResponse&lt;UniversalSymbol&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<UniversalSymbol> getSymbolsByTickerWithHttpInfo(UUID ticker, UUID symbolId) throws ApiException {
+    private ApiResponse<UniversalSymbol> getSymbolsByTickerWithHttpInfo(UUID ticker, UUID symbolId) throws ApiException {
         okhttp3.Call localVarCall = getSymbolsByTickerValidateBeforeCall(ticker, symbolId, null);
         Type localVarReturnType = new TypeToken<UniversalSymbol>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get details of a symbol by the ticker (asynchronously)
-     * 
-     * @param ticker The ticker of the UniversalSymbol to get. (required)
-     * @param symbolId OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getSymbolsByTickerAsync(UUID ticker, UUID symbolId, final ApiCallback<UniversalSymbol> _callback) throws ApiException {
+    private okhttp3.Call getSymbolsByTickerAsync(UUID ticker, UUID symbolId, final ApiCallback<UniversalSymbol> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getSymbolsByTickerValidateBeforeCall(ticker, symbolId, _callback);
         Type localVarReturnType = new TypeToken<UniversalSymbol>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetSymbolsByTickerRequestBuilder {
+        private final UUID ticker;
+        private UUID symbolId;
+
+        private GetSymbolsByTickerRequestBuilder(UUID ticker) {
+            this.ticker = ticker;
+        }
+
+        /**
+         * Set symbolId
+         * @param symbolId OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)
+         * @return GetSymbolsByTickerRequestBuilder
+         */
+        public GetSymbolsByTickerRequestBuilder symbolId(UUID symbolId) {
+            this.symbolId = symbolId;
+            return this;
+        }
+        
+        /**
+         * Build call for getSymbolsByTicker
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getSymbolsByTickerCall(ticker, symbolId, _callback);
+        }
+
+
+        /**
+         * Execute getSymbolsByTicker request
+         * @return UniversalSymbol
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public UniversalSymbol execute() throws ApiException {
+            ApiResponse<UniversalSymbol> localVarResp = getSymbolsByTickerWithHttpInfo(ticker, symbolId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getSymbolsByTicker request with HTTP info returned
+         * @return ApiResponse&lt;UniversalSymbol&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UniversalSymbol> executeWithHttpInfo() throws ApiException {
+            return getSymbolsByTickerWithHttpInfo(ticker, symbolId);
+        }
+
+        /**
+         * Execute getSymbolsByTicker request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UniversalSymbol> _callback) throws ApiException {
+            return getSymbolsByTickerAsync(ticker, symbolId, _callback);
+        }
+    }
+
     /**
-     * Build call for listAllBrokerageAuthorizationType
-     * @param brokerage Comma separated value of brokerage slugs (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get details of a symbol by the ticker
+     * 
+     * @param ticker The ticker of the UniversalSymbol to get. (required)
+     * @return GetSymbolsByTickerRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAllBrokerageAuthorizationTypeCall(String brokerage, final ApiCallback _callback) throws ApiException {
+    public GetSymbolsByTickerRequestBuilder getSymbolsByTicker(UUID ticker) throws IllegalArgumentException {
+        if (ticker == null) throw new IllegalArgumentException("\"ticker\" is required but got null");
+            
+
+        return new GetSymbolsByTickerRequestBuilder(ticker);
+    }
+    private okhttp3.Call listAllBrokerageAuthorizationTypeCall(String brokerage, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -894,77 +1093,117 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * List of all brokerage authorization types
-     * 
-     * @param brokerage Comma separated value of brokerage slugs (optional)
-     * @return List&lt;BrokerageAuthorizationTypeReadOnly&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<BrokerageAuthorizationTypeReadOnly> listAllBrokerageAuthorizationType(String brokerage) throws ApiException {
-        ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> localVarResp = listAllBrokerageAuthorizationTypeWithHttpInfo(brokerage);
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of all brokerage authorization types
-     * 
-     * @param brokerage Comma separated value of brokerage slugs (optional)
-     * @return ApiResponse&lt;List&lt;BrokerageAuthorizationTypeReadOnly&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> listAllBrokerageAuthorizationTypeWithHttpInfo(String brokerage) throws ApiException {
+    private ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> listAllBrokerageAuthorizationTypeWithHttpInfo(String brokerage) throws ApiException {
         okhttp3.Call localVarCall = listAllBrokerageAuthorizationTypeValidateBeforeCall(brokerage, null);
         Type localVarReturnType = new TypeToken<List<BrokerageAuthorizationTypeReadOnly>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of all brokerage authorization types (asynchronously)
-     * 
-     * @param brokerage Comma separated value of brokerage slugs (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listAllBrokerageAuthorizationTypeAsync(String brokerage, final ApiCallback<List<BrokerageAuthorizationTypeReadOnly>> _callback) throws ApiException {
+    private okhttp3.Call listAllBrokerageAuthorizationTypeAsync(String brokerage, final ApiCallback<List<BrokerageAuthorizationTypeReadOnly>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listAllBrokerageAuthorizationTypeValidateBeforeCall(brokerage, _callback);
         Type localVarReturnType = new TypeToken<List<BrokerageAuthorizationTypeReadOnly>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListAllBrokerageAuthorizationTypeRequestBuilder {
+        private String brokerage;
+
+        private ListAllBrokerageAuthorizationTypeRequestBuilder() {
+        }
+
+        /**
+         * Set brokerage
+         * @param brokerage Comma separated value of brokerage slugs (optional)
+         * @return ListAllBrokerageAuthorizationTypeRequestBuilder
+         */
+        public ListAllBrokerageAuthorizationTypeRequestBuilder brokerage(String brokerage) {
+            this.brokerage = brokerage;
+            return this;
+        }
+        
+        /**
+         * Build call for listAllBrokerageAuthorizationType
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllBrokerageAuthorizationTypeCall(brokerage, _callback);
+        }
+
+
+        /**
+         * Execute listAllBrokerageAuthorizationType request
+         * @return List&lt;BrokerageAuthorizationTypeReadOnly&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<BrokerageAuthorizationTypeReadOnly> execute() throws ApiException {
+            ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> localVarResp = listAllBrokerageAuthorizationTypeWithHttpInfo(brokerage);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAllBrokerageAuthorizationType request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;BrokerageAuthorizationTypeReadOnly&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> executeWithHttpInfo() throws ApiException {
+            return listAllBrokerageAuthorizationTypeWithHttpInfo(brokerage);
+        }
+
+        /**
+         * Execute listAllBrokerageAuthorizationType request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<BrokerageAuthorizationTypeReadOnly>> _callback) throws ApiException {
+            return listAllBrokerageAuthorizationTypeAsync(brokerage, _callback);
+        }
+    }
+
     /**
-     * Build call for listAllBrokerages
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of all brokerage authorization types
+     * 
+     * @return ListAllBrokerageAuthorizationTypeRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all defined Brokerage Authorization Type objects. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAllBrokeragesCall(final ApiCallback _callback) throws ApiException {
+    public ListAllBrokerageAuthorizationTypeRequestBuilder listAllBrokerageAuthorizationType() throws IllegalArgumentException {
+        return new ListAllBrokerageAuthorizationTypeRequestBuilder();
+    }
+    private okhttp3.Call listAllBrokeragesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1014,74 +1253,106 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * List of all brokerages.
-     * 
-     * @return List&lt;Brokerage&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Brokerage> listAllBrokerages() throws ApiException {
-        ApiResponse<List<Brokerage>> localVarResp = listAllBrokeragesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of all brokerages.
-     * 
-     * @return ApiResponse&lt;List&lt;Brokerage&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Brokerage>> listAllBrokeragesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<Brokerage>> listAllBrokeragesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listAllBrokeragesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<Brokerage>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of all brokerages. (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listAllBrokeragesAsync(final ApiCallback<List<Brokerage>> _callback) throws ApiException {
+    private okhttp3.Call listAllBrokeragesAsync(final ApiCallback<List<Brokerage>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listAllBrokeragesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<Brokerage>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListAllBrokeragesRequestBuilder {
+
+        private ListAllBrokeragesRequestBuilder() {
+        }
+
+        /**
+         * Build call for listAllBrokerages
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllBrokeragesCall(_callback);
+        }
+
+
+        /**
+         * Execute listAllBrokerages request
+         * @return List&lt;Brokerage&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Brokerage> execute() throws ApiException {
+            ApiResponse<List<Brokerage>> localVarResp = listAllBrokeragesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAllBrokerages request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Brokerage&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Brokerage>> executeWithHttpInfo() throws ApiException {
+            return listAllBrokeragesWithHttpInfo();
+        }
+
+        /**
+         * Execute listAllBrokerages request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Brokerage>> _callback) throws ApiException {
+            return listAllBrokeragesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for listAllCurrencies
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of all brokerages.
+     * 
+     * @return ListAllBrokeragesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all defined Brokerage objects. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAllCurrenciesCall(final ApiCallback _callback) throws ApiException {
+    public ListAllBrokeragesRequestBuilder listAllBrokerages() throws IllegalArgumentException {
+        return new ListAllBrokeragesRequestBuilder();
+    }
+    private okhttp3.Call listAllCurrenciesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1131,73 +1402,106 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * List of all supported currencies
-     * 
-     * @return List&lt;Currency&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Currency> listAllCurrencies() throws ApiException {
-        ApiResponse<List<Currency>> localVarResp = listAllCurrenciesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of all supported currencies
-     * 
-     * @return ApiResponse&lt;List&lt;Currency&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Currency>> listAllCurrenciesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<Currency>> listAllCurrenciesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listAllCurrenciesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<Currency>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of all supported currencies (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listAllCurrenciesAsync(final ApiCallback<List<Currency>> _callback) throws ApiException {
+    private okhttp3.Call listAllCurrenciesAsync(final ApiCallback<List<Currency>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listAllCurrenciesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<Currency>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListAllCurrenciesRequestBuilder {
+
+        private ListAllCurrenciesRequestBuilder() {
+        }
+
+        /**
+         * Build call for listAllCurrencies
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllCurrenciesCall(_callback);
+        }
+
+
+        /**
+         * Execute listAllCurrencies request
+         * @return List&lt;Currency&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Currency> execute() throws ApiException {
+            ApiResponse<List<Currency>> localVarResp = listAllCurrenciesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAllCurrencies request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Currency&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Currency>> executeWithHttpInfo() throws ApiException {
+            return listAllCurrenciesWithHttpInfo();
+        }
+
+        /**
+         * Execute listAllCurrencies request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Currency>> _callback) throws ApiException {
+            return listAllCurrenciesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for listAllCurrenciesRates
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of all supported currencies
+     * 
+     * @return ListAllCurrenciesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAllCurrenciesRatesCall(final ApiCallback _callback) throws ApiException {
+    public ListAllCurrenciesRequestBuilder listAllCurrencies() throws IllegalArgumentException {
+        return new ListAllCurrenciesRequestBuilder();
+    }
+    private okhttp3.Call listAllCurrenciesRatesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1247,75 +1551,101 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Return the exchange rates of all supported currencies
-     * 
-     * @return List&lt;ExchangeRatePairs&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ExchangeRatePairs> listAllCurrenciesRates() throws ApiException {
-        ApiResponse<List<ExchangeRatePairs>> localVarResp = listAllCurrenciesRatesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return the exchange rates of all supported currencies
-     * 
-     * @return ApiResponse&lt;List&lt;ExchangeRatePairs&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ExchangeRatePairs>> listAllCurrenciesRatesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<ExchangeRatePairs>> listAllCurrenciesRatesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listAllCurrenciesRatesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<ExchangeRatePairs>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return the exchange rates of all supported currencies (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listAllCurrenciesRatesAsync(final ApiCallback<List<ExchangeRatePairs>> _callback) throws ApiException {
+    private okhttp3.Call listAllCurrenciesRatesAsync(final ApiCallback<List<ExchangeRatePairs>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listAllCurrenciesRatesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<ExchangeRatePairs>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListAllCurrenciesRatesRequestBuilder {
+
+        private ListAllCurrenciesRatesRequestBuilder() {
+        }
+
+        /**
+         * Build call for listAllCurrenciesRates
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllCurrenciesRatesCall(_callback);
+        }
+
+
+        /**
+         * Execute listAllCurrenciesRates request
+         * @return List&lt;ExchangeRatePairs&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<ExchangeRatePairs> execute() throws ApiException {
+            ApiResponse<List<ExchangeRatePairs>> localVarResp = listAllCurrenciesRatesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAllCurrenciesRates request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;ExchangeRatePairs&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<ExchangeRatePairs>> executeWithHttpInfo() throws ApiException {
+            return listAllCurrenciesRatesWithHttpInfo();
+        }
+
+        /**
+         * Execute listAllCurrenciesRates request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<ExchangeRatePairs>> _callback) throws ApiException {
+            return listAllCurrenciesRatesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for symbolSearchUserAccount
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbolQuery  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Return the exchange rates of all supported currencies
+     * 
+     * @return ListAllCurrenciesRatesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all exchange rates pairs for supported currencies </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call symbolSearchUserAccountCall(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
+    public ListAllCurrenciesRatesRequestBuilder listAllCurrenciesRates() throws IllegalArgumentException {
+        return new ListAllCurrenciesRatesRequestBuilder();
+    }
+    private okhttp3.Call symbolSearchUserAccountCall(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1390,59 +1720,124 @@ public class ReferenceDataApi {
 
     }
 
-    /**
-     * Search for symbols that are supported by a brokerage account using a substring
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbolQuery  (optional)
-     * @return List&lt;UniversalSymbol&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<UniversalSymbol> symbolSearchUserAccount(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery) throws ApiException {
-        ApiResponse<List<UniversalSymbol>> localVarResp = symbolSearchUserAccountWithHttpInfo(userId, userSecret, accountId, symbolQuery);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Search for symbols that are supported by a brokerage account using a substring
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param symbolQuery  (optional)
-     * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<UniversalSymbol>> symbolSearchUserAccountWithHttpInfo(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery) throws ApiException {
+    private ApiResponse<List<UniversalSymbol>> symbolSearchUserAccountWithHttpInfo(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery) throws ApiException {
         okhttp3.Call localVarCall = symbolSearchUserAccountValidateBeforeCall(userId, userSecret, accountId, symbolQuery, null);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call symbolSearchUserAccountAsync(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = symbolSearchUserAccountValidateBeforeCall(userId, userSecret, accountId, symbolQuery, _callback);
+        Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class SymbolSearchUserAccountRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+        private String substring;
+
+        private SymbolSearchUserAccountRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set substring
+         * @param substring  (optional)
+         * @return SymbolSearchUserAccountRequestBuilder
+         */
+        public SymbolSearchUserAccountRequestBuilder substring(String substring) {
+            this.substring = substring;
+            return this;
+        }
+        
+        /**
+         * Build call for symbolSearchUserAccount
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return symbolSearchUserAccountCall(userId, userSecret, accountId, symbolQuery, _callback);
+        }
+
+        private SymbolQuery buildBodyParams() {
+            SymbolQuery symbolQuery = new SymbolQuery();
+            symbolQuery.substring(this.substring);
+            return symbolQuery;
+        }
+
+        /**
+         * Execute symbolSearchUserAccount request
+         * @return List&lt;UniversalSymbol&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UniversalSymbol> execute() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            ApiResponse<List<UniversalSymbol>> localVarResp = symbolSearchUserAccountWithHttpInfo(userId, userSecret, accountId, symbolQuery);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute symbolSearchUserAccount request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UniversalSymbol>> executeWithHttpInfo() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return symbolSearchUserAccountWithHttpInfo(userId, userSecret, accountId, symbolQuery);
+        }
+
+        /**
+         * Execute symbolSearchUserAccount request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return symbolSearchUserAccountAsync(userId, userSecret, accountId, symbolQuery, _callback);
+        }
+    }
+
     /**
-     * Search for symbols that are supported by a brokerage account using a substring (asynchronously)
+     * Search for symbols that are supported by a brokerage account using a substring
      * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param symbolQuery  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return SymbolSearchUserAccountRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -1450,11 +1845,16 @@ public class ReferenceDataApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call symbolSearchUserAccountAsync(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+    public SymbolSearchUserAccountRequestBuilder symbolSearchUserAccount(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = symbolSearchUserAccountValidateBeforeCall(userId, userSecret, accountId, symbolQuery, _callback);
-        Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new SymbolSearchUserAccountRequestBuilder(userId, userSecret, accountId);
     }
 }

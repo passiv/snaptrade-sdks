@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -81,6 +82,10 @@ public class ManualTradeSymbol {
   }
 
   public ManualTradeSymbol brokerageSymbolId(UUID brokerageSymbolId) {
+
+    
+    
+    
     
     this.brokerageSymbolId = brokerageSymbolId;
     return this;
@@ -99,11 +104,19 @@ public class ManualTradeSymbol {
 
 
   public void setBrokerageSymbolId(UUID brokerageSymbolId) {
+
+    
+    
+    
     this.brokerageSymbolId = brokerageSymbolId;
   }
 
 
   public ManualTradeSymbol universalSymbolId(UUID universalSymbolId) {
+
+    
+    
+    
     
     this.universalSymbolId = universalSymbolId;
     return this;
@@ -122,11 +135,19 @@ public class ManualTradeSymbol {
 
 
   public void setUniversalSymbolId(UUID universalSymbolId) {
+
+    
+    
+    
     this.universalSymbolId = universalSymbolId;
   }
 
 
   public ManualTradeSymbol currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -145,11 +166,19 @@ public class ManualTradeSymbol {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
   public ManualTradeSymbol localId(String localId) {
+
+    
+    
+    
     
     this.localId = localId;
     return this;
@@ -168,11 +197,19 @@ public class ManualTradeSymbol {
 
 
   public void setLocalId(String localId) {
+
+    
+    
+    
     this.localId = localId;
   }
 
 
   public ManualTradeSymbol description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -191,11 +228,19 @@ public class ManualTradeSymbol {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public ManualTradeSymbol symbol(String symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -214,6 +259,10 @@ public class ManualTradeSymbol {
 
 
   public void setSymbol(String symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 

@@ -133,8 +133,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get quotes.</param>
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SymbolsQuotes</returns>
-        SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
+        /// <returns>List&lt;SymbolsQuotesInner&gt;</returns>
+        List<SymbolsQuotesInner> GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// Get symbol quotes
@@ -149,8 +149,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get quotes.</param>
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SymbolsQuotes</returns>
-        ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
+        /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
+        ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
         /// <summary>
         /// Modify units of a trade before it is placed
         /// </summary>
@@ -410,8 +410,8 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SymbolsQuotes</returns>
-        System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of List&lt;SymbolsQuotesInner&gt;</returns>
+        System.Threading.Tasks.Task<List<SymbolsQuotesInner>> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get symbol quotes
@@ -427,8 +427,8 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SymbolsQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<SymbolsQuotesInner>>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Modify units of a trade before it is placed
         /// </summary>
@@ -1476,10 +1476,10 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get quotes.</param>
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SymbolsQuotes</returns>
-        public SymbolsQuotes GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
+        /// <returns>List&lt;SymbolsQuotesInner&gt;</returns>
+        public List<SymbolsQuotesInner> GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> localVarResponse = GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
+            SnapTrade.Net.Client.ApiResponse<List<SymbolsQuotesInner>> localVarResponse = GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
             return localVarResponse.Data;
         }
 
@@ -1493,8 +1493,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get quotes.</param>
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SymbolsQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
+        /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
+        public SnapTrade.Net.Client.ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1571,7 +1571,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<SymbolsQuotes>("/accounts/{accountId}/quotes", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<List<SymbolsQuotesInner>>("/accounts/{accountId}/quotes", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountQuotes", localVarResponse);
@@ -1595,10 +1595,10 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SymbolsQuotes</returns>
-        public async System.Threading.Tasks.Task<SymbolsQuotes> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of List&lt;SymbolsQuotesInner&gt;</returns>
+        public async System.Threading.Tasks.Task<List<SymbolsQuotesInner>> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<SymbolsQuotes> localVarResponse = await GetUserAccountQuotesWithHttpInfoAsync(userId, userSecret, symbols, accountId, useTicker, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<SymbolsQuotesInner>> localVarResponse = await GetUserAccountQuotesWithHttpInfoAsync(userId, userSecret, symbols, accountId, useTicker, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1613,8 +1613,8 @@ namespace SnapTrade.Net.Api
         /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SymbolsQuotes)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SymbolsQuotes>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<SymbolsQuotesInner>>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1692,7 +1692,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<SymbolsQuotes>("/accounts/{accountId}/quotes", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<SymbolsQuotesInner>>("/accounts/{accountId}/quotes", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

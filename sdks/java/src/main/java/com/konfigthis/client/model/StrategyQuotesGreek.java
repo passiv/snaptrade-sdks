@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -52,30 +52,44 @@ import com.konfigthis.client.JSON;
 public class StrategyQuotesGreek {
   public static final String SERIALIZED_NAME_DELTA = "delta";
   @SerializedName(SERIALIZED_NAME_DELTA)
-  private BigDecimal delta;
+  private Double delta;
 
   public static final String SERIALIZED_NAME_GAMMA = "gamma";
   @SerializedName(SERIALIZED_NAME_GAMMA)
-  private BigDecimal gamma;
+  private Double gamma;
 
   public static final String SERIALIZED_NAME_THETA = "theta";
   @SerializedName(SERIALIZED_NAME_THETA)
-  private BigDecimal theta;
+  private Double theta;
 
   public static final String SERIALIZED_NAME_VEGA = "vega";
   @SerializedName(SERIALIZED_NAME_VEGA)
-  private BigDecimal vega;
+  private Double vega;
 
   public static final String SERIALIZED_NAME_RHO = "rho";
   @SerializedName(SERIALIZED_NAME_RHO)
-  private BigDecimal rho;
+  private Double rho;
 
   public StrategyQuotesGreek() {
   }
 
-  public StrategyQuotesGreek delta(BigDecimal delta) {
+  public StrategyQuotesGreek delta(Double delta) {
+
+    
+    
+    
     
     this.delta = delta;
+    return this;
+  }
+
+  public StrategyQuotesGreek delta(Integer delta) {
+
+    
+    
+    
+    
+    this.delta = delta.doubleValue();
     return this;
   }
 
@@ -86,19 +100,37 @@ public class StrategyQuotesGreek {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.1", value = "")
 
-  public BigDecimal getDelta() {
+  public Double getDelta() {
     return delta;
   }
 
 
-  public void setDelta(BigDecimal delta) {
+  public void setDelta(Double delta) {
+
+    
+    
+    
     this.delta = delta;
   }
 
 
-  public StrategyQuotesGreek gamma(BigDecimal gamma) {
+  public StrategyQuotesGreek gamma(Double gamma) {
+
+    
+    
+    
     
     this.gamma = gamma;
+    return this;
+  }
+
+  public StrategyQuotesGreek gamma(Integer gamma) {
+
+    
+    
+    
+    
+    this.gamma = gamma.doubleValue();
     return this;
   }
 
@@ -109,19 +141,37 @@ public class StrategyQuotesGreek {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.1", value = "")
 
-  public BigDecimal getGamma() {
+  public Double getGamma() {
     return gamma;
   }
 
 
-  public void setGamma(BigDecimal gamma) {
+  public void setGamma(Double gamma) {
+
+    
+    
+    
     this.gamma = gamma;
   }
 
 
-  public StrategyQuotesGreek theta(BigDecimal theta) {
+  public StrategyQuotesGreek theta(Double theta) {
+
+    
+    
+    
     
     this.theta = theta;
+    return this;
+  }
+
+  public StrategyQuotesGreek theta(Integer theta) {
+
+    
+    
+    
+    
+    this.theta = theta.doubleValue();
     return this;
   }
 
@@ -132,19 +182,37 @@ public class StrategyQuotesGreek {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.1", value = "")
 
-  public BigDecimal getTheta() {
+  public Double getTheta() {
     return theta;
   }
 
 
-  public void setTheta(BigDecimal theta) {
+  public void setTheta(Double theta) {
+
+    
+    
+    
     this.theta = theta;
   }
 
 
-  public StrategyQuotesGreek vega(BigDecimal vega) {
+  public StrategyQuotesGreek vega(Double vega) {
+
+    
+    
+    
     
     this.vega = vega;
+    return this;
+  }
+
+  public StrategyQuotesGreek vega(Integer vega) {
+
+    
+    
+    
+    
+    this.vega = vega.doubleValue();
     return this;
   }
 
@@ -155,19 +223,37 @@ public class StrategyQuotesGreek {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.1", value = "")
 
-  public BigDecimal getVega() {
+  public Double getVega() {
     return vega;
   }
 
 
-  public void setVega(BigDecimal vega) {
+  public void setVega(Double vega) {
+
+    
+    
+    
     this.vega = vega;
   }
 
 
-  public StrategyQuotesGreek rho(BigDecimal rho) {
+  public StrategyQuotesGreek rho(Double rho) {
+
+    
+    
+    
     
     this.rho = rho;
+    return this;
+  }
+
+  public StrategyQuotesGreek rho(Integer rho) {
+
+    
+    
+    
+    
+    this.rho = rho.doubleValue();
     return this;
   }
 
@@ -178,12 +264,16 @@ public class StrategyQuotesGreek {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.1", value = "")
 
-  public BigDecimal getRho() {
+  public Double getRho() {
     return rho;
   }
 
 
-  public void setRho(BigDecimal rho) {
+  public void setRho(Double rho) {
+
+    
+    
+    
     this.rho = rho;
   }
 

@@ -16,7 +16,7 @@ Passiv user account settings
 |**activatedTrialDate** | **String** |  |  [optional] |
 |**demo** | **Boolean** |  |  [optional] |
 |**apiEnabled** | **Boolean** |  |  [optional] |
-|**driftThreshold** | **BigDecimal** |  |  [optional] |
+|**driftThreshold** | **Double** |  |  [optional] |
 |**preferredCurrency** | **Currency** |  |  [optional] |
 
 

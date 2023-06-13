@@ -55,6 +55,8 @@ describe 'PortfolioManagementApi' do
 
   # unit tests for create_asset_class
   # Create a new model asset class
+  # @param user_id 
+  # @param user_secret 
   # @param [Hash] opts the optional parameters
   # @return [ModelAssetClassDetails]
   describe 'create_asset_class test' do
@@ -133,6 +135,8 @@ describe 'PortfolioManagementApi' do
   # unit tests for detail_asset_class
   # Get details of a model asset class
   # @param model_asset_class_id The ID of the model asset class to get.
+  # @param user_id 
+  # @param user_secret 
   # @param [Hash] opts the optional parameters
   # @return [ModelAssetClassDetails]
   describe 'detail_asset_class test' do
@@ -268,6 +272,8 @@ describe 'PortfolioManagementApi' do
 
   # unit tests for list_asset_classes
   # List of model asset class
+  # @param user_id 
+  # @param user_secret 
   # @param [Hash] opts the optional parameters
   # @return [Array<ModelAssetClassDetails>]
   describe 'list_asset_classes test' do
@@ -359,6 +365,8 @@ describe 'PortfolioManagementApi' do
   # unit tests for update_asset_class
   # Updates model asset class objects
   # @param model_asset_class_id The ID of the model asset class to update.
+  # @param user_id 
+  # @param user_secret 
   # @param model_asset_class_details Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
   # @param [Hash] opts the optional parameters
   # @return [nil]

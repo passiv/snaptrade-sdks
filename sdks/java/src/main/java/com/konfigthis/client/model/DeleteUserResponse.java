@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class DeleteUserResponse {
   }
 
   public DeleteUserResponse status(String status) {
+
+    
+    
+    
     
     this.status = status;
     return this;
@@ -80,11 +85,19 @@ public class DeleteUserResponse {
 
 
   public void setStatus(String status) {
+
+    
+    
+    
     this.status = status;
   }
 
 
   public DeleteUserResponse userId(String userId) {
+
+    
+    
+    
     
     this.userId = userId;
     return this;
@@ -103,6 +116,10 @@ public class DeleteUserResponse {
 
 
   public void setUserId(String userId) {
+
+    
+    
+    
     this.userId = userId;
   }
 

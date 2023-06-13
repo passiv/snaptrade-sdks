@@ -10,7 +10,7 @@ Options Symbol
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
 |**ticker** | **String** |  |  [optional] |
-|**strikePrice** | **Integer** |  |  [optional] |
+|**strikePrice** | **Double** |  |  [optional] |
 |**expirationDate** | **String** |  |  [optional] |
 |**isMiniOption** | **Boolean** |  |  [optional] |
 |**underlyingSymbol** | **UnderlyingSymbol** |  |  [optional] |

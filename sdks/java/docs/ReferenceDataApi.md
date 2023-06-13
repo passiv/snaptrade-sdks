@@ -19,15 +19,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getCurrencyExchangeRatePair"></a>
 # **getCurrencyExchangeRatePair**
-> ExchangeRatePairs getCurrencyExchangeRatePair(currencyPair)
+> ExchangeRatePairs getCurrencyExchangeRatePair(currencyPair).execute();
 
 Return the exchange rate of a currency pair
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -35,32 +35,46 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
-    String currencyPair = "currencyPair_example"; // String | A currency pair based on currency code for example, {CAD-USD}
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    String currencyPair = "currencyPair_example"; // A currency pair based on currency code for example, {CAD-USD}
     try {
-      ExchangeRatePairs result = apiInstance.getCurrencyExchangeRatePair(currencyPair);
+      ExchangeRatePairs result = api
+              .getCurrencyExchangeRatePair(currencyPair)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getCurrencyExchangeRatePair");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ExchangeRatePairs> response = api
+              .getCurrencyExchangeRatePair(currencyPair)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getCurrencyExchangeRatePair");
       System.err.println("Status code: " + e.getCode());
@@ -98,15 +112,15 @@ public class Example {
 
 <a name="getPartnerInfo"></a>
 # **getPartnerInfo**
-> PartnerData getPartnerInfo()
+> PartnerData getPartnerInfo().execute();
 
 Get metadata related to Snaptrade partner
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -114,31 +128,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      PartnerData result = apiInstance.getPartnerInfo();
+      PartnerData result = api
+              .getPartnerInfo()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PartnerData> response = api
+              .getPartnerInfo()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
       System.err.println("Status code: " + e.getCode());
@@ -170,22 +198,19 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successfully obtained encrypted JWT data. See description on how to object JWT token |  -  |
-| **400** | Bad Request |  -  |
-| **401** | Unauthorized |  -  |
-| **404** | Not Found |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="getSecurityTypes"></a>
 # **getSecurityTypes**
-> List&lt;SecurityType&gt; getSecurityTypes()
+> List&lt;SecurityType&gt; getSecurityTypes().execute();
 
 List of all security types.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -193,31 +218,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      List<SecurityType> result = apiInstance.getSecurityTypes();
+      List<SecurityType> result = api
+              .getSecurityTypes()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getSecurityTypes");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<SecurityType>> response = api
+              .getSecurityTypes()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSecurityTypes");
       System.err.println("Status code: " + e.getCode());
@@ -253,15 +292,15 @@ This endpoint does not need any parameter.
 
 <a name="getStockExchanges"></a>
 # **getStockExchanges**
-> List&lt;Exchange&gt; getStockExchanges()
+> List&lt;Exchange&gt; getStockExchanges().execute();
 
 Return list of stock exchanges on Passiv and their suffixes
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -269,31 +308,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      List<Exchange> result = apiInstance.getStockExchanges();
+      List<Exchange> result = api
+              .getStockExchanges()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getStockExchanges");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Exchange>> response = api
+              .getStockExchanges()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getStockExchanges");
       System.err.println("Status code: " + e.getCode());
@@ -328,15 +381,15 @@ This endpoint does not need any parameter.
 
 <a name="getSymbols"></a>
 # **getSymbols**
-> List&lt;UniversalSymbol&gt; getSymbols(symbolQuery)
+> List&lt;UniversalSymbol&gt; getSymbols().symbolQuery(symbolQuery).execute();
 
 Search for symbols
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -344,32 +397,48 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
-    SymbolQuery symbolQuery = new SymbolQuery(); // SymbolQuery | 
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = apiInstance.getSymbols(symbolQuery);
+      List<UniversalSymbol> result = api
+              .getSymbols()
+              .substring(substring)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getSymbols");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<UniversalSymbol>> response = api
+              .getSymbols()
+              .substring(substring)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbols");
       System.err.println("Status code: " + e.getCode());
@@ -408,15 +477,15 @@ public class Example {
 
 <a name="getSymbolsByTicker"></a>
 # **getSymbolsByTicker**
-> UniversalSymbol getSymbolsByTicker(ticker, symbolId)
+> UniversalSymbol getSymbolsByTicker(ticker).symbolId(symbolId).execute();
 
 Get details of a symbol by the ticker
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -424,33 +493,49 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
-    UUID ticker = UUID.randomUUID(); // UUID | The ticker of the UniversalSymbol to get.
-    UUID symbolId = UUID.randomUUID(); // UUID | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    UUID ticker = UUID.randomUUID(); // The ticker of the UniversalSymbol to get.
+    UUID symbolId = UUID.randomUUID(); // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     try {
-      UniversalSymbol result = apiInstance.getSymbolsByTicker(ticker, symbolId);
+      UniversalSymbol result = api
+              .getSymbolsByTicker(ticker)
+              .symbolId(symbolId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<UniversalSymbol> response = api
+              .getSymbolsByTicker(ticker)
+              .symbolId(symbolId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
       System.err.println("Status code: " + e.getCode());
@@ -491,15 +576,15 @@ public class Example {
 
 <a name="listAllBrokerageAuthorizationType"></a>
 # **listAllBrokerageAuthorizationType**
-> List&lt;BrokerageAuthorizationTypeReadOnly&gt; listAllBrokerageAuthorizationType(brokerage)
+> List&lt;BrokerageAuthorizationTypeReadOnly&gt; listAllBrokerageAuthorizationType().brokerage(brokerage).execute();
 
 List of all brokerage authorization types
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -507,32 +592,48 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
-    String brokerage = "QUESTRADE,ALPACA"; // String | Comma separated value of brokerage slugs
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    String brokerage = "QUESTRADE,ALPACA"; // Comma separated value of brokerage slugs
     try {
-      List<BrokerageAuthorizationTypeReadOnly> result = apiInstance.listAllBrokerageAuthorizationType(brokerage);
+      List<BrokerageAuthorizationTypeReadOnly> result = api
+              .listAllBrokerageAuthorizationType()
+              .brokerage(brokerage)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageAuthorizationType");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> response = api
+              .listAllBrokerageAuthorizationType()
+              .brokerage(brokerage)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageAuthorizationType");
       System.err.println("Status code: " + e.getCode());
@@ -571,15 +672,15 @@ public class Example {
 
 <a name="listAllBrokerages"></a>
 # **listAllBrokerages**
-> List&lt;Brokerage&gt; listAllBrokerages()
+> List&lt;Brokerage&gt; listAllBrokerages().execute();
 
 List of all brokerages.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -587,31 +688,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      List<Brokerage> result = apiInstance.listAllBrokerages();
+      List<Brokerage> result = api
+              .listAllBrokerages()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllBrokerages");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Brokerage>> response = api
+              .listAllBrokerages()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerages");
       System.err.println("Status code: " + e.getCode());
@@ -647,15 +762,15 @@ This endpoint does not need any parameter.
 
 <a name="listAllCurrencies"></a>
 # **listAllCurrencies**
-> List&lt;Currency&gt; listAllCurrencies()
+> List&lt;Currency&gt; listAllCurrencies().execute();
 
 List of all supported currencies
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -663,31 +778,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      List<Currency> result = apiInstance.listAllCurrencies();
+      List<Currency> result = api
+              .listAllCurrencies()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllCurrencies");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Currency>> response = api
+              .listAllCurrencies()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrencies");
       System.err.println("Status code: " + e.getCode());
@@ -723,15 +852,15 @@ This endpoint does not need any parameter.
 
 <a name="listAllCurrenciesRates"></a>
 # **listAllCurrenciesRates**
-> List&lt;ExchangeRatePairs&gt; listAllCurrenciesRates()
+> List&lt;ExchangeRatePairs&gt; listAllCurrenciesRates().execute();
 
 Return the exchange rates of all supported currencies
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -739,31 +868,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
     try {
-      List<ExchangeRatePairs> result = apiInstance.listAllCurrenciesRates();
+      List<ExchangeRatePairs> result = api
+              .listAllCurrenciesRates()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllCurrenciesRates");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<ExchangeRatePairs>> response = api
+              .listAllCurrenciesRates()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrenciesRates");
       System.err.println("Status code: " + e.getCode());
@@ -798,15 +941,15 @@ This endpoint does not need any parameter.
 
 <a name="symbolSearchUserAccount"></a>
 # **symbolSearchUserAccount**
-> List&lt;UniversalSymbol&gt; symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery)
+> List&lt;UniversalSymbol&gt; symbolSearchUserAccount(userId, userSecret, accountId).symbolQuery(symbolQuery).execute();
 
 Search for symbols that are supported by a brokerage account using a substring
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -814,35 +957,51 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    ReferenceDataApi apiInstance = new ReferenceDataApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    SymbolQuery symbolQuery = new SymbolQuery(); // SymbolQuery | 
+    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = apiInstance.symbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
+      List<UniversalSymbol> result = api
+              .symbolSearchUserAccount(userId, userSecret, accountId)
+              .substring(substring)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#symbolSearchUserAccount");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<UniversalSymbol>> response = api
+              .symbolSearchUserAccount(userId, userSecret, accountId)
+              .substring(substring)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#symbolSearchUserAccount");
       System.err.println("Status code: " + e.getCode());

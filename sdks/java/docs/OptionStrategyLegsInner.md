@@ -8,9 +8,9 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**optionSymbolId** | **String** |  |  [optional] |
-|**index** | **BigDecimal** |  |  [optional] |
+|**index** | **Double** |  |  [optional] |
 |**action** | **String** |  |  [optional] |
-|**quantity** | **BigDecimal** |  |  [optional] |
+|**quantity** | **Double** |  |  [optional] |
 
 
 

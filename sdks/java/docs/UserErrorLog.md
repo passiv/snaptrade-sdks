@@ -10,7 +10,7 @@ An API error log for a specific SnapTrade user.
 |------------ | ------------- | ------------- | -------------|
 |**requestedAt** | **String** |  |  [optional] |
 |**response** | **String** |  |  [optional] |
-|**statusCode** | **BigDecimal** |  |  [optional] |
+|**statusCode** | **Double** |  |  [optional] |
 |**queryParams** | **String** |  |  [optional] |
 |**httpMethod** | **String** |  |  [optional] |
 |**endpoint** | **String** |  |  [optional] |

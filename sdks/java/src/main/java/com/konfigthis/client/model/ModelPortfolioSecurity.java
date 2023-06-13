@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class ModelPortfolioSecurity {
   }
 
   public ModelPortfolioSecurity symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -80,11 +85,23 @@ public class ModelPortfolioSecurity {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public ModelPortfolioSecurity percent(Integer percent) {
+
+    if (percent < 0) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
+    }
+    if (percent > 100) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
+    }
+    
     
     this.percent = percent;
     return this;
@@ -105,6 +122,14 @@ public class ModelPortfolioSecurity {
 
 
   public void setPercent(Integer percent) {
+
+    if (percent < 0) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
+    }
+    if (percent > 100) {
+      throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
+    }
+    
     this.percent = percent;
   }
 

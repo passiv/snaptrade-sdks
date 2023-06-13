@@ -26,12 +26,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.konfigthis.client.model.AuthenticationLoginSnapTradeUser200Response;
 import com.konfigthis.client.model.DeleteUserResponse;
 import com.konfigthis.client.model.EncryptedResponse;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model403FailedRequestResponse;
-import com.konfigthis.client.model.Model404FailedRequestResponse;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -48,11 +44,20 @@ public class AuthenticationApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public AuthenticationApi() {
+    public AuthenticationApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public AuthenticationApi(ApiClient apiClient) {
+    public AuthenticationApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -80,23 +85,7 @@ public class AuthenticationApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for deleteSnapTradeUser
-     * @param userId  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deleteSnapTradeUserCall(String userId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteSnapTradeUserCall(String userId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -155,91 +144,112 @@ public class AuthenticationApi {
 
     }
 
-    /**
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-     * 
-     * @param userId  (required)
-     * @return DeleteUserResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public DeleteUserResponse deleteSnapTradeUser(String userId) throws ApiException {
-        ApiResponse<DeleteUserResponse> localVarResp = deleteSnapTradeUserWithHttpInfo(userId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-     * 
-     * @param userId  (required)
-     * @return ApiResponse&lt;DeleteUserResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<DeleteUserResponse> deleteSnapTradeUserWithHttpInfo(String userId) throws ApiException {
+    private ApiResponse<DeleteUserResponse> deleteSnapTradeUserWithHttpInfo(String userId) throws ApiException {
         okhttp3.Call localVarCall = deleteSnapTradeUserValidateBeforeCall(userId, null);
         Type localVarReturnType = new TypeToken<DeleteUserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deleteSnapTradeUserAsync(String userId, final ApiCallback<DeleteUserResponse> _callback) throws ApiException {
+    private okhttp3.Call deleteSnapTradeUserAsync(String userId, final ApiCallback<DeleteUserResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteSnapTradeUserValidateBeforeCall(userId, _callback);
         Type localVarReturnType = new TypeToken<DeleteUserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class DeleteSnapTradeUserRequestBuilder {
+        private final String userId;
+
+        private DeleteSnapTradeUserRequestBuilder(String userId) {
+            this.userId = userId;
+        }
+
+        /**
+         * Build call for deleteSnapTradeUser
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteSnapTradeUserCall(userId, _callback);
+        }
+
+
+        /**
+         * Execute deleteSnapTradeUser request
+         * @return DeleteUserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeleteUserResponse execute() throws ApiException {
+            ApiResponse<DeleteUserResponse> localVarResp = deleteSnapTradeUserWithHttpInfo(userId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute deleteSnapTradeUser request with HTTP info returned
+         * @return ApiResponse&lt;DeleteUserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeleteUserResponse> executeWithHttpInfo() throws ApiException {
+            return deleteSnapTradeUserWithHttpInfo(userId);
+        }
+
+        /**
+         * Execute deleteSnapTradeUser request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<DeleteUserResponse> _callback) throws ApiException {
+            return deleteSnapTradeUserAsync(userId, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserJWT
+     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * 
      * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @return DeleteSnapTradeUserRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserJWTCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public DeleteSnapTradeUserRequestBuilder deleteSnapTradeUser(String userId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        return new DeleteSnapTradeUserRequestBuilder(userId);
+    }
+    private okhttp3.Call getUserJWTCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -307,91 +317,118 @@ public class AuthenticationApi {
 
     }
 
-    /**
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return EncryptedResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public EncryptedResponse getUserJWT(String userId, String userSecret) throws ApiException {
-        ApiResponse<EncryptedResponse> localVarResp = getUserJWTWithHttpInfo(userId, userSecret);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;EncryptedResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EncryptedResponse> getUserJWTWithHttpInfo(String userId, String userSecret) throws ApiException {
+    private ApiResponse<EncryptedResponse> getUserJWTWithHttpInfo(String userId, String userSecret) throws ApiException {
         okhttp3.Call localVarCall = getUserJWTValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<EncryptedResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getUserJWTAsync(String userId, String userSecret, final ApiCallback<EncryptedResponse> _callback) throws ApiException {
+    private okhttp3.Call getUserJWTAsync(String userId, String userSecret, final ApiCallback<EncryptedResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserJWTValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<EncryptedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetUserJWTRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+
+        private GetUserJWTRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for getUserJWT
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserJWTCall(userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute getUserJWT request
+         * @return EncryptedResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public EncryptedResponse execute() throws ApiException {
+            ApiResponse<EncryptedResponse> localVarResp = getUserJWTWithHttpInfo(userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserJWT request with HTTP info returned
+         * @return ApiResponse&lt;EncryptedResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<EncryptedResponse> executeWithHttpInfo() throws ApiException {
+            return getUserJWTWithHttpInfo(userId, userSecret);
+        }
+
+        /**
+         * Execute getUserJWT request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<EncryptedResponse> _callback) throws ApiException {
+            return getUserJWTAsync(userId, userSecret, _callback);
+        }
+    }
+
     /**
-     * Build call for listSnapTradeUsers
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return GetUserJWTRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listSnapTradeUsersCall(final ApiCallback _callback) throws ApiException {
+    public GetUserJWTRequestBuilder getUserJWT(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new GetUserJWTRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call listSnapTradeUsersCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -441,86 +478,106 @@ public class AuthenticationApi {
 
     }
 
-    /**
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
-     * 
-     * @return List&lt;String&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<String> listSnapTradeUsers() throws ApiException {
-        ApiResponse<List<String>> localVarResp = listSnapTradeUsersWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
-     * 
-     * @return ApiResponse&lt;List&lt;String&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<String>> listSnapTradeUsersWithHttpInfo() throws ApiException {
+    private ApiResponse<List<String>> listSnapTradeUsersWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listSnapTradeUsersValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listSnapTradeUsersAsync(final ApiCallback<List<String>> _callback) throws ApiException {
+    private okhttp3.Call listSnapTradeUsersAsync(final ApiCallback<List<String>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listSnapTradeUsersValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListSnapTradeUsersRequestBuilder {
+
+        private ListSnapTradeUsersRequestBuilder() {
+        }
+
+        /**
+         * Build call for listSnapTradeUsers
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listSnapTradeUsersCall(_callback);
+        }
+
+
+        /**
+         * Execute listSnapTradeUsers request
+         * @return List&lt;String&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<String> execute() throws ApiException {
+            ApiResponse<List<String>> localVarResp = listSnapTradeUsersWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listSnapTradeUsers request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;String&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<String>> executeWithHttpInfo() throws ApiException {
+            return listSnapTradeUsersWithHttpInfo();
+        }
+
+        /**
+         * Execute listSnapTradeUsers request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<String>> _callback) throws ApiException {
+            return listSnapTradeUsersAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for loginSnapTradeUser
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param snapTradeLoginUserRequestBody  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * 
+     * @return ListSnapTradeUsersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call loginSnapTradeUserCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
+    public ListSnapTradeUsersRequestBuilder listSnapTradeUsers() throws IllegalArgumentException {
+        return new ListSnapTradeUsersRequestBuilder();
+    }
+    private okhttp3.Call loginSnapTradeUserCall(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -589,95 +646,186 @@ public class AuthenticationApi {
 
     }
 
-    /**
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param snapTradeLoginUserRequestBody  (optional)
-     * @return AuthenticationLoginSnapTradeUser200Response
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public AuthenticationLoginSnapTradeUser200Response loginSnapTradeUser(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
-        ApiResponse<AuthenticationLoginSnapTradeUser200Response> localVarResp = loginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param snapTradeLoginUserRequestBody  (optional)
-     * @return ApiResponse&lt;AuthenticationLoginSnapTradeUser200Response&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<AuthenticationLoginSnapTradeUser200Response> loginSnapTradeUserWithHttpInfo(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
+    private ApiResponse<Object> loginSnapTradeUserWithHttpInfo(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody) throws ApiException {
         okhttp3.Call localVarCall = loginSnapTradeUserValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, null);
-        Type localVarReturnType = new TypeToken<AuthenticationLoginSnapTradeUser200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call loginSnapTradeUserAsync(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = loginSnapTradeUserValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class LoginSnapTradeUserRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private String broker;
+        private Boolean immediateRedirect;
+        private String customRedirect;
+        private String reconnect;
+        private String connectionType;
+
+        private LoginSnapTradeUserRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set broker
+         * @param broker  (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder broker(String broker) {
+            this.broker = broker;
+            return this;
+        }
+        
+        /**
+         * Set immediateRedirect
+         * @param immediateRedirect  (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder immediateRedirect(Boolean immediateRedirect) {
+            this.immediateRedirect = immediateRedirect;
+            return this;
+        }
+        
+        /**
+         * Set customRedirect
+         * @param customRedirect  (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder customRedirect(String customRedirect) {
+            this.customRedirect = customRedirect;
+            return this;
+        }
+        
+        /**
+         * Set reconnect
+         * @param reconnect  (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder reconnect(String reconnect) {
+            this.reconnect = reconnect;
+            return this;
+        }
+        
+        /**
+         * Set connectionType
+         * @param connectionType  (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {
+            this.connectionType = connectionType;
+            return this;
+        }
+        
+        /**
+         * Build call for loginSnapTradeUser
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = buildBodyParams();
+            return loginSnapTradeUserCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
+        }
+
+        private SnapTradeLoginUserRequestBody buildBodyParams() {
+            SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody();
+            snapTradeLoginUserRequestBody.broker(this.broker);
+            snapTradeLoginUserRequestBody.immediateRedirect(this.immediateRedirect);
+            snapTradeLoginUserRequestBody.customRedirect(this.customRedirect);
+            snapTradeLoginUserRequestBody.reconnect(this.reconnect);
+            snapTradeLoginUserRequestBody.connectionType(this.connectionType);
+            return snapTradeLoginUserRequestBody;
+        }
+
+        /**
+         * Execute loginSnapTradeUser request
+         * @return Object
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public Object execute() throws ApiException {
+            SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = buildBodyParams();
+            ApiResponse<Object> localVarResp = loginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute loginSnapTradeUser request with HTTP info returned
+         * @return ApiResponse&lt;Object&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Object> executeWithHttpInfo() throws ApiException {
+            SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = buildBodyParams();
+            return loginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
+        }
+
+        /**
+         * Execute loginSnapTradeUser request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Object> _callback) throws ApiException {
+            SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = buildBodyParams();
+            return loginSnapTradeUserAsync(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
+        }
+    }
+
     /**
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal (asynchronously)
+     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param snapTradeLoginUserRequestBody  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return LoginSnapTradeUserRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call loginSnapTradeUserAsync(String userId, String userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody, final ApiCallback<AuthenticationLoginSnapTradeUser200Response> _callback) throws ApiException {
+    public LoginSnapTradeUserRequestBuilder loginSnapTradeUser(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = loginSnapTradeUserValidateBeforeCall(userId, userSecret, snapTradeLoginUserRequestBody, _callback);
-        Type localVarReturnType = new TypeToken<AuthenticationLoginSnapTradeUser200Response>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new LoginSnapTradeUserRequestBuilder(userId, userSecret);
     }
-    /**
-     * Build call for registerSnapTradeUser
-     * @param snapTradeRegisterUserRequestBody  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerSnapTradeUserCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call registerSnapTradeUserCall(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -733,68 +881,136 @@ public class AuthenticationApi {
 
     }
 
-    /**
-     * Register user with SnapTrade in order to create secure brokerage authorizations
-     * 
-     * @param snapTradeRegisterUserRequestBody  (required)
-     * @return UserIDandSecret
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public UserIDandSecret registerSnapTradeUser(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
-        ApiResponse<UserIDandSecret> localVarResp = registerSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Register user with SnapTrade in order to create secure brokerage authorizations
-     * 
-     * @param snapTradeRegisterUserRequestBody  (required)
-     * @return ApiResponse&lt;UserIDandSecret&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<UserIDandSecret> registerSnapTradeUserWithHttpInfo(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
+    private ApiResponse<UserIDandSecret> registerSnapTradeUserWithHttpInfo(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody) throws ApiException {
         okhttp3.Call localVarCall = registerSnapTradeUserValidateBeforeCall(snapTradeRegisterUserRequestBody, null);
         Type localVarReturnType = new TypeToken<UserIDandSecret>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Register user with SnapTrade in order to create secure brokerage authorizations (asynchronously)
-     * 
-     * @param snapTradeRegisterUserRequestBody  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request. Could be caused by various reasons. Error message is provided in response </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Invalid SnapTrade Client ID provided in query </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerSnapTradeUserAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback<UserIDandSecret> _callback) throws ApiException {
+    private okhttp3.Call registerSnapTradeUserAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, final ApiCallback<UserIDandSecret> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = registerSnapTradeUserValidateBeforeCall(snapTradeRegisterUserRequestBody, _callback);
         Type localVarReturnType = new TypeToken<UserIDandSecret>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
+    }
+
+    public class RegisterSnapTradeUserRequestBuilder {
+        private String userId;
+        private String rsaPublicKey;
+
+        private RegisterSnapTradeUserRequestBuilder() {
+        }
+
+        /**
+         * Set userId
+         * @param userId SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user (optional)
+         * @return RegisterSnapTradeUserRequestBuilder
+         */
+        public RegisterSnapTradeUserRequestBuilder userId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+        
+        /**
+         * Set rsaPublicKey
+         * @param rsaPublicKey Open SSH RSA public key (optional)
+         * @return RegisterSnapTradeUserRequestBuilder
+         */
+        public RegisterSnapTradeUserRequestBuilder rsaPublicKey(String rsaPublicKey) {
+            this.rsaPublicKey = rsaPublicKey;
+            return this;
+        }
+        
+        /**
+         * Build call for registerSnapTradeUser
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = buildBodyParams();
+            return registerSnapTradeUserCall(snapTradeRegisterUserRequestBody, _callback);
+        }
+
+        private SnapTradeRegisterUserRequestBody buildBodyParams() {
+            SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody();
+            snapTradeRegisterUserRequestBody.userId(this.userId);
+            snapTradeRegisterUserRequestBody.rsaPublicKey(this.rsaPublicKey);
+            return snapTradeRegisterUserRequestBody;
+        }
+
+        /**
+         * Execute registerSnapTradeUser request
+         * @return UserIDandSecret
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserIDandSecret execute() throws ApiException {
+            SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = buildBodyParams();
+            ApiResponse<UserIDandSecret> localVarResp = registerSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute registerSnapTradeUser request with HTTP info returned
+         * @return ApiResponse&lt;UserIDandSecret&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserIDandSecret> executeWithHttpInfo() throws ApiException {
+            SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = buildBodyParams();
+            return registerSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
+        }
+
+        /**
+         * Execute registerSnapTradeUser request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserIDandSecret> _callback) throws ApiException {
+            SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = buildBodyParams();
+            return registerSnapTradeUserAsync(snapTradeRegisterUserRequestBody, _callback);
+        }
+    }
+
+    /**
+     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * 
+     * @param snapTradeRegisterUserRequestBody  (required)
+     * @return RegisterSnapTradeUserRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public RegisterSnapTradeUserRequestBuilder registerSnapTradeUser() throws IllegalArgumentException {
+        return new RegisterSnapTradeUserRequestBuilder();
     }
 }

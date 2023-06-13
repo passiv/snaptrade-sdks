@@ -254,10 +254,15 @@ require 'snaptrade'
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Create a new model asset class
-  result = SnapTrade::PortfolioManagement.create_asset_class
+  result = SnapTrade::PortfolioManagement.create_asset_class(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::PortfolioManagement.create_asset_class: #{e}"
@@ -269,10 +274,15 @@ end
 This returns an Array which contains the response data, status code and headers.
 
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Create a new model asset class
-  data, status_code, headers, response = SnapTrade::PortfolioManagement.create_asset_class_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.create_asset_class_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => ModelAssetClassDetails
@@ -283,7 +293,10 @@ end
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **user_id** | **String** |  |  |
+| **user_secret** | **String** |  |  |
 
 ### Return type
 
@@ -631,11 +644,15 @@ SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Get details of a model asset class
   result = SnapTrade::PortfolioManagement.detail_asset_class(
     model_asset_class_id: model_asset_class_id,
+    user_id: user_id,
+    user_secret: user_secret,
   )
   p result
 rescue SnapTrade::ApiError => e
@@ -649,11 +666,15 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # Get details of a model asset class
   data, status_code, headers, response = SnapTrade::PortfolioManagement.detail_asset_class_with_http_info(
     model_asset_class_id: model_asset_class_id,
+    user_id: user_id,
+    user_secret: user_secret,
   )
   p status_code # => 2xx
   p headers # => { ... }
@@ -668,6 +689,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **model_asset_class_id** | **String** | The ID of the model asset class to get. |  |
+| **user_id** | **String** |  |  |
+| **user_secret** | **String** |  |  |
 
 ### Return type
 
@@ -1310,10 +1333,15 @@ require 'snaptrade'
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List of model asset class
-  result = SnapTrade::PortfolioManagement.list_asset_classes
+  result = SnapTrade::PortfolioManagement.list_asset_classes(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::PortfolioManagement.list_asset_classes: #{e}"
@@ -1325,10 +1353,15 @@ end
 This returns an Array which contains the response data, status code and headers.
 
 ```ruby
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 
 begin
   # List of model asset class
-  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_asset_classes_with_http_info
+  data, status_code, headers, response = SnapTrade::PortfolioManagement.list_asset_classes_with_http_info(
+    user_id: user_id,
+    user_secret: user_secret,
+  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<ModelAssetClassDetails>
@@ -1339,7 +1372,10 @@ end
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **user_id** | **String** |  |  |
+| **user_secret** | **String** |  |  |
 
 ### Return type
 
@@ -1804,6 +1840,8 @@ SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 model_asset_class = {
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name" => "Bonds",
@@ -1817,6 +1855,8 @@ begin
   # Updates model asset class objects
   SnapTrade::PortfolioManagement.update_asset_class(
     model_asset_class_id: model_asset_class_id,
+    user_id: user_id,
+    user_secret: user_secret,
     model_asset_class: model_asset_class,
     model_asset_class_target: model_asset_class_target,
   )
@@ -1831,6 +1871,8 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 model_asset_class_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+user_id = "John.doe@snaptrade.com"
+user_secret = "USERSECRET123"
 model_asset_class = {
         "id" => "2bcd7cc3-e922-4976-bce1-9858296801c3",
         "name" => "Bonds",
@@ -1844,6 +1886,8 @@ begin
   # Updates model asset class objects
   data, status_code, headers, response = SnapTrade::PortfolioManagement.update_asset_class_with_http_info(
     model_asset_class_id: model_asset_class_id,
+    user_id: user_id,
+    user_secret: user_secret,
     model_asset_class: model_asset_class,
     model_asset_class_target: model_asset_class_target,
   )
@@ -1860,6 +1904,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **model_asset_class_id** | **String** | The ID of the model asset class to update. |  |
+| **user_id** | **String** |  |  |
+| **user_secret** | **String** |  |  |
 | **model_asset_class_details** | [**ModelAssetClassDetails**](ModelAssetClassDetails.md) | Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array |  |
 
 ### Return type

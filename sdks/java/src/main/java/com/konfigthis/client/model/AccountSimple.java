@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountSyncStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -34,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,10 +65,18 @@ public class AccountSimple {
   @SerializedName(SERIALIZED_NAME_NUMBER)
   private String number;
 
+  public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
+  @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
+  private AccountSyncStatus syncStatus;
+
   public AccountSimple() {
   }
 
   public AccountSimple id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -85,11 +95,19 @@ public class AccountSimple {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public AccountSimple name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -108,11 +126,19 @@ public class AccountSimple {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public AccountSimple number(String number) {
+
+    
+    
+    
     
     this.number = number;
     return this;
@@ -131,7 +157,42 @@ public class AccountSimple {
 
 
   public void setNumber(String number) {
+
+    
+    
+    
     this.number = number;
+  }
+
+
+  public AccountSimple syncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    
+    this.syncStatus = syncStatus;
+    return this;
+  }
+
+   /**
+   * Get syncStatus
+   * @return syncStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountSyncStatus getSyncStatus() {
+    return syncStatus;
+  }
+
+
+  public void setSyncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    this.syncStatus = syncStatus;
   }
 
   /**
@@ -191,13 +252,14 @@ public class AccountSimple {
     AccountSimple accountSimple = (AccountSimple) o;
     return Objects.equals(this.id, accountSimple.id) &&
         Objects.equals(this.name, accountSimple.name) &&
-        Objects.equals(this.number, accountSimple.number)&&
+        Objects.equals(this.number, accountSimple.number) &&
+        Objects.equals(this.syncStatus, accountSimple.syncStatus)&&
         Objects.equals(this.additionalProperties, accountSimple.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, number, additionalProperties);
+    return Objects.hash(id, name, number, syncStatus, additionalProperties);
   }
 
   @Override
@@ -207,6 +269,7 @@ public class AccountSimple {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
+    sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -233,6 +296,7 @@ public class AccountSimple {
     openapiFields.add("id");
     openapiFields.add("name");
     openapiFields.add("number");
+    openapiFields.add("sync_status");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -258,6 +322,10 @@ public class AccountSimple {
       }
       if ((jsonObj.get("number") != null && !jsonObj.get("number").isJsonNull()) && !jsonObj.get("number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
+      }
+      // validate the optional field `sync_status`
+      if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {
+        AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       }
   }
 

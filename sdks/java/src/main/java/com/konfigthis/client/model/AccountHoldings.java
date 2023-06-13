@@ -39,6 +39,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -76,6 +77,10 @@ public class AccountHoldings {
   }
 
   public AccountHoldings account(SnapTradeHoldingsAccount account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -94,11 +99,19 @@ public class AccountHoldings {
 
 
   public void setAccount(SnapTradeHoldingsAccount account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public AccountHoldings balances(List<Balance> balances) {
+
+    
+    
+    
     
     this.balances = balances;
     return this;
@@ -125,11 +138,19 @@ public class AccountHoldings {
 
 
   public void setBalances(List<Balance> balances) {
+
+    
+    
+    
     this.balances = balances;
   }
 
 
   public AccountHoldings positions(List<Position> positions) {
+
+    
+    
+    
     
     this.positions = positions;
     return this;
@@ -156,11 +177,19 @@ public class AccountHoldings {
 
 
   public void setPositions(List<Position> positions) {
+
+    
+    
+    
     this.positions = positions;
   }
 
 
   public AccountHoldings totalValue(SnapTradeHoldingsTotalValue totalValue) {
+
+    
+    
+    
     
     this.totalValue = totalValue;
     return this;
@@ -179,6 +208,10 @@ public class AccountHoldings {
 
 
   public void setTotalValue(SnapTradeHoldingsTotalValue totalValue) {
+
+    
+    
+    
     this.totalValue = totalValue;
   }
 

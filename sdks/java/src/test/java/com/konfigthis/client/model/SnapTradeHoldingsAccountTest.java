@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountSyncStatus;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -89,6 +90,14 @@ public class SnapTradeHoldingsAccountTest {
     @Test
     public void institutionNameTest() {
         // TODO: test institutionName
+    }
+
+    /**
+     * Test the property 'syncStatus'
+     */
+    @Test
+    public void syncStatusTest() {
+        // TODO: test syncStatus
     }
 
     /**

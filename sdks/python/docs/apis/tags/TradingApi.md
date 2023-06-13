@@ -595,12 +595,6 @@ try:
         use_ticker=True,  # optional
     )
     pprint(get_user_account_quotes_response.body)
-    pprint(get_user_account_quotes_response.body["symbol"])
-    pprint(get_user_account_quotes_response.body["bid_price"])
-    pprint(get_user_account_quotes_response.body["ask_price"])
-    pprint(get_user_account_quotes_response.body["last_trade_price"])
-    pprint(get_user_account_quotes_response.body["bid_size"])
-    pprint(get_user_account_quotes_response.body["ask_size"])
     pprint(get_user_account_quotes_response.headers)
     pprint(get_user_account_quotes_response.status)
     pprint(get_user_account_quotes_response.round_trip_time)

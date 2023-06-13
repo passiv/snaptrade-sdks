@@ -23,7 +23,6 @@ import com.konfigthis.client.model.PositionSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -36,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -59,28 +59,32 @@ public class Position {
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
-  private BigDecimal units;
+  private Double units;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_OPEN_PNL = "open_pnl";
   @SerializedName(SERIALIZED_NAME_OPEN_PNL)
-  private BigDecimal openPnl;
+  private Double openPnl;
 
   public static final String SERIALIZED_NAME_FRACTIONAL_UNITS = "fractional_units";
   @SerializedName(SERIALIZED_NAME_FRACTIONAL_UNITS)
-  private BigDecimal fractionalUnits;
+  private Double fractionalUnits;
 
   public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
-  private BigDecimal averagePurchasePrice;
+  private Double averagePurchasePrice;
 
   public Position() {
   }
 
   public Position symbol(PositionSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -99,13 +103,31 @@ public class Position {
 
 
   public void setSymbol(PositionSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
-  public Position units(BigDecimal units) {
+  public Position units(Double units) {
+
+    
+    
+    
     
     this.units = units;
+    return this;
+  }
+
+  public Position units(Integer units) {
+
+    
+    
+    
+    
+    this.units = units.doubleValue();
     return this;
   }
 
@@ -116,19 +138,37 @@ public class Position {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "40", value = "")
 
-  public BigDecimal getUnits() {
+  public Double getUnits() {
     return units;
   }
 
 
-  public void setUnits(BigDecimal units) {
+  public void setUnits(Double units) {
+
+    
+    
+    
     this.units = units;
   }
 
 
-  public Position price(BigDecimal price) {
+  public Position price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public Position price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -139,19 +179,37 @@ public class Position {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "113.15", value = "Last known market price for the symbol")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
-  public Position openPnl(BigDecimal openPnl) {
+  public Position openPnl(Double openPnl) {
+
+    
+    
+    
     
     this.openPnl = openPnl;
+    return this;
+  }
+
+  public Position openPnl(Integer openPnl) {
+
+    
+    
+    
+    
+    this.openPnl = openPnl.doubleValue();
     return this;
   }
 
@@ -162,19 +220,37 @@ public class Position {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.44", value = "")
 
-  public BigDecimal getOpenPnl() {
+  public Double getOpenPnl() {
     return openPnl;
   }
 
 
-  public void setOpenPnl(BigDecimal openPnl) {
+  public void setOpenPnl(Double openPnl) {
+
+    
+    
+    
     this.openPnl = openPnl;
   }
 
 
-  public Position fractionalUnits(BigDecimal fractionalUnits) {
+  public Position fractionalUnits(Double fractionalUnits) {
+
+    
+    
+    
     
     this.fractionalUnits = fractionalUnits;
+    return this;
+  }
+
+  public Position fractionalUnits(Integer fractionalUnits) {
+
+    
+    
+    
+    
+    this.fractionalUnits = fractionalUnits.doubleValue();
     return this;
   }
 
@@ -185,19 +261,37 @@ public class Position {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1.44", value = "Deprecated, use the units field for both fractional and integer units going forward")
 
-  public BigDecimal getFractionalUnits() {
+  public Double getFractionalUnits() {
     return fractionalUnits;
   }
 
 
-  public void setFractionalUnits(BigDecimal fractionalUnits) {
+  public void setFractionalUnits(Double fractionalUnits) {
+
+    
+    
+    
     this.fractionalUnits = fractionalUnits;
   }
 
 
-  public Position averagePurchasePrice(BigDecimal averagePurchasePrice) {
+  public Position averagePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     
     this.averagePurchasePrice = averagePurchasePrice;
+    return this;
+  }
+
+  public Position averagePurchasePrice(Integer averagePurchasePrice) {
+
+    
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice.doubleValue();
     return this;
   }
 
@@ -208,12 +302,16 @@ public class Position {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "108.3353", value = "Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.")
 
-  public BigDecimal getAveragePurchasePrice() {
+  public Double getAveragePurchasePrice() {
     return averagePurchasePrice;
   }
 
 
-  public void setAveragePurchasePrice(BigDecimal averagePurchasePrice) {
+  public void setAveragePurchasePrice(Double averagePurchasePrice) {
+
+    
+    
+    
     this.averagePurchasePrice = averagePurchasePrice;
   }
 

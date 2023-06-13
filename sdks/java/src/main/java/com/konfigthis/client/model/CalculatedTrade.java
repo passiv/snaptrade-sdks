@@ -37,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -66,6 +67,10 @@ public class CalculatedTrade {
   }
 
   public CalculatedTrade id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -84,11 +89,19 @@ public class CalculatedTrade {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public CalculatedTrade trades(List<Trade> trades) {
+
+    
+    
+    
     
     this.trades = trades;
     return this;
@@ -115,6 +128,10 @@ public class CalculatedTrade {
 
 
   public void setTrades(List<Trade> trades) {
+
+    
+    
+    
     this.trades = trades;
   }
 

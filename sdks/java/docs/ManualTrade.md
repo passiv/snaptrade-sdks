@@ -9,13 +9,13 @@ A manual trade object
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**account** | **Account** |  |  [optional] |
+|**account** | **String** |  |  [optional] |
 |**orderType** | **OrderType** |  |  [optional] |
 |**timeInForce** | **TimeInForce** |  |  [optional] |
 |**symbol** | **ManualTradeSymbol** |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
-|**units** | **BigDecimal** | Trade Units |  [optional] |
-|**price** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
+|**units** | **Double** | Trade Units |  [optional] |
+|**price** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 
 
 

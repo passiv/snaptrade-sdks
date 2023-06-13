@@ -17,21 +17,4 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
-class RequiredSymbolsQuotes(TypedDict):
-    pass
-
-class OptionalSymbolsQuotes(TypedDict, total=False):
-    symbol: UniversalSymbol
-
-    bid_price: typing.Union[int, float]
-
-    ask_price: typing.Union[int, float]
-
-    last_trade_price: typing.Union[int, float]
-
-    bid_size: typing.Union[int, float]
-
-    ask_size: typing.Union[int, float]
-
-class SymbolsQuotes(RequiredSymbolsQuotes, OptionalSymbolsQuotes):
-    pass
+SymbolsQuotes = typing.List[typing.Union[bool, date, datetime, dict, float, int, list, str, None]]

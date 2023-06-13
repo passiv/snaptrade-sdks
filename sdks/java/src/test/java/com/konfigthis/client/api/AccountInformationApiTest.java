@@ -13,16 +13,19 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
+import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model403FailedRequestResponse;
 import com.konfigthis.client.model.Position;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +38,14 @@ import java.util.Map;
 @Disabled
 public class AccountInformationApiTest {
 
-    private final AccountInformationApi api = new AccountInformationApi();
+    private static AccountInformationApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new AccountInformationApi(apiClient);
+    }
 
     /**
      * List all accounts for the user, plus balances and positions for each account.
@@ -47,7 +57,9 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID brokerageAuthorizations = null;
-        List<AccountHoldings> response = api.getAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+        List<AccountHoldings> response = api.getAllUserHoldings(userId, userSecret)
+                .brokerageAuthorizations(brokerageAuthorizations)
+                .execute();
         // TODO: test validations
     }
 
@@ -61,7 +73,8 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Balance> response = api.getUserAccountBalance(userId, userSecret, accountId);
+        List<Balance> response = api.getUserAccountBalance(userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 
@@ -75,7 +88,8 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Account> response = api.getUserAccountDetails(userId, userSecret, accountId);
+        List<Account> response = api.getUserAccountDetails(userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 
@@ -90,7 +104,9 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         String state = null;
-        List<AccountOrderRecord> response = api.getUserAccountOrders(userId, userSecret, accountId, state);
+        List<AccountOrderRecord> response = api.getUserAccountOrders(userId, userSecret, accountId)
+                .state(state)
+                .execute();
         // TODO: test validations
     }
 
@@ -104,7 +120,8 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId);
+        List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 
@@ -118,7 +135,8 @@ public class AccountInformationApiTest {
         UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        AccountHoldings response = api.getUserHoldings(accountId, userId, userSecret);
+        AccountHoldingsAccount response = api.getUserHoldings(accountId, userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 
@@ -131,7 +149,8 @@ public class AccountInformationApiTest {
     public void listUserAccountsTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        List<Account> response = api.listUserAccounts(userId, userSecret);
+        List<Account> response = api.listUserAccounts(userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 
@@ -145,7 +164,8 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Account> response = api.updateUserAccount(userId, userSecret, accountId);
+        List<Account> response = api.updateUserAccount(userId, userSecret, accountId)
+                .execute();
         // TODO: test validations
     }
 

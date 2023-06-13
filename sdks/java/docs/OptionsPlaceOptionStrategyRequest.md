@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**orderType** | [**OrderTypeEnum**](#OrderTypeEnum) |  |  |
 |**timeInForce** | [**TimeInForceEnum**](#TimeInForceEnum) |  |  |
-|**price** | **BigDecimal** | Trade Price if limit or stop limit order |  |
+|**price** | **Double** | Trade Price if limit or stop limit order |  |
 
 
 

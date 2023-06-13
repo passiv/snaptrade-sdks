@@ -23,7 +23,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -36,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class NetDividend {
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
-  private BigDecimal amount;
+  private Double amount;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -69,6 +69,10 @@ public class NetDividend {
   }
 
   public NetDividend symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -87,13 +91,31 @@ public class NetDividend {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
-  public NetDividend amount(BigDecimal amount) {
+  public NetDividend amount(Double amount) {
+
+    
+    
+    
     
     this.amount = amount;
+    return this;
+  }
+
+  public NetDividend amount(Integer amount) {
+
+    
+    
+    
+    
+    this.amount = amount.doubleValue();
     return this;
   }
 
@@ -104,17 +126,25 @@ public class NetDividend {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "165.05", value = "")
 
-  public BigDecimal getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
 
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(Double amount) {
+
+    
+    
+    
     this.amount = amount;
   }
 
 
   public NetDividend currency(String currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -133,6 +163,10 @@ public class NetDividend {
 
 
   public void setCurrency(String currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 

@@ -21,14 +21,15 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.OptionsSymbol;
 import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,6 +41,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -73,37 +75,41 @@ public class AccountOrderRecord {
   @SerializedName(SERIALIZED_NAME_UNIVERSAL_SYMBOL)
   private UniversalSymbol universalSymbol;
 
+  public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
+  @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
+  private OptionsSymbol optionSymbol;
+
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
   private Action action;
 
   public static final String SERIALIZED_NAME_TOTAL_QUANTITY = "total_quantity";
   @SerializedName(SERIALIZED_NAME_TOTAL_QUANTITY)
-  private BigDecimal totalQuantity;
+  private Double totalQuantity;
 
   public static final String SERIALIZED_NAME_OPEN_QUANTITY = "open_quantity";
   @SerializedName(SERIALIZED_NAME_OPEN_QUANTITY)
-  private BigDecimal openQuantity;
+  private Double openQuantity;
 
   public static final String SERIALIZED_NAME_CANCELED_QUANTITY = "canceled_quantity";
   @SerializedName(SERIALIZED_NAME_CANCELED_QUANTITY)
-  private BigDecimal canceledQuantity;
+  private Double canceledQuantity;
 
   public static final String SERIALIZED_NAME_FILLED_QUANTITY = "filled_quantity";
   @SerializedName(SERIALIZED_NAME_FILLED_QUANTITY)
-  private BigDecimal filledQuantity;
+  private Double filledQuantity;
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
-  private BigDecimal executionPrice;
+  private Double executionPrice;
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private BigDecimal limitPrice;
+  private Double limitPrice;
 
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
-  private BigDecimal stopPrice;
+  private Double stopPrice;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -129,6 +135,10 @@ public class AccountOrderRecord {
   }
 
   public AccountOrderRecord brokerageOrderId(String brokerageOrderId) {
+
+    
+    
+    
     
     this.brokerageOrderId = brokerageOrderId;
     return this;
@@ -147,11 +157,19 @@ public class AccountOrderRecord {
 
 
   public void setBrokerageOrderId(String brokerageOrderId) {
+
+    
+    
+    
     this.brokerageOrderId = brokerageOrderId;
   }
 
 
   public AccountOrderRecord status(AccountOrderRecordStatus status) {
+
+    
+    
+    
     
     this.status = status;
     return this;
@@ -170,11 +188,19 @@ public class AccountOrderRecord {
 
 
   public void setStatus(AccountOrderRecordStatus status) {
+
+    
+    
+    
     this.status = status;
   }
 
 
   public AccountOrderRecord symbol(UUID symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -193,11 +219,19 @@ public class AccountOrderRecord {
 
 
   public void setSymbol(UUID symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public AccountOrderRecord universalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     
     this.universalSymbol = universalSymbol;
     return this;
@@ -216,11 +250,50 @@ public class AccountOrderRecord {
 
 
   public void setUniversalSymbol(UniversalSymbol universalSymbol) {
+
+    
+    
+    
     this.universalSymbol = universalSymbol;
   }
 
 
+  public AccountOrderRecord optionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+    return this;
+  }
+
+   /**
+   * Get optionSymbol
+   * @return optionSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public OptionsSymbol getOptionSymbol() {
+    return optionSymbol;
+  }
+
+
+  public void setOptionSymbol(OptionsSymbol optionSymbol) {
+
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+  }
+
+
   public AccountOrderRecord action(Action action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -239,13 +312,31 @@ public class AccountOrderRecord {
 
 
   public void setAction(Action action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
-  public AccountOrderRecord totalQuantity(BigDecimal totalQuantity) {
+  public AccountOrderRecord totalQuantity(Double totalQuantity) {
+
+    
+    
+    
     
     this.totalQuantity = totalQuantity;
+    return this;
+  }
+
+  public AccountOrderRecord totalQuantity(Integer totalQuantity) {
+
+    
+    
+    
+    
+    this.totalQuantity = totalQuantity.doubleValue();
     return this;
   }
 
@@ -256,19 +347,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getTotalQuantity() {
+  public Double getTotalQuantity() {
     return totalQuantity;
   }
 
 
-  public void setTotalQuantity(BigDecimal totalQuantity) {
+  public void setTotalQuantity(Double totalQuantity) {
+
+    
+    
+    
     this.totalQuantity = totalQuantity;
   }
 
 
-  public AccountOrderRecord openQuantity(BigDecimal openQuantity) {
+  public AccountOrderRecord openQuantity(Double openQuantity) {
+
+    
+    
+    
     
     this.openQuantity = openQuantity;
+    return this;
+  }
+
+  public AccountOrderRecord openQuantity(Integer openQuantity) {
+
+    
+    
+    
+    
+    this.openQuantity = openQuantity.doubleValue();
     return this;
   }
 
@@ -279,19 +388,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getOpenQuantity() {
+  public Double getOpenQuantity() {
     return openQuantity;
   }
 
 
-  public void setOpenQuantity(BigDecimal openQuantity) {
+  public void setOpenQuantity(Double openQuantity) {
+
+    
+    
+    
     this.openQuantity = openQuantity;
   }
 
 
-  public AccountOrderRecord canceledQuantity(BigDecimal canceledQuantity) {
+  public AccountOrderRecord canceledQuantity(Double canceledQuantity) {
+
+    
+    
+    
     
     this.canceledQuantity = canceledQuantity;
+    return this;
+  }
+
+  public AccountOrderRecord canceledQuantity(Integer canceledQuantity) {
+
+    
+    
+    
+    
+    this.canceledQuantity = canceledQuantity.doubleValue();
     return this;
   }
 
@@ -302,19 +429,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getCanceledQuantity() {
+  public Double getCanceledQuantity() {
     return canceledQuantity;
   }
 
 
-  public void setCanceledQuantity(BigDecimal canceledQuantity) {
+  public void setCanceledQuantity(Double canceledQuantity) {
+
+    
+    
+    
     this.canceledQuantity = canceledQuantity;
   }
 
 
-  public AccountOrderRecord filledQuantity(BigDecimal filledQuantity) {
+  public AccountOrderRecord filledQuantity(Double filledQuantity) {
+
+    
+    
+    
     
     this.filledQuantity = filledQuantity;
+    return this;
+  }
+
+  public AccountOrderRecord filledQuantity(Integer filledQuantity) {
+
+    
+    
+    
+    
+    this.filledQuantity = filledQuantity.doubleValue();
     return this;
   }
 
@@ -325,19 +470,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getFilledQuantity() {
+  public Double getFilledQuantity() {
     return filledQuantity;
   }
 
 
-  public void setFilledQuantity(BigDecimal filledQuantity) {
+  public void setFilledQuantity(Double filledQuantity) {
+
+    
+    
+    
     this.filledQuantity = filledQuantity;
   }
 
 
-  public AccountOrderRecord executionPrice(BigDecimal executionPrice) {
+  public AccountOrderRecord executionPrice(Double executionPrice) {
+
+    
+    
+    
     
     this.executionPrice = executionPrice;
+    return this;
+  }
+
+  public AccountOrderRecord executionPrice(Integer executionPrice) {
+
+    
+    
+    
+    
+    this.executionPrice = executionPrice.doubleValue();
     return this;
   }
 
@@ -348,19 +511,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getExecutionPrice() {
+  public Double getExecutionPrice() {
     return executionPrice;
   }
 
 
-  public void setExecutionPrice(BigDecimal executionPrice) {
+  public void setExecutionPrice(Double executionPrice) {
+
+    
+    
+    
     this.executionPrice = executionPrice;
   }
 
 
-  public AccountOrderRecord limitPrice(BigDecimal limitPrice) {
+  public AccountOrderRecord limitPrice(Double limitPrice) {
+
+    
+    
+    
     
     this.limitPrice = limitPrice;
+    return this;
+  }
+
+  public AccountOrderRecord limitPrice(Integer limitPrice) {
+
+    
+    
+    
+    
+    this.limitPrice = limitPrice.doubleValue();
     return this;
   }
 
@@ -371,19 +552,37 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getLimitPrice() {
+  public Double getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(BigDecimal limitPrice) {
+  public void setLimitPrice(Double limitPrice) {
+
+    
+    
+    
     this.limitPrice = limitPrice;
   }
 
 
-  public AccountOrderRecord stopPrice(BigDecimal stopPrice) {
+  public AccountOrderRecord stopPrice(Double stopPrice) {
+
+    
+    
+    
     
     this.stopPrice = stopPrice;
+    return this;
+  }
+
+  public AccountOrderRecord stopPrice(Integer stopPrice) {
+
+    
+    
+    
+    
+    this.stopPrice = stopPrice.doubleValue();
     return this;
   }
 
@@ -394,17 +593,25 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getStopPrice() {
+  public Double getStopPrice() {
     return stopPrice;
   }
 
 
-  public void setStopPrice(BigDecimal stopPrice) {
+  public void setStopPrice(Double stopPrice) {
+
+    
+    
+    
     this.stopPrice = stopPrice;
   }
 
 
   public AccountOrderRecord orderType(OrderType orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -423,11 +630,19 @@ public class AccountOrderRecord {
 
 
   public void setOrderType(OrderType orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
   public AccountOrderRecord timeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -446,11 +661,19 @@ public class AccountOrderRecord {
 
 
   public void setTimeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
   public AccountOrderRecord timePlaced(String timePlaced) {
+
+    
+    
+    
     
     this.timePlaced = timePlaced;
     return this;
@@ -469,11 +692,19 @@ public class AccountOrderRecord {
 
 
   public void setTimePlaced(String timePlaced) {
+
+    
+    
+    
     this.timePlaced = timePlaced;
   }
 
 
   public AccountOrderRecord timeUpdated(String timeUpdated) {
+
+    
+    
+    
     
     this.timeUpdated = timeUpdated;
     return this;
@@ -492,11 +723,19 @@ public class AccountOrderRecord {
 
 
   public void setTimeUpdated(String timeUpdated) {
+
+    
+    
+    
     this.timeUpdated = timeUpdated;
   }
 
 
   public AccountOrderRecord expiryDate(String expiryDate) {
+
+    
+    
+    
     
     this.expiryDate = expiryDate;
     return this;
@@ -515,6 +754,10 @@ public class AccountOrderRecord {
 
 
   public void setExpiryDate(String expiryDate) {
+
+    
+    
+    
     this.expiryDate = expiryDate;
   }
 
@@ -577,6 +820,7 @@ public class AccountOrderRecord {
         Objects.equals(this.status, accountOrderRecord.status) &&
         Objects.equals(this.symbol, accountOrderRecord.symbol) &&
         Objects.equals(this.universalSymbol, accountOrderRecord.universalSymbol) &&
+        Objects.equals(this.optionSymbol, accountOrderRecord.optionSymbol) &&
         Objects.equals(this.action, accountOrderRecord.action) &&
         Objects.equals(this.totalQuantity, accountOrderRecord.totalQuantity) &&
         Objects.equals(this.openQuantity, accountOrderRecord.openQuantity) &&
@@ -593,9 +837,20 @@ public class AccountOrderRecord {
         Objects.equals(this.additionalProperties, accountOrderRecord.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, symbol, universalSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, expiryDate, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, symbol, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, expiryDate, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -606,6 +861,7 @@ public class AccountOrderRecord {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    universalSymbol: ").append(toIndentedString(universalSymbol)).append("\n");
+    sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
     sb.append("    totalQuantity: ").append(toIndentedString(totalQuantity)).append("\n");
     sb.append("    openQuantity: ").append(toIndentedString(openQuantity)).append("\n");
@@ -646,6 +902,7 @@ public class AccountOrderRecord {
     openapiFields.add("status");
     openapiFields.add("symbol");
     openapiFields.add("universal_symbol");
+    openapiFields.add("option_symbol");
     openapiFields.add("action");
     openapiFields.add("total_quantity");
     openapiFields.add("open_quantity");

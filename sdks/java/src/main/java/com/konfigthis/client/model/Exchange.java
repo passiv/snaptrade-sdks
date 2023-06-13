@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -88,6 +89,10 @@ public class Exchange {
   }
 
   public Exchange id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -106,11 +111,19 @@ public class Exchange {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public Exchange code(String code) {
+
+    
+    
+    
     
     this.code = code;
     return this;
@@ -129,11 +142,19 @@ public class Exchange {
 
 
   public void setCode(String code) {
+
+    
+    
+    
     this.code = code;
   }
 
 
   public Exchange micCode(String micCode) {
+
+    
+    
+    
     
     this.micCode = micCode;
     return this;
@@ -152,11 +173,19 @@ public class Exchange {
 
 
   public void setMicCode(String micCode) {
+
+    
+    
+    
     this.micCode = micCode;
   }
 
 
   public Exchange name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -175,11 +204,19 @@ public class Exchange {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public Exchange timezone(String timezone) {
+
+    
+    
+    
     
     this.timezone = timezone;
     return this;
@@ -198,11 +235,19 @@ public class Exchange {
 
 
   public void setTimezone(String timezone) {
+
+    
+    
+    
     this.timezone = timezone;
   }
 
 
   public Exchange startTime(String startTime) {
+
+    
+    
+    
     
     this.startTime = startTime;
     return this;
@@ -221,11 +266,19 @@ public class Exchange {
 
 
   public void setStartTime(String startTime) {
+
+    
+    
+    
     this.startTime = startTime;
   }
 
 
   public Exchange closeTime(String closeTime) {
+
+    
+    
+    
     
     this.closeTime = closeTime;
     return this;
@@ -244,11 +297,19 @@ public class Exchange {
 
 
   public void setCloseTime(String closeTime) {
+
+    
+    
+    
     this.closeTime = closeTime;
   }
 
 
   public Exchange suffix(String suffix) {
+
+    
+    
+    
     
     this.suffix = suffix;
     return this;
@@ -267,6 +328,10 @@ public class Exchange {
 
 
   public void setSuffix(String suffix) {
+
+    
+    
+    
     this.suffix = suffix;
   }
 

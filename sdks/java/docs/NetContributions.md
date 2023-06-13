@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**date** | **String** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) |  [optional] |
-|**contributions** | **BigDecimal** |  |  [optional] |
+|**date** | **LocalDate** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) |  [optional] |
+|**contributions** | **Double** |  |  [optional] |
 |**currency** | **String** |  |  [optional] |
 
 

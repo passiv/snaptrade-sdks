@@ -89,7 +89,9 @@ namespace SnapTrade.Net.Test.Api
         public void CreateAssetClassTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.CreateAssetClass();
+            //string userId = null;
+            //string userSecret = null;
+            //var response = instance.CreateAssetClass(userId, userSecret);
             //Assert.IsType<ModelAssetClassDetails>(response);
         }
 
@@ -171,7 +173,9 @@ namespace SnapTrade.Net.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //Guid modelAssetClassId = null;
-            //var response = instance.DetailAssetClass(modelAssetClassId);
+            //string userId = null;
+            //string userSecret = null;
+            //var response = instance.DetailAssetClass(modelAssetClassId, userId, userSecret);
             //Assert.IsType<ModelAssetClassDetails>(response);
         }
 
@@ -318,7 +322,9 @@ namespace SnapTrade.Net.Test.Api
         public void ListAssetClassesTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.ListAssetClasses();
+            //string userId = null;
+            //string userSecret = null;
+            //var response = instance.ListAssetClasses(userId, userSecret);
             //Assert.IsType<List<ModelAssetClassDetails>>(response);
         }
 
@@ -416,8 +422,10 @@ namespace SnapTrade.Net.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //Guid modelAssetClassId = null;
+            //string userId = null;
+            //string userSecret = null;
             //ModelAssetClassDetails modelAssetClassDetails = null;
-            //instance.UpdateAssetClass(modelAssetClassId, modelAssetClassDetails);
+            //instance.UpdateAssetClass(modelAssetClassId, userId, userSecret, modelAssetClassDetails);
         }
 
         /// <summary>

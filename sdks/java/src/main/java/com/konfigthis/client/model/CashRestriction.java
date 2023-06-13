@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.google.gson.Gson;
@@ -35,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -117,12 +117,16 @@ public class CashRestriction {
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
-  private BigDecimal amount;
+  private Double amount;
 
   public CashRestriction() {
   }
 
   public CashRestriction id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -141,11 +145,19 @@ public class CashRestriction {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public CashRestriction account(UUID account) {
+
+    
+    
+    
     
     this.account = account;
     return this;
@@ -164,11 +176,19 @@ public class CashRestriction {
 
 
   public void setAccount(UUID account) {
+
+    
+    
+    
     this.account = account;
   }
 
 
   public CashRestriction currency(UUID currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -187,11 +207,19 @@ public class CashRestriction {
 
 
   public void setCurrency(UUID currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
   public CashRestriction type(TypeEnum type) {
+
+    
+    
+    
     
     this.type = type;
     return this;
@@ -210,13 +238,31 @@ public class CashRestriction {
 
 
   public void setType(TypeEnum type) {
+
+    
+    
+    
     this.type = type;
   }
 
 
-  public CashRestriction amount(BigDecimal amount) {
+  public CashRestriction amount(Double amount) {
+
+    
+    
+    
     
     this.amount = amount;
+    return this;
+  }
+
+  public CashRestriction amount(Integer amount) {
+
+    
+    
+    
+    
+    this.amount = amount.doubleValue();
     return this;
   }
 
@@ -227,12 +273,16 @@ public class CashRestriction {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "100", value = "")
 
-  public BigDecimal getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
 
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(Double amount) {
+
+    
+    
+    
     this.amount = amount;
   }
 

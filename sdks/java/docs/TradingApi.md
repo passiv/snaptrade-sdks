@@ -18,15 +18,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="cancelUserAccountOrder"></a>
 # **cancelUserAccountOrder**
-> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, body)
+> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
 
 Cancel open order in account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -34,35 +34,51 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    UUID body = UUID.randomUUID(); // UUID | 
+    TradingApi api = new TradingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID brokerageOrderId = UUID.randomUUID();
     try {
-      AccountOrderRecord result = apiInstance.cancelUserAccountOrder(userId, userSecret, accountId, body);
+      AccountOrderRecord result = api
+              .cancelUserAccountOrder(userId, userSecret, accountId)
+              .brokerageOrderId(brokerageOrderId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<AccountOrderRecord> response = api
+              .cancelUserAccountOrder(userId, userSecret, accountId)
+              .brokerageOrderId(brokerageOrderId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
       System.err.println("Status code: " + e.getCode());
@@ -81,7 +97,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**| The ID of the account get positions. | |
-| **body** | **UUID**|  | |
+| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)| The Order ID to be canceled | |
 
 ### Return type
 
@@ -100,20 +116,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Order Record of canceled order |  -  |
-| **400** | Unable to cancel open order. Please verify status in brokerage account |  -  |
 | **500** | Unexpected error |  -  |
 
 <a name="getCalculatedTradeImpactById"></a>
 # **getCalculatedTradeImpactById**
-> Trade getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
+> Trade getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId).execute();
 
 Return details of a specific trade before it&#39;s placed
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -121,34 +136,48 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
-    UUID calculatedTradeId = UUID.randomUUID(); // UUID | The ID of calculated trade to get account impact
-    UUID tradeId = UUID.randomUUID(); // UUID | The ID of trade object
+    TradingApi api = new TradingApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
+    UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
+    UUID tradeId = UUID.randomUUID(); // The ID of trade object
     try {
-      Trade result = apiInstance.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId);
+      Trade result = api
+              .getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getCalculatedTradeImpactById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<Trade> response = api
+              .getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradeImpactById");
       System.err.println("Status code: " + e.getCode());
@@ -188,15 +217,15 @@ public class Example {
 
 <a name="getCalculatedTradesImpact"></a>
 # **getCalculatedTradesImpact**
-> List&lt;TradeImpact&gt; getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
+> List&lt;TradeImpact&gt; getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId).execute();
 
 Return the impact of placing a series of trades on the portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -204,33 +233,47 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
-    UUID calculatedTradeId = UUID.randomUUID(); // UUID | The ID of calculated trade to get account impact
+    TradingApi api = new TradingApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
+    UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     try {
-      List<TradeImpact> result = apiInstance.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId);
+      List<TradeImpact> result = api
+              .getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getCalculatedTradesImpact");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<TradeImpact>> response = api
+              .getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradesImpact");
       System.err.println("Status code: " + e.getCode());
@@ -269,15 +312,15 @@ public class Example {
 
 <a name="getOrderImpact"></a>
 # **getOrderImpact**
-> ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm)
+> ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm).execute();
 
 Check impact of trades on account.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -285,34 +328,71 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    ManualTradeForm manualTradeForm = new ManualTradeForm(); // ManualTradeForm | 
+    TradingApi api = new TradingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    Action action = Action.fromValue("BUY");
+    OrderType orderType = OrderType.fromValue("Limit");
+    Double price = 3.4D; // Trade Price if limit or stop limit order
+    Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    TimeInForce timeInForce = TimeInForce.fromValue("Day");
+    Double units = 3.4D; // Trade Units
+    UUID universalSymbolId = UUID.randomUUID();
     try {
-      ManualTradeAndImpact result = apiInstance.getOrderImpact(userId, userSecret, manualTradeForm);
+      ManualTradeAndImpact result = api
+              .getOrderImpact(userId, userSecret)
+              .accountId(accountId)
+              .action(action)
+              .orderType(orderType)
+              .price(price)
+              .stop(stop)
+              .timeInForce(timeInForce)
+              .units(units)
+              .universalSymbolId(universalSymbolId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getOrderImpact");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ManualTradeAndImpact> response = api
+              .getOrderImpact(userId, userSecret)
+              .accountId(accountId)
+              .action(action)
+              .orderType(orderType)
+              .price(price)
+              .stop(stop)
+              .timeInForce(timeInForce)
+              .units(units)
+              .universalSymbolId(universalSymbolId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getOrderImpact");
       System.err.println("Status code: " + e.getCode());
@@ -349,21 +429,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Return trade object and it&#39;s impact on the account |  -  |
-| **400** | Missing or wrong data format provided in request body |  -  |
-| **403** | User does not have permissions to place trades |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="getUserAccountQuotes"></a>
 # **getUserAccountQuotes**
-> SymbolsQuotes getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker)
+> SymbolsQuotes getUserAccountQuotes(userId, userSecret, symbols, accountId).useTicker(useTicker).execute();
 
 Get symbol quotes
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -371,36 +449,52 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID symbols = UUID.randomUUID(); // UUID | List of universal_symbol_id or tickers to get quotes for.
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account to get quotes.
-    Boolean useTicker = true; // Boolean | Should be set to True if providing tickers.
+    TradingApi api = new TradingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    String symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
+    String accountId = "accountId_example"; // The ID of the account to get quotes.
+    Boolean useTicker = true; // Should be set to True if providing tickers.
     try {
-      SymbolsQuotes result = apiInstance.getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
+      SymbolsQuotes result = api
+              .getUserAccountQuotes(userId, userSecret, symbols, accountId)
+              .useTicker(useTicker)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getUserAccountQuotes");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<SymbolsQuotes> response = api
+              .getUserAccountQuotes(userId, userSecret, symbols, accountId)
+              .useTicker(useTicker)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getUserAccountQuotes");
       System.err.println("Status code: " + e.getCode());
@@ -418,8 +512,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **symbols** | **UUID**| List of universal_symbol_id or tickers to get quotes for. | |
-| **accountId** | **UUID**| The ID of the account to get quotes. | |
+| **symbols** | **String**| List of universal_symbol_id or tickers to get quotes for. | |
+| **accountId** | **String**| The ID of the account to get quotes. | |
 | **useTicker** | **Boolean**| Should be set to True if providing tickers. | [optional] |
 
 ### Return type
@@ -443,15 +537,15 @@ public class Example {
 
 <a name="modifyCalculatedTradeById"></a>
 # **modifyCalculatedTradeById**
-> Trade modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade)
+> Trade modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId).trade(trade).execute();
 
 Modify units of a trade before it is placed
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -459,35 +553,72 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
-    UUID calculatedTradeId = UUID.randomUUID(); // UUID | The ID of calculated trade to get account impact
-    UUID tradeId = UUID.randomUUID(); // UUID | The ID of trade object
-    Trade trade = new Trade(); // Trade | 
+    TradingApi api = new TradingApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
+    UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
+    UUID tradeId = UUID.randomUUID(); // The ID of trade object
+    UUID id = UUID.randomUUID();
+    Account account = new Account();
+    BrokerageSymbol symbol = new BrokerageSymbol();
+    UniversalSymbol universalSymbol = new UniversalSymbol();
+    String action = "BUY";
+    Integer units = 56;
+    Double price = 3.4D;
+    Integer sequence = 56;
     try {
-      Trade result = apiInstance.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade);
+      Trade result = api
+              .modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+              .id(id)
+              .account(account)
+              .symbol(symbol)
+              .universalSymbol(universalSymbol)
+              .action(action)
+              .units(units)
+              .price(price)
+              .sequence(sequence)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#modifyCalculatedTradeById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<Trade> response = api
+              .modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+              .id(id)
+              .account(account)
+              .symbol(symbol)
+              .universalSymbol(universalSymbol)
+              .action(action)
+              .units(units)
+              .price(price)
+              .sequence(sequence)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#modifyCalculatedTradeById");
       System.err.println("Status code: " + e.getCode());
@@ -528,15 +659,15 @@ public class Example {
 
 <a name="placeCalculatedTrades"></a>
 # **placeCalculatedTrades**
-> List&lt;TradeExecutionStatus&gt; placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
+> List&lt;TradeExecutionStatus&gt; placeCalculatedTrades(portfolioGroupId, calculatedTradeId).execute();
 
 Place orders for the CalculatedTrades in series
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -544,33 +675,47 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
-    UUID calculatedTradeId = UUID.randomUUID(); // UUID | The ID of calculated trade to get account impact
+    TradingApi api = new TradingApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
+    UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     try {
-      List<TradeExecutionStatus> result = apiInstance.placeCalculatedTrades(portfolioGroupId, calculatedTradeId);
+      List<TradeExecutionStatus> result = api
+              .placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeCalculatedTrades");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<TradeExecutionStatus>> response = api
+              .placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeCalculatedTrades");
       System.err.println("Status code: " + e.getCode());
@@ -609,15 +754,15 @@ public class Example {
 
 <a name="placeForceOrder"></a>
 # **placeForceOrder**
-> AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeForm)
+> AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeForm).execute();
 
 Place a trade with NO validation.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -625,34 +770,71 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    ManualTradeForm manualTradeForm = new ManualTradeForm(); // ManualTradeForm | 
+    TradingApi api = new TradingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    Action action = Action.fromValue("BUY");
+    OrderType orderType = OrderType.fromValue("Limit");
+    Double price = 3.4D; // Trade Price if limit or stop limit order
+    Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    TimeInForce timeInForce = TimeInForce.fromValue("Day");
+    Double units = 3.4D; // Trade Units
+    UUID universalSymbolId = UUID.randomUUID();
     try {
-      AccountOrderRecord result = apiInstance.placeForceOrder(userId, userSecret, manualTradeForm);
+      AccountOrderRecord result = api
+              .placeForceOrder(userId, userSecret)
+              .accountId(accountId)
+              .action(action)
+              .orderType(orderType)
+              .price(price)
+              .stop(stop)
+              .timeInForce(timeInForce)
+              .units(units)
+              .universalSymbolId(universalSymbolId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeForceOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<AccountOrderRecord> response = api
+              .placeForceOrder(userId, userSecret)
+              .accountId(accountId)
+              .action(action)
+              .orderType(orderType)
+              .price(price)
+              .stop(stop)
+              .timeInForce(timeInForce)
+              .units(units)
+              .universalSymbolId(universalSymbolId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
       System.err.println("Status code: " + e.getCode());
@@ -689,21 +871,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Trade sucessfully placed |  -  |
-| **400** | Trade could not be placed |  -  |
-| **403** | User does not have permissions to place trades |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="placeOCOOrder"></a>
 # **placeOCOOrder**
-> AccountOrderRecord placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest)
+> AccountOrderRecord placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest).execute();
 
 Place a OCO (One Cancels Other) order
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -711,34 +891,53 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(); // TradingPlaceOCOOrderRequest | 
+    TradingApi api = new TradingApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    Object firstTradeId = null; // The ID of first trade object obtained from trade/impact endpoint
+    Object secondTradeId = null; // The ID of second trade object obtained from trade/impact endpoint
     try {
-      AccountOrderRecord result = apiInstance.placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
+      AccountOrderRecord result = api
+              .placeOCOOrder(userId, userSecret)
+              .firstTradeId(firstTradeId)
+              .secondTradeId(secondTradeId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeOCOOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<AccountOrderRecord> response = api
+              .placeOCOOrder(userId, userSecret)
+              .firstTradeId(firstTradeId)
+              .secondTradeId(secondTradeId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOCOOrder");
       System.err.println("Status code: " + e.getCode());
@@ -775,20 +974,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Status of order placed |  -  |
-| **400** | Failed to submit order to broker |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="placeOrder"></a>
 # **placeOrder**
-> AccountOrderRecord placeOrder(tradeId, userId, userSecret)
+> AccountOrderRecord placeOrder(tradeId, userId, userSecret).execute();
 
 Place order
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -796,34 +994,48 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    TradingApi apiInstance = new TradingApi(defaultClient);
-    UUID tradeId = UUID.randomUUID(); // UUID | The ID of trade object obtained from trade/impact endpoint
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
+    TradingApi api = new TradingApi(apiClient);
+    UUID tradeId = UUID.randomUUID(); // The ID of trade object obtained from trade/impact endpoint
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
-      AccountOrderRecord result = apiInstance.placeOrder(tradeId, userId, userSecret);
+      AccountOrderRecord result = api
+              .placeOrder(tradeId, userId, userSecret)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<AccountOrderRecord> response = api
+              .placeOrder(tradeId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");
       System.err.println("Status code: " + e.getCode());
@@ -860,6 +1072,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Status of order placed |  -  |
-| **400** | Failed to submit order to broker |  -  |
 | **500** | Unexpected Error |  -  |
 

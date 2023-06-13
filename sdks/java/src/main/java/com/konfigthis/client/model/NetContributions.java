@@ -22,7 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -53,11 +54,11 @@ import com.konfigthis.client.JSON;
 public class NetContributions {
   public static final String SERIALIZED_NAME_DATE = "date";
   @SerializedName(SERIALIZED_NAME_DATE)
-  private String date;
+  private LocalDate date;
 
   public static final String SERIALIZED_NAME_CONTRIBUTIONS = "contributions";
   @SerializedName(SERIALIZED_NAME_CONTRIBUTIONS)
-  private BigDecimal contributions;
+  private Double contributions;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -66,7 +67,11 @@ public class NetContributions {
   public NetContributions() {
   }
 
-  public NetContributions date(String date) {
+  public NetContributions date(LocalDate date) {
+
+    
+    
+    
     
     this.date = date;
     return this;
@@ -77,21 +82,39 @@ public class NetContributions {
    * @return date
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-24T00:00:00.000Z", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
-  public String getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
 
-  public void setDate(String date) {
+  public void setDate(LocalDate date) {
+
+    
+    
+    
     this.date = date;
   }
 
 
-  public NetContributions contributions(BigDecimal contributions) {
+  public NetContributions contributions(Double contributions) {
+
+    
+    
+    
     
     this.contributions = contributions;
+    return this;
+  }
+
+  public NetContributions contributions(Integer contributions) {
+
+    
+    
+    
+    
+    this.contributions = contributions.doubleValue();
     return this;
   }
 
@@ -102,17 +125,25 @@ public class NetContributions {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "524.74", value = "")
 
-  public BigDecimal getContributions() {
+  public Double getContributions() {
     return contributions;
   }
 
 
-  public void setContributions(BigDecimal contributions) {
+  public void setContributions(Double contributions) {
+
+    
+    
+    
     this.contributions = contributions;
   }
 
 
   public NetContributions currency(String currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -131,6 +162,10 @@ public class NetContributions {
 
 
   public void setCurrency(String currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
@@ -260,9 +295,6 @@ public class NetContributions {
         if (!NetContributions.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in NetContributions is not found in the empty JSON string", NetContributions.openapiRequiredFields.toString()));
         }
-      }
-      if ((jsonObj.get("date") != null && !jsonObj.get("date").isJsonNull()) && !jsonObj.get("date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("date").toString()));
       }
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));

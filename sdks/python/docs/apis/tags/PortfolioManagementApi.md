@@ -326,7 +326,10 @@ snaptrade = SnapTrade(
 
 try:
     # Create a new model asset class
-    create_asset_class_response = snaptrade.portfolio_management.create_asset_class()
+    create_asset_class_response = snaptrade.portfolio_management.create_asset_class(
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+    )
     pprint(create_asset_class_response.body)
     pprint(create_asset_class_response.body["model_asset_class"])
     pprint(create_asset_class_response.body["model_asset_class_target"])
@@ -342,7 +345,41 @@ except ApiException as e:
     pprint(e.round_trip_time)
 ```
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+query_params | RequestQueryParams | |
+accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
+stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
+timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
+skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### query_params
+#### RequestQueryParams
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+userId | UserIdSchema | | 
+userSecret | UserSecretSchema | | 
+
+
+# UserIdSchema
+
+SnapTrade User ID
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User ID | 
+
+# UserSecretSchema
+
+SnapTrade User Secret (generated when registering user)
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User Secret (generated when registering user) | 
 
 ### Return Types, Responses
 
@@ -946,6 +983,8 @@ try:
     # Get details of a model asset class
     detail_asset_class_response = snaptrade.portfolio_management.detail_asset_class(
         model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
     )
     pprint(detail_asset_class_response.body)
     pprint(detail_asset_class_response.body["model_asset_class"])
@@ -965,11 +1004,39 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+query_params | RequestQueryParams | |
 path_params | RequestPathParams | |
 accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
 stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
 timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
 skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### query_params
+#### RequestQueryParams
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+userId | UserIdSchema | | 
+userSecret | UserSecretSchema | | 
+
+
+# UserIdSchema
+
+SnapTrade User ID
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User ID | 
+
+# UserSecretSchema
+
+SnapTrade User Secret (generated when registering user)
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User Secret (generated when registering user) | 
 
 ### path_params
 #### RequestPathParams
@@ -2240,7 +2307,10 @@ snaptrade = SnapTrade(
 
 try:
     # List of model asset class
-    list_asset_classes_response = snaptrade.portfolio_management.list_asset_classes()
+    list_asset_classes_response = snaptrade.portfolio_management.list_asset_classes(
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
+    )
     pprint(list_asset_classes_response.body)
     pprint(list_asset_classes_response.body["model_asset_class"])
     pprint(list_asset_classes_response.body["model_asset_class_target"])
@@ -2256,7 +2326,41 @@ except ApiException as e:
     pprint(e.round_trip_time)
 ```
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+query_params | RequestQueryParams | |
+accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
+stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
+timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
+skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### query_params
+#### RequestQueryParams
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+userId | UserIdSchema | | 
+userSecret | UserSecretSchema | | 
+
+
+# UserIdSchema
+
+SnapTrade User ID
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User ID | 
+
+# UserSecretSchema
+
+SnapTrade User Secret (generated when registering user)
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User Secret (generated when registering user) | 
 
 ### Return Types, Responses
 
@@ -3074,6 +3178,8 @@ try:
     # Updates model asset class objects
     snaptrade.portfolio_management.update_asset_class(
         model_asset_class_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
+        user_id="John.doe@snaptrade.com",  # required
+        user_secret="USERSECRET123",  # required
         model_asset_class={
             "id": "2bcd7cc3-e922-4976-bce1-9858296801c3",
             "name": "Bonds",
@@ -3096,6 +3202,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 body | typing.Union[SchemaForRequestBodyApplicationJson] | required |
+query_params | RequestQueryParams | |
 path_params | RequestPathParams | |
 content_type | str | optional, default is 'application/json' | Selects the schema and serialization of the request body
 stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
@@ -3109,6 +3216,33 @@ Type | Description  | Notes
 ------------- | ------------- | -------------
 [**ModelAssetClassDetails**](../../models/ModelAssetClassDetails.md) |  | 
 
+
+### query_params
+#### RequestQueryParams
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+userId | UserIdSchema | | 
+userSecret | UserSecretSchema | | 
+
+
+# UserIdSchema
+
+SnapTrade User ID
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User ID | 
+
+# UserSecretSchema
+
+SnapTrade User Secret (generated when registering user)
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+str,  | str,  | SnapTrade User Secret (generated when registering user) | 
 
 ### path_params
 #### RequestPathParams

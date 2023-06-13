@@ -11,10 +11,10 @@ Manual Trade Form
 |**accountId** | **UUID** |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
 |**orderType** | **OrderType** |  |  [optional] |
-|**price** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**stop** | **BigDecimal** | Stop Price. If stop loss or stop limit order, the price to trigger the stop |  [optional] |
+|**price** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**stop** | **Double** | Stop Price. If stop loss or stop limit order, the price to trigger the stop |  [optional] |
 |**timeInForce** | **TimeInForce** |  |  [optional] |
-|**units** | **BigDecimal** | Trade Units |  [optional] |
+|**units** | **Double** | Trade Units |  [optional] |
 |**universalSymbolId** | **UUID** |  |  [optional] |
 
 

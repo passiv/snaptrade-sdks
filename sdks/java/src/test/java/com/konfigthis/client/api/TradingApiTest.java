@@ -13,19 +13,28 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountOrderRecord;
+import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.BrokerageSymbol;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model403FailedRequestResponse;
+import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotes;
+import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.Trade;
 import com.konfigthis.client.model.TradeExecutionStatus;
 import com.konfigthis.client.model.TradeImpact;
+import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
+import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +47,14 @@ import java.util.Map;
 @Disabled
 public class TradingApiTest {
 
-    private final TradingApi api = new TradingApi();
+    private static TradingApi api;
+
+    
+    @BeforeAll
+    public static void beforeClass() {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        api = new TradingApi(apiClient);
+    }
 
     /**
      * Cancel open order in account
@@ -50,8 +66,10 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        UUID body = null;
-        AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId, body);
+        UUID brokerageOrderId = null;
+        AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId)
+                .brokerageOrderId(brokerageOrderId)
+                .execute();
         // TODO: test validations
     }
 
@@ -65,7 +83,8 @@ public class TradingApiTest {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
         UUID tradeId = null;
-        Trade response = api.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId);
+        Trade response = api.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
+                .execute();
         // TODO: test validations
     }
 
@@ -78,7 +97,8 @@ public class TradingApiTest {
     public void getCalculatedTradesImpactTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
-        List<TradeImpact> response = api.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId);
+        List<TradeImpact> response = api.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
+                .execute();
         // TODO: test validations
     }
 
@@ -91,8 +111,24 @@ public class TradingApiTest {
     public void getOrderImpactTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        ManualTradeForm manualTradeForm = null;
-        ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret, manualTradeForm);
+        UUID accountId = null;
+        Action action = null;
+        OrderType orderType = null;
+        Double price = null;
+        Double stop = null;
+        TimeInForce timeInForce = null;
+        Double units = null;
+        UUID universalSymbolId = null;
+        ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret)
+                .accountId(accountId)
+                .action(action)
+                .orderType(orderType)
+                .price(price)
+                .stop(stop)
+                .timeInForce(timeInForce)
+                .units(units)
+                .universalSymbolId(universalSymbolId)
+                .execute();
         // TODO: test validations
     }
 
@@ -105,10 +141,12 @@ public class TradingApiTest {
     public void getUserAccountQuotesTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        UUID symbols = null;
-        UUID accountId = null;
+        String symbols = null;
+        String accountId = null;
         Boolean useTicker = null;
-        SymbolsQuotes response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
+        SymbolsQuotes response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
+                .useTicker(useTicker)
+                .execute();
         // TODO: test validations
     }
 
@@ -122,8 +160,24 @@ public class TradingApiTest {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
         UUID tradeId = null;
-        Trade trade = null;
-        Trade response = api.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade);
+        UUID id = null;
+        Account account = null;
+        BrokerageSymbol symbol = null;
+        UniversalSymbol universalSymbol = null;
+        String action = null;
+        Integer units = null;
+        Double price = null;
+        Integer sequence = null;
+        Trade response = api.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+                .id(id)
+                .account(account)
+                .symbol(symbol)
+                .universalSymbol(universalSymbol)
+                .action(action)
+                .units(units)
+                .price(price)
+                .sequence(sequence)
+                .execute();
         // TODO: test validations
     }
 
@@ -136,7 +190,8 @@ public class TradingApiTest {
     public void placeCalculatedTradesTest() throws ApiException {
         UUID portfolioGroupId = null;
         UUID calculatedTradeId = null;
-        List<TradeExecutionStatus> response = api.placeCalculatedTrades(portfolioGroupId, calculatedTradeId);
+        List<TradeExecutionStatus> response = api.placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
+                .execute();
         // TODO: test validations
     }
 
@@ -149,8 +204,24 @@ public class TradingApiTest {
     public void placeForceOrderTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        ManualTradeForm manualTradeForm = null;
-        AccountOrderRecord response = api.placeForceOrder(userId, userSecret, manualTradeForm);
+        UUID accountId = null;
+        Action action = null;
+        OrderType orderType = null;
+        Double price = null;
+        Double stop = null;
+        TimeInForce timeInForce = null;
+        Double units = null;
+        UUID universalSymbolId = null;
+        AccountOrderRecord response = api.placeForceOrder(userId, userSecret)
+                .accountId(accountId)
+                .action(action)
+                .orderType(orderType)
+                .price(price)
+                .stop(stop)
+                .timeInForce(timeInForce)
+                .units(units)
+                .universalSymbolId(universalSymbolId)
+                .execute();
         // TODO: test validations
     }
 
@@ -163,8 +234,12 @@ public class TradingApiTest {
     public void placeOCOOrderTest() throws ApiException {
         String userId = null;
         String userSecret = null;
-        TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = null;
-        AccountOrderRecord response = api.placeOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
+        Object firstTradeId = null;
+        Object secondTradeId = null;
+        AccountOrderRecord response = api.placeOCOOrder(userId, userSecret)
+                .firstTradeId(firstTradeId)
+                .secondTradeId(secondTradeId)
+                .execute();
         // TODO: test validations
     }
 
@@ -178,7 +253,8 @@ public class TradingApiTest {
         UUID tradeId = null;
         String userId = null;
         String userSecret = null;
-        AccountOrderRecord response = api.placeOrder(tradeId, userId, userSecret);
+        AccountOrderRecord response = api.placeOrder(tradeId, userId, userSecret)
+                .execute();
         // TODO: test validations
     }
 

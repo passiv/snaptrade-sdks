@@ -16,15 +16,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getAllUserHoldings"></a>
 # **getAllUserHoldings**
-> List&lt;AccountHoldings&gt; getAllUserHoldings(userId, userSecret, brokerageAuthorizations)
+> List&lt;AccountHoldings&gt; getAllUserHoldings(userId, userSecret).brokerageAuthorizations(brokerageAuthorizations).execute();
 
 List all accounts for the user, plus balances and positions for each account.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -32,34 +32,50 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // UUID | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     try {
-      List<AccountHoldings> result = apiInstance.getAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+      List<AccountHoldings> result = api
+              .getAllUserHoldings(userId, userSecret)
+              .brokerageAuthorizations(brokerageAuthorizations)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<AccountHoldings>> response = api
+              .getAllUserHoldings(userId, userSecret)
+              .brokerageAuthorizations(brokerageAuthorizations)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
       System.err.println("Status code: " + e.getCode());
@@ -96,21 +112,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns list of accounts and holdings |  -  |
-| **400** | Bad Request |  -  |
-| **403** | Forbidden |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="getUserAccountBalance"></a>
 # **getUserAccountBalance**
-> List&lt;Balance&gt; getUserAccountBalance(userId, userSecret, accountId)
+> List&lt;Balance&gt; getUserAccountBalance(userId, userSecret, accountId).execute();
 
 Get all cash balances of an investment account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -118,34 +132,48 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     try {
-      List<Balance> result = apiInstance.getUserAccountBalance(userId, userSecret, accountId);
+      List<Balance> result = api
+              .getUserAccountBalance(userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountBalance");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Balance>> response = api
+              .getUserAccountBalance(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountBalance");
       System.err.println("Status code: " + e.getCode());
@@ -186,15 +214,15 @@ public class Example {
 
 <a name="getUserAccountDetails"></a>
 # **getUserAccountDetails**
-> List&lt;Account&gt; getUserAccountDetails(userId, userSecret, accountId)
+> List&lt;Account&gt; getUserAccountDetails(userId, userSecret, accountId).execute();
 
 Return details of a specific investment account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -202,34 +230,48 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account to get detail of.
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account to get detail of.
     try {
-      List<Account> result = apiInstance.getUserAccountDetails(userId, userSecret, accountId);
+      List<Account> result = api
+              .getUserAccountDetails(userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Account>> response = api
+              .getUserAccountDetails(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
       System.err.println("Status code: " + e.getCode());
@@ -270,15 +312,15 @@ public class Example {
 
 <a name="getUserAccountOrders"></a>
 # **getUserAccountOrders**
-> List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId, state)
+> List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).execute();
 
 Get all history of orders placed in account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -286,35 +328,51 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
-    String state = "all"; // String | defaults value is set to \"all\"
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    String state = "all"; // defaults value is set to \"all\"
     try {
-      List<AccountOrderRecord> result = apiInstance.getUserAccountOrders(userId, userSecret, accountId, state);
+      List<AccountOrderRecord> result = api
+              .getUserAccountOrders(userId, userSecret, accountId)
+              .state(state)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountOrders");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<AccountOrderRecord>> response = api
+              .getUserAccountOrders(userId, userSecret, accountId)
+              .state(state)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountOrders");
       System.err.println("Status code: " + e.getCode());
@@ -356,15 +414,15 @@ public class Example {
 
 <a name="getUserAccountPositions"></a>
 # **getUserAccountPositions**
-> List&lt;Position&gt; getUserAccountPositions(userId, userSecret, accountId)
+> List&lt;Position&gt; getUserAccountPositions(userId, userSecret, accountId).execute();
 
 Get all positions of an investment account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -372,34 +430,48 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account get positions.
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     try {
-      List<Position> result = apiInstance.getUserAccountPositions(userId, userSecret, accountId);
+      List<Position> result = api
+              .getUserAccountPositions(userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountPositions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Position>> response = api
+              .getUserAccountPositions(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountPositions");
       System.err.println("Status code: " + e.getCode());
@@ -440,15 +512,15 @@ public class Example {
 
 <a name="getUserHoldings"></a>
 # **getUserHoldings**
-> AccountHoldings getUserHoldings(accountId, userId, userSecret)
+> AccountHoldingsAccount getUserHoldings(accountId, userId, userSecret).execute();
 
 List balances, positions and orders for the specified account.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -456,34 +528,48 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // UUID | The ID of the account to fetch holdings for.
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to fetch holdings for.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
-      AccountHoldings result = apiInstance.getUserHoldings(accountId, userId, userSecret);
+      AccountHoldingsAccount result = api
+              .getUserHoldings(accountId, userId, userSecret)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserHoldings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<AccountHoldingsAccount> response = api
+              .getUserHoldings(accountId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserHoldings");
       System.err.println("Status code: " + e.getCode());
@@ -505,7 +591,7 @@ public class Example {
 
 ### Return type
 
-[**AccountHoldings**](AccountHoldings.md)
+[**AccountHoldingsAccount**](AccountHoldingsAccount.md)
 
 ### Authorization
 
@@ -520,21 +606,19 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns holdings for the account |  -  |
-| **400** | Bad Request |  -  |
-| **403** | Forbidden |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="listUserAccounts"></a>
 # **listUserAccounts**
-> List&lt;Account&gt; listUserAccounts(userId, userSecret)
+> List&lt;Account&gt; listUserAccounts(userId, userSecret).execute();
 
 List all investment accounts for the user
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -542,33 +626,47 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
-      List<Account> result = apiInstance.listUserAccounts(userId, userSecret);
+      List<Account> result = api
+              .listUserAccounts(userId, userSecret)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#listUserAccounts");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Account>> response = api
+              .listUserAccounts(userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#listUserAccounts");
       System.err.println("Status code: " + e.getCode());
@@ -608,15 +706,15 @@ public class Example {
 
 <a name="updateUserAccount"></a>
 # **updateUserAccount**
-> List&lt;Account&gt; updateUserAccount(userId, userSecret, accountId)
+> List&lt;Account&gt; updateUserAccount(userId, userSecret, accountId).execute();
 
 Update details of an investment account
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -624,34 +722,48 @@ import com.konfigthis.client.api.AccountInformationApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    AccountInformationApi apiInstance = new AccountInformationApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    UUID accountId = UUID.randomUUID(); // UUID | The ID of the account to update.
+    AccountInformationApi api = new AccountInformationApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID(); // The ID of the account to update.
     try {
-      List<Account> result = apiInstance.updateUserAccount(userId, userSecret, accountId);
+      List<Account> result = api
+              .updateUserAccount(userId, userSecret, accountId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#updateUserAccount");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Account>> response = api
+              .updateUserAccount(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#updateUserAccount");
       System.err.println("Status code: " + e.getCode());

@@ -23,7 +23,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -58,28 +58,32 @@ public class SymbolsQuotes {
 
   public static final String SERIALIZED_NAME_BID_PRICE = "bid_price";
   @SerializedName(SERIALIZED_NAME_BID_PRICE)
-  private BigDecimal bidPrice;
+  private Double bidPrice;
 
   public static final String SERIALIZED_NAME_ASK_PRICE = "ask_price";
   @SerializedName(SERIALIZED_NAME_ASK_PRICE)
-  private BigDecimal askPrice;
+  private Double askPrice;
 
   public static final String SERIALIZED_NAME_LAST_TRADE_PRICE = "last_trade_price";
   @SerializedName(SERIALIZED_NAME_LAST_TRADE_PRICE)
-  private BigDecimal lastTradePrice;
+  private Double lastTradePrice;
 
   public static final String SERIALIZED_NAME_BID_SIZE = "bid_size";
   @SerializedName(SERIALIZED_NAME_BID_SIZE)
-  private BigDecimal bidSize;
+  private Double bidSize;
 
   public static final String SERIALIZED_NAME_ASK_SIZE = "ask_size";
   @SerializedName(SERIALIZED_NAME_ASK_SIZE)
-  private BigDecimal askSize;
+  private Double askSize;
 
   public SymbolsQuotes() {
   }
 
   public SymbolsQuotes symbol(UniversalSymbol symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -98,13 +102,31 @@ public class SymbolsQuotes {
 
 
   public void setSymbol(UniversalSymbol symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
-  public SymbolsQuotes bidPrice(BigDecimal bidPrice) {
+  public SymbolsQuotes bidPrice(Double bidPrice) {
+
+    
+    
+    
     
     this.bidPrice = bidPrice;
+    return this;
+  }
+
+  public SymbolsQuotes bidPrice(Integer bidPrice) {
+
+    
+    
+    
+    
+    this.bidPrice = bidPrice.doubleValue();
     return this;
   }
 
@@ -115,19 +137,37 @@ public class SymbolsQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "8.43", value = "")
 
-  public BigDecimal getBidPrice() {
+  public Double getBidPrice() {
     return bidPrice;
   }
 
 
-  public void setBidPrice(BigDecimal bidPrice) {
+  public void setBidPrice(Double bidPrice) {
+
+    
+    
+    
     this.bidPrice = bidPrice;
   }
 
 
-  public SymbolsQuotes askPrice(BigDecimal askPrice) {
+  public SymbolsQuotes askPrice(Double askPrice) {
+
+    
+    
+    
     
     this.askPrice = askPrice;
+    return this;
+  }
+
+  public SymbolsQuotes askPrice(Integer askPrice) {
+
+    
+    
+    
+    
+    this.askPrice = askPrice.doubleValue();
     return this;
   }
 
@@ -138,19 +178,37 @@ public class SymbolsQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "8.43", value = "")
 
-  public BigDecimal getAskPrice() {
+  public Double getAskPrice() {
     return askPrice;
   }
 
 
-  public void setAskPrice(BigDecimal askPrice) {
+  public void setAskPrice(Double askPrice) {
+
+    
+    
+    
     this.askPrice = askPrice;
   }
 
 
-  public SymbolsQuotes lastTradePrice(BigDecimal lastTradePrice) {
+  public SymbolsQuotes lastTradePrice(Double lastTradePrice) {
+
+    
+    
+    
     
     this.lastTradePrice = lastTradePrice;
+    return this;
+  }
+
+  public SymbolsQuotes lastTradePrice(Integer lastTradePrice) {
+
+    
+    
+    
+    
+    this.lastTradePrice = lastTradePrice.doubleValue();
     return this;
   }
 
@@ -161,19 +219,37 @@ public class SymbolsQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "8.74", value = "")
 
-  public BigDecimal getLastTradePrice() {
+  public Double getLastTradePrice() {
     return lastTradePrice;
   }
 
 
-  public void setLastTradePrice(BigDecimal lastTradePrice) {
+  public void setLastTradePrice(Double lastTradePrice) {
+
+    
+    
+    
     this.lastTradePrice = lastTradePrice;
   }
 
 
-  public SymbolsQuotes bidSize(BigDecimal bidSize) {
+  public SymbolsQuotes bidSize(Double bidSize) {
+
+    
+    
+    
     
     this.bidSize = bidSize;
+    return this;
+  }
+
+  public SymbolsQuotes bidSize(Integer bidSize) {
+
+    
+    
+    
+    
+    this.bidSize = bidSize.doubleValue();
     return this;
   }
 
@@ -184,19 +260,37 @@ public class SymbolsQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "260", value = "")
 
-  public BigDecimal getBidSize() {
+  public Double getBidSize() {
     return bidSize;
   }
 
 
-  public void setBidSize(BigDecimal bidSize) {
+  public void setBidSize(Double bidSize) {
+
+    
+    
+    
     this.bidSize = bidSize;
   }
 
 
-  public SymbolsQuotes askSize(BigDecimal askSize) {
+  public SymbolsQuotes askSize(Double askSize) {
+
+    
+    
+    
     
     this.askSize = askSize;
+    return this;
+  }
+
+  public SymbolsQuotes askSize(Integer askSize) {
+
+    
+    
+    
+    
+    this.askSize = askSize.doubleValue();
     return this;
   }
 
@@ -207,12 +301,16 @@ public class SymbolsQuotes {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "344", value = "")
 
-  public BigDecimal getAskSize() {
+  public Double getAskSize() {
     return askSize;
   }
 
 
-  public void setAskSize(BigDecimal askSize) {
+  public void setAskSize(Double askSize) {
+
+    
+    
+    
     this.askSize = askSize;
   }
 

@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**SymbolsQuotes**
+**Array<SymbolsQuotesInner>**
 
 ### HTTP request headers
 

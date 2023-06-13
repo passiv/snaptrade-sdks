@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -62,6 +63,10 @@ public class TradingPlaceOCOOrderRequest {
   }
 
   public TradingPlaceOCOOrderRequest firstTradeId(Object firstTradeId) {
+
+    
+    
+    
     
     this.firstTradeId = firstTradeId;
     return this;
@@ -80,11 +85,19 @@ public class TradingPlaceOCOOrderRequest {
 
 
   public void setFirstTradeId(Object firstTradeId) {
+
+    
+    
+    
     this.firstTradeId = firstTradeId;
   }
 
 
   public TradingPlaceOCOOrderRequest secondTradeId(Object secondTradeId) {
+
+    
+    
+    
     
     this.secondTradeId = secondTradeId;
     return this;
@@ -103,6 +116,10 @@ public class TradingPlaceOCOOrderRequest {
 
 
   public void setSecondTradeId(Object secondTradeId) {
+
+    
+    
+    
     this.secondTradeId = secondTradeId;
   }
 

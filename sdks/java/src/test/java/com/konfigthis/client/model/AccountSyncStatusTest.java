@@ -17,42 +17,34 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.TransactionsStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for Model401FailedRequestResponse
+ * Model tests for AccountSyncStatus
  */
-public class Model401FailedRequestResponseTest {
-    private final Model401FailedRequestResponse model = new Model401FailedRequestResponse();
+public class AccountSyncStatusTest {
+    private final AccountSyncStatus model = new AccountSyncStatus();
 
     /**
-     * Model tests for Model401FailedRequestResponse
+     * Model tests for AccountSyncStatus
      */
     @Test
-    public void testModel401FailedRequestResponse() {
-        // TODO: test Model401FailedRequestResponse
+    public void testAccountSyncStatus() {
+        // TODO: test AccountSyncStatus
     }
 
     /**
-     * Test the property 'defaultDetail'
+     * Test the property 'transactions'
      */
     @Test
-    public void defaultDetailTest() {
-        // TODO: test defaultDetail
-    }
-
-    /**
-     * Test the property 'defaultCode'
-     */
-    @Test
-    public void defaultCodeTest() {
-        // TODO: test defaultCode
+    public void transactionsTest() {
+        // TODO: test transactions
     }
 
 }

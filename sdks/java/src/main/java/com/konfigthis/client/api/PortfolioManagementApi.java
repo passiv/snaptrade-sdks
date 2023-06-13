@@ -29,13 +29,20 @@ import java.io.IOException;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.CalculatedTrade;
+import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExcludedAsset;
+import com.konfigthis.client.model.ModelAssetClass;
 import com.konfigthis.client.model.ModelAssetClassDetails;
+import com.konfigthis.client.model.ModelAssetClassTarget;
+import com.konfigthis.client.model.ModelPortfolio;
+import com.konfigthis.client.model.ModelPortfolioAssetClass;
 import com.konfigthis.client.model.ModelPortfolioDetails;
+import com.konfigthis.client.model.ModelPortfolioSecurity;
 import com.konfigthis.client.model.PortfolioGroup;
 import com.konfigthis.client.model.PortfolioGroupInfo;
-import com.konfigthis.client.model.PortfolioGroupPosition;
 import com.konfigthis.client.model.PortfolioGroupSettings;
+import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.SymbolQuery;
 import com.konfigthis.client.model.TargetAsset;
 import com.konfigthis.client.model.Trade;
@@ -54,11 +61,20 @@ public class PortfolioManagementApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public PortfolioManagementApi() {
+    public PortfolioManagementApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public PortfolioManagementApi(ApiClient apiClient) {
+    public PortfolioManagementApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -86,20 +102,7 @@ public class PortfolioManagementApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for addPortfolioExcludedAsset
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call addPortfolioExcludedAssetCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call addPortfolioExcludedAssetCall(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -156,224 +159,211 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Adds an asset to exclude to a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @return ExcludedAsset
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ExcludedAsset addPortfolioExcludedAsset(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
-        ApiResponse<ExcludedAsset> localVarResp = addPortfolioExcludedAssetWithHttpInfo(portfolioGroupId, universalSymbol);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Adds an asset to exclude to a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @return ApiResponse&lt;ExcludedAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ExcludedAsset> addPortfolioExcludedAssetWithHttpInfo(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
+    private ApiResponse<ExcludedAsset> addPortfolioExcludedAssetWithHttpInfo(UUID portfolioGroupId, UniversalSymbol universalSymbol) throws ApiException {
         okhttp3.Call localVarCall = addPortfolioExcludedAssetValidateBeforeCall(portfolioGroupId, universalSymbol, null);
         Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Adds an asset to exclude to a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
-     * @param universalSymbol  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call addPortfolioExcludedAssetAsync(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback<ExcludedAsset> _callback) throws ApiException {
+    private okhttp3.Call addPortfolioExcludedAssetAsync(UUID portfolioGroupId, UniversalSymbol universalSymbol, final ApiCallback<ExcludedAsset> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = addPortfolioExcludedAssetValidateBeforeCall(portfolioGroupId, universalSymbol, _callback);
         Type localVarReturnType = new TypeToken<ExcludedAsset>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
-    /**
-     * Build call for callList
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call callListCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
 
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
+    public class AddPortfolioExcludedAssetRequestBuilder {
+        private final UUID portfolioGroupId;
+        private UUID id;
+        private String symbol;
+        private String rawSymbol;
+        private String description;
+        private Currency currency;
+        private Exchange exchange;
+        private SecurityType type;
+        private List<Currency> currencies;
+
+        private AddPortfolioExcludedAssetRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
         }
 
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        /**
+         * Set id
+         * @param id  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+        
+        /**
+         * Set rawSymbol
+         * @param rawSymbol  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder rawSymbol(String rawSymbol) {
+            this.rawSymbol = rawSymbol;
+            return this;
+        }
+        
+        /**
+         * Set description
+         * @param description  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+        
+        /**
+         * Set currency
+         * @param currency  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder currency(Currency currency) {
+            this.currency = currency;
+            return this;
+        }
+        
+        /**
+         * Set exchange
+         * @param exchange  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder exchange(Exchange exchange) {
+            this.exchange = exchange;
+            return this;
+        }
+        
+        /**
+         * Set type
+         * @param type  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder type(SecurityType type) {
+            this.type = type;
+            return this;
+        }
+        
+        /**
+         * Set currencies
+         * @param currencies  (optional)
+         * @return AddPortfolioExcludedAssetRequestBuilder
+         */
+        public AddPortfolioExcludedAssetRequestBuilder currencies(List<Currency> currencies) {
+            this.currencies = currencies;
+            return this;
+        }
+        
+        /**
+         * Build call for addPortfolioExcludedAsset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            UniversalSymbol universalSymbol = buildBodyParams();
+            return addPortfolioExcludedAssetCall(portfolioGroupId, universalSymbol, _callback);
         }
 
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        private UniversalSymbol buildBodyParams() {
+            UniversalSymbol universalSymbol = new UniversalSymbol();
+            universalSymbol.id(this.id);
+            universalSymbol.symbol(this.symbol);
+            universalSymbol.rawSymbol(this.rawSymbol);
+            universalSymbol.description(this.description);
+            universalSymbol.currency(this.currency);
+            universalSymbol.exchange(this.exchange);
+            universalSymbol.type(this.type);
+            universalSymbol.currencies(this.currencies);
+            return universalSymbol;
         }
 
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
+        /**
+         * Execute addPortfolioExcludedAsset request
+         * @return ExcludedAsset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ExcludedAsset execute() throws ApiException {
+            UniversalSymbol universalSymbol = buildBodyParams();
+            ApiResponse<ExcludedAsset> localVarResp = addPortfolioExcludedAssetWithHttpInfo(portfolioGroupId, universalSymbol);
+            return localVarResp.getResponseBody();
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
+        /**
+         * Execute addPortfolioExcludedAsset request with HTTP info returned
+         * @return ApiResponse&lt;ExcludedAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ExcludedAsset> executeWithHttpInfo() throws ApiException {
+            UniversalSymbol universalSymbol = buildBodyParams();
+            return addPortfolioExcludedAssetWithHttpInfo(portfolioGroupId, universalSymbol);
         }
 
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        /**
+         * Execute addPortfolioExcludedAsset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ExcludedAsset> _callback) throws ApiException {
+            UniversalSymbol universalSymbol = buildBodyParams();
+            return addPortfolioExcludedAssetAsync(portfolioGroupId, universalSymbol, _callback);
+        }
     }
 
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call callListValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling callList(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling callList(Async)");
-        }
-
-        return callListCall(userId, userSecret, _callback);
-
-    }
-
     /**
-     * List all portfolio groups
+     * Adds an asset to exclude to a portfolio group
      * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return List&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to exclude an asset. (required)
+     * @return AddPortfolioExcludedAssetRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> An asset is excluded from calculations in portfolio group. </td><td>  -  </td></tr>
      </table>
      */
-    public List<PortfolioGroup> callList(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<PortfolioGroup>> localVarResp = callListWithHttpInfo(userId, userSecret);
-        return localVarResp.getData();
-    }
+    public AddPortfolioExcludedAssetRequestBuilder addPortfolioExcludedAsset(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
 
-    /**
-     * List all portfolio groups
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<PortfolioGroup>> callListWithHttpInfo(String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = callListValidateBeforeCall(userId, userSecret, null);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return new AddPortfolioExcludedAssetRequestBuilder(portfolioGroupId);
     }
-
-    /**
-     * List all portfolio groups (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call callListAsync(String userId, String userSecret, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = callListValidateBeforeCall(userId, userSecret, _callback);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for create
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createCall(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -447,85 +437,156 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Create new portfolio group
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @return List&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<PortfolioGroup> create(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
-        ApiResponse<List<PortfolioGroup>> localVarResp = createWithHttpInfo(userId, userSecret, requestBody);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Create new portfolio group
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<PortfolioGroup>> createWithHttpInfo(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
+    private ApiResponse<List<PortfolioGroup>> createWithHttpInfo(String userId, String userSecret, Map<String, Object> requestBody) throws ApiException {
         okhttp3.Call localVarCall = createValidateBeforeCall(userId, userSecret, requestBody, null);
         Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Create new portfolio group (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param requestBody  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createAsync(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+    private okhttp3.Call createAsync(String userId, String userSecret, Map<String, Object> requestBody, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = createValidateBeforeCall(userId, userSecret, requestBody, _callback);
         Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class CreateRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private UUID id;
+        private String name;
+
+        private CreateRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set id
+         * @param id  (optional)
+         * @return CreateRequestBuilder
+         */
+        public CreateRequestBuilder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+        
+        /**
+         * Set name
+         * @param name  (optional)
+         * @return CreateRequestBuilder
+         */
+        public CreateRequestBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        /**
+         * Build call for create
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return createCall(userId, userSecret, requestBody, _callback);
+        }
+
+        private Map&lt;String, Object&gt; buildBodyParams() {
+            Map&lt;String, Object&gt; requestBody = new Map&lt;String, Object&gt;();
+            requestBody.id(this.id);
+            requestBody.name(this.name);
+            return requestBody;
+        }
+
+        /**
+         * Execute create request
+         * @return List&lt;PortfolioGroup&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<PortfolioGroup> execute() throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            ApiResponse<List<PortfolioGroup>> localVarResp = createWithHttpInfo(userId, userSecret, requestBody);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute create request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<PortfolioGroup>> executeWithHttpInfo() throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return createWithHttpInfo(userId, userSecret, requestBody);
+        }
+
+        /**
+         * Execute create request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return createAsync(userId, userSecret, requestBody, _callback);
+        }
+    }
+
     /**
-     * Build call for createAssetClass
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Create new portfolio group
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param requestBody  (required)
+     * @return CreateRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A new PortfolioGroup is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The input data is missing or invalid. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createAssetClassCall(final ApiCallback _callback) throws ApiException {
+    public CreateRequestBuilder create(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new CreateRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call createAssetClassCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -575,70 +636,101 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Create a new model asset class
-     * 
-     * @return ModelAssetClassDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelAssetClassDetails createAssetClass() throws ApiException {
-        ApiResponse<ModelAssetClassDetails> localVarResp = createAssetClassWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Create a new model asset class
-     * 
-     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelAssetClassDetails> createAssetClassWithHttpInfo() throws ApiException {
+    private ApiResponse<ModelAssetClassDetails> createAssetClassWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Create a new model asset class (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createAssetClassAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+    private okhttp3.Call createAssetClassAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class CreateAssetClassRequestBuilder {
+
+        private CreateAssetClassRequestBuilder() {
+        }
+
+        /**
+         * Build call for createAssetClass
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return createAssetClassCall(_callback);
+        }
+
+
+        /**
+         * Execute createAssetClass request
+         * @return ModelAssetClassDetails
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ModelAssetClassDetails execute() throws ApiException {
+            ApiResponse<ModelAssetClassDetails> localVarResp = createAssetClassWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute createAssetClass request with HTTP info returned
+         * @return ApiResponse&lt;ModelAssetClassDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ModelAssetClassDetails> executeWithHttpInfo() throws ApiException {
+            return createAssetClassWithHttpInfo();
+        }
+
+        /**
+         * Execute createAssetClass request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+            return createAssetClassAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for createModelPortfolio
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Create a new model asset class
+     * 
+     * @return CreateAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createModelPortfolioCall(final ApiCallback _callback) throws ApiException {
+    public CreateAssetClassRequestBuilder createAssetClass() throws IllegalArgumentException {
+        return new CreateAssetClassRequestBuilder();
+    }
+    private okhttp3.Call createModelPortfolioCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -688,71 +780,101 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Creates a new model portfolio
-     * 
-     * @return ModelPortfolioDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelPortfolioDetails createModelPortfolio() throws ApiException {
-        ApiResponse<ModelPortfolioDetails> localVarResp = createModelPortfolioWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * Creates a new model portfolio
-     * 
-     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelPortfolioDetails> createModelPortfolioWithHttpInfo() throws ApiException {
+    private ApiResponse<ModelPortfolioDetails> createModelPortfolioWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = createModelPortfolioValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Creates a new model portfolio (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call createModelPortfolioAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+    private okhttp3.Call createModelPortfolioAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = createModelPortfolioValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class CreateModelPortfolioRequestBuilder {
+
+        private CreateModelPortfolioRequestBuilder() {
+        }
+
+        /**
+         * Build call for createModelPortfolio
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return createModelPortfolioCall(_callback);
+        }
+
+
+        /**
+         * Execute createModelPortfolio request
+         * @return ModelPortfolioDetails
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ModelPortfolioDetails execute() throws ApiException {
+            ApiResponse<ModelPortfolioDetails> localVarResp = createModelPortfolioWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute createModelPortfolio request with HTTP info returned
+         * @return ApiResponse&lt;ModelPortfolioDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ModelPortfolioDetails> executeWithHttpInfo() throws ApiException {
+            return createModelPortfolioWithHttpInfo();
+        }
+
+        /**
+         * Execute createModelPortfolio request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+            return createModelPortfolioAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for deleteAssetClass
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Creates a new model portfolio
+     * 
+     * @return CreateModelPortfolioRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A new model portfolio is created. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+    public CreateModelPortfolioRequestBuilder createModelPortfolio() throws IllegalArgumentException {
+        return new CreateModelPortfolioRequestBuilder();
+    }
+    private okhttp3.Call deleteAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -807,71 +929,103 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Deletes a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public void deleteAssetClass(UUID modelAssetClassId) throws ApiException {
-        deleteAssetClassWithHttpInfo(modelAssetClassId);
-    }
 
-    /**
-     * Deletes a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> deleteAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
+    private ApiResponse<Void> deleteAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
         okhttp3.Call localVarCall = deleteAssetClassValidateBeforeCall(modelAssetClassId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    /**
-     * Deletes a model asset class (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deleteAssetClassAsync(UUID modelAssetClassId, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call deleteAssetClassAsync(UUID modelAssetClassId, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteAssetClassValidateBeforeCall(modelAssetClassId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
+
+    public class DeleteAssetClassRequestBuilder {
+        private final UUID modelAssetClassId;
+
+        private DeleteAssetClassRequestBuilder(UUID modelAssetClassId) {
+            this.modelAssetClassId = modelAssetClassId;
+        }
+
+        /**
+         * Build call for deleteAssetClass
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteAssetClassCall(modelAssetClassId, _callback);
+        }
+
+
+        /**
+         * Execute deleteAssetClass request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            deleteAssetClassWithHttpInfo(modelAssetClassId);
+        }
+
+        /**
+         * Execute deleteAssetClass request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            return deleteAssetClassWithHttpInfo(modelAssetClassId);
+        }
+
+        /**
+         * Execute deleteAssetClass request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            return deleteAssetClassAsync(modelAssetClassId, _callback);
+        }
+    }
+
     /**
-     * Build call for deleteExcludedAsset
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Deletes a model asset class
+     * 
+     * @param modelAssetClassId The ID of the model asset class to delete. (required)
+     * @return DeleteAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteExcludedAssetCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
+    public DeleteAssetClassRequestBuilder deleteAssetClass(UUID modelAssetClassId) throws IllegalArgumentException {
+        if (modelAssetClassId == null) throw new IllegalArgumentException("\"modelAssetClassId\" is required but got null");
+            
+
+        return new DeleteAssetClassRequestBuilder(modelAssetClassId);
+    }
+    private okhttp3.Call deleteExcludedAssetCall(UUID portfolioGroupId, UUID symbolId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -932,73 +1086,109 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Unexclude an asset from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public void deleteExcludedAsset(UUID portfolioGroupId, UUID symbolId) throws ApiException {
-        deleteExcludedAssetWithHttpInfo(portfolioGroupId, symbolId);
-    }
 
-    /**
-     * Unexclude an asset from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> deleteExcludedAssetWithHttpInfo(UUID portfolioGroupId, UUID symbolId) throws ApiException {
+    private ApiResponse<Void> deleteExcludedAssetWithHttpInfo(UUID portfolioGroupId, UUID symbolId) throws ApiException {
         okhttp3.Call localVarCall = deleteExcludedAssetValidateBeforeCall(portfolioGroupId, symbolId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    /**
-     * Unexclude an asset from a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
-     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deleteExcludedAssetAsync(UUID portfolioGroupId, UUID symbolId, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call deleteExcludedAssetAsync(UUID portfolioGroupId, UUID symbolId, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteExcludedAssetValidateBeforeCall(portfolioGroupId, symbolId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
+
+    public class DeleteExcludedAssetRequestBuilder {
+        private final UUID portfolioGroupId;
+        private final UUID symbolId;
+
+        private DeleteExcludedAssetRequestBuilder(UUID portfolioGroupId, UUID symbolId) {
+            this.portfolioGroupId = portfolioGroupId;
+            this.symbolId = symbolId;
+        }
+
+        /**
+         * Build call for deleteExcludedAsset
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteExcludedAssetCall(portfolioGroupId, symbolId, _callback);
+        }
+
+
+        /**
+         * Execute deleteExcludedAsset request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            deleteExcludedAssetWithHttpInfo(portfolioGroupId, symbolId);
+        }
+
+        /**
+         * Execute deleteExcludedAsset request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            return deleteExcludedAssetWithHttpInfo(portfolioGroupId, symbolId);
+        }
+
+        /**
+         * Execute deleteExcludedAsset request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            return deleteExcludedAssetAsync(portfolioGroupId, symbolId, _callback);
+        }
+    }
+
     /**
-     * Build call for deleteModelPortfolioById
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Unexclude an asset from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to unexclude an asset. (required)
+     * @param symbolId The ID of the excluded asset Symbol to delete. (required)
+     * @return DeleteExcludedAssetRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Excluded asset deleted </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteModelPortfolioByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
+    public DeleteExcludedAssetRequestBuilder deleteExcludedAsset(UUID portfolioGroupId, UUID symbolId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        if (symbolId == null) throw new IllegalArgumentException("\"symbolId\" is required but got null");
+            
+
+        return new DeleteExcludedAssetRequestBuilder(portfolioGroupId, symbolId);
+    }
+    private okhttp3.Call deleteModelPortfolioByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1053,73 +1243,103 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Deletes a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public void deleteModelPortfolioById(UUID modelPortfolioId) throws ApiException {
-        deleteModelPortfolioByIdWithHttpInfo(modelPortfolioId);
-    }
 
-    /**
-     * Deletes a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> deleteModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
+    private ApiResponse<Void> deleteModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
         okhttp3.Call localVarCall = deleteModelPortfolioByIdValidateBeforeCall(modelPortfolioId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    /**
-     * Deletes a model portfolio (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deleteModelPortfolioByIdAsync(UUID modelPortfolioId, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call deleteModelPortfolioByIdAsync(UUID modelPortfolioId, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteModelPortfolioByIdValidateBeforeCall(modelPortfolioId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
+
+    public class DeleteModelPortfolioByIdRequestBuilder {
+        private final UUID modelPortfolioId;
+
+        private DeleteModelPortfolioByIdRequestBuilder(UUID modelPortfolioId) {
+            this.modelPortfolioId = modelPortfolioId;
+        }
+
+        /**
+         * Build call for deleteModelPortfolioById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteModelPortfolioByIdCall(modelPortfolioId, _callback);
+        }
+
+
+        /**
+         * Execute deleteModelPortfolioById request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            deleteModelPortfolioByIdWithHttpInfo(modelPortfolioId);
+        }
+
+        /**
+         * Execute deleteModelPortfolioById request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            return deleteModelPortfolioByIdWithHttpInfo(modelPortfolioId);
+        }
+
+        /**
+         * Execute deleteModelPortfolioById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            return deleteModelPortfolioByIdAsync(modelPortfolioId, _callback);
+        }
+    }
+
     /**
-     * Build call for deletePortfoli
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Deletes a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to delete. (required)
+     * @return DeleteModelPortfolioByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> No content </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deletePortfoliCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public DeleteModelPortfolioByIdRequestBuilder deleteModelPortfolioById(UUID modelPortfolioId) throws IllegalArgumentException {
+        if (modelPortfolioId == null) throw new IllegalArgumentException("\"modelPortfolioId\" is required but got null");
+            
+
+        return new DeleteModelPortfolioByIdRequestBuilder(modelPortfolioId);
+    }
+    private okhttp3.Call deletePortfoliCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1175,87 +1395,122 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Remove a target portfolio.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @return PortfolioGroup
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroup deletePortfoli(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = deletePortfoliWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Remove a target portfolio.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @return ApiResponse&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroup> deletePortfoliWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<PortfolioGroup> deletePortfoliWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = deletePortfoliValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Remove a target portfolio. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deletePortfoliAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    private okhttp3.Call deletePortfoliAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deletePortfoliValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class DeletePortfoliRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private DeletePortfoliRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for deletePortfoli
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deletePortfoliCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute deletePortfoli request
+         * @return PortfolioGroup
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroup execute() throws ApiException {
+            ApiResponse<PortfolioGroup> localVarResp = deletePortfoliWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute deletePortfoli request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroup&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroup> executeWithHttpInfo() throws ApiException {
+            return deletePortfoliWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute deletePortfoli request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+            return deletePortfoliAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for deletePortfolioTargetById
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Remove a target portfolio.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to delete. (required)
+     * @return DeletePortfoliRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string). </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deletePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+    public DeletePortfoliRequestBuilder deletePortfoli(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new DeletePortfoliRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call deletePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1317,86 +1572,128 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Remove a TargetAsset.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @return TargetAsset
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public TargetAsset deletePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = deletePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Remove a TargetAsset.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @return ApiResponse&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<TargetAsset> deletePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+    private ApiResponse<TargetAsset> deletePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
         okhttp3.Call localVarCall = deletePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, null);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Remove a TargetAsset. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to delete. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call deletePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    private okhttp3.Call deletePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deletePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class DeletePortfolioTargetByIdRequestBuilder {
+        private final UUID portfolioGroupId;
+        private final UUID targetAssetId;
+
+        private DeletePortfolioTargetByIdRequestBuilder(UUID portfolioGroupId, UUID targetAssetId) {
+            this.portfolioGroupId = portfolioGroupId;
+            this.targetAssetId = targetAssetId;
+        }
+
+        /**
+         * Build call for deletePortfolioTargetById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deletePortfolioTargetByIdCall(portfolioGroupId, targetAssetId, _callback);
+        }
+
+
+        /**
+         * Execute deletePortfolioTargetById request
+         * @return TargetAsset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public TargetAsset execute() throws ApiException {
+            ApiResponse<TargetAsset> localVarResp = deletePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute deletePortfolioTargetById request with HTTP info returned
+         * @return ApiResponse&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TargetAsset> executeWithHttpInfo() throws ApiException {
+            return deletePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
+        }
+
+        /**
+         * Execute deletePortfolioTargetById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TargetAsset> _callback) throws ApiException {
+            return deletePortfolioTargetByIdAsync(portfolioGroupId, targetAssetId, _callback);
+        }
+    }
+
     /**
-     * Build call for detailAssetClass
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Remove a TargetAsset.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to remove the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to delete. (required)
+     * @return DeletePortfolioTargetByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The TargetAsset object which was deleted. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call detailAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+    public DeletePortfolioTargetByIdRequestBuilder deletePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        if (targetAssetId == null) throw new IllegalArgumentException("\"targetAssetId\" is required but got null");
+            
+
+        return new DeletePortfolioTargetByIdRequestBuilder(portfolioGroupId, targetAssetId);
+    }
+    private okhttp3.Call detailAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1452,76 +1749,107 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get details of a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @return ModelAssetClassDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelAssetClassDetails detailAssetClass(UUID modelAssetClassId) throws ApiException {
-        ApiResponse<ModelAssetClassDetails> localVarResp = detailAssetClassWithHttpInfo(modelAssetClassId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get details of a model asset class
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @return ApiResponse&lt;ModelAssetClassDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelAssetClassDetails> detailAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
+    private ApiResponse<ModelAssetClassDetails> detailAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
         okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, null);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get details of a model asset class (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call detailAssetClassAsync(UUID modelAssetClassId, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+    private okhttp3.Call detailAssetClassAsync(UUID modelAssetClassId, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, _callback);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class DetailAssetClassRequestBuilder {
+        private final UUID modelAssetClassId;
+
+        private DetailAssetClassRequestBuilder(UUID modelAssetClassId) {
+            this.modelAssetClassId = modelAssetClassId;
+        }
+
+        /**
+         * Build call for detailAssetClass
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return detailAssetClassCall(modelAssetClassId, _callback);
+        }
+
+
+        /**
+         * Execute detailAssetClass request
+         * @return ModelAssetClassDetails
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
+         </table>
+         */
+        public ModelAssetClassDetails execute() throws ApiException {
+            ApiResponse<ModelAssetClassDetails> localVarResp = detailAssetClassWithHttpInfo(modelAssetClassId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute detailAssetClass request with HTTP info returned
+         * @return ApiResponse&lt;ModelAssetClassDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ModelAssetClassDetails> executeWithHttpInfo() throws ApiException {
+            return detailAssetClassWithHttpInfo(modelAssetClassId);
+        }
+
+        /**
+         * Execute detailAssetClass request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+            return detailAssetClassAsync(modelAssetClassId, _callback);
+        }
+    }
+
     /**
-     * Build call for getCalculatedTradeById
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get details of a model asset class
+     * 
+     * @param modelAssetClassId The ID of the model asset class to get. (required)
+     * @return DetailAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getCalculatedTradeByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
+    public DetailAssetClassRequestBuilder detailAssetClass(UUID modelAssetClassId) throws IllegalArgumentException {
+        if (modelAssetClassId == null) throw new IllegalArgumentException("\"modelAssetClassId\" is required but got null");
+            
+
+        return new DetailAssetClassRequestBuilder(modelAssetClassId);
+    }
+    private okhttp3.Call getCalculatedTradeByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1589,80 +1917,119 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Return an individual trade
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return List&lt;Trade&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Trade> getCalculatedTradeById(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
-        ApiResponse<List<Trade>> localVarResp = getCalculatedTradeByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return an individual trade
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @return ApiResponse&lt;List&lt;Trade&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Trade>> getCalculatedTradeByIdWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
+    private ApiResponse<List<Trade>> getCalculatedTradeByIdWithHttpInfo(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws ApiException {
         okhttp3.Call localVarCall = getCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, null);
         Type localVarReturnType = new TypeToken<List<Trade>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return an individual trade (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
-     * @param tradeId The ID of trade object (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getCalculatedTradeByIdAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<List<Trade>> _callback) throws ApiException {
+    private okhttp3.Call getCalculatedTradeByIdAsync(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback<List<Trade>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getCalculatedTradeByIdValidateBeforeCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
         Type localVarReturnType = new TypeToken<List<Trade>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetCalculatedTradeByIdRequestBuilder {
+        private final UUID portfolioGroupId;
+        private final UUID calculatedTradeId;
+        private final UUID tradeId;
+
+        private GetCalculatedTradeByIdRequestBuilder(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) {
+            this.portfolioGroupId = portfolioGroupId;
+            this.calculatedTradeId = calculatedTradeId;
+            this.tradeId = tradeId;
+        }
+
+        /**
+         * Build call for getCalculatedTradeById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getCalculatedTradeByIdCall(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        }
+
+
+        /**
+         * Execute getCalculatedTradeById request
+         * @return List&lt;Trade&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Trade> execute() throws ApiException {
+            ApiResponse<List<Trade>> localVarResp = getCalculatedTradeByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getCalculatedTradeById request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Trade&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Trade>> executeWithHttpInfo() throws ApiException {
+            return getCalculatedTradeByIdWithHttpInfo(portfolioGroupId, calculatedTradeId, tradeId);
+        }
+
+        /**
+         * Execute getCalculatedTradeById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Trade>> _callback) throws ApiException {
+            return getCalculatedTradeByIdAsync(portfolioGroupId, calculatedTradeId, tradeId, _callback);
+        }
+    }
+
     /**
-     * Build call for getModelDetailsById
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Return an individual trade
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @param calculatedTradeId The ID of calculated trade to get account impact (required)
+     * @param tradeId The ID of trade object (required)
+     * @return GetCalculatedTradeByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Trade objects </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getModelDetailsByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
+    public GetCalculatedTradeByIdRequestBuilder getCalculatedTradeById(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        if (calculatedTradeId == null) throw new IllegalArgumentException("\"calculatedTradeId\" is required but got null");
+            
+
+        if (tradeId == null) throw new IllegalArgumentException("\"tradeId\" is required but got null");
+            
+
+        return new GetCalculatedTradeByIdRequestBuilder(portfolioGroupId, calculatedTradeId, tradeId);
+    }
+    private okhttp3.Call getModelDetailsByIdCall(UUID modelPortfolioId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1718,77 +2085,107 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get details of a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @return ModelPortfolioDetails
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ModelPortfolioDetails getModelDetailsById(UUID modelPortfolioId) throws ApiException {
-        ApiResponse<ModelPortfolioDetails> localVarResp = getModelDetailsByIdWithHttpInfo(modelPortfolioId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get details of a model portfolio
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @return ApiResponse&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ModelPortfolioDetails> getModelDetailsByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
+    private ApiResponse<ModelPortfolioDetails> getModelDetailsByIdWithHttpInfo(UUID modelPortfolioId) throws ApiException {
         okhttp3.Call localVarCall = getModelDetailsByIdValidateBeforeCall(modelPortfolioId, null);
         Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get details of a model portfolio (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getModelDetailsByIdAsync(UUID modelPortfolioId, final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+    private okhttp3.Call getModelDetailsByIdAsync(UUID modelPortfolioId, final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getModelDetailsByIdValidateBeforeCall(modelPortfolioId, _callback);
         Type localVarReturnType = new TypeToken<ModelPortfolioDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetModelDetailsByIdRequestBuilder {
+        private final UUID modelPortfolioId;
+
+        private GetModelDetailsByIdRequestBuilder(UUID modelPortfolioId) {
+            this.modelPortfolioId = modelPortfolioId;
+        }
+
+        /**
+         * Build call for getModelDetailsById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getModelDetailsByIdCall(modelPortfolioId, _callback);
+        }
+
+
+        /**
+         * Execute getModelDetailsById request
+         * @return ModelPortfolioDetails
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ModelPortfolioDetails execute() throws ApiException {
+            ApiResponse<ModelPortfolioDetails> localVarResp = getModelDetailsByIdWithHttpInfo(modelPortfolioId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getModelDetailsById request with HTTP info returned
+         * @return ApiResponse&lt;ModelPortfolioDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ModelPortfolioDetails> executeWithHttpInfo() throws ApiException {
+            return getModelDetailsByIdWithHttpInfo(modelPortfolioId);
+        }
+
+        /**
+         * Execute getModelDetailsById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ModelPortfolioDetails> _callback) throws ApiException {
+            return getModelDetailsByIdAsync(modelPortfolioId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortfolioBalances
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get details of a model portfolio
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to get. (required)
+     * @return GetModelDetailsByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a particular model portfolio. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortfolioBalancesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetModelDetailsByIdRequestBuilder getModelDetailsById(UUID modelPortfolioId) throws IllegalArgumentException {
+        if (modelPortfolioId == null) throw new IllegalArgumentException("\"modelPortfolioId\" is required but got null");
+            
+
+        return new GetModelDetailsByIdRequestBuilder(modelPortfolioId);
+    }
+    private okhttp3.Call getPortfolioBalancesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1844,84 +2241,122 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get sum of cash balances in portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;Balance&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Balance> getPortfolioBalances(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<Balance>> localVarResp = getPortfolioBalancesWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get sum of cash balances in portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Balance>> getPortfolioBalancesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<List<Balance>> getPortfolioBalancesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioBalancesValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get sum of cash balances in portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioBalancesAsync(UUID portfolioGroupId, final ApiCallback<List<Balance>> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioBalancesAsync(UUID portfolioGroupId, final ApiCallback<List<Balance>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioBalancesValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortfolioBalancesRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortfolioBalancesRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for getPortfolioBalances
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioBalancesCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute getPortfolioBalances request
+         * @return List&lt;Balance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Balance> execute() throws ApiException {
+            ApiResponse<List<Balance>> localVarResp = getPortfolioBalancesWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortfolioBalances request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Balance>> executeWithHttpInfo() throws ApiException {
+            return getPortfolioBalancesWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortfolioBalances request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Balance>> _callback) throws ApiException {
+            return getPortfolioBalancesAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortfolioDetailsById
-     * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get sum of cash balances in portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return GetPortfolioBalancesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Sum of cash balances across accounts in portfolio group by currency </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortfolioDetailsByIdCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetPortfolioBalancesRequestBuilder getPortfolioBalances(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new GetPortfolioBalancesRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call getPortfolioDetailsByIdCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1977,78 +2412,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get details of a target portfolio
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
-     * @return PortfolioGroup
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroup getPortfolioDetailsById(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = getPortfolioDetailsByIdWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get details of a target portfolio
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
-     * @return ApiResponse&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroup> getPortfolioDetailsByIdWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<PortfolioGroup> getPortfolioDetailsByIdWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioDetailsByIdValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get details of a target portfolio (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioDetailsByIdAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioDetailsByIdAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioDetailsByIdValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortfolioDetailsByIdRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortfolioDetailsByIdRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for getPortfolioDetailsById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioDetailsByIdCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute getPortfolioDetailsById request
+         * @return PortfolioGroup
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroup execute() throws ApiException {
+            ApiResponse<PortfolioGroup> localVarResp = getPortfolioDetailsByIdWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortfolioDetailsById request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroup&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroup> executeWithHttpInfo() throws ApiException {
+            return getPortfolioDetailsByIdWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortfolioDetailsById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+            return getPortfolioDetailsByIdAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortfolioInfo
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get details of a target portfolio
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to get. (required)
+     * @return GetPortfolioDetailsByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully gets a target portfolio </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortfolioInfoCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetPortfolioDetailsByIdRequestBuilder getPortfolioDetailsById(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new GetPortfolioDetailsByIdRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call getPortfolioInfoCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2104,213 +2573,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Return a whole bunch of relevant information relating to a portfolio group.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return PortfolioGroupInfo
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroupInfo getPortfolioInfo(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupInfo> localVarResp = getPortfolioInfoWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return a whole bunch of relevant information relating to a portfolio group.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;PortfolioGroupInfo&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroupInfo> getPortfolioInfoWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<PortfolioGroupInfo> getPortfolioInfoWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioInfoValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroupInfo>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return a whole bunch of relevant information relating to a portfolio group. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioInfoAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupInfo> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioInfoAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupInfo> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioInfoValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroupInfo>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
-    /**
-     * Build call for getPortfolioPositions
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioPositionsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
 
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
+    public class GetPortfolioInfoRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortfolioInfoRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
         }
 
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/portfolioGroups/{portfolioGroupId}/positions"
-            .replace("{" + "portfolioGroupId" + "}", localVarApiClient.escapeString(portfolioGroupId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
+        /**
+         * Build call for getPortfolioInfo
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioInfoCall(portfolioGroupId, _callback);
         }
 
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        /**
+         * Execute getPortfolioInfo request
+         * @return PortfolioGroupInfo
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroupInfo execute() throws ApiException {
+            ApiResponse<PortfolioGroupInfo> localVarResp = getPortfolioInfoWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
         }
 
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        /**
+         * Execute getPortfolioInfo request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroupInfo&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroupInfo> executeWithHttpInfo() throws ApiException {
+            return getPortfolioInfoWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortfolioInfo request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroupInfo> _callback) throws ApiException {
+            return getPortfolioInfoAsync(portfolioGroupId, _callback);
+        }
     }
 
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPortfolioPositionsValidateBeforeCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'portfolioGroupId' is set
-        if (portfolioGroupId == null) {
-            throw new ApiException("Missing the required parameter 'portfolioGroupId' when calling getPortfolioPositions(Async)");
-        }
-
-        return getPortfolioPositionsCall(portfolioGroupId, _callback);
-
-    }
-
     /**
-     * Get total of each postions owned in portfolio group
+     * Return a whole bunch of relevant information relating to a portfolio group.
      * 
      * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;PortfolioGroupPosition&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @return GetPortfolioInfoRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public List<PortfolioGroupPosition> getPortfolioPositions(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<PortfolioGroupPosition>> localVarResp = getPortfolioPositionsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
+    public GetPortfolioInfoRequestBuilder getPortfolioInfo(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
 
-    /**
-     * Get total of each postions owned in portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;PortfolioGroupPosition&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<PortfolioGroupPosition>> getPortfolioPositionsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
-        okhttp3.Call localVarCall = getPortfolioPositionsValidateBeforeCall(portfolioGroupId, null);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
+        return new GetPortfolioInfoRequestBuilder(portfolioGroupId);
     }
-
-    /**
-     * Get total of each postions owned in portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Totals of each postions owned in portfolio group </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioPositionsAsync(UUID portfolioGroupId, final ApiCallback<List<PortfolioGroupPosition>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getPortfolioPositionsValidateBeforeCall(portfolioGroupId, _callback);
-        Type localVarReturnType = new TypeToken<List<PortfolioGroupPosition>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for getPortfolioSettings
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2366,79 +2734,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @return PortfolioGroupSettings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroupSettings getPortfolioSettings(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupSettings> localVarResp = getPortfolioSettingsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroupSettings> getPortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<PortfolioGroupSettings> getPortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioSettingsValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get portfolio group settings (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioSettingsValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortfolioSettingsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortfolioSettingsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for getPortfolioSettings
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioSettingsCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute getPortfolioSettings request
+         * @return PortfolioGroupSettings
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroupSettings execute() throws ApiException {
+            ApiResponse<PortfolioGroupSettings> localVarResp = getPortfolioSettingsWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortfolioSettings request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroupSettings&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroupSettings> executeWithHttpInfo() throws ApiException {
+            return getPortfolioSettingsWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortfolioSettings request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
+            return getPortfolioSettingsAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortfolioTargetById
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get portfolio group settings
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the settings. (required)
+     * @return GetPortfolioSettingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
+    public GetPortfolioSettingsRequestBuilder getPortfolioSettings(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new GetPortfolioSettingsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call getPortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2500,83 +2901,118 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get a specific target from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @return TargetAsset
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
-     </table>
-     */
-    public TargetAsset getPortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = getPortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get a specific target from a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @return ApiResponse&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<TargetAsset> getPortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
+    private ApiResponse<TargetAsset> getPortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, null);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get a specific target from a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to get. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, final ApiCallback<TargetAsset> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, _callback);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortfolioTargetByIdRequestBuilder {
+        private final UUID portfolioGroupId;
+        private final UUID targetAssetId;
+
+        private GetPortfolioTargetByIdRequestBuilder(UUID portfolioGroupId, UUID targetAssetId) {
+            this.portfolioGroupId = portfolioGroupId;
+            this.targetAssetId = targetAssetId;
+        }
+
+        /**
+         * Build call for getPortfolioTargetById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioTargetByIdCall(portfolioGroupId, targetAssetId, _callback);
+        }
+
+
+        /**
+         * Execute getPortfolioTargetById request
+         * @return TargetAsset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+         </table>
+         */
+        public TargetAsset execute() throws ApiException {
+            ApiResponse<TargetAsset> localVarResp = getPortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortfolioTargetById request with HTTP info returned
+         * @return ApiResponse&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TargetAsset> executeWithHttpInfo() throws ApiException {
+            return getPortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId);
+        }
+
+        /**
+         * Execute getPortfolioTargetById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TargetAsset> _callback) throws ApiException {
+            return getPortfolioTargetByIdAsync(portfolioGroupId, targetAssetId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortfolioTargets
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get a specific target from a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to get the target asset. (required)
+     * @param targetAssetId The ID of the TargetAsset to get. (required)
+     * @return GetPortfolioTargetByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully get target asset. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected errors </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortfolioTargetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetPortfolioTargetByIdRequestBuilder getPortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        if (targetAssetId == null) throw new IllegalArgumentException("\"targetAssetId\" is required but got null");
+            
+
+        return new GetPortfolioTargetByIdRequestBuilder(portfolioGroupId, targetAssetId);
+    }
+    private okhttp3.Call getPortfolioTargetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2632,84 +3068,122 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get all target assets under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TargetAsset> getPortfolioTargets(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = getPortfolioTargetsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get all target assets under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TargetAsset>> getPortfolioTargetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<List<TargetAsset>> getPortfolioTargetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortfolioTargetsValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get all target assets under the specified PortfolioGroup. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortfolioTargetsAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+    private okhttp3.Call getPortfolioTargetsAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortfolioTargetsValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortfolioTargetsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortfolioTargetsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for getPortfolioTargets
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortfolioTargetsCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute getPortfolioTargets request
+         * @return List&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<TargetAsset> execute() throws ApiException {
+            ApiResponse<List<TargetAsset>> localVarResp = getPortfolioTargetsWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortfolioTargets request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<TargetAsset>> executeWithHttpInfo() throws ApiException {
+            return getPortfolioTargetsWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortfolioTargets request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+            return getPortfolioTargetsAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for getPortoflioExcludedAssets
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get all target assets under the specified PortfolioGroup.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return GetPortfolioTargetsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> All target assets owned by the specified PortfolioGroup. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPortoflioExcludedAssetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetPortfolioTargetsRequestBuilder getPortfolioTargets(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new GetPortfolioTargetsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call getPortoflioExcludedAssetsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2765,78 +3239,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get an array of excluded assets associated with a portfolio group\\
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @return List&lt;ExcludedAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ExcludedAsset> getPortoflioExcludedAssets(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<ExcludedAsset>> localVarResp = getPortoflioExcludedAssetsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get an array of excluded assets associated with a portfolio group\\
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @return ApiResponse&lt;List&lt;ExcludedAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ExcludedAsset>> getPortoflioExcludedAssetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<List<ExcludedAsset>> getPortoflioExcludedAssetsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = getPortoflioExcludedAssetsValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get an array of excluded assets associated with a portfolio group\\ (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getPortoflioExcludedAssetsAsync(UUID portfolioGroupId, final ApiCallback<List<ExcludedAsset>> _callback) throws ApiException {
+    private okhttp3.Call getPortoflioExcludedAssetsAsync(UUID portfolioGroupId, final ApiCallback<List<ExcludedAsset>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPortoflioExcludedAssetsValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<List<ExcludedAsset>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetPortoflioExcludedAssetsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private GetPortoflioExcludedAssetsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for getPortoflioExcludedAssets
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPortoflioExcludedAssetsCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute getPortoflioExcludedAssets request
+         * @return List&lt;ExcludedAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<ExcludedAsset> execute() throws ApiException {
+            ApiResponse<List<ExcludedAsset>> localVarResp = getPortoflioExcludedAssetsWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getPortoflioExcludedAssets request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;ExcludedAsset&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<ExcludedAsset>> executeWithHttpInfo() throws ApiException {
+            return getPortoflioExcludedAssetsWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute getPortoflioExcludedAssets request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<ExcludedAsset>> _callback) throws ApiException {
+            return getPortoflioExcludedAssetsAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for importModelPortfolio
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get an array of excluded assets associated with a portfolio group\\
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the excluded assets are linked. (required)
+     * @return GetPortoflioExcludedAssetsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Array of excluded assets linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call importModelPortfolioCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public GetPortoflioExcludedAssetsRequestBuilder getPortoflioExcludedAssets(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new GetPortoflioExcludedAssetsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call importModelPortfolioCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2892,76 +3400,291 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Import target allocation based on portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return List&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TargetAsset> importModelPortfolio(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = importModelPortfolioWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Import target allocation based on portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TargetAsset>> importModelPortfolioWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<List<TargetAsset>> importModelPortfolioWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = importModelPortfolioValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Import target allocation based on portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call importModelPortfolioAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+    private okhttp3.Call importModelPortfolioAsync(UUID portfolioGroupId, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = importModelPortfolioValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ImportModelPortfolioRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private ImportModelPortfolioRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for importModelPortfolio
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return importModelPortfolioCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute importModelPortfolio request
+         * @return List&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<TargetAsset> execute() throws ApiException {
+            ApiResponse<List<TargetAsset>> localVarResp = importModelPortfolioWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute importModelPortfolio request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<TargetAsset>> executeWithHttpInfo() throws ApiException {
+            return importModelPortfolioWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute importModelPortfolio request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+            return importModelPortfolioAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for listAssetClasses
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Import target allocation based on portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return ImportModelPortfolioRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Portfolio group target allocation has been updated </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listAssetClassesCall(final ApiCallback _callback) throws ApiException {
+    public ImportModelPortfolioRequestBuilder importModelPortfolio(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new ImportModelPortfolioRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call listCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/portfolioGroups";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling list(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling list(Async)");
+        }
+
+        return listCall(userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<List<PortfolioGroup>> listWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listValidateBeforeCall(userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listAsync(String userId, String userSecret, final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listValidateBeforeCall(userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<List<PortfolioGroup>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class ListRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+
+        private ListRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for list
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listCall(userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute list request
+         * @return List&lt;PortfolioGroup&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<PortfolioGroup> execute() throws ApiException {
+            ApiResponse<List<PortfolioGroup>> localVarResp = listWithHttpInfo(userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute list request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;PortfolioGroup&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<PortfolioGroup>> executeWithHttpInfo() throws ApiException {
+            return listWithHttpInfo(userId, userSecret);
+        }
+
+        /**
+         * Execute list request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
+            return listAsync(userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * List all portfolio groups
+     * 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return ListRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of all PortfolioGroup objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ListRequestBuilder list(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new ListRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call listAssetClassesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3011,71 +3734,101 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * List of model asset class
-     * 
-     * @return List&lt;ModelAssetClassDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ModelAssetClassDetails> listAssetClasses() throws ApiException {
-        ApiResponse<List<ModelAssetClassDetails>> localVarResp = listAssetClassesWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of model asset class
-     * 
-     * @return ApiResponse&lt;List&lt;ModelAssetClassDetails&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ModelAssetClassDetails>> listAssetClassesWithHttpInfo() throws ApiException {
+    private ApiResponse<List<ModelAssetClassDetails>> listAssetClassesWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of model asset class (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listAssetClassesAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
+    private okhttp3.Call listAssetClassesAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListAssetClassesRequestBuilder {
+
+        private ListAssetClassesRequestBuilder() {
+        }
+
+        /**
+         * Build call for listAssetClasses
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAssetClassesCall(_callback);
+        }
+
+
+        /**
+         * Execute listAssetClasses request
+         * @return List&lt;ModelAssetClassDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<ModelAssetClassDetails> execute() throws ApiException {
+            ApiResponse<List<ModelAssetClassDetails>> localVarResp = listAssetClassesWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAssetClasses request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;ModelAssetClassDetails&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<ModelAssetClassDetails>> executeWithHttpInfo() throws ApiException {
+            return listAssetClassesWithHttpInfo();
+        }
+
+        /**
+         * Execute listAssetClasses request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
+            return listAssetClassesAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for listCalculatedTrades
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of model asset class
+     * 
+     * @return ListAssetClassesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listCalculatedTradesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public ListAssetClassesRequestBuilder listAssetClasses() throws IllegalArgumentException {
+        return new ListAssetClassesRequestBuilder();
+    }
+    private okhttp3.Call listCalculatedTradesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3131,73 +3884,107 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * List of trades to make to rebalance portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @return CalculatedTrade
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public CalculatedTrade listCalculatedTrades(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<CalculatedTrade> localVarResp = listCalculatedTradesWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of trades to make to rebalance portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @return ApiResponse&lt;CalculatedTrade&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<CalculatedTrade> listCalculatedTradesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<CalculatedTrade> listCalculatedTradesWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = listCalculatedTradesValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of trades to make to rebalance portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listCalculatedTradesAsync(UUID portfolioGroupId, final ApiCallback<CalculatedTrade> _callback) throws ApiException {
+    private okhttp3.Call listCalculatedTradesAsync(UUID portfolioGroupId, final ApiCallback<CalculatedTrade> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listCalculatedTradesValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<CalculatedTrade>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListCalculatedTradesRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private ListCalculatedTradesRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for listCalculatedTrades
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listCalculatedTradesCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute listCalculatedTrades request
+         * @return CalculatedTrade
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+         </table>
+         */
+        public CalculatedTrade execute() throws ApiException {
+            ApiResponse<CalculatedTrade> localVarResp = listCalculatedTradesWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listCalculatedTrades request with HTTP info returned
+         * @return ApiResponse&lt;CalculatedTrade&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CalculatedTrade> executeWithHttpInfo() throws ApiException {
+            return listCalculatedTradesWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute listCalculatedTrades request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CalculatedTrade> _callback) throws ApiException {
+            return listCalculatedTradesAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for listModelPortfolio
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of trades to make to rebalance portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to perform rebalancing calculations (required)
+     * @return ListCalculatedTradesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Calculated trades to make </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listModelPortfolioCall(final ApiCallback _callback) throws ApiException {
+    public ListCalculatedTradesRequestBuilder listCalculatedTrades(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new ListCalculatedTradesRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call listModelPortfolioCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3247,72 +4034,101 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * List of model portfolio
-     * 
-     * @return List&lt;ModelPortfolioDetails&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<ModelPortfolioDetails> listModelPortfolio() throws ApiException {
-        ApiResponse<List<ModelPortfolioDetails>> localVarResp = listModelPortfolioWithHttpInfo();
-        return localVarResp.getData();
-    }
 
-    /**
-     * List of model portfolio
-     * 
-     * @return ApiResponse&lt;List&lt;ModelPortfolioDetails&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<ModelPortfolioDetails>> listModelPortfolioWithHttpInfo() throws ApiException {
+    private ApiResponse<List<ModelPortfolioDetails>> listModelPortfolioWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = listModelPortfolioValidateBeforeCall(null);
         Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List of model portfolio (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listModelPortfolioAsync(final ApiCallback<List<ModelPortfolioDetails>> _callback) throws ApiException {
+    private okhttp3.Call listModelPortfolioAsync(final ApiCallback<List<ModelPortfolioDetails>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listModelPortfolioValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<ModelPortfolioDetails>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListModelPortfolioRequestBuilder {
+
+        private ListModelPortfolioRequestBuilder() {
+        }
+
+        /**
+         * Build call for listModelPortfolio
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listModelPortfolioCall(_callback);
+        }
+
+
+        /**
+         * Execute listModelPortfolio request
+         * @return List&lt;ModelPortfolioDetails&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<ModelPortfolioDetails> execute() throws ApiException {
+            ApiResponse<List<ModelPortfolioDetails>> localVarResp = listModelPortfolioWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listModelPortfolio request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;ModelPortfolioDetails&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<ModelPortfolioDetails>> executeWithHttpInfo() throws ApiException {
+            return listModelPortfolioWithHttpInfo();
+        }
+
+        /**
+         * Execute listModelPortfolio request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<ModelPortfolioDetails>> _callback) throws ApiException {
+            return listModelPortfolioAsync(_callback);
+        }
+    }
+
     /**
-     * Build call for listPortfolioAccounts
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * List of model portfolio
+     * 
+     * @return ListModelPortfolioRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all model portfolio objects for the authenticated user. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call listPortfolioAccountsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public ListModelPortfolioRequestBuilder listModelPortfolio() throws IllegalArgumentException {
+        return new ListModelPortfolioRequestBuilder();
+    }
+    private okhttp3.Call listPortfolioAccountsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3368,78 +4184,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Get all accounts associated with a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @return List&lt;Account&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Account> listPortfolioAccounts(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<List<Account>> localVarResp = listPortfolioAccountsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get all accounts associated with a portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Account>> listPortfolioAccountsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<List<Account>> listPortfolioAccountsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = listPortfolioAccountsValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get all accounts associated with a portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listPortfolioAccountsAsync(UUID portfolioGroupId, final ApiCallback<List<Account>> _callback) throws ApiException {
+    private okhttp3.Call listPortfolioAccountsAsync(UUID portfolioGroupId, final ApiCallback<List<Account>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listPortfolioAccountsValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListPortfolioAccountsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private ListPortfolioAccountsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for listPortfolioAccounts
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listPortfolioAccountsCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute listPortfolioAccounts request
+         * @return List&lt;Account&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Account> execute() throws ApiException {
+            ApiResponse<List<Account>> localVarResp = listPortfolioAccountsWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listPortfolioAccounts request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+            return listPortfolioAccountsWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute listPortfolioAccounts request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+            return listPortfolioAccountsAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for modifyModelPortfolioById
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Get all accounts associated with a portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which the accounts are linked. (required)
+     * @return ListPortfolioAccountsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Accounts linked to portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call modifyModelPortfolioByIdCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
+    public ListPortfolioAccountsRequestBuilder listPortfolioAccounts(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new ListPortfolioAccountsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call modifyModelPortfolioByIdCall(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3500,77 +4350,148 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Updates model portfolio object
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public void modifyModelPortfolioById(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
-        modifyModelPortfolioByIdWithHttpInfo(modelPortfolioId, modelPortfolioDetails);
-    }
 
-    /**
-     * Updates model portfolio object
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> modifyModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
+    private ApiResponse<Void> modifyModelPortfolioByIdWithHttpInfo(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails) throws ApiException {
         okhttp3.Call localVarCall = modifyModelPortfolioByIdValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    /**
-     * Updates model portfolio object (asynchronously)
-     * 
-     * @param modelPortfolioId The ID of the model portfolio to update. (required)
-     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call modifyModelPortfolioByIdAsync(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call modifyModelPortfolioByIdAsync(UUID modelPortfolioId, ModelPortfolioDetails modelPortfolioDetails, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = modifyModelPortfolioByIdValidateBeforeCall(modelPortfolioId, modelPortfolioDetails, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
+
+    public class ModifyModelPortfolioByIdRequestBuilder {
+        private final UUID modelPortfolioId;
+        private ModelPortfolio modelPortfolio;
+        private List<ModelPortfolioSecurity> modelPortfolioSecurity;
+        private List<ModelPortfolioAssetClass> modelPortfolioAssetClass;
+
+        private ModifyModelPortfolioByIdRequestBuilder(UUID modelPortfolioId) {
+            this.modelPortfolioId = modelPortfolioId;
+        }
+
+        /**
+         * Set modelPortfolio
+         * @param modelPortfolio  (optional)
+         * @return ModifyModelPortfolioByIdRequestBuilder
+         */
+        public ModifyModelPortfolioByIdRequestBuilder modelPortfolio(ModelPortfolio modelPortfolio) {
+            this.modelPortfolio = modelPortfolio;
+            return this;
+        }
+        
+        /**
+         * Set modelPortfolioSecurity
+         * @param modelPortfolioSecurity  (optional)
+         * @return ModifyModelPortfolioByIdRequestBuilder
+         */
+        public ModifyModelPortfolioByIdRequestBuilder modelPortfolioSecurity(List<ModelPortfolioSecurity> modelPortfolioSecurity) {
+            this.modelPortfolioSecurity = modelPortfolioSecurity;
+            return this;
+        }
+        
+        /**
+         * Set modelPortfolioAssetClass
+         * @param modelPortfolioAssetClass  (optional)
+         * @return ModifyModelPortfolioByIdRequestBuilder
+         */
+        public ModifyModelPortfolioByIdRequestBuilder modelPortfolioAssetClass(List<ModelPortfolioAssetClass> modelPortfolioAssetClass) {
+            this.modelPortfolioAssetClass = modelPortfolioAssetClass;
+            return this;
+        }
+        
+        /**
+         * Build call for modifyModelPortfolioById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ModelPortfolioDetails modelPortfolioDetails = buildBodyParams();
+            return modifyModelPortfolioByIdCall(modelPortfolioId, modelPortfolioDetails, _callback);
+        }
+
+        private ModelPortfolioDetails buildBodyParams() {
+            ModelPortfolioDetails modelPortfolioDetails = new ModelPortfolioDetails();
+            modelPortfolioDetails.modelPortfolio(this.modelPortfolio);
+            modelPortfolioDetails.modelPortfolioSecurity(this.modelPortfolioSecurity);
+            modelPortfolioDetails.modelPortfolioAssetClass(this.modelPortfolioAssetClass);
+            return modelPortfolioDetails;
+        }
+
+        /**
+         * Execute modifyModelPortfolioById request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            ModelPortfolioDetails modelPortfolioDetails = buildBodyParams();
+            modifyModelPortfolioByIdWithHttpInfo(modelPortfolioId, modelPortfolioDetails);
+        }
+
+        /**
+         * Execute modifyModelPortfolioById request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            ModelPortfolioDetails modelPortfolioDetails = buildBodyParams();
+            return modifyModelPortfolioByIdWithHttpInfo(modelPortfolioId, modelPortfolioDetails);
+        }
+
+        /**
+         * Execute modifyModelPortfolioById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            ModelPortfolioDetails modelPortfolioDetails = buildBodyParams();
+            return modifyModelPortfolioByIdAsync(modelPortfolioId, modelPortfolioDetails, _callback);
+        }
+    }
+
     /**
-     * Build call for savePortfolio
-     * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
-     * @param requestBody  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Updates model portfolio object
+     * 
+     * @param modelPortfolioId The ID of the model portfolio to update. (required)
+     * @param modelPortfolioDetails Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. &lt;br /&gt;&lt;br /&gt; * The model portfolio name and model portfolio model type is required. &lt;br /&gt; * The model portfolio model type must be either 0 or 1. [0 -&gt; Securities based, 1 -&gt; Asset Class based] &lt;br /&gt;&lt;br /&gt; * If the model portfolio type is 0, the model portfolio asset class must be an empty array. &lt;br /&gt; * If the model portfolio type is 1, the model portfolio security must be an empty array. &lt;br /&gt;&lt;br /&gt; * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object &lt;br /&gt; * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object &lt;br /&gt;&lt;br /&gt; * To remove all model portfolio securities or model portfolio asset class, set then to an empty array (required)
+     * @return ModifyModelPortfolioByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model portfolio object with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call savePortfolioCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
+    public ModifyModelPortfolioByIdRequestBuilder modifyModelPortfolioById(UUID modelPortfolioId) throws IllegalArgumentException {
+        if (modelPortfolioId == null) throw new IllegalArgumentException("\"modelPortfolioId\" is required but got null");
+            
+
+        return new ModifyModelPortfolioByIdRequestBuilder(modelPortfolioId);
+    }
+    private okhttp3.Call savePortfolioCall(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3632,88 +4553,155 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Update an existing target portfolio.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
-     * @param requestBody  (required)
-     * @return PortfolioGroup
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroup savePortfolio(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
-        ApiResponse<PortfolioGroup> localVarResp = savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Update an existing target portfolio.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
-     * @param requestBody  (required)
-     * @return ApiResponse&lt;PortfolioGroup&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroup> savePortfolioWithHttpInfo(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
+    private ApiResponse<PortfolioGroup> savePortfolioWithHttpInfo(UUID portfolioGroupId, Map<String, Object> requestBody) throws ApiException {
         okhttp3.Call localVarCall = savePortfolioValidateBeforeCall(portfolioGroupId, requestBody, null);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Update an existing target portfolio. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
-     * @param requestBody  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call savePortfolioAsync(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+    private okhttp3.Call savePortfolioAsync(UUID portfolioGroupId, Map<String, Object> requestBody, final ApiCallback<PortfolioGroup> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = savePortfolioValidateBeforeCall(portfolioGroupId, requestBody, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroup>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class SavePortfolioRequestBuilder {
+        private final UUID portfolioGroupId;
+        private UUID id;
+        private String name;
+
+        private SavePortfolioRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Set id
+         * @param id  (optional)
+         * @return SavePortfolioRequestBuilder
+         */
+        public SavePortfolioRequestBuilder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+        
+        /**
+         * Set name
+         * @param name  (optional)
+         * @return SavePortfolioRequestBuilder
+         */
+        public SavePortfolioRequestBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        /**
+         * Build call for savePortfolio
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return savePortfolioCall(portfolioGroupId, requestBody, _callback);
+        }
+
+        private Map&lt;String, Object&gt; buildBodyParams() {
+            Map&lt;String, Object&gt; requestBody = new Map&lt;String, Object&gt;();
+            requestBody.id(this.id);
+            requestBody.name(this.name);
+            return requestBody;
+        }
+
+        /**
+         * Execute savePortfolio request
+         * @return PortfolioGroup
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroup execute() throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            ApiResponse<PortfolioGroup> localVarResp = savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute savePortfolio request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroup&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroup> executeWithHttpInfo() throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
+        }
+
+        /**
+         * Execute savePortfolio request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroup> _callback) throws ApiException {
+            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            return savePortfolioAsync(portfolioGroupId, requestBody, _callback);
+        }
+    }
+
     /**
-     * Build call for searchPortfolioSymbols
-     * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
-     * @param symbolQuery  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Update an existing target portfolio.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to update. (required)
+     * @param requestBody  (required)
+     * @return SavePortfolioRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> The PortfolioGroup object which was updated. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchPortfolioSymbolsCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
+    public SavePortfolioRequestBuilder savePortfolio(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new SavePortfolioRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call searchPortfolioSymbolsCall(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3770,84 +4758,132 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Search for symbols limited to brokerages under the specified portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
-     * @param symbolQuery  (optional)
-     * @return List&lt;UniversalSymbol&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<UniversalSymbol> searchPortfolioSymbols(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
-        ApiResponse<List<UniversalSymbol>> localVarResp = searchPortfolioSymbolsWithHttpInfo(portfolioGroupId, symbolQuery);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Search for symbols limited to brokerages under the specified portfolio group
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
-     * @param symbolQuery  (optional)
-     * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<UniversalSymbol>> searchPortfolioSymbolsWithHttpInfo(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
+    private ApiResponse<List<UniversalSymbol>> searchPortfolioSymbolsWithHttpInfo(UUID portfolioGroupId, SymbolQuery symbolQuery) throws ApiException {
         okhttp3.Call localVarCall = searchPortfolioSymbolsValidateBeforeCall(portfolioGroupId, symbolQuery, null);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Search for symbols limited to brokerages under the specified portfolio group (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
-     * @param symbolQuery  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call searchPortfolioSymbolsAsync(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+    private okhttp3.Call searchPortfolioSymbolsAsync(UUID portfolioGroupId, SymbolQuery symbolQuery, final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = searchPortfolioSymbolsValidateBeforeCall(portfolioGroupId, symbolQuery, _callback);
         Type localVarReturnType = new TypeToken<List<UniversalSymbol>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class SearchPortfolioSymbolsRequestBuilder {
+        private final UUID portfolioGroupId;
+        private String substring;
+
+        private SearchPortfolioSymbolsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Set substring
+         * @param substring  (optional)
+         * @return SearchPortfolioSymbolsRequestBuilder
+         */
+        public SearchPortfolioSymbolsRequestBuilder substring(String substring) {
+            this.substring = substring;
+            return this;
+        }
+        
+        /**
+         * Build call for searchPortfolioSymbols
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return searchPortfolioSymbolsCall(portfolioGroupId, symbolQuery, _callback);
+        }
+
+        private SymbolQuery buildBodyParams() {
+            SymbolQuery symbolQuery = new SymbolQuery();
+            symbolQuery.substring(this.substring);
+            return symbolQuery;
+        }
+
+        /**
+         * Execute searchPortfolioSymbols request
+         * @return List&lt;UniversalSymbol&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UniversalSymbol> execute() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            ApiResponse<List<UniversalSymbol>> localVarResp = searchPortfolioSymbolsWithHttpInfo(portfolioGroupId, symbolQuery);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute searchPortfolioSymbols request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UniversalSymbol&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UniversalSymbol>> executeWithHttpInfo() throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return searchPortfolioSymbolsWithHttpInfo(portfolioGroupId, symbolQuery);
+        }
+
+        /**
+         * Execute searchPortfolioSymbols request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
+            SymbolQuery symbolQuery = buildBodyParams();
+            return searchPortfolioSymbolsAsync(portfolioGroupId, symbolQuery, _callback);
+        }
+    }
+
     /**
-     * Build call for setPortfolioTargets
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param targetAsset  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Search for symbols limited to brokerages under the specified portfolio group
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup to search under (required)
+     * @return SearchPortfolioSymbolsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call setPortfolioTargetsCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
+    public SearchPortfolioSymbolsRequestBuilder searchPortfolioSymbols(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new SearchPortfolioSymbolsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call setPortfolioTargetsCall(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3904,87 +4940,130 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param targetAsset  (optional)
-     * @return List&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<TargetAsset> setPortfolioTargets(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
-        ApiResponse<List<TargetAsset>> localVarResp = setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param targetAsset  (optional)
-     * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<TargetAsset>> setPortfolioTargetsWithHttpInfo(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
+    private ApiResponse<List<TargetAsset>> setPortfolioTargetsWithHttpInfo(UUID portfolioGroupId, List<TargetAsset> targetAsset) throws ApiException {
         okhttp3.Call localVarCall = setPortfolioTargetsValidateBeforeCall(portfolioGroupId, targetAsset, null);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list. (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
-     * @param targetAsset  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call setPortfolioTargetsAsync(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+    private okhttp3.Call setPortfolioTargetsAsync(UUID portfolioGroupId, List<TargetAsset> targetAsset, final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = setPortfolioTargetsValidateBeforeCall(portfolioGroupId, targetAsset, _callback);
         Type localVarReturnType = new TypeToken<List<TargetAsset>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class SetPortfolioTargetsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private SetPortfolioTargetsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for setPortfolioTargets
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            return setPortfolioTargetsCall(portfolioGroupId, targetAsset, _callback);
+        }
+
+        private List&lt;TargetAsset&gt; buildBodyParams() {
+            List&lt;TargetAsset&gt; targetAsset = new List&lt;TargetAsset&gt;();
+            return targetAsset;
+        }
+
+        /**
+         * Execute setPortfolioTargets request
+         * @return List&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<TargetAsset> execute() throws ApiException {
+            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            ApiResponse<List<TargetAsset>> localVarResp = setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute setPortfolioTargets request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;TargetAsset&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<TargetAsset>> executeWithHttpInfo() throws ApiException {
+            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            return setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
+        }
+
+        /**
+         * Execute setPortfolioTargets request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
+            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            return setPortfolioTargetsAsync(portfolioGroupId, targetAsset, _callback);
+        }
+    }
+
     /**
-     * Build call for updateAssetClass
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to create the target asset. (required)
+     * @return SetPortfolioTargetsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A new target asset or set of target assets is created. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The specified portfolioGroupId was not found. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateAssetClassCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
+    public SetPortfolioTargetsRequestBuilder setPortfolioTargets(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new SetPortfolioTargetsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call updateAssetClassCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4045,74 +5124,136 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Updates model asset class objects
-     * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public void updateAssetClass(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
-        updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
-    }
 
-    /**
-     * Updates model asset class objects
-     * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> updateAssetClassWithHttpInfo(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
+    private ApiResponse<Void> updateAssetClassWithHttpInfo(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
         okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    /**
-     * Updates model asset class objects (asynchronously)
-     * 
-     * @param modelAssetClassId The ID of the model asset class to update. (required)
-     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call updateAssetClassAsync(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call updateAssetClassAsync(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
+
+    public class UpdateAssetClassRequestBuilder {
+        private final UUID modelAssetClassId;
+        private ModelAssetClass modelAssetClass;
+        private List<ModelAssetClassTarget> modelAssetClassTarget;
+
+        private UpdateAssetClassRequestBuilder(UUID modelAssetClassId) {
+            this.modelAssetClassId = modelAssetClassId;
+        }
+
+        /**
+         * Set modelAssetClass
+         * @param modelAssetClass  (optional)
+         * @return UpdateAssetClassRequestBuilder
+         */
+        public UpdateAssetClassRequestBuilder modelAssetClass(ModelAssetClass modelAssetClass) {
+            this.modelAssetClass = modelAssetClass;
+            return this;
+        }
+        
+        /**
+         * Set modelAssetClassTarget
+         * @param modelAssetClassTarget  (optional)
+         * @return UpdateAssetClassRequestBuilder
+         */
+        public UpdateAssetClassRequestBuilder modelAssetClassTarget(List<ModelAssetClassTarget> modelAssetClassTarget) {
+            this.modelAssetClassTarget = modelAssetClassTarget;
+            return this;
+        }
+        
+        /**
+         * Build call for updateAssetClass
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
+            return updateAssetClassCall(modelAssetClassId, modelAssetClassDetails, _callback);
+        }
+
+        private ModelAssetClassDetails buildBodyParams() {
+            ModelAssetClassDetails modelAssetClassDetails = new ModelAssetClassDetails();
+            modelAssetClassDetails.modelAssetClass(this.modelAssetClass);
+            modelAssetClassDetails.modelAssetClassTarget(this.modelAssetClassTarget);
+            return modelAssetClassDetails;
+        }
+
+        /**
+         * Execute updateAssetClass request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute() throws ApiException {
+            ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
+            updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
+        }
+
+        /**
+         * Execute updateAssetClass request with HTTP info returned
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
+            ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
+            return updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
+        }
+
+        /**
+         * Execute updateAssetClass request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
+            ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
+            return updateAssetClassAsync(modelAssetClassId, modelAssetClassDetails, _callback);
+        }
+    }
+
     /**
-     * Build call for updatePortfolioSettings
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Updates model asset class objects
+     * 
+     * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
+     * @return UpdateAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updatePortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
+    public UpdateAssetClassRequestBuilder updateAssetClass(UUID modelAssetClassId) throws IllegalArgumentException {
+        if (modelAssetClassId == null) throw new IllegalArgumentException("\"modelAssetClassId\" is required but got null");
+            
+
+        return new UpdateAssetClassRequestBuilder(modelAssetClassId);
+    }
+    private okhttp3.Call updatePortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4168,82 +5309,112 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Updates portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @return PortfolioGroupSettings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public PortfolioGroupSettings updatePortfolioSettings(UUID portfolioGroupId) throws ApiException {
-        ApiResponse<PortfolioGroupSettings> localVarResp = updatePortfolioSettingsWithHttpInfo(portfolioGroupId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Updates portfolio group settings
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @return ApiResponse&lt;PortfolioGroupSettings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PortfolioGroupSettings> updatePortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
+    private ApiResponse<PortfolioGroupSettings> updatePortfolioSettingsWithHttpInfo(UUID portfolioGroupId) throws ApiException {
         okhttp3.Call localVarCall = updatePortfolioSettingsValidateBeforeCall(portfolioGroupId, null);
         Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Updates portfolio group settings (asynchronously)
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call updatePortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
+    private okhttp3.Call updatePortfolioSettingsAsync(UUID portfolioGroupId, final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = updatePortfolioSettingsValidateBeforeCall(portfolioGroupId, _callback);
         Type localVarReturnType = new TypeToken<PortfolioGroupSettings>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class UpdatePortfolioSettingsRequestBuilder {
+        private final UUID portfolioGroupId;
+
+        private UpdatePortfolioSettingsRequestBuilder(UUID portfolioGroupId) {
+            this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Build call for updatePortfolioSettings
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return updatePortfolioSettingsCall(portfolioGroupId, _callback);
+        }
+
+
+        /**
+         * Execute updatePortfolioSettings request
+         * @return PortfolioGroupSettings
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public PortfolioGroupSettings execute() throws ApiException {
+            ApiResponse<PortfolioGroupSettings> localVarResp = updatePortfolioSettingsWithHttpInfo(portfolioGroupId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute updatePortfolioSettings request with HTTP info returned
+         * @return ApiResponse&lt;PortfolioGroupSettings&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PortfolioGroupSettings> executeWithHttpInfo() throws ApiException {
+            return updatePortfolioSettingsWithHttpInfo(portfolioGroupId);
+        }
+
+        /**
+         * Execute updatePortfolioSettings request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroupSettings> _callback) throws ApiException {
+            return updatePortfolioSettingsAsync(portfolioGroupId, _callback);
+        }
+    }
+
     /**
-     * Build call for updatePortfolioTargetById
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to patch. (required)
-     * @param targetAsset  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * Updates portfolio group settings
+     * 
+     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the settings. (required)
+     * @return UpdatePortfolioSettingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Settings of portfolio group </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updatePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
+    public UpdatePortfolioSettingsRequestBuilder updatePortfolioSettings(UUID portfolioGroupId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
+
+        return new UpdatePortfolioSettingsRequestBuilder(portfolioGroupId);
+    }
+    private okhttp3.Call updatePortfolioTargetByIdCall(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -4311,60 +5482,179 @@ public class PortfolioManagementApi {
 
     }
 
-    /**
-     * Update a TargetAsset under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to patch. (required)
-     * @param targetAsset  (required)
-     * @return TargetAsset
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public TargetAsset updatePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
-        ApiResponse<TargetAsset> localVarResp = updatePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId, targetAsset);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Update a TargetAsset under the specified PortfolioGroup.
-     * 
-     * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset. (required)
-     * @param targetAssetId The ID of the TargetAsset to patch. (required)
-     * @param targetAsset  (required)
-     * @return ApiResponse&lt;TargetAsset&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<TargetAsset> updatePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
+    private ApiResponse<TargetAsset> updatePortfolioTargetByIdWithHttpInfo(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset) throws ApiException {
         okhttp3.Call localVarCall = updatePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, null);
         Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call updatePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback<TargetAsset> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updatePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
+        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class UpdatePortfolioTargetByIdRequestBuilder {
+        private final UUID portfolioGroupId;
+        private final UUID targetAssetId;
+        private UUID id;
+        private UniversalSymbol symbol;
+        private double percent;
+        private Boolean isSupported;
+        private Boolean isExcluded;
+
+        private UpdatePortfolioTargetByIdRequestBuilder(UUID portfolioGroupId, UUID targetAssetId) {
+            this.portfolioGroupId = portfolioGroupId;
+            this.targetAssetId = targetAssetId;
+        }
+
+        /**
+         * Set id
+         * @param id  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder symbol(UniversalSymbol symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+        
+        /**
+         * Set percent
+         * @param percent  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder percent(double percent) {
+            this.percent = percent;
+            return this;
+        }
+        
+        /**
+         * Set isSupported
+         * @param isSupported  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder isSupported(Boolean isSupported) {
+            this.isSupported = isSupported;
+            return this;
+        }
+        
+        /**
+         * Set isExcluded
+         * @param isExcluded  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder isExcluded(Boolean isExcluded) {
+            this.isExcluded = isExcluded;
+            return this;
+        }
+        
+        /**
+         * Build call for updatePortfolioTargetById
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            TargetAsset targetAsset = buildBodyParams();
+            return updatePortfolioTargetByIdCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
+        }
+
+        private TargetAsset buildBodyParams() {
+            TargetAsset targetAsset = new TargetAsset();
+            targetAsset.id(this.id);
+            targetAsset.symbol(this.symbol);
+            targetAsset.percent(this.percent);
+            targetAsset.isSupported(this.isSupported);
+            targetAsset.isExcluded(this.isExcluded);
+            targetAsset.meta(this.meta);
+            return targetAsset;
+        }
+
+        /**
+         * Execute updatePortfolioTargetById request
+         * @return TargetAsset
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public TargetAsset execute() throws ApiException {
+            TargetAsset targetAsset = buildBodyParams();
+            ApiResponse<TargetAsset> localVarResp = updatePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId, targetAsset);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute updatePortfolioTargetById request with HTTP info returned
+         * @return ApiResponse&lt;TargetAsset&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TargetAsset> executeWithHttpInfo() throws ApiException {
+            TargetAsset targetAsset = buildBodyParams();
+            return updatePortfolioTargetByIdWithHttpInfo(portfolioGroupId, targetAssetId, targetAsset);
+        }
+
+        /**
+         * Execute updatePortfolioTargetById request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The target asset is updated. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The specified portfolioGroupId or targetAssetId is invalid (not a UUID string) or the input data is invalid. </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> The specified portfolioGroupId or targetAssetId was not found. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TargetAsset> _callback) throws ApiException {
+            TargetAsset targetAsset = buildBodyParams();
+            return updatePortfolioTargetByIdAsync(portfolioGroupId, targetAssetId, targetAsset, _callback);
+        }
+    }
+
     /**
-     * Update a TargetAsset under the specified PortfolioGroup. (asynchronously)
+     * Update a TargetAsset under the specified PortfolioGroup.
      * 
      * @param portfolioGroupId The ID of the PortfolioGroup under which to patch the target asset. (required)
      * @param targetAssetId The ID of the TargetAsset to patch. (required)
      * @param targetAsset  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return UpdatePortfolioTargetByIdRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -4374,11 +5664,13 @@ public class PortfolioManagementApi {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updatePortfolioTargetByIdAsync(UUID portfolioGroupId, UUID targetAssetId, TargetAsset targetAsset, final ApiCallback<TargetAsset> _callback) throws ApiException {
+    public UpdatePortfolioTargetByIdRequestBuilder updatePortfolioTargetById(UUID portfolioGroupId, UUID targetAssetId) throws IllegalArgumentException {
+        if (portfolioGroupId == null) throw new IllegalArgumentException("\"portfolioGroupId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = updatePortfolioTargetByIdValidateBeforeCall(portfolioGroupId, targetAssetId, targetAsset, _callback);
-        Type localVarReturnType = new TypeToken<TargetAsset>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (targetAssetId == null) throw new IllegalArgumentException("\"targetAssetId\" is required but got null");
+            
+
+        return new UpdatePortfolioTargetByIdRequestBuilder(portfolioGroupId, targetAssetId);
     }
 }

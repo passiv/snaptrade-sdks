@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -65,6 +66,10 @@ public class EncryptedResponseEncryptedMessageData {
   }
 
   public EncryptedResponseEncryptedMessageData encryptedMessage(String encryptedMessage) {
+
+    
+    
+    
     
     this.encryptedMessage = encryptedMessage;
     return this;
@@ -83,11 +88,19 @@ public class EncryptedResponseEncryptedMessageData {
 
 
   public void setEncryptedMessage(String encryptedMessage) {
+
+    
+    
+    
     this.encryptedMessage = encryptedMessage;
   }
 
 
   public EncryptedResponseEncryptedMessageData tag(String tag) {
+
+    
+    
+    
     
     this.tag = tag;
     return this;
@@ -106,11 +119,19 @@ public class EncryptedResponseEncryptedMessageData {
 
 
   public void setTag(String tag) {
+
+    
+    
+    
     this.tag = tag;
   }
 
 
   public EncryptedResponseEncryptedMessageData nonce(String nonce) {
+
+    
+    
+    
     
     this.nonce = nonce;
     return this;
@@ -129,6 +150,10 @@ public class EncryptedResponseEncryptedMessageData {
 
 
   public void setNonce(String nonce) {
+
+    
+    
+    
     this.nonce = nonce;
   }
 

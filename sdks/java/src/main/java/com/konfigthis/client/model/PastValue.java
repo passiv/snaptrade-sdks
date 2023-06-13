@@ -22,7 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -52,11 +53,11 @@ import com.konfigthis.client.JSON;
 public class PastValue {
   public static final String SERIALIZED_NAME_DATE = "date";
   @SerializedName(SERIALIZED_NAME_DATE)
-  private String date;
+  private LocalDate date;
 
   public static final String SERIALIZED_NAME_VALUE = "value";
   @SerializedName(SERIALIZED_NAME_VALUE)
-  private BigDecimal value;
+  private Double value;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
@@ -65,7 +66,11 @@ public class PastValue {
   public PastValue() {
   }
 
-  public PastValue date(String date) {
+  public PastValue date(LocalDate date) {
+
+    
+    
+    
     
     this.date = date;
     return this;
@@ -76,21 +81,39 @@ public class PastValue {
    * @return date
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-24T00:00:00.000Z", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
-  public String getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
 
-  public void setDate(String date) {
+  public void setDate(LocalDate date) {
+
+    
+    
+    
     this.date = date;
   }
 
 
-  public PastValue value(BigDecimal value) {
+  public PastValue value(Double value) {
+
+    
+    
+    
     
     this.value = value;
+    return this;
+  }
+
+  public PastValue value(Integer value) {
+
+    
+    
+    
+    
+    this.value = value.doubleValue();
     return this;
   }
 
@@ -101,17 +124,25 @@ public class PastValue {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "52.74", value = "")
 
-  public BigDecimal getValue() {
+  public Double getValue() {
     return value;
   }
 
 
-  public void setValue(BigDecimal value) {
+  public void setValue(Double value) {
+
+    
+    
+    
     this.value = value;
   }
 
 
   public PastValue currency(String currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -130,6 +161,10 @@ public class PastValue {
 
 
   public void setCurrency(String currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
@@ -248,9 +283,6 @@ public class PastValue {
         if (!PastValue.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in PastValue is not found in the empty JSON string", PastValue.openapiRequiredFields.toString()));
         }
-      }
-      if ((jsonObj.get("date") != null && !jsonObj.get("date").isJsonNull()) && !jsonObj.get("date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("date").toString()));
       }
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));

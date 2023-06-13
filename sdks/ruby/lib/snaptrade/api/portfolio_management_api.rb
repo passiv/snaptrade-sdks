@@ -257,40 +257,58 @@ module SnapTrade
 
 
     # Create a new model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def create_asset_class(extra: {})
+    def create_asset_class(user_id:, user_secret:, extra: {})
 
-      data, _status_code, _headers = create_asset_class_with_http_info_impl(extra)
+      data, _status_code, _headers = create_asset_class_with_http_info_impl(user_id, user_secret, extra)
       data
     end
 
     # Create a new model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def create_asset_class_with_http_info(extra: {})
+    def create_asset_class_with_http_info(user_id:, user_secret:, extra: {})
 
-      create_asset_class_with_http_info_impl(extra)
+      create_asset_class_with_http_info_impl(user_id, user_secret, extra)
     end
 
     # Create a new model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [ModelAssetClassDetails]
-    def create_asset_class_impl(opts = {})
-      data, _status_code, _headers = create_asset_class_with_http_info(opts)
+    def create_asset_class_impl(user_id, user_secret, opts = {})
+      data, _status_code, _headers = create_asset_class_with_http_info(user_id, user_secret, opts)
       data
     end
 
     # Create a new model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ModelAssetClassDetails, Integer, Hash)>] ModelAssetClassDetails data, response status code and response headers
-    def create_asset_class_with_http_info_impl(opts = {})
+    def create_asset_class_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PortfolioManagementApi.create_asset_class ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling PortfolioManagementApi.create_asset_class"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling PortfolioManagementApi.create_asset_class"
       end
       # resource path
       local_var_path = '/modelAssetClass'
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -805,35 +823,43 @@ module SnapTrade
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def detail_asset_class(model_asset_class_id:, extra: {})
+    def detail_asset_class(model_asset_class_id:, user_id:, user_secret:, extra: {})
 
-      data, _status_code, _headers = detail_asset_class_with_http_info_impl(model_asset_class_id, extra)
+      data, _status_code, _headers = detail_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, extra)
       data
     end
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def detail_asset_class_with_http_info(model_asset_class_id:, extra: {})
+    def detail_asset_class_with_http_info(model_asset_class_id:, user_id:, user_secret:, extra: {})
 
-      detail_asset_class_with_http_info_impl(model_asset_class_id, extra)
+      detail_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, extra)
     end
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [ModelAssetClassDetails]
-    def detail_asset_class_impl(model_asset_class_id, opts = {})
-      data, _status_code, _headers = detail_asset_class_with_http_info(model_asset_class_id, opts)
+    def detail_asset_class_impl(model_asset_class_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = detail_asset_class_with_http_info(model_asset_class_id, user_id, user_secret, opts)
       data
     end
 
     # Get details of a model asset class
     # @param model_asset_class_id [String] The ID of the model asset class to get.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ModelAssetClassDetails, Integer, Hash)>] ModelAssetClassDetails data, response status code and response headers
-    def detail_asset_class_with_http_info_impl(model_asset_class_id, opts = {})
+    def detail_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PortfolioManagementApi.detail_asset_class ...'
       end
@@ -841,11 +867,21 @@ module SnapTrade
       if @api_client.config.client_side_validation && model_asset_class_id.nil?
         fail ArgumentError, "Missing the required parameter 'model_asset_class_id' when calling PortfolioManagementApi.detail_asset_class"
       end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling PortfolioManagementApi.detail_asset_class"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling PortfolioManagementApi.detail_asset_class"
+      end
       # resource path
       local_var_path = '/modelAssetClass/{modelAssetClassId}'.sub('{' + 'modelAssetClassId' + '}', CGI.escape(model_asset_class_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1786,40 +1822,58 @@ module SnapTrade
 
 
     # List of model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_asset_classes(extra: {})
+    def list_asset_classes(user_id:, user_secret:, extra: {})
 
-      data, _status_code, _headers = list_asset_classes_with_http_info_impl(extra)
+      data, _status_code, _headers = list_asset_classes_with_http_info_impl(user_id, user_secret, extra)
       data
     end
 
     # List of model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_asset_classes_with_http_info(extra: {})
+    def list_asset_classes_with_http_info(user_id:, user_secret:, extra: {})
 
-      list_asset_classes_with_http_info_impl(extra)
+      list_asset_classes_with_http_info_impl(user_id, user_secret, extra)
     end
 
     # List of model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<ModelAssetClassDetails>]
-    def list_asset_classes_impl(opts = {})
-      data, _status_code, _headers = list_asset_classes_with_http_info(opts)
+    def list_asset_classes_impl(user_id, user_secret, opts = {})
+      data, _status_code, _headers = list_asset_classes_with_http_info(user_id, user_secret, opts)
       data
     end
 
     # List of model asset class
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<ModelAssetClassDetails>, Integer, Hash)>] Array<ModelAssetClassDetails> data, response status code and response headers
-    def list_asset_classes_with_http_info_impl(opts = {})
+    def list_asset_classes_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PortfolioManagementApi.list_asset_classes ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling PortfolioManagementApi.list_asset_classes"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling PortfolioManagementApi.list_asset_classes"
       end
       # resource path
       local_var_path = '/modelAssetClass'
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -2483,57 +2537,73 @@ module SnapTrade
 
     # Updates model asset class objects
     # @param model_asset_class_id [String] The ID of the model asset class to update.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
     # @param body [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_asset_class(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
+    def update_asset_class(model_asset_class_id:, user_id:, user_secret:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
       _body = {}
       _body[:model_asset_class] = model_asset_class if model_asset_class != SENTINEL
       _body[:model_asset_class_target] = model_asset_class_target if model_asset_class_target != SENTINEL
       model_asset_class_details = _body
 
-      update_asset_class_with_http_info_impl(model_asset_class_id, model_asset_class_details, extra)
+      update_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, model_asset_class_details, extra)
       nil
     end
 
     # Updates model asset class objects
     # @param model_asset_class_id [String] The ID of the model asset class to update.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param model_asset_class [ModelAssetClass] 
     # @param model_asset_class_target [Array<ModelAssetClassTarget>] 
     # @param body [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_asset_class_with_http_info(model_asset_class_id:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
+    def update_asset_class_with_http_info(model_asset_class_id:, user_id:, user_secret:, model_asset_class: SENTINEL, model_asset_class_target: SENTINEL, extra: {})
       _body = {}
       _body[:model_asset_class] = model_asset_class if model_asset_class != SENTINEL
       _body[:model_asset_class_target] = model_asset_class_target if model_asset_class_target != SENTINEL
       model_asset_class_details = _body
 
-      update_asset_class_with_http_info_impl(model_asset_class_id, model_asset_class_details, extra)
+      update_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, model_asset_class_details, extra)
     end
 
     # Updates model asset class objects
     # @param model_asset_class_id [String] The ID of the model asset class to update.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param model_asset_class_details [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update_asset_class_impl(model_asset_class_id, model_asset_class_details, opts = {})
-      update_asset_class_with_http_info(model_asset_class_id, model_asset_class_details, opts)
+    def update_asset_class_impl(model_asset_class_id, user_id, user_secret, model_asset_class_details, opts = {})
+      update_asset_class_with_http_info(model_asset_class_id, user_id, user_secret, model_asset_class_details, opts)
       nil
     end
 
     # Updates model asset class objects
     # @param model_asset_class_id [String] The ID of the model asset class to update.
+    # @param user_id [String] 
+    # @param user_secret [String] 
     # @param model_asset_class_details [ModelAssetClassDetails] Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def update_asset_class_with_http_info_impl(model_asset_class_id, model_asset_class_details, opts = {})
+    def update_asset_class_with_http_info_impl(model_asset_class_id, user_id, user_secret, model_asset_class_details, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PortfolioManagementApi.update_asset_class ...'
       end
       # verify the required parameter 'model_asset_class_id' is set
       if @api_client.config.client_side_validation && model_asset_class_id.nil?
         fail ArgumentError, "Missing the required parameter 'model_asset_class_id' when calling PortfolioManagementApi.update_asset_class"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling PortfolioManagementApi.update_asset_class"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling PortfolioManagementApi.update_asset_class"
       end
       # verify the required parameter 'model_asset_class_details' is set
       if @api_client.config.client_side_validation && model_asset_class_details.nil?
@@ -2544,6 +2614,8 @@ module SnapTrade
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountSyncStatus;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,6 +39,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -79,6 +81,10 @@ public class SnapTradeHoldingsAccount {
   @SerializedName(SERIALIZED_NAME_INSTITUTION_NAME)
   private String institutionName;
 
+  public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
+  @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
+  private AccountSyncStatus syncStatus;
+
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
   private Map<String, Object> meta = null;
@@ -87,6 +93,10 @@ public class SnapTradeHoldingsAccount {
   }
 
   public SnapTradeHoldingsAccount id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -105,11 +115,19 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public SnapTradeHoldingsAccount brokerageAuthorization(BrokerageAuthorization brokerageAuthorization) {
+
+    
+    
+    
     
     this.brokerageAuthorization = brokerageAuthorization;
     return this;
@@ -128,11 +146,19 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setBrokerageAuthorization(BrokerageAuthorization brokerageAuthorization) {
+
+    
+    
+    
     this.brokerageAuthorization = brokerageAuthorization;
   }
 
 
   public SnapTradeHoldingsAccount portfolioGroup(UUID portfolioGroup) {
+
+    
+    
+    
     
     this.portfolioGroup = portfolioGroup;
     return this;
@@ -151,11 +177,19 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setPortfolioGroup(UUID portfolioGroup) {
+
+    
+    
+    
     this.portfolioGroup = portfolioGroup;
   }
 
 
   public SnapTradeHoldingsAccount name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -174,11 +208,19 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public SnapTradeHoldingsAccount number(String number) {
+
+    
+    
+    
     
     this.number = number;
     return this;
@@ -197,11 +239,19 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setNumber(String number) {
+
+    
+    
+    
     this.number = number;
   }
 
 
   public SnapTradeHoldingsAccount institutionName(String institutionName) {
+
+    
+    
+    
     
     this.institutionName = institutionName;
     return this;
@@ -220,11 +270,50 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setInstitutionName(String institutionName) {
+
+    
+    
+    
     this.institutionName = institutionName;
   }
 
 
+  public SnapTradeHoldingsAccount syncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    
+    this.syncStatus = syncStatus;
+    return this;
+  }
+
+   /**
+   * Get syncStatus
+   * @return syncStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountSyncStatus getSyncStatus() {
+    return syncStatus;
+  }
+
+
+  public void setSyncStatus(AccountSyncStatus syncStatus) {
+
+    
+    
+    
+    this.syncStatus = syncStatus;
+  }
+
+
   public SnapTradeHoldingsAccount meta(Map<String, Object> meta) {
+
+    
+    
+    
     
     this.meta = meta;
     return this;
@@ -251,6 +340,10 @@ public class SnapTradeHoldingsAccount {
 
 
   public void setMeta(Map<String, Object> meta) {
+
+    
+    
+    
     this.meta = meta;
   }
 
@@ -315,6 +408,7 @@ public class SnapTradeHoldingsAccount {
         Objects.equals(this.name, snapTradeHoldingsAccount.name) &&
         Objects.equals(this.number, snapTradeHoldingsAccount.number) &&
         Objects.equals(this.institutionName, snapTradeHoldingsAccount.institutionName) &&
+        Objects.equals(this.syncStatus, snapTradeHoldingsAccount.syncStatus) &&
         Objects.equals(this.meta, snapTradeHoldingsAccount.meta)&&
         Objects.equals(this.additionalProperties, snapTradeHoldingsAccount.additionalProperties);
   }
@@ -325,7 +419,7 @@ public class SnapTradeHoldingsAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, meta, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, syncStatus, meta, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -345,6 +439,7 @@ public class SnapTradeHoldingsAccount {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    institutionName: ").append(toIndentedString(institutionName)).append("\n");
+    sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -375,6 +470,7 @@ public class SnapTradeHoldingsAccount {
     openapiFields.add("name");
     openapiFields.add("number");
     openapiFields.add("institution_name");
+    openapiFields.add("sync_status");
     openapiFields.add("meta");
 
     // a set of required properties/fields (JSON key names)
@@ -407,6 +503,10 @@ public class SnapTradeHoldingsAccount {
       }
       if ((jsonObj.get("institution_name") != null && !jsonObj.get("institution_name").isJsonNull()) && !jsonObj.get("institution_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_name").toString()));
+      }
+      // validate the optional field `sync_status`
+      if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {
+        AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       }
   }
 

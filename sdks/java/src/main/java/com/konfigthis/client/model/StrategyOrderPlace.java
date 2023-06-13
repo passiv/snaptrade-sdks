@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -65,6 +66,10 @@ public class StrategyOrderPlace {
   }
 
   public StrategyOrderPlace orderId(Integer orderId) {
+
+    
+    
+    
     
     this.orderId = orderId;
     return this;
@@ -83,11 +88,19 @@ public class StrategyOrderPlace {
 
 
   public void setOrderId(Integer orderId) {
+
+    
+    
+    
     this.orderId = orderId;
   }
 
 
   public StrategyOrderPlace orders(List<StrategyOrderPlaceOrdersInner> orders) {
+
+    
+    
+    
     
     this.orders = orders;
     return this;
@@ -114,6 +127,10 @@ public class StrategyOrderPlace {
 
 
   public void setOrders(List<StrategyOrderPlaceOrdersInner> orders) {
+
+    
+    
+    
     this.orders = orders;
   }
 

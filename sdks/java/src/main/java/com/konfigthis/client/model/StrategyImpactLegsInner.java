@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -81,6 +82,10 @@ public class StrategyImpactLegsInner {
   }
 
   public StrategyImpactLegsInner legId(Integer legId) {
+
+    
+    
+    
     
     this.legId = legId;
     return this;
@@ -99,11 +104,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setLegId(Integer legId) {
+
+    
+    
+    
     this.legId = legId;
   }
 
 
   public StrategyImpactLegsInner symbol(String symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -122,11 +135,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setSymbol(String symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public StrategyImpactLegsInner symbolId(Integer symbolId) {
+
+    
+    
+    
     
     this.symbolId = symbolId;
     return this;
@@ -145,11 +166,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setSymbolId(Integer symbolId) {
+
+    
+    
+    
     this.symbolId = symbolId;
   }
 
 
   public StrategyImpactLegsInner legRatioQuantity(Integer legRatioQuantity) {
+
+    
+    
+    
     
     this.legRatioQuantity = legRatioQuantity;
     return this;
@@ -168,11 +197,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setLegRatioQuantity(Integer legRatioQuantity) {
+
+    
+    
+    
     this.legRatioQuantity = legRatioQuantity;
   }
 
 
   public StrategyImpactLegsInner side(String side) {
+
+    
+    
+    
     
     this.side = side;
     return this;
@@ -191,11 +228,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setSide(String side) {
+
+    
+    
+    
     this.side = side;
   }
 
 
   public StrategyImpactLegsInner avgExecPrice(String avgExecPrice) {
+
+    
+    
+    
     
     this.avgExecPrice = avgExecPrice;
     return this;
@@ -214,11 +259,19 @@ public class StrategyImpactLegsInner {
 
 
   public void setAvgExecPrice(String avgExecPrice) {
+
+    
+    
+    
     this.avgExecPrice = avgExecPrice;
   }
 
 
   public StrategyImpactLegsInner lastExecPrice(String lastExecPrice) {
+
+    
+    
+    
     
     this.lastExecPrice = lastExecPrice;
     return this;
@@ -237,6 +290,10 @@ public class StrategyImpactLegsInner {
 
 
   public void setLastExecPrice(String lastExecPrice) {
+
+    
+    
+    
     this.lastExecPrice = lastExecPrice;
   }
 

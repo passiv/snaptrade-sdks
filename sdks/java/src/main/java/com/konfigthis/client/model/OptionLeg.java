@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -112,12 +112,16 @@ public class OptionLeg {
 
   public static final String SERIALIZED_NAME_QUANTITY = "quantity";
   @SerializedName(SERIALIZED_NAME_QUANTITY)
-  private BigDecimal quantity;
+  private Double quantity;
 
   public OptionLeg() {
   }
 
   public OptionLeg action(ActionEnum action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -136,11 +140,19 @@ public class OptionLeg {
 
 
   public void setAction(ActionEnum action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
   public OptionLeg optionSymbolId(String optionSymbolId) {
+
+    
+    
+    
     
     this.optionSymbolId = optionSymbolId;
     return this;
@@ -159,13 +171,31 @@ public class OptionLeg {
 
 
   public void setOptionSymbolId(String optionSymbolId) {
+
+    
+    
+    
     this.optionSymbolId = optionSymbolId;
   }
 
 
-  public OptionLeg quantity(BigDecimal quantity) {
+  public OptionLeg quantity(Double quantity) {
+
+    
+    
+    
     
     this.quantity = quantity;
+    return this;
+  }
+
+  public OptionLeg quantity(Integer quantity) {
+
+    
+    
+    
+    
+    this.quantity = quantity.doubleValue();
     return this;
   }
 
@@ -176,12 +206,16 @@ public class OptionLeg {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "1", value = "")
 
-  public BigDecimal getQuantity() {
+  public Double getQuantity() {
     return quantity;
   }
 
 
-  public void setQuantity(BigDecimal quantity) {
+  public void setQuantity(Double quantity) {
+
+    
+    
+    
     this.quantity = quantity;
   }
 

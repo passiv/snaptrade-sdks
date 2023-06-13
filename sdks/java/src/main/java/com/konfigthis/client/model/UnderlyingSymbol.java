@@ -40,6 +40,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -89,6 +90,10 @@ public class UnderlyingSymbol {
   }
 
   public UnderlyingSymbol id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -107,11 +112,19 @@ public class UnderlyingSymbol {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public UnderlyingSymbol symbol(String symbol) {
+
+    
+    
+    
     
     this.symbol = symbol;
     return this;
@@ -130,11 +143,19 @@ public class UnderlyingSymbol {
 
 
   public void setSymbol(String symbol) {
+
+    
+    
+    
     this.symbol = symbol;
   }
 
 
   public UnderlyingSymbol description(String description) {
+
+    
+    
+    
     
     this.description = description;
     return this;
@@ -153,11 +174,19 @@ public class UnderlyingSymbol {
 
 
   public void setDescription(String description) {
+
+    
+    
+    
     this.description = description;
   }
 
 
   public UnderlyingSymbol currency(Currency currency) {
+
+    
+    
+    
     
     this.currency = currency;
     return this;
@@ -176,11 +205,19 @@ public class UnderlyingSymbol {
 
 
   public void setCurrency(Currency currency) {
+
+    
+    
+    
     this.currency = currency;
   }
 
 
   public UnderlyingSymbol exchange(USExchange exchange) {
+
+    
+    
+    
     
     this.exchange = exchange;
     return this;
@@ -199,11 +236,19 @@ public class UnderlyingSymbol {
 
 
   public void setExchange(USExchange exchange) {
+
+    
+    
+    
     this.exchange = exchange;
   }
 
 
   public UnderlyingSymbol type(SecurityType type) {
+
+    
+    
+    
     
     this.type = type;
     return this;
@@ -222,11 +267,19 @@ public class UnderlyingSymbol {
 
 
   public void setType(SecurityType type) {
+
+    
+    
+    
     this.type = type;
   }
 
 
   public UnderlyingSymbol currencies(List<Currency> currencies) {
+
+    
+    
+    
     
     this.currencies = currencies;
     return this;
@@ -253,6 +306,10 @@ public class UnderlyingSymbol {
 
 
   public void setCurrencies(List<Currency> currencies) {
+
+    
+    
+    
     this.currencies = currencies;
   }
 

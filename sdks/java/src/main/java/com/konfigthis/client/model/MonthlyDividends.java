@@ -23,6 +23,7 @@ import com.konfigthis.client.model.DividendAtDate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -54,7 +56,7 @@ import com.konfigthis.client.JSON;
 public class MonthlyDividends {
   public static final String SERIALIZED_NAME_DATE = "date";
   @SerializedName(SERIALIZED_NAME_DATE)
-  private String date;
+  private LocalDate date;
 
   public static final String SERIALIZED_NAME_DIVIDENDS = "dividends";
   @SerializedName(SERIALIZED_NAME_DIVIDENDS)
@@ -63,7 +65,11 @@ public class MonthlyDividends {
   public MonthlyDividends() {
   }
 
-  public MonthlyDividends date(String date) {
+  public MonthlyDividends date(LocalDate date) {
+
+    
+    
+    
     
     this.date = date;
     return this;
@@ -74,19 +80,27 @@ public class MonthlyDividends {
    * @return date
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-24T00:00:00.000Z", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
-  public String getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
 
-  public void setDate(String date) {
+  public void setDate(LocalDate date) {
+
+    
+    
+    
     this.date = date;
   }
 
 
   public MonthlyDividends dividends(List<DividendAtDate> dividends) {
+
+    
+    
+    
     
     this.dividends = dividends;
     return this;
@@ -113,6 +127,10 @@ public class MonthlyDividends {
 
 
   public void setDividends(List<DividendAtDate> dividends) {
+
+    
+    
+    
     this.dividends = dividends;
   }
 
@@ -228,9 +246,6 @@ public class MonthlyDividends {
         if (!MonthlyDividends.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in MonthlyDividends is not found in the empty JSON string", MonthlyDividends.openapiRequiredFields.toString()));
         }
-      }
-      if ((jsonObj.get("date") != null && !jsonObj.get("date").isJsonNull()) && !jsonObj.get("date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("date").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("dividends") != null && !jsonObj.get("dividends").isJsonArray()) {

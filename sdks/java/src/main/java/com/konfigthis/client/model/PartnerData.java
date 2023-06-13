@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -105,6 +106,10 @@ public class PartnerData {
   }
 
   public PartnerData redirectUri(String redirectUri) {
+
+    
+    
+    
     
     this.redirectUri = redirectUri;
     return this;
@@ -123,11 +128,19 @@ public class PartnerData {
 
 
   public void setRedirectUri(String redirectUri) {
+
+    
+    
+    
     this.redirectUri = redirectUri;
   }
 
 
   public PartnerData allowedBrokerages(List<Brokerage> allowedBrokerages) {
+
+    
+    
+    
     
     this.allowedBrokerages = allowedBrokerages;
     return this;
@@ -154,11 +167,19 @@ public class PartnerData {
 
 
   public void setAllowedBrokerages(List<Brokerage> allowedBrokerages) {
+
+    
+    
+    
     this.allowedBrokerages = allowedBrokerages;
   }
 
 
   public PartnerData name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -177,11 +198,19 @@ public class PartnerData {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public PartnerData slug(String slug) {
+
+    
+    
+    
     
     this.slug = slug;
     return this;
@@ -200,11 +229,19 @@ public class PartnerData {
 
 
   public void setSlug(String slug) {
+
+    
+    
+    
     this.slug = slug;
   }
 
 
   public PartnerData logoUrl(String logoUrl) {
+
+    
+    
+    
     
     this.logoUrl = logoUrl;
     return this;
@@ -223,11 +260,19 @@ public class PartnerData {
 
 
   public void setLogoUrl(String logoUrl) {
+
+    
+    
+    
     this.logoUrl = logoUrl;
   }
 
 
   public PartnerData pinRequired(Boolean pinRequired) {
+
+    
+    
+    
     
     this.pinRequired = pinRequired;
     return this;
@@ -246,11 +291,19 @@ public class PartnerData {
 
 
   public void setPinRequired(Boolean pinRequired) {
+
+    
+    
+    
     this.pinRequired = pinRequired;
   }
 
 
   public PartnerData canAccessTrades(Boolean canAccessTrades) {
+
+    
+    
+    
     
     this.canAccessTrades = canAccessTrades;
     return this;
@@ -269,11 +322,19 @@ public class PartnerData {
 
 
   public void setCanAccessTrades(Boolean canAccessTrades) {
+
+    
+    
+    
     this.canAccessTrades = canAccessTrades;
   }
 
 
   public PartnerData canAccessHoldings(Boolean canAccessHoldings) {
+
+    
+    
+    
     
     this.canAccessHoldings = canAccessHoldings;
     return this;
@@ -292,11 +353,19 @@ public class PartnerData {
 
 
   public void setCanAccessHoldings(Boolean canAccessHoldings) {
+
+    
+    
+    
     this.canAccessHoldings = canAccessHoldings;
   }
 
 
   public PartnerData canAccessAccountHistory(Boolean canAccessAccountHistory) {
+
+    
+    
+    
     
     this.canAccessAccountHistory = canAccessAccountHistory;
     return this;
@@ -315,11 +384,19 @@ public class PartnerData {
 
 
   public void setCanAccessAccountHistory(Boolean canAccessAccountHistory) {
+
+    
+    
+    
     this.canAccessAccountHistory = canAccessAccountHistory;
   }
 
 
   public PartnerData canAccessReferenceData(Boolean canAccessReferenceData) {
+
+    
+    
+    
     
     this.canAccessReferenceData = canAccessReferenceData;
     return this;
@@ -338,11 +415,19 @@ public class PartnerData {
 
 
   public void setCanAccessReferenceData(Boolean canAccessReferenceData) {
+
+    
+    
+    
     this.canAccessReferenceData = canAccessReferenceData;
   }
 
 
   public PartnerData canAccessPortfolioManagement(Boolean canAccessPortfolioManagement) {
+
+    
+    
+    
     
     this.canAccessPortfolioManagement = canAccessPortfolioManagement;
     return this;
@@ -361,11 +446,19 @@ public class PartnerData {
 
 
   public void setCanAccessPortfolioManagement(Boolean canAccessPortfolioManagement) {
+
+    
+    
+    
     this.canAccessPortfolioManagement = canAccessPortfolioManagement;
   }
 
 
   public PartnerData canAccessOrders(Boolean canAccessOrders) {
+
+    
+    
+    
     
     this.canAccessOrders = canAccessOrders;
     return this;
@@ -384,6 +477,10 @@ public class PartnerData {
 
 
   public void setCanAccessOrders(Boolean canAccessOrders) {
+
+    
+    
+    
     this.canAccessOrders = canAccessOrders;
   }
 

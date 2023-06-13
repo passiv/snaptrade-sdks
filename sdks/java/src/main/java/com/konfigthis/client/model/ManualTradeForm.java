@@ -25,7 +25,6 @@ import com.konfigthis.client.model.TimeInForce;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -39,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -70,11 +70,11 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private BigDecimal price;
+  private Double price;
 
   public static final String SERIALIZED_NAME_STOP = "stop";
   @SerializedName(SERIALIZED_NAME_STOP)
-  private BigDecimal stop;
+  private Double stop;
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
@@ -82,7 +82,7 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
-  private BigDecimal units;
+  private Double units;
 
   public static final String SERIALIZED_NAME_UNIVERSAL_SYMBOL_ID = "universal_symbol_id";
   @SerializedName(SERIALIZED_NAME_UNIVERSAL_SYMBOL_ID)
@@ -92,6 +92,10 @@ public class ManualTradeForm {
   }
 
   public ManualTradeForm accountId(UUID accountId) {
+
+    
+    
+    
     
     this.accountId = accountId;
     return this;
@@ -110,11 +114,19 @@ public class ManualTradeForm {
 
 
   public void setAccountId(UUID accountId) {
+
+    
+    
+    
     this.accountId = accountId;
   }
 
 
   public ManualTradeForm action(Action action) {
+
+    
+    
+    
     
     this.action = action;
     return this;
@@ -133,11 +145,19 @@ public class ManualTradeForm {
 
 
   public void setAction(Action action) {
+
+    
+    
+    
     this.action = action;
   }
 
 
   public ManualTradeForm orderType(OrderType orderType) {
+
+    
+    
+    
     
     this.orderType = orderType;
     return this;
@@ -156,13 +176,31 @@ public class ManualTradeForm {
 
 
   public void setOrderType(OrderType orderType) {
+
+    
+    
+    
     this.orderType = orderType;
   }
 
 
-  public ManualTradeForm price(BigDecimal price) {
+  public ManualTradeForm price(Double price) {
+
+    
+    
+    
     
     this.price = price;
+    return this;
+  }
+
+  public ManualTradeForm price(Integer price) {
+
+    
+    
+    
+    
+    this.price = price.doubleValue();
     return this;
   }
 
@@ -173,19 +211,37 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
+
+    
+    
+    
     this.price = price;
   }
 
 
-  public ManualTradeForm stop(BigDecimal stop) {
+  public ManualTradeForm stop(Double stop) {
+
+    
+    
+    
     
     this.stop = stop;
+    return this;
+  }
+
+  public ManualTradeForm stop(Integer stop) {
+
+    
+    
+    
+    
+    this.stop = stop.doubleValue();
     return this;
   }
 
@@ -196,17 +252,25 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "31.33", value = "Stop Price. If stop loss or stop limit order, the price to trigger the stop")
 
-  public BigDecimal getStop() {
+  public Double getStop() {
     return stop;
   }
 
 
-  public void setStop(BigDecimal stop) {
+  public void setStop(Double stop) {
+
+    
+    
+    
     this.stop = stop;
   }
 
 
   public ManualTradeForm timeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     
     this.timeInForce = timeInForce;
     return this;
@@ -225,13 +289,31 @@ public class ManualTradeForm {
 
 
   public void setTimeInForce(TimeInForce timeInForce) {
+
+    
+    
+    
     this.timeInForce = timeInForce;
   }
 
 
-  public ManualTradeForm units(BigDecimal units) {
+  public ManualTradeForm units(Double units) {
+
+    
+    
+    
     
     this.units = units;
+    return this;
+  }
+
+  public ManualTradeForm units(Integer units) {
+
+    
+    
+    
+    
+    this.units = units.doubleValue();
     return this;
   }
 
@@ -242,17 +324,25 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Trade Units")
 
-  public BigDecimal getUnits() {
+  public Double getUnits() {
     return units;
   }
 
 
-  public void setUnits(BigDecimal units) {
+  public void setUnits(Double units) {
+
+    
+    
+    
     this.units = units;
   }
 
 
   public ManualTradeForm universalSymbolId(UUID universalSymbolId) {
+
+    
+    
+    
     
     this.universalSymbolId = universalSymbolId;
     return this;
@@ -271,6 +361,10 @@ public class ManualTradeForm {
 
 
   public void setUniversalSymbolId(UUID universalSymbolId) {
+
+    
+    
+    
     this.universalSymbolId = universalSymbolId;
   }
 

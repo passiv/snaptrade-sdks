@@ -5,7 +5,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**addPortfolioExcludedAsset**](PortfolioManagementApi.md#addPortfolioExcludedAsset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group |
-| [**callList**](PortfolioManagementApi.md#callList) | **GET** /portfolioGroups | List all portfolio groups |
 | [**create**](PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group |
 | [**createAssetClass**](PortfolioManagementApi.md#createAssetClass) | **POST** /modelAssetClass | Create a new model asset class |
 | [**createModelPortfolio**](PortfolioManagementApi.md#createModelPortfolio) | **POST** /modelPortfolio | Creates a new model portfolio |
@@ -20,12 +19,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getPortfolioBalances**](PortfolioManagementApi.md#getPortfolioBalances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group |
 | [**getPortfolioDetailsById**](PortfolioManagementApi.md#getPortfolioDetailsById) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio |
 | [**getPortfolioInfo**](PortfolioManagementApi.md#getPortfolioInfo) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group. |
-| [**getPortfolioPositions**](PortfolioManagementApi.md#getPortfolioPositions) | **GET** /portfolioGroups/{portfolioGroupId}/positions | Get total of each postions owned in portfolio group |
 | [**getPortfolioSettings**](PortfolioManagementApi.md#getPortfolioSettings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings |
 | [**getPortfolioTargetById**](PortfolioManagementApi.md#getPortfolioTargetById) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group |
 | [**getPortfolioTargets**](PortfolioManagementApi.md#getPortfolioTargets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup. |
 | [**getPortoflioExcludedAssets**](PortfolioManagementApi.md#getPortoflioExcludedAssets) | **GET** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group\\ |
 | [**importModelPortfolio**](PortfolioManagementApi.md#importModelPortfolio) | **POST** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group |
+| [**list**](PortfolioManagementApi.md#list) | **GET** /portfolioGroups | List all portfolio groups |
 | [**listAssetClasses**](PortfolioManagementApi.md#listAssetClasses) | **GET** /modelAssetClass | List of model asset class |
 | [**listCalculatedTrades**](PortfolioManagementApi.md#listCalculatedTrades) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group |
 | [**listModelPortfolio**](PortfolioManagementApi.md#listModelPortfolio) | **GET** /modelPortfolio | List of model portfolio |
@@ -41,15 +40,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="addPortfolioExcludedAsset"></a>
 # **addPortfolioExcludedAsset**
-> ExcludedAsset addPortfolioExcludedAsset(portfolioGroupId, universalSymbol)
+> ExcludedAsset addPortfolioExcludedAsset(portfolioGroupId).universalSymbol(universalSymbol).execute();
 
 Adds an asset to exclude to a portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -57,33 +56,70 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to exclude an asset.
-    UniversalSymbol universalSymbol = new UniversalSymbol(); // UniversalSymbol | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to exclude an asset.
+    UUID id = UUID.randomUUID();
+    String symbol = "symbol_example";
+    String rawSymbol = "rawSymbol_example";
+    String description = "description_example";
+    Currency currency = new Currency();
+    Exchange exchange = new Exchange();
+    SecurityType type = new SecurityType();
+    List<Currency> currencies = Arrays.asList();
     try {
-      ExcludedAsset result = apiInstance.addPortfolioExcludedAsset(portfolioGroupId, universalSymbol);
+      ExcludedAsset result = api
+              .addPortfolioExcludedAsset(portfolioGroupId)
+              .id(id)
+              .symbol(symbol)
+              .rawSymbol(rawSymbol)
+              .description(description)
+              .currency(currency)
+              .exchange(exchange)
+              .type(type)
+              .currencies(currencies)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#addPortfolioExcludedAsset");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ExcludedAsset> response = api
+              .addPortfolioExcludedAsset(portfolioGroupId)
+              .id(id)
+              .symbol(symbol)
+              .rawSymbol(rawSymbol)
+              .description(description)
+              .currency(currency)
+              .exchange(exchange)
+              .type(type)
+              .currencies(currencies)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#addPortfolioExcludedAsset");
       System.err.println("Status code: " + e.getCode());
@@ -120,99 +156,17 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | An asset is excluded from calculations in portfolio group. |  -  |
 
-<a name="callList"></a>
-# **callList**
-> List&lt;PortfolioGroup&gt; callList(userId, userSecret)
-
-List all portfolio groups
-
-### Example
-```java
-// Import classes:
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.PortfolioManagementApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
-    
-    // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
-
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    try {
-      List<PortfolioGroup> result = apiInstance.callList(userId, userSecret);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling PortfolioManagementApi#callList");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-
-### Return type
-
-[**List&lt;PortfolioGroup&gt;**](PortfolioGroup.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | A list of all PortfolioGroup objects for the authenticated user. |  -  |
-| **0** | Unexpected error. |  -  |
-
 <a name="create"></a>
 # **create**
-> List&lt;PortfolioGroup&gt; create(userId, userSecret, requestBody)
+> List&lt;PortfolioGroup&gt; create(userId, userSecret, requestBody).execute();
 
 Create new portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -220,34 +174,53 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    String userId = "userId_example"; // String | 
-    String userSecret = "userSecret_example"; // String | 
-    Map<String, Object> requestBody = null; // Map<String, Object> | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID id = UUID.randomUUID();
+    String name = "name_example";
     try {
-      List<PortfolioGroup> result = apiInstance.create(userId, userSecret, requestBody);
+      List<PortfolioGroup> result = api
+              .create(userId, userSecret)
+              .id(id)
+              .name(name)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#create");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<PortfolioGroup>> response = api
+              .create(userId, userSecret)
+              .id(id)
+              .name(name)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#create");
       System.err.println("Status code: " + e.getCode());
@@ -289,15 +262,15 @@ public class Example {
 
 <a name="createAssetClass"></a>
 # **createAssetClass**
-> ModelAssetClassDetails createAssetClass()
+> ModelAssetClassDetails createAssetClass().execute();
 
 Create a new model asset class
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -305,31 +278,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
     try {
-      ModelAssetClassDetails result = apiInstance.createAssetClass();
+      ModelAssetClassDetails result = api
+              .createAssetClass()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#createAssetClass");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ModelAssetClassDetails> response = api
+              .createAssetClass()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createAssetClass");
       System.err.println("Status code: " + e.getCode());
@@ -364,15 +351,15 @@ This endpoint does not need any parameter.
 
 <a name="createModelPortfolio"></a>
 # **createModelPortfolio**
-> ModelPortfolioDetails createModelPortfolio()
+> ModelPortfolioDetails createModelPortfolio().execute();
 
 Creates a new model portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -380,31 +367,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
     try {
-      ModelPortfolioDetails result = apiInstance.createModelPortfolio();
+      ModelPortfolioDetails result = api
+              .createModelPortfolio()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#createModelPortfolio");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ModelPortfolioDetails> response = api
+              .createModelPortfolio()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createModelPortfolio");
       System.err.println("Status code: " + e.getCode());
@@ -439,15 +440,15 @@ This endpoint does not need any parameter.
 
 <a name="deleteAssetClass"></a>
 # **deleteAssetClass**
-> deleteAssetClass(modelAssetClassId)
+> deleteAssetClass(modelAssetClassId).execute();
 
 Deletes a model asset class
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -455,31 +456,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelAssetClassId = UUID.randomUUID(); // UUID | The ID of the model asset class to delete.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to delete.
     try {
-      apiInstance.deleteAssetClass(modelAssetClassId);
+      api
+              .deleteAssetClass(modelAssetClassId)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#deleteAssetClass");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      api
+              .deleteAssetClass(modelAssetClassId)
+              .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteAssetClass");
       System.err.println("Status code: " + e.getCode());
@@ -517,15 +526,15 @@ null (empty response body)
 
 <a name="deleteExcludedAsset"></a>
 # **deleteExcludedAsset**
-> deleteExcludedAsset(portfolioGroupId, symbolId)
+> deleteExcludedAsset(portfolioGroupId, symbolId).execute();
 
 Unexclude an asset from a portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -533,32 +542,40 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to unexclude an asset.
-    UUID symbolId = UUID.randomUUID(); // UUID | The ID of the excluded asset Symbol to delete.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to unexclude an asset.
+    UUID symbolId = UUID.randomUUID(); // The ID of the excluded asset Symbol to delete.
     try {
-      apiInstance.deleteExcludedAsset(portfolioGroupId, symbolId);
+      api
+              .deleteExcludedAsset(portfolioGroupId, symbolId)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#deleteExcludedAsset");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      api
+              .deleteExcludedAsset(portfolioGroupId, symbolId)
+              .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteExcludedAsset");
       System.err.println("Status code: " + e.getCode());
@@ -597,15 +614,15 @@ null (empty response body)
 
 <a name="deleteModelPortfolioById"></a>
 # **deleteModelPortfolioById**
-> deleteModelPortfolioById(modelPortfolioId)
+> deleteModelPortfolioById(modelPortfolioId).execute();
 
 Deletes a model portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -613,31 +630,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelPortfolioId = UUID.randomUUID(); // UUID | The ID of the model portfolio to delete.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to delete.
     try {
-      apiInstance.deleteModelPortfolioById(modelPortfolioId);
+      api
+              .deleteModelPortfolioById(modelPortfolioId)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#deleteModelPortfolioById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      api
+              .deleteModelPortfolioById(modelPortfolioId)
+              .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteModelPortfolioById");
       System.err.println("Status code: " + e.getCode());
@@ -675,15 +700,15 @@ null (empty response body)
 
 <a name="deletePortfoli"></a>
 # **deletePortfoli**
-> PortfolioGroup deletePortfoli(portfolioGroupId)
+> PortfolioGroup deletePortfoli(portfolioGroupId).execute();
 
 Remove a target portfolio.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -691,32 +716,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to delete.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to delete.
     try {
-      PortfolioGroup result = apiInstance.deletePortfoli(portfolioGroupId);
+      PortfolioGroup result = api
+              .deletePortfoli(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#deletePortfoli");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroup> response = api
+              .deletePortfoli(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfoli");
       System.err.println("Status code: " + e.getCode());
@@ -757,15 +796,15 @@ public class Example {
 
 <a name="deletePortfolioTargetById"></a>
 # **deletePortfolioTargetById**
-> TargetAsset deletePortfolioTargetById(portfolioGroupId, targetAssetId)
+> TargetAsset deletePortfolioTargetById(portfolioGroupId, targetAssetId).execute();
 
 Remove a TargetAsset.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -773,33 +812,47 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to remove the target asset.
-    UUID targetAssetId = UUID.randomUUID(); // UUID | The ID of the TargetAsset to delete.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to remove the target asset.
+    UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to delete.
     try {
-      TargetAsset result = apiInstance.deletePortfolioTargetById(portfolioGroupId, targetAssetId);
+      TargetAsset result = api
+              .deletePortfolioTargetById(portfolioGroupId, targetAssetId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#deletePortfolioTargetById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<TargetAsset> response = api
+              .deletePortfolioTargetById(portfolioGroupId, targetAssetId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfolioTargetById");
       System.err.println("Status code: " + e.getCode());
@@ -841,15 +894,15 @@ public class Example {
 
 <a name="detailAssetClass"></a>
 # **detailAssetClass**
-> ModelAssetClassDetails detailAssetClass(modelAssetClassId)
+> ModelAssetClassDetails detailAssetClass(modelAssetClassId).execute();
 
 Get details of a model asset class
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -857,32 +910,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelAssetClassId = UUID.randomUUID(); // UUID | The ID of the model asset class to get.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to get.
     try {
-      ModelAssetClassDetails result = apiInstance.detailAssetClass(modelAssetClassId);
+      ModelAssetClassDetails result = api
+              .detailAssetClass(modelAssetClassId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#detailAssetClass");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ModelAssetClassDetails> response = api
+              .detailAssetClass(modelAssetClassId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#detailAssetClass");
       System.err.println("Status code: " + e.getCode());
@@ -920,15 +987,15 @@ public class Example {
 
 <a name="getCalculatedTradeById"></a>
 # **getCalculatedTradeById**
-> List&lt;Trade&gt; getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+> List&lt;Trade&gt; getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId).execute();
 
 Return an individual trade
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -936,34 +1003,48 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
-    UUID calculatedTradeId = UUID.randomUUID(); // UUID | The ID of calculated trade to get account impact
-    UUID tradeId = UUID.randomUUID(); // UUID | The ID of trade object
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
+    UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
+    UUID tradeId = UUID.randomUUID(); // The ID of trade object
     try {
-      List<Trade> result = apiInstance.getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId);
+      List<Trade> result = api
+              .getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getCalculatedTradeById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Trade>> response = api
+              .getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getCalculatedTradeById");
       System.err.println("Status code: " + e.getCode());
@@ -1003,15 +1084,15 @@ public class Example {
 
 <a name="getModelDetailsById"></a>
 # **getModelDetailsById**
-> ModelPortfolioDetails getModelDetailsById(modelPortfolioId)
+> ModelPortfolioDetails getModelDetailsById(modelPortfolioId).execute();
 
 Get details of a model portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1019,32 +1100,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelPortfolioId = UUID.randomUUID(); // UUID | The ID of the model portfolio to get.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to get.
     try {
-      ModelPortfolioDetails result = apiInstance.getModelDetailsById(modelPortfolioId);
+      ModelPortfolioDetails result = api
+              .getModelDetailsById(modelPortfolioId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getModelDetailsById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<ModelPortfolioDetails> response = api
+              .getModelDetailsById(modelPortfolioId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getModelDetailsById");
       System.err.println("Status code: " + e.getCode());
@@ -1082,15 +1177,15 @@ public class Example {
 
 <a name="getPortfolioBalances"></a>
 # **getPortfolioBalances**
-> List&lt;Balance&gt; getPortfolioBalances(portfolioGroupId)
+> List&lt;Balance&gt; getPortfolioBalances(portfolioGroupId).execute();
 
 Get sum of cash balances in portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1098,32 +1193,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<Balance> result = apiInstance.getPortfolioBalances(portfolioGroupId);
+      List<Balance> result = api
+              .getPortfolioBalances(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioBalances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Balance>> response = api
+              .getPortfolioBalances(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioBalances");
       System.err.println("Status code: " + e.getCode());
@@ -1164,15 +1273,15 @@ public class Example {
 
 <a name="getPortfolioDetailsById"></a>
 # **getPortfolioDetailsById**
-> PortfolioGroup getPortfolioDetailsById(portfolioGroupId)
+> PortfolioGroup getPortfolioDetailsById(portfolioGroupId).execute();
 
 Get details of a target portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1180,32 +1289,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to get.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to get.
     try {
-      PortfolioGroup result = apiInstance.getPortfolioDetailsById(portfolioGroupId);
+      PortfolioGroup result = api
+              .getPortfolioDetailsById(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioDetailsById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroup> response = api
+              .getPortfolioDetailsById(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioDetailsById");
       System.err.println("Status code: " + e.getCode());
@@ -1244,15 +1367,15 @@ public class Example {
 
 <a name="getPortfolioInfo"></a>
 # **getPortfolioInfo**
-> PortfolioGroupInfo getPortfolioInfo(portfolioGroupId)
+> PortfolioGroupInfo getPortfolioInfo(portfolioGroupId).execute();
 
 Return a whole bunch of relevant information relating to a portfolio group.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1260,32 +1383,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      PortfolioGroupInfo result = apiInstance.getPortfolioInfo(portfolioGroupId);
+      PortfolioGroupInfo result = api
+              .getPortfolioInfo(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroupInfo> response = api
+              .getPortfolioInfo(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioInfo");
       System.err.println("Status code: " + e.getCode());
@@ -1322,99 +1459,17 @@ public class Example {
 | **200** | Portfolio group target allocation has been updated |  -  |
 | **0** | Unexpected error. |  -  |
 
-<a name="getPortfolioPositions"></a>
-# **getPortfolioPositions**
-> List&lt;PortfolioGroupPosition&gt; getPortfolioPositions(portfolioGroupId)
-
-Get total of each postions owned in portfolio group
-
-### Example
-```java
-// Import classes:
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.PortfolioManagementApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
-    
-    // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
-
-    // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
-
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
-    try {
-      List<PortfolioGroupPosition> result = apiInstance.getPortfolioPositions(portfolioGroupId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioPositions");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **portfolioGroupId** | **UUID**| The ID of the PortfolioGroup under which to create the target asset. | |
-
-### Return type
-
-[**List&lt;PortfolioGroupPosition&gt;**](PortfolioGroupPosition.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Totals of each postions owned in portfolio group |  -  |
-| **400** | The specified portfolioGroupId is invalid (not a UUID string) or the input data is invalid. |  -  |
-| **404** | The specified portfolioGroupId was not found. |  -  |
-| **0** | Unexpected error. |  -  |
-
 <a name="getPortfolioSettings"></a>
 # **getPortfolioSettings**
-> PortfolioGroupSettings getPortfolioSettings(portfolioGroupId)
+> PortfolioGroupSettings getPortfolioSettings(portfolioGroupId).execute();
 
 Get portfolio group settings
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1422,32 +1477,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to get the settings.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the settings.
     try {
-      PortfolioGroupSettings result = apiInstance.getPortfolioSettings(portfolioGroupId);
+      PortfolioGroupSettings result = api
+              .getPortfolioSettings(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioSettings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroupSettings> response = api
+              .getPortfolioSettings(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioSettings");
       System.err.println("Status code: " + e.getCode());
@@ -1486,15 +1555,15 @@ public class Example {
 
 <a name="getPortfolioTargetById"></a>
 # **getPortfolioTargetById**
-> TargetAsset getPortfolioTargetById(portfolioGroupId, targetAssetId)
+> TargetAsset getPortfolioTargetById(portfolioGroupId, targetAssetId).execute();
 
 Get a specific target from a portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1502,33 +1571,47 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to get the target asset.
-    UUID targetAssetId = UUID.randomUUID(); // UUID | The ID of the TargetAsset to get.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the target asset.
+    UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to get.
     try {
-      TargetAsset result = apiInstance.getPortfolioTargetById(portfolioGroupId, targetAssetId);
+      TargetAsset result = api
+              .getPortfolioTargetById(portfolioGroupId, targetAssetId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargetById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<TargetAsset> response = api
+              .getPortfolioTargetById(portfolioGroupId, targetAssetId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargetById");
       System.err.println("Status code: " + e.getCode());
@@ -1568,15 +1651,15 @@ public class Example {
 
 <a name="getPortfolioTargets"></a>
 # **getPortfolioTargets**
-> List&lt;TargetAsset&gt; getPortfolioTargets(portfolioGroupId)
+> List&lt;TargetAsset&gt; getPortfolioTargets(portfolioGroupId).execute();
 
 Get all target assets under the specified PortfolioGroup.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1584,32 +1667,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = apiInstance.getPortfolioTargets(portfolioGroupId);
+      List<TargetAsset> result = api
+              .getPortfolioTargets(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargets");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<TargetAsset>> response = api
+              .getPortfolioTargets(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargets");
       System.err.println("Status code: " + e.getCode());
@@ -1650,15 +1747,15 @@ public class Example {
 
 <a name="getPortoflioExcludedAssets"></a>
 # **getPortoflioExcludedAssets**
-> List&lt;ExcludedAsset&gt; getPortoflioExcludedAssets(portfolioGroupId)
+> List&lt;ExcludedAsset&gt; getPortoflioExcludedAssets(portfolioGroupId).execute();
 
 Get an array of excluded assets associated with a portfolio group\\
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1666,32 +1763,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which the excluded assets are linked.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the excluded assets are linked.
     try {
-      List<ExcludedAsset> result = apiInstance.getPortoflioExcludedAssets(portfolioGroupId);
+      List<ExcludedAsset> result = api
+              .getPortoflioExcludedAssets(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#getPortoflioExcludedAssets");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<ExcludedAsset>> response = api
+              .getPortoflioExcludedAssets(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortoflioExcludedAssets");
       System.err.println("Status code: " + e.getCode());
@@ -1730,15 +1841,15 @@ public class Example {
 
 <a name="importModelPortfolio"></a>
 # **importModelPortfolio**
-> List&lt;TargetAsset&gt; importModelPortfolio(portfolioGroupId)
+> List&lt;TargetAsset&gt; importModelPortfolio(portfolioGroupId).execute();
 
 Import target allocation based on portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1746,32 +1857,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = apiInstance.importModelPortfolio(portfolioGroupId);
+      List<TargetAsset> result = api
+              .importModelPortfolio(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#importModelPortfolio");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<TargetAsset>> response = api
+              .importModelPortfolio(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#importModelPortfolio");
       System.err.println("Status code: " + e.getCode());
@@ -1808,17 +1933,17 @@ public class Example {
 | **200** | Portfolio group target allocation has been updated |  -  |
 | **0** | Unexpected error. |  -  |
 
-<a name="listAssetClasses"></a>
-# **listAssetClasses**
-> List&lt;ModelAssetClassDetails&gt; listAssetClasses()
+<a name="list"></a>
+# **list**
+> List&lt;PortfolioGroup&gt; list(userId, userSecret).execute();
 
-List of model asset class
+List all portfolio groups
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1826,31 +1951,141 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
-      List<ModelAssetClassDetails> result = apiInstance.listAssetClasses();
+      List<PortfolioGroup> result = api
+              .list(userId, userSecret)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#list");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<PortfolioGroup>> response = api
+              .list(userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#list");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**List&lt;PortfolioGroup&gt;**](PortfolioGroup.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of all PortfolioGroup objects for the authenticated user. |  -  |
+| **0** | Unexpected error. |  -  |
+
+<a name="listAssetClasses"></a>
+# **listAssetClasses**
+> List&lt;ModelAssetClassDetails&gt; listAssetClasses().execute();
+
+List of model asset class
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.PortfolioManagementApi;
+
+public class Example {
+  public static void main(String[] args) {
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    
+    // Configure API key authorization: PartnerClientId
+    apiClient.setPartnerClientId("YOUR API KEY");
+
+    // Configure API key authorization: PartnerSignature
+    apiClient.setPartnerSignature("YOUR API KEY");
+
+    // Configure API key authorization: PartnerTimestamp
+    apiClient.setPartnerTimestamp("YOUR API KEY");
+
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    try {
+      List<ModelAssetClassDetails> result = api
+              .listAssetClasses()
+              .execute();
+      System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#listAssetClasses");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<ModelAssetClassDetails>> response = api
+              .listAssetClasses()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listAssetClasses");
       System.err.println("Status code: " + e.getCode());
@@ -1885,15 +2120,15 @@ This endpoint does not need any parameter.
 
 <a name="listCalculatedTrades"></a>
 # **listCalculatedTrades**
-> CalculatedTrade listCalculatedTrades(portfolioGroupId)
+> CalculatedTrade listCalculatedTrades(portfolioGroupId).execute();
 
 List of trades to make to rebalance portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1901,32 +2136,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to perform rebalancing calculations
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     try {
-      CalculatedTrade result = apiInstance.listCalculatedTrades(portfolioGroupId);
+      CalculatedTrade result = api
+              .listCalculatedTrades(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#listCalculatedTrades");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<CalculatedTrade> response = api
+              .listCalculatedTrades(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listCalculatedTrades");
       System.err.println("Status code: " + e.getCode());
@@ -1964,15 +2213,15 @@ public class Example {
 
 <a name="listModelPortfolio"></a>
 # **listModelPortfolio**
-> List&lt;ModelPortfolioDetails&gt; listModelPortfolio()
+> List&lt;ModelPortfolioDetails&gt; listModelPortfolio().execute();
 
 List of model portfolio
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -1980,31 +2229,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
     try {
-      List<ModelPortfolioDetails> result = apiInstance.listModelPortfolio();
+      List<ModelPortfolioDetails> result = api
+              .listModelPortfolio()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#listModelPortfolio");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<ModelPortfolioDetails>> response = api
+              .listModelPortfolio()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listModelPortfolio");
       System.err.println("Status code: " + e.getCode());
@@ -2039,15 +2302,15 @@ This endpoint does not need any parameter.
 
 <a name="listPortfolioAccounts"></a>
 # **listPortfolioAccounts**
-> List&lt;Account&gt; listPortfolioAccounts(portfolioGroupId)
+> List&lt;Account&gt; listPortfolioAccounts(portfolioGroupId).execute();
 
 Get all accounts associated with a portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2055,32 +2318,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which the accounts are linked.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the accounts are linked.
     try {
-      List<Account> result = apiInstance.listPortfolioAccounts(portfolioGroupId);
+      List<Account> result = api
+              .listPortfolioAccounts(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#listPortfolioAccounts");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<Account>> response = api
+              .listPortfolioAccounts(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listPortfolioAccounts");
       System.err.println("Status code: " + e.getCode());
@@ -2119,15 +2396,15 @@ public class Example {
 
 <a name="modifyModelPortfolioById"></a>
 # **modifyModelPortfolioById**
-> modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails)
+> modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails).execute();
 
 Updates model portfolio object
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2135,32 +2412,48 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelPortfolioId = UUID.randomUUID(); // UUID | The ID of the model portfolio to update.
-    ModelPortfolioDetails modelPortfolioDetails = new ModelPortfolioDetails(); // ModelPortfolioDetails | Use this endpoint change model asset class name and to add or remove a model portfolio security/model portfolio asset class. <br /><br /> * The model portfolio name and model portfolio model type is required. <br /> * The model portfolio model type must be either 0 or 1. [0 -> Securities based, 1 -> Asset Class based] <br /><br /> * If the model portfolio type is 0, the model portfolio asset class must be an empty array. <br /> * If the model portfolio type is 1, the model portfolio security must be an empty array. <br /><br /> * When updating the model portfolio security, the percent is required. Only the symbol id is required for the symbol object <br /> * When updating the model portfolio asset classes, the percent is required. Only the model asset class id is required for the model asset class object <br /><br /> * To remove all model portfolio securities or model portfolio asset class, set then to an empty array
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to update.
+    ModelPortfolio modelPortfolio = new ModelPortfolio();
+    List<ModelPortfolioSecurity> modelPortfolioSecurity = Arrays.asList();
+    List<ModelPortfolioAssetClass> modelPortfolioAssetClass = Arrays.asList();
     try {
-      apiInstance.modifyModelPortfolioById(modelPortfolioId, modelPortfolioDetails);
+      api
+              .modifyModelPortfolioById(modelPortfolioId)
+              .modelPortfolio(modelPortfolio)
+              .modelPortfolioSecurity(modelPortfolioSecurity)
+              .modelPortfolioAssetClass(modelPortfolioAssetClass)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#modifyModelPortfolioById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      api
+              .modifyModelPortfolioById(modelPortfolioId)
+              .modelPortfolio(modelPortfolio)
+              .modelPortfolioSecurity(modelPortfolioSecurity)
+              .modelPortfolioAssetClass(modelPortfolioAssetClass)
+              .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#modifyModelPortfolioById");
       System.err.println("Status code: " + e.getCode());
@@ -2199,15 +2492,15 @@ null (empty response body)
 
 <a name="savePortfolio"></a>
 # **savePortfolio**
-> PortfolioGroup savePortfolio(portfolioGroupId, requestBody)
+> PortfolioGroup savePortfolio(portfolioGroupId, requestBody).execute();
 
 Update an existing target portfolio.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2215,33 +2508,52 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to update.
-    Map<String, Object> requestBody = null; // Map<String, Object> | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to update.
+    UUID id = UUID.randomUUID();
+    String name = "name_example";
     try {
-      PortfolioGroup result = apiInstance.savePortfolio(portfolioGroupId, requestBody);
+      PortfolioGroup result = api
+              .savePortfolio(portfolioGroupId)
+              .id(id)
+              .name(name)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#savePortfolio");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroup> response = api
+              .savePortfolio(portfolioGroupId)
+              .id(id)
+              .name(name)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#savePortfolio");
       System.err.println("Status code: " + e.getCode());
@@ -2283,15 +2595,15 @@ public class Example {
 
 <a name="searchPortfolioSymbols"></a>
 # **searchPortfolioSymbols**
-> List&lt;UniversalSymbol&gt; searchPortfolioSymbols(portfolioGroupId, symbolQuery)
+> List&lt;UniversalSymbol&gt; searchPortfolioSymbols(portfolioGroupId).symbolQuery(symbolQuery).execute();
 
 Search for symbols limited to brokerages under the specified portfolio group
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2299,33 +2611,49 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup to search under
-    SymbolQuery symbolQuery = new SymbolQuery(); // SymbolQuery | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to search under
+    String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = apiInstance.searchPortfolioSymbols(portfolioGroupId, symbolQuery);
+      List<UniversalSymbol> result = api
+              .searchPortfolioSymbols(portfolioGroupId)
+              .substring(substring)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#searchPortfolioSymbols");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<UniversalSymbol>> response = api
+              .searchPortfolioSymbols(portfolioGroupId)
+              .substring(substring)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#searchPortfolioSymbols");
       System.err.println("Status code: " + e.getCode());
@@ -2365,15 +2693,15 @@ public class Example {
 
 <a name="setPortfolioTargets"></a>
 # **setPortfolioTargets**
-> List&lt;TargetAsset&gt; setPortfolioTargets(portfolioGroupId, targetAsset)
+> List&lt;TargetAsset&gt; setPortfolioTargets(portfolioGroupId).targetAsset(targetAsset).execute();
 
 Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2381,33 +2709,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to create the target asset.
-    List<TargetAsset> targetAsset = Arrays.asList(); // List<TargetAsset> | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = apiInstance.setPortfolioTargets(portfolioGroupId, targetAsset);
+      List<TargetAsset> result = api
+              .setPortfolioTargets(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#setPortfolioTargets");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<List<TargetAsset>> response = api
+              .setPortfolioTargets(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#setPortfolioTargets");
       System.err.println("Status code: " + e.getCode());
@@ -2449,15 +2790,15 @@ public class Example {
 
 <a name="updateAssetClass"></a>
 # **updateAssetClass**
-> updateAssetClass(modelAssetClassId, modelAssetClassDetails)
+> updateAssetClass(modelAssetClassId, modelAssetClassDetails).execute();
 
 Updates model asset class objects
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2465,32 +2806,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID modelAssetClassId = UUID.randomUUID(); // UUID | The ID of the model asset class to update.
-    ModelAssetClassDetails modelAssetClassDetails = new ModelAssetClassDetails(); // ModelAssetClassDetails | Use this endpoint change model asset class name and to add or remove a model asset class target. <br /><br /> * Only the model asset class name is required for the model asset class object. <br /> * Only the symbol id is required for the symbol object in the model asset class target object. <br /> * To remove all model asset class targets, set the model asset class target as an empty array
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to update.
+    ModelAssetClass modelAssetClass = new ModelAssetClass();
+    List<ModelAssetClassTarget> modelAssetClassTarget = Arrays.asList();
     try {
-      apiInstance.updateAssetClass(modelAssetClassId, modelAssetClassDetails);
+      api
+              .updateAssetClass(modelAssetClassId)
+              .modelAssetClass(modelAssetClass)
+              .modelAssetClassTarget(modelAssetClassTarget)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#updateAssetClass");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      api
+              .updateAssetClass(modelAssetClassId)
+              .modelAssetClass(modelAssetClass)
+              .modelAssetClassTarget(modelAssetClassTarget)
+              .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updateAssetClass");
       System.err.println("Status code: " + e.getCode());
@@ -2529,15 +2883,15 @@ null (empty response body)
 
 <a name="updatePortfolioSettings"></a>
 # **updatePortfolioSettings**
-> PortfolioGroupSettings updatePortfolioSettings(portfolioGroupId)
+> PortfolioGroupSettings updatePortfolioSettings(portfolioGroupId).execute();
 
 Updates portfolio group settings
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2545,32 +2899,46 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to patch the settings.
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the settings.
     try {
-      PortfolioGroupSettings result = apiInstance.updatePortfolioSettings(portfolioGroupId);
+      PortfolioGroupSettings result = api
+              .updatePortfolioSettings(portfolioGroupId)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioSettings");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<PortfolioGroupSettings> response = api
+              .updatePortfolioSettings(portfolioGroupId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioSettings");
       System.err.println("Status code: " + e.getCode());
@@ -2609,15 +2977,15 @@ public class Example {
 
 <a name="updatePortfolioTargetById"></a>
 # **updatePortfolioTargetById**
-> TargetAsset updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset)
+> TargetAsset updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset).execute();
 
 Update a TargetAsset under the specified PortfolioGroup.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
@@ -2625,34 +2993,62 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    // Set custom base path if desired
+    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
     
     // Configure API key authorization: PartnerClientId
-    ApiKeyAuth PartnerClientId = (ApiKeyAuth) defaultClient.getAuthentication("PartnerClientId");
-    PartnerClientId.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerClientId.setApiKeyPrefix("Token");
+    apiClient.setPartnerClientId("YOUR API KEY");
 
     // Configure API key authorization: PartnerSignature
-    ApiKeyAuth PartnerSignature = (ApiKeyAuth) defaultClient.getAuthentication("PartnerSignature");
-    PartnerSignature.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerSignature.setApiKeyPrefix("Token");
+    apiClient.setPartnerSignature("YOUR API KEY");
 
     // Configure API key authorization: PartnerTimestamp
-    ApiKeyAuth PartnerTimestamp = (ApiKeyAuth) defaultClient.getAuthentication("PartnerTimestamp");
-    PartnerTimestamp.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //PartnerTimestamp.setApiKeyPrefix("Token");
+    apiClient.setPartnerTimestamp("YOUR API KEY");
 
-    PortfolioManagementApi apiInstance = new PortfolioManagementApi(defaultClient);
-    UUID portfolioGroupId = UUID.randomUUID(); // UUID | The ID of the PortfolioGroup under which to patch the target asset.
-    UUID targetAssetId = UUID.randomUUID(); // UUID | The ID of the TargetAsset to patch.
-    TargetAsset targetAsset = new TargetAsset(); // TargetAsset | 
+    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the target asset.
+    UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to patch.
+    UUID id = UUID.randomUUID();
+    UniversalSymbol symbol = new UniversalSymbol();
+    Double percent = 3.4D;
+    Boolean isSupported = true;
+    Boolean isExcluded = true;
     try {
-      TargetAsset result = apiInstance.updatePortfolioTargetById(portfolioGroupId, targetAssetId, targetAsset);
+      TargetAsset result = api
+              .updatePortfolioTargetById(portfolioGroupId, targetAssetId)
+              .id(id)
+              .symbol(symbol)
+              .percent(percent)
+              .isSupported(isSupported)
+              .isExcluded(isExcluded)
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioTargetById");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<TargetAsset> response = api
+              .updatePortfolioTargetById(portfolioGroupId, targetAssetId)
+              .id(id)
+              .symbol(symbol)
+              .percent(percent)
+              .isSupported(isSupported)
+              .isExcluded(isExcluded)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioTargetById");
       System.err.println("Status code: " + e.getCode());

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="check"></a>
 # **check**
-> Status check()
+> Status check().execute();
 
 Get API Status
 
@@ -17,22 +17,43 @@ Check whether the API is operational and verify timestamps.
 
 ### Example
 ```java
-// Import classes:
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.ApiStatusApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.snaptrade.com/api/v1");
+    ApiClient apiClient = Configuration.getDefaultApiClient();
+    apiClient.setBasePath("https://api.snaptrade.com/api/v1");
 
-    ApiStatusApi apiInstance = new ApiStatusApi(defaultClient);
+    ApiStatusApi api = new ApiStatusApi(apiClient);
     try {
-      Status result = apiInstance.check();
+      Status result = api
+              .check()
+              .execute();
       System.out.println(result);
+      System.out.println(result.toJson()); // Serialize response back to JSON 
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ApiStatusApi#check");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    try {
+      ApiResponse<Status> response = api
+              .check()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ApiStatusApi#check");
       System.err.println("Status code: " + e.getCode());

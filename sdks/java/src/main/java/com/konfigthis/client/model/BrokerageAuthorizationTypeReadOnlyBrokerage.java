@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -66,6 +67,10 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
   }
 
   public BrokerageAuthorizationTypeReadOnlyBrokerage id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -84,11 +89,19 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public BrokerageAuthorizationTypeReadOnlyBrokerage name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -107,11 +120,19 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public BrokerageAuthorizationTypeReadOnlyBrokerage slug(String slug) {
+
+    
+    
+    
     
     this.slug = slug;
     return this;
@@ -130,6 +151,10 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
 
 
   public void setSlug(String slug) {
+
+    
+    
+    
     this.slug = slug;
   }
 

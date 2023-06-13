@@ -24,7 +24,6 @@ import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -69,7 +69,7 @@ public class OptionStrategy {
 
   public static final String SERIALIZED_NAME_NUMBER_OF_LEGS = "number_of_legs";
   @SerializedName(SERIALIZED_NAME_NUMBER_OF_LEGS)
-  private BigDecimal numberOfLegs;
+  private Double numberOfLegs;
 
   public static final String SERIALIZED_NAME_LEGS = "legs";
   @SerializedName(SERIALIZED_NAME_LEGS)
@@ -79,6 +79,10 @@ public class OptionStrategy {
   }
 
   public OptionStrategy id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -97,11 +101,19 @@ public class OptionStrategy {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public OptionStrategy underlyingSymbolId(UniversalSymbol underlyingSymbolId) {
+
+    
+    
+    
     
     this.underlyingSymbolId = underlyingSymbolId;
     return this;
@@ -120,11 +132,19 @@ public class OptionStrategy {
 
 
   public void setUnderlyingSymbolId(UniversalSymbol underlyingSymbolId) {
+
+    
+    
+    
     this.underlyingSymbolId = underlyingSymbolId;
   }
 
 
   public OptionStrategy strategyType(String strategyType) {
+
+    
+    
+    
     
     this.strategyType = strategyType;
     return this;
@@ -143,13 +163,31 @@ public class OptionStrategy {
 
 
   public void setStrategyType(String strategyType) {
+
+    
+    
+    
     this.strategyType = strategyType;
   }
 
 
-  public OptionStrategy numberOfLegs(BigDecimal numberOfLegs) {
+  public OptionStrategy numberOfLegs(Double numberOfLegs) {
+
+    
+    
+    
     
     this.numberOfLegs = numberOfLegs;
+    return this;
+  }
+
+  public OptionStrategy numberOfLegs(Integer numberOfLegs) {
+
+    
+    
+    
+    
+    this.numberOfLegs = numberOfLegs.doubleValue();
     return this;
   }
 
@@ -160,17 +198,25 @@ public class OptionStrategy {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "2", value = "")
 
-  public BigDecimal getNumberOfLegs() {
+  public Double getNumberOfLegs() {
     return numberOfLegs;
   }
 
 
-  public void setNumberOfLegs(BigDecimal numberOfLegs) {
+  public void setNumberOfLegs(Double numberOfLegs) {
+
+    
+    
+    
     this.numberOfLegs = numberOfLegs;
   }
 
 
   public OptionStrategy legs(List<OptionStrategyLegsInner> legs) {
+
+    
+    
+    
     
     this.legs = legs;
     return this;
@@ -197,6 +243,10 @@ public class OptionStrategy {
 
 
   public void setLegs(List<OptionStrategyLegsInner> legs) {
+
+    
+    
+    
     this.legs = legs;
   }
 

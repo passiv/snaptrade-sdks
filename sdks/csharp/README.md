@@ -273,7 +273,7 @@ Class | Method | HTTP request | Description
  - [Model.SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [Model.Symbol](docs/Symbol.md)
  - [Model.SymbolQuery](docs/SymbolQuery.md)
- - [Model.SymbolsQuotes](docs/SymbolsQuotes.md)
+ - [Model.SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [Model.TargetAsset](docs/TargetAsset.md)
  - [Model.TimeInForce](docs/TimeInForce.md)
  - [Model.Trade](docs/Trade.md)

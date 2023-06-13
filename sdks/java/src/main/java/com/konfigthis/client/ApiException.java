@@ -26,6 +26,7 @@ public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
     private String responseBody = null;
+    private Long roundTripTime = null;
  
     /**
      * <p>Constructor for ApiException.</p>
@@ -59,11 +60,12 @@ public class ApiException extends Exception {
      * @param responseHeaders a {@link java.util.Map} of HTTP response headers
      * @param responseBody the response body
      */
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, String responseBody) {
+    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, String responseBody, Long roundTripTime) {
         super(message, throwable);
         this.code = code;
         this.responseHeaders = responseHeaders;
         this.responseBody = responseBody;
+        this.roundTripTime = roundTripTime;
     }
 
     /**
@@ -74,8 +76,8 @@ public class ApiException extends Exception {
      * @param responseHeaders a {@link java.util.Map} of HTTP response headers
      * @param responseBody the response body
      */
-    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this(message, (Throwable) null, code, responseHeaders, responseBody);
+    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, String responseBody, Long roundTripTime) {
+        this(message, (Throwable) null, code, responseHeaders, responseBody, roundTripTime);
     }
 
     /**
@@ -86,8 +88,8 @@ public class ApiException extends Exception {
      * @param code HTTP status code
      * @param responseHeaders a {@link java.util.Map} of HTTP response headers
      */
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders) {
-        this(message, throwable, code, responseHeaders, null);
+    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, Long roundTripTime) {
+        this(message, throwable, code, responseHeaders, null, roundTripTime);
     }
 
     /**
@@ -98,7 +100,7 @@ public class ApiException extends Exception {
      * @param responseBody the response body
      */
     public ApiException(int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this((String) null, (Throwable) null, code, responseHeaders, responseBody);
+        this((String) null, (Throwable) null, code, responseHeaders, responseBody, null);
     }
 
     /**
@@ -131,7 +133,7 @@ public class ApiException extends Exception {
      *
      * @return HTTP status code
      */
-    public int getCode() {
+    public int getStatusCode() {
         return code;
     }
 
@@ -154,12 +156,21 @@ public class ApiException extends Exception {
     }
 
     /**
+     * Get the round trip time
+     *
+     * @return total time between start and end of request
+     */
+    public Long getRoundTripTime() {
+        return roundTripTime;
+    }
+
+    /**
      * Get the exception message including HTTP response data.
      *
      * @return The exception message
      */
     public String getMessage() {
         return String.format("Message: %s%nHTTP response code: %s%nHTTP response body: %s%nHTTP response headers: %s",
-                super.getMessage(), this.getCode(), this.getResponseBody(), this.getResponseHeaders());
+                super.getMessage(), this.getStatusCode(), this.getResponseBody(), this.getResponseHeaders());
     }
 }

@@ -23,7 +23,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -86,7 +86,7 @@ public class UserSettings {
 
   public static final String SERIALIZED_NAME_DRIFT_THRESHOLD = "drift_threshold";
   @SerializedName(SERIALIZED_NAME_DRIFT_THRESHOLD)
-  private BigDecimal driftThreshold;
+  private Double driftThreshold;
 
   public static final String SERIALIZED_NAME_PREFERRED_CURRENCY = "preferred_currency";
   @SerializedName(SERIALIZED_NAME_PREFERRED_CURRENCY)
@@ -96,6 +96,10 @@ public class UserSettings {
   }
 
   public UserSettings email(String email) {
+
+    
+    
+    
     
     this.email = email;
     return this;
@@ -114,11 +118,19 @@ public class UserSettings {
 
 
   public void setEmail(String email) {
+
+    
+    
+    
     this.email = email;
   }
 
 
   public UserSettings name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -137,11 +149,19 @@ public class UserSettings {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 
 
   public UserSettings receiveCashNotification(Boolean receiveCashNotification) {
+
+    
+    
+    
     
     this.receiveCashNotification = receiveCashNotification;
     return this;
@@ -160,11 +180,19 @@ public class UserSettings {
 
 
   public void setReceiveCashNotification(Boolean receiveCashNotification) {
+
+    
+    
+    
     this.receiveCashNotification = receiveCashNotification;
   }
 
 
   public UserSettings receiveDriftNotification(Boolean receiveDriftNotification) {
+
+    
+    
+    
     
     this.receiveDriftNotification = receiveDriftNotification;
     return this;
@@ -183,11 +211,19 @@ public class UserSettings {
 
 
   public void setReceiveDriftNotification(Boolean receiveDriftNotification) {
+
+    
+    
+    
     this.receiveDriftNotification = receiveDriftNotification;
   }
 
 
   public UserSettings userTrialActivated(Boolean userTrialActivated) {
+
+    
+    
+    
     
     this.userTrialActivated = userTrialActivated;
     return this;
@@ -206,11 +242,19 @@ public class UserSettings {
 
 
   public void setUserTrialActivated(Boolean userTrialActivated) {
+
+    
+    
+    
     this.userTrialActivated = userTrialActivated;
   }
 
 
   public UserSettings activatedTrialDate(String activatedTrialDate) {
+
+    
+    
+    
     
     this.activatedTrialDate = activatedTrialDate;
     return this;
@@ -229,11 +273,19 @@ public class UserSettings {
 
 
   public void setActivatedTrialDate(String activatedTrialDate) {
+
+    
+    
+    
     this.activatedTrialDate = activatedTrialDate;
   }
 
 
   public UserSettings demo(Boolean demo) {
+
+    
+    
+    
     
     this.demo = demo;
     return this;
@@ -252,11 +304,19 @@ public class UserSettings {
 
 
   public void setDemo(Boolean demo) {
+
+    
+    
+    
     this.demo = demo;
   }
 
 
   public UserSettings apiEnabled(Boolean apiEnabled) {
+
+    
+    
+    
     
     this.apiEnabled = apiEnabled;
     return this;
@@ -275,13 +335,31 @@ public class UserSettings {
 
 
   public void setApiEnabled(Boolean apiEnabled) {
+
+    
+    
+    
     this.apiEnabled = apiEnabled;
   }
 
 
-  public UserSettings driftThreshold(BigDecimal driftThreshold) {
+  public UserSettings driftThreshold(Double driftThreshold) {
+
+    
+    
+    
     
     this.driftThreshold = driftThreshold;
+    return this;
+  }
+
+  public UserSettings driftThreshold(Integer driftThreshold) {
+
+    
+    
+    
+    
+    this.driftThreshold = driftThreshold.doubleValue();
     return this;
   }
 
@@ -292,17 +370,25 @@ public class UserSettings {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "95", value = "")
 
-  public BigDecimal getDriftThreshold() {
+  public Double getDriftThreshold() {
     return driftThreshold;
   }
 
 
-  public void setDriftThreshold(BigDecimal driftThreshold) {
+  public void setDriftThreshold(Double driftThreshold) {
+
+    
+    
+    
     this.driftThreshold = driftThreshold;
   }
 
 
   public UserSettings preferredCurrency(Currency preferredCurrency) {
+
+    
+    
+    
     
     this.preferredCurrency = preferredCurrency;
     return this;
@@ -321,6 +407,10 @@ public class UserSettings {
 
 
   public void setPreferredCurrency(Currency preferredCurrency) {
+
+    
+    
+    
     this.preferredCurrency = preferredCurrency;
   }
 

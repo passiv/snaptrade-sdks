@@ -27,7 +27,6 @@ import com.konfigthis.client.model.SubPeriodReturnRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -42,6 +41,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -81,15 +81,15 @@ public class PerformanceCustom {
 
   public static final String SERIALIZED_NAME_CONTRIBUTION_STREAK = "contributionStreak";
   @SerializedName(SERIALIZED_NAME_CONTRIBUTION_STREAK)
-  private BigDecimal contributionStreak;
+  private Double contributionStreak;
 
   public static final String SERIALIZED_NAME_CONTRIBUTION_MONTHS_CONTRIBUTED = "contributionMonthsContributed";
   @SerializedName(SERIALIZED_NAME_CONTRIBUTION_MONTHS_CONTRIBUTED)
-  private BigDecimal contributionMonthsContributed;
+  private Double contributionMonthsContributed;
 
   public static final String SERIALIZED_NAME_CONTRIBUTION_TOTAL_MONTHS = "contributionTotalMonths";
   @SerializedName(SERIALIZED_NAME_CONTRIBUTION_TOTAL_MONTHS)
-  private BigDecimal contributionTotalMonths;
+  private Double contributionTotalMonths;
 
   public static final String SERIALIZED_NAME_DIVIDENDS = "dividends";
   @SerializedName(SERIALIZED_NAME_DIVIDENDS)
@@ -97,11 +97,11 @@ public class PerformanceCustom {
 
   public static final String SERIALIZED_NAME_DIVIDEND_INCOME = "dividendIncome";
   @SerializedName(SERIALIZED_NAME_DIVIDEND_INCOME)
-  private BigDecimal dividendIncome;
+  private Double dividendIncome;
 
   public static final String SERIALIZED_NAME_MONTHLY_DIVIDENDS = "monthlyDividends";
   @SerializedName(SERIALIZED_NAME_MONTHLY_DIVIDENDS)
-  private BigDecimal monthlyDividends;
+  private Double monthlyDividends;
 
   public static final String SERIALIZED_NAME_BAD_TICKERS = "badTickers";
   @SerializedName(SERIALIZED_NAME_BAD_TICKERS)
@@ -113,19 +113,19 @@ public class PerformanceCustom {
 
   public static final String SERIALIZED_NAME_COMMISSIONS = "commissions";
   @SerializedName(SERIALIZED_NAME_COMMISSIONS)
-  private BigDecimal commissions;
+  private Double commissions;
 
   public static final String SERIALIZED_NAME_FOREX_FEES = "forexFees";
   @SerializedName(SERIALIZED_NAME_FOREX_FEES)
-  private BigDecimal forexFees;
+  private Double forexFees;
 
   public static final String SERIALIZED_NAME_FEES = "fees";
   @SerializedName(SERIALIZED_NAME_FEES)
-  private BigDecimal fees;
+  private Double fees;
 
   public static final String SERIALIZED_NAME_RATE_OF_RETURN = "rateOfReturn";
   @SerializedName(SERIALIZED_NAME_RATE_OF_RETURN)
-  private BigDecimal rateOfReturn;
+  private Double rateOfReturn;
 
   public static final String SERIALIZED_NAME_RETURN_RATE_TIMEFRAME = "returnRateTimeframe";
   @SerializedName(SERIALIZED_NAME_RETURN_RATE_TIMEFRAME)
@@ -139,6 +139,10 @@ public class PerformanceCustom {
   }
 
   public PerformanceCustom totalEquityTimeframe(List<PastValue> totalEquityTimeframe) {
+
+    
+    
+    
     
     this.totalEquityTimeframe = totalEquityTimeframe;
     return this;
@@ -165,11 +169,19 @@ public class PerformanceCustom {
 
 
   public void setTotalEquityTimeframe(List<PastValue> totalEquityTimeframe) {
+
+    
+    
+    
     this.totalEquityTimeframe = totalEquityTimeframe;
   }
 
 
   public PerformanceCustom contributions(NetContributions contributions) {
+
+    
+    
+    
     
     this.contributions = contributions;
     return this;
@@ -188,11 +200,19 @@ public class PerformanceCustom {
 
 
   public void setContributions(NetContributions contributions) {
+
+    
+    
+    
     this.contributions = contributions;
   }
 
 
   public PerformanceCustom contributionTimeframe(List<PastValue> contributionTimeframe) {
+
+    
+    
+    
     
     this.contributionTimeframe = contributionTimeframe;
     return this;
@@ -219,11 +239,19 @@ public class PerformanceCustom {
 
 
   public void setContributionTimeframe(List<PastValue> contributionTimeframe) {
+
+    
+    
+    
     this.contributionTimeframe = contributionTimeframe;
   }
 
 
   public PerformanceCustom contributionTimeframeCumulative(List<PastValue> contributionTimeframeCumulative) {
+
+    
+    
+    
     
     this.contributionTimeframeCumulative = contributionTimeframeCumulative;
     return this;
@@ -250,11 +278,19 @@ public class PerformanceCustom {
 
 
   public void setContributionTimeframeCumulative(List<PastValue> contributionTimeframeCumulative) {
+
+    
+    
+    
     this.contributionTimeframeCumulative = contributionTimeframeCumulative;
   }
 
 
   public PerformanceCustom withdrawalTimeframe(List<PastValue> withdrawalTimeframe) {
+
+    
+    
+    
     
     this.withdrawalTimeframe = withdrawalTimeframe;
     return this;
@@ -281,13 +317,31 @@ public class PerformanceCustom {
 
 
   public void setWithdrawalTimeframe(List<PastValue> withdrawalTimeframe) {
+
+    
+    
+    
     this.withdrawalTimeframe = withdrawalTimeframe;
   }
 
 
-  public PerformanceCustom contributionStreak(BigDecimal contributionStreak) {
+  public PerformanceCustom contributionStreak(Double contributionStreak) {
+
+    
+    
+    
     
     this.contributionStreak = contributionStreak;
+    return this;
+  }
+
+  public PerformanceCustom contributionStreak(Integer contributionStreak) {
+
+    
+    
+    
+    
+    this.contributionStreak = contributionStreak.doubleValue();
     return this;
   }
 
@@ -298,19 +352,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "5", value = "Current streak of cosecutive months where contributions were made")
 
-  public BigDecimal getContributionStreak() {
+  public Double getContributionStreak() {
     return contributionStreak;
   }
 
 
-  public void setContributionStreak(BigDecimal contributionStreak) {
+  public void setContributionStreak(Double contributionStreak) {
+
+    
+    
+    
     this.contributionStreak = contributionStreak;
   }
 
 
-  public PerformanceCustom contributionMonthsContributed(BigDecimal contributionMonthsContributed) {
+  public PerformanceCustom contributionMonthsContributed(Double contributionMonthsContributed) {
+
+    
+    
+    
     
     this.contributionMonthsContributed = contributionMonthsContributed;
+    return this;
+  }
+
+  public PerformanceCustom contributionMonthsContributed(Integer contributionMonthsContributed) {
+
+    
+    
+    
+    
+    this.contributionMonthsContributed = contributionMonthsContributed.doubleValue();
     return this;
   }
 
@@ -321,19 +393,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "Number of months in the timeframe with contributions")
 
-  public BigDecimal getContributionMonthsContributed() {
+  public Double getContributionMonthsContributed() {
     return contributionMonthsContributed;
   }
 
 
-  public void setContributionMonthsContributed(BigDecimal contributionMonthsContributed) {
+  public void setContributionMonthsContributed(Double contributionMonthsContributed) {
+
+    
+    
+    
     this.contributionMonthsContributed = contributionMonthsContributed;
   }
 
 
-  public PerformanceCustom contributionTotalMonths(BigDecimal contributionTotalMonths) {
+  public PerformanceCustom contributionTotalMonths(Double contributionTotalMonths) {
+
+    
+    
+    
     
     this.contributionTotalMonths = contributionTotalMonths;
+    return this;
+  }
+
+  public PerformanceCustom contributionTotalMonths(Integer contributionTotalMonths) {
+
+    
+    
+    
+    
+    this.contributionTotalMonths = contributionTotalMonths.doubleValue();
     return this;
   }
 
@@ -344,17 +434,25 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "13", value = "Total months in timeframe")
 
-  public BigDecimal getContributionTotalMonths() {
+  public Double getContributionTotalMonths() {
     return contributionTotalMonths;
   }
 
 
-  public void setContributionTotalMonths(BigDecimal contributionTotalMonths) {
+  public void setContributionTotalMonths(Double contributionTotalMonths) {
+
+    
+    
+    
     this.contributionTotalMonths = contributionTotalMonths;
   }
 
 
   public PerformanceCustom dividends(List<NetDividend> dividends) {
+
+    
+    
+    
     
     this.dividends = dividends;
     return this;
@@ -381,13 +479,31 @@ public class PerformanceCustom {
 
 
   public void setDividends(List<NetDividend> dividends) {
+
+    
+    
+    
     this.dividends = dividends;
   }
 
 
-  public PerformanceCustom dividendIncome(BigDecimal dividendIncome) {
+  public PerformanceCustom dividendIncome(Double dividendIncome) {
+
+    
+    
+    
     
     this.dividendIncome = dividendIncome;
+    return this;
+  }
+
+  public PerformanceCustom dividendIncome(Integer dividendIncome) {
+
+    
+    
+    
+    
+    this.dividendIncome = dividendIncome.doubleValue();
     return this;
   }
 
@@ -398,19 +514,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "135.97", value = "Total dividends received over the timeframe")
 
-  public BigDecimal getDividendIncome() {
+  public Double getDividendIncome() {
     return dividendIncome;
   }
 
 
-  public void setDividendIncome(BigDecimal dividendIncome) {
+  public void setDividendIncome(Double dividendIncome) {
+
+    
+    
+    
     this.dividendIncome = dividendIncome;
   }
 
 
-  public PerformanceCustom monthlyDividends(BigDecimal monthlyDividends) {
+  public PerformanceCustom monthlyDividends(Double monthlyDividends) {
+
+    
+    
+    
     
     this.monthlyDividends = monthlyDividends;
+    return this;
+  }
+
+  public PerformanceCustom monthlyDividends(Integer monthlyDividends) {
+
+    
+    
+    
+    
+    this.monthlyDividends = monthlyDividends.doubleValue();
     return this;
   }
 
@@ -421,17 +555,25 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "26.37", value = "Average dividends received per month over the timeframe")
 
-  public BigDecimal getMonthlyDividends() {
+  public Double getMonthlyDividends() {
     return monthlyDividends;
   }
 
 
-  public void setMonthlyDividends(BigDecimal monthlyDividends) {
+  public void setMonthlyDividends(Double monthlyDividends) {
+
+    
+    
+    
     this.monthlyDividends = monthlyDividends;
   }
 
 
   public PerformanceCustom badTickers(List<String> badTickers) {
+
+    
+    
+    
     
     this.badTickers = badTickers;
     return this;
@@ -458,11 +600,19 @@ public class PerformanceCustom {
 
 
   public void setBadTickers(List<String> badTickers) {
+
+    
+    
+    
     this.badTickers = badTickers;
   }
 
 
   public PerformanceCustom dividendTimeline(List<MonthlyDividends> dividendTimeline) {
+
+    
+    
+    
     
     this.dividendTimeline = dividendTimeline;
     return this;
@@ -489,13 +639,31 @@ public class PerformanceCustom {
 
 
   public void setDividendTimeline(List<MonthlyDividends> dividendTimeline) {
+
+    
+    
+    
     this.dividendTimeline = dividendTimeline;
   }
 
 
-  public PerformanceCustom commissions(BigDecimal commissions) {
+  public PerformanceCustom commissions(Double commissions) {
+
+    
+    
+    
     
     this.commissions = commissions;
+    return this;
+  }
+
+  public PerformanceCustom commissions(Integer commissions) {
+
+    
+    
+    
+    
+    this.commissions = commissions.doubleValue();
     return this;
   }
 
@@ -506,19 +674,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "3.26", value = "commissions incurred during the timeframe")
 
-  public BigDecimal getCommissions() {
+  public Double getCommissions() {
     return commissions;
   }
 
 
-  public void setCommissions(BigDecimal commissions) {
+  public void setCommissions(Double commissions) {
+
+    
+    
+    
     this.commissions = commissions;
   }
 
 
-  public PerformanceCustom forexFees(BigDecimal forexFees) {
+  public PerformanceCustom forexFees(Double forexFees) {
+
+    
+    
+    
     
     this.forexFees = forexFees;
+    return this;
+  }
+
+  public PerformanceCustom forexFees(Integer forexFees) {
+
+    
+    
+    
+    
+    this.forexFees = forexFees.doubleValue();
     return this;
   }
 
@@ -529,19 +715,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "5.26", value = "forex fees incurred during the timeframe")
 
-  public BigDecimal getForexFees() {
+  public Double getForexFees() {
     return forexFees;
   }
 
 
-  public void setForexFees(BigDecimal forexFees) {
+  public void setForexFees(Double forexFees) {
+
+    
+    
+    
     this.forexFees = forexFees;
   }
 
 
-  public PerformanceCustom fees(BigDecimal fees) {
+  public PerformanceCustom fees(Double fees) {
+
+    
+    
+    
     
     this.fees = fees;
+    return this;
+  }
+
+  public PerformanceCustom fees(Integer fees) {
+
+    
+    
+    
+    
+    this.fees = fees.doubleValue();
     return this;
   }
 
@@ -552,19 +756,37 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "2.72", value = "other fees incurred during the timeframe")
 
-  public BigDecimal getFees() {
+  public Double getFees() {
     return fees;
   }
 
 
-  public void setFees(BigDecimal fees) {
+  public void setFees(Double fees) {
+
+    
+    
+    
     this.fees = fees;
   }
 
 
-  public PerformanceCustom rateOfReturn(BigDecimal rateOfReturn) {
+  public PerformanceCustom rateOfReturn(Double rateOfReturn) {
+
+    
+    
+    
     
     this.rateOfReturn = rateOfReturn;
+    return this;
+  }
+
+  public PerformanceCustom rateOfReturn(Integer rateOfReturn) {
+
+    
+    
+    
+    
+    this.rateOfReturn = rateOfReturn.doubleValue();
     return this;
   }
 
@@ -575,17 +797,25 @@ public class PerformanceCustom {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "0.082312367452", value = "The return rate over the timeframe. Annualized if timeframe is longer than 1 year")
 
-  public BigDecimal getRateOfReturn() {
+  public Double getRateOfReturn() {
     return rateOfReturn;
   }
 
 
-  public void setRateOfReturn(BigDecimal rateOfReturn) {
+  public void setRateOfReturn(Double rateOfReturn) {
+
+    
+    
+    
     this.rateOfReturn = rateOfReturn;
   }
 
 
   public PerformanceCustom returnRateTimeframe(List<SubPeriodReturnRate> returnRateTimeframe) {
+
+    
+    
+    
     
     this.returnRateTimeframe = returnRateTimeframe;
     return this;
@@ -612,11 +842,19 @@ public class PerformanceCustom {
 
 
   public void setReturnRateTimeframe(List<SubPeriodReturnRate> returnRateTimeframe) {
+
+    
+    
+    
     this.returnRateTimeframe = returnRateTimeframe;
   }
 
 
   public PerformanceCustom detailedMode(Boolean detailedMode) {
+
+    
+    
+    
     
     this.detailedMode = detailedMode;
     return this;
@@ -635,6 +873,10 @@ public class PerformanceCustom {
 
 
   public void setDetailedMode(Boolean detailedMode) {
+
+    
+    
+    
     this.detailedMode = detailedMode;
   }
 

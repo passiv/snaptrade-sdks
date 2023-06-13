@@ -17,37 +17,43 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.EncryptedResponse;
-import com.konfigthis.client.model.EncryptedResponseEncryptedMessageData;
-import com.konfigthis.client.model.LoginRedirectURI;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for AuthenticationLoginSnapTradeUser200Response
+ * Model tests for SessionEvent
  */
-public class AuthenticationLoginSnapTradeUser200ResponseTest {
-    private final AuthenticationLoginSnapTradeUser200Response model = new AuthenticationLoginSnapTradeUser200Response();
+public class SessionEventTest {
+    private final SessionEvent model = new SessionEvent();
 
     /**
-     * Model tests for AuthenticationLoginSnapTradeUser200Response
+     * Model tests for SessionEvent
      */
     @Test
-    public void testAuthenticationLoginSnapTradeUser200Response() {
-        // TODO: test AuthenticationLoginSnapTradeUser200Response
+    public void testSessionEvent() {
+        // TODO: test SessionEvent
     }
 
     /**
-     * Test the property 'redirectURI'
+     * Test the property 'id'
      */
     @Test
-    public void redirectURITest() {
-        // TODO: test redirectURI
+    public void idTest() {
+        // TODO: test id
+    }
+
+    /**
+     * Test the property 'sessionEventType'
+     */
+    @Test
+    public void sessionEventTypeTest() {
+        // TODO: test sessionEventType
     }
 
     /**
@@ -59,19 +65,35 @@ public class AuthenticationLoginSnapTradeUser200ResponseTest {
     }
 
     /**
-     * Test the property 'encryptedSharedKey'
+     * Test the property 'userId'
      */
     @Test
-    public void encryptedSharedKeyTest() {
-        // TODO: test encryptedSharedKey
+    public void userIdTest() {
+        // TODO: test userId
     }
 
     /**
-     * Test the property 'encryptedMessageData'
+     * Test the property 'createdDate'
      */
     @Test
-    public void encryptedMessageDataTest() {
-        // TODO: test encryptedMessageData
+    public void createdDateTest() {
+        // TODO: test createdDate
+    }
+
+    /**
+     * Test the property 'brokerageStatusCode'
+     */
+    @Test
+    public void brokerageStatusCodeTest() {
+        // TODO: test brokerageStatusCode
+    }
+
+    /**
+     * Test the property 'brokerageAuthorizationId'
+     */
+    @Test
+    public void brokerageAuthorizationIdTest() {
+        // TODO: test brokerageAuthorizationId
     }
 
 }

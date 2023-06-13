@@ -10,10 +10,10 @@ Target percentage of a certain asset
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
 |**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
-|**percent** | **BigDecimal** |  |  [optional] |
+|**percent** | **Double** |  |  [optional] |
 |**isSupported** | **Boolean** |  |  [optional] |
 |**isExcluded** | **Boolean** |  |  [optional] |
-|**meta** | **Object** |  |  [optional] |
+|**meta** | **Map&lt;String, Object&gt;** |  |  [optional] |
 
 
 

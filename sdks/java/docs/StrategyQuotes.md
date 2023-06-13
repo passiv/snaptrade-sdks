@@ -8,10 +8,10 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**strategy** | **OptionStrategy** |  |  [optional] |
-|**openPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**bidPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**askPrice** | **BigDecimal** | Trade Price if limit or stop limit order |  [optional] |
-|**volatility** | **BigDecimal** |  |  [optional] |
+|**openPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**bidPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**askPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**volatility** | **Double** |  |  [optional] |
 |**greek** | **StrategyQuotesGreek** |  |  [optional] |
 
 

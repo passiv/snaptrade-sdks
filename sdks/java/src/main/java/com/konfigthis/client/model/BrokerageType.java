@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -63,6 +64,10 @@ public class BrokerageType {
   }
 
   public BrokerageType id(UUID id) {
+
+    
+    
+    
     
     this.id = id;
     return this;
@@ -81,11 +86,19 @@ public class BrokerageType {
 
 
   public void setId(UUID id) {
+
+    
+    
+    
     this.id = id;
   }
 
 
   public BrokerageType name(String name) {
+
+    
+    
+    
     
     this.name = name;
     return this;
@@ -104,6 +117,10 @@ public class BrokerageType {
 
 
   public void setName(String name) {
+
+    
+    
+    
     this.name = name;
   }
 

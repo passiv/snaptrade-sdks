@@ -28,10 +28,9 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
+import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
-import com.konfigthis.client.model.Model400FailedRequestResponse;
-import com.konfigthis.client.model.Model403FailedRequestResponse;
 import com.konfigthis.client.model.Position;
 import java.util.UUID;
 
@@ -47,11 +46,20 @@ public class AccountInformationApi {
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public AccountInformationApi() {
+    public AccountInformationApi() throws IllegalArgumentException {
         this(Configuration.getDefaultApiClient());
     }
 
-    public AccountInformationApi(ApiClient apiClient) {
+    public AccountInformationApi(ApiClient apiClient) throws IllegalArgumentException {
+        if (apiClient.getPartnerClientId() == null) {
+            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
+        }
+        if (apiClient.getPartnerSignature() == null) {
+            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
+        }
+        if (apiClient.getPartnerTimestamp() == null) {
+            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
+        }
         this.localVarApiClient = apiClient;
     }
 
@@ -79,24 +87,7 @@ public class AccountInformationApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for getAllUserHoldings
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getAllUserHoldingsCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllUserHoldingsCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -168,92 +159,129 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * List all accounts for the user, plus balances and positions for each account.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
-     * @return List&lt;AccountHoldings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<AccountHoldings> getAllUserHoldings(String userId, String userSecret, UUID brokerageAuthorizations) throws ApiException {
-        ApiResponse<List<AccountHoldings>> localVarResp = getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
-        return localVarResp.getData();
-    }
 
-    /**
-     * List all accounts for the user, plus balances and positions for each account.
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
-     * @return ApiResponse&lt;List&lt;AccountHoldings&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<AccountHoldings>> getAllUserHoldingsWithHttpInfo(String userId, String userSecret, UUID brokerageAuthorizations) throws ApiException {
+    private ApiResponse<List<AccountHoldings>> getAllUserHoldingsWithHttpInfo(String userId, String userSecret, UUID brokerageAuthorizations) throws ApiException {
         okhttp3.Call localVarCall = getAllUserHoldingsValidateBeforeCall(userId, userSecret, brokerageAuthorizations, null);
         Type localVarReturnType = new TypeToken<List<AccountHoldings>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List all accounts for the user, plus balances and positions for each account. (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getAllUserHoldingsAsync(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
+    private okhttp3.Call getAllUserHoldingsAsync(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getAllUserHoldingsValidateBeforeCall(userId, userSecret, brokerageAuthorizations, _callback);
         Type localVarReturnType = new TypeToken<List<AccountHoldings>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetAllUserHoldingsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private UUID brokerageAuthorizations;
+
+        private GetAllUserHoldingsRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set brokerageAuthorizations
+         * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+         * @return GetAllUserHoldingsRequestBuilder
+         */
+        public GetAllUserHoldingsRequestBuilder brokerageAuthorizations(UUID brokerageAuthorizations) {
+            this.brokerageAuthorizations = brokerageAuthorizations;
+            return this;
+        }
+        
+        /**
+         * Build call for getAllUserHoldings
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getAllUserHoldingsCall(userId, userSecret, brokerageAuthorizations, _callback);
+        }
+
+
+        /**
+         * Execute getAllUserHoldings request
+         * @return List&lt;AccountHoldings&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<AccountHoldings> execute() throws ApiException {
+            ApiResponse<List<AccountHoldings>> localVarResp = getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getAllUserHoldings request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;AccountHoldings&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<AccountHoldings>> executeWithHttpInfo() throws ApiException {
+            return getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
+        }
+
+        /**
+         * Execute getAllUserHoldings request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
+            return getAllUserHoldingsAsync(userId, userSecret, brokerageAuthorizations, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserAccountBalance
+     * List all accounts for the user, plus balances and positions for each account.
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @return GetAllUserHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserAccountBalanceCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    public GetAllUserHoldingsRequestBuilder getAllUserHoldings(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new GetAllUserHoldingsRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call getUserAccountBalanceCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -327,86 +355,124 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * Get all cash balances of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return List&lt;Balance&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Balance> getUserAccountBalance(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<List<Balance>> localVarResp = getUserAccountBalanceWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get all cash balances of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Balance>> getUserAccountBalanceWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<List<Balance>> getUserAccountBalanceWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountBalanceValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get all cash balances of an investment account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getUserAccountBalanceAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Balance>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountBalanceAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Balance>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountBalanceValidateBeforeCall(userId, userSecret, accountId, _callback);
         Type localVarReturnType = new TypeToken<List<Balance>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetUserAccountBalanceRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private GetUserAccountBalanceRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for getUserAccountBalance
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserAccountBalanceCall(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute getUserAccountBalance request
+         * @return List&lt;Balance&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Balance> execute() throws ApiException {
+            ApiResponse<List<Balance>> localVarResp = getUserAccountBalanceWithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAccountBalance request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Balance&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Balance>> executeWithHttpInfo() throws ApiException {
+            return getUserAccountBalanceWithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute getUserAccountBalance request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Balance>> _callback) throws ApiException {
+            return getUserAccountBalanceAsync(userId, userSecret, accountId, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserAccountDetails
+     * Get all cash balances of an investment account
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to get detail of. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param accountId The ID of the account get positions. (required)
+     * @return GetUserAccountBalanceRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserAccountDetailsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    public GetUserAccountBalanceRequestBuilder getUserAccountBalance(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new GetUserAccountBalanceRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getUserAccountDetailsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -480,87 +546,124 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * Return details of a specific investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account to get detail of. (required)
-     * @return List&lt;Account&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Account> getUserAccountDetails(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<List<Account>> localVarResp = getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Return details of a specific investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account to get detail of. (required)
-     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Account>> getUserAccountDetailsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<List<Account>> getUserAccountDetailsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountDetailsValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Return details of a specific investment account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account to get detail of. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getUserAccountDetailsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Account>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountDetailsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Account>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountDetailsValidateBeforeCall(userId, userSecret, accountId, _callback);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetUserAccountDetailsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private GetUserAccountDetailsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for getUserAccountDetails
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserAccountDetailsCall(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute getUserAccountDetails request
+         * @return List&lt;Account&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Account> execute() throws ApiException {
+            ApiResponse<List<Account>> localVarResp = getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAccountDetails request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+            return getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute getUserAccountDetails request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+            return getUserAccountDetailsAsync(userId, userSecret, accountId, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserAccountOrders
+     * Return details of a specific investment account
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param accountId The ID of the account to get detail of. (required)
+     * @return GetUserAccountDetailsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserAccountOrdersCall(String userId, String userSecret, UUID accountId, String state, final ApiCallback _callback) throws ApiException {
+    public GetUserAccountDetailsRequestBuilder getUserAccountDetails(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new GetUserAccountDetailsRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getUserAccountOrdersCall(String userId, String userSecret, UUID accountId, String state, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -638,89 +741,135 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * Get all history of orders placed in account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @return List&lt;AccountOrderRecord&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<AccountOrderRecord> getUserAccountOrders(String userId, String userSecret, UUID accountId, String state) throws ApiException {
-        ApiResponse<List<AccountOrderRecord>> localVarResp = getUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get all history of orders placed in account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @return ApiResponse&lt;List&lt;AccountOrderRecord&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<AccountOrderRecord>> getUserAccountOrdersWithHttpInfo(String userId, String userSecret, UUID accountId, String state) throws ApiException {
+    private ApiResponse<List<AccountOrderRecord>> getUserAccountOrdersWithHttpInfo(String userId, String userSecret, UUID accountId, String state) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountOrdersValidateBeforeCall(userId, userSecret, accountId, state, null);
         Type localVarReturnType = new TypeToken<List<AccountOrderRecord>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get all history of orders placed in account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param state defaults value is set to \&quot;all\&quot; (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getUserAccountOrdersAsync(String userId, String userSecret, UUID accountId, String state, final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOrdersAsync(String userId, String userSecret, UUID accountId, String state, final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountOrdersValidateBeforeCall(userId, userSecret, accountId, state, _callback);
         Type localVarReturnType = new TypeToken<List<AccountOrderRecord>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetUserAccountOrdersRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+        private String state;
+
+        private GetUserAccountOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set state
+         * @param state defaults value is set to \&quot;all\&quot; (optional)
+         * @return GetUserAccountOrdersRequestBuilder
+         */
+        public GetUserAccountOrdersRequestBuilder state(String state) {
+            this.state = state;
+            return this;
+        }
+        
+        /**
+         * Build call for getUserAccountOrders
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserAccountOrdersCall(userId, userSecret, accountId, state, _callback);
+        }
+
+
+        /**
+         * Execute getUserAccountOrders request
+         * @return List&lt;AccountOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<AccountOrderRecord> execute() throws ApiException {
+            ApiResponse<List<AccountOrderRecord>> localVarResp = getUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAccountOrders request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;AccountOrderRecord&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<AccountOrderRecord>> executeWithHttpInfo() throws ApiException {
+            return getUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state);
+        }
+
+        /**
+         * Execute getUserAccountOrders request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
+            return getUserAccountOrdersAsync(userId, userSecret, accountId, state, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserAccountPositions
+     * Get all history of orders placed in account
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account get positions. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @return GetUserAccountOrdersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserAccountPositionsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    public GetUserAccountOrdersRequestBuilder getUserAccountOrders(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new GetUserAccountOrdersRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getUserAccountPositionsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -794,88 +943,124 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * Get all positions of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return List&lt;Position&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Position> getUserAccountPositions(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<List<Position>> localVarResp = getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Get all positions of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @return ApiResponse&lt;List&lt;Position&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Position>> getUserAccountPositionsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<List<Position>> getUserAccountPositionsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountPositionsValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<List<Position>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * Get all positions of an investment account (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getUserAccountPositionsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Position>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountPositionsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Position>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountPositionsValidateBeforeCall(userId, userSecret, accountId, _callback);
         Type localVarReturnType = new TypeToken<List<Position>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class GetUserAccountPositionsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private GetUserAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for getUserAccountPositions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserAccountPositionsCall(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute getUserAccountPositions request
+         * @return List&lt;Position&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Position> execute() throws ApiException {
+            ApiResponse<List<Position>> localVarResp = getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAccountPositions request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Position&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Position>> executeWithHttpInfo() throws ApiException {
+            return getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute getUserAccountPositions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Position>> _callback) throws ApiException {
+            return getUserAccountPositionsAsync(userId, userSecret, accountId, _callback);
+        }
+    }
+
     /**
-     * Build call for getUserHoldings
-     * @param accountId The ID of the account to fetch holdings for. (required)
+     * Get all positions of an investment account
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @param accountId The ID of the account get positions. (required)
+     * @return GetUserAccountPositionsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserHoldingsCall(UUID accountId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    public GetUserAccountPositionsRequestBuilder getUserAccountPositions(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new GetUserAccountPositionsRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getUserHoldingsCall(UUID accountId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -949,91 +1134,124 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * List balances, positions and orders for the specified account.
-     * 
-     * @param accountId The ID of the account to fetch holdings for. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return AccountHoldings
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public AccountHoldings getUserHoldings(UUID accountId, String userId, String userSecret) throws ApiException {
-        ApiResponse<AccountHoldings> localVarResp = getUserHoldingsWithHttpInfo(accountId, userId, userSecret);
-        return localVarResp.getData();
-    }
 
-    /**
-     * List balances, positions and orders for the specified account.
-     * 
-     * @param accountId The ID of the account to fetch holdings for. (required)
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;AccountHoldings&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<AccountHoldings> getUserHoldingsWithHttpInfo(UUID accountId, String userId, String userSecret) throws ApiException {
+    private ApiResponse<AccountHoldingsAccount> getUserHoldingsWithHttpInfo(UUID accountId, String userId, String userSecret) throws ApiException {
         okhttp3.Call localVarCall = getUserHoldingsValidateBeforeCall(accountId, userId, userSecret, null);
-        Type localVarReturnType = new TypeToken<AccountHoldings>(){}.getType();
+        Type localVarReturnType = new TypeToken<AccountHoldingsAccount>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call getUserHoldingsAsync(UUID accountId, String userId, String userSecret, final ApiCallback<AccountHoldingsAccount> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserHoldingsValidateBeforeCall(accountId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<AccountHoldingsAccount>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class GetUserHoldingsRequestBuilder {
+        private final UUID accountId;
+        private final String userId;
+        private final String userSecret;
+
+        private GetUserHoldingsRequestBuilder(UUID accountId, String userId, String userSecret) {
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for getUserHoldings
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserHoldingsCall(accountId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute getUserHoldings request
+         * @return AccountHoldingsAccount
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountHoldingsAccount execute() throws ApiException {
+            ApiResponse<AccountHoldingsAccount> localVarResp = getUserHoldingsWithHttpInfo(accountId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserHoldings request with HTTP info returned
+         * @return ApiResponse&lt;AccountHoldingsAccount&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountHoldingsAccount> executeWithHttpInfo() throws ApiException {
+            return getUserHoldingsWithHttpInfo(accountId, userId, userSecret);
+        }
+
+        /**
+         * Execute getUserHoldings request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountHoldingsAccount> _callback) throws ApiException {
+            return getUserHoldingsAsync(accountId, userId, userSecret, _callback);
+        }
+    }
+
     /**
-     * List balances, positions and orders for the specified account. (asynchronously)
+     * List balances, positions and orders for the specified account.
      * 
      * @param accountId The ID of the account to fetch holdings for. (required)
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return GetUserHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getUserHoldingsAsync(UUID accountId, String userId, String userSecret, final ApiCallback<AccountHoldings> _callback) throws ApiException {
+    public GetUserHoldingsRequestBuilder getUserHoldings(UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = getUserHoldingsValidateBeforeCall(accountId, userId, userSecret, _callback);
-        Type localVarReturnType = new TypeToken<AccountHoldings>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new GetUserHoldingsRequestBuilder(accountId, userId, userSecret);
     }
-    /**
-     * Build call for listUserAccounts
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listUserAccountsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listUserAccountsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1101,83 +1319,118 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * List all investment accounts for the user
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return List&lt;Account&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Account> listUserAccounts(String userId, String userSecret) throws ApiException {
-        ApiResponse<List<Account>> localVarResp = listUserAccountsWithHttpInfo(userId, userSecret);
-        return localVarResp.getData();
-    }
 
-    /**
-     * List all investment accounts for the user
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Account>> listUserAccountsWithHttpInfo(String userId, String userSecret) throws ApiException {
+    private ApiResponse<List<Account>> listUserAccountsWithHttpInfo(String userId, String userSecret) throws ApiException {
         okhttp3.Call localVarCall = listUserAccountsValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    /**
-     * List all investment accounts for the user (asynchronously)
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listUserAccountsAsync(String userId, String userSecret, final ApiCallback<List<Account>> _callback) throws ApiException {
+    private okhttp3.Call listUserAccountsAsync(String userId, String userSecret, final ApiCallback<List<Account>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listUserAccountsValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
+
+    public class ListUserAccountsRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+
+        private ListUserAccountsRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for listUserAccounts
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listUserAccountsCall(userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute listUserAccounts request
+         * @return List&lt;Account&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Account> execute() throws ApiException {
+            ApiResponse<List<Account>> localVarResp = listUserAccountsWithHttpInfo(userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listUserAccounts request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+            return listUserAccountsWithHttpInfo(userId, userSecret);
+        }
+
+        /**
+         * Execute listUserAccounts request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+            return listUserAccountsAsync(userId, userSecret, _callback);
+        }
+    }
+
     /**
-     * Build call for updateUserAccount
+     * List all investment accounts for the user
+     * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to update. (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @return ListUserAccountsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateUserAccountCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    public ListUserAccountsRequestBuilder listUserAccounts(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new ListUserAccountsRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call updateUserAccountCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1251,56 +1504,104 @@ public class AccountInformationApi {
 
     }
 
-    /**
-     * Update details of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account to update. (required)
-     * @return List&lt;Account&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Account> updateUserAccount(String userId, String userSecret, UUID accountId) throws ApiException {
-        ApiResponse<List<Account>> localVarResp = updateUserAccountWithHttpInfo(userId, userSecret, accountId);
-        return localVarResp.getData();
-    }
 
-    /**
-     * Update details of an investment account
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId The ID of the account to update. (required)
-     * @return ApiResponse&lt;List&lt;Account&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Account>> updateUserAccountWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<List<Account>> updateUserAccountWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = updateUserAccountValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
+    private okhttp3.Call updateUserAccountAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Account>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUserAccountValidateBeforeCall(userId, userSecret, accountId, _callback);
+        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class UpdateUserAccountRequestBuilder {
+        private final String userId;
+        private final String userSecret;
+        private final UUID accountId;
+
+        private UpdateUserAccountRequestBuilder(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for updateUserAccount
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return updateUserAccountCall(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute updateUserAccount request
+         * @return List&lt;Account&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Account> execute() throws ApiException {
+            ApiResponse<List<Account>> localVarResp = updateUserAccountWithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute updateUserAccount request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+            return updateUserAccountWithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute updateUserAccount request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Successfully updated details of an investment account </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+            return updateUserAccountAsync(userId, userSecret, accountId, _callback);
+        }
+    }
+
     /**
-     * Update details of an investment account (asynchronously)
+     * Update details of an investment account
      * 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to update. (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @return UpdateUserAccountRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -1308,11 +1609,16 @@ public class AccountInformationApi {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateUserAccountAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Account>> _callback) throws ApiException {
+    public UpdateUserAccountRequestBuilder updateUserAccount(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
 
-        okhttp3.Call localVarCall = updateUserAccountValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return new UpdateUserAccountRequestBuilder(userId, userSecret, accountId);
     }
 }
