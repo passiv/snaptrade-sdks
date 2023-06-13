@@ -1330,6 +1330,17 @@ paths:
         - Portfolio Management
       summary: List of model asset class
       operationId: PortfolioManagement_listAssetClasses
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+              $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+              $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
           description: A list of all model asset class objects for the authenticated user.
@@ -1344,6 +1355,17 @@ paths:
         - Portfolio Management
       summary: Create a new model asset class
       operationId: PortfolioManagement_createAssetClass
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+              $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+              $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
           description: A new asset class is created.
@@ -1364,6 +1386,16 @@ paths:
           description: The ID of the model asset class to get.
           schema:
             $ref: "#/components/schemas/Id"
+        - in: query
+          required: true
+          name: userId
+          schema:
+              $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+              $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
           description: Details of a particular model asset class
@@ -1383,6 +1415,17 @@ paths:
           description: The ID of the model asset class to update.
           schema:
             $ref: "#/components/schemas/Id"
+        - in: query
+          required: true
+          name: userId
+          schema:
+              $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+              $ref: "#/components/schemas/UserSecret"
+
       requestBody:
         required: true
         description:
