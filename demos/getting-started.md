@@ -102,7 +102,25 @@ print(redirect_uri.body["redirectURI"])
 
 :::
 
-### 5) Get account holdings data
+### 5) List accounts
+
+After connecting an account to snaptrade, you can see the account IDs by calling `list_user_accounts`.
+
+:::form
+
+```python
+accounts = snaptrade.account_information.list_user_accounts(
+    user_id=user_id,
+    user_secret=user_secret
+)
+pprint(accounts.body)
+```
+
+::button[List User Accounts]
+
+:::
+
+### 6) Get account holdings data for a user
 
 In order to retrieve user holdings for a specific account, you can call the
 Holdings endpoint by passing the clientId, timestamp, userId and list of account
@@ -111,9 +129,13 @@ array of objects containing each account holdings data.
 
 :::form
 
+::input{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT ID" description="The ID of the account to pull holdings for"}
+
 ```python
-holdings = snaptrade.account_information.get_all_user_holdings(
-user_id=user_id, user_secret=user_secret
+holdings = snaptrade.account_information.get_user_holdings(
+    account_id=ACCOUNT_ID,
+    user_id=user_id,
+    user_secret=user_secret
 )
 pprint(holdings.body)
 ```
@@ -122,7 +144,7 @@ pprint(holdings.body)
 
 :::
 
-### 6) Deleting a user
+### 7) Deleting a user
 
 Disabling all brokerage authorizations and permanently deleting all data
 associated with the user
