@@ -2,7 +2,7 @@
 
 ### 1) Initialize a client with your clientId and consumerKey
 
-You can get your \`clientId\` and \`consumerKey\` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
+You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
 
 :::form
 
@@ -10,7 +10,7 @@ You can get your \`clientId\` and \`consumerKey\` by contacting [api@snaptrade.c
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
 
-\`\`\`python
+```python
 from snaptrade_client import SnapTrade
 from pprint import pprint
 import uuid
@@ -22,7 +22,7 @@ client_id=SNAPTRADE_CLIENT_ID,
 )
 
 print("Successfully initiated client")
-\`\`\`
+```
 
 ::button[Initialize SDK Client]
 
@@ -36,10 +36,10 @@ current server timestamp, and internal API minor version number.
 
 :::form
 
-\`\`\`python
+```python
 api_response = snaptrade.api_status.check()
 pprint(api_response.body)
-\`\`\`
+```
 
 ::button[Check API Status]
 
@@ -60,7 +60,7 @@ endpoints that involve access to user data.
 
 ::input{name=SNAPTRADE_USER_ID label="SnapTrade User ID" placeholder="YOUR_SNAPTRADE_USER_ID" type="password"}
 
-\`\`\`python
+```python
 user_id = SNAPTRADE_USER_ID
 register_response = snaptrade.authentication.register_snap_trade_user(
 user_id=user_id
@@ -72,7 +72,7 @@ pprint(register_response.body)
 # resources for certain endpoints.
 
 user_secret = register_response.body["userSecret"]
-\`\`\`
+```
 
 ::button[Create a new user on SnapTrade]
 
@@ -90,13 +90,13 @@ SnapTrade portal.
 
 :::form
 
-\`\`\`python
+```python
 redirect_uri = snaptrade.authentication.login_snap_trade_user(
 user_id=user_id, user_secret=user_secret
 )
 
 print(redirect_uri.body["redirectURI"])
-\`\`\`
+```
 
 ::button[Login User]
 
@@ -105,10 +105,11 @@ print(redirect_uri.body["redirectURI"])
 ### 5) List Users
 
 :::form
-\`\`\`python
+
+```python
 users = snaptrade.authentication.list_snap_trade_users()
 pprint(users.body)
-\`\`\`
+```
 
 ::button[List Users]
 
@@ -120,12 +121,13 @@ Disabling all brokerage authorizations and permanently deleting all data
 associated with the user
 
 :::form
-\`\`\`python
+
+```python
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
 user_id=user_id
 )
 pprint(deleted_response.body)
-\`\`\`
+```
 
 ::button[Delete User]
 
