@@ -114,6 +114,10 @@ accounts = snaptrade.account_information.list_user_accounts(
     user_secret=user_secret
 )
 pprint(accounts.body)
+
+# Use the "SAVE" protocol to use values in subsequent cell
+for account in accounts.body:
+    print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
 ```
 
 ::button[List User Accounts]
