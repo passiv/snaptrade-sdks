@@ -1,2 +1,7 @@
 organizationName: SnapTrade
 portalName: SnapTrade Demos
+demos:
+  - id: getting-started
+  - id: registering-users
+  - id: handling-user-data
+  - id: placing-trades
