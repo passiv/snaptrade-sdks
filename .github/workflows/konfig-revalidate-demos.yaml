@@ -1,0 +1,23 @@
+name: konfig-revalidate-demos
+on:
+  push:
+    branches:
+      - master
+jobs:
+  konfig-revalidate-demos:
+    runs-on: ubuntu-latest
+    env:
+      CLI_VERSION: 1.0.208
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache node_modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          # npm cache files are stored in "~/.npm" on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.CLI_VERSION }}
+      - name: Install Konfig CLI
+        run: npm install -g konfig-cli@$CLI_VERSION
+      - name: Revalidate Demos
+        run: konfig revalidate-demos -o passiv -p snaptrade-sdks
