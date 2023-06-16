@@ -107,7 +107,7 @@ Place the order without checking impact
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
 ::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
-::number{name=PRICE label="Price" defaultValue=10, step=0.01 precision=2}
+::number{name=PRICE label="Price" defaultValue=10 step=0.01 precision=2}
 ::number{name=UNITS label="Units" defaultValue=1}
 
 ```python
