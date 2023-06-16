@@ -31,8 +31,6 @@ user_id = USER_ID
 user_secret = USER_SECRET
 
 print("Initialized user_id and user_secret")
-
-print("test")
 ```
 
 ::button[Initialize SDK Client]
