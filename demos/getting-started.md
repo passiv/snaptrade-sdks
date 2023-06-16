@@ -4,11 +4,13 @@
 
 You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
 
-:::form
+::::form
 
 ::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" type="password"}
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
+
+:::code
 
 ```python
 from snaptrade_client import SnapTrade
@@ -24,9 +26,33 @@ client_id=SNAPTRADE_CLIENT_ID,
 print("Successfully initiated client")
 ```
 
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+const snaptrade = new Snaptrade({
+  consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+  clientId: process.env.SNAPTRADE_CLIENT_ID,
+});
+console.log("Successfully initiated client!");
+```
+
+````csharp
+Configuration configuration = new Configuration();
+string clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
+string consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+configuration.ApiKey.Add("clientId", clientId);
+configuration.ConsumerKey = consumerKey;
+apiStatusApi = new APIStatusApi(configuration);
+authenticationApi = new AuthenticationApi(configuration);
+accountInformationApi = new AccountInformationApi(configuration);
+transactionsAndReportingApi = new TransactionsAndReportingApi(configuration);
+referenceDataApi = new ReferenceDataApi(configuration);
+optionsApi = new OptionsApi(configuration);
+Console.WriteLine("Successfully initiated clients!");
+:::
+
 ::button[Initialize SDK Client]
 
-:::
+::::
 
 ### 2) Check that the client is able to make a request to the API server
 
@@ -39,7 +65,7 @@ current server timestamp, and internal API minor version number.
 ```python
 api_response = snaptrade.api_status.check()
 pprint(api_response.body)
-```
+````
 
 ::button[Check API Status]
 
