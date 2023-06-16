@@ -42,13 +42,34 @@ print("Initialized user_id and user_secret")
 
 :::
 
-### 2) Get Order Impact
+### 2) List accounts
+
+You can see the account IDs by calling `list_user_accounts`.
+
+:::form
+
+```python
+accounts = snaptrade.account_information.list_user_accounts(
+    user_id=user_id,
+    user_secret=user_secret
+)
+pprint(accounts.body)
+
+for account in accounts.body:
+    print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
+```
+
+::button[List Accounts]
+
+:::
+
+### 3) Get Order Impact
 
 Check the account has enough cash to place trades.
 
 :::form{skippable}
 
-::input{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT ID" description="The ID of the account to check"}
+::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for."}
 ::input{name=UNIVERSAL_SYMBOL label="Universal Symbol" defaultValue="c15a817e-7171-4940-9ae7-f7b4a95408ee"}
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
 ::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}
@@ -75,13 +96,13 @@ pprint(result.body)
 
 :::
 
-### 3) Place Force Order
+### 4) Place Force Order
 
 Place the order without checking impact
 
 :::form
 
-::input{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT ID" description="The ID of the account to check"}
+::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for."}
 ::input{name=UNIVERSAL_SYMBOL label="Universal Symbol" defaultValue="c15a817e-7171-4940-9ae7-f7b4a95408ee"}
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
 ::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}

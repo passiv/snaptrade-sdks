@@ -5,15 +5,17 @@ This demo is for after a user is created and connected. See [Getting Started](/s
 [Registering Users](/snaptrade/snaptrade-demos/registering-users) for creating and connecting a user to SnapTrade.
 :::
 
-### 1) Initialize a client with your clientId and consumerKey
-
-You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
+### 1) Initialize SnapTrade client, `user_id`, and `user_secret`
 
 :::form
 
 ::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" type="password"}
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
+
+::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID" type="password"}
+
+::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
 
 ```python
 from snaptrade_client import SnapTrade
@@ -26,6 +28,9 @@ snaptrade = SnapTrade(
   client_id=SNAPTRADE_CLIENT_ID,
 )
 
+user_id = USER_ID
+user_secret = USER_SECRET
+
 print("Successfully initiated client")
 ```
 
@@ -33,36 +38,58 @@ print("Successfully initiated client")
 
 :::
 
-### 2) Get all user holdings
+### 2) List accounts
 
-List all accounts for the user, plus balances and positions for each account.
+You can see the account IDs by calling `list_user_accounts`.
 
 :::form
 
-::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID" type="password"}
+```python
+accounts = snaptrade.account_information.list_user_accounts(
+    user_id=user_id,
+    user_secret=user_secret
+)
+pprint(accounts.body)
 
-::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
+for account in accounts.body:
+    print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
+```
+
+::button[List Accounts]
+
+:::
+
+### 3) Get account holdings data for a user
+
+In order to retrieve user holdings for a specific account, you can call the
+Holdings endpoint by passing the clientId, timestamp, userId and list of account
+numbers (accounts) to filter the holdings. In the response, you should get an
+array of objects containing each account holdings data.
+
+:::form
+
+::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for. The available values are pulled from the 'List User Accounts' step."}
 
 ```python
-user_id = USER_ID
-user_secret = USER_SECRET
-holdings = snaptrade.account_information.get_all_user_holdings(
-  user_id=USER_ID, user_secret=user_secret
+holdings = snaptrade.account_information.get_user_holdings(
+    account_id=ACCOUNT_ID,
+    user_id=user_id,
+    user_secret=user_secret
 )
 pprint(holdings.body)
 ```
 
-::button[Get all user holdings]
+::button[Get Account Holdings]
 
 :::
 
-### 3) Get Transactions / Historical Activities
+### 4) Get Transactions / Historical Activities
 
 Returns activities (transactions) for a user. Specifying start and end date is
 highly recommended for automatic calls for better performance. This uses the
 TransactionsAndReporting API.
 
-:::form
+:::form{skippable}
 
 ::date{name=START_DATE label="Start Date" placeholder="START_DATE" valueFormat="YYYY-MM-DD" optional}
 ::date{name=END_DATE label="End Date" placeholder="END_DATE" valueFormat="YYYY-MM-DD" optional}
@@ -87,7 +114,7 @@ pprint(activities.body)
 
 :::
 
-### 4) Get Quotes
+### 5) Get Quotes
 
 Get symbol quotes for a user, these are account and thus brokerage specific.
 That means if you have a US only account, you cannot get quotes for

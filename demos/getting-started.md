@@ -129,9 +129,9 @@ Holdings endpoint by passing the clientId, timestamp, userId and list of account
 numbers (accounts) to filter the holdings. In the response, you should get an
 array of objects containing each account holdings data.
 
-:::form
+:::form{skippable}
 
-::input{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT ID" description="The ID of the account to pull holdings for"}
+::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for"}
 
 ```python
 holdings = snaptrade.account_information.get_user_holdings(

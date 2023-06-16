@@ -3,5 +3,6 @@ portalName: SnapTrade Demos
 demos:
   - id: getting-started
   - id: registering-users
+  - id: list-accounts
   - id: handling-user-data
   - id: placing-trades
