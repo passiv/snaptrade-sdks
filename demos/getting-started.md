@@ -68,7 +68,6 @@ user_id=user_id
 pprint(register_response.body)
 
 # Note: A user secret is only generated once. It's required to access
-
 # resources for certain endpoints.
 
 user_secret = register_response.body["userSecret"]
