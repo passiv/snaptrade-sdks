@@ -1,5 +1,8 @@
 organizationName: SnapTrade
 portalName: SnapTrade Demos
+socials:
+  website: https://snaptrade.com
+  documentation: https://docs.snaptrade.com
 demos:
   - id: getting-started
   - id: registering-users
