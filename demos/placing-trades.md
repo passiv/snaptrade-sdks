@@ -21,7 +21,7 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 
 ```python
 from snaptrade_client import SnapTrade
-from pprint import pprint
+import json
 import uuid
 import os
 
@@ -53,7 +53,7 @@ accounts = snaptrade.account_information.list_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(accounts.body)
+print(json.dumps(accounts.body, indent=2))
 
 for account in accounts.body:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
@@ -89,7 +89,7 @@ result = snaptrade.trading.get_order_impact(
   price=PRICE,
   units=UNITS,
 )
-pprint(result.body)
+print(json.dumps(result.body, indent=2))
 ```
 
 ::button[Get Order Impact]
@@ -122,7 +122,7 @@ result = snaptrade.trading.place_force_order(
   price=PRICE,
   units=UNITS,
 )
-pprint(result.body)
+print(json.dumps(result.body, indent=2))
 ```
 
 ::button[Place Force Order]

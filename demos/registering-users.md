@@ -12,7 +12,7 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 
 ```python
 from snaptrade_client import SnapTrade
-from pprint import pprint
+import json
 import uuid
 import os
 
@@ -38,7 +38,7 @@ current server timestamp, and internal API minor version number.
 
 ```python
 api_response = snaptrade.api_status.check()
-pprint(api_response.body)
+print(json.dumps(api_response.body, indent=2))
 ```
 
 ::button[Check API Status]
@@ -65,7 +65,7 @@ user_id = SNAPTRADE_USER_ID
 register_response = snaptrade.authentication.register_snap_trade_user(
 user_id=user_id
 )
-pprint(register_response.body)
+print(json.dumps(register_response.body, indent=2))
 
 # Note: A user secret is only generated once. It's required to access
 
@@ -95,7 +95,7 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 user_id=user_id, user_secret=user_secret
 )
 
-print(redirect_uri.body["redirectURI"])
+print(json.dumps(redirect_uri.body, indent=2))
 ```
 
 ::button[Login User]
@@ -108,7 +108,7 @@ print(redirect_uri.body["redirectURI"])
 
 ```python
 users = snaptrade.authentication.list_snap_trade_users()
-pprint(users.body)
+print(json.dumps(users.body, indent=2))
 ```
 
 ::button[List Users]
@@ -126,7 +126,7 @@ associated with the user
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
 user_id=user_id
 )
-pprint(deleted_response.body)
+print(json.dumps(deleted_response.body, indent=2))
 ```
 
 ::button[Delete User]

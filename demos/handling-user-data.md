@@ -19,7 +19,7 @@ This demo is for after a user is created and connected. See [Getting Started](/s
 
 ```python
 from snaptrade_client import SnapTrade
-from pprint import pprint
+import json
 import uuid
 import os
 
@@ -49,7 +49,7 @@ accounts = snaptrade.account_information.list_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(accounts.body)
+print(json.dumps(accounts.body, indent=2))
 
 for account in accounts.body:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
@@ -76,7 +76,7 @@ holdings = snaptrade.account_information.get_user_holdings(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(holdings.body)
+print(json.dumps(holdings.body, indent=2))
 ```
 
 ::button[Get Account Holdings]
@@ -107,7 +107,7 @@ activities = snaptrade.transactions_and_reporting.get_activities(
   brokerage_authorizations=BROKERAGE_AUTHORIZATIONS if "BROKERAGE_AUTHORIZATIONS" in globals() else None,
   type=TYPE if "TYPE" in globals() else None
 )
-pprint(activities.body)
+print(json.dumps(activities.body, indent=2))
 ```
 
 ::button[Get Activities]
@@ -134,7 +134,7 @@ activities = snaptrade.trading.get_user_account_quotes(
   account_id=ACCOUNT_ID,
   use_ticker=USE_TICKER if "USE_TICKER" in globals() else None,
 )
-pprint(activities.body)
+print(json.dumps(activities.body, indent=2))
 ```
 
 ::button[Get Quotes]

@@ -13,8 +13,8 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 :::code
 
 ```python
+import json
 from snaptrade_client import SnapTrade
-from pprint import pprint
 import uuid
 import os
 
@@ -64,7 +64,7 @@ current server timestamp, and internal API minor version number.
 
 ```python
 api_response = snaptrade.api_status.check()
-pprint(api_response.body)
+print(json.dumps(api_response.body, indent=2))
 ````
 
 ::button[Check API Status]
@@ -91,7 +91,7 @@ user_id = SNAPTRADE_USER_ID
 register_response = snaptrade.authentication.register_snap_trade_user(
 user_id=user_id
 )
-pprint(register_response.body)
+print(json.dumps(register_response.body, indent=2))
 
 # Note: A user secret is only generated once. It's required to access
 # resources for certain endpoints.
@@ -120,7 +120,7 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 user_id=user_id, user_secret=user_secret
 )
 
-print(redirect_uri.body["redirectURI"])
+print(json.dumps(redirect_uri.body, indent=2))
 ```
 
 ::button[Get Redirect URI]
@@ -138,7 +138,7 @@ accounts = snaptrade.account_information.list_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(accounts.body)
+print(json.dumps(accounts.body, indent=2))
 
 for account in accounts.body:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
@@ -165,7 +165,7 @@ holdings = snaptrade.account_information.get_user_holdings(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(holdings.body)
+print(json.dumps(holdings.body, indent=2))
 ```
 
 ::button[Get Account Holdings]
@@ -183,7 +183,7 @@ associated with the user
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
 user_id=user_id
 )
-pprint(deleted_response.body)
+print(json.dumps(deleted_response.body, indent=2))
 ```
 
 ::button[Delete User]

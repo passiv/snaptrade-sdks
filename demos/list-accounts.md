@@ -16,7 +16,7 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 
 ```python
 from snaptrade_client import SnapTrade
-from pprint import pprint
+import json
 import uuid
 import os
 
@@ -48,7 +48,7 @@ accounts = snaptrade.account_information.list_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(accounts.body)
+print(json.dumps(accounts.body, indent=2))
 
 for account in accounts.body:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
@@ -75,7 +75,7 @@ holdings = snaptrade.account_information.get_user_holdings(
     user_id=user_id,
     user_secret=user_secret
 )
-pprint(holdings.body)
+print(json.dumps(holdings.body, indent=2))
 ```
 
 ::button[Get Account Holdings]
