@@ -35,7 +35,7 @@ const snaptrade = new Snaptrade({
 console.log("Successfully initiated client!");
 ```
 
-````csharp
+```csharp
 Configuration configuration = new Configuration();
 string clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
 string consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
@@ -48,6 +48,8 @@ transactionsAndReportingApi = new TransactionsAndReportingApi(configuration);
 referenceDataApi = new ReferenceDataApi(configuration);
 optionsApi = new OptionsApi(configuration);
 Console.WriteLine("Successfully initiated clients!");
+```
+
 :::
 
 ::button[Initialize SDK Client]
@@ -65,7 +67,7 @@ current server timestamp, and internal API minor version number.
 ```python
 api_response = snaptrade.api_status.check()
 print(json.dumps(api_response.body, indent=2))
-````
+```
 
 ::button[Check API Status]
 
