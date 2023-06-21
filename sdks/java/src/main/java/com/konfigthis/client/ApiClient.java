@@ -49,13 +49,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import com.google.gson.Gson;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.binary.Base64;
-
 import com.konfigthis.client.auth.Authentication;
 import com.konfigthis.client.auth.HttpBasicAuth;
 import com.konfigthis.client.auth.HttpBearerAuth;
@@ -71,8 +64,6 @@ public class ApiClient {
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private Map<String, String> defaultCookieMap = new HashMap<String, String>();
     private String tempFolderPath = null;
-    // CUSTOM CODE
-    private String consumerKey = null;
 
     private Map<String, Authentication> authentications;
 
@@ -90,19 +81,13 @@ public class ApiClient {
 
     private HttpLoggingInterceptor loggingInterceptor;
 
+    public String consumerKey;
+
     /**
      * Basic constructor for ApiClient
      */
     public ApiClient() {
-        init();
-        initHttpClient();
-
-        // Setup authentications (key: authentication name, value: authentication).
-        authentications.put("PartnerClientId", new ApiKeyAuth("query", "clientId"));
-        authentications.put("PartnerSignature", new ApiKeyAuth("header", "Signature"));
-        authentications.put("PartnerTimestamp", new ApiKeyAuth("query", "timestamp"));
-        // Prevent the authentications from being modified.
-        authentications = Collections.unmodifiableMap(authentications);
+        this(null, null);
     }
 
     /**
@@ -111,9 +96,16 @@ public class ApiClient {
      * @param client a {@link okhttp3.OkHttpClient} object
      */
     public ApiClient(OkHttpClient client) {
-        init();
+        this(client, null);
+    }
 
-        httpClient = client;
+    public ApiClient(OkHttpClient client, Configuration configuration) {
+        init();
+        if (client == null) {
+            initHttpClient();
+        } else {
+            this.httpClient = client;
+        }
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications.put("PartnerClientId", new ApiKeyAuth("query", "clientId"));
@@ -121,6 +113,49 @@ public class ApiClient {
         authentications.put("PartnerTimestamp", new ApiKeyAuth("query", "timestamp"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
+
+        if (configuration.clientId != null) {
+            this.setPartnerClientId(configuration.clientId);
+        }
+        if (configuration.consumerKey != null) {
+            this.consumerKey = configuration.consumerKey;
+        }
+        setVerifyingSsl(configuration.verifyingSsl);
+        setBasePath(configuration.host);
+    }
+
+    public String getPartnerClientId() {
+        return ((ApiKeyAuth) this.getAuthentication("clientId")).getApiKey();
+    }
+
+    public void setPartnerClientId(String apiKey) {
+        ((ApiKeyAuth) this.getAuthentication("clientId")).setApiKey(apiKey);
+    }
+
+    public void setPartnerClientIdPrefix(String prefix) {
+        ((ApiKeyAuth) this.getAuthentication("clientId")).setApiKeyPrefix(prefix);
+    }
+    public String getPartnerSignature() {
+        return ((ApiKeyAuth) this.getAuthentication("Signature")).getApiKey();
+    }
+
+    public void setPartnerSignature(String apiKey) {
+        ((ApiKeyAuth) this.getAuthentication("Signature")).setApiKey(apiKey);
+    }
+
+    public void setPartnerSignaturePrefix(String prefix) {
+        ((ApiKeyAuth) this.getAuthentication("Signature")).setApiKeyPrefix(prefix);
+    }
+    public String getPartnerTimestamp() {
+        return ((ApiKeyAuth) this.getAuthentication("timestamp")).getApiKey();
+    }
+
+    public void setPartnerTimestamp(String apiKey) {
+        ((ApiKeyAuth) this.getAuthentication("timestamp")).setApiKey(apiKey);
+    }
+
+    public void setPartnerTimestampPrefix(String prefix) {
+        ((ApiKeyAuth) this.getAuthentication("timestamp")).setApiKeyPrefix(prefix);
     }
 
     private void initHttpClient() {
@@ -133,6 +168,7 @@ public class ApiClient {
         for (Interceptor interceptor: interceptors) {
             builder.addInterceptor(interceptor);
         }
+        builder.readTimeout(0, TimeUnit.MILLISECONDS);
 
         httpClient = builder.build();
     }
@@ -146,26 +182,6 @@ public class ApiClient {
         setUserAgent("Konfig/3.0.0/java");
 
         authentications = new HashMap<String, Authentication>();
-    }
-
-    // CUSTOM CODE
-    public String getClientId() {
-        ApiKeyAuth key = (ApiKeyAuth) this.getAuthentication("PartnerClientId");
-        if (key.getApiKey() == null) throw new RuntimeException("Set client id using ApiClient#setClient");
-        return key.getApiKey();
-    }
-
-    // CUSTOM CODE
-    public ApiClient setClientId(String clientId) {
-        ApiKeyAuth key = (ApiKeyAuth) this.getAuthentication("PartnerClientId");
-        key.setApiKey(clientId);
-        return this;
-    }
-
-    // CUSTOM CODE
-    public ApiClient setConsumerKey(String partnerConsumerKey) {
-        this.consumerKey = partnerConsumerKey;
-        return this;
     }
 
     /**
@@ -184,6 +200,10 @@ public class ApiClient {
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {
+        // strip trailing slash from basePath
+        if (basePath != null && basePath.endsWith("/")) {
+            basePath = basePath.substring(0, basePath.length() - 1);
+        }
         this.basePath = basePath;
         return this;
     }
@@ -885,7 +905,7 @@ public class ApiClient {
                     "Content type \"" + contentType + "\" is not supported for type: " + returnType,
                     response.code(),
                     response.headers().toMultimap(),
-                    respBody);
+                    respBody, response.receivedResponseAtMillis() - response.sentRequestAtMillis());
         }
     }
 
@@ -1011,7 +1031,13 @@ public class ApiClient {
         try {
             Response response = call.execute();
             T data = handleResponse(response, returnType);
-            return new ApiResponse<T>(response.code(), response.headers().toMultimap(), data);
+            return new ApiResponse<T>(
+                    call.request(),
+                    response.code(),
+                    response.headers().toMultimap(),
+                    data,
+                    response.receivedResponseAtMillis() -
+                            response.sentRequestAtMillis());
         } catch (IOException e) {
             throw new ApiException(e);
         }
@@ -1081,7 +1107,7 @@ public class ApiClient {
                     try {
                         response.body().close();
                     } catch (Exception e) {
-                        throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
+                        throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap(), response.receivedResponseAtMillis() - response.sentRequestAtMillis());
                     }
                 }
                 return null;
@@ -1094,10 +1120,10 @@ public class ApiClient {
                 try {
                     respBody = response.body().string();
                 } catch (IOException e) {
-                    throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
+                    throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap(), response.receivedResponseAtMillis() - response.sentRequestAtMillis());
                 }
             }
-            throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);
+            throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody, response.receivedResponseAtMillis() - response.sentRequestAtMillis());
         }
     }
 
@@ -1146,13 +1172,6 @@ public class ApiClient {
         List<Pair> allQueryParams = new ArrayList<Pair>(queryParams);
         allQueryParams.addAll(collectionQueryParams);
 
-        // CUSTOM CODE
-        // Attach clientId / timestamp to query parameters
-        Pair clientId = new Pair("clientId", this.getClientId());
-        Pair timestamp = new Pair("timestamp", String.valueOf(System.currentTimeMillis() / 1000L));
-        queryParams.add(clientId);
-        queryParams.add(timestamp);
-
         final String url = buildUrl(baseUrl, path, queryParams, collectionQueryParams);
 
         // prepare HTTP request body
@@ -1181,7 +1200,6 @@ public class ApiClient {
         updateParamsForAuth(authNames, allQueryParams, headerParams, cookieParams, requestBodyToString(reqBody), method, URI.create(url));
 
         final Request.Builder reqBuilder = new Request.Builder().url(url);
-        generateAndAddSignatureToHeader(headerParams, requestBodyToString(reqBody), path, queryString(path, queryParams));
         processHeaderParams(headerParams, reqBuilder);
         processCookieParams(cookieParams, reqBuilder);
 
@@ -1201,27 +1219,6 @@ public class ApiClient {
         return request;
     }
 
-    public String queryString(String path, List<Pair> queryParams) {
-        // CUSTOM CODE
-        if (queryParams == null || queryParams.isEmpty()) return "";
-        StringBuilder queryString = new StringBuilder();
-        // support (constant) query string in `path`, e.g. "/posts?draft=1"
-        String prefix = path.contains("?") ? "&" : "?";
-        for (Pair param : queryParams) {
-            if (param.getValue() != null) {
-                if (prefix != null) {
-                    queryString.append(prefix);
-                    prefix = null;
-                } else {
-                    queryString.append("&");
-                }
-                String value = parameterToString(param.getValue());
-                queryString.append(escapeString(param.getName())).append("=").append(escapeString(value));
-            }
-        }
-        return queryString.toString();
-    }
-
     /**
      * Build full URL by concatenating base path, the given sub path and query parameters.
      *
@@ -1239,7 +1236,22 @@ public class ApiClient {
             url.append(basePath).append(path);
         }
 
-        url.append(queryString(path, queryParams));
+        if (queryParams != null && !queryParams.isEmpty()) {
+            // support (constant) query string in `path`, e.g. "/posts?draft=1"
+            String prefix = path.contains("?") ? "&" : "?";
+            for (Pair param : queryParams) {
+                if (param.getValue() != null) {
+                    if (prefix != null) {
+                        url.append(prefix);
+                        prefix = null;
+                    } else {
+                        url.append("&");
+                    }
+                    String value = parameterToString(param.getValue());
+                    url.append(escapeString(param.getName())).append("=").append(escapeString(value));
+                }
+            }
+        }
 
         if (collectionQueryParams != null && !collectionQueryParams.isEmpty()) {
             String prefix = url.toString().contains("?") ? "&" : "?";
@@ -1259,35 +1271,6 @@ public class ApiClient {
         }
 
         return url.toString();
-    }
-
-
-    // CUSTOM CODE
-    /**
-     * Generates request signature as described here: https://docs.snaptrade.com/reference/getting-started
-     * @param headerParams
-     * @param body
-     * @param queryString
-     */
-    public void generateAndAddSignatureToHeader(Map<String, String> headerParams, String body, String path, String queryString) {
-        if (this.consumerKey == null)
-            throw new RuntimeException("Set the consumer key for this API Client using ApiClient#setConsumerKey");
-        Gson gson = new Gson();
-        TreeMap map = gson.fromJson(body, TreeMap.class);
-        String sortedJson = map == null ? "\"\"": gson.toJson(map);
-        String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}", body.equals("") ? "null" : sortedJson, path, queryString.replace("?", ""));
-        final String algorithm = "HmacSHA256";
-        final SecretKeySpec secretKeySpec = new SecretKeySpec(this.consumerKey.getBytes(), algorithm);
-        final Mac mac;
-        try {
-            mac = Mac.getInstance(algorithm);
-            mac.init(secretKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            throw new RuntimeException(e);
-        }
-        mac.doFinal(data.getBytes());
-        final String base64 = new String(Base64.encodeBase64(mac.doFinal(data.getBytes())));
-        headerParams.put("Signature", base64);
     }
 
     /**
