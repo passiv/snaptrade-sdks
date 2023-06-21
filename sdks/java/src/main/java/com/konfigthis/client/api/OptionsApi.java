@@ -221,7 +221,7 @@ public class OptionsApi {
             OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest();
             optionsGetOptionStrategyRequest.underlyingSymbolId(this.underlyingSymbolId);
             optionsGetOptionStrategyRequest.legs(this.legs);
-            optionsGetOptionStrategyRequest.strategyType(this.strategyType);
+            optionsGetOptionStrategyRequest.strategyType(OptionsGetOptionStrategyRequest.StrategyTypeEnum.fromValue(this.strategyType));
             return optionsGetOptionStrategyRequest;
         }
 
@@ -1049,8 +1049,8 @@ public class OptionsApi {
 
         private OptionsPlaceOptionStrategyRequest buildBodyParams() {
             OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest();
-            optionsPlaceOptionStrategyRequest.orderType(this.orderType);
-            optionsPlaceOptionStrategyRequest.timeInForce(this.timeInForce);
+            optionsPlaceOptionStrategyRequest.orderType(OptionsPlaceOptionStrategyRequest.OrderTypeEnum.fromValue(this.orderType));
+            optionsPlaceOptionStrategyRequest.timeInForce(OptionsPlaceOptionStrategyRequest.TimeInForceEnum.fromValue(this.timeInForce));
             optionsPlaceOptionStrategyRequest.price(this.price);
             return optionsPlaceOptionStrategyRequest;
         }

@@ -748,7 +748,7 @@ public class AuthenticationApi {
             snapTradeLoginUserRequestBody.immediateRedirect(this.immediateRedirect);
             snapTradeLoginUserRequestBody.customRedirect(this.customRedirect);
             snapTradeLoginUserRequestBody.reconnect(this.reconnect);
-            snapTradeLoginUserRequestBody.connectionType(this.connectionType);
+            snapTradeLoginUserRequestBody.connectionType(SnapTradeLoginUserRequestBody.ConnectionTypeEnum.fromValue(this.connectionType));
             return snapTradeLoginUserRequestBody;
         }
 

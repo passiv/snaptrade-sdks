@@ -497,12 +497,12 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return createCall(userId, userSecret, requestBody, _callback);
         }
 
-        private Map&lt;String, Object&gt; buildBodyParams() {
-            Map&lt;String, Object&gt; requestBody = new Map&lt;String, Object&gt;();
+        private Map<String, Object> buildBodyParams() {
+            Map<String, Object> requestBody = new Map<String, Object>();
             requestBody.id(this.id);
             requestBody.name(this.name);
             return requestBody;
@@ -521,7 +521,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public List<PortfolioGroup> execute() throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             ApiResponse<List<PortfolioGroup>> localVarResp = createWithHttpInfo(userId, userSecret, requestBody);
             return localVarResp.getResponseBody();
         }
@@ -539,7 +539,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<List<PortfolioGroup>> executeWithHttpInfo() throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return createWithHttpInfo(userId, userSecret, requestBody);
         }
 
@@ -557,7 +557,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<PortfolioGroup>> _callback) throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return createAsync(userId, userSecret, requestBody, _callback);
         }
     }
@@ -4702,12 +4702,12 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return savePortfolioCall(portfolioGroupId, requestBody, _callback);
         }
 
-        private Map&lt;String, Object&gt; buildBodyParams() {
-            Map&lt;String, Object&gt; requestBody = new Map&lt;String, Object&gt;();
+        private Map<String, Object> buildBodyParams() {
+            Map<String, Object> requestBody = new Map<String, Object>();
             requestBody.id(this.id);
             requestBody.name(this.name);
             return requestBody;
@@ -4727,7 +4727,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public PortfolioGroup execute() throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             ApiResponse<PortfolioGroup> localVarResp = savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
             return localVarResp.getResponseBody();
         }
@@ -4746,7 +4746,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<PortfolioGroup> executeWithHttpInfo() throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return savePortfolioWithHttpInfo(portfolioGroupId, requestBody);
         }
 
@@ -4765,7 +4765,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<PortfolioGroup> _callback) throws ApiException {
-            Map&lt;String, Object&gt; requestBody = buildBodyParams();
+            Map<String, Object> requestBody = buildBodyParams();
             return savePortfolioAsync(portfolioGroupId, requestBody, _callback);
         }
     }
@@ -5067,12 +5067,12 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            List<TargetAsset> targetAsset = buildBodyParams();
             return setPortfolioTargetsCall(portfolioGroupId, targetAsset, _callback);
         }
 
-        private List&lt;TargetAsset&gt; buildBodyParams() {
-            List&lt;TargetAsset&gt; targetAsset = new List&lt;TargetAsset&gt;();
+        private List<TargetAsset> buildBodyParams() {
+            List<TargetAsset> targetAsset = new List<TargetAsset>();
             return targetAsset;
         }
 
@@ -5090,7 +5090,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public List<TargetAsset> execute() throws ApiException {
-            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            List<TargetAsset> targetAsset = buildBodyParams();
             ApiResponse<List<TargetAsset>> localVarResp = setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
             return localVarResp.getResponseBody();
         }
@@ -5109,7 +5109,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<List<TargetAsset>> executeWithHttpInfo() throws ApiException {
-            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            List<TargetAsset> targetAsset = buildBodyParams();
             return setPortfolioTargetsWithHttpInfo(portfolioGroupId, targetAsset);
         }
 
@@ -5128,7 +5128,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<TargetAsset>> _callback) throws ApiException {
-            List&lt;TargetAsset&gt; targetAsset = buildBodyParams();
+            List<TargetAsset> targetAsset = buildBodyParams();
             return setPortfolioTargetsAsync(portfolioGroupId, targetAsset, _callback);
         }
     }
