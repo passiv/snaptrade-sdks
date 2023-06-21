@@ -5038,9 +5038,20 @@ public class PortfolioManagementApi {
 
     public class SetPortfolioTargetsRequestBuilder {
         private final UUID portfolioGroupId;
+        private List<TargetAsset> targetAsset;
 
         private SetPortfolioTargetsRequestBuilder(UUID portfolioGroupId) {
             this.portfolioGroupId = portfolioGroupId;
+        }
+
+        /**
+         * Set targetAsset
+         * @param targetAsset  (optional)
+         * @return SetPortfolioTargetsRequestBuilder
+         */
+        public SetPortfolioTargetsRequestBuilder targetAsset(List<TargetAsset> targetAsset) {
+            this.targetAsset = targetAsset;
+            return this;
         }
 
         /**
@@ -5063,8 +5074,7 @@ public class PortfolioManagementApi {
         }
 
         private List<TargetAsset> buildBodyParams() {
-            List<TargetAsset> targetAsset = new ArrayList<TargetAsset>();
-            return targetAsset;
+            return this.targetAsset;
         }
 
         /**
