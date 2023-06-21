@@ -41,9 +41,6 @@ public class Example {
                 System.out.println(response.get("redirectURI"));
 
                 // 5) Make a portfolio group and query
-                Map<String, Object> portfolioGroupPostBody = new HashMap<>();
-                portfolioGroupPostBody.put("id", UUID.randomUUID().toString());
-                portfolioGroupPostBody.put("name", "MyPortfolio");
                 List<PortfolioGroup> portfolioGroupsFromPost = snaptrade.portfolioManagement.create(
                                 userIDandSecret.getUserId(), userIDandSecret.getUserSecret()).id(UUID.randomUUID())
                                 .name("MyPortfolio").execute();
@@ -68,6 +65,5 @@ public class Example {
                 DeleteUserResponse deleteUserResponse = snaptrade.authentication
                                 .deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
                 System.out.println(deleteUserResponse);
-
         }
 }
