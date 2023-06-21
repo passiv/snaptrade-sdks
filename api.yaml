@@ -3143,17 +3143,17 @@ components:
         total_quantity:
           $ref: "#/components/schemas/Units"
         open_quantity:
-          $ref: "#/components/schemas/Units"
+          $ref: "#/components/schemas/OpenUnits"
         canceled_quantity:
-          $ref: "#/components/schemas/Units"
+          $ref: "#/components/schemas/CancelledUnits"
         filled_quantity:
-          $ref: "#/components/schemas/Units"
+          $ref: "#/components/schemas/FilledUnits"
         execution_price:
           $ref: "#/components/schemas/Price"
         limit_price:
           $ref: "#/components/schemas/Price"
         stop_price:
-          $ref: "#/components/schemas/Price"
+          $ref: "#/components/schemas/StopPrice"
         order_type:
           $ref: "#/components/schemas/OrderType"
         time_in_force:
@@ -4966,6 +4966,18 @@ components:
     Units:
       description: Trade Units
       type: number
+    OpenUnits:
+      description: Trade Units
+      type: number
+      nullable: true
+    CancelledUnits:
+      description: Trade Units
+      type: number
+      nullable: true
+    FilledUnits:
+      description: Trade Units
+      type: number
+      nullable: true
     Price:
       description: Trade Price if limit or stop limit order
       type: number
