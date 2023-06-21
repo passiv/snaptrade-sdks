@@ -29,7 +29,7 @@ public class ApiClientCustom {
         if (client.consumerKey == null)
             throw new RuntimeException("Set the consumer key by configuring Configuration#consumerKey");
         Gson gson = new Gson();
-        TreeMap map = gson.fromJson(payload, TreeMap.class);
+        Object map = body instanceof List ? body : gson.fromJson(payload, TreeMap.class);
         String sortedJson = map == null ? "\"\"": gson.toJson(map);
         String queryString = url.split( "\\?")[1];
         String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}", payload == null || payload.equals("") || payload.equals("{}") ? "null" : sortedJson, path, queryString);
