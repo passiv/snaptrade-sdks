@@ -57,7 +57,7 @@ import com.konfigthis.client.auth.ApiKeyAuth;
 /**
  * <p>ApiClient class.</p>
  */
-public class ApiClient {
+public class ApiClient extends ApiClientCustom {
 
     private String basePath = "https://api.snaptrade.com/api/v1";
     private boolean debugging = false;
@@ -1176,11 +1176,10 @@ public class ApiClient {
      * @throws com.konfigthis.client.ApiException If fail to serialize the request body object
      */
     public Request buildRequest(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
+        requestBeforeHook(baseUrl, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames);
         // aggregate queryParams (non-collection) and collectionQueryParams into allQueryParams
         List<Pair> allQueryParams = new ArrayList<Pair>(queryParams);
         allQueryParams.addAll(collectionQueryParams);
-
-        final String url = buildUrl(baseUrl, path, queryParams, collectionQueryParams);
 
         // prepare HTTP request body
         RequestBody reqBody;
@@ -1205,7 +1204,11 @@ public class ApiClient {
         }
 
         // update parameters with authentication settings
-        updateParamsForAuth(authNames, allQueryParams, headerParams, cookieParams, requestBodyToString(reqBody), method, URI.create(url));
+        updateParamsForAuth(authNames, allQueryParams, headerParams, cookieParams, requestBodyToString(reqBody), method);
+
+        final String url = buildUrl(baseUrl, path, queryParams, collectionQueryParams);
+
+        requestAfterHook(url, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames);
 
         final Request.Builder reqBuilder = new Request.Builder().url(url);
         processHeaderParams(headerParams, reqBuilder);
@@ -1227,6 +1230,26 @@ public class ApiClient {
         return request;
     }
 
+    public String queryString(String path, List<Pair> queryParams) {
+        if (queryParams == null || queryParams.isEmpty()) return "";
+        StringBuilder queryString = new StringBuilder();
+        // support (constant) query string in `path`, e.g. "/posts?draft=1"
+        String prefix = path.contains("?") ? "&" : "?";
+        for (Pair param : queryParams) {
+            if (param.getValue() != null) {
+                if (prefix != null) {
+                    queryString.append(prefix);
+                    prefix = null;
+                } else {
+                    queryString.append("&");
+                }
+                String value = parameterToString(param.getValue());
+                queryString.append(escapeString(param.getName())).append("=").append(escapeString(value));
+            }
+        }
+        return queryString.toString();
+    }
+
     /**
      * Build full URL by concatenating base path, the given sub path and query parameters.
      *
@@ -1244,22 +1267,7 @@ public class ApiClient {
             url.append(basePath).append(path);
         }
 
-        if (queryParams != null && !queryParams.isEmpty()) {
-            // support (constant) query string in `path`, e.g. "/posts?draft=1"
-            String prefix = path.contains("?") ? "&" : "?";
-            for (Pair param : queryParams) {
-                if (param.getValue() != null) {
-                    if (prefix != null) {
-                        url.append(prefix);
-                        prefix = null;
-                    } else {
-                        url.append("&");
-                    }
-                    String value = parameterToString(param.getValue());
-                    url.append(escapeString(param.getName())).append("=").append(escapeString(value));
-                }
-            }
-        }
+        url.append(queryString(path, queryParams));
 
         if (collectionQueryParams != null && !collectionQueryParams.isEmpty()) {
             String prefix = url.toString().contains("?") ? "&" : "?";
@@ -1324,17 +1332,16 @@ public class ApiClient {
      * @param cookieParams Map of cookie parameters
      * @param payload HTTP request body
      * @param method HTTP method
-     * @param uri URI
      * @throws com.konfigthis.client.ApiException If fails to update the parameters
      */
     public void updateParamsForAuth(String[] authNames, List<Pair> queryParams, Map<String, String> headerParams,
-                                    Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException {
+                                    Map<String, String> cookieParams, String payload, String method) throws ApiException {
         for (String authName : authNames) {
             Authentication auth = authentications.get(authName);
             if (auth == null) {
                 throw new RuntimeException("Authentication undefined: " + authName);
             }
-            auth.applyToParams(queryParams, headerParams, cookieParams, payload, method, uri);
+            auth.applyToParams(queryParams, headerParams, cookieParams, payload, method);
         }
     }
 

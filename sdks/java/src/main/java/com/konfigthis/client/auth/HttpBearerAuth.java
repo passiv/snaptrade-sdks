@@ -48,7 +48,7 @@ public class HttpBearerAuth implements Authentication {
 
   @Override
   public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams,
-                            String payload, String method, URI uri) throws ApiException {
+                            String payload, String method) throws ApiException {
     if (bearerToken == null) {
       return;
     }
