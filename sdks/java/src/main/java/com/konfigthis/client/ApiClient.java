@@ -81,7 +81,7 @@ public class ApiClient extends ApiClientCustom {
 
     private HttpLoggingInterceptor loggingInterceptor;
 
-    private String consumerKey;
+    public String consumerKey;
 
     /**
      * Basic constructor for ApiClient
@@ -1176,10 +1176,7 @@ public class ApiClient extends ApiClientCustom {
      * @throws com.konfigthis.client.ApiException If fail to serialize the request body object
      */
     public Request buildRequest(String baseUrl, String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String[] authNames, ApiCallback callback) throws ApiException {
-        requestBeforeHook(baseUrl, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames);
-        // aggregate queryParams (non-collection) and collectionQueryParams into allQueryParams
-        List<Pair> allQueryParams = new ArrayList<Pair>(queryParams);
-        allQueryParams.addAll(collectionQueryParams);
+        requestBeforeHook(baseUrl, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames, this);
 
         // prepare HTTP request body
         RequestBody reqBody;
@@ -1203,12 +1200,14 @@ public class ApiClient extends ApiClientCustom {
             reqBody = serialize(body, contentType);
         }
 
+        String payload = requestBodyToString(reqBody);
+
         // update parameters with authentication settings
-        updateParamsForAuth(authNames, allQueryParams, headerParams, cookieParams, requestBodyToString(reqBody), method);
+        updateParamsForAuth(authNames, queryParams, headerParams, cookieParams, payload, method);
 
         final String url = buildUrl(baseUrl, path, queryParams, collectionQueryParams);
 
-        requestAfterHook(url, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames);
+        requestAfterHook(url, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames, payload, this);
 
         final Request.Builder reqBuilder = new Request.Builder().url(url);
         processHeaderParams(headerParams, reqBuilder);
