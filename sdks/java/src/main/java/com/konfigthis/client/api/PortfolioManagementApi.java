@@ -502,9 +502,9 @@ public class PortfolioManagementApi {
         }
 
         private Map<String, Object> buildBodyParams() {
-            Map<String, Object> requestBody = new Map<String, Object>();
-            requestBody.id(this.id);
-            requestBody.name(this.name);
+            Map<String, Object> requestBody = new HashMap<String, Object>();
+            requestBody.put("id", this.id);
+            requestBody.put("name", this.name);
             return requestBody;
         }
 
@@ -4707,9 +4707,9 @@ public class PortfolioManagementApi {
         }
 
         private Map<String, Object> buildBodyParams() {
-            Map<String, Object> requestBody = new Map<String, Object>();
-            requestBody.id(this.id);
-            requestBody.name(this.name);
+            Map<String, Object> requestBody = new HashMap<String, Object>();
+            requestBody.put("id", this.id);
+            requestBody.put("name", this.name);
             return requestBody;
         }
 
@@ -5072,7 +5072,7 @@ public class PortfolioManagementApi {
         }
 
         private List<TargetAsset> buildBodyParams() {
-            List<TargetAsset> targetAsset = new List<TargetAsset>();
+            List<TargetAsset> targetAsset = new ArrayList<TargetAsset>();
             return targetAsset;
         }
 
