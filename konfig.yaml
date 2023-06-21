@@ -26,6 +26,7 @@ requiredEnvironmentVariables:
 outputDirectory: /tmp/snaptrade-sdks-out
 infoContactName: SnapTrade
 infoContactUrl: https://snaptrade.com/
+doNotValidateGloballyRequiredSecurity: true
 tagPriority:
   - Account Information
 generators:
@@ -66,6 +67,9 @@ generators:
     version: 3.0.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
+    clientName: Snaptrade
+    clientState:
+      - consumerKey
     git:
       host: github.com
       userId: passiv

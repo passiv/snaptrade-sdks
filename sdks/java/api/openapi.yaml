@@ -13618,15 +13618,12 @@ components:
       in: header
       name: Signature
       type: apiKey
-      x-konfig-globally-required-security: true
     PartnerClientId:
       in: query
       name: clientId
       type: apiKey
-      x-konfig-globally-required-security: true
     PartnerTimestamp:
       in: query
       name: timestamp
       type: apiKey
-      x-konfig-globally-required-security: true
 

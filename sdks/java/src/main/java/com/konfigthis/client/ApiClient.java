@@ -81,7 +81,7 @@ public class ApiClient {
 
     private HttpLoggingInterceptor loggingInterceptor;
 
-    public String consumerKey;
+    private String consumerKey;
 
     /**
      * Basic constructor for ApiClient
@@ -114,48 +114,56 @@ public class ApiClient {
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
 
-        if (configuration.clientId != null) {
-            this.setPartnerClientId(configuration.clientId);
+        if (configuration != null) {
+            if (configuration.clientId != null) {
+                this.setPartnerClientId(configuration.clientId);
+            }
+            if (configuration.Signature != null) {
+                this.setPartnerSignature(configuration.Signature);
+            }
+            if (configuration.timestamp != null) {
+                this.setPartnerTimestamp(configuration.timestamp);
+            }
+            if (configuration.consumerKey != null) {
+                this.consumerKey = configuration.consumerKey;
+            }
+            setVerifyingSsl(configuration.verifyingSsl);
+            setBasePath(configuration.host);
         }
-        if (configuration.consumerKey != null) {
-            this.consumerKey = configuration.consumerKey;
-        }
-        setVerifyingSsl(configuration.verifyingSsl);
-        setBasePath(configuration.host);
     }
 
     public String getPartnerClientId() {
-        return ((ApiKeyAuth) this.getAuthentication("clientId")).getApiKey();
+        return ((ApiKeyAuth) this.getAuthentication("PartnerClientId")).getApiKey();
     }
 
     public void setPartnerClientId(String apiKey) {
-        ((ApiKeyAuth) this.getAuthentication("clientId")).setApiKey(apiKey);
+        ((ApiKeyAuth) this.getAuthentication("PartnerClientId")).setApiKey(apiKey);
     }
 
     public void setPartnerClientIdPrefix(String prefix) {
-        ((ApiKeyAuth) this.getAuthentication("clientId")).setApiKeyPrefix(prefix);
+        ((ApiKeyAuth) this.getAuthentication("PartnerClientId")).setApiKeyPrefix(prefix);
     }
     public String getPartnerSignature() {
-        return ((ApiKeyAuth) this.getAuthentication("Signature")).getApiKey();
+        return ((ApiKeyAuth) this.getAuthentication("PartnerSignature")).getApiKey();
     }
 
     public void setPartnerSignature(String apiKey) {
-        ((ApiKeyAuth) this.getAuthentication("Signature")).setApiKey(apiKey);
+        ((ApiKeyAuth) this.getAuthentication("PartnerSignature")).setApiKey(apiKey);
     }
 
     public void setPartnerSignaturePrefix(String prefix) {
-        ((ApiKeyAuth) this.getAuthentication("Signature")).setApiKeyPrefix(prefix);
+        ((ApiKeyAuth) this.getAuthentication("PartnerSignature")).setApiKeyPrefix(prefix);
     }
     public String getPartnerTimestamp() {
-        return ((ApiKeyAuth) this.getAuthentication("timestamp")).getApiKey();
+        return ((ApiKeyAuth) this.getAuthentication("PartnerTimestamp")).getApiKey();
     }
 
     public void setPartnerTimestamp(String apiKey) {
-        ((ApiKeyAuth) this.getAuthentication("timestamp")).setApiKey(apiKey);
+        ((ApiKeyAuth) this.getAuthentication("PartnerTimestamp")).setApiKey(apiKey);
     }
 
     public void setPartnerTimestampPrefix(String prefix) {
-        ((ApiKeyAuth) this.getAuthentication("timestamp")).setApiKeyPrefix(prefix);
+        ((ApiKeyAuth) this.getAuthentication("PartnerTimestamp")).setApiKeyPrefix(prefix);
     }
 
     private void initHttpClient() {
@@ -1391,10 +1399,10 @@ public class ApiClient {
     /**
      * Add a Content-Disposition Header for the given key and file to the MultipartBody Builder.
      *
-     * @param mpBuilder MultipartBody.Builder 
+     * @param mpBuilder MultipartBody.Builder
      * @param key The key of the Header element
      * @param file The file to add to the Header
-     */ 
+     */
     private void addPartToMultiPartBuilder(MultipartBody.Builder mpBuilder, String key, File file) {
         Headers partHeaders = Headers.of("Content-Disposition", "form-data; name=\"" + key + "\"; filename=\"" + file.getName() + "\"");
         MediaType mediaType = MediaType.parse(guessContentTypeFromFile(file));

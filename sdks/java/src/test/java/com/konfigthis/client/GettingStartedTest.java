@@ -1,5 +1,6 @@
 package com.konfigthis.client;
 
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.api.*;
 import com.konfigthis.client.model.*;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,7 @@ public class GettingStartedTest {
                 Configuration configuration = new Configuration();
                 configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
                 configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-                SnapTrade snaptrade = new SnapTrade(configuration);
-
-                snaptrade.apiStatus = new ApiStatusApi();
+                Snaptrade snaptrade = new Snaptrade(configuration);
 
                 // 2) Check that the client is able to make a request to the API server
                 Status status = snaptrade.apiStatus.check().execute();

@@ -47,15 +47,6 @@ public class TransactionsAndReportingApi {
     }
 
     public TransactionsAndReportingApi(ApiClient apiClient) throws IllegalArgumentException {
-        if (apiClient.getPartnerClientId() == null) {
-            throw new IllegalArgumentException("\"clientId\" is required but no API key was provided. Please set \"clientId\" with ApiClient#setPartnerClientId(String).");
-        }
-        if (apiClient.getPartnerSignature() == null) {
-            throw new IllegalArgumentException("\"Signature\" is required but no API key was provided. Please set \"Signature\" with ApiClient#setPartnerSignature(String).");
-        }
-        if (apiClient.getPartnerTimestamp() == null) {
-            throw new IllegalArgumentException("\"timestamp\" is required but no API key was provided. Please set \"timestamp\" with ApiClient#setPartnerTimestamp(String).");
-        }
         this.localVarApiClient = apiClient;
     }
 
