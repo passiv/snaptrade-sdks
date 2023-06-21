@@ -526,12 +526,14 @@ public class PortfolioManagementApiTest {
         Double percent = null;
         Boolean isSupported = null;
         Boolean isExcluded = null;
+        Map<String, Object> meta = null;
         TargetAsset response = api.updatePortfolioTargetById(portfolioGroupId, targetAssetId)
                 .id(id)
                 .symbol(symbol)
                 .percent(percent)
                 .isSupported(isSupported)
                 .isExcluded(isExcluded)
+                .meta(meta)
                 .execute();
         // TODO: test validations
     }

@@ -5625,6 +5625,7 @@ public class PortfolioManagementApi {
         private double percent;
         private Boolean isSupported;
         private Boolean isExcluded;
+        private Map<String, Object> meta;
 
         private UpdatePortfolioTargetByIdRequestBuilder(UUID portfolioGroupId, UUID targetAssetId) {
             this.portfolioGroupId = portfolioGroupId;
@@ -5678,6 +5679,16 @@ public class PortfolioManagementApi {
          */
         public UpdatePortfolioTargetByIdRequestBuilder isExcluded(Boolean isExcluded) {
             this.isExcluded = isExcluded;
+            return this;
+        }
+        
+        /**
+         * Set meta
+         * @param meta  (optional)
+         * @return UpdatePortfolioTargetByIdRequestBuilder
+         */
+        public UpdatePortfolioTargetByIdRequestBuilder meta(Map<String, Object> meta) {
+            this.meta = meta;
             return this;
         }
         

@@ -3035,6 +3035,7 @@ public class Example {
     Double percent = 3.4D;
     Boolean isSupported = true;
     Boolean isExcluded = true;
+    Map<String, Object> meta = new HashMap();
     try {
       TargetAsset result = api
               .updatePortfolioTargetById(portfolioGroupId, targetAssetId)
@@ -3043,6 +3044,7 @@ public class Example {
               .percent(percent)
               .isSupported(isSupported)
               .isExcluded(isExcluded)
+              .meta(meta)
               .execute();
       System.out.println(result);
       System.out.println(result.toJson()); // Serialize response back to JSON 
@@ -3063,6 +3065,7 @@ public class Example {
               .percent(percent)
               .isSupported(isSupported)
               .isExcluded(isExcluded)
+              .meta(meta)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
