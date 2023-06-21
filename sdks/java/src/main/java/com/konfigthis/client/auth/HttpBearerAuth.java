@@ -15,7 +15,6 @@ package com.konfigthis.client.auth;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Pair;
 
-import java.net.URI;
 import java.util.Map;
 import java.util.List;
 

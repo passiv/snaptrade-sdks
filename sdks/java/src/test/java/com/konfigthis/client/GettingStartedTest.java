@@ -38,11 +38,11 @@ public class GettingStartedTest {
 
                 // 4) Get a redirect URI. Users will need this to connect their brokerage to the
                 // SnapTrade server
-                LoginRedirectURI response = (LoginRedirectURI) snaptrade.authentication
+                Map response = (Map) snaptrade.authentication
                                 .loginSnapTradeUser(userIDandSecret.getUserId(),
                                                 userIDandSecret.getUserSecret())
                                 .execute();
-                System.out.println(response.getRedirectURI());
+                System.out.println(response.get("redirectURI"));
 
                 // 5) Make a portfolio group and query
                 Map<String, Object> portfolioGroupPostBody = new HashMap<>();

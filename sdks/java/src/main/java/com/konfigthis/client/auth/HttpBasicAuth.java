@@ -17,7 +17,6 @@ import com.konfigthis.client.ApiException;
 
 import okhttp3.Credentials;
 
-import java.net.URI;
 import java.util.Map;
 import java.util.List;
 

@@ -1391,6 +1391,7 @@ public class TradingApi {
             trade.account(this.account);
             trade.symbol(this.symbol);
             trade.universalSymbol(this.universalSymbol);
+            if (this.action != null)
             trade.action(Trade.ActionEnum.fromValue(this.action));
             trade.units(this.units);
             trade.price(this.price);

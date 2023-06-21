@@ -1229,26 +1229,6 @@ public class ApiClient extends ApiClientCustom {
         return request;
     }
 
-    public String queryString(String path, List<Pair> queryParams) {
-        if (queryParams == null || queryParams.isEmpty()) return "";
-        StringBuilder queryString = new StringBuilder();
-        // support (constant) query string in `path`, e.g. "/posts?draft=1"
-        String prefix = path.contains("?") ? "&" : "?";
-        for (Pair param : queryParams) {
-            if (param.getValue() != null) {
-                if (prefix != null) {
-                    queryString.append(prefix);
-                    prefix = null;
-                } else {
-                    queryString.append("&");
-                }
-                String value = parameterToString(param.getValue());
-                queryString.append(escapeString(param.getName())).append("=").append(escapeString(value));
-            }
-        }
-        return queryString.toString();
-    }
-
     /**
      * Build full URL by concatenating base path, the given sub path and query parameters.
      *
@@ -1266,7 +1246,22 @@ public class ApiClient extends ApiClientCustom {
             url.append(basePath).append(path);
         }
 
-        url.append(queryString(path, queryParams));
+        if (queryParams != null && !queryParams.isEmpty()) {
+            // support (constant) query string in `path`, e.g. "/posts?draft=1"
+            String prefix = path.contains("?") ? "&" : "?";
+            for (Pair param : queryParams) {
+                if (param.getValue() != null) {
+                    if (prefix != null) {
+                        url.append(prefix);
+                        prefix = null;
+                    } else {
+                        url.append("&");
+                    }
+                    String value = parameterToString(param.getValue());
+                    url.append(escapeString(param.getName())).append("=").append(escapeString(value));
+                }
+            }
+        }
 
         if (collectionQueryParams != null && !collectionQueryParams.isEmpty()) {
             String prefix = url.toString().contains("?") ? "&" : "?";
