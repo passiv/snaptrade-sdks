@@ -15,6 +15,9 @@ package com.konfigthis.client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.gson.stream.JsonReader;
@@ -92,6 +95,21 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter);
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
+
+        /**
+         * For the "type: number" schema we accept both Double and Integer
+         * In the case that we pass "1.0" or "1" we serialize the JsonPrimitive
+         * as the "1" literal. This is useful when the server expects an integer.
+         */
+        gsonBuilder.registerTypeAdapter(Double.class, new JsonSerializer<Double>() {
+
+            @Override
+            public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
+                if (src == src.longValue())
+                    return new JsonPrimitive(src.longValue());
+                return new JsonPrimitive(src);
+            }
+        });
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Account.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountHoldings.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountHoldingsAccount.CustomTypeAdapterFactory());
@@ -175,7 +193,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SubPeriodReturnRate.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Symbol.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SymbolQuery.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SymbolsQuotes.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SymbolsQuotesInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TargetAsset.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Trade.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TradeExecutionStatus.CustomTypeAdapterFactory());
@@ -191,6 +209,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserErrorLog.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserIDandSecret.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserSettings.CustomTypeAdapterFactory());
+        gsonBuilder.disableHtmlEscaping();
         gson = gsonBuilder.create();
     }
 
@@ -223,9 +242,7 @@ public class JSON {
      * @return String representation of the JSON
      */
     public static String serialize(Object obj) {
-        String serialized = gson.toJson(obj);
-        // CUSTOM CODE
-        return serialized.equals("{}") || serialized.equals("") ? "" : serialized;
+        return gson.toJson(obj);
     }
 
     /**

@@ -33,7 +33,7 @@ import com.konfigthis.client.model.BrokerageSymbol;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderType;
-import com.konfigthis.client.model.SymbolsQuotes;
+import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.Trade;
 import com.konfigthis.client.model.TradeExecutionStatus;
@@ -1062,16 +1062,16 @@ public class TradingApi {
     }
 
 
-    private ApiResponse<SymbolsQuotes> getUserAccountQuotesWithHttpInfo(String userId, String userSecret, String symbols, String accountId, Boolean useTicker) throws ApiException {
+    private ApiResponse<List<SymbolsQuotesInner>> getUserAccountQuotesWithHttpInfo(String userId, String userSecret, String symbols, String accountId, Boolean useTicker) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, null);
-        Type localVarReturnType = new TypeToken<SymbolsQuotes>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<SymbolsQuotesInner>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getUserAccountQuotesAsync(String userId, String userSecret, String symbols, String accountId, Boolean useTicker, final ApiCallback<SymbolsQuotes> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountQuotesAsync(String userId, String userSecret, String symbols, String accountId, Boolean useTicker, final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, _callback);
-        Type localVarReturnType = new TypeToken<SymbolsQuotes>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<SymbolsQuotesInner>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1119,7 +1119,7 @@ public class TradingApi {
 
         /**
          * Execute getUserAccountQuotes request
-         * @return SymbolsQuotes
+         * @return List&lt;SymbolsQuotesInner&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1128,14 +1128,14 @@ public class TradingApi {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public SymbolsQuotes execute() throws ApiException {
-            ApiResponse<SymbolsQuotes> localVarResp = getUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
+        public List<SymbolsQuotesInner> execute() throws ApiException {
+            ApiResponse<List<SymbolsQuotesInner>> localVarResp = getUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute getUserAccountQuotes request with HTTP info returned
-         * @return ApiResponse&lt;SymbolsQuotes&gt;
+         * @return ApiResponse&lt;List&lt;SymbolsQuotesInner&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1144,7 +1144,7 @@ public class TradingApi {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<SymbolsQuotes> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<List<SymbolsQuotesInner>> executeWithHttpInfo() throws ApiException {
             return getUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
         }
 
@@ -1160,7 +1160,7 @@ public class TradingApi {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<SymbolsQuotes> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
             return getUserAccountQuotesAsync(userId, userSecret, symbols, accountId, useTicker, _callback);
         }
     }

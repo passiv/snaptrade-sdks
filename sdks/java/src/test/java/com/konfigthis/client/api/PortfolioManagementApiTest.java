@@ -116,7 +116,9 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void createAssetClassTest() throws ApiException {
-        ModelAssetClassDetails response = api.createAssetClass()
+        String userId = null;
+        String userSecret = null;
+        ModelAssetClassDetails response = api.createAssetClass(userId, userSecret)
                 .execute();
         // TODO: test validations
     }
@@ -208,7 +210,9 @@ public class PortfolioManagementApiTest {
     @Test
     public void detailAssetClassTest() throws ApiException {
         UUID modelAssetClassId = null;
-        ModelAssetClassDetails response = api.detailAssetClass(modelAssetClassId)
+        String userId = null;
+        String userSecret = null;
+        ModelAssetClassDetails response = api.detailAssetClass(modelAssetClassId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }
@@ -367,7 +371,9 @@ public class PortfolioManagementApiTest {
      */
     @Test
     public void listAssetClassesTest() throws ApiException {
-        List<ModelAssetClassDetails> response = api.listAssetClasses()
+        String userId = null;
+        String userSecret = null;
+        List<ModelAssetClassDetails> response = api.listAssetClasses(userId, userSecret)
                 .execute();
         // TODO: test validations
     }
@@ -482,9 +488,11 @@ public class PortfolioManagementApiTest {
     @Test
     public void updateAssetClassTest() throws ApiException {
         UUID modelAssetClassId = null;
+        String userId = null;
+        String userSecret = null;
         ModelAssetClass modelAssetClass = null;
         List<ModelAssetClassTarget> modelAssetClassTarget = null;
-        api.updateAssetClass(modelAssetClassId)
+        api.updateAssetClass(modelAssetClassId, userId, userSecret)
                 .modelAssetClass(modelAssetClass)
                 .modelAssetClassTarget(modelAssetClassTarget)
                 .execute();

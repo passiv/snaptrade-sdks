@@ -26,17 +26,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for SymbolsQuotes
+ * Model tests for SymbolsQuotesInner
  */
-public class SymbolsQuotesTest {
-    private final SymbolsQuotes model = new SymbolsQuotes();
+public class SymbolsQuotesInnerTest {
+    private final SymbolsQuotesInner model = new SymbolsQuotesInner();
 
     /**
-     * Model tests for SymbolsQuotes
+     * Model tests for SymbolsQuotesInner
      */
     @Test
-    public void testSymbolsQuotes() {
-        // TODO: test SymbolsQuotes
+    public void testSymbolsQuotesInner() {
+        // TODO: test SymbolsQuotesInner
     }
 
     /**

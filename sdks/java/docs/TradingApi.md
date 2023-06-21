@@ -433,7 +433,7 @@ public class Example {
 
 <a name="getUserAccountQuotes"></a>
 # **getUserAccountQuotes**
-> SymbolsQuotes getUserAccountQuotes(userId, userSecret, symbols, accountId).useTicker(useTicker).execute();
+> List&lt;SymbolsQuotesInner&gt; getUserAccountQuotes(userId, userSecret, symbols, accountId).useTicker(useTicker).execute();
 
 Get symbol quotes
 
@@ -470,7 +470,7 @@ public class Example {
     String accountId = "accountId_example"; // The ID of the account to get quotes.
     Boolean useTicker = true; // Should be set to True if providing tickers.
     try {
-      SymbolsQuotes result = api
+      List<SymbolsQuotesInner> result = api
               .getUserAccountQuotes(userId, userSecret, symbols, accountId)
               .useTicker(useTicker)
               .execute();
@@ -486,7 +486,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
     try {
-      ApiResponse<SymbolsQuotes> response = api
+      ApiResponse<List<SymbolsQuotesInner>> response = api
               .getUserAccountQuotes(userId, userSecret, symbols, accountId)
               .useTicker(useTicker)
               .executeWithHttpInfo();
@@ -518,7 +518,7 @@ public class Example {
 
 ### Return type
 
-[**SymbolsQuotes**](SymbolsQuotes.md)
+[**List&lt;SymbolsQuotesInner&gt;**](SymbolsQuotesInner.md)
 
 ### Authorization
 

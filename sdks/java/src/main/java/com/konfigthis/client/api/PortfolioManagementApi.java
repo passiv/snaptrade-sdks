@@ -586,7 +586,7 @@ public class PortfolioManagementApi {
 
         return new CreateRequestBuilder(userId, userSecret);
     }
-    private okhttp3.Call createAssetClassCall(final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createAssetClassCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -611,6 +611,14 @@ public class PortfolioManagementApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -631,29 +639,43 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createAssetClassValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return createAssetClassCall(_callback);
+    private okhttp3.Call createAssetClassValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling createAssetClass(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling createAssetClass(Async)");
+        }
+
+        return createAssetClassCall(userId, userSecret, _callback);
 
     }
 
 
-    private ApiResponse<ModelAssetClassDetails> createAssetClassWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(null);
+    private ApiResponse<ModelAssetClassDetails> createAssetClassWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call createAssetClassAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+    private okhttp3.Call createAssetClassAsync(String userId, String userSecret, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = createAssetClassValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class CreateAssetClassRequestBuilder {
+        private final String userId;
+        private final String userSecret;
 
-        private CreateAssetClassRequestBuilder() {
+        private CreateAssetClassRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
         }
 
         /**
@@ -668,7 +690,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return createAssetClassCall(_callback);
+            return createAssetClassCall(userId, userSecret, _callback);
         }
 
 
@@ -683,7 +705,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ModelAssetClassDetails execute() throws ApiException {
-            ApiResponse<ModelAssetClassDetails> localVarResp = createAssetClassWithHttpInfo();
+            ApiResponse<ModelAssetClassDetails> localVarResp = createAssetClassWithHttpInfo(userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
@@ -698,7 +720,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<ModelAssetClassDetails> executeWithHttpInfo() throws ApiException {
-            return createAssetClassWithHttpInfo();
+            return createAssetClassWithHttpInfo(userId, userSecret);
         }
 
         /**
@@ -713,13 +735,15 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
-            return createAssetClassAsync(_callback);
+            return createAssetClassAsync(userId, userSecret, _callback);
         }
     }
 
     /**
      * Create a new model asset class
      * 
+     * @param userId  (required)
+     * @param userSecret  (required)
      * @return CreateAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -727,8 +751,14 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> A new asset class is created. </td><td>  -  </td></tr>
      </table>
      */
-    public CreateAssetClassRequestBuilder createAssetClass() throws IllegalArgumentException {
-        return new CreateAssetClassRequestBuilder();
+    public CreateAssetClassRequestBuilder createAssetClass(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new CreateAssetClassRequestBuilder(userId, userSecret);
     }
     private okhttp3.Call createModelPortfolioCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -1693,7 +1723,7 @@ public class PortfolioManagementApi {
 
         return new DeletePortfolioTargetByIdRequestBuilder(portfolioGroupId, targetAssetId);
     }
-    private okhttp3.Call detailAssetClassCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call detailAssetClassCall(UUID modelAssetClassId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1719,6 +1749,14 @@ public class PortfolioManagementApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1739,26 +1777,36 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call detailAssetClassValidateBeforeCall(UUID modelAssetClassId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call detailAssetClassValidateBeforeCall(UUID modelAssetClassId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'modelAssetClassId' is set
         if (modelAssetClassId == null) {
             throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling detailAssetClass(Async)");
         }
 
-        return detailAssetClassCall(modelAssetClassId, _callback);
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling detailAssetClass(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling detailAssetClass(Async)");
+        }
+
+        return detailAssetClassCall(modelAssetClassId, userId, userSecret, _callback);
 
     }
 
 
-    private ApiResponse<ModelAssetClassDetails> detailAssetClassWithHttpInfo(UUID modelAssetClassId) throws ApiException {
-        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, null);
+    private ApiResponse<ModelAssetClassDetails> detailAssetClassWithHttpInfo(UUID modelAssetClassId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, userId, userSecret, null);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call detailAssetClassAsync(UUID modelAssetClassId, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
+    private okhttp3.Call detailAssetClassAsync(UUID modelAssetClassId, String userId, String userSecret, final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, _callback);
+        okhttp3.Call localVarCall = detailAssetClassValidateBeforeCall(modelAssetClassId, userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<ModelAssetClassDetails>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1766,9 +1814,13 @@ public class PortfolioManagementApi {
 
     public class DetailAssetClassRequestBuilder {
         private final UUID modelAssetClassId;
+        private final String userId;
+        private final String userSecret;
 
-        private DetailAssetClassRequestBuilder(UUID modelAssetClassId) {
+        private DetailAssetClassRequestBuilder(UUID modelAssetClassId, String userId, String userSecret) {
             this.modelAssetClassId = modelAssetClassId;
+            this.userId = userId;
+            this.userSecret = userSecret;
         }
 
         /**
@@ -1783,7 +1835,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return detailAssetClassCall(modelAssetClassId, _callback);
+            return detailAssetClassCall(modelAssetClassId, userId, userSecret, _callback);
         }
 
 
@@ -1798,7 +1850,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ModelAssetClassDetails execute() throws ApiException {
-            ApiResponse<ModelAssetClassDetails> localVarResp = detailAssetClassWithHttpInfo(modelAssetClassId);
+            ApiResponse<ModelAssetClassDetails> localVarResp = detailAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
@@ -1813,7 +1865,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<ModelAssetClassDetails> executeWithHttpInfo() throws ApiException {
-            return detailAssetClassWithHttpInfo(modelAssetClassId);
+            return detailAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret);
         }
 
         /**
@@ -1828,7 +1880,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<ModelAssetClassDetails> _callback) throws ApiException {
-            return detailAssetClassAsync(modelAssetClassId, _callback);
+            return detailAssetClassAsync(modelAssetClassId, userId, userSecret, _callback);
         }
     }
 
@@ -1836,6 +1888,8 @@ public class PortfolioManagementApi {
      * Get details of a model asset class
      * 
      * @param modelAssetClassId The ID of the model asset class to get. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
      * @return DetailAssetClassRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1843,11 +1897,17 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Details of a particular model asset class </td><td>  -  </td></tr>
      </table>
      */
-    public DetailAssetClassRequestBuilder detailAssetClass(UUID modelAssetClassId) throws IllegalArgumentException {
+    public DetailAssetClassRequestBuilder detailAssetClass(UUID modelAssetClassId, String userId, String userSecret) throws IllegalArgumentException {
         if (modelAssetClassId == null) throw new IllegalArgumentException("\"modelAssetClassId\" is required but got null");
             
 
-        return new DetailAssetClassRequestBuilder(modelAssetClassId);
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new DetailAssetClassRequestBuilder(modelAssetClassId, userId, userSecret);
     }
     private okhttp3.Call getCalculatedTradeByIdCall(UUID portfolioGroupId, UUID calculatedTradeId, UUID tradeId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -3684,7 +3744,7 @@ public class PortfolioManagementApi {
 
         return new ListRequestBuilder(userId, userSecret);
     }
-    private okhttp3.Call listAssetClassesCall(final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listAssetClassesCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -3709,6 +3769,14 @@ public class PortfolioManagementApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -3729,29 +3797,43 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listAssetClassesValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return listAssetClassesCall(_callback);
+    private okhttp3.Call listAssetClassesValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling listAssetClasses(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listAssetClasses(Async)");
+        }
+
+        return listAssetClassesCall(userId, userSecret, _callback);
 
     }
 
 
-    private ApiResponse<List<ModelAssetClassDetails>> listAssetClassesWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(null);
+    private ApiResponse<List<ModelAssetClassDetails>> listAssetClassesWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listAssetClassesAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
+    private okhttp3.Call listAssetClassesAsync(String userId, String userSecret, final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = listAssetClassesValidateBeforeCall(userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<ModelAssetClassDetails>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class ListAssetClassesRequestBuilder {
+        private final String userId;
+        private final String userSecret;
 
-        private ListAssetClassesRequestBuilder() {
+        private ListAssetClassesRequestBuilder(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
         }
 
         /**
@@ -3766,7 +3848,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return listAssetClassesCall(_callback);
+            return listAssetClassesCall(userId, userSecret, _callback);
         }
 
 
@@ -3781,7 +3863,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public List<ModelAssetClassDetails> execute() throws ApiException {
-            ApiResponse<List<ModelAssetClassDetails>> localVarResp = listAssetClassesWithHttpInfo();
+            ApiResponse<List<ModelAssetClassDetails>> localVarResp = listAssetClassesWithHttpInfo(userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
@@ -3796,7 +3878,7 @@ public class PortfolioManagementApi {
          </table>
          */
         public ApiResponse<List<ModelAssetClassDetails>> executeWithHttpInfo() throws ApiException {
-            return listAssetClassesWithHttpInfo();
+            return listAssetClassesWithHttpInfo(userId, userSecret);
         }
 
         /**
@@ -3811,13 +3893,15 @@ public class PortfolioManagementApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<ModelAssetClassDetails>> _callback) throws ApiException {
-            return listAssetClassesAsync(_callback);
+            return listAssetClassesAsync(userId, userSecret, _callback);
         }
     }
 
     /**
      * List of model asset class
      * 
+     * @param userId  (required)
+     * @param userSecret  (required)
      * @return ListAssetClassesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -3825,8 +3909,14 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> A list of all model asset class objects for the authenticated user. </td><td>  -  </td></tr>
      </table>
      */
-    public ListAssetClassesRequestBuilder listAssetClasses() throws IllegalArgumentException {
-        return new ListAssetClassesRequestBuilder();
+    public ListAssetClassesRequestBuilder listAssetClasses(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new ListAssetClassesRequestBuilder(userId, userSecret);
     }
     private okhttp3.Call listCalculatedTradesCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -5063,7 +5153,7 @@ public class PortfolioManagementApi {
 
         return new SetPortfolioTargetsRequestBuilder(portfolioGroupId);
     }
-    private okhttp3.Call updateAssetClassCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateAssetClassCall(UUID modelAssetClassId, String userId, String userSecret, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -5089,6 +5179,14 @@ public class PortfolioManagementApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
         final String[] localVarAccepts = {
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
@@ -5109,10 +5207,20 @@ public class PortfolioManagementApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateAssetClassValidateBeforeCall(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateAssetClassValidateBeforeCall(UUID modelAssetClassId, String userId, String userSecret, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'modelAssetClassId' is set
         if (modelAssetClassId == null) {
             throw new ApiException("Missing the required parameter 'modelAssetClassId' when calling updateAssetClass(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling updateAssetClass(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling updateAssetClass(Async)");
         }
 
         // verify the required parameter 'modelAssetClassDetails' is set
@@ -5120,30 +5228,34 @@ public class PortfolioManagementApi {
             throw new ApiException("Missing the required parameter 'modelAssetClassDetails' when calling updateAssetClass(Async)");
         }
 
-        return updateAssetClassCall(modelAssetClassId, modelAssetClassDetails, _callback);
+        return updateAssetClassCall(modelAssetClassId, userId, userSecret, modelAssetClassDetails, _callback);
 
     }
 
 
-    private ApiResponse<Void> updateAssetClassWithHttpInfo(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
-        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, null);
+    private ApiResponse<Void> updateAssetClassWithHttpInfo(UUID modelAssetClassId, String userId, String userSecret, ModelAssetClassDetails modelAssetClassDetails) throws ApiException {
+        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, userId, userSecret, modelAssetClassDetails, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private okhttp3.Call updateAssetClassAsync(UUID modelAssetClassId, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
+    private okhttp3.Call updateAssetClassAsync(UUID modelAssetClassId, String userId, String userSecret, ModelAssetClassDetails modelAssetClassDetails, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, modelAssetClassDetails, _callback);
+        okhttp3.Call localVarCall = updateAssetClassValidateBeforeCall(modelAssetClassId, userId, userSecret, modelAssetClassDetails, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
 
     public class UpdateAssetClassRequestBuilder {
         private final UUID modelAssetClassId;
+        private final String userId;
+        private final String userSecret;
         private ModelAssetClass modelAssetClass;
         private List<ModelAssetClassTarget> modelAssetClassTarget;
 
-        private UpdateAssetClassRequestBuilder(UUID modelAssetClassId) {
+        private UpdateAssetClassRequestBuilder(UUID modelAssetClassId, String userId, String userSecret) {
             this.modelAssetClassId = modelAssetClassId;
+            this.userId = userId;
+            this.userSecret = userSecret;
         }
 
         /**
@@ -5179,7 +5291,7 @@ public class PortfolioManagementApi {
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
-            return updateAssetClassCall(modelAssetClassId, modelAssetClassDetails, _callback);
+            return updateAssetClassCall(modelAssetClassId, userId, userSecret, modelAssetClassDetails, _callback);
         }
 
         private ModelAssetClassDetails buildBodyParams() {
@@ -5200,7 +5312,7 @@ public class PortfolioManagementApi {
          */
         public void execute() throws ApiException {
             ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
-            updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
+            updateAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret, modelAssetClassDetails);
         }
 
         /**
@@ -5215,7 +5327,7 @@ public class PortfolioManagementApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
-            return updateAssetClassWithHttpInfo(modelAssetClassId, modelAssetClassDetails);
+            return updateAssetClassWithHttpInfo(modelAssetClassId, userId, userSecret, modelAssetClassDetails);
         }
 
         /**
@@ -5231,7 +5343,7 @@ public class PortfolioManagementApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             ModelAssetClassDetails modelAssetClassDetails = buildBodyParams();
-            return updateAssetClassAsync(modelAssetClassId, modelAssetClassDetails, _callback);
+            return updateAssetClassAsync(modelAssetClassId, userId, userSecret, modelAssetClassDetails, _callback);
         }
     }
 
@@ -5239,6 +5351,8 @@ public class PortfolioManagementApi {
      * Updates model asset class objects
      * 
      * @param modelAssetClassId The ID of the model asset class to update. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
      * @param modelAssetClassDetails Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array (required)
      * @return UpdateAssetClassRequestBuilder
      * @http.response.details
@@ -5247,11 +5361,17 @@ public class PortfolioManagementApi {
         <tr><td> 200 </td><td> Updates model asset class with data from request body. </td><td>  -  </td></tr>
      </table>
      */
-    public UpdateAssetClassRequestBuilder updateAssetClass(UUID modelAssetClassId) throws IllegalArgumentException {
+    public UpdateAssetClassRequestBuilder updateAssetClass(UUID modelAssetClassId, String userId, String userSecret) throws IllegalArgumentException {
         if (modelAssetClassId == null) throw new IllegalArgumentException("\"modelAssetClassId\" is required but got null");
             
 
-        return new UpdateAssetClassRequestBuilder(modelAssetClassId);
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return new UpdateAssetClassRequestBuilder(modelAssetClassId, userId, userSecret);
     }
     private okhttp3.Call updatePortfolioSettingsCall(UUID portfolioGroupId, final ApiCallback _callback) throws ApiException {
         String basePath = null;

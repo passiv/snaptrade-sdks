@@ -262,7 +262,7 @@ public class Example {
 
 <a name="createAssetClass"></a>
 # **createAssetClass**
-> ModelAssetClassDetails createAssetClass().execute();
+> ModelAssetClassDetails createAssetClass(userId, userSecret).execute();
 
 Create a new model asset class
 
@@ -293,9 +293,11 @@ public class Example {
     apiClient.setPartnerTimestamp("YOUR API KEY");
 
     PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
       ModelAssetClassDetails result = api
-              .createAssetClass()
+              .createAssetClass(userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.toJson()); // Serialize response back to JSON 
@@ -310,7 +312,7 @@ public class Example {
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
     try {
       ApiResponse<ModelAssetClassDetails> response = api
-              .createAssetClass()
+              .createAssetClass(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -329,7 +331,11 @@ public class Example {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
 
 ### Return type
 
@@ -894,7 +900,7 @@ public class Example {
 
 <a name="detailAssetClass"></a>
 # **detailAssetClass**
-> ModelAssetClassDetails detailAssetClass(modelAssetClassId).execute();
+> ModelAssetClassDetails detailAssetClass(modelAssetClassId, userId, userSecret).execute();
 
 Get details of a model asset class
 
@@ -926,9 +932,11 @@ public class Example {
 
     PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to get.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
       ModelAssetClassDetails result = api
-              .detailAssetClass(modelAssetClassId)
+              .detailAssetClass(modelAssetClassId, userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.toJson()); // Serialize response back to JSON 
@@ -943,7 +951,7 @@ public class Example {
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
     try {
       ApiResponse<ModelAssetClassDetails> response = api
-              .detailAssetClass(modelAssetClassId)
+              .detailAssetClass(modelAssetClassId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -966,6 +974,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **modelAssetClassId** | **UUID**| The ID of the model asset class to get. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
 
 ### Return type
 
@@ -2031,7 +2041,7 @@ public class Example {
 
 <a name="listAssetClasses"></a>
 # **listAssetClasses**
-> List&lt;ModelAssetClassDetails&gt; listAssetClasses().execute();
+> List&lt;ModelAssetClassDetails&gt; listAssetClasses(userId, userSecret).execute();
 
 List of model asset class
 
@@ -2062,9 +2072,11 @@ public class Example {
     apiClient.setPartnerTimestamp("YOUR API KEY");
 
     PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     try {
       List<ModelAssetClassDetails> result = api
-              .listAssetClasses()
+              .listAssetClasses(userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.toJson()); // Serialize response back to JSON 
@@ -2079,7 +2091,7 @@ public class Example {
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
     try {
       ApiResponse<List<ModelAssetClassDetails>> response = api
-              .listAssetClasses()
+              .listAssetClasses(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -2098,7 +2110,11 @@ public class Example {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
 
 ### Return type
 
@@ -2790,7 +2806,7 @@ public class Example {
 
 <a name="updateAssetClass"></a>
 # **updateAssetClass**
-> updateAssetClass(modelAssetClassId, modelAssetClassDetails).execute();
+> updateAssetClass(modelAssetClassId, userId, userSecret, modelAssetClassDetails).execute();
 
 Updates model asset class objects
 
@@ -2822,11 +2838,13 @@ public class Example {
 
     PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to update.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
     ModelAssetClass modelAssetClass = new ModelAssetClass();
     List<ModelAssetClassTarget> modelAssetClassTarget = Arrays.asList();
     try {
       api
-              .updateAssetClass(modelAssetClassId)
+              .updateAssetClass(modelAssetClassId, userId, userSecret)
               .modelAssetClass(modelAssetClass)
               .modelAssetClassTarget(modelAssetClassTarget)
               .execute();
@@ -2841,7 +2859,7 @@ public class Example {
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
     try {
       api
-              .updateAssetClass(modelAssetClassId)
+              .updateAssetClass(modelAssetClassId, userId, userSecret)
               .modelAssetClass(modelAssetClass)
               .modelAssetClassTarget(modelAssetClassTarget)
               .executeWithHttpInfo();
@@ -2861,6 +2879,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **modelAssetClassId** | **UUID**| The ID of the model asset class to update. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
 | **modelAssetClassDetails** | [**ModelAssetClassDetails**](ModelAssetClassDetails.md)| Use this endpoint change model asset class name and to add or remove a model asset class target. &lt;br /&gt;&lt;br /&gt; * Only the model asset class name is required for the model asset class object. &lt;br /&gt; * Only the symbol id is required for the symbol object in the model asset class target object. &lt;br /&gt; * To remove all model asset class targets, set the model asset class target as an empty array | |
 
 ### Return type

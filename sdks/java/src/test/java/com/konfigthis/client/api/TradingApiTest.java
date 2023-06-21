@@ -23,7 +23,7 @@ import com.konfigthis.client.model.BrokerageSymbol;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderType;
-import com.konfigthis.client.model.SymbolsQuotes;
+import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.Trade;
 import com.konfigthis.client.model.TradeExecutionStatus;
@@ -144,7 +144,7 @@ public class TradingApiTest {
         String symbols = null;
         String accountId = null;
         Boolean useTicker = null;
-        SymbolsQuotes response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
+        List<SymbolsQuotesInner> response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
                 .useTicker(useTicker)
                 .execute();
         // TODO: test validations

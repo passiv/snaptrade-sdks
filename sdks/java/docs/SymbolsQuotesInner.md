@@ -1,8 +1,7 @@
 
 
-# SymbolsQuotes
+# SymbolsQuotesInner
 
-Symbols and Tickers Quotes object
 
 ## Properties
 

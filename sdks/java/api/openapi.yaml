@@ -1503,6 +1503,21 @@ paths:
   /modelAssetClass:
     get:
       operationId: PortfolioManagement_listAssetClasses
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
       responses:
         "200":
           content:
@@ -1522,6 +1537,21 @@ paths:
       x-accepts: application/json
     post:
       operationId: PortfolioManagement_createAssetClass
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
       responses:
         "200":
           content:
@@ -1567,6 +1597,20 @@ paths:
         schema:
           $ref: '#/components/schemas/Id'
         style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
       responses:
         "200":
           content:
@@ -1591,6 +1635,20 @@ paths:
         schema:
           $ref: '#/components/schemas/Id'
         style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9142,73 +9200,10 @@ components:
       type: object
       x-konfig-is-used-in-successful-response: true
     SymbolsQuotes:
-      additionalProperties: true
       description: Symbols and Tickers Quotes object
-      example:
-        symbol:
-          symbol: VAB.TO
-          raw_symbol: VAB
-          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type:
-            is_supported: true
-            code: cs
-            description: Common Stock
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          currencies:
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-        last_trade_price: 8.74
-        ask_size: 344
-        bid_size: 260
-        bid_price: 8.43
-        ask_price: 8.43
-      properties:
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        bid_price:
-          example: 8.43
-          type: number
-          x-konfig-original-example: 8.43
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-properties-bid_price
-        ask_price:
-          example: 8.43
-          type: number
-          x-konfig-original-example: 8.43
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-properties-ask_price
-        last_trade_price:
-          example: 8.74
-          type: number
-          x-konfig-original-example: 8.74
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-properties-last_trade_price
-        bid_size:
-          example: 260
-          type: number
-          x-konfig-original-example: 260
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-properties-bid_size
-        ask_size:
-          example: 344
-          type: number
-          x-konfig-original-example: 344
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-properties-ask_size
-      type: object
+      items:
+        $ref: '#/components/schemas/SymbolsQuotes_inner'
+      type: array
       x-konfig-is-used-in-successful-response: true
     ManualTradeForm:
       description: Manual Trade Form
@@ -11075,23 +11070,23 @@ components:
       example: MVGP.U.TO
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-properties-bid_price:
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_price:
       example: 8.43
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-properties-ask_price:
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_price:
       example: 8.43
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-properties-last_trade_price:
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price:
       example: 8.74
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-properties-bid_size:
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_size:
       example: 260
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-properties-ask_size:
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size:
       example: 344
       type: number
       x-do-not-generate: true
@@ -12013,16 +12008,34 @@ components:
       x-konfig-is-parameter: []
     konfig-generated-schema-single-parameter-schema-get--modelAssetClass:
       additionalProperties: true
-      properties: {}
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
       type: object
       x-do-not-generate: true
-      x-konfig-is-parameter: []
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--modelAssetClass:
       additionalProperties: true
-      properties: {}
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
       type: object
       x-do-not-generate: true
-      x-konfig-is-parameter: []
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-delete--modelAssetClass-modelAssetClassId:
       additionalProperties: true
       properties:
@@ -12039,17 +12052,29 @@ components:
       properties:
         modelAssetClassId:
           $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
       required:
       - modelAssetClassId
+      - userId
+      - userSecret
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
       - modelAssetClassId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--modelAssetClass-modelAssetClassId:
       additionalProperties: true
       properties:
         modelAssetClassId:
           $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
         model_asset_class:
           $ref: '#/components/schemas/ModelAssetClass'
         model_asset_class_target:
@@ -12058,10 +12083,14 @@ components:
           type: array
       required:
       - modelAssetClassId
+      - userId
+      - userSecret
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
       - modelAssetClassId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--modelPortfolio:
       additionalProperties: true
       properties: {}
@@ -13496,6 +13525,71 @@ components:
             $ref: '#/components/schemas/OptionChain_inner_chainPerRoot_inner'
           type: array
       type: object
+    SymbolsQuotes_inner:
+      example:
+        symbol:
+          symbol: VAB.TO
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          exchange:
+            start_time: 09:30:00
+            mic_code: XTSE
+            code: TSX
+            timezone: America/New_York
+            name: Toronto Stock Exchange
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            close_time: "57600"
+            suffix: .TO
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        last_trade_price: 8.74
+        ask_size: 344
+        bid_size: 260
+        bid_price: 8.43
+        ask_price: 8.43
+      properties:
+        symbol:
+          $ref: '#/components/schemas/UniversalSymbol'
+        bid_price:
+          example: 8.43
+          type: number
+          x-konfig-original-example: 8.43
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_price
+        ask_price:
+          example: 8.43
+          type: number
+          x-konfig-original-example: 8.43
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_price
+        last_trade_price:
+          example: 8.74
+          type: number
+          x-konfig-original-example: 8.74
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price
+        bid_size:
+          example: 260
+          type: number
+          x-konfig-original-example: 260
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_size
+        ask_size:
+          example: 344
+          type: number
+          x-konfig-original-example: 344
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
     encryptedResponse_encryptedMessageData:
       additionalProperties: true
       example:
