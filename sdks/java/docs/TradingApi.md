@@ -34,43 +34,79 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     UUID brokerageOrderId = UUID.randomUUID();
     try {
-      AccountOrderRecord result = api
+      AccountOrderRecord result = client
+              .trading
               .cancelUserAccountOrder(userId, userSecret, accountId)
               .brokerageOrderId(brokerageOrderId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBrokerageOrderId());
+
+      System.out.println(result.getStatus());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getOptionSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getTotalQuantity());
+
+      System.out.println(result.getOpenQuantity());
+
+      System.out.println(result.getCanceledQuantity());
+
+      System.out.println(result.getFilledQuantity());
+
+      System.out.println(result.getExecutionPrice());
+
+      System.out.println(result.getLimitPrice());
+
+      System.out.println(result.getStopPrice());
+
+      System.out.println(result.getOrderType());
+
+      System.out.println(result.getTimeInForce());
+
+      System.out.println(result.getTimePlaced());
+
+      System.out.println(result.getTimeUpdated());
+
+      System.out.println(result.getExpiryDate());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = api
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
               .cancelUserAccountOrder(userId, userSecret, accountId)
               .brokerageOrderId(brokerageOrderId)
               .executeWithHttpInfo();
@@ -81,13 +117,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -136,41 +173,57 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     UUID tradeId = UUID.randomUUID(); // The ID of trade object
     try {
-      Trade result = api
+      Trade result = client
+              .trading
               .getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getAccount());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getUnits());
+
+      System.out.println(result.getPrice());
+
+      System.out.println(result.getSequence());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradeImpactById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<Trade> response = api
+      ApiResponse<Trade> response = client
+              .trading
               .getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -180,13 +233,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradeImpactById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -233,40 +287,40 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     try {
-      List<TradeImpact> result = api
+      List<TradeImpact> result = client
+              .trading
               .getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradesImpact");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<TradeImpact>> response = api
+      ApiResponse<List<TradeImpact>> response = client
+              .trading
               .getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -276,13 +330,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getCalculatedTradesImpact");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -328,21 +383,19 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
@@ -354,7 +407,8 @@ public class Example {
     Double units = 3.4D; // Trade Units
     UUID universalSymbolId = UUID.randomUUID();
     try {
-      ManualTradeAndImpact result = api
+      ManualTradeAndImpact result = client
+              .trading
               .getOrderImpact(userId, userSecret)
               .accountId(accountId)
               .action(action)
@@ -366,18 +420,25 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getTrade());
+
+      System.out.println(result.getTradeImpacts());
+
+      System.out.println(result.getCombinedRemainingBalance());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getOrderImpact");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ManualTradeAndImpact> response = api
+      ApiResponse<ManualTradeAndImpact> response = client
+              .trading
               .getOrderImpact(userId, userSecret)
               .accountId(accountId)
               .action(action)
@@ -395,13 +456,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getOrderImpact");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -449,44 +511,42 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     String symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
     String accountId = "accountId_example"; // The ID of the account to get quotes.
     Boolean useTicker = true; // Should be set to True if providing tickers.
     try {
-      List<SymbolsQuotesInner> result = api
+      List<SymbolsQuotesInner> result = client
+              .trading
               .getUserAccountQuotes(userId, userSecret, symbols, accountId)
               .useTicker(useTicker)
               .execute();
-      System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getUserAccountQuotes");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<SymbolsQuotesInner>> response = api
+      ApiResponse<List<SymbolsQuotesInner>> response = client
+              .trading
               .getUserAccountQuotes(userId, userSecret, symbols, accountId)
               .useTicker(useTicker)
               .executeWithHttpInfo();
@@ -497,13 +557,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getUserAccountQuotes");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -553,21 +614,19 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     UUID tradeId = UUID.randomUUID(); // The ID of trade object
@@ -580,7 +639,8 @@ public class Example {
     Double price = 3.4D;
     Integer sequence = 56;
     try {
-      Trade result = api
+      Trade result = client
+              .trading
               .modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
               .id(id)
               .account(account)
@@ -592,18 +652,35 @@ public class Example {
               .sequence(sequence)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getAccount());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getUnits());
+
+      System.out.println(result.getPrice());
+
+      System.out.println(result.getSequence());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#modifyCalculatedTradeById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<Trade> response = api
+      ApiResponse<Trade> response = client
+              .trading
               .modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
               .id(id)
               .account(account)
@@ -621,13 +698,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#modifyCalculatedTradeById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -675,40 +753,40 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     try {
-      List<TradeExecutionStatus> result = api
+      List<TradeExecutionStatus> result = client
+              .trading
               .placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeCalculatedTrades");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<TradeExecutionStatus>> response = api
+      ApiResponse<List<TradeExecutionStatus>> response = client
+              .trading
               .placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -718,13 +796,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeCalculatedTrades");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -770,21 +849,19 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
@@ -796,7 +873,8 @@ public class Example {
     Double units = 3.4D; // Trade Units
     UUID universalSymbolId = UUID.randomUUID();
     try {
-      AccountOrderRecord result = api
+      AccountOrderRecord result = client
+              .trading
               .placeForceOrder(userId, userSecret)
               .accountId(accountId)
               .action(action)
@@ -808,18 +886,55 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBrokerageOrderId());
+
+      System.out.println(result.getStatus());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getOptionSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getTotalQuantity());
+
+      System.out.println(result.getOpenQuantity());
+
+      System.out.println(result.getCanceledQuantity());
+
+      System.out.println(result.getFilledQuantity());
+
+      System.out.println(result.getExecutionPrice());
+
+      System.out.println(result.getLimitPrice());
+
+      System.out.println(result.getStopPrice());
+
+      System.out.println(result.getOrderType());
+
+      System.out.println(result.getTimeInForce());
+
+      System.out.println(result.getTimePlaced());
+
+      System.out.println(result.getTimeUpdated());
+
+      System.out.println(result.getExpiryDate());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = api
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
               .placeForceOrder(userId, userSecret)
               .accountId(accountId)
               .action(action)
@@ -837,13 +952,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -891,44 +1007,80 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     Object firstTradeId = null; // The ID of first trade object obtained from trade/impact endpoint
     Object secondTradeId = null; // The ID of second trade object obtained from trade/impact endpoint
     try {
-      AccountOrderRecord result = api
+      AccountOrderRecord result = client
+              .trading
               .placeOCOOrder(userId, userSecret)
               .firstTradeId(firstTradeId)
               .secondTradeId(secondTradeId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBrokerageOrderId());
+
+      System.out.println(result.getStatus());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getOptionSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getTotalQuantity());
+
+      System.out.println(result.getOpenQuantity());
+
+      System.out.println(result.getCanceledQuantity());
+
+      System.out.println(result.getFilledQuantity());
+
+      System.out.println(result.getExecutionPrice());
+
+      System.out.println(result.getLimitPrice());
+
+      System.out.println(result.getStopPrice());
+
+      System.out.println(result.getOrderType());
+
+      System.out.println(result.getTimeInForce());
+
+      System.out.println(result.getTimePlaced());
+
+      System.out.println(result.getTimeUpdated());
+
+      System.out.println(result.getExpiryDate());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOCOOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = api
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
               .placeOCOOrder(userId, userSecret)
               .firstTradeId(firstTradeId)
               .secondTradeId(secondTradeId)
@@ -940,13 +1092,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOCOOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -994,41 +1147,77 @@ import com.konfigthis.client.api.TradingApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    TradingApi api = new TradingApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID tradeId = UUID.randomUUID(); // The ID of trade object obtained from trade/impact endpoint
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      AccountOrderRecord result = api
+      AccountOrderRecord result = client
+              .trading
               .placeOrder(tradeId, userId, userSecret)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBrokerageOrderId());
+
+      System.out.println(result.getStatus());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getUniversalSymbol());
+
+      System.out.println(result.getOptionSymbol());
+
+      System.out.println(result.getAction());
+
+      System.out.println(result.getTotalQuantity());
+
+      System.out.println(result.getOpenQuantity());
+
+      System.out.println(result.getCanceledQuantity());
+
+      System.out.println(result.getFilledQuantity());
+
+      System.out.println(result.getExecutionPrice());
+
+      System.out.println(result.getLimitPrice());
+
+      System.out.println(result.getStopPrice());
+
+      System.out.println(result.getOrderType());
+
+      System.out.println(result.getTimeInForce());
+
+      System.out.println(result.getTimePlaced());
+
+      System.out.println(result.getTimeUpdated());
+
+      System.out.println(result.getExpiryDate());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = api
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
               .placeOrder(tradeId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1038,13 +1227,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters

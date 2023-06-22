@@ -26,27 +26,35 @@ import com.konfigthis.client.api.ApiStatusApi;
 
 public class Example {
   public static void main(String[] args) {
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
 
-    ApiStatusApi api = new ApiStatusApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      Status result = api
+      Status result = client
+              .apiStatus
               .check()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getVersion());
+
+      System.out.println(result.getTimestamp());
+
+      System.out.println(result.getOnline());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ApiStatusApi#check");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<Status> response = api
+      ApiResponse<Status> response = client
+              .apiStatus
               .check()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -56,13 +64,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ApiStatusApi#check");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters

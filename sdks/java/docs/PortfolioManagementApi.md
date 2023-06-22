@@ -56,21 +56,19 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to exclude an asset.
     UUID id = UUID.randomUUID();
     String symbol = "symbol_example";
@@ -81,7 +79,8 @@ public class Example {
     SecurityType type = new SecurityType();
     List<Currency> currencies = Arrays.asList();
     try {
-      ExcludedAsset result = api
+      ExcludedAsset result = client
+              .portfolioManagement
               .addPortfolioExcludedAsset(portfolioGroupId)
               .id(id)
               .symbol(symbol)
@@ -93,18 +92,21 @@ public class Example {
               .currencies(currencies)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getSymbol());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#addPortfolioExcludedAsset");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ExcludedAsset> response = api
+      ApiResponse<ExcludedAsset> response = client
+              .portfolioManagement
               .addPortfolioExcludedAsset(portfolioGroupId)
               .id(id)
               .symbol(symbol)
@@ -122,13 +124,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#addPortfolioExcludedAsset");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -174,44 +177,44 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID id = UUID.randomUUID();
     String name = "name_example";
     try {
-      List<PortfolioGroup> result = api
+      List<PortfolioGroup> result = client
+              .portfolioManagement
               .create(userId, userSecret)
               .id(id)
               .name(name)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#create");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<PortfolioGroup>> response = api
+      ApiResponse<List<PortfolioGroup>> response = client
+              .portfolioManagement
               .create(userId, userSecret)
               .id(id)
               .name(name)
@@ -223,13 +226,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#create");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -278,40 +282,44 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      ModelAssetClassDetails result = api
+      ModelAssetClassDetails result = client
+              .portfolioManagement
               .createAssetClass(userId, userSecret)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getModelAssetClass());
+
+      System.out.println(result.getModelAssetClassTarget());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ModelAssetClassDetails> response = api
+      ApiResponse<ModelAssetClassDetails> response = client
+              .portfolioManagement
               .createAssetClass(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -321,13 +329,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -373,38 +382,44 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      ModelPortfolioDetails result = api
+      ModelPortfolioDetails result = client
+              .portfolioManagement
               .createModelPortfolio()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getModelPortfolio());
+
+      System.out.println(result.getModelPortfolioSecurity());
+
+      System.out.println(result.getModelPortfolioAssetClass());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ModelPortfolioDetails> response = api
+      ApiResponse<ModelPortfolioDetails> response = client
+              .portfolioManagement
               .createModelPortfolio()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -414,13 +429,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#createModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -462,48 +478,49 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to delete.
     try {
-      api
+      client
+              .portfolioManagement
               .deleteAssetClass(modelAssetClassId)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      api
+      client
+              .portfolioManagement
               .deleteAssetClass(modelAssetClassId)
               .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -548,49 +565,50 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to unexclude an asset.
     UUID symbolId = UUID.randomUUID(); // The ID of the excluded asset Symbol to delete.
     try {
-      api
+      client
+              .portfolioManagement
               .deleteExcludedAsset(portfolioGroupId, symbolId)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteExcludedAsset");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      api
+      client
+              .portfolioManagement
               .deleteExcludedAsset(portfolioGroupId, symbolId)
               .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteExcludedAsset");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -636,48 +654,49 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to delete.
     try {
-      api
+      client
+              .portfolioManagement
               .deleteModelPortfolioById(modelPortfolioId)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteModelPortfolioById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      api
+      client
+              .portfolioManagement
               .deleteModelPortfolioById(modelPortfolioId)
               .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deleteModelPortfolioById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -722,39 +741,43 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to delete.
     try {
-      PortfolioGroup result = api
+      PortfolioGroup result = client
+              .portfolioManagement
               .deletePortfoli(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getName());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfoli");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroup> response = api
+      ApiResponse<PortfolioGroup> response = client
+              .portfolioManagement
               .deletePortfoli(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -764,13 +787,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfoli");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -818,40 +842,52 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to remove the target asset.
     UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to delete.
     try {
-      TargetAsset result = api
+      TargetAsset result = client
+              .portfolioManagement
               .deletePortfolioTargetById(portfolioGroupId, targetAssetId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getPercent());
+
+      System.out.println(result.getIsSupported());
+
+      System.out.println(result.getIsExcluded());
+
+      System.out.println(result.getMeta());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<TargetAsset> response = api
+      ApiResponse<TargetAsset> response = client
+              .portfolioManagement
               .deletePortfolioTargetById(portfolioGroupId, targetAssetId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -861,13 +897,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#deletePortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -916,41 +953,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to get.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      ModelAssetClassDetails result = api
+      ModelAssetClassDetails result = client
+              .portfolioManagement
               .detailAssetClass(modelAssetClassId, userId, userSecret)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getModelAssetClass());
+
+      System.out.println(result.getModelAssetClassTarget());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#detailAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ModelAssetClassDetails> response = api
+      ApiResponse<ModelAssetClassDetails> response = client
+              .portfolioManagement
               .detailAssetClass(modelAssetClassId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -960,13 +1001,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#detailAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1013,41 +1055,41 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     UUID calculatedTradeId = UUID.randomUUID(); // The ID of calculated trade to get account impact
     UUID tradeId = UUID.randomUUID(); // The ID of trade object
     try {
-      List<Trade> result = api
+      List<Trade> result = client
+              .portfolioManagement
               .getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getCalculatedTradeById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Trade>> response = api
+      ApiResponse<List<Trade>> response = client
+              .portfolioManagement
               .getCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1057,13 +1099,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getCalculatedTradeById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1110,39 +1153,45 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to get.
     try {
-      ModelPortfolioDetails result = api
+      ModelPortfolioDetails result = client
+              .portfolioManagement
               .getModelDetailsById(modelPortfolioId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getModelPortfolio());
+
+      System.out.println(result.getModelPortfolioSecurity());
+
+      System.out.println(result.getModelPortfolioAssetClass());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getModelDetailsById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ModelPortfolioDetails> response = api
+      ApiResponse<ModelPortfolioDetails> response = client
+              .portfolioManagement
               .getModelDetailsById(modelPortfolioId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1152,13 +1201,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getModelDetailsById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1203,39 +1253,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<Balance> result = api
+      List<Balance> result = client
+              .portfolioManagement
               .getPortfolioBalances(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioBalances");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Balance>> response = api
+      ApiResponse<List<Balance>> response = client
+              .portfolioManagement
               .getPortfolioBalances(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1245,13 +1295,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioBalances");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1299,39 +1350,43 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to get.
     try {
-      PortfolioGroup result = api
+      PortfolioGroup result = client
+              .portfolioManagement
               .getPortfolioDetailsById(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getName());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioDetailsById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroup> response = api
+      ApiResponse<PortfolioGroup> response = client
+              .portfolioManagement
               .getPortfolioDetailsById(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1341,13 +1396,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioDetailsById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1393,39 +1449,61 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      PortfolioGroupInfo result = api
+      PortfolioGroupInfo result = client
+              .portfolioManagement
               .getPortfolioInfo(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getSymbols());
+
+      System.out.println(result.getQuotableSymbols());
+
+      System.out.println(result.getBalances());
+
+      System.out.println(result.getPositions());
+
+      System.out.println(result.getTargetPositions());
+
+      System.out.println(result.getIdealPositions());
+
+      System.out.println(result.getExcludedPositions());
+
+      System.out.println(result.getCalculatedTrades());
+
+      System.out.println(result.getBrokerageAuthorizations());
+
+      System.out.println(result.getAccuracy());
+
+      System.out.println(result.getSettings());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioInfo");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroupInfo> response = api
+      ApiResponse<PortfolioGroupInfo> response = client
+              .portfolioManagement
               .getPortfolioInfo(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1435,13 +1513,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioInfo");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1487,39 +1566,49 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the settings.
     try {
-      PortfolioGroupSettings result = api
+      PortfolioGroupSettings result = client
+              .portfolioManagement
               .getPortfolioSettings(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBuyOnly());
+
+      System.out.println(result.getCashOptimizer());
+
+      System.out.println(result.getNotifyFrequency());
+
+      System.out.println(result.getDriftThreshold());
+
+      System.out.println(result.getPreferredCurrency());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioSettings");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroupSettings> response = api
+      ApiResponse<PortfolioGroupSettings> response = client
+              .portfolioManagement
               .getPortfolioSettings(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1529,13 +1618,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioSettings");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1581,40 +1671,52 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the target asset.
     UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to get.
     try {
-      TargetAsset result = api
+      TargetAsset result = client
+              .portfolioManagement
               .getPortfolioTargetById(portfolioGroupId, targetAssetId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getPercent());
+
+      System.out.println(result.getIsSupported());
+
+      System.out.println(result.getIsExcluded());
+
+      System.out.println(result.getMeta());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<TargetAsset> response = api
+      ApiResponse<TargetAsset> response = client
+              .portfolioManagement
               .getPortfolioTargetById(portfolioGroupId, targetAssetId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1624,13 +1726,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1677,39 +1780,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = api
+      List<TargetAsset> result = client
+              .portfolioManagement
               .getPortfolioTargets(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<TargetAsset>> response = api
+      ApiResponse<List<TargetAsset>> response = client
+              .portfolioManagement
               .getPortfolioTargets(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1719,13 +1822,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortfolioTargets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1773,39 +1877,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the excluded assets are linked.
     try {
-      List<ExcludedAsset> result = api
+      List<ExcludedAsset> result = client
+              .portfolioManagement
               .getPortoflioExcludedAssets(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortoflioExcludedAssets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<ExcludedAsset>> response = api
+      ApiResponse<List<ExcludedAsset>> response = client
+              .portfolioManagement
               .getPortoflioExcludedAssets(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1815,13 +1919,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#getPortoflioExcludedAssets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1867,39 +1972,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = api
+      List<TargetAsset> result = client
+              .portfolioManagement
               .importModelPortfolio(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#importModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<TargetAsset>> response = api
+      ApiResponse<List<TargetAsset>> response = client
+              .portfolioManagement
               .importModelPortfolio(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -1909,13 +2014,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#importModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -1961,40 +2067,40 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      List<PortfolioGroup> result = api
+      List<PortfolioGroup> result = client
+              .portfolioManagement
               .list(userId, userSecret)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#list");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<PortfolioGroup>> response = api
+      ApiResponse<List<PortfolioGroup>> response = client
+              .portfolioManagement
               .list(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2004,13 +2110,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#list");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2057,40 +2164,40 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      List<ModelAssetClassDetails> result = api
+      List<ModelAssetClassDetails> result = client
+              .portfolioManagement
               .listAssetClasses(userId, userSecret)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listAssetClasses");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<ModelAssetClassDetails>> response = api
+      ApiResponse<List<ModelAssetClassDetails>> response = client
+              .portfolioManagement
               .listAssetClasses(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2100,13 +2207,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listAssetClasses");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2152,39 +2260,43 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
     try {
-      CalculatedTrade result = api
+      CalculatedTrade result = client
+              .portfolioManagement
               .listCalculatedTrades(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getTrades());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listCalculatedTrades");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<CalculatedTrade> response = api
+      ApiResponse<CalculatedTrade> response = client
+              .portfolioManagement
               .listCalculatedTrades(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2194,13 +2306,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listCalculatedTrades");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2245,38 +2358,38 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<ModelPortfolioDetails> result = api
+      List<ModelPortfolioDetails> result = client
+              .portfolioManagement
               .listModelPortfolio()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<ModelPortfolioDetails>> response = api
+      ApiResponse<List<ModelPortfolioDetails>> response = client
+              .portfolioManagement
               .listModelPortfolio()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2286,13 +2399,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listModelPortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2334,39 +2448,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the accounts are linked.
     try {
-      List<Account> result = api
+      List<Account> result = client
+              .portfolioManagement
               .listPortfolioAccounts(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listPortfolioAccounts");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Account>> response = api
+      ApiResponse<List<Account>> response = client
+              .portfolioManagement
               .listPortfolioAccounts(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2376,13 +2490,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#listPortfolioAccounts");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2428,27 +2543,26 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to update.
     ModelPortfolio modelPortfolio = new ModelPortfolio();
     List<ModelPortfolioSecurity> modelPortfolioSecurity = Arrays.asList();
     List<ModelPortfolioAssetClass> modelPortfolioAssetClass = Arrays.asList();
     try {
-      api
+      client
+              .portfolioManagement
               .modifyModelPortfolioById(modelPortfolioId)
               .modelPortfolio(modelPortfolio)
               .modelPortfolioSecurity(modelPortfolioSecurity)
@@ -2456,15 +2570,16 @@ public class Example {
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#modifyModelPortfolioById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      api
+      client
+              .portfolioManagement
               .modifyModelPortfolioById(modelPortfolioId)
               .modelPortfolio(modelPortfolio)
               .modelPortfolioSecurity(modelPortfolioSecurity)
@@ -2472,13 +2587,14 @@ public class Example {
               .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#modifyModelPortfolioById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2524,43 +2640,47 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to update.
     UUID id = UUID.randomUUID();
     String name = "name_example";
     try {
-      PortfolioGroup result = api
+      PortfolioGroup result = client
+              .portfolioManagement
               .savePortfolio(portfolioGroupId)
               .id(id)
               .name(name)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getName());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#savePortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroup> response = api
+      ApiResponse<PortfolioGroup> response = client
+              .portfolioManagement
               .savePortfolio(portfolioGroupId)
               .id(id)
               .name(name)
@@ -2572,13 +2692,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#savePortfolio");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2627,41 +2748,41 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to search under
     String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = api
+      List<UniversalSymbol> result = client
+              .portfolioManagement
               .searchPortfolioSymbols(portfolioGroupId)
               .substring(substring)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#searchPortfolioSymbols");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<UniversalSymbol>> response = api
+      ApiResponse<List<UniversalSymbol>> response = client
+              .portfolioManagement
               .searchPortfolioSymbols(portfolioGroupId)
               .substring(substring)
               .executeWithHttpInfo();
@@ -2672,13 +2793,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#searchPortfolioSymbols");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2725,39 +2847,39 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
     try {
-      List<TargetAsset> result = api
+      List<TargetAsset> result = client
+              .portfolioManagement
               .setPortfolioTargets(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#setPortfolioTargets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<TargetAsset>> response = api
+      ApiResponse<List<TargetAsset>> response = client
+              .portfolioManagement
               .setPortfolioTargets(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2767,13 +2889,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#setPortfolioTargets");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2822,56 +2945,57 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to update.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     ModelAssetClass modelAssetClass = new ModelAssetClass();
     List<ModelAssetClassTarget> modelAssetClassTarget = Arrays.asList();
     try {
-      api
+      client
+              .portfolioManagement
               .updateAssetClass(modelAssetClassId, userId, userSecret)
               .modelAssetClass(modelAssetClass)
               .modelAssetClassTarget(modelAssetClassTarget)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updateAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      api
+      client
+              .portfolioManagement
               .updateAssetClass(modelAssetClassId, userId, userSecret)
               .modelAssetClass(modelAssetClass)
               .modelAssetClassTarget(modelAssetClassTarget)
               .executeWithHttpInfo();
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updateAssetClass");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -2919,39 +3043,49 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the settings.
     try {
-      PortfolioGroupSettings result = api
+      PortfolioGroupSettings result = client
+              .portfolioManagement
               .updatePortfolioSettings(portfolioGroupId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getBuyOnly());
+
+      System.out.println(result.getCashOptimizer());
+
+      System.out.println(result.getNotifyFrequency());
+
+      System.out.println(result.getDriftThreshold());
+
+      System.out.println(result.getPreferredCurrency());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioSettings");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PortfolioGroupSettings> response = api
+      ApiResponse<PortfolioGroupSettings> response = client
+              .portfolioManagement
               .updatePortfolioSettings(portfolioGroupId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -2961,13 +3095,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioSettings");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -3013,21 +3148,19 @@ import com.konfigthis.client.api.PortfolioManagementApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    PortfolioManagementApi api = new PortfolioManagementApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the target asset.
     UUID targetAssetId = UUID.randomUUID(); // The ID of the TargetAsset to patch.
     UUID id = UUID.randomUUID();
@@ -3037,7 +3170,8 @@ public class Example {
     Boolean isExcluded = true;
     Map<String, Object> meta = new HashMap();
     try {
-      TargetAsset result = api
+      TargetAsset result = client
+              .portfolioManagement
               .updatePortfolioTargetById(portfolioGroupId, targetAssetId)
               .id(id)
               .symbol(symbol)
@@ -3047,18 +3181,31 @@ public class Example {
               .meta(meta)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getPercent());
+
+      System.out.println(result.getIsSupported());
+
+      System.out.println(result.getIsExcluded());
+
+      System.out.println(result.getMeta());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<TargetAsset> response = api
+      ApiResponse<TargetAsset> response = client
+              .portfolioManagement
               .updatePortfolioTargetById(portfolioGroupId, targetAssetId)
               .id(id)
               .symbol(symbol)
@@ -3074,13 +3221,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling PortfolioManagementApi#updatePortfolioTargetById");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters

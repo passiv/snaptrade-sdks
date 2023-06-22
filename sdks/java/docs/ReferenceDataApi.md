@@ -35,39 +35,45 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String currencyPair = "currencyPair_example"; // A currency pair based on currency code for example, {CAD-USD}
     try {
-      ExchangeRatePairs result = api
+      ExchangeRatePairs result = client
+              .referenceData
               .getCurrencyExchangeRatePair(currencyPair)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getSrc());
+
+      System.out.println(result.getDst());
+
+      System.out.println(result.getExchangeRate());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getCurrencyExchangeRatePair");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<ExchangeRatePairs> response = api
+      ApiResponse<ExchangeRatePairs> response = client
+              .referenceData
               .getCurrencyExchangeRatePair(currencyPair)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -77,13 +83,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getCurrencyExchangeRatePair");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -128,38 +135,62 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      PartnerData result = api
+      PartnerData result = client
+              .referenceData
               .getPartnerInfo()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getRedirectUri());
+
+      System.out.println(result.getAllowedBrokerages());
+
+      System.out.println(result.getName());
+
+      System.out.println(result.getSlug());
+
+      System.out.println(result.getLogoUrl());
+
+      System.out.println(result.getPinRequired());
+
+      System.out.println(result.getCanAccessTrades());
+
+      System.out.println(result.getCanAccessHoldings());
+
+      System.out.println(result.getCanAccessAccountHistory());
+
+      System.out.println(result.getCanAccessReferenceData());
+
+      System.out.println(result.getCanAccessPortfolioManagement());
+
+      System.out.println(result.getCanAccessOrders());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<PartnerData> response = api
+      ApiResponse<PartnerData> response = client
+              .referenceData
               .getPartnerInfo()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -169,13 +200,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -218,38 +250,38 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<SecurityType> result = api
+      List<SecurityType> result = client
+              .referenceData
               .getSecurityTypes()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSecurityTypes");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<SecurityType>> response = api
+      ApiResponse<List<SecurityType>> response = client
+              .referenceData
               .getSecurityTypes()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -259,13 +291,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSecurityTypes");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -308,38 +341,38 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<Exchange> result = api
+      List<Exchange> result = client
+              .referenceData
               .getStockExchanges()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getStockExchanges");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Exchange>> response = api
+      ApiResponse<List<Exchange>> response = client
+              .referenceData
               .getStockExchanges()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -349,13 +382,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getStockExchanges");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -397,40 +431,40 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = api
+      List<UniversalSymbol> result = client
+              .referenceData
               .getSymbols()
               .substring(substring)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbols");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<UniversalSymbol>> response = api
+      ApiResponse<List<UniversalSymbol>> response = client
+              .referenceData
               .getSymbols()
               .substring(substring)
               .executeWithHttpInfo();
@@ -441,13 +475,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbols");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -493,41 +528,57 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     UUID ticker = UUID.randomUUID(); // The ticker of the UniversalSymbol to get.
     UUID symbolId = UUID.randomUUID(); // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     try {
-      UniversalSymbol result = api
+      UniversalSymbol result = client
+              .referenceData
               .getSymbolsByTicker(ticker)
               .symbolId(symbolId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getSymbol());
+
+      System.out.println(result.getRawSymbol());
+
+      System.out.println(result.getDescription());
+
+      System.out.println(result.getCurrency());
+
+      System.out.println(result.getExchange());
+
+      System.out.println(result.getType());
+
+      System.out.println(result.getCurrencies());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<UniversalSymbol> response = api
+      ApiResponse<UniversalSymbol> response = client
+              .referenceData
               .getSymbolsByTicker(ticker)
               .symbolId(symbolId)
               .executeWithHttpInfo();
@@ -538,13 +589,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -592,40 +644,40 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String brokerage = "QUESTRADE,ALPACA"; // Comma separated value of brokerage slugs
     try {
-      List<BrokerageAuthorizationTypeReadOnly> result = api
+      List<BrokerageAuthorizationTypeReadOnly> result = client
+              .referenceData
               .listAllBrokerageAuthorizationType()
               .brokerage(brokerage)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageAuthorizationType");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> response = api
+      ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> response = client
+              .referenceData
               .listAllBrokerageAuthorizationType()
               .brokerage(brokerage)
               .executeWithHttpInfo();
@@ -636,13 +688,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageAuthorizationType");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -688,38 +741,38 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<Brokerage> result = api
+      List<Brokerage> result = client
+              .referenceData
               .listAllBrokerages()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerages");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Brokerage>> response = api
+      ApiResponse<List<Brokerage>> response = client
+              .referenceData
               .listAllBrokerages()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -729,13 +782,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerages");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -778,38 +832,38 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<Currency> result = api
+      List<Currency> result = client
+              .referenceData
               .listAllCurrencies()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrencies");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Currency>> response = api
+      ApiResponse<List<Currency>> response = client
+              .referenceData
               .listAllCurrencies()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -819,13 +873,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrencies");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -868,38 +923,38 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<ExchangeRatePairs> result = api
+      List<ExchangeRatePairs> result = client
+              .referenceData
               .listAllCurrenciesRates()
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrenciesRates");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<ExchangeRatePairs>> response = api
+      ApiResponse<List<ExchangeRatePairs>> response = client
+              .referenceData
               .listAllCurrenciesRates()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -909,13 +964,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrenciesRates");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -957,43 +1013,43 @@ import com.konfigthis.client.api.ReferenceDataApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    ReferenceDataApi api = new ReferenceDataApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     String substring = "substring_example";
     try {
-      List<UniversalSymbol> result = api
+      List<UniversalSymbol> result = client
+              .referenceData
               .symbolSearchUserAccount(userId, userSecret, accountId)
               .substring(substring)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#symbolSearchUserAccount");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<UniversalSymbol>> response = api
+      ApiResponse<List<UniversalSymbol>> response = client
+              .referenceData
               .symbolSearchUserAccount(userId, userSecret, accountId)
               .substring(substring)
               .executeWithHttpInfo();
@@ -1004,13 +1060,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#symbolSearchUserAccount");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters

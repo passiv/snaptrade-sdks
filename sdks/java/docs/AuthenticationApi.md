@@ -29,39 +29,43 @@ import com.konfigthis.client.api.AuthenticationApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    AuthenticationApi api = new AuthenticationApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     try {
-      DeleteUserResponse result = api
+      DeleteUserResponse result = client
+              .authentication
               .deleteSnapTradeUser(userId)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getStatus());
+
+      System.out.println(result.getUserId());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#deleteSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<DeleteUserResponse> response = api
+      ApiResponse<DeleteUserResponse> response = client
+              .authentication
               .deleteSnapTradeUser(userId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -71,13 +75,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#deleteSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -123,40 +128,38 @@ import com.konfigthis.client.api.AuthenticationApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    AuthenticationApi api = new AuthenticationApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      EncryptedResponse result = api
+      EncryptedResponse result = client
+              .authentication
               .getUserJWT(userId, userSecret)
               .execute();
-      System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#getUserJWT");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<EncryptedResponse> response = api
+      ApiResponse<EncryptedResponse> response = client
+              .authentication
               .getUserJWT(userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -166,13 +169,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#getUserJWT");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -219,38 +223,36 @@ import com.konfigthis.client.api.AuthenticationApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    AuthenticationApi api = new AuthenticationApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     try {
-      List<String> result = api
+      List<String> result = client
+              .authentication
               .listSnapTradeUsers()
               .execute();
-      System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#listSnapTradeUsers");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<String>> response = api
+      ApiResponse<List<String>> response = client
+              .authentication
               .listSnapTradeUsers()
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -260,13 +262,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#listSnapTradeUsers");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -309,21 +312,19 @@ import com.konfigthis.client.api.AuthenticationApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    AuthenticationApi api = new AuthenticationApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     String broker = "broker_example";
@@ -332,7 +333,8 @@ public class Example {
     String reconnect = "reconnect_example";
     String connectionType = "read";
     try {
-      Object result = api
+      Object result = client
+              .authentication
               .loginSnapTradeUser(userId, userSecret)
               .broker(broker)
               .immediateRedirect(immediateRedirect)
@@ -340,19 +342,18 @@ public class Example {
               .reconnect(reconnect)
               .connectionType(connectionType)
               .execute();
-      System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#loginSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<Object> response = api
+      ApiResponse<Object> response = client
+              .authentication
               .loginSnapTradeUser(userId, userSecret)
               .broker(broker)
               .immediateRedirect(immediateRedirect)
@@ -367,13 +368,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#loginSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters
@@ -421,42 +423,46 @@ import com.konfigthis.client.api.AuthenticationApi;
 
 public class Example {
   public static void main(String[] args) {
-
-    ApiClient apiClient = Configuration.getDefaultApiClient();
-    // Set custom base path if desired
-    // apiClient.setBasePath("https://api.snaptrade.com/api/v1");
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
     
     // Configure API key authorization: PartnerClientId
-    apiClient.setPartnerClientId("YOUR API KEY");
+    configuration.clientId  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerSignature
-    apiClient.setPartnerSignature("YOUR API KEY");
+    configuration.Signature  = "YOUR API KEY";
 
     // Configure API key authorization: PartnerTimestamp
-    apiClient.setPartnerTimestamp("YOUR API KEY");
+    configuration.timestamp  = "YOUR API KEY";
 
-    AuthenticationApi api = new AuthenticationApi(apiClient);
+    Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     String rsaPublicKey = "rsaPublicKey_example"; // Open SSH RSA public key
     try {
-      UserIDandSecret result = api
+      UserIDandSecret result = client
+              .authentication
               .registerSnapTradeUser()
               .userId(userId)
               .rsaPublicKey(rsaPublicKey)
               .execute();
       System.out.println(result);
-      System.out.println(result.toJson()); // Serialize response back to JSON 
+
+      System.out.println(result.getUserId());
+
+      System.out.println(result.getUserSecret());
+
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#registerSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
 
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request 
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<UserIDandSecret> response = api
+      ApiResponse<UserIDandSecret> response = client
+              .authentication
               .registerSnapTradeUser()
               .userId(userId)
               .rsaPublicKey(rsaPublicKey)
@@ -468,13 +474,14 @@ public class Example {
       System.out.println(response.getRequest());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#registerSnapTradeUser");
-      System.err.println("Status code: " + e.getCode());
+      System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
 }
+
 ```
 
 ### Parameters

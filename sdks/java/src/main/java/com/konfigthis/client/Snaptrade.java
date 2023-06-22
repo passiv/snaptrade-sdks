@@ -24,6 +24,10 @@ public class Snaptrade {
     public final TradingApi trading;
     public final TransactionsAndReportingApi transactionsAndReporting;
 
+    public Snaptrade() {
+        this(null);
+    }
+
     public Snaptrade(Configuration configuration) {
         this.apiClient = new ApiClient(null, configuration);
         this.accountInformation = new AccountInformationApi(this.apiClient);
