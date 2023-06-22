@@ -587,11 +587,11 @@ public class AccountOrderRecord {
   }
 
    /**
-   * Trade Price if limit or stop limit order
+   * Stop Price. If stop loss or stop limit order, the price to trigger the stop
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "31.33", value = "Trade Price if limit or stop limit order")
+  @ApiModelProperty(example = "31.33", value = "Stop Price. If stop loss or stop limit order, the price to trigger the stop")
 
   public Double getStopPrice() {
     return stopPrice;

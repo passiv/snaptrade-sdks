@@ -3415,6 +3415,7 @@ try:
             percent=90,  # optional
             is_supported=True,  # optional
             is_excluded=True,  # optional
+            meta={},  # optional
         )
     )
     pprint(update_portfolio_target_by_id_response.body)

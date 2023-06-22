@@ -2742,15 +2742,17 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
+    # @param meta [Hash<String, Object>] 
     # @param body [TargetAsset] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {})
+    def update_portfolio_target_by_id(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, meta: SENTINEL, extra: {})
       _body = {}
       _body[:id] = id if id != SENTINEL
       _body[:symbol] = symbol if symbol != SENTINEL
       _body[:percent] = percent if percent != SENTINEL
       _body[:is_supported] = is_supported if is_supported != SENTINEL
       _body[:is_excluded] = is_excluded if is_excluded != SENTINEL
+      _body[:meta] = meta if meta != SENTINEL
       target_asset = _body
 
       data, _status_code, _headers = update_portfolio_target_by_id_with_http_info_impl(portfolio_group_id, target_asset_id, target_asset, extra)
@@ -2765,15 +2767,17 @@ module SnapTrade
     # @param percent [Float] 
     # @param is_supported [Boolean] 
     # @param is_excluded [Boolean] 
+    # @param meta [Hash<String, Object>] 
     # @param body [TargetAsset] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def update_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, extra: {})
+    def update_portfolio_target_by_id_with_http_info(portfolio_group_id:, target_asset_id:, id: SENTINEL, symbol: SENTINEL, percent: SENTINEL, is_supported: SENTINEL, is_excluded: SENTINEL, meta: SENTINEL, extra: {})
       _body = {}
       _body[:id] = id if id != SENTINEL
       _body[:symbol] = symbol if symbol != SENTINEL
       _body[:percent] = percent if percent != SENTINEL
       _body[:is_supported] = is_supported if is_supported != SENTINEL
       _body[:is_excluded] = is_excluded if is_excluded != SENTINEL
+      _body[:meta] = meta if meta != SENTINEL
       target_asset = _body
 
       update_portfolio_target_by_id_with_http_info_impl(portfolio_group_id, target_asset_id, target_asset, extra)

@@ -17,9 +17,13 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.type.action import Action
+from snaptrade_client.type.cancelled_units import CancelledUnits
+from snaptrade_client.type.filled_units import FilledUnits
+from snaptrade_client.type.open_units import OpenUnits
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
@@ -43,20 +47,17 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # Trade Units
     total_quantity: typing.Union[int, float]
 
-    # Trade Units
-    open_quantity: typing.Union[int, float]
+    open_quantity: OpenUnits
 
-    # Trade Units
-    canceled_quantity: typing.Union[int, float]
+    canceled_quantity: CancelledUnits
 
-    # Trade Units
-    filled_quantity: typing.Union[int, float]
+    filled_quantity: FilledUnits
 
     execution_price: Price
 
     limit_price: Price
 
-    stop_price: Price
+    stop_price: StopPrice
 
     order_type: OrderType
 

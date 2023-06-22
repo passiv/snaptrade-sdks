@@ -183,6 +183,7 @@ class BaseApi(api_client.Api):
         percent: typing.Optional[Percent] = None,
         is_supported: typing.Optional[bool] = None,
         is_excluded: typing.Optional[bool] = None,
+        meta: typing.Optional[typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]] = None,
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -198,6 +199,8 @@ class BaseApi(api_client.Api):
             _body["is_supported"] = is_supported
         if is_excluded is not None:
             _body["is_excluded"] = is_excluded
+        if meta is not None:
+            _body["meta"] = meta
         args.body = body if body is not None else _body
         if portfolio_group_id is not None:
             _path_params["portfolioGroupId"] = portfolio_group_id
@@ -458,6 +461,7 @@ class UpdatePortfolioTargetById(BaseApi):
         percent: typing.Optional[Percent] = None,
         is_supported: typing.Optional[bool] = None,
         is_excluded: typing.Optional[bool] = None,
+        meta: typing.Optional[typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -475,6 +479,7 @@ class UpdatePortfolioTargetById(BaseApi):
             percent=percent,
             is_supported=is_supported,
             is_excluded=is_excluded,
+            meta=meta,
         )
         return await self._aupdate_portfolio_target_by_id_oapg(
             body=args.body,
@@ -491,6 +496,7 @@ class UpdatePortfolioTargetById(BaseApi):
         percent: typing.Optional[Percent] = None,
         is_supported: typing.Optional[bool] = None,
         is_excluded: typing.Optional[bool] = None,
+        meta: typing.Optional[typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -507,6 +513,7 @@ class UpdatePortfolioTargetById(BaseApi):
             percent=percent,
             is_supported=is_supported,
             is_excluded=is_excluded,
+            meta=meta,
         )
         return self._update_portfolio_target_by_id_oapg(
             body=args.body,
@@ -526,6 +533,7 @@ class ApiForpatch(BaseApi):
         percent: typing.Optional[Percent] = None,
         is_supported: typing.Optional[bool] = None,
         is_excluded: typing.Optional[bool] = None,
+        meta: typing.Optional[typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -543,6 +551,7 @@ class ApiForpatch(BaseApi):
             percent=percent,
             is_supported=is_supported,
             is_excluded=is_excluded,
+            meta=meta,
         )
         return await self._aupdate_portfolio_target_by_id_oapg(
             body=args.body,
@@ -559,6 +568,7 @@ class ApiForpatch(BaseApi):
         percent: typing.Optional[Percent] = None,
         is_supported: typing.Optional[bool] = None,
         is_excluded: typing.Optional[bool] = None,
+        meta: typing.Optional[typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -575,6 +585,7 @@ class ApiForpatch(BaseApi):
             percent=percent,
             is_supported=is_supported,
             is_excluded=is_excluded,
+            meta=meta,
         )
         return self._update_portfolio_target_by_id_oapg(
             body=args.body,

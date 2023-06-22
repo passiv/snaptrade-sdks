@@ -29,6 +29,7 @@ from snaptrade_client.model.brokerage_authorization_type_read_only import Broker
 from snaptrade_client.model.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.calculated_trade import CalculatedTrade
+from snaptrade_client.model.cancelled_units import CancelledUnits
 from snaptrade_client.model.cash import Cash
 from snaptrade_client.model.cash_restriction import CashRestriction
 from snaptrade_client.model.client_id import ClientID
@@ -41,6 +42,7 @@ from snaptrade_client.model.encrypted_response import EncryptedResponse
 from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs
 from snaptrade_client.model.excluded_asset import ExcludedAsset
+from snaptrade_client.model.filled_units import FilledUnits
 from snaptrade_client.model.id import Id
 from snaptrade_client.model.jwt import JWT
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI
@@ -63,6 +65,7 @@ from snaptrade_client.model.model_portfolio_security import ModelPortfolioSecuri
 from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
+from snaptrade_client.model.open_units import OpenUnits
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_leg import OptionLeg
 from snaptrade_client.model.option_strategy import OptionStrategy

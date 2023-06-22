@@ -45,7 +45,7 @@ module SnapTrade
     # Trade Price if limit or stop limit order
     attr_accessor :limit_price
 
-    # Trade Price if limit or stop limit order
+    # Stop Price. If stop loss or stop limit order, the price to trigger the stop
     attr_accessor :stop_price
 
     attr_accessor :order_type
@@ -117,6 +117,9 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'open_quantity',
+        :'canceled_quantity',
+        :'filled_quantity',
         :'execution_price',
         :'limit_price',
         :'stop_price',

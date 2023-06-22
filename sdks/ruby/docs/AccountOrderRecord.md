@@ -16,7 +16,7 @@
 | **filled_quantity** | **Float** | Trade Units | [optional] |
 | **execution_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **limit_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
-| **stop_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
+| **stop_price** | **Float** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] |
 | **order_type** | [**OrderType**](OrderType.md) |  | [optional] |
 | **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
 | **time_placed** | **String** | Time | [optional] |

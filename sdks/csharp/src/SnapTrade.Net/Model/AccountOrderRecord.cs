@@ -71,13 +71,13 @@ namespace SnapTrade.Net.Model
         /// <param name="filledQuantity">Trade Units.</param>
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
-        /// <param name="stopPrice">Trade Price if limit or stop limit order.</param>
+        /// <param name="stopPrice">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
         /// <param name="orderType">orderType.</param>
         /// <param name="timeInForce">timeInForce.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), Guid symbol = default(Guid), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), Action? action = default(Action?), decimal totalQuantity = default(decimal), decimal openQuantity = default(decimal), decimal canceledQuantity = default(decimal), decimal filledQuantity = default(decimal), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), Guid symbol = default(Guid), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), Action? action = default(Action?), decimal totalQuantity = default(decimal), decimal? openQuantity = default(decimal?), decimal? canceledQuantity = default(decimal?), decimal? filledQuantity = default(decimal?), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -136,22 +136,22 @@ namespace SnapTrade.Net.Model
         /// Trade Units
         /// </summary>
         /// <value>Trade Units</value>
-        [DataMember(Name = "open_quantity", EmitDefaultValue = false)]
-        public decimal OpenQuantity { get; set; }
+        [DataMember(Name = "open_quantity", EmitDefaultValue = true)]
+        public decimal? OpenQuantity { get; set; }
 
         /// <summary>
         /// Trade Units
         /// </summary>
         /// <value>Trade Units</value>
-        [DataMember(Name = "canceled_quantity", EmitDefaultValue = false)]
-        public decimal CanceledQuantity { get; set; }
+        [DataMember(Name = "canceled_quantity", EmitDefaultValue = true)]
+        public decimal? CanceledQuantity { get; set; }
 
         /// <summary>
         /// Trade Units
         /// </summary>
         /// <value>Trade Units</value>
-        [DataMember(Name = "filled_quantity", EmitDefaultValue = false)]
-        public decimal FilledQuantity { get; set; }
+        [DataMember(Name = "filled_quantity", EmitDefaultValue = true)]
+        public decimal? FilledQuantity { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
@@ -168,9 +168,9 @@ namespace SnapTrade.Net.Model
         public decimal? LimitPrice { get; set; }
 
         /// <summary>
-        /// Trade Price if limit or stop limit order
+        /// Stop Price. If stop loss or stop limit order, the price to trigger the stop
         /// </summary>
-        /// <value>Trade Price if limit or stop limit order</value>
+        /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public decimal? StopPrice { get; set; }
 
@@ -298,15 +298,18 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.OpenQuantity == input.OpenQuantity ||
-                    this.OpenQuantity.Equals(input.OpenQuantity)
+                    (this.OpenQuantity != null &&
+                    this.OpenQuantity.Equals(input.OpenQuantity))
                 ) && base.Equals(input) && 
                 (
                     this.CanceledQuantity == input.CanceledQuantity ||
-                    this.CanceledQuantity.Equals(input.CanceledQuantity)
+                    (this.CanceledQuantity != null &&
+                    this.CanceledQuantity.Equals(input.CanceledQuantity))
                 ) && base.Equals(input) && 
                 (
                     this.FilledQuantity == input.FilledQuantity ||
-                    this.FilledQuantity.Equals(input.FilledQuantity)
+                    (this.FilledQuantity != null &&
+                    this.FilledQuantity.Equals(input.FilledQuantity))
                 ) && base.Equals(input) && 
                 (
                     this.ExecutionPrice == input.ExecutionPrice ||
@@ -377,9 +380,18 @@ namespace SnapTrade.Net.Model
                 }
                 hashCode = (hashCode * 59) + this.Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.TotalQuantity.GetHashCode();
-                hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();
-                hashCode = (hashCode * 59) + this.CanceledQuantity.GetHashCode();
-                hashCode = (hashCode * 59) + this.FilledQuantity.GetHashCode();
+                if (this.OpenQuantity != null)
+                {
+                    hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();
+                }
+                if (this.CanceledQuantity != null)
+                {
+                    hashCode = (hashCode * 59) + this.CanceledQuantity.GetHashCode();
+                }
+                if (this.FilledQuantity != null)
+                {
+                    hashCode = (hashCode * 59) + this.FilledQuantity.GetHashCode();
+                }
                 if (this.ExecutionPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();

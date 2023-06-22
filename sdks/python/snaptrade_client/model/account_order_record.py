@@ -56,9 +56,18 @@ class AccountOrderRecord(
             def action() -> typing.Type['Action']:
                 return Action
             total_quantity = schemas.NumberSchema
-            open_quantity = schemas.NumberSchema
-            canceled_quantity = schemas.NumberSchema
-            filled_quantity = schemas.NumberSchema
+        
+            @staticmethod
+            def open_quantity() -> typing.Type['OpenUnits']:
+                return OpenUnits
+        
+            @staticmethod
+            def canceled_quantity() -> typing.Type['CancelledUnits']:
+                return CancelledUnits
+        
+            @staticmethod
+            def filled_quantity() -> typing.Type['FilledUnits']:
+                return FilledUnits
         
             @staticmethod
             def execution_price() -> typing.Type['Price']:
@@ -69,8 +78,8 @@ class AccountOrderRecord(
                 return Price
         
             @staticmethod
-            def stop_price() -> typing.Type['Price']:
-                return Price
+            def stop_price() -> typing.Type['StopPrice']:
+                return StopPrice
         
             @staticmethod
             def order_type() -> typing.Type['OrderType']:
@@ -126,13 +135,13 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["total_quantity"]) -> MetaOapg.properties.total_quantity: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["open_quantity"]) -> MetaOapg.properties.open_quantity: ...
+    def __getitem__(self, name: typing_extensions.Literal["open_quantity"]) -> 'OpenUnits': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["canceled_quantity"]) -> MetaOapg.properties.canceled_quantity: ...
+    def __getitem__(self, name: typing_extensions.Literal["canceled_quantity"]) -> 'CancelledUnits': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["filled_quantity"]) -> MetaOapg.properties.filled_quantity: ...
+    def __getitem__(self, name: typing_extensions.Literal["filled_quantity"]) -> 'FilledUnits': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["execution_price"]) -> 'Price': ...
@@ -141,7 +150,7 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["limit_price"]) -> 'Price': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> 'Price': ...
+    def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> 'StopPrice': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
@@ -187,13 +196,13 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["total_quantity"]) -> typing.Union[MetaOapg.properties.total_quantity, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["open_quantity"]) -> typing.Union[MetaOapg.properties.open_quantity, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["open_quantity"]) -> typing.Union['OpenUnits', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["canceled_quantity"]) -> typing.Union[MetaOapg.properties.canceled_quantity, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["canceled_quantity"]) -> typing.Union['CancelledUnits', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["filled_quantity"]) -> typing.Union[MetaOapg.properties.filled_quantity, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["filled_quantity"]) -> typing.Union['FilledUnits', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["execution_price"]) -> typing.Union['Price', schemas.Unset]: ...
@@ -202,7 +211,7 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["limit_price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union['Price', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union['StopPrice', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderType', schemas.Unset]: ...
@@ -235,12 +244,12 @@ class AccountOrderRecord(
         option_symbol: typing.Union['OptionsSymbol', schemas.Unset] = schemas.unset,
         action: typing.Union['Action', schemas.Unset] = schemas.unset,
         total_quantity: typing.Union[MetaOapg.properties.total_quantity, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        open_quantity: typing.Union[MetaOapg.properties.open_quantity, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        canceled_quantity: typing.Union[MetaOapg.properties.canceled_quantity, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        filled_quantity: typing.Union[MetaOapg.properties.filled_quantity, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        open_quantity: typing.Union['OpenUnits', schemas.Unset] = schemas.unset,
+        canceled_quantity: typing.Union['CancelledUnits', schemas.Unset] = schemas.unset,
+        filled_quantity: typing.Union['FilledUnits', schemas.Unset] = schemas.unset,
         execution_price: typing.Union['Price', schemas.Unset] = schemas.unset,
         limit_price: typing.Union['Price', schemas.Unset] = schemas.unset,
-        stop_price: typing.Union['Price', schemas.Unset] = schemas.unset,
+        stop_price: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, schemas.Unset] = schemas.unset,
@@ -276,8 +285,12 @@ class AccountOrderRecord(
 
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.cancelled_units import CancelledUnits
+from snaptrade_client.model.filled_units import FilledUnits
+from snaptrade_client.model.open_units import OpenUnits
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
+from snaptrade_client.model.stop_price import StopPrice
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.universal_symbol import UniversalSymbol

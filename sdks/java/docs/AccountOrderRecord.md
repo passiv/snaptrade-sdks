@@ -20,7 +20,7 @@ Record of order in brokerageaccount
 |**filledQuantity** | **Double** | Trade Units |  [optional] |
 |**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
-|**stopPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
+|**stopPrice** | **Double** | Stop Price. If stop loss or stop limit order, the price to trigger the stop |  [optional] |
 |**orderType** | **OrderType** |  |  [optional] |
 |**timeInForce** | **TimeInForce** |  |  [optional] |
 |**timePlaced** | **String** | Time |  [optional] |

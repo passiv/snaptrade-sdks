@@ -86,19 +86,19 @@ export interface AccountOrderRecord {
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'open_quantity'?: number;
+    'open_quantity'?: number | null;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'canceled_quantity'?: number;
+    'canceled_quantity'?: number | null;
     /**
      * Trade Units
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'filled_quantity'?: number;
+    'filled_quantity'?: number | null;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
@@ -112,7 +112,7 @@ export interface AccountOrderRecord {
      */
     'limit_price'?: number | null;
     /**
-     * Trade Price if limit or stop limit order
+     * Stop Price. If stop loss or stop limit order, the price to trigger the stop
      * @type {number}
      * @memberof AccountOrderRecord
      */

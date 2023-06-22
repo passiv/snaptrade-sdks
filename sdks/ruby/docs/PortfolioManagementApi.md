@@ -1991,6 +1991,7 @@ symbol = {
 percent = 90
 is_supported = True
 is_excluded = True
+meta = {}
 
 begin
   # Update a TargetAsset under the specified PortfolioGroup.
@@ -2002,6 +2003,7 @@ begin
     percent: percent,
     is_supported: is_supported,
     is_excluded: is_excluded,
+    meta: meta,
   )
   p result
 rescue SnapTrade::ApiError => e
@@ -2026,6 +2028,7 @@ symbol = {
 percent = 90
 is_supported = True
 is_excluded = True
+meta = {}
 
 begin
   # Update a TargetAsset under the specified PortfolioGroup.
@@ -2037,6 +2040,7 @@ begin
     percent: percent,
     is_supported: is_supported,
     is_excluded: is_excluded,
+    meta: meta,
   )
   p status_code # => 2xx
   p headers # => { ... }
