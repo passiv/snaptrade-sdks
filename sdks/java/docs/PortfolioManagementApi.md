@@ -58,15 +58,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to exclude an asset.
@@ -179,15 +173,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
@@ -284,15 +272,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
@@ -384,15 +366,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     try {
@@ -480,15 +456,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to delete.
@@ -567,15 +537,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to unexclude an asset.
@@ -656,15 +620,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to delete.
@@ -743,15 +701,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to delete.
@@ -844,15 +796,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to remove the target asset.
@@ -955,15 +901,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to get.
@@ -1057,15 +997,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
@@ -1155,15 +1089,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to get.
@@ -1255,15 +1183,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
@@ -1352,15 +1274,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to get.
@@ -1451,15 +1367,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
@@ -1568,15 +1478,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the settings.
@@ -1673,15 +1577,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to get the target asset.
@@ -1782,15 +1680,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
@@ -1879,15 +1771,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the excluded assets are linked.
@@ -1974,15 +1860,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
@@ -2069,15 +1949,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
@@ -2166,15 +2040,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
@@ -2262,15 +2130,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to perform rebalancing calculations
@@ -2360,15 +2222,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     try {
@@ -2450,15 +2306,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which the accounts are linked.
@@ -2545,15 +2395,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelPortfolioId = UUID.randomUUID(); // The ID of the model portfolio to update.
@@ -2642,15 +2486,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to update.
@@ -2750,15 +2588,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup to search under
@@ -2849,15 +2681,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to create the target asset.
@@ -2947,15 +2773,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID modelAssetClassId = UUID.randomUUID(); // The ID of the model asset class to update.
@@ -3045,15 +2865,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the settings.
@@ -3150,15 +2964,9 @@ public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
     configuration.host = "https://api.snaptrade.com/api/v1";
-    
-    // Configure API key authorization: PartnerClientId
-    configuration.clientId  = "YOUR API KEY";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
 
-    // Configure API key authorization: PartnerSignature
-    configuration.Signature  = "YOUR API KEY";
-
-    // Configure API key authorization: PartnerTimestamp
-    configuration.timestamp  = "YOUR API KEY";
 
     Snaptrade client = new Snaptrade(configuration);
     UUID portfolioGroupId = UUID.randomUUID(); // The ID of the PortfolioGroup under which to patch the target asset.

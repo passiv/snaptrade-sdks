@@ -68,6 +68,7 @@ generators:
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
+    apiDocumentationAuthenticationPartial: snippets/javaDocAuthPartial.java
     clientState:
       - consumerKey
     git:
