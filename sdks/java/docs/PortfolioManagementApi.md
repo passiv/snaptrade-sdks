@@ -49,10 +49,14 @@ Adds an asset to exclude to a portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -164,10 +168,14 @@ Create new portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -263,10 +271,14 @@ Create a new model asset class
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -357,10 +369,14 @@ Creates a new model portfolio
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -447,10 +463,14 @@ Deletes a model asset class
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -528,10 +548,14 @@ Unexclude an asset from a portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -611,10 +635,14 @@ Deletes a model portfolio
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -692,10 +720,14 @@ Remove a target portfolio.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -787,10 +819,14 @@ Remove a TargetAsset.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -892,10 +928,14 @@ Get details of a model asset class
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -988,10 +1028,14 @@ Return an individual trade
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1080,10 +1124,14 @@ Get details of a model portfolio
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1174,10 +1222,14 @@ Get sum of cash balances in portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1265,10 +1317,14 @@ Get details of a target portfolio
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1358,10 +1414,14 @@ Return a whole bunch of relevant information relating to a portfolio group.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1469,10 +1529,14 @@ Get portfolio group settings
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1568,10 +1632,14 @@ Get a specific target from a portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1671,10 +1739,14 @@ Get all target assets under the specified PortfolioGroup.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1762,10 +1834,14 @@ Get an array of excluded assets associated with a portfolio group\\
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1851,10 +1927,14 @@ Import target allocation based on portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -1940,10 +2020,14 @@ List all portfolio groups
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2031,10 +2115,14 @@ List of model asset class
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2121,10 +2209,14 @@ List of trades to make to rebalance portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2213,10 +2305,14 @@ List of model portfolio
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2297,10 +2393,14 @@ Get all accounts associated with a portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2386,10 +2486,14 @@ Updates model portfolio object
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2477,10 +2581,14 @@ Update an existing target portfolio.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2579,10 +2687,14 @@ Search for symbols limited to brokerages under the specified portfolio group
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2672,10 +2784,14 @@ Set a new list of target assets under the specified PortfolioGroup. All existing
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2764,10 +2880,14 @@ Updates model asset class objects
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2856,10 +2976,14 @@ Updates portfolio group settings
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -2955,10 +3079,14 @@ Update a TargetAsset under the specified PortfolioGroup.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.PortfolioManagementApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {

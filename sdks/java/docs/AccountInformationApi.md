@@ -25,10 +25,14 @@ List all accounts for the user, plus balances and positions for each account.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -120,10 +124,14 @@ Get all cash balances of an investment account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -213,10 +221,14 @@ Return details of a specific investment account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -306,10 +318,14 @@ Get all history of orders placed in account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -403,10 +419,14 @@ Get all positions of an investment account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -496,10 +516,14 @@ List balances, positions and orders for the specified account.
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -599,10 +623,14 @@ List all investment accounts for the user
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -690,10 +718,14 @@ Update details of an investment account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {

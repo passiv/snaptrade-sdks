@@ -21,10 +21,14 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.TransactionsAndReportingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -134,10 +138,14 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.TransactionsAndReportingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {

@@ -22,10 +22,14 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AuthenticationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -115,10 +119,14 @@ Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local d
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AuthenticationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -204,10 +212,14 @@ Get a list of all SnapTrade users you&#39;ve registered on our platform
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AuthenticationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -287,10 +299,14 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AuthenticationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -392,10 +408,14 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.AuthenticationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {

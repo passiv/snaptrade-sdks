@@ -106,10 +106,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.konfigthis.client.api.*;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.model.*;
-import org.junit.jupiter.api.Test;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

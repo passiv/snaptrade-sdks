@@ -22,10 +22,14 @@ Creates an option strategy object that will be used to place an option strategy 
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -131,10 +135,14 @@ Get the options chain
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -224,10 +232,14 @@ Get latest market data of option strategy
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -331,10 +343,14 @@ Get the options holdings in the account
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
@@ -436,10 +452,14 @@ Place an option strategy order on the brokerage
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.auth.*;
 import com.konfigthis.client.model.*;
 import com.konfigthis.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Example {
   public static void main(String[] args) {
