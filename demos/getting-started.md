@@ -10,6 +10,7 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
 
+
 :::code
 
 ```python
@@ -24,6 +25,9 @@ client_id=SNAPTRADE_CLIENT_ID,
 )
 
 print("Successfully initiated client")
+
+print("::SAVE[SNAPTRADE_CONSUMER_KEY]/{}".format(SNAPTRADE_CONSUMER_KEY))
+print("::SAVE[SNAPTRADE_CLIENTID]/{}".format(SNAPTRADE_CLIENT_ID))
 ```
 
 ```typescript

@@ -11,9 +11,9 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 
 :::form
 
-::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" type="password"}
+::enum{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" savedData=SNAPTRADE_CLIENT_ID description="The ID entered on the first SDK intialization"}
 
-::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
+::enum{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" savedData=SNAPTRADE_CONSUMER_KEY description="The consumer key entered on the first SDK intialization"}
 
 ::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID" type="password"}
 
