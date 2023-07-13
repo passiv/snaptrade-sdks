@@ -13,7 +13,6 @@ class TagValues(str, enum.Enum):
     ACCOUNT_INFORMATION = "Account Information"
     TRANSACTIONS_AND_REPORTING = "Transactions And Reporting"
     TRADING = "Trading"
-    PORTFOLIO_MANAGEMENT = "Portfolio Management"
     REFERENCE_DATA = "Reference Data"
     ERROR_LOGS = "Error Logs"
     OPTIONS = "Options"

@@ -150,7 +150,6 @@ require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
 require 'snaptrade/api/error_logs_api'
 require 'snaptrade/api/options_api'
-require 'snaptrade/api/portfolio_management_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
 require 'snaptrade/api/transactions_and_reporting_api'
@@ -192,7 +191,6 @@ module SnapTrade
     attr_accessor :connections
     attr_accessor :error_logs
     attr_accessor :options
-    attr_accessor :portfolio_management
     attr_accessor :reference_data
     attr_accessor :trading
     attr_accessor :transactions_and_reporting
@@ -205,7 +203,6 @@ module SnapTrade
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
       @error_logs = SnapTrade::ErrorLogsApi.new(@api_client)
       @options = SnapTrade::OptionsApi.new(@api_client)
-      @portfolio_management = SnapTrade::PortfolioManagementApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)
       @transactions_and_reporting = SnapTrade::TransactionsAndReportingApi.new(@api_client)

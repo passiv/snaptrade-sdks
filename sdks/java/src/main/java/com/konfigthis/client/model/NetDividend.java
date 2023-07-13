@@ -297,10 +297,6 @@ public class NetDividend {
           throw new IllegalArgumentException(String.format("The required field(s) %s in NetDividend is not found in the empty JSON string", NetDividend.openapiRequiredFields.toString()));
         }
       }
-      // validate the optional field `symbol`
-      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
-        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
-      }
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));
       }

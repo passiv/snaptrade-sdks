@@ -1,6 +1,5 @@
 # snaptrade-sdks
 
-
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
 |Java|4.1.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.1.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
@@ -33,4 +32,4 @@ Successfully logged in as dylan@konfigthis.com
 
 4. Generate SDKs with `konfig generate`
 
-### [Documentation](https://docs.konfigthis.com/)
+### [Documentation](https://konfigthis.com/docs)

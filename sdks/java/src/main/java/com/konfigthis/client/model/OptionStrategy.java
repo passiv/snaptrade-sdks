@@ -375,10 +375,6 @@ public class OptionStrategy {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      // validate the optional field `underlying_symbol_id`
-      if (jsonObj.get("underlying_symbol_id") != null && !jsonObj.get("underlying_symbol_id").isJsonNull()) {
-        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("underlying_symbol_id"));
-      }
       if ((jsonObj.get("strategy_type") != null && !jsonObj.get("strategy_type").isJsonNull()) && !jsonObj.get("strategy_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `strategy_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("strategy_type").toString()));
       }

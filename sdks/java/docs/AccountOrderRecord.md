@@ -11,7 +11,7 @@ Record of order in brokerageaccount
 |**brokerageOrderId** | **String** | Order id returned by brokerage |  [optional] |
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**symbol** | **UUID** |  |  [optional] |
-|**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
+|**universalSymbol** | **UniversalSymbol** |  |  [optional] |
 |**optionSymbol** | **OptionsSymbol** |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
 |**totalQuantity** | **Double** | Trade Units |  [optional] |

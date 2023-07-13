@@ -670,33 +670,13 @@ public class PortfolioGroupInfo {
           throw new IllegalArgumentException(String.format("The required field(s) %s in PortfolioGroupInfo is not found in the empty JSON string", PortfolioGroupInfo.openapiRequiredFields.toString()));
         }
       }
-      if (jsonObj.get("symbols") != null && !jsonObj.get("symbols").isJsonNull()) {
-        JsonArray jsonArraysymbols = jsonObj.getAsJsonArray("symbols");
-        if (jsonArraysymbols != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("symbols").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `symbols` to be an array in the JSON string but got `%s`", jsonObj.get("symbols").toString()));
-          }
-
-          // validate the optional field `symbols` (array)
-          for (int i = 0; i < jsonArraysymbols.size(); i++) {
-            UniversalSymbol.validateJsonObject(jsonArraysymbols.get(i).getAsJsonObject());
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("symbols") != null && !jsonObj.get("symbols").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `symbols` to be an array in the JSON string but got `%s`", jsonObj.get("symbols").toString()));
       }
-      if (jsonObj.get("quotable_symbols") != null && !jsonObj.get("quotable_symbols").isJsonNull()) {
-        JsonArray jsonArrayquotableSymbols = jsonObj.getAsJsonArray("quotable_symbols");
-        if (jsonArrayquotableSymbols != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("quotable_symbols").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `quotable_symbols` to be an array in the JSON string but got `%s`", jsonObj.get("quotable_symbols").toString()));
-          }
-
-          // validate the optional field `quotable_symbols` (array)
-          for (int i = 0; i < jsonArrayquotableSymbols.size(); i++) {
-            UniversalSymbol.validateJsonObject(jsonArrayquotableSymbols.get(i).getAsJsonObject());
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("quotable_symbols") != null && !jsonObj.get("quotable_symbols").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `quotable_symbols` to be an array in the JSON string but got `%s`", jsonObj.get("quotable_symbols").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonArray()) {
@@ -706,19 +686,9 @@ public class PortfolioGroupInfo {
       if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string but got `%s`", jsonObj.get("positions").toString()));
       }
-      if (jsonObj.get("target_positions") != null && !jsonObj.get("target_positions").isJsonNull()) {
-        JsonArray jsonArraytargetPositions = jsonObj.getAsJsonArray("target_positions");
-        if (jsonArraytargetPositions != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("target_positions").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `target_positions` to be an array in the JSON string but got `%s`", jsonObj.get("target_positions").toString()));
-          }
-
-          // validate the optional field `target_positions` (array)
-          for (int i = 0; i < jsonArraytargetPositions.size(); i++) {
-            TargetAsset.validateJsonObject(jsonArraytargetPositions.get(i).getAsJsonObject());
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("target_positions") != null && !jsonObj.get("target_positions").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `target_positions` to be an array in the JSON string but got `%s`", jsonObj.get("target_positions").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("ideal_positions") != null && !jsonObj.get("ideal_positions").isJsonArray()) {

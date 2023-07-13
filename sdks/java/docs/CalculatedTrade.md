@@ -9,7 +9,7 @@ Array of trades to make to rebalance portfolio
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**trades** | [**List&lt;Trade&gt;**](Trade.md) |  |  [optional] |
+|**trades** | **List&lt;Trade&gt;** |  |  [optional] |
 
 
 

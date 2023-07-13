@@ -439,10 +439,6 @@ public class TargetAsset {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      // validate the optional field `symbol`
-      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
-        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

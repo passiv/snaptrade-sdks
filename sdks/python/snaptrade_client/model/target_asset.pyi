@@ -89,6 +89,7 @@ class TargetAsset(
                 "is_excluded": is_excluded,
                 "meta": meta,
             }
+        additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
@@ -109,12 +110,11 @@ class TargetAsset(
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
     
     @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id", "symbol", "percent", "is_supported", "is_excluded", "meta", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["percent"], typing_extensions.Literal["is_supported"], typing_extensions.Literal["is_excluded"], typing_extensions.Literal["meta"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
-    
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
@@ -135,11 +135,10 @@ class TargetAsset(
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id", "symbol", "percent", "is_supported", "is_excluded", "meta", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["percent"], typing_extensions.Literal["is_supported"], typing_extensions.Literal["is_excluded"], typing_extensions.Literal["meta"], str, ]):
         return super().get_item_oapg(name)
-    
 
     def __new__(
         cls,
@@ -151,7 +150,7 @@ class TargetAsset(
         is_excluded: typing.Union[MetaOapg.properties.is_excluded, bool, schemas.Unset] = schemas.unset,
         meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, None, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'TargetAsset':
         return super().__new__(
             cls,

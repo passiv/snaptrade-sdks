@@ -8,7 +8,7 @@ Details of a security held
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
+|**symbol** | **UniversalSymbol** |  |  [optional] |
 |**price** | **Double** | Last known market price for the symbol |  [optional] |
 |**units** | **Integer** |  |  [optional] |
 
