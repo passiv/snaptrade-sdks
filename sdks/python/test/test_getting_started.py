@@ -58,17 +58,6 @@ class TestGettingStarted(unittest.TestCase):
         )
         print(redirect_uri.body)
 
-        snaptrade.portfolio_management.create(
-            user_id=user_id,
-            user_secret=user_secret,
-            id=str(uuid.uuid4()),
-            name="MyPortfolio",
-        )
-        res = snaptrade.portfolio_management.list(
-            user_id=user_id, user_secret=user_secret
-        )
-        pprint(res.body)
-
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(
             user_id=user_id, user_secret=user_secret
@@ -109,15 +98,6 @@ class TestGettingStarted(unittest.TestCase):
             query_params={"userId": user_id, "userSecret": user_secret}
         )
         print(redirect_uri.body)
-
-        snaptrade.portfolio_management.create(
-            query_params={"userId": user_id, "userSecret": user_secret},
-            body={"id": str(uuid.uuid4()), "name": "MyPortfolio"},
-        )
-        res = snaptrade.portfolio_management.list(
-            query_params={"userId": user_id, "userSecret": user_secret}
-        )
-        pprint(res.body)
 
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(
