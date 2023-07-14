@@ -22,29 +22,6 @@ describe 'GettingStarted' do
     # run after each test
   end
 
-  describe 'non object body parameter' do
-    it 'should work' do
-      configuration = SnapTrade::Configuration.new
-      configuration.client_id = ENV["SNAPTRADE_CLIENT_ID"]
-      configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
-      configuration.host = "http://127.0.0.1:4010"
-      snaptrade = SnapTrade::Client.new(configuration)
-
-      data = snaptrade.portfolio_management.set_portfolio_targets(
-        portfolio_group_id: SecureRandom.uuid,
-        body: [{
-          "id" => SecureRandom.uuid,
-          "symbol" => {
-            "id" => SecureRandom.uuid,
-            "symbol" => "VOO"
-          }
-        }]
-      )
-      puts data
-      expect(data).not_to be_nil
-    end
-  end
-
   describe 'optional non body parameters should be passed' do
     it 'should pass' do
       configuration = SnapTrade::Configuration.new
@@ -86,15 +63,6 @@ describe 'GettingStarted' do
       redirect_uri = SnapTrade::Authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
 
-      SnapTrade::PortfolioManagement.create(
-        user_id: user_id,
-        user_secret: response.user_secret,
-        id: SecureRandom.uuid,
-        name: "MyPortfolio"
-      )
-      portfolios = SnapTrade::PortfolioManagement.list(user_id: user_id, user_secret: response.user_secret)
-      puts portfolios
-
       # 5) Obtaining account holdings data
       holdings = SnapTrade::AccountInformation.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)
       puts holdings
@@ -126,10 +94,6 @@ describe 'GettingStarted' do
       # 4) Get a redirect URI
       redirect_uri = snaptrade.authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
-
-      snaptrade.portfolio_management.create(user_id: user_id, user_secret: response.user_secret, id: SecureRandom.uuid, name: "MyPortfolio")
-      portfolios = snaptrade.portfolio_management.list(user_id: user_id, user_secret: response.user_secret)
-      puts portfolios
 
       # 5) Obtaining account holdings data
       holdings = snaptrade.account_information.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)

@@ -32,15 +32,8 @@ public class GettingStartedTest {
                 UUID userId = UUID.randomUUID();
                 UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
                         .userId(userId.toString()).execute();
-                List<PortfolioGroup> myPortfolio = snaptrade.portfolioManagement.create(userIDandSecret.getUserId(),
-                        userIDandSecret.getUserSecret()).id(UUID.randomUUID()).name("MyPortfolio").execute();
                 List<TargetAsset> targetAsset = new ArrayList<>();
                 targetAsset.add(new TargetAsset().symbol(new UniversalSymbol().symbol("AAPL")).percent(90));
-                List<TargetAsset> execute =
-                        snaptrade.portfolioManagement.setPortfolioTargets(myPortfolio.get(0).getId())
-                                .targetAsset(targetAsset)
-                                .execute();
-                assertNotNull(execute);
                 snaptrade.authentication.deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
         }
 
@@ -77,16 +70,7 @@ public class GettingStartedTest {
                                 .execute();
                 System.out.println(response.get("redirectURI"));
 
-                // 5) Make a portfolio group and query
-                List<PortfolioGroup> portfolioGroupsFromPost = snaptrade.portfolioManagement.create(
-                                userIDandSecret.getUserId(), userIDandSecret.getUserSecret()).id(UUID.randomUUID())
-                                .name("MyPortfolio").execute();
-                System.out.println(portfolioGroupsFromPost);
-                List<PortfolioGroup> portfolioGroups = snaptrade.portfolioManagement.list(userIDandSecret.getUserId(),
-                                userIDandSecret.getUserSecret()).execute();
-                System.out.println(portfolioGroups);
-
-                // 7) Query holdings and available brokerages
+                // 5) Query holdings and available brokerages
                 List<AccountHoldings> holdings = snaptrade.accountInformation
                                 .getAllUserHoldings(userIDandSecret.getUserId(),
                                                 userIDandSecret.getUserSecret())
@@ -98,7 +82,7 @@ public class GettingStartedTest {
                 List<Brokerage> brokerages = snaptrade.referenceData.listAllBrokerages().execute();
                 System.out.println(brokerages);
 
-                // 8) Deleting a user
+                // 6) Deleting a user
                 DeleteUserResponse deleteUserResponse = snaptrade.authentication
                                 .deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
                 System.out.println(deleteUserResponse);

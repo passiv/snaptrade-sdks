@@ -35,7 +35,6 @@ namespace SnapTrade.Net.Test.Api
     {
         private APIStatusApi apiStatusApi;
         private AuthenticationApi authenticationApi;
-        private PortfolioManagementApi portfolioManagementApi;
         private AccountInformationApi accountInformationApi;
 
         private TransactionsAndReportingApi transactionsAndReportingApi;
