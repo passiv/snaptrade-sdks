@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <param name="exchange">exchange.</param>
         /// <param name="type">type.</param>
         /// <param name="currencies">currencies.</param>
-        public UniversalSymbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>))
+        public UniversalSymbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -53,6 +53,7 @@ namespace SnapTrade.Net.Model
             this.Exchange = exchange;
             this.Type = type;
             this.Currencies = currencies;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -104,6 +105,12 @@ namespace SnapTrade.Net.Model
         public List<Currency> Currencies { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -111,6 +118,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class UniversalSymbol {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  RawSymbol: ").Append(RawSymbol).Append("\n");
@@ -119,6 +127,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Exchange: ").Append(Exchange).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Currencies: ").Append(Currencies).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +136,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -153,48 +162,49 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RawSymbol == input.RawSymbol ||
                     (this.RawSymbol != null &&
                     this.RawSymbol.Equals(input.RawSymbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Currency == input.Currency ||
                     (this.Currency != null &&
                     this.Currency.Equals(input.Currency))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Exchange == input.Exchange ||
                     (this.Exchange != null &&
                     this.Exchange.Equals(input.Exchange))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Currencies == input.Currencies ||
                     this.Currencies != null &&
                     input.Currencies != null &&
                     this.Currencies.SequenceEqual(input.Currencies)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -205,7 +215,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -237,6 +247,10 @@ namespace SnapTrade.Net.Model
                 if (this.Currencies != null)
                 {
                     hashCode = (hashCode * 59) + this.Currencies.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

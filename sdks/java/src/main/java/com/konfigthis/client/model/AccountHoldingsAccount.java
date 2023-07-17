@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -322,9 +323,20 @@ public class AccountHoldingsAccount {
         Objects.equals(this.additionalProperties, accountHoldingsAccount.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(account, balances, positions, orders, totalValue, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -381,17 +393,17 @@ public class AccountHoldingsAccount {
           throw new IllegalArgumentException(String.format("The required field(s) %s in AccountHoldingsAccount is not found in the empty JSON string", AccountHoldingsAccount.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string but got `%s`", jsonObj.get("balances").toString()));
+      // ensure the optional json data is an array if present (nullable)
+      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonNull() && !jsonObj.get("balances").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string or null but got `%s`", jsonObj.get("balances").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string but got `%s`", jsonObj.get("positions").toString()));
+      // ensure the optional json data is an array if present (nullable)
+      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonNull() && !jsonObj.get("positions").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string or null but got `%s`", jsonObj.get("positions").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("orders") != null && !jsonObj.get("orders").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `orders` to be an array in the JSON string but got `%s`", jsonObj.get("orders").toString()));
+      // ensure the optional json data is an array if present (nullable)
+      if (jsonObj.get("orders") != null && !jsonObj.get("orders").isJsonNull() && !jsonObj.get("orders").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `orders` to be an array in the JSON string or null but got `%s`", jsonObj.get("orders").toString()));
       }
   }
 

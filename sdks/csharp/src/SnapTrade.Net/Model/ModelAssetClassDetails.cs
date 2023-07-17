@@ -37,10 +37,11 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="modelAssetClass">modelAssetClass.</param>
         /// <param name="modelAssetClassTarget">modelAssetClassTarget.</param>
-        public ModelAssetClassDetails(ModelAssetClass modelAssetClass = default(ModelAssetClass), List<ModelAssetClassTarget> modelAssetClassTarget = default(List<ModelAssetClassTarget>))
+        public ModelAssetClassDetails(ModelAssetClass modelAssetClass = default(ModelAssetClass), List<ModelAssetClassTarget> modelAssetClassTarget = default(List<ModelAssetClassTarget>)) : base()
         {
             this.ModelAssetClass = modelAssetClass;
             this.ModelAssetClassTarget = modelAssetClassTarget;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -56,6 +57,12 @@ namespace SnapTrade.Net.Model
         public List<ModelAssetClassTarget> ModelAssetClassTarget { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -63,8 +70,10 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ModelAssetClassDetails {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  ModelAssetClass: ").Append(ModelAssetClass).Append("\n");
             sb.Append("  ModelAssetClassTarget: ").Append(ModelAssetClassTarget).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +82,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -99,18 +108,19 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.ModelAssetClass == input.ModelAssetClass ||
                     (this.ModelAssetClass != null &&
                     this.ModelAssetClass.Equals(input.ModelAssetClass))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ModelAssetClassTarget == input.ModelAssetClassTarget ||
                     this.ModelAssetClassTarget != null &&
                     input.ModelAssetClassTarget != null &&
                     this.ModelAssetClassTarget.SequenceEqual(input.ModelAssetClassTarget)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -121,7 +131,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.ModelAssetClass != null)
                 {
                     hashCode = (hashCode * 59) + this.ModelAssetClass.GetHashCode();
@@ -129,6 +139,10 @@ namespace SnapTrade.Net.Model
                 if (this.ModelAssetClassTarget != null)
                 {
                     hashCode = (hashCode * 59) + this.ModelAssetClassTarget.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

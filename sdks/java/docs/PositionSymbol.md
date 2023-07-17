@@ -10,7 +10,7 @@ Symbol returned in position object
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
-|**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
+|**symbol** | **UniversalSymbol** |  |  [optional] |
 |**localId** | **String** |  |  [optional] |
 |**isQuotable** | **Boolean** |  |  [optional] |
 |**isTradable** | **Boolean** |  |  [optional] |

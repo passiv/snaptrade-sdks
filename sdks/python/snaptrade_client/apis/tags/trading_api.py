@@ -11,12 +11,8 @@
 """
 
 from snaptrade_client.paths.accounts_account_id_orders_cancel.post import CancelUserAccountOrder
-from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id.get import GetCalculatedTradeImpactById
-from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact.get import GetCalculatedTradesImpact
 from snaptrade_client.paths.trade_impact.post import GetOrderImpact
 from snaptrade_client.paths.accounts_account_id_quotes.get import GetUserAccountQuotes
-from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id.patch import ModifyCalculatedTradeById
-from snaptrade_client.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders.post import PlaceCalculatedTrades
 from snaptrade_client.paths.trade_place.post import PlaceForceOrder
 from snaptrade_client.paths.trade_oco.post import PlaceOcoOrder
 from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
@@ -24,12 +20,8 @@ from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
 
 class TradingApi(
     CancelUserAccountOrder,
-    GetCalculatedTradeImpactById,
-    GetCalculatedTradesImpact,
     GetOrderImpact,
     GetUserAccountQuotes,
-    ModifyCalculatedTradeById,
-    PlaceCalculatedTrades,
     PlaceForceOrder,
     PlaceOcoOrder,
     PlaceOrder,

@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="isSupported">isSupported.</param>
         /// <param name="isExcluded">isExcluded.</param>
         /// <param name="meta">meta.</param>
-        public TargetAsset(Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), decimal percent = default(decimal), bool isSupported = default(bool), bool isExcluded = default(bool), Dictionary<string, Object> meta = default(Dictionary<string, Object>))
+        public TargetAsset(Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), decimal percent = default(decimal), bool isSupported = default(bool), bool isExcluded = default(bool), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -49,6 +49,7 @@ namespace SnapTrade.Net.Model
             this.IsSupported = isSupported;
             this.IsExcluded = isExcluded;
             this.Meta = meta;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -88,6 +89,12 @@ namespace SnapTrade.Net.Model
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -95,12 +102,14 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class TargetAsset {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Percent: ").Append(Percent).Append("\n");
             sb.Append("  IsSupported: ").Append(IsSupported).Append("\n");
             sb.Append("  IsExcluded: ").Append(IsExcluded).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,7 +118,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -135,35 +144,36 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Percent == input.Percent ||
                     this.Percent.Equals(input.Percent)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.IsSupported == input.IsSupported ||
                     this.IsSupported.Equals(input.IsSupported)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.IsExcluded == input.IsExcluded ||
                     this.IsExcluded.Equals(input.IsExcluded)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Meta == input.Meta ||
                     this.Meta != null &&
                     input.Meta != null &&
                     this.Meta.SequenceEqual(input.Meta)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -174,7 +184,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -189,6 +199,10 @@ namespace SnapTrade.Net.Model
                 if (this.Meta != null)
                 {
                     hashCode = (hashCode * 59) + this.Meta.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

@@ -57,13 +57,13 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Balances
         /// </summary>
-        [DataMember(Name = "balances", EmitDefaultValue = false)]
+        [DataMember(Name = "balances", EmitDefaultValue = true)]
         public List<Balance> Balances { get; set; }
 
         /// <summary>
         /// Gets or Sets Positions
         /// </summary>
-        [DataMember(Name = "positions", EmitDefaultValue = false)]
+        [DataMember(Name = "positions", EmitDefaultValue = true)]
         public List<Position> Positions { get; set; }
 
         /// <summary>

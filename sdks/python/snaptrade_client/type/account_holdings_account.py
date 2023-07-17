@@ -27,11 +27,11 @@ class RequiredAccountHoldingsAccount(TypedDict):
 class OptionalAccountHoldingsAccount(TypedDict, total=False):
     account: SnapTradeHoldingsAccountAccountId
 
-    balances: typing.List[Balance]
+    balances: typing.Optional[typing.List[Balance]]
 
-    positions: typing.List[Position]
+    positions: typing.Optional[typing.List[Position]]
 
-    orders: typing.List[AccountOrderRecord]
+    orders: typing.Optional[typing.List[AccountOrderRecord]]
 
     total_value: SnapTradeHoldingsTotalValue
 

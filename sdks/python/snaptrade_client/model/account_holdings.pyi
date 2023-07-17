@@ -44,7 +44,10 @@ class AccountHoldings(
             
             
             class balances(
-                schemas.ListSchema
+                schemas.ListBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneTupleMixin
             ):
             
             
@@ -54,23 +57,24 @@ class AccountHoldings(
                     def items() -> typing.Type['Balance']:
                         return Balance
             
+            
                 def __new__(
                     cls,
-                    arg: typing.Union[typing.Tuple['Balance'], typing.List['Balance']],
+                    *args: typing.Union[list, tuple, None, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'balances':
                     return super().__new__(
                         cls,
-                        arg,
+                        *args,
                         _configuration=_configuration,
                     )
             
-                def __getitem__(self, i: int) -> 'Balance':
-                    return super().__getitem__(i)
-            
             
             class positions(
-                schemas.ListSchema
+                schemas.ListBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneTupleMixin
             ):
             
             
@@ -80,19 +84,17 @@ class AccountHoldings(
                     def items() -> typing.Type['Position']:
                         return Position
             
+            
                 def __new__(
                     cls,
-                    arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
+                    *args: typing.Union[list, tuple, None, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'positions':
                     return super().__new__(
                         cls,
-                        arg,
+                        *args,
                         _configuration=_configuration,
                     )
-            
-                def __getitem__(self, i: int) -> 'Position':
-                    return super().__getitem__(i)
         
             @staticmethod
             def total_value() -> typing.Type['SnapTradeHoldingsTotalValue']:
@@ -146,8 +148,8 @@ class AccountHoldings(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         account: typing.Union['SnapTradeHoldingsAccount', schemas.Unset] = schemas.unset,
-        balances: typing.Union[MetaOapg.properties.balances, list, tuple, schemas.Unset] = schemas.unset,
-        positions: typing.Union[MetaOapg.properties.positions, list, tuple, schemas.Unset] = schemas.unset,
+        balances: typing.Union[MetaOapg.properties.balances, list, tuple, None, schemas.Unset] = schemas.unset,
+        positions: typing.Union[MetaOapg.properties.positions, list, tuple, None, schemas.Unset] = schemas.unset,
         total_value: typing.Union['SnapTradeHoldingsTotalValue', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
