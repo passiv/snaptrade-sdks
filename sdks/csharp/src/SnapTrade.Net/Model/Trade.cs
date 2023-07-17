@@ -69,7 +69,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">units.</param>
         /// <param name="price">price.</param>
         /// <param name="sequence">sequence.</param>
-        public Trade(Guid id = default(Guid), Account account = default(Account), BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), ActionEnum? action = default(ActionEnum?), int units = default(int), decimal price = default(decimal), int sequence = default(int))
+        public Trade(Guid id = default(Guid), Account account = default(Account), BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), ActionEnum? action = default(ActionEnum?), int units = default(int), decimal price = default(decimal), int sequence = default(int)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -79,6 +79,7 @@ namespace SnapTrade.Net.Model
             this.Units = units;
             this.Price = price;
             this.Sequence = sequence;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -124,6 +125,12 @@ namespace SnapTrade.Net.Model
         public int Sequence { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -131,6 +138,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Trade {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
@@ -139,6 +147,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Sequence: ").Append(Sequence).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -147,7 +156,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -173,43 +182,44 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Account == input.Account ||
                     (this.Account != null &&
                     this.Account.Equals(input.Account))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UniversalSymbol == input.UniversalSymbol ||
                     (this.UniversalSymbol != null &&
                     this.UniversalSymbol.Equals(input.UniversalSymbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Action == input.Action ||
                     this.Action.Equals(input.Action)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
                     this.Units.Equals(input.Units)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Price == input.Price ||
                     this.Price.Equals(input.Price)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Sequence == input.Sequence ||
                     this.Sequence.Equals(input.Sequence)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -220,7 +230,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -241,6 +251,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.Units.GetHashCode();
                 hashCode = (hashCode * 59) + this.Price.GetHashCode();
                 hashCode = (hashCode * 59) + this.Sequence.GetHashCode();
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
+                }
                 return hashCode;
             }
         }

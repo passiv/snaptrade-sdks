@@ -251,19 +251,9 @@ public class CalculatedTrade {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      if (jsonObj.get("trades") != null && !jsonObj.get("trades").isJsonNull()) {
-        JsonArray jsonArraytrades = jsonObj.getAsJsonArray("trades");
-        if (jsonArraytrades != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("trades").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `trades` to be an array in the JSON string but got `%s`", jsonObj.get("trades").toString()));
-          }
-
-          // validate the optional field `trades` (array)
-          for (int i = 0; i < jsonArraytrades.size(); i++) {
-            Trade.validateJsonObject(jsonArraytrades.get(i).getAsJsonObject());
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("trades") != null && !jsonObj.get("trades").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `trades` to be an array in the JSON string but got `%s`", jsonObj.get("trades").toString()));
       }
   }
 

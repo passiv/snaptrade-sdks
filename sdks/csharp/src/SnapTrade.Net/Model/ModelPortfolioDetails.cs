@@ -38,11 +38,12 @@ namespace SnapTrade.Net.Model
         /// <param name="modelPortfolio">modelPortfolio.</param>
         /// <param name="modelPortfolioSecurity">modelPortfolioSecurity.</param>
         /// <param name="modelPortfolioAssetClass">modelPortfolioAssetClass.</param>
-        public ModelPortfolioDetails(ModelPortfolio modelPortfolio = default(ModelPortfolio), List<ModelPortfolioSecurity> modelPortfolioSecurity = default(List<ModelPortfolioSecurity>), List<ModelPortfolioAssetClass> modelPortfolioAssetClass = default(List<ModelPortfolioAssetClass>))
+        public ModelPortfolioDetails(ModelPortfolio modelPortfolio = default(ModelPortfolio), List<ModelPortfolioSecurity> modelPortfolioSecurity = default(List<ModelPortfolioSecurity>), List<ModelPortfolioAssetClass> modelPortfolioAssetClass = default(List<ModelPortfolioAssetClass>)) : base()
         {
             this.ModelPortfolio = modelPortfolio;
             this.ModelPortfolioSecurity = modelPortfolioSecurity;
             this.ModelPortfolioAssetClass = modelPortfolioAssetClass;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -64,6 +65,12 @@ namespace SnapTrade.Net.Model
         public List<ModelPortfolioAssetClass> ModelPortfolioAssetClass { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -71,9 +78,11 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ModelPortfolioDetails {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  ModelPortfolio: ").Append(ModelPortfolio).Append("\n");
             sb.Append("  ModelPortfolioSecurity: ").Append(ModelPortfolioSecurity).Append("\n");
             sb.Append("  ModelPortfolioAssetClass: ").Append(ModelPortfolioAssetClass).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +91,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -108,24 +117,25 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.ModelPortfolio == input.ModelPortfolio ||
                     (this.ModelPortfolio != null &&
                     this.ModelPortfolio.Equals(input.ModelPortfolio))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ModelPortfolioSecurity == input.ModelPortfolioSecurity ||
                     this.ModelPortfolioSecurity != null &&
                     input.ModelPortfolioSecurity != null &&
                     this.ModelPortfolioSecurity.SequenceEqual(input.ModelPortfolioSecurity)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ModelPortfolioAssetClass == input.ModelPortfolioAssetClass ||
                     this.ModelPortfolioAssetClass != null &&
                     input.ModelPortfolioAssetClass != null &&
                     this.ModelPortfolioAssetClass.SequenceEqual(input.ModelPortfolioAssetClass)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -136,7 +146,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.ModelPortfolio != null)
                 {
                     hashCode = (hashCode * 59) + this.ModelPortfolio.GetHashCode();
@@ -148,6 +158,10 @@ namespace SnapTrade.Net.Model
                 if (this.ModelPortfolioAssetClass != null)
                 {
                     hashCode = (hashCode * 59) + this.ModelPortfolioAssetClass.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

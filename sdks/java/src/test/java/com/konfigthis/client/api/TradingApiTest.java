@@ -16,22 +16,16 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
-import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Action;
-import com.konfigthis.client.model.BrokerageSymbol;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForce;
-import com.konfigthis.client.model.Trade;
-import com.konfigthis.client.model.TradeExecutionStatus;
-import com.konfigthis.client.model.TradeImpact;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
-import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -69,35 +63,6 @@ public class TradingApiTest {
         UUID brokerageOrderId = null;
         AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId)
                 .brokerageOrderId(brokerageOrderId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Return details of a specific trade before it&#39;s placed
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getCalculatedTradeImpactByIdTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        Trade response = api.getCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Return the impact of placing a series of trades on the portfolio
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getCalculatedTradesImpactTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        List<TradeImpact> response = api.getCalculatedTradesImpact(portfolioGroupId, calculatedTradeId)
                 .execute();
         // TODO: test validations
     }
@@ -146,51 +111,6 @@ public class TradingApiTest {
         Boolean useTicker = null;
         List<SymbolsQuotesInner> response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
                 .useTicker(useTicker)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Modify units of a trade before it is placed
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void modifyCalculatedTradeByIdTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        UUID tradeId = null;
-        UUID id = null;
-        Account account = null;
-        BrokerageSymbol symbol = null;
-        UniversalSymbol universalSymbol = null;
-        String action = null;
-        Integer units = null;
-        Double price = null;
-        Integer sequence = null;
-        Trade response = api.modifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId)
-                .id(id)
-                .account(account)
-                .symbol(symbol)
-                .universalSymbol(universalSymbol)
-                .action(action)
-                .units(units)
-                .price(price)
-                .sequence(sequence)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Place orders for the CalculatedTrades in series
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void placeCalculatedTradesTest() throws ApiException {
-        UUID portfolioGroupId = null;
-        UUID calculatedTradeId = null;
-        List<TradeExecutionStatus> response = api.placeCalculatedTrades(portfolioGroupId, calculatedTradeId)
                 .execute();
         // TODO: test validations
     }

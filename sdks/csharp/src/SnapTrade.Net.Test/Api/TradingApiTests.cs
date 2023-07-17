@@ -71,33 +71,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetCalculatedTradeImpactById
-        /// </summary>
-        [Fact]
-        public void GetCalculatedTradeImpactByIdTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //Guid portfolioGroupId = null;
-            //Guid calculatedTradeId = null;
-            //Guid tradeId = null;
-            //var response = instance.GetCalculatedTradeImpactById(portfolioGroupId, calculatedTradeId, tradeId);
-            //Assert.IsType<Trade>(response);
-        }
-
-        /// <summary>
-        /// Test GetCalculatedTradesImpact
-        /// </summary>
-        [Fact]
-        public void GetCalculatedTradesImpactTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //Guid portfolioGroupId = null;
-            //Guid calculatedTradeId = null;
-            //var response = instance.GetCalculatedTradesImpact(portfolioGroupId, calculatedTradeId);
-            //Assert.IsType<List<TradeImpact>>(response);
-        }
-
-        /// <summary>
         /// Test GetOrderImpact
         /// </summary>
         [Fact]
@@ -125,34 +98,6 @@ namespace SnapTrade.Net.Test.Api
             //bool? useTicker = null;
             //var response = instance.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
             //Assert.IsType<List<SymbolsQuotesInner>>(response);
-        }
-
-        /// <summary>
-        /// Test ModifyCalculatedTradeById
-        /// </summary>
-        [Fact]
-        public void ModifyCalculatedTradeByIdTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //Guid portfolioGroupId = null;
-            //Guid calculatedTradeId = null;
-            //Guid tradeId = null;
-            //Trade trade = null;
-            //var response = instance.ModifyCalculatedTradeById(portfolioGroupId, calculatedTradeId, tradeId, trade);
-            //Assert.IsType<Trade>(response);
-        }
-
-        /// <summary>
-        /// Test PlaceCalculatedTrades
-        /// </summary>
-        [Fact]
-        public void PlaceCalculatedTradesTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //Guid portfolioGroupId = null;
-            //Guid calculatedTradeId = null;
-            //var response = instance.PlaceCalculatedTrades(portfolioGroupId, calculatedTradeId);
-            //Assert.IsType<List<TradeExecutionStatus>>(response);
         }
 
         /// <summary>

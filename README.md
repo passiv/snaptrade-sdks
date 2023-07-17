@@ -1,14 +1,13 @@
 # snaptrade-sdks
 
-
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
-|Java|4.1.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.1.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
-|Ruby|1.7.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.7.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
-|Python|10.21.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.21.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
-|TypeScript|8.17.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.17.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
-|C#|3.21.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.21.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
-|PHP|1.14.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.14.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
+|Java|4.2.0|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.2.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
+|Ruby|1.8.0|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.8.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
+|Python|10.22.0|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.22.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
+|TypeScript|8.18.0|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.18.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
+|C#|3.22.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.22.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
+|PHP|1.15.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.15.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
 
 
 ## How to regenerate SDKs
@@ -33,4 +32,4 @@ Successfully logged in as dylan@konfigthis.com
 
 4. Generate SDKs with `konfig generate`
 
-### [Documentation](https://docs.konfigthis.com/)
+### [Documentation](https://konfigthis.com/docs)

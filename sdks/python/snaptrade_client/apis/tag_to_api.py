@@ -8,7 +8,6 @@ from snaptrade_client.apis.tags.connections_api import ConnectionsApi
 from snaptrade_client.apis.tags.account_information_api import AccountInformationApi
 from snaptrade_client.apis.tags.transactions_and_reporting_api import TransactionsAndReportingApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
-from snaptrade_client.apis.tags.portfolio_management_api import PortfolioManagementApi
 from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.error_logs_api import ErrorLogsApi
 from snaptrade_client.apis.tags.options_api import OptionsApi
@@ -23,7 +22,6 @@ TagToApi = typing_extensions.TypedDict(
         TagValues.ACCOUNT_INFORMATION: AccountInformationApi,
         TagValues.TRANSACTIONS_AND_REPORTING: TransactionsAndReportingApi,
         TagValues.TRADING: TradingApi,
-        TagValues.PORTFOLIO_MANAGEMENT: PortfolioManagementApi,
         TagValues.REFERENCE_DATA: ReferenceDataApi,
         TagValues.ERROR_LOGS: ErrorLogsApi,
         TagValues.OPTIONS: OptionsApi,
@@ -39,7 +37,6 @@ tag_to_api = TagToApi(
         TagValues.ACCOUNT_INFORMATION: AccountInformationApi,
         TagValues.TRANSACTIONS_AND_REPORTING: TransactionsAndReportingApi,
         TagValues.TRADING: TradingApi,
-        TagValues.PORTFOLIO_MANAGEMENT: PortfolioManagementApi,
         TagValues.REFERENCE_DATA: ReferenceDataApi,
         TagValues.ERROR_LOGS: ErrorLogsApi,
         TagValues.OPTIONS: OptionsApi,

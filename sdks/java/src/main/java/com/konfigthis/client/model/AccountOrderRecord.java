@@ -939,10 +939,6 @@ public class AccountOrderRecord {
       if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
-      // validate the optional field `universal_symbol`
-      if (jsonObj.get("universal_symbol") != null && !jsonObj.get("universal_symbol").isJsonNull()) {
-        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("universal_symbol"));
-      }
       if ((jsonObj.get("time_placed") != null && !jsonObj.get("time_placed").isJsonNull()) && !jsonObj.get("time_placed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_placed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_placed").toString()));
       }

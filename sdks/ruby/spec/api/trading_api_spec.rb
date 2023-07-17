@@ -42,31 +42,6 @@ describe 'TradingApi' do
     end
   end
 
-  # unit tests for get_calculated_trade_impact_by_id
-  # Return details of a specific trade before it&#39;s placed
-  # @param portfolio_group_id The ID of the PortfolioGroup to perform rebalancing calculations
-  # @param calculated_trade_id The ID of calculated trade to get account impact
-  # @param trade_id The ID of trade object
-  # @param [Hash] opts the optional parameters
-  # @return [Trade]
-  describe 'get_calculated_trade_impact_by_id test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_calculated_trades_impact
-  # Return the impact of placing a series of trades on the portfolio
-  # @param portfolio_group_id The ID of the PortfolioGroup to perform rebalancing calculations
-  # @param calculated_trade_id The ID of calculated trade to get account impact
-  # @param [Hash] opts the optional parameters
-  # @return [Array<TradeImpact>]
-  describe 'get_calculated_trades_impact test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_order_impact
   # Check impact of trades on account.
   # @param user_id 
@@ -90,32 +65,6 @@ describe 'TradingApi' do
   # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
   # @return [Array<SymbolsQuotesInner>]
   describe 'get_user_account_quotes test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for modify_calculated_trade_by_id
-  # Modify units of a trade before it is placed
-  # @param portfolio_group_id The ID of the PortfolioGroup to perform rebalancing calculations
-  # @param calculated_trade_id The ID of calculated trade to get account impact
-  # @param trade_id The ID of trade object
-  # @param [Hash] opts the optional parameters
-  # @option opts [Trade] :trade 
-  # @return [Trade]
-  describe 'modify_calculated_trade_by_id test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for place_calculated_trades
-  # Place orders for the CalculatedTrades in series
-  # @param portfolio_group_id The ID of the PortfolioGroup to perform rebalancing calculations
-  # @param calculated_trade_id The ID of calculated trade to get account impact
-  # @param [Hash] opts the optional parameters
-  # @return [Array<TradeExecutionStatus>]
-  describe 'place_calculated_trades test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

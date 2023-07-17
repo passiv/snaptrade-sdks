@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.7.0'
+gem 'snaptrade', '~> 1.8.0'
 ```
 
 ## Getting Started
@@ -67,38 +67,6 @@ Class | Method | HTTP request | Description
 *SnapTrade::OptionsApi* | [**get_options_strategy_quote**](docs/OptionsApi.md#get_options_strategy_quote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
 *SnapTrade::OptionsApi* | [**list_option_holdings**](docs/OptionsApi.md#list_option_holdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
 *SnapTrade::OptionsApi* | [**place_option_strategy**](docs/OptionsApi.md#place_option_strategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
-*SnapTrade::PortfolioManagementApi* | [**add_portfolio_excluded_asset**](docs/PortfolioManagementApi.md#add_portfolio_excluded_asset) | **POST** /portfolioGroups/{portfolioGroupId}/excludedassets | Adds an asset to exclude to a portfolio group
-*SnapTrade::PortfolioManagementApi* | [**create**](docs/PortfolioManagementApi.md#create) | **POST** /portfolioGroups | Create new portfolio group
-*SnapTrade::PortfolioManagementApi* | [**create_asset_class**](docs/PortfolioManagementApi.md#create_asset_class) | **POST** /modelAssetClass | Create a new model asset class
-*SnapTrade::PortfolioManagementApi* | [**create_model_portfolio**](docs/PortfolioManagementApi.md#create_model_portfolio) | **POST** /modelPortfolio | Creates a new model portfolio
-*SnapTrade::PortfolioManagementApi* | [**delete_asset_class**](docs/PortfolioManagementApi.md#delete_asset_class) | **DELETE** /modelAssetClass/{modelAssetClassId} | Deletes a model asset class
-*SnapTrade::PortfolioManagementApi* | [**delete_excluded_asset**](docs/PortfolioManagementApi.md#delete_excluded_asset) | **DELETE** /portfolioGroups/{portfolioGroupId}/excludedassets/{symbolId} | Unexclude an asset from a portfolio group
-*SnapTrade::PortfolioManagementApi* | [**delete_model_portfolio_by_id**](docs/PortfolioManagementApi.md#delete_model_portfolio_by_id) | **DELETE** /modelPortfolio/{modelPortfolioId} | Deletes a model portfolio
-*SnapTrade::PortfolioManagementApi* | [**delete_portfoli**](docs/PortfolioManagementApi.md#delete_portfoli) | **DELETE** /portfolioGroups/{portfolioGroupId} | Remove a target portfolio.
-*SnapTrade::PortfolioManagementApi* | [**delete_portfolio_target_by_id**](docs/PortfolioManagementApi.md#delete_portfolio_target_by_id) | **DELETE** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Remove a TargetAsset.
-*SnapTrade::PortfolioManagementApi* | [**detail_asset_class**](docs/PortfolioManagementApi.md#detail_asset_class) | **GET** /modelAssetClass/{modelAssetClassId} | Get details of a model asset class
-*SnapTrade::PortfolioManagementApi* | [**get_calculated_trade_by_id**](docs/PortfolioManagementApi.md#get_calculated_trade_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/{TradeId} | Return an individual trade
-*SnapTrade::PortfolioManagementApi* | [**get_model_details_by_id**](docs/PortfolioManagementApi.md#get_model_details_by_id) | **GET** /modelPortfolio/{modelPortfolioId} | Get details of a model portfolio
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_balances**](docs/PortfolioManagementApi.md#get_portfolio_balances) | **GET** /portfolioGroups/{portfolioGroupId}/balances | Get sum of cash balances in portfolio group
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_details_by_id**](docs/PortfolioManagementApi.md#get_portfolio_details_by_id) | **GET** /portfolioGroups/{portfolioGroupId} | Get details of a target portfolio
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_info**](docs/PortfolioManagementApi.md#get_portfolio_info) | **GET** /portfolioGroups/{portfolioGroupId}/info | Return a whole bunch of relevant information relating to a portfolio group.
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_settings**](docs/PortfolioManagementApi.md#get_portfolio_settings) | **GET** /portfolioGroups/{portfolioGroupId}/settings | Get portfolio group settings
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_target_by_id**](docs/PortfolioManagementApi.md#get_portfolio_target_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Get a specific target from a portfolio group
-*SnapTrade::PortfolioManagementApi* | [**get_portfolio_targets**](docs/PortfolioManagementApi.md#get_portfolio_targets) | **GET** /portfolioGroups/{portfolioGroupId}/targets | Get all target assets under the specified PortfolioGroup.
-*SnapTrade::PortfolioManagementApi* | [**get_portoflio_excluded_assets**](docs/PortfolioManagementApi.md#get_portoflio_excluded_assets) | **GET** /portfolioGroups/{portfolioGroupId}/excludedassets | Get an array of excluded assets associated with a portfolio group\\
-*SnapTrade::PortfolioManagementApi* | [**import_model_portfolio**](docs/PortfolioManagementApi.md#import_model_portfolio) | **POST** /portfolioGroups/{portfolioGroupId}/import | Import target allocation based on portfolio group
-*SnapTrade::PortfolioManagementApi* | [**list**](docs/PortfolioManagementApi.md#list) | **GET** /portfolioGroups | List all portfolio groups
-*SnapTrade::PortfolioManagementApi* | [**list_asset_classes**](docs/PortfolioManagementApi.md#list_asset_classes) | **GET** /modelAssetClass | List of model asset class
-*SnapTrade::PortfolioManagementApi* | [**list_calculated_trades**](docs/PortfolioManagementApi.md#list_calculated_trades) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades | List of trades to make to rebalance portfolio group
-*SnapTrade::PortfolioManagementApi* | [**list_model_portfolio**](docs/PortfolioManagementApi.md#list_model_portfolio) | **GET** /modelPortfolio | List of model portfolio
-*SnapTrade::PortfolioManagementApi* | [**list_portfolio_accounts**](docs/PortfolioManagementApi.md#list_portfolio_accounts) | **GET** /portfolioGroups/{portfolioGroupId}/accounts | Get all accounts associated with a portfolio group
-*SnapTrade::PortfolioManagementApi* | [**modify_model_portfolio_by_id**](docs/PortfolioManagementApi.md#modify_model_portfolio_by_id) | **POST** /modelPortfolio/{modelPortfolioId} | Updates model portfolio object
-*SnapTrade::PortfolioManagementApi* | [**save_portfolio**](docs/PortfolioManagementApi.md#save_portfolio) | **PATCH** /portfolioGroups/{portfolioGroupId} | Update an existing target portfolio.
-*SnapTrade::PortfolioManagementApi* | [**search_portfolio_symbols**](docs/PortfolioManagementApi.md#search_portfolio_symbols) | **POST** /portfolioGroups/{portfolioGroupId}/symbols | Search for symbols limited to brokerages under the specified portfolio group
-*SnapTrade::PortfolioManagementApi* | [**set_portfolio_targets**](docs/PortfolioManagementApi.md#set_portfolio_targets) | **POST** /portfolioGroups/{portfolioGroupId}/targets | Set a new list of target assets under the specified PortfolioGroup. All existing target assets under this portfolio group will be replaced with the new list.
-*SnapTrade::PortfolioManagementApi* | [**update_asset_class**](docs/PortfolioManagementApi.md#update_asset_class) | **POST** /modelAssetClass/{modelAssetClassId} | Updates model asset class objects
-*SnapTrade::PortfolioManagementApi* | [**update_portfolio_settings**](docs/PortfolioManagementApi.md#update_portfolio_settings) | **PATCH** /portfolioGroups/{portfolioGroupId}/settings | Updates portfolio group settings
-*SnapTrade::PortfolioManagementApi* | [**update_portfolio_target_by_id**](docs/PortfolioManagementApi.md#update_portfolio_target_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/targets/{targetAssetId} | Update a TargetAsset under the specified PortfolioGroup.
 *SnapTrade::ReferenceDataApi* | [**get_currency_exchange_rate_pair**](docs/ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *SnapTrade::ReferenceDataApi* | [**get_partner_info**](docs/ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *SnapTrade::ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types.
@@ -111,12 +79,8 @@ Class | Method | HTTP request | Description
 *SnapTrade::ReferenceDataApi* | [**list_all_currencies_rates**](docs/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
 *SnapTrade::ReferenceDataApi* | [**symbol_search_user_account**](docs/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
 *SnapTrade::TradingApi* | [**cancel_user_account_order**](docs/TradingApi.md#cancel_user_account_order) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*SnapTrade::TradingApi* | [**get_calculated_trade_impact_by_id**](docs/TradingApi.md#get_calculated_trade_impact_by_id) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Return details of a specific trade before it's placed
-*SnapTrade::TradingApi* | [**get_calculated_trades_impact**](docs/TradingApi.md#get_calculated_trades_impact) | **GET** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/impact | Return the impact of placing a series of trades on the portfolio
 *SnapTrade::TradingApi* | [**get_order_impact**](docs/TradingApi.md#get_order_impact) | **POST** /trade/impact | Check impact of trades on account.
 *SnapTrade::TradingApi* | [**get_user_account_quotes**](docs/TradingApi.md#get_user_account_quotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
-*SnapTrade::TradingApi* | [**modify_calculated_trade_by_id**](docs/TradingApi.md#modify_calculated_trade_by_id) | **PATCH** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/modify/{tradeId} | Modify units of a trade before it is placed
-*SnapTrade::TradingApi* | [**place_calculated_trades**](docs/TradingApi.md#place_calculated_trades) | **POST** /portfolioGroups/{portfolioGroupId}/calculatedtrades/{calculatedTradeId}/placeOrders | Place orders for the CalculatedTrades in series
 *SnapTrade::TradingApi* | [**place_force_order**](docs/TradingApi.md#place_force_order) | **POST** /trade/place | Place a trade with NO validation.
 *SnapTrade::TradingApi* | [**place_oco_order**](docs/TradingApi.md#place_oco_order) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 *SnapTrade::TradingApi* | [**place_order**](docs/TradingApi.md#place_order) | **POST** /trade/{tradeId} | Place order

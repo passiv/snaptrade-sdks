@@ -34,27 +34,6 @@ from snaptrade_client.apis.paths.currencies_rates import CurrenciesRates
 from snaptrade_client.apis.paths.currencies_rates_currency_pair import CurrenciesRatesCurrencyPair
 from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
-from snaptrade_client.apis.paths.model_asset_class import ModelAssetClass
-from snaptrade_client.apis.paths.model_asset_class_model_asset_class_id import ModelAssetClassModelAssetClassId
-from snaptrade_client.apis.paths.model_portfolio import ModelPortfolio
-from snaptrade_client.apis.paths.model_portfolio_model_portfolio_id import ModelPortfolioModelPortfolioId
-from snaptrade_client.apis.paths.portfolio_groups import PortfolioGroups
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id import PortfolioGroupsPortfolioGroupId
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_accounts import PortfolioGroupsPortfolioGroupIdAccounts
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_balances import PortfolioGroupsPortfolioGroupIdBalances
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_calculatedtrades import PortfolioGroupsPortfolioGroupIdCalculatedtrades
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_trade_id import PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeId
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_impact import PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpact
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_modify_trade_id import PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeId
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_calculatedtrades_calculated_trade_id_place_orders import PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrders
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_excludedassets import PortfolioGroupsPortfolioGroupIdExcludedassets
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_excludedassets_symbol_id import PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_import import PortfolioGroupsPortfolioGroupIdImport
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_info import PortfolioGroupsPortfolioGroupIdInfo
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_settings import PortfolioGroupsPortfolioGroupIdSettings
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_symbols import PortfolioGroupsPortfolioGroupIdSymbols
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_targets import PortfolioGroupsPortfolioGroupIdTargets
-from snaptrade_client.apis.paths.portfolio_groups_portfolio_group_id_targets_target_asset_id import PortfolioGroupsPortfolioGroupIdTargetsTargetAssetId
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_ticker import SymbolsTicker
 from snaptrade_client.apis.paths.trade_place import TradePlace
@@ -100,27 +79,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,
         PathValues.SECURITY_TYPES: SecurityTypes,
-        PathValues.MODEL_ASSET_CLASS: ModelAssetClass,
-        PathValues.MODEL_ASSET_CLASS_MODEL_ASSET_CLASS_ID: ModelAssetClassModelAssetClassId,
-        PathValues.MODEL_PORTFOLIO: ModelPortfolio,
-        PathValues.MODEL_PORTFOLIO_MODEL_PORTFOLIO_ID: ModelPortfolioModelPortfolioId,
-        PathValues.PORTFOLIO_GROUPS: PortfolioGroups,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID: PortfolioGroupsPortfolioGroupId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_ACCOUNTS: PortfolioGroupsPortfolioGroupIdAccounts,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_BALANCES: PortfolioGroupsPortfolioGroupIdBalances,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES: PortfolioGroupsPortfolioGroupIdCalculatedtrades,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_TRADE_ID: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_IMPACT: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpact,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_MODIFY_TRADE_ID: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_PLACE_ORDERS: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrders,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS: PortfolioGroupsPortfolioGroupIdExcludedassets,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS_SYMBOL_ID: PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_IMPORT: PortfolioGroupsPortfolioGroupIdImport,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_INFO: PortfolioGroupsPortfolioGroupIdInfo,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SETTINGS: PortfolioGroupsPortfolioGroupIdSettings,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SYMBOLS: PortfolioGroupsPortfolioGroupIdSymbols,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS: PortfolioGroupsPortfolioGroupIdTargets,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS_TARGET_ASSET_ID: PortfolioGroupsPortfolioGroupIdTargetsTargetAssetId,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_TICKER: SymbolsTicker,
         PathValues.TRADE_PLACE: TradePlace,
@@ -167,27 +125,6 @@ path_to_api = PathToApi(
         PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,
         PathValues.SECURITY_TYPES: SecurityTypes,
-        PathValues.MODEL_ASSET_CLASS: ModelAssetClass,
-        PathValues.MODEL_ASSET_CLASS_MODEL_ASSET_CLASS_ID: ModelAssetClassModelAssetClassId,
-        PathValues.MODEL_PORTFOLIO: ModelPortfolio,
-        PathValues.MODEL_PORTFOLIO_MODEL_PORTFOLIO_ID: ModelPortfolioModelPortfolioId,
-        PathValues.PORTFOLIO_GROUPS: PortfolioGroups,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID: PortfolioGroupsPortfolioGroupId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_ACCOUNTS: PortfolioGroupsPortfolioGroupIdAccounts,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_BALANCES: PortfolioGroupsPortfolioGroupIdBalances,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES: PortfolioGroupsPortfolioGroupIdCalculatedtrades,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_TRADE_ID: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdTradeId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_IMPACT: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdImpact,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_MODIFY_TRADE_ID: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdModifyTradeId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_CALCULATEDTRADES_CALCULATED_TRADE_ID_PLACE_ORDERS: PortfolioGroupsPortfolioGroupIdCalculatedtradesCalculatedTradeIdPlaceOrders,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS: PortfolioGroupsPortfolioGroupIdExcludedassets,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_EXCLUDEDASSETS_SYMBOL_ID: PortfolioGroupsPortfolioGroupIdExcludedassetsSymbolId,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_IMPORT: PortfolioGroupsPortfolioGroupIdImport,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_INFO: PortfolioGroupsPortfolioGroupIdInfo,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SETTINGS: PortfolioGroupsPortfolioGroupIdSettings,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_SYMBOLS: PortfolioGroupsPortfolioGroupIdSymbols,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS: PortfolioGroupsPortfolioGroupIdTargets,
-        PathValues.PORTFOLIO_GROUPS_PORTFOLIO_GROUP_ID_TARGETS_TARGET_ASSET_ID: PortfolioGroupsPortfolioGroupIdTargetsTargetAssetId,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_TICKER: SymbolsTicker,
         PathValues.TRADE_PLACE: TradePlace,

@@ -69,6 +69,7 @@ class ModelAssetClassDetails(
                 "model_asset_class": model_asset_class,
                 "model_asset_class_target": model_asset_class_target,
             }
+        additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["model_asset_class"]) -> 'ModelAssetClass': ...
@@ -77,12 +78,11 @@ class ModelAssetClassDetails(
     def __getitem__(self, name: typing_extensions.Literal["model_asset_class_target"]) -> MetaOapg.properties.model_asset_class_target: ...
     
     @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["model_asset_class", "model_asset_class_target", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["model_asset_class"], typing_extensions.Literal["model_asset_class_target"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
-    
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["model_asset_class"]) -> typing.Union['ModelAssetClass', schemas.Unset]: ...
@@ -91,11 +91,10 @@ class ModelAssetClassDetails(
     def get_item_oapg(self, name: typing_extensions.Literal["model_asset_class_target"]) -> typing.Union[MetaOapg.properties.model_asset_class_target, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["model_asset_class", "model_asset_class_target", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["model_asset_class"], typing_extensions.Literal["model_asset_class_target"], str, ]):
         return super().get_item_oapg(name)
-    
 
     def __new__(
         cls,
@@ -103,7 +102,7 @@ class ModelAssetClassDetails(
         model_asset_class: typing.Union['ModelAssetClass', schemas.Unset] = schemas.unset,
         model_asset_class_target: typing.Union[MetaOapg.properties.model_asset_class_target, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ModelAssetClassDetails':
         return super().__new__(
             cls,
