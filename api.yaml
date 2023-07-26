@@ -556,9 +556,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Account"
+                $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error
     put:
@@ -870,9 +868,11 @@ paths:
         "200":
           description: The option holdings in the account
           content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OptionsHoldings"
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/OptionsHoldings"
         "500":
           description: Unexpected error
   "/accounts/{accountId}/optionsChain":
