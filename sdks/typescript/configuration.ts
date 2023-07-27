@@ -21,7 +21,7 @@ type ApiKey =
 export interface ConfigurationParameters {
     consumerKey?: string;
     clientId?: string;
-    Signature?: string;
+    signature?: string;
     timestamp?: string;
     apiKey?: ApiKey;
     username?: string;
@@ -99,8 +99,8 @@ export class Configuration {
             this.apiKey = {}
             if (param.clientId !== undefined)
                 this.apiKey["clientId"] = param.clientId
-            if (param.Signature !== undefined)
-                this.apiKey["Signature"] = param.Signature
+            if (param.signature !== undefined)
+                this.apiKey["Signature"] = param.signature
             if (param.timestamp !== undefined)
                 this.apiKey["timestamp"] = param.timestamp
         }

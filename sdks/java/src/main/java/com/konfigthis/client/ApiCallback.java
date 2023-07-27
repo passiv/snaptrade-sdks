@@ -48,7 +48,9 @@ public interface ApiCallback<T> {
      * @param contentLength content length of request body
      * @param done write end
      */
-    void onUploadProgress(long bytesWritten, long contentLength, boolean done);
+    default void onUploadProgress(long bytesWritten, long contentLength, boolean done) {
+        return;
+    }
 
     /**
      * This is called when the API download processing.
@@ -57,5 +59,7 @@ public interface ApiCallback<T> {
      * @param contentLength content length of the response
      * @param done Read end
      */
-    void onDownloadProgress(long bytesRead, long contentLength, boolean done);
+    default void onDownloadProgress(long bytesRead, long contentLength, boolean done) {
+        return;
+    }
 }

@@ -35,7 +35,7 @@ export class Snaptrade extends SnaptradeCustom {
   readonly trading: TradingApi;
   readonly transactionsAndReporting: TransactionsAndReportingApi;
 
-  constructor(configurationParameters: ConfigurationParameters) {
+  constructor(configurationParameters: ConfigurationParameters = {}) {
     super(configurationParameters);
     const configuration = new Configuration(configurationParameters);
     this.accountInformation = new AccountInformationApi(configuration);

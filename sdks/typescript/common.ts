@@ -13,8 +13,10 @@
 
 import { Configuration } from "./configuration";
 import { RequiredError, RequestArgs } from "./base";
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { requestAfterHook } from "./requestAfterHook";
+import { requestBeforeUrlHook } from "./requestBeforeUrlHook";
+import { readableStreamToString, SnaptradeError, parseIfJson } from "./error";
 
 /**
  *
@@ -154,10 +156,22 @@ export const toPathString = function (url: URL) {
  * @export
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
-    return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+    return async <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+        requestBeforeUrlHook({axiosArgs, basePath, configuration})
         const url = (configuration?.basePath || basePath) + axiosArgs.url
         requestAfterHook({axiosArgs, basePath, url, configuration})
-        return axios.request<T, R>({...axiosArgs.options, url});
+        try {
+            return await axios.request<T, R>({ ...axiosArgs.options, url });
+        } catch (e) {
+            if (e instanceof AxiosError && e.isAxiosError) {
+              const responseBody =
+              e.response?.data instanceof ReadableStream
+                ? await readableStreamToString(e.response.data)
+                : e.response?.data;
+              throw new SnaptradeError(e, parseIfJson(responseBody))
+            }
+            throw e
+        }
     };
 }
 

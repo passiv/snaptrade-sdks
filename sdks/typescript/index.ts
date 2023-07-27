@@ -15,3 +15,4 @@ export * from "./api";
 export * from "./configuration";
 export * from "./models";
 export * from "./client";
+export * from "./error";
