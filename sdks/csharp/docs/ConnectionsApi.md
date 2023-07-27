@@ -20,7 +20,6 @@ Get detail of a specific brokerage authorizations for the user
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -30,15 +29,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ConnectionsApi(config);
             var authorizationId = "authorizationId_example";  // Guid | The ID of a brokerage authorization object.
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
@@ -46,7 +44,7 @@ namespace Example
             try
             {
                 // Get detail of a specific brokerage authorizations for the user
-                BrokerageAuthorization result = apiInstance.DetailBrokerageAuthorization(authorizationId, userId, userSecret);
+                BrokerageAuthorization result = client.Connections.DetailBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -127,7 +125,6 @@ List all brokerage authorizations for the user
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -137,22 +134,21 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ConnectionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // List all brokerage authorizations for the user
-                List<BrokerageAuthorization> result = apiInstance.ListBrokerageAuthorizations(userId, userSecret);
+                List<BrokerageAuthorization> result = client.Connections.ListBrokerageAuthorizations(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -232,7 +228,6 @@ Remove a brokerage authorization.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -242,15 +237,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ConnectionsApi(config);
             var authorizationId = "authorizationId_example";  // Guid | The ID of the Authorization to delete.
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
@@ -258,7 +252,7 @@ namespace Example
             try
             {
                 // Remove a brokerage authorization.
-                apiInstance.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
+                client.Connections.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
             }
             catch (ApiException e)
             {
@@ -337,7 +331,6 @@ List all session events for the partner
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -347,15 +340,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ConnectionsApi(config);
             var partnerClientId = "partnerClientId_example";  // string | 
             var userId = "userId_example";  // string | Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
             var sessionId = "sessionId_example";  // string | Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
@@ -363,7 +355,7 @@ namespace Example
             try
             {
                 // List all session events for the partner
-                List<ConnectionsSessionEvents200ResponseInner> result = apiInstance.SessionEvents(partnerClientId, userId, sessionId);
+                List<ConnectionsSessionEvents200ResponseInner> result = client.Connections.SessionEvents(partnerClientId, userId, sessionId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

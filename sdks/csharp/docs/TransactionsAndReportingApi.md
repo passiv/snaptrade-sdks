@@ -20,7 +20,6 @@ Returns activities (transactions) for a user. Specifing start and end date is hi
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -30,15 +29,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new TransactionsAndReportingApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var startDate = DateTime.Parse("2013-10-20");  // DateTime? |  (optional) 
@@ -50,7 +48,7 @@ namespace Example
             try
             {
                 // Get transaction history for a user
-                List<UniversalActivity> result = apiInstance.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
+                List<UniversalActivity> result = client.TransactionsAndReporting.GetActivities(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -137,7 +135,6 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -147,15 +144,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new TransactionsAndReportingApi(config);
             var startDate = DateTime.Parse("2013-10-20");  // DateTime | 
             var endDate = DateTime.Parse("2013-10-20");  // DateTime | 
             var userId = "userId_example";  // string | 
@@ -167,7 +163,7 @@ namespace Example
             try
             {
                 // Get performance information for a specific timeframe
-                PerformanceCustom result = apiInstance.GetReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
+                PerformanceCustom result = client.TransactionsAndReporting.GetReportingCustomRange(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

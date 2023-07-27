@@ -47,11 +47,15 @@ namespace SnapTrade.Net.Test.Api
 
         private string testUserSecret;
 
+        private string clientId;
+
+        private string consumerKey;
+
         public GettingStartedTests()
         {
             Configuration configuration = new Configuration();
-            string clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
-            string consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+            this.clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
+            this.consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
             this.testUserId = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_ID");
             this.testUserSecret = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_SECRET");
             configuration.ApiKey.Add("clientId", clientId);
@@ -96,6 +100,25 @@ namespace SnapTrade.Net.Test.Api
             var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
             Console.WriteLine(holdings);
             var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
+            Console.WriteLine(deleteResponse);
+        }
+
+        [Fact]
+        public void GettingStartedNewClientTest()
+        {
+            Snaptrade snaptrade = new Snaptrade();
+            snaptrade.SetClientId(clientId);
+            snaptrade.SetConsumerKey(consumerKey);
+            Status status = snaptrade.APIStatus.Check();
+            Console.WriteLine(status.ToJson());
+            string uuid = Guid.NewGuid().ToString();
+            UserIDandSecret userIDandSecret = snaptrade.Authentication.RegisterSnapTradeUser(new SnapTradeRegisterUserRequestBody(uuid));
+            Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
+            var redirectUri = snaptrade.Authentication.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
+            Console.WriteLine(redirectUri);
+            var holdings = snaptrade.AccountInformation.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(holdings);
+            var deleteResponse = snaptrade.Authentication.DeleteSnapTradeUser(userIDandSecret.UserId);
             Console.WriteLine(deleteResponse);
         }
 

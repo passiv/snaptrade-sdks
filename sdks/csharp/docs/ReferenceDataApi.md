@@ -27,7 +27,6 @@ Return the exchange rate of a currency pair
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -37,21 +36,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
             var currencyPair = "currencyPair_example";  // string | A currency pair based on currency code for example, {CAD-USD}
 
             try
             {
                 // Return the exchange rate of a currency pair
-                ExchangeRatePairs result = apiInstance.GetCurrencyExchangeRatePair(currencyPair);
+                ExchangeRatePairs result = client.ReferenceData.GetCurrencyExchangeRatePair(currencyPair);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -129,7 +127,6 @@ Get metadata related to Snaptrade partner
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -139,20 +136,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // Get metadata related to Snaptrade partner
-                PartnerData result = apiInstance.GetPartnerInfo();
+                PartnerData result = client.ReferenceData.GetPartnerInfo();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -230,7 +226,6 @@ List of all security types.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -240,20 +235,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // List of all security types.
-                List<SecurityType> result = apiInstance.GetSecurityTypes();
+                List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -328,7 +322,6 @@ Return list of stock exchanges on Passiv and their suffixes
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -338,20 +331,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // Return list of stock exchanges on Passiv and their suffixes
-                List<Exchange> result = apiInstance.GetStockExchanges();
+                List<Exchange> result = client.ReferenceData.GetStockExchanges();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -425,7 +417,6 @@ Search for symbols
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -435,21 +426,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
             var symbolQuery = new SymbolQuery(); // SymbolQuery |  (optional) 
 
             try
             {
                 // Search for symbols
-                List<UniversalSymbol> result = apiInstance.GetSymbols(symbolQuery);
+                List<UniversalSymbol> result = client.ReferenceData.GetSymbols(symbolQuery);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -528,7 +518,6 @@ Get details of a symbol by the ticker
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -538,22 +527,21 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
             var ticker = "ticker_example";  // Guid | The ticker of the UniversalSymbol to get.
             var symbolId = "symbolId_example";  // Guid? | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
 
             try
             {
                 // Get details of a symbol by the ticker
-                UniversalSymbol result = apiInstance.GetSymbolsByTicker(ticker, symbolId);
+                UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(ticker, symbolId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -634,7 +622,6 @@ List of all brokerage authorization types
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -644,21 +631,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
             var brokerage = QUESTRADE,ALPACA;  // string | Comma separated value of brokerage slugs (optional) 
 
             try
             {
                 // List of all brokerage authorization types
-                List<BrokerageAuthorizationTypeReadOnly> result = apiInstance.ListAllBrokerageAuthorizationType(brokerage);
+                List<BrokerageAuthorizationTypeReadOnly> result = client.ReferenceData.ListAllBrokerageAuthorizationType(brokerage);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -737,7 +723,6 @@ List of all brokerages.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -747,20 +732,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // List of all brokerages.
-                List<Brokerage> result = apiInstance.ListAllBrokerages();
+                List<Brokerage> result = client.ReferenceData.ListAllBrokerages();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -835,7 +819,6 @@ List of all supported currencies
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -845,20 +828,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // List of all supported currencies
-                List<Currency> result = apiInstance.ListAllCurrencies();
+                List<Currency> result = client.ReferenceData.ListAllCurrencies();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -933,7 +915,6 @@ Return the exchange rates of all supported currencies
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -943,20 +924,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
 
             try
             {
                 // Return the exchange rates of all supported currencies
-                List<ExchangeRatePairs> result = apiInstance.ListAllCurrenciesRates();
+                List<ExchangeRatePairs> result = client.ReferenceData.ListAllCurrenciesRates();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -1030,7 +1010,6 @@ Search for symbols that are supported by a brokerage account using a substring
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -1040,15 +1019,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ReferenceDataApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -1057,7 +1035,7 @@ namespace Example
             try
             {
                 // Search for symbols that are supported by a brokerage account using a substring
-                List<UniversalSymbol> result = apiInstance.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
+                List<UniversalSymbol> result = client.ReferenceData.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

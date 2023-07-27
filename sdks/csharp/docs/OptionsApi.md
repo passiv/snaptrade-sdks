@@ -21,7 +21,6 @@ Creates an option strategy object that will be used to place an option strategy 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -31,15 +30,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -48,7 +46,7 @@ namespace Example
             try
             {
                 // Creates an option strategy object that will be used to place an option strategy order
-                StrategyQuotes result = apiInstance.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+                StrategyQuotes result = client.Options.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -130,7 +128,6 @@ Get the options chain
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -140,15 +137,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -157,7 +153,7 @@ namespace Example
             try
             {
                 // Get the options chain
-                List<OptionChainInner> result = apiInstance.GetOptionsChain(userId, userSecret, accountId, symbol);
+                List<OptionChainInner> result = client.Options.GetOptionsChain(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -239,7 +235,6 @@ Get latest market data of option strategy
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -249,15 +244,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -266,7 +260,7 @@ namespace Example
             try
             {
                 // Get latest market data of option strategy
-                StrategyQuotes result = apiInstance.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
+                StrategyQuotes result = client.Options.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -348,7 +342,6 @@ Get the options holdings in the account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -358,15 +351,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -374,7 +366,7 @@ namespace Example
             try
             {
                 // Get the options holdings in the account
-                List<OptionsHoldings> result = apiInstance.ListOptionHoldings(userId, userSecret, accountId);
+                List<OptionsHoldings> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -455,7 +447,6 @@ Place an option strategy order on the brokerage
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -465,15 +456,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new OptionsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -483,7 +473,7 @@ namespace Example
             try
             {
                 // Place an option strategy order on the brokerage
-                StrategyOrderRecord result = apiInstance.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
+                StrategyOrderRecord result = client.Options.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

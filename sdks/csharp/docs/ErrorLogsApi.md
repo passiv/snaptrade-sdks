@@ -17,7 +17,6 @@ Retrieve error logs on behalf of your SnapTrade users
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -27,22 +26,21 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new ErrorLogsApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // Retrieve error logs on behalf of your SnapTrade users
-                List<UserErrorLog> result = apiInstance.ListUserErrors(userId, userSecret);
+                List<UserErrorLog> result = client.ErrorLogs.ListUserErrors(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

@@ -21,7 +21,6 @@ Delete user from SnapTrade, disabling all brokerage authorizations and permanent
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -31,21 +30,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AuthenticationApi(config);
             var userId = "userId_example";  // string | 
 
             try
             {
                 // Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-                DeleteUserResponse result = apiInstance.DeleteSnapTradeUser(userId);
+                DeleteUserResponse result = client.Authentication.DeleteSnapTradeUser(userId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -127,7 +125,6 @@ Obtains an encrypted JWT tokens that should be decrypted on a user's local devic
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -137,22 +134,21 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AuthenticationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // Obtains an encrypted JWT tokens that should be decrypted on a user's local device
-                EncryptedResponse result = apiInstance.GetUserJWT(userId, userSecret);
+                EncryptedResponse result = client.Authentication.GetUserJWT(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -235,7 +231,6 @@ Get a list of all SnapTrade users you've registered on our platform
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -245,20 +240,19 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AuthenticationApi(config);
 
             try
             {
                 // Get a list of all SnapTrade users you've registered on our platform
-                List<string> result = apiInstance.ListSnapTradeUsers();
+                List<string> result = client.Authentication.ListSnapTradeUsers();
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -335,7 +329,6 @@ Generate a redirect URI to securely login a user to the SnapTrade Connection Por
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -345,15 +338,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AuthenticationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(); // SnapTradeLoginUserRequestBody |  (optional) 
@@ -361,7 +353,7 @@ namespace Example
             try
             {
                 // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-                AuthenticationLoginSnapTradeUser200Response result = apiInstance.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
+                AuthenticationLoginSnapTradeUser200Response result = client.Authentication.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -445,7 +437,6 @@ Register user with SnapTrade in order to create secure brokerage authorizations
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -455,21 +446,20 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AuthenticationApi(config);
             var snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody(); // SnapTradeRegisterUserRequestBody | 
 
             try
             {
                 // Register user with SnapTrade in order to create secure brokerage authorizations
-                UserIDandSecret result = apiInstance.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
+                UserIDandSecret result = client.Authentication.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

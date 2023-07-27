@@ -24,7 +24,6 @@ List all accounts for the user, plus balances and positions for each account.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -34,15 +33,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var brokerageAuthorizations = 917c8734-8470-4a3e-a18f-57c3f2ee6631;  // Guid? | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
@@ -50,7 +48,7 @@ namespace Example
             try
             {
                 // List all accounts for the user, plus balances and positions for each account.
-                List<AccountHoldings> result = apiInstance.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+                List<AccountHoldings> result = client.AccountInformation.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -133,7 +131,6 @@ Get all cash balances of an investment account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -143,15 +140,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -159,7 +155,7 @@ namespace Example
             try
             {
                 // Get all cash balances of an investment account
-                List<Balance> result = apiInstance.GetUserAccountBalance(userId, userSecret, accountId);
+                List<Balance> result = client.AccountInformation.GetUserAccountBalance(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -240,7 +236,6 @@ Return details of a specific investment account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -250,15 +245,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account to get detail of.
@@ -266,7 +260,7 @@ namespace Example
             try
             {
                 // Return details of a specific investment account
-                Account result = apiInstance.GetUserAccountDetails(userId, userSecret, accountId);
+                Account result = client.AccountInformation.GetUserAccountDetails(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -347,7 +341,6 @@ Get all history of orders placed in account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -357,15 +350,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -374,7 +366,7 @@ namespace Example
             try
             {
                 // Get all history of orders placed in account
-                List<AccountOrderRecord> result = apiInstance.GetUserAccountOrders(userId, userSecret, accountId, state);
+                List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -456,7 +448,6 @@ Get all positions of an investment account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -466,15 +457,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account get positions.
@@ -482,7 +472,7 @@ namespace Example
             try
             {
                 // Get all positions of an investment account
-                List<Position> result = apiInstance.GetUserAccountPositions(userId, userSecret, accountId);
+                List<Position> result = client.AccountInformation.GetUserAccountPositions(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -563,7 +553,6 @@ List balances, positions and orders for the specified account.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -573,15 +562,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var accountId = 917c8734-8470-4a3e-a18f-57c3f2ee6631;  // Guid | The ID of the account to fetch holdings for.
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
@@ -589,7 +577,7 @@ namespace Example
             try
             {
                 // List balances, positions and orders for the specified account.
-                AccountHoldingsAccount result = apiInstance.GetUserHoldings(accountId, userId, userSecret);
+                AccountHoldingsAccount result = client.AccountInformation.GetUserHoldings(accountId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -672,7 +660,6 @@ List all investment accounts for the user
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -682,22 +669,21 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
 
             try
             {
                 // List all investment accounts for the user
-                List<Account> result = apiInstance.ListUserAccounts(userId, userSecret);
+                List<Account> result = client.AccountInformation.ListUserAccounts(userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -777,7 +763,6 @@ Update details of an investment account
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -787,15 +772,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var accountId = "accountId_example";  // Guid | The ID of the account to update.
@@ -803,7 +787,7 @@ namespace Example
             try
             {
                 // Update details of an investment account
-                List<Account> result = apiInstance.UpdateUserAccount(userId, userSecret, accountId);
+                List<Account> result = client.AccountInformation.UpdateUserAccount(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

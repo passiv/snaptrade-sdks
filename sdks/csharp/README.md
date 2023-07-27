@@ -47,7 +47,6 @@ using SnapTrade.Net.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using SnapTrade.Net.Api;
 using SnapTrade.Net.Client;
 using SnapTrade.Net.Model;
 
@@ -57,15 +56,14 @@ namespace Example
     {
         public static void Main()
         {
-            Configuration config = new Configuration();
 
+            Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
-            // config.BasePath = "https://api.snaptrade.com/api/v1";
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            config.ApiKey.Add("clientId", System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            config.ConsumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
 
-            var apiInstance = new AccountInformationApi(config);
             var userId = "userId_example";  // string | 
             var userSecret = "userSecret_example";  // string | 
             var brokerageAuthorizations = 917c8734-8470-4a3e-a18f-57c3f2ee6631;  // Guid? | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
@@ -73,7 +71,7 @@ namespace Example
             try
             {
                 // List all accounts for the user, plus balances and positions for each account.
-                List<AccountHoldings> result = apiInstance.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
+                List<AccountHoldings> result = client.AccountInformation.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
