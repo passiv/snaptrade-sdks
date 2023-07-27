@@ -82,75 +82,10 @@ class EncryptedResponse(
         
         class properties:
             encryptedSharedKey = schemas.StrSchema
-            
-            
-            class encryptedMessageData(
-                schemas.DictSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    class properties:
-                        encryptedMessage = schemas.StrSchema
-                        tag = schemas.StrSchema
-                        nonce = schemas.StrSchema
-                        __annotations__ = {
-                            "encryptedMessage": encryptedMessage,
-                            "tag": tag,
-                            "nonce": nonce,
-                        }
-                    additional_properties = schemas.AnyTypeSchema
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["encryptedMessage"]) -> MetaOapg.properties.encryptedMessage: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["tag"]) -> MetaOapg.properties.tag: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["nonce"]) -> MetaOapg.properties.nonce: ...
-                
-                @typing.overload
-                def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
-                
-                def __getitem__(self, name: typing.Union[typing_extensions.Literal["encryptedMessage"], typing_extensions.Literal["tag"], typing_extensions.Literal["nonce"], str, ]):
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["encryptedMessage"]) -> typing.Union[MetaOapg.properties.encryptedMessage, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["tag"]) -> typing.Union[MetaOapg.properties.tag, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["nonce"]) -> typing.Union[MetaOapg.properties.nonce, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
-                
-                def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["encryptedMessage"], typing_extensions.Literal["tag"], typing_extensions.Literal["nonce"], str, ]):
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, ],
-                    encryptedMessage: typing.Union[MetaOapg.properties.encryptedMessage, str, schemas.Unset] = schemas.unset,
-                    tag: typing.Union[MetaOapg.properties.tag, str, schemas.Unset] = schemas.unset,
-                    nonce: typing.Union[MetaOapg.properties.nonce, str, schemas.Unset] = schemas.unset,
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'encryptedMessageData':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        encryptedMessage=encryptedMessage,
-                        tag=tag,
-                        nonce=nonce,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def encryptedMessageData() -> typing.Type['EncryptedResponseEncryptedMessageData']:
+                return EncryptedResponseEncryptedMessageData
             __annotations__ = {
                 "encryptedSharedKey": encryptedSharedKey,
                 "encryptedMessageData": encryptedMessageData,
@@ -161,7 +96,7 @@ class EncryptedResponse(
     def __getitem__(self, name: typing_extensions.Literal["encryptedSharedKey"]) -> MetaOapg.properties.encryptedSharedKey: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["encryptedMessageData"]) -> MetaOapg.properties.encryptedMessageData: ...
+    def __getitem__(self, name: typing_extensions.Literal["encryptedMessageData"]) -> 'EncryptedResponseEncryptedMessageData': ...
     
     def __getitem__(self, name: typing.Union[typing_extensions.Literal["encryptedSharedKey"], typing_extensions.Literal["encryptedMessageData"], ]):
         # dict_instance[name] accessor
@@ -171,7 +106,7 @@ class EncryptedResponse(
     def get_item_oapg(self, name: typing_extensions.Literal["encryptedSharedKey"]) -> typing.Union[MetaOapg.properties.encryptedSharedKey, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["encryptedMessageData"]) -> typing.Union[MetaOapg.properties.encryptedMessageData, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["encryptedMessageData"]) -> typing.Union['EncryptedResponseEncryptedMessageData', schemas.Unset]: ...
     
     def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["encryptedSharedKey"], typing_extensions.Literal["encryptedMessageData"], ]):
         return super().get_item_oapg(name)
@@ -180,7 +115,7 @@ class EncryptedResponse(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         encryptedSharedKey: typing.Union[MetaOapg.properties.encryptedSharedKey, str, schemas.Unset] = schemas.unset,
-        encryptedMessageData: typing.Union[MetaOapg.properties.encryptedMessageData, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        encryptedMessageData: typing.Union['EncryptedResponseEncryptedMessageData', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'EncryptedResponse':
         return super().__new__(
@@ -190,3 +125,5 @@ class EncryptedResponse(
             encryptedMessageData=encryptedMessageData,
             _configuration=_configuration,
         )
+
+from snaptrade_client.model.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData

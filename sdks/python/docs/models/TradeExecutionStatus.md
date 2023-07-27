@@ -18,21 +18,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **action** | str,  | str,  | Action of executed trade | [optional] must be one of ["BUY", "SELL", ] 
 **price** | decimal.Decimal, int, float,  | decimal.Decimal,  | Price of execution | [optional] 
 **commissions** | decimal.Decimal, int, float,  | decimal.Decimal,  | Fees paid from executing trade | [optional] 
-**[meta](#meta)** | dict, frozendict.frozendict,  | frozendict.frozendict,  | Other misc. data | [optional] 
-**any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
-
-# meta
-
-Other misc. data
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Other misc. data | 
-
-### Dictionary Keys
-Key | Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | ------------- | -------------
+**meta** | [**TradeExecutionStatusMeta**](TradeExecutionStatusMeta.md) | [**TradeExecutionStatusMeta**](TradeExecutionStatusMeta.md) |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

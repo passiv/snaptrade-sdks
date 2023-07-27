@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.option_strategy import OptionStrategy
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.strategy_quotes_greek import StrategyQuotesGreek
 
 class RequiredStrategyQuotes(TypedDict):
     pass
@@ -32,7 +33,7 @@ class OptionalStrategyQuotes(TypedDict, total=False):
 
     volatility: typing.Union[int, float]
 
-    greek: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    greek: StrategyQuotesGreek
 
 class StrategyQuotes(RequiredStrategyQuotes, OptionalStrategyQuotes):
     pass

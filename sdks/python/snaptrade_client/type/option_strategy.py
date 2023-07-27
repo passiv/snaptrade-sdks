@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredOptionStrategy(TypedDict):
@@ -29,7 +30,7 @@ class OptionalOptionStrategy(TypedDict, total=False):
 
     number_of_legs: typing.Union[int, float]
 
-    legs: typing.List[typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    legs: OptionStrategyLegs
 
 class OptionStrategy(RequiredOptionStrategy, OptionalOptionStrategy):
     pass

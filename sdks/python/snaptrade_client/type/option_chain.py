@@ -15,5 +15,6 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.option_chain_item import OptionChainItem
 
-OptionChain = typing.List[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]
+OptionChain = typing.List[OptionChainItem]

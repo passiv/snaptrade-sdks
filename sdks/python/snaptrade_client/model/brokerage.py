@@ -131,29 +131,10 @@ class Brokerage(
             @staticmethod
             def brokerage_type() -> typing.Type['BrokerageType']:
                 return BrokerageType
-            
-            
-            class exchanges(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    items = schemas.AnyTypeSchema
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]], typing.List[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]]],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'exchanges':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> MetaOapg.items:
-                    return super().__getitem__(i)
+        
+            @staticmethod
+            def exchanges() -> typing.Type['BrokerageExchanges']:
+                return BrokerageExchanges
             __annotations__ = {
                 "id": id,
                 "name": name,
@@ -228,7 +209,7 @@ class Brokerage(
     def __getitem__(self, name: typing_extensions.Literal["brokerage_type"]) -> 'BrokerageType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["exchanges"]) -> MetaOapg.properties.exchanges: ...
+    def __getitem__(self, name: typing_extensions.Literal["exchanges"]) -> 'BrokerageExchanges': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -289,7 +270,7 @@ class Brokerage(
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_type"]) -> typing.Union['BrokerageType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["exchanges"]) -> typing.Union[MetaOapg.properties.exchanges, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["exchanges"]) -> typing.Union['BrokerageExchanges', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -317,7 +298,7 @@ class Brokerage(
         is_scraping_integration: typing.Union[MetaOapg.properties.is_scraping_integration, bool, schemas.Unset] = schemas.unset,
         default_currency: typing.Union[MetaOapg.properties.default_currency, str, uuid.UUID, schemas.Unset] = schemas.unset,
         brokerage_type: typing.Union['BrokerageType', schemas.Unset] = schemas.unset,
-        exchanges: typing.Union[MetaOapg.properties.exchanges, list, tuple, schemas.Unset] = schemas.unset,
+        exchanges: typing.Union['BrokerageExchanges', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Brokerage':
@@ -346,4 +327,5 @@ class Brokerage(
             **kwargs,
         )
 
+from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.model.brokerage_type import BrokerageType

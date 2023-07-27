@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.manual_trade import ManualTrade
+from snaptrade_client.type.manual_trade_and_impact_trade_impacts import ManualTradeAndImpactTradeImpacts
 from snaptrade_client.type.manual_trade_balance import ManualTradeBalance
 
 class RequiredManualTradeAndImpact(TypedDict):
@@ -24,7 +25,7 @@ class RequiredManualTradeAndImpact(TypedDict):
 class OptionalManualTradeAndImpact(TypedDict, total=False):
     trade: ManualTrade
 
-    trade_impacts: typing.List[ManualTrade]
+    trade_impacts: ManualTradeAndImpactTradeImpacts
 
     combined_remaining_balance: ManualTradeBalance
 

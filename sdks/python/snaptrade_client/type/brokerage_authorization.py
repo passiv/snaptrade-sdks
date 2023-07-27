@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.brokerage import Brokerage
+from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
 
 class RequiredBrokerageAuthorization(TypedDict):
     pass
@@ -41,8 +42,7 @@ class OptionalBrokerageAuthorization(TypedDict, total=False):
     # Disabled date
     disabled_date: typing.Optional[str]
 
-    # Additional data about brokerage authorization
-    meta: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    meta: BrokerageAuthorizationMeta
 
 class BrokerageAuthorization(RequiredBrokerageAuthorization, OptionalBrokerageAuthorization):
     pass

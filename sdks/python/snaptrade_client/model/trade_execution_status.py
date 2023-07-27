@@ -109,35 +109,10 @@ class TradeExecutionStatus(
                     return cls("SELL")
             price = schemas.NumberSchema
             commissions = schemas.NumberSchema
-            
-            
-            class meta(
-                schemas.DictSchema
-            ):
-            
-            
-                class MetaOapg:
-                    additional_properties = schemas.AnyTypeSchema
-                
-                def __getitem__(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                def get_item_oapg(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'meta':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def meta() -> typing.Type['TradeExecutionStatusMeta']:
+                return TradeExecutionStatusMeta
             __annotations__ = {
                 "symbol": symbol,
                 "universal_symbol": universal_symbol,
@@ -176,7 +151,7 @@ class TradeExecutionStatus(
     def __getitem__(self, name: typing_extensions.Literal["commissions"]) -> MetaOapg.properties.commissions: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
+    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'TradeExecutionStatusMeta': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -210,7 +185,7 @@ class TradeExecutionStatus(
     def get_item_oapg(self, name: typing_extensions.Literal["commissions"]) -> typing.Union[MetaOapg.properties.commissions, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['TradeExecutionStatusMeta', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -229,7 +204,7 @@ class TradeExecutionStatus(
         action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
         price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         commissions: typing.Union[MetaOapg.properties.commissions, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        meta: typing.Union['TradeExecutionStatusMeta', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'TradeExecutionStatus':
@@ -251,4 +226,5 @@ class TradeExecutionStatus(
 
 from snaptrade_client.model.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.model.trade import Trade
+from snaptrade_client.model.trade_execution_status_meta import TradeExecutionStatusMeta
 from snaptrade_client.model.universal_symbol import UniversalSymbol

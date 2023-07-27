@@ -72,75 +72,10 @@ class BrokerageAuthorizationTypeReadOnly(
                 @schemas.classproperty
                 def TOKEN(cls):
                     return cls("TOKEN")
-            
-            
-            class brokerage(
-                schemas.DictSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    class properties:
-                        id = schemas.UUIDSchema
-                        name = schemas.StrSchema
-                        slug = schemas.StrSchema
-                        __annotations__ = {
-                            "id": id,
-                            "name": name,
-                            "slug": slug,
-                        }
-                    additional_properties = schemas.AnyTypeSchema
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["name"]) -> MetaOapg.properties.name: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["slug"]) -> MetaOapg.properties.slug: ...
-                
-                @typing.overload
-                def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
-                
-                def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["slug"], str, ]):
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["name"]) -> typing.Union[MetaOapg.properties.name, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["slug"]) -> typing.Union[MetaOapg.properties.slug, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
-                
-                def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["slug"], str, ]):
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, ],
-                    id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-                    name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
-                    slug: typing.Union[MetaOapg.properties.slug, str, schemas.Unset] = schemas.unset,
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'brokerage':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        id=id,
-                        name=name,
-                        slug=slug,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def brokerage() -> typing.Type['BrokerageAuthorizationTypeReadOnlyBrokerage']:
+                return BrokerageAuthorizationTypeReadOnlyBrokerage
             __annotations__ = {
                 "id": id,
                 "type": type,
@@ -159,7 +94,7 @@ class BrokerageAuthorizationTypeReadOnly(
     def __getitem__(self, name: typing_extensions.Literal["auth_type"]) -> MetaOapg.properties.auth_type: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["brokerage"]) -> MetaOapg.properties.brokerage: ...
+    def __getitem__(self, name: typing_extensions.Literal["brokerage"]) -> 'BrokerageAuthorizationTypeReadOnlyBrokerage': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -178,7 +113,7 @@ class BrokerageAuthorizationTypeReadOnly(
     def get_item_oapg(self, name: typing_extensions.Literal["auth_type"]) -> typing.Union[MetaOapg.properties.auth_type, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage"]) -> typing.Union[MetaOapg.properties.brokerage, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage"]) -> typing.Union['BrokerageAuthorizationTypeReadOnlyBrokerage', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -192,7 +127,7 @@ class BrokerageAuthorizationTypeReadOnly(
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         type: typing.Union[MetaOapg.properties.type, str, schemas.Unset] = schemas.unset,
         auth_type: typing.Union[MetaOapg.properties.auth_type, str, schemas.Unset] = schemas.unset,
-        brokerage: typing.Union[MetaOapg.properties.brokerage, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        brokerage: typing.Union['BrokerageAuthorizationTypeReadOnlyBrokerage', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'BrokerageAuthorizationTypeReadOnly':
@@ -206,3 +141,5 @@ class BrokerageAuthorizationTypeReadOnly(
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.brokerage_authorization_type_read_only_brokerage import BrokerageAuthorizationTypeReadOnlyBrokerage

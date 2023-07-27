@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData
 
 class RequiredEncryptedResponse(TypedDict):
     pass
@@ -22,7 +23,7 @@ class RequiredEncryptedResponse(TypedDict):
 class OptionalEncryptedResponse(TypedDict, total=False):
     encryptedSharedKey: str
 
-    encryptedMessageData: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    encryptedMessageData: EncryptedResponseEncryptedMessageData
 
 class EncryptedResponse(RequiredEncryptedResponse, OptionalEncryptedResponse):
     pass

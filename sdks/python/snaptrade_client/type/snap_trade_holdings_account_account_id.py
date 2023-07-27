@@ -15,7 +15,8 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.cash_restriction import CashRestriction
+from snaptrade_client.type.snap_trade_holdings_account_account_id_cash_restrictions import SnapTradeHoldingsAccountAccountIdCashRestrictions
+from snaptrade_client.type.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta
 
 class RequiredSnapTradeHoldingsAccountAccountId(TypedDict):
     pass
@@ -33,9 +34,9 @@ class OptionalSnapTradeHoldingsAccountAccountId(TypedDict, total=False):
 
     institution_name: str
 
-    meta: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    meta: SnapTradeHoldingsAccountAccountIdMeta
 
-    cash_restrictions: typing.List[CashRestriction]
+    cash_restrictions: SnapTradeHoldingsAccountAccountIdCashRestrictions
 
     # Time
     created_date: str

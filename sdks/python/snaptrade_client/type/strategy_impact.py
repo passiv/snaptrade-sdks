@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.strategy_impact_legs import StrategyImpactLegs
 
 class RequiredStrategyImpact(TypedDict):
     pass
@@ -32,7 +33,7 @@ class OptionalStrategyImpact(TypedDict, total=False):
 
     tradeValueCalculation: str
 
-    legs: typing.List[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]
+    legs: StrategyImpactLegs
 
     side: str
 

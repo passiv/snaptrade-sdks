@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.type.brokerage_type import BrokerageType
 
 class RequiredBrokerage(TypedDict):
@@ -55,8 +56,7 @@ class OptionalBrokerage(TypedDict, total=False):
 
     brokerage_type: BrokerageType
 
-    # List of exchange ID supported by brokerage
-    exchanges: typing.List[typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    exchanges: BrokerageExchanges
 
 class Brokerage(RequiredBrokerage, OptionalBrokerage):
     pass

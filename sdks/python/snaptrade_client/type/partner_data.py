@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.brokerage import Brokerage
+from snaptrade_client.type.partner_data_allowed_brokerages import PartnerDataAllowedBrokerages
 
 class RequiredPartnerData(TypedDict):
     pass
@@ -24,8 +24,7 @@ class OptionalPartnerData(TypedDict, total=False):
     # URI to redirect user back to after user is done adding brokerage connections
     redirect_uri: str
 
-    # Brokerages that can be accessed by partners
-    allowed_brokerages: typing.List[Brokerage]
+    allowed_brokerages: PartnerDataAllowedBrokerages
 
     # Name of Snaptrade Partner
     name: str

@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.account_sync_status import AccountSyncStatus
 from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 
 class RequiredSnapTradeHoldingsAccount(TypedDict):
     pass
@@ -36,7 +37,7 @@ class OptionalSnapTradeHoldingsAccount(TypedDict, total=False):
 
     sync_status: AccountSyncStatus
 
-    meta: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    meta: SnapTradeHoldingsAccountMeta
 
 class SnapTradeHoldingsAccount(RequiredSnapTradeHoldingsAccount, OptionalSnapTradeHoldingsAccount):
     pass

@@ -48,39 +48,10 @@ class TargetAsset(
                 return Percent
             is_supported = schemas.BoolSchema
             is_excluded = schemas.BoolSchema
-            
-            
-            class meta(
-                schemas.DictBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneFrozenDictMixin
-            ):
-            
-            
-                class MetaOapg:
-                    additional_properties = schemas.AnyTypeSchema
-            
-                
-                def __getitem__(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                def get_item_oapg(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, None, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'meta':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def meta() -> typing.Type['TargetAssetMeta']:
+                return TargetAssetMeta
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -107,7 +78,7 @@ class TargetAsset(
     def __getitem__(self, name: typing_extensions.Literal["is_excluded"]) -> MetaOapg.properties.is_excluded: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
+    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'TargetAssetMeta': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -132,7 +103,7 @@ class TargetAsset(
     def get_item_oapg(self, name: typing_extensions.Literal["is_excluded"]) -> typing.Union[MetaOapg.properties.is_excluded, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['TargetAssetMeta', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -148,7 +119,7 @@ class TargetAsset(
         percent: typing.Union['Percent', schemas.Unset] = schemas.unset,
         is_supported: typing.Union[MetaOapg.properties.is_supported, bool, schemas.Unset] = schemas.unset,
         is_excluded: typing.Union[MetaOapg.properties.is_excluded, bool, schemas.Unset] = schemas.unset,
-        meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, None, schemas.Unset] = schemas.unset,
+        meta: typing.Union['TargetAssetMeta', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'TargetAsset':
@@ -166,4 +137,5 @@ class TargetAsset(
         )
 
 from snaptrade_client.model.percent import Percent
+from snaptrade_client.model.target_asset_meta import TargetAssetMeta
 from snaptrade_client.model.universal_symbol import UniversalSymbol

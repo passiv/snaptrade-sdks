@@ -52,95 +52,10 @@ class StrategyQuotes(
             def ask_price() -> typing.Type['Price']:
                 return Price
             volatility = schemas.NumberSchema
-            
-            
-            class greek(
-                schemas.DictSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    class properties:
-                        delta = schemas.NumberSchema
-                        gamma = schemas.NumberSchema
-                        theta = schemas.NumberSchema
-                        vega = schemas.NumberSchema
-                        rho = schemas.NumberSchema
-                        __annotations__ = {
-                            "delta": delta,
-                            "gamma": gamma,
-                            "theta": theta,
-                            "vega": vega,
-                            "rho": rho,
-                        }
-                    additional_properties = schemas.AnyTypeSchema
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["delta"]) -> MetaOapg.properties.delta: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["gamma"]) -> MetaOapg.properties.gamma: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["theta"]) -> MetaOapg.properties.theta: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["vega"]) -> MetaOapg.properties.vega: ...
-                
-                @typing.overload
-                def __getitem__(self, name: typing_extensions.Literal["rho"]) -> MetaOapg.properties.rho: ...
-                
-                @typing.overload
-                def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
-                
-                def __getitem__(self, name: typing.Union[typing_extensions.Literal["delta"], typing_extensions.Literal["gamma"], typing_extensions.Literal["theta"], typing_extensions.Literal["vega"], typing_extensions.Literal["rho"], str, ]):
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["delta"]) -> typing.Union[MetaOapg.properties.delta, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["gamma"]) -> typing.Union[MetaOapg.properties.gamma, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["theta"]) -> typing.Union[MetaOapg.properties.theta, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["vega"]) -> typing.Union[MetaOapg.properties.vega, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: typing_extensions.Literal["rho"]) -> typing.Union[MetaOapg.properties.rho, schemas.Unset]: ...
-                
-                @typing.overload
-                def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
-                
-                def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["delta"], typing_extensions.Literal["gamma"], typing_extensions.Literal["theta"], typing_extensions.Literal["vega"], typing_extensions.Literal["rho"], str, ]):
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, ],
-                    delta: typing.Union[MetaOapg.properties.delta, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                    gamma: typing.Union[MetaOapg.properties.gamma, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                    theta: typing.Union[MetaOapg.properties.theta, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                    vega: typing.Union[MetaOapg.properties.vega, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                    rho: typing.Union[MetaOapg.properties.rho, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'greek':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        delta=delta,
-                        gamma=gamma,
-                        theta=theta,
-                        vega=vega,
-                        rho=rho,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def greek() -> typing.Type['StrategyQuotesGreek']:
+                return StrategyQuotesGreek
             __annotations__ = {
                 "strategy": strategy,
                 "open_price": open_price,
@@ -167,7 +82,7 @@ class StrategyQuotes(
     def __getitem__(self, name: typing_extensions.Literal["volatility"]) -> MetaOapg.properties.volatility: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["greek"]) -> MetaOapg.properties.greek: ...
+    def __getitem__(self, name: typing_extensions.Literal["greek"]) -> 'StrategyQuotesGreek': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -192,7 +107,7 @@ class StrategyQuotes(
     def get_item_oapg(self, name: typing_extensions.Literal["volatility"]) -> typing.Union[MetaOapg.properties.volatility, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["greek"]) -> typing.Union[MetaOapg.properties.greek, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["greek"]) -> typing.Union['StrategyQuotesGreek', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -208,7 +123,7 @@ class StrategyQuotes(
         bid_price: typing.Union['Price', schemas.Unset] = schemas.unset,
         ask_price: typing.Union['Price', schemas.Unset] = schemas.unset,
         volatility: typing.Union[MetaOapg.properties.volatility, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        greek: typing.Union[MetaOapg.properties.greek, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        greek: typing.Union['StrategyQuotesGreek', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'StrategyQuotes':
@@ -227,3 +142,4 @@ class StrategyQuotes(
 
 from snaptrade_client.model.option_strategy import OptionStrategy
 from snaptrade_client.model.price import Price
+from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek

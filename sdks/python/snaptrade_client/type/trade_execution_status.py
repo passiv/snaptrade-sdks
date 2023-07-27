@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.type.trade import Trade
+from snaptrade_client.type.trade_execution_status_meta import TradeExecutionStatusMeta
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredTradeExecutionStatus(TypedDict):
@@ -44,8 +45,7 @@ class OptionalTradeExecutionStatus(TypedDict, total=False):
     # Fees paid from executing trade
     commissions: typing.Union[int, float]
 
-    # Other misc. data
-    meta: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    meta: TradeExecutionStatusMeta
 
 class TradeExecutionStatus(RequiredTradeExecutionStatus, OptionalTradeExecutionStatus):
     pass

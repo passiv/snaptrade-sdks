@@ -15,9 +15,9 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.account_order_record import AccountOrderRecord
-from snaptrade_client.type.balance import Balance
-from snaptrade_client.type.position import Position
+from snaptrade_client.type.account_holdings_account_balances import AccountHoldingsAccountBalances
+from snaptrade_client.type.account_holdings_account_orders import AccountHoldingsAccountOrders
+from snaptrade_client.type.account_holdings_account_positions import AccountHoldingsAccountPositions
 from snaptrade_client.type.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.type.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
 
@@ -27,11 +27,11 @@ class RequiredAccountHoldingsAccount(TypedDict):
 class OptionalAccountHoldingsAccount(TypedDict, total=False):
     account: SnapTradeHoldingsAccountAccountId
 
-    balances: typing.Optional[typing.List[Balance]]
+    balances: AccountHoldingsAccountBalances
 
-    positions: typing.Optional[typing.List[Position]]
+    positions: AccountHoldingsAccountPositions
 
-    orders: typing.Optional[typing.List[AccountOrderRecord]]
+    orders: AccountHoldingsAccountOrders
 
     total_value: SnapTradeHoldingsTotalValue
 

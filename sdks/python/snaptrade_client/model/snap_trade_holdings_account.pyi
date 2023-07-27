@@ -69,35 +69,10 @@ class SnapTradeHoldingsAccount(
             @staticmethod
             def sync_status() -> typing.Type['AccountSyncStatus']:
                 return AccountSyncStatus
-            
-            
-            class meta(
-                schemas.DictSchema
-            ):
-            
-            
-                class MetaOapg:
-                    additional_properties = schemas.AnyTypeSchema
-                
-                def __getitem__(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    # dict_instance[name] accessor
-                    return super().__getitem__(name)
-                
-                def get_item_oapg(self, name: typing.Union[str, ]) -> MetaOapg.additional_properties:
-                    return super().get_item_oapg(name)
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                ) -> 'meta':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def meta() -> typing.Type['SnapTradeHoldingsAccountMeta']:
+                return SnapTradeHoldingsAccountMeta
             __annotations__ = {
                 "id": id,
                 "brokerage_authorization": brokerage_authorization,
@@ -132,7 +107,7 @@ class SnapTradeHoldingsAccount(
     def __getitem__(self, name: typing_extensions.Literal["sync_status"]) -> 'AccountSyncStatus': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> MetaOapg.properties.meta: ...
+    def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'SnapTradeHoldingsAccountMeta': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -163,7 +138,7 @@ class SnapTradeHoldingsAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["sync_status"]) -> typing.Union['AccountSyncStatus', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union[MetaOapg.properties.meta, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['SnapTradeHoldingsAccountMeta', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -181,7 +156,7 @@ class SnapTradeHoldingsAccount(
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
         institution_name: typing.Union[MetaOapg.properties.institution_name, str, schemas.Unset] = schemas.unset,
         sync_status: typing.Union['AccountSyncStatus', schemas.Unset] = schemas.unset,
-        meta: typing.Union[MetaOapg.properties.meta, dict, frozendict.frozendict, schemas.Unset] = schemas.unset,
+        meta: typing.Union['SnapTradeHoldingsAccountMeta', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'SnapTradeHoldingsAccount':
@@ -202,3 +177,4 @@ class SnapTradeHoldingsAccount(
 
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta

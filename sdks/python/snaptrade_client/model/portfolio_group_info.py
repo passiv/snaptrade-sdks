@@ -37,240 +37,42 @@ class PortfolioGroupInfo(
     class MetaOapg:
         
         class properties:
-            
-            
-            class symbols(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['UniversalSymbol']:
-                        return UniversalSymbol
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['UniversalSymbol'], typing.List['UniversalSymbol']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'symbols':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'UniversalSymbol':
-                    return super().__getitem__(i)
-            
-            
-            class quotable_symbols(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['UniversalSymbol']:
-                        return UniversalSymbol
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['UniversalSymbol'], typing.List['UniversalSymbol']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'quotable_symbols':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'UniversalSymbol':
-                    return super().__getitem__(i)
-            
-            
-            class balances(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['Balance']:
-                        return Balance
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['Balance'], typing.List['Balance']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'balances':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'Balance':
-                    return super().__getitem__(i)
-            
-            
-            class positions(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['Position']:
-                        return Position
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'positions':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'Position':
-                    return super().__getitem__(i)
-            
-            
-            class target_positions(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['TargetAsset']:
-                        return TargetAsset
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['TargetAsset'], typing.List['TargetAsset']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'target_positions':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'TargetAsset':
-                    return super().__getitem__(i)
-            
-            
-            class ideal_positions(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['Position']:
-                        return Position
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'ideal_positions':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'Position':
-                    return super().__getitem__(i)
-            
-            
-            class excluded_positions(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['ExcludedAsset']:
-                        return ExcludedAsset
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['ExcludedAsset'], typing.List['ExcludedAsset']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'excluded_positions':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'ExcludedAsset':
-                    return super().__getitem__(i)
-            
-            
-            class calculated_trades(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['CalculatedTrade']:
-                        return CalculatedTrade
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['CalculatedTrade'], typing.List['CalculatedTrade']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'calculated_trades':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'CalculatedTrade':
-                    return super().__getitem__(i)
-            
-            
-            class brokerage_authorizations(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['BrokerageAuthorization']:
-                        return BrokerageAuthorization
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['BrokerageAuthorization'], typing.List['BrokerageAuthorization']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'brokerage_authorizations':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'BrokerageAuthorization':
-                    return super().__getitem__(i)
+        
+            @staticmethod
+            def symbols() -> typing.Type['PortfolioGroupInfoSymbols']:
+                return PortfolioGroupInfoSymbols
+        
+            @staticmethod
+            def quotable_symbols() -> typing.Type['PortfolioGroupInfoQuotableSymbols']:
+                return PortfolioGroupInfoQuotableSymbols
+        
+            @staticmethod
+            def balances() -> typing.Type['PortfolioGroupInfoBalances']:
+                return PortfolioGroupInfoBalances
+        
+            @staticmethod
+            def positions() -> typing.Type['PortfolioGroupInfoPositions']:
+                return PortfolioGroupInfoPositions
+        
+            @staticmethod
+            def target_positions() -> typing.Type['PortfolioGroupInfoTargetPositions']:
+                return PortfolioGroupInfoTargetPositions
+        
+            @staticmethod
+            def ideal_positions() -> typing.Type['PortfolioGroupInfoIdealPositions']:
+                return PortfolioGroupInfoIdealPositions
+        
+            @staticmethod
+            def excluded_positions() -> typing.Type['PortfolioGroupInfoExcludedPositions']:
+                return PortfolioGroupInfoExcludedPositions
+        
+            @staticmethod
+            def calculated_trades() -> typing.Type['PortfolioGroupInfoCalculatedTrades']:
+                return PortfolioGroupInfoCalculatedTrades
+        
+            @staticmethod
+            def brokerage_authorizations() -> typing.Type['PortfolioGroupInfoBrokerageAuthorizations']:
+                return PortfolioGroupInfoBrokerageAuthorizations
             accuracy = schemas.NumberSchema
         
             @staticmethod
@@ -292,31 +94,31 @@ class PortfolioGroupInfo(
         additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["symbols"]) -> MetaOapg.properties.symbols: ...
+    def __getitem__(self, name: typing_extensions.Literal["symbols"]) -> 'PortfolioGroupInfoSymbols': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["quotable_symbols"]) -> MetaOapg.properties.quotable_symbols: ...
+    def __getitem__(self, name: typing_extensions.Literal["quotable_symbols"]) -> 'PortfolioGroupInfoQuotableSymbols': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> MetaOapg.properties.balances: ...
+    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> 'PortfolioGroupInfoBalances': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> MetaOapg.properties.positions: ...
+    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> 'PortfolioGroupInfoPositions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["target_positions"]) -> MetaOapg.properties.target_positions: ...
+    def __getitem__(self, name: typing_extensions.Literal["target_positions"]) -> 'PortfolioGroupInfoTargetPositions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["ideal_positions"]) -> MetaOapg.properties.ideal_positions: ...
+    def __getitem__(self, name: typing_extensions.Literal["ideal_positions"]) -> 'PortfolioGroupInfoIdealPositions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["excluded_positions"]) -> MetaOapg.properties.excluded_positions: ...
+    def __getitem__(self, name: typing_extensions.Literal["excluded_positions"]) -> 'PortfolioGroupInfoExcludedPositions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["calculated_trades"]) -> MetaOapg.properties.calculated_trades: ...
+    def __getitem__(self, name: typing_extensions.Literal["calculated_trades"]) -> 'PortfolioGroupInfoCalculatedTrades': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["brokerage_authorizations"]) -> MetaOapg.properties.brokerage_authorizations: ...
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_authorizations"]) -> 'PortfolioGroupInfoBrokerageAuthorizations': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["accuracy"]) -> MetaOapg.properties.accuracy: ...
@@ -332,31 +134,31 @@ class PortfolioGroupInfo(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbols"]) -> typing.Union[MetaOapg.properties.symbols, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["symbols"]) -> typing.Union['PortfolioGroupInfoSymbols', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["quotable_symbols"]) -> typing.Union[MetaOapg.properties.quotable_symbols, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["quotable_symbols"]) -> typing.Union['PortfolioGroupInfoQuotableSymbols', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union[MetaOapg.properties.balances, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union['PortfolioGroupInfoBalances', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union[MetaOapg.properties.positions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union['PortfolioGroupInfoPositions', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["target_positions"]) -> typing.Union[MetaOapg.properties.target_positions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["target_positions"]) -> typing.Union['PortfolioGroupInfoTargetPositions', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ideal_positions"]) -> typing.Union[MetaOapg.properties.ideal_positions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["ideal_positions"]) -> typing.Union['PortfolioGroupInfoIdealPositions', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["excluded_positions"]) -> typing.Union[MetaOapg.properties.excluded_positions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["excluded_positions"]) -> typing.Union['PortfolioGroupInfoExcludedPositions', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["calculated_trades"]) -> typing.Union[MetaOapg.properties.calculated_trades, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["calculated_trades"]) -> typing.Union['PortfolioGroupInfoCalculatedTrades', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_authorizations"]) -> typing.Union[MetaOapg.properties.brokerage_authorizations, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_authorizations"]) -> typing.Union['PortfolioGroupInfoBrokerageAuthorizations', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["accuracy"]) -> typing.Union[MetaOapg.properties.accuracy, schemas.Unset]: ...
@@ -373,15 +175,15 @@ class PortfolioGroupInfo(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        symbols: typing.Union[MetaOapg.properties.symbols, list, tuple, schemas.Unset] = schemas.unset,
-        quotable_symbols: typing.Union[MetaOapg.properties.quotable_symbols, list, tuple, schemas.Unset] = schemas.unset,
-        balances: typing.Union[MetaOapg.properties.balances, list, tuple, schemas.Unset] = schemas.unset,
-        positions: typing.Union[MetaOapg.properties.positions, list, tuple, schemas.Unset] = schemas.unset,
-        target_positions: typing.Union[MetaOapg.properties.target_positions, list, tuple, schemas.Unset] = schemas.unset,
-        ideal_positions: typing.Union[MetaOapg.properties.ideal_positions, list, tuple, schemas.Unset] = schemas.unset,
-        excluded_positions: typing.Union[MetaOapg.properties.excluded_positions, list, tuple, schemas.Unset] = schemas.unset,
-        calculated_trades: typing.Union[MetaOapg.properties.calculated_trades, list, tuple, schemas.Unset] = schemas.unset,
-        brokerage_authorizations: typing.Union[MetaOapg.properties.brokerage_authorizations, list, tuple, schemas.Unset] = schemas.unset,
+        symbols: typing.Union['PortfolioGroupInfoSymbols', schemas.Unset] = schemas.unset,
+        quotable_symbols: typing.Union['PortfolioGroupInfoQuotableSymbols', schemas.Unset] = schemas.unset,
+        balances: typing.Union['PortfolioGroupInfoBalances', schemas.Unset] = schemas.unset,
+        positions: typing.Union['PortfolioGroupInfoPositions', schemas.Unset] = schemas.unset,
+        target_positions: typing.Union['PortfolioGroupInfoTargetPositions', schemas.Unset] = schemas.unset,
+        ideal_positions: typing.Union['PortfolioGroupInfoIdealPositions', schemas.Unset] = schemas.unset,
+        excluded_positions: typing.Union['PortfolioGroupInfoExcludedPositions', schemas.Unset] = schemas.unset,
+        calculated_trades: typing.Union['PortfolioGroupInfoCalculatedTrades', schemas.Unset] = schemas.unset,
+        brokerage_authorizations: typing.Union['PortfolioGroupInfoBrokerageAuthorizations', schemas.Unset] = schemas.unset,
         accuracy: typing.Union[MetaOapg.properties.accuracy, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         settings: typing.Union['PortfolioGroupSettings', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -405,11 +207,13 @@ class PortfolioGroupInfo(
             **kwargs,
         )
 
-from snaptrade_client.model.balance import Balance
-from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.model.calculated_trade import CalculatedTrade
-from snaptrade_client.model.excluded_asset import ExcludedAsset
+from snaptrade_client.model.portfolio_group_info_balances import PortfolioGroupInfoBalances
+from snaptrade_client.model.portfolio_group_info_brokerage_authorizations import PortfolioGroupInfoBrokerageAuthorizations
+from snaptrade_client.model.portfolio_group_info_calculated_trades import PortfolioGroupInfoCalculatedTrades
+from snaptrade_client.model.portfolio_group_info_excluded_positions import PortfolioGroupInfoExcludedPositions
+from snaptrade_client.model.portfolio_group_info_ideal_positions import PortfolioGroupInfoIdealPositions
+from snaptrade_client.model.portfolio_group_info_positions import PortfolioGroupInfoPositions
+from snaptrade_client.model.portfolio_group_info_quotable_symbols import PortfolioGroupInfoQuotableSymbols
+from snaptrade_client.model.portfolio_group_info_symbols import PortfolioGroupInfoSymbols
+from snaptrade_client.model.portfolio_group_info_target_positions import PortfolioGroupInfoTargetPositions
 from snaptrade_client.model.portfolio_group_settings import PortfolioGroupSettings
-from snaptrade_client.model.position import Position
-from snaptrade_client.model.target_asset import TargetAsset
-from snaptrade_client.model.universal_symbol import UniversalSymbol

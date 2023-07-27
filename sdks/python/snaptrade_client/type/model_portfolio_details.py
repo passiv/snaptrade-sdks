@@ -16,8 +16,8 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.model_portfolio import ModelPortfolio
-from snaptrade_client.type.model_portfolio_asset_class import ModelPortfolioAssetClass
-from snaptrade_client.type.model_portfolio_security import ModelPortfolioSecurity
+from snaptrade_client.type.model_portfolio_details_model_portfolio_asset_class import ModelPortfolioDetailsModelPortfolioAssetClass
+from snaptrade_client.type.model_portfolio_details_model_portfolio_security import ModelPortfolioDetailsModelPortfolioSecurity
 
 class RequiredModelPortfolioDetails(TypedDict):
     pass
@@ -25,9 +25,9 @@ class RequiredModelPortfolioDetails(TypedDict):
 class OptionalModelPortfolioDetails(TypedDict, total=False):
     model_portfolio: ModelPortfolio
 
-    model_portfolio_security: typing.List[ModelPortfolioSecurity]
+    model_portfolio_security: ModelPortfolioDetailsModelPortfolioSecurity
 
-    model_portfolio_asset_class: typing.List[ModelPortfolioAssetClass]
+    model_portfolio_asset_class: ModelPortfolioDetailsModelPortfolioAssetClass
 
 class ModelPortfolioDetails(RequiredModelPortfolioDetails, OptionalModelPortfolioDetails):
     pass

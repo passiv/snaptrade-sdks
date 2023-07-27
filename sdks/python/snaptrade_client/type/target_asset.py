@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.percent import Percent
+from snaptrade_client.type.target_asset_meta import TargetAssetMeta
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredTargetAsset(TypedDict):
@@ -32,7 +33,7 @@ class OptionalTargetAsset(TypedDict, total=False):
 
     is_excluded: bool
 
-    meta: typing.Optional[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]
+    meta: TargetAssetMeta
 
 class TargetAsset(RequiredTargetAsset, OptionalTargetAsset):
     pass

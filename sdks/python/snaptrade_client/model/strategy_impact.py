@@ -43,137 +43,10 @@ class StrategyImpact(
             maintExcessEffect = schemas.NumberSchema
             maintExcessResult = schemas.NumberSchema
             tradeValueCalculation = schemas.StrSchema
-            
-            
-            class legs(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    
-                    class items(
-                        schemas.DictSchema
-                    ):
-                    
-                    
-                        class MetaOapg:
-                            
-                            class properties:
-                                legId = schemas.Int32Schema
-                                symbol = schemas.StrSchema
-                                symbolId = schemas.Int32Schema
-                                legRatioQuantity = schemas.Int32Schema
-                                side = schemas.StrSchema
-                                avgExecPrice = schemas.StrSchema
-                                lastExecPrice = schemas.StrSchema
-                                __annotations__ = {
-                                    "legId": legId,
-                                    "symbol": symbol,
-                                    "symbolId": symbolId,
-                                    "legRatioQuantity": legRatioQuantity,
-                                    "side": side,
-                                    "avgExecPrice": avgExecPrice,
-                                    "lastExecPrice": lastExecPrice,
-                                }
-                            additional_properties = schemas.AnyTypeSchema
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["legId"]) -> MetaOapg.properties.legId: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["symbolId"]) -> MetaOapg.properties.symbolId: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["legRatioQuantity"]) -> MetaOapg.properties.legRatioQuantity: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["side"]) -> MetaOapg.properties.side: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["avgExecPrice"]) -> MetaOapg.properties.avgExecPrice: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: typing_extensions.Literal["lastExecPrice"]) -> MetaOapg.properties.lastExecPrice: ...
-                        
-                        @typing.overload
-                        def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
-                        
-                        def __getitem__(self, name: typing.Union[typing_extensions.Literal["legId"], typing_extensions.Literal["symbol"], typing_extensions.Literal["symbolId"], typing_extensions.Literal["legRatioQuantity"], typing_extensions.Literal["side"], typing_extensions.Literal["avgExecPrice"], typing_extensions.Literal["lastExecPrice"], str, ]):
-                            # dict_instance[name] accessor
-                            return super().__getitem__(name)
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["legId"]) -> typing.Union[MetaOapg.properties.legId, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["symbolId"]) -> typing.Union[MetaOapg.properties.symbolId, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["legRatioQuantity"]) -> typing.Union[MetaOapg.properties.legRatioQuantity, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["side"]) -> typing.Union[MetaOapg.properties.side, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["avgExecPrice"]) -> typing.Union[MetaOapg.properties.avgExecPrice, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: typing_extensions.Literal["lastExecPrice"]) -> typing.Union[MetaOapg.properties.lastExecPrice, schemas.Unset]: ...
-                        
-                        @typing.overload
-                        def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
-                        
-                        def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["legId"], typing_extensions.Literal["symbol"], typing_extensions.Literal["symbolId"], typing_extensions.Literal["legRatioQuantity"], typing_extensions.Literal["side"], typing_extensions.Literal["avgExecPrice"], typing_extensions.Literal["lastExecPrice"], str, ]):
-                            return super().get_item_oapg(name)
-                    
-                        def __new__(
-                            cls,
-                            *args: typing.Union[dict, frozendict.frozendict, ],
-                            legId: typing.Union[MetaOapg.properties.legId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-                            symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
-                            symbolId: typing.Union[MetaOapg.properties.symbolId, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-                            legRatioQuantity: typing.Union[MetaOapg.properties.legRatioQuantity, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-                            side: typing.Union[MetaOapg.properties.side, str, schemas.Unset] = schemas.unset,
-                            avgExecPrice: typing.Union[MetaOapg.properties.avgExecPrice, str, schemas.Unset] = schemas.unset,
-                            lastExecPrice: typing.Union[MetaOapg.properties.lastExecPrice, str, schemas.Unset] = schemas.unset,
-                            _configuration: typing.Optional[schemas.Configuration] = None,
-                            **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                        ) -> 'items':
-                            return super().__new__(
-                                cls,
-                                *args,
-                                legId=legId,
-                                symbol=symbol,
-                                symbolId=symbolId,
-                                legRatioQuantity=legRatioQuantity,
-                                side=side,
-                                avgExecPrice=avgExecPrice,
-                                lastExecPrice=lastExecPrice,
-                                _configuration=_configuration,
-                                **kwargs,
-                            )
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, dict, frozendict.frozendict, ]], typing.List[typing.Union[MetaOapg.items, dict, frozendict.frozendict, ]]],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'legs':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> MetaOapg.items:
-                    return super().__getitem__(i)
+        
+            @staticmethod
+            def legs() -> typing.Type['StrategyImpactLegs']:
+                return StrategyImpactLegs
             side = schemas.StrSchema
             effect = schemas.StrSchema
             price = schemas.NumberSchema
@@ -212,7 +85,7 @@ class StrategyImpact(
     def __getitem__(self, name: typing_extensions.Literal["tradeValueCalculation"]) -> MetaOapg.properties.tradeValueCalculation: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
+    def __getitem__(self, name: typing_extensions.Literal["legs"]) -> 'StrategyImpactLegs': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["side"]) -> MetaOapg.properties.side: ...
@@ -252,7 +125,7 @@ class StrategyImpact(
     def get_item_oapg(self, name: typing_extensions.Literal["tradeValueCalculation"]) -> typing.Union[MetaOapg.properties.tradeValueCalculation, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> typing.Union[MetaOapg.properties.legs, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> typing.Union['StrategyImpactLegs', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["side"]) -> typing.Union[MetaOapg.properties.side, schemas.Unset]: ...
@@ -281,7 +154,7 @@ class StrategyImpact(
         maintExcessEffect: typing.Union[MetaOapg.properties.maintExcessEffect, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         maintExcessResult: typing.Union[MetaOapg.properties.maintExcessResult, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         tradeValueCalculation: typing.Union[MetaOapg.properties.tradeValueCalculation, str, schemas.Unset] = schemas.unset,
-        legs: typing.Union[MetaOapg.properties.legs, list, tuple, schemas.Unset] = schemas.unset,
+        legs: typing.Union['StrategyImpactLegs', schemas.Unset] = schemas.unset,
         side: typing.Union[MetaOapg.properties.side, str, schemas.Unset] = schemas.unset,
         effect: typing.Union[MetaOapg.properties.effect, str, schemas.Unset] = schemas.unset,
         price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -306,3 +179,5 @@ class StrategyImpact(
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.strategy_impact_legs import StrategyImpactLegs

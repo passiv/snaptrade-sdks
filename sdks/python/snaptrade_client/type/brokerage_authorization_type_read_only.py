@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.brokerage_authorization_type_read_only_brokerage import BrokerageAuthorizationTypeReadOnlyBrokerage
 
 class RequiredBrokerageAuthorizationTypeReadOnly(TypedDict):
     pass
@@ -26,7 +27,7 @@ class OptionalBrokerageAuthorizationTypeReadOnly(TypedDict, total=False):
 
     auth_type: str
 
-    brokerage: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+    brokerage: BrokerageAuthorizationTypeReadOnlyBrokerage
 
 class BrokerageAuthorizationTypeReadOnly(RequiredBrokerageAuthorizationTypeReadOnly, OptionalBrokerageAuthorizationTypeReadOnly):
     pass

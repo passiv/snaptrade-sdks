@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.strategy_order_place_orders import StrategyOrderPlaceOrders
 
 class RequiredStrategyOrderPlace(TypedDict):
     pass
@@ -22,7 +23,7 @@ class RequiredStrategyOrderPlace(TypedDict):
 class OptionalStrategyOrderPlace(TypedDict, total=False):
     orderId: int
 
-    orders: typing.List[typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]]
+    orders: StrategyOrderPlaceOrders
 
 class StrategyOrderPlace(RequiredStrategyOrderPlace, OptionalStrategyOrderPlace):
     pass

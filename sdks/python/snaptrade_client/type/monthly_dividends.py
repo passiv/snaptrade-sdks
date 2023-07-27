@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.dividend_at_date import DividendAtDate
+from snaptrade_client.type.monthly_dividends_dividends import MonthlyDividendsDividends
 
 class RequiredMonthlyDividends(TypedDict):
     pass
@@ -24,7 +24,7 @@ class OptionalMonthlyDividends(TypedDict, total=False):
     # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
     date: date
 
-    dividends: typing.List[DividendAtDate]
+    dividends: MonthlyDividendsDividends
 
 class MonthlyDividends(RequiredMonthlyDividends, OptionalMonthlyDividends):
     pass

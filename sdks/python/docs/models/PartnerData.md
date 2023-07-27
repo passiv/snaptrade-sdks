@@ -11,7 +11,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  | SnapTrade Partner meta
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **redirect_uri** | str,  | str,  | URI to redirect user back to after user is done adding brokerage connections | [optional] 
-**[allowed_brokerages](#allowed_brokerages)** | list, tuple,  | tuple,  | Brokerages that can be accessed by partners | [optional] 
+**allowed_brokerages** | [**PartnerDataAllowedBrokerages**](PartnerDataAllowedBrokerages.md) | [**PartnerDataAllowedBrokerages**](PartnerDataAllowedBrokerages.md) |  | [optional] 
 **name** | str,  | str,  | Name of Snaptrade Partner | [optional] 
 **slug** | str,  | str,  | Slug of Snaptrade Partner | [optional] 
 **logo_url** | str,  | str,  | URL to partner&#x27;s logo | [optional] 
@@ -23,20 +23,6 @@ Key | Input Type | Accessed Type | Description | Notes
 **can_access_portfolio_management** | bool,  | BoolClass,  | Shows if users Snaptrade partners can access portfolio group management features | [optional] 
 **can_access_orders** | bool,  | BoolClass,  | Shows if Snaptrade partners can get users account order history | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
-
-# allowed_brokerages
-
-Brokerages that can be accessed by partners
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  | Brokerages that can be accessed by partners | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**Brokerage**](Brokerage.md) | [**Brokerage**](Brokerage.md) | [**Brokerage**](Brokerage.md) |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

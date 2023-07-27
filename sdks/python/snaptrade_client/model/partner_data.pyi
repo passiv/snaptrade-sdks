@@ -38,32 +38,10 @@ class PartnerData(
         
         class properties:
             redirect_uri = schemas.StrSchema
-            
-            
-            class allowed_brokerages(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['Brokerage']:
-                        return Brokerage
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['Brokerage'], typing.List['Brokerage']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'allowed_brokerages':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'Brokerage':
-                    return super().__getitem__(i)
+        
+            @staticmethod
+            def allowed_brokerages() -> typing.Type['PartnerDataAllowedBrokerages']:
+                return PartnerDataAllowedBrokerages
             name = schemas.StrSchema
             slug = schemas.StrSchema
             logo_url = schemas.StrSchema
@@ -94,7 +72,7 @@ class PartnerData(
     def __getitem__(self, name: typing_extensions.Literal["redirect_uri"]) -> MetaOapg.properties.redirect_uri: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["allowed_brokerages"]) -> MetaOapg.properties.allowed_brokerages: ...
+    def __getitem__(self, name: typing_extensions.Literal["allowed_brokerages"]) -> 'PartnerDataAllowedBrokerages': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["name"]) -> MetaOapg.properties.name: ...
@@ -137,7 +115,7 @@ class PartnerData(
     def get_item_oapg(self, name: typing_extensions.Literal["redirect_uri"]) -> typing.Union[MetaOapg.properties.redirect_uri, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["allowed_brokerages"]) -> typing.Union[MetaOapg.properties.allowed_brokerages, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["allowed_brokerages"]) -> typing.Union['PartnerDataAllowedBrokerages', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["name"]) -> typing.Union[MetaOapg.properties.name, schemas.Unset]: ...
@@ -179,7 +157,7 @@ class PartnerData(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         redirect_uri: typing.Union[MetaOapg.properties.redirect_uri, str, schemas.Unset] = schemas.unset,
-        allowed_brokerages: typing.Union[MetaOapg.properties.allowed_brokerages, list, tuple, schemas.Unset] = schemas.unset,
+        allowed_brokerages: typing.Union['PartnerDataAllowedBrokerages', schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         slug: typing.Union[MetaOapg.properties.slug, str, schemas.Unset] = schemas.unset,
         logo_url: typing.Union[MetaOapg.properties.logo_url, str, schemas.Unset] = schemas.unset,
@@ -212,4 +190,4 @@ class PartnerData(
             **kwargs,
         )
 
-from snaptrade_client.model.brokerage import Brokerage
+from snaptrade_client.model.partner_data_allowed_brokerages import PartnerDataAllowedBrokerages
