@@ -639,7 +639,7 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
 
-            var brokerage = QUESTRADE,ALPACA;  // string | Comma separated value of brokerage slugs (optional) 
+            var brokerage = "QUESTRADE,ALPACA";  // string | Comma separated value of brokerage slugs (optional) 
 
             try
             {
