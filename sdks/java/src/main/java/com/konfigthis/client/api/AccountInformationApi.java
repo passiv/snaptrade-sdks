@@ -538,16 +538,16 @@ public class AccountInformationApi {
     }
 
 
-    private ApiResponse<List<Account>> getUserAccountDetailsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<Account> getUserAccountDetailsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountDetailsValidateBeforeCall(userId, userSecret, accountId, null);
-        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        Type localVarReturnType = new TypeToken<Account>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getUserAccountDetailsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Account>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountDetailsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<Account> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountDetailsValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        Type localVarReturnType = new TypeToken<Account>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -582,7 +582,7 @@ public class AccountInformationApi {
 
         /**
          * Execute getUserAccountDetails request
-         * @return List&lt;Account&gt;
+         * @return Account
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -591,14 +591,14 @@ public class AccountInformationApi {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public List<Account> execute() throws ApiException {
-            ApiResponse<List<Account>> localVarResp = getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
+        public Account execute() throws ApiException {
+            ApiResponse<Account> localVarResp = getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute getUserAccountDetails request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @return ApiResponse&lt;Account&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -607,7 +607,7 @@ public class AccountInformationApi {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<Account> executeWithHttpInfo() throws ApiException {
             return getUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
         }
 
@@ -623,7 +623,7 @@ public class AccountInformationApi {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<Account> _callback) throws ApiException {
             return getUserAccountDetailsAsync(userId, userSecret, accountId, _callback);
         }
     }

@@ -190,7 +190,7 @@ begin
   )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => Array<Account>
+  p data # => Account
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_account_details: #{e}"
 end
@@ -206,7 +206,7 @@ end
 
 ### Return type
 
-[**Array&lt;Account&gt;**](Account.md)
+[**Account**](Account.md)
 
 ## get_user_account_orders
 

@@ -212,7 +212,7 @@ public class Example {
 
 <a name="getUserAccountDetails"></a>
 # **getUserAccountDetails**
-> List&lt;Account&gt; getUserAccountDetails(userId, userSecret, accountId).execute();
+> Account getUserAccountDetails(userId, userSecret, accountId).execute();
 
 Return details of a specific investment account
 
@@ -243,11 +243,31 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account to get detail of.
     try {
-      List<Account> result = client
+      Account result = client
               .accountInformation
               .getUserAccountDetails(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
+
+      System.out.println(result.getId());
+
+      System.out.println(result.getBrokerageAuthorization());
+
+      System.out.println(result.getPortfolioGroup());
+
+      System.out.println(result.getName());
+
+      System.out.println(result.getNumber());
+
+      System.out.println(result.getInstitutionName());
+
+      System.out.println(result.getCreatedDate());
+
+      System.out.println(result.getMeta());
+
+      System.out.println(result.getCashRestrictions());
+
+      System.out.println(result.getSyncStatus());
 
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
@@ -259,7 +279,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Account>> response = client
+      ApiResponse<Account> response = client
               .accountInformation
               .getUserAccountDetails(userId, userSecret, accountId)
               .executeWithHttpInfo();
@@ -290,7 +310,7 @@ public class Example {
 
 ### Return type
 
-[**List&lt;Account&gt;**](Account.md)
+[**Account**](Account.md)
 
 ### Authorization
 

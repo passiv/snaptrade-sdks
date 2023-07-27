@@ -83,8 +83,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;Account&gt;</returns>
-        List<Account> GetUserAccountDetails(string userId, string userSecret, Guid accountId, int operationIndex = 0);
+        /// <returns>Account</returns>
+        Account GetUserAccountDetails(string userId, string userSecret, Guid accountId, int operationIndex = 0);
 
         /// <summary>
         /// Return details of a specific investment account
@@ -97,8 +97,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;Account&gt;</returns>
-        ApiResponse<List<Account>> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0);
+        /// <returns>ApiResponse of Account</returns>
+        ApiResponse<Account> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0);
         /// <summary>
         /// Get all history of orders placed in account
         /// </summary>
@@ -298,8 +298,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Account&gt;</returns>
-        System.Threading.Tasks.Task<List<Account>> GetUserAccountDetailsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of Account</returns>
+        System.Threading.Tasks.Task<Account> GetUserAccountDetailsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Return details of a specific investment account
@@ -313,8 +313,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Account&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Account>>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (Account)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Account>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all history of orders placed in account
         /// </summary>
@@ -990,10 +990,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;Account&gt;</returns>
-        public List<Account> GetUserAccountDetails(string userId, string userSecret, Guid accountId, int operationIndex = 0)
+        /// <returns>Account</returns>
+        public Account GetUserAccountDetails(string userId, string userSecret, Guid accountId, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<Account>> localVarResponse = GetUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
+            SnapTrade.Net.Client.ApiResponse<Account> localVarResponse = GetUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
             return localVarResponse.Data;
         }
 
@@ -1005,8 +1005,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;Account&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<Account>> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0)
+        /// <returns>ApiResponse of Account</returns>
+        public SnapTrade.Net.Client.ApiResponse<Account> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1066,7 +1066,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<Account>>("/accounts/{accountId}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<Account>("/accounts/{accountId}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountDetails", localVarResponse);
@@ -1088,10 +1088,10 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Account&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Account>> GetUserAccountDetailsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of Account</returns>
+        public async System.Threading.Tasks.Task<Account> GetUserAccountDetailsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<Account>> localVarResponse = await GetUserAccountDetailsWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<Account> localVarResponse = await GetUserAccountDetailsWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1104,8 +1104,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account to get detail of.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Account&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<Account>>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (Account)</returns>
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<Account>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1166,7 +1166,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<Account>>("/accounts/{accountId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Account>("/accounts/{accountId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

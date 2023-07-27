@@ -105,42 +105,17 @@ _auth = [
     'PartnerSignature',
     'PartnerTimestamp',
 ]
-
-
-class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
-):
-
-
-    class MetaOapg:
-        
-        @staticmethod
-        def items() -> typing.Type['Account']:
-            return Account
-
-    def __new__(
-        cls,
-        arg: typing.Union[typing.Tuple['Account'], typing.List['Account']],
-        _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'SchemaFor200ResponseBodyApplicationJson':
-        return super().__new__(
-            cls,
-            arg,
-            _configuration=_configuration,
-        )
-
-    def __getitem__(self, i: int) -> 'Account':
-        return super().__getitem__(i)
+SchemaFor200ResponseBodyApplicationJson = AccountSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[Account]
+    body: Account
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[Account]
+    body: Account
 
 
 _response_for_200 = api_client.OpenApiResponse(

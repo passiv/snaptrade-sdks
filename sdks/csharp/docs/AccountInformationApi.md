@@ -231,7 +231,7 @@ catch (ApiException e)
 
 <a name="getuseraccountdetails"></a>
 # **GetUserAccountDetails**
-> List&lt;Account&gt; GetUserAccountDetails (string userId, string userSecret, Guid accountId)
+> Account GetUserAccountDetails (string userId, string userSecret, Guid accountId)
 
 Return details of a specific investment account
 
@@ -266,7 +266,7 @@ namespace Example
             try
             {
                 // Return details of a specific investment account
-                List<Account> result = apiInstance.GetUserAccountDetails(userId, userSecret, accountId);
+                Account result = apiInstance.GetUserAccountDetails(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -293,7 +293,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Return details of a specific investment account
-    ApiResponse<List<Account>> response = apiInstance.GetUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
+    ApiResponse<Account> response = apiInstance.GetUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -316,7 +316,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;Account&gt;**](Account.md)
+[**Account**](Account.md)
 
 ### Authorization
 

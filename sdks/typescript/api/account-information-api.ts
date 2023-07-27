@@ -564,7 +564,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+        async getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountDetails(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -660,7 +660,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
+        getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig): AxiosPromise<Account> {
             return localVarFp.getUserAccountDetails(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

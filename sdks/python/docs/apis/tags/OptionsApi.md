@@ -561,10 +561,16 @@ body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
 headers | Unset | headers were not defined |
 
 # SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**OptionsHoldings**](../../models/OptionsHoldings.md) |  | 
 
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+list, tuple,  | tuple,  |  | 
+
+### Tuple Items
+Class Name | Input Type | Accessed Type | Description | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+[**OptionsHoldings**](../../models/OptionsHoldings.md) | [**OptionsHoldings**](../../models/OptionsHoldings.md) | [**OptionsHoldings**](../../models/OptionsHoldings.md) |  | 
 
 #### list_option_holdings.ApiResponseFor500
 Name | Type | Description  | Notes

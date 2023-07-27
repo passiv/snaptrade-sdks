@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**OptionsHoldings**
+**Array<OptionsHoldings>**
 
 ### HTTP request headers
 

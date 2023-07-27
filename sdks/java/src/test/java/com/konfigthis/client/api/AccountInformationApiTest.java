@@ -88,7 +88,7 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<Account> response = api.getUserAccountDetails(userId, userSecret, accountId)
+        Account response = api.getUserAccountDetails(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

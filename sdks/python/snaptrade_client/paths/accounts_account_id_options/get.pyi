@@ -98,17 +98,42 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-SchemaFor200ResponseBodyApplicationJson = OptionsHoldingsSchema
+
+
+class SchemaFor200ResponseBodyApplicationJson(
+    schemas.ListSchema
+):
+
+
+    class MetaOapg:
+        
+        @staticmethod
+        def items() -> typing.Type['OptionsHoldings']:
+            return OptionsHoldings
+
+    def __new__(
+        cls,
+        arg: typing.Union[typing.Tuple['OptionsHoldings'], typing.List['OptionsHoldings']],
+        _configuration: typing.Optional[schemas.Configuration] = None,
+    ) -> 'SchemaFor200ResponseBodyApplicationJson':
+        return super().__new__(
+            cls,
+            arg,
+            _configuration=_configuration,
+        )
+
+    def __getitem__(self, i: int) -> 'OptionsHoldings':
+        return super().__getitem__(i)
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: OptionsHoldings
+    body: typing.List[OptionsHoldings]
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: OptionsHoldings
+    body: typing.List[OptionsHoldings]
 
 
 _response_for_200 = api_client.OpenApiResponse(

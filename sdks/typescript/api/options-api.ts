@@ -420,7 +420,7 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionsHoldings>> {
+        async listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionsHoldings>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listOptionHoldings(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -482,7 +482,7 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<OptionsHoldings> {
+        listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<OptionsHoldings>> {
             return localVarFp.listOptionHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

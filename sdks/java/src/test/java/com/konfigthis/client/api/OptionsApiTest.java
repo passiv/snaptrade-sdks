@@ -108,7 +108,7 @@ public class OptionsApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        OptionsHoldings response = api.listOptionHoldings(userId, userSecret, accountId)
+        List<OptionsHoldings> response = api.listOptionHoldings(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

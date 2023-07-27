@@ -237,7 +237,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
-    # @return [Array<Account>]
+    # @return [Account]
     def get_user_account_details_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_details_with_http_info(user_id, user_secret, account_id, opts)
       data
@@ -248,7 +248,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
+    # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
     def get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_details ...'
@@ -285,7 +285,7 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<Account>'
+      return_type = opts[:debug_return_type] || 'Account'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']

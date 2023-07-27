@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Array<Account>**
+**Account**
 
 ### HTTP request headers
 

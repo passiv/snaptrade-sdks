@@ -60,7 +60,7 @@ describe 'AccountInformationApi' do
   # @param user_secret 
   # @param account_id The ID of the account to get detail of.
   # @param [Hash] opts the optional parameters
-  # @return [Array<Account>]
+  # @return [Account]
   describe 'get_user_account_details test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

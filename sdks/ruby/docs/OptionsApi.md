@@ -287,7 +287,7 @@ begin
   )
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => OptionsHoldings
+  p data # => Array<OptionsHoldings>
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.list_option_holdings: #{e}"
 end
@@ -303,7 +303,7 @@ end
 
 ### Return type
 
-[**OptionsHoldings**](OptionsHoldings.md)
+[**Array&lt;OptionsHoldings&gt;**](OptionsHoldings.md)
 
 ## place_option_strategy
 

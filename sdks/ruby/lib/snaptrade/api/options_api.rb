@@ -381,7 +381,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
-    # @return [OptionsHoldings]
+    # @return [Array<OptionsHoldings>]
     def list_option_holdings_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = list_option_holdings_with_http_info(user_id, user_secret, account_id, opts)
       data
@@ -392,7 +392,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(OptionsHoldings, Integer, Hash)>] OptionsHoldings data, response status code and response headers
+    # @return [Array<(Array<OptionsHoldings>, Integer, Hash)>] Array<OptionsHoldings> data, response status code and response headers
     def list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.list_option_holdings ...'
@@ -429,7 +429,7 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'OptionsHoldings'
+      return_type = opts[:debug_return_type] || 'Array<OptionsHoldings>'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
