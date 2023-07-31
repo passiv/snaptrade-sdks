@@ -45,7 +45,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>4.4.0</version>
+  <version>4.5.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:4.4.0"
+   implementation "com.konfigthis:snaptrade-java-sdk:4.5.0"
 }
 ```
 
@@ -98,7 +98,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-4.4.0.jar`
+* `target/snaptrade-java-sdk-4.5.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
