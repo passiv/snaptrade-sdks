@@ -4,13 +4,13 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account. |
-| [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account |
+| [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
+| [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
-| [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account |
+| [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
-| [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List all investment accounts for the user |
+| [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
 | [**updateUserAccount**](AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
 
@@ -18,7 +18,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 # **getAllUserHoldings**
 > List&lt;AccountHoldings&gt; getAllUserHoldings(userId, userSecret).brokerageAuthorizations(brokerageAuthorizations).execute();
 
-List all accounts for the user, plus balances and positions for each account.
+List all accounts for the user, plus balances, positions, and orders for each account.
 
 ### Example
 ```java
@@ -117,7 +117,7 @@ public class Example {
 # **getUserAccountBalance**
 > List&lt;Balance&gt; getUserAccountBalance(userId, userSecret, accountId).execute();
 
-Get all cash balances of an investment account
+List account balances
 
 ### Example
 ```java
@@ -432,7 +432,7 @@ public class Example {
 # **getUserAccountPositions**
 > List&lt;Position&gt; getUserAccountPositions(userId, userSecret, accountId).execute();
 
-Get all positions of an investment account
+List account positions
 
 ### Example
 ```java
@@ -636,7 +636,7 @@ public class Example {
 # **listUserAccounts**
 > List&lt;Account&gt; listUserAccounts(userId, userSecret).execute();
 
-List all investment accounts for the user
+List accounts
 
 ### Example
 ```java

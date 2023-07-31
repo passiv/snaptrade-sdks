@@ -36,10 +36,32 @@ class MonthlyDividends(
         
         class properties:
             date = schemas.DateSchema
-        
-            @staticmethod
-            def dividends() -> typing.Type['MonthlyDividendsDividends']:
-                return MonthlyDividendsDividends
+            
+            
+            class dividends(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['DividendAtDate']:
+                        return DividendAtDate
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['DividendAtDate'], typing.List['DividendAtDate']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'dividends':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'DividendAtDate':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "date": date,
                 "dividends": dividends,
@@ -50,7 +72,7 @@ class MonthlyDividends(
     def __getitem__(self, name: typing_extensions.Literal["date"]) -> MetaOapg.properties.date: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["dividends"]) -> 'MonthlyDividendsDividends': ...
+    def __getitem__(self, name: typing_extensions.Literal["dividends"]) -> MetaOapg.properties.dividends: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -63,7 +85,7 @@ class MonthlyDividends(
     def get_item_oapg(self, name: typing_extensions.Literal["date"]) -> typing.Union[MetaOapg.properties.date, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["dividends"]) -> typing.Union['MonthlyDividendsDividends', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["dividends"]) -> typing.Union[MetaOapg.properties.dividends, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -75,7 +97,7 @@ class MonthlyDividends(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         date: typing.Union[MetaOapg.properties.date, str, date, schemas.Unset] = schemas.unset,
-        dividends: typing.Union['MonthlyDividendsDividends', schemas.Unset] = schemas.unset,
+        dividends: typing.Union[MetaOapg.properties.dividends, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'MonthlyDividends':
@@ -88,4 +110,4 @@ class MonthlyDividends(
             **kwargs,
         )
 
-from snaptrade_client.model.monthly_dividends_dividends import MonthlyDividendsDividends
+from snaptrade_client.model.dividend_at_date import DividendAtDate

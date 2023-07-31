@@ -91,7 +91,7 @@ snaptrade = SnapTrade(
 
 async def main():
     try:
-        # List all accounts for the user, plus balances and positions for each account.
+        # List all accounts for the user, plus balances, positions, and orders for each account.
         get_all_user_holdings_response = await snaptrade.account_information.aget_all_user_holdings(
             user_id="John.doe@snaptrade.com",  # required
             user_secret="USERSECRET123",  # required
@@ -127,20 +127,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccountInformationApi* | [**get_all_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
-*AccountInformationApi* | [**get_user_account_balance**](docs/apis/tags/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
+*AccountInformationApi* | [**get_all_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
+*AccountInformationApi* | [**get_user_account_balance**](docs/apis/tags/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**get_user_account_details**](docs/apis/tags/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *AccountInformationApi* | [**get_user_account_orders**](docs/apis/tags/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
-*AccountInformationApi* | [**get_user_account_positions**](docs/apis/tags/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account
+*AccountInformationApi* | [**get_user_account_positions**](docs/apis/tags/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions
 *AccountInformationApi* | [**get_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-*AccountInformationApi* | [**list_user_accounts**](docs/apis/tags/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user
+*AccountInformationApi* | [**list_user_accounts**](docs/apis/tags/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**update_user_account**](docs/apis/tags/AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**check**](docs/apis/tags/APIStatusApi.md#check) | **GET** / | Get API Status
-*AuthenticationApi* | [**delete_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-*AuthenticationApi* | [**get_user_jwt**](docs/apis/tags/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
-*AuthenticationApi* | [**list_snap_trade_users**](docs/apis/tags/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#x27;ve registered on our platform
-*AuthenticationApi* | [**login_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-*AuthenticationApi* | [**register_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
+*AuthenticationApi* | [**delete_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
+*AuthenticationApi* | [**get_user_jwt**](docs/apis/tags/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
+*AuthenticationApi* | [**list_snap_trade_users**](docs/apis/tags/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**login_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user &amp; generate connection link
+*AuthenticationApi* | [**register_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user
 *ConnectionsApi* | [**detail_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 *ConnectionsApi* | [**list_brokerage_authorizations**](docs/apis/tags/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**remove_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
@@ -154,14 +154,14 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**get_currency_exchange_rate_pair**](docs/apis/tags/ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *ReferenceDataApi* | [**get_partner_info**](docs/apis/tags/ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *ReferenceDataApi* | [**get_security_types**](docs/apis/tags/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types.
-*ReferenceDataApi* | [**get_stock_exchanges**](docs/apis/tags/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+*ReferenceDataApi* | [**get_stock_exchanges**](docs/apis/tags/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges
 *ReferenceDataApi* | [**get_symbols**](docs/apis/tags/ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols
 *ReferenceDataApi* | [**get_symbols_by_ticker**](docs/apis/tags/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
 *ReferenceDataApi* | [**list_all_brokerage_authorization_type**](docs/apis/tags/ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**list_all_brokerages**](docs/apis/tags/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List of all brokerages.
-*ReferenceDataApi* | [**list_all_currencies**](docs/apis/tags/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List of all supported currencies
-*ReferenceDataApi* | [**list_all_currencies_rates**](docs/apis/tags/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
-*ReferenceDataApi* | [**symbol_search_user_account**](docs/apis/tags/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+*ReferenceDataApi* | [**list_all_brokerages**](docs/apis/tags/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List brokerages
+*ReferenceDataApi* | [**list_all_currencies**](docs/apis/tags/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List currencies
+*ReferenceDataApi* | [**list_all_currencies_rates**](docs/apis/tags/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | List currency exchange rates
+*ReferenceDataApi* | [**symbol_search_user_account**](docs/apis/tags/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 *TradingApi* | [**cancel_user_account_order**](docs/apis/tags/TradingApi.md#cancel_user_account_order) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
 *TradingApi* | [**get_order_impact**](docs/apis/tags/TradingApi.md#get_order_impact) | **POST** /trade/impact | Check impact of trades on account.
 *TradingApi* | [**get_user_account_quotes**](docs/apis/tags/TradingApi.md#get_user_account_quotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
@@ -174,14 +174,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Account](docs/models/Account.md)
- - [AccountCashRestrictions](docs/models/AccountCashRestrictions.md)
  - [AccountHoldings](docs/models/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/models/AccountHoldingsAccount.md)
- - [AccountHoldingsAccountBalances](docs/models/AccountHoldingsAccountBalances.md)
- - [AccountHoldingsAccountOrders](docs/models/AccountHoldingsAccountOrders.md)
- - [AccountHoldingsAccountPositions](docs/models/AccountHoldingsAccountPositions.md)
- - [AccountHoldingsBalances](docs/models/AccountHoldingsBalances.md)
- - [AccountHoldingsPositions](docs/models/AccountHoldingsPositions.md)
  - [AccountIDs](docs/models/AccountIDs.md)
  - [AccountMeta](docs/models/AccountMeta.md)
  - [AccountOrderRecord](docs/models/AccountOrderRecord.md)
@@ -201,7 +195,6 @@ Class | Method | HTTP request | Description
  - [BrokerageSymbol](docs/models/BrokerageSymbol.md)
  - [BrokerageType](docs/models/BrokerageType.md)
  - [CalculatedTrade](docs/models/CalculatedTrade.md)
- - [CalculatedTradeTrades](docs/models/CalculatedTradeTrades.md)
  - [CancelledUnits](docs/models/CancelledUnits.md)
  - [Cash](docs/models/Cash.md)
  - [CashRestriction](docs/models/CashRestriction.md)
@@ -222,7 +215,6 @@ Class | Method | HTTP request | Description
  - [LoginRedirectURI](docs/models/LoginRedirectURI.md)
  - [ManualTrade](docs/models/ManualTrade.md)
  - [ManualTradeAndImpact](docs/models/ManualTradeAndImpact.md)
- - [ManualTradeAndImpactTradeImpacts](docs/models/ManualTradeAndImpactTradeImpacts.md)
  - [ManualTradeBalance](docs/models/ManualTradeBalance.md)
  - [ManualTradeForm](docs/models/ManualTradeForm.md)
  - [ManualTradeSymbol](docs/models/ManualTradeSymbol.md)
@@ -232,16 +224,12 @@ Class | Method | HTTP request | Description
  - [Model404FailedRequestResponse](docs/models/Model404FailedRequestResponse.md)
  - [ModelAssetClass](docs/models/ModelAssetClass.md)
  - [ModelAssetClassDetails](docs/models/ModelAssetClassDetails.md)
- - [ModelAssetClassDetailsModelAssetClassTarget](docs/models/ModelAssetClassDetailsModelAssetClassTarget.md)
  - [ModelAssetClassTarget](docs/models/ModelAssetClassTarget.md)
  - [ModelPortfolio](docs/models/ModelPortfolio.md)
  - [ModelPortfolioAssetClass](docs/models/ModelPortfolioAssetClass.md)
  - [ModelPortfolioDetails](docs/models/ModelPortfolioDetails.md)
- - [ModelPortfolioDetailsModelPortfolioAssetClass](docs/models/ModelPortfolioDetailsModelPortfolioAssetClass.md)
- - [ModelPortfolioDetailsModelPortfolioSecurity](docs/models/ModelPortfolioDetailsModelPortfolioSecurity.md)
  - [ModelPortfolioSecurity](docs/models/ModelPortfolioSecurity.md)
  - [MonthlyDividends](docs/models/MonthlyDividends.md)
- - [MonthlyDividendsDividends](docs/models/MonthlyDividendsDividends.md)
  - [NetContributions](docs/models/NetContributions.md)
  - [NetDividend](docs/models/NetDividend.md)
  - [OpenUnits](docs/models/OpenUnits.md)
@@ -259,29 +247,12 @@ Class | Method | HTTP request | Description
  - [OptionsSymbol](docs/models/OptionsSymbol.md)
  - [OrderType](docs/models/OrderType.md)
  - [PartnerData](docs/models/PartnerData.md)
- - [PartnerDataAllowedBrokerages](docs/models/PartnerDataAllowedBrokerages.md)
  - [PastValue](docs/models/PastValue.md)
  - [Percent](docs/models/Percent.md)
  - [PerformanceCustom](docs/models/PerformanceCustom.md)
  - [PerformanceCustomBadTickers](docs/models/PerformanceCustomBadTickers.md)
- - [PerformanceCustomContributionTimeframe](docs/models/PerformanceCustomContributionTimeframe.md)
- - [PerformanceCustomContributionTimeframeCumulative](docs/models/PerformanceCustomContributionTimeframeCumulative.md)
- - [PerformanceCustomDividendTimeline](docs/models/PerformanceCustomDividendTimeline.md)
- - [PerformanceCustomDividends](docs/models/PerformanceCustomDividends.md)
- - [PerformanceCustomReturnRateTimeframe](docs/models/PerformanceCustomReturnRateTimeframe.md)
- - [PerformanceCustomTotalEquityTimeframe](docs/models/PerformanceCustomTotalEquityTimeframe.md)
- - [PerformanceCustomWithdrawalTimeframe](docs/models/PerformanceCustomWithdrawalTimeframe.md)
  - [PortfolioGroup](docs/models/PortfolioGroup.md)
  - [PortfolioGroupInfo](docs/models/PortfolioGroupInfo.md)
- - [PortfolioGroupInfoBalances](docs/models/PortfolioGroupInfoBalances.md)
- - [PortfolioGroupInfoBrokerageAuthorizations](docs/models/PortfolioGroupInfoBrokerageAuthorizations.md)
- - [PortfolioGroupInfoCalculatedTrades](docs/models/PortfolioGroupInfoCalculatedTrades.md)
- - [PortfolioGroupInfoExcludedPositions](docs/models/PortfolioGroupInfoExcludedPositions.md)
- - [PortfolioGroupInfoIdealPositions](docs/models/PortfolioGroupInfoIdealPositions.md)
- - [PortfolioGroupInfoPositions](docs/models/PortfolioGroupInfoPositions.md)
- - [PortfolioGroupInfoQuotableSymbols](docs/models/PortfolioGroupInfoQuotableSymbols.md)
- - [PortfolioGroupInfoSymbols](docs/models/PortfolioGroupInfoSymbols.md)
- - [PortfolioGroupInfoTargetPositions](docs/models/PortfolioGroupInfoTargetPositions.md)
  - [PortfolioGroupPosition](docs/models/PortfolioGroupPosition.md)
  - [PortfolioGroupSettings](docs/models/PortfolioGroupSettings.md)
  - [Position](docs/models/Position.md)
@@ -298,7 +269,6 @@ Class | Method | HTTP request | Description
  - [SnapTradeAPIDisclaimerAcceptStatus](docs/models/SnapTradeAPIDisclaimerAcceptStatus.md)
  - [SnapTradeHoldingsAccount](docs/models/SnapTradeHoldingsAccount.md)
  - [SnapTradeHoldingsAccountAccountId](docs/models/SnapTradeHoldingsAccountAccountId.md)
- - [SnapTradeHoldingsAccountAccountIdCashRestrictions](docs/models/SnapTradeHoldingsAccountAccountIdCashRestrictions.md)
  - [SnapTradeHoldingsAccountAccountIdMeta](docs/models/SnapTradeHoldingsAccountAccountIdMeta.md)
  - [SnapTradeHoldingsAccountMeta](docs/models/SnapTradeHoldingsAccountMeta.md)
  - [SnapTradeHoldingsTotalValue](docs/models/SnapTradeHoldingsTotalValue.md)
@@ -338,13 +308,10 @@ Class | Method | HTTP request | Description
  - [TransactionsStatus](docs/models/TransactionsStatus.md)
  - [USExchange](docs/models/USExchange.md)
  - [UnderlyingSymbol](docs/models/UnderlyingSymbol.md)
- - [UnderlyingSymbolCurrencies](docs/models/UnderlyingSymbolCurrencies.md)
  - [Units](docs/models/Units.md)
  - [UniversalActivity](docs/models/UniversalActivity.md)
  - [UniversalSymbol](docs/models/UniversalSymbol.md)
- - [UniversalSymbolCurrencies](docs/models/UniversalSymbolCurrencies.md)
  - [UniversalSymbolTicker](docs/models/UniversalSymbolTicker.md)
- - [UniversalSymbolTickerCurrencies](docs/models/UniversalSymbolTickerCurrencies.md)
  - [UserErrorLog](docs/models/UserErrorLog.md)
  - [UserID](docs/models/UserID.md)
  - [UserIDandSecret](docs/models/UserIDandSecret.md)

@@ -37,26 +37,114 @@ class PerformanceCustom(
     class MetaOapg:
         
         class properties:
-        
-            @staticmethod
-            def totalEquityTimeframe() -> typing.Type['PerformanceCustomTotalEquityTimeframe']:
-                return PerformanceCustomTotalEquityTimeframe
+            
+            
+            class totalEquityTimeframe(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['PastValue']:
+                        return PastValue
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['PastValue'], typing.List['PastValue']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'totalEquityTimeframe':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'PastValue':
+                    return super().__getitem__(i)
         
             @staticmethod
             def contributions() -> typing.Type['NetContributions']:
                 return NetContributions
-        
-            @staticmethod
-            def contributionTimeframe() -> typing.Type['PerformanceCustomContributionTimeframe']:
-                return PerformanceCustomContributionTimeframe
-        
-            @staticmethod
-            def contributionTimeframeCumulative() -> typing.Type['PerformanceCustomContributionTimeframeCumulative']:
-                return PerformanceCustomContributionTimeframeCumulative
-        
-            @staticmethod
-            def withdrawalTimeframe() -> typing.Type['PerformanceCustomWithdrawalTimeframe']:
-                return PerformanceCustomWithdrawalTimeframe
+            
+            
+            class contributionTimeframe(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['PastValue']:
+                        return PastValue
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['PastValue'], typing.List['PastValue']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'contributionTimeframe':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'PastValue':
+                    return super().__getitem__(i)
+            
+            
+            class contributionTimeframeCumulative(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['PastValue']:
+                        return PastValue
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['PastValue'], typing.List['PastValue']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'contributionTimeframeCumulative':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'PastValue':
+                    return super().__getitem__(i)
+            
+            
+            class withdrawalTimeframe(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['PastValue']:
+                        return PastValue
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['PastValue'], typing.List['PastValue']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'withdrawalTimeframe':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'PastValue':
+                    return super().__getitem__(i)
             
             
             class contributionStreak(
@@ -117,10 +205,32 @@ class PerformanceCustom(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def dividends() -> typing.Type['PerformanceCustomDividends']:
-                return PerformanceCustomDividends
+            
+            
+            class dividends(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['NetDividend']:
+                        return NetDividend
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['NetDividend'], typing.List['NetDividend']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'dividends':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'NetDividend':
+                    return super().__getitem__(i)
             
             
             class dividendIncome(
@@ -165,10 +275,32 @@ class PerformanceCustom(
             @staticmethod
             def badTickers() -> typing.Type['PerformanceCustomBadTickers']:
                 return PerformanceCustomBadTickers
-        
-            @staticmethod
-            def dividendTimeline() -> typing.Type['PerformanceCustomDividendTimeline']:
-                return PerformanceCustomDividendTimeline
+            
+            
+            class dividendTimeline(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['MonthlyDividends']:
+                        return MonthlyDividends
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['MonthlyDividends'], typing.List['MonthlyDividends']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'dividendTimeline':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'MonthlyDividends':
+                    return super().__getitem__(i)
             
             
             class commissions(
@@ -249,10 +381,32 @@ class PerformanceCustom(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def returnRateTimeframe() -> typing.Type['PerformanceCustomReturnRateTimeframe']:
-                return PerformanceCustomReturnRateTimeframe
+            
+            
+            class returnRateTimeframe(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['SubPeriodReturnRate']:
+                        return SubPeriodReturnRate
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['SubPeriodReturnRate'], typing.List['SubPeriodReturnRate']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'returnRateTimeframe':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'SubPeriodReturnRate':
+                    return super().__getitem__(i)
             detailedMode = schemas.BoolSchema
             __annotations__ = {
                 "totalEquityTimeframe": totalEquityTimeframe,
@@ -278,19 +432,19 @@ class PerformanceCustom(
         additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["totalEquityTimeframe"]) -> 'PerformanceCustomTotalEquityTimeframe': ...
+    def __getitem__(self, name: typing_extensions.Literal["totalEquityTimeframe"]) -> MetaOapg.properties.totalEquityTimeframe: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["contributions"]) -> 'NetContributions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["contributionTimeframe"]) -> 'PerformanceCustomContributionTimeframe': ...
+    def __getitem__(self, name: typing_extensions.Literal["contributionTimeframe"]) -> MetaOapg.properties.contributionTimeframe: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["contributionTimeframeCumulative"]) -> 'PerformanceCustomContributionTimeframeCumulative': ...
+    def __getitem__(self, name: typing_extensions.Literal["contributionTimeframeCumulative"]) -> MetaOapg.properties.contributionTimeframeCumulative: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["withdrawalTimeframe"]) -> 'PerformanceCustomWithdrawalTimeframe': ...
+    def __getitem__(self, name: typing_extensions.Literal["withdrawalTimeframe"]) -> MetaOapg.properties.withdrawalTimeframe: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["contributionStreak"]) -> MetaOapg.properties.contributionStreak: ...
@@ -302,7 +456,7 @@ class PerformanceCustom(
     def __getitem__(self, name: typing_extensions.Literal["contributionTotalMonths"]) -> MetaOapg.properties.contributionTotalMonths: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["dividends"]) -> 'PerformanceCustomDividends': ...
+    def __getitem__(self, name: typing_extensions.Literal["dividends"]) -> MetaOapg.properties.dividends: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["dividendIncome"]) -> MetaOapg.properties.dividendIncome: ...
@@ -314,7 +468,7 @@ class PerformanceCustom(
     def __getitem__(self, name: typing_extensions.Literal["badTickers"]) -> 'PerformanceCustomBadTickers': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["dividendTimeline"]) -> 'PerformanceCustomDividendTimeline': ...
+    def __getitem__(self, name: typing_extensions.Literal["dividendTimeline"]) -> MetaOapg.properties.dividendTimeline: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["commissions"]) -> MetaOapg.properties.commissions: ...
@@ -329,7 +483,7 @@ class PerformanceCustom(
     def __getitem__(self, name: typing_extensions.Literal["rateOfReturn"]) -> MetaOapg.properties.rateOfReturn: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["returnRateTimeframe"]) -> 'PerformanceCustomReturnRateTimeframe': ...
+    def __getitem__(self, name: typing_extensions.Literal["returnRateTimeframe"]) -> MetaOapg.properties.returnRateTimeframe: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["detailedMode"]) -> MetaOapg.properties.detailedMode: ...
@@ -342,19 +496,19 @@ class PerformanceCustom(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["totalEquityTimeframe"]) -> typing.Union['PerformanceCustomTotalEquityTimeframe', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["totalEquityTimeframe"]) -> typing.Union[MetaOapg.properties.totalEquityTimeframe, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["contributions"]) -> typing.Union['NetContributions', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["contributionTimeframe"]) -> typing.Union['PerformanceCustomContributionTimeframe', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["contributionTimeframe"]) -> typing.Union[MetaOapg.properties.contributionTimeframe, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["contributionTimeframeCumulative"]) -> typing.Union['PerformanceCustomContributionTimeframeCumulative', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["contributionTimeframeCumulative"]) -> typing.Union[MetaOapg.properties.contributionTimeframeCumulative, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["withdrawalTimeframe"]) -> typing.Union['PerformanceCustomWithdrawalTimeframe', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["withdrawalTimeframe"]) -> typing.Union[MetaOapg.properties.withdrawalTimeframe, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["contributionStreak"]) -> typing.Union[MetaOapg.properties.contributionStreak, schemas.Unset]: ...
@@ -366,7 +520,7 @@ class PerformanceCustom(
     def get_item_oapg(self, name: typing_extensions.Literal["contributionTotalMonths"]) -> typing.Union[MetaOapg.properties.contributionTotalMonths, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["dividends"]) -> typing.Union['PerformanceCustomDividends', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["dividends"]) -> typing.Union[MetaOapg.properties.dividends, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["dividendIncome"]) -> typing.Union[MetaOapg.properties.dividendIncome, schemas.Unset]: ...
@@ -378,7 +532,7 @@ class PerformanceCustom(
     def get_item_oapg(self, name: typing_extensions.Literal["badTickers"]) -> typing.Union['PerformanceCustomBadTickers', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["dividendTimeline"]) -> typing.Union['PerformanceCustomDividendTimeline', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["dividendTimeline"]) -> typing.Union[MetaOapg.properties.dividendTimeline, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["commissions"]) -> typing.Union[MetaOapg.properties.commissions, schemas.Unset]: ...
@@ -393,7 +547,7 @@ class PerformanceCustom(
     def get_item_oapg(self, name: typing_extensions.Literal["rateOfReturn"]) -> typing.Union[MetaOapg.properties.rateOfReturn, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["returnRateTimeframe"]) -> typing.Union['PerformanceCustomReturnRateTimeframe', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["returnRateTimeframe"]) -> typing.Union[MetaOapg.properties.returnRateTimeframe, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["detailedMode"]) -> typing.Union[MetaOapg.properties.detailedMode, schemas.Unset]: ...
@@ -407,24 +561,24 @@ class PerformanceCustom(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        totalEquityTimeframe: typing.Union['PerformanceCustomTotalEquityTimeframe', schemas.Unset] = schemas.unset,
+        totalEquityTimeframe: typing.Union[MetaOapg.properties.totalEquityTimeframe, list, tuple, schemas.Unset] = schemas.unset,
         contributions: typing.Union['NetContributions', schemas.Unset] = schemas.unset,
-        contributionTimeframe: typing.Union['PerformanceCustomContributionTimeframe', schemas.Unset] = schemas.unset,
-        contributionTimeframeCumulative: typing.Union['PerformanceCustomContributionTimeframeCumulative', schemas.Unset] = schemas.unset,
-        withdrawalTimeframe: typing.Union['PerformanceCustomWithdrawalTimeframe', schemas.Unset] = schemas.unset,
+        contributionTimeframe: typing.Union[MetaOapg.properties.contributionTimeframe, list, tuple, schemas.Unset] = schemas.unset,
+        contributionTimeframeCumulative: typing.Union[MetaOapg.properties.contributionTimeframeCumulative, list, tuple, schemas.Unset] = schemas.unset,
+        withdrawalTimeframe: typing.Union[MetaOapg.properties.withdrawalTimeframe, list, tuple, schemas.Unset] = schemas.unset,
         contributionStreak: typing.Union[MetaOapg.properties.contributionStreak, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         contributionMonthsContributed: typing.Union[MetaOapg.properties.contributionMonthsContributed, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         contributionTotalMonths: typing.Union[MetaOapg.properties.contributionTotalMonths, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        dividends: typing.Union['PerformanceCustomDividends', schemas.Unset] = schemas.unset,
+        dividends: typing.Union[MetaOapg.properties.dividends, list, tuple, schemas.Unset] = schemas.unset,
         dividendIncome: typing.Union[MetaOapg.properties.dividendIncome, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         monthlyDividends: typing.Union[MetaOapg.properties.monthlyDividends, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         badTickers: typing.Union['PerformanceCustomBadTickers', schemas.Unset] = schemas.unset,
-        dividendTimeline: typing.Union['PerformanceCustomDividendTimeline', schemas.Unset] = schemas.unset,
+        dividendTimeline: typing.Union[MetaOapg.properties.dividendTimeline, list, tuple, schemas.Unset] = schemas.unset,
         commissions: typing.Union[MetaOapg.properties.commissions, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         forexFees: typing.Union[MetaOapg.properties.forexFees, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         fees: typing.Union[MetaOapg.properties.fees, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         rateOfReturn: typing.Union[MetaOapg.properties.rateOfReturn, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        returnRateTimeframe: typing.Union['PerformanceCustomReturnRateTimeframe', schemas.Unset] = schemas.unset,
+        returnRateTimeframe: typing.Union[MetaOapg.properties.returnRateTimeframe, list, tuple, schemas.Unset] = schemas.unset,
         detailedMode: typing.Union[MetaOapg.properties.detailedMode, bool, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -455,12 +609,9 @@ class PerformanceCustom(
             **kwargs,
         )
 
+from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.net_contributions import NetContributions
+from snaptrade_client.model.net_dividend import NetDividend
+from snaptrade_client.model.past_value import PastValue
 from snaptrade_client.model.performance_custom_bad_tickers import PerformanceCustomBadTickers
-from snaptrade_client.model.performance_custom_contribution_timeframe import PerformanceCustomContributionTimeframe
-from snaptrade_client.model.performance_custom_contribution_timeframe_cumulative import PerformanceCustomContributionTimeframeCumulative
-from snaptrade_client.model.performance_custom_dividend_timeline import PerformanceCustomDividendTimeline
-from snaptrade_client.model.performance_custom_dividends import PerformanceCustomDividends
-from snaptrade_client.model.performance_custom_return_rate_timeframe import PerformanceCustomReturnRateTimeframe
-from snaptrade_client.model.performance_custom_total_equity_timeframe import PerformanceCustomTotalEquityTimeframe
-from snaptrade_client.model.performance_custom_withdrawal_timeframe import PerformanceCustomWithdrawalTimeframe
+from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate

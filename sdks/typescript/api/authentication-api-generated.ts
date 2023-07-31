@@ -46,7 +46,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
     return {
         /**
          * 
-         * @summary Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+         * @summary Delete SnapTrade user
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -95,7 +95,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @summary Obtains an encrypted JWT tokens that should be decrypted on a user\'s local device
+         * @summary Generate encrypted JWT token
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -151,7 +151,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @summary Get a list of all SnapTrade users you\'ve registered on our platform
+         * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -193,7 +193,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @summary Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+         * @summary Login user & generate connection link
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {SnapTradeLoginUserRequestBody} [snapTradeLoginUserRequestBody] 
@@ -254,7 +254,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @summary Register user with SnapTrade in order to create secure brokerage authorizations
+         * @summary Create SnapTrade user
          * @param {SnapTradeRegisterUserRequestBody} snapTradeRegisterUserRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -313,7 +313,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+         * @summary Delete SnapTrade user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -324,7 +324,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Obtains an encrypted JWT tokens that should be decrypted on a user\'s local device
+         * @summary Generate encrypted JWT token
          * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -335,7 +335,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get a list of all SnapTrade users you\'ve registered on our platform
+         * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -345,7 +345,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+         * @summary Login user & generate connection link
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -356,7 +356,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Register user with SnapTrade in order to create secure brokerage authorizations
+         * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -377,7 +377,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
     return {
         /**
          * 
-         * @summary Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+         * @summary Delete SnapTrade user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -387,7 +387,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @summary Obtains an encrypted JWT tokens that should be decrypted on a user\'s local device
+         * @summary Generate encrypted JWT token
          * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -397,7 +397,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @summary Get a list of all SnapTrade users you\'ve registered on our platform
+         * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -406,7 +406,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @summary Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+         * @summary Login user & generate connection link
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -416,7 +416,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @summary Register user with SnapTrade in order to create secure brokerage authorizations
+         * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -507,7 +507,7 @@ export type AuthenticationApiRegisterSnapTradeUserRequest = {
 export class AuthenticationApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * @summary Delete SnapTrade user
      * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -519,7 +519,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Obtains an encrypted JWT tokens that should be decrypted on a user\'s local device
+     * @summary Generate encrypted JWT token
      * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -531,7 +531,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Get a list of all SnapTrade users you\'ve registered on our platform
+     * @summary List SnapTrade users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
@@ -542,7 +542,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * @summary Login user & generate connection link
      * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -554,7 +554,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Register user with SnapTrade in order to create secure brokerage authorizations
+     * @summary Create SnapTrade user
      * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -223,7 +223,7 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      * 
      * @param userId  (required)
      * @return DeleteSnapTradeUserRequestBuilder
@@ -398,7 +398,7 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      * 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -555,7 +555,7 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      * 
      * @return ListSnapTradeUsersRequestBuilder
      * @http.response.details
@@ -796,7 +796,7 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      * 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -991,7 +991,7 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      * 
      * @param snapTradeRegisterUserRequestBody  (required)
      * @return RegisterSnapTradeUserRequestBuilder

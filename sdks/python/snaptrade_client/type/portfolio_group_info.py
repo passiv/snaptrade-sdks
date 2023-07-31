@@ -15,38 +15,36 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.portfolio_group_info_balances import PortfolioGroupInfoBalances
-from snaptrade_client.type.portfolio_group_info_brokerage_authorizations import PortfolioGroupInfoBrokerageAuthorizations
-from snaptrade_client.type.portfolio_group_info_calculated_trades import PortfolioGroupInfoCalculatedTrades
-from snaptrade_client.type.portfolio_group_info_excluded_positions import PortfolioGroupInfoExcludedPositions
-from snaptrade_client.type.portfolio_group_info_ideal_positions import PortfolioGroupInfoIdealPositions
-from snaptrade_client.type.portfolio_group_info_positions import PortfolioGroupInfoPositions
-from snaptrade_client.type.portfolio_group_info_quotable_symbols import PortfolioGroupInfoQuotableSymbols
-from snaptrade_client.type.portfolio_group_info_symbols import PortfolioGroupInfoSymbols
-from snaptrade_client.type.portfolio_group_info_target_positions import PortfolioGroupInfoTargetPositions
+from snaptrade_client.type.balance import Balance
+from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.calculated_trade import CalculatedTrade
+from snaptrade_client.type.excluded_asset import ExcludedAsset
 from snaptrade_client.type.portfolio_group_settings import PortfolioGroupSettings
+from snaptrade_client.type.position import Position
+from snaptrade_client.type.target_asset import TargetAsset
+from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredPortfolioGroupInfo(TypedDict):
     pass
 
 class OptionalPortfolioGroupInfo(TypedDict, total=False):
-    symbols: PortfolioGroupInfoSymbols
+    symbols: typing.List[UniversalSymbol]
 
-    quotable_symbols: PortfolioGroupInfoQuotableSymbols
+    quotable_symbols: typing.List[UniversalSymbol]
 
-    balances: PortfolioGroupInfoBalances
+    balances: typing.List[Balance]
 
-    positions: PortfolioGroupInfoPositions
+    positions: typing.List[Position]
 
-    target_positions: PortfolioGroupInfoTargetPositions
+    target_positions: typing.List[TargetAsset]
 
-    ideal_positions: PortfolioGroupInfoIdealPositions
+    ideal_positions: typing.List[Position]
 
-    excluded_positions: PortfolioGroupInfoExcludedPositions
+    excluded_positions: typing.List[ExcludedAsset]
 
-    calculated_trades: PortfolioGroupInfoCalculatedTrades
+    calculated_trades: typing.List[CalculatedTrade]
 
-    brokerage_authorizations: PortfolioGroupInfoBrokerageAuthorizations
+    brokerage_authorizations: typing.List[BrokerageAuthorization]
 
     accuracy: typing.Union[int, float]
 

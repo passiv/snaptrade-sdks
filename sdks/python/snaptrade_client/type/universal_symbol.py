@@ -18,7 +18,6 @@ from typing_extensions import TypedDict, Literal
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.security_type import SecurityType
-from snaptrade_client.type.universal_symbol_currencies import UniversalSymbolCurrencies
 
 class RequiredUniversalSymbol(TypedDict):
     pass
@@ -38,7 +37,7 @@ class OptionalUniversalSymbol(TypedDict, total=False):
 
     type: SecurityType
 
-    currencies: UniversalSymbolCurrencies
+    currencies: typing.List[Currency]
 
 class UniversalSymbol(RequiredUniversalSymbol, OptionalUniversalSymbol):
     pass

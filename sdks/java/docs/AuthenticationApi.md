@@ -4,18 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user |
-| [**getUserJWT**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device |
-| [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform |
-| [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal |
-| [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations |
+| [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
+| [**getUserJWT**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token |
+| [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users |
+| [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
+| [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
 
 
 <a name="deleteSnapTradeUser"></a>
 # **deleteSnapTradeUser**
 > DeleteUserResponse deleteSnapTradeUser(userId).execute();
 
-Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+Delete SnapTrade user
 
 ### Example
 ```java
@@ -112,7 +112,7 @@ public class Example {
 # **getUserJWT**
 > EncryptedResponse getUserJWT(userId, userSecret).execute();
 
-Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+Generate encrypted JWT token
 
 ### Example
 ```java
@@ -205,7 +205,7 @@ public class Example {
 # **listSnapTradeUsers**
 > List&lt;String&gt; listSnapTradeUsers().execute();
 
-Get a list of all SnapTrade users you&#39;ve registered on our platform
+List SnapTrade users
 
 ### Example
 ```java
@@ -292,7 +292,7 @@ This endpoint does not need any parameter.
 # **loginSnapTradeUser**
 > Object loginSnapTradeUser(userId, userSecret).snapTradeLoginUserRequestBody(snapTradeLoginUserRequestBody).execute();
 
-Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+Login user &amp; generate connection link
 
 ### Example
 ```java
@@ -401,7 +401,7 @@ public class Example {
 # **registerSnapTradeUser**
 > UserIDandSecret registerSnapTradeUser(snapTradeRegisterUserRequestBody).execute();
 
-Register user with SnapTrade in order to create secure brokerage authorizations
+Create SnapTrade user
 
 ### Example
 ```java

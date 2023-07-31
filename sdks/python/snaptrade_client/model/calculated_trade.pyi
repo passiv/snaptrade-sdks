@@ -38,10 +38,32 @@ class CalculatedTrade(
         
         class properties:
             id = schemas.UUIDSchema
-        
-            @staticmethod
-            def trades() -> typing.Type['CalculatedTradeTrades']:
-                return CalculatedTradeTrades
+            
+            
+            class trades(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['Trade']:
+                        return Trade
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['Trade'], typing.List['Trade']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'trades':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'Trade':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "id": id,
                 "trades": trades,
@@ -52,7 +74,7 @@ class CalculatedTrade(
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["trades"]) -> 'CalculatedTradeTrades': ...
+    def __getitem__(self, name: typing_extensions.Literal["trades"]) -> MetaOapg.properties.trades: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -65,7 +87,7 @@ class CalculatedTrade(
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["trades"]) -> typing.Union['CalculatedTradeTrades', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["trades"]) -> typing.Union[MetaOapg.properties.trades, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -77,7 +99,7 @@ class CalculatedTrade(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        trades: typing.Union['CalculatedTradeTrades', schemas.Unset] = schemas.unset,
+        trades: typing.Union[MetaOapg.properties.trades, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'CalculatedTrade':
@@ -90,4 +112,4 @@ class CalculatedTrade(
             **kwargs,
         )
 
-from snaptrade_client.model.calculated_trade_trades import CalculatedTradeTrades
+from snaptrade_client.model.trade import Trade

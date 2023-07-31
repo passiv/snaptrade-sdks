@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeDeleteUser(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeDeleteUser unit test stubs
-        Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+        Delete SnapTrade user
     """
 
     def setUp(self):

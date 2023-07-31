@@ -7,14 +7,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
 | [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types. |
-| [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes |
+| [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges |
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
-| [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List of all brokerages. |
-| [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List of all supported currencies |
-| [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies |
-| [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring |
+| [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages |
+| [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies |
+| [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates |
+| [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
 
 <a name="getcurrencyexchangeratepair"></a>
 # **GetCurrencyExchangeRatePair**
@@ -315,7 +315,7 @@ This endpoint does not need any parameter.
 # **GetStockExchanges**
 > List&lt;Exchange&gt; GetStockExchanges ()
 
-Return list of stock exchanges on Passiv and their suffixes
+List exchanges
 
 ### Example
 ```csharp
@@ -342,7 +342,7 @@ namespace Example
 
             try
             {
-                // Return list of stock exchanges on Passiv and their suffixes
+                // List exchanges
                 List<Exchange> result = client.ReferenceData.GetStockExchanges();
                 Console.WriteLine(result);
             }
@@ -369,7 +369,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Return list of stock exchanges on Passiv and their suffixes
+    // List exchanges
     ApiResponse<List<Exchange>> response = apiInstance.GetStockExchangesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -716,7 +716,7 @@ catch (ApiException e)
 # **ListAllBrokerages**
 > List&lt;Brokerage&gt; ListAllBrokerages ()
 
-List of all brokerages.
+List brokerages
 
 ### Example
 ```csharp
@@ -743,7 +743,7 @@ namespace Example
 
             try
             {
-                // List of all brokerages.
+                // List brokerages
                 List<Brokerage> result = client.ReferenceData.ListAllBrokerages();
                 Console.WriteLine(result);
             }
@@ -770,7 +770,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List of all brokerages.
+    // List brokerages
     ApiResponse<List<Brokerage>> response = apiInstance.ListAllBrokeragesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -812,7 +812,7 @@ This endpoint does not need any parameter.
 # **ListAllCurrencies**
 > List&lt;Currency&gt; ListAllCurrencies ()
 
-List of all supported currencies
+List currencies
 
 ### Example
 ```csharp
@@ -839,7 +839,7 @@ namespace Example
 
             try
             {
-                // List of all supported currencies
+                // List currencies
                 List<Currency> result = client.ReferenceData.ListAllCurrencies();
                 Console.WriteLine(result);
             }
@@ -866,7 +866,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List of all supported currencies
+    // List currencies
     ApiResponse<List<Currency>> response = apiInstance.ListAllCurrenciesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -908,7 +908,7 @@ This endpoint does not need any parameter.
 # **ListAllCurrenciesRates**
 > List&lt;ExchangeRatePairs&gt; ListAllCurrenciesRates ()
 
-Return the exchange rates of all supported currencies
+List currency exchange rates
 
 ### Example
 ```csharp
@@ -935,7 +935,7 @@ namespace Example
 
             try
             {
-                // Return the exchange rates of all supported currencies
+                // List currency exchange rates
                 List<ExchangeRatePairs> result = client.ReferenceData.ListAllCurrenciesRates();
                 Console.WriteLine(result);
             }
@@ -962,7 +962,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Return the exchange rates of all supported currencies
+    // List currency exchange rates
     ApiResponse<List<ExchangeRatePairs>> response = apiInstance.ListAllCurrenciesRatesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1003,7 +1003,7 @@ This endpoint does not need any parameter.
 # **SymbolSearchUserAccount**
 > List&lt;UniversalSymbol&gt; SymbolSearchUserAccount (string userId, string userSecret, Guid accountId, SymbolQuery symbolQuery = null)
 
-Search for symbols that are supported by a brokerage account using a substring
+Search for symbols available in an account
 
 ### Example
 ```csharp
@@ -1034,7 +1034,7 @@ namespace Example
 
             try
             {
-                // Search for symbols that are supported by a brokerage account using a substring
+                // Search for symbols available in an account
                 List<UniversalSymbol> result = client.ReferenceData.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
                 Console.WriteLine(result);
             }
@@ -1061,7 +1061,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search for symbols that are supported by a brokerage account using a substring
+    // Search for symbols available in an account
     ApiResponse<List<UniversalSymbol>> response = apiInstance.SymbolSearchUserAccountWithHttpInfo(userId, userSecret, accountId, symbolQuery);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

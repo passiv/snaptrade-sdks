@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdSymbols(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdSymbols unit test stubs
-        Search for symbols that are supported by a brokerage account using a substring
+        Search for symbols available in an account
     """
 
     def setUp(self):

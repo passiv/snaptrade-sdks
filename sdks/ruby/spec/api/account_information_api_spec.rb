@@ -29,7 +29,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_all_user_holdings
-  # List all accounts for the user, plus balances and positions for each account.
+  # List all accounts for the user, plus balances, positions, and orders for each account.
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
@@ -42,7 +42,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_account_balance
-  # Get all cash balances of an investment account
+  # List account balances
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account get positions.
@@ -82,7 +82,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_account_positions
-  # Get all positions of an investment account
+  # List account positions
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account get positions.
@@ -108,7 +108,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for list_user_accounts
-  # List all investment accounts for the user
+  # List accounts
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

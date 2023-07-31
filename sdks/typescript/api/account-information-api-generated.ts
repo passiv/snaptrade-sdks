@@ -44,7 +44,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
     return {
         /**
          * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -105,7 +105,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary Get all cash balances of an investment account
+         * @summary List account balances
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
@@ -290,7 +290,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary Get all positions of an investment account
+         * @summary List account positions
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
@@ -410,7 +410,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary List all investment accounts for the user
+         * @summary List accounts
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -536,7 +536,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -547,7 +547,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get all cash balances of an investment account
+         * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -580,7 +580,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get all positions of an investment account
+         * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -602,7 +602,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary List all investment accounts for the user
+         * @summary List accounts
          * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -634,7 +634,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     return {
         /**
          * 
-         * @summary List all accounts for the user, plus balances and positions for each account.
+         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -644,7 +644,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get all cash balances of an investment account
+         * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -674,7 +674,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get all positions of an investment account
+         * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -694,7 +694,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary List all investment accounts for the user
+         * @summary List accounts
          * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -964,7 +964,7 @@ export type AccountInformationApiUpdateUserAccountRequest = {
 export class AccountInformationApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary List all accounts for the user, plus balances and positions for each account.
+     * @summary List all accounts for the user, plus balances, positions, and orders for each account.
      * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -976,7 +976,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Get all cash balances of an investment account
+     * @summary List account balances
      * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1012,7 +1012,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Get all positions of an investment account
+     * @summary List account positions
      * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1036,7 +1036,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary List all investment accounts for the user
+     * @summary List accounts
      * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

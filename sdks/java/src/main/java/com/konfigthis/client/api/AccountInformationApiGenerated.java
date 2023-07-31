@@ -251,7 +251,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      * 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -438,7 +438,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * Get all cash balances of an investment account
+     * List account balances
      * 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1026,7 +1026,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * Get all positions of an investment account
+     * List account positions
      * 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1400,7 +1400,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * List all investment accounts for the user
+     * List accounts
      * 
      * @param userId  (required)
      * @param userSecret  (required)

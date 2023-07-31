@@ -60,7 +60,7 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_stock_exchanges
-  # Return list of stock exchanges on Passiv and their suffixes
+  # List exchanges
   # @param [Hash] opts the optional parameters
   # @return [Array<Exchange>]
   describe 'get_stock_exchanges test' do
@@ -104,7 +104,7 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for list_all_brokerages
-  # List of all brokerages.
+  # List brokerages
   # @param [Hash] opts the optional parameters
   # @return [Array<Brokerage>]
   describe 'list_all_brokerages test' do
@@ -114,7 +114,7 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for list_all_currencies
-  # List of all supported currencies
+  # List currencies
   # @param [Hash] opts the optional parameters
   # @return [Array<Currency>]
   describe 'list_all_currencies test' do
@@ -124,7 +124,7 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for list_all_currencies_rates
-  # Return the exchange rates of all supported currencies
+  # List currency exchange rates
   # @param [Hash] opts the optional parameters
   # @return [Array<ExchangeRatePairs>]
   describe 'list_all_currencies_rates test' do
@@ -134,7 +134,7 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for symbol_search_user_account
-  # Search for symbols that are supported by a brokerage account using a substring
+  # Search for symbols available in an account
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account get positions.

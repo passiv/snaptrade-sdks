@@ -72,10 +72,32 @@ class UniversalSymbol(
             @staticmethod
             def type() -> typing.Type['SecurityType']:
                 return SecurityType
-        
-            @staticmethod
-            def currencies() -> typing.Type['UniversalSymbolCurrencies']:
-                return UniversalSymbolCurrencies
+            
+            
+            class currencies(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['Currency']:
+                        return Currency
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['Currency'], typing.List['Currency']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'currencies':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'Currency':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -110,7 +132,7 @@ class UniversalSymbol(
     def __getitem__(self, name: typing_extensions.Literal["type"]) -> 'SecurityType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["currencies"]) -> 'UniversalSymbolCurrencies': ...
+    def __getitem__(self, name: typing_extensions.Literal["currencies"]) -> MetaOapg.properties.currencies: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -141,7 +163,7 @@ class UniversalSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union['SecurityType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currencies"]) -> typing.Union['UniversalSymbolCurrencies', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currencies"]) -> typing.Union[MetaOapg.properties.currencies, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -159,7 +181,7 @@ class UniversalSymbol(
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
         type: typing.Union['SecurityType', schemas.Unset] = schemas.unset,
-        currencies: typing.Union['UniversalSymbolCurrencies', schemas.Unset] = schemas.unset,
+        currencies: typing.Union[MetaOapg.properties.currencies, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'UniversalSymbol':
@@ -181,4 +203,3 @@ class UniversalSymbol(
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.security_type import SecurityType
-from snaptrade_client.model.universal_symbol_currencies import UniversalSymbolCurrencies

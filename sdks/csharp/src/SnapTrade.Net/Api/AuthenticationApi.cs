@@ -28,7 +28,7 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+        /// Delete SnapTrade user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Api
         DeleteUserResponse DeleteSnapTradeUser(string userId, int operationIndex = 0);
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+        /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of DeleteUserResponse</returns>
         ApiResponse<DeleteUserResponse> DeleteSnapTradeUserWithHttpInfo(string userId, int operationIndex = 0);
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+        /// Generate encrypted JWT token
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -58,7 +58,7 @@ namespace SnapTrade.Net.Api
         EncryptedResponse GetUserJWT(string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+        /// Generate encrypted JWT token
         /// </summary>
         /// <remarks>
         /// 
@@ -70,7 +70,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of EncryptedResponse</returns>
         ApiResponse<EncryptedResponse> GetUserJWTWithHttpInfo(string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform
+        /// List SnapTrade users
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Api
         List<string> ListSnapTradeUsers(int operationIndex = 0);
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform
+        /// List SnapTrade users
         /// </summary>
         /// <remarks>
         /// 
@@ -88,7 +88,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;string&gt;</returns>
         ApiResponse<List<string>> ListSnapTradeUsersWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+        /// Login user &amp; generate connection link
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -99,7 +99,7 @@ namespace SnapTrade.Net.Api
         AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+        /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
         /// 
@@ -112,7 +112,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AuthenticationLoginSnapTradeUser200Response</returns>
         ApiResponse<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations
+        /// Create SnapTrade user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -121,7 +121,7 @@ namespace SnapTrade.Net.Api
         UserIDandSecret RegisterSnapTradeUser(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0);
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations
+        /// Create SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -141,7 +141,7 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+        /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -154,7 +154,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<DeleteUserResponse> DeleteSnapTradeUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+        /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -166,7 +166,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (DeleteUserResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<DeleteUserResponse>> DeleteSnapTradeUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+        /// Generate encrypted JWT token
         /// </summary>
         /// <remarks>
         /// 
@@ -180,7 +180,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<EncryptedResponse> GetUserJWTAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+        /// Generate encrypted JWT token
         /// </summary>
         /// <remarks>
         /// 
@@ -193,7 +193,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (EncryptedResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<EncryptedResponse>> GetUserJWTWithHttpInfoAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform
+        /// List SnapTrade users
         /// </summary>
         /// <remarks>
         /// 
@@ -205,7 +205,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<string>> ListSnapTradeUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform
+        /// List SnapTrade users
         /// </summary>
         /// <remarks>
         /// 
@@ -216,7 +216,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<string>>> ListSnapTradeUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+        /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
         /// 
@@ -231,7 +231,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+        /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
         /// 
@@ -245,7 +245,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUser200Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<AuthenticationLoginSnapTradeUser200Response>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations
+        /// Create SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -258,7 +258,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<UserIDandSecret> RegisterSnapTradeUserAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations
+        /// Create SnapTrade user
         /// </summary>
         /// <remarks>
         /// 
@@ -390,7 +390,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user 
+        /// Delete SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -403,7 +403,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user 
+        /// Delete SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -475,7 +475,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user 
+        /// Delete SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -489,7 +489,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user 
+        /// Delete SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -564,7 +564,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device 
+        /// Generate encrypted JWT token 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -578,7 +578,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device 
+        /// Generate encrypted JWT token 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -658,7 +658,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device 
+        /// Generate encrypted JWT token 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -673,7 +673,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device 
+        /// Generate encrypted JWT token 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -756,7 +756,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform 
+        /// List SnapTrade users 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -768,7 +768,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform 
+        /// List SnapTrade users 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -832,7 +832,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform 
+        /// List SnapTrade users 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -845,7 +845,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of all SnapTrade users you&#39;ve registered on our platform 
+        /// List SnapTrade users 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -912,7 +912,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal 
+        /// Login user &amp; generate connection link 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -927,7 +927,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal 
+        /// Login user &amp; generate connection link 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1010,7 +1010,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal 
+        /// Login user &amp; generate connection link 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1026,7 +1026,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Generate a redirect URI to securely login a user to the SnapTrade Connection Portal 
+        /// Login user &amp; generate connection link 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1112,7 +1112,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations 
+        /// Create SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1125,7 +1125,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations 
+        /// Create SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1198,7 +1198,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations 
+        /// Create SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1212,7 +1212,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Register user with SnapTrade in order to create secure brokerage authorizations 
+        /// Create SnapTrade user 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>

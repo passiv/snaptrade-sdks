@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestBrokerages(ApiTestMixin, unittest.TestCase):
     """
     Brokerages unit test stubs
-        List of all brokerages.
+        List brokerages
     """
 
     def setUp(self):

@@ -4,18 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_all_user_holdings**](AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account. |
-| [**get_user_account_balance**](AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account |
+| [**get_all_user_holdings**](AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
+| [**get_user_account_balance**](AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**get_user_account_details**](AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
-| [**get_user_account_positions**](AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account |
+| [**get_user_account_positions**](AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**get_user_holdings**](AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
-| [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user |
+| [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts |
 | [**update_user_account**](AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
 ## get_all_user_holdings
 
-List all accounts for the user, plus balances and positions for each account.
+List all accounts for the user, plus balances, positions, and orders for each account.
 
 ### Example
 
@@ -30,7 +30,7 @@ user_secret = "USERSECRET123"
 brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 
 begin
-  # List all accounts for the user, plus balances and positions for each account.
+  # List all accounts for the user, plus balances, positions, and orders for each account.
   result = SnapTrade::AccountInformation.get_all_user_holdings(
     user_id: user_id,
     user_secret: user_secret,
@@ -52,7 +52,7 @@ user_secret = "USERSECRET123"
 brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 
 begin
-  # List all accounts for the user, plus balances and positions for each account.
+  # List all accounts for the user, plus balances, positions, and orders for each account.
   data, status_code, headers, response = SnapTrade::AccountInformation.get_all_user_holdings_with_http_info(
     user_id: user_id,
     user_secret: user_secret,
@@ -80,7 +80,7 @@ end
 
 ## get_user_account_balance
 
-Get all cash balances of an investment account
+List account balances
 
 ### Example
 
@@ -95,7 +95,7 @@ user_secret = "USERSECRET123"
 account_id = "accountId_example"
 
 begin
-  # Get all cash balances of an investment account
+  # List account balances
   result = SnapTrade::AccountInformation.get_user_account_balance(
     user_id: user_id,
     user_secret: user_secret,
@@ -117,7 +117,7 @@ user_secret = "USERSECRET123"
 account_id = "accountId_example"
 
 begin
-  # Get all cash balances of an investment account
+  # List account balances
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_balance_with_http_info(
     user_id: user_id,
     user_secret: user_secret,
@@ -280,7 +280,7 @@ end
 
 ## get_user_account_positions
 
-Get all positions of an investment account
+List account positions
 
 ### Example
 
@@ -295,7 +295,7 @@ user_secret = "USERSECRET123"
 account_id = "accountId_example"
 
 begin
-  # Get all positions of an investment account
+  # List account positions
   result = SnapTrade::AccountInformation.get_user_account_positions(
     user_id: user_id,
     user_secret: user_secret,
@@ -317,7 +317,7 @@ user_secret = "USERSECRET123"
 account_id = "accountId_example"
 
 begin
-  # Get all positions of an investment account
+  # List account positions
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_positions_with_http_info(
     user_id: user_id,
     user_secret: user_secret,
@@ -410,7 +410,7 @@ end
 
 ## list_user_accounts
 
-List all investment accounts for the user
+List accounts
 
 ### Example
 
@@ -424,7 +424,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # List all investment accounts for the user
+  # List accounts
   result = SnapTrade::AccountInformation.list_user_accounts(
     user_id: user_id,
     user_secret: user_secret,
@@ -444,7 +444,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # List all investment accounts for the user
+  # List accounts
   data, status_code, headers, response = SnapTrade::AccountInformation.list_user_accounts_with_http_info(
     user_id: user_id,
     user_secret: user_secret,

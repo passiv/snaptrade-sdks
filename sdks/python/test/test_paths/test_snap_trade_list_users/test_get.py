@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeListUsers(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeListUsers unit test stubs
-        Get a list of all SnapTrade users you've registered on our platform
+        List SnapTrade users
     """
 
     def setUp(self):

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdBalances(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdBalances unit test stubs
-        Get all cash balances of an investment account
+        List account balances
     """
 
     def setUp(self):

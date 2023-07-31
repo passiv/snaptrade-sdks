@@ -39,14 +39,58 @@ class ModelPortfolioDetails(
             @staticmethod
             def model_portfolio() -> typing.Type['ModelPortfolio']:
                 return ModelPortfolio
-        
-            @staticmethod
-            def model_portfolio_security() -> typing.Type['ModelPortfolioDetailsModelPortfolioSecurity']:
-                return ModelPortfolioDetailsModelPortfolioSecurity
-        
-            @staticmethod
-            def model_portfolio_asset_class() -> typing.Type['ModelPortfolioDetailsModelPortfolioAssetClass']:
-                return ModelPortfolioDetailsModelPortfolioAssetClass
+            
+            
+            class model_portfolio_security(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['ModelPortfolioSecurity']:
+                        return ModelPortfolioSecurity
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['ModelPortfolioSecurity'], typing.List['ModelPortfolioSecurity']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'model_portfolio_security':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'ModelPortfolioSecurity':
+                    return super().__getitem__(i)
+            
+            
+            class model_portfolio_asset_class(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['ModelPortfolioAssetClass']:
+                        return ModelPortfolioAssetClass
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['ModelPortfolioAssetClass'], typing.List['ModelPortfolioAssetClass']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'model_portfolio_asset_class':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'ModelPortfolioAssetClass':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "model_portfolio": model_portfolio,
                 "model_portfolio_security": model_portfolio_security,
@@ -58,10 +102,10 @@ class ModelPortfolioDetails(
     def __getitem__(self, name: typing_extensions.Literal["model_portfolio"]) -> 'ModelPortfolio': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["model_portfolio_security"]) -> 'ModelPortfolioDetailsModelPortfolioSecurity': ...
+    def __getitem__(self, name: typing_extensions.Literal["model_portfolio_security"]) -> MetaOapg.properties.model_portfolio_security: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["model_portfolio_asset_class"]) -> 'ModelPortfolioDetailsModelPortfolioAssetClass': ...
+    def __getitem__(self, name: typing_extensions.Literal["model_portfolio_asset_class"]) -> MetaOapg.properties.model_portfolio_asset_class: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -74,10 +118,10 @@ class ModelPortfolioDetails(
     def get_item_oapg(self, name: typing_extensions.Literal["model_portfolio"]) -> typing.Union['ModelPortfolio', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["model_portfolio_security"]) -> typing.Union['ModelPortfolioDetailsModelPortfolioSecurity', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["model_portfolio_security"]) -> typing.Union[MetaOapg.properties.model_portfolio_security, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["model_portfolio_asset_class"]) -> typing.Union['ModelPortfolioDetailsModelPortfolioAssetClass', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["model_portfolio_asset_class"]) -> typing.Union[MetaOapg.properties.model_portfolio_asset_class, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -89,8 +133,8 @@ class ModelPortfolioDetails(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         model_portfolio: typing.Union['ModelPortfolio', schemas.Unset] = schemas.unset,
-        model_portfolio_security: typing.Union['ModelPortfolioDetailsModelPortfolioSecurity', schemas.Unset] = schemas.unset,
-        model_portfolio_asset_class: typing.Union['ModelPortfolioDetailsModelPortfolioAssetClass', schemas.Unset] = schemas.unset,
+        model_portfolio_security: typing.Union[MetaOapg.properties.model_portfolio_security, list, tuple, schemas.Unset] = schemas.unset,
+        model_portfolio_asset_class: typing.Union[MetaOapg.properties.model_portfolio_asset_class, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ModelPortfolioDetails':
@@ -105,5 +149,5 @@ class ModelPortfolioDetails(
         )
 
 from snaptrade_client.model.model_portfolio import ModelPortfolio
-from snaptrade_client.model.model_portfolio_details_model_portfolio_asset_class import ModelPortfolioDetailsModelPortfolioAssetClass
-from snaptrade_client.model.model_portfolio_details_model_portfolio_security import ModelPortfolioDetailsModelPortfolioSecurity
+from snaptrade_client.model.model_portfolio_asset_class import ModelPortfolioAssetClass
+from snaptrade_client.model.model_portfolio_security import ModelPortfolioSecurity

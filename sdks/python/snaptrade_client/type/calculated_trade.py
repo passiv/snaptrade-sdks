@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
-from snaptrade_client.type.calculated_trade_trades import CalculatedTradeTrades
+from snaptrade_client.type.trade import Trade
 
 class RequiredCalculatedTrade(TypedDict):
     pass
@@ -23,7 +23,7 @@ class RequiredCalculatedTrade(TypedDict):
 class OptionalCalculatedTrade(TypedDict, total=False):
     id: str
 
-    trades: CalculatedTradeTrades
+    trades: typing.List[Trade]
 
 class CalculatedTrade(RequiredCalculatedTrade, OptionalCalculatedTrade):
     pass

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestHoldings(ApiTestMixin, unittest.TestCase):
     """
     Holdings unit test stubs
-        List all accounts for the user, plus balances and positions for each account.
+        List all accounts for the user, plus balances, positions, and orders for each account.
     """
 
     def setUp(self):

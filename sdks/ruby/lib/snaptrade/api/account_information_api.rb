@@ -18,7 +18,7 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # List all accounts for the user, plus balances and positions for each account.
+    # List all accounts for the user, plus balances, positions, and orders for each account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -30,7 +30,7 @@ module SnapTrade
       data
     end
 
-    # List all accounts for the user, plus balances and positions for each account.
+    # List all accounts for the user, plus balances, positions, and orders for each account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -41,7 +41,7 @@ module SnapTrade
       get_all_user_holdings_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # List all accounts for the user, plus balances and positions for each account.
+    # List all accounts for the user, plus balances, positions, and orders for each account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -52,7 +52,7 @@ module SnapTrade
       data
     end
 
-    # List all accounts for the user, plus balances and positions for each account.
+    # List all accounts for the user, plus balances, positions, and orders for each account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -114,7 +114,7 @@ module SnapTrade
     end
 
 
-    # Get all cash balances of an investment account
+    # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -125,7 +125,7 @@ module SnapTrade
       data
     end
 
-    # Get all cash balances of an investment account
+    # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -135,7 +135,7 @@ module SnapTrade
       get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Get all cash balances of an investment account
+    # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -146,7 +146,7 @@ module SnapTrade
       data
     end
 
-    # Get all cash balances of an investment account
+    # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -416,7 +416,7 @@ module SnapTrade
     end
 
 
-    # Get all positions of an investment account
+    # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -427,7 +427,7 @@ module SnapTrade
       data
     end
 
-    # Get all positions of an investment account
+    # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -437,7 +437,7 @@ module SnapTrade
       get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Get all positions of an investment account
+    # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -448,7 +448,7 @@ module SnapTrade
       data
     end
 
-    # Get all positions of an investment account
+    # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -610,7 +610,7 @@ module SnapTrade
     end
 
 
-    # List all investment accounts for the user
+    # List accounts
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -620,7 +620,7 @@ module SnapTrade
       data
     end
 
-    # List all investment accounts for the user
+    # List accounts
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -629,7 +629,7 @@ module SnapTrade
       list_user_accounts_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # List all investment accounts for the user
+    # List accounts
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -639,7 +639,7 @@ module SnapTrade
       data
     end
 
-    # List all investment accounts for the user
+    # List accounts
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

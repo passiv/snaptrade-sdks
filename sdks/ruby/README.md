@@ -25,7 +25,7 @@ user_secret = "USERSECRET123"
 brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 
 begin
-  # List all accounts for the user, plus balances and positions for each account.
+  # List all accounts for the user, plus balances, positions, and orders for each account.
   result = SnapTrade::AccountInformation.get_all_user_holdings(
     user_id: user_id,
     user_secret: user_secret,
@@ -43,20 +43,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SnapTrade::AccountInformationApi* | [**get_all_user_holdings**](docs/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account.
-*SnapTrade::AccountInformationApi* | [**get_user_account_balance**](docs/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account
+*SnapTrade::AccountInformationApi* | [**get_all_user_holdings**](docs/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
+*SnapTrade::AccountInformationApi* | [**get_user_account_balance**](docs/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances
 *SnapTrade::AccountInformationApi* | [**get_user_account_details**](docs/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *SnapTrade::AccountInformationApi* | [**get_user_account_orders**](docs/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
-*SnapTrade::AccountInformationApi* | [**get_user_account_positions**](docs/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account
+*SnapTrade::AccountInformationApi* | [**get_user_account_positions**](docs/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions
 *SnapTrade::AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-*SnapTrade::AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List all investment accounts for the user
+*SnapTrade::AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts
 *SnapTrade::AccountInformationApi* | [**update_user_account**](docs/AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account
 *SnapTrade::APIStatusApi* | [**check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
-*SnapTrade::AuthenticationApi* | [**delete_snap_trade_user**](docs/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-*SnapTrade::AuthenticationApi* | [**get_user_jwt**](docs/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user's local device
-*SnapTrade::AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you've registered on our platform
-*SnapTrade::AuthenticationApi* | [**login_snap_trade_user**](docs/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-*SnapTrade::AuthenticationApi* | [**register_snap_trade_user**](docs/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
+*SnapTrade::AuthenticationApi* | [**delete_snap_trade_user**](docs/AuthenticationApi.md#delete_snap_trade_user) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
+*SnapTrade::AuthenticationApi* | [**get_user_jwt**](docs/AuthenticationApi.md#get_user_jwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
+*SnapTrade::AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users
+*SnapTrade::AuthenticationApi* | [**login_snap_trade_user**](docs/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user & generate connection link
+*SnapTrade::AuthenticationApi* | [**register_snap_trade_user**](docs/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user
 *SnapTrade::ConnectionsApi* | [**detail_brokerage_authorization**](docs/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
 *SnapTrade::ConnectionsApi* | [**list_brokerage_authorizations**](docs/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *SnapTrade::ConnectionsApi* | [**remove_brokerage_authorization**](docs/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
@@ -70,14 +70,14 @@ Class | Method | HTTP request | Description
 *SnapTrade::ReferenceDataApi* | [**get_currency_exchange_rate_pair**](docs/ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *SnapTrade::ReferenceDataApi* | [**get_partner_info**](docs/ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *SnapTrade::ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types.
-*SnapTrade::ReferenceDataApi* | [**get_stock_exchanges**](docs/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+*SnapTrade::ReferenceDataApi* | [**get_stock_exchanges**](docs/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges
 *SnapTrade::ReferenceDataApi* | [**get_symbols**](docs/ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols
 *SnapTrade::ReferenceDataApi* | [**get_symbols_by_ticker**](docs/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
 *SnapTrade::ReferenceDataApi* | [**list_all_brokerage_authorization_type**](docs/ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*SnapTrade::ReferenceDataApi* | [**list_all_brokerages**](docs/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List of all brokerages.
-*SnapTrade::ReferenceDataApi* | [**list_all_currencies**](docs/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List of all supported currencies
-*SnapTrade::ReferenceDataApi* | [**list_all_currencies_rates**](docs/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
-*SnapTrade::ReferenceDataApi* | [**symbol_search_user_account**](docs/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+*SnapTrade::ReferenceDataApi* | [**list_all_brokerages**](docs/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List brokerages
+*SnapTrade::ReferenceDataApi* | [**list_all_currencies**](docs/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List currencies
+*SnapTrade::ReferenceDataApi* | [**list_all_currencies_rates**](docs/ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | List currency exchange rates
+*SnapTrade::ReferenceDataApi* | [**symbol_search_user_account**](docs/ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 *SnapTrade::TradingApi* | [**cancel_user_account_order**](docs/TradingApi.md#cancel_user_account_order) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
 *SnapTrade::TradingApi* | [**get_order_impact**](docs/TradingApi.md#get_order_impact) | **POST** /trade/impact | Check impact of trades on account.
 *SnapTrade::TradingApi* | [**get_user_account_quotes**](docs/TradingApi.md#get_user_account_quotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes

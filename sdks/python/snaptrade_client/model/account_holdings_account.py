@@ -41,18 +41,87 @@ class AccountHoldingsAccount(
             @staticmethod
             def account() -> typing.Type['SnapTradeHoldingsAccountAccountId']:
                 return SnapTradeHoldingsAccountAccountId
-        
-            @staticmethod
-            def balances() -> typing.Type['AccountHoldingsAccountBalances']:
-                return AccountHoldingsAccountBalances
-        
-            @staticmethod
-            def positions() -> typing.Type['AccountHoldingsAccountPositions']:
-                return AccountHoldingsAccountPositions
-        
-            @staticmethod
-            def orders() -> typing.Type['AccountHoldingsAccountOrders']:
-                return AccountHoldingsAccountOrders
+            
+            
+            class balances(
+                schemas.ListBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneTupleMixin
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['Balance']:
+                        return Balance
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[list, tuple, None, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'balances':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class positions(
+                schemas.ListBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneTupleMixin
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['Position']:
+                        return Position
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[list, tuple, None, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'positions':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class orders(
+                schemas.ListBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneTupleMixin
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['AccountOrderRecord']:
+                        return AccountOrderRecord
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[list, tuple, None, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'orders':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
         
             @staticmethod
             def total_value() -> typing.Type['SnapTradeHoldingsTotalValue']:
@@ -70,13 +139,13 @@ class AccountHoldingsAccount(
     def __getitem__(self, name: typing_extensions.Literal["account"]) -> 'SnapTradeHoldingsAccountAccountId': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> 'AccountHoldingsAccountBalances': ...
+    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> MetaOapg.properties.balances: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> 'AccountHoldingsAccountPositions': ...
+    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> MetaOapg.properties.positions: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["orders"]) -> 'AccountHoldingsAccountOrders': ...
+    def __getitem__(self, name: typing_extensions.Literal["orders"]) -> MetaOapg.properties.orders: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["total_value"]) -> 'SnapTradeHoldingsTotalValue': ...
@@ -92,13 +161,13 @@ class AccountHoldingsAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union['SnapTradeHoldingsAccountAccountId', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union['AccountHoldingsAccountBalances', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union[MetaOapg.properties.balances, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union['AccountHoldingsAccountPositions', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union[MetaOapg.properties.positions, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> typing.Union['AccountHoldingsAccountOrders', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> typing.Union[MetaOapg.properties.orders, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["total_value"]) -> typing.Union['SnapTradeHoldingsTotalValue', schemas.Unset]: ...
@@ -113,9 +182,9 @@ class AccountHoldingsAccount(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         account: typing.Union['SnapTradeHoldingsAccountAccountId', schemas.Unset] = schemas.unset,
-        balances: typing.Union['AccountHoldingsAccountBalances', schemas.Unset] = schemas.unset,
-        positions: typing.Union['AccountHoldingsAccountPositions', schemas.Unset] = schemas.unset,
-        orders: typing.Union['AccountHoldingsAccountOrders', schemas.Unset] = schemas.unset,
+        balances: typing.Union[MetaOapg.properties.balances, list, tuple, None, schemas.Unset] = schemas.unset,
+        positions: typing.Union[MetaOapg.properties.positions, list, tuple, None, schemas.Unset] = schemas.unset,
+        orders: typing.Union[MetaOapg.properties.orders, list, tuple, None, schemas.Unset] = schemas.unset,
         total_value: typing.Union['SnapTradeHoldingsTotalValue', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -132,8 +201,8 @@ class AccountHoldingsAccount(
             **kwargs,
         )
 
-from snaptrade_client.model.account_holdings_account_balances import AccountHoldingsAccountBalances
-from snaptrade_client.model.account_holdings_account_orders import AccountHoldingsAccountOrders
-from snaptrade_client.model.account_holdings_account_positions import AccountHoldingsAccountPositions
+from snaptrade_client.model.account_order_record import AccountOrderRecord
+from snaptrade_client.model.balance import Balance
+from snaptrade_client.model.position import Position
 from snaptrade_client.model.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue

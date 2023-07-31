@@ -46,7 +46,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+     * Delete SnapTrade user
      *
      * @throws ApiException if the Api call fails
      */
@@ -59,7 +59,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+     * Generate encrypted JWT token
      *
      * @throws ApiException if the Api call fails
      */
@@ -73,7 +73,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Get a list of all SnapTrade users you&#39;ve registered on our platform
+     * List SnapTrade users
      *
      * @throws ApiException if the Api call fails
      */
@@ -85,7 +85,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+     * Login user &amp; generate connection link
      *
      * @throws ApiException if the Api call fails
      */
@@ -109,7 +109,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Register user with SnapTrade in order to create secure brokerage authorizations
+     * Create SnapTrade user
      *
      * @throws ApiException if the Api call fails
      */

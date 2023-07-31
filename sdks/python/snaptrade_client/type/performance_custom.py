@@ -15,29 +15,26 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.monthly_dividends import MonthlyDividends
 from snaptrade_client.type.net_contributions import NetContributions
+from snaptrade_client.type.net_dividend import NetDividend
+from snaptrade_client.type.past_value import PastValue
 from snaptrade_client.type.performance_custom_bad_tickers import PerformanceCustomBadTickers
-from snaptrade_client.type.performance_custom_contribution_timeframe import PerformanceCustomContributionTimeframe
-from snaptrade_client.type.performance_custom_contribution_timeframe_cumulative import PerformanceCustomContributionTimeframeCumulative
-from snaptrade_client.type.performance_custom_dividend_timeline import PerformanceCustomDividendTimeline
-from snaptrade_client.type.performance_custom_dividends import PerformanceCustomDividends
-from snaptrade_client.type.performance_custom_return_rate_timeframe import PerformanceCustomReturnRateTimeframe
-from snaptrade_client.type.performance_custom_total_equity_timeframe import PerformanceCustomTotalEquityTimeframe
-from snaptrade_client.type.performance_custom_withdrawal_timeframe import PerformanceCustomWithdrawalTimeframe
+from snaptrade_client.type.sub_period_return_rate import SubPeriodReturnRate
 
 class RequiredPerformanceCustom(TypedDict):
     pass
 
 class OptionalPerformanceCustom(TypedDict, total=False):
-    totalEquityTimeframe: PerformanceCustomTotalEquityTimeframe
+    totalEquityTimeframe: typing.List[PastValue]
 
     contributions: NetContributions
 
-    contributionTimeframe: PerformanceCustomContributionTimeframe
+    contributionTimeframe: typing.List[PastValue]
 
-    contributionTimeframeCumulative: PerformanceCustomContributionTimeframeCumulative
+    contributionTimeframeCumulative: typing.List[PastValue]
 
-    withdrawalTimeframe: PerformanceCustomWithdrawalTimeframe
+    withdrawalTimeframe: typing.List[PastValue]
 
     # Current streak of cosecutive months where contributions were made
     contributionStreak: typing.Optional[typing.Union[int, float]]
@@ -48,7 +45,7 @@ class OptionalPerformanceCustom(TypedDict, total=False):
     # Total months in timeframe
     contributionTotalMonths: typing.Optional[typing.Union[int, float]]
 
-    dividends: PerformanceCustomDividends
+    dividends: typing.List[NetDividend]
 
     # Total dividends received over the timeframe
     dividendIncome: typing.Optional[typing.Union[int, float]]
@@ -58,7 +55,7 @@ class OptionalPerformanceCustom(TypedDict, total=False):
 
     badTickers: PerformanceCustomBadTickers
 
-    dividendTimeline: PerformanceCustomDividendTimeline
+    dividendTimeline: typing.List[MonthlyDividends]
 
     # commissions incurred during the timeframe
     commissions: typing.Optional[typing.Union[int, float]]
@@ -72,7 +69,7 @@ class OptionalPerformanceCustom(TypedDict, total=False):
     # The return rate over the timeframe. Annualized if timeframe is longer than 1 year
     rateOfReturn: typing.Optional[typing.Union[int, float]]
 
-    returnRateTimeframe: PerformanceCustomReturnRateTimeframe
+    returnRateTimeframe: typing.List[SubPeriodReturnRate]
 
     # Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes)
     detailedMode: bool

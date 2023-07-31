@@ -41,10 +41,32 @@ class ManualTradeAndImpact(
             @staticmethod
             def trade() -> typing.Type['ManualTrade']:
                 return ManualTrade
-        
-            @staticmethod
-            def trade_impacts() -> typing.Type['ManualTradeAndImpactTradeImpacts']:
-                return ManualTradeAndImpactTradeImpacts
+            
+            
+            class trade_impacts(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['ManualTrade']:
+                        return ManualTrade
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['ManualTrade'], typing.List['ManualTrade']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'trade_impacts':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'ManualTrade':
+                    return super().__getitem__(i)
         
             @staticmethod
             def combined_remaining_balance() -> typing.Type['ManualTradeBalance']:
@@ -60,7 +82,7 @@ class ManualTradeAndImpact(
     def __getitem__(self, name: typing_extensions.Literal["trade"]) -> 'ManualTrade': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["trade_impacts"]) -> 'ManualTradeAndImpactTradeImpacts': ...
+    def __getitem__(self, name: typing_extensions.Literal["trade_impacts"]) -> MetaOapg.properties.trade_impacts: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["combined_remaining_balance"]) -> 'ManualTradeBalance': ...
@@ -76,7 +98,7 @@ class ManualTradeAndImpact(
     def get_item_oapg(self, name: typing_extensions.Literal["trade"]) -> typing.Union['ManualTrade', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["trade_impacts"]) -> typing.Union['ManualTradeAndImpactTradeImpacts', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["trade_impacts"]) -> typing.Union[MetaOapg.properties.trade_impacts, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["combined_remaining_balance"]) -> typing.Union['ManualTradeBalance', schemas.Unset]: ...
@@ -91,7 +113,7 @@ class ManualTradeAndImpact(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         trade: typing.Union['ManualTrade', schemas.Unset] = schemas.unset,
-        trade_impacts: typing.Union['ManualTradeAndImpactTradeImpacts', schemas.Unset] = schemas.unset,
+        trade_impacts: typing.Union[MetaOapg.properties.trade_impacts, list, tuple, schemas.Unset] = schemas.unset,
         combined_remaining_balance: typing.Union['ManualTradeBalance', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -107,5 +129,4 @@ class ManualTradeAndImpact(
         )
 
 from snaptrade_client.model.manual_trade import ManualTrade
-from snaptrade_client.model.manual_trade_and_impact_trade_impacts import ManualTradeAndImpactTradeImpacts
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance

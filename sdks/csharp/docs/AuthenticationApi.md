@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**DeleteSnapTradeUser**](AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user |
-| [**GetUserJWT**](AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device |
-| [**ListSnapTradeUsers**](AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | Get a list of all SnapTrade users you&#39;ve registered on our platform |
-| [**LoginSnapTradeUser**](AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal |
-| [**RegisterSnapTradeUser**](AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations |
+| [**DeleteSnapTradeUser**](AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
+| [**GetUserJWT**](AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token |
+| [**ListSnapTradeUsers**](AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users |
+| [**LoginSnapTradeUser**](AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
+| [**RegisterSnapTradeUser**](AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
 
 <a name="deletesnaptradeuser"></a>
 # **DeleteSnapTradeUser**
 > DeleteUserResponse DeleteSnapTradeUser (string userId)
 
-Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+Delete SnapTrade user
 
 ### Example
 ```csharp
@@ -42,7 +42,7 @@ namespace Example
 
             try
             {
-                // Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+                // Delete SnapTrade user
                 DeleteUserResponse result = client.Authentication.DeleteSnapTradeUser(userId);
                 Console.WriteLine(result);
             }
@@ -69,7 +69,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    // Delete SnapTrade user
     ApiResponse<DeleteUserResponse> response = apiInstance.DeleteSnapTradeUserWithHttpInfo(userId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -118,7 +118,7 @@ catch (ApiException e)
 # **GetUserJWT**
 > EncryptedResponse GetUserJWT (string userId, string userSecret)
 
-Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+Generate encrypted JWT token
 
 ### Example
 ```csharp
@@ -147,7 +147,7 @@ namespace Example
 
             try
             {
-                // Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+                // Generate encrypted JWT token
                 EncryptedResponse result = client.Authentication.GetUserJWT(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -174,7 +174,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    // Generate encrypted JWT token
     ApiResponse<EncryptedResponse> response = apiInstance.GetUserJWTWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -224,7 +224,7 @@ catch (ApiException e)
 # **ListSnapTradeUsers**
 > List&lt;string&gt; ListSnapTradeUsers ()
 
-Get a list of all SnapTrade users you've registered on our platform
+List SnapTrade users
 
 ### Example
 ```csharp
@@ -251,7 +251,7 @@ namespace Example
 
             try
             {
-                // Get a list of all SnapTrade users you've registered on our platform
+                // List SnapTrade users
                 List<string> result = client.Authentication.ListSnapTradeUsers();
                 Console.WriteLine(result);
             }
@@ -278,7 +278,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get a list of all SnapTrade users you've registered on our platform
+    // List SnapTrade users
     ApiResponse<List<string>> response = apiInstance.ListSnapTradeUsersWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -322,7 +322,7 @@ This endpoint does not need any parameter.
 # **LoginSnapTradeUser**
 > AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser (string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null)
 
-Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+Login user & generate connection link
 
 ### Example
 ```csharp
@@ -352,7 +352,7 @@ namespace Example
 
             try
             {
-                // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+                // Login user & generate connection link
                 AuthenticationLoginSnapTradeUser200Response result = client.Authentication.LoginSnapTradeUser(userId, userSecret, snapTradeLoginUserRequestBody);
                 Console.WriteLine(result);
             }
@@ -379,7 +379,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    // Login user & generate connection link
     ApiResponse<AuthenticationLoginSnapTradeUser200Response> response = apiInstance.LoginSnapTradeUserWithHttpInfo(userId, userSecret, snapTradeLoginUserRequestBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -430,7 +430,7 @@ catch (ApiException e)
 # **RegisterSnapTradeUser**
 > UserIDandSecret RegisterSnapTradeUser (SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody)
 
-Register user with SnapTrade in order to create secure brokerage authorizations
+Create SnapTrade user
 
 ### Example
 ```csharp
@@ -458,7 +458,7 @@ namespace Example
 
             try
             {
-                // Register user with SnapTrade in order to create secure brokerage authorizations
+                // Create SnapTrade user
                 UserIDandSecret result = client.Authentication.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
                 Console.WriteLine(result);
             }
@@ -485,7 +485,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Register user with SnapTrade in order to create secure brokerage authorizations
+    // Create SnapTrade user
     ApiResponse<UserIDandSecret> response = apiInstance.RegisterSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

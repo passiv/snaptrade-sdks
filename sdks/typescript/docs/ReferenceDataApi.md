@@ -7,14 +7,14 @@ Method | HTTP request | Description
 [**getCurrencyExchangeRatePair**](ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types.
-[**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+[**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | List exchanges
 [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols
 [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
 [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-[**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | List of all brokerages.
-[**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | List of all supported currencies
-[**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies
-[**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+[**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | List brokerages
+[**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | List currencies
+[**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | List currency exchange rates
+[**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 
 
 # **getCurrencyExchangeRatePair**

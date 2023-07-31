@@ -8,14 +8,14 @@ Method | HTTP request | Description
 [**get_currency_exchange_rate_pair**](#get_currency_exchange_rate_pair) | **get** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 [**get_partner_info**](#get_partner_info) | **get** /snapTrade/partners | Get metadata related to Snaptrade partner
 [**get_security_types**](#get_security_types) | **get** /securityTypes | List of all security types.
-[**get_stock_exchanges**](#get_stock_exchanges) | **get** /exchanges | Return list of stock exchanges on Passiv and their suffixes
+[**get_stock_exchanges**](#get_stock_exchanges) | **get** /exchanges | List exchanges
 [**get_symbols**](#get_symbols) | **post** /symbols | Search for symbols
 [**get_symbols_by_ticker**](#get_symbols_by_ticker) | **get** /symbols/{ticker} | Get details of a symbol by the ticker
 [**list_all_brokerage_authorization_type**](#list_all_brokerage_authorization_type) | **get** /brokerageAuthorizationTypes | List of all brokerage authorization types
-[**list_all_brokerages**](#list_all_brokerages) | **get** /brokerages | List of all brokerages.
-[**list_all_currencies**](#list_all_currencies) | **get** /currencies | List of all supported currencies
-[**list_all_currencies_rates**](#list_all_currencies_rates) | **get** /currencies/rates | Return the exchange rates of all supported currencies
-[**symbol_search_user_account**](#symbol_search_user_account) | **post** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring
+[**list_all_brokerages**](#list_all_brokerages) | **get** /brokerages | List brokerages
+[**list_all_currencies**](#list_all_currencies) | **get** /currencies | List currencies
+[**list_all_currencies_rates**](#list_all_currencies_rates) | **get** /currencies/rates | List currency exchange rates
+[**symbol_search_user_account**](#symbol_search_user_account) | **post** /accounts/{accountId}/symbols | Search for symbols available in an account
 
 # **get_currency_exchange_rate_pair**
 
@@ -316,7 +316,7 @@ headers | Unset | headers were not defined |
 
 # **get_stock_exchanges**
 
-Return list of stock exchanges on Passiv and their suffixes
+List exchanges
 
 ### Example
 
@@ -333,7 +333,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Return list of stock exchanges on Passiv and their suffixes
+    # List exchanges
     get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
     pprint(get_stock_exchanges_response.body)
     pprint(get_stock_exchanges_response.body["id"])
@@ -729,7 +729,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_brokerages**
 
-List of all brokerages.
+List brokerages
 
 ### Example
 
@@ -746,7 +746,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # List of all brokerages.
+    # List brokerages
     list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
     pprint(list_all_brokerages_response.body)
     pprint(list_all_brokerages_response.body["id"])
@@ -823,7 +823,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_currencies**
 
-List of all supported currencies
+List currencies
 
 ### Example
 
@@ -840,7 +840,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # List of all supported currencies
+    # List currencies
     list_all_currencies_response = snaptrade.reference_data.list_all_currencies()
     pprint(list_all_currencies_response.body)
     pprint(list_all_currencies_response.body["id"])
@@ -902,7 +902,7 @@ headers | Unset | headers were not defined |
 
 # **list_all_currencies_rates**
 
-Return the exchange rates of all supported currencies
+List currency exchange rates
 
 ### Example
 
@@ -919,7 +919,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Return the exchange rates of all supported currencies
+    # List currency exchange rates
     list_all_currencies_rates_response = (
         snaptrade.reference_data.list_all_currencies_rates()
     )
@@ -975,7 +975,7 @@ Class Name | Input Type | Accessed Type | Description | Notes
 
 # **symbol_search_user_account**
 
-Search for symbols that are supported by a brokerage account using a substring
+Search for symbols available in an account
 
 ### Example
 
@@ -992,7 +992,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Search for symbols that are supported by a brokerage account using a substring
+    # Search for symbols available in an account
     symbol_search_user_account_response = (
         snaptrade.reference_data.symbol_search_user_account(
             user_id="John.doe@snaptrade.com",  # required

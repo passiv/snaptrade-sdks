@@ -39,10 +39,32 @@ class ModelAssetClassDetails(
             @staticmethod
             def model_asset_class() -> typing.Type['ModelAssetClass']:
                 return ModelAssetClass
-        
-            @staticmethod
-            def model_asset_class_target() -> typing.Type['ModelAssetClassDetailsModelAssetClassTarget']:
-                return ModelAssetClassDetailsModelAssetClassTarget
+            
+            
+            class model_asset_class_target(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['ModelAssetClassTarget']:
+                        return ModelAssetClassTarget
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['ModelAssetClassTarget'], typing.List['ModelAssetClassTarget']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'model_asset_class_target':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'ModelAssetClassTarget':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "model_asset_class": model_asset_class,
                 "model_asset_class_target": model_asset_class_target,
@@ -53,7 +75,7 @@ class ModelAssetClassDetails(
     def __getitem__(self, name: typing_extensions.Literal["model_asset_class"]) -> 'ModelAssetClass': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["model_asset_class_target"]) -> 'ModelAssetClassDetailsModelAssetClassTarget': ...
+    def __getitem__(self, name: typing_extensions.Literal["model_asset_class_target"]) -> MetaOapg.properties.model_asset_class_target: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -66,7 +88,7 @@ class ModelAssetClassDetails(
     def get_item_oapg(self, name: typing_extensions.Literal["model_asset_class"]) -> typing.Union['ModelAssetClass', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["model_asset_class_target"]) -> typing.Union['ModelAssetClassDetailsModelAssetClassTarget', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["model_asset_class_target"]) -> typing.Union[MetaOapg.properties.model_asset_class_target, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -78,7 +100,7 @@ class ModelAssetClassDetails(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         model_asset_class: typing.Union['ModelAssetClass', schemas.Unset] = schemas.unset,
-        model_asset_class_target: typing.Union['ModelAssetClassDetailsModelAssetClassTarget', schemas.Unset] = schemas.unset,
+        model_asset_class_target: typing.Union[MetaOapg.properties.model_asset_class_target, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ModelAssetClassDetails':
@@ -92,4 +114,4 @@ class ModelAssetClassDetails(
         )
 
 from snaptrade_client.model.model_asset_class import ModelAssetClass
-from snaptrade_client.model.model_asset_class_details_model_asset_class_target import ModelAssetClassDetailsModelAssetClassTarget
+from snaptrade_client.model.model_asset_class_target import ModelAssetClassTarget

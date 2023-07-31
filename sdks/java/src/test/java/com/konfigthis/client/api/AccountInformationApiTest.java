@@ -48,7 +48,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * List all accounts for the user, plus balances and positions for each account.
+     * List all accounts for the user, plus balances, positions, and orders for each account.
      *
      * @throws ApiException if the Api call fails
      */
@@ -64,7 +64,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * Get all cash balances of an investment account
+     * List account balances
      *
      * @throws ApiException if the Api call fails
      */
@@ -111,7 +111,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * Get all positions of an investment account
+     * List account positions
      *
      * @throws ApiException if the Api call fails
      */
@@ -141,7 +141,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * List all investment accounts for the user
+     * List accounts
      *
      * @throws ApiException if the Api call fails
      */

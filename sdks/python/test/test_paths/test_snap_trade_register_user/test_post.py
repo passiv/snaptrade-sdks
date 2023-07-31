@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeRegisterUser(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeRegisterUser unit test stubs
-        Register user with SnapTrade in order to create secure brokerage authorizations
+        Create SnapTrade user
     """
 
     def setUp(self):

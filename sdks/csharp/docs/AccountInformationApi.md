@@ -4,20 +4,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetAllUserHoldings**](AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances and positions for each account. |
-| [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | Get all cash balances of an investment account |
+| [**GetAllUserHoldings**](AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
+| [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
-| [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | Get all positions of an investment account |
+| [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
-| [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List all investment accounts for the user |
+| [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
 | [**UpdateUserAccount**](AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
 <a name="getalluserholdings"></a>
 # **GetAllUserHoldings**
 > List&lt;AccountHoldings&gt; GetAllUserHoldings (string userId, string userSecret, Guid? brokerageAuthorizations = null)
 
-List all accounts for the user, plus balances and positions for each account.
+List all accounts for the user, plus balances, positions, and orders for each account.
 
 ### Example
 ```csharp
@@ -47,7 +47,7 @@ namespace Example
 
             try
             {
-                // List all accounts for the user, plus balances and positions for each account.
+                // List all accounts for the user, plus balances, positions, and orders for each account.
                 List<AccountHoldings> result = client.AccountInformation.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
                 Console.WriteLine(result);
             }
@@ -74,7 +74,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List all accounts for the user, plus balances and positions for each account.
+    // List all accounts for the user, plus balances, positions, and orders for each account.
     ApiResponse<List<AccountHoldings>> response = apiInstance.GetAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -124,7 +124,7 @@ catch (ApiException e)
 # **GetUserAccountBalance**
 > List&lt;Balance&gt; GetUserAccountBalance (string userId, string userSecret, Guid accountId)
 
-Get all cash balances of an investment account
+List account balances
 
 ### Example
 ```csharp
@@ -154,7 +154,7 @@ namespace Example
 
             try
             {
-                // Get all cash balances of an investment account
+                // List account balances
                 List<Balance> result = client.AccountInformation.GetUserAccountBalance(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -181,7 +181,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get all cash balances of an investment account
+    // List account balances
     ApiResponse<List<Balance>> response = apiInstance.GetUserAccountBalanceWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -441,7 +441,7 @@ catch (ApiException e)
 # **GetUserAccountPositions**
 > List&lt;Position&gt; GetUserAccountPositions (string userId, string userSecret, Guid accountId)
 
-Get all positions of an investment account
+List account positions
 
 ### Example
 ```csharp
@@ -471,7 +471,7 @@ namespace Example
 
             try
             {
-                // Get all positions of an investment account
+                // List account positions
                 List<Position> result = client.AccountInformation.GetUserAccountPositions(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -498,7 +498,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get all positions of an investment account
+    // List account positions
     ApiResponse<List<Position>> response = apiInstance.GetUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -653,7 +653,7 @@ catch (ApiException e)
 # **ListUserAccounts**
 > List&lt;Account&gt; ListUserAccounts (string userId, string userSecret)
 
-List all investment accounts for the user
+List accounts
 
 ### Example
 ```csharp
@@ -682,7 +682,7 @@ namespace Example
 
             try
             {
-                // List all investment accounts for the user
+                // List accounts
                 List<Account> result = client.AccountInformation.ListUserAccounts(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -709,7 +709,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List all investment accounts for the user
+    // List accounts
     ApiResponse<List<Account>> response = apiInstance.ListUserAccountsWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

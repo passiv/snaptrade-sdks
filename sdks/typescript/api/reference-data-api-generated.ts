@@ -182,7 +182,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @summary List exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -369,7 +369,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary List of all brokerages.
+         * @summary List brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -411,7 +411,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary List of all supported currencies
+         * @summary List currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -453,7 +453,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Return the exchange rates of all supported currencies
+         * @summary List currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -495,7 +495,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Search for symbols that are supported by a brokerage account using a substring
+         * @summary Search for symbols available in an account
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
@@ -601,7 +601,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @summary List exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -644,7 +644,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary List of all brokerages.
+         * @summary List brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -654,7 +654,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary List of all supported currencies
+         * @summary List currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -664,7 +664,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Return the exchange rates of all supported currencies
+         * @summary List currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -674,7 +674,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Search for symbols that are supported by a brokerage account using a substring
+         * @summary Search for symbols available in an account
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -723,7 +723,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary Return list of stock exchanges on Passiv and their suffixes
+         * @summary List exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -762,7 +762,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary List of all brokerages.
+         * @summary List brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -771,7 +771,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary List of all supported currencies
+         * @summary List currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -780,7 +780,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary Return the exchange rates of all supported currencies
+         * @summary List currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -789,7 +789,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary Search for symbols that are supported by a brokerage account using a substring
+         * @summary Search for symbols available in an account
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -937,7 +937,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Return list of stock exchanges on Passiv and their suffixes
+     * @summary List exchanges
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -984,7 +984,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary List of all brokerages.
+     * @summary List brokerages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -995,7 +995,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary List of all supported currencies
+     * @summary List currencies
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -1006,7 +1006,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Return the exchange rates of all supported currencies
+     * @summary List currency exchange rates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -1017,7 +1017,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Search for symbols that are supported by a brokerage account using a substring
+     * @summary Search for symbols available in an account
      * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

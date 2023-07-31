@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeEncryptedJWT(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeEncryptedJWT unit test stubs
-        Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+        Generate encrypted JWT token
     """
 
     def setUp(self):

@@ -18,7 +18,7 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    # Delete SnapTrade user
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user(user_id:, extra: {})
@@ -27,7 +27,7 @@ module SnapTrade
       data
     end
 
-    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    # Delete SnapTrade user
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user_with_http_info(user_id:, extra: {})
@@ -35,7 +35,7 @@ module SnapTrade
       delete_snap_trade_user_with_http_info_impl(user_id, extra)
     end
 
-    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    # Delete SnapTrade user
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteUserResponse]
@@ -44,7 +44,7 @@ module SnapTrade
       data
     end
 
-    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    # Delete SnapTrade user
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteUserResponse, Integer, Hash)>] DeleteUserResponse data, response status code and response headers
@@ -98,7 +98,7 @@ module SnapTrade
     end
 
 
-    # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    # Generate encrypted JWT token
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -108,7 +108,7 @@ module SnapTrade
       data
     end
 
-    # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    # Generate encrypted JWT token
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -117,7 +117,7 @@ module SnapTrade
       get_user_jwt_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    # Generate encrypted JWT token
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -127,7 +127,7 @@ module SnapTrade
       data
     end
 
-    # Obtains an encrypted JWT tokens that should be decrypted on a user&#39;s local device
+    # Generate encrypted JWT token
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -187,7 +187,7 @@ module SnapTrade
     end
 
 
-    # Get a list of all SnapTrade users you've registered on our platform
+    # List SnapTrade users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
 
@@ -195,14 +195,14 @@ module SnapTrade
       data
     end
 
-    # Get a list of all SnapTrade users you've registered on our platform
+    # List SnapTrade users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
 
       list_snap_trade_users_with_http_info_impl(extra)
     end
 
-    # Get a list of all SnapTrade users you've registered on our platform
+    # List SnapTrade users
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
     def list_snap_trade_users_impl(opts = {})
@@ -210,7 +210,7 @@ module SnapTrade
       data
     end
 
-    # Get a list of all SnapTrade users you&#39;ve registered on our platform
+    # List SnapTrade users
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
     def list_snap_trade_users_with_http_info_impl(opts = {})
@@ -258,7 +258,7 @@ module SnapTrade
     end
 
 
-    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    # Login user & generate connection link
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] 
@@ -281,7 +281,7 @@ module SnapTrade
       data
     end
 
-    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    # Login user & generate connection link
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] 
@@ -303,7 +303,7 @@ module SnapTrade
       login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    # Login user & generate connection link
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -314,7 +314,7 @@ module SnapTrade
       data
     end
 
-    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    # Login user &amp; generate connection link
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -380,7 +380,7 @@ module SnapTrade
     end
 
 
-    # Register user with SnapTrade in order to create secure brokerage authorizations
+    # Create SnapTrade user
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
     # @param body [SnapTradeRegisterUserRequestBody] 
@@ -395,7 +395,7 @@ module SnapTrade
       data
     end
 
-    # Register user with SnapTrade in order to create secure brokerage authorizations
+    # Create SnapTrade user
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
     # @param rsa_public_key [String] Open SSH RSA public key
     # @param body [SnapTradeRegisterUserRequestBody] 
@@ -409,7 +409,7 @@ module SnapTrade
       register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
     end
 
-    # Register user with SnapTrade in order to create secure brokerage authorizations
+    # Create SnapTrade user
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
@@ -418,7 +418,7 @@ module SnapTrade
       data
     end
 
-    # Register user with SnapTrade in order to create secure brokerage authorizations
+    # Create SnapTrade user
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers

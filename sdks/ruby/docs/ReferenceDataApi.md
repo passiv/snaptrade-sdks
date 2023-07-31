@@ -7,14 +7,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**get_currency_exchange_rate_pair**](ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
 | [**get_partner_info**](ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**get_security_types**](ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types. |
-| [**get_stock_exchanges**](ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | Return list of stock exchanges on Passiv and their suffixes |
+| [**get_stock_exchanges**](ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges |
 | [**get_symbols**](ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols |
 | [**get_symbols_by_ticker**](ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
 | [**list_all_brokerage_authorization_type**](ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
-| [**list_all_brokerages**](ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List of all brokerages. |
-| [**list_all_currencies**](ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List of all supported currencies |
-| [**list_all_currencies_rates**](ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | Return the exchange rates of all supported currencies |
-| [**symbol_search_user_account**](ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols that are supported by a brokerage account using a substring |
+| [**list_all_brokerages**](ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List brokerages |
+| [**list_all_currencies**](ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List currencies |
+| [**list_all_currencies_rates**](ReferenceDataApi.md#list_all_currencies_rates) | **GET** /currencies/rates | List currency exchange rates |
+| [**symbol_search_user_account**](ReferenceDataApi.md#symbol_search_user_account) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
 
 ## get_currency_exchange_rate_pair
 
@@ -167,7 +167,7 @@ This endpoint does not need any parameter.
 
 ## get_stock_exchanges
 
-Return list of stock exchanges on Passiv and their suffixes
+List exchanges
 
 ### Example
 
@@ -179,7 +179,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
-  # Return list of stock exchanges on Passiv and their suffixes
+  # List exchanges
   result = SnapTrade::ReferenceData.get_stock_exchanges
   p result
 rescue SnapTrade::ApiError => e
@@ -194,7 +194,7 @@ This returns an Array which contains the response data, status code and headers.
 ```ruby
 
 begin
-  # Return list of stock exchanges on Passiv and their suffixes
+  # List exchanges
   data, status_code, headers, response = SnapTrade::ReferenceData.get_stock_exchanges_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -384,7 +384,7 @@ end
 
 ## list_all_brokerages
 
-List of all brokerages.
+List brokerages
 
 ### Example
 
@@ -396,7 +396,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
-  # List of all brokerages.
+  # List brokerages
   result = SnapTrade::ReferenceData.list_all_brokerages
   p result
 rescue SnapTrade::ApiError => e
@@ -411,7 +411,7 @@ This returns an Array which contains the response data, status code and headers.
 ```ruby
 
 begin
-  # List of all brokerages.
+  # List brokerages
   data, status_code, headers, response = SnapTrade::ReferenceData.list_all_brokerages_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -431,7 +431,7 @@ This endpoint does not need any parameter.
 
 ## list_all_currencies
 
-List of all supported currencies
+List currencies
 
 ### Example
 
@@ -443,7 +443,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
-  # List of all supported currencies
+  # List currencies
   result = SnapTrade::ReferenceData.list_all_currencies
   p result
 rescue SnapTrade::ApiError => e
@@ -458,7 +458,7 @@ This returns an Array which contains the response data, status code and headers.
 ```ruby
 
 begin
-  # List of all supported currencies
+  # List currencies
   data, status_code, headers, response = SnapTrade::ReferenceData.list_all_currencies_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -478,7 +478,7 @@ This endpoint does not need any parameter.
 
 ## list_all_currencies_rates
 
-Return the exchange rates of all supported currencies
+List currency exchange rates
 
 ### Example
 
@@ -490,7 +490,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
-  # Return the exchange rates of all supported currencies
+  # List currency exchange rates
   result = SnapTrade::ReferenceData.list_all_currencies_rates
   p result
 rescue SnapTrade::ApiError => e
@@ -505,7 +505,7 @@ This returns an Array which contains the response data, status code and headers.
 ```ruby
 
 begin
-  # Return the exchange rates of all supported currencies
+  # List currency exchange rates
   data, status_code, headers, response = SnapTrade::ReferenceData.list_all_currencies_rates_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
@@ -525,7 +525,7 @@ This endpoint does not need any parameter.
 
 ## symbol_search_user_account
 
-Search for symbols that are supported by a brokerage account using a substring
+Search for symbols available in an account
 
 ### Example
 
@@ -541,7 +541,7 @@ account_id = "accountId_example"
 substring = "apple"
 
 begin
-  # Search for symbols that are supported by a brokerage account using a substring
+  # Search for symbols available in an account
   result = SnapTrade::ReferenceData.symbol_search_user_account(
     user_id: user_id,
     user_secret: user_secret,
@@ -565,7 +565,7 @@ account_id = "accountId_example"
 substring = "apple"
 
 begin
-  # Search for symbols that are supported by a brokerage account using a substring
+  # Search for symbols available in an account
   data, status_code, headers, response = SnapTrade::ReferenceData.symbol_search_user_account_with_http_info(
     user_id: user_id,
     user_secret: user_secret,

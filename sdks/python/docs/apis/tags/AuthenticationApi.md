@@ -5,15 +5,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_snap_trade_user**](#delete_snap_trade_user) | **delete** /snapTrade/deleteUser | Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
-[**get_user_jwt**](#get_user_jwt) | **get** /snapTrade/encryptedJWT | Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
-[**list_snap_trade_users**](#list_snap_trade_users) | **get** /snapTrade/listUsers | Get a list of all SnapTrade users you&#x27;ve registered on our platform
-[**login_snap_trade_user**](#login_snap_trade_user) | **post** /snapTrade/login | Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
-[**register_snap_trade_user**](#register_snap_trade_user) | **post** /snapTrade/registerUser | Register user with SnapTrade in order to create secure brokerage authorizations
+[**delete_snap_trade_user**](#delete_snap_trade_user) | **delete** /snapTrade/deleteUser | Delete SnapTrade user
+[**get_user_jwt**](#get_user_jwt) | **get** /snapTrade/encryptedJWT | Generate encrypted JWT token
+[**list_snap_trade_users**](#list_snap_trade_users) | **get** /snapTrade/listUsers | List SnapTrade users
+[**login_snap_trade_user**](#login_snap_trade_user) | **post** /snapTrade/login | Login user &amp; generate connection link
+[**register_snap_trade_user**](#register_snap_trade_user) | **post** /snapTrade/registerUser | Create SnapTrade user
 
 # **delete_snap_trade_user**
 
-Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+Delete SnapTrade user
 
 ### Example
 
@@ -30,7 +30,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Delete user from SnapTrade, disabling all brokerage authorizations and permanently deleting all data associated with the user
+    # Delete SnapTrade user
     delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
         user_id="John.doe@snaptrade.com",  # required
     )
@@ -153,7 +153,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_jwt**
 
-Obtains an encrypted JWT tokens that should be decrypted on a user&#x27;s local device
+Generate encrypted JWT token
 
 ### Example
 
@@ -170,7 +170,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Obtains an encrypted JWT tokens that should be decrypted on a user's local device
+    # Generate encrypted JWT token
     get_user_jwt_response = snaptrade.authentication.get_user_jwt(
         user_id="John.doe@snaptrade.com",  # required
         user_secret="USERSECRET123",  # required
@@ -301,7 +301,7 @@ headers | Unset | headers were not defined |
 
 # **list_snap_trade_users**
 
-Get a list of all SnapTrade users you&#x27;ve registered on our platform
+List SnapTrade users
 
 ### Example
 
@@ -318,7 +318,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Get a list of all SnapTrade users you've registered on our platform
+    # List SnapTrade users
     list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
     pprint(list_snap_trade_users_response.body)
     pprint(list_snap_trade_users_response.headers)
@@ -399,7 +399,7 @@ headers | Unset | headers were not defined |
 
 # **login_snap_trade_user**
 
-Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+Login user &amp; generate connection link
 
 ### Example
 
@@ -416,7 +416,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Generate a redirect URI to securely login a user to the SnapTrade Connection Portal
+    # Login user & generate connection link
     login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
         user_id="John.doe@snaptrade.com",  # required
         user_secret="USERSECRET123",  # required
@@ -570,7 +570,7 @@ headers | Unset | headers were not defined |
 
 # **register_snap_trade_user**
 
-Register user with SnapTrade in order to create secure brokerage authorizations
+Create SnapTrade user
 
 ### Example
 
@@ -587,7 +587,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Register user with SnapTrade in order to create secure brokerage authorizations
+    # Create SnapTrade user
     register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
         user_id="snaptrade-user-123",  # optional
         rsa_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",  # optional

@@ -28,7 +28,7 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account.
+        /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -39,7 +39,7 @@ namespace SnapTrade.Net.Api
         List<AccountHoldings> GetAllUserHoldings(string userId, string userSecret, Guid? brokerageAuthorizations = default(Guid?), int operationIndex = 0);
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account.
+        /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
         /// 
@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;AccountHoldings&gt;</returns>
         ApiResponse<List<AccountHoldings>> GetAllUserHoldingsWithHttpInfo(string userId, string userSecret, Guid? brokerageAuthorizations = default(Guid?), int operationIndex = 0);
         /// <summary>
-        /// Get all cash balances of an investment account
+        /// List account balances
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -63,7 +63,7 @@ namespace SnapTrade.Net.Api
         List<Balance> GetUserAccountBalance(string userId, string userSecret, Guid accountId, int operationIndex = 0);
 
         /// <summary>
-        /// Get all cash balances of an investment account
+        /// List account balances
         /// </summary>
         /// <remarks>
         /// 
@@ -126,7 +126,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
         ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, Guid accountId, string state = default(string), int operationIndex = 0);
         /// <summary>
-        /// Get all positions of an investment account
+        /// List account positions
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -137,7 +137,7 @@ namespace SnapTrade.Net.Api
         List<Position> GetUserAccountPositions(string userId, string userSecret, Guid accountId, int operationIndex = 0);
 
         /// <summary>
-        /// Get all positions of an investment account
+        /// List account positions
         /// </summary>
         /// <remarks>
         /// 
@@ -174,7 +174,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountHoldingsAccount</returns>
         ApiResponse<AccountHoldingsAccount> GetUserHoldingsWithHttpInfo(Guid accountId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// List all investment accounts for the user
+        /// List accounts
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -184,7 +184,7 @@ namespace SnapTrade.Net.Api
         List<Account> ListUserAccounts(string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// List all investment accounts for the user
+        /// List accounts
         /// </summary>
         /// <remarks>
         /// 
@@ -229,7 +229,7 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account.
+        /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
         /// 
@@ -244,7 +244,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<AccountHoldings>> GetAllUserHoldingsAsync(string userId, string userSecret, Guid? brokerageAuthorizations = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account.
+        /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
         /// 
@@ -258,7 +258,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;AccountHoldings&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<AccountHoldings>>> GetAllUserHoldingsWithHttpInfoAsync(string userId, string userSecret, Guid? brokerageAuthorizations = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get all cash balances of an investment account
+        /// List account balances
         /// </summary>
         /// <remarks>
         /// 
@@ -273,7 +273,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Balance>> GetUserAccountBalanceAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get all cash balances of an investment account
+        /// List account balances
         /// </summary>
         /// <remarks>
         /// 
@@ -347,7 +347,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;AccountOrderRecord&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<AccountOrderRecord>>> GetUserAccountOrdersWithHttpInfoAsync(string userId, string userSecret, Guid accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get all positions of an investment account
+        /// List account positions
         /// </summary>
         /// <remarks>
         /// 
@@ -362,7 +362,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Position>> GetUserAccountPositionsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get all positions of an investment account
+        /// List account positions
         /// </summary>
         /// <remarks>
         /// 
@@ -405,7 +405,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountHoldingsAccount)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountHoldingsAccount>> GetUserHoldingsWithHttpInfoAsync(Guid accountId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List all investment accounts for the user
+        /// List accounts
         /// </summary>
         /// <remarks>
         /// 
@@ -419,7 +419,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Account>> ListUserAccountsAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List all investment accounts for the user
+        /// List accounts
         /// </summary>
         /// <remarks>
         /// 
@@ -581,7 +581,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -596,7 +596,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -681,7 +681,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -697,7 +697,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances and positions for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -785,7 +785,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all cash balances of an investment account 
+        /// List account balances 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -800,7 +800,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all cash balances of an investment account 
+        /// List account balances 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -882,7 +882,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all cash balances of an investment account 
+        /// List account balances 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -898,7 +898,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all cash balances of an investment account 
+        /// List account balances 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1391,7 +1391,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all positions of an investment account 
+        /// List account positions 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1406,7 +1406,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all positions of an investment account 
+        /// List account positions 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1488,7 +1488,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all positions of an investment account 
+        /// List account positions 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1504,7 +1504,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all positions of an investment account 
+        /// List account positions 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1787,7 +1787,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all investment accounts for the user 
+        /// List accounts 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1801,7 +1801,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all investment accounts for the user 
+        /// List accounts 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1881,7 +1881,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all investment accounts for the user 
+        /// List accounts 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1896,7 +1896,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all investment accounts for the user 
+        /// List accounts 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

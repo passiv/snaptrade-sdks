@@ -66,10 +66,32 @@ class SnapTradeHoldingsAccountAccountId(
             @staticmethod
             def meta() -> typing.Type['SnapTradeHoldingsAccountAccountIdMeta']:
                 return SnapTradeHoldingsAccountAccountIdMeta
-        
-            @staticmethod
-            def cash_restrictions() -> typing.Type['SnapTradeHoldingsAccountAccountIdCashRestrictions']:
-                return SnapTradeHoldingsAccountAccountIdCashRestrictions
+            
+            
+            class cash_restrictions(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['CashRestriction']:
+                        return CashRestriction
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['CashRestriction'], typing.List['CashRestriction']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'cash_restrictions':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'CashRestriction':
+                    return super().__getitem__(i)
             created_date = schemas.StrSchema
             __annotations__ = {
                 "id": id,
@@ -106,7 +128,7 @@ class SnapTradeHoldingsAccountAccountId(
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'SnapTradeHoldingsAccountAccountIdMeta': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> 'SnapTradeHoldingsAccountAccountIdCashRestrictions': ...
+    def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> MetaOapg.properties.cash_restrictions: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["created_date"]) -> MetaOapg.properties.created_date: ...
@@ -140,7 +162,7 @@ class SnapTradeHoldingsAccountAccountId(
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['SnapTradeHoldingsAccountAccountIdMeta', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union['SnapTradeHoldingsAccountAccountIdCashRestrictions', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union[MetaOapg.properties.cash_restrictions, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["created_date"]) -> typing.Union[MetaOapg.properties.created_date, schemas.Unset]: ...
@@ -161,7 +183,7 @@ class SnapTradeHoldingsAccountAccountId(
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
         institution_name: typing.Union[MetaOapg.properties.institution_name, str, schemas.Unset] = schemas.unset,
         meta: typing.Union['SnapTradeHoldingsAccountAccountIdMeta', schemas.Unset] = schemas.unset,
-        cash_restrictions: typing.Union['SnapTradeHoldingsAccountAccountIdCashRestrictions', schemas.Unset] = schemas.unset,
+        cash_restrictions: typing.Union[MetaOapg.properties.cash_restrictions, list, tuple, schemas.Unset] = schemas.unset,
         created_date: typing.Union[MetaOapg.properties.created_date, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -182,5 +204,5 @@ class SnapTradeHoldingsAccountAccountId(
             **kwargs,
         )
 
-from snaptrade_client.model.snap_trade_holdings_account_account_id_cash_restrictions import SnapTradeHoldingsAccountAccountIdCashRestrictions
+from snaptrade_client.model.cash_restriction import CashRestriction
 from snaptrade_client.model.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta

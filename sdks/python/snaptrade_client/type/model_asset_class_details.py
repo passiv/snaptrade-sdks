@@ -16,7 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.model_asset_class import ModelAssetClass
-from snaptrade_client.type.model_asset_class_details_model_asset_class_target import ModelAssetClassDetailsModelAssetClassTarget
+from snaptrade_client.type.model_asset_class_target import ModelAssetClassTarget
 
 class RequiredModelAssetClassDetails(TypedDict):
     pass
@@ -24,7 +24,7 @@ class RequiredModelAssetClassDetails(TypedDict):
 class OptionalModelAssetClassDetails(TypedDict, total=False):
     model_asset_class: ModelAssetClass
 
-    model_asset_class_target: ModelAssetClassDetailsModelAssetClassTarget
+    model_asset_class_target: typing.List[ModelAssetClassTarget]
 
 class ModelAssetClassDetails(RequiredModelAssetClassDetails, OptionalModelAssetClassDetails):
     pass

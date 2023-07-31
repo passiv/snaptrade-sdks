@@ -88,7 +88,7 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      *
      * @throws ApiException if the Api call fails
      */
@@ -143,7 +143,7 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List of all brokerages.
+     * List brokerages
      *
      * @throws ApiException if the Api call fails
      */
@@ -155,7 +155,7 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List of all supported currencies
+     * List currencies
      *
      * @throws ApiException if the Api call fails
      */
@@ -167,7 +167,7 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      *
      * @throws ApiException if the Api call fails
      */
@@ -179,7 +179,7 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      *
      * @throws ApiException if the Api call fails
      */

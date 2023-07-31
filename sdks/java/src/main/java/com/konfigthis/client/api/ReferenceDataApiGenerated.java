@@ -667,7 +667,7 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Return list of stock exchanges on Passiv and their suffixes
+     * List exchanges
      * 
      * @return GetStockExchangesRequestBuilder
      * @http.response.details
@@ -1330,7 +1330,7 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * List of all brokerages.
+     * List brokerages
      * 
      * @return ListAllBrokeragesRequestBuilder
      * @http.response.details
@@ -1479,7 +1479,7 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * List of all supported currencies
+     * List currencies
      * 
      * @return ListAllCurrenciesRequestBuilder
      * @http.response.details
@@ -1624,7 +1624,7 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Return the exchange rates of all supported currencies
+     * List currency exchange rates
      * 
      * @return ListAllCurrenciesRatesRequestBuilder
      * @http.response.details
@@ -1823,7 +1823,7 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Search for symbols that are supported by a brokerage account using a substring
+     * Search for symbols available in an account
      * 
      * @param userId  (required)
      * @param userSecret  (required)

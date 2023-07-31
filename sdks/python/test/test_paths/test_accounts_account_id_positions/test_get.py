@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdPositions(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdPositions unit test stubs
-        Get all positions of an investment account
+        List account positions
     """
 
     def setUp(self):

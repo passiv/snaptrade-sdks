@@ -5,18 +5,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_all_user_holdings**](#get_all_user_holdings) | **get** /holdings | List all accounts for the user, plus balances and positions for each account.
-[**get_user_account_balance**](#get_user_account_balance) | **get** /accounts/{accountId}/balances | Get all cash balances of an investment account
+[**get_all_user_holdings**](#get_all_user_holdings) | **get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
+[**get_user_account_balance**](#get_user_account_balance) | **get** /accounts/{accountId}/balances | List account balances
 [**get_user_account_details**](#get_user_account_details) | **get** /accounts/{accountId} | Return details of a specific investment account
 [**get_user_account_orders**](#get_user_account_orders) | **get** /accounts/{accountId}/orders | Get all history of orders placed in account
-[**get_user_account_positions**](#get_user_account_positions) | **get** /accounts/{accountId}/positions | Get all positions of an investment account
+[**get_user_account_positions**](#get_user_account_positions) | **get** /accounts/{accountId}/positions | List account positions
 [**get_user_holdings**](#get_user_holdings) | **get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-[**list_user_accounts**](#list_user_accounts) | **get** /accounts | List all investment accounts for the user
+[**list_user_accounts**](#list_user_accounts) | **get** /accounts | List accounts
 [**update_user_account**](#update_user_account) | **put** /accounts/{accountId} | Update details of an investment account
 
 # **get_all_user_holdings**
 
-List all accounts for the user, plus balances and positions for each account.
+List all accounts for the user, plus balances, positions, and orders for each account.
 
 ### Example
 
@@ -33,7 +33,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # List all accounts for the user, plus balances and positions for each account.
+    # List all accounts for the user, plus balances, positions, and orders for each account.
     get_all_user_holdings_response = (
         snaptrade.account_information.get_all_user_holdings(
             user_id="John.doe@snaptrade.com",  # required
@@ -174,7 +174,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_balance**
 
-Get all cash balances of an investment account
+List account balances
 
 ### Example
 
@@ -191,7 +191,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Get all cash balances of an investment account
+    # List account balances
     get_user_account_balance_response = (
         snaptrade.account_information.get_user_account_balance(
             user_id="John.doe@snaptrade.com",  # required
@@ -608,7 +608,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_positions**
 
-Get all positions of an investment account
+List account positions
 
 ### Example
 
@@ -625,7 +625,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Get all positions of an investment account
+    # List account positions
     get_user_account_positions_response = (
         snaptrade.account_information.get_user_account_positions(
             user_id="John.doe@snaptrade.com",  # required
@@ -904,7 +904,7 @@ headers | Unset | headers were not defined |
 
 # **list_user_accounts**
 
-List all investment accounts for the user
+List accounts
 
 ### Example
 
@@ -921,7 +921,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # List all investment accounts for the user
+    # List accounts
     list_user_accounts_response = snaptrade.account_information.list_user_accounts(
         user_id="John.doe@snaptrade.com",  # required
         user_secret="USERSECRET123",  # required

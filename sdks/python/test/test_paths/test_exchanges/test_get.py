@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestExchanges(ApiTestMixin, unittest.TestCase):
     """
     Exchanges unit test stubs
-        Return list of stock exchanges on Passiv and their suffixes
+        List exchanges
     """
 
     def setUp(self):

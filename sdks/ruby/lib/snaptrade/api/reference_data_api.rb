@@ -239,7 +239,7 @@ module SnapTrade
     end
 
 
-    # Return list of stock exchanges on Passiv and their suffixes
+    # List exchanges
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_stock_exchanges(extra: {})
 
@@ -247,14 +247,14 @@ module SnapTrade
       data
     end
 
-    # Return list of stock exchanges on Passiv and their suffixes
+    # List exchanges
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_stock_exchanges_with_http_info(extra: {})
 
       get_stock_exchanges_with_http_info_impl(extra)
     end
 
-    # Return list of stock exchanges on Passiv and their suffixes
+    # List exchanges
     # @param [Hash] opts the optional parameters
     # @return [Array<Exchange>]
     def get_stock_exchanges_impl(opts = {})
@@ -262,7 +262,7 @@ module SnapTrade
       data
     end
 
-    # Return list of stock exchanges on Passiv and their suffixes
+    # List exchanges
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Exchange>, Integer, Hash)>] Array<Exchange> data, response status code and response headers
     def get_stock_exchanges_with_http_info_impl(opts = {})
@@ -562,7 +562,7 @@ module SnapTrade
     end
 
 
-    # List of all brokerages.
+    # List brokerages
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerages(extra: {})
 
@@ -570,14 +570,14 @@ module SnapTrade
       data
     end
 
-    # List of all brokerages.
+    # List brokerages
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerages_with_http_info(extra: {})
 
       list_all_brokerages_with_http_info_impl(extra)
     end
 
-    # List of all brokerages.
+    # List brokerages
     # @param [Hash] opts the optional parameters
     # @return [Array<Brokerage>]
     def list_all_brokerages_impl(opts = {})
@@ -585,7 +585,7 @@ module SnapTrade
       data
     end
 
-    # List of all brokerages.
+    # List brokerages
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Brokerage>, Integer, Hash)>] Array<Brokerage> data, response status code and response headers
     def list_all_brokerages_with_http_info_impl(opts = {})
@@ -633,7 +633,7 @@ module SnapTrade
     end
 
 
-    # List of all supported currencies
+    # List currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies(extra: {})
 
@@ -641,14 +641,14 @@ module SnapTrade
       data
     end
 
-    # List of all supported currencies
+    # List currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_with_http_info(extra: {})
 
       list_all_currencies_with_http_info_impl(extra)
     end
 
-    # List of all supported currencies
+    # List currencies
     # @param [Hash] opts the optional parameters
     # @return [Array<Currency>]
     def list_all_currencies_impl(opts = {})
@@ -656,7 +656,7 @@ module SnapTrade
       data
     end
 
-    # List of all supported currencies
+    # List currencies
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Currency>, Integer, Hash)>] Array<Currency> data, response status code and response headers
     def list_all_currencies_with_http_info_impl(opts = {})
@@ -704,7 +704,7 @@ module SnapTrade
     end
 
 
-    # Return the exchange rates of all supported currencies
+    # List currency exchange rates
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_rates(extra: {})
 
@@ -712,14 +712,14 @@ module SnapTrade
       data
     end
 
-    # Return the exchange rates of all supported currencies
+    # List currency exchange rates
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_rates_with_http_info(extra: {})
 
       list_all_currencies_rates_with_http_info_impl(extra)
     end
 
-    # Return the exchange rates of all supported currencies
+    # List currency exchange rates
     # @param [Hash] opts the optional parameters
     # @return [Array<ExchangeRatePairs>]
     def list_all_currencies_rates_impl(opts = {})
@@ -727,7 +727,7 @@ module SnapTrade
       data
     end
 
-    # Return the exchange rates of all supported currencies
+    # List currency exchange rates
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<ExchangeRatePairs>, Integer, Hash)>] Array<ExchangeRatePairs> data, response status code and response headers
     def list_all_currencies_rates_with_http_info_impl(opts = {})
@@ -775,7 +775,7 @@ module SnapTrade
     end
 
 
-    # Search for symbols that are supported by a brokerage account using a substring
+    # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -791,7 +791,7 @@ module SnapTrade
       data
     end
 
-    # Search for symbols that are supported by a brokerage account using a substring
+    # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -806,7 +806,7 @@ module SnapTrade
       symbol_search_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Search for symbols that are supported by a brokerage account using a substring
+    # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -818,7 +818,7 @@ module SnapTrade
       data
     end
 
-    # Search for symbols that are supported by a brokerage account using a substring
+    # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
