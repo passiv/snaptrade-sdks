@@ -169,7 +169,7 @@ paths:
     get:
       tags:
         - Authentication
-      summary: Get a list of all SnapTrade users you've registered on our platform
+      summary: List SnapTrade users
       operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
@@ -198,8 +198,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: Register user with SnapTrade in order to create secure brokerage
-        authorizations
+      summary: Create SnapTrade user
       operationId: Authentication_registerSnapTradeUser
       requestBody:
         $ref: "#/components/requestBodies/RegisterUserRequestBody"
@@ -231,8 +230,7 @@ paths:
       tags:
         - Authentication
       summary:
-        Delete user from SnapTrade, disabling all brokerage authorizations and
-        permanently deleting all data associated with the user
+        Delete SnapTrade user
       operationId: Authentication_deleteSnapTradeUser
       parameters:
         - in: query
@@ -271,8 +269,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: Generate a redirect URI to securely login a user to the SnapTrade
-        Connection Portal
+      summary: Login user & generate connection link
       operationId: Authentication_loginSnapTradeUser
       parameters:
         - in: query
@@ -321,8 +318,7 @@ paths:
       tags:
         - Authentication
       summary:
-        Obtains an encrypted JWT tokens that should be decrypted on a user's
-        local device
+        Generate encrypted JWT token
       operationId: Authentication_getUserJWT
       parameters:
         - in: query
@@ -405,7 +401,7 @@ paths:
       tags:
         - Account Information
       summary:
-        List all accounts for the user, plus balances and positions for each
+        List all accounts for the user, plus balances, positions, and orders for each
         account.
       operationId: AccountInformation_getAllUserHoldings
       parameters:
@@ -502,7 +498,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List all investment accounts for the user
+      summary: List accounts
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -597,7 +593,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Get all cash balances of an investment account
+      summary: List account balances
       operationId: AccountInformation_getUserAccountBalance
       parameters:
         - in: query
@@ -632,7 +628,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Get all positions of an investment account
+      summary: List account positions
       operationId: AccountInformation_getUserAccountPositions
       parameters:
         - in: query
@@ -801,8 +797,7 @@ paths:
       tags:
         - Reference Data
       summary:
-        Search for symbols that are supported by a brokerage account using a
-        substring
+        Search for symbols available in an account
       operationId: ReferenceData_symbolSearchUserAccount
       parameters:
         - in: query
@@ -1167,7 +1162,7 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List of all brokerages.
+      summary: List brokerages
       operationId: ReferenceData_listAllBrokerages
       parameters: []
       responses:
@@ -1210,7 +1205,7 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List of all supported currencies
+      summary: List currencies
       operationId: ReferenceData_listAllCurrencies
       parameters: []
       responses:
@@ -1254,7 +1249,7 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Return the exchange rates of all supported currencies
+      summary: List currency exchange rates
       operationId: ReferenceData_listAllCurrenciesRates
       parameters: []
       responses:
@@ -1290,7 +1285,7 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Return list of stock exchanges on Passiv and their suffixes
+      summary: List exchanges
       operationId: ReferenceData_getStockExchanges
       parameters: []
       responses:
