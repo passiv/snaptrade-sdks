@@ -476,10 +476,11 @@ try:
         account_id="accountId_example",  # required
     )
     pprint(list_option_holdings_response.body)
-    pprint(list_option_holdings_response.body["id"])
     pprint(list_option_holdings_response.body["symbol"])
+    pprint(list_option_holdings_response.body["description"])
     pprint(list_option_holdings_response.body["option_symbol"])
     pprint(list_option_holdings_response.body["price"])
+    pprint(list_option_holdings_response.body["units"])
     pprint(list_option_holdings_response.body["currency"])
     pprint(list_option_holdings_response.body["average_purchase_price"])
     pprint(list_option_holdings_response.headers)
@@ -570,7 +571,7 @@ list, tuple,  | tuple,  |  |
 ### Tuple Items
 Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-[**OptionsHoldings**](../../models/OptionsHoldings.md) | [**OptionsHoldings**](../../models/OptionsHoldings.md) | [**OptionsHoldings**](../../models/OptionsHoldings.md) |  | 
+[**OptionsPosition**](../../models/OptionsPosition.md) | [**OptionsPosition**](../../models/OptionsPosition.md) | [**OptionsPosition**](../../models/OptionsPosition.md) |  | 
 
 #### list_option_holdings.ApiResponseFor500
 Name | Type | Description  | Notes

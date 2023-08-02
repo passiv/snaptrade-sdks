@@ -32,9 +32,9 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.options_holdings import OptionsHoldings as OptionsHoldingsSchema
+from snaptrade_client.model.options_position import OptionsPosition as OptionsPositionSchema
 
-from snaptrade_client.type.options_holdings import OptionsHoldings
+from snaptrade_client.type.options_position import OptionsPosition
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -108,12 +108,12 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['OptionsHoldings']:
-            return OptionsHoldings
+        def items() -> typing.Type['OptionsPosition']:
+            return OptionsPosition
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['OptionsHoldings'], typing.List['OptionsHoldings']],
+        arg: typing.Union[typing.Tuple['OptionsPosition'], typing.List['OptionsPosition']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
@@ -122,18 +122,18 @@ class SchemaFor200ResponseBodyApplicationJson(
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> 'OptionsHoldings':
+    def __getitem__(self, i: int) -> 'OptionsPosition':
         return super().__getitem__(i)
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[OptionsHoldings]
+    body: typing.List[OptionsPosition]
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[OptionsHoldings]
+    body: typing.List[OptionsPosition]
 
 
 _response_for_200 = api_client.OpenApiResponse(

@@ -917,7 +917,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OptionsHoldings'
+                  $ref: '#/components/schemas/OptionsPosition'
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: The option holdings in the account
@@ -2938,53 +2938,15 @@ components:
     OptionsPosition:
       additionalProperties: true
       description: Option Holdings
-      properties:
-        symbol:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        description:
-          example: SPY PUT Aug 2022
-          type: string
-          x-konfig-original-example: SPY PUT Aug 2022
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-description
-        option_symbol:
-          $ref: '#/components/schemas/OptionsSymbol'
-        price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
-        units:
-          example: 10
-          type: number
-          x-konfig-original-example: 10
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-units
-        currency:
-          $ref: '#/components/schemas/Currency'
-        average_purchase_price:
-          description: Average purchase price for this position
-          example: 108.3353
-          nullable: true
-          type: number
-          x-konfig-original-example: 108.3353
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
-      type: object
-    OptionsHoldings:
-      additionalProperties: true
-      description: Option Holdings
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         price: 31.33
+        description: SPY PUT Aug 2022
         currency:
           code: USD
           name: US Dollar
           id: 87b24961-b51e-4db8-9226-f198f6518a89
-        id: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
+        units: 10
         average_purchase_price: 108.3353
         option_symbol:
           is_quotable: true
@@ -3027,6 +2989,45 @@ components:
           expiration_date: 2022-08-19T00:00:00.000Z
           security_type: {}
           strike_price: 200
+      properties:
+        symbol:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+        description:
+          example: SPY PUT Aug 2022
+          type: string
+          x-konfig-original-example: SPY PUT Aug 2022
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-description
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbol'
+        price:
+          description: Trade Price if limit or stop limit order
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
+        units:
+          example: 10
+          type: number
+          x-konfig-original-example: 10
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-units
+        currency:
+          $ref: '#/components/schemas/Currency'
+        average_purchase_price:
+          description: Average purchase price for this position
+          example: 108.3353
+          nullable: true
+          type: number
+          x-konfig-original-example: 108.3353
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
+      type: object
+    OptionsHoldings:
+      additionalProperties: true
+      description: Option Holdings
       properties:
         id:
           description: Options information

@@ -334,7 +334,7 @@ public class Example {
 
 <a name="listOptionHoldings"></a>
 # **listOptionHoldings**
-> List&lt;OptionsHoldings&gt; listOptionHoldings(userId, userSecret, accountId).execute();
+> List&lt;OptionsPosition&gt; listOptionHoldings(userId, userSecret, accountId).execute();
 
 Get the options holdings in the account
 
@@ -365,7 +365,7 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
     try {
-      List<OptionsHoldings> result = client
+      List<OptionsPosition> result = client
               .options
               .listOptionHoldings(userId, userSecret, accountId)
               .execute();
@@ -381,7 +381,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<OptionsHoldings>> response = client
+      ApiResponse<List<OptionsPosition>> response = client
               .options
               .listOptionHoldings(userId, userSecret, accountId)
               .executeWithHttpInfo();
@@ -412,7 +412,7 @@ public class Example {
 
 ### Return type
 
-[**List&lt;OptionsHoldings&gt;**](OptionsHoldings.md)
+[**List&lt;OptionsPosition&gt;**](OptionsPosition.md)
 
 ### Authorization
 

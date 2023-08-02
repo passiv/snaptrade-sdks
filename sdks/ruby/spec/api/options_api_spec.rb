@@ -76,7 +76,7 @@ describe 'OptionsApi' do
   # @param user_secret 
   # @param account_id The ID of the account get positions.
   # @param [Hash] opts the optional parameters
-  # @return [Array<OptionsHoldings>]
+  # @return [Array<OptionsPosition>]
   describe 'list_option_holdings test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

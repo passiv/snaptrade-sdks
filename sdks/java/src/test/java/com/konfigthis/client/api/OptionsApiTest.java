@@ -19,8 +19,8 @@ import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.OptionChainInner;
 import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
-import com.konfigthis.client.model.OptionsHoldings;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
+import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import java.util.UUID;
@@ -108,7 +108,7 @@ public class OptionsApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        List<OptionsHoldings> response = api.listOptionHoldings(userId, userSecret, accountId)
+        List<OptionsPosition> response = api.listOptionHoldings(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

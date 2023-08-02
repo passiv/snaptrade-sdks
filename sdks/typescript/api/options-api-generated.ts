@@ -25,9 +25,9 @@ import { OptionLeg } from '../models';
 // @ts-ignore
 import { OptionsGetOptionStrategyRequest } from '../models';
 // @ts-ignore
-import { OptionsHoldings } from '../models';
-// @ts-ignore
 import { OptionsPlaceOptionStrategyRequest } from '../models';
+// @ts-ignore
+import { OptionsPosition } from '../models';
 // @ts-ignore
 import { StrategyOrderRecord } from '../models';
 // @ts-ignore
@@ -419,7 +419,7 @@ export const OptionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionsHoldings>>> {
+        async listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionsPosition>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listOptionHoldings(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -481,7 +481,7 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<OptionsHoldings>> {
+        listOptionHoldings(requestParameters: OptionsApiListOptionHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<OptionsPosition>> {
             return localVarFp.listOptionHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

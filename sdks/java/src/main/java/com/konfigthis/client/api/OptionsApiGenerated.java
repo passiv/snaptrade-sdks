@@ -29,8 +29,8 @@ import java.io.IOException;
 import com.konfigthis.client.model.OptionChainInner;
 import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
-import com.konfigthis.client.model.OptionsHoldings;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
+import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import java.util.UUID;
@@ -786,16 +786,16 @@ public class OptionsApiGenerated {
     }
 
 
-    private ApiResponse<List<OptionsHoldings>> listOptionHoldingsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+    private ApiResponse<List<OptionsPosition>> listOptionHoldingsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
         okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, null);
-        Type localVarReturnType = new TypeToken<List<OptionsHoldings>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<OptionsPosition>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listOptionHoldingsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<OptionsHoldings>> _callback) throws ApiException {
+    private okhttp3.Call listOptionHoldingsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<OptionsPosition>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listOptionHoldingsValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<List<OptionsHoldings>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<OptionsPosition>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -830,7 +830,7 @@ public class OptionsApiGenerated {
 
         /**
          * Execute listOptionHoldings request
-         * @return List&lt;OptionsHoldings&gt;
+         * @return List&lt;OptionsPosition&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -839,14 +839,14 @@ public class OptionsApiGenerated {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public List<OptionsHoldings> execute() throws ApiException {
-            ApiResponse<List<OptionsHoldings>> localVarResp = listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
+        public List<OptionsPosition> execute() throws ApiException {
+            ApiResponse<List<OptionsPosition>> localVarResp = listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute listOptionHoldings request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;OptionsHoldings&gt;&gt;
+         * @return ApiResponse&lt;List&lt;OptionsPosition&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -855,7 +855,7 @@ public class OptionsApiGenerated {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<List<OptionsHoldings>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<List<OptionsPosition>> executeWithHttpInfo() throws ApiException {
             return listOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
         }
 
@@ -871,7 +871,7 @@ public class OptionsApiGenerated {
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<List<OptionsHoldings>> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<List<OptionsPosition>> _callback) throws ApiException {
             return listOptionHoldingsAsync(userId, userSecret, accountId, _callback);
         }
     }

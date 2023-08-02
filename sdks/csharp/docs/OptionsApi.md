@@ -333,7 +333,7 @@ catch (ApiException e)
 
 <a name="listoptionholdings"></a>
 # **ListOptionHoldings**
-> List&lt;OptionsHoldings&gt; ListOptionHoldings (string userId, string userSecret, Guid accountId)
+> List&lt;OptionsPosition&gt; ListOptionHoldings (string userId, string userSecret, Guid accountId)
 
 Get the options holdings in the account
 
@@ -366,7 +366,7 @@ namespace Example
             try
             {
                 // Get the options holdings in the account
-                List<OptionsHoldings> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
+                List<OptionsPosition> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -393,7 +393,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get the options holdings in the account
-    ApiResponse<List<OptionsHoldings>> response = apiInstance.ListOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
+    ApiResponse<List<OptionsPosition>> response = apiInstance.ListOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -416,7 +416,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;OptionsHoldings&gt;**](OptionsHoldings.md)
+[**List&lt;OptionsPosition&gt;**](OptionsPosition.md)
 
 ### Authorization
 
