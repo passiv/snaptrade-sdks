@@ -32,7 +32,7 @@ tagPriority:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 1.10.0
+    version: 1.11.0
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -42,7 +42,7 @@ generators:
     clientState:
       - consumer_key
   php:
-    version: 1.18.0
+    version: 1.19.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -54,7 +54,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 3.25.0
+    version: 3.26.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -65,7 +65,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 4.5.0
+    version: 4.6.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -79,7 +79,7 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 10.25.0
+    version: 10.26.0
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -95,7 +95,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.21.0
+    version: 8.22.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
