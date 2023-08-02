@@ -867,7 +867,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: "#/components/schemas/OptionsHoldings"
+                    $ref: "#/components/schemas/OptionsPosition"
         "500":
           description: Unexpected error
   "/accounts/{accountId}/optionsChain":
