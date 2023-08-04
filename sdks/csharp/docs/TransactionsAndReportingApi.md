@@ -43,7 +43,7 @@ namespace Example
             var endDate = DateTime.Parse("2013-10-20");  // DateTime? |  (optional) 
             var accounts = "accounts_example";  // string | Optional comma seperated list of account IDs used to filter the request on specific accounts (optional) 
             var brokerageAuthorizations = "brokerageAuthorizations_example";  // string | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional) 
-            var type = "DIVIDEND";  // string | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional) 
+            var type = "DIVIDEND";  // string | Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional) 
 
             try
             {
@@ -98,7 +98,7 @@ catch (ApiException e)
 | **endDate** | **DateTime?** |  | [optional]  |
 | **accounts** | **string** | Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional]  |
 | **brokerageAuthorizations** | **string** | Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional]  |
-| **type** | **string** | Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional]  |
+| **type** | **string** | Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional]  |
 
 ### Return type
 

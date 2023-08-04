@@ -26,7 +26,7 @@ module SnapTrade
     # @param end_date [Date] 
     # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @param type [String] Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @param type [String] Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -47,7 +47,7 @@ module SnapTrade
     # @param end_date [Date] 
     # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @param type [String] Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @param type [String] Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -68,7 +68,7 @@ module SnapTrade
     # @option opts [Date] :end_date 
     # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @option opts [String] :type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @option opts [String] :type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
     # @return [Array<UniversalActivity>]
     def get_activities_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_activities_with_http_info(user_id, user_secret, opts)
@@ -84,7 +84,7 @@ module SnapTrade
     # @option opts [Date] :end_date 
     # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
     # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @option opts [String] :type Optional comma seperated list of types to filter activities by. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @option opts [String] :type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
     # @return [Array<(Array<UniversalActivity>, Integer, Hash)>] Array<UniversalActivity> data, response status code and response headers
     def get_activities_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
