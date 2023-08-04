@@ -1565,7 +1565,7 @@ paths:
           required: false
           name: type
           description:
-            Optional comma seperated list of types to filter activities by. Potential values include
+            Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include
               - DIVIDEND
               - BUY
               - SELL
