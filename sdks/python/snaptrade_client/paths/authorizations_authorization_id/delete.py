@@ -15,6 +15,7 @@ import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
 import json
+from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions

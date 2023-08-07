@@ -255,6 +255,25 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(options_chain)
 
+    def test_remove_brokerage_authorization(self):
+        snaptrade = SnapTrade(
+            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
+            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
+            host="http://127.0.0.1:4010"
+        )
+        user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
+        user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
+
+        response = snaptrade.connections.remove_brokerage_authorization(
+            query_params={
+                "userId": user_id,
+                "userSecret": user_secret,
+            },
+            path_params={"authorizationId": uuid.uuid4()},
+        )
+        pprint(response)
+        self.assertIsNotNone(response)
+
 
 if __name__ == "__main__":
     unittest.main()
