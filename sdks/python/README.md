@@ -1,4 +1,4 @@
-# snaptrade-python-sdk@10.27.0
+# snaptrade-python-sdk@10.27.1
 Connect brokerage accounts to your app for live positions and trading
 
 
@@ -9,7 +9,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.27.0
+pip install snaptrade-python-sdk==10.27.1
 ```
 
 ## Getting Started
