@@ -232,6 +232,8 @@ class BaseApi(api_client.Api):
             serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
             for serialized_value in serialized_data.values():
                 used_path += serialized_value
+    
+        _headers = HTTPHeaderDict()
         # TODO add cookie handling
         method = 'delete'.upper()
         request_before_hook(
@@ -357,6 +359,8 @@ class BaseApi(api_client.Api):
             serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
             for serialized_value in serialized_data.values():
                 used_path += serialized_value
+    
+        _headers = HTTPHeaderDict()
         # TODO add cookie handling
         method = 'delete'.upper()
         request_before_hook(
