@@ -3350,7 +3350,9 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         symbol:
-          $ref: "#/components/schemas/UniversalSymbol"
+          allOf:
+          - $ref: "#/components/schemas/UniversalSymbol"
+          nullable: true
         brokerage_authorization:
           $ref: "#/components/schemas/BrokerageAuthorization"
         description:
@@ -3359,6 +3361,10 @@ components:
         allows_fractional_units:
           type: boolean
           example: true
+          nullable: true
+        option_symbol:
+          allOf:
+            - $ref: "#/components/schemas/OptionsSymbol"
           nullable: true
     PositionSymbol:
       description: Symbol returned in position object
@@ -4048,7 +4054,7 @@ components:
         type:
           type: string
           description:
-            Potential values include
+            Potential values include (but are not limited to)
             - DIVIDEND
             - BUY
             - SELL
