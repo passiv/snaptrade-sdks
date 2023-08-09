@@ -12,13 +12,13 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::BrokerageSymbol
-describe SnapTrade::BrokerageSymbol do
-  let(:instance) { SnapTrade::BrokerageSymbol.new }
+# Unit tests for SnapTrade::BrokerageSymbolSymbol
+describe SnapTrade::BrokerageSymbolSymbol do
+  let(:instance) { SnapTrade::BrokerageSymbolSymbol.new }
 
-  describe 'test an instance of BrokerageSymbol' do
-    it 'should create an instance of BrokerageSymbol' do
-      expect(instance).to be_instance_of(SnapTrade::BrokerageSymbol)
+  describe 'test an instance of BrokerageSymbolSymbol' do
+    it 'should create an instance of BrokerageSymbolSymbol' do
+      expect(instance).to be_instance_of(SnapTrade::BrokerageSymbolSymbol)
     end
   end
   describe 'test attribute "id"' do
@@ -33,7 +33,7 @@ describe SnapTrade::BrokerageSymbol do
     end
   end
 
-  describe 'test attribute "brokerage_authorization"' do
+  describe 'test attribute "raw_symbol"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -45,13 +45,25 @@ describe SnapTrade::BrokerageSymbol do
     end
   end
 
-  describe 'test attribute "allows_fractional_units"' do
+  describe 'test attribute "currency"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "option_symbol"' do
+  describe 'test attribute "exchange"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "currencies"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

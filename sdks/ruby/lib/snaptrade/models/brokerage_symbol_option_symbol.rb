@@ -12,63 +12,43 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A transaction or activity from an institution
-  class UniversalActivity
+  class BrokerageSymbolOptionSymbol
     attr_accessor :id
 
-    attr_accessor :account
+    attr_accessor :ticker
 
-    attr_accessor :amount
+    attr_accessor :strike_price
 
-    attr_accessor :currency
+    attr_accessor :expiration_date
 
-    attr_accessor :description
+    attr_accessor :is_mini_option
 
-    attr_accessor :fee
+    attr_accessor :underlying_symbol
 
-    attr_accessor :institution
+    attr_accessor :local_id
 
-    # If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
-    attr_accessor :option_type
+    attr_accessor :security_type
 
-    attr_accessor :price
+    attr_accessor :listing_exchange
 
-    attr_accessor :settlement_date
+    attr_accessor :is_quotable
 
-    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
-    attr_accessor :external_reference_id
-
-    attr_accessor :symbol
-
-    attr_accessor :option_symbol
-
-    attr_accessor :trade_date
-
-    # Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
-    attr_accessor :type
-
-    # Usually but not necessarily an integer
-    attr_accessor :units
+    attr_accessor :is_tradable
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'account' => :'account',
-        :'amount' => :'amount',
-        :'currency' => :'currency',
-        :'description' => :'description',
-        :'fee' => :'fee',
-        :'institution' => :'institution',
-        :'option_type' => :'option_type',
-        :'price' => :'price',
-        :'settlement_date' => :'settlement_date',
-        :'external_reference_id' => :'external_reference_id',
-        :'symbol' => :'symbol',
-        :'option_symbol' => :'option_symbol',
-        :'trade_date' => :'trade_date',
-        :'type' => :'type',
-        :'units' => :'units'
+        :'ticker' => :'ticker',
+        :'strike_price' => :'strike_price',
+        :'expiration_date' => :'expiration_date',
+        :'is_mini_option' => :'is_mini_option',
+        :'underlying_symbol' => :'underlying_symbol',
+        :'local_id' => :'local_id',
+        :'security_type' => :'security_type',
+        :'listing_exchange' => :'listing_exchange',
+        :'is_quotable' => :'is_quotable',
+        :'is_tradable' => :'is_tradable'
       }
     end
 
@@ -81,44 +61,45 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'account' => :'AccountSimple',
-        :'amount' => :'Float',
-        :'currency' => :'Currency',
-        :'description' => :'String',
-        :'fee' => :'Float',
-        :'institution' => :'String',
-        :'option_type' => :'String',
-        :'price' => :'Float',
-        :'settlement_date' => :'String',
-        :'external_reference_id' => :'String',
-        :'symbol' => :'Symbol',
-        :'option_symbol' => :'OptionsSymbol',
-        :'trade_date' => :'String',
-        :'type' => :'String',
-        :'units' => :'Float'
+        :'ticker' => :'String',
+        :'strike_price' => :'Float',
+        :'expiration_date' => :'String',
+        :'is_mini_option' => :'Boolean',
+        :'underlying_symbol' => :'UnderlyingSymbol',
+        :'local_id' => :'String',
+        :'security_type' => :'Object',
+        :'listing_exchange' => :'Object',
+        :'is_quotable' => :'Boolean',
+        :'is_tradable' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'amount',
-        :'external_reference_id',
-        :'trade_date',
+        :'security_type',
+        :'listing_exchange',
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'OptionsSymbol'
+      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::UniversalActivity` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::BrokerageSymbolOptionSymbol` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::UniversalActivity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::BrokerageSymbolOptionSymbol`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -127,64 +108,44 @@ module SnapTrade
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
+      if attributes.key?(:'ticker')
+        self.ticker = attributes[:'ticker']
       end
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.key?(:'strike_price')
+        self.strike_price = attributes[:'strike_price']
       end
 
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'expiration_date')
+        self.expiration_date = attributes[:'expiration_date']
       end
 
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.key?(:'is_mini_option')
+        self.is_mini_option = attributes[:'is_mini_option']
       end
 
-      if attributes.key?(:'fee')
-        self.fee = attributes[:'fee']
+      if attributes.key?(:'underlying_symbol')
+        self.underlying_symbol = attributes[:'underlying_symbol']
       end
 
-      if attributes.key?(:'institution')
-        self.institution = attributes[:'institution']
+      if attributes.key?(:'local_id')
+        self.local_id = attributes[:'local_id']
       end
 
-      if attributes.key?(:'option_type')
-        self.option_type = attributes[:'option_type']
+      if attributes.key?(:'security_type')
+        self.security_type = attributes[:'security_type']
       end
 
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
+      if attributes.key?(:'listing_exchange')
+        self.listing_exchange = attributes[:'listing_exchange']
       end
 
-      if attributes.key?(:'settlement_date')
-        self.settlement_date = attributes[:'settlement_date']
+      if attributes.key?(:'is_quotable')
+        self.is_quotable = attributes[:'is_quotable']
       end
 
-      if attributes.key?(:'external_reference_id')
-        self.external_reference_id = attributes[:'external_reference_id']
-      end
-
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
-      end
-
-      if attributes.key?(:'option_symbol')
-        self.option_symbol = attributes[:'option_symbol']
-      end
-
-      if attributes.key?(:'trade_date')
-        self.trade_date = attributes[:'trade_date']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
+      if attributes.key?(:'is_tradable')
+        self.is_tradable = attributes[:'is_tradable']
       end
     end
 
@@ -207,21 +168,16 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          account == o.account &&
-          amount == o.amount &&
-          currency == o.currency &&
-          description == o.description &&
-          fee == o.fee &&
-          institution == o.institution &&
-          option_type == o.option_type &&
-          price == o.price &&
-          settlement_date == o.settlement_date &&
-          external_reference_id == o.external_reference_id &&
-          symbol == o.symbol &&
-          option_symbol == o.option_symbol &&
-          trade_date == o.trade_date &&
-          type == o.type &&
-          units == o.units
+          ticker == o.ticker &&
+          strike_price == o.strike_price &&
+          expiration_date == o.expiration_date &&
+          is_mini_option == o.is_mini_option &&
+          underlying_symbol == o.underlying_symbol &&
+          local_id == o.local_id &&
+          security_type == o.security_type &&
+          listing_exchange == o.listing_exchange &&
+          is_quotable == o.is_quotable &&
+          is_tradable == o.is_tradable
     end
 
     # @see the `==` method
@@ -233,7 +189,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, amount, currency, description, fee, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
+      [id, ticker, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, security_type, listing_exchange, is_quotable, is_tradable].hash
     end
 
     # Builds the object from hash

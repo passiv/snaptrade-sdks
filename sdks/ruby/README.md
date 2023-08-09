@@ -109,6 +109,8 @@ Class | Method | HTTP request | Description
  - [SnapTrade::BrokerageAuthorizationTypeReadOnlyType](docs/BrokerageAuthorizationTypeReadOnlyType.md)
  - [SnapTrade::BrokerageAuthorizationTypeType](docs/BrokerageAuthorizationTypeType.md)
  - [SnapTrade::BrokerageSymbol](docs/BrokerageSymbol.md)
+ - [SnapTrade::BrokerageSymbolOptionSymbol](docs/BrokerageSymbolOptionSymbol.md)
+ - [SnapTrade::BrokerageSymbolSymbol](docs/BrokerageSymbolSymbol.md)
  - [SnapTrade::BrokerageType](docs/BrokerageType.md)
  - [SnapTrade::CalculatedTrade](docs/CalculatedTrade.md)
  - [SnapTrade::CashRestriction](docs/CashRestriction.md)

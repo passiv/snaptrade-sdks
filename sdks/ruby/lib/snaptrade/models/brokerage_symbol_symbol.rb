@@ -12,63 +12,34 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A transaction or activity from an institution
-  class UniversalActivity
+  class BrokerageSymbolSymbol
     attr_accessor :id
-
-    attr_accessor :account
-
-    attr_accessor :amount
-
-    attr_accessor :currency
-
-    attr_accessor :description
-
-    attr_accessor :fee
-
-    attr_accessor :institution
-
-    # If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
-    attr_accessor :option_type
-
-    attr_accessor :price
-
-    attr_accessor :settlement_date
-
-    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
-    attr_accessor :external_reference_id
 
     attr_accessor :symbol
 
-    attr_accessor :option_symbol
+    attr_accessor :raw_symbol
 
-    attr_accessor :trade_date
+    attr_accessor :description
 
-    # Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    attr_accessor :currency
+
+    attr_accessor :exchange
+
     attr_accessor :type
 
-    # Usually but not necessarily an integer
-    attr_accessor :units
+    attr_accessor :currencies
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'account' => :'account',
-        :'amount' => :'amount',
-        :'currency' => :'currency',
-        :'description' => :'description',
-        :'fee' => :'fee',
-        :'institution' => :'institution',
-        :'option_type' => :'option_type',
-        :'price' => :'price',
-        :'settlement_date' => :'settlement_date',
-        :'external_reference_id' => :'external_reference_id',
         :'symbol' => :'symbol',
-        :'option_symbol' => :'option_symbol',
-        :'trade_date' => :'trade_date',
+        :'raw_symbol' => :'raw_symbol',
+        :'description' => :'description',
+        :'currency' => :'currency',
+        :'exchange' => :'exchange',
         :'type' => :'type',
-        :'units' => :'units'
+        :'currencies' => :'currencies'
       }
     end
 
@@ -81,44 +52,41 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'account' => :'AccountSimple',
-        :'amount' => :'Float',
-        :'currency' => :'Currency',
+        :'symbol' => :'String',
+        :'raw_symbol' => :'String',
         :'description' => :'String',
-        :'fee' => :'Float',
-        :'institution' => :'String',
-        :'option_type' => :'String',
-        :'price' => :'Float',
-        :'settlement_date' => :'String',
-        :'external_reference_id' => :'String',
-        :'symbol' => :'Symbol',
-        :'option_symbol' => :'OptionsSymbol',
-        :'trade_date' => :'String',
-        :'type' => :'String',
-        :'units' => :'Float'
+        :'currency' => :'Currency',
+        :'exchange' => :'Exchange',
+        :'type' => :'SecurityType',
+        :'currencies' => :'Array<Currency>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'amount',
-        :'external_reference_id',
-        :'trade_date',
+        :'description',
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'UniversalSymbol'
+      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::UniversalActivity` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::BrokerageSymbolSymbol` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::UniversalActivity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::BrokerageSymbolSymbol`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -127,64 +95,34 @@ module SnapTrade
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
       end
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
-      end
-
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'raw_symbol')
+        self.raw_symbol = attributes[:'raw_symbol']
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
 
-      if attributes.key?(:'fee')
-        self.fee = attributes[:'fee']
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
-      if attributes.key?(:'institution')
-        self.institution = attributes[:'institution']
-      end
-
-      if attributes.key?(:'option_type')
-        self.option_type = attributes[:'option_type']
-      end
-
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
-      end
-
-      if attributes.key?(:'settlement_date')
-        self.settlement_date = attributes[:'settlement_date']
-      end
-
-      if attributes.key?(:'external_reference_id')
-        self.external_reference_id = attributes[:'external_reference_id']
-      end
-
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
-      end
-
-      if attributes.key?(:'option_symbol')
-        self.option_symbol = attributes[:'option_symbol']
-      end
-
-      if attributes.key?(:'trade_date')
-        self.trade_date = attributes[:'trade_date']
+      if attributes.key?(:'exchange')
+        self.exchange = attributes[:'exchange']
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
+      if attributes.key?(:'currencies')
+        if (value = attributes[:'currencies']).is_a?(Array)
+          self.currencies = value
+        end
       end
     end
 
@@ -207,21 +145,13 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          account == o.account &&
-          amount == o.amount &&
-          currency == o.currency &&
-          description == o.description &&
-          fee == o.fee &&
-          institution == o.institution &&
-          option_type == o.option_type &&
-          price == o.price &&
-          settlement_date == o.settlement_date &&
-          external_reference_id == o.external_reference_id &&
           symbol == o.symbol &&
-          option_symbol == o.option_symbol &&
-          trade_date == o.trade_date &&
+          raw_symbol == o.raw_symbol &&
+          description == o.description &&
+          currency == o.currency &&
+          exchange == o.exchange &&
           type == o.type &&
-          units == o.units
+          currencies == o.currencies
     end
 
     # @see the `==` method
@@ -233,7 +163,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, amount, currency, description, fee, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
+      [id, symbol, raw_symbol, description, currency, exchange, type, currencies].hash
     end
 
     # Builds the object from hash

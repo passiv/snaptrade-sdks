@@ -17,12 +17,14 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.BrokerageAuthorization;
-import com.konfigthis.client.model.BrokerageSymbolOptionSymbol;
-import com.konfigthis.client.model.BrokerageSymbolSymbol;
+import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.Exchange;
+import com.konfigthis.client.model.SecurityType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
@@ -30,17 +32,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for BrokerageSymbol
+ * Model tests for BrokerageSymbolSymbol
  */
-public class BrokerageSymbolTest {
-    private final BrokerageSymbol model = new BrokerageSymbol();
+public class BrokerageSymbolSymbolTest {
+    private final BrokerageSymbolSymbol model = new BrokerageSymbolSymbol();
 
     /**
-     * Model tests for BrokerageSymbol
+     * Model tests for BrokerageSymbolSymbol
      */
     @Test
-    public void testBrokerageSymbol() {
-        // TODO: test BrokerageSymbol
+    public void testBrokerageSymbolSymbol() {
+        // TODO: test BrokerageSymbolSymbol
     }
 
     /**
@@ -60,11 +62,11 @@ public class BrokerageSymbolTest {
     }
 
     /**
-     * Test the property 'brokerageAuthorization'
+     * Test the property 'rawSymbol'
      */
     @Test
-    public void brokerageAuthorizationTest() {
-        // TODO: test brokerageAuthorization
+    public void rawSymbolTest() {
+        // TODO: test rawSymbol
     }
 
     /**
@@ -76,19 +78,35 @@ public class BrokerageSymbolTest {
     }
 
     /**
-     * Test the property 'allowsFractionalUnits'
+     * Test the property 'currency'
      */
     @Test
-    public void allowsFractionalUnitsTest() {
-        // TODO: test allowsFractionalUnits
+    public void currencyTest() {
+        // TODO: test currency
     }
 
     /**
-     * Test the property 'optionSymbol'
+     * Test the property 'exchange'
      */
     @Test
-    public void optionSymbolTest() {
-        // TODO: test optionSymbol
+    public void exchangeTest() {
+        // TODO: test exchange
+    }
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
+
+    /**
+     * Test the property 'currencies'
+     */
+    @Test
+    public void currenciesTest() {
+        // TODO: test currencies
     }
 
 }

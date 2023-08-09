@@ -14,6 +14,8 @@ export * from './brokerage-authorization-type';
 export * from './brokerage-authorization-type-read-only';
 export * from './brokerage-authorization-type-read-only-brokerage';
 export * from './brokerage-symbol';
+export * from './brokerage-symbol-option-symbol';
+export * from './brokerage-symbol-symbol';
 export * from './brokerage-type';
 export * from './calculated-trade';
 export * from './cash-restriction';

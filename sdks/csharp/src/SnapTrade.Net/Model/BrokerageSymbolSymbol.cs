@@ -27,29 +27,32 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Brokerage symbol
+    /// BrokerageSymbolSymbol
     /// </summary>
-    [DataContract(Name = "BrokerageSymbol")]
-    public partial class BrokerageSymbol : IEquatable<BrokerageSymbol>, IValidatableObject
+    [DataContract(Name = "BrokerageSymbol_symbol")]
+    public partial class BrokerageSymbolSymbol : IEquatable<BrokerageSymbolSymbol>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrokerageSymbol" /> class.
+        /// Initializes a new instance of the <see cref="BrokerageSymbolSymbol" /> class.
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="symbol">symbol.</param>
-        /// <param name="brokerageAuthorization">brokerageAuthorization.</param>
+        /// <param name="rawSymbol">rawSymbol.</param>
         /// <param name="description">description.</param>
-        /// <param name="allowsFractionalUnits">allowsFractionalUnits.</param>
-        /// <param name="optionSymbol">optionSymbol.</param>
-        public BrokerageSymbol(Guid id = default(Guid), BrokerageSymbolSymbol symbol = default(BrokerageSymbolSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?), BrokerageSymbolOptionSymbol optionSymbol = default(BrokerageSymbolOptionSymbol)) : base()
+        /// <param name="currency">currency.</param>
+        /// <param name="exchange">exchange.</param>
+        /// <param name="type">type.</param>
+        /// <param name="currencies">currencies.</param>
+        public BrokerageSymbolSymbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>))
         {
             this.Id = id;
             this.Symbol = symbol;
-            this.BrokerageAuthorization = brokerageAuthorization;
+            this.RawSymbol = rawSymbol;
             this.Description = description;
-            this.AllowsFractionalUnits = allowsFractionalUnits;
-            this.OptionSymbol = optionSymbol;
-            this.AdditionalProperties = new Dictionary<string, object>();
+            this.Currency = currency;
+            this.Exchange = exchange;
+            this.Type = type;
+            this.Currencies = currencies;
         }
 
         /// <summary>
@@ -61,38 +64,44 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
-        [DataMember(Name = "symbol", EmitDefaultValue = true)]
-        public BrokerageSymbolSymbol Symbol { get; set; }
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        public string Symbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets BrokerageAuthorization
+        /// Gets or Sets RawSymbol
         /// </summary>
-        [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
-        public BrokerageAuthorization BrokerageAuthorization { get; set; }
+        [DataMember(Name = "raw_symbol", EmitDefaultValue = false)]
+        public string RawSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
+        [DataMember(Name = "description", EmitDefaultValue = true)]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets AllowsFractionalUnits
+        /// Gets or Sets Currency
         /// </summary>
-        [DataMember(Name = "allows_fractional_units", EmitDefaultValue = true)]
-        public bool? AllowsFractionalUnits { get; set; }
+        [DataMember(Name = "currency", EmitDefaultValue = false)]
+        public Currency Currency { get; set; }
 
         /// <summary>
-        /// Gets or Sets OptionSymbol
+        /// Gets or Sets Exchange
         /// </summary>
-        [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
-        public BrokerageSymbolOptionSymbol OptionSymbol { get; set; }
+        [DataMember(Name = "exchange", EmitDefaultValue = false)]
+        public Exchange Exchange { get; set; }
 
         /// <summary>
-        /// Gets or Sets additional properties
+        /// Gets or Sets Type
         /// </summary>
-        [JsonExtensionData]
-        public IDictionary<string, object> AdditionalProperties { get; set; }
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public SecurityType Type { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Currencies
+        /// </summary>
+        [DataMember(Name = "currencies", EmitDefaultValue = false)]
+        public List<Currency> Currencies { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,15 +110,15 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class BrokerageSymbol {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("class BrokerageSymbolSymbol {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
-            sb.Append("  BrokerageAuthorization: ").Append(BrokerageAuthorization).Append("\n");
+            sb.Append("  RawSymbol: ").Append(RawSymbol).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  AllowsFractionalUnits: ").Append(AllowsFractionalUnits).Append("\n");
-            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
+            sb.Append("  Exchange: ").Append(Exchange).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Currencies: ").Append(Currencies).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +127,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -130,52 +139,62 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BrokerageSymbol);
+            return this.Equals(input as BrokerageSymbolSymbol);
         }
 
         /// <summary>
-        /// Returns true if BrokerageSymbol instances are equal
+        /// Returns true if BrokerageSymbolSymbol instances are equal
         /// </summary>
-        /// <param name="input">Instance of BrokerageSymbol to be compared</param>
+        /// <param name="input">Instance of BrokerageSymbolSymbol to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(BrokerageSymbol input)
+        public bool Equals(BrokerageSymbolSymbol input)
         {
             if (input == null)
             {
                 return false;
             }
-            return base.Equals(input) && 
+            return 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && base.Equals(input) && 
+                ) && 
                 (
-                    this.BrokerageAuthorization == input.BrokerageAuthorization ||
-                    (this.BrokerageAuthorization != null &&
-                    this.BrokerageAuthorization.Equals(input.BrokerageAuthorization))
-                ) && base.Equals(input) && 
+                    this.RawSymbol == input.RawSymbol ||
+                    (this.RawSymbol != null &&
+                    this.RawSymbol.Equals(input.RawSymbol))
+                ) && 
                 (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
+                ) && 
                 (
-                    this.AllowsFractionalUnits == input.AllowsFractionalUnits ||
-                    (this.AllowsFractionalUnits != null &&
-                    this.AllowsFractionalUnits.Equals(input.AllowsFractionalUnits))
-                ) && base.Equals(input) && 
+                    this.Currency == input.Currency ||
+                    (this.Currency != null &&
+                    this.Currency.Equals(input.Currency))
+                ) && 
                 (
-                    this.OptionSymbol == input.OptionSymbol ||
-                    (this.OptionSymbol != null &&
-                    this.OptionSymbol.Equals(input.OptionSymbol))
-                )
-                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
+                    this.Exchange == input.Exchange ||
+                    (this.Exchange != null &&
+                    this.Exchange.Equals(input.Exchange))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Currencies == input.Currencies ||
+                    this.Currencies != null &&
+                    input.Currencies != null &&
+                    this.Currencies.SequenceEqual(input.Currencies)
+                );
         }
 
         /// <summary>
@@ -186,7 +205,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -195,25 +214,29 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
-                if (this.BrokerageAuthorization != null)
+                if (this.RawSymbol != null)
                 {
-                    hashCode = (hashCode * 59) + this.BrokerageAuthorization.GetHashCode();
+                    hashCode = (hashCode * 59) + this.RawSymbol.GetHashCode();
                 }
                 if (this.Description != null)
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
-                if (this.AllowsFractionalUnits != null)
+                if (this.Currency != null)
                 {
-                    hashCode = (hashCode * 59) + this.AllowsFractionalUnits.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 }
-                if (this.OptionSymbol != null)
+                if (this.Exchange != null)
                 {
-                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Exchange.GetHashCode();
                 }
-                if (this.AdditionalProperties != null)
+                if (this.Type != null)
                 {
-                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                }
+                if (this.Currencies != null)
+                {
+                    hashCode = (hashCode * 59) + this.Currencies.GetHashCode();
                 }
                 return hashCode;
             }

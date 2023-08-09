@@ -9,10 +9,11 @@ Brokerage symbol
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**symbol** | **UniversalSymbol** |  |  [optional] |
+|**symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  |  [optional] |
 |**brokerageAuthorization** | **BrokerageAuthorization** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**allowsFractionalUnits** | **Boolean** |  |  [optional] |
+|**optionSymbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  |  [optional] |
 
 
 
