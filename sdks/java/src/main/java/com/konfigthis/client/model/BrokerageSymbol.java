@@ -20,7 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.BrokerageAuthorization;
-import com.konfigthis.client.model.UniversalSymbol;
+import com.konfigthis.client.model.BrokerageSymbolOptionSymbol;
+import com.konfigthis.client.model.BrokerageSymbolSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class BrokerageSymbol {
 
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private UniversalSymbol symbol;
+  private BrokerageSymbolSymbol symbol;
 
   public static final String SERIALIZED_NAME_BROKERAGE_AUTHORIZATION = "brokerage_authorization";
   @SerializedName(SERIALIZED_NAME_BROKERAGE_AUTHORIZATION)
@@ -74,6 +75,10 @@ public class BrokerageSymbol {
   public static final String SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS = "allows_fractional_units";
   @SerializedName(SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS)
   private Boolean allowsFractionalUnits;
+
+  public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
+  @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
+  private BrokerageSymbolOptionSymbol optionSymbol;
 
   public BrokerageSymbol() {
   }
@@ -109,7 +114,7 @@ public class BrokerageSymbol {
   }
 
 
-  public BrokerageSymbol symbol(UniversalSymbol symbol) {
+  public BrokerageSymbol symbol(BrokerageSymbolSymbol symbol) {
 
     
     
@@ -126,12 +131,12 @@ public class BrokerageSymbol {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public UniversalSymbol getSymbol() {
+  public BrokerageSymbolSymbol getSymbol() {
     return symbol;
   }
 
 
-  public void setSymbol(UniversalSymbol symbol) {
+  public void setSymbol(BrokerageSymbolSymbol symbol) {
 
     
     
@@ -232,6 +237,37 @@ public class BrokerageSymbol {
     this.allowsFractionalUnits = allowsFractionalUnits;
   }
 
+
+  public BrokerageSymbol optionSymbol(BrokerageSymbolOptionSymbol optionSymbol) {
+
+    
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+    return this;
+  }
+
+   /**
+   * Get optionSymbol
+   * @return optionSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public BrokerageSymbolOptionSymbol getOptionSymbol() {
+    return optionSymbol;
+  }
+
+
+  public void setOptionSymbol(BrokerageSymbolOptionSymbol optionSymbol) {
+
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -291,7 +327,8 @@ public class BrokerageSymbol {
         Objects.equals(this.symbol, brokerageSymbol.symbol) &&
         Objects.equals(this.brokerageAuthorization, brokerageSymbol.brokerageAuthorization) &&
         Objects.equals(this.description, brokerageSymbol.description) &&
-        Objects.equals(this.allowsFractionalUnits, brokerageSymbol.allowsFractionalUnits)&&
+        Objects.equals(this.allowsFractionalUnits, brokerageSymbol.allowsFractionalUnits) &&
+        Objects.equals(this.optionSymbol, brokerageSymbol.optionSymbol)&&
         Objects.equals(this.additionalProperties, brokerageSymbol.additionalProperties);
   }
 
@@ -301,7 +338,7 @@ public class BrokerageSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, brokerageAuthorization, description, allowsFractionalUnits, additionalProperties);
+    return Objects.hash(id, symbol, brokerageAuthorization, description, allowsFractionalUnits, optionSymbol, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -320,6 +357,7 @@ public class BrokerageSymbol {
     sb.append("    brokerageAuthorization: ").append(toIndentedString(brokerageAuthorization)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    allowsFractionalUnits: ").append(toIndentedString(allowsFractionalUnits)).append("\n");
+    sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -348,6 +386,7 @@ public class BrokerageSymbol {
     openapiFields.add("brokerage_authorization");
     openapiFields.add("description");
     openapiFields.add("allows_fractional_units");
+    openapiFields.add("option_symbol");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -368,8 +407,16 @@ public class BrokerageSymbol {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        BrokerageSymbolSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      // validate the optional field `option_symbol`
+      if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
+        BrokerageSymbolOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
   }
 

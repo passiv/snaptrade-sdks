@@ -24,6 +24,8 @@ module SnapTrade
 
     attr_accessor :allows_fractional_units
 
+    attr_accessor :option_symbol
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -31,7 +33,8 @@ module SnapTrade
         :'symbol' => :'symbol',
         :'brokerage_authorization' => :'brokerage_authorization',
         :'description' => :'description',
-        :'allows_fractional_units' => :'allows_fractional_units'
+        :'allows_fractional_units' => :'allows_fractional_units',
+        :'option_symbol' => :'option_symbol'
       }
     end
 
@@ -44,17 +47,20 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'symbol' => :'UniversalSymbol',
+        :'symbol' => :'BrokerageSymbolSymbol',
         :'brokerage_authorization' => :'BrokerageAuthorization',
         :'description' => :'String',
-        :'allows_fractional_units' => :'Boolean'
+        :'allows_fractional_units' => :'Boolean',
+        :'option_symbol' => :'BrokerageSymbolOptionSymbol'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'allows_fractional_units'
+        :'symbol',
+        :'allows_fractional_units',
+        :'option_symbol'
       ])
     end
 
@@ -92,6 +98,10 @@ module SnapTrade
       if attributes.key?(:'allows_fractional_units')
         self.allows_fractional_units = attributes[:'allows_fractional_units']
       end
+
+      if attributes.key?(:'option_symbol')
+        self.option_symbol = attributes[:'option_symbol']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,7 +126,8 @@ module SnapTrade
           symbol == o.symbol &&
           brokerage_authorization == o.brokerage_authorization &&
           description == o.description &&
-          allows_fractional_units == o.allows_fractional_units
+          allows_fractional_units == o.allows_fractional_units &&
+          option_symbol == o.option_symbol
     end
 
     # @see the `==` method
@@ -128,7 +139,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, symbol, brokerage_authorization, description, allows_fractional_units].hash
+      [id, symbol, brokerage_authorization, description, allows_fractional_units, option_symbol].hash
     end
 
     # Builds the object from hash

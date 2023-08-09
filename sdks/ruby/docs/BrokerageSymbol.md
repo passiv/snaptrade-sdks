@@ -5,10 +5,11 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  | [optional] |
 | **brokerage_authorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] |
 | **description** | **String** |  | [optional] |
 | **allows_fractional_units** | **Boolean** |  | [optional] |
+| **option_symbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = SnapTrade::BrokerageSymbol.new(
   symbol: null,
   brokerage_authorization: null,
   description: VANGUARD CDN AGGREGATE BOND INDEX ETF,
-  allows_fractional_units: true
+  allows_fractional_units: true,
+  option_symbol: null
 )
 ```
 

@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredBrokerageSymbol(TypedDict):
@@ -31,6 +32,8 @@ class OptionalBrokerageSymbol(TypedDict, total=False):
     description: str
 
     allows_fractional_units: typing.Optional[bool]
+
+    option_symbol: OptionsSymbol
 
 class BrokerageSymbol(RequiredBrokerageSymbol, OptionalBrokerageSymbol):
     pass

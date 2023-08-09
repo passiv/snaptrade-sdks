@@ -97,6 +97,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'AllowsFractionalUnits'
         }
+        /// <summary>
+        /// Test the property 'OptionSymbol'
+        /// </summary>
+        [Fact]
+        public void OptionSymbolTest()
+        {
+            // TODO unit test for the property 'OptionSymbol'
+        }
 
     }
 

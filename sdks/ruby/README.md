@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.12.0'
+gem 'snaptrade', '~> 1.13.0'
 ```
 
 ## Getting Started
@@ -109,6 +109,8 @@ Class | Method | HTTP request | Description
  - [SnapTrade::BrokerageAuthorizationTypeReadOnlyType](docs/BrokerageAuthorizationTypeReadOnlyType.md)
  - [SnapTrade::BrokerageAuthorizationTypeType](docs/BrokerageAuthorizationTypeType.md)
  - [SnapTrade::BrokerageSymbol](docs/BrokerageSymbol.md)
+ - [SnapTrade::BrokerageSymbolOptionSymbol](docs/BrokerageSymbolOptionSymbol.md)
+ - [SnapTrade::BrokerageSymbolSymbol](docs/BrokerageSymbolSymbol.md)
  - [SnapTrade::BrokerageType](docs/BrokerageType.md)
  - [SnapTrade::CalculatedTrade](docs/CalculatedTrade.md)
  - [SnapTrade::CashRestriction](docs/CashRestriction.md)

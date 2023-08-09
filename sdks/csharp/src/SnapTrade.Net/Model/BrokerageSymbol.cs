@@ -40,13 +40,15 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageAuthorization">brokerageAuthorization.</param>
         /// <param name="description">description.</param>
         /// <param name="allowsFractionalUnits">allowsFractionalUnits.</param>
-        public BrokerageSymbol(Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?)) : base()
+        /// <param name="optionSymbol">optionSymbol.</param>
+        public BrokerageSymbol(Guid id = default(Guid), BrokerageSymbolSymbol symbol = default(BrokerageSymbolSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?), BrokerageSymbolOptionSymbol optionSymbol = default(BrokerageSymbolOptionSymbol)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
             this.BrokerageAuthorization = brokerageAuthorization;
             this.Description = description;
             this.AllowsFractionalUnits = allowsFractionalUnits;
+            this.OptionSymbol = optionSymbol;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -59,8 +61,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public UniversalSymbol Symbol { get; set; }
+        [DataMember(Name = "symbol", EmitDefaultValue = true)]
+        public BrokerageSymbolSymbol Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageAuthorization
@@ -79,6 +81,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "allows_fractional_units", EmitDefaultValue = true)]
         public bool? AllowsFractionalUnits { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OptionSymbol
+        /// </summary>
+        [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
+        public BrokerageSymbolOptionSymbol OptionSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -100,6 +108,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  BrokerageAuthorization: ").Append(BrokerageAuthorization).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  AllowsFractionalUnits: ").Append(AllowsFractionalUnits).Append("\n");
+            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -160,6 +169,11 @@ namespace SnapTrade.Net.Model
                     this.AllowsFractionalUnits == input.AllowsFractionalUnits ||
                     (this.AllowsFractionalUnits != null &&
                     this.AllowsFractionalUnits.Equals(input.AllowsFractionalUnits))
+                ) && base.Equals(input) && 
+                (
+                    this.OptionSymbol == input.OptionSymbol ||
+                    (this.OptionSymbol != null &&
+                    this.OptionSymbol.Equals(input.OptionSymbol))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -192,6 +206,10 @@ namespace SnapTrade.Net.Model
                 if (this.AllowsFractionalUnits != null)
                 {
                     hashCode = (hashCode * 59) + this.AllowsFractionalUnits.GetHashCode();
+                }
+                if (this.OptionSymbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

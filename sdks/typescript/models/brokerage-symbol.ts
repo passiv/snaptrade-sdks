@@ -16,7 +16,10 @@
 import { BrokerageAuthorization } from './brokerage-authorization';
 // May contain unused imports in some cases
 // @ts-ignore
-import { UniversalSymbol } from './universal-symbol';
+import { BrokerageSymbolOptionSymbol } from './brokerage-symbol-option-symbol';
+// May contain unused imports in some cases
+// @ts-ignore
+import { BrokerageSymbolSymbol } from './brokerage-symbol-symbol';
 
 /**
  * Brokerage symbol
@@ -34,10 +37,10 @@ export interface BrokerageSymbol {
     'id'?: string;
     /**
      * 
-     * @type {UniversalSymbol}
+     * @type {BrokerageSymbolSymbol}
      * @memberof BrokerageSymbol
      */
-    'symbol'?: UniversalSymbol;
+    'symbol'?: BrokerageSymbolSymbol | null;
     /**
      * 
      * @type {BrokerageAuthorization}
@@ -56,5 +59,11 @@ export interface BrokerageSymbol {
      * @memberof BrokerageSymbol
      */
     'allows_fractional_units'?: boolean | null;
+    /**
+     * 
+     * @type {BrokerageSymbolOptionSymbol}
+     * @memberof BrokerageSymbol
+     */
+    'option_symbol'?: BrokerageSymbolOptionSymbol | null;
 }
 

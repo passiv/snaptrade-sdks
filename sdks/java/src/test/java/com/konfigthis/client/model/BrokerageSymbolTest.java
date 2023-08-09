@@ -18,7 +18,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.BrokerageAuthorization;
-import com.konfigthis.client.model.UniversalSymbol;
+import com.konfigthis.client.model.BrokerageSymbolOptionSymbol;
+import com.konfigthis.client.model.BrokerageSymbolSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -80,6 +81,14 @@ public class BrokerageSymbolTest {
     @Test
     public void allowsFractionalUnitsTest() {
         // TODO: test allowsFractionalUnits
+    }
+
+    /**
+     * Test the property 'optionSymbol'
+     */
+    @Test
+    public void optionSymbolTest() {
+        // TODO: test optionSymbol
     }
 
 }

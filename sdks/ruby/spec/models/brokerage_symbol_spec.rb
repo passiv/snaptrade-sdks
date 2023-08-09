@@ -51,4 +51,10 @@ describe SnapTrade::BrokerageSymbol do
     end
   end
 
+  describe 'test attribute "option_symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end
