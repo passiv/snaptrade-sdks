@@ -97,161 +97,161 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccountInformationApi* | [**GetAllUserHoldings**](docs\AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
-*AccountInformationApi* | [**GetUserAccountBalance**](docs\AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
-*AccountInformationApi* | [**GetUserAccountDetails**](docs\AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
-*AccountInformationApi* | [**GetUserAccountOrders**](docs\AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
-*AccountInformationApi* | [**GetUserAccountPositions**](docs\AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
-*AccountInformationApi* | [**GetUserHoldings**](docs\AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
-*AccountInformationApi* | [**ListUserAccounts**](docs\AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
-*AccountInformationApi* | [**UpdateUserAccount**](docs\AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
-*APIStatusApi* | [**Check**](docs\APIStatusApi.md#check) | **GET** / | Get API Status
-*AuthenticationApi* | [**DeleteSnapTradeUser**](docs\AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
-*AuthenticationApi* | [**GetUserJWT**](docs\AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
-*AuthenticationApi* | [**ListSnapTradeUsers**](docs\AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users
-*AuthenticationApi* | [**LoginSnapTradeUser**](docs\AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user & generate connection link
-*AuthenticationApi* | [**RegisterSnapTradeUser**](docs\AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
-*ConnectionsApi* | [**DetailBrokerageAuthorization**](docs\ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
-*ConnectionsApi* | [**ListBrokerageAuthorizations**](docs\ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
-*ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs\ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
-*ConnectionsApi* | [**SessionEvents**](docs\ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | List all session events for the partner
-*ErrorLogsApi* | [**ListUserErrors**](docs\ErrorLogsApi.md#listusererrors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
-*OptionsApi* | [**GetOptionStrategy**](docs\OptionsApi.md#getoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order
-*OptionsApi* | [**GetOptionsChain**](docs\OptionsApi.md#getoptionschain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain
-*OptionsApi* | [**GetOptionsStrategyQuote**](docs\OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
-*OptionsApi* | [**ListOptionHoldings**](docs\OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
-*OptionsApi* | [**PlaceOptionStrategy**](docs\OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
-*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs\ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
-*ReferenceDataApi* | [**GetPartnerInfo**](docs\ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
-*ReferenceDataApi* | [**GetSecurityTypes**](docs\ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types.
-*ReferenceDataApi* | [**GetStockExchanges**](docs\ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges
-*ReferenceDataApi* | [**GetSymbols**](docs\ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols
-*ReferenceDataApi* | [**GetSymbolsByTicker**](docs\ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
-*ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs\ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**ListAllBrokerages**](docs\ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages
-*ReferenceDataApi* | [**ListAllCurrencies**](docs\ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies
-*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs\ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates
-*ReferenceDataApi* | [**SymbolSearchUserAccount**](docs\ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
-*TradingApi* | [**CancelUserAccountOrder**](docs\TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*TradingApi* | [**GetOrderImpact**](docs\TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
-*TradingApi* | [**GetUserAccountQuotes**](docs\TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
-*TradingApi* | [**PlaceForceOrder**](docs\TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation.
-*TradingApi* | [**PlaceOCOOrder**](docs\TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
-*TradingApi* | [**PlaceOrder**](docs\TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order
-*TransactionsAndReportingApi* | [**GetActivities**](docs\TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
-*TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs\TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
+*AccountInformationApi* | [**GetAllUserHoldings**](docs/AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
+*AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
+*AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
+*AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
+*AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
+*AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
+*AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
+*AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
+*APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
+*AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
+*AuthenticationApi* | [**GetUserJWT**](docs/AuthenticationApi.md#getuserjwt) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
+*AuthenticationApi* | [**ListSnapTradeUsers**](docs/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**LoginSnapTradeUser**](docs/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user & generate connection link
+*AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
+*ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
+*ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
+*ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
+*ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | List all session events for the partner
+*ErrorLogsApi* | [**ListUserErrors**](docs/ErrorLogsApi.md#listusererrors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
+*OptionsApi* | [**GetOptionStrategy**](docs/OptionsApi.md#getoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order
+*OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain
+*OptionsApi* | [**GetOptionsStrategyQuote**](docs/OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy
+*OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account
+*OptionsApi* | [**PlaceOptionStrategy**](docs/OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
+*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
+*ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
+*ReferenceDataApi* | [**GetSecurityTypes**](docs/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types.
+*ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges
+*ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols
+*ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
+*ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
+*ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages
+*ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies
+*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates
+*ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
+*TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
+*TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
+*TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
+*TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation.
+*TradingApi* | [**PlaceOCOOrder**](docs/TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
+*TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order
+*TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
+*TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
 
 
 ## Documentation for Models
 
- - [Model.Account](docs\Account.md)
- - [Model.AccountHoldings](docs\AccountHoldings.md)
- - [Model.AccountHoldingsAccount](docs\AccountHoldingsAccount.md)
- - [Model.AccountOrderRecord](docs\AccountOrderRecord.md)
- - [Model.AccountOrderRecordStatus](docs\AccountOrderRecordStatus.md)
- - [Model.AccountSimple](docs\AccountSimple.md)
- - [Model.AccountSyncStatus](docs\AccountSyncStatus.md)
- - [Model.Action](docs\Action.md)
- - [Model.AuthenticationLoginSnapTradeUser200Response](docs\AuthenticationLoginSnapTradeUser200Response.md)
- - [Model.Balance](docs\Balance.md)
- - [Model.Brokerage](docs\Brokerage.md)
- - [Model.BrokerageAuthorization](docs\BrokerageAuthorization.md)
- - [Model.BrokerageAuthorizationType](docs\BrokerageAuthorizationType.md)
- - [Model.BrokerageAuthorizationTypeReadOnly](docs\BrokerageAuthorizationTypeReadOnly.md)
- - [Model.BrokerageAuthorizationTypeReadOnlyBrokerage](docs\BrokerageAuthorizationTypeReadOnlyBrokerage.md)
- - [Model.BrokerageSymbol](docs\BrokerageSymbol.md)
- - [Model.BrokerageSymbolOptionSymbol](docs\BrokerageSymbolOptionSymbol.md)
- - [Model.BrokerageSymbolSymbol](docs\BrokerageSymbolSymbol.md)
- - [Model.BrokerageType](docs\BrokerageType.md)
- - [Model.CalculatedTrade](docs\CalculatedTrade.md)
- - [Model.CashRestriction](docs\CashRestriction.md)
- - [Model.ConnectionsSessionEvents200ResponseInner](docs\ConnectionsSessionEvents200ResponseInner.md)
- - [Model.Currency](docs\Currency.md)
- - [Model.DeleteUserResponse](docs\DeleteUserResponse.md)
- - [Model.DividendAtDate](docs\DividendAtDate.md)
- - [Model.EncryptedResponse](docs\EncryptedResponse.md)
- - [Model.EncryptedResponseEncryptedMessageData](docs\EncryptedResponseEncryptedMessageData.md)
- - [Model.Exchange](docs\Exchange.md)
- - [Model.ExchangeRatePairs](docs\ExchangeRatePairs.md)
- - [Model.ExcludedAsset](docs\ExcludedAsset.md)
- - [Model.JWT](docs\JWT.md)
- - [Model.LoginRedirectURI](docs\LoginRedirectURI.md)
- - [Model.ManualTrade](docs\ManualTrade.md)
- - [Model.ManualTradeAndImpact](docs\ManualTradeAndImpact.md)
- - [Model.ManualTradeBalance](docs\ManualTradeBalance.md)
- - [Model.ManualTradeForm](docs\ManualTradeForm.md)
- - [Model.ManualTradeSymbol](docs\ManualTradeSymbol.md)
- - [Model.Model400FailedRequestResponse](docs\Model400FailedRequestResponse.md)
- - [Model.Model401FailedRequestResponse](docs\Model401FailedRequestResponse.md)
- - [Model.Model403FailedRequestResponse](docs\Model403FailedRequestResponse.md)
- - [Model.Model404FailedRequestResponse](docs\Model404FailedRequestResponse.md)
- - [Model.ModelAssetClass](docs\ModelAssetClass.md)
- - [Model.ModelAssetClassDetails](docs\ModelAssetClassDetails.md)
- - [Model.ModelAssetClassTarget](docs\ModelAssetClassTarget.md)
- - [Model.ModelPortfolio](docs\ModelPortfolio.md)
- - [Model.ModelPortfolioAssetClass](docs\ModelPortfolioAssetClass.md)
- - [Model.ModelPortfolioDetails](docs\ModelPortfolioDetails.md)
- - [Model.ModelPortfolioSecurity](docs\ModelPortfolioSecurity.md)
- - [Model.MonthlyDividends](docs\MonthlyDividends.md)
- - [Model.NetContributions](docs\NetContributions.md)
- - [Model.NetDividend](docs\NetDividend.md)
- - [Model.OptionChainInner](docs\OptionChainInner.md)
- - [Model.OptionChainInnerChainPerRootInner](docs\OptionChainInnerChainPerRootInner.md)
- - [Model.OptionChainInnerChainPerRootInnerChainPerStrikePriceInner](docs\OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.md)
- - [Model.OptionLeg](docs\OptionLeg.md)
- - [Model.OptionStrategy](docs\OptionStrategy.md)
- - [Model.OptionStrategyLegsInner](docs\OptionStrategyLegsInner.md)
- - [Model.OptionsGetOptionStrategyRequest](docs\OptionsGetOptionStrategyRequest.md)
- - [Model.OptionsHoldings](docs\OptionsHoldings.md)
- - [Model.OptionsPlaceOptionStrategyRequest](docs\OptionsPlaceOptionStrategyRequest.md)
- - [Model.OptionsPosition](docs\OptionsPosition.md)
- - [Model.OptionsSymbol](docs\OptionsSymbol.md)
- - [Model.OrderType](docs\OrderType.md)
- - [Model.PartnerData](docs\PartnerData.md)
- - [Model.PastValue](docs\PastValue.md)
- - [Model.PerformanceCustom](docs\PerformanceCustom.md)
- - [Model.PortfolioGroup](docs\PortfolioGroup.md)
- - [Model.PortfolioGroupInfo](docs\PortfolioGroupInfo.md)
- - [Model.PortfolioGroupPosition](docs\PortfolioGroupPosition.md)
- - [Model.PortfolioGroupSettings](docs\PortfolioGroupSettings.md)
- - [Model.Position](docs\Position.md)
- - [Model.PositionSymbol](docs\PositionSymbol.md)
- - [Model.RedirectTokenandPin](docs\RedirectTokenandPin.md)
- - [Model.SecurityType](docs\SecurityType.md)
- - [Model.SessionEvent](docs\SessionEvent.md)
- - [Model.SnapTradeAPIDisclaimerAcceptStatus](docs\SnapTradeAPIDisclaimerAcceptStatus.md)
- - [Model.SnapTradeHoldingsAccount](docs\SnapTradeHoldingsAccount.md)
- - [Model.SnapTradeHoldingsAccountAccountId](docs\SnapTradeHoldingsAccountAccountId.md)
- - [Model.SnapTradeHoldingsTotalValue](docs\SnapTradeHoldingsTotalValue.md)
- - [Model.SnapTradeLoginUserRequestBody](docs\SnapTradeLoginUserRequestBody.md)
- - [Model.SnapTradeRegisterUserRequestBody](docs\SnapTradeRegisterUserRequestBody.md)
- - [Model.Status](docs\Status.md)
- - [Model.StrategyImpact](docs\StrategyImpact.md)
- - [Model.StrategyImpactLegsInner](docs\StrategyImpactLegsInner.md)
- - [Model.StrategyOrderPlace](docs\StrategyOrderPlace.md)
- - [Model.StrategyOrderPlaceOrdersInner](docs\StrategyOrderPlaceOrdersInner.md)
- - [Model.StrategyOrderPlaceOrdersInnerLegsInner](docs\StrategyOrderPlaceOrdersInnerLegsInner.md)
- - [Model.StrategyOrderRecord](docs\StrategyOrderRecord.md)
- - [Model.StrategyQuotes](docs\StrategyQuotes.md)
- - [Model.StrategyQuotesGreek](docs\StrategyQuotesGreek.md)
- - [Model.SubPeriodReturnRate](docs\SubPeriodReturnRate.md)
- - [Model.Symbol](docs\Symbol.md)
- - [Model.SymbolQuery](docs\SymbolQuery.md)
- - [Model.SymbolsQuotesInner](docs\SymbolsQuotesInner.md)
- - [Model.TargetAsset](docs\TargetAsset.md)
- - [Model.TimeInForce](docs\TimeInForce.md)
- - [Model.Trade](docs\Trade.md)
- - [Model.TradeExecutionStatus](docs\TradeExecutionStatus.md)
- - [Model.TradeImpact](docs\TradeImpact.md)
- - [Model.TradingCancelUserAccountOrderRequest](docs\TradingCancelUserAccountOrderRequest.md)
- - [Model.TradingPlaceOCOOrderRequest](docs\TradingPlaceOCOOrderRequest.md)
- - [Model.TransactionsStatus](docs\TransactionsStatus.md)
- - [Model.USExchange](docs\USExchange.md)
- - [Model.UnderlyingSymbol](docs\UnderlyingSymbol.md)
- - [Model.UniversalActivity](docs\UniversalActivity.md)
- - [Model.UniversalSymbol](docs\UniversalSymbol.md)
- - [Model.UniversalSymbolTicker](docs\UniversalSymbolTicker.md)
- - [Model.UserErrorLog](docs\UserErrorLog.md)
- - [Model.UserIDandSecret](docs\UserIDandSecret.md)
- - [Model.UserSettings](docs\UserSettings.md)
+ - [Model.Account](docs/Account.md)
+ - [Model.AccountHoldings](docs/AccountHoldings.md)
+ - [Model.AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
+ - [Model.AccountOrderRecord](docs/AccountOrderRecord.md)
+ - [Model.AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
+ - [Model.AccountSimple](docs/AccountSimple.md)
+ - [Model.AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [Model.Action](docs/Action.md)
+ - [Model.AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
+ - [Model.Balance](docs/Balance.md)
+ - [Model.Brokerage](docs/Brokerage.md)
+ - [Model.BrokerageAuthorization](docs/BrokerageAuthorization.md)
+ - [Model.BrokerageAuthorizationType](docs/BrokerageAuthorizationType.md)
+ - [Model.BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
+ - [Model.BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
+ - [Model.BrokerageSymbol](docs/BrokerageSymbol.md)
+ - [Model.BrokerageSymbolOptionSymbol](docs/BrokerageSymbolOptionSymbol.md)
+ - [Model.BrokerageSymbolSymbol](docs/BrokerageSymbolSymbol.md)
+ - [Model.BrokerageType](docs/BrokerageType.md)
+ - [Model.CalculatedTrade](docs/CalculatedTrade.md)
+ - [Model.CashRestriction](docs/CashRestriction.md)
+ - [Model.ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
+ - [Model.Currency](docs/Currency.md)
+ - [Model.DeleteUserResponse](docs/DeleteUserResponse.md)
+ - [Model.DividendAtDate](docs/DividendAtDate.md)
+ - [Model.EncryptedResponse](docs/EncryptedResponse.md)
+ - [Model.EncryptedResponseEncryptedMessageData](docs/EncryptedResponseEncryptedMessageData.md)
+ - [Model.Exchange](docs/Exchange.md)
+ - [Model.ExchangeRatePairs](docs/ExchangeRatePairs.md)
+ - [Model.ExcludedAsset](docs/ExcludedAsset.md)
+ - [Model.JWT](docs/JWT.md)
+ - [Model.LoginRedirectURI](docs/LoginRedirectURI.md)
+ - [Model.ManualTrade](docs/ManualTrade.md)
+ - [Model.ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
+ - [Model.ManualTradeBalance](docs/ManualTradeBalance.md)
+ - [Model.ManualTradeForm](docs/ManualTradeForm.md)
+ - [Model.ManualTradeSymbol](docs/ManualTradeSymbol.md)
+ - [Model.Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
+ - [Model.Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)
+ - [Model.Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
+ - [Model.Model404FailedRequestResponse](docs/Model404FailedRequestResponse.md)
+ - [Model.ModelAssetClass](docs/ModelAssetClass.md)
+ - [Model.ModelAssetClassDetails](docs/ModelAssetClassDetails.md)
+ - [Model.ModelAssetClassTarget](docs/ModelAssetClassTarget.md)
+ - [Model.ModelPortfolio](docs/ModelPortfolio.md)
+ - [Model.ModelPortfolioAssetClass](docs/ModelPortfolioAssetClass.md)
+ - [Model.ModelPortfolioDetails](docs/ModelPortfolioDetails.md)
+ - [Model.ModelPortfolioSecurity](docs/ModelPortfolioSecurity.md)
+ - [Model.MonthlyDividends](docs/MonthlyDividends.md)
+ - [Model.NetContributions](docs/NetContributions.md)
+ - [Model.NetDividend](docs/NetDividend.md)
+ - [Model.OptionChainInner](docs/OptionChainInner.md)
+ - [Model.OptionChainInnerChainPerRootInner](docs/OptionChainInnerChainPerRootInner.md)
+ - [Model.OptionChainInnerChainPerRootInnerChainPerStrikePriceInner](docs/OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.md)
+ - [Model.OptionLeg](docs/OptionLeg.md)
+ - [Model.OptionStrategy](docs/OptionStrategy.md)
+ - [Model.OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
+ - [Model.OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
+ - [Model.OptionsHoldings](docs/OptionsHoldings.md)
+ - [Model.OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
+ - [Model.OptionsPosition](docs/OptionsPosition.md)
+ - [Model.OptionsSymbol](docs/OptionsSymbol.md)
+ - [Model.OrderType](docs/OrderType.md)
+ - [Model.PartnerData](docs/PartnerData.md)
+ - [Model.PastValue](docs/PastValue.md)
+ - [Model.PerformanceCustom](docs/PerformanceCustom.md)
+ - [Model.PortfolioGroup](docs/PortfolioGroup.md)
+ - [Model.PortfolioGroupInfo](docs/PortfolioGroupInfo.md)
+ - [Model.PortfolioGroupPosition](docs/PortfolioGroupPosition.md)
+ - [Model.PortfolioGroupSettings](docs/PortfolioGroupSettings.md)
+ - [Model.Position](docs/Position.md)
+ - [Model.PositionSymbol](docs/PositionSymbol.md)
+ - [Model.RedirectTokenandPin](docs/RedirectTokenandPin.md)
+ - [Model.SecurityType](docs/SecurityType.md)
+ - [Model.SessionEvent](docs/SessionEvent.md)
+ - [Model.SnapTradeAPIDisclaimerAcceptStatus](docs/SnapTradeAPIDisclaimerAcceptStatus.md)
+ - [Model.SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
+ - [Model.SnapTradeHoldingsAccountAccountId](docs/SnapTradeHoldingsAccountAccountId.md)
+ - [Model.SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
+ - [Model.SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)
+ - [Model.SnapTradeRegisterUserRequestBody](docs/SnapTradeRegisterUserRequestBody.md)
+ - [Model.Status](docs/Status.md)
+ - [Model.StrategyImpact](docs/StrategyImpact.md)
+ - [Model.StrategyImpactLegsInner](docs/StrategyImpactLegsInner.md)
+ - [Model.StrategyOrderPlace](docs/StrategyOrderPlace.md)
+ - [Model.StrategyOrderPlaceOrdersInner](docs/StrategyOrderPlaceOrdersInner.md)
+ - [Model.StrategyOrderPlaceOrdersInnerLegsInner](docs/StrategyOrderPlaceOrdersInnerLegsInner.md)
+ - [Model.StrategyOrderRecord](docs/StrategyOrderRecord.md)
+ - [Model.StrategyQuotes](docs/StrategyQuotes.md)
+ - [Model.StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
+ - [Model.SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
+ - [Model.Symbol](docs/Symbol.md)
+ - [Model.SymbolQuery](docs/SymbolQuery.md)
+ - [Model.SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
+ - [Model.TargetAsset](docs/TargetAsset.md)
+ - [Model.TimeInForce](docs/TimeInForce.md)
+ - [Model.Trade](docs/Trade.md)
+ - [Model.TradeExecutionStatus](docs/TradeExecutionStatus.md)
+ - [Model.TradeImpact](docs/TradeImpact.md)
+ - [Model.TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
+ - [Model.TradingPlaceOCOOrderRequest](docs/TradingPlaceOCOOrderRequest.md)
+ - [Model.TransactionsStatus](docs/TransactionsStatus.md)
+ - [Model.USExchange](docs/USExchange.md)
+ - [Model.UnderlyingSymbol](docs/UnderlyingSymbol.md)
+ - [Model.UniversalActivity](docs/UniversalActivity.md)
+ - [Model.UniversalSymbol](docs/UniversalSymbol.md)
+ - [Model.UniversalSymbolTicker](docs/UniversalSymbolTicker.md)
+ - [Model.UserErrorLog](docs/UserErrorLog.md)
+ - [Model.UserIDandSecret](docs/UserIDandSecret.md)
+ - [Model.UserSettings](docs/UserSettings.md)
 
