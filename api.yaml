@@ -4048,7 +4048,7 @@ components:
         type:
           type: string
           description:
-            Potential values include
+            Potential values include (but are not limited to)
             - DIVIDEND
             - BUY
             - SELL
