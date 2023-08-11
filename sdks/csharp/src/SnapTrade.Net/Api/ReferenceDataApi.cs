@@ -129,7 +129,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbolId">OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UniversalSymbol</returns>
-        UniversalSymbol GetSymbolsByTicker(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0);
+        UniversalSymbol GetSymbolsByTicker(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0);
 
         /// <summary>
         /// Get details of a symbol by the ticker
@@ -142,7 +142,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbolId">OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UniversalSymbol</returns>
-        ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0);
+        ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0);
         /// <summary>
         /// List of all brokerage authorization types
         /// </summary>
@@ -383,7 +383,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UniversalSymbol</returns>
-        System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get details of a symbol by the ticker
@@ -397,7 +397,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UniversalSymbol)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UniversalSymbol>> GetSymbolsByTickerWithHttpInfoAsync(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UniversalSymbol>> GetSymbolsByTickerWithHttpInfoAsync(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List of all brokerage authorization types
         /// </summary>
@@ -1457,7 +1457,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbolId">OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UniversalSymbol</returns>
-        public UniversalSymbol GetSymbolsByTicker(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0)
+        public UniversalSymbol GetSymbolsByTicker(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<UniversalSymbol> localVarResponse = GetSymbolsByTickerWithHttpInfo(ticker, symbolId);
             return localVarResponse.Data;
@@ -1471,8 +1471,14 @@ namespace SnapTrade.Net.Api
         /// <param name="symbolId">OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UniversalSymbol</returns>
-        public SnapTrade.Net.Client.ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0)
         {
+            // verify the required parameter 'ticker' is set
+            if (ticker == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'ticker' when calling ReferenceDataApi->GetSymbolsByTicker");
+            }
+
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
@@ -1543,7 +1549,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UniversalSymbol</returns>
-        public async System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<UniversalSymbol> localVarResponse = await GetSymbolsByTickerWithHttpInfoAsync(ticker, symbolId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1558,8 +1564,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UniversalSymbol)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<UniversalSymbol>> GetSymbolsByTickerWithHttpInfoAsync(Guid ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<UniversalSymbol>> GetSymbolsByTickerWithHttpInfoAsync(string ticker, Guid? symbolId = default(Guid?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            // verify the required parameter 'ticker' is set
+            if (ticker == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'ticker' when calling ReferenceDataApi->GetSymbolsByTicker");
+            }
+
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 

@@ -529,7 +529,7 @@ public class Example {
 
 
     Snaptrade client = new Snaptrade(configuration);
-    UUID ticker = UUID.randomUUID(); // The ticker of the UniversalSymbol to get.
+    String ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
     UUID symbolId = UUID.randomUUID(); // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     try {
       UniversalSymbol result = client
@@ -591,7 +591,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ticker** | **UUID**| The ticker of the UniversalSymbol to get. | |
+| **ticker** | **String**| The ticker of the UniversalSymbol to get. | |
 | **symbolId** | **UUID**| OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional] |
 
 ### Return type

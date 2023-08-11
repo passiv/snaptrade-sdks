@@ -1532,7 +1532,6 @@ paths:
         name: ticker
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: OPTIONAL IN PATH Can be used instead of the ticker ; The ID of
@@ -8752,7 +8751,6 @@ components:
       additionalProperties: true
       properties:
         ticker:
-          format: uuid
           type: string
         symbolId:
           format: uuid

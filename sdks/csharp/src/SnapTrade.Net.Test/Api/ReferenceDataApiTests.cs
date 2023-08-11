@@ -119,7 +119,7 @@ namespace SnapTrade.Net.Test.Api
         public void GetSymbolsByTickerTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //Guid ticker = null;
+            //string ticker = null;
             //Guid? symbolId = null;
             //var response = instance.GetSymbolsByTicker(ticker, symbolId);
             //Assert.IsType<UniversalSymbol>(response);

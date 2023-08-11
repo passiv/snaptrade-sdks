@@ -849,7 +849,7 @@ public class ReferenceDataApiGenerated {
     public GetSymbolsRequestBuilder getSymbols() throws IllegalArgumentException {
         return new GetSymbolsRequestBuilder();
     }
-    private okhttp3.Call getSymbolsByTickerCall(UUID ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getSymbolsByTickerCall(String ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -899,7 +899,7 @@ public class ReferenceDataApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getSymbolsByTickerValidateBeforeCall(UUID ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getSymbolsByTickerValidateBeforeCall(String ticker, UUID symbolId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'ticker' is set
         if (ticker == null) {
             throw new ApiException("Missing the required parameter 'ticker' when calling getSymbolsByTicker(Async)");
@@ -910,13 +910,13 @@ public class ReferenceDataApiGenerated {
     }
 
 
-    private ApiResponse<UniversalSymbol> getSymbolsByTickerWithHttpInfo(UUID ticker, UUID symbolId) throws ApiException {
+    private ApiResponse<UniversalSymbol> getSymbolsByTickerWithHttpInfo(String ticker, UUID symbolId) throws ApiException {
         okhttp3.Call localVarCall = getSymbolsByTickerValidateBeforeCall(ticker, symbolId, null);
         Type localVarReturnType = new TypeToken<UniversalSymbol>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getSymbolsByTickerAsync(UUID ticker, UUID symbolId, final ApiCallback<UniversalSymbol> _callback) throws ApiException {
+    private okhttp3.Call getSymbolsByTickerAsync(String ticker, UUID symbolId, final ApiCallback<UniversalSymbol> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getSymbolsByTickerValidateBeforeCall(ticker, symbolId, _callback);
         Type localVarReturnType = new TypeToken<UniversalSymbol>(){}.getType();
@@ -925,10 +925,10 @@ public class ReferenceDataApiGenerated {
     }
 
     public class GetSymbolsByTickerRequestBuilder {
-        private final UUID ticker;
+        private final String ticker;
         private UUID symbolId;
 
-        private GetSymbolsByTickerRequestBuilder(UUID ticker) {
+        private GetSymbolsByTickerRequestBuilder(String ticker) {
             this.ticker = ticker;
         }
 
@@ -1024,7 +1024,7 @@ public class ReferenceDataApiGenerated {
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public GetSymbolsByTickerRequestBuilder getSymbolsByTicker(UUID ticker) throws IllegalArgumentException {
+    public GetSymbolsByTickerRequestBuilder getSymbolsByTicker(String ticker) throws IllegalArgumentException {
         if (ticker == null) throw new IllegalArgumentException("\"ticker\" is required but got null");
             
 

@@ -509,7 +509,7 @@ catch (ApiException e)
 
 <a name="getsymbolsbyticker"></a>
 # **GetSymbolsByTicker**
-> UniversalSymbol GetSymbolsByTicker (Guid ticker, Guid? symbolId = null)
+> UniversalSymbol GetSymbolsByTicker (string ticker, Guid? symbolId = null)
 
 Get details of a symbol by the ticker
 
@@ -535,7 +535,7 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
 
-            var ticker = "ticker_example";  // Guid | The ticker of the UniversalSymbol to get.
+            var ticker = "ticker_example";  // string | The ticker of the UniversalSymbol to get.
             var symbolId = "symbolId_example";  // Guid? | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
 
             try
@@ -585,7 +585,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **ticker** | **Guid** | The ticker of the UniversalSymbol to get. |  |
+| **ticker** | **string** | The ticker of the UniversalSymbol to get. |  |
 | **symbolId** | **Guid?** | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional]  |
 
 ### Return type

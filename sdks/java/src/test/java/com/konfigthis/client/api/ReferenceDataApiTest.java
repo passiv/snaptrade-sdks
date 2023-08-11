@@ -120,7 +120,7 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void getSymbolsByTickerTest() throws ApiException {
-        UUID ticker = null;
+        String ticker = null;
         UUID symbolId = null;
         UniversalSymbol response = api.getSymbolsByTicker(ticker)
                 .symbolId(symbolId)
