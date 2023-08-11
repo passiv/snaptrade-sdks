@@ -1,11 +1,6 @@
 # Placing Trades
 
-:::info
-This demo is for after a user is created and connected. See [Getting Started](/snaptrade/snaptrade-demos/getting-started) or
-[Registering Users](/snaptrade/snaptrade-demos/registering-users) for creating and connecting a user to SnapTrade.
-:::
-
-### 1) Initialize a client with your clientId and consumerKey / assign `user_id` and `user_secret` to variables
+### 1) Create user and Get redirect URL for a trading connection
 
 You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
 
@@ -14,10 +9,6 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 ::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" type="password"}
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
-
-::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID" type="password"}
-
-::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
 
 ```python
 from snaptrade_client import SnapTrade
@@ -30,21 +21,25 @@ snaptrade = SnapTrade(
   client_id=SNAPTRADE_CLIENT_ID,
 )
 
-print("Successfully initiated client")
+user_id = f"konfigdemo:{uuid.uuid4()}"
+register_response = snaptrade.authentication.register_snap_trade_user(
+  user_id=user_id
+)
+user_secret = register_response.body["userSecret"]
 
-user_id = USER_ID
-user_secret = USER_SECRET
-
-print("Initialized user_id and user_secret")
+redirect_uri = snaptrade.authentication.login_snap_trade_user(
+  user_id=user_id, user_secret=user_secret, connection_type="trade"
+)
+print(json.dumps(redirect_uri.body, indent=2))
 ```
 
-::button[Initialize SDK Client / Assign Variables]
+::button[Create User and Get Redirect URL]
 
 :::
 
 ### 2) List accounts
 
-You can see the account IDs by calling `list_user_accounts`.
+After connecting an account you can see the account IDs by calling `list_user_accounts`.
 
 :::form
 
@@ -96,21 +91,47 @@ print(json.dumps(result.body, indent=2))
 
 :::
 
-### 4) Place Force Order
+### 4) Place the order
 
-Place the order without checking impact
+Place the order
+
+:::form{skippable}
+
+::input{name=TRADE_ID label="Trade Id" description="The ID of the trade created at the previous step."}
+
+```python
+result = snaptrade.trading.place_order(
+  user_id=user_id,
+  user_secret=user_secret,
+  trade_id=TRADE_ID
+)
+print(json.dumps(result.body, indent=2))
+```
+
+::button[Place Order]
+
+:::
+
+### Alternative - Place Order without checking impact
+
+If you don't need to check the impact of an order before placing it use `place_force_order`
 
 :::form
 
 ::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for."}
 ::input{name=UNIVERSAL_SYMBOL label="Universal Symbol" defaultValue="c15a817e-7171-4940-9ae7-f7b4a95408ee"}
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
-::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}
+::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Market"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
-::number{name=PRICE label="Price" defaultValue=10 step=0.01 precision=2}
+::number{name=PRICE label="Price" step=0.01 precision=2 optional}
 ::number{name=UNITS label="Units" defaultValue=1}
 
 ```python
+try:
+    price=PRICE
+except NameError:
+    price=None
+
 result = snaptrade.trading.place_force_order(
   user_id=user_id,
   user_secret=user_secret,
@@ -119,7 +140,7 @@ result = snaptrade.trading.place_force_order(
   universal_symbol_id=UNIVERSAL_SYMBOL,
   order_type=ORDER_TYPE,
   time_in_force=TIME_IN_FORCE,
-  price=PRICE,
+  price=price,
   units=UNITS,
 )
 print(json.dumps(result.body, indent=2))
