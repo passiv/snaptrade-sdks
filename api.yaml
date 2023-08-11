@@ -1351,7 +1351,6 @@ paths:
           description: The ticker of the UniversalSymbol to get.
           schema:
             type: string
-            format: uuid
         - in: query
           name: symbolId
           required: false
