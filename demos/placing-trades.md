@@ -1,11 +1,6 @@
 # Placing Trades
 
-:::info
-This demo is for after a user is created and connected. See [Getting Started](/snaptrade/snaptrade-demos/getting-started) or
-[Registering Users](/snaptrade/snaptrade-demos/registering-users) for creating and connecting a user to SnapTrade.
-:::
-
-### 1) Create user and Get redirect URL
+### 1) Create user and Get redirect URL for a trading connection
 
 You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
 
