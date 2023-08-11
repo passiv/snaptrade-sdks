@@ -5,7 +5,7 @@ This demo is for after a user is created and connected. See [Getting Started](/s
 [Registering Users](/snaptrade/snaptrade-demos/registering-users) for creating and connecting a user to SnapTrade.
 :::
 
-### 1) Initialize a client with your clientId and consumerKey / assign `user_id` and `user_secret` to variables
+### 1) Create user and Get redirect URL
 
 You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](mailto:api@snaptrade.com)
 
@@ -14,10 +14,6 @@ You can get your `clientId` and `consumerKey` by contacting [api@snaptrade.com](
 ::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID" type="password"}
 
 ::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
-
-::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID" type="password"}
-
-::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
 
 ```python
 from snaptrade_client import SnapTrade
@@ -32,19 +28,27 @@ snaptrade = SnapTrade(
 
 print("Successfully initiated client")
 
-user_id = USER_ID
-user_secret = USER_SECRET
+user_id = f"konfigdemo:{uuid()}"
+register_response = snaptrade.authentication.register_snap_trade_user(
+  user_id=user_id
+)
+user_secret = register_response.body["userSecret"]
+print("User created")
 
-print("Initialized user_id and user_secret")
+redirect_uri = snaptrade.authentication.login_snap_trade_user(
+  user_id=user_id, user_secret=user_secret, connection_type="trade"
+)
+
+print(json.dumps(redirect_uri.body, indent=2))
 ```
 
-::button[Initialize SDK Client / Assign Variables]
+::button[Create User and Get Redirect URL]
 
 :::
 
 ### 2) List accounts
 
-You can see the account IDs by calling `list_user_accounts`.
+After connecting an account you can see the account IDs by calling `list_user_accounts`.
 
 :::form
 
