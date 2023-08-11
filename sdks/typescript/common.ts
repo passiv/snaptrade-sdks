@@ -164,13 +164,26 @@ export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxi
             return await axios.request<T, R>({ ...axiosArgs.options, url });
         } catch (e) {
             if (e instanceof AxiosError && e.isAxiosError) {
-              const responseBody =
-              e.response?.data instanceof ReadableStream
-                ? await readableStreamToString(e.response.data)
-                : e.response?.data;
-              throw new SnaptradeError(e, parseIfJson(responseBody))
+                try {
+                    const responseBody =
+                        e.response?.data instanceof ReadableStream
+                        ? await readableStreamToString(e.response.data)
+                        : e.response?.data
+                    throw new SnaptradeError(e, parseIfJson(responseBody))
+                } catch (innerError) {
+                    if (innerError instanceof ReferenceError) {
+                        // Got: "ReferenceError: ReadableStream is not defined"
+                        // This means we are in a Node environment so just throw the original error
+                        throw new SnaptradeError(e, e.response?.data)
+                    }
+                    if (innerError instanceof SnaptradeError) {
+                        // Got "SnaptradeError" from the above try block
+                        throw innerError;
+                    }
+                    // Something unexpected happened: propagate the error
+                    throw e
+                }
             }
-            throw e
         }
     };
 }
