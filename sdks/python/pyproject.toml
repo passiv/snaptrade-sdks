@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "snaptrade-python-sdk"
-version = "10.28.0"
+version = "10.29.0"
 description = "Client for SnapTrade"
 authors = ["SnapTrade <api@snaptrade.com>"]
 license = "MIT"
