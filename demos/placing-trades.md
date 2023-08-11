@@ -26,19 +26,15 @@ snaptrade = SnapTrade(
   client_id=SNAPTRADE_CLIENT_ID,
 )
 
-print("Successfully initiated client")
-
-user_id = f"konfigdemo:{uuid()}"
+user_id = f"konfigdemo:{uuid.uuid4()}"
 register_response = snaptrade.authentication.register_snap_trade_user(
   user_id=user_id
 )
 user_secret = register_response.body["userSecret"]
-print("User created")
 
 redirect_uri = snaptrade.authentication.login_snap_trade_user(
   user_id=user_id, user_secret=user_secret, connection_type="trade"
 )
-
 print(json.dumps(redirect_uri.body, indent=2))
 ```
 
