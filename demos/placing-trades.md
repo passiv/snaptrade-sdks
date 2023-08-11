@@ -96,21 +96,47 @@ print(json.dumps(result.body, indent=2))
 
 :::
 
-### 4) Place Force Order
+### 4) Place the order
 
-Place the order without checking impact
+Place the order
+
+:::form{skippable}
+
+::input{name=TRADE_ID label="Trade Id" description="The ID of the trade created at the previous step."}
+
+```python
+result = snaptrade.trading.place_order(
+  user_id=user_id,
+  user_secret=user_secret,
+  trade_id=TRADE_ID
+)
+print(json.dumps(result.body, indent=2))
+```
+
+::button[Place Order]
+
+:::
+
+### Alternative - Place Order without checking impact
+
+If you don't need to check the impact of an order before placing it use `place_force_order`
 
 :::form
 
 ::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to pull holdings for."}
 ::input{name=UNIVERSAL_SYMBOL label="Universal Symbol" defaultValue="c15a817e-7171-4940-9ae7-f7b4a95408ee"}
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
-::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}
+::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Market"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
-::number{name=PRICE label="Price" defaultValue=10 step=0.01 precision=2}
+::number{name=PRICE label="Price" step=0.01 precision=2 optional}
 ::number{name=UNITS label="Units" defaultValue=1}
 
 ```python
+try:
+    price=PRICE
+except NameError:
+    price=None
+
 result = snaptrade.trading.place_force_order(
   user_id=user_id,
   user_secret=user_secret,
@@ -119,7 +145,7 @@ result = snaptrade.trading.place_force_order(
   universal_symbol_id=UNIVERSAL_SYMBOL,
   order_type=ORDER_TYPE,
   time_in_force=TIME_IN_FORCE,
-  price=PRICE,
+  price=price,
   units=UNITS,
 )
 print(json.dumps(result.body, indent=2))
