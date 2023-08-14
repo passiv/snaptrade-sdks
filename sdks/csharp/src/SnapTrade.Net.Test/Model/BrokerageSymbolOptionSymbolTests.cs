@@ -114,36 +114,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'LocalId'
         }
         /// <summary>
-        /// Test the property 'SecurityType'
+        /// Test the property 'ExchangeId'
         /// </summary>
         [Fact]
-        public void SecurityTypeTest()
+        public void ExchangeIdTest()
         {
-            // TODO unit test for the property 'SecurityType'
-        }
-        /// <summary>
-        /// Test the property 'ListingExchange'
-        /// </summary>
-        [Fact]
-        public void ListingExchangeTest()
-        {
-            // TODO unit test for the property 'ListingExchange'
-        }
-        /// <summary>
-        /// Test the property 'IsQuotable'
-        /// </summary>
-        [Fact]
-        public void IsQuotableTest()
-        {
-            // TODO unit test for the property 'IsQuotable'
-        }
-        /// <summary>
-        /// Test the property 'IsTradable'
-        /// </summary>
-        [Fact]
-        public void IsTradableTest()
-        {
-            // TODO unit test for the property 'IsTradable'
+            // TODO unit test for the property 'ExchangeId'
         }
 
     }

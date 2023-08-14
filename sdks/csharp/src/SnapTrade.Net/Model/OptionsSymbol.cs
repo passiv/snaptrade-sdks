@@ -42,11 +42,8 @@ namespace SnapTrade.Net.Model
         /// <param name="isMiniOption">isMiniOption.</param>
         /// <param name="underlyingSymbol">underlyingSymbol.</param>
         /// <param name="localId">localId.</param>
-        /// <param name="securityType">securityType.</param>
-        /// <param name="listingExchange">listingExchange.</param>
-        /// <param name="isQuotable">isQuotable.</param>
-        /// <param name="isTradable">isTradable.</param>
-        public OptionsSymbol(Guid id = default(Guid), string ticker = default(string), decimal strikePrice = default(decimal), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), Object securityType = default(Object), Object listingExchange = default(Object), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        /// <param name="exchangeId">exchangeId.</param>
+        public OptionsSymbol(Guid id = default(Guid), string ticker = default(string), decimal strikePrice = default(decimal), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), Guid exchangeId = default(Guid)) : base()
         {
             this.Id = id;
             this.Ticker = ticker;
@@ -55,10 +52,7 @@ namespace SnapTrade.Net.Model
             this.IsMiniOption = isMiniOption;
             this.UnderlyingSymbol = underlyingSymbol;
             this.LocalId = localId;
-            this.SecurityType = securityType;
-            this.ListingExchange = listingExchange;
-            this.IsQuotable = isQuotable;
-            this.IsTradable = isTradable;
+            this.ExchangeId = exchangeId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -105,28 +99,10 @@ namespace SnapTrade.Net.Model
         public string LocalId { get; set; }
 
         /// <summary>
-        /// Gets or Sets SecurityType
+        /// Gets or Sets ExchangeId
         /// </summary>
-        [DataMember(Name = "security_type", EmitDefaultValue = true)]
-        public Object SecurityType { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ListingExchange
-        /// </summary>
-        [DataMember(Name = "listing_exchange", EmitDefaultValue = true)]
-        public Object ListingExchange { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IsQuotable
-        /// </summary>
-        [DataMember(Name = "is_quotable", EmitDefaultValue = true)]
-        public bool IsQuotable { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IsTradable
-        /// </summary>
-        [DataMember(Name = "is_tradable", EmitDefaultValue = true)]
-        public bool IsTradable { get; set; }
+        [DataMember(Name = "exchange_id", EmitDefaultValue = false)]
+        public Guid ExchangeId { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -150,10 +126,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  IsMiniOption: ").Append(IsMiniOption).Append("\n");
             sb.Append("  UnderlyingSymbol: ").Append(UnderlyingSymbol).Append("\n");
             sb.Append("  LocalId: ").Append(LocalId).Append("\n");
-            sb.Append("  SecurityType: ").Append(SecurityType).Append("\n");
-            sb.Append("  ListingExchange: ").Append(ListingExchange).Append("\n");
-            sb.Append("  IsQuotable: ").Append(IsQuotable).Append("\n");
-            sb.Append("  IsTradable: ").Append(IsTradable).Append("\n");
+            sb.Append("  ExchangeId: ").Append(ExchangeId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -224,22 +197,9 @@ namespace SnapTrade.Net.Model
                     this.LocalId.Equals(input.LocalId))
                 ) && base.Equals(input) && 
                 (
-                    this.SecurityType == input.SecurityType ||
-                    (this.SecurityType != null &&
-                    this.SecurityType.Equals(input.SecurityType))
-                ) && base.Equals(input) && 
-                (
-                    this.ListingExchange == input.ListingExchange ||
-                    (this.ListingExchange != null &&
-                    this.ListingExchange.Equals(input.ListingExchange))
-                ) && base.Equals(input) && 
-                (
-                    this.IsQuotable == input.IsQuotable ||
-                    this.IsQuotable.Equals(input.IsQuotable)
-                ) && base.Equals(input) && 
-                (
-                    this.IsTradable == input.IsTradable ||
-                    this.IsTradable.Equals(input.IsTradable)
+                    this.ExchangeId == input.ExchangeId ||
+                    (this.ExchangeId != null &&
+                    this.ExchangeId.Equals(input.ExchangeId))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -275,16 +235,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
                 }
-                if (this.SecurityType != null)
+                if (this.ExchangeId != null)
                 {
-                    hashCode = (hashCode * 59) + this.SecurityType.GetHashCode();
+                    hashCode = (hashCode * 59) + this.ExchangeId.GetHashCode();
                 }
-                if (this.ListingExchange != null)
-                {
-                    hashCode = (hashCode * 59) + this.ListingExchange.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IsQuotable.GetHashCode();
-                hashCode = (hashCode * 59) + this.IsTradable.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

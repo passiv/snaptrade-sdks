@@ -11,10 +11,7 @@ Name | Type | Description | Notes
 **IsMiniOption** | **bool** |  | [optional] 
 **UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional] 
 **LocalId** | **string** |  | [optional] 
-**SecurityType** | **Object** |  | [optional] 
-**ListingExchange** | **Object** |  | [optional] 
-**IsQuotable** | **bool** |  | [optional] 
-**IsTradable** | **bool** |  | [optional] 
+**ExchangeId** | **Guid** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

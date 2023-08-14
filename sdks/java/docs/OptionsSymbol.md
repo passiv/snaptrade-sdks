@@ -15,10 +15,7 @@ Options Symbol
 |**isMiniOption** | **Boolean** |  |  [optional] |
 |**underlyingSymbol** | **UnderlyingSymbol** |  |  [optional] |
 |**localId** | **String** |  |  [optional] |
-|**securityType** | **Object** |  |  [optional] |
-|**listingExchange** | **Object** |  |  [optional] |
-|**isQuotable** | **Boolean** |  |  [optional] |
-|**isTradable** | **Boolean** |  |  [optional] |
+|**exchangeId** | **UUID** |  |  [optional] |
 
 
 

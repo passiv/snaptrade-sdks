@@ -17,12 +17,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.OptionsSymbol;
+import com.konfigthis.client.model.BrokerageSymbol;
+import com.konfigthis.client.model.OptionsPositionCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -48,22 +47,6 @@ public class OptionsPositionTest {
     @Test
     public void symbolTest() {
         // TODO: test symbol
-    }
-
-    /**
-     * Test the property 'description'
-     */
-    @Test
-    public void descriptionTest() {
-        // TODO: test description
-    }
-
-    /**
-     * Test the property 'optionSymbol'
-     */
-    @Test
-    public void optionSymbolTest() {
-        // TODO: test optionSymbol
     }
 
     /**
@@ -96,6 +79,30 @@ public class OptionsPositionTest {
     @Test
     public void averagePurchasePriceTest() {
         // TODO: test averagePurchasePrice
+    }
+
+    /**
+     * Test the property 'openPnl'
+     */
+    @Test
+    public void openPnlTest() {
+        // TODO: test openPnl
+    }
+
+    /**
+     * Test the property 'fractionalUnits'
+     */
+    @Test
+    public void fractionalUnitsTest() {
+        // TODO: test fractionalUnits
+    }
+
+    /**
+     * Test the property 'bookPrice'
+     */
+    @Test
+    public void bookPriceTest() {
+        // TODO: test bookPrice
     }
 
 }

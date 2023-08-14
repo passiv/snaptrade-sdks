@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -98,35 +97,11 @@ public class BrokerageSymbolOptionSymbolTest {
     }
 
     /**
-     * Test the property 'securityType'
+     * Test the property 'exchangeId'
      */
     @Test
-    public void securityTypeTest() {
-        // TODO: test securityType
-    }
-
-    /**
-     * Test the property 'listingExchange'
-     */
-    @Test
-    public void listingExchangeTest() {
-        // TODO: test listingExchange
-    }
-
-    /**
-     * Test the property 'isQuotable'
-     */
-    @Test
-    public void isQuotableTest() {
-        // TODO: test isQuotable
-    }
-
-    /**
-     * Test the property 'isTradable'
-     */
-    @Test
-    public void isTradableTest() {
-        // TODO: test isTradable
+    public void exchangeIdTest() {
+        // TODO: test exchangeId
     }
 
 }

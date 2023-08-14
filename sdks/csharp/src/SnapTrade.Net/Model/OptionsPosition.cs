@@ -36,21 +36,23 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="OptionsPosition" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
-        /// <param name="description">description.</param>
-        /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         /// <param name="units">units.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsPosition(Guid symbol = default(Guid), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal? price = default(decimal?), decimal units = default(decimal), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
+        /// <param name="openPnl">openPnl.</param>
+        /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
+        /// <param name="bookPrice">The book price of the asset.</param>
+        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), decimal? price = default(decimal?), decimal units = default(decimal), OptionsPositionCurrency currency = default(OptionsPositionCurrency), decimal? averagePurchasePrice = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?), decimal? bookPrice = default(decimal?)) : base()
         {
             this.Symbol = symbol;
-            this.Description = description;
-            this.OptionSymbol = optionSymbol;
             this.Price = price;
             this.Units = units;
             this.Currency = currency;
             this.AveragePurchasePrice = averagePurchasePrice;
+            this.OpenPnl = openPnl;
+            this.FractionalUnits = fractionalUnits;
+            this.BookPrice = bookPrice;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -58,19 +60,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public Guid Symbol { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or Sets OptionSymbol
-        /// </summary>
-        [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
-        public OptionsSymbol OptionSymbol { get; set; }
+        public BrokerageSymbol Symbol { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
@@ -88,8 +78,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public Currency Currency { get; set; }
+        [DataMember(Name = "currency", EmitDefaultValue = true)]
+        public OptionsPositionCurrency Currency { get; set; }
 
         /// <summary>
         /// Average purchase price for this position
@@ -97,6 +87,26 @@ namespace SnapTrade.Net.Model
         /// <value>Average purchase price for this position</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
         public decimal? AveragePurchasePrice { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OpenPnl
+        /// </summary>
+        [DataMember(Name = "open_pnl", EmitDefaultValue = true)]
+        public decimal? OpenPnl { get; set; }
+
+        /// <summary>
+        /// Deprecated, use the units field for both fractional and integer units going forward
+        /// </summary>
+        /// <value>Deprecated, use the units field for both fractional and integer units going forward</value>
+        [DataMember(Name = "fractional_units", EmitDefaultValue = true)]
+        public decimal? FractionalUnits { get; set; }
+
+        /// <summary>
+        /// The book price of the asset
+        /// </summary>
+        /// <value>The book price of the asset</value>
+        [DataMember(Name = "book_price", EmitDefaultValue = true)]
+        public decimal? BookPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -114,12 +124,13 @@ namespace SnapTrade.Net.Model
             sb.Append("class OptionsPosition {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
+            sb.Append("  OpenPnl: ").Append(OpenPnl).Append("\n");
+            sb.Append("  FractionalUnits: ").Append(FractionalUnits).Append("\n");
+            sb.Append("  BookPrice: ").Append(BookPrice).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -162,16 +173,6 @@ namespace SnapTrade.Net.Model
                     this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
-                    this.OptionSymbol == input.OptionSymbol ||
-                    (this.OptionSymbol != null &&
-                    this.OptionSymbol.Equals(input.OptionSymbol))
-                ) && base.Equals(input) && 
-                (
                     this.Price == input.Price ||
                     (this.Price != null &&
                     this.Price.Equals(input.Price))
@@ -189,6 +190,21 @@ namespace SnapTrade.Net.Model
                     this.AveragePurchasePrice == input.AveragePurchasePrice ||
                     (this.AveragePurchasePrice != null &&
                     this.AveragePurchasePrice.Equals(input.AveragePurchasePrice))
+                ) && base.Equals(input) && 
+                (
+                    this.OpenPnl == input.OpenPnl ||
+                    (this.OpenPnl != null &&
+                    this.OpenPnl.Equals(input.OpenPnl))
+                ) && base.Equals(input) && 
+                (
+                    this.FractionalUnits == input.FractionalUnits ||
+                    (this.FractionalUnits != null &&
+                    this.FractionalUnits.Equals(input.FractionalUnits))
+                ) && base.Equals(input) && 
+                (
+                    this.BookPrice == input.BookPrice ||
+                    (this.BookPrice != null &&
+                    this.BookPrice.Equals(input.BookPrice))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -206,14 +222,6 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.OptionSymbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
-                }
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();
@@ -226,6 +234,18 @@ namespace SnapTrade.Net.Model
                 if (this.AveragePurchasePrice != null)
                 {
                     hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                }
+                if (this.OpenPnl != null)
+                {
+                    hashCode = (hashCode * 59) + this.OpenPnl.GetHashCode();
+                }
+                if (this.FractionalUnits != null)
+                {
+                    hashCode = (hashCode * 59) + this.FractionalUnits.GetHashCode();
+                }
+                if (this.BookPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.BookPrice.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

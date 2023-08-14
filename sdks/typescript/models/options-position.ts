@@ -13,10 +13,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Currency } from './currency';
+import { BrokerageSymbol } from './brokerage-symbol';
 // May contain unused imports in some cases
 // @ts-ignore
-import { OptionsSymbol } from './options-symbol';
+import { OptionsPositionCurrency } from './options-position-currency';
 
 /**
  * Option Holdings
@@ -28,22 +28,10 @@ export interface OptionsPosition {
 
     /**
      * 
-     * @type {string}
+     * @type {BrokerageSymbol}
      * @memberof OptionsPosition
      */
-    'symbol'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OptionsPosition
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {OptionsSymbol}
-     * @memberof OptionsPosition
-     */
-    'option_symbol'?: OptionsSymbol;
+    'symbol'?: BrokerageSymbol;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
@@ -58,15 +46,33 @@ export interface OptionsPosition {
     'units'?: number;
     /**
      * 
-     * @type {Currency}
+     * @type {OptionsPositionCurrency}
      * @memberof OptionsPosition
      */
-    'currency'?: Currency;
+    'currency'?: OptionsPositionCurrency | null;
     /**
      * Average purchase price for this position
      * @type {number}
      * @memberof OptionsPosition
      */
     'average_purchase_price'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'open_pnl'?: number | null;
+    /**
+     * Deprecated, use the units field for both fractional and integer units going forward
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'fractional_units'?: number | null;
+    /**
+     * The book price of the asset
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'book_price'?: number | null;
 }
 

@@ -2312,6 +2312,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          book_price: 5
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -2353,6 +2354,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          book_price: 5
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -2477,6 +2479,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          book_price: 5
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -2518,6 +2521,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          book_price: 5
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -2568,9 +2572,8 @@ components:
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           filled_quantity: 5.962133916683182
           option_symbol:
-            is_quotable: true
             ticker: SPY 220819P00200000
-            is_tradable: true
+            exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             local_id: "40817960"
             is_mini_option: false
             underlying_symbol:
@@ -2604,9 +2607,7 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            listing_exchange: {}
-            expiration_date: 2022-08-19T00:00:00.000Z
-            security_type: {}
+            expiration_date: 2017-07-17T15:13:07.177712+00:00
             strike_price: 200
           order_type: null
           open_quantity: 6.027456183070403
@@ -2655,9 +2656,8 @@ components:
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           filled_quantity: 5.962133916683182
           option_symbol:
-            is_quotable: true
             ticker: SPY 220819P00200000
-            is_tradable: true
+            exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             local_id: "40817960"
             is_mini_option: false
             underlying_symbol:
@@ -2691,9 +2691,7 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            listing_exchange: {}
-            expiration_date: 2022-08-19T00:00:00.000Z
-            security_type: {}
+            expiration_date: 2017-07-17T15:13:07.177712+00:00
             strike_price: 200
           order_type: null
           open_quantity: 6.027456183070403
@@ -2791,9 +2789,8 @@ components:
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         filled_quantity: 5.962133916683182
         option_symbol:
-          is_quotable: true
           ticker: SPY 220819P00200000
-          is_tradable: true
+          exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           local_id: "40817960"
           is_mini_option: false
           underlying_symbol:
@@ -2827,9 +2824,7 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          listing_exchange: {}
-          expiration_date: 2022-08-19T00:00:00.000Z
-          security_type: {}
+          expiration_date: 2017-07-17T15:13:07.177712+00:00
           strike_price: 200
         order_type: null
         open_quantity: 6.027456183070403
@@ -2940,70 +2935,56 @@ components:
       additionalProperties: true
       description: Option Holdings
       example:
-        symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        symbol:
+          symbol: null
+          allows_fractional_units: true
+          brokerage_authorization:
+            brokerage:
+              maintenance_mode: true
+              allows_fractional_units: true
+              exchanges:
+              - 2bcd7cc3-e922-4976-bce1-9858296801c3
+              - 4bcd8cc3-c122-4974-dc21-1858296801f4
+              description: Questrade is an online brokerage firm and wealth management
+                firm based in Canada. It is Canada's largest discount broker.
+              display_name: Questrade
+              url: https://www.questrade.com/
+              enabled: true
+              allows_trading: true
+              has_reporting: true
+              is_real_time_connection: true
+              name: Questrade
+              allows_trading_through_snaptrade_api: true
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              brokerage_type:
+                name: Traditional Brokerage
+                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              aws_s3_logo_url: https://www.passiv.com/questrade.logo
+              slug: QUESTRADE
+              is_scraping_integration: true
+            disabled_date: 2022-01-21T20:11:19.217Z
+            meta:
+              identifier: 123456
+            name: Connection-1
+            disabled: false
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            created_date: 2022-01-21T20:11:19.217Z
+            updated_date: 2022-01-21T20:11:19.217Z
+            type: trade
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          option_symbol: null
+        book_price: 5
+        fractional_units: 1.44
         price: 31.33
-        description: SPY PUT Aug 2022
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
+        open_pnl: 0.44
+        currency: null
         units: 10
         average_purchase_price: 108.3353
-        option_symbol:
-          is_quotable: true
-          ticker: SPY 220819P00200000
-          is_tradable: true
-          local_id: "40817960"
-          is_mini_option: false
-          underlying_symbol:
-            symbol: SPY
-            description: SPDR S&P 500 ETF Trust
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: ARCA
-              code: ARCX
-              timezone: America/New_York
-              name: NYSE ARCA
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: None
-              allows_cryptocurrency_symbols: false
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          listing_exchange: {}
-          expiration_date: 2022-08-19T00:00:00.000Z
-          security_type: {}
-          strike_price: 200
       properties:
         symbol:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        description:
-          example: SPY PUT Aug 2022
-          type: string
-          x-konfig-original-example: SPY PUT Aug 2022
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-description
-        option_symbol:
-          $ref: '#/components/schemas/OptionsSymbol'
+          $ref: '#/components/schemas/BrokerageSymbol'
         price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -3017,7 +2998,7 @@ components:
           x-konfig-original-example: 10
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-units
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/OptionsPosition_currency'
         average_purchase_price:
           description: Average purchase price for this position
           example: 108.3353
@@ -3025,6 +3006,27 @@ components:
           type: number
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
+        open_pnl:
+          example: 0.44
+          nullable: true
+          type: number
+          x-konfig-original-example: 0.44
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-open_pnl
+        fractional_units:
+          description: "Deprecated, use the units field for both fractional and integer\
+            \ units going forward"
+          example: 1.44
+          nullable: true
+          type: number
+          x-konfig-original-example: 1.44
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-fractional_units
+        book_price:
+          description: The book price of the asset
+          example: 5
+          nullable: true
+          type: number
+          x-konfig-original-example: 5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-book_price
       type: object
     OptionsHoldings:
       additionalProperties: true
@@ -4325,6 +4327,7 @@ components:
           local_id: "3291231"
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        book_price: 5
         fractional_units: 1.44
         price: 113.15
         open_pnl: 0.44
@@ -4368,6 +4371,13 @@ components:
           type: number
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-average_purchase_price
+        book_price:
+          description: The book price of the asset
+          example: 5
+          nullable: true
+          type: number
+          x-konfig-original-example: 5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-book_price
       type: object
     RedirectTokenandPin:
       additionalProperties: true
@@ -4944,6 +4954,46 @@ components:
     BrokerageSymbol:
       additionalProperties: true
       description: Brokerage symbol
+      example:
+        symbol: null
+        allows_fractional_units: true
+        brokerage_authorization:
+          brokerage:
+            maintenance_mode: true
+            allows_fractional_units: true
+            exchanges:
+            - 2bcd7cc3-e922-4976-bce1-9858296801c3
+            - 4bcd8cc3-c122-4974-dc21-1858296801f4
+            description: Questrade is an online brokerage firm and wealth management
+              firm based in Canada. It is Canada's largest discount broker.
+            display_name: Questrade
+            url: https://www.questrade.com/
+            enabled: true
+            allows_trading: true
+            has_reporting: true
+            is_real_time_connection: true
+            name: Questrade
+            allows_trading_through_snaptrade_api: true
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            brokerage_type:
+              name: Traditional Brokerage
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            aws_s3_logo_url: https://www.passiv.com/questrade.logo
+            slug: QUESTRADE
+            is_scraping_integration: true
+          disabled_date: 2022-01-21T20:11:19.217Z
+          meta:
+            identifier: 123456
+          name: Connection-1
+          disabled: false
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          created_date: 2022-01-21T20:11:19.217Z
+          updated_date: 2022-01-21T20:11:19.217Z
+          type: trade
+        description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        option_symbol: null
       properties:
         id:
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6089,9 +6139,8 @@ components:
           id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         option_symbol:
-          is_quotable: true
           ticker: SPY 220819P00200000
-          is_tradable: true
+          exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           local_id: "40817960"
           is_mini_option: false
           underlying_symbol:
@@ -6125,9 +6174,7 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          listing_exchange: {}
-          expiration_date: 2022-08-19T00:00:00.000Z
-          security_type: {}
+          expiration_date: 2017-07-17T15:13:07.177712+00:00
           strike_price: 200
         account:
           number: Q6542138443
@@ -6389,9 +6436,8 @@ components:
       additionalProperties: true
       description: Options Symbol
       example:
-        is_quotable: true
         ticker: SPY 220819P00200000
-        is_tradable: true
+        exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         local_id: "40817960"
         is_mini_option: false
         underlying_symbol:
@@ -6425,9 +6471,7 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        listing_exchange: {}
-        expiration_date: 2022-08-19T00:00:00.000Z
-        security_type: {}
+        expiration_date: 2017-07-17T15:13:07.177712+00:00
         strike_price: 200
       properties:
         id:
@@ -6447,9 +6491,10 @@ components:
           x-konfig-original-example: 200
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-strike_price
         expiration_date:
-          example: 2022-08-19T00:00:00.000Z
+          example: 2017-07-17T15:13:07.177712+00:00
+          format: datetime
           type: string
-          x-konfig-original-example: 2022-08-19T00:00:00.000Z
+          x-konfig-original-example: 2017-07-17T15:13:07.177712+00:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-expiration_date
         is_mini_option:
           example: false
@@ -6463,22 +6508,9 @@ components:
           type: string
           x-konfig-original-example: "40817960"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
-        security_type:
-          example: {}
-          x-konfig-original-example: {}
-        listing_exchange:
-          example: {}
-          x-konfig-original-example: {}
-        is_quotable:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_quotable
-        is_tradable:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_tradable
+        exchange_id:
+          format: uuid
+          type: string
       type: object
     OptionLeg:
       additionalProperties: true
@@ -6806,16 +6838,24 @@ components:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsPosition-properties-description:
-      example: SPY PUT Aug 2022
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-units:
       example: 10
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price:
       example: 108.3353
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsPosition-properties-open_pnl:
+      example: 0.44
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsPosition-properties-fractional_units:
+      example: 1.44
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsPosition-properties-book_price:
+      example: 5
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsHoldings-properties-id:
@@ -7370,6 +7410,10 @@ components:
       example: 108.3353
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Position-properties-book_price:
+      example: 5
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-RedirectTokenandPin-properties-token:
       example: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B
       type: string
@@ -7921,7 +7965,7 @@ components:
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-expiration_date:
-      example: 2022-08-19T00:00:00.000Z
+      example: 2017-07-17T15:13:07.177712+00:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option:
@@ -7931,14 +7975,6 @@ components:
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id:
       example: "40817960"
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_quotable:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_tradable:
-      example: true
-      type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionLeg-properties-option_symbol_id:
       example: SPY220819P00200000
@@ -9179,6 +9215,10 @@ components:
         second_trade_id:
           description: The ID of second trade object obtained from trade/impact endpoint
       type: object
+    OptionsPosition_currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency'
+      nullable: true
     StrategyImpact_legs_inner:
       additionalProperties: true
       properties:

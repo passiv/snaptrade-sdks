@@ -19,12 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.OptionsSymbol;
+import com.konfigthis.client.model.BrokerageSymbol;
+import com.konfigthis.client.model.OptionsPositionCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -57,15 +56,7 @@ import com.konfigthis.client.JSON;
 public class OptionsPosition {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private UUID symbol;
-
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
-
-  public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
-  @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private OptionsSymbol optionSymbol;
+  private BrokerageSymbol symbol;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -77,16 +68,28 @@ public class OptionsPosition {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private Currency currency;
+  private OptionsPositionCurrency currency;
 
   public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
   private Double averagePurchasePrice;
 
+  public static final String SERIALIZED_NAME_OPEN_PNL = "open_pnl";
+  @SerializedName(SERIALIZED_NAME_OPEN_PNL)
+  private Double openPnl;
+
+  public static final String SERIALIZED_NAME_FRACTIONAL_UNITS = "fractional_units";
+  @SerializedName(SERIALIZED_NAME_FRACTIONAL_UNITS)
+  private Double fractionalUnits;
+
+  public static final String SERIALIZED_NAME_BOOK_PRICE = "book_price";
+  @SerializedName(SERIALIZED_NAME_BOOK_PRICE)
+  private Double bookPrice;
+
   public OptionsPosition() {
   }
 
-  public OptionsPosition symbol(UUID symbol) {
+  public OptionsPosition symbol(BrokerageSymbol symbol) {
 
     
     
@@ -101,81 +104,19 @@ public class OptionsPosition {
    * @return symbol
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "")
+  @ApiModelProperty(value = "")
 
-  public UUID getSymbol() {
+  public BrokerageSymbol getSymbol() {
     return symbol;
   }
 
 
-  public void setSymbol(UUID symbol) {
+  public void setSymbol(BrokerageSymbol symbol) {
 
     
     
     
     this.symbol = symbol;
-  }
-
-
-  public OptionsPosition description(String description) {
-
-    
-    
-    
-    
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Get description
-   * @return description
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "SPY PUT Aug 2022", value = "")
-
-  public String getDescription() {
-    return description;
-  }
-
-
-  public void setDescription(String description) {
-
-    
-    
-    
-    this.description = description;
-  }
-
-
-  public OptionsPosition optionSymbol(OptionsSymbol optionSymbol) {
-
-    
-    
-    
-    
-    this.optionSymbol = optionSymbol;
-    return this;
-  }
-
-   /**
-   * Get optionSymbol
-   * @return optionSymbol
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public OptionsSymbol getOptionSymbol() {
-    return optionSymbol;
-  }
-
-
-  public void setOptionSymbol(OptionsSymbol optionSymbol) {
-
-    
-    
-    
-    this.optionSymbol = optionSymbol;
   }
 
 
@@ -261,7 +202,7 @@ public class OptionsPosition {
   }
 
 
-  public OptionsPosition currency(Currency currency) {
+  public OptionsPosition currency(OptionsPositionCurrency currency) {
 
     
     
@@ -278,12 +219,12 @@ public class OptionsPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Currency getCurrency() {
+  public OptionsPositionCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(Currency currency) {
+  public void setCurrency(OptionsPositionCurrency currency) {
 
     
     
@@ -330,6 +271,129 @@ public class OptionsPosition {
     
     
     this.averagePurchasePrice = averagePurchasePrice;
+  }
+
+
+  public OptionsPosition openPnl(Double openPnl) {
+
+    
+    
+    
+    
+    this.openPnl = openPnl;
+    return this;
+  }
+
+  public OptionsPosition openPnl(Integer openPnl) {
+
+    
+    
+    
+    
+    this.openPnl = openPnl.doubleValue();
+    return this;
+  }
+
+   /**
+   * Get openPnl
+   * @return openPnl
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "0.44", value = "")
+
+  public Double getOpenPnl() {
+    return openPnl;
+  }
+
+
+  public void setOpenPnl(Double openPnl) {
+
+    
+    
+    
+    this.openPnl = openPnl;
+  }
+
+
+  public OptionsPosition fractionalUnits(Double fractionalUnits) {
+
+    
+    
+    
+    
+    this.fractionalUnits = fractionalUnits;
+    return this;
+  }
+
+  public OptionsPosition fractionalUnits(Integer fractionalUnits) {
+
+    
+    
+    
+    
+    this.fractionalUnits = fractionalUnits.doubleValue();
+    return this;
+  }
+
+   /**
+   * Deprecated, use the units field for both fractional and integer units going forward
+   * @return fractionalUnits
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1.44", value = "Deprecated, use the units field for both fractional and integer units going forward")
+
+  public Double getFractionalUnits() {
+    return fractionalUnits;
+  }
+
+
+  public void setFractionalUnits(Double fractionalUnits) {
+
+    
+    
+    
+    this.fractionalUnits = fractionalUnits;
+  }
+
+
+  public OptionsPosition bookPrice(Double bookPrice) {
+
+    
+    
+    
+    
+    this.bookPrice = bookPrice;
+    return this;
+  }
+
+  public OptionsPosition bookPrice(Integer bookPrice) {
+
+    
+    
+    
+    
+    this.bookPrice = bookPrice.doubleValue();
+    return this;
+  }
+
+   /**
+   * The book price of the asset
+   * @return bookPrice
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "5", value = "The book price of the asset")
+
+  public Double getBookPrice() {
+    return bookPrice;
+  }
+
+
+  public void setBookPrice(Double bookPrice) {
+
+    
+    
+    
+    this.bookPrice = bookPrice;
   }
 
   /**
@@ -388,12 +452,13 @@ public class OptionsPosition {
     }
     OptionsPosition optionsPosition = (OptionsPosition) o;
     return Objects.equals(this.symbol, optionsPosition.symbol) &&
-        Objects.equals(this.description, optionsPosition.description) &&
-        Objects.equals(this.optionSymbol, optionsPosition.optionSymbol) &&
         Objects.equals(this.price, optionsPosition.price) &&
         Objects.equals(this.units, optionsPosition.units) &&
         Objects.equals(this.currency, optionsPosition.currency) &&
-        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice)&&
+        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice) &&
+        Objects.equals(this.openPnl, optionsPosition.openPnl) &&
+        Objects.equals(this.fractionalUnits, optionsPosition.fractionalUnits) &&
+        Objects.equals(this.bookPrice, optionsPosition.bookPrice)&&
         Objects.equals(this.additionalProperties, optionsPosition.additionalProperties);
   }
 
@@ -403,7 +468,7 @@ public class OptionsPosition {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, description, optionSymbol, price, units, currency, averagePurchasePrice, additionalProperties);
+    return Objects.hash(symbol, price, units, currency, averagePurchasePrice, openPnl, fractionalUnits, bookPrice, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -418,12 +483,13 @@ public class OptionsPosition {
     StringBuilder sb = new StringBuilder();
     sb.append("class OptionsPosition {\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
+    sb.append("    openPnl: ").append(toIndentedString(openPnl)).append("\n");
+    sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
+    sb.append("    bookPrice: ").append(toIndentedString(bookPrice)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -448,12 +514,13 @@ public class OptionsPosition {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("symbol");
-    openapiFields.add("description");
-    openapiFields.add("option_symbol");
     openapiFields.add("price");
     openapiFields.add("units");
     openapiFields.add("currency");
     openapiFields.add("average_purchase_price");
+    openapiFields.add("open_pnl");
+    openapiFields.add("fractional_units");
+    openapiFields.add("book_price");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -471,11 +538,9 @@ public class OptionsPosition {
           throw new IllegalArgumentException(String.format("The required field(s) %s in OptionsPosition is not found in the empty JSON string", OptionsPosition.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
-      }
-      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        OptionsPositionCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
   }
 

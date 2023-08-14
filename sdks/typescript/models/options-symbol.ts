@@ -67,27 +67,9 @@ export interface OptionsSymbol {
     'local_id'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof OptionsSymbol
      */
-    'security_type'?: any;
-    /**
-     * 
-     * @type {any}
-     * @memberof OptionsSymbol
-     */
-    'listing_exchange'?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof OptionsSymbol
-     */
-    'is_quotable'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof OptionsSymbol
-     */
-    'is_tradable'?: boolean;
+    'exchange_id'?: string;
 }
 

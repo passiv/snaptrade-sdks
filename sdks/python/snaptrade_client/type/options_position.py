@@ -15,19 +15,15 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.price import Price
 
 class RequiredOptionsPosition(TypedDict):
     pass
 
 class OptionalOptionsPosition(TypedDict, total=False):
-    symbol: str
-
-    description: str
-
-    option_symbol: OptionsSymbol
+    symbol: BrokerageSymbol
 
     price: Price
 
@@ -37,6 +33,14 @@ class OptionalOptionsPosition(TypedDict, total=False):
 
     # Average purchase price for this position
     average_purchase_price: typing.Optional[typing.Union[int, float]]
+
+    open_pnl: typing.Optional[typing.Union[int, float]]
+
+    # Deprecated, use the units field for both fractional and integer units going forward
+    fractional_units: typing.Optional[typing.Union[int, float]]
+
+    # The book price of the asset
+    book_price: typing.Optional[typing.Union[int, float]]
 
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):
     pass

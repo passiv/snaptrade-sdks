@@ -28,13 +28,7 @@ module SnapTrade
 
     attr_accessor :local_id
 
-    attr_accessor :security_type
-
-    attr_accessor :listing_exchange
-
-    attr_accessor :is_quotable
-
-    attr_accessor :is_tradable
+    attr_accessor :exchange_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -46,10 +40,7 @@ module SnapTrade
         :'is_mini_option' => :'is_mini_option',
         :'underlying_symbol' => :'underlying_symbol',
         :'local_id' => :'local_id',
-        :'security_type' => :'security_type',
-        :'listing_exchange' => :'listing_exchange',
-        :'is_quotable' => :'is_quotable',
-        :'is_tradable' => :'is_tradable'
+        :'exchange_id' => :'exchange_id'
       }
     end
 
@@ -68,18 +59,13 @@ module SnapTrade
         :'is_mini_option' => :'Boolean',
         :'underlying_symbol' => :'UnderlyingSymbol',
         :'local_id' => :'String',
-        :'security_type' => :'Object',
-        :'listing_exchange' => :'Object',
-        :'is_quotable' => :'Boolean',
-        :'is_tradable' => :'Boolean'
+        :'exchange_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'security_type',
-        :'listing_exchange',
       ])
     end
 
@@ -126,20 +112,8 @@ module SnapTrade
         self.local_id = attributes[:'local_id']
       end
 
-      if attributes.key?(:'security_type')
-        self.security_type = attributes[:'security_type']
-      end
-
-      if attributes.key?(:'listing_exchange')
-        self.listing_exchange = attributes[:'listing_exchange']
-      end
-
-      if attributes.key?(:'is_quotable')
-        self.is_quotable = attributes[:'is_quotable']
-      end
-
-      if attributes.key?(:'is_tradable')
-        self.is_tradable = attributes[:'is_tradable']
+      if attributes.key?(:'exchange_id')
+        self.exchange_id = attributes[:'exchange_id']
       end
     end
 
@@ -168,10 +142,7 @@ module SnapTrade
           is_mini_option == o.is_mini_option &&
           underlying_symbol == o.underlying_symbol &&
           local_id == o.local_id &&
-          security_type == o.security_type &&
-          listing_exchange == o.listing_exchange &&
-          is_quotable == o.is_quotable &&
-          is_tradable == o.is_tradable
+          exchange_id == o.exchange_id
     end
 
     # @see the `==` method
@@ -183,7 +154,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, ticker, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, security_type, listing_exchange, is_quotable, is_tradable].hash
+      [id, ticker, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
     end
 
     # Builds the object from hash

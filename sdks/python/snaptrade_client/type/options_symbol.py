@@ -35,13 +35,7 @@ class OptionalOptionsSymbol(TypedDict, total=False):
 
     local_id: str
 
-    security_type: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
-
-    listing_exchange: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
-
-    is_quotable: bool
-
-    is_tradable: bool
+    exchange_id: str
 
 class OptionsSymbol(RequiredOptionsSymbol, OptionalOptionsSymbol):
     pass

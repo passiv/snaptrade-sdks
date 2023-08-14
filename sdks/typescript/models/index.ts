@@ -59,6 +59,7 @@ export * from './options-get-option-strategy-request';
 export * from './options-holdings';
 export * from './options-place-option-strategy-request';
 export * from './options-position';
+export * from './options-position-currency';
 export * from './options-symbol';
 export * from './order-type';
 export * from './partner-data';

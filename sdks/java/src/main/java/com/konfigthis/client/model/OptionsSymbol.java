@@ -24,7 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -82,21 +81,9 @@ public class OptionsSymbol {
   @SerializedName(SERIALIZED_NAME_LOCAL_ID)
   private String localId;
 
-  public static final String SERIALIZED_NAME_SECURITY_TYPE = "security_type";
-  @SerializedName(SERIALIZED_NAME_SECURITY_TYPE)
-  private Object securityType = null;
-
-  public static final String SERIALIZED_NAME_LISTING_EXCHANGE = "listing_exchange";
-  @SerializedName(SERIALIZED_NAME_LISTING_EXCHANGE)
-  private Object listingExchange = null;
-
-  public static final String SERIALIZED_NAME_IS_QUOTABLE = "is_quotable";
-  @SerializedName(SERIALIZED_NAME_IS_QUOTABLE)
-  private Boolean isQuotable;
-
-  public static final String SERIALIZED_NAME_IS_TRADABLE = "is_tradable";
-  @SerializedName(SERIALIZED_NAME_IS_TRADABLE)
-  private Boolean isTradable;
+  public static final String SERIALIZED_NAME_EXCHANGE_ID = "exchange_id";
+  @SerializedName(SERIALIZED_NAME_EXCHANGE_ID)
+  private UUID exchangeId;
 
   public OptionsSymbol() {
   }
@@ -219,7 +206,7 @@ public class OptionsSymbol {
    * @return expirationDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-08-19T00:00:00.000Z", value = "")
+  @ApiModelProperty(example = "2017-07-17T15:13:07.177712+00:00", value = "")
 
   public String getExpirationDate() {
     return expirationDate;
@@ -328,127 +315,34 @@ public class OptionsSymbol {
   }
 
 
-  public OptionsSymbol securityType(Object securityType) {
+  public OptionsSymbol exchangeId(UUID exchangeId) {
 
     
     
     
     
-    this.securityType = securityType;
+    this.exchangeId = exchangeId;
     return this;
   }
 
    /**
-   * Get securityType
-   * @return securityType
+   * Get exchangeId
+   * @return exchangeId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "{}", value = "")
+  @ApiModelProperty(value = "")
 
-  public Object getSecurityType() {
-    return securityType;
+  public UUID getExchangeId() {
+    return exchangeId;
   }
 
 
-  public void setSecurityType(Object securityType) {
+  public void setExchangeId(UUID exchangeId) {
 
     
     
     
-    this.securityType = securityType;
-  }
-
-
-  public OptionsSymbol listingExchange(Object listingExchange) {
-
-    
-    
-    
-    
-    this.listingExchange = listingExchange;
-    return this;
-  }
-
-   /**
-   * Get listingExchange
-   * @return listingExchange
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "{}", value = "")
-
-  public Object getListingExchange() {
-    return listingExchange;
-  }
-
-
-  public void setListingExchange(Object listingExchange) {
-
-    
-    
-    
-    this.listingExchange = listingExchange;
-  }
-
-
-  public OptionsSymbol isQuotable(Boolean isQuotable) {
-
-    
-    
-    
-    
-    this.isQuotable = isQuotable;
-    return this;
-  }
-
-   /**
-   * Get isQuotable
-   * @return isQuotable
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "")
-
-  public Boolean getIsQuotable() {
-    return isQuotable;
-  }
-
-
-  public void setIsQuotable(Boolean isQuotable) {
-
-    
-    
-    
-    this.isQuotable = isQuotable;
-  }
-
-
-  public OptionsSymbol isTradable(Boolean isTradable) {
-
-    
-    
-    
-    
-    this.isTradable = isTradable;
-    return this;
-  }
-
-   /**
-   * Get isTradable
-   * @return isTradable
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "")
-
-  public Boolean getIsTradable() {
-    return isTradable;
-  }
-
-
-  public void setIsTradable(Boolean isTradable) {
-
-    
-    
-    
-    this.isTradable = isTradable;
+    this.exchangeId = exchangeId;
   }
 
   /**
@@ -513,27 +407,13 @@ public class OptionsSymbol {
         Objects.equals(this.isMiniOption, optionsSymbol.isMiniOption) &&
         Objects.equals(this.underlyingSymbol, optionsSymbol.underlyingSymbol) &&
         Objects.equals(this.localId, optionsSymbol.localId) &&
-        Objects.equals(this.securityType, optionsSymbol.securityType) &&
-        Objects.equals(this.listingExchange, optionsSymbol.listingExchange) &&
-        Objects.equals(this.isQuotable, optionsSymbol.isQuotable) &&
-        Objects.equals(this.isTradable, optionsSymbol.isTradable)&&
+        Objects.equals(this.exchangeId, optionsSymbol.exchangeId)&&
         Objects.equals(this.additionalProperties, optionsSymbol.additionalProperties);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ticker, strikePrice, expirationDate, isMiniOption, underlyingSymbol, localId, securityType, listingExchange, isQuotable, isTradable, additionalProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, ticker, strikePrice, expirationDate, isMiniOption, underlyingSymbol, localId, exchangeId, additionalProperties);
   }
 
   @Override
@@ -547,10 +427,7 @@ public class OptionsSymbol {
     sb.append("    isMiniOption: ").append(toIndentedString(isMiniOption)).append("\n");
     sb.append("    underlyingSymbol: ").append(toIndentedString(underlyingSymbol)).append("\n");
     sb.append("    localId: ").append(toIndentedString(localId)).append("\n");
-    sb.append("    securityType: ").append(toIndentedString(securityType)).append("\n");
-    sb.append("    listingExchange: ").append(toIndentedString(listingExchange)).append("\n");
-    sb.append("    isQuotable: ").append(toIndentedString(isQuotable)).append("\n");
-    sb.append("    isTradable: ").append(toIndentedString(isTradable)).append("\n");
+    sb.append("    exchangeId: ").append(toIndentedString(exchangeId)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -581,10 +458,7 @@ public class OptionsSymbol {
     openapiFields.add("is_mini_option");
     openapiFields.add("underlying_symbol");
     openapiFields.add("local_id");
-    openapiFields.add("security_type");
-    openapiFields.add("listing_exchange");
-    openapiFields.add("is_quotable");
-    openapiFields.add("is_tradable");
+    openapiFields.add("exchange_id");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -613,6 +487,9 @@ public class OptionsSymbol {
       }
       if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
+      }
+      if ((jsonObj.get("exchange_id") != null && !jsonObj.get("exchange_id").isJsonNull()) && !jsonObj.get("exchange_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `exchange_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("exchange_id").toString()));
       }
   }
 

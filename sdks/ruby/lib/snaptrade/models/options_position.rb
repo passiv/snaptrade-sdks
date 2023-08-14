@@ -16,10 +16,6 @@ module SnapTrade
   class OptionsPosition
     attr_accessor :symbol
 
-    attr_accessor :description
-
-    attr_accessor :option_symbol
-
     # Trade Price if limit or stop limit order
     attr_accessor :price
 
@@ -30,16 +26,25 @@ module SnapTrade
     # Average purchase price for this position
     attr_accessor :average_purchase_price
 
+    attr_accessor :open_pnl
+
+    # Deprecated, use the units field for both fractional and integer units going forward
+    attr_accessor :fractional_units
+
+    # The book price of the asset
+    attr_accessor :book_price
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'symbol' => :'symbol',
-        :'description' => :'description',
-        :'option_symbol' => :'option_symbol',
         :'price' => :'price',
         :'units' => :'units',
         :'currency' => :'currency',
-        :'average_purchase_price' => :'average_purchase_price'
+        :'average_purchase_price' => :'average_purchase_price',
+        :'open_pnl' => :'open_pnl',
+        :'fractional_units' => :'fractional_units',
+        :'book_price' => :'book_price'
       }
     end
 
@@ -51,13 +56,14 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'symbol' => :'String',
-        :'description' => :'String',
-        :'option_symbol' => :'OptionsSymbol',
+        :'symbol' => :'BrokerageSymbol',
         :'price' => :'Float',
         :'units' => :'Float',
-        :'currency' => :'Currency',
-        :'average_purchase_price' => :'Float'
+        :'currency' => :'OptionsPositionCurrency',
+        :'average_purchase_price' => :'Float',
+        :'open_pnl' => :'Float',
+        :'fractional_units' => :'Float',
+        :'book_price' => :'Float'
       }
     end
 
@@ -65,7 +71,11 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'price',
-        :'average_purchase_price'
+        :'currency',
+        :'average_purchase_price',
+        :'open_pnl',
+        :'fractional_units',
+        :'book_price'
       ])
     end
 
@@ -88,14 +98,6 @@ module SnapTrade
         self.symbol = attributes[:'symbol']
       end
 
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'option_symbol')
-        self.option_symbol = attributes[:'option_symbol']
-      end
-
       if attributes.key?(:'price')
         self.price = attributes[:'price']
       end
@@ -110,6 +112,18 @@ module SnapTrade
 
       if attributes.key?(:'average_purchase_price')
         self.average_purchase_price = attributes[:'average_purchase_price']
+      end
+
+      if attributes.key?(:'open_pnl')
+        self.open_pnl = attributes[:'open_pnl']
+      end
+
+      if attributes.key?(:'fractional_units')
+        self.fractional_units = attributes[:'fractional_units']
+      end
+
+      if attributes.key?(:'book_price')
+        self.book_price = attributes[:'book_price']
       end
     end
 
@@ -132,12 +146,13 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           symbol == o.symbol &&
-          description == o.description &&
-          option_symbol == o.option_symbol &&
           price == o.price &&
           units == o.units &&
           currency == o.currency &&
-          average_purchase_price == o.average_purchase_price
+          average_purchase_price == o.average_purchase_price &&
+          open_pnl == o.open_pnl &&
+          fractional_units == o.fractional_units &&
+          book_price == o.book_price
     end
 
     # @see the `==` method
@@ -149,7 +164,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, description, option_symbol, price, units, currency, average_purchase_price].hash
+      [symbol, price, units, currency, average_purchase_price, open_pnl, fractional_units, book_price].hash
     end
 
     # Builds the object from hash

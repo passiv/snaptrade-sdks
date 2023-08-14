@@ -68,27 +68,9 @@ export interface BrokerageSymbolOptionSymbol {
     'local_id'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'security_type'?: any;
-    /**
-     * 
-     * @type {any}
-     * @memberof BrokerageSymbolOptionSymbol
-     */
-    'listing_exchange'?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BrokerageSymbolOptionSymbol
-     */
-    'is_quotable'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BrokerageSymbolOptionSymbol
-     */
-    'is_tradable'?: boolean;
+    'exchange_id'?: string;
 }
 

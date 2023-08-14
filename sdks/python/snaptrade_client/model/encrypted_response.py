@@ -117,6 +117,7 @@ class EncryptedResponse(
         encryptedSharedKey: typing.Union[MetaOapg.properties.encryptedSharedKey, str, schemas.Unset] = schemas.unset,
         encryptedMessageData: typing.Union['EncryptedResponseEncryptedMessageData', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs,
     ) -> 'EncryptedResponse':
         return super().__new__(
             cls,

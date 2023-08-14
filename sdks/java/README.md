@@ -287,6 +287,7 @@ Class | Method | HTTP request | Description
  - [OptionsHoldings](docs/OptionsHoldings.md)
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
+ - [OptionsPositionCurrency](docs/OptionsPositionCurrency.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OrderType](docs/OrderType.md)
  - [PartnerData](docs/PartnerData.md)

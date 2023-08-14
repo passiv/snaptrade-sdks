@@ -105,6 +105,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'AveragePurchasePrice'
         }
+        /// <summary>
+        /// Test the property 'BookPrice'
+        /// </summary>
+        [Fact]
+        public void BookPriceTest()
+        {
+            // TODO unit test for the property 'BookPrice'
+        }
 
     }
 

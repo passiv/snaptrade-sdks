@@ -14,6 +14,7 @@ Account Position
 |**openPnl** | **Double** |  |  [optional] |
 |**fractionalUnits** | **Double** | Deprecated, use the units field for both fractional and integer units going forward |  [optional] |
 |**averagePurchasePrice** | **Double** | Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions. |  [optional] |
+|**bookPrice** | **Double** | The book price of the asset |  [optional] |
 
 
 

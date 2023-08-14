@@ -12,34 +12,19 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class BrokerageSymbolOptionSymbol
+  class OptionsPositionCurrency
     attr_accessor :id
 
-    attr_accessor :ticker
+    attr_accessor :code
 
-    attr_accessor :strike_price
-
-    attr_accessor :expiration_date
-
-    attr_accessor :is_mini_option
-
-    attr_accessor :underlying_symbol
-
-    attr_accessor :local_id
-
-    attr_accessor :exchange_id
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'ticker' => :'ticker',
-        :'strike_price' => :'strike_price',
-        :'expiration_date' => :'expiration_date',
-        :'is_mini_option' => :'is_mini_option',
-        :'underlying_symbol' => :'underlying_symbol',
-        :'local_id' => :'local_id',
-        :'exchange_id' => :'exchange_id'
+        :'code' => :'code',
+        :'name' => :'name'
       }
     end
 
@@ -52,13 +37,8 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'ticker' => :'String',
-        :'strike_price' => :'Float',
-        :'expiration_date' => :'String',
-        :'is_mini_option' => :'Boolean',
-        :'underlying_symbol' => :'UnderlyingSymbol',
-        :'local_id' => :'String',
-        :'exchange_id' => :'String'
+        :'code' => :'String',
+        :'name' => :'String'
       }
     end
 
@@ -71,7 +51,7 @@ module SnapTrade
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'OptionsSymbol'
+      :'Currency'
       ]
     end
 
@@ -79,13 +59,13 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::BrokerageSymbolOptionSymbol` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::OptionsPositionCurrency` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::BrokerageSymbolOptionSymbol`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::OptionsPositionCurrency`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -94,32 +74,12 @@ module SnapTrade
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'ticker')
-        self.ticker = attributes[:'ticker']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
-      if attributes.key?(:'strike_price')
-        self.strike_price = attributes[:'strike_price']
-      end
-
-      if attributes.key?(:'expiration_date')
-        self.expiration_date = attributes[:'expiration_date']
-      end
-
-      if attributes.key?(:'is_mini_option')
-        self.is_mini_option = attributes[:'is_mini_option']
-      end
-
-      if attributes.key?(:'underlying_symbol')
-        self.underlying_symbol = attributes[:'underlying_symbol']
-      end
-
-      if attributes.key?(:'local_id')
-        self.local_id = attributes[:'local_id']
-      end
-
-      if attributes.key?(:'exchange_id')
-        self.exchange_id = attributes[:'exchange_id']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
     end
 
@@ -142,13 +102,8 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          ticker == o.ticker &&
-          strike_price == o.strike_price &&
-          expiration_date == o.expiration_date &&
-          is_mini_option == o.is_mini_option &&
-          underlying_symbol == o.underlying_symbol &&
-          local_id == o.local_id &&
-          exchange_id == o.exchange_id
+          code == o.code &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -160,7 +115,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, ticker, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
+      [id, code, name].hash
     end
 
     # Builds the object from hash

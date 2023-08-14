@@ -11,10 +11,7 @@
 | **is_mini_option** | **Boolean** |  | [optional] |
 | **underlying_symbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional] |
 | **local_id** | **String** |  | [optional] |
-| **security_type** | **Object** |  | [optional] |
-| **listing_exchange** | **Object** |  | [optional] |
-| **is_quotable** | **Boolean** |  | [optional] |
-| **is_tradable** | **Boolean** |  | [optional] |
+| **exchange_id** | **String** |  | [optional] |
 
 ## Example
 
@@ -25,14 +22,11 @@ instance = SnapTrade::BrokerageSymbolOptionSymbol.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
   ticker: SPY 220819P00200000,
   strike_price: 200,
-  expiration_date: 2022-08-19T00:00:00.000Z,
+  expiration_date: 2017-07-17T15:13:07.177712+00:00,
   is_mini_option: false,
   underlying_symbol: null,
   local_id: 40817960,
-  security_type: {},
-  listing_exchange: {},
-  is_quotable: true,
-  is_tradable: true
+  exchange_id: null
 )
 ```
 

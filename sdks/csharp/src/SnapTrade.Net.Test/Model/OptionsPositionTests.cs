@@ -66,22 +66,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
-        /// Test the property 'Description'
-        /// </summary>
-        [Fact]
-        public void DescriptionTest()
-        {
-            // TODO unit test for the property 'Description'
-        }
-        /// <summary>
-        /// Test the property 'OptionSymbol'
-        /// </summary>
-        [Fact]
-        public void OptionSymbolTest()
-        {
-            // TODO unit test for the property 'OptionSymbol'
-        }
-        /// <summary>
         /// Test the property 'Price'
         /// </summary>
         [Fact]
@@ -112,6 +96,30 @@ namespace SnapTrade.Net.Test.Model
         public void AveragePurchasePriceTest()
         {
             // TODO unit test for the property 'AveragePurchasePrice'
+        }
+        /// <summary>
+        /// Test the property 'OpenPnl'
+        /// </summary>
+        [Fact]
+        public void OpenPnlTest()
+        {
+            // TODO unit test for the property 'OpenPnl'
+        }
+        /// <summary>
+        /// Test the property 'FractionalUnits'
+        /// </summary>
+        [Fact]
+        public void FractionalUnitsTest()
+        {
+            // TODO unit test for the property 'FractionalUnits'
+        }
+        /// <summary>
+        /// Test the property 'BookPrice'
+        /// </summary>
+        [Fact]
+        public void BookPriceTest()
+        {
+            // TODO unit test for the property 'BookPrice'
         }
 
     }

@@ -157,6 +157,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::OptionsHoldings](docs/OptionsHoldings.md)
  - [SnapTrade::OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [SnapTrade::OptionsPosition](docs/OptionsPosition.md)
+ - [SnapTrade::OptionsPositionCurrency](docs/OptionsPositionCurrency.md)
  - [SnapTrade::OptionsSymbol](docs/OptionsSymbol.md)
  - [SnapTrade::OrderStrategyExecuteBodyOrderType](docs/OrderStrategyExecuteBodyOrderType.md)
  - [SnapTrade::OrderStrategyExecuteBodyTimeInForce](docs/OrderStrategyExecuteBodyTimeInForce.md)

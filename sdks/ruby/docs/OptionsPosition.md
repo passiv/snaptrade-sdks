@@ -4,13 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | **String** |  | [optional] |
-| **description** | **String** |  | [optional] |
-| **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] |
+| **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **units** | **Float** |  | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **currency** | [**OptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional] |
 | **average_purchase_price** | **Float** | Average purchase price for this position | [optional] |
+| **open_pnl** | **Float** |  | [optional] |
+| **fractional_units** | **Float** | Deprecated, use the units field for both fractional and integer units going forward | [optional] |
+| **book_price** | **Float** | The book price of the asset | [optional] |
 
 ## Example
 
@@ -18,13 +19,14 @@
 require 'snaptrade'
 
 instance = SnapTrade::OptionsPosition.new(
-  symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3,
-  description: SPY PUT Aug 2022,
-  option_symbol: null,
+  symbol: null,
   price: 31.33,
   units: 10,
   currency: null,
-  average_purchase_price: 108.3353
+  average_purchase_price: 108.3353,
+  open_pnl: 0.44,
+  fractional_units: 1.44,
+  book_price: 5
 )
 ```
 
