@@ -2199,24 +2199,38 @@ components:
       type: object
       properties:
         symbol:
-          $ref: "#/components/schemas/Id"
-        description:
-          type: string
-          example: "SPY PUT Aug 2022"
-        option_symbol:
-          $ref: "#/components/schemas/OptionsSymbol"
+          $ref: "#/components/schemas/BrokerageSymbol"
         price:
           $ref: "#/components/schemas/Price"
         units:
           type: number
           example: 10
         currency:
-          $ref: "#/components/schemas/Currency"
+          nullable: true
+          allOf:
+           - $ref: "#/components/schemas/Currency"
         average_purchase_price:
           type: number
           nullable: true
           example: 108.3353
           description: Average purchase price for this position
+        open_pnl:
+          type: number
+          example: 0.44
+          nullable: true
+        fractional_units:
+          description:
+            Deprecated, use the units field for both fractional and integer
+            units going forward
+          type: number
+          nullable: true
+          example: 1.44
+        book_price:
+          description: The book price of the asset
+          type: number
+          example: 5.00
+          nullable: true
+
 
     OptionsHoldings:
       description: Option Holdings
@@ -3014,6 +3028,11 @@ components:
           description:
             Average purchase price for this position. Either returned by the
             underlying broker or calculated using historical transactions.
+        book_price:
+          description: The book price of the asset
+          type: number
+          example: 5.00
+          nullable: true
     RedirectTokenandPin:
       description: Response when register user is successful
       type: object
@@ -4165,7 +4184,8 @@ components:
           example: 200
         expiration_date:
           type: string
-          example: 2022-08-19
+          format: datetime
+          example: "2017-07-17T15:13:07.177712+00:00"
         is_mini_option:
           type: boolean
           example: false
@@ -4174,16 +4194,10 @@ components:
         local_id:
           type: string
           example: "40817960"
-        security_type:
-          example: {}
-        listing_exchange:
-          example: {}
-        is_quotable:
-          type: boolean
-          example: true
-        is_tradable:
-          type: boolean
-          example: true
+        exchange_id:
+          type: string
+          format: uuid
+
     OptionLeg:
       description: Option Leg
       type: object
