@@ -297,9 +297,6 @@ try:
         user_id="John.doe@snaptrade.com",  # required
         user_secret="USERSECRET123",  # required
     )
-    pprint(remove_brokerage_authorization_response.headers)
-    pprint(remove_brokerage_authorization_response.status)
-    pprint(remove_brokerage_authorization_response.round_trip_time)
 except ApiException as e:
     print(
         "Exception when calling ConnectionsApi.remove_brokerage_authorization: %s\n" % e
@@ -430,9 +427,6 @@ try:
         user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
         session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
     )
-    pprint(session_events_response.headers)
-    pprint(session_events_response.status)
-    pprint(session_events_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling ConnectionsApi.session_events: %s\n" % e)
     pprint(e.body)

@@ -175,9 +175,6 @@ try:
         user_id="John.doe@snaptrade.com",  # required
         user_secret="USERSECRET123",  # required
     )
-    pprint(get_user_jwt_response.headers)
-    pprint(get_user_jwt_response.status)
-    pprint(get_user_jwt_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AuthenticationApi.get_user_jwt: %s\n" % e)
     pprint(e.body)
@@ -426,9 +423,6 @@ try:
         reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",  # optional
         connection_type="read",  # optional
     )
-    pprint(login_snap_trade_user_response.headers)
-    pprint(login_snap_trade_user_response.status)
-    pprint(login_snap_trade_user_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling AuthenticationApi.login_snap_trade_user: %s\n" % e)
     pprint(e.body)
