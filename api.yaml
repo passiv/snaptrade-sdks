@@ -398,6 +398,7 @@ paths:
           description: Unexpected Error
   /holdings:
     get:
+      deprecated: true
       tags:
         - Account Information
       summary:
@@ -1061,7 +1062,7 @@ paths:
     get:
       tags:
         - Connections
-      summary: Get detail of a specific brokerage authorizations for the user
+      summary: Get brokerage authorization details
       operationId: Connections_detailBrokerageAuthorization
       parameters:
         - in: path
@@ -1092,7 +1093,7 @@ paths:
     delete:
       tags:
         - Connections
-      summary: Remove a brokerage authorization.
+      summary: Delete brokerage authorization
       operationId: Connections_removeBrokerageAuthorization
       parameters:
         - in: path
@@ -2225,11 +2226,6 @@ components:
           type: number
           nullable: true
           example: 1.44
-        book_price:
-          description: The book price of the asset
-          type: number
-          example: 5.00
-          nullable: true
 
 
     OptionsHoldings:
@@ -2789,7 +2785,7 @@ components:
       type: object
       properties:
         redirectURI:
-          example: https://app.passiv.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example
+          example: https://app.snaptrade.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example
         sessionId:
           type: string
     MockSignatureResponse:
@@ -2803,9 +2799,9 @@ components:
         signature:
           $ref: "#/components/schemas/Signature"
     ClientID:
-      description: SnapTrade Client ID (generated and provided to partner by Passiv)
+      description: SnapTrade Client ID (generated and provided to partner by SnapTrade)
       type: string
-      example: PASSIVTEST
+      example: SNAPTRADETEST
     UserID:
       description: SnapTrade User ID
       type: string
@@ -3028,11 +3024,6 @@ components:
           description:
             Average purchase price for this position. Either returned by the
             underlying broker or calculated using historical transactions.
-        book_price:
-          description: The book price of the asset
-          type: number
-          example: 5.00
-          nullable: true
     RedirectTokenandPin:
       description: Response when register user is successful
       type: object
@@ -3049,7 +3040,7 @@ components:
           * Prepare signed content (see SignedContent schema)
           * Sign content prepared above with HMAC-SHA256 using the UTF-8 encoding
           * Return base64 encoding of sign content along with headers
-         Note: Use the shared consumer key provided by Passiv to signed the request
+         Note: Use the shared consumer key provided by SnapTrade to signed the request
         Example python code
 
         ```
@@ -3070,7 +3061,7 @@ components:
 
         request_path = "/api/v1/snapTrade/mockSignature"
 
-        request_query = "clientId=PASSIVTEST&timestamp=1635790389"
+        request_query = "clientId=SNAPTRADETEST&timestamp=1635790389"
 
         sig_object = {"content": request_data, "path": request_path, "query": request_query}
 
@@ -3106,7 +3097,7 @@ components:
         To produce the correct signature, the JSON should be processed to look like this:
           -- `{"blue":"moon","hello":"world"}`
       type: string
-      example: '{"content":{"userId":"snaptrade-user-123","userSecret":"CHRIS.P.BACON"},"path":"/api/v1/snapTrade/mockSignature","query":"clientId=PASSIVTEST&timestamp=1635790389"}'
+      example: '{"content":{"userId":"snaptrade-user-123","userSecret":"CHRIS.P.BACON"},"path":"/api/v1/snapTrade/mockSignature","query":"clientId=SNAPTRADETEST&timestamp=1635790389"}'
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
@@ -3127,7 +3118,7 @@ components:
           example: true
         customRedirect:
           type: string
-          example: https://passiv.com
+          example: https://snaptrade.com
         reconnect:
           type: string
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
@@ -3256,7 +3247,7 @@ components:
         aws_s3_logo_url:
           type: string
           format: url
-          example: https://www.passiv.com/questrade.logo
+          example: https://www.snaptrade.com/questrade.logo
         slug:
           type: string
           example: QUESTRADE
@@ -3468,7 +3459,7 @@ components:
     Email:
       type: string
       format: email
-      example: ops@getpassiv.com
+      example: ops@snaptrade.com
     ExchangeRatePairs:
       description: The exchange rate of a pair of currencies
       type: object
@@ -3519,7 +3510,7 @@ components:
           $ref: "#/components/schemas/Id"
         name:
           type: string
-          example: Passiv 5x Aggressive Growth Fund
+          example: SnapTrade 5x Aggressive Growth Fund
         model_type:
           description:
             "Enum definitions -> [-1: Unassigned, 0: Security Model Portfolio,
@@ -4044,7 +4035,7 @@ components:
           example: 0
         institution:
           type: string
-          example: Passiv Investr
+          example: SnapTrade Investr
         option_type:
           type: string
           example: BUY_TO_OPEN
@@ -4247,7 +4238,7 @@ components:
         brokerage_authorization_type:
           $ref: "#/components/schemas/BrokerageAuthorizationTypeReadOnly"
     UserSettings:
-      description: Passiv user account settings
+      description: User account settings
       type: object
       properties:
         email:
