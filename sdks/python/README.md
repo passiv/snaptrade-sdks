@@ -141,9 +141,9 @@ Tag | Method | HTTP request | Description
 *Authentication* | [**list_snap_trade_users**](docs/apis/tags/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users
 *Authentication* | [**login_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user &amp; generate connection link
 *Authentication* | [**register_snap_trade_user**](docs/apis/tags/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user
-*Connections* | [**detail_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
+*Connections* | [**detail_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *Connections* | [**list_brokerage_authorizations**](docs/apis/tags/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
-*Connections* | [**remove_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
+*Connections* | [**remove_brokerage_authorization**](docs/apis/tags/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization
 *Connections* | [**session_events**](docs/apis/tags/ConnectionsApi.md#session_events) | **GET** /sessionEvents | List all session events for the partner
 *Error Logs* | [**list_user_errors**](docs/apis/tags/ErrorLogsApi.md#list_user_errors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
 *Options* | [**get_option_strategy**](docs/apis/tags/OptionsApi.md#get_option_strategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order

@@ -240,7 +240,7 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      * 
      * @param authorizationId The ID of a brokerage authorization object. (required)
      * @param userId  (required)
@@ -613,7 +613,7 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      * 
      * @param authorizationId The ID of the Authorization to delete. (required)
      * @param userId  (required)

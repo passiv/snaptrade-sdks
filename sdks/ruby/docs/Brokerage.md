@@ -33,7 +33,7 @@ instance = SnapTrade::Brokerage.new(
   name: Questrade,
   display_name: Questrade,
   description: Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada&#39;s largest discount broker.,
-  aws_s3_logo_url: https://www.passiv.com/questrade.logo,
+  aws_s3_logo_url: https://www.snaptrade.com/questrade.logo,
   slug: QUESTRADE,
   url: https://www.questrade.com/,
   enabled: true,

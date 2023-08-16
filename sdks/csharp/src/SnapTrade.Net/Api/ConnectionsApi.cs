@@ -28,7 +28,7 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user
+        /// Get brokerage authorization details
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
@@ -39,7 +39,7 @@ namespace SnapTrade.Net.Api
         BrokerageAuthorization DetailBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user
+        /// Get brokerage authorization details
         /// </summary>
         /// <remarks>
         /// 
@@ -74,7 +74,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;BrokerageAuthorization&gt;</returns>
         ApiResponse<List<BrokerageAuthorization>> ListBrokerageAuthorizationsWithHttpInfo(string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// Remove a brokerage authorization.
+        /// Delete brokerage authorization
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of the Authorization to delete.</param>
@@ -85,7 +85,7 @@ namespace SnapTrade.Net.Api
         void RemoveBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Remove a brokerage authorization.
+        /// Delete brokerage authorization
         /// </summary>
         /// <remarks>
         /// 
@@ -131,7 +131,7 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user
+        /// Get brokerage authorization details
         /// </summary>
         /// <remarks>
         /// 
@@ -146,7 +146,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user
+        /// Get brokerage authorization details
         /// </summary>
         /// <remarks>
         /// 
@@ -187,7 +187,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;BrokerageAuthorization&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<BrokerageAuthorization>>> ListBrokerageAuthorizationsWithHttpInfoAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Remove a brokerage authorization.
+        /// Delete brokerage authorization
         /// </summary>
         /// <remarks>
         /// 
@@ -202,7 +202,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Remove a brokerage authorization.
+        /// Delete brokerage authorization
         /// </summary>
         /// <remarks>
         /// 
@@ -365,7 +365,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user 
+        /// Get brokerage authorization details 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
@@ -380,7 +380,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user 
+        /// Get brokerage authorization details 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
@@ -462,7 +462,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user 
+        /// Get brokerage authorization details 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
@@ -478,7 +478,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get detail of a specific brokerage authorizations for the user 
+        /// Get brokerage authorization details 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
@@ -755,7 +755,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Remove a brokerage authorization. 
+        /// Delete brokerage authorization 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of the Authorization to delete.</param>
@@ -769,7 +769,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Remove a brokerage authorization. 
+        /// Delete brokerage authorization 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of the Authorization to delete.</param>
@@ -850,7 +850,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Remove a brokerage authorization. 
+        /// Delete brokerage authorization 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of the Authorization to delete.</param>
@@ -865,7 +865,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Remove a brokerage authorization. 
+        /// Delete brokerage authorization 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId">The ID of the Authorization to delete.</param>

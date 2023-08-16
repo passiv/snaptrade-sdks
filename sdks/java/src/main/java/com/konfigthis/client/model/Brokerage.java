@@ -269,7 +269,7 @@ public class Brokerage {
    * @return awsS3LogoUrl
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://www.passiv.com/questrade.logo", value = "")
+  @ApiModelProperty(example = "https://www.snaptrade.com/questrade.logo", value = "")
 
   public String getAwsS3LogoUrl() {
     return awsS3LogoUrl;

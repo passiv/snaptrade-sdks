@@ -44,7 +44,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Get detail of a specific brokerage authorizations for the user
+     * Get brokerage authorization details
      *
      * @throws ApiException if the Api call fails
      */
@@ -73,7 +73,7 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Remove a brokerage authorization.
+     * Delete brokerage authorization
      *
      * @throws ApiException if the Api call fails
      */

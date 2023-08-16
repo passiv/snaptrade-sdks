@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.UserSettings
-Passiv user account settings
+User account settings
 
 ## Properties
 

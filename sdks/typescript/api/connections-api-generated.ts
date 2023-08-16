@@ -32,7 +32,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @summary Get detail of a specific brokerage authorizations for the user
+         * @summary Get brokerage authorization details
          * @param {string} authorizationId The ID of a brokerage authorization object.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -148,7 +148,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary Remove a brokerage authorization.
+         * @summary Delete brokerage authorization
          * @param {string} authorizationId The ID of the Authorization to delete.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -277,7 +277,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get detail of a specific brokerage authorizations for the user
+         * @summary Get brokerage authorization details
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -299,7 +299,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove a brokerage authorization.
+         * @summary Delete brokerage authorization
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -331,7 +331,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @summary Get detail of a specific brokerage authorizations for the user
+         * @summary Get brokerage authorization details
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -351,7 +351,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary Remove a brokerage authorization.
+         * @summary Delete brokerage authorization
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -494,7 +494,7 @@ export type ConnectionsApiSessionEventsRequest = {
 export class ConnectionsApiGenerated extends BaseAPI {
     /**
      * 
-     * @summary Get detail of a specific brokerage authorizations for the user
+     * @summary Get brokerage authorization details
      * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -518,7 +518,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Remove a brokerage authorization.
+     * @summary Delete brokerage authorization
      * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

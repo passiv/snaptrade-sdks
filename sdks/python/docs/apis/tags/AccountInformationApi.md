@@ -640,7 +640,6 @@ try:
     pprint(get_user_account_positions_response.body["open_pnl"])
     pprint(get_user_account_positions_response.body["fractional_units"])
     pprint(get_user_account_positions_response.body["average_purchase_price"])
-    pprint(get_user_account_positions_response.body["book_price"])
     pprint(get_user_account_positions_response.headers)
     pprint(get_user_account_positions_response.status)
     pprint(get_user_account_positions_response.round_trip_time)

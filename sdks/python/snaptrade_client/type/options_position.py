@@ -39,8 +39,5 @@ class OptionalOptionsPosition(TypedDict, total=False):
     # Deprecated, use the units field for both fractional and integer units going forward
     fractional_units: typing.Optional[typing.Union[int, float]]
 
-    # The book price of the asset
-    book_price: typing.Optional[typing.Union[int, float]]
-
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):
     pass

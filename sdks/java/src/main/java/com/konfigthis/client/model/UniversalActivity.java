@@ -344,7 +344,7 @@ public class UniversalActivity {
    * @return institution
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Passiv Investr", value = "")
+  @ApiModelProperty(example = "SnapTrade Investr", value = "")
 
   public String getInstitution() {
     return institution;

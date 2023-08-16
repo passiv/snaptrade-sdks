@@ -97,12 +97,4 @@ public class OptionsPositionTest {
         // TODO: test fractionalUnits
     }
 
-    /**
-     * Test the property 'bookPrice'
-     */
-    @Test
-    public void bookPriceTest() {
-        // TODO: test bookPrice
-    }
-
 }

@@ -1,11 +1,11 @@
 # snaptrade_client.model.user_settings.UserSettings
 
-Passiv user account settings
+User account settings
 
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Passiv user account settings | 
+dict, frozendict.frozendict,  | frozendict.frozendict,  | User account settings | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

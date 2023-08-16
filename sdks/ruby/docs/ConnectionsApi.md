@@ -4,14 +4,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**detail_brokerage_authorization**](ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user |
+| [**detail_brokerage_authorization**](ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**list_brokerage_authorizations**](ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
-| [**remove_brokerage_authorization**](ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization. |
+| [**remove_brokerage_authorization**](ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**session_events**](ConnectionsApi.md#session_events) | **GET** /sessionEvents | List all session events for the partner |
 
 ## detail_brokerage_authorization
 
-Get detail of a specific brokerage authorizations for the user
+Get brokerage authorization details
 
 ### Example
 
@@ -26,7 +26,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # Get detail of a specific brokerage authorizations for the user
+  # Get brokerage authorization details
   result = SnapTrade::Connections.detail_brokerage_authorization(
     authorization_id: authorization_id,
     user_id: user_id,
@@ -48,7 +48,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # Get detail of a specific brokerage authorizations for the user
+  # Get brokerage authorization details
   data, status_code, headers, response = SnapTrade::Connections.detail_brokerage_authorization_with_http_info(
     authorization_id: authorization_id,
     user_id: user_id,
@@ -136,7 +136,7 @@ end
 
 ## remove_brokerage_authorization
 
-Remove a brokerage authorization.
+Delete brokerage authorization
 
 ### Example
 
@@ -151,7 +151,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # Remove a brokerage authorization.
+  # Delete brokerage authorization
   SnapTrade::Connections.remove_brokerage_authorization(
     authorization_id: authorization_id,
     user_id: user_id,
@@ -172,7 +172,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # Remove a brokerage authorization.
+  # Delete brokerage authorization
   data, status_code, headers, response = SnapTrade::Connections.remove_brokerage_authorization_with_http_info(
     authorization_id: authorization_id,
     user_id: user_id,
@@ -210,7 +210,7 @@ require 'snaptrade'
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
-partner_client_id = "PASSIVTEST"
+partner_client_id = "SNAPTRADETEST"
 user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 
@@ -232,7 +232,7 @@ end
 This returns an Array which contains the response data, status code and headers.
 
 ```ruby
-partner_client_id = "PASSIVTEST"
+partner_client_id = "SNAPTRADETEST"
 user_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
 

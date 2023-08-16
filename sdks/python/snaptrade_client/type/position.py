@@ -36,8 +36,5 @@ class OptionalPosition(TypedDict, total=False):
     # Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
     average_purchase_price: typing.Optional[typing.Union[int, float]]
 
-    # The book price of the asset
-    book_price: typing.Optional[typing.Union[int, float]]
-
 class Position(RequiredPosition, OptionalPosition):
     pass

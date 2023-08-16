@@ -31,9 +31,6 @@ module SnapTrade
     # Deprecated, use the units field for both fractional and integer units going forward
     attr_accessor :fractional_units
 
-    # The book price of the asset
-    attr_accessor :book_price
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -43,8 +40,7 @@ module SnapTrade
         :'currency' => :'currency',
         :'average_purchase_price' => :'average_purchase_price',
         :'open_pnl' => :'open_pnl',
-        :'fractional_units' => :'fractional_units',
-        :'book_price' => :'book_price'
+        :'fractional_units' => :'fractional_units'
       }
     end
 
@@ -62,8 +58,7 @@ module SnapTrade
         :'currency' => :'OptionsPositionCurrency',
         :'average_purchase_price' => :'Float',
         :'open_pnl' => :'Float',
-        :'fractional_units' => :'Float',
-        :'book_price' => :'Float'
+        :'fractional_units' => :'Float'
       }
     end
 
@@ -74,8 +69,7 @@ module SnapTrade
         :'currency',
         :'average_purchase_price',
         :'open_pnl',
-        :'fractional_units',
-        :'book_price'
+        :'fractional_units'
       ])
     end
 
@@ -121,10 +115,6 @@ module SnapTrade
       if attributes.key?(:'fractional_units')
         self.fractional_units = attributes[:'fractional_units']
       end
-
-      if attributes.key?(:'book_price')
-        self.book_price = attributes[:'book_price']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -151,8 +141,7 @@ module SnapTrade
           currency == o.currency &&
           average_purchase_price == o.average_purchase_price &&
           open_pnl == o.open_pnl &&
-          fractional_units == o.fractional_units &&
-          book_price == o.book_price
+          fractional_units == o.fractional_units
     end
 
     # @see the `==` method
@@ -164,7 +153,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, price, units, currency, average_purchase_price, open_pnl, fractional_units, book_price].hash
+      [symbol, price, units, currency, average_purchase_price, open_pnl, fractional_units].hash
     end
 
     # Builds the object from hash

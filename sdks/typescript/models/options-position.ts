@@ -68,11 +68,5 @@ export interface OptionsPosition {
      * @memberof OptionsPosition
      */
     'fractional_units'?: number | null;
-    /**
-     * The book price of the asset
-     * @type {number}
-     * @memberof OptionsPosition
-     */
-    'book_price'?: number | null;
 }
 

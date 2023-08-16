@@ -15,7 +15,6 @@ Option Holdings
 |**averagePurchasePrice** | **Double** | Average purchase price for this position |  [optional] |
 |**openPnl** | **Double** |  |  [optional] |
 |**fractionalUnits** | **Double** | Deprecated, use the units field for both fractional and integer units going forward |  [optional] |
-|**bookPrice** | **Double** | The book price of the asset |  [optional] |
 
 
 

@@ -483,7 +483,6 @@ try:
     pprint(list_option_holdings_response.body["average_purchase_price"])
     pprint(list_option_holdings_response.body["open_pnl"])
     pprint(list_option_holdings_response.body["fractional_units"])
-    pprint(list_option_holdings_response.body["book_price"])
     pprint(list_option_holdings_response.headers)
     pprint(list_option_holdings_response.status)
     pprint(list_option_holdings_response.round_trip_time)

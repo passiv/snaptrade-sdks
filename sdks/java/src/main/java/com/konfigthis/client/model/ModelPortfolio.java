@@ -161,7 +161,7 @@ public class ModelPortfolio {
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Passiv 5x Aggressive Growth Fund", value = "")
+  @ApiModelProperty(example = "SnapTrade 5x Aggressive Growth Fund", value = "")
 
   public String getName() {
     return name;

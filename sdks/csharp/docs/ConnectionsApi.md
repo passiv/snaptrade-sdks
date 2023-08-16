@@ -4,16 +4,16 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user |
+| [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
-| [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization. |
+| [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | List all session events for the partner |
 
 <a name="detailbrokerageauthorization"></a>
 # **DetailBrokerageAuthorization**
 > BrokerageAuthorization DetailBrokerageAuthorization (Guid authorizationId, string userId, string userSecret)
 
-Get detail of a specific brokerage authorizations for the user
+Get brokerage authorization details
 
 ### Example
 ```csharp
@@ -43,7 +43,7 @@ namespace Example
 
             try
             {
-                // Get detail of a specific brokerage authorizations for the user
+                // Get brokerage authorization details
                 BrokerageAuthorization result = client.Connections.DetailBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -70,7 +70,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get detail of a specific brokerage authorizations for the user
+    // Get brokerage authorization details
     ApiResponse<BrokerageAuthorization> response = apiInstance.DetailBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -221,7 +221,7 @@ catch (ApiException e)
 # **RemoveBrokerageAuthorization**
 > void RemoveBrokerageAuthorization (Guid authorizationId, string userId, string userSecret)
 
-Remove a brokerage authorization.
+Delete brokerage authorization
 
 ### Example
 ```csharp
@@ -251,7 +251,7 @@ namespace Example
 
             try
             {
-                // Remove a brokerage authorization.
+                // Delete brokerage authorization
                 client.Connections.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
             }
             catch (ApiException e)
@@ -277,7 +277,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Remove a brokerage authorization.
+    // Delete brokerage authorization
     apiInstance.RemoveBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
 }
 catch (ApiException e)

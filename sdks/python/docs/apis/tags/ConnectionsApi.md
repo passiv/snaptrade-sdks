@@ -5,14 +5,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**detail_brokerage_authorization**](#detail_brokerage_authorization) | **get** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
+[**detail_brokerage_authorization**](#detail_brokerage_authorization) | **get** /authorizations/{authorizationId} | Get brokerage authorization details
 [**list_brokerage_authorizations**](#list_brokerage_authorizations) | **get** /authorizations | List all brokerage authorizations for the user
-[**remove_brokerage_authorization**](#remove_brokerage_authorization) | **delete** /authorizations/{authorizationId} | Remove a brokerage authorization.
+[**remove_brokerage_authorization**](#remove_brokerage_authorization) | **delete** /authorizations/{authorizationId} | Delete brokerage authorization
 [**session_events**](#session_events) | **get** /sessionEvents | List all session events for the partner
 
 # **detail_brokerage_authorization**
 
-Get detail of a specific brokerage authorizations for the user
+Get brokerage authorization details
 
 ### Example
 
@@ -29,7 +29,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Get detail of a specific brokerage authorizations for the user
+    # Get brokerage authorization details
     detail_brokerage_authorization_response = (
         snaptrade.connections.detail_brokerage_authorization(
             authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
@@ -274,7 +274,7 @@ headers | Unset | headers were not defined |
 
 # **remove_brokerage_authorization**
 
-Remove a brokerage authorization.
+Delete brokerage authorization
 
 ### Example
 
@@ -291,7 +291,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Remove a brokerage authorization.
+    # Delete brokerage authorization
     snaptrade.connections.remove_brokerage_authorization(
         authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",  # required
         user_id="John.doe@snaptrade.com",  # required
@@ -423,10 +423,13 @@ snaptrade = SnapTrade(
 try:
     # List all session events for the partner
     session_events_response = snaptrade.connections.session_events(
-        partner_client_id="PASSIVTEST",  # required
+        partner_client_id="SNAPTRADETEST",  # required
         user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
         session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",  # optional
     )
+    pprint(session_events_response.headers)
+    pprint(session_events_response.status)
+    pprint(session_events_response.round_trip_time)
 except ApiException as e:
     print("Exception when calling ConnectionsApi.session_events: %s\n" % e)
     pprint(e.body)
@@ -457,12 +460,12 @@ sessionId | SessionIdSchema | | optional
 
 # PartnerClientIdSchema
 
-SnapTrade Client ID (generated and provided to partner by Passiv)
+SnapTrade Client ID (generated and provided to partner by SnapTrade)
 
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade Client ID (generated and provided to partner by Passiv) | 
+str,  | str,  | SnapTrade Client ID (generated and provided to partner by SnapTrade) | 
 
 # UserIdSchema
 

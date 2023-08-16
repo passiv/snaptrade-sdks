@@ -59,11 +59,5 @@ export interface Position {
      * @memberof Position
      */
     'average_purchase_price'?: number | null;
-    /**
-     * The book price of the asset
-     * @type {number}
-     * @memberof Position
-     */
-    'book_price'?: number | null;
 }
 

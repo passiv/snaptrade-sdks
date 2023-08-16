@@ -12,7 +12,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Passiv user account settings
+  # User account settings
   class UserSettings
     attr_accessor :email
 

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Passiv user account settings
+    /// User account settings
     /// </summary>
     [DataContract(Name = "UserSettings")]
     public partial class UserSettings : IEquatable<UserSettings>, IValidatableObject

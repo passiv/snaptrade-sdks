@@ -195,7 +195,7 @@ const loginSnapTradeUserResponse =
     userSecret: "USERSECRET123",
     broker: "ALPACA",
     immediate_redirect: true,
-    custom_redirect: "https://passiv.com",
+    custom_redirect: "https://snaptrade.com",
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connection_type: "read",
   });

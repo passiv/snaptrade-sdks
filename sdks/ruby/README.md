@@ -57,9 +57,9 @@ Class | Method | HTTP request | Description
 *SnapTrade::AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users
 *SnapTrade::AuthenticationApi* | [**login_snap_trade_user**](docs/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user & generate connection link
 *SnapTrade::AuthenticationApi* | [**register_snap_trade_user**](docs/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user
-*SnapTrade::ConnectionsApi* | [**detail_brokerage_authorization**](docs/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user
+*SnapTrade::ConnectionsApi* | [**detail_brokerage_authorization**](docs/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *SnapTrade::ConnectionsApi* | [**list_brokerage_authorizations**](docs/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
-*SnapTrade::ConnectionsApi* | [**remove_brokerage_authorization**](docs/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization.
+*SnapTrade::ConnectionsApi* | [**remove_brokerage_authorization**](docs/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization
 *SnapTrade::ConnectionsApi* | [**session_events**](docs/ConnectionsApi.md#session_events) | **GET** /sessionEvents | List all session events for the partner
 *SnapTrade::ErrorLogsApi* | [**list_user_errors**](docs/ErrorLogsApi.md#list_user_errors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users
 *SnapTrade::OptionsApi* | [**get_option_strategy**](docs/OptionsApi.md#get_option_strategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order

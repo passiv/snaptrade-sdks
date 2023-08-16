@@ -4,9 +4,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get detail of a specific brokerage authorizations for the user |
+| [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
-| [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Remove a brokerage authorization. |
+| [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | List all session events for the partner |
 
 
@@ -14,7 +14,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 # **detailBrokerageAuthorization**
 > BrokerageAuthorization detailBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
-Get detail of a specific brokerage authorizations for the user
+Get brokerage authorization details
 
 ### Example
 ```java
@@ -224,7 +224,7 @@ public class Example {
 # **removeBrokerageAuthorization**
 > removeBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
-Remove a brokerage authorization.
+Delete brokerage authorization
 
 ### Example
 ```java

@@ -21,7 +21,7 @@
 require 'snaptrade'
 
 instance = SnapTrade::UserSettings.new(
-  email: ops@getpassiv.com,
+  email: ops@snaptrade.com,
   name: James Bond,
   receive_cash_notification: true,
   receive_drift_notification: true,

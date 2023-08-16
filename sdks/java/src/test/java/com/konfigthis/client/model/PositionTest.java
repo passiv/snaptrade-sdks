@@ -88,12 +88,4 @@ public class PositionTest {
         // TODO: test averagePurchasePrice
     }
 
-    /**
-     * Test the property 'bookPrice'
-     */
-    @Test
-    public void bookPriceTest() {
-        // TODO: test bookPrice
-    }
-
 }

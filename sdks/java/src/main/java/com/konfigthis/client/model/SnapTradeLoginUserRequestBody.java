@@ -198,7 +198,7 @@ public class SnapTradeLoginUserRequestBody {
    * @return customRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://passiv.com", value = "")
+  @ApiModelProperty(example = "https://snaptrade.com", value = "")
 
   public String getCustomRedirect() {
     return customRedirect;

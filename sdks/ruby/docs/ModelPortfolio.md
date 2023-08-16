@@ -15,7 +15,7 @@ require 'snaptrade'
 
 instance = SnapTrade::ModelPortfolio.new(
   id: 2bcd7cc3-e922-4976-bce1-9858296801c3,
-  name: Passiv 5x Aggressive Growth Fund,
+  name: SnapTrade 5x Aggressive Growth Fund,
   model_type: null
 )
 ```

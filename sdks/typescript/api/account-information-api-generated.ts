@@ -49,6 +49,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {string} userSecret 
          * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getAllUserHoldings: async (userId: string, userSecret: string, brokerageAuthorizations?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -539,6 +540,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getAllUserHoldings(requestParameters: AccountInformationApiGetAllUserHoldingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountHoldings>>> {
@@ -637,6 +639,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getAllUserHoldings(requestParameters: AccountInformationApiGetAllUserHoldingsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<AccountHoldings>> {
@@ -967,6 +970,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
      * @summary List all accounts for the user, plus balances, positions, and orders for each account.
      * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */

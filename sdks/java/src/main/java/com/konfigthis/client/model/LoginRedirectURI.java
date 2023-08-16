@@ -78,7 +78,7 @@ public class LoginRedirectURI {
    * @return redirectURI
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://app.passiv.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example", value = "")
+  @ApiModelProperty(example = "https://app.snaptrade.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example", value = "")
 
   public Object getRedirectURI() {
     return redirectURI;

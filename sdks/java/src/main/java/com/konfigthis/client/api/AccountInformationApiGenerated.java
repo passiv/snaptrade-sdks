@@ -134,6 +134,7 @@ public class AccountInformationApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllUserHoldingsValidateBeforeCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -196,7 +197,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getAllUserHoldingsCall(userId, userSecret, brokerageAuthorizations, _callback);
         }
@@ -212,7 +215,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<AccountHoldings> execute() throws ApiException {
             ApiResponse<List<AccountHoldings>> localVarResp = getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
             return localVarResp.getResponseBody();
@@ -228,7 +233,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<AccountHoldings>> executeWithHttpInfo() throws ApiException {
             return getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
         }
@@ -244,7 +251,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
             return getAllUserHoldingsAsync(userId, userSecret, brokerageAuthorizations, _callback);
         }
@@ -262,7 +271,9 @@ public class AccountInformationApiGenerated {
         <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public GetAllUserHoldingsRequestBuilder getAllUserHoldings(String userId, String userSecret) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

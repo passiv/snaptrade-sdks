@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAuthorizationsAuthorizationId(ApiTestMixin, unittest.TestCase):
     """
     AuthorizationsAuthorizationId unit test stubs
-        Get detail of a specific brokerage authorizations for the user
+        Get brokerage authorization details
     """
 
     def setUp(self):

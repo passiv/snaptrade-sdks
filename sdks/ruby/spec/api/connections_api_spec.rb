@@ -29,7 +29,7 @@ describe 'ConnectionsApi' do
   end
 
   # unit tests for detail_brokerage_authorization
-  # Get detail of a specific brokerage authorizations for the user
+  # Get brokerage authorization details
   # @param authorization_id The ID of a brokerage authorization object.
   # @param user_id 
   # @param user_secret 
@@ -54,7 +54,7 @@ describe 'ConnectionsApi' do
   end
 
   # unit tests for remove_brokerage_authorization
-  # Remove a brokerage authorization.
+  # Delete brokerage authorization
   # @param authorization_id The ID of the Authorization to delete.
   # @param user_id 
   # @param user_secret 

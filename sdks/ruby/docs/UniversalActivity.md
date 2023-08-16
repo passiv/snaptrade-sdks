@@ -33,7 +33,7 @@ instance = SnapTrade::UniversalActivity.new(
   currency: null,
   description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22,
   fee: 0,
-  institution: Passiv Investr,
+  institution: SnapTrade Investr,
   option_type: BUY_TO_OPEN,
   price: 0.4,
   settlement_date: 2022-01-06T05:00:00.000Z,

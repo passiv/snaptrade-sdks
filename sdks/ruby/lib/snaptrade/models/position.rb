@@ -29,9 +29,6 @@ module SnapTrade
     # Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
     attr_accessor :average_purchase_price
 
-    # The book price of the asset
-    attr_accessor :book_price
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,8 +37,7 @@ module SnapTrade
         :'price' => :'price',
         :'open_pnl' => :'open_pnl',
         :'fractional_units' => :'fractional_units',
-        :'average_purchase_price' => :'average_purchase_price',
-        :'book_price' => :'book_price'
+        :'average_purchase_price' => :'average_purchase_price'
       }
     end
 
@@ -58,8 +54,7 @@ module SnapTrade
         :'price' => :'Float',
         :'open_pnl' => :'Float',
         :'fractional_units' => :'Float',
-        :'average_purchase_price' => :'Float',
-        :'book_price' => :'Float'
+        :'average_purchase_price' => :'Float'
       }
     end
 
@@ -70,8 +65,7 @@ module SnapTrade
         :'price',
         :'open_pnl',
         :'fractional_units',
-        :'average_purchase_price',
-        :'book_price'
+        :'average_purchase_price'
       ])
     end
 
@@ -113,10 +107,6 @@ module SnapTrade
       if attributes.key?(:'average_purchase_price')
         self.average_purchase_price = attributes[:'average_purchase_price']
       end
-
-      if attributes.key?(:'book_price')
-        self.book_price = attributes[:'book_price']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,8 +132,7 @@ module SnapTrade
           price == o.price &&
           open_pnl == o.open_pnl &&
           fractional_units == o.fractional_units &&
-          average_purchase_price == o.average_purchase_price &&
-          book_price == o.book_price
+          average_purchase_price == o.average_purchase_price
     end
 
     # @see the `==` method
@@ -155,7 +144,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, units, price, open_pnl, fractional_units, average_purchase_price, book_price].hash
+      [symbol, units, price, open_pnl, fractional_units, average_purchase_price].hash
     end
 
     # Builds the object from hash

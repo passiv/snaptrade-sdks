@@ -77,10 +77,6 @@ public class Position {
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
   private Double averagePurchasePrice;
 
-  public static final String SERIALIZED_NAME_BOOK_PRICE = "book_price";
-  @SerializedName(SERIALIZED_NAME_BOOK_PRICE)
-  private Double bookPrice;
-
   public Position() {
   }
 
@@ -319,47 +315,6 @@ public class Position {
     this.averagePurchasePrice = averagePurchasePrice;
   }
 
-
-  public Position bookPrice(Double bookPrice) {
-
-    
-    
-    
-    
-    this.bookPrice = bookPrice;
-    return this;
-  }
-
-  public Position bookPrice(Integer bookPrice) {
-
-    
-    
-    
-    
-    this.bookPrice = bookPrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * The book price of the asset
-   * @return bookPrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "5", value = "The book price of the asset")
-
-  public Double getBookPrice() {
-    return bookPrice;
-  }
-
-
-  public void setBookPrice(Double bookPrice) {
-
-    
-    
-    
-    this.bookPrice = bookPrice;
-  }
-
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -420,8 +375,7 @@ public class Position {
         Objects.equals(this.price, position.price) &&
         Objects.equals(this.openPnl, position.openPnl) &&
         Objects.equals(this.fractionalUnits, position.fractionalUnits) &&
-        Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice) &&
-        Objects.equals(this.bookPrice, position.bookPrice)&&
+        Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice)&&
         Objects.equals(this.additionalProperties, position.additionalProperties);
   }
 
@@ -431,7 +385,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, units, price, openPnl, fractionalUnits, averagePurchasePrice, bookPrice, additionalProperties);
+    return Objects.hash(symbol, units, price, openPnl, fractionalUnits, averagePurchasePrice, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -451,7 +405,6 @@ public class Position {
     sb.append("    openPnl: ").append(toIndentedString(openPnl)).append("\n");
     sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
-    sb.append("    bookPrice: ").append(toIndentedString(bookPrice)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -481,7 +434,6 @@ public class Position {
     openapiFields.add("open_pnl");
     openapiFields.add("fractional_units");
     openapiFields.add("average_purchase_price");
-    openapiFields.add("book_price");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

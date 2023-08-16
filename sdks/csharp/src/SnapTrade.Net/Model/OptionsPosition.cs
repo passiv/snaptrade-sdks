@@ -42,8 +42,7 @@ namespace SnapTrade.Net.Model
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
         /// <param name="openPnl">openPnl.</param>
         /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
-        /// <param name="bookPrice">The book price of the asset.</param>
-        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), decimal? price = default(decimal?), decimal units = default(decimal), OptionsPositionCurrency currency = default(OptionsPositionCurrency), decimal? averagePurchasePrice = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?), decimal? bookPrice = default(decimal?)) : base()
+        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), decimal? price = default(decimal?), decimal units = default(decimal), OptionsPositionCurrency currency = default(OptionsPositionCurrency), decimal? averagePurchasePrice = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
@@ -52,7 +51,6 @@ namespace SnapTrade.Net.Model
             this.AveragePurchasePrice = averagePurchasePrice;
             this.OpenPnl = openPnl;
             this.FractionalUnits = fractionalUnits;
-            this.BookPrice = bookPrice;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -102,13 +100,6 @@ namespace SnapTrade.Net.Model
         public decimal? FractionalUnits { get; set; }
 
         /// <summary>
-        /// The book price of the asset
-        /// </summary>
-        /// <value>The book price of the asset</value>
-        [DataMember(Name = "book_price", EmitDefaultValue = true)]
-        public decimal? BookPrice { get; set; }
-
-        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -130,7 +121,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
             sb.Append("  OpenPnl: ").Append(OpenPnl).Append("\n");
             sb.Append("  FractionalUnits: ").Append(FractionalUnits).Append("\n");
-            sb.Append("  BookPrice: ").Append(BookPrice).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -200,11 +190,6 @@ namespace SnapTrade.Net.Model
                     this.FractionalUnits == input.FractionalUnits ||
                     (this.FractionalUnits != null &&
                     this.FractionalUnits.Equals(input.FractionalUnits))
-                ) && base.Equals(input) && 
-                (
-                    this.BookPrice == input.BookPrice ||
-                    (this.BookPrice != null &&
-                    this.BookPrice.Equals(input.BookPrice))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -242,10 +227,6 @@ namespace SnapTrade.Net.Model
                 if (this.FractionalUnits != null)
                 {
                     hashCode = (hashCode * 59) + this.FractionalUnits.GetHashCode();
-                }
-                if (this.BookPrice != null)
-                {
-                    hashCode = (hashCode * 59) + this.BookPrice.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

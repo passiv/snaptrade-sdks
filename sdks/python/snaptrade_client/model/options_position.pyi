@@ -142,26 +142,6 @@ class OptionsPosition(
                         *args,
                         _configuration=_configuration,
                     )
-            
-            
-            class book_price(
-                schemas.NumberBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneDecimalMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'book_price':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
             __annotations__ = {
                 "symbol": symbol,
                 "price": price,
@@ -170,7 +150,6 @@ class OptionsPosition(
                 "average_purchase_price": average_purchase_price,
                 "open_pnl": open_pnl,
                 "fractional_units": fractional_units,
-                "book_price": book_price,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -196,12 +175,9 @@ class OptionsPosition(
     def __getitem__(self, name: typing_extensions.Literal["fractional_units"]) -> MetaOapg.properties.fractional_units: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["book_price"]) -> MetaOapg.properties.book_price: ...
-    
-    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["currency"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["book_price"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["currency"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["fractional_units"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -227,12 +203,9 @@ class OptionsPosition(
     def get_item_oapg(self, name: typing_extensions.Literal["fractional_units"]) -> typing.Union[MetaOapg.properties.fractional_units, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["book_price"]) -> typing.Union[MetaOapg.properties.book_price, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["currency"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["book_price"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["currency"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["fractional_units"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -245,7 +218,6 @@ class OptionsPosition(
         average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         open_pnl: typing.Union[MetaOapg.properties.open_pnl, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         fractional_units: typing.Union[MetaOapg.properties.fractional_units, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        book_price: typing.Union[MetaOapg.properties.book_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'OptionsPosition':
@@ -259,7 +231,6 @@ class OptionsPosition(
             average_purchase_price=average_purchase_price,
             open_pnl=open_pnl,
             fractional_units=fractional_units,
-            book_price=book_price,
             _configuration=_configuration,
             **kwargs,
         )

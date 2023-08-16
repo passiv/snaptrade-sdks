@@ -18,7 +18,7 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Get detail of a specific brokerage authorizations for the user
+    # Get brokerage authorization details
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -29,7 +29,7 @@ module SnapTrade
       data
     end
 
-    # Get detail of a specific brokerage authorizations for the user
+    # Get brokerage authorization details
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -39,7 +39,7 @@ module SnapTrade
       detail_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
-    # Get detail of a specific brokerage authorizations for the user
+    # Get brokerage authorization details
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -50,7 +50,7 @@ module SnapTrade
       data
     end
 
-    # Get detail of a specific brokerage authorizations for the user
+    # Get brokerage authorization details
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -204,7 +204,7 @@ module SnapTrade
     end
 
 
-    # Remove a brokerage authorization.
+    # Delete brokerage authorization
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -215,7 +215,7 @@ module SnapTrade
       nil
     end
 
-    # Remove a brokerage authorization.
+    # Delete brokerage authorization
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -225,7 +225,7 @@ module SnapTrade
       remove_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
-    # Remove a brokerage authorization.
+    # Delete brokerage authorization
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -236,7 +236,7 @@ module SnapTrade
       nil
     end
 
-    # Remove a brokerage authorization.
+    # Delete brokerage authorization
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 

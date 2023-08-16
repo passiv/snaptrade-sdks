@@ -16,7 +16,7 @@
 import { Currency } from './currency';
 
 /**
- * Passiv user account settings
+ * User account settings
  * @export
  * @interface UserSettings
  */

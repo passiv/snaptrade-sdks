@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **AveragePurchasePrice** | **decimal?** | Average purchase price for this position | [optional] 
 **OpenPnl** | **decimal?** |  | [optional] 
 **FractionalUnits** | **decimal?** | Deprecated, use the units field for both fractional and integer units going forward | [optional] 
-**BookPrice** | **decimal?** | The book price of the asset | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
