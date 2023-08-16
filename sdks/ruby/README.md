@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.14.0'
+gem 'snaptrade', '~> 1.15.0'
 ```
 
 ## Getting Started
