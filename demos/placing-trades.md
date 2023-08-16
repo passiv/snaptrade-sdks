@@ -70,7 +70,7 @@ Check the account has enough cash to place trades.
 ::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Limit"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
 ::number{name=PRICE label="Price" defaultValue=10, step=0.01 precision=2}
-::number{name=UNITS label="Units" defaultValue=1}
+::number{name=UNITS label="Units" defaultValue=1 step=0.05 precision=2}
 
 ```python
 result = snaptrade.trading.get_order_impact(
@@ -124,7 +124,7 @@ If you don't need to check the impact of an order before placing it use `place_f
 ::enum{name=ORDER_TYPE label="Order Type" data="Limit,Market,StopLimit,StopLoss" defaultValue="Market"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
 ::number{name=PRICE label="Price" step=0.01 precision=2 optional}
-::number{name=UNITS label="Units" defaultValue=1}
+::number{name=UNITS label="Units" defaultValue=1 step=0.05 precision=2}
 
 ```python
 try:
