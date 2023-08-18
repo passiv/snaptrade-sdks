@@ -23,7 +23,6 @@ import tempfile
 import time
 import typing
 import typing_extensions
-import warnings
 import aiohttp
 import urllib3
 from urllib3._collections import HTTPHeaderDict
@@ -76,7 +75,7 @@ def DeprecationWarningOnce(func=None, *, prefix=None):
                 msg = f"{func.__name__} is deprecated"
                 if prefix:
                     msg = f"{prefix}.{msg}"
-                warnings.warn(msg, DeprecationWarning)
+                instance.api_client.configuration.logger["package_logger"].warn(msg)
                 warned = True
             return func(instance, *args, **kwargs)
         return wrapper
