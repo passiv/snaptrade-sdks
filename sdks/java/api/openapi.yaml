@@ -10,6 +10,8 @@ info:
   version: 1.0.0
   x-konfig-ignore:
     potential-incorrect-type: true
+  x-readme:
+    explorer-enabled: false
 servers:
 - description: SnapTrade Production API
   url: https://api.snaptrade.com/api/v1
