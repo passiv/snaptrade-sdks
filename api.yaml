@@ -8,6 +8,8 @@ info:
     email: api@snaptrade.com
   x-konfig-ignore:
     potential-incorrect-type: true
+  x-readme:
+    explorer-enabled: false
 servers:
   - description: SnapTrade Production API
     url: https://api.snaptrade.com/api/v1
