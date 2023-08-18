@@ -411,6 +411,7 @@ class BaseApi(api_client.Api):
 class GetAllUserHoldings(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget_all_user_holdings(
         self,
         user_id: typing.Optional[str] = None,
@@ -432,6 +433,7 @@ class GetAllUserHoldings(BaseApi):
             query_params=args.query,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     def get_all_user_holdings(
         self,
         user_id: typing.Optional[str] = None,
@@ -455,6 +457,7 @@ class GetAllUserHoldings(BaseApi):
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget(
         self,
         user_id: typing.Optional[str] = None,
@@ -476,6 +479,7 @@ class ApiForget(BaseApi):
             query_params=args.query,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     def get(
         self,
         user_id: typing.Optional[str] = None,
