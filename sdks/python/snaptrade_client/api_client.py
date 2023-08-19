@@ -75,7 +75,7 @@ def DeprecationWarningOnce(func=None, *, prefix=None):
                 msg = f"{func.__name__} is deprecated"
                 if prefix:
                     msg = f"{prefix}.{msg}"
-                instance.api_client.configuration.logger.warn(msg)
+                instance.api_client.configuration.logger.warning(msg)
                 warned = True
             return func(instance, *args, **kwargs)
         return wrapper
