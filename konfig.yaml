@@ -93,7 +93,7 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 10.32.1
+    version: 10.32.2
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
