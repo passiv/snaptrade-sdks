@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
 
+primaryColor: "#9fc1be"
+portalTitle: SnapTrade
 filterTags:
   - Webhooks
   - Development Tools
