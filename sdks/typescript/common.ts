@@ -159,7 +159,7 @@ export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxi
     return async <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
         requestBeforeUrlHook({axiosArgs, basePath, configuration})
         const url = (configuration?.basePath || basePath) + axiosArgs.url
-        requestAfterHook({axiosArgs, basePath, url, configuration})
+        await requestAfterHook({axiosArgs, basePath, url, configuration})
         try {
             return await axios.request<T, R>({ ...axiosArgs.options, url });
         } catch (e) {

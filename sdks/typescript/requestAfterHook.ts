@@ -2,6 +2,48 @@ import * as crypto from "crypto";
 import { RequestArgs } from "./base";
 import { Configuration } from "./configuration";
 
+// Function to check if the code is running in a Node.js environment
+function isNodeEnvironment() {
+  return (
+    typeof process !== "undefined" && process.versions && process.versions.node
+  );
+}
+
+// Compute HMAC SHA256
+async function computeHmacSha256(
+  message: string,
+  key: string
+): Promise<string> {
+  if (isNodeEnvironment()) {
+    // Node.js environment
+    const crypto = require("crypto");
+    const hmac = crypto.createHmac("sha256", key);
+    hmac.update(message);
+    return hmac.digest("base64"); // or return Buffer if you want raw bytes
+  } else {
+    // Browser environment
+    const encoder = new TextEncoder();
+    const keyBuffer = encoder.encode(key);
+    const msgBuffer = encoder.encode(message);
+    const cryptoKey = await window.crypto.subtle.importKey(
+      "raw",
+      keyBuffer,
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+    const signature = await window.crypto.subtle.sign(
+      "HMAC",
+      cryptoKey,
+      msgBuffer
+    );
+    const byteArray = new Uint8Array(signature);
+    // Convert byte array to base64
+    const base64 = btoa(String.fromCharCode.apply(null, byteArray));
+    return base64;
+  }
+}
+
 const JSONstringifyOrder = (obj: any) => {
   var allKeys: any = [];
   var seen: any = {};
@@ -16,12 +58,12 @@ const JSONstringifyOrder = (obj: any) => {
   return JSON.stringify(obj, allKeys);
 };
 
-export function requestAfterHook(request: {
+export async function requestAfterHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
   url: string;
   configuration?: Configuration;
-}): void {
+}): Promise<void> {
   const { configuration, basePath, axiosArgs, url } = request;
   if (configuration?.consumerKey === undefined)
     throw Error("Consumer key is required");
@@ -45,8 +87,7 @@ export function requestAfterHook(request: {
     query: requestQuery,
   };
   const sigContent = JSONstringifyOrder(sigObject);
-  const hmac = crypto.createHmac("sha256", consumerKey);
-  const signature = hmac.update(sigContent).digest("base64");
+  const signature = await computeHmacSha256(sigContent, consumerKey);
 
   if (axiosArgs.options.headers)
     axiosArgs.options.headers["Signature"] = signature;
