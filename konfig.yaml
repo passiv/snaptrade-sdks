@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
 
-primaryColor: "#9fc1be"
+primaryColor: '#9fc1be'
 portalTitle: SnapTrade
 filterTags:
   - Webhooks
@@ -111,7 +111,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.27.0
+    version: 8.27.1
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

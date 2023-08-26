@@ -1,4 +1,4 @@
-# snaptrade-typescript-sdk@8.27.0
+# snaptrade-typescript-sdk@8.27.1
 
 Connect brokerage accounts to your app for live positions and trading
 ## Installing
