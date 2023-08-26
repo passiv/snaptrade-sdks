@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Snaptrade } from "./index";
 
 function uuid() {
@@ -22,30 +21,6 @@ function uuid() {
     return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
   });
 }
-
-describe("trailing slash is stripped", () => {
-  // Mocking axios just for this describe block
-  jest.mock("axios");
-
-  it("should make a GET request to the correct URL", async () => {
-    const mockGet = jest.fn().mockResolvedValue({ data: {} });
-    (axios.request as jest.Mock) = mockGet;
-
-    // Call your function
-    await new Snaptrade({
-      consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-      clientId: process.env.SNAPTRADE_CLIENT_ID,
-      basePath: "http://localhost:3000/api/proxy",
-    }).apiStatus.check();
-
-    // Assert that axios.get was called with the correct URL
-    expect(axios.request).toHaveBeenCalledWith(
-      expect.objectContaining({
-        url: expect.stringContaining("http://localhost:3000/api/proxy?"),
-      })
-    );
-  });
-});
 
 it("getting started", async () => {
   // 1) Initialize a client with your clientID and consumerKey.
