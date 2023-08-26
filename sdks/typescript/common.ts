@@ -148,7 +148,14 @@ export const serializeDataIfNeeded = function (value: any, requestOptions: any, 
  * @export
  */
 export const toPathString = function (url: URL) {
-    return url.pathname + url.search + url.hash
+    return removeTrailingSlash(url.pathname) + url.search + url.hash
+}
+
+/**
+ * remove trailing slash from string
+ */
+export const removeTrailingSlash = function (url: string) {
+    return url.replace(/\/$/, "");
 }
 
 /**
