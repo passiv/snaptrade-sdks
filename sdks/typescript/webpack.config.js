@@ -1,12 +1,12 @@
 const path = require("path");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: "./index.ts",
   output: {
     filename: "browser.js",
     path: path.resolve(__dirname, "dist"),
-    library: "konfig",
+    library: "snaptrade",
     libraryTarget: "umd",
   },
   resolve: {
