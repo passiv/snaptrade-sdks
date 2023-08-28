@@ -17,6 +17,9 @@ portal:
       path: demos/handling-user-data.md
     - id: placing-trades
       path: demos/placing-trades.md
+  hideSecurity:
+    - name: PartnerSignature
+    - name: PartnerTimestamp
 
 filterTags:
   - Webhooks
