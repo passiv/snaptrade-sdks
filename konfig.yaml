@@ -1,7 +1,23 @@
 # yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
 
-primaryColor: '#9fc1be'
-portalTitle: SnapTrade
+portal:
+  title: SnapTrade
+  primaryColor: '#9fc1be'
+  socials:
+    website: https://snaptrade.com
+    documentation: https://docs.snaptrade.com
+  demos:
+    - id: getting-started
+      path: demos/getting-started.md
+    - id: registering-users
+      path: demos/registering-users.md
+    - id: list-accounts
+      path: demos/list-accounts.md
+    - id: handling-user-data
+      path: demos/handling-user-data.md
+    - id: placing-trades
+      path: demos/placing-trades.md
+
 filterTags:
   - Webhooks
   - Development Tools
