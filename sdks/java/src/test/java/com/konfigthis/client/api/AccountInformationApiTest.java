@@ -94,7 +94,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      *
      * @throws ApiException if the Api call fails
      */

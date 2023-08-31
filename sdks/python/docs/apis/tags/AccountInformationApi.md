@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**get_all_user_holdings**](#get_all_user_holdings) | **get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**get_user_account_balance**](#get_user_account_balance) | **get** /accounts/{accountId}/balances | List account balances
 [**get_user_account_details**](#get_user_account_details) | **get** /accounts/{accountId} | Return details of a specific investment account
-[**get_user_account_orders**](#get_user_account_orders) | **get** /accounts/{accountId}/orders | Get all history of orders placed in account
+[**get_user_account_orders**](#get_user_account_orders) | **get** /accounts/{accountId}/orders | Get history of orders placed in account
 [**get_user_account_positions**](#get_user_account_positions) | **get** /accounts/{accountId}/positions | List account positions
 [**get_user_holdings**](#get_user_holdings) | **get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 [**list_user_accounts**](#list_user_accounts) | **get** /accounts | List accounts
@@ -448,7 +448,7 @@ headers | Unset | headers were not defined |
 
 # **get_user_account_orders**
 
-Get all history of orders placed in account
+Get history of orders placed in account
 
 ### Example
 
@@ -465,7 +465,7 @@ snaptrade = SnapTrade(
 )
 
 try:
-    # Get all history of orders placed in account
+    # Get history of orders placed in account
     get_user_account_orders_response = (
         snaptrade.account_information.get_user_account_orders(
             user_id="John.doe@snaptrade.com",  # required

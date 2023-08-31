@@ -52,19 +52,12 @@ public class Example {
               .getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getStrategy());
-
       System.out.println(result.getOpenPrice());
-
       System.out.println(result.getBidPrice());
-
       System.out.println(result.getAskPrice());
-
       System.out.println(result.getVolatility());
-
       System.out.println(result.getGreek());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionStrategy");
       System.err.println("Status code: " + e.getStatusCode());
@@ -260,19 +253,12 @@ public class Example {
               .getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getStrategy());
-
       System.out.println(result.getOpenPrice());
-
       System.out.println(result.getBidPrice());
-
       System.out.println(result.getAskPrice());
-
       System.out.println(result.getVolatility());
-
       System.out.println(result.getGreek());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionsStrategyQuote");
       System.err.println("Status code: " + e.getStatusCode());
@@ -370,7 +356,6 @@ public class Example {
               .listOptionHoldings(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#listOptionHoldings");
       System.err.println("Status code: " + e.getStatusCode());
@@ -471,29 +456,17 @@ public class Example {
               .placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getStrategy());
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getFilledQuantity());
-
       System.out.println(result.getOpenQuantity());
-
       System.out.println(result.getClosedQuantity());
-
       System.out.println(result.getOrderType());
-
       System.out.println(result.getTimeInForce());
-
       System.out.println(result.getLimitPrice());
-
       System.out.println(result.getExecutionPrice());
-
       System.out.println(result.getTimePlaced());
-
       System.out.println(result.getTimeUpdated());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#placeOptionStrategy");
       System.err.println("Status code: " + e.getStatusCode());

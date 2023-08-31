@@ -7,7 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
+| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
@@ -53,7 +53,6 @@ public class Example {
               .brokerageAuthorizations(brokerageAuthorizations)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
       System.err.println("Status code: " + e.getStatusCode());
@@ -151,7 +150,6 @@ public class Example {
               .getUserAccountBalance(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountBalance");
       System.err.println("Status code: " + e.getStatusCode());
@@ -248,27 +246,16 @@ public class Example {
               .getUserAccountDetails(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getId());
-
       System.out.println(result.getBrokerageAuthorization());
-
       System.out.println(result.getPortfolioGroup());
-
       System.out.println(result.getName());
-
       System.out.println(result.getNumber());
-
       System.out.println(result.getInstitutionName());
-
       System.out.println(result.getCreatedDate());
-
       System.out.println(result.getMeta());
-
       System.out.println(result.getCashRestrictions());
-
       System.out.println(result.getSyncStatus());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
       System.err.println("Status code: " + e.getStatusCode());
@@ -331,7 +318,7 @@ public class Example {
 # **getUserAccountOrders**
 > List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).execute();
 
-Get all history of orders placed in account
+Get history of orders placed in account
 
 ### Example
 ```java
@@ -367,7 +354,6 @@ public class Example {
               .state(state)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountOrders");
       System.err.println("Status code: " + e.getStatusCode());
@@ -466,7 +452,6 @@ public class Example {
               .getUserAccountPositions(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountPositions");
       System.err.println("Status code: " + e.getStatusCode());
@@ -563,17 +548,11 @@ public class Example {
               .getUserHoldings(accountId, userId, userSecret)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getAccount());
-
       System.out.println(result.getBalances());
-
       System.out.println(result.getPositions());
-
       System.out.println(result.getOrders());
-
       System.out.println(result.getTotalValue());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserHoldings");
       System.err.println("Status code: " + e.getStatusCode());
@@ -669,7 +648,6 @@ public class Example {
               .listUserAccounts(userId, userSecret)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#listUserAccounts");
       System.err.println("Status code: " + e.getStatusCode());
@@ -765,7 +743,6 @@ public class Example {
               .updateUserAccount(userId, userSecret, accountId)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#updateUserAccount");
       System.err.println("Status code: " + e.getStatusCode());

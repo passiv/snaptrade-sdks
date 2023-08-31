@@ -1,4 +1,8 @@
-# snaptrade-python-sdk@10.32.2
+# snaptrade-python-sdk
+
+[![PyPI](https://img.shields.io/badge/PyPI-v10.32.3-blue)](https://pypi.org/project/snaptrade-python-sdk/10.32.3)
+[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
+
 Connect brokerage accounts to your app for live positions and trading
 
 
@@ -9,7 +13,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.32.2
+pip install snaptrade-python-sdk==10.32.3
 ```
 
 ## Getting Started
@@ -130,7 +134,7 @@ Tag | Method | HTTP request | Description
 *Account Information* | [**get_all_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *Account Information* | [**get_user_account_balance**](docs/apis/tags/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances
 *Account Information* | [**get_user_account_details**](docs/apis/tags/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
-*Account Information* | [**get_user_account_orders**](docs/apis/tags/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account
+*Account Information* | [**get_user_account_orders**](docs/apis/tags/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account
 *Account Information* | [**get_user_account_positions**](docs/apis/tags/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions
 *Account Information* | [**get_user_holdings**](docs/apis/tags/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
 *Account Information* | [**list_user_accounts**](docs/apis/tags/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts

@@ -20,7 +20,6 @@ portal:
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
-
 filterTags:
   - Webhooks
   - Development Tools
@@ -52,7 +51,7 @@ tagPriority:
   - Account Information
 additionalGenerators:
   php7:
-    version: 1.2.0
+    version: 1.2.1
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -67,7 +66,7 @@ additionalGenerators:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 1.15.0
+    version: 1.15.1
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -77,7 +76,7 @@ generators:
     clientState:
       - consumer_key
   php:
-    version: 1.24.0
+    version: 1.24.1
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -89,7 +88,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 3.32.0
+    version: 3.32.1
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -100,7 +99,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 4.11.0
+    version: 4.11.1
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -114,7 +113,7 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 10.32.2
+    version: 10.32.3
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -130,7 +129,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.27.1
+    version: 8.27.2
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

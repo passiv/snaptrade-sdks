@@ -719,7 +719,7 @@ paths:
           description: List all orders in account
         "500":
           description: Unexpected error
-      summary: Get all history of orders placed in account
+      summary: Get history of orders placed in account
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true

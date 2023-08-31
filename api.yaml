@@ -666,7 +666,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Get all history of orders placed in account
+      summary: Get history of orders placed in account
       operationId: AccountInformation_getUserAccountOrders
       parameters:
         - in: query

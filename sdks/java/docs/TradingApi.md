@@ -52,43 +52,24 @@ public class Example {
               .brokerageOrderId(brokerageOrderId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getBrokerageOrderId());
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getSymbol());
-
       System.out.println(result.getUniversalSymbol());
-
       System.out.println(result.getOptionSymbol());
-
       System.out.println(result.getAction());
-
       System.out.println(result.getTotalQuantity());
-
       System.out.println(result.getOpenQuantity());
-
       System.out.println(result.getCanceledQuantity());
-
       System.out.println(result.getFilledQuantity());
-
       System.out.println(result.getExecutionPrice());
-
       System.out.println(result.getLimitPrice());
-
       System.out.println(result.getStopPrice());
-
       System.out.println(result.getOrderType());
-
       System.out.println(result.getTimeInForce());
-
       System.out.println(result.getTimePlaced());
-
       System.out.println(result.getTimeUpdated());
-
       System.out.println(result.getExpiryDate());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -202,13 +183,9 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getTrade());
-
       System.out.println(result.getTradeImpacts());
-
       System.out.println(result.getCombinedRemainingBalance());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getOrderImpact");
       System.err.println("Status code: " + e.getStatusCode());
@@ -429,43 +406,24 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getBrokerageOrderId());
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getSymbol());
-
       System.out.println(result.getUniversalSymbol());
-
       System.out.println(result.getOptionSymbol());
-
       System.out.println(result.getAction());
-
       System.out.println(result.getTotalQuantity());
-
       System.out.println(result.getOpenQuantity());
-
       System.out.println(result.getCanceledQuantity());
-
       System.out.println(result.getFilledQuantity());
-
       System.out.println(result.getExecutionPrice());
-
       System.out.println(result.getLimitPrice());
-
       System.out.println(result.getStopPrice());
-
       System.out.println(result.getOrderType());
-
       System.out.println(result.getTimeInForce());
-
       System.out.println(result.getTimePlaced());
-
       System.out.println(result.getTimeUpdated());
-
       System.out.println(result.getExpiryDate());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -573,43 +531,24 @@ public class Example {
               .secondTradeId(secondTradeId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getBrokerageOrderId());
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getSymbol());
-
       System.out.println(result.getUniversalSymbol());
-
       System.out.println(result.getOptionSymbol());
-
       System.out.println(result.getAction());
-
       System.out.println(result.getTotalQuantity());
-
       System.out.println(result.getOpenQuantity());
-
       System.out.println(result.getCanceledQuantity());
-
       System.out.println(result.getFilledQuantity());
-
       System.out.println(result.getExecutionPrice());
-
       System.out.println(result.getLimitPrice());
-
       System.out.println(result.getStopPrice());
-
       System.out.println(result.getOrderType());
-
       System.out.println(result.getTimeInForce());
-
       System.out.println(result.getTimePlaced());
-
       System.out.println(result.getTimeUpdated());
-
       System.out.println(result.getExpiryDate());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOCOOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -708,43 +647,24 @@ public class Example {
               .placeOrder(tradeId, userId, userSecret)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getBrokerageOrderId());
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getSymbol());
-
       System.out.println(result.getUniversalSymbol());
-
       System.out.println(result.getOptionSymbol());
-
       System.out.println(result.getAction());
-
       System.out.println(result.getTotalQuantity());
-
       System.out.println(result.getOpenQuantity());
-
       System.out.println(result.getCanceledQuantity());
-
       System.out.println(result.getFilledQuantity());
-
       System.out.println(result.getExecutionPrice());
-
       System.out.println(result.getLimitPrice());
-
       System.out.println(result.getStopPrice());
-
       System.out.println(result.getOrderType());
-
       System.out.println(result.getTimeInForce());
-
       System.out.println(result.getTimePlaced());
-
       System.out.println(result.getTimeUpdated());
-
       System.out.println(result.getExpiryDate());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");
       System.err.println("Status code: " + e.getStatusCode());

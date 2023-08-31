@@ -124,6 +124,7 @@ public class ApiClient extends ApiClientCustom {
             if (configuration.timestamp != null) {
                 this.setPartnerTimestamp(configuration.timestamp);
             }
+
             if (configuration.consumerKey != null) {
                 this.consumerKey = configuration.consumerKey;
             }
@@ -187,7 +188,7 @@ public class ApiClient extends ApiClientCustom {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("Konfig/4.11.0/java");
+        setUserAgent("Konfig/4.11.1/java");
 
         authentications = new HashMap<String, Authentication>();
     }

@@ -226,7 +226,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
+         * @summary Get history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account get positions.
@@ -571,7 +571,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
+         * @summary Get history of orders placed in account
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -667,7 +667,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get all history of orders placed in account
+         * @summary Get history of orders placed in account
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1004,7 +1004,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Get all history of orders placed in account
+     * @summary Get history of orders placed in account
      * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

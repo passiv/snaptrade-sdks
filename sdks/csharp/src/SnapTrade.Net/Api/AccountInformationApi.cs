@@ -102,7 +102,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of Account</returns>
         ApiResponse<Account> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0);
         /// <summary>
-        /// Get all history of orders placed in account
+        /// Get history of orders placed in account
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -114,7 +114,7 @@ namespace SnapTrade.Net.Api
         List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, Guid accountId, string state = default(string), int operationIndex = 0);
 
         /// <summary>
-        /// Get all history of orders placed in account
+        /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
         /// 
@@ -320,7 +320,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (Account)</returns>
         System.Threading.Tasks.Task<ApiResponse<Account>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get all history of orders placed in account
+        /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
         /// 
@@ -336,7 +336,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<AccountOrderRecord>> GetUserAccountOrdersAsync(string userId, string userSecret, Guid accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get all history of orders placed in account
+        /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
         /// 
@@ -1189,7 +1189,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all history of orders placed in account 
+        /// Get history of orders placed in account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1205,7 +1205,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all history of orders placed in account 
+        /// Get history of orders placed in account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1292,7 +1292,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all history of orders placed in account 
+        /// Get history of orders placed in account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1309,7 +1309,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get all history of orders placed in account 
+        /// Get history of orders placed in account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

@@ -57,7 +57,6 @@ public class Example {
               .type(type)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TransactionsAndReportingApi#getActivities");
       System.err.println("Status code: " + e.getStatusCode());
@@ -172,45 +171,25 @@ public class Example {
               .frequency(frequency)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getTotalEquityTimeframe());
-
       System.out.println(result.getContributions());
-
       System.out.println(result.getContributionTimeframe());
-
       System.out.println(result.getContributionTimeframeCumulative());
-
       System.out.println(result.getWithdrawalTimeframe());
-
       System.out.println(result.getContributionStreak());
-
       System.out.println(result.getContributionMonthsContributed());
-
       System.out.println(result.getContributionTotalMonths());
-
       System.out.println(result.getDividends());
-
       System.out.println(result.getDividendIncome());
-
       System.out.println(result.getMonthlyDividends());
-
       System.out.println(result.getBadTickers());
-
       System.out.println(result.getDividendTimeline());
-
       System.out.println(result.getCommissions());
-
       System.out.println(result.getForexFees());
-
       System.out.println(result.getFees());
-
       System.out.println(result.getRateOfReturn());
-
       System.out.println(result.getReturnRateTimeframe());
-
       System.out.println(result.getDetailedMode());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling TransactionsAndReportingApi#getReportingCustomRange");
       System.err.println("Status code: " + e.getStatusCode());

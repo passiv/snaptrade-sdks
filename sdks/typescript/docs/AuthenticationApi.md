@@ -194,10 +194,10 @@ const loginSnapTradeUserResponse =
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
     broker: "ALPACA",
-    immediate_redirect: true,
-    custom_redirect: "https://snaptrade.com",
+    immediateRedirect: true,
+    customRedirect: "https://snaptrade.com",
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-    connection_type: "read",
+    connectionType: "read",
   });
 
 console.log(loginSnapTradeUserResponse);
@@ -254,8 +254,8 @@ const snaptrade = new Snaptrade({
 
 const registerSnapTradeUserResponse =
   await snaptrade.authentication.registerSnapTradeUser({
-    user_id: "snaptrade-user-123",
-    rsa_public_key:
+    userId: "snaptrade-user-123",
+    rsaPublicKey:
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
   });
 

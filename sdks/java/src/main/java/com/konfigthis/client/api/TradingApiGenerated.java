@@ -397,7 +397,7 @@ public class TradingApiGenerated {
         private Double price;
         private Double stop;
         private TimeInForce timeInForce;
-        private double units;
+        private Double units;
         private UUID universalSymbolId;
 
         private GetOrderImpactRequestBuilder(String userId, String userSecret) {
@@ -492,7 +492,7 @@ public class TradingApiGenerated {
          * @param units Trade Units (optional)
          * @return GetOrderImpactRequestBuilder
          */
-        public GetOrderImpactRequestBuilder units(double units) {
+        public GetOrderImpactRequestBuilder units(Double units) {
             this.units = units;
             return this;
         }
@@ -930,7 +930,7 @@ public class TradingApiGenerated {
         private Double price;
         private Double stop;
         private TimeInForce timeInForce;
-        private double units;
+        private Double units;
         private UUID universalSymbolId;
 
         private PlaceForceOrderRequestBuilder(String userId, String userSecret) {
@@ -1025,7 +1025,7 @@ public class TradingApiGenerated {
          * @param units Trade Units (optional)
          * @return PlaceForceOrderRequestBuilder
          */
-        public PlaceForceOrderRequestBuilder units(double units) {
+        public PlaceForceOrderRequestBuilder units(Double units) {
             this.units = units;
             return this;
         }

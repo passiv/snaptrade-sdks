@@ -7,7 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**get_all_user_holdings**](AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**get_user_account_balance**](AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**get_user_account_details**](AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get all history of orders placed in account |
+| [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**get_user_account_positions**](AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**get_user_holdings**](AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
 | [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts |
@@ -210,7 +210,7 @@ end
 
 ## get_user_account_orders
 
-Get all history of orders placed in account
+Get history of orders placed in account
 
 ### Example
 
@@ -226,7 +226,7 @@ account_id = "accountId_example"
 state = "all"
 
 begin
-  # Get all history of orders placed in account
+  # Get history of orders placed in account
   result = SnapTrade::AccountInformation.get_user_account_orders(
     user_id: user_id,
     user_secret: user_secret,
@@ -250,7 +250,7 @@ account_id = "accountId_example"
 state = "all"
 
 begin
-  # Get all history of orders placed in account
+  # Get history of orders placed in account
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_orders_with_http_info(
     user_id: user_id,
     user_secret: user_secret,

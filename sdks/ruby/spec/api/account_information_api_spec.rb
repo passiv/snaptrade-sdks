@@ -68,7 +68,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_account_orders
-  # Get all history of orders placed in account
+  # Get history of orders placed in account
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account get positions.
