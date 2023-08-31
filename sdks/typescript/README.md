@@ -1,6 +1,6 @@
 # snaptrade-typescript-sdk
 
-[![npm](https://img.shields.io/badge/npm-v8.27.1-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.27.1)
+[![npm](https://img.shields.io/badge/npm-v8.27.2-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.27.2)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
