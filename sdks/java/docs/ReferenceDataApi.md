@@ -53,13 +53,9 @@ public class Example {
               .getCurrencyExchangeRatePair(currencyPair)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getSrc());
-
       System.out.println(result.getDst());
-
       System.out.println(result.getExchangeRate());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getCurrencyExchangeRatePair");
       System.err.println("Status code: " + e.getStatusCode());
@@ -150,31 +146,18 @@ public class Example {
               .getPartnerInfo()
               .execute();
       System.out.println(result);
-
       System.out.println(result.getRedirectUri());
-
       System.out.println(result.getAllowedBrokerages());
-
       System.out.println(result.getName());
-
       System.out.println(result.getSlug());
-
       System.out.println(result.getLogoUrl());
-
       System.out.println(result.getPinRequired());
-
       System.out.println(result.getCanAccessTrades());
-
       System.out.println(result.getCanAccessHoldings());
-
       System.out.println(result.getCanAccessAccountHistory());
-
       System.out.println(result.getCanAccessReferenceData());
-
       System.out.println(result.getCanAccessPortfolioManagement());
-
       System.out.println(result.getCanAccessOrders());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
       System.err.println("Status code: " + e.getStatusCode());
@@ -263,7 +246,6 @@ public class Example {
               .getSecurityTypes()
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSecurityTypes");
       System.err.println("Status code: " + e.getStatusCode());
@@ -352,7 +334,6 @@ public class Example {
               .getStockExchanges()
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getStockExchanges");
       System.err.println("Status code: " + e.getStatusCode());
@@ -442,7 +423,6 @@ public class Example {
               .substring(substring)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbols");
       System.err.println("Status code: " + e.getStatusCode());
@@ -538,23 +518,14 @@ public class Example {
               .symbolId(symbolId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getId());
-
       System.out.println(result.getSymbol());
-
       System.out.println(result.getRawSymbol());
-
       System.out.println(result.getDescription());
-
       System.out.println(result.getCurrency());
-
       System.out.println(result.getExchange());
-
       System.out.println(result.getType());
-
       System.out.println(result.getCurrencies());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
       System.err.println("Status code: " + e.getStatusCode());
@@ -651,7 +622,6 @@ public class Example {
               .brokerage(brokerage)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageAuthorizationType");
       System.err.println("Status code: " + e.getStatusCode());
@@ -744,7 +714,6 @@ public class Example {
               .listAllBrokerages()
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllBrokerages");
       System.err.println("Status code: " + e.getStatusCode());
@@ -833,7 +802,6 @@ public class Example {
               .listAllCurrencies()
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrencies");
       System.err.println("Status code: " + e.getStatusCode());
@@ -922,7 +890,6 @@ public class Example {
               .listAllCurrenciesRates()
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#listAllCurrenciesRates");
       System.err.println("Status code: " + e.getStatusCode());
@@ -1015,7 +982,6 @@ public class Example {
               .substring(substring)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#symbolSearchUserAccount");
       System.err.println("Status code: " + e.getStatusCode());

@@ -846,7 +846,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * Get all history of orders placed in account
+     * Get history of orders placed in account
      * 
      * @param userId  (required)
      * @param userSecret  (required)

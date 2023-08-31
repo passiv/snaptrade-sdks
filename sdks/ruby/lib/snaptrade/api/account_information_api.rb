@@ -308,7 +308,7 @@ module SnapTrade
     end
 
 
-    # Get all history of orders placed in account
+    # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -321,7 +321,7 @@ module SnapTrade
       data
     end
 
-    # Get all history of orders placed in account
+    # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -333,7 +333,7 @@ module SnapTrade
       get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Get all history of orders placed in account
+    # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.
@@ -345,7 +345,7 @@ module SnapTrade
       data
     end
 
-    # Get all history of orders placed in account
+    # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account get positions.

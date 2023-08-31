@@ -43,13 +43,9 @@ public class Example {
               .check()
               .execute();
       System.out.println(result);
-
       System.out.println(result.getVersion());
-
       System.out.println(result.getTimestamp());
-
       System.out.println(result.getOnline());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ApiStatusApi#check");
       System.err.println("Status code: " + e.getStatusCode());

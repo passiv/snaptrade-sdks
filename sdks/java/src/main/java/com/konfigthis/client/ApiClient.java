@@ -124,6 +124,7 @@ public class ApiClient extends ApiClientCustom {
             if (configuration.timestamp != null) {
                 this.setPartnerTimestamp(configuration.timestamp);
             }
+
             if (configuration.consumerKey != null) {
                 this.consumerKey = configuration.consumerKey;
             }

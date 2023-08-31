@@ -9,19 +9,3 @@
 |C#|3.32.0|[NuGet](https://nuget.org/packages/SnapTrade.Net/3.32.0)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/csharp)|
 |PHP (8.0+)|1.24.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#1.24.0)|[Documentation](https://github.com/passiv/snaptrade-php-sdk/blob/master/README.md)|[Source](https://github.com/passiv/snaptrade-php-sdk)|
 |PHP (7.0+)|1.2.0|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-7-sdk#1.2.0)|[Documentation](https://github.com/passiv/snaptrade-php-7-sdk/blob/master/README.md)|[Source](https://github.com/passiv/snaptrade-php-7-sdk)|
-
-
-## How to regenerate SDKs
-
-1. Install [Konfig's CLI](https://www.npmjs.com/package/konfig-cli)
-
-```bash
-❯ npm install -g konfig-cli
-```
-
-2. Generate SDKs
-```bash
-❯ konfig generate
-```
-
-### [Documentation](https://konfigthis.com/docs)

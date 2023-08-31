@@ -47,11 +47,8 @@ public class Example {
               .deleteSnapTradeUser(userId)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getStatus());
-
       System.out.println(result.getUserId());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#deleteSnapTradeUser");
       System.err.println("Status code: " + e.getStatusCode());
@@ -436,11 +433,8 @@ public class Example {
               .rsaPublicKey(rsaPublicKey)
               .execute();
       System.out.println(result);
-
       System.out.println(result.getUserId());
-
       System.out.println(result.getUserSecret());
-
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#registerSnapTradeUser");
       System.err.println("Status code: " + e.getStatusCode());

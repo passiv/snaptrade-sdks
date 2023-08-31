@@ -44,7 +44,6 @@ public class Example {
               .listUserErrors(userId, userSecret)
               .execute();
       System.out.println(result);
-
     } catch (ApiException e) {
       System.err.println("Exception when calling ErrorLogsApi#listUserErrors");
       System.err.println("Status code: " + e.getStatusCode());
