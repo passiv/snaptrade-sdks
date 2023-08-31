@@ -1,10 +1,10 @@
-name: konfig-revalidate-demos
+name: konfig-revalidate-portal
 on:
   push:
     branches:
       - master
 jobs:
-  konfig-revalidate-demos:
+  konfig-revalidate-portal:
     runs-on: ubuntu-latest
     env:
       CLI_VERSION: 1.10.0
