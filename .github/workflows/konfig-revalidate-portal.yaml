@@ -7,7 +7,7 @@ jobs:
   konfig-revalidate-demos:
     runs-on: ubuntu-latest
     env:
-      CLI_VERSION: 1.0.208
+      CLI_VERSION: 1.10.0
     steps:
       - uses: actions/checkout@v3
       - name: Cache node_modules
@@ -19,5 +19,5 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.CLI_VERSION }}
       - name: Install Konfig CLI
         run: npm install -g konfig-cli@$CLI_VERSION
-      - name: Revalidate Demos
-        run: konfig revalidate-demos -o passiv -p snaptrade-sdks
+      - name: Revalidate Portal
+        run: konfig revalidate-portal -o passiv -r snaptrade-sdks
