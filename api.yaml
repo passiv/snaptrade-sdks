@@ -4035,6 +4035,11 @@ components:
         fee:
           type: number
           example: 0
+        fx_rate:
+          type: number
+          example: 1.032
+          nullable: true
+          description: The forex conversion rate involved in the transaction if provided by the brokerage
         institution:
           type: string
           example: SnapTrade Investr
