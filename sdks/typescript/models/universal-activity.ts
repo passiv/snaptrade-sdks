@@ -69,6 +69,12 @@ export interface UniversalActivity {
      */
     'fee'?: number;
     /**
+     * The forex conversion rate involved in the transaction if provided by the brokerage
+     * @type {number}
+     * @memberof UniversalActivity
+     */
+    'fx_rate'?: number | null;
+    /**
      * 
      * @type {string}
      * @memberof UniversalActivity

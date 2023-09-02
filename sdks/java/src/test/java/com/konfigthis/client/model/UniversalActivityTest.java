@@ -92,6 +92,14 @@ public class UniversalActivityTest {
     }
 
     /**
+     * Test the property 'fxRate'
+     */
+    @Test
+    public void fxRateTest() {
+        // TODO: test fxRate
+    }
+
+    /**
      * Test the property 'institution'
      */
     @Test

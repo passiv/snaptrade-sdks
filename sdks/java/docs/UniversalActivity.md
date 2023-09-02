@@ -14,6 +14,7 @@ A transaction or activity from an institution
 |**currency** | **Currency** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**fee** | **Double** |  |  [optional] |
+|**fxRate** | **Double** | The forex conversion rate involved in the transaction if provided by the brokerage |  [optional] |
 |**institution** | **String** |  |  [optional] |
 |**optionType** | **String** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string |  [optional] |
 |**price** | **Double** |  |  [optional] |

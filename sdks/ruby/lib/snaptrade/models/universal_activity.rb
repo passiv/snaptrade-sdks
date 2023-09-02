@@ -26,6 +26,9 @@ module SnapTrade
 
     attr_accessor :fee
 
+    # The forex conversion rate involved in the transaction if provided by the brokerage
+    attr_accessor :fx_rate
+
     attr_accessor :institution
 
     # If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
@@ -59,6 +62,7 @@ module SnapTrade
         :'currency' => :'currency',
         :'description' => :'description',
         :'fee' => :'fee',
+        :'fx_rate' => :'fx_rate',
         :'institution' => :'institution',
         :'option_type' => :'option_type',
         :'price' => :'price',
@@ -86,6 +90,7 @@ module SnapTrade
         :'currency' => :'Currency',
         :'description' => :'String',
         :'fee' => :'Float',
+        :'fx_rate' => :'Float',
         :'institution' => :'String',
         :'option_type' => :'String',
         :'price' => :'Float',
@@ -103,6 +108,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'amount',
+        :'fx_rate',
         :'external_reference_id',
         :'trade_date',
       ])
@@ -145,6 +151,10 @@ module SnapTrade
 
       if attributes.key?(:'fee')
         self.fee = attributes[:'fee']
+      end
+
+      if attributes.key?(:'fx_rate')
+        self.fx_rate = attributes[:'fx_rate']
       end
 
       if attributes.key?(:'institution')
@@ -212,6 +222,7 @@ module SnapTrade
           currency == o.currency &&
           description == o.description &&
           fee == o.fee &&
+          fx_rate == o.fx_rate &&
           institution == o.institution &&
           option_type == o.option_type &&
           price == o.price &&
@@ -233,7 +244,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, amount, currency, description, fee, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
+      [id, account, amount, currency, description, fee, fx_rate, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
     end
 
     # Builds the object from hash

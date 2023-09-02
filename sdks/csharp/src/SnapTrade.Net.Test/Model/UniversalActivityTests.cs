@@ -106,6 +106,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Fee'
         }
         /// <summary>
+        /// Test the property 'FxRate'
+        /// </summary>
+        [Fact]
+        public void FxRateTest()
+        {
+            // TODO unit test for the property 'FxRate'
+        }
+        /// <summary>
         /// Test the property 'Institution'
         /// </summary>
         [Fact]

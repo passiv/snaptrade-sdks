@@ -41,6 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="description">description.</param>
         /// <param name="fee">fee.</param>
+        /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage.</param>
         /// <param name="institution">institution.</param>
         /// <param name="optionType">If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string.</param>
         /// <param name="price">price.</param>
@@ -51,7 +52,7 @@ namespace SnapTrade.Net.Model
         /// <param name="tradeDate">tradeDate.</param>
         /// <param name="type">Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT.</param>
         /// <param name="units">Usually but not necessarily an integer.</param>
-        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), string externalReferenceId = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
+        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), decimal? fxRate = default(decimal?), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), string externalReferenceId = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -59,6 +60,7 @@ namespace SnapTrade.Net.Model
             this.Currency = currency;
             this.Description = description;
             this.Fee = fee;
+            this.FxRate = fxRate;
             this.Institution = institution;
             this.OptionType = optionType;
             this.Price = price;
@@ -107,6 +109,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "fee", EmitDefaultValue = false)]
         public decimal Fee { get; set; }
+
+        /// <summary>
+        /// The forex conversion rate involved in the transaction if provided by the brokerage
+        /// </summary>
+        /// <value>The forex conversion rate involved in the transaction if provided by the brokerage</value>
+        [DataMember(Name = "fx_rate", EmitDefaultValue = true)]
+        public decimal? FxRate { get; set; }
 
         /// <summary>
         /// Gets or Sets Institution
@@ -193,6 +202,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Fee: ").Append(Fee).Append("\n");
+            sb.Append("  FxRate: ").Append(FxRate).Append("\n");
             sb.Append("  Institution: ").Append(Institution).Append("\n");
             sb.Append("  OptionType: ").Append(OptionType).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
@@ -267,6 +277,11 @@ namespace SnapTrade.Net.Model
                 (
                     this.Fee == input.Fee ||
                     this.Fee.Equals(input.Fee)
+                ) && base.Equals(input) && 
+                (
+                    this.FxRate == input.FxRate ||
+                    (this.FxRate != null &&
+                    this.FxRate.Equals(input.FxRate))
                 ) && base.Equals(input) && 
                 (
                     this.Institution == input.Institution ||
@@ -349,6 +364,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Fee.GetHashCode();
+                if (this.FxRate != null)
+                {
+                    hashCode = (hashCode * 59) + this.FxRate.GetHashCode();
+                }
                 if (this.Institution != null)
                 {
                     hashCode = (hashCode * 59) + this.Institution.GetHashCode();

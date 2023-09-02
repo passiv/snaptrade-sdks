@@ -46,6 +46,7 @@ try:
     pprint(get_activities_response.body["currency"])
     pprint(get_activities_response.body["description"])
     pprint(get_activities_response.body["fee"])
+    pprint(get_activities_response.body["fx_rate"])
     pprint(get_activities_response.body["institution"])
     pprint(get_activities_response.body["option_type"])
     pprint(get_activities_response.body["price"])

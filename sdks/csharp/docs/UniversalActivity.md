@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Fee** | **decimal** |  | [optional] 
+**FxRate** | **decimal?** | The forex conversion rate involved in the transaction if provided by the brokerage | [optional] 
 **Institution** | **string** |  | [optional] 
 **OptionType** | **string** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] 
 **Price** | **decimal** |  | [optional] 

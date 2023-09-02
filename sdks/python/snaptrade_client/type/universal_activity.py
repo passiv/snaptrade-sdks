@@ -36,6 +36,9 @@ class OptionalUniversalActivity(TypedDict, total=False):
 
     fee: typing.Union[int, float]
 
+    # The forex conversion rate involved in the transaction if provided by the brokerage
+    fx_rate: typing.Optional[typing.Union[int, float]]
+
     institution: str
 
     # If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string

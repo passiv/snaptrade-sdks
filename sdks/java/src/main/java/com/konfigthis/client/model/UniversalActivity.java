@@ -80,6 +80,10 @@ public class UniversalActivity {
   @SerializedName(SERIALIZED_NAME_FEE)
   private Double fee;
 
+  public static final String SERIALIZED_NAME_FX_RATE = "fx_rate";
+  @SerializedName(SERIALIZED_NAME_FX_RATE)
+  private Double fxRate;
+
   public static final String SERIALIZED_NAME_INSTITUTION = "institution";
   @SerializedName(SERIALIZED_NAME_INSTITUTION)
   private String institution;
@@ -326,6 +330,47 @@ public class UniversalActivity {
     
     
     this.fee = fee;
+  }
+
+
+  public UniversalActivity fxRate(Double fxRate) {
+
+    
+    
+    
+    
+    this.fxRate = fxRate;
+    return this;
+  }
+
+  public UniversalActivity fxRate(Integer fxRate) {
+
+    
+    
+    
+    
+    this.fxRate = fxRate.doubleValue();
+    return this;
+  }
+
+   /**
+   * The forex conversion rate involved in the transaction if provided by the brokerage
+   * @return fxRate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1.032", value = "The forex conversion rate involved in the transaction if provided by the brokerage")
+
+  public Double getFxRate() {
+    return fxRate;
+  }
+
+
+  public void setFxRate(Double fxRate) {
+
+    
+    
+    
+    this.fxRate = fxRate;
   }
 
 
@@ -719,6 +764,7 @@ public class UniversalActivity {
         Objects.equals(this.currency, universalActivity.currency) &&
         Objects.equals(this.description, universalActivity.description) &&
         Objects.equals(this.fee, universalActivity.fee) &&
+        Objects.equals(this.fxRate, universalActivity.fxRate) &&
         Objects.equals(this.institution, universalActivity.institution) &&
         Objects.equals(this.optionType, universalActivity.optionType) &&
         Objects.equals(this.price, universalActivity.price) &&
@@ -738,7 +784,7 @@ public class UniversalActivity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, account, amount, currency, description, fee, institution, optionType, price, settlementDate, externalReferenceId, symbol, optionSymbol, tradeDate, type, units, additionalProperties);
+    return Objects.hash(id, account, amount, currency, description, fee, fxRate, institution, optionType, price, settlementDate, externalReferenceId, symbol, optionSymbol, tradeDate, type, units, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -758,6 +804,7 @@ public class UniversalActivity {
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    fee: ").append(toIndentedString(fee)).append("\n");
+    sb.append("    fxRate: ").append(toIndentedString(fxRate)).append("\n");
     sb.append("    institution: ").append(toIndentedString(institution)).append("\n");
     sb.append("    optionType: ").append(toIndentedString(optionType)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
@@ -797,6 +844,7 @@ public class UniversalActivity {
     openapiFields.add("currency");
     openapiFields.add("description");
     openapiFields.add("fee");
+    openapiFields.add("fx_rate");
     openapiFields.add("institution");
     openapiFields.add("option_type");
     openapiFields.add("price");

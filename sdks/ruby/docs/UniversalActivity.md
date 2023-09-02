@@ -10,6 +10,7 @@
 | **currency** | [**Currency**](Currency.md) |  | [optional] |
 | **description** | **String** |  | [optional] |
 | **fee** | **Float** |  | [optional] |
+| **fx_rate** | **Float** | The forex conversion rate involved in the transaction if provided by the brokerage | [optional] |
 | **institution** | **String** |  | [optional] |
 | **option_type** | **String** | If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] |
 | **price** | **Float** |  | [optional] |
@@ -33,6 +34,7 @@ instance = SnapTrade::UniversalActivity.new(
   currency: null,
   description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22,
   fee: 0,
+  fx_rate: 1.032,
   institution: SnapTrade Investr,
   option_type: BUY_TO_OPEN,
   price: 0.4,
