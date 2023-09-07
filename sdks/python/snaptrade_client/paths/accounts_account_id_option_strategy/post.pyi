@@ -127,8 +127,8 @@ class SchemaForRequestBodyApplicationJson(
                 class MetaOapg:
                     
                     @staticmethod
-                    def items() -> typing.Type['OptionLeg']:
-                        return OptionLeg
+                    def items() -> typing.Type['OptionLegSchema']:
+                        return OptionLegSchema
             
                 def __new__(
                     cls,

@@ -53,8 +53,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['ExchangeRatePairs']:
-            return ExchangeRatePairs
+        def items() -> typing.Type['ExchangeRatePairsSchema']:
+            return ExchangeRatePairsSchema
 
     def __new__(
         cls,

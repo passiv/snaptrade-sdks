@@ -46,8 +46,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['SecurityType']:
-            return SecurityType
+        def items() -> typing.Type['SecurityTypeSchema']:
+            return SecurityTypeSchema
 
     def __new__(
         cls,

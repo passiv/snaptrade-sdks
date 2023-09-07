@@ -122,8 +122,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['UniversalActivity']:
-            return UniversalActivity
+        def items() -> typing.Type['UniversalActivitySchema']:
+            return UniversalActivitySchema
 
     def __new__(
         cls,

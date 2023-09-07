@@ -108,8 +108,8 @@ class SchemaFor200ResponseBody(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['Balance']:
-            return Balance
+        def items() -> typing.Type['BalanceSchema']:
+            return BalanceSchema
 
     def __new__(
         cls,

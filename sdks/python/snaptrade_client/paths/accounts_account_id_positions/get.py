@@ -115,8 +115,8 @@ class SchemaFor200ResponseBody(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['Position']:
-            return Position
+        def items() -> typing.Type['PositionSchema']:
+            return PositionSchema
 
     def __new__(
         cls,
