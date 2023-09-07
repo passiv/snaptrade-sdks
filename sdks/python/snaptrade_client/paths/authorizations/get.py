@@ -89,8 +89,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['BrokerageAuthorization']:
-            return BrokerageAuthorization
+        def items() -> typing.Type['BrokerageAuthorizationSchema']:
+            return BrokerageAuthorizationSchema
 
     def __new__(
         cls,

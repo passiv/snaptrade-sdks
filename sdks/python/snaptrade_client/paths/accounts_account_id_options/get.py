@@ -115,8 +115,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['OptionsPosition']:
-            return OptionsPosition
+        def items() -> typing.Type['OptionsPositionSchema']:
+            return OptionsPositionSchema
 
     def __new__(
         cls,

@@ -82,8 +82,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['UserErrorLog']:
-            return UserErrorLog
+        def items() -> typing.Type['UserErrorLogSchema']:
+            return UserErrorLogSchema
 
     def __new__(
         cls,

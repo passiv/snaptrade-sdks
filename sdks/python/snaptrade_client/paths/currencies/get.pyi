@@ -46,8 +46,8 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['Currency']:
-            return Currency
+        def items() -> typing.Type['CurrencySchema']:
+            return CurrencySchema
 
     def __new__(
         cls,

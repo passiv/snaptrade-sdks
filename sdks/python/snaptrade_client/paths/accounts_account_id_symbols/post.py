@@ -127,8 +127,8 @@ class SchemaFor200ResponseBody(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['UniversalSymbol']:
-            return UniversalSymbol
+        def items() -> typing.Type['UniversalSymbolSchema']:
+            return UniversalSymbolSchema
 
     def __new__(
         cls,
