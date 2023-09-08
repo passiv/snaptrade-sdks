@@ -4,9 +4,11 @@ import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.DeleteUserResponse;
+import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.PortfolioGroup;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.Status;
+import com.konfigthis.client.model.StrategyQuotes;
 import com.konfigthis.client.model.TargetAsset;
 import com.konfigthis.client.model.UniversalSymbol;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -31,7 +33,7 @@ public class GettingStartedTest {
                 Snaptrade snaptrade = new Snaptrade(configuration);
                 UUID userId = UUID.randomUUID();
                 UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
-                        .userId(userId.toString()).execute();
+                                .userId(userId.toString()).execute();
                 List<TargetAsset> targetAsset = new ArrayList<>();
                 targetAsset.add(new TargetAsset().symbol(new UniversalSymbol().symbol("AAPL")).percent(90));
                 snaptrade.authentication.deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
@@ -81,6 +83,28 @@ public class GettingStartedTest {
                 System.out.println(accounts);
                 List<Brokerage> brokerages = snaptrade.referenceData.listAllBrokerages().execute();
                 System.out.println(brokerages);
+
+                // Test getOptionStrategy
+                try {
+                        UUID underlyingSymbolId = UUID.fromString("3ab7bf2d-beca-4de3-a215-f93d4a5a99b7");
+                        List<OptionLeg> legs = new ArrayList<OptionLeg>();
+                        String strategyType = "CUSTOM";
+                        String option_id = "48947660";
+                        Double quantity = 1.0;
+                        OptionLeg leg = new OptionLeg().optionSymbolId(option_id)
+                                        .action(OptionLeg.ActionEnum.BUY_TO_OPEN)
+                                        .quantity(quantity);
+                        legs.add(leg);
+                        StrategyQuotes result = snaptrade.options
+                                        .getOptionStrategy(underlyingSymbolId, legs, strategyType,
+                                                        userIDandSecret.getUserId(),
+                                                        userIDandSecret.getUserSecret(),
+                                                        underlyingSymbolId)
+                                        .execute();
+                        System.out.println(result);
+                } catch (ApiException e) {
+                        System.out.println(e);
+                }
 
                 // 6) Deleting a user
                 DeleteUserResponse deleteUserResponse = snaptrade.authentication

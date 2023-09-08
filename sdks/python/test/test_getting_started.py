@@ -105,6 +105,26 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(holdings.body)
 
+        # Test get_option_strategy
+        try:
+            resp = snaptrade.options.get_option_strategy(
+                underlying_symbol_id="3ab7bf2d-beca-4de3-a215-f93d4a5a99b7",
+                legs=[
+                    {
+                        "option_symbol_id": "48947660",
+                        "quantity": 1.0,
+                        "action": "BUY_TO_OPEN",
+                    }
+                ],
+                strategy_type="CUSTOM",
+                user_id=user_id,
+                user_secret=user_secret,
+                account_id="3ab7bf2d-beca-4de3-a215-f93d4a5a99b7",
+            )
+            print(resp)
+        except Exception as e:
+            print(e)
+
         # 6) Deleting a user
         deleted_response = snaptrade.authentication.delete_snap_trade_user(
             query_params={"userId": user_id}
@@ -259,7 +279,7 @@ class TestGettingStarted(unittest.TestCase):
         snaptrade = SnapTrade(
             consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
             client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-            host="http://127.0.0.1:4010"
+            host="http://127.0.0.1:4010",
         )
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
