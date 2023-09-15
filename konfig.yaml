@@ -6,6 +6,14 @@ portal:
   socials:
     website: https://snaptrade.com
     documentation: https://docs.snaptrade.com
+  documentation:
+    sidebar:
+      sections:
+        - label: Guides
+          links:
+            - label: Getting Started
+              id: getting-started
+              path: docs/getting-started.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
