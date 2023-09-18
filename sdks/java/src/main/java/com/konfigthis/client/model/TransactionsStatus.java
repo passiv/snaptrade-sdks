@@ -110,7 +110,7 @@ public class TransactionsStatus {
    * @return lastSuccessfulSync
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date in YYYY-MM-DD format or null")
+  @ApiModelProperty(example = "Mon Jan 24 00:00:00 UTC 2022", value = "Date in YYYY-MM-DD format or null")
 
   public LocalDate getLastSuccessfulSync() {
     return lastSuccessfulSync;
