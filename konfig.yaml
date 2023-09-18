@@ -4,6 +4,7 @@ portal:
   title: SnapTrade
   primaryColor: '#9fc1be'
   favicon: favicon.png
+  logo: portal-logo.png
   socials:
     website: https://snaptrade.com
   documentation:
