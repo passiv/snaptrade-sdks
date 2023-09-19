@@ -83,8 +83,9 @@ generators:
     git:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/ruby
-    clientState:
-      - consumer_key
+    clientStateWithExamples:
+      - name: consumer_key
+        required: true
   php:
     version: 1.25.1
     outputDirectory: sdks/php

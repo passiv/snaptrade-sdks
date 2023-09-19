@@ -46,6 +46,13 @@ module SnapTrade
     # client state configured through konfig.yaml
     attr_accessor :consumer_key
 
+    def consumer_key=(value)
+      if value.nil? || value.empty?
+        raise ArgumentError, "Invalid value for consumer_key, must be non-empty string"
+      end
+      @consumer_key = value
+    end
+
     # Defines API keys used with API Key authentications.
     #
     # @return [Hash] key: parameter name, value: parameter value (API key)
