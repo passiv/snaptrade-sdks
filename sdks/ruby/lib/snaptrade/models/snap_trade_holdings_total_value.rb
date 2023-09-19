@@ -12,7 +12,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Total Value of the account
+  # Summed value of account positions and cash balances
   class SnapTradeHoldingsTotalValue
     attr_accessor :value
 

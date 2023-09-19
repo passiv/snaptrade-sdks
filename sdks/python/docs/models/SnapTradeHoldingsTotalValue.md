@@ -1,11 +1,11 @@
 # snaptrade_client.model.snap_trade_holdings_total_value.SnapTradeHoldingsTotalValue
 
-Total Value of the account
+Summed value of account positions and cash balances
 
 ## Model Type Info
 Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-dict, frozendict.frozendict,  | frozendict.frozendict,  | Total Value of the account | 
+dict, frozendict.frozendict,  | frozendict.frozendict,  | Summed value of account positions and cash balances | 
 
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes

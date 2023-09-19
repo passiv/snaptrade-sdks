@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Total Value of the account
+    /// Summed value of account positions and cash balances
     /// </summary>
     [DataContract(Name = "SnapTradeHoldingsTotalValue")]
     public partial class SnapTradeHoldingsTotalValue : IEquatable<SnapTradeHoldingsTotalValue>, IValidatableObject

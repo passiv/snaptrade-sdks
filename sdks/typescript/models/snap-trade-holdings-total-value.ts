@@ -13,7 +13,7 @@
 
 
 /**
- * Total Value of the account
+ * Summed value of account positions and cash balances
  * @export
  * @interface SnapTradeHoldingsTotalValue
  */

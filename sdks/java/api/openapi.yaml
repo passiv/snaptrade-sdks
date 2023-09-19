@@ -3608,7 +3608,7 @@ components:
       type: object
     SnapTradeHoldingsTotalValue:
       additionalProperties: true
-      description: Total Value of the account
+      description: Summed value of account positions and cash balances
       example:
         currency: USD
         value: 32600.71

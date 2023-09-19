@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.SnapTradeHoldingsTotalValue
-Total Value of the account
+Summed value of account positions and cash balances
 
 ## Properties
 

@@ -2,10 +2,18 @@ import unittest
 from unittest.mock import patch
 
 from snaptrade_client.api_client import ApiClient, DeprecationWarningOnce
+from snaptrade_client.configuration import Configuration
 
 
 class RandomClass:
-    api_client = ApiClient()
+    configuration = Configuration(
+        # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
+        # See configuration.py for a list of all supported configuration parameters.
+        host = "https://api.snaptrade.com/api/v1",
+        consumer_key="YOUR_CONSUMER_KEY",
+    client_id="YOUR_CLIENT_ID",
+    )
+    api_client = ApiClient(configuration)
 
     @DeprecationWarningOnce
     def deprecated_method(self):
