@@ -105,4 +105,10 @@ describe 'GettingStarted' do
     end
   end
 
+  describe 'setting consumer key to nil' do
+    it 'should fail with ArgumentError' do
+      expect { SnapTrade.consumer_key = nil }.to raise_error(ArgumentError)
+      SnapTrade.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
+    end
+  end
 end
