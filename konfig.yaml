@@ -110,7 +110,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 4.12.1
+    version: 4.12.2
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade

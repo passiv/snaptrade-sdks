@@ -2,7 +2,7 @@
 
 |Language|Version|Package Manager|Documentation|Source|
 |-|-|-|-|-|
-|Java|4.12.1|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.12.1)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
+|Java|4.12.2|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.12.2)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/java)|
 |Ruby|1.16.2|[RubyGems](https://rubygems.org/gems/snaptrade/versions/1.16.2)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/ruby)|
 |Python|10.33.2|[PyPI](https://pypi.org/project/snaptrade-python-sdk/10.33.2)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python)|
 |TypeScript|8.28.1|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.28.1)|[Documentation](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript/README.md)|[Source](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript)|
