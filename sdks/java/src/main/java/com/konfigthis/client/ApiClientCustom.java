@@ -15,24 +15,25 @@ import java.util.TreeMap;
 public class ApiClientCustom {
 
     protected void requestBeforeHook(String baseUrl, String path, String method, List<Pair> queryParams,
-                                     List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams,
-                                     Map<String, String> cookieParams, Map<String, Object> formParams,
-                                     String[] authNames, ApiClient client) {
+            List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams,
+            Map<String, String> cookieParams, Map<String, Object> formParams,
+            String[] authNames, ApiClient client) {
         Pair timestamp = new Pair("timestamp", String.valueOf(System.currentTimeMillis() / 1000L));
         queryParams.add(timestamp);
     }
 
     protected void requestAfterHook(String url, String path, String method, List<Pair> queryParams,
-                                     List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams,
-                                     Map<String, String> cookieParams, Map<String, Object> formParams,
-                                     String[] authNames, String payload, ApiClient client) {
+            List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams,
+            Map<String, String> cookieParams, Map<String, Object> formParams,
+            String[] authNames, String payload, ApiClient client) {
         if (client.consumerKey == null)
             throw new RuntimeException("Set the consumer key by configuring Configuration#consumerKey");
-        Gson gson = new Gson();
+        Gson gson = JSON.getGson();
         Object map = body instanceof List ? body : gson.fromJson(payload, TreeMap.class);
-        String sortedJson = map == null ? "\"\"": gson.toJson(map);
-        String queryString = url.split( "\\?")[1];
-        String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}", payload == null || payload.equals("") || payload.equals("{}") ? "null" : sortedJson, path, queryString);
+        String sortedJson = map == null ? "\"\"" : gson.toJson(map);
+        String queryString = url.split("\\?")[1];
+        String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}",
+                payload == null || payload.equals("") || payload.equals("{}") ? "null" : sortedJson, path, queryString);
         byte[] hmacSha256Bytes;
         try {
             hmacSha256Bytes = calculateHmacSha256(data, client.consumerKey);
