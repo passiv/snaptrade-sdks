@@ -4171,12 +4171,25 @@ components:
     OptionsSymbol:
       description: Options Symbol
       type: object
+      required:
+       - id
+         ticker
+         option_type
+         strike_price
+         expiration_date
+         underlying_symbol
       properties:
         id:
           $ref: "#/components/schemas/Id"
         ticker:
           type: string
           example: SPY 220819P00200000
+        option_type:
+          type: string
+          enum:
+            - CALL
+            - PUT
+          example: CALL
         strike_price:
           type: number
           example: 200
