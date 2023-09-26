@@ -61,6 +61,57 @@ public class OptionsSymbol {
   @SerializedName(SERIALIZED_NAME_TICKER)
   private String ticker;
 
+  /**
+   * Gets or Sets optionType
+   */
+  @JsonAdapter(OptionTypeEnum.Adapter.class)
+  public enum OptionTypeEnum {
+    CALL("CALL"),
+    
+    PUT("PUT");
+
+    private String value;
+
+    OptionTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OptionTypeEnum fromValue(String value) {
+      for (OptionTypeEnum b : OptionTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<OptionTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OptionTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OptionTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OptionTypeEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_OPTION_TYPE = "option_type";
+  @SerializedName(SERIALIZED_NAME_OPTION_TYPE)
+  private OptionTypeEnum optionType;
+
   public static final String SERIALIZED_NAME_STRIKE_PRICE = "strike_price";
   @SerializedName(SERIALIZED_NAME_STRIKE_PRICE)
   private Double strikePrice;
@@ -102,8 +153,8 @@ public class OptionsSymbol {
    * Get id
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", required = true, value = "")
 
   public UUID getId() {
     return id;
@@ -133,8 +184,8 @@ public class OptionsSymbol {
    * Get ticker
    * @return ticker
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "SPY 220819P00200000", value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "SPY 220819P00200000", required = true, value = "")
 
   public String getTicker() {
     return ticker;
@@ -147,6 +198,37 @@ public class OptionsSymbol {
     
     
     this.ticker = ticker;
+  }
+
+
+  public OptionsSymbol optionType(OptionTypeEnum optionType) {
+
+    
+    
+    
+    
+    this.optionType = optionType;
+    return this;
+  }
+
+   /**
+   * Get optionType
+   * @return optionType
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "CALL", required = true, value = "")
+
+  public OptionTypeEnum getOptionType() {
+    return optionType;
+  }
+
+
+  public void setOptionType(OptionTypeEnum optionType) {
+
+    
+    
+    
+    this.optionType = optionType;
   }
 
 
@@ -174,8 +256,8 @@ public class OptionsSymbol {
    * Get strikePrice
    * @return strikePrice
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "200", value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "200", required = true, value = "")
 
   public Double getStrikePrice() {
     return strikePrice;
@@ -205,8 +287,8 @@ public class OptionsSymbol {
    * Get expirationDate
    * @return expirationDate
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2017-07-17T15:13:07.177712+00:00", value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "2017-07-17T15:13:07.177712+00:00", required = true, value = "")
 
   public String getExpirationDate() {
     return expirationDate;
@@ -267,8 +349,8 @@ public class OptionsSymbol {
    * Get underlyingSymbol
    * @return underlyingSymbol
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
 
   public UnderlyingSymbol getUnderlyingSymbol() {
     return underlyingSymbol;
@@ -402,6 +484,7 @@ public class OptionsSymbol {
     OptionsSymbol optionsSymbol = (OptionsSymbol) o;
     return Objects.equals(this.id, optionsSymbol.id) &&
         Objects.equals(this.ticker, optionsSymbol.ticker) &&
+        Objects.equals(this.optionType, optionsSymbol.optionType) &&
         Objects.equals(this.strikePrice, optionsSymbol.strikePrice) &&
         Objects.equals(this.expirationDate, optionsSymbol.expirationDate) &&
         Objects.equals(this.isMiniOption, optionsSymbol.isMiniOption) &&
@@ -413,7 +496,7 @@ public class OptionsSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ticker, strikePrice, expirationDate, isMiniOption, underlyingSymbol, localId, exchangeId, additionalProperties);
+    return Objects.hash(id, ticker, optionType, strikePrice, expirationDate, isMiniOption, underlyingSymbol, localId, exchangeId, additionalProperties);
   }
 
   @Override
@@ -422,6 +505,7 @@ public class OptionsSymbol {
     sb.append("class OptionsSymbol {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    ticker: ").append(toIndentedString(ticker)).append("\n");
+    sb.append("    optionType: ").append(toIndentedString(optionType)).append("\n");
     sb.append("    strikePrice: ").append(toIndentedString(strikePrice)).append("\n");
     sb.append("    expirationDate: ").append(toIndentedString(expirationDate)).append("\n");
     sb.append("    isMiniOption: ").append(toIndentedString(isMiniOption)).append("\n");
@@ -453,6 +537,7 @@ public class OptionsSymbol {
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
     openapiFields.add("ticker");
+    openapiFields.add("option_type");
     openapiFields.add("strike_price");
     openapiFields.add("expiration_date");
     openapiFields.add("is_mini_option");
@@ -462,6 +547,12 @@ public class OptionsSymbol {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("ticker");
+    openapiRequiredFields.add("option_type");
+    openapiRequiredFields.add("strike_price");
+    openapiRequiredFields.add("expiration_date");
+    openapiRequiredFields.add("underlying_symbol");
   }
 
  /**
@@ -476,13 +567,23 @@ public class OptionsSymbol {
           throw new IllegalArgumentException(String.format("The required field(s) %s in OptionsSymbol is not found in the empty JSON string", OptionsSymbol.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : OptionsSymbol.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      if ((jsonObj.get("ticker") != null && !jsonObj.get("ticker").isJsonNull()) && !jsonObj.get("ticker").isJsonPrimitive()) {
+      if (!jsonObj.get("ticker").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `ticker` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ticker").toString()));
       }
-      if ((jsonObj.get("expiration_date") != null && !jsonObj.get("expiration_date").isJsonNull()) && !jsonObj.get("expiration_date").isJsonPrimitive()) {
+      if (!jsonObj.get("option_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `option_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("option_type").toString()));
+      }
+      if (!jsonObj.get("expiration_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `expiration_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("expiration_date").toString()));
       }
       if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {

@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.16.2'
+gem 'snaptrade', '~> 1.16.3'
 ```
 
 ## Getting Started
@@ -153,6 +153,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::OptionLegAction](docs/OptionLegAction.md)
  - [SnapTrade::OptionStrategy](docs/OptionStrategy.md)
  - [SnapTrade::OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
+ - [SnapTrade::OptionType](docs/OptionType.md)
  - [SnapTrade::OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
  - [SnapTrade::OptionsHoldings](docs/OptionsHoldings.md)
  - [SnapTrade::OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)

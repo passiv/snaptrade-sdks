@@ -2575,6 +2575,7 @@ components:
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             local_id: "40817960"
             is_mini_option: false
+            option_type: CALL
             underlying_symbol:
               symbol: SPY
               description: SPDR S&P 500 ETF Trust
@@ -2659,6 +2660,7 @@ components:
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             local_id: "40817960"
             is_mini_option: false
+            option_type: CALL
             underlying_symbol:
               symbol: SPY
               description: SPDR S&P 500 ETF Trust
@@ -2792,6 +2794,7 @@ components:
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           local_id: "40817960"
           is_mini_option: false
+          option_type: CALL
           underlying_symbol:
             symbol: SPY
             description: SPDR S&P 500 ETF Trust
@@ -6127,6 +6130,7 @@ components:
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           local_id: "40817960"
           is_mini_option: false
+          option_type: CALL
           underlying_symbol:
             symbol: SPY
             description: SPDR S&P 500 ETF Trust
@@ -6432,6 +6436,7 @@ components:
         exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         local_id: "40817960"
         is_mini_option: false
+        option_type: CALL
         underlying_symbol:
           symbol: SPY
           description: SPDR S&P 500 ETF Trust
@@ -6477,6 +6482,14 @@ components:
           type: string
           x-konfig-original-example: SPY 220819P00200000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker
+        option_type:
+          enum:
+          - CALL
+          - PUT
+          example: CALL
+          type: string
+          x-konfig-original-example: CALL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-option_type
         strike_price:
           example: 200
           type: number
@@ -6503,6 +6516,13 @@ components:
         exchange_id:
           format: uuid
           type: string
+      required:
+      - expiration_date
+      - id
+      - option_type
+      - strike_price
+      - ticker
+      - underlying_symbol
       type: object
     OptionLeg:
       additionalProperties: true
@@ -7946,6 +7966,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker:
       example: SPY 220819P00200000
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsSymbol-properties-option_type:
+      example: CALL
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-strike_price:

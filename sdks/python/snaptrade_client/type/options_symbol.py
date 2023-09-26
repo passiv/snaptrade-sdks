@@ -18,20 +18,20 @@ from typing_extensions import TypedDict, Literal
 from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
 
 class RequiredOptionsSymbol(TypedDict):
-    pass
-
-class OptionalOptionsSymbol(TypedDict, total=False):
     id: str
 
     ticker: str
+
+    option_type: str
 
     strike_price: typing.Union[int, float]
 
     expiration_date: str
 
-    is_mini_option: bool
-
     underlying_symbol: UnderlyingSymbol
+
+class OptionalOptionsSymbol(TypedDict, total=False):
+    is_mini_option: bool
 
     local_id: str
 

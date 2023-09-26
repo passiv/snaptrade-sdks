@@ -57,6 +57,14 @@ public class BrokerageSymbolOptionSymbolTest {
     }
 
     /**
+     * Test the property 'optionType'
+     */
+    @Test
+    public void optionTypeTest() {
+        // TODO: test optionType
+    }
+
+    /**
      * Test the property 'strikePrice'
      */
     @Test

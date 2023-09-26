@@ -17,6 +17,8 @@ module SnapTrade
 
     attr_accessor :ticker
 
+    attr_accessor :option_type
+
     attr_accessor :strike_price
 
     attr_accessor :expiration_date
@@ -34,6 +36,7 @@ module SnapTrade
       {
         :'id' => :'id',
         :'ticker' => :'ticker',
+        :'option_type' => :'option_type',
         :'strike_price' => :'strike_price',
         :'expiration_date' => :'expiration_date',
         :'is_mini_option' => :'is_mini_option',
@@ -53,6 +56,7 @@ module SnapTrade
       {
         :'id' => :'String',
         :'ticker' => :'String',
+        :'option_type' => :'OptionType',
         :'strike_price' => :'Float',
         :'expiration_date' => :'String',
         :'is_mini_option' => :'Boolean',
@@ -98,6 +102,10 @@ module SnapTrade
         self.ticker = attributes[:'ticker']
       end
 
+      if attributes.key?(:'option_type')
+        self.option_type = attributes[:'option_type']
+      end
+
       if attributes.key?(:'strike_price')
         self.strike_price = attributes[:'strike_price']
       end
@@ -127,12 +135,42 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @ticker.nil?
+        invalid_properties.push('invalid value for "ticker", ticker cannot be nil.')
+      end
+
+      if @option_type.nil?
+        invalid_properties.push('invalid value for "option_type", option_type cannot be nil.')
+      end
+
+      if @strike_price.nil?
+        invalid_properties.push('invalid value for "strike_price", strike_price cannot be nil.')
+      end
+
+      if @expiration_date.nil?
+        invalid_properties.push('invalid value for "expiration_date", expiration_date cannot be nil.')
+      end
+
+      if @underlying_symbol.nil?
+        invalid_properties.push('invalid value for "underlying_symbol", underlying_symbol cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @ticker.nil?
+      return false if @option_type.nil?
+      return false if @strike_price.nil?
+      return false if @expiration_date.nil?
+      return false if @underlying_symbol.nil?
       true
     end
 
@@ -143,6 +181,7 @@ module SnapTrade
       self.class == o.class &&
           id == o.id &&
           ticker == o.ticker &&
+          option_type == o.option_type &&
           strike_price == o.strike_price &&
           expiration_date == o.expiration_date &&
           is_mini_option == o.is_mini_option &&
@@ -160,7 +199,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, ticker, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
+      [id, ticker, option_type, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
     end
 
     # Builds the object from hash

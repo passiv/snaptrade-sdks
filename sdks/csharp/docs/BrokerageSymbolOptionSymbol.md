@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**Ticker** | **string** |  | [optional] 
-**StrikePrice** | **decimal** |  | [optional] 
-**ExpirationDate** | **string** |  | [optional] 
+**Id** | **Guid** |  | 
+**Ticker** | **string** |  | 
+**OptionType** | **string** |  | 
+**StrikePrice** | **decimal** |  | 
+**ExpirationDate** | **string** |  | 
 **IsMiniOption** | **bool** |  | [optional] 
-**UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | [optional] 
+**UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | 
 **LocalId** | **string** |  | [optional] 
 **ExchangeId** | **Guid** |  | [optional] 
 
