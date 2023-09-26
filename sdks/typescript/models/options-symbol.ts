@@ -28,25 +28,31 @@ export interface OptionsSymbol {
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'id'?: string;
+    'id': string;
     /**
      * 
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'ticker'?: string;
+    'ticker': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OptionsSymbol
+     */
+    'option_type': OptionsSymbolOptionTypeEnum;
     /**
      * 
      * @type {number}
      * @memberof OptionsSymbol
      */
-    'strike_price'?: number;
+    'strike_price': number;
     /**
      * 
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'expiration_date'?: string;
+    'expiration_date': string;
     /**
      * 
      * @type {boolean}
@@ -58,7 +64,7 @@ export interface OptionsSymbol {
      * @type {UnderlyingSymbol}
      * @memberof OptionsSymbol
      */
-    'underlying_symbol'?: UnderlyingSymbol;
+    'underlying_symbol': UnderlyingSymbol;
     /**
      * 
      * @type {string}
@@ -72,4 +78,7 @@ export interface OptionsSymbol {
      */
     'exchange_id'?: string;
 }
+
+type OptionsSymbolOptionTypeEnum = 'CALL' | 'PUT'
+
 

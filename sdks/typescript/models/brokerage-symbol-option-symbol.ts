@@ -29,25 +29,31 @@ export interface BrokerageSymbolOptionSymbol {
      * @type {string}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'id'?: string;
+    'id': string;
     /**
      * 
      * @type {string}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'ticker'?: string;
+    'ticker': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BrokerageSymbolOptionSymbol
+     */
+    'option_type': BrokerageSymbolOptionSymbolOptionTypeEnum;
     /**
      * 
      * @type {number}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'strike_price'?: number;
+    'strike_price': number;
     /**
      * 
      * @type {string}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'expiration_date'?: string;
+    'expiration_date': string;
     /**
      * 
      * @type {boolean}
@@ -59,7 +65,7 @@ export interface BrokerageSymbolOptionSymbol {
      * @type {UnderlyingSymbol}
      * @memberof BrokerageSymbolOptionSymbol
      */
-    'underlying_symbol'?: UnderlyingSymbol;
+    'underlying_symbol': UnderlyingSymbol;
     /**
      * 
      * @type {string}
@@ -73,4 +79,7 @@ export interface BrokerageSymbolOptionSymbol {
      */
     'exchange_id'?: string;
 }
+
+type BrokerageSymbolOptionSymbolOptionTypeEnum = 'CALL' | 'PUT'
+
 

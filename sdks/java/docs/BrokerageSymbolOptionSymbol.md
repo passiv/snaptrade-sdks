@@ -7,14 +7,24 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **UUID** |  |  [optional] |
-|**ticker** | **String** |  |  [optional] |
-|**strikePrice** | **Double** |  |  [optional] |
-|**expirationDate** | **String** |  |  [optional] |
+|**id** | **UUID** |  |  |
+|**ticker** | **String** |  |  |
+|**optionType** | [**OptionTypeEnum**](#OptionTypeEnum) |  |  |
+|**strikePrice** | **Double** |  |  |
+|**expirationDate** | **String** |  |  |
 |**isMiniOption** | **Boolean** |  |  [optional] |
-|**underlyingSymbol** | **UnderlyingSymbol** |  |  [optional] |
+|**underlyingSymbol** | **UnderlyingSymbol** |  |  |
 |**localId** | **String** |  |  [optional] |
 |**exchangeId** | **UUID** |  |  [optional] |
+
+
+
+## Enum: OptionTypeEnum
+
+| Name | Value |
+|---- | -----|
+| CALL | &quot;CALL&quot; |
+| PUT | &quot;PUT&quot; |
 
 
 
