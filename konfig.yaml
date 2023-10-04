@@ -2,7 +2,7 @@
 
 portal:
   title: SnapTrade
-  primaryColor: '#9fc1be'
+  primaryColor: "#9fc1be"
   favicon: favicon.png
   logo: portal-logo.png
   socials:
@@ -14,8 +14,22 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
-            - id: client-side-direct-api-usage
-              path: docs/client-side-direct-api-usage.md
+            - id: recommended-functionality
+              path: docs/recommended-functionality.md
+            - id: recommended-endpoints-to-get-started
+              path: docs/recommended-endpoints-to-get-started.md
+            - id: request-ids
+              path: docs/request-ids.md
+            - id: ratelimiting
+              path: docs/ratelimiting.md
+            - id: fix-broken-connections
+              path: docs/fix-broken-connections.md
+            - id: display-the-connection-portal-in-an-iframe
+              path: docs/display-the-connection-portal-in-an-iframe.md
+            - id: connection-messaging
+              path: docs/connection-messaging.md
+            - id: trading-with-snaptrade
+              path: docs/trading-with-snaptrade.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
