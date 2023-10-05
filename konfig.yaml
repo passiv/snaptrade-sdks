@@ -41,6 +41,9 @@ portal:
       path: demos/handling-user-data.md
     - id: placing-trades
       path: demos/placing-trades.md
+  hideOperations:
+    /holdings:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
