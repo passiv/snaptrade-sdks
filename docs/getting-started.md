@@ -165,7 +165,7 @@ Example:
 
 ---
 
-## Place a non-marketable order
+## Place a limit order
 
 To place an order through SnapTrade API, you need to go through the following two steps:
 
@@ -296,7 +296,7 @@ Example of the response:
 
 ---
 
-## Delete a non-marketable order
+## Delete an open order
 
 To cancel an open order, you need to `POST` to the
 :api[Trading_cancelUserAccountOrder] endpoint with the `account id` in the query
