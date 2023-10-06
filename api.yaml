@@ -4039,7 +4039,7 @@ components:
           type: number
           example: 1.032
           nullable: true
-          description: The forex conversion rate involved in the transaction if provided by the brokerage
+          description: The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
         institution:
           type: string
           example: SnapTrade Investr
