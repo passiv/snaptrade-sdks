@@ -33,7 +33,9 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.brokerage_authorization_type_read_only import BrokerageAuthorizationTypeReadOnly as BrokerageAuthorizationTypeReadOnlySchema
+from snaptrade_client.model.brokerage_authorization_type_read_only_brokerage import BrokerageAuthorizationTypeReadOnlyBrokerage as BrokerageAuthorizationTypeReadOnlyBrokerageSchema
 
+from snaptrade_client.type.brokerage_authorization_type_read_only_brokerage import BrokerageAuthorizationTypeReadOnlyBrokerage
 from snaptrade_client.type.brokerage_authorization_type_read_only import BrokerageAuthorizationTypeReadOnly
 
 from . import path

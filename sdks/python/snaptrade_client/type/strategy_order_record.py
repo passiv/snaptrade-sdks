@@ -15,8 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.option_strategy import OptionStrategy
+from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredStrategyOrderRecord(TypedDict):
     pass

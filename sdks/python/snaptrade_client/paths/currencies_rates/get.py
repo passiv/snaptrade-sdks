@@ -33,8 +33,10 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs as ExchangeRatePairsSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
 
 from snaptrade_client.type.exchange_rate_pairs import ExchangeRatePairs
+from snaptrade_client.type.currency import Currency
 
 from . import path
 

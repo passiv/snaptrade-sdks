@@ -128,5 +128,16 @@ class ManualTradeAndImpact(
             **kwargs,
         )
 
+from snaptrade_client.model.account import Account
+from snaptrade_client.model.account_meta import AccountMeta
+from snaptrade_client.model.account_sync_status import AccountSyncStatus
+from snaptrade_client.model.action import Action
+from snaptrade_client.model.cash import Cash
+from snaptrade_client.model.cash_restriction import CashRestriction
+from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance
+from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
+from snaptrade_client.model.order_type import OrderType
+from snaptrade_client.model.price import Price
+from snaptrade_client.model.time_in_force import TimeInForce

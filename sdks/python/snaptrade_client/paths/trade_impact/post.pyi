@@ -32,25 +32,43 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact as ManualTradeAndImpactSchema
-from snaptrade_client.model.action import Action as ActionSchema
+from snaptrade_client.model.manual_trade import ManualTrade as ManualTradeSchema
+from snaptrade_client.model.cash_restriction import CashRestriction as CashRestrictionSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
+from snaptrade_client.model.manual_trade_balance import ManualTradeBalance as ManualTradeBalanceSchema
 from snaptrade_client.model.time_in_force import TimeInForce as TimeInForceSchema
+from snaptrade_client.model.account_meta import AccountMeta as AccountMetaSchema
 from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
+from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact as ManualTradeAndImpactSchema
+from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol as ManualTradeSymbolSchema
+from snaptrade_client.model.action import Action as ActionSchema
+from snaptrade_client.model.account import Account as AccountSchema
+from snaptrade_client.model.cash import Cash as CashSchema
+from snaptrade_client.model.account_sync_status import AccountSyncStatus as AccountSyncStatusSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
 
-from snaptrade_client.type.action import Action
 from snaptrade_client.type.time_in_force import TimeInForce
-from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
+from snaptrade_client.type.account_meta import AccountMeta
 from snaptrade_client.type.stop_price import StopPrice
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.manual_trade import ManualTrade
 from snaptrade_client.type.order_type import OrderType
+from snaptrade_client.type.action import Action
+from snaptrade_client.type.account import Account
+from snaptrade_client.type.manual_trade_form import ManualTradeForm
+from snaptrade_client.type.cash import Cash
+from snaptrade_client.type.cash_restriction import CashRestriction
+from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
+from snaptrade_client.type.account_sync_status import AccountSyncStatus
+from snaptrade_client.type.manual_trade_balance import ManualTradeBalance
 
 # Query params
 UserIdSchema = schemas.StrSchema

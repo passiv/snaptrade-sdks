@@ -16,7 +16,11 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.account_sync_status import AccountSyncStatus
+from snaptrade_client.type.brokerage import Brokerage
 from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
+from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
+from snaptrade_client.type.brokerage_type import BrokerageType
 from snaptrade_client.type.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 
 class RequiredSnapTradeHoldingsAccount(TypedDict):

@@ -32,10 +32,16 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.exchange import Exchange as ExchangeSchema
 from snaptrade_client.model.symbol_query import SymbolQuery as SymbolQuerySchema
+from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
+from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.symbol_query import SymbolQuery
+from snaptrade_client.type.exchange import Exchange
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 from . import path

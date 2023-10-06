@@ -10,14 +10,14 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  | Universal symbol |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**id** | str, uuid.UUID,  | str,  |  | [optional] value must be a uuid
-**symbol** | str,  | str,  |  | [optional] 
-**raw_symbol** | str,  | str,  |  | [optional] 
+**symbol** | str,  | str,  |  | 
+**raw_symbol** | str,  | str,  |  | 
+**currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | 
+**id** | str, uuid.UUID,  | str,  |  | value must be a uuid
+**type** | [**SecurityType**](SecurityType.md) | [**SecurityType**](SecurityType.md) |  | 
+**[currencies](#currencies)** | list, tuple,  | tuple,  |  | 
 **description** | None, str,  | NoneClass, str,  |  | [optional] 
-**currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | [optional] 
 **exchange** | [**Exchange**](Exchange.md) | [**Exchange**](Exchange.md) |  | [optional] 
-**type** | [**SecurityType**](SecurityType.md) | [**SecurityType**](SecurityType.md) |  | [optional] 
-**[currencies](#currencies)** | list, tuple,  | tuple,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 # currencies

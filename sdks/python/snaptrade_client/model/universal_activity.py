@@ -326,6 +326,11 @@ class UniversalActivity(
         )
 
 from snaptrade_client.model.account_simple import AccountSimple
+from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.symbol import Symbol
+from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.model.us_exchange import USExchange

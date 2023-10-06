@@ -20,24 +20,22 @@ from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.security_type import SecurityType
 
 class RequiredUniversalSymbol(TypedDict):
-    pass
-
-class OptionalUniversalSymbol(TypedDict, total=False):
     id: str
 
     symbol: str
 
     raw_symbol: str
 
-    description: typing.Optional[str]
-
     currency: Currency
-
-    exchange: Exchange
 
     type: SecurityType
 
     currencies: typing.List[Currency]
+
+class OptionalUniversalSymbol(TypedDict, total=False):
+    description: typing.Optional[str]
+
+    exchange: Exchange
 
 class UniversalSymbol(RequiredUniversalSymbol, OptionalUniversalSymbol):
     pass

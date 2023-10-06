@@ -1,5 +1,4 @@
-<a name="__pageTop"></a>
-# snaptrade_client.apis.tags.transactions_and_reporting_api.TransactionsAndReportingApi
+# snaptrade_client.transactions_and_reporting
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -10,8 +9,6 @@ Method | HTTP request | Description
 
 # **get_activities**
 
-Get transaction history for a user
-
 Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
 
 ### Example
@@ -21,9 +18,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -68,134 +62,10 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-startDate | StartDateSchema | | optional
-endDate | EndDateSchema | | optional
-accounts | AccountsSchema | | optional
-brokerageAuthorizations | BrokerageAuthorizationsSchema | | optional
-type | TypeSchema | | optional
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# StartDateSchema
-
-Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, date,  | str,  | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | value must conform to RFC-3339 full-date YYYY-MM-DD
-
-# EndDateSchema
-
-Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, date,  | str,  | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | value must conform to RFC-3339 full-date YYYY-MM-DD
-
-# AccountsSchema
-
-Comma seperated list of account IDs
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | Comma seperated list of account IDs | 
-
-# BrokerageAuthorizationsSchema
-
-Comma seperated list of brokerage authorization IDs
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | Comma seperated list of brokerage authorization IDs | 
-
-# TypeSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  |  | 
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_activities.ApiResponseFor200) | Successfully retrieved transaction history
-default | [ApiResponseForDefault](#get_activities.ApiResponseForDefault) | Unexpected error
-
-#### get_activities.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**UniversalActivity**](../../models/UniversalActivity.md) | [**UniversalActivity**](../../models/UniversalActivity.md) | [**UniversalActivity**](../../models/UniversalActivity.md) |  | 
-
-#### get_activities.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
 # **get_reporting_custom_range**
-
-Get performance information for a specific timeframe
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
 
@@ -206,9 +76,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -260,122 +127,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-startDate | StartDateSchema | | 
-endDate | EndDateSchema | | 
-accounts | AccountsSchema | | optional
-detailed | DetailedSchema | | optional
-frequency | FrequencySchema | | optional
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# StartDateSchema
-
-Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, date,  | str,  | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | value must conform to RFC-3339 full-date YYYY-MM-DD
-
-# EndDateSchema
-
-Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, date,  | str,  | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | value must conform to RFC-3339 full-date YYYY-MM-DD
-
-# AccountsSchema
-
-Comma seperated list of account IDs
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | Comma seperated list of account IDs | 
-
-# DetailedSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-bool,  | BoolClass,  |  | 
-
-# FrequencySchema
-
-Optional frequency for the rate of return chart (defaults to monthly). Possible values are weekly, monthly, quarterly, yearly.
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | Optional frequency for the rate of return chart (defaults to monthly). Possible values are weekly, monthly, quarterly, yearly. | 
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_reporting_custom_range.ApiResponseFor200) | Successfully retrieved performance data
-default | [ApiResponseForDefault](#get_reporting_custom_range.ApiResponseForDefault) | Unexpected error
-
-#### get_reporting_custom_range.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**PerformanceCustom**](../../models/PerformanceCustom.md) |  | 
-
-
-#### get_reporting_custom_range.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

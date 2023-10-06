@@ -16,7 +16,10 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.account import Account
+from snaptrade_client.type.account_meta import AccountMeta
+from snaptrade_client.type.account_sync_status import AccountSyncStatus
 from snaptrade_client.type.cash import Cash
+from snaptrade_client.type.cash_restriction import CashRestriction
 from snaptrade_client.type.currency import Currency
 
 class RequiredManualTradeBalance(TypedDict):

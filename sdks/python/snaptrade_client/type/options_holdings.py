@@ -18,6 +18,9 @@ from typing_extensions import TypedDict, Literal
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.type.us_exchange import USExchange
 
 class RequiredOptionsHoldings(TypedDict):
     pass
