@@ -5,14 +5,14 @@ Universal symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**Symbol** | **string** |  | [optional] 
-**RawSymbol** | **string** |  | [optional] 
+**Id** | **string** |  | 
+**Symbol** | **string** |  | 
+**RawSymbol** | **string** |  | 
 **Description** | **string** |  | [optional] 
-**Currency** | [**Currency**](Currency.md) |  | [optional] 
-**Exchange** | [**Exchange**](Exchange.md) |  | [optional] 
-**Type** | [**SecurityType**](SecurityType.md) |  | [optional] 
-**Currencies** | [**List&lt;Currency&gt;**](Currency.md) |  | [optional] 
+**Currency** | **Currency** |  | 
+**Exchange** | **Exchange** |  | [optional] 
+**Type** | **SecurityType** |  | 
+**Currencies** | [**List&lt;Currency&gt;**](Currency.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

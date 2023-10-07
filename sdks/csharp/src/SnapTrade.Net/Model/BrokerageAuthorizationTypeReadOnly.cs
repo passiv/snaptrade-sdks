@@ -103,7 +103,7 @@ namespace SnapTrade.Net.Model
         /// <param name="type">type.</param>
         /// <param name="authType">authType.</param>
         /// <param name="brokerage">brokerage.</param>
-        public BrokerageAuthorizationTypeReadOnly(Guid id = default(Guid), TypeEnum? type = default(TypeEnum?), AuthTypeEnum? authType = default(AuthTypeEnum?), BrokerageAuthorizationTypeReadOnlyBrokerage brokerage = default(BrokerageAuthorizationTypeReadOnlyBrokerage)) : base()
+        public BrokerageAuthorizationTypeReadOnly(string id = default(string), TypeEnum? type = default(TypeEnum?), AuthTypeEnum? authType = default(AuthTypeEnum?), BrokerageAuthorizationTypeReadOnlyBrokerage brokerage = default(BrokerageAuthorizationTypeReadOnlyBrokerage)) : base()
         {
             this.Id = id;
             this.Type = type;
@@ -116,7 +116,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Brokerage

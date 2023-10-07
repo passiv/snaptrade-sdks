@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **BuyOnly** | **bool** |  | [optional] 
 **CashOptimizer** | **bool** |  | [optional] 
 **NotifyFrequency** | **string** |  | [optional] 
-**DriftThreshold** | **decimal** |  | [optional] 
-**PreferredCurrency** | [**Currency**](Currency.md) |  | [optional] 
+**DriftThreshold** | **double** |  | [optional] 
+**PreferredCurrency** | **Currency** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

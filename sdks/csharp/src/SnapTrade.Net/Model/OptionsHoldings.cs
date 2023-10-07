@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsHoldings(string id = default(string), Guid symbol = default(Guid), OptionsSymbol optionSymbol = default(OptionsSymbol), decimal? price = default(decimal?), Currency currency = default(Currency), decimal? averagePurchasePrice = default(decimal?)) : base()
+        public OptionsHoldings(string id = default(string), string symbol = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol), double? price = default(double?), Currency currency = default(Currency), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -63,7 +63,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public Guid Symbol { get; set; }
+        public string Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets OptionSymbol
@@ -76,7 +76,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -89,7 +89,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Average purchase price for this position</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
-        public decimal? AveragePurchasePrice { get; set; }
+        public double? AveragePurchasePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

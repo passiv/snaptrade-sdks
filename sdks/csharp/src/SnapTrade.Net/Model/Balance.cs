@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="currency">currency.</param>
         /// <param name="cash">cash.</param>
-        public Balance(Currency currency = default(Currency), decimal? cash = default(decimal?)) : base()
+        public Balance(Currency currency = default(Currency), double? cash = default(double?)) : base()
         {
             this.Currency = currency;
             this.Cash = cash;
@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Cash
         /// </summary>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
-        public decimal? Cash { get; set; }
+        public double? Cash { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

@@ -16,7 +16,7 @@ Key | Input Type | Accessed Type | Description | Notes
 **currency** | [**Currency**](Currency.md) | [**Currency**](Currency.md) |  | [optional] 
 **description** | str,  | str,  |  | [optional] 
 **fee** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 
-**fx_rate** | None, decimal.Decimal, int, float,  | NoneClass, decimal.Decimal,  | The forex conversion rate involved in the transaction if provided by the brokerage | [optional] 
+**fx_rate** | None, decimal.Decimal, int, float,  | NoneClass, decimal.Decimal,  | The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency) | [optional] 
 **institution** | str,  | str,  |  | [optional] 
 **option_type** | str,  | str,  | If an option transaction, then it&#x27;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string | [optional] 
 **price** | decimal.Decimal, int, float,  | decimal.Decimal,  |  | [optional] 

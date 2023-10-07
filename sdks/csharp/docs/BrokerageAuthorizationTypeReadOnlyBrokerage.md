@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Name** | **string** | Name of Brokerage | [optional] 
 **Slug** | **string** | Slug of Brokerage. It is usually the name of the brokerage in capital letters | [optional] 
 

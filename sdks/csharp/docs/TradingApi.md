@@ -11,9 +11,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**PlaceOCOOrder**](TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order |
 
-<a name="canceluseraccountorder"></a>
+
 # **CancelUserAccountOrder**
-> AccountOrderRecord CancelUserAccountOrder (string userId, string userSecret, Guid accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest)
 
 Cancel open order in account
 
@@ -31,19 +30,22 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(); // TradingCancelUserAccountOrderRequest | The Order ID to be canceled
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var brokerageOrderId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            
+            // The Order ID to be canceled
+            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+                brokerageOrderId
+            );
+            
             try
             {
                 // Cancel open order in account
@@ -93,21 +95,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 | **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) | The Order ID to be canceled |  |
 
 ### Return type
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -119,9 +112,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getorderimpact"></a>
+
 # **GetOrderImpact**
-> ManualTradeAndImpact GetOrderImpact (string userId, string userSecret, ManualTradeForm manualTradeForm)
 
 Check impact of trades on account.
 
@@ -139,18 +131,34 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var manualTradeForm = new ManualTradeForm(); // ManualTradeForm | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var action = ModelAction.BUY;
+            var orderType = OrderType.Limit;
+            var price = 31.33; // Trade Price if limit or stop limit order
+            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+            var timeInForce = TimeInForce.Day;
+            var units = default(double); // Trade Units
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            
+            var manualTradeForm = new ManualTradeForm(
+                accountId,
+                action,
+                orderType,
+                price,
+                stop,
+                timeInForce,
+                units,
+                universalSymbolId
+            );
+            
             try
             {
                 // Check impact of trades on account.
@@ -206,15 +214,6 @@ catch (ApiException e)
 
 [**ManualTradeAndImpact**](ManualTradeAndImpact.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -226,9 +225,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuseraccountquotes"></a>
+
 # **GetUserAccountQuotes**
-> List&lt;SymbolsQuotesInner&gt; GetUserAccountQuotes (string userId, string userSecret, string symbols, string accountId, bool? useTicker = null)
 
 Get symbol quotes
 
@@ -246,20 +244,18 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var symbols = "symbols_example";  // string | List of universal_symbol_id or tickers to get quotes for.
-            var accountId = "accountId_example";  // string | The ID of the account to get quotes.
-            var useTicker = true;  // bool? | Should be set to True if providing tickers. (optional) 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
+            var accountId = "accountId_example"; // The ID of the account to get quotes.
+            var useTicker = true; // Should be set to True if providing tickers. (optional) 
+            
             try
             {
                 // Get symbol quotes
@@ -317,15 +313,6 @@ catch (ApiException e)
 
 [**List&lt;SymbolsQuotesInner&gt;**](SymbolsQuotesInner.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -335,9 +322,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="placeforceorder"></a>
+
 # **PlaceForceOrder**
-> AccountOrderRecord PlaceForceOrder (string userId, string userSecret, ManualTradeForm manualTradeForm)
 
 Place a trade with NO validation.
 
@@ -355,18 +341,34 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var manualTradeForm = new ManualTradeForm(); // ManualTradeForm | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var action = ModelAction.BUY;
+            var orderType = OrderType.Limit;
+            var price = 31.33; // Trade Price if limit or stop limit order
+            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
+            var timeInForce = TimeInForce.Day;
+            var units = default(double); // Trade Units
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            
+            var manualTradeForm = new ManualTradeForm(
+                accountId,
+                action,
+                orderType,
+                price,
+                stop,
+                timeInForce,
+                units,
+                universalSymbolId
+            );
+            
             try
             {
                 // Place a trade with NO validation.
@@ -422,15 +424,6 @@ catch (ApiException e)
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -442,9 +435,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="placeocoorder"></a>
+
 # **PlaceOCOOrder**
-> AccountOrderRecord PlaceOCOOrder (string userId, string userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest)
 
 Place a OCO (One Cancels Other) order
 
@@ -462,18 +454,22 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(); // TradingPlaceOCOOrderRequest | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var firstTradeId = "firstTradeId_example"; // The ID of first trade object obtained from trade/impact endpoint
+            var secondTradeId = "secondTradeId_example"; // The ID of second trade object obtained from trade/impact endpoint
+            
+            var tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(
+                firstTradeId,
+                secondTradeId
+            );
+            
             try
             {
                 // Place a OCO (One Cancels Other) order
@@ -529,15 +525,6 @@ catch (ApiException e)
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -548,9 +535,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="placeorder"></a>
+
 # **PlaceOrder**
-> AccountOrderRecord PlaceOrder (Guid tradeId, string userId, string userSecret)
 
 Place order
 
@@ -568,18 +554,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var tradeId = "tradeId_example";  // Guid | The ID of trade object obtained from trade/impact endpoint
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var tradeId = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // Place order
@@ -627,22 +611,13 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **tradeId** | **Guid** | The ID of trade object obtained from trade/impact endpoint |  |
+| **tradeId** | **string** | The ID of trade object obtained from trade/impact endpoint |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
 ### Return type
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details

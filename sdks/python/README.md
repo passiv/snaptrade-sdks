@@ -1,10 +1,15 @@
-# snaptrade-python-sdk
+<div align="center">
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.33.3-blue)](https://pypi.org/project/snaptrade-python-sdk/10.33.3)
+# SnapTrade
+
+[![Visit SnapTrade](./header.png)](https://snaptrade.com)
+
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.0-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
-Connect brokerage accounts to your app for live positions and trading
+</div>
 
+Connect brokerage accounts to your app for live positions and trading
 
 ## Requirements
 
@@ -13,7 +18,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.33.3
+pip install snaptrade-python-sdk==10.34.0
 ```
 
 ## Getting Started
@@ -85,9 +90,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -174,154 +176,6 @@ Tag | Method | HTTP request | Description
 *Trading* | [**place_order**](docs/apis/tags/TradingApi.md#place_order) | **POST** /trade/{tradeId} | Place order
 *Transactions And Reporting* | [**get_activities**](docs/apis/tags/TransactionsAndReportingApi.md#get_activities) | **GET** /activities | Get transaction history for a user
 *Transactions And Reporting* | [**get_reporting_custom_range**](docs/apis/tags/TransactionsAndReportingApi.md#get_reporting_custom_range) | **GET** /performance/custom | Get performance information for a specific timeframe
-
-## Documentation For Models
-
- - [Account](docs/models/Account.md)
- - [AccountHoldings](docs/models/AccountHoldings.md)
- - [AccountHoldingsAccount](docs/models/AccountHoldingsAccount.md)
- - [AccountIDs](docs/models/AccountIDs.md)
- - [AccountMeta](docs/models/AccountMeta.md)
- - [AccountOrderRecord](docs/models/AccountOrderRecord.md)
- - [AccountOrderRecordStatus](docs/models/AccountOrderRecordStatus.md)
- - [AccountSimple](docs/models/AccountSimple.md)
- - [AccountSyncStatus](docs/models/AccountSyncStatus.md)
- - [Action](docs/models/Action.md)
- - [Balance](docs/models/Balance.md)
- - [Brokerage](docs/models/Brokerage.md)
- - [BrokerageAuthIDs](docs/models/BrokerageAuthIDs.md)
- - [BrokerageAuthorization](docs/models/BrokerageAuthorization.md)
- - [BrokerageAuthorizationMeta](docs/models/BrokerageAuthorizationMeta.md)
- - [BrokerageAuthorizationType](docs/models/BrokerageAuthorizationType.md)
- - [BrokerageAuthorizationTypeReadOnly](docs/models/BrokerageAuthorizationTypeReadOnly.md)
- - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/models/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
- - [BrokerageExchanges](docs/models/BrokerageExchanges.md)
- - [BrokerageSymbol](docs/models/BrokerageSymbol.md)
- - [BrokerageType](docs/models/BrokerageType.md)
- - [CalculatedTrade](docs/models/CalculatedTrade.md)
- - [CancelledUnits](docs/models/CancelledUnits.md)
- - [Cash](docs/models/Cash.md)
- - [CashRestriction](docs/models/CashRestriction.md)
- - [ClientID](docs/models/ClientID.md)
- - [ConsumerKey](docs/models/ConsumerKey.md)
- - [Currency](docs/models/Currency.md)
- - [DeleteUserResponse](docs/models/DeleteUserResponse.md)
- - [DividendAtDate](docs/models/DividendAtDate.md)
- - [Email](docs/models/Email.md)
- - [EncryptedResponse](docs/models/EncryptedResponse.md)
- - [EncryptedResponseEncryptedMessageData](docs/models/EncryptedResponseEncryptedMessageData.md)
- - [Exchange](docs/models/Exchange.md)
- - [ExchangeRatePairs](docs/models/ExchangeRatePairs.md)
- - [ExcludedAsset](docs/models/ExcludedAsset.md)
- - [FilledUnits](docs/models/FilledUnits.md)
- - [Id](docs/models/Id.md)
- - [JWT](docs/models/JWT.md)
- - [LoginRedirectURI](docs/models/LoginRedirectURI.md)
- - [ManualTrade](docs/models/ManualTrade.md)
- - [ManualTradeAndImpact](docs/models/ManualTradeAndImpact.md)
- - [ManualTradeBalance](docs/models/ManualTradeBalance.md)
- - [ManualTradeForm](docs/models/ManualTradeForm.md)
- - [ManualTradeSymbol](docs/models/ManualTradeSymbol.md)
- - [Model400FailedRequestResponse](docs/models/Model400FailedRequestResponse.md)
- - [Model401FailedRequestResponse](docs/models/Model401FailedRequestResponse.md)
- - [Model403FailedRequestResponse](docs/models/Model403FailedRequestResponse.md)
- - [Model404FailedRequestResponse](docs/models/Model404FailedRequestResponse.md)
- - [ModelAssetClass](docs/models/ModelAssetClass.md)
- - [ModelAssetClassDetails](docs/models/ModelAssetClassDetails.md)
- - [ModelAssetClassTarget](docs/models/ModelAssetClassTarget.md)
- - [ModelPortfolio](docs/models/ModelPortfolio.md)
- - [ModelPortfolioAssetClass](docs/models/ModelPortfolioAssetClass.md)
- - [ModelPortfolioDetails](docs/models/ModelPortfolioDetails.md)
- - [ModelPortfolioSecurity](docs/models/ModelPortfolioSecurity.md)
- - [MonthlyDividends](docs/models/MonthlyDividends.md)
- - [NetContributions](docs/models/NetContributions.md)
- - [NetDividend](docs/models/NetDividend.md)
- - [OpenUnits](docs/models/OpenUnits.md)
- - [OptionChain](docs/models/OptionChain.md)
- - [OptionChainItem](docs/models/OptionChainItem.md)
- - [OptionChainItemChainPerRoot](docs/models/OptionChainItemChainPerRoot.md)
- - [OptionChainItemChainPerRootItem](docs/models/OptionChainItemChainPerRootItem.md)
- - [OptionChainItemChainPerRootItemChainPerStrikePrice](docs/models/OptionChainItemChainPerRootItemChainPerStrikePrice.md)
- - [OptionChainItemChainPerRootItemChainPerStrikePriceItem](docs/models/OptionChainItemChainPerRootItemChainPerStrikePriceItem.md)
- - [OptionLeg](docs/models/OptionLeg.md)
- - [OptionStrategy](docs/models/OptionStrategy.md)
- - [OptionStrategyLegs](docs/models/OptionStrategyLegs.md)
- - [OptionsHoldings](docs/models/OptionsHoldings.md)
- - [OptionsPosition](docs/models/OptionsPosition.md)
- - [OptionsSymbol](docs/models/OptionsSymbol.md)
- - [OrderType](docs/models/OrderType.md)
- - [PartnerData](docs/models/PartnerData.md)
- - [PastValue](docs/models/PastValue.md)
- - [Percent](docs/models/Percent.md)
- - [PerformanceCustom](docs/models/PerformanceCustom.md)
- - [PerformanceCustomBadTickers](docs/models/PerformanceCustomBadTickers.md)
- - [PortfolioGroup](docs/models/PortfolioGroup.md)
- - [PortfolioGroupInfo](docs/models/PortfolioGroupInfo.md)
- - [PortfolioGroupPosition](docs/models/PortfolioGroupPosition.md)
- - [PortfolioGroupSettings](docs/models/PortfolioGroupSettings.md)
- - [Position](docs/models/Position.md)
- - [PositionSymbol](docs/models/PositionSymbol.md)
- - [Price](docs/models/Price.md)
- - [RedirectTokenandPin](docs/models/RedirectTokenandPin.md)
- - [ReportingDate](docs/models/ReportingDate.md)
- - [ReportingFrequency](docs/models/ReportingFrequency.md)
- - [RsaPublicKey](docs/models/RsaPublicKey.md)
- - [SecurityType](docs/models/SecurityType.md)
- - [SessionEvent](docs/models/SessionEvent.md)
- - [Signature](docs/models/Signature.md)
- - [SignedContent](docs/models/SignedContent.md)
- - [SnapTradeAPIDisclaimerAcceptStatus](docs/models/SnapTradeAPIDisclaimerAcceptStatus.md)
- - [SnapTradeHoldingsAccount](docs/models/SnapTradeHoldingsAccount.md)
- - [SnapTradeHoldingsAccountAccountId](docs/models/SnapTradeHoldingsAccountAccountId.md)
- - [SnapTradeHoldingsAccountAccountIdMeta](docs/models/SnapTradeHoldingsAccountAccountIdMeta.md)
- - [SnapTradeHoldingsAccountMeta](docs/models/SnapTradeHoldingsAccountMeta.md)
- - [SnapTradeHoldingsTotalValue](docs/models/SnapTradeHoldingsTotalValue.md)
- - [SnapTradeLoginUserRequestBody](docs/models/SnapTradeLoginUserRequestBody.md)
- - [SnapTradeRegisterUserRequestBody](docs/models/SnapTradeRegisterUserRequestBody.md)
- - [SnapTradeUserID](docs/models/SnapTradeUserID.md)
- - [SnapTradeUserSecret](docs/models/SnapTradeUserSecret.md)
- - [Status](docs/models/Status.md)
- - [StopPrice](docs/models/StopPrice.md)
- - [StrategyImpact](docs/models/StrategyImpact.md)
- - [StrategyImpactLegs](docs/models/StrategyImpactLegs.md)
- - [StrategyImpactLegsItem](docs/models/StrategyImpactLegsItem.md)
- - [StrategyOrderPlace](docs/models/StrategyOrderPlace.md)
- - [StrategyOrderPlaceOrders](docs/models/StrategyOrderPlaceOrders.md)
- - [StrategyOrderPlaceOrdersItem](docs/models/StrategyOrderPlaceOrdersItem.md)
- - [StrategyOrderPlaceOrdersItemLegs](docs/models/StrategyOrderPlaceOrdersItemLegs.md)
- - [StrategyOrderPlaceOrdersItemLegsItem](docs/models/StrategyOrderPlaceOrdersItemLegsItem.md)
- - [StrategyOrderQuotes](docs/models/StrategyOrderQuotes.md)
- - [StrategyOrderRecord](docs/models/StrategyOrderRecord.md)
- - [StrategyQuotes](docs/models/StrategyQuotes.md)
- - [StrategyQuotesGreek](docs/models/StrategyQuotesGreek.md)
- - [SubPeriodReturnRate](docs/models/SubPeriodReturnRate.md)
- - [Symbol](docs/models/Symbol.md)
- - [SymbolQuery](docs/models/SymbolQuery.md)
- - [SymbolsQuotes](docs/models/SymbolsQuotes.md)
- - [SyncStatusDate](docs/models/SyncStatusDate.md)
- - [TargetAsset](docs/models/TargetAsset.md)
- - [TargetAssetList](docs/models/TargetAssetList.md)
- - [TargetAssetMeta](docs/models/TargetAssetMeta.md)
- - [Time](docs/models/Time.md)
- - [TimeInForce](docs/models/TimeInForce.md)
- - [Timestamp](docs/models/Timestamp.md)
- - [Trade](docs/models/Trade.md)
- - [TradeExecutionStatus](docs/models/TradeExecutionStatus.md)
- - [TradeExecutionStatusMeta](docs/models/TradeExecutionStatusMeta.md)
- - [TradeImpact](docs/models/TradeImpact.md)
- - [TransactionsStatus](docs/models/TransactionsStatus.md)
- - [USExchange](docs/models/USExchange.md)
- - [UnderlyingSymbol](docs/models/UnderlyingSymbol.md)
- - [Units](docs/models/Units.md)
- - [UniversalActivity](docs/models/UniversalActivity.md)
- - [UniversalSymbol](docs/models/UniversalSymbol.md)
- - [UniversalSymbolTicker](docs/models/UniversalSymbolTicker.md)
- - [UserErrorLog](docs/models/UserErrorLog.md)
- - [UserID](docs/models/UserID.md)
- - [UserIDandSecret](docs/models/UserIDandSecret.md)
- - [UserList](docs/models/UserList.md)
- - [UserSecret](docs/models/UserSecret.md)
- - [UserSettings](docs/models/UserSettings.md)
 
 
 ## Author

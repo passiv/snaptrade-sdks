@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="periodStart">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
         /// <param name="periodEnd">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
         /// <param name="rateOfReturn">The return rate for the given period.</param>
-        public SubPeriodReturnRate(DateTime periodStart = default(DateTime), DateTime periodEnd = default(DateTime), decimal? rateOfReturn = default(decimal?)) : base()
+        public SubPeriodReturnRate(DateTime periodStart = default(DateTime), DateTime periodEnd = default(DateTime), double? rateOfReturn = default(double?)) : base()
         {
             this.PeriodStart = periodStart;
             this.PeriodEnd = periodEnd;
@@ -67,7 +67,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The return rate for the given period</value>
         [DataMember(Name = "rateOfReturn", EmitDefaultValue = true)]
-        public decimal? RateOfReturn { get; set; }
+        public double? RateOfReturn { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

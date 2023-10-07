@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="remainingCash">Remaining balance after executing all trades.</param>
         /// <param name="estimatedCommissions">Total estimated commissions across all trades to make.</param>
         /// <param name="forexFees">Estimated forex fees to pay to excute trades.</param>
-        public TradeImpact(Account account = default(Account), Currency currency = default(Currency), decimal remainingCash = default(decimal), decimal estimatedCommissions = default(decimal), decimal forexFees = default(decimal)) : base()
+        public TradeImpact(Account account = default(Account), Currency currency = default(Currency), double remainingCash = default(double), double estimatedCommissions = default(double), double forexFees = default(double)) : base()
         {
             this.Account = account;
             this.Currency = currency;
@@ -67,21 +67,21 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Remaining balance after executing all trades</value>
         [DataMember(Name = "remaining_cash", EmitDefaultValue = false)]
-        public decimal RemainingCash { get; set; }
+        public double RemainingCash { get; set; }
 
         /// <summary>
         /// Total estimated commissions across all trades to make
         /// </summary>
         /// <value>Total estimated commissions across all trades to make</value>
         [DataMember(Name = "estimated_commissions", EmitDefaultValue = false)]
-        public decimal EstimatedCommissions { get; set; }
+        public double EstimatedCommissions { get; set; }
 
         /// <summary>
         /// Estimated forex fees to pay to excute trades
         /// </summary>
         /// <value>Estimated forex fees to pay to excute trades</value>
         [DataMember(Name = "forex_fees", EmitDefaultValue = false)]
-        public decimal ForexFees { get; set; }
+        public double ForexFees { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

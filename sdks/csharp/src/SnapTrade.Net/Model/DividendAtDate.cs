@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">The ticker of the symbol that the dividend came from.</param>
         /// <param name="amount">The amount received from the dividend.</param>
         /// <param name="currency">The currency of the amount.</param>
-        public DividendAtDate(string symbol = default(string), decimal? amount = default(decimal?), string currency = default(string)) : base()
+        public DividendAtDate(string symbol = default(string), double? amount = default(double?), string currency = default(string)) : base()
         {
             this.Symbol = symbol;
             this.Amount = amount;
@@ -58,7 +58,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The amount received from the dividend</value>
         [DataMember(Name = "amount", EmitDefaultValue = true)]
-        public decimal? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// The currency of the amount

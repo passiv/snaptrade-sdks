@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **CreatedDate** | **string** | Time | [optional] 
 **UpdatedDate** | **string** | Time | [optional] 
-**Brokerage** | [**Brokerage**](Brokerage.md) |  | [optional] 
+**Brokerage** | **Brokerage** |  | [optional] 
 **Name** | **string** | Connection Name | [optional] 
 **Type** | **string** |  | [optional] 
 **Disabled** | **bool** |  | [optional] 

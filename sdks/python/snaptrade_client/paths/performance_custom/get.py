@@ -32,9 +32,31 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.exchange import Exchange as ExchangeSchema
+from snaptrade_client.model.net_dividend import NetDividend as NetDividendSchema
+from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate as SubPeriodReturnRateSchema
+from snaptrade_client.model.monthly_dividends import MonthlyDividends as MonthlyDividendsSchema
 from snaptrade_client.model.performance_custom import PerformanceCustom as PerformanceCustomSchema
+from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
+from snaptrade_client.model.performance_custom_bad_tickers import PerformanceCustomBadTickers as PerformanceCustomBadTickersSchema
+from snaptrade_client.model.net_contributions import NetContributions as NetContributionsSchema
+from snaptrade_client.model.past_value import PastValue as PastValueSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
+from snaptrade_client.model.dividend_at_date import DividendAtDate as DividendAtDateSchema
+from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
 from snaptrade_client.type.performance_custom import PerformanceCustom
+from snaptrade_client.type.past_value import PastValue
+from snaptrade_client.type.dividend_at_date import DividendAtDate
+from snaptrade_client.type.monthly_dividends import MonthlyDividends
+from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.exchange import Exchange
+from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.sub_period_return_rate import SubPeriodReturnRate
+from snaptrade_client.type.performance_custom_bad_tickers import PerformanceCustomBadTickers
+from snaptrade_client.type.universal_symbol import UniversalSymbol
+from snaptrade_client.type.net_contributions import NetContributions
+from snaptrade_client.type.net_dividend import NetDividend
 
 from . import path
 

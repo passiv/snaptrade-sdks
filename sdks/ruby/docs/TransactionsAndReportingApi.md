@@ -32,14 +32,14 @@ type = "DIVIDEND"
 begin
   # Get transaction history for a user
   result = SnapTrade::TransactionsAndReporting.get_activities(
-    user_id: user_id,
-    user_secret: user_secret,
-    start_date: start_date,
-    end_date: end_date,
-    accounts: accounts,
-    brokerage_authorizations: brokerage_authorizations,
-    type: type,
-  )
+                                                                 user_id: user_id,
+                                                                 user_secret: user_secret,
+                                                                 start_date: start_date,
+                                                                 end_date: end_date,
+                                                                 accounts: accounts,
+                                                                 brokerage_authorizations: brokerage_authorizations,
+                                                                 type: type,
+                                                               )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::TransactionsAndReporting.get_activities: #{e}"
@@ -62,14 +62,14 @@ type = "DIVIDEND"
 begin
   # Get transaction history for a user
   data, status_code, headers, response = SnapTrade::TransactionsAndReporting.get_activities_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    start_date: start_date,
-    end_date: end_date,
-    accounts: accounts,
-    brokerage_authorizations: brokerage_authorizations,
-    type: type,
-  )
+                                                                                                              user_id: user_id,
+                                                                                                              user_secret: user_secret,
+                                                                                                              start_date: start_date,
+                                                                                                              end_date: end_date,
+                                                                                                              accounts: accounts,
+                                                                                                              brokerage_authorizations: brokerage_authorizations,
+                                                                                                              type: type,
+                                                                                                            )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<UniversalActivity>
@@ -119,14 +119,14 @@ frequency = "monthly"
 begin
   # Get performance information for a specific timeframe
   result = SnapTrade::TransactionsAndReporting.get_reporting_custom_range(
-    start_date: start_date,
-    end_date: end_date,
-    user_id: user_id,
-    user_secret: user_secret,
-    accounts: accounts,
-    detailed: detailed,
-    frequency: frequency,
-  )
+                                                                             start_date: start_date,
+                                                                             end_date: end_date,
+                                                                             user_id: user_id,
+                                                                             user_secret: user_secret,
+                                                                             accounts: accounts,
+                                                                             detailed: detailed,
+                                                                             frequency: frequency,
+                                                                           )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::TransactionsAndReporting.get_reporting_custom_range: #{e}"
@@ -149,14 +149,14 @@ frequency = "monthly"
 begin
   # Get performance information for a specific timeframe
   data, status_code, headers, response = SnapTrade::TransactionsAndReporting.get_reporting_custom_range_with_http_info(
-    start_date: start_date,
-    end_date: end_date,
-    user_id: user_id,
-    user_secret: user_secret,
-    accounts: accounts,
-    detailed: detailed,
-    frequency: frequency,
-  )
+                                                                                                                          start_date: start_date,
+                                                                                                                          end_date: end_date,
+                                                                                                                          user_id: user_id,
+                                                                                                                          user_secret: user_secret,
+                                                                                                                          accounts: accounts,
+                                                                                                                          detailed: detailed,
+                                                                                                                          frequency: frequency,
+                                                                                                                        )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => PerformanceCustom

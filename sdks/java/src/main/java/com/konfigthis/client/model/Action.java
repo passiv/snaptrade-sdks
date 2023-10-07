@@ -26,8 +26,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Trade Action
  */
-@JsonAdapter(Action.Adapter.class)
-public enum Action {
+@JsonAdapter(Action.Adapter.class)public enum Action {
   
   BUY("BUY"),
   

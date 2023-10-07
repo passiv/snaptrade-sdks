@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RequestedAt** | **string** |  | [optional] 
 **Response** | **string** |  | [optional] 
-**StatusCode** | **decimal** |  | [optional] 
+**StatusCode** | **double** |  | [optional] 
 **QueryParams** | **string** |  | [optional] 
 **HttpMethod** | **string** |  | [optional] 
 **Endpoint** | **string** |  | [optional] 

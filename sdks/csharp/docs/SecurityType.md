@@ -5,7 +5,7 @@ Security Type
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Code** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **IsSupported** | **bool** |  | [optional] 

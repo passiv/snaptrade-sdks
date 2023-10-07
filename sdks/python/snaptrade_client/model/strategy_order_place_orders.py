@@ -53,3 +53,4 @@ class StrategyOrderPlaceOrders(
         return super().__getitem__(i)
 
 from snaptrade_client.model.strategy_order_place_orders_item import StrategyOrderPlaceOrdersItem
+from snaptrade_client.model.strategy_order_place_orders_item_legs import StrategyOrderPlaceOrdersItemLegs

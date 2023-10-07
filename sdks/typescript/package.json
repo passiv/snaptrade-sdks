@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "8.28.2",
+  "version": "8.29.0",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
@@ -30,6 +30,9 @@
   },
   "dependencies": {
     "axios": "0.27.2"
+  },
+  "resolutions": {
+    "semver": "^7.5.2"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",

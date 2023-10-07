@@ -5,7 +5,7 @@ SnapTradeUser Investment Account
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Number** | **string** |  | [optional] 
 **SyncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 

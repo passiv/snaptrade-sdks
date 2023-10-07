@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "snaptrade-python-sdk"
-version = "10.33.3"
+version = "10.34.0"
 description = "Client for SnapTrade"
 authors = ["SnapTrade <api@snaptrade.com>"]
 license = "MIT"
@@ -9,7 +9,7 @@ packages = [{include = "snaptrade_client"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-certifi = ">=2022.12.7"
+certifi = ">=2023.7.22"
 python-dateutil = "^2.8.2"
 typing_extensions = "^4.3.0"
 urllib3 = "^1.26.7"

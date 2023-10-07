@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="openPnl">openPnl.</param>
         /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions..</param>
-        public Position(PositionSymbol symbol = default(PositionSymbol), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?), decimal? averagePurchasePrice = default(decimal?)) : base()
+        public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? fractionalUnits = default(double?), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Symbol = symbol;
             this.Units = units;
@@ -62,34 +62,34 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Units
         /// </summary>
         [DataMember(Name = "units", EmitDefaultValue = true)]
-        public decimal? Units { get; set; }
+        public double? Units { get; set; }
 
         /// <summary>
         /// Last known market price for the symbol
         /// </summary>
         /// <value>Last known market price for the symbol</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Gets or Sets OpenPnl
         /// </summary>
         [DataMember(Name = "open_pnl", EmitDefaultValue = true)]
-        public decimal? OpenPnl { get; set; }
+        public double? OpenPnl { get; set; }
 
         /// <summary>
         /// Deprecated, use the units field for both fractional and integer units going forward
         /// </summary>
         /// <value>Deprecated, use the units field for both fractional and integer units going forward</value>
         [DataMember(Name = "fractional_units", EmitDefaultValue = true)]
-        public decimal? FractionalUnits { get; set; }
+        public double? FractionalUnits { get; set; }
 
         /// <summary>
         /// Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
         /// </summary>
         /// <value>Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
-        public decimal? AveragePurchasePrice { get; set; }
+        public double? AveragePurchasePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

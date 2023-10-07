@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | 
+**Id** | **string** |  | 
 **Ticker** | **string** |  | 
 **OptionType** | **string** |  | 
-**StrikePrice** | **decimal** |  | 
+**StrikePrice** | **double** |  | 
 **ExpirationDate** | **string** |  | 
 **IsMiniOption** | **bool** |  | [optional] 
-**UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | 
+**UnderlyingSymbol** | **UnderlyingSymbol** |  | 
 **LocalId** | **string** |  | [optional] 
-**ExchangeId** | **Guid** |  | [optional] 
+**ExchangeId** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

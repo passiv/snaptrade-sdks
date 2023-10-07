@@ -5,9 +5,9 @@ Manual trade symbol object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BrokerageSymbolId** | **Guid** |  | [optional] 
-**UniversalSymbolId** | **Guid** |  | [optional] 
-**Currency** | [**Currency**](Currency.md) |  | [optional] 
+**BrokerageSymbolId** | **string** |  | [optional] 
+**UniversalSymbolId** | **string** |  | [optional] 
+**Currency** | **Currency** |  | [optional] 
 **LocalId** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Symbol** | **string** |  | [optional] 

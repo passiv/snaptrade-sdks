@@ -13,9 +13,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
 | [**UpdateUserAccount**](AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
-<a name="getalluserholdings"></a>
+
 # **GetAllUserHoldings**
-> List&lt;AccountHoldings&gt; GetAllUserHoldings (string userId, string userSecret, Guid? brokerageAuthorizations = null)
 
 List all accounts for the user, plus balances, positions, and orders for each account.
 
@@ -33,18 +32,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var brokerageAuthorizations = 917c8734-8470-4a3e-a18f-57c3f2ee6631;  // Guid? | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
+            
             try
             {
                 // List all accounts for the user, plus balances, positions, and orders for each account.
@@ -94,20 +91,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **brokerageAuthorizations** | **Guid?** | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional]  |
+| **brokerageAuthorizations** | **string** | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional]  |
 
 ### Return type
 
 [**List&lt;AccountHoldings&gt;**](AccountHoldings.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -120,9 +108,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuseraccountbalance"></a>
+
 # **GetUserAccountBalance**
-> List&lt;Balance&gt; GetUserAccountBalance (string userId, string userSecret, Guid accountId)
 
 List account balances
 
@@ -140,18 +127,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            
             try
             {
                 // List account balances
@@ -201,20 +186,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 
 ### Return type
 
 [**List&lt;Balance&gt;**](Balance.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
 
 
 ### HTTP response details
@@ -225,9 +201,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuseraccountdetails"></a>
+
 # **GetUserAccountDetails**
-> Account GetUserAccountDetails (string userId, string userSecret, Guid accountId)
 
 Return details of a specific investment account
 
@@ -245,18 +220,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account to get detail of.
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account to get detail of.
+            
             try
             {
                 // Return details of a specific investment account
@@ -306,20 +279,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account to get detail of. |  |
+| **accountId** | **string** | The ID of the account to get detail of. |  |
 
 ### Return type
 
 [**Account**](Account.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -330,9 +294,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuseraccountorders"></a>
+
 # **GetUserAccountOrders**
-> List&lt;AccountOrderRecord&gt; GetUserAccountOrders (string userId, string userSecret, Guid accountId, string state = null)
 
 Get history of orders placed in account
 
@@ -350,19 +313,17 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var state = "all";  // string | defaults value is set to \"all\" (optional) 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var state = "all"; // defaults value is set to \"all\" (optional) 
+            
             try
             {
                 // Get history of orders placed in account
@@ -412,21 +373,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 | **state** | **string** | defaults value is set to \&quot;all\&quot; | [optional]  |
 
 ### Return type
 
 [**List&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -437,9 +389,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuseraccountpositions"></a>
+
 # **GetUserAccountPositions**
-> List&lt;Position&gt; GetUserAccountPositions (string userId, string userSecret, Guid accountId)
 
 List account positions
 
@@ -457,18 +408,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            
             try
             {
                 // List account positions
@@ -518,20 +467,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 
 ### Return type
 
 [**List&lt;Position&gt;**](Position.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
 
 
 ### HTTP response details
@@ -542,9 +482,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuserholdings"></a>
+
 # **GetUserHoldings**
-> AccountHoldingsAccount GetUserHoldings (Guid accountId, string userId, string userSecret)
 
 List balances, positions and orders for the specified account.
 
@@ -562,18 +501,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var accountId = 917c8734-8470-4a3e-a18f-57c3f2ee6631;  // Guid | The ID of the account to fetch holdings for.
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to fetch holdings for.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // List balances, positions and orders for the specified account.
@@ -621,22 +558,13 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **accountId** | **Guid** | The ID of the account to fetch holdings for. |  |
+| **accountId** | **string** | The ID of the account to fetch holdings for. |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
 ### Return type
 
 [**AccountHoldingsAccount**](AccountHoldingsAccount.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -649,9 +577,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listuseraccounts"></a>
+
 # **ListUserAccounts**
-> List&lt;Account&gt; ListUserAccounts (string userId, string userSecret)
 
 List accounts
 
@@ -669,17 +596,15 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // List accounts
@@ -734,15 +659,6 @@ catch (ApiException e)
 
 [**List&lt;Account&gt;**](Account.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -752,9 +668,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="updateuseraccount"></a>
+
 # **UpdateUserAccount**
-> List&lt;Account&gt; UpdateUserAccount (string userId, string userSecret, Guid accountId)
 
 Update details of an investment account
 
@@ -772,18 +687,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account to update.
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account to update.
+            
             try
             {
                 // Update details of an investment account
@@ -833,20 +746,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account to update. |  |
+| **accountId** | **string** | The ID of the account to update. |  |
 
 ### Return type
 
 [**List&lt;Account&gt;**](Account.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details

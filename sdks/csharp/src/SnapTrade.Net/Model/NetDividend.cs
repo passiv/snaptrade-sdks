@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="amount">amount.</param>
         /// <param name="currency">currency.</param>
-        public NetDividend(UniversalSymbol symbol = default(UniversalSymbol), decimal? amount = default(decimal?), string currency = default(string)) : base()
+        public NetDividend(UniversalSymbol symbol = default(UniversalSymbol), double? amount = default(double?), string currency = default(string)) : base()
         {
             this.Symbol = symbol;
             this.Amount = amount;
@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Amount
         /// </summary>
         [DataMember(Name = "amount", EmitDefaultValue = true)]
-        public decimal? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency

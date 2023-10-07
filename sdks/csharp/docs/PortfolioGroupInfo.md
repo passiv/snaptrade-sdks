@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **ExcludedPositions** | [**List&lt;ExcludedAsset&gt;**](ExcludedAsset.md) |  | [optional] 
 **CalculatedTrades** | [**List&lt;CalculatedTrade&gt;**](CalculatedTrade.md) |  | [optional] 
 **BrokerageAuthorizations** | [**List&lt;BrokerageAuthorization&gt;**](BrokerageAuthorization.md) |  | [optional] 
-**Accuracy** | **decimal** |  | [optional] 
-**Settings** | [**PortfolioGroupSettings**](PortfolioGroupSettings.md) |  | [optional] 
+**Accuracy** | **double** |  | [optional] 
+**Settings** | **PortfolioGroupSettings** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

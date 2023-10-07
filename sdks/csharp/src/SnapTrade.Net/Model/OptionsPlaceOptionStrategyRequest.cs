@@ -107,7 +107,7 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">Trade Price if limit or stop limit order (required).</param>
-        public OptionsPlaceOptionStrategyRequest(OrderTypeEnum orderType = default(OrderTypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal? price = default(decimal?))
+        public OptionsPlaceOptionStrategyRequest(OrderTypeEnum orderType = default(OrderTypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), double? price = default(double?))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
@@ -124,7 +124,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "price", IsRequired = true, EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

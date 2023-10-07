@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ModelPortfolio** | [**ModelPortfolio**](ModelPortfolio.md) |  | [optional] 
+**ModelPortfolio** | **ModelPortfolio** |  | [optional] 
 **ModelPortfolioSecurity** | [**List&lt;ModelPortfolioSecurity&gt;**](ModelPortfolioSecurity.md) |  | [optional] 
 **ModelPortfolioAssetClass** | [**List&lt;ModelPortfolioAssetClass&gt;**](ModelPortfolioAssetClass.md) |  | [optional] 
 

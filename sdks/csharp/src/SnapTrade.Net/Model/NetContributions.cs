@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
         /// <param name="contributions">contributions.</param>
         /// <param name="currency">currency.</param>
-        public NetContributions(DateTime date = default(DateTime), decimal? contributions = default(decimal?), string currency = default(string)) : base()
+        public NetContributions(DateTime date = default(DateTime), double? contributions = default(double?), string currency = default(string)) : base()
         {
             this.Date = date;
             this.Contributions = contributions;
@@ -58,7 +58,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Contributions
         /// </summary>
         [DataMember(Name = "contributions", EmitDefaultValue = true)]
-        public decimal? Contributions { get; set; }
+        public double? Contributions { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency

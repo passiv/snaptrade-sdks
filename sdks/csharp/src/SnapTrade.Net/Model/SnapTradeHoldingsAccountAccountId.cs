@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">meta.</param>
         /// <param name="cashRestrictions">cashRestrictions.</param>
         /// <param name="createdDate">Time.</param>
-        public SnapTradeHoldingsAccountAccountId(Guid id = default(Guid), Guid brokerageAuthorization = default(Guid), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), string createdDate = default(string)) : base()
+        public SnapTradeHoldingsAccountAccountId(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), string createdDate = default(string)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -62,19 +62,19 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageAuthorization
         /// </summary>
         [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
-        public Guid BrokerageAuthorization { get; set; }
+        public string BrokerageAuthorization { get; set; }
 
         /// <summary>
         /// Gets or Sets PortfolioGroup
         /// </summary>
         [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
-        public Guid PortfolioGroup { get; set; }
+        public string PortfolioGroup { get; set; }
 
         /// <summary>
         /// Gets or Sets Name

@@ -33,8 +33,8 @@ currency_pair = "currencyPair_example"
 begin
   # Return the exchange rate of a currency pair
   result = SnapTrade::ReferenceData.get_currency_exchange_rate_pair(
-    currency_pair: currency_pair,
-  )
+                                                                       currency_pair: currency_pair,
+                                                                     )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ReferenceData.get_currency_exchange_rate_pair: #{e}"
@@ -51,8 +51,8 @@ currency_pair = "currencyPair_example"
 begin
   # Return the exchange rate of a currency pair
   data, status_code, headers, response = SnapTrade::ReferenceData.get_currency_exchange_rate_pair_with_http_info(
-    currency_pair: currency_pair,
-  )
+                                                                                                                    currency_pair: currency_pair,
+                                                                                                                  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => ExchangeRatePairs
@@ -229,8 +229,8 @@ substring = "apple"
 begin
   # Search for symbols
   result = SnapTrade::ReferenceData.get_symbols(
-    substring: substring,
-  )
+                                                   substring: substring,
+                                                 )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ReferenceData.get_symbols: #{e}"
@@ -247,8 +247,8 @@ substring = "apple"
 begin
   # Search for symbols
   data, status_code, headers, response = SnapTrade::ReferenceData.get_symbols_with_http_info(
-    substring: substring,
-  )
+                                                                                                substring: substring,
+                                                                                              )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<UniversalSymbol>
@@ -285,9 +285,9 @@ symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 begin
   # Get details of a symbol by the ticker
   result = SnapTrade::ReferenceData.get_symbols_by_ticker(
-    ticker: ticker,
-    symbol_id: symbol_id,
-  )
+                                                             ticker: ticker,
+                                                             symbol_id: symbol_id,
+                                                           )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ReferenceData.get_symbols_by_ticker: #{e}"
@@ -305,9 +305,9 @@ symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
 begin
   # Get details of a symbol by the ticker
   data, status_code, headers, response = SnapTrade::ReferenceData.get_symbols_by_ticker_with_http_info(
-    ticker: ticker,
-    symbol_id: symbol_id,
-  )
+                                                                                                          ticker: ticker,
+                                                                                                          symbol_id: symbol_id,
+                                                                                                        )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => UniversalSymbol
@@ -344,8 +344,8 @@ brokerage = "QUESTRADE,ALPACA"
 begin
   # List of all brokerage authorization types
   result = SnapTrade::ReferenceData.list_all_brokerage_authorization_type(
-    brokerage: brokerage,
-  )
+                                                                             brokerage: brokerage,
+                                                                           )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ReferenceData.list_all_brokerage_authorization_type: #{e}"
@@ -362,8 +362,8 @@ brokerage = "QUESTRADE,ALPACA"
 begin
   # List of all brokerage authorization types
   data, status_code, headers, response = SnapTrade::ReferenceData.list_all_brokerage_authorization_type_with_http_info(
-    brokerage: brokerage,
-  )
+                                                                                                                          brokerage: brokerage,
+                                                                                                                        )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<BrokerageAuthorizationTypeReadOnly>
@@ -543,11 +543,11 @@ substring = "apple"
 begin
   # Search for symbols available in an account
   result = SnapTrade::ReferenceData.symbol_search_user_account(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    substring: substring,
-  )
+                                                                  user_id: user_id,
+                                                                  user_secret: user_secret,
+                                                                  account_id: account_id,
+                                                                  substring: substring,
+                                                                )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ReferenceData.symbol_search_user_account: #{e}"
@@ -567,11 +567,11 @@ substring = "apple"
 begin
   # Search for symbols available in an account
   data, status_code, headers, response = SnapTrade::ReferenceData.symbol_search_user_account_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    substring: substring,
-  )
+                                                                                                               user_id: user_id,
+                                                                                                               user_secret: user_secret,
+                                                                                                               account_id: account_id,
+                                                                                                               substring: substring,
+                                                                                                             )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<UniversalSymbol>

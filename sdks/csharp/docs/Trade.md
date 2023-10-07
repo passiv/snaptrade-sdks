@@ -5,13 +5,13 @@ A trade object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**Account** | [**Account**](Account.md) |  | [optional] 
-**Symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] 
-**UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**Action** | **string** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**Account** | **Account** |  | [optional] 
+**Symbol** | **BrokerageSymbol** |  | [optional] 
+**UniversalSymbol** | **UniversalSymbol** |  | [optional] 
+**_Action** | **string** |  | [optional] 
 **Units** | **int** |  | [optional] 
-**Price** | **decimal** |  | [optional] 
+**Price** | **double** |  | [optional] 
 **Sequence** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -53,7 +53,7 @@ namespace SnapTrade.Net.Model
         /// <param name="defaultCurrency">defaultCurrency.</param>
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">List of exchange ID supported by brokerage.</param>
-        public Brokerage(Guid id = default(Guid), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), Guid defaultCurrency = default(Guid), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
+        public Brokerage(string id = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), string defaultCurrency = default(string), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -80,7 +80,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -170,7 +170,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets DefaultCurrency
         /// </summary>
         [DataMember(Name = "default_currency", EmitDefaultValue = false)]
-        public Guid DefaultCurrency { get; set; }
+        public string DefaultCurrency { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageType

@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Model
         /// <param name="rateOfReturn">The return rate over the timeframe. Annualized if timeframe is longer than 1 year.</param>
         /// <param name="returnRateTimeframe">returnRateTimeframe.</param>
         /// <param name="detailedMode">Whether the user has detailed mode enabled (more frequent data points for totalEquity and contribution timeframes).</param>
-        public PerformanceCustom(List<PastValue> totalEquityTimeframe = default(List<PastValue>), NetContributions contributions = default(NetContributions), List<PastValue> contributionTimeframe = default(List<PastValue>), List<PastValue> contributionTimeframeCumulative = default(List<PastValue>), List<PastValue> withdrawalTimeframe = default(List<PastValue>), decimal? contributionStreak = default(decimal?), decimal? contributionMonthsContributed = default(decimal?), decimal? contributionTotalMonths = default(decimal?), List<NetDividend> dividends = default(List<NetDividend>), decimal? dividendIncome = default(decimal?), decimal? monthlyDividends = default(decimal?), List<string> badTickers = default(List<string>), List<MonthlyDividends> dividendTimeline = default(List<MonthlyDividends>), decimal? commissions = default(decimal?), decimal? forexFees = default(decimal?), decimal? fees = default(decimal?), decimal? rateOfReturn = default(decimal?), List<SubPeriodReturnRate> returnRateTimeframe = default(List<SubPeriodReturnRate>), bool detailedMode = default(bool)) : base()
+        public PerformanceCustom(List<PastValue> totalEquityTimeframe = default(List<PastValue>), NetContributions contributions = default(NetContributions), List<PastValue> contributionTimeframe = default(List<PastValue>), List<PastValue> contributionTimeframeCumulative = default(List<PastValue>), List<PastValue> withdrawalTimeframe = default(List<PastValue>), double? contributionStreak = default(double?), double? contributionMonthsContributed = default(double?), double? contributionTotalMonths = default(double?), List<NetDividend> dividends = default(List<NetDividend>), double? dividendIncome = default(double?), double? monthlyDividends = default(double?), List<string> badTickers = default(List<string>), List<MonthlyDividends> dividendTimeline = default(List<MonthlyDividends>), double? commissions = default(double?), double? forexFees = default(double?), double? fees = default(double?), double? rateOfReturn = default(double?), List<SubPeriodReturnRate> returnRateTimeframe = default(List<SubPeriodReturnRate>), bool detailedMode = default(bool)) : base()
         {
             this.TotalEquityTimeframe = totalEquityTimeframe;
             this.Contributions = contributions;
@@ -113,21 +113,21 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Current streak of cosecutive months where contributions were made</value>
         [DataMember(Name = "contributionStreak", EmitDefaultValue = true)]
-        public decimal? ContributionStreak { get; set; }
+        public double? ContributionStreak { get; set; }
 
         /// <summary>
         /// Number of months in the timeframe with contributions
         /// </summary>
         /// <value>Number of months in the timeframe with contributions</value>
         [DataMember(Name = "contributionMonthsContributed", EmitDefaultValue = true)]
-        public decimal? ContributionMonthsContributed { get; set; }
+        public double? ContributionMonthsContributed { get; set; }
 
         /// <summary>
         /// Total months in timeframe
         /// </summary>
         /// <value>Total months in timeframe</value>
         [DataMember(Name = "contributionTotalMonths", EmitDefaultValue = true)]
-        public decimal? ContributionTotalMonths { get; set; }
+        public double? ContributionTotalMonths { get; set; }
 
         /// <summary>
         /// Gets or Sets Dividends
@@ -140,14 +140,14 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Total dividends received over the timeframe</value>
         [DataMember(Name = "dividendIncome", EmitDefaultValue = true)]
-        public decimal? DividendIncome { get; set; }
+        public double? DividendIncome { get; set; }
 
         /// <summary>
         /// Average dividends received per month over the timeframe
         /// </summary>
         /// <value>Average dividends received per month over the timeframe</value>
         [DataMember(Name = "monthlyDividends", EmitDefaultValue = true)]
-        public decimal? MonthlyDividends { get; set; }
+        public double? MonthlyDividends { get; set; }
 
         /// <summary>
         /// list of tickers which may not be supported or may not have accurate price data
@@ -167,28 +167,28 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>commissions incurred during the timeframe</value>
         [DataMember(Name = "commissions", EmitDefaultValue = true)]
-        public decimal? Commissions { get; set; }
+        public double? Commissions { get; set; }
 
         /// <summary>
         /// forex fees incurred during the timeframe
         /// </summary>
         /// <value>forex fees incurred during the timeframe</value>
         [DataMember(Name = "forexFees", EmitDefaultValue = true)]
-        public decimal? ForexFees { get; set; }
+        public double? ForexFees { get; set; }
 
         /// <summary>
         /// other fees incurred during the timeframe
         /// </summary>
         /// <value>other fees incurred during the timeframe</value>
         [DataMember(Name = "fees", EmitDefaultValue = true)]
-        public decimal? Fees { get; set; }
+        public double? Fees { get; set; }
 
         /// <summary>
         /// The return rate over the timeframe. Annualized if timeframe is longer than 1 year
         /// </summary>
         /// <value>The return rate over the timeframe. Annualized if timeframe is longer than 1 year</value>
         [DataMember(Name = "rateOfReturn", EmitDefaultValue = true)]
-        public decimal? RateOfReturn { get; set; }
+        public double? RateOfReturn { get; set; }
 
         /// <summary>
         /// Gets or Sets ReturnRateTimeframe

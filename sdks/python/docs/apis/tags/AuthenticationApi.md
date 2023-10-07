@@ -1,5 +1,4 @@
-<a name="__pageTop"></a>
-# snaptrade_client.apis.tags.authentication_api.AuthenticationApi
+# snaptrade_client.authentication
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -22,9 +21,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -48,106 +44,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#delete_snap_trade_user.ApiResponseFor200) | Delete successful
-400 | [ApiResponseFor400](#delete_snap_trade_user.ApiResponseFor400) | Bad Request
-403 | [ApiResponseFor403](#delete_snap_trade_user.ApiResponseFor403) | Forbidden
-404 | [ApiResponseFor404](#delete_snap_trade_user.ApiResponseFor404) | Not Found
-500 | [ApiResponseFor500](#delete_snap_trade_user.ApiResponseFor500) | Unexpected Error
-
-#### delete_snap_trade_user.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**DeleteUserResponse**](../../models/DeleteUserResponse.md) |  | 
-
-
-#### delete_snap_trade_user.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### delete_snap_trade_user.ApiResponseFor403
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor403ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor403ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model403FailedRequestResponse**](../../models/Model403FailedRequestResponse.md) |  | 
-
-
-#### delete_snap_trade_user.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor404ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor404ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model404FailedRequestResponse**](../../models/Model404FailedRequestResponse.md) |  | 
-
-
-#### delete_snap_trade_user.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -162,9 +58,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -186,116 +79,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_jwt.ApiResponseFor200) | Successfully obtained encrypted JWT data. See description on how to object JWT token
-400 | [ApiResponseFor400](#get_user_jwt.ApiResponseFor400) | Bad Request
-403 | [ApiResponseFor403](#get_user_jwt.ApiResponseFor403) | Forbidden
-404 | [ApiResponseFor404](#get_user_jwt.ApiResponseFor404) | Not Found
-500 | [ApiResponseFor500](#get_user_jwt.ApiResponseFor500) | Unexpected Error
-
-#### get_user_jwt.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**EncryptedResponse**](../../models/EncryptedResponse.md) |  | 
-
-
-#### get_user_jwt.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### get_user_jwt.ApiResponseFor403
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor403ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor403ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model403FailedRequestResponse**](../../models/Model403FailedRequestResponse.md) |  | 
-
-
-#### get_user_jwt.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor404ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor404ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model404FailedRequestResponse**](../../models/Model404FailedRequestResponse.md) |  | 
-
-
-#### get_user_jwt.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -310,9 +93,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -332,68 +112,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-This endpoint does not need any parameter.
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#list_snap_trade_users.ApiResponseFor200) | Successfully generated a list of users
-400 | [ApiResponseFor400](#list_snap_trade_users.ApiResponseFor400) | Bad Request. Could be caused by various reasons. Error message is provided in response
-404 | [ApiResponseFor404](#list_snap_trade_users.ApiResponseFor404) | Invalid SnapTrade Client ID provided in query
-500 | [ApiResponseFor500](#list_snap_trade_users.ApiResponseFor500) | Unexpected error
-
-#### list_snap_trade_users.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**UserList**](../../models/UserList.md) |  | 
-
-
-#### list_snap_trade_users.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### list_snap_trade_users.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor404ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor404ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model404FailedRequestResponse**](../../models/Model404FailedRequestResponse.md) |  | 
-
-
-#### list_snap_trade_users.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -408,9 +126,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -437,134 +152,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-body | typing.Union[SchemaForRequestBodyApplicationJson, Unset] | optional, default is unset |
-query_params | RequestQueryParams | |
-content_type | str | optional, default is 'application/json' | Selects the schema and serialization of the request body
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### body
-
-# SchemaForRequestBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**SnapTradeLoginUserRequestBody**](../../models/SnapTradeLoginUserRequestBody.md) |  | 
-
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#login_snap_trade_user.ApiResponseFor200) | Login successful. Redirect user to provided URI in response
-400 | [ApiResponseFor400](#login_snap_trade_user.ApiResponseFor400) | Bad Request
-403 | [ApiResponseFor403](#login_snap_trade_user.ApiResponseFor403) | Forbidden
-404 | [ApiResponseFor404](#login_snap_trade_user.ApiResponseFor404) | Not Found
-500 | [ApiResponseFor500](#login_snap_trade_user.ApiResponseFor500) | Unexpected Error
-
-#### login_snap_trade_user.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO |  | 
-
-### Composed Schemas (allOf/anyOf/oneOf/not)
-#### oneOf
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[LoginRedirectURI](../../models/LoginRedirectURI.md) | [**LoginRedirectURI**](../../models/LoginRedirectURI.md) | [**LoginRedirectURI**](../../models/LoginRedirectURI.md) |  | 
-[EncryptedResponse](../../models/EncryptedResponse.md) | [**EncryptedResponse**](../../models/EncryptedResponse.md) | [**EncryptedResponse**](../../models/EncryptedResponse.md) |  | 
-
-#### login_snap_trade_user.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### login_snap_trade_user.ApiResponseFor403
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor403ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor403ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model403FailedRequestResponse**](../../models/Model403FailedRequestResponse.md) |  | 
-
-
-#### login_snap_trade_user.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor404ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor404ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model404FailedRequestResponse**](../../models/Model404FailedRequestResponse.md) |  | 
-
-
-#### login_snap_trade_user.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -579,9 +166,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -606,84 +190,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-body | typing.Union[SchemaForRequestBodyApplicationJson] | required |
-content_type | str | optional, default is 'application/json' | Selects the schema and serialization of the request body
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### body
-
-# SchemaForRequestBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**SnapTradeRegisterUserRequestBody**](../../models/SnapTradeRegisterUserRequestBody.md) |  | 
-
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#register_snap_trade_user.ApiResponseFor200) | Successfully registered user
-400 | [ApiResponseFor400](#register_snap_trade_user.ApiResponseFor400) | Bad Request. Could be caused by various reasons. Error message is provided in response
-404 | [ApiResponseFor404](#register_snap_trade_user.ApiResponseFor404) | Invalid SnapTrade Client ID provided in query
-500 | [ApiResponseFor500](#register_snap_trade_user.ApiResponseFor500) | Unexpected error
-
-#### register_snap_trade_user.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**UserIDandSecret**](../../models/UserIDandSecret.md) |  | 
-
-
-#### register_snap_trade_user.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### register_snap_trade_user.ApiResponseFor404
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor404ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor404ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model404FailedRequestResponse**](../../models/Model404FailedRequestResponse.md) |  | 
-
-
-#### register_snap_trade_user.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

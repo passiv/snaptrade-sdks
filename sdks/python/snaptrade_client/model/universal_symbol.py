@@ -35,39 +35,23 @@ class UniversalSymbol(
 
 
     class MetaOapg:
+        required = {
+            "symbol",
+            "raw_symbol",
+            "currency",
+            "id",
+            "type",
+            "currencies",
+        }
         
         class properties:
             id = schemas.UUIDSchema
             symbol = schemas.StrSchema
             raw_symbol = schemas.StrSchema
-            
-            
-            class description(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'description':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
         
             @staticmethod
             def currency() -> typing.Type['Currency']:
                 return Currency
-        
-            @staticmethod
-            def exchange() -> typing.Type['Exchange']:
-                return Exchange
         
             @staticmethod
             def type() -> typing.Type['SecurityType']:
@@ -98,20 +82,48 @@ class UniversalSymbol(
             
                 def __getitem__(self, i: int) -> 'Currency':
                     return super().__getitem__(i)
+            
+            
+            class description(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'description':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+        
+            @staticmethod
+            def exchange() -> typing.Type['Exchange']:
+                return Exchange
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
                 "raw_symbol": raw_symbol,
-                "description": description,
                 "currency": currency,
-                "exchange": exchange,
                 "type": type,
                 "currencies": currencies,
+                "description": description,
+                "exchange": exchange,
             }
         additional_properties = schemas.AnyTypeSchema
     
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
+    symbol: MetaOapg.properties.symbol
+    raw_symbol: MetaOapg.properties.raw_symbol
+    currency: 'Currency'
+    id: MetaOapg.properties.id
+    type: 'SecurityType'
+    currencies: MetaOapg.properties.currencies
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
@@ -120,13 +132,10 @@ class UniversalSymbol(
     def __getitem__(self, name: typing_extensions.Literal["raw_symbol"]) -> MetaOapg.properties.raw_symbol: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["description"]) -> MetaOapg.properties.description: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["currency"]) -> 'Currency': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["exchange"]) -> 'Exchange': ...
+    def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["type"]) -> 'SecurityType': ...
@@ -135,67 +144,73 @@ class UniversalSymbol(
     def __getitem__(self, name: typing_extensions.Literal["currencies"]) -> MetaOapg.properties.currencies: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["description"]) -> MetaOapg.properties.description: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["exchange"]) -> 'Exchange': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["description"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["raw_symbol"]) -> MetaOapg.properties.raw_symbol: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["raw_symbol"]) -> typing.Union[MetaOapg.properties.raw_symbol, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> 'Currency': ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> 'SecurityType': ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["currencies"]) -> MetaOapg.properties.currencies: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["description"]) -> typing.Union[MetaOapg.properties.description, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union['Currency', schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["exchange"]) -> typing.Union['Exchange', schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union['SecurityType', schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currencies"]) -> typing.Union[MetaOapg.properties.currencies, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["description"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
-        raw_symbol: typing.Union[MetaOapg.properties.raw_symbol, str, schemas.Unset] = schemas.unset,
+        symbol: typing.Union[MetaOapg.properties.symbol, str, ],
+        raw_symbol: typing.Union[MetaOapg.properties.raw_symbol, str, ],
+        currency: 'Currency',
+        id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, ],
+        type: 'SecurityType',
+        currencies: typing.Union[MetaOapg.properties.currencies, list, tuple, ],
         description: typing.Union[MetaOapg.properties.description, None, str, schemas.Unset] = schemas.unset,
-        currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
-        type: typing.Union['SecurityType', schemas.Unset] = schemas.unset,
-        currencies: typing.Union[MetaOapg.properties.currencies, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'UniversalSymbol':
         return super().__new__(
             cls,
             *args,
-            id=id,
             symbol=symbol,
             raw_symbol=raw_symbol,
-            description=description,
             currency=currency,
-            exchange=exchange,
+            id=id,
             type=type,
             currencies=currencies,
+            description=description,
+            exchange=exchange,
             _configuration=_configuration,
             **kwargs,
         )

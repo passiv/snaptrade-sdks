@@ -63,8 +63,13 @@ namespace SnapTrade.Net.Model
         /// <param name="underlyingSymbolId">underlyingSymbolId (required).</param>
         /// <param name="legs">legs (required).</param>
         /// <param name="strategyType">strategyType (required).</param>
-        public OptionsGetOptionStrategyRequest(Guid underlyingSymbolId = default(Guid), List<OptionLeg> legs = default(List<OptionLeg>), StrategyTypeEnum strategyType = default(StrategyTypeEnum))
+        public OptionsGetOptionStrategyRequest(string underlyingSymbolId = default(string), List<OptionLeg> legs = default(List<OptionLeg>), StrategyTypeEnum strategyType = default(StrategyTypeEnum))
         {
+            // to ensure "underlyingSymbolId" is required (not null)
+            if (underlyingSymbolId == null)
+            {
+                throw new ArgumentNullException("underlyingSymbolId is a required property for OptionsGetOptionStrategyRequest and cannot be null");
+            }
             this.UnderlyingSymbolId = underlyingSymbolId;
             // to ensure "legs" is required (not null)
             if (legs == null)
@@ -79,7 +84,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets UnderlyingSymbolId
         /// </summary>
         [DataMember(Name = "underlying_symbol_id", IsRequired = true, EmitDefaultValue = true)]
-        public Guid UnderlyingSymbolId { get; set; }
+        public string UnderlyingSymbolId { get; set; }
 
         /// <summary>
         /// Gets or Sets Legs

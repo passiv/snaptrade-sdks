@@ -32,9 +32,17 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
+from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
+from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization as BrokerageAuthorizationSchema
+from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta as BrokerageAuthorizationMetaSchema
 
+from snaptrade_client.type.brokerage import Brokerage
+from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
 from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.brokerage_type import BrokerageType
+from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
 
 from . import path
 

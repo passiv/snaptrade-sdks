@@ -16,5 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.option_chain_item import OptionChainItem
+from snaptrade_client.type.option_chain_item_chain_per_root import OptionChainItemChainPerRoot
 
 OptionChain = typing.List[OptionChainItem]

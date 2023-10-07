@@ -32,10 +32,22 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.exchange import Exchange as ExchangeSchema
+from snaptrade_client.model.option_strategy import OptionStrategy as OptionStrategySchema
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord as StrategyOrderRecordSchema
+from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
+from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs as OptionStrategyLegsSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
 from snaptrade_client.model.price import Price as PriceSchema
+from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
+from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
+from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.strategy_order_record import StrategyOrderRecord
+from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.universal_symbol import UniversalSymbol
+from snaptrade_client.type.option_strategy import OptionStrategy
 from snaptrade_client.type.price import Price
 
 # Query params

@@ -7,14 +7,14 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **UUID** |  |  [optional] |
-|**symbol** | **String** |  |  [optional] |
-|**rawSymbol** | **String** |  |  [optional] |
+|**id** | **UUID** |  |  |
+|**symbol** | **String** |  |  |
+|**rawSymbol** | **String** |  |  |
 |**description** | **String** |  |  [optional] |
-|**currency** | **Currency** |  |  [optional] |
+|**currency** | **Currency** |  |  |
 |**exchange** | **Exchange** |  |  [optional] |
-|**type** | **SecurityType** |  |  [optional] |
-|**currencies** | **List&lt;Currency&gt;** |  |  [optional] |
+|**type** | **SecurityType** |  |  |
+|**currencies** | **List&lt;Currency&gt;** |  |  |
 
 
 

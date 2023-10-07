@@ -16,9 +16,14 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.account_simple import AccountSimple
+from snaptrade_client.type.account_sync_status import AccountSyncStatus
 from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.options_symbol import OptionsSymbol
+from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.symbol import Symbol
+from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.type.us_exchange import USExchange
 
 class RequiredUniversalActivity(TypedDict):
     pass
@@ -36,7 +41,7 @@ class OptionalUniversalActivity(TypedDict, total=False):
 
     fee: typing.Union[int, float]
 
-    # The forex conversion rate involved in the transaction if provided by the brokerage
+    # The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
     fx_rate: typing.Optional[typing.Union[int, float]]
 
     institution: str

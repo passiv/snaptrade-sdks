@@ -148,6 +148,11 @@ class ModelPortfolioDetails(
             **kwargs,
         )
 
+from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.exchange import Exchange
+from snaptrade_client.model.model_asset_class import ModelAssetClass
 from snaptrade_client.model.model_portfolio import ModelPortfolio
 from snaptrade_client.model.model_portfolio_asset_class import ModelPortfolioAssetClass
 from snaptrade_client.model.model_portfolio_security import ModelPortfolioSecurity
+from snaptrade_client.model.security_type import SecurityType
+from snaptrade_client.model.universal_symbol import UniversalSymbol

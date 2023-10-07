@@ -27,8 +27,8 @@ user_id = "John.doe@snaptrade.com"
 begin
   # Delete SnapTrade user
   result = SnapTrade::Authentication.delete_snap_trade_user(
-    user_id: user_id,
-  )
+                                                               user_id: user_id,
+                                                             )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Authentication.delete_snap_trade_user: #{e}"
@@ -45,8 +45,8 @@ user_id = "John.doe@snaptrade.com"
 begin
   # Delete SnapTrade user
   data, status_code, headers, response = SnapTrade::Authentication.delete_snap_trade_user_with_http_info(
-    user_id: user_id,
-  )
+                                                                                                            user_id: user_id,
+                                                                                                          )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => DeleteUserResponse
@@ -83,9 +83,9 @@ user_secret = "USERSECRET123"
 begin
   # Generate encrypted JWT token
   result = SnapTrade::Authentication.get_user_jwt(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                     user_id: user_id,
+                                                     user_secret: user_secret,
+                                                   )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Authentication.get_user_jwt: #{e}"
@@ -103,9 +103,9 @@ user_secret = "USERSECRET123"
 begin
   # Generate encrypted JWT token
   data, status_code, headers, response = SnapTrade::Authentication.get_user_jwt_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                  user_id: user_id,
+                                                                                                  user_secret: user_secret,
+                                                                                                )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => EncryptedResponse
@@ -195,14 +195,14 @@ connection_type = "read"
 begin
   # Login user & generate connection link
   result = SnapTrade::Authentication.login_snap_trade_user(
-    user_id: user_id,
-    user_secret: user_secret,
-    broker: broker,
-    immediate_redirect: immediate_redirect,
-    custom_redirect: custom_redirect,
-    reconnect: reconnect,
-    connection_type: connection_type,
-  )
+                                                              user_id: user_id,
+                                                              user_secret: user_secret,
+                                                              broker: broker,
+                                                              immediate_redirect: immediate_redirect,
+                                                              custom_redirect: custom_redirect,
+                                                              reconnect: reconnect,
+                                                              connection_type: connection_type,
+                                                            )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Authentication.login_snap_trade_user: #{e}"
@@ -225,14 +225,14 @@ connection_type = "read"
 begin
   # Login user & generate connection link
   data, status_code, headers, response = SnapTrade::Authentication.login_snap_trade_user_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    broker: broker,
-    immediate_redirect: immediate_redirect,
-    custom_redirect: custom_redirect,
-    reconnect: reconnect,
-    connection_type: connection_type,
-  )
+                                                                                                           user_id: user_id,
+                                                                                                           user_secret: user_secret,
+                                                                                                           broker: broker,
+                                                                                                           immediate_redirect: immediate_redirect,
+                                                                                                           custom_redirect: custom_redirect,
+                                                                                                           reconnect: reconnect,
+                                                                                                           connection_type: connection_type,
+                                                                                                         )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AuthenticationLoginSnapTradeUser200Response
@@ -271,9 +271,9 @@ rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcp
 begin
   # Create SnapTrade user
   result = SnapTrade::Authentication.register_snap_trade_user(
-    user_id: user_id,
-    rsa_public_key: rsa_public_key,
-  )
+                                                                 user_id: user_id,
+                                                                 rsa_public_key: rsa_public_key,
+                                                               )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Authentication.register_snap_trade_user: #{e}"
@@ -291,9 +291,9 @@ rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcp
 begin
   # Create SnapTrade user
   data, status_code, headers, response = SnapTrade::Authentication.register_snap_trade_user_with_http_info(
-    user_id: user_id,
-    rsa_public_key: rsa_public_key,
-  )
+                                                                                                              user_id: user_id,
+                                                                                                              rsa_public_key: rsa_public_key,
+                                                                                                            )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => UserIDandSecret

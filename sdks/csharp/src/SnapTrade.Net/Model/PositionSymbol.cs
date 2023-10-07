@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="localId">localId.</param>
         /// <param name="isQuotable">isQuotable.</param>
         /// <param name="isTradable">isTradable.</param>
-        public PositionSymbol(Guid id = default(Guid), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        public PositionSymbol(string id = default(string), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
             this.Id = id;
             this.Description = description;
@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Description

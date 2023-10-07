@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="theta">theta.</param>
         /// <param name="vega">vega.</param>
         /// <param name="rho">rho.</param>
-        public StrategyQuotesGreek(decimal delta = default(decimal), decimal gamma = default(decimal), decimal theta = default(decimal), decimal vega = default(decimal), decimal rho = default(decimal)) : base()
+        public StrategyQuotesGreek(double delta = default(double), double gamma = default(double), double theta = default(double), double vega = default(double), double rho = default(double)) : base()
         {
             this.Delta = delta;
             this.Gamma = gamma;
@@ -54,31 +54,31 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Delta
         /// </summary>
         [DataMember(Name = "delta", EmitDefaultValue = false)]
-        public decimal Delta { get; set; }
+        public double Delta { get; set; }
 
         /// <summary>
         /// Gets or Sets Gamma
         /// </summary>
         [DataMember(Name = "gamma", EmitDefaultValue = false)]
-        public decimal Gamma { get; set; }
+        public double Gamma { get; set; }
 
         /// <summary>
         /// Gets or Sets Theta
         /// </summary>
         [DataMember(Name = "theta", EmitDefaultValue = false)]
-        public decimal Theta { get; set; }
+        public double Theta { get; set; }
 
         /// <summary>
         /// Gets or Sets Vega
         /// </summary>
         [DataMember(Name = "vega", EmitDefaultValue = false)]
-        public decimal Vega { get; set; }
+        public double Vega { get; set; }
 
         /// <summary>
         /// Gets or Sets Rho
         /// </summary>
         [DataMember(Name = "rho", EmitDefaultValue = false)]
-        public decimal Rho { get; set; }
+        public double Rho { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

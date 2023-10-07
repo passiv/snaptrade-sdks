@@ -202,7 +202,26 @@ class AccountHoldingsAccount(
         )
 
 from snaptrade_client.model.account_order_record import AccountOrderRecord
+from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.model.action import Action
 from snaptrade_client.model.balance import Balance
+from snaptrade_client.model.cancelled_units import CancelledUnits
+from snaptrade_client.model.cash_restriction import CashRestriction
+from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.exchange import Exchange
+from snaptrade_client.model.filled_units import FilledUnits
+from snaptrade_client.model.open_units import OpenUnits
+from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.position import Position
+from snaptrade_client.model.position_symbol import PositionSymbol
+from snaptrade_client.model.price import Price
+from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
+from snaptrade_client.model.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
+from snaptrade_client.model.stop_price import StopPrice
+from snaptrade_client.model.time_in_force import TimeInForce
+from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.model.universal_symbol import UniversalSymbol
+from snaptrade_client.model.us_exchange import USExchange

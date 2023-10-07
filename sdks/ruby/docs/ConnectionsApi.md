@@ -28,10 +28,10 @@ user_secret = "USERSECRET123"
 begin
   # Get brokerage authorization details
   result = SnapTrade::Connections.detail_brokerage_authorization(
-    authorization_id: authorization_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                    authorization_id: authorization_id,
+                                                                    user_id: user_id,
+                                                                    user_secret: user_secret,
+                                                                  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Connections.detail_brokerage_authorization: #{e}"
@@ -50,10 +50,10 @@ user_secret = "USERSECRET123"
 begin
   # Get brokerage authorization details
   data, status_code, headers, response = SnapTrade::Connections.detail_brokerage_authorization_with_http_info(
-    authorization_id: authorization_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                                 authorization_id: authorization_id,
+                                                                                                                 user_id: user_id,
+                                                                                                                 user_secret: user_secret,
+                                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => BrokerageAuthorization
@@ -92,9 +92,9 @@ user_secret = "USERSECRET123"
 begin
   # List all brokerage authorizations for the user
   result = SnapTrade::Connections.list_brokerage_authorizations(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                   user_id: user_id,
+                                                                   user_secret: user_secret,
+                                                                 )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Connections.list_brokerage_authorizations: #{e}"
@@ -112,9 +112,9 @@ user_secret = "USERSECRET123"
 begin
   # List all brokerage authorizations for the user
   data, status_code, headers, response = SnapTrade::Connections.list_brokerage_authorizations_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                                user_id: user_id,
+                                                                                                                user_secret: user_secret,
+                                                                                                              )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<BrokerageAuthorization>
@@ -153,10 +153,10 @@ user_secret = "USERSECRET123"
 begin
   # Delete brokerage authorization
   SnapTrade::Connections.remove_brokerage_authorization(
-    authorization_id: authorization_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                           authorization_id: authorization_id,
+                                                           user_id: user_id,
+                                                           user_secret: user_secret,
+                                                         )
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Connections.remove_brokerage_authorization: #{e}"
 end
@@ -174,10 +174,10 @@ user_secret = "USERSECRET123"
 begin
   # Delete brokerage authorization
   data, status_code, headers, response = SnapTrade::Connections.remove_brokerage_authorization_with_http_info(
-    authorization_id: authorization_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                                 authorization_id: authorization_id,
+                                                                                                                 user_id: user_id,
+                                                                                                                 user_secret: user_secret,
+                                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -217,10 +217,10 @@ session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071e
 begin
   # List all session events for the partner
   result = SnapTrade::Connections.session_events(
-    partner_client_id: partner_client_id,
-    user_id: user_id,
-    session_id: session_id,
-  )
+                                                    partner_client_id: partner_client_id,
+                                                    user_id: user_id,
+                                                    session_id: session_id,
+                                                  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Connections.session_events: #{e}"
@@ -239,10 +239,10 @@ session_id = "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071e
 begin
   # List all session events for the partner
   data, status_code, headers, response = SnapTrade::Connections.session_events_with_http_info(
-    partner_client_id: partner_client_id,
-    user_id: user_id,
-    session_id: session_id,
-  )
+                                                                                                 partner_client_id: partner_client_id,
+                                                                                                 user_id: user_id,
+                                                                                                 session_id: session_id,
+                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<ConnectionsSessionEvents200ResponseInner>

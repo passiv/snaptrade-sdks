@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// <param name="apiEnabled">apiEnabled.</param>
         /// <param name="driftThreshold">driftThreshold.</param>
         /// <param name="preferredCurrency">preferredCurrency.</param>
-        public UserSettings(string email = default(string), string name = default(string), bool receiveCashNotification = default(bool), bool receiveDriftNotification = default(bool), bool userTrialActivated = default(bool), string activatedTrialDate = default(string), bool demo = default(bool), bool apiEnabled = default(bool), decimal driftThreshold = default(decimal), Currency preferredCurrency = default(Currency)) : base()
+        public UserSettings(string email = default(string), string name = default(string), bool receiveCashNotification = default(bool), bool receiveDriftNotification = default(bool), bool userTrialActivated = default(bool), string activatedTrialDate = default(string), bool demo = default(bool), bool apiEnabled = default(bool), double driftThreshold = default(double), Currency preferredCurrency = default(Currency)) : base()
         {
             this.Email = email;
             this.Name = name;
@@ -112,7 +112,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets DriftThreshold
         /// </summary>
         [DataMember(Name = "drift_threshold", EmitDefaultValue = false)]
-        public decimal DriftThreshold { get; set; }
+        public double DriftThreshold { get; set; }
 
         /// <summary>
         /// Gets or Sets PreferredCurrency

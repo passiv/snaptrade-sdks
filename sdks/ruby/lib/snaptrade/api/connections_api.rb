@@ -24,7 +24,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_brokerage_authorization(authorization_id:, user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = detail_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
       data
     end
@@ -35,7 +34,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def detail_brokerage_authorization_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
-
       detail_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
@@ -120,7 +118,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_brokerage_authorizations(user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = list_brokerage_authorizations_with_http_info_impl(user_id, user_secret, extra)
       data
     end
@@ -130,7 +127,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_brokerage_authorizations_with_http_info(user_id:, user_secret:, extra: {})
-
       list_brokerage_authorizations_with_http_info_impl(user_id, user_secret, extra)
     end
 
@@ -210,7 +206,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def remove_brokerage_authorization(authorization_id:, user_id:, user_secret:, extra: {})
-
       remove_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
       nil
     end
@@ -221,7 +216,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def remove_brokerage_authorization_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
-
       remove_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
@@ -307,7 +301,6 @@ module SnapTrade
     def session_events(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {})
       extra[:user_id] = user_id if user_id != SENTINEL
       extra[:session_id] = session_id if session_id != SENTINEL
-
       data, _status_code, _headers = session_events_with_http_info_impl(partner_client_id, extra)
       data
     end
@@ -320,7 +313,6 @@ module SnapTrade
     def session_events_with_http_info(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {})
       extra[:user_id] = user_id if user_id != SENTINEL
       extra[:session_id] = session_id if session_id != SENTINEL
-
       session_events_with_http_info_impl(partner_client_id, extra)
     end
 

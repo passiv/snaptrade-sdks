@@ -32,9 +32,15 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.cash_restriction import CashRestriction as CashRestrictionSchema
 from snaptrade_client.model.account import Account as AccountSchema
+from snaptrade_client.model.account_sync_status import AccountSyncStatus as AccountSyncStatusSchema
+from snaptrade_client.model.account_meta import AccountMeta as AccountMetaSchema
 
 from snaptrade_client.type.account import Account
+from snaptrade_client.type.cash_restriction import CashRestriction
+from snaptrade_client.type.account_meta import AccountMeta
+from snaptrade_client.type.account_sync_status import AccountSyncStatus
 
 from . import path
 

@@ -98,7 +98,7 @@ namespace SnapTrade.Net.Model
         /// <param name="createdDate">Time.</param>
         /// <param name="brokerageStatusCode">brokerageStatusCode.</param>
         /// <param name="brokerageAuthorizationId">brokerageAuthorizationId.</param>
-        public SessionEvent(Guid id = default(Guid), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), Guid sessionId = default(Guid), string userId = default(string), string createdDate = default(string), int? brokerageStatusCode = default(int?), Guid brokerageAuthorizationId = default(Guid)) : base()
+        public SessionEvent(string id = default(string), SessionEventTypeEnum? sessionEventType = default(SessionEventTypeEnum?), string sessionId = default(string), string userId = default(string), string createdDate = default(string), int? brokerageStatusCode = default(int?), string brokerageAuthorizationId = default(string)) : base()
         {
             this.Id = id;
             this.SessionEventType = sessionEventType;
@@ -114,13 +114,13 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets SessionId
         /// </summary>
         [DataMember(Name = "session_id", EmitDefaultValue = false)]
-        public Guid SessionId { get; set; }
+        public string SessionId { get; set; }
 
         /// <summary>
         /// SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
@@ -146,7 +146,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets BrokerageAuthorizationId
         /// </summary>
         [DataMember(Name = "brokerage_authorization_id", EmitDefaultValue = false)]
-        public Guid BrokerageAuthorizationId { get; set; }
+        public string BrokerageAuthorizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

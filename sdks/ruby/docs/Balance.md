@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **currency** | **Currency** |  | [optional] |
 | **cash** | **Float** |  | [optional] |
 
 ## Example

@@ -5,9 +5,9 @@ Brokerage symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  | [optional] 
-**BrokerageAuthorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] 
+**BrokerageAuthorization** | **BrokerageAuthorization** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **AllowsFractionalUnits** | **bool?** |  | [optional] 
 **OptionSymbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  | [optional] 

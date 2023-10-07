@@ -15,7 +15,10 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal
 
+from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.type.us_exchange import USExchange
 
 class RequiredOptionsSymbol(TypedDict):
     id: str

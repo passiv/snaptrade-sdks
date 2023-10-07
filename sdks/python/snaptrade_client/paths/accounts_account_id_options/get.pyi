@@ -32,9 +32,37 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.exchange import Exchange as ExchangeSchema
+from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
+from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
+from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization as BrokerageAuthorizationSchema
+from snaptrade_client.model.price import Price as PriceSchema
+from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta as BrokerageAuthorizationMetaSchema
 from snaptrade_client.model.options_position import OptionsPosition as OptionsPositionSchema
+from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
+from snaptrade_client.model.brokerage_symbol import BrokerageSymbol as BrokerageSymbolSchema
+from snaptrade_client.model.options_symbol import OptionsSymbol as OptionsSymbolSchema
+from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
+from snaptrade_client.model.underlying_symbol import UnderlyingSymbol as UnderlyingSymbolSchema
+from snaptrade_client.model.us_exchange import USExchange as USExchangeSchema
+from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
+from snaptrade_client.type.brokerage import Brokerage
+from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
+from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.brokerage_type import BrokerageType
+from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
+from snaptrade_client.type.price import Price
 from snaptrade_client.type.options_position import OptionsPosition
+from snaptrade_client.type.options_symbol import OptionsSymbol
+from snaptrade_client.type.exchange import Exchange
+from snaptrade_client.type.brokerage_symbol import BrokerageSymbol
+from snaptrade_client.type.us_exchange import USExchange
+from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
+from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 # Query params
 UserIdSchema = schemas.StrSchema

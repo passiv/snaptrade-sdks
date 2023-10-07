@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="code">code.</param>
         /// <param name="name">name.</param>
-        public Currency(Guid id = default(Guid), string code = default(string), string name = default(string)) : base()
+        public Currency(string id = default(string), string code = default(string), string name = default(string)) : base()
         {
             this.Id = id;
             this.Code = code;
@@ -50,7 +50,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Code

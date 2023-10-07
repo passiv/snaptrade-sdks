@@ -124,12 +124,42 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @symbol.nil?
+        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
+      end
+
+      if @raw_symbol.nil?
+        invalid_properties.push('invalid value for "raw_symbol", raw_symbol cannot be nil.')
+      end
+
+      if @currency.nil?
+        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @currencies.nil?
+        invalid_properties.push('invalid value for "currencies", currencies cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @symbol.nil?
+      return false if @raw_symbol.nil?
+      return false if @currency.nil?
+      return false if @type.nil?
+      return false if @currencies.nil?
       true
     end
 

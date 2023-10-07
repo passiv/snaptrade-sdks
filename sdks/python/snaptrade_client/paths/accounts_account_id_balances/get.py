@@ -33,8 +33,10 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.balance import Balance as BalanceSchema
+from snaptrade_client.model.currency import Currency as CurrencySchema
 
 from snaptrade_client.type.balance import Balance
+from snaptrade_client.type.currency import Currency
 
 from . import path
 

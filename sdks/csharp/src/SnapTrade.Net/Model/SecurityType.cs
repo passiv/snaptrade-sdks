@@ -39,7 +39,7 @@ namespace SnapTrade.Net.Model
         /// <param name="code">code.</param>
         /// <param name="description">description.</param>
         /// <param name="isSupported">isSupported.</param>
-        public SecurityType(Guid id = default(Guid), string code = default(string), string description = default(string), bool isSupported = default(bool)) : base()
+        public SecurityType(string id = default(string), string code = default(string), string description = default(string), bool isSupported = default(bool)) : base()
         {
             this.Id = id;
             this.Code = code;
@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Code

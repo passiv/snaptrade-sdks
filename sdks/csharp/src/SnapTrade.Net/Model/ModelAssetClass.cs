@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public ModelAssetClass(Guid id = default(Guid), string name = default(string)) : base()
+        public ModelAssetClass(string id = default(string), string name = default(string)) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name

@@ -14,8 +14,8 @@
 require 'snaptrade'
 
 instance = SnapTrade::SubPeriodReturnRate.new(
-  period_start: Mon Jan 24 00:00:00 UTC 2022,
-  period_end: Mon Jan 24 00:00:00 UTC 2022,
+  period_start: Sun Jan 23 16:00:00 PST 2022,
+  period_end: Sun Jan 23 16:00:00 PST 2022,
   rate_of_return: 0.012312367452
 )
 ```

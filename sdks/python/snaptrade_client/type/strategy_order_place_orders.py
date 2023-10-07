@@ -16,5 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.strategy_order_place_orders_item import StrategyOrderPlaceOrdersItem
+from snaptrade_client.type.strategy_order_place_orders_item_legs import StrategyOrderPlaceOrdersItemLegs
 
 StrategyOrderPlaceOrders = typing.List[StrategyOrderPlaceOrdersItem]

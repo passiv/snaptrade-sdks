@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **strategy** | [**OptionStrategy**](OptionStrategy.md) |  | [optional] |
+| **strategy** | **OptionStrategy** |  | [optional] |
 | **status** | [**StrategyOrderRecordStatus**](StrategyOrderRecordStatus.md) |  | [optional] |
 | **filled_quantity** | **Float** |  | [optional] |
 | **open_quantity** | **Float** |  | [optional] |

@@ -4,14 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
-| **symbol** | **String** |  | [optional] |
-| **raw_symbol** | **String** |  | [optional] |
+| **id** | **String** |  |  |
+| **symbol** | **String** |  |  |
+| **raw_symbol** | **String** |  |  |
 | **description** | **String** |  | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
-| **exchange** | [**Exchange**](Exchange.md) |  | [optional] |
-| **type** | [**SecurityType**](SecurityType.md) |  | [optional] |
-| **currencies** | [**Array&lt;Currency&gt;**](Currency.md) |  | [optional] |
+| **currency** | **Currency** |  |  |
+| **exchange** | **Exchange** |  | [optional] |
+| **type** | **SecurityType** |  |  |
+| **currencies** | [**Array&lt;Currency&gt;**](Currency.md) |  |  |
 
 ## Example
 

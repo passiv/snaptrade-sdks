@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="askPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="volatility">volatility.</param>
         /// <param name="greek">greek.</param>
-        public StrategyQuotes(OptionStrategy strategy = default(OptionStrategy), decimal? openPrice = default(decimal?), decimal? bidPrice = default(decimal?), decimal? askPrice = default(decimal?), decimal volatility = default(decimal), StrategyQuotesGreek greek = default(StrategyQuotesGreek)) : base()
+        public StrategyQuotes(OptionStrategy strategy = default(OptionStrategy), double? openPrice = default(double?), double? bidPrice = default(double?), double? askPrice = default(double?), double volatility = default(double), StrategyQuotesGreek greek = default(StrategyQuotesGreek)) : base()
         {
             this.Strategy = strategy;
             this.OpenPrice = openPrice;
@@ -63,27 +63,27 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "open_price", EmitDefaultValue = true)]
-        public decimal? OpenPrice { get; set; }
+        public double? OpenPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "bid_price", EmitDefaultValue = true)]
-        public decimal? BidPrice { get; set; }
+        public double? BidPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "ask_price", EmitDefaultValue = true)]
-        public decimal? AskPrice { get; set; }
+        public double? AskPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets Volatility
         /// </summary>
         [DataMember(Name = "volatility", EmitDefaultValue = false)]
-        public decimal Volatility { get; set; }
+        public double Volatility { get; set; }
 
         /// <summary>
         /// Gets or Sets Greek

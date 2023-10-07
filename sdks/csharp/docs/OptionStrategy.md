@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**UnderlyingSymbolId** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
+**Id** | **string** |  | [optional] 
+**UnderlyingSymbolId** | **UniversalSymbol** |  | [optional] 
 **StrategyType** | **string** |  | [optional] 
-**NumberOfLegs** | **decimal** |  | [optional] 
+**NumberOfLegs** | **double** |  | [optional] 
 **Legs** | [**List&lt;OptionStrategyLegsInner&gt;**](OptionStrategyLegsInner.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

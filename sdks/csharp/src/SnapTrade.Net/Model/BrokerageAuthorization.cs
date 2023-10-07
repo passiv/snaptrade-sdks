@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="disabled">disabled.</param>
         /// <param name="disabledDate">Disabled date.</param>
         /// <param name="meta">Additional data about brokerage authorization.</param>
-        public BrokerageAuthorization(Guid id = default(Guid), string createdDate = default(string), string updatedDate = default(string), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), string disabledDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public BrokerageAuthorization(string id = default(string), string createdDate = default(string), string updatedDate = default(string), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), string disabledDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.CreatedDate = createdDate;
@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Time

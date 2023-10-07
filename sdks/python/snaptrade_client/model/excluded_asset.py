@@ -80,4 +80,7 @@ class ExcludedAsset(
             **kwargs,
         )
 
+from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.exchange import Exchange
+from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.universal_symbol import UniversalSymbol

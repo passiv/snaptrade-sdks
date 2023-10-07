@@ -238,7 +238,7 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
-        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), decimal filledQuantity = default(decimal), decimal openQuantity = default(decimal), decimal closedQuantity = default(decimal), OrderTypeEnum? orderType = default(OrderTypeEnum?), TimeInForceEnum? timeInForce = default(TimeInForceEnum?), decimal? limitPrice = default(decimal?), decimal? executionPrice = default(decimal?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
+        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderTypeEnum? orderType = default(OrderTypeEnum?), TimeInForceEnum? timeInForce = default(TimeInForceEnum?), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
         {
             this.Strategy = strategy;
             this.Status = status;
@@ -264,33 +264,33 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets FilledQuantity
         /// </summary>
         [DataMember(Name = "filled_quantity", EmitDefaultValue = false)]
-        public decimal FilledQuantity { get; set; }
+        public double FilledQuantity { get; set; }
 
         /// <summary>
         /// Gets or Sets OpenQuantity
         /// </summary>
         [DataMember(Name = "open_quantity", EmitDefaultValue = false)]
-        public decimal OpenQuantity { get; set; }
+        public double OpenQuantity { get; set; }
 
         /// <summary>
         /// Gets or Sets ClosedQuantity
         /// </summary>
         [DataMember(Name = "closed_quantity", EmitDefaultValue = false)]
-        public decimal ClosedQuantity { get; set; }
+        public double ClosedQuantity { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
-        public decimal? LimitPrice { get; set; }
+        public double? LimitPrice { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
-        public decimal? ExecutionPrice { get; set; }
+        public double? ExecutionPrice { get; set; }
 
         /// <summary>
         /// Time

@@ -55,3 +55,4 @@ class OptionChain(
         return super().__getitem__(i)
 
 from snaptrade_client.model.option_chain_item import OptionChainItem
+from snaptrade_client.model.option_chain_item_chain_per_root import OptionChainItemChainPerRoot

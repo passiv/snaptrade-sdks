@@ -7,7 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **created_date** | **String** | Time | [optional] |
 | **updated_date** | **String** | Time | [optional] |
-| **brokerage** | [**Brokerage**](Brokerage.md) |  | [optional] |
+| **brokerage** | **Brokerage** |  | [optional] |
 | **name** | **String** | Connection Name | [optional] |
 | **type** | **String** |  | [optional] |
 | **disabled** | **Boolean** |  | [optional] |

@@ -5,7 +5,7 @@ Currency
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Code** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 

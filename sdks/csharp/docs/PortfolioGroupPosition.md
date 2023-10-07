@@ -5,8 +5,8 @@ Details of a security held
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**Price** | **decimal?** | Last known market price for the symbol | [optional] 
+**Symbol** | **UniversalSymbol** |  | [optional] 
+**Price** | **double?** | Last known market price for the symbol | [optional] 
 **Units** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

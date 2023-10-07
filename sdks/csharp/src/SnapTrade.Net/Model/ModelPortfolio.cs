@@ -68,7 +68,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="modelType">Enum definitions -&gt; [-1: Unassigned, 0: Security Model Portfolio, 1: Asset Class Portfolio] (default to ModelTypeEnum.NUMBER_MINUS_1).</param>
-        public ModelPortfolio(Guid id = default(Guid), string name = default(string), ModelTypeEnum? modelType = ModelTypeEnum.NUMBER_MINUS_1) : base()
+        public ModelPortfolio(string id = default(string), string name = default(string), ModelTypeEnum? modelType = ModelTypeEnum.NUMBER_MINUS_1) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -80,7 +80,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name

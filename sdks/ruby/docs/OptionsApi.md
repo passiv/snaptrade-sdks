@@ -38,13 +38,13 @@ account_id = "accountId_example"
 begin
   # Creates an option strategy object that will be used to place an option strategy order
   result = SnapTrade::Options.get_option_strategy(
-    underlying_symbol_id: underlying_symbol_id,
-    legs: legs,
-    strategy_type: strategy_type,
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                     underlying_symbol_id: underlying_symbol_id,
+                                                     legs: legs,
+                                                     strategy_type: strategy_type,
+                                                     user_id: user_id,
+                                                     user_secret: user_secret,
+                                                     account_id: account_id,
+                                                   )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.get_option_strategy: #{e}"
@@ -72,13 +72,13 @@ account_id = "accountId_example"
 begin
   # Creates an option strategy object that will be used to place an option strategy order
   data, status_code, headers, response = SnapTrade::Options.get_option_strategy_with_http_info(
-    underlying_symbol_id: underlying_symbol_id,
-    legs: legs,
-    strategy_type: strategy_type,
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                  underlying_symbol_id: underlying_symbol_id,
+                                                                                                  legs: legs,
+                                                                                                  strategy_type: strategy_type,
+                                                                                                  user_id: user_id,
+                                                                                                  user_secret: user_secret,
+                                                                                                  account_id: account_id,
+                                                                                                )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => StrategyQuotes
@@ -120,11 +120,11 @@ symbol = "symbol_example"
 begin
   # Get the options chain
   result = SnapTrade::Options.get_options_chain(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    symbol: symbol,
-  )
+                                                   user_id: user_id,
+                                                   user_secret: user_secret,
+                                                   account_id: account_id,
+                                                   symbol: symbol,
+                                                 )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.get_options_chain: #{e}"
@@ -144,11 +144,11 @@ symbol = "symbol_example"
 begin
   # Get the options chain
   data, status_code, headers, response = SnapTrade::Options.get_options_chain_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    symbol: symbol,
-  )
+                                                                                                user_id: user_id,
+                                                                                                user_secret: user_secret,
+                                                                                                account_id: account_id,
+                                                                                                symbol: symbol,
+                                                                                              )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<OptionChainInner>
@@ -190,11 +190,11 @@ option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Get latest market data of option strategy
   result = SnapTrade::Options.get_options_strategy_quote(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    option_strategy_id: option_strategy_id,
-  )
+                                                            user_id: user_id,
+                                                            user_secret: user_secret,
+                                                            account_id: account_id,
+                                                            option_strategy_id: option_strategy_id,
+                                                          )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.get_options_strategy_quote: #{e}"
@@ -214,11 +214,11 @@ option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Get latest market data of option strategy
   data, status_code, headers, response = SnapTrade::Options.get_options_strategy_quote_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    option_strategy_id: option_strategy_id,
-  )
+                                                                                                         user_id: user_id,
+                                                                                                         user_secret: user_secret,
+                                                                                                         account_id: account_id,
+                                                                                                         option_strategy_id: option_strategy_id,
+                                                                                                       )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => StrategyQuotes
@@ -259,10 +259,10 @@ account_id = "accountId_example"
 begin
   # Get the options holdings in the account
   result = SnapTrade::Options.list_option_holdings(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                      user_id: user_id,
+                                                      user_secret: user_secret,
+                                                      account_id: account_id,
+                                                    )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.list_option_holdings: #{e}"
@@ -281,10 +281,10 @@ account_id = "accountId_example"
 begin
   # Get the options holdings in the account
   data, status_code, headers, response = SnapTrade::Options.list_option_holdings_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                   user_id: user_id,
+                                                                                                   user_secret: user_secret,
+                                                                                                   account_id: account_id,
+                                                                                                 )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<OptionsPosition>
@@ -328,14 +328,14 @@ option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Place an option strategy order on the brokerage
   result = SnapTrade::Options.place_option_strategy(
-    order_type: order_type,
-    time_in_force: time_in_force,
-    price: price,
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    option_strategy_id: option_strategy_id,
-  )
+                                                       order_type: order_type,
+                                                       time_in_force: time_in_force,
+                                                       price: price,
+                                                       user_id: user_id,
+                                                       user_secret: user_secret,
+                                                       account_id: account_id,
+                                                       option_strategy_id: option_strategy_id,
+                                                     )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Options.place_option_strategy: #{e}"
@@ -358,14 +358,14 @@ option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Place an option strategy order on the brokerage
   data, status_code, headers, response = SnapTrade::Options.place_option_strategy_with_http_info(
-    order_type: order_type,
-    time_in_force: time_in_force,
-    price: price,
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    option_strategy_id: option_strategy_id,
-  )
+                                                                                                    order_type: order_type,
+                                                                                                    time_in_force: time_in_force,
+                                                                                                    price: price,
+                                                                                                    user_id: user_id,
+                                                                                                    user_secret: user_secret,
+                                                                                                    account_id: account_id,
+                                                                                                    option_strategy_id: option_strategy_id,
+                                                                                                  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => StrategyOrderRecord

@@ -5,7 +5,7 @@ US Stock Exchange
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Code** | **string** |  | [optional] 
 **MicCode** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 

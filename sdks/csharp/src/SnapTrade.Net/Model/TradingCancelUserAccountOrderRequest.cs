@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="TradingCancelUserAccountOrderRequest" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">brokerageOrderId.</param>
-        public TradingCancelUserAccountOrderRequest(Guid brokerageOrderId = default(Guid))
+        public TradingCancelUserAccountOrderRequest(string brokerageOrderId = default(string))
         {
             this.BrokerageOrderId = brokerageOrderId;
         }
@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets BrokerageOrderId
         /// </summary>
         [DataMember(Name = "brokerage_order_id", EmitDefaultValue = false)]
-        public Guid BrokerageOrderId { get; set; }
+        public string BrokerageOrderId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

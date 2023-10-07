@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **underlying_symbol_id** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **underlying_symbol_id** | **UniversalSymbol** |  | [optional] |
 | **strategy_type** | **String** |  | [optional] |
 | **number_of_legs** | **Float** |  | [optional] |
 | **legs** | [**Array&lt;OptionStrategyLegsInner&gt;**](OptionStrategyLegsInner.md) |  | [optional] |

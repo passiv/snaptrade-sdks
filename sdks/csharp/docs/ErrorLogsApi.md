@@ -6,9 +6,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**ListUserErrors**](ErrorLogsApi.md#listusererrors) | **GET** /snapTrade/listUserErrors | Retrieve error logs on behalf of your SnapTrade users |
 
-<a name="listusererrors"></a>
+
 # **ListUserErrors**
-> List&lt;UserErrorLog&gt; ListUserErrors (string userId, string userSecret)
 
 Retrieve error logs on behalf of your SnapTrade users
 
@@ -26,17 +25,15 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // Retrieve error logs on behalf of your SnapTrade users
@@ -90,15 +87,6 @@ catch (ApiException e)
 ### Return type
 
 [**List&lt;UserErrorLog&gt;**](UserErrorLog.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details

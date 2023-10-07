@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="queryParams">queryParams.</param>
         /// <param name="httpMethod">httpMethod.</param>
         /// <param name="endpoint">endpoint.</param>
-        public UserErrorLog(string requestedAt = default(string), string response = default(string), decimal statusCode = default(decimal), string queryParams = default(string), string httpMethod = default(string), string endpoint = default(string)) : base()
+        public UserErrorLog(string requestedAt = default(string), string response = default(string), double statusCode = default(double), string queryParams = default(string), string httpMethod = default(string), string endpoint = default(string)) : base()
         {
             this.RequestedAt = requestedAt;
             this.Response = response;
@@ -68,7 +68,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets StatusCode
         /// </summary>
         [DataMember(Name = "statusCode", EmitDefaultValue = false)]
-        public decimal StatusCode { get; set; }
+        public double StatusCode { get; set; }
 
         /// <summary>
         /// Gets or Sets QueryParams

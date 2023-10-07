@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="account">account.</param>
         /// <param name="currency">currency.</param>
         /// <param name="cash">Cash.</param>
-        public ManualTradeBalance(Account account = default(Account), Currency currency = default(Currency), decimal? cash = default(decimal?)) : base()
+        public ManualTradeBalance(Account account = default(Account), Currency currency = default(Currency), double? cash = default(double?)) : base()
         {
             this.Account = account;
             this.Currency = currency;
@@ -63,7 +63,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Cash</value>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
-        public decimal? Cash { get; set; }
+        public double? Cash { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

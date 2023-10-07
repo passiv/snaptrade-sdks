@@ -5,9 +5,9 @@ Symbol returned in position object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
-**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
+**Symbol** | **UniversalSymbol** |  | [optional] 
 **LocalId** | **string** |  | [optional] 
 **IsQuotable** | **bool** |  | [optional] 
 **IsTradable** | **bool** |  | [optional] 

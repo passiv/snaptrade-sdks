@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="description">description.</param>
         /// <param name="allowsFractionalUnits">allowsFractionalUnits.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
-        public BrokerageSymbol(Guid id = default(Guid), BrokerageSymbolSymbol symbol = default(BrokerageSymbolSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?), BrokerageSymbolOptionSymbol optionSymbol = default(BrokerageSymbolOptionSymbol)) : base()
+        public BrokerageSymbol(string id = default(string), BrokerageSymbolSymbol symbol = default(BrokerageSymbolSymbol), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string description = default(string), bool? allowsFractionalUnits = default(bool?), BrokerageSymbolOptionSymbol optionSymbol = default(BrokerageSymbolOptionSymbol)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol

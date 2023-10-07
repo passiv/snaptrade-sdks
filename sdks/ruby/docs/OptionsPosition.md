@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
+| **symbol** | **BrokerageSymbol** |  | [optional] |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **units** | **Float** |  | [optional] |
 | **currency** | [**OptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional] |

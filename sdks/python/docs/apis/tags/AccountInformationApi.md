@@ -1,5 +1,4 @@
-<a name="__pageTop"></a>
-# snaptrade_client.apis.tags.account_information_api.AccountInformationApi
+# snaptrade_client.account_information
 
 All URIs are relative to *https://api.snaptrade.com/api/v1*
 
@@ -25,9 +24,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -59,116 +55,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-brokerage_authorizations | BrokerageAuthorizationsSchema | | optional
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-# BrokerageAuthorizationsSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_all_user_holdings.ApiResponseFor200) | Returns list of accounts and holdings
-400 | [ApiResponseFor400](#get_all_user_holdings.ApiResponseFor400) | Bad Request
-403 | [ApiResponseFor403](#get_all_user_holdings.ApiResponseFor403) | Forbidden
-500 | [ApiResponseFor500](#get_all_user_holdings.ApiResponseFor500) | Unexpected Error
-
-#### get_all_user_holdings.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**AccountHoldings**](../../models/AccountHoldings.md) | [**AccountHoldings**](../../models/AccountHoldings.md) | [**AccountHoldings**](../../models/AccountHoldings.md) |  | 
-
-#### get_all_user_holdings.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### get_all_user_holdings.ApiResponseFor403
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor403ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor403ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model403FailedRequestResponse**](../../models/Model403FailedRequestResponse.md) |  | 
-
-
-#### get_all_user_holdings.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -183,9 +69,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -216,95 +99,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('*/*', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_account_balance.ApiResponseFor200) | List of all balances in investment account
-default | [ApiResponseForDefault](#get_user_account_balance.ApiResponseForDefault) | Unexpected error
-
-#### get_user_account_balance.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBody, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBody
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) | [**Balance**](../../models/Balance.md) |  | 
-
-#### get_user_account_balance.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -319,9 +113,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -360,89 +151,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_account_details.ApiResponseFor200) | Details of a specific investment account
-default | [ApiResponseForDefault](#get_user_account_details.ApiResponseForDefault) | Unexpected error
-
-#### get_user_account_details.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Account**](../../models/Account.md) |  | 
-
-
-#### get_user_account_details.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -457,9 +165,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -506,103 +211,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-state | StateSchema | | optional
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-# StateSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  |  | must be one of ["all", "open", "executed", ] 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_account_orders.ApiResponseFor200) | List all orders in account
-500 | [ApiResponseFor500](#get_user_account_orders.ApiResponseFor500) | Unexpected error
-
-#### get_user_account_orders.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**AccountOrderRecord**](../../models/AccountOrderRecord.md) | [**AccountOrderRecord**](../../models/AccountOrderRecord.md) | [**AccountOrderRecord**](../../models/AccountOrderRecord.md) |  | 
-
-#### get_user_account_orders.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -617,9 +225,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -654,95 +259,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('*/*', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_account_positions.ApiResponseFor200) | List all positions in investment account
-default | [ApiResponseForDefault](#get_user_account_positions.ApiResponseForDefault) | Unexpected error
-
-#### get_user_account_positions.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBody, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBody
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**Position**](../../models/Position.md) | [**Position**](../../models/Position.md) | [**Position**](../../models/Position.md) |  | 
-
-#### get_user_account_positions.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -757,9 +273,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -788,117 +301,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#get_user_holdings.ApiResponseFor200) | Returns holdings for the account
-400 | [ApiResponseFor400](#get_user_holdings.ApiResponseFor400) | Bad Request
-403 | [ApiResponseFor403](#get_user_holdings.ApiResponseFor403) | Forbidden
-500 | [ApiResponseFor500](#get_user_holdings.ApiResponseFor500) | Unexpected Error
-
-#### get_user_holdings.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**AccountHoldingsAccount**](../../models/AccountHoldingsAccount.md) |  | 
-
-
-#### get_user_holdings.ApiResponseFor400
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor400ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model400FailedRequestResponse**](../../models/Model400FailedRequestResponse.md) |  | 
-
-
-#### get_user_holdings.ApiResponseFor403
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor403ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor403ResponseBodyApplicationJson
-Type | Description  | Notes
-------------- | ------------- | -------------
-[**Model403FailedRequestResponse**](../../models/Model403FailedRequestResponse.md) |  | 
-
-
-#### get_user_holdings.ApiResponseFor500
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -913,9 +315,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -948,80 +347,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#list_user_accounts.ApiResponseFor200) | A list of all Account objects for the authenticated user.
-default | [ApiResponseForDefault](#list_user_accounts.ApiResponseForDefault) | Unexpected error.
-
-#### list_user_accounts.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
-
-#### list_user_accounts.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 
@@ -1036,9 +361,6 @@ from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
-    # Defining the host is optional and defaults to https://api.snaptrade.com/api/v1
-    # See configuration.py for a list of all supported configuration parameters.
-    host="https://api.snaptrade.com/api/v1",
     consumer_key="YOUR_CONSUMER_KEY",
     client_id="YOUR_CLIENT_ID",
 )
@@ -1072,95 +394,6 @@ except ApiException as e:
     pprint(e.reason)
     pprint(e.round_trip_time)
 ```
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-query_params | RequestQueryParams | |
-path_params | RequestPathParams | |
-accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
-stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
-timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
-skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
-
-### query_params
-#### RequestQueryParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-userId | UserIdSchema | | 
-userSecret | UserSecretSchema | | 
-
-
-# UserIdSchema
-
-SnapTrade User ID
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User ID | 
-
-# UserSecretSchema
-
-SnapTrade User Secret (generated when registering user)
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str,  | str,  | SnapTrade User Secret (generated when registering user) | 
-
-### path_params
-#### RequestPathParams
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-accountId | AccountIdSchema | | 
-
-# AccountIdSchema
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-str, uuid.UUID,  | str,  |  | value must be a uuid
-
-### Return Types, Responses
-
-Code | Class | Description
-------------- | ------------- | -------------
-n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
-200 | [ApiResponseFor200](#update_user_account.ApiResponseFor200) | Successfully updated details of an investment account
-default | [ApiResponseForDefault](#update_user_account.ApiResponseForDefault) | Unexpected error
-
-#### update_user_account.ApiResponseFor200
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
-headers | Unset | headers were not defined |
-
-# SchemaFor200ResponseBodyApplicationJson
-
-## Model Type Info
-Input Type | Accessed Type | Description | Notes
------------- | ------------- | ------------- | -------------
-list, tuple,  | tuple,  |  | 
-
-### Tuple Items
-Class Name | Input Type | Accessed Type | Description | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-[**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) | [**Account**](../../models/Account.md) |  | 
-
-#### update_user_account.ApiResponseForDefault
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-response | urllib3.HTTPResponse | Raw response |
-body | Unset | body was not defined |
-headers | Unset | headers were not defined |
-
-### Authorization
-
-[PartnerClientId](../../../README.md#PartnerClientId), [PartnerSignature](../../../README.md#PartnerSignature), [PartnerTimestamp](../../../README.md#PartnerTimestamp)
 
 [[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
 

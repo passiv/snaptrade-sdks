@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal
 
 from snaptrade_client.type.action import Action
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
