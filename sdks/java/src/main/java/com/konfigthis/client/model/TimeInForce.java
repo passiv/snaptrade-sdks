@@ -26,8 +26,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
  */
-@JsonAdapter(TimeInForce.Adapter.class)
-public enum TimeInForce {
+@JsonAdapter(TimeInForce.Adapter.class)public enum TimeInForce {
   
   DAY("Day"),
   

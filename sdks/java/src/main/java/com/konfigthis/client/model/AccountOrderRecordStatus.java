@@ -25,8 +25,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Gets or Sets AccountOrderRecordStatus
  */
-@JsonAdapter(AccountOrderRecordStatus.Adapter.class)
-public enum AccountOrderRecordStatus {
+@JsonAdapter(AccountOrderRecordStatus.Adapter.class)public enum AccountOrderRecordStatus {
   
   NONE("NONE"),
   

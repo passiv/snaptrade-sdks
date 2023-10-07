@@ -28,6 +28,8 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
+import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnlyBrokerage;
+import com.konfigthis.client.model.BrokerageType;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;

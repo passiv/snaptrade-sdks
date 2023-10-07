@@ -26,8 +26,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Order Type
  */
-@JsonAdapter(OrderType.Adapter.class)
-public enum OrderType {
+@JsonAdapter(OrderType.Adapter.class)public enum OrderType {
   
   LIMIT("Limit"),
   

@@ -5193,7 +5193,10 @@ components:
           - -1
           - 0
           - 1
+          example: -1
           type: integer
+          x-konfig-original-example: -1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelPortfolio-properties-model_type
       type: object
     ModelPortfolioAssetClass:
       additionalProperties: true
@@ -6200,8 +6203,11 @@ components:
           x-konfig-original-example: 0
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-fee
         fx_rate:
-          description: The forex conversion rate involved in the transaction if provided
-            by the brokerage
+          description: "The forex conversion rate involved in the transaction if provided\
+            \ by the brokerage. Used in cases where securities of one currency are\
+            \ purchased in a different currency, and the forex conversion is automatic.\
+            \ In those cases, price, amount and fee will be in the top level currency\
+            \ (activity -> currency)"
           example: 1.032
           nullable: true
           type: number
@@ -6328,6 +6334,13 @@ components:
           items:
             $ref: '#/components/schemas/Currency'
           type: array
+      required:
+      - currencies
+      - currency
+      - id
+      - raw_symbol
+      - symbol
+      - type
       type: object
       x-konfig-is-used-in-successful-response: true
     UniversalSymbolTicker:
@@ -7673,6 +7686,10 @@ components:
     konfig-generated-schema-components-schemas-ModelPortfolio-properties-name:
       example: SnapTrade 5x Aggressive Growth Fund
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ModelPortfolio-properties-model_type:
+      example: -1
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ModelPortfolioAssetClass-properties-percent:
       example: 100
