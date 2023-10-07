@@ -1,9 +1,15 @@
-# snaptrade-typescript-sdk
+<div align="center">
+
+[![Visit SnapTrade](./header.png)](https://snaptrade.com)
+
+# [SnapTrade](https://snaptrade.com)
+
+Connect brokerage accounts to your app for live positions and trading
 
 [![npm](https://img.shields.io/badge/npm-v8.29.0-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
-Connect brokerage accounts to your app for live positions and trading
+</div>
 
 ## Table of Contents
 
@@ -826,7 +832,7 @@ const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
 
 ##### underlyingSymbolId: `string`
 
-##### legs: `OptionLeg`[]
+##### legs: [`OptionLeg`](./models/option-leg.ts)[]
 
 ##### strategyType: `string`
 

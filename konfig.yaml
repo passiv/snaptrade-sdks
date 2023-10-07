@@ -76,6 +76,10 @@ infoContactUrl: https://snaptrade.com/
 doNotValidateGloballyRequiredSecurity: true
 tagPriority:
   - Account Information
+readmeHeader:
+  title: SnapTrade
+  image: header.png
+  url: https://snaptrade.com
 additionalGenerators:
   php7:
     version: 1.4.0

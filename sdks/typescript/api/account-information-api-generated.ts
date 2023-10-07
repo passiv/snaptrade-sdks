@@ -27,53 +27,13 @@ import { AccountHoldingsAccount } from '../models';
 // @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
-import { AccountOrderRecordStatus } from '../models';
-// @ts-ignore
-import { AccountSyncStatus } from '../models';
-// @ts-ignore
-import { Action } from '../models';
-// @ts-ignore
 import { Balance } from '../models';
-// @ts-ignore
-import { Brokerage } from '../models';
-// @ts-ignore
-import { BrokerageAuthorization } from '../models';
-// @ts-ignore
-import { BrokerageType } from '../models';
-// @ts-ignore
-import { CashRestriction } from '../models';
-// @ts-ignore
-import { Currency } from '../models';
-// @ts-ignore
-import { Exchange } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
-import { OptionsSymbol } from '../models';
-// @ts-ignore
-import { OrderType } from '../models';
-// @ts-ignore
 import { Position } from '../models';
-// @ts-ignore
-import { PositionSymbol } from '../models';
-// @ts-ignore
-import { SecurityType } from '../models';
-// @ts-ignore
-import { SnapTradeHoldingsAccount } from '../models';
-// @ts-ignore
-import { SnapTradeHoldingsAccountAccountId } from '../models';
-// @ts-ignore
-import { SnapTradeHoldingsTotalValue } from '../models';
-// @ts-ignore
-import { TimeInForce } from '../models';
-// @ts-ignore
-import { USExchange } from '../models';
-// @ts-ignore
-import { UnderlyingSymbol } from '../models';
-// @ts-ignore
-import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
