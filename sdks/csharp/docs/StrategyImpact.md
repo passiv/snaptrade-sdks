@@ -5,16 +5,16 @@ The strategy impact
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EstimatedCommissions** | **decimal** |  | [optional] 
-**BuyingPowerEffect** | **decimal** |  | [optional] 
-**BuyingPowerResult** | **decimal** |  | [optional] 
-**MaintExcessEffect** | **decimal** |  | [optional] 
-**MaintExcessResult** | **decimal** |  | [optional] 
+**EstimatedCommissions** | **double** |  | [optional] 
+**BuyingPowerEffect** | **double** |  | [optional] 
+**BuyingPowerResult** | **double** |  | [optional] 
+**MaintExcessEffect** | **double** |  | [optional] 
+**MaintExcessResult** | **double** |  | [optional] 
 **TradeValueCalculation** | **string** |  | [optional] 
 **Legs** | [**List&lt;StrategyImpactLegsInner&gt;**](StrategyImpactLegsInner.md) |  | [optional] 
 **Side** | **string** |  | [optional] 
 **Effect** | **string** |  | [optional] 
-**Price** | **decimal** |  | [optional] 
+**Price** | **double** |  | [optional] 
 **Strategy** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

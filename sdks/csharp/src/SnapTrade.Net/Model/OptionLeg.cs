@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Model
     public partial class OptionLeg : IEquatable<OptionLeg>, IValidatableObject
     {
         /// <summary>
-        /// Defines Action
+        /// Defines _Action
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ActionEnum
@@ -66,19 +66,19 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Action
+        /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ActionEnum? Action { get; set; }
+        public ActionEnum? _Action { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionLeg" /> class.
         /// </summary>
         /// <param name="action">action.</param>
         /// <param name="optionSymbolId">Obtained from calling options chain endpoint (option_id).</param>
         /// <param name="quantity">quantity.</param>
-        public OptionLeg(ActionEnum? action = default(ActionEnum?), string optionSymbolId = default(string), decimal quantity = default(decimal)) : base()
+        public OptionLeg(ActionEnum? action = default(ActionEnum?), string optionSymbolId = default(string), double quantity = default(double)) : base()
         {
-            this.Action = action;
+            this._Action = action;
             this.OptionSymbolId = optionSymbolId;
             this.Quantity = quantity;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -95,7 +95,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public decimal Quantity { get; set; }
+        public double Quantity { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -112,7 +112,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionLeg {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Action: ").Append(Action).Append("\n");
+            sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  OptionSymbolId: ").Append(OptionSymbolId).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -152,8 +152,8 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
+                    this._Action == input._Action ||
+                    this._Action.Equals(input._Action)
                 ) && base.Equals(input) && 
                 (
                     this.OptionSymbolId == input.OptionSymbolId ||
@@ -176,7 +176,7 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                hashCode = (hashCode * 59) + this.Action.GetHashCode();
+                hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 if (this.OptionSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.OptionSymbolId.GetHashCode();

@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="closeTime">closeTime.</param>
         /// <param name="suffix">suffix.</param>
         /// <param name="allowsCryptocurrencySymbols">allowsCryptocurrencySymbols.</param>
-        public USExchange(Guid id = default(Guid), string code = default(string), string micCode = default(string), string name = default(string), string timezone = default(string), string startTime = default(string), string closeTime = default(string), string suffix = default(string), bool allowsCryptocurrencySymbols = default(bool)) : base()
+        public USExchange(string id = default(string), string code = default(string), string micCode = default(string), string name = default(string), string timezone = default(string), string startTime = default(string), string closeTime = default(string), string suffix = default(string), bool allowsCryptocurrencySymbols = default(bool)) : base()
         {
             this.Id = id;
             this.Code = code;
@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Code

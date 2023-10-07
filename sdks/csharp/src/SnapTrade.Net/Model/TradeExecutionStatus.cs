@@ -105,7 +105,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Action of executed trade</value>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ActionEnum? Action { get; set; }
+        public ActionEnum? _Action { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TradeExecutionStatus" /> class.
         /// </summary>
@@ -118,14 +118,14 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Price of execution.</param>
         /// <param name="commissions">Fees paid from executing trade.</param>
         /// <param name="meta">Other misc. data.</param>
-        public TradeExecutionStatus(BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), Trade trade = default(Trade), StateEnum? state = default(StateEnum?), int filledUnits = default(int), ActionEnum? action = default(ActionEnum?), decimal price = default(decimal), decimal commissions = default(decimal), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public TradeExecutionStatus(BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), Trade trade = default(Trade), StateEnum? state = default(StateEnum?), int filledUnits = default(int), ActionEnum? action = default(ActionEnum?), double price = default(double), double commissions = default(double), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Symbol = symbol;
             this.UniversalSymbol = universalSymbol;
             this.Trade = trade;
             this.State = state;
             this.FilledUnits = filledUnits;
-            this.Action = action;
+            this._Action = action;
             this.Price = price;
             this.Commissions = commissions;
             this.Meta = meta;
@@ -162,14 +162,14 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Price of execution</value>
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary>
         /// Fees paid from executing trade
         /// </summary>
         /// <value>Fees paid from executing trade</value>
         [DataMember(Name = "commissions", EmitDefaultValue = false)]
-        public decimal Commissions { get; set; }
+        public double Commissions { get; set; }
 
         /// <summary>
         /// Other misc. data
@@ -198,7 +198,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Trade: ").Append(Trade).Append("\n");
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  FilledUnits: ").Append(FilledUnits).Append("\n");
-            sb.Append("  Action: ").Append(Action).Append("\n");
+            sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Commissions: ").Append(Commissions).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
@@ -262,8 +262,8 @@ namespace SnapTrade.Net.Model
                     this.FilledUnits.Equals(input.FilledUnits)
                 ) && base.Equals(input) && 
                 (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
+                    this._Action == input._Action ||
+                    this._Action.Equals(input._Action)
                 ) && base.Equals(input) && 
                 (
                     this.Price == input.Price ||
@@ -305,7 +305,7 @@ namespace SnapTrade.Net.Model
                 }
                 hashCode = (hashCode * 59) + this.State.GetHashCode();
                 hashCode = (hashCode * 59) + this.FilledUnits.GetHashCode();
-                hashCode = (hashCode * 59) + this.Action.GetHashCode();
+                hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.Price.GetHashCode();
                 hashCode = (hashCode * 59) + this.Commissions.GetHashCode();
                 if (this.Meta != null)

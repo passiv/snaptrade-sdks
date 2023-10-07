@@ -39,11 +39,11 @@ namespace SnapTrade.Net.Model
         /// <param name="index">index.</param>
         /// <param name="action">action.</param>
         /// <param name="quantity">quantity.</param>
-        public OptionStrategyLegsInner(string optionSymbolId = default(string), decimal index = default(decimal), string action = default(string), decimal quantity = default(decimal))
+        public OptionStrategyLegsInner(string optionSymbolId = default(string), double index = default(double), string action = default(string), double quantity = default(double))
         {
             this.OptionSymbolId = optionSymbolId;
             this.Index = index;
-            this.Action = action;
+            this._Action = action;
             this.Quantity = quantity;
         }
 
@@ -57,19 +57,19 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Index
         /// </summary>
         [DataMember(Name = "index", EmitDefaultValue = false)]
-        public decimal Index { get; set; }
+        public double Index { get; set; }
 
         /// <summary>
-        /// Gets or Sets Action
+        /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public string Action { get; set; }
+        public string _Action { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
         /// </summary>
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public decimal Quantity { get; set; }
+        public double Quantity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -81,7 +81,7 @@ namespace SnapTrade.Net.Model
             sb.Append("class OptionStrategyLegsInner {\n");
             sb.Append("  OptionSymbolId: ").Append(OptionSymbolId).Append("\n");
             sb.Append("  Index: ").Append(Index).Append("\n");
-            sb.Append("  Action: ").Append(Action).Append("\n");
+            sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -128,9 +128,9 @@ namespace SnapTrade.Net.Model
                     this.Index.Equals(input.Index)
                 ) && 
                 (
-                    this.Action == input.Action ||
-                    (this.Action != null &&
-                    this.Action.Equals(input.Action))
+                    this._Action == input._Action ||
+                    (this._Action != null &&
+                    this._Action.Equals(input._Action))
                 ) && 
                 (
                     this.Quantity == input.Quantity ||
@@ -152,9 +152,9 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.OptionSymbolId.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Index.GetHashCode();
-                if (this.Action != null)
+                if (this._Action != null)
                 {
-                    hashCode = (hashCode * 59) + this.Action.GetHashCode();
+                    hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Quantity.GetHashCode();
                 return hashCode;

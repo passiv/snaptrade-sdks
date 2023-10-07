@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="strategyType">strategyType.</param>
         /// <param name="numberOfLegs">numberOfLegs.</param>
         /// <param name="legs">legs.</param>
-        public OptionStrategy(Guid id = default(Guid), UniversalSymbol underlyingSymbolId = default(UniversalSymbol), string strategyType = default(string), decimal numberOfLegs = default(decimal), List<OptionStrategyLegsInner> legs = default(List<OptionStrategyLegsInner>)) : base()
+        public OptionStrategy(string id = default(string), UniversalSymbol underlyingSymbolId = default(UniversalSymbol), string strategyType = default(string), double numberOfLegs = default(double), List<OptionStrategyLegsInner> legs = default(List<OptionStrategyLegsInner>)) : base()
         {
             this.Id = id;
             this.UnderlyingSymbolId = underlyingSymbolId;
@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets UnderlyingSymbolId
@@ -72,7 +72,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets NumberOfLegs
         /// </summary>
         [DataMember(Name = "number_of_legs", EmitDefaultValue = false)]
-        public decimal NumberOfLegs { get; set; }
+        public double NumberOfLegs { get; set; }
 
         /// <summary>
         /// Gets or Sets Legs

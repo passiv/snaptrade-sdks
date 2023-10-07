@@ -34,10 +34,10 @@ namespace SnapTrade.Net.Model
     {
 
         /// <summary>
-        /// Gets or Sets Action
+        /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public Action? Action { get; set; }
+        public ModelAction? _Action { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderType
@@ -61,10 +61,10 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">timeInForce.</param>
         /// <param name="units">Trade Units.</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
-        public ManualTradeForm(Guid accountId = default(Guid), Action? action = default(Action?), OrderType? orderType = default(OrderType?), decimal? price = default(decimal?), decimal? stop = default(decimal?), TimeInForce? timeInForce = default(TimeInForce?), decimal units = default(decimal), Guid universalSymbolId = default(Guid))
+        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double units = default(double), string universalSymbolId = default(string))
         {
             this.AccountId = accountId;
-            this.Action = action;
+            this._Action = action;
             this.OrderType = orderType;
             this.Price = price;
             this.Stop = stop;
@@ -77,34 +77,34 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets AccountId
         /// </summary>
         [DataMember(Name = "account_id", EmitDefaultValue = false)]
-        public Guid AccountId { get; set; }
+        public string AccountId { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Stop Price. If stop loss or stop limit order, the price to trigger the stop
         /// </summary>
         /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
         [DataMember(Name = "stop", EmitDefaultValue = true)]
-        public decimal? Stop { get; set; }
+        public double? Stop { get; set; }
 
         /// <summary>
         /// Trade Units
         /// </summary>
         /// <value>Trade Units</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
-        public decimal Units { get; set; }
+        public double Units { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbolId
         /// </summary>
         [DataMember(Name = "universal_symbol_id", EmitDefaultValue = false)]
-        public Guid UniversalSymbolId { get; set; }
+        public string UniversalSymbolId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -115,7 +115,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeForm {\n");
             sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            sb.Append("  Action: ").Append(Action).Append("\n");
+            sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Stop: ").Append(Stop).Append("\n");
@@ -163,8 +163,8 @@ namespace SnapTrade.Net.Model
                     this.AccountId.Equals(input.AccountId))
                 ) && 
                 (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
+                    this._Action == input._Action ||
+                    this._Action.Equals(input._Action)
                 ) && 
                 (
                     this.OrderType == input.OrderType ||
@@ -208,7 +208,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.AccountId.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Action.GetHashCode();
+                hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 if (this.Price != null)
                 {

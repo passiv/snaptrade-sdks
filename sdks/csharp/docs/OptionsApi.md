@@ -10,9 +10,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
 | [**PlaceOptionStrategy**](OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage |
 
-<a name="getoptionstrategy"></a>
+
 # **GetOptionStrategy**
-> StrategyQuotes GetOptionStrategy (string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest)
 
 Creates an option strategy object that will be used to place an option strategy order
 
@@ -30,19 +29,25 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest(); // OptionsGetOptionStrategyRequest | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var underlyingSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var legs = new List<OptionLeg>();
+            var strategyType = OptionsGetOptionStrategyRequest.StrategyTypeEnum.CUSTOM;
+            
+            var optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest(
+                underlyingSymbolId,
+                legs,
+                strategyType
+            );
+            
             try
             {
                 // Creates an option strategy object that will be used to place an option strategy order
@@ -92,21 +97,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 | **optionsGetOptionStrategyRequest** | [**OptionsGetOptionStrategyRequest**](OptionsGetOptionStrategyRequest.md) |  |  |
 
 ### Return type
 
 [**StrategyQuotes**](StrategyQuotes.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -117,9 +113,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getoptionschain"></a>
+
 # **GetOptionsChain**
-> List&lt;OptionChainInner&gt; GetOptionsChain (string userId, string userSecret, Guid accountId, Guid symbol)
 
 Get the options chain
 
@@ -137,19 +132,17 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var symbol = "symbol_example";  // Guid | Universal symbol ID if symbol
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var symbol = "symbol_example"; // Universal symbol ID if symbol
+            
             try
             {
                 // Get the options chain
@@ -199,21 +192,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
-| **symbol** | **Guid** | Universal symbol ID if symbol |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
+| **symbol** | **string** | Universal symbol ID if symbol |  |
 
 ### Return type
 
 [**List&lt;OptionChainInner&gt;**](OptionChainInner.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -224,9 +208,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getoptionsstrategyquote"></a>
+
 # **GetOptionsStrategyQuote**
-> StrategyQuotes GetOptionsStrategyQuote (string userId, string userSecret, Guid accountId, Guid optionStrategyId)
 
 Get latest market data of option strategy
 
@@ -244,19 +227,17 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var optionStrategyId = "optionStrategyId_example";  // Guid | Option strategy id obtained from response when creating option strategy object
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
+            
             try
             {
                 // Get latest market data of option strategy
@@ -306,21 +287,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
-| **optionStrategyId** | **Guid** | Option strategy id obtained from response when creating option strategy object |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
+| **optionStrategyId** | **string** | Option strategy id obtained from response when creating option strategy object |  |
 
 ### Return type
 
 [**StrategyQuotes**](StrategyQuotes.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -331,9 +303,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listoptionholdings"></a>
+
 # **ListOptionHoldings**
-> List&lt;OptionsPosition&gt; ListOptionHoldings (string userId, string userSecret, Guid accountId)
 
 Get the options holdings in the account
 
@@ -351,18 +322,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            
             try
             {
                 // Get the options holdings in the account
@@ -412,20 +381,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 
 ### Return type
 
 [**List&lt;OptionsPosition&gt;**](OptionsPosition.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -436,9 +396,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="placeoptionstrategy"></a>
+
 # **PlaceOptionStrategy**
-> StrategyOrderRecord PlaceOptionStrategy (string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest)
 
 Place an option strategy order on the brokerage
 
@@ -456,20 +415,26 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var optionStrategyId = "optionStrategyId_example";  // Guid | Option strategy id obtained from response when creating option strategy object
-            var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(); // OptionsPlaceOptionStrategyRequest | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
+            var orderType = OptionsPlaceOptionStrategyRequest.OrderTypeEnum.Limit;
+            var timeInForce = OptionsPlaceOptionStrategyRequest.TimeInForceEnum.DAY;
+            var price = 31.33; // Trade Price if limit or stop limit order
+            
+            var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(
+                orderType,
+                timeInForce,
+                price
+            );
+            
             try
             {
                 // Place an option strategy order on the brokerage
@@ -519,22 +484,13 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
-| **optionStrategyId** | **Guid** | Option strategy id obtained from response when creating option strategy object |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
+| **optionStrategyId** | **string** | Option strategy id obtained from response when creating option strategy object |  |
 | **optionsPlaceOptionStrategyRequest** | [**OptionsPlaceOptionStrategyRequest**](OptionsPlaceOptionStrategyRequest.md) |  |  |
 
 ### Return type
 
 [**StrategyOrderRecord**](StrategyOrderRecord.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 
 ### HTTP response details

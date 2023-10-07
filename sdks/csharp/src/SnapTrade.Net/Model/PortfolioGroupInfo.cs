@@ -46,7 +46,7 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageAuthorizations">brokerageAuthorizations.</param>
         /// <param name="accuracy">accuracy.</param>
         /// <param name="settings">settings.</param>
-        public PortfolioGroupInfo(List<UniversalSymbol> symbols = default(List<UniversalSymbol>), List<UniversalSymbol> quotableSymbols = default(List<UniversalSymbol>), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<TargetAsset> targetPositions = default(List<TargetAsset>), List<Position> idealPositions = default(List<Position>), List<ExcludedAsset> excludedPositions = default(List<ExcludedAsset>), List<CalculatedTrade> calculatedTrades = default(List<CalculatedTrade>), List<BrokerageAuthorization> brokerageAuthorizations = default(List<BrokerageAuthorization>), decimal accuracy = default(decimal), PortfolioGroupSettings settings = default(PortfolioGroupSettings)) : base()
+        public PortfolioGroupInfo(List<UniversalSymbol> symbols = default(List<UniversalSymbol>), List<UniversalSymbol> quotableSymbols = default(List<UniversalSymbol>), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<TargetAsset> targetPositions = default(List<TargetAsset>), List<Position> idealPositions = default(List<Position>), List<ExcludedAsset> excludedPositions = default(List<ExcludedAsset>), List<CalculatedTrade> calculatedTrades = default(List<CalculatedTrade>), List<BrokerageAuthorization> brokerageAuthorizations = default(List<BrokerageAuthorization>), double accuracy = default(double), PortfolioGroupSettings settings = default(PortfolioGroupSettings)) : base()
         {
             this.Symbols = symbols;
             this.QuotableSymbols = quotableSymbols;
@@ -120,7 +120,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Accuracy
         /// </summary>
         [DataMember(Name = "accuracy", EmitDefaultValue = false)]
-        public decimal Accuracy { get; set; }
+        public double Accuracy { get; set; }
 
         /// <summary>
         /// Gets or Sets Settings

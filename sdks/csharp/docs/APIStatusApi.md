@@ -6,11 +6,10 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**Check**](APIStatusApi.md#check) | **GET** / | Get API Status |
 
-<a name="check"></a>
-# **Check**
-> Status Check ()
 
-Get API Status
+# **Check**
+
+
 
 Check whether the API is operational and verify timestamps.
 
@@ -28,15 +27,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // Get API Status
@@ -85,15 +82,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Status**](Status.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details

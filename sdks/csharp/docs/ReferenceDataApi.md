@@ -16,9 +16,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates |
 | [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
 
-<a name="getcurrencyexchangeratepair"></a>
+
 # **GetCurrencyExchangeRatePair**
-> ExchangeRatePairs GetCurrencyExchangeRatePair (string currencyPair)
 
 Return the exchange rate of a currency pair
 
@@ -36,16 +35,14 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var currencyPair = "currencyPair_example";  // string | A currency pair based on currency code for example, {CAD-USD}
-
+            var currencyPair = "currencyPair_example"; // A currency pair based on currency code for example, {CAD-USD}
+            
             try
             {
                 // Return the exchange rate of a currency pair
@@ -99,15 +96,6 @@ catch (ApiException e)
 
 [**ExchangeRatePairs**](ExchangeRatePairs.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -116,9 +104,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getpartnerinfo"></a>
+
 # **GetPartnerInfo**
-> PartnerData GetPartnerInfo ()
 
 Get metadata related to Snaptrade partner
 
@@ -136,15 +123,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // Get metadata related to Snaptrade partner
@@ -194,15 +179,6 @@ This endpoint does not need any parameter.
 
 [**PartnerData**](PartnerData.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -215,9 +191,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getsecuritytypes"></a>
+
 # **GetSecurityTypes**
-> List&lt;SecurityType&gt; GetSecurityTypes ()
 
 List of all security types.
 
@@ -235,15 +210,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List of all security types.
@@ -293,15 +266,6 @@ This endpoint does not need any parameter.
 
 [**List&lt;SecurityType&gt;**](SecurityType.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -311,9 +275,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getstockexchanges"></a>
+
 # **GetStockExchanges**
-> List&lt;Exchange&gt; GetStockExchanges ()
 
 List exchanges
 
@@ -331,15 +294,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List exchanges
@@ -389,15 +350,6 @@ This endpoint does not need any parameter.
 
 [**List&lt;Exchange&gt;**](Exchange.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -406,9 +358,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getsymbols"></a>
+
 # **GetSymbols**
-> List&lt;UniversalSymbol&gt; GetSymbols (SymbolQuery symbolQuery = null)
 
 Search for symbols
 
@@ -426,16 +377,18 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var symbolQuery = new SymbolQuery(); // SymbolQuery |  (optional) 
-
+            var substring = "apple";
+            
+            var symbolQuery = new SymbolQuery(
+                substring
+            );
+            
             try
             {
                 // Search for symbols
@@ -489,15 +442,6 @@ catch (ApiException e)
 
 [**List&lt;UniversalSymbol&gt;**](UniversalSymbol.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -507,9 +451,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getsymbolsbyticker"></a>
+
 # **GetSymbolsByTicker**
-> UniversalSymbol GetSymbolsByTicker (string ticker, Guid? symbolId = null)
 
 Get details of a symbol by the ticker
 
@@ -527,17 +470,15 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var ticker = "ticker_example";  // string | The ticker of the UniversalSymbol to get.
-            var symbolId = "symbolId_example";  // Guid? | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
-
+            var ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
+            var symbolId = "symbolId_example"; // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
+            
             try
             {
                 // Get details of a symbol by the ticker
@@ -586,20 +527,11 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **ticker** | **string** | The ticker of the UniversalSymbol to get. |  |
-| **symbolId** | **Guid?** | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional]  |
+| **symbolId** | **string** | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional]  |
 
 ### Return type
 
 [**UniversalSymbol**](UniversalSymbol.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
 
 
 ### HTTP response details
@@ -611,9 +543,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listallbrokerageauthorizationtype"></a>
+
 # **ListAllBrokerageAuthorizationType**
-> List&lt;BrokerageAuthorizationTypeReadOnly&gt; ListAllBrokerageAuthorizationType (string brokerage = null)
 
 List of all brokerage authorization types
 
@@ -631,16 +562,14 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var brokerage = "QUESTRADE,ALPACA";  // string | Comma separated value of brokerage slugs (optional) 
-
+            var brokerage = "QUESTRADE,ALPACA"; // Comma separated value of brokerage slugs (optional) 
+            
             try
             {
                 // List of all brokerage authorization types
@@ -694,15 +623,6 @@ catch (ApiException e)
 
 [**List&lt;BrokerageAuthorizationTypeReadOnly&gt;**](BrokerageAuthorizationTypeReadOnly.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -712,9 +632,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listallbrokerages"></a>
+
 # **ListAllBrokerages**
-> List&lt;Brokerage&gt; ListAllBrokerages ()
 
 List brokerages
 
@@ -732,15 +651,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List brokerages
@@ -790,15 +707,6 @@ This endpoint does not need any parameter.
 
 [**List&lt;Brokerage&gt;**](Brokerage.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -808,9 +716,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listallcurrencies"></a>
+
 # **ListAllCurrencies**
-> List&lt;Currency&gt; ListAllCurrencies ()
 
 List currencies
 
@@ -828,15 +735,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List currencies
@@ -886,15 +791,6 @@ This endpoint does not need any parameter.
 
 [**List&lt;Currency&gt;**](Currency.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -904,9 +800,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listallcurrenciesrates"></a>
+
 # **ListAllCurrenciesRates**
-> List&lt;ExchangeRatePairs&gt; ListAllCurrenciesRates ()
 
 List currency exchange rates
 
@@ -924,15 +819,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List currency exchange rates
@@ -982,15 +875,6 @@ This endpoint does not need any parameter.
 
 [**List&lt;ExchangeRatePairs&gt;**](ExchangeRatePairs.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -999,9 +883,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="symbolsearchuseraccount"></a>
+
 # **SymbolSearchUserAccount**
-> List&lt;UniversalSymbol&gt; SymbolSearchUserAccount (string userId, string userSecret, Guid accountId, SymbolQuery symbolQuery = null)
 
 Search for symbols available in an account
 
@@ -1019,19 +902,21 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var accountId = "accountId_example";  // Guid | The ID of the account get positions.
-            var symbolQuery = new SymbolQuery(); // SymbolQuery |  (optional) 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example"; // The ID of the account get positions.
+            var substring = "apple";
+            
+            var symbolQuery = new SymbolQuery(
+                substring
+            );
+            
             try
             {
                 // Search for symbols available in an account
@@ -1081,21 +966,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **Guid** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account get positions. |  |
 | **symbolQuery** | [**SymbolQuery**](SymbolQuery.md) |  | [optional]  |
 
 ### Return type
 
 [**List&lt;UniversalSymbol&gt;**](UniversalSymbol.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
 
 
 ### HTTP response details

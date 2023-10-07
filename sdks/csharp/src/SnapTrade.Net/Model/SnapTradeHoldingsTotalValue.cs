@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="value">value.</param>
         /// <param name="currency">currency.</param>
-        public SnapTradeHoldingsTotalValue(decimal value = default(decimal), string currency = default(string)) : base()
+        public SnapTradeHoldingsTotalValue(double value = default(double), string currency = default(string)) : base()
         {
             this.Value = value;
             this.Currency = currency;
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
-        public decimal Value { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency

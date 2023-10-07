@@ -78,8 +78,13 @@ namespace SnapTrade.Net.Model
         /// <param name="underlyingSymbol">underlyingSymbol (required).</param>
         /// <param name="localId">localId.</param>
         /// <param name="exchangeId">exchangeId.</param>
-        public OptionsSymbol(Guid id = default(Guid), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), decimal strikePrice = default(decimal), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), Guid exchangeId = default(Guid)) : base()
+        public OptionsSymbol(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), string exchangeId = default(string)) : base()
         {
+            // to ensure "id" is required (not null)
+            if (id == null)
+            {
+                throw new ArgumentNullException("id is a required property for OptionsSymbol and cannot be null");
+            }
             this.Id = id;
             // to ensure "ticker" is required (not null)
             if (ticker == null)
@@ -111,7 +116,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Ticker
@@ -123,7 +128,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets StrikePrice
         /// </summary>
         [DataMember(Name = "strike_price", IsRequired = true, EmitDefaultValue = true)]
-        public decimal StrikePrice { get; set; }
+        public double StrikePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets ExpirationDate
@@ -153,7 +158,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets ExchangeId
         /// </summary>
         [DataMember(Name = "exchange_id", EmitDefaultValue = false)]
-        public Guid ExchangeId { get; set; }
+        public string ExchangeId { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

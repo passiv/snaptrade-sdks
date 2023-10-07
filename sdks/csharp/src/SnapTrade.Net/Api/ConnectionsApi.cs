@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BrokerageAuthorization</returns>
-        BrokerageAuthorization DetailBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
+        BrokerageAuthorization DetailBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
         /// Get brokerage authorization details
@@ -50,7 +50,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageAuthorization</returns>
-        ApiResponse<BrokerageAuthorization> DetailBrokerageAuthorizationWithHttpInfo(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
+        ApiResponse<BrokerageAuthorization> DetailBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
         /// List all brokerage authorizations for the user
         /// </summary>
@@ -82,7 +82,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void RemoveBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
+        void RemoveBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
         /// Delete brokerage authorization
@@ -96,7 +96,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> RemoveBrokerageAuthorizationWithHttpInfo(Guid authorizationId, string userId, string userSecret, int operationIndex = 0);
+        ApiResponse<Object> RemoveBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
         /// List all session events for the partner
         /// </summary>
@@ -143,7 +143,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BrokerageAuthorization</returns>
-        System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get brokerage authorization details
@@ -158,7 +158,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BrokerageAuthorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorization>> DetailBrokerageAuthorizationWithHttpInfoAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorization>> DetailBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all brokerage authorizations for the user
         /// </summary>
@@ -199,7 +199,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete brokerage authorization
@@ -214,7 +214,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> RemoveBrokerageAuthorizationWithHttpInfoAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> RemoveBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all session events for the partner
         /// </summary>
@@ -373,7 +373,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BrokerageAuthorization</returns>
-        public BrokerageAuthorization DetailBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0)
+        public BrokerageAuthorization DetailBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization> localVarResponse = DetailBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
             return localVarResponse.Data;
@@ -388,8 +388,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageAuthorization</returns>
-        public SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization> DetailBrokerageAuthorizationWithHttpInfo(Guid authorizationId, string userId, string userSecret, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization> DetailBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->DetailBrokerageAuthorization");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -471,7 +477,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BrokerageAuthorization</returns>
-        public async System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization> localVarResponse = await DetailBrokerageAuthorizationWithHttpInfoAsync(authorizationId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -487,8 +493,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BrokerageAuthorization)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization>> DetailBrokerageAuthorizationWithHttpInfoAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<BrokerageAuthorization>> DetailBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->DetailBrokerageAuthorization");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -763,7 +775,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void RemoveBrokerageAuthorization(Guid authorizationId, string userId, string userSecret, int operationIndex = 0)
+        public void RemoveBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
             RemoveBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
         }
@@ -777,8 +789,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public SnapTrade.Net.Client.ApiResponse<Object> RemoveBrokerageAuthorizationWithHttpInfo(Guid authorizationId, string userId, string userSecret, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<Object> RemoveBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->RemoveBrokerageAuthorization");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -859,7 +877,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             await RemoveBrokerageAuthorizationWithHttpInfoAsync(authorizationId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -874,8 +892,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<Object>> RemoveBrokerageAuthorizationWithHttpInfoAsync(Guid authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<Object>> RemoveBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->RemoveBrokerageAuthorization");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {

@@ -46,7 +46,7 @@ namespace SnapTrade.Net.Model
         /// <param name="effect">effect.</param>
         /// <param name="price">price.</param>
         /// <param name="strategy">strategy.</param>
-        public StrategyImpact(decimal estimatedCommissions = default(decimal), decimal buyingPowerEffect = default(decimal), decimal buyingPowerResult = default(decimal), decimal maintExcessEffect = default(decimal), decimal maintExcessResult = default(decimal), string tradeValueCalculation = default(string), List<StrategyImpactLegsInner> legs = default(List<StrategyImpactLegsInner>), string side = default(string), string effect = default(string), decimal price = default(decimal), string strategy = default(string)) : base()
+        public StrategyImpact(double estimatedCommissions = default(double), double buyingPowerEffect = default(double), double buyingPowerResult = default(double), double maintExcessEffect = default(double), double maintExcessResult = default(double), string tradeValueCalculation = default(string), List<StrategyImpactLegsInner> legs = default(List<StrategyImpactLegsInner>), string side = default(string), string effect = default(string), double price = default(double), string strategy = default(string)) : base()
         {
             this.EstimatedCommissions = estimatedCommissions;
             this.BuyingPowerEffect = buyingPowerEffect;
@@ -66,31 +66,31 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets EstimatedCommissions
         /// </summary>
         [DataMember(Name = "estimatedCommissions", EmitDefaultValue = false)]
-        public decimal EstimatedCommissions { get; set; }
+        public double EstimatedCommissions { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyingPowerEffect
         /// </summary>
         [DataMember(Name = "buyingPowerEffect", EmitDefaultValue = false)]
-        public decimal BuyingPowerEffect { get; set; }
+        public double BuyingPowerEffect { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyingPowerResult
         /// </summary>
         [DataMember(Name = "buyingPowerResult", EmitDefaultValue = false)]
-        public decimal BuyingPowerResult { get; set; }
+        public double BuyingPowerResult { get; set; }
 
         /// <summary>
         /// Gets or Sets MaintExcessEffect
         /// </summary>
         [DataMember(Name = "maintExcessEffect", EmitDefaultValue = false)]
-        public decimal MaintExcessEffect { get; set; }
+        public double MaintExcessEffect { get; set; }
 
         /// <summary>
         /// Gets or Sets MaintExcessResult
         /// </summary>
         [DataMember(Name = "maintExcessResult", EmitDefaultValue = false)]
-        public decimal MaintExcessResult { get; set; }
+        public double MaintExcessResult { get; set; }
 
         /// <summary>
         /// Gets or Sets TradeValueCalculation
@@ -120,7 +120,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Strategy

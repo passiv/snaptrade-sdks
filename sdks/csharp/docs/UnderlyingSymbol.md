@@ -5,12 +5,12 @@ Underlying Symbol
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Symbol** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
-**Currency** | [**Currency**](Currency.md) |  | [optional] 
-**Exchange** | [**USExchange**](USExchange.md) |  | [optional] 
-**Type** | [**SecurityType**](SecurityType.md) |  | [optional] 
+**Currency** | **Currency** |  | [optional] 
+**Exchange** | **USExchange** |  | [optional] 
+**Type** | **SecurityType** |  | [optional] 
 **Currencies** | [**List&lt;Currency&gt;**](Currency.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

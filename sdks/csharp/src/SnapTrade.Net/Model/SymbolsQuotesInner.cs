@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="lastTradePrice">lastTradePrice.</param>
         /// <param name="bidSize">bidSize.</param>
         /// <param name="askSize">askSize.</param>
-        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), decimal bidPrice = default(decimal), decimal askPrice = default(decimal), decimal lastTradePrice = default(decimal), decimal bidSize = default(decimal), decimal askSize = default(decimal))
+        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), double bidPrice = default(double), double askPrice = default(double), double lastTradePrice = default(double), double bidSize = default(double), double askSize = default(double))
         {
             this.Symbol = symbol;
             this.BidPrice = bidPrice;
@@ -61,31 +61,31 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets BidPrice
         /// </summary>
         [DataMember(Name = "bid_price", EmitDefaultValue = false)]
-        public decimal BidPrice { get; set; }
+        public double BidPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets AskPrice
         /// </summary>
         [DataMember(Name = "ask_price", EmitDefaultValue = false)]
-        public decimal AskPrice { get; set; }
+        public double AskPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets LastTradePrice
         /// </summary>
         [DataMember(Name = "last_trade_price", EmitDefaultValue = false)]
-        public decimal LastTradePrice { get; set; }
+        public double LastTradePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets BidSize
         /// </summary>
         [DataMember(Name = "bid_size", EmitDefaultValue = false)]
-        public decimal BidSize { get; set; }
+        public double BidSize { get; set; }
 
         /// <summary>
         /// Gets or Sets AskSize
         /// </summary>
         [DataMember(Name = "ask_size", EmitDefaultValue = false)]
-        public decimal AskSize { get; set; }
+        public double AskSize { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

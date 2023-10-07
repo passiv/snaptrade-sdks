@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="isSupported">isSupported.</param>
         /// <param name="isExcluded">isExcluded.</param>
         /// <param name="meta">meta.</param>
-        public TargetAsset(Guid id = default(Guid), UniversalSymbol symbol = default(UniversalSymbol), decimal percent = default(decimal), bool isSupported = default(bool), bool isExcluded = default(bool), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public TargetAsset(string id = default(string), UniversalSymbol symbol = default(UniversalSymbol), double percent = default(double), bool isSupported = default(bool), bool isExcluded = default(bool), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
@@ -68,7 +68,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Percent
         /// </summary>
         [DataMember(Name = "percent", EmitDefaultValue = false)]
-        public decimal Percent { get; set; }
+        public double Percent { get; set; }
 
         /// <summary>
         /// Gets or Sets IsSupported
@@ -215,14 +215,14 @@ namespace SnapTrade.Net.Model
         /// <returns>Validation Result</returns>
         public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
         {
-            // Percent (decimal) maximum
-            if (this.Percent > (decimal)100)
+            // Percent (double) maximum
+            if (this.Percent > (double)100)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Percent, must be a value less than or equal to 100.", new [] { "Percent" });
             }
 
-            // Percent (decimal) minimum
-            if (this.Percent < (decimal)0)
+            // Percent (double) minimum
+            if (this.Percent < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Percent, must be a value greater than or equal to 0.", new [] { "Percent" });
             }

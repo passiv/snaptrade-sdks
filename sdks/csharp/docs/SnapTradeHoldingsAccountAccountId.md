@@ -5,9 +5,9 @@ Holdings with account ID
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**BrokerageAuthorization** | **Guid** |  | [optional] 
-**PortfolioGroup** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**BrokerageAuthorization** | **string** |  | [optional] 
+**PortfolioGroup** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Number** | **string** |  | [optional] 
 **InstitutionName** | **string** |  | [optional] 

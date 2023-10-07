@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="price">Last known market price for the symbol.</param>
         /// <param name="units">units.</param>
-        public PortfolioGroupPosition(UniversalSymbol symbol = default(UniversalSymbol), decimal? price = default(decimal?), int units = default(int)) : base()
+        public PortfolioGroupPosition(UniversalSymbol symbol = default(UniversalSymbol), double? price = default(double?), int units = default(int)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
@@ -57,7 +57,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Last known market price for the symbol</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Units

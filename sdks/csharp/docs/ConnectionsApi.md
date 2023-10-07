@@ -9,9 +9,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | List all session events for the partner |
 
-<a name="detailbrokerageauthorization"></a>
+
 # **DetailBrokerageAuthorization**
-> BrokerageAuthorization DetailBrokerageAuthorization (Guid authorizationId, string userId, string userSecret)
 
 Get brokerage authorization details
 
@@ -29,18 +28,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var authorizationId = "authorizationId_example";  // Guid | The ID of a brokerage authorization object.
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // Get brokerage authorization details
@@ -88,22 +85,13 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **Guid** | The ID of a brokerage authorization object. |  |
+| **authorizationId** | **string** | The ID of a brokerage authorization object. |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
 ### Return type
 
 [**BrokerageAuthorization**](BrokerageAuthorization.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details
@@ -114,9 +102,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listbrokerageauthorizations"></a>
+
 # **ListBrokerageAuthorizations**
-> List&lt;BrokerageAuthorization&gt; ListBrokerageAuthorizations (string userId, string userSecret)
 
 List all brokerage authorizations for the user
 
@@ -134,17 +121,15 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // List all brokerage authorizations for the user
@@ -199,15 +184,6 @@ catch (ApiException e)
 
 [**List&lt;BrokerageAuthorization&gt;**](BrokerageAuthorization.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -217,9 +193,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="removebrokerageauthorization"></a>
+
 # **RemoveBrokerageAuthorization**
-> void RemoveBrokerageAuthorization (Guid authorizationId, string userId, string userSecret)
 
 Delete brokerage authorization
 
@@ -237,18 +212,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var authorizationId = "authorizationId_example";  // Guid | The ID of the Authorization to delete.
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var authorizationId = "authorizationId_example"; // The ID of the Authorization to delete.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // Delete brokerage authorization
@@ -292,22 +265,13 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **Guid** | The ID of the Authorization to delete. |  |
+| **authorizationId** | **string** | The ID of the Authorization to delete. |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
 ### Return type
 
 void (empty response body)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
 
 
 ### HTTP response details
@@ -320,9 +284,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sessionevents"></a>
+
 # **SessionEvents**
-> List&lt;ConnectionsSessionEvents200ResponseInner&gt; SessionEvents (string partnerClientId, string userId = null, string sessionId = null)
 
 List all session events for the partner
 
@@ -340,18 +303,16 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var partnerClientId = "partnerClientId_example";  // string | 
-            var userId = "userId_example";  // string | Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
-            var sessionId = "sessionId_example";  // string | Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
-
+            var partnerClientId = "partnerClientId_example";
+            var userId = "userId_example"; // Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
+            var sessionId = "sessionId_example"; // Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
+            
             try
             {
                 // List all session events for the partner
@@ -406,15 +367,6 @@ catch (ApiException e)
 ### Return type
 
 [**List&lt;ConnectionsSessionEvents200ResponseInner&gt;**](ConnectionsSessionEvents200ResponseInner.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 
 ### HTTP response details

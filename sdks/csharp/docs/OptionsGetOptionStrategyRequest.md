@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UnderlyingSymbolId** | **Guid** |  | 
+**UnderlyingSymbolId** | **string** |  | 
 **Legs** | [**List&lt;OptionLeg&gt;**](OptionLeg.md) |  | 
 **StrategyType** | **string** |  | 
 

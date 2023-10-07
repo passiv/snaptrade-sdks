@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **ActivatedTrialDate** | **string** |  | [optional] 
 **Demo** | **bool** |  | [optional] 
 **ApiEnabled** | **bool** |  | [optional] 
-**DriftThreshold** | **decimal** |  | [optional] 
-**PreferredCurrency** | [**Currency**](Currency.md) |  | [optional] 
+**DriftThreshold** | **double** |  | [optional] 
+**PreferredCurrency** | **Currency** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <param name="institutionName">institutionName.</param>
         /// <param name="syncStatus">syncStatus.</param>
         /// <param name="meta">meta.</param>
-        public SnapTradeHoldingsAccount(Guid id = default(Guid), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), Guid portfolioGroup = default(Guid), string name = default(string), string number = default(string), string institutionName = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        public SnapTradeHoldingsAccount(string id = default(string), BrokerageAuthorization brokerageAuthorization = default(BrokerageAuthorization), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -60,7 +60,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageAuthorization
@@ -72,7 +72,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets PortfolioGroup
         /// </summary>
         [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
-        public Guid PortfolioGroup { get; set; }
+        public string PortfolioGroup { get; set; }
 
         /// <summary>
         /// Gets or Sets Name

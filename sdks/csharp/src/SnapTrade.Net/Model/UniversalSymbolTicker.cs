@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <param name="exchange">exchange.</param>
         /// <param name="type">type.</param>
         /// <param name="currencies">currencies.</param>
-        public UniversalSymbolTicker(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>)) : base()
+        public UniversalSymbolTicker(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -60,7 +60,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol

@@ -74,12 +74,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Index'
         }
         /// <summary>
-        /// Test the property 'Action'
+        /// Test the property '_Action'
         /// </summary>
         [Fact]
-        public void ActionTest()
+        public void _ActionTest()
         {
-            // TODO unit test for the property 'Action'
+            // TODO unit test for the property '_Action'
         }
         /// <summary>
         /// Test the property 'Quantity'

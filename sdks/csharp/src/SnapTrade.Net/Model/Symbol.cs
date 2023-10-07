@@ -42,7 +42,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="exchange">exchange.</param>
         /// <param name="type">type.</param>
-        public Symbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType)) : base()
+        public Symbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType)) : base()
         {
             this.Id = id;
             this._Symbol = symbol;
@@ -58,7 +58,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets _Symbol

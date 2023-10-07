@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
-        StrategyQuotes GetOptionStrategy(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
+        StrategyQuotes GetOptionStrategy(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
 
         /// <summary>
         /// Creates an option strategy object that will be used to place an option strategy order
@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
-        ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
+        ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
         /// <summary>
         /// Get the options chain
         /// </summary>
@@ -63,7 +63,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionChainInner&gt;</returns>
-        List<OptionChainInner> GetOptionsChain(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0);
+        List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
 
         /// <summary>
         /// Get the options chain
@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0);
+        ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
         /// <summary>
         /// Get latest market data of option strategy
         /// </summary>
@@ -89,7 +89,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
-        StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0);
+        StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
 
         /// <summary>
         /// Get latest market data of option strategy
@@ -104,7 +104,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
-        ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0);
+        ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
         /// <summary>
         /// Get the options holdings in the account
         /// </summary>
@@ -114,7 +114,7 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
-        List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, Guid accountId, int operationIndex = 0);
+        List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0);
 
         /// <summary>
         /// Get the options holdings in the account
@@ -128,7 +128,7 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
-        ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0);
+        ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
         /// Place an option strategy order on the brokerage
         /// </summary>
@@ -140,7 +140,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyOrderRecord</returns>
-        StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
+        StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
 
         /// <summary>
         /// Place an option strategy order on the brokerage
@@ -156,7 +156,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyOrderRecord</returns>
-        ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
+        ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -180,7 +180,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyQuotes</returns>
-        System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Creates an option strategy object that will be used to place an option strategy order
@@ -196,7 +196,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get the options chain
         /// </summary>
@@ -211,7 +211,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get the options chain
@@ -227,7 +227,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get latest market data of option strategy
         /// </summary>
@@ -242,7 +242,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyQuotes</returns>
-        System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get latest market data of option strategy
@@ -258,7 +258,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get the options holdings in the account
         /// </summary>
@@ -272,7 +272,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
-        System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get the options holdings in the account
@@ -287,7 +287,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place an option strategy order on the brokerage
         /// </summary>
@@ -303,7 +303,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyOrderRecord</returns>
-        System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place an option strategy order on the brokerage
@@ -320,7 +320,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -451,7 +451,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
-        public StrategyQuotes GetOptionStrategy(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
+        public StrategyQuotes GetOptionStrategy(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = GetOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
             return localVarResponse.Data;
@@ -467,7 +467,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -479,6 +479,12 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionStrategy");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionStrategy");
             }
 
             // verify the required parameter 'optionsGetOptionStrategyRequest' is set
@@ -559,7 +565,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyQuotes</returns>
-        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = await GetOptionStrategyWithHttpInfoAsync(userId, userSecret, accountId, optionsGetOptionStrategyRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -576,7 +582,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, Guid accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -588,6 +594,12 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionStrategy");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionStrategy");
             }
 
             // verify the required parameter 'optionsGetOptionStrategyRequest' is set
@@ -669,7 +681,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionChainInner&gt;</returns>
-        public List<OptionChainInner> GetOptionsChain(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0)
+        public List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = GetOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
             return localVarResponse.Data;
@@ -685,7 +697,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -697,6 +709,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
+            }
+
+            // verify the required parameter 'symbol' is set
+            if (symbol == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -724,7 +748,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, "uuid"));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -770,7 +794,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        public async System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = await GetOptionsChainWithHttpInfoAsync(userId, userSecret, accountId, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -787,7 +811,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -799,6 +823,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
+            }
+
+            // verify the required parameter 'symbol' is set
+            if (symbol == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
             }
 
 
@@ -827,7 +863,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, "uuid"));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
             localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -873,7 +909,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
-        public StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0)
+        public StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = GetOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
             return localVarResponse.Data;
@@ -889,7 +925,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -901,6 +937,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsStrategyQuote");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsStrategyQuote");
+            }
+
+            // verify the required parameter 'optionStrategyId' is set
+            if (optionStrategyId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->GetOptionsStrategyQuote");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -974,7 +1022,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyQuotes</returns>
-        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = await GetOptionsStrategyQuoteWithHttpInfoAsync(userId, userSecret, accountId, optionStrategyId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -991,7 +1039,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1003,6 +1051,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsStrategyQuote");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsStrategyQuote");
+            }
+
+            // verify the required parameter 'optionStrategyId' is set
+            if (optionStrategyId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->GetOptionsStrategyQuote");
             }
 
 
@@ -1076,7 +1136,7 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
-        public List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, Guid accountId, int operationIndex = 0)
+        public List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> localVarResponse = ListOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
             return localVarResponse.Data;
@@ -1091,7 +1151,7 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId">The ID of the account get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, Guid accountId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1103,6 +1163,12 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->ListOptionHoldings");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->ListOptionHoldings");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1174,7 +1240,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
-        public async System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> localVarResponse = await ListOptionHoldingsWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1190,7 +1256,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, Guid accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1202,6 +1268,12 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->ListOptionHoldings");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->ListOptionHoldings");
             }
 
 
@@ -1276,7 +1348,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyOrderRecord</returns>
-        public StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
+        public StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> localVarResponse = PlaceOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
             return localVarResponse.Data;
@@ -1293,7 +1365,7 @@ namespace SnapTrade.Net.Api
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1305,6 +1377,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->PlaceOptionStrategy");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->PlaceOptionStrategy");
+            }
+
+            // verify the required parameter 'optionStrategyId' is set
+            if (optionStrategyId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->PlaceOptionStrategy");
             }
 
             // verify the required parameter 'optionsPlaceOptionStrategyRequest' is set
@@ -1387,7 +1471,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StrategyOrderRecord</returns>
-        public async System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> localVarResponse = await PlaceOptionStrategyWithHttpInfoAsync(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1405,7 +1489,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StrategyOrderRecord)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, Guid accountId, Guid optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1417,6 +1501,18 @@ namespace SnapTrade.Net.Api
             if (userSecret == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->PlaceOptionStrategy");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->PlaceOptionStrategy");
+            }
+
+            // verify the required parameter 'optionStrategyId' is set
+            if (optionStrategyId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->PlaceOptionStrategy");
             }
 
             // verify the required parameter 'optionsPlaceOptionStrategyRequest' is set

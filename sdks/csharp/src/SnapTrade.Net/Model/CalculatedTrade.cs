@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="trades">trades.</param>
-        public CalculatedTrade(Guid id = default(Guid), List<Trade> trades = default(List<Trade>)) : base()
+        public CalculatedTrade(string id = default(string), List<Trade> trades = default(List<Trade>)) : base()
         {
             this.Id = id;
             this.Trades = trades;
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Trades

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
+**Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **DisplayName** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **IsRealTimeConnection** | **bool** |  | [optional] 
 **AllowsTradingThroughSnaptradeApi** | **bool?** |  | [optional] 
 **IsScrapingIntegration** | **bool** |  | [optional] 
-**DefaultCurrency** | **Guid** |  | [optional] 
-**BrokerageType** | [**BrokerageType**](BrokerageType.md) |  | [optional] 
+**DefaultCurrency** | **string** |  | [optional] 
+**BrokerageType** | **BrokerageType** |  | [optional] 
 **Exchanges** | **List&lt;Object&gt;** | List of exchange ID supported by brokerage | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

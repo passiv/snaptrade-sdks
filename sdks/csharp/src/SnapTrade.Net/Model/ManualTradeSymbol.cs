@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="localId">localId.</param>
         /// <param name="description">description.</param>
         /// <param name="symbol">symbol.</param>
-        public ManualTradeSymbol(Guid brokerageSymbolId = default(Guid), Guid universalSymbolId = default(Guid), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
+        public ManualTradeSymbol(string brokerageSymbolId = default(string), string universalSymbolId = default(string), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
         {
             this.BrokerageSymbolId = brokerageSymbolId;
             this.UniversalSymbolId = universalSymbolId;
@@ -56,13 +56,13 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets BrokerageSymbolId
         /// </summary>
         [DataMember(Name = "brokerage_symbol_id", EmitDefaultValue = false)]
-        public Guid BrokerageSymbolId { get; set; }
+        public string BrokerageSymbolId { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbolId
         /// </summary>
         [DataMember(Name = "universal_symbol_id", EmitDefaultValue = false)]
-        public Guid UniversalSymbolId { get; set; }
+        public string UniversalSymbolId { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency

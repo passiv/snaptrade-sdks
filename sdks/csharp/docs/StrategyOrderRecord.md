@@ -5,15 +5,15 @@ Strategy order record
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Strategy** | [**OptionStrategy**](OptionStrategy.md) |  | [optional] 
+**Strategy** | **OptionStrategy** |  | [optional] 
 **Status** | **string** |  | [optional] 
-**FilledQuantity** | **decimal** |  | [optional] 
-**OpenQuantity** | **decimal** |  | [optional] 
-**ClosedQuantity** | **decimal** |  | [optional] 
+**FilledQuantity** | **double** |  | [optional] 
+**OpenQuantity** | **double** |  | [optional] 
+**ClosedQuantity** | **double** |  | [optional] 
 **OrderType** | **string** |  | [optional] 
 **TimeInForce** | **string** |  | [optional] 
-**LimitPrice** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
-**ExecutionPrice** | **decimal?** | Trade Price if limit or stop limit order | [optional] 
+**LimitPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
+**ExecutionPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **TimePlaced** | **string** | Time | [optional] 
 **TimeUpdated** | **string** | Time | [optional] 
 

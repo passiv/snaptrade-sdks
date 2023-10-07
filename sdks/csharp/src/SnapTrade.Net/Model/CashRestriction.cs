@@ -66,7 +66,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="type">type.</param>
         /// <param name="amount">amount.</param>
-        public CashRestriction(Guid id = default(Guid), Guid account = default(Guid), Guid currency = default(Guid), TypeEnum? type = default(TypeEnum?), decimal amount = default(decimal)) : base()
+        public CashRestriction(string id = default(string), string account = default(string), string currency = default(string), TypeEnum? type = default(TypeEnum?), double amount = default(double)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -80,25 +80,25 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
         [DataMember(Name = "account", EmitDefaultValue = false)]
-        public Guid Account { get; set; }
+        public string Account { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public Guid Currency { get; set; }
+        public string Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Amount
         /// </summary>
         [DataMember(Name = "amount", EmitDefaultValue = false)]
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

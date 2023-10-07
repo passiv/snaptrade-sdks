@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="name">Name of Brokerage.</param>
         /// <param name="slug">Slug of Brokerage. It is usually the name of the brokerage in capital letters.</param>
-        public BrokerageAuthorizationTypeReadOnlyBrokerage(Guid id = default(Guid), string name = default(string), string slug = default(string)) : base()
+        public BrokerageAuthorizationTypeReadOnlyBrokerage(string id = default(string), string name = default(string), string slug = default(string)) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -50,7 +50,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Name of Brokerage

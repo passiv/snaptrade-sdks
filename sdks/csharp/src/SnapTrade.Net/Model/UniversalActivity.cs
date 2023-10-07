@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="description">description.</param>
         /// <param name="fee">fee.</param>
-        /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage.</param>
+        /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">institution.</param>
         /// <param name="optionType">If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string.</param>
         /// <param name="price">price.</param>
@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Model
         /// <param name="tradeDate">tradeDate.</param>
         /// <param name="type">Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT.</param>
         /// <param name="units">Usually but not necessarily an integer.</param>
-        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), decimal? amount = default(decimal?), Currency currency = default(Currency), string description = default(string), decimal fee = default(decimal), decimal? fxRate = default(decimal?), string institution = default(string), string optionType = default(string), decimal price = default(decimal), string settlementDate = default(string), string externalReferenceId = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), decimal units = default(decimal)) : base()
+        public UniversalActivity(string id = default(string), AccountSimple account = default(AccountSimple), double? amount = default(double?), Currency currency = default(Currency), string description = default(string), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string optionType = default(string), double price = default(double), string settlementDate = default(string), string externalReferenceId = default(string), Symbol symbol = default(Symbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string tradeDate = default(string), string type = default(string), double units = default(double)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -90,7 +90,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Amount
         /// </summary>
         [DataMember(Name = "amount", EmitDefaultValue = true)]
-        public decimal? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -108,14 +108,14 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Fee
         /// </summary>
         [DataMember(Name = "fee", EmitDefaultValue = false)]
-        public decimal Fee { get; set; }
+        public double Fee { get; set; }
 
         /// <summary>
-        /// The forex conversion rate involved in the transaction if provided by the brokerage
+        /// The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency)
         /// </summary>
-        /// <value>The forex conversion rate involved in the transaction if provided by the brokerage</value>
+        /// <value>The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency)</value>
         [DataMember(Name = "fx_rate", EmitDefaultValue = true)]
-        public decimal? FxRate { get; set; }
+        public double? FxRate { get; set; }
 
         /// <summary>
         /// Gets or Sets Institution
@@ -134,7 +134,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary>
         /// Gets or Sets SettlementDate
@@ -179,7 +179,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Usually but not necessarily an integer</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
-        public decimal Units { get; set; }
+        public double Units { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

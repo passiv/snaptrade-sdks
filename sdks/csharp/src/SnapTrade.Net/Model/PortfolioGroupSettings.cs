@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="notifyFrequency">notifyFrequency.</param>
         /// <param name="driftThreshold">driftThreshold.</param>
         /// <param name="preferredCurrency">preferredCurrency.</param>
-        public PortfolioGroupSettings(bool buyOnly = default(bool), bool cashOptimizer = default(bool), string notifyFrequency = default(string), decimal driftThreshold = default(decimal), Currency preferredCurrency = default(Currency)) : base()
+        public PortfolioGroupSettings(bool buyOnly = default(bool), bool cashOptimizer = default(bool), string notifyFrequency = default(string), double driftThreshold = default(double), Currency preferredCurrency = default(Currency)) : base()
         {
             this.BuyOnly = buyOnly;
             this.CashOptimizer = cashOptimizer;
@@ -72,7 +72,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets DriftThreshold
         /// </summary>
         [DataMember(Name = "driftThreshold", EmitDefaultValue = false)]
-        public decimal DriftThreshold { get; set; }
+        public double DriftThreshold { get; set; }
 
         /// <summary>
         /// Gets or Sets PreferredCurrency
@@ -196,14 +196,14 @@ namespace SnapTrade.Net.Model
         /// <returns>Validation Result</returns>
         public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
         {
-            // DriftThreshold (decimal) maximum
-            if (this.DriftThreshold > (decimal)100)
+            // DriftThreshold (double) maximum
+            if (this.DriftThreshold > (double)100)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DriftThreshold, must be a value less than or equal to 100.", new [] { "DriftThreshold" });
             }
 
-            // DriftThreshold (decimal) minimum
-            if (this.DriftThreshold < (decimal)0)
+            // DriftThreshold (double) minimum
+            if (this.DriftThreshold < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DriftThreshold, must be a value greater than or equal to 0.", new [] { "DriftThreshold" });
             }

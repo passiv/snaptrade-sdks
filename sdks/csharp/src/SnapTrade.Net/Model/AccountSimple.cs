@@ -39,7 +39,7 @@ namespace SnapTrade.Net.Model
         /// <param name="name">name.</param>
         /// <param name="number">number.</param>
         /// <param name="syncStatus">syncStatus.</param>
-        public AccountSimple(Guid id = default(Guid), string name = default(string), string number = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
+        public AccountSimple(string id = default(string), string name = default(string), string number = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
         {
             this.Id = id;
             this.Name = name;
@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name

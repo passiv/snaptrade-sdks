@@ -5,9 +5,9 @@ Target percentage of a certain asset
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **Guid** |  | [optional] 
-**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**Percent** | **decimal** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**Symbol** | **UniversalSymbol** |  | [optional] 
+**Percent** | **double** |  | [optional] 
 **IsSupported** | **bool** |  | [optional] 
 **IsExcluded** | **bool** |  | [optional] 
 **Meta** | **Dictionary&lt;string, Object&gt;** |  | [optional] 

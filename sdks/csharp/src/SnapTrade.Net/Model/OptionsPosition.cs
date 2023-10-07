@@ -42,7 +42,7 @@ namespace SnapTrade.Net.Model
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
         /// <param name="openPnl">openPnl.</param>
         /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
-        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), decimal? price = default(decimal?), decimal units = default(decimal), OptionsPositionCurrency currency = default(OptionsPositionCurrency), decimal? averagePurchasePrice = default(decimal?), decimal? openPnl = default(decimal?), decimal? fractionalUnits = default(decimal?)) : base()
+        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), double? price = default(double?), double units = default(double), OptionsPositionCurrency currency = default(OptionsPositionCurrency), double? averagePurchasePrice = default(double?), double? openPnl = default(double?), double? fractionalUnits = default(double?)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
@@ -65,13 +65,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Units
         /// </summary>
         [DataMember(Name = "units", EmitDefaultValue = false)]
-        public decimal Units { get; set; }
+        public double Units { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -84,20 +84,20 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Average purchase price for this position</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
-        public decimal? AveragePurchasePrice { get; set; }
+        public double? AveragePurchasePrice { get; set; }
 
         /// <summary>
         /// Gets or Sets OpenPnl
         /// </summary>
         [DataMember(Name = "open_pnl", EmitDefaultValue = true)]
-        public decimal? OpenPnl { get; set; }
+        public double? OpenPnl { get; set; }
 
         /// <summary>
         /// Deprecated, use the units field for both fractional and integer units going forward
         /// </summary>
         /// <value>Deprecated, use the units field for both fractional and integer units going forward</value>
         [DataMember(Name = "fractional_units", EmitDefaultValue = true)]
-        public decimal? FractionalUnits { get; set; }
+        public double? FractionalUnits { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

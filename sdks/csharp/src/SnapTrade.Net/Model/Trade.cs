@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Model
     public partial class Trade : IEquatable<Trade>, IValidatableObject
     {
         /// <summary>
-        /// Defines Action
+        /// Defines _Action
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ActionEnum
@@ -54,10 +54,10 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Action
+        /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ActionEnum? Action { get; set; }
+        public ActionEnum? _Action { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Trade" /> class.
         /// </summary>
@@ -69,13 +69,13 @@ namespace SnapTrade.Net.Model
         /// <param name="units">units.</param>
         /// <param name="price">price.</param>
         /// <param name="sequence">sequence.</param>
-        public Trade(Guid id = default(Guid), Account account = default(Account), BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), ActionEnum? action = default(ActionEnum?), int units = default(int), decimal price = default(decimal), int sequence = default(int)) : base()
+        public Trade(string id = default(string), Account account = default(Account), BrokerageSymbol symbol = default(BrokerageSymbol), UniversalSymbol universalSymbol = default(UniversalSymbol), ActionEnum? action = default(ActionEnum?), int units = default(int), double price = default(double), int sequence = default(int)) : base()
         {
             this.Id = id;
             this.Account = account;
             this.Symbol = symbol;
             this.UniversalSymbol = universalSymbol;
-            this.Action = action;
+            this._Action = action;
             this.Units = units;
             this.Price = price;
             this.Sequence = sequence;
@@ -86,7 +86,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Account
@@ -116,7 +116,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         /// <summary>
         /// Gets or Sets Sequence
@@ -143,7 +143,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  UniversalSymbol: ").Append(UniversalSymbol).Append("\n");
-            sb.Append("  Action: ").Append(Action).Append("\n");
+            sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Sequence: ").Append(Sequence).Append("\n");
@@ -204,8 +204,8 @@ namespace SnapTrade.Net.Model
                     this.UniversalSymbol.Equals(input.UniversalSymbol))
                 ) && base.Equals(input) && 
                 (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
+                    this._Action == input._Action ||
+                    this._Action.Equals(input._Action)
                 ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
@@ -247,7 +247,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.UniversalSymbol.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Action.GetHashCode();
+                hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.Units.GetHashCode();
                 hashCode = (hashCode * 59) + this.Price.GetHashCode();
                 hashCode = (hashCode * 59) + this.Sequence.GetHashCode();

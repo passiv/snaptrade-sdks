@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="src">src.</param>
         /// <param name="dst">dst.</param>
         /// <param name="exchangeRate">exchangeRate.</param>
-        public ExchangeRatePairs(Currency src = default(Currency), Currency dst = default(Currency), decimal exchangeRate = default(decimal)) : base()
+        public ExchangeRatePairs(Currency src = default(Currency), Currency dst = default(Currency), double exchangeRate = default(double)) : base()
         {
             this.Src = src;
             this.Dst = dst;
@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets ExchangeRate
         /// </summary>
         [DataMember(Name = "exchange_rate", EmitDefaultValue = false)]
-        public decimal ExchangeRate { get; set; }
+        public double ExchangeRate { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

@@ -35,43 +35,81 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalSymbol" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="symbol">symbol.</param>
-        /// <param name="rawSymbol">rawSymbol.</param>
-        /// <param name="description">description.</param>
-        /// <param name="currency">currency.</param>
-        /// <param name="exchange">exchange.</param>
-        /// <param name="type">type.</param>
-        /// <param name="currencies">currencies.</param>
-        public UniversalSymbol(Guid id = default(Guid), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>)) : base()
+        [JsonConstructorAttribute]
+        protected UniversalSymbol()
         {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UniversalSymbol" /> class.
+        /// </summary>
+        /// <param name="id">id (required).</param>
+        /// <param name="symbol">symbol (required).</param>
+        /// <param name="rawSymbol">rawSymbol (required).</param>
+        /// <param name="description">description.</param>
+        /// <param name="currency">currency (required).</param>
+        /// <param name="exchange">exchange.</param>
+        /// <param name="type">type (required).</param>
+        /// <param name="currencies">currencies (required).</param>
+        public UniversalSymbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>)) : base()
+        {
+            // to ensure "id" is required (not null)
+            if (id == null)
+            {
+                throw new ArgumentNullException("id is a required property for UniversalSymbol and cannot be null");
+            }
             this.Id = id;
+            // to ensure "symbol" is required (not null)
+            if (symbol == null)
+            {
+                throw new ArgumentNullException("symbol is a required property for UniversalSymbol and cannot be null");
+            }
             this.Symbol = symbol;
+            // to ensure "rawSymbol" is required (not null)
+            if (rawSymbol == null)
+            {
+                throw new ArgumentNullException("rawSymbol is a required property for UniversalSymbol and cannot be null");
+            }
             this.RawSymbol = rawSymbol;
-            this.Description = description;
+            // to ensure "currency" is required (not null)
+            if (currency == null)
+            {
+                throw new ArgumentNullException("currency is a required property for UniversalSymbol and cannot be null");
+            }
             this.Currency = currency;
-            this.Exchange = exchange;
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new ArgumentNullException("type is a required property for UniversalSymbol and cannot be null");
+            }
             this.Type = type;
+            // to ensure "currencies" is required (not null)
+            if (currencies == null)
+            {
+                throw new ArgumentNullException("currencies is a required property for UniversalSymbol and cannot be null");
+            }
             this.Currencies = currencies;
+            this.Description = description;
+            this.Exchange = exchange;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid Id { get; set; }
+        [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
         /// </summary>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
         public string Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets RawSymbol
         /// </summary>
-        [DataMember(Name = "raw_symbol", EmitDefaultValue = false)]
+        [DataMember(Name = "raw_symbol", IsRequired = true, EmitDefaultValue = true)]
         public string RawSymbol { get; set; }
 
         /// <summary>
@@ -83,7 +121,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = false)]
+        [DataMember(Name = "currency", IsRequired = true, EmitDefaultValue = true)]
         public Currency Currency { get; set; }
 
         /// <summary>
@@ -95,13 +133,13 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
+        [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
         public SecurityType Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Currencies
         /// </summary>
-        [DataMember(Name = "currencies", EmitDefaultValue = false)]
+        [DataMember(Name = "currencies", IsRequired = true, EmitDefaultValue = true)]
         public List<Currency> Currencies { get; set; }
 
         /// <summary>

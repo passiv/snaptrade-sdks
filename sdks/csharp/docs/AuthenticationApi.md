@@ -10,9 +10,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**LoginSnapTradeUser**](AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
 | [**RegisterSnapTradeUser**](AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
 
-<a name="deletesnaptradeuser"></a>
+
 # **DeleteSnapTradeUser**
-> DeleteUserResponse DeleteSnapTradeUser (string userId)
 
 Delete SnapTrade user
 
@@ -30,16 +29,14 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-
+            var userId = "userId_example";
+            
             try
             {
                 // Delete SnapTrade user
@@ -93,15 +90,6 @@ catch (ApiException e)
 
 [**DeleteUserResponse**](DeleteUserResponse.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -114,9 +102,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuserjwt"></a>
+
 # **GetUserJWT**
-> EncryptedResponse GetUserJWT (string userId, string userSecret)
 
 Generate encrypted JWT token
 
@@ -134,17 +121,15 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
             try
             {
                 // Generate encrypted JWT token
@@ -199,15 +184,6 @@ catch (ApiException e)
 
 [**EncryptedResponse**](EncryptedResponse.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -220,9 +196,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="listsnaptradeusers"></a>
+
 # **ListSnapTradeUsers**
-> List&lt;string&gt; ListSnapTradeUsers ()
 
 List SnapTrade users
 
@@ -240,15 +215,13 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-
+            
             try
             {
                 // List SnapTrade users
@@ -298,15 +271,6 @@ This endpoint does not need any parameter.
 
 **List<string>**
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -318,9 +282,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="loginsnaptradeuser"></a>
+
 # **LoginSnapTradeUser**
-> AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser (string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = null)
 
 Login user & generate connection link
 
@@ -338,18 +301,28 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var userId = "userId_example";  // string | 
-            var userSecret = "userSecret_example";  // string | 
-            var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(); // SnapTradeLoginUserRequestBody |  (optional) 
-
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var broker = "ALPACA";
+            var immediateRedirect = true;
+            var customRedirect = "https://snaptrade.com";
+            var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1";
+            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read;
+            
+            var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
+                broker,
+                immediateRedirect,
+                customRedirect,
+                reconnect,
+                connectionType
+            );
+            
             try
             {
                 // Login user & generate connection link
@@ -405,15 +378,6 @@ catch (ApiException e)
 
 [**AuthenticationLoginSnapTradeUser200Response**](AuthenticationLoginSnapTradeUser200Response.md)
 
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -426,9 +390,8 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="registersnaptradeuser"></a>
+
 # **RegisterSnapTradeUser**
-> UserIDandSecret RegisterSnapTradeUser (SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody)
 
 Create SnapTrade user
 
@@ -446,16 +409,20 @@ namespace Example
     {
         public static void Main()
         {
-
             Snaptrade client = new Snaptrade();
             // Configure custom BasePath if desired
             // client.SetBasePath("https://api.snaptrade.com/api/v1");
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-
-            var snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody(); // SnapTradeRegisterUserRequestBody | 
-
+            var userId = "snaptrade-user-123"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+            var rsaPublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="; // Open SSH RSA public key
+            
+            var snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody(
+                userId,
+                rsaPublicKey
+            );
+            
             try
             {
                 // Create SnapTrade user
@@ -508,15 +475,6 @@ catch (ApiException e)
 ### Return type
 
 [**UserIDandSecret**](UserIDandSecret.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
 
 
 ### HTTP response details
