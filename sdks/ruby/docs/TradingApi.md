@@ -31,11 +31,11 @@ brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Cancel open order in account
   result = SnapTrade::Trading.cancel_user_account_order(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    brokerage_order_id: brokerage_order_id,
-  )
+                                                           user_id: user_id,
+                                                           user_secret: user_secret,
+                                                           account_id: account_id,
+                                                           brokerage_order_id: brokerage_order_id,
+                                                         )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.cancel_user_account_order: #{e}"
@@ -55,11 +55,11 @@ brokerage_order_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Cancel open order in account
   data, status_code, headers, response = SnapTrade::Trading.cancel_user_account_order_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    brokerage_order_id: brokerage_order_id,
-  )
+                                                                                                        user_id: user_id,
+                                                                                                        user_secret: user_secret,
+                                                                                                        account_id: account_id,
+                                                                                                        brokerage_order_id: brokerage_order_id,
+                                                                                                      )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AccountOrderRecord
@@ -107,17 +107,17 @@ universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Check impact of trades on account.
   result = SnapTrade::Trading.get_order_impact(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    action: action,
-    order_type: order_type,
-    price: price,
-    stop: stop,
-    time_in_force: time_in_force,
-    units: units,
-    universal_symbol_id: universal_symbol_id,
-  )
+                                                  user_id: user_id,
+                                                  user_secret: user_secret,
+                                                  account_id: account_id,
+                                                  action: action,
+                                                  order_type: order_type,
+                                                  price: price,
+                                                  stop: stop,
+                                                  time_in_force: time_in_force,
+                                                  units: units,
+                                                  universal_symbol_id: universal_symbol_id,
+                                                )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.get_order_impact: #{e}"
@@ -143,17 +143,17 @@ universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Check impact of trades on account.
   data, status_code, headers, response = SnapTrade::Trading.get_order_impact_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    action: action,
-    order_type: order_type,
-    price: price,
-    stop: stop,
-    time_in_force: time_in_force,
-    units: units,
-    universal_symbol_id: universal_symbol_id,
-  )
+                                                                                               user_id: user_id,
+                                                                                               user_secret: user_secret,
+                                                                                               account_id: account_id,
+                                                                                               action: action,
+                                                                                               order_type: order_type,
+                                                                                               price: price,
+                                                                                               stop: stop,
+                                                                                               time_in_force: time_in_force,
+                                                                                               units: units,
+                                                                                               universal_symbol_id: universal_symbol_id,
+                                                                                             )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => ManualTradeAndImpact
@@ -195,12 +195,12 @@ use_ticker = True
 begin
   # Get symbol quotes
   result = SnapTrade::Trading.get_user_account_quotes(
-    user_id: user_id,
-    user_secret: user_secret,
-    symbols: symbols,
-    account_id: account_id,
-    use_ticker: use_ticker,
-  )
+                                                         user_id: user_id,
+                                                         user_secret: user_secret,
+                                                         symbols: symbols,
+                                                         account_id: account_id,
+                                                         use_ticker: use_ticker,
+                                                       )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.get_user_account_quotes: #{e}"
@@ -221,12 +221,12 @@ use_ticker = True
 begin
   # Get symbol quotes
   data, status_code, headers, response = SnapTrade::Trading.get_user_account_quotes_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    symbols: symbols,
-    account_id: account_id,
-    use_ticker: use_ticker,
-  )
+                                                                                                      user_id: user_id,
+                                                                                                      user_secret: user_secret,
+                                                                                                      symbols: symbols,
+                                                                                                      account_id: account_id,
+                                                                                                      use_ticker: use_ticker,
+                                                                                                    )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<SymbolsQuotesInner>
@@ -275,17 +275,17 @@ universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Place a trade with NO validation.
   result = SnapTrade::Trading.place_force_order(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    action: action,
-    order_type: order_type,
-    price: price,
-    stop: stop,
-    time_in_force: time_in_force,
-    units: units,
-    universal_symbol_id: universal_symbol_id,
-  )
+                                                   user_id: user_id,
+                                                   user_secret: user_secret,
+                                                   account_id: account_id,
+                                                   action: action,
+                                                   order_type: order_type,
+                                                   price: price,
+                                                   stop: stop,
+                                                   time_in_force: time_in_force,
+                                                   units: units,
+                                                   universal_symbol_id: universal_symbol_id,
+                                                 )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.place_force_order: #{e}"
@@ -311,17 +311,17 @@ universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 begin
   # Place a trade with NO validation.
   data, status_code, headers, response = SnapTrade::Trading.place_force_order_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    action: action,
-    order_type: order_type,
-    price: price,
-    stop: stop,
-    time_in_force: time_in_force,
-    units: units,
-    universal_symbol_id: universal_symbol_id,
-  )
+                                                                                                user_id: user_id,
+                                                                                                user_secret: user_secret,
+                                                                                                account_id: account_id,
+                                                                                                action: action,
+                                                                                                order_type: order_type,
+                                                                                                price: price,
+                                                                                                stop: stop,
+                                                                                                time_in_force: time_in_force,
+                                                                                                units: units,
+                                                                                                universal_symbol_id: universal_symbol_id,
+                                                                                              )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AccountOrderRecord
@@ -362,11 +362,11 @@ second_trade_id = None
 begin
   # Place a OCO (One Cancels Other) order
   result = SnapTrade::Trading.place_oco_order(
-    user_id: user_id,
-    user_secret: user_secret,
-    first_trade_id: first_trade_id,
-    second_trade_id: second_trade_id,
-  )
+                                                 user_id: user_id,
+                                                 user_secret: user_secret,
+                                                 first_trade_id: first_trade_id,
+                                                 second_trade_id: second_trade_id,
+                                               )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.place_oco_order: #{e}"
@@ -386,11 +386,11 @@ second_trade_id = None
 begin
   # Place a OCO (One Cancels Other) order
   data, status_code, headers, response = SnapTrade::Trading.place_oco_order_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    first_trade_id: first_trade_id,
-    second_trade_id: second_trade_id,
-  )
+                                                                                              user_id: user_id,
+                                                                                              user_secret: user_secret,
+                                                                                              first_trade_id: first_trade_id,
+                                                                                              second_trade_id: second_trade_id,
+                                                                                            )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AccountOrderRecord
@@ -430,10 +430,10 @@ user_secret = "USERSECRET123"
 begin
   # Place order
   result = SnapTrade::Trading.place_order(
-    trade_id: trade_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                             trade_id: trade_id,
+                                             user_id: user_id,
+                                             user_secret: user_secret,
+                                           )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::Trading.place_order: #{e}"
@@ -452,10 +452,10 @@ user_secret = "USERSECRET123"
 begin
   # Place order
   data, status_code, headers, response = SnapTrade::Trading.place_order_with_http_info(
-    trade_id: trade_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                          trade_id: trade_id,
+                                                                                          user_id: user_id,
+                                                                                          user_secret: user_secret,
+                                                                                        )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AccountOrderRecord

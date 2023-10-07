@@ -27,10 +27,10 @@ brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 begin
   # List all accounts for the user, plus balances, positions, and orders for each account.
   result = SnapTrade::AccountInformation.get_all_user_holdings(
-    user_id: user_id,
-    user_secret: user_secret,
-    brokerage_authorizations: brokerage_authorizations,
-  )
+                                                                  user_id: user_id,
+                                                                  user_secret: user_secret,
+                                                                  brokerage_authorizations: brokerage_authorizations,
+                                                                )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_all_user_holdings: #{e}"

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **symbol** | **UniversalSymbol** |  | [optional] |
 
 ## Example
 

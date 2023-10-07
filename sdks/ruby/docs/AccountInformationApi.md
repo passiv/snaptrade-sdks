@@ -32,10 +32,10 @@ brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 begin
   # List all accounts for the user, plus balances, positions, and orders for each account.
   result = SnapTrade::AccountInformation.get_all_user_holdings(
-    user_id: user_id,
-    user_secret: user_secret,
-    brokerage_authorizations: brokerage_authorizations,
-  )
+                                                                  user_id: user_id,
+                                                                  user_secret: user_secret,
+                                                                  brokerage_authorizations: brokerage_authorizations,
+                                                                )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_all_user_holdings: #{e}"
@@ -54,10 +54,10 @@ brokerage_authorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"
 begin
   # List all accounts for the user, plus balances, positions, and orders for each account.
   data, status_code, headers, response = SnapTrade::AccountInformation.get_all_user_holdings_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    brokerage_authorizations: brokerage_authorizations,
-  )
+                                                                                                               user_id: user_id,
+                                                                                                               user_secret: user_secret,
+                                                                                                               brokerage_authorizations: brokerage_authorizations,
+                                                                                                             )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<AccountHoldings>
@@ -97,10 +97,10 @@ account_id = "accountId_example"
 begin
   # List account balances
   result = SnapTrade::AccountInformation.get_user_account_balance(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                     user_id: user_id,
+                                                                     user_secret: user_secret,
+                                                                     account_id: account_id,
+                                                                   )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_account_balance: #{e}"
@@ -119,10 +119,10 @@ account_id = "accountId_example"
 begin
   # List account balances
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_balance_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                                  user_id: user_id,
+                                                                                                                  user_secret: user_secret,
+                                                                                                                  account_id: account_id,
+                                                                                                                )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<Balance>
@@ -162,10 +162,10 @@ account_id = "accountId_example"
 begin
   # Return details of a specific investment account
   result = SnapTrade::AccountInformation.get_user_account_details(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                     user_id: user_id,
+                                                                     user_secret: user_secret,
+                                                                     account_id: account_id,
+                                                                   )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_account_details: #{e}"
@@ -184,10 +184,10 @@ account_id = "accountId_example"
 begin
   # Return details of a specific investment account
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_details_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                                  user_id: user_id,
+                                                                                                                  user_secret: user_secret,
+                                                                                                                  account_id: account_id,
+                                                                                                                )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Account
@@ -228,11 +228,11 @@ state = "all"
 begin
   # Get history of orders placed in account
   result = SnapTrade::AccountInformation.get_user_account_orders(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    state: state,
-  )
+                                                                    user_id: user_id,
+                                                                    user_secret: user_secret,
+                                                                    account_id: account_id,
+                                                                    state: state,
+                                                                  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_account_orders: #{e}"
@@ -252,11 +252,11 @@ state = "all"
 begin
   # Get history of orders placed in account
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_orders_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-    state: state,
-  )
+                                                                                                                 user_id: user_id,
+                                                                                                                 user_secret: user_secret,
+                                                                                                                 account_id: account_id,
+                                                                                                                 state: state,
+                                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<AccountOrderRecord>
@@ -297,10 +297,10 @@ account_id = "accountId_example"
 begin
   # List account positions
   result = SnapTrade::AccountInformation.get_user_account_positions(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                       user_id: user_id,
+                                                                       user_secret: user_secret,
+                                                                       account_id: account_id,
+                                                                     )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_account_positions: #{e}"
@@ -319,10 +319,10 @@ account_id = "accountId_example"
 begin
   # List account positions
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_positions_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                                    user_id: user_id,
+                                                                                                                    user_secret: user_secret,
+                                                                                                                    account_id: account_id,
+                                                                                                                  )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<Position>
@@ -362,10 +362,10 @@ user_secret = "USERSECRET123"
 begin
   # List balances, positions and orders for the specified account.
   result = SnapTrade::AccountInformation.get_user_holdings(
-    account_id: account_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                              account_id: account_id,
+                                                              user_id: user_id,
+                                                              user_secret: user_secret,
+                                                            )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.get_user_holdings: #{e}"
@@ -384,10 +384,10 @@ user_secret = "USERSECRET123"
 begin
   # List balances, positions and orders for the specified account.
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_holdings_with_http_info(
-    account_id: account_id,
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                           account_id: account_id,
+                                                                                                           user_id: user_id,
+                                                                                                           user_secret: user_secret,
+                                                                                                         )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => AccountHoldingsAccount
@@ -426,9 +426,9 @@ user_secret = "USERSECRET123"
 begin
   # List accounts
   result = SnapTrade::AccountInformation.list_user_accounts(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                               user_id: user_id,
+                                                               user_secret: user_secret,
+                                                             )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.list_user_accounts: #{e}"
@@ -446,9 +446,9 @@ user_secret = "USERSECRET123"
 begin
   # List accounts
   data, status_code, headers, response = SnapTrade::AccountInformation.list_user_accounts_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                            user_id: user_id,
+                                                                                                            user_secret: user_secret,
+                                                                                                          )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<Account>
@@ -487,10 +487,10 @@ account_id = "accountId_example"
 begin
   # Update details of an investment account
   result = SnapTrade::AccountInformation.update_user_account(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                user_id: user_id,
+                                                                user_secret: user_secret,
+                                                                account_id: account_id,
+                                                              )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::AccountInformation.update_user_account: #{e}"
@@ -509,10 +509,10 @@ account_id = "accountId_example"
 begin
   # Update details of an investment account
   data, status_code, headers, response = SnapTrade::AccountInformation.update_user_account_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-    account_id: account_id,
-  )
+                                                                                                             user_id: user_id,
+                                                                                                             user_secret: user_secret,
+                                                                                                             account_id: account_id,
+                                                                                                           )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<Account>

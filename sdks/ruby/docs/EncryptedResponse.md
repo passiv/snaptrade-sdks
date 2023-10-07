@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **encrypted_shared_key** | **String** |  | [optional] |
-| **encrypted_message_data** | [**EncryptedResponseEncryptedMessageData**](EncryptedResponseEncryptedMessageData.md) |  | [optional] |
+| **encrypted_message_data** | **EncryptedResponseEncryptedMessageData** |  | [optional] |
 
 ## Example
 

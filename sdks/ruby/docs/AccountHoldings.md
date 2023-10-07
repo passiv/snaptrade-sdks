@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account** | [**SnapTradeHoldingsAccount**](SnapTradeHoldingsAccount.md) |  | [optional] |
+| **account** | **SnapTradeHoldingsAccount** |  | [optional] |
 | **balances** | [**Array&lt;Balance&gt;**](Balance.md) |  | [optional] |
 | **positions** | [**Array&lt;Position&gt;**](Position.md) |  | [optional] |
-| **total_value** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  | [optional] |
+| **total_value** | **SnapTradeHoldingsTotalValue** |  | [optional] |
 
 ## Example
 

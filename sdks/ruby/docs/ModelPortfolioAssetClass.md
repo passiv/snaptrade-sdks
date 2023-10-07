@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **model_asset_class** | [**ModelAssetClass**](ModelAssetClass.md) |  | [optional] |
+| **model_asset_class** | **ModelAssetClass** |  | [optional] |
 | **percent** | **Integer** |  | [optional] |
 
 ## Example

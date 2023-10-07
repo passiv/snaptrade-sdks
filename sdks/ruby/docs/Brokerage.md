@@ -20,7 +20,7 @@
 | **allows_trading_through_snaptrade_api** | **Boolean** |  | [optional] |
 | **is_scraping_integration** | **Boolean** |  | [optional] |
 | **default_currency** | **String** |  | [optional] |
-| **brokerage_type** | [**BrokerageType**](BrokerageType.md) |  | [optional] |
+| **brokerage_type** | **BrokerageType** |  | [optional] |
 | **exchanges** | **Array&lt;Object&gt;** | List of exchange ID supported by brokerage | [optional] |
 
 ## Example

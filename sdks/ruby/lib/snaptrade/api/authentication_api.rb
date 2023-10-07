@@ -22,7 +22,6 @@ module SnapTrade
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user(user_id:, extra: {})
-
       data, _status_code, _headers = delete_snap_trade_user_with_http_info_impl(user_id, extra)
       data
     end
@@ -31,7 +30,6 @@ module SnapTrade
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user_with_http_info(user_id:, extra: {})
-
       delete_snap_trade_user_with_http_info_impl(user_id, extra)
     end
 
@@ -103,7 +101,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_jwt(user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = get_user_jwt_with_http_info_impl(user_id, user_secret, extra)
       data
     end
@@ -113,7 +110,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_jwt_with_http_info(user_id:, user_secret:, extra: {})
-
       get_user_jwt_with_http_info_impl(user_id, user_secret, extra)
     end
 
@@ -190,7 +186,6 @@ module SnapTrade
     # List SnapTrade users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
-
       data, _status_code, _headers = list_snap_trade_users_with_http_info_impl(extra)
       data
     end
@@ -198,7 +193,6 @@ module SnapTrade
     # List SnapTrade users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
-
       list_snap_trade_users_with_http_info_impl(extra)
     end
 
@@ -276,7 +270,6 @@ module SnapTrade
       _body[:reconnect] = reconnect if reconnect != SENTINEL
       _body[:connectionType] = connection_type if connection_type != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
-
       data, _status_code, _headers = login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
       data
     end
@@ -299,7 +292,6 @@ module SnapTrade
       _body[:reconnect] = reconnect if reconnect != SENTINEL
       _body[:connectionType] = connection_type if connection_type != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
-
       login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
     end
 
@@ -390,7 +382,6 @@ module SnapTrade
       _body[:userId] = user_id if user_id != SENTINEL
       _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL
       snap_trade_register_user_request_body = _body
-
       data, _status_code, _headers = register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
       data
     end
@@ -405,7 +396,6 @@ module SnapTrade
       _body[:userId] = user_id if user_id != SENTINEL
       _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL
       snap_trade_register_user_request_body = _body
-
       register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
     end
 

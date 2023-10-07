@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **trade** | [**ManualTrade**](ManualTrade.md) |  | [optional] |
+| **trade** | **ManualTrade** |  | [optional] |
 | **trade_impacts** | [**Array&lt;ManualTrade&gt;**](ManualTrade.md) |  | [optional] |
-| **combined_remaining_balance** | [**ManualTradeBalance**](ManualTradeBalance.md) |  | [optional] |
+| **combined_remaining_balance** | **ManualTradeBalance** |  | [optional] |
 
 ## Example
 

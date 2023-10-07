@@ -6,9 +6,9 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Options information | [optional] |
 | **symbol** | **String** |  | [optional] |
-| **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] |
+| **option_symbol** | **OptionsSymbol** |  | [optional] |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **currency** | **Currency** |  | [optional] |
 | **average_purchase_price** | **Float** | Average purchase price for this position | [optional] |
 
 ## Example

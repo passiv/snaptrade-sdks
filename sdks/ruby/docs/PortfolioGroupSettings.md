@@ -8,7 +8,7 @@
 | **cash_optimizer** | **Boolean** |  | [optional] |
 | **notify_frequency** | **String** |  | [optional] |
 | **drift_threshold** | **Float** |  | [optional] |
-| **preferred_currency** | [**Currency**](Currency.md) |  | [optional] |
+| **preferred_currency** | **Currency** |  | [optional] |
 
 ## Example
 

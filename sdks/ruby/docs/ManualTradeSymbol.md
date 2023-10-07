@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **brokerage_symbol_id** | **String** |  | [optional] |
 | **universal_symbol_id** | **String** |  | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **currency** | **Currency** |  | [optional] |
 | **local_id** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
 | **symbol** | **String** |  | [optional] |

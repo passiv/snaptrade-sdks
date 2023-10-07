@@ -22,7 +22,6 @@ module SnapTrade
     # @param currency_pair [String] A currency pair based on currency code for example, {CAD-USD}
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_currency_exchange_rate_pair(currency_pair:, extra: {})
-
       data, _status_code, _headers = get_currency_exchange_rate_pair_with_http_info_impl(currency_pair, extra)
       data
     end
@@ -31,7 +30,6 @@ module SnapTrade
     # @param currency_pair [String] A currency pair based on currency code for example, {CAD-USD}
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_currency_exchange_rate_pair_with_http_info(currency_pair:, extra: {})
-
       get_currency_exchange_rate_pair_with_http_info_impl(currency_pair, extra)
     end
 
@@ -100,7 +98,6 @@ module SnapTrade
     # Get metadata related to Snaptrade partner
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info(extra: {})
-
       data, _status_code, _headers = get_partner_info_with_http_info_impl(extra)
       data
     end
@@ -108,7 +105,6 @@ module SnapTrade
     # Get metadata related to Snaptrade partner
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info_with_http_info(extra: {})
-
       get_partner_info_with_http_info_impl(extra)
     end
 
@@ -171,7 +167,6 @@ module SnapTrade
     # List of all security types.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types(extra: {})
-
       data, _status_code, _headers = get_security_types_with_http_info_impl(extra)
       data
     end
@@ -179,7 +174,6 @@ module SnapTrade
     # List of all security types.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types_with_http_info(extra: {})
-
       get_security_types_with_http_info_impl(extra)
     end
 
@@ -242,7 +236,6 @@ module SnapTrade
     # List exchanges
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_stock_exchanges(extra: {})
-
       data, _status_code, _headers = get_stock_exchanges_with_http_info_impl(extra)
       data
     end
@@ -250,7 +243,6 @@ module SnapTrade
     # List exchanges
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_stock_exchanges_with_http_info(extra: {})
-
       get_stock_exchanges_with_http_info_impl(extra)
     end
 
@@ -318,7 +310,6 @@ module SnapTrade
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
-
       data, _status_code, _headers = get_symbols_with_http_info_impl(extra)
       data
     end
@@ -331,7 +322,6 @@ module SnapTrade
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
-
       get_symbols_with_http_info_impl(extra)
     end
 
@@ -404,7 +394,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_by_ticker(ticker:, symbol_id: SENTINEL, extra: {})
       extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
-
       data, _status_code, _headers = get_symbols_by_ticker_with_http_info_impl(ticker, extra)
       data
     end
@@ -415,7 +404,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_by_ticker_with_http_info(ticker:, symbol_id: SENTINEL, extra: {})
       extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
-
       get_symbols_by_ticker_with_http_info_impl(ticker, extra)
     end
 
@@ -489,7 +477,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerage_authorization_type(brokerage: SENTINEL, extra: {})
       extra[:brokerage] = brokerage if brokerage != SENTINEL
-
       data, _status_code, _headers = list_all_brokerage_authorization_type_with_http_info_impl(extra)
       data
     end
@@ -499,7 +486,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerage_authorization_type_with_http_info(brokerage: SENTINEL, extra: {})
       extra[:brokerage] = brokerage if brokerage != SENTINEL
-
       list_all_brokerage_authorization_type_with_http_info_impl(extra)
     end
 
@@ -565,7 +551,6 @@ module SnapTrade
     # List brokerages
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerages(extra: {})
-
       data, _status_code, _headers = list_all_brokerages_with_http_info_impl(extra)
       data
     end
@@ -573,7 +558,6 @@ module SnapTrade
     # List brokerages
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_brokerages_with_http_info(extra: {})
-
       list_all_brokerages_with_http_info_impl(extra)
     end
 
@@ -636,7 +620,6 @@ module SnapTrade
     # List currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies(extra: {})
-
       data, _status_code, _headers = list_all_currencies_with_http_info_impl(extra)
       data
     end
@@ -644,7 +627,6 @@ module SnapTrade
     # List currencies
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_with_http_info(extra: {})
-
       list_all_currencies_with_http_info_impl(extra)
     end
 
@@ -707,7 +689,6 @@ module SnapTrade
     # List currency exchange rates
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_rates(extra: {})
-
       data, _status_code, _headers = list_all_currencies_rates_with_http_info_impl(extra)
       data
     end
@@ -715,7 +696,6 @@ module SnapTrade
     # List currency exchange rates
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_all_currencies_rates_with_http_info(extra: {})
-
       list_all_currencies_rates_with_http_info_impl(extra)
     end
 
@@ -786,7 +766,6 @@ module SnapTrade
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
-
       data, _status_code, _headers = symbol_search_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
@@ -802,7 +781,6 @@ module SnapTrade
       _body = {}
       _body[:substring] = substring if substring != SENTINEL
       extra[:symbol_query] = _body if !_body.empty?
-
       symbol_search_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 

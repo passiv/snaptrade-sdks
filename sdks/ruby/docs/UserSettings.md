@@ -13,7 +13,7 @@
 | **demo** | **Boolean** |  | [optional] |
 | **api_enabled** | **Boolean** |  | [optional] |
 | **drift_threshold** | **Float** |  | [optional] |
-| **preferred_currency** | [**Currency**](Currency.md) |  | [optional] |
+| **preferred_currency** | **Currency** |  | [optional] |
 
 ## Example
 

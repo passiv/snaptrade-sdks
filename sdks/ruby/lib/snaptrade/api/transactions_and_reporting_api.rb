@@ -34,7 +34,6 @@ module SnapTrade
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
       extra[:type] = type if type != SENTINEL
-
       data, _status_code, _headers = get_activities_with_http_info_impl(user_id, user_secret, extra)
       data
     end
@@ -55,7 +54,6 @@ module SnapTrade
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
       extra[:type] = type if type != SENTINEL
-
       get_activities_with_http_info_impl(user_id, user_secret, extra)
     end
 
@@ -160,7 +158,6 @@ module SnapTrade
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:detailed] = detailed if detailed != SENTINEL
       extra[:frequency] = frequency if frequency != SENTINEL
-
       data, _status_code, _headers = get_reporting_custom_range_with_http_info_impl(start_date, end_date, user_id, user_secret, extra)
       data
     end
@@ -179,7 +176,6 @@ module SnapTrade
       extra[:accounts] = accounts if accounts != SENTINEL
       extra[:detailed] = detailed if detailed != SENTINEL
       extra[:frequency] = frequency if frequency != SENTINEL
-
       get_reporting_custom_range_with_http_info_impl(start_date, end_date, user_id, user_secret, extra)
     end
 

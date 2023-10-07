@@ -7,8 +7,8 @@
 | **brokerage_order_id** | **String** | Order id returned by brokerage | [optional] |
 | **status** | [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] |
 | **symbol** | **String** |  | [optional] |
-| **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
-| **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] |
+| **universal_symbol** | **UniversalSymbol** |  | [optional] |
+| **option_symbol** | **OptionsSymbol** |  | [optional] |
 | **action** | [**Action**](Action.md) |  | [optional] |
 | **total_quantity** | **Float** | Trade Units | [optional] |
 | **open_quantity** | **Float** | Trade Units | [optional] |

@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account** | [**Account**](Account.md) |  | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **account** | **Account** |  | [optional] |
+| **currency** | **Currency** |  | [optional] |
 | **cash** | **Float** | Cash | [optional] |
 
 ## Example

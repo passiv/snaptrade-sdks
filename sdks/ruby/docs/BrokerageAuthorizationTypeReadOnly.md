@@ -7,7 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **type** | [**BrokerageAuthorizationTypeReadOnlyType**](BrokerageAuthorizationTypeReadOnlyType.md) |  | [optional] |
 | **auth_type** | [**AuthType**](AuthType.md) |  | [optional] |
-| **brokerage** | [**BrokerageAuthorizationTypeReadOnlyBrokerage**](BrokerageAuthorizationTypeReadOnlyBrokerage.md) |  | [optional] |
+| **brokerage** | **BrokerageAuthorizationTypeReadOnlyBrokerage** |  | [optional] |
 
 ## Example
 

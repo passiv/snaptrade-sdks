@@ -24,9 +24,9 @@ user_secret = "USERSECRET123"
 begin
   # Retrieve error logs on behalf of your SnapTrade users
   result = SnapTrade::ErrorLogs.list_user_errors(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                    user_id: user_id,
+                                                    user_secret: user_secret,
+                                                  )
   p result
 rescue SnapTrade::ApiError => e
   puts "Exception when calling SnapTrade::ErrorLogs.list_user_errors: #{e}"
@@ -44,9 +44,9 @@ user_secret = "USERSECRET123"
 begin
   # Retrieve error logs on behalf of your SnapTrade users
   data, status_code, headers, response = SnapTrade::ErrorLogs.list_user_errors_with_http_info(
-    user_id: user_id,
-    user_secret: user_secret,
-  )
+                                                                                                 user_id: user_id,
+                                                                                                 user_secret: user_secret,
+                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Array<UserErrorLog>

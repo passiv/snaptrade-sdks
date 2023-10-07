@@ -7,9 +7,9 @@
 | **id** | **String** |  | [optional] |
 | **symbol** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
-| **currency** | [**Currency**](Currency.md) |  | [optional] |
-| **exchange** | [**USExchange**](USExchange.md) |  | [optional] |
-| **type** | [**SecurityType**](SecurityType.md) |  | [optional] |
+| **currency** | **Currency** |  | [optional] |
+| **exchange** | **USExchange** |  | [optional] |
+| **type** | **SecurityType** |  | [optional] |
 | **currencies** | [**Array&lt;Currency&gt;**](Currency.md) |  | [optional] |
 
 ## Example

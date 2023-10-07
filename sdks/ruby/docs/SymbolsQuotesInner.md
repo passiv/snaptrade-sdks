@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **symbol** | **UniversalSymbol** |  | [optional] |
 | **bid_price** | **Float** |  | [optional] |
 | **ask_price** | **Float** |  | [optional] |
 | **last_trade_price** | **Float** |  | [optional] |

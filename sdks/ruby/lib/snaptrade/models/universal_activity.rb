@@ -26,7 +26,7 @@ module SnapTrade
 
     attr_accessor :fee
 
-    # The forex conversion rate involved in the transaction if provided by the brokerage
+    # The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
     attr_accessor :fx_rate
 
     attr_accessor :institution

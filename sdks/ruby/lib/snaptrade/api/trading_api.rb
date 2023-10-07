@@ -29,7 +29,6 @@ module SnapTrade
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       trading_cancel_user_account_order_request = _body
-
       data, _status_code, _headers = cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
       data
     end
@@ -45,7 +44,6 @@ module SnapTrade
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       trading_cancel_user_account_order_request = _body
-
       cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
     end
 
@@ -160,7 +158,6 @@ module SnapTrade
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       manual_trade_form = _body
-
       data, _status_code, _headers = get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
     end
@@ -189,7 +186,6 @@ module SnapTrade
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       manual_trade_form = _body
-
       get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
@@ -283,7 +279,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_quotes(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
-
       data, _status_code, _headers = get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
       data
     end
@@ -297,7 +292,6 @@ module SnapTrade
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_quotes_with_http_info(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
-
       get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
     end
 
@@ -411,7 +405,6 @@ module SnapTrade
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       manual_trade_form = _body
-
       data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
     end
@@ -440,7 +433,6 @@ module SnapTrade
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       manual_trade_form = _body
-
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
@@ -537,7 +529,6 @@ module SnapTrade
       _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
       _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
       trading_place_oco_order_request = _body
-
       data, _status_code, _headers = place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
       data
     end
@@ -554,7 +545,6 @@ module SnapTrade
       _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
       _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
       trading_place_oco_order_request = _body
-
       place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
     end
 
@@ -645,7 +635,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_order(trade_id:, user_id:, user_secret:, extra: {})
-
       data, _status_code, _headers = place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
       data
     end
@@ -656,7 +645,6 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_order_with_http_info(trade_id:, user_id:, user_secret:, extra: {})
-
       place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
     end
 

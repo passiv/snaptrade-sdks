@@ -33,7 +33,6 @@ module SnapTrade
       _body[:legs] = legs if legs != SENTINEL
       _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
       options_get_option_strategy_request = _body
-
       data, _status_code, _headers = get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
       data
     end
@@ -53,7 +52,6 @@ module SnapTrade
       _body[:legs] = legs if legs != SENTINEL
       _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
       options_get_option_strategy_request = _body
-
       get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
     end
 
@@ -151,7 +149,6 @@ module SnapTrade
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {})
-
       data, _status_code, _headers = get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
       data
     end
@@ -163,7 +160,6 @@ module SnapTrade
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
-
       get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
     end
 
@@ -257,7 +253,6 @@ module SnapTrade
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
-
       data, _status_code, _headers = get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
       data
     end
@@ -269,7 +264,6 @@ module SnapTrade
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
-
       get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
     end
 
@@ -361,7 +355,6 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_option_holdings(user_id:, user_secret:, account_id:, extra: {})
-
       data, _status_code, _headers = list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
@@ -372,7 +365,6 @@ module SnapTrade
     # @param account_id [String] The ID of the account get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_option_holdings_with_http_info(user_id:, user_secret:, account_id:, extra: {})
-
       list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
@@ -468,7 +460,6 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       options_place_option_strategy_request = _body
-
       data, _status_code, _headers = place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
       data
     end
@@ -489,7 +480,6 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       options_place_option_strategy_request = _body
-
       place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
     end
 
