@@ -57,7 +57,7 @@ portal:
       post: true
     /snapTrade/encryptedJWT:
       get: true
-    /snapTrade/sessionEvents:
+    /sessionEvents:
       get: true
   hideSecurity:
     - name: PartnerSignature
