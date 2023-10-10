@@ -1,15 +1,16 @@
 <div align="center">
 
+[![Visit SnapTrade](https://raw.githubusercontent.com/passiv/snaptrade-sdks/HEAD/sdks/python/header.png)](https://snaptrade.com)
+
 # SnapTrade
 
-[![Visit SnapTrade](./header.png)](https://snaptrade.com)
+Connect brokerage accounts to your app for live positions and trading
+
 
 [![PyPI](https://img.shields.io/badge/PyPI-v10.34.0-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
-
-Connect brokerage accounts to your app for live positions and trading
 
 ## Requirements
 

@@ -2,19 +2,19 @@ import typing_extensions
 
 from snaptrade_client.paths import PathValues
 from snaptrade_client.apis.paths.root import Root
-from snaptrade_client.apis.paths.snap_trade_list_users import SnapTradeListUsers
 from snaptrade_client.apis.paths.snap_trade_register_user import SnapTradeRegisterUser
+from snaptrade_client.apis.paths.snap_trade_list_users import SnapTradeListUsers
 from snaptrade_client.apis.paths.snap_trade_delete_user import SnapTradeDeleteUser
 from snaptrade_client.apis.paths.snap_trade_login import SnapTradeLogin
 from snaptrade_client.apis.paths.snap_trade_encrypted_jwt import SnapTradeEncryptedJWT
-from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
+from snaptrade_client.apis.paths.accounts import Accounts
 from snaptrade_client.apis.paths.holdings import Holdings
 from snaptrade_client.apis.paths.accounts_account_id_holdings import AccountsAccountIdHoldings
-from snaptrade_client.apis.paths.accounts import Accounts
 from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
 from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
+from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
@@ -47,19 +47,19 @@ PathToApi = typing_extensions.TypedDict(
     'PathToApi',
     {
         PathValues._: Root,
-        PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_REGISTER_USER: SnapTradeRegisterUser,
+        PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
         PathValues.SNAP_TRADE_LOGIN: SnapTradeLogin,
         PathValues.SNAP_TRADE_ENCRYPTED_JWT: SnapTradeEncryptedJWT,
-        PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
+        PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
-        PathValues.ACCOUNTS: Accounts,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
@@ -93,19 +93,19 @@ PathToApi = typing_extensions.TypedDict(
 path_to_api = PathToApi(
     {
         PathValues._: Root,
-        PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_REGISTER_USER: SnapTradeRegisterUser,
+        PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
         PathValues.SNAP_TRADE_LOGIN: SnapTradeLogin,
         PathValues.SNAP_TRADE_ENCRYPTED_JWT: SnapTradeEncryptedJWT,
-        PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
+        PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
-        PathValues.ACCOUNTS: Accounts,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,

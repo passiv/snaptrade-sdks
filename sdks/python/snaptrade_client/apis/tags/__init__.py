@@ -7,10 +7,10 @@ import enum
 
 class TagValues(str, enum.Enum):
     API_STATUS = "API Status"
-    API_DISCLAIMER = "API Disclaimer"
     AUTHENTICATION = "Authentication"
-    CONNECTIONS = "Connections"
     ACCOUNT_INFORMATION = "Account Information"
+    API_DISCLAIMER = "API Disclaimer"
+    CONNECTIONS = "Connections"
     TRANSACTIONS_AND_REPORTING = "Transactions And Reporting"
     TRADING = "Trading"
     REFERENCE_DATA = "Reference Data"
