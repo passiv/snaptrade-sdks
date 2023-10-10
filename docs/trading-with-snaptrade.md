@@ -1,3 +1,5 @@
+# Trading with SnapTrade
+
 ## To trade with SnapTrade:
 
 > 🚧 Soft Rate Limit
