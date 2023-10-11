@@ -11,7 +11,7 @@ order:
         method: get
 portal:
   title: SnapTrade
-  primaryColor: "#9fc1be"
+  primaryColor: '#9fc1be'
   favicon: favicon.png
   logo: portal-logo.png
   socials:
@@ -112,7 +112,7 @@ additionalGenerators:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 1.17.0
+    version: 1.17.1
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
