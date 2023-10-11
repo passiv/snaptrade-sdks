@@ -19,7 +19,7 @@ module SnapTrade
       path = request.path[request.path.index('/api/v1/')..-1]
       query = Faraday::Utils.build_query(request.params)
       sig_object = {
-        "content" => request.body.nil? || request.body.empty? ? nil : JSON.parse(request.body),
+        "content" => request.body.nil? || request.body.empty? ? nil : Hash[JSON.parse(request.body).sort],
         "path" => path,
         "query" => query
       }
