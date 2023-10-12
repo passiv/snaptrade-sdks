@@ -54,7 +54,7 @@ portal:
     /holdings:
       get: true
     /accounts/{accountId}:
-      post: true
+      put: true
     /snapTrade/encryptedJWT:
       get: true
     /sessionEvents:
