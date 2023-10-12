@@ -26,6 +26,8 @@ Example:
 
 Easily integrate with SnapTrade in your programming language of choice by using one of our SDKs:
 
+| Language     | SDK Link                           |
+|------------|-------------------------------------------------------------------------|
 | Python     | https://pypi.org/project/snaptrade-python-sdk                           |
 | TypeScript | https://www.npmjs.com/package/snaptrade-typescript-sdk                  |
 | Java       | https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk |
