@@ -11,7 +11,7 @@ order:
         method: get
 portal:
   title: SnapTrade
-  primaryColor: '#9fc1be'
+  primaryColor: '#EBB964'
   favicon: favicon.png
   logo: portal-logo.png
   socials:
