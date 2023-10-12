@@ -4,7 +4,7 @@
 
 ### /accounts/{accountId}/holdings
 
-<https://docs.snaptrade.com/reference/accountinformation_getuserholdings>
+:api[AccountInformation_getUserHoldings]
 
 Used to return holdings for a specific account a user has connected in the following format:
 
@@ -34,7 +34,7 @@ Tips:
 
 ### /accounts
 
-<https://docs.snaptrade.com/reference/accountinformation_listuseraccounts>
+:api[AccountInformation_listUserAccounts]
 
 Returns a list of all the accounts a user has connected
 
@@ -44,7 +44,7 @@ Pros:
 
 ### /accounts/{accountId}/balances
 
-<https://docs.snaptrade.com/reference/accountinformation_getuseraccountbalance>
+:api[AccountInformation_getUserAccountBalance]
 
 Returns a list of all cash balances associated with the account id supplied, as well as what currency the balance is in
 
@@ -54,7 +54,7 @@ Pros:
 
 ### /accounts/{accountId}/positions
 
-<https://docs.snaptrade.com/reference/accountinformation_getuseraccountpositions>
+:api[AccountInformation_getUserAccountPositions]
 
 Returns a list of all positions associated with the account id supplied, as well as information on the security (current price, ticker, exchange, average purchase price, etc)
 
@@ -73,7 +73,7 @@ Returns a list of recent orders (buys, sells) from the brokerage
 Pros:
 
 - Implemented for all brokerages
-- Realtime data (updated intraday)
+- Realtime data 
 - Includes all orders (not just executed orders)
 - Has timestamps in addition to the date
 
@@ -83,7 +83,7 @@ Cons:
 
 ### /activities
 
-<https://docs.snaptrade.com/reference/transactionsandreporting_getactivities>
+:api[TransactionsAndReporting_getActivities]
 
 Returns a list of transactions/activities for the given user. Activities will include at minimum buys, sells, dividends, contributions, withdrawals. Some brokerages will also provide transactions for things like forex transactions, share splits, and more.
 
