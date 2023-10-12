@@ -95,7 +95,7 @@ Pros:
 Cons:
 
 - Only includes executed trades
-- Get's updated end of day
+- Gets updated end of day
 - Not all brokerages support this feature
 - Some brokerages only include date, not time of transaction
 

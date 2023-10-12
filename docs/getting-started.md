@@ -35,10 +35,6 @@ Easily integrate with SnapTrade in your programming language of choice by using 
 | C#         | https://nuget.org/packages/SnapTrade.Net                                |
 | PHP        | https://packagist.org/packages/konfig/snaptrade-php-sdk                 |
 
-If would prefer to manually integrate with SnapTrade, refer to [this
-guide](https://docs.snaptrade.com/reference/generating-request-signatures) on
-how to securely sign requests to our API
-
 ---
 
 ## Register a test user
@@ -78,7 +74,7 @@ Example:
 
 ## Connect an account through the Connection Portal
 
-Once a user successfully logs into the SnapTrade portal, they can select their brokerage and go through the OAuth flow to connect their brokerage accounts.
+Once a user successfully logs into the connection portal, they can select their brokerage and go through the connection flow to connect their brokerage accounts.
 
 :::note
 For the initial connection, partners can pass in a broker name in the URI so users can go directly to the selected brokerage and make a connection.
