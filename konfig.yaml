@@ -11,7 +11,7 @@ order:
         method: get
 portal:
   title: SnapTrade
-  primaryColor: '#EBB964'
+  primaryColor: '#ebb964'
   favicon: favicon.png
   logo: portal-logo.png
   socials:
@@ -58,6 +58,8 @@ portal:
     /snapTrade/encryptedJWT:
       get: true
     /sessionEvents:
+      get: true
+    /snapTrade/listUserErrors:
       get: true
   hideSecurity:
     - name: PartnerSignature

@@ -51,11 +51,6 @@ Example:
 { "userId": "USERID123", "userSecret": "AYSEY8726837292873" }
 ```
 
-:::note
-If trading is enabled for a partner, users also need to provide a PIN (or create one if a first-time user)
-before logging into the SnapTrade portal.
-:::
-
 ---
 
 ## Generate a login link
@@ -76,11 +71,6 @@ Example:
   "redirectURI": "https://app.snaptrade.com/snapTrade/redeemToken?token=TOKEN&clientId=PASSIVTEST"
 }
 ```
-
-:::note
-If trading is enabled for a partner, users also need to provide a PIN (or create one if a first-time user)
-before logging into the SnapTrade portal.
-:::
 
 ---
 
