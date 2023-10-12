@@ -26,29 +26,12 @@ Example:
 
 Easily integrate with SnapTrade in your programming language of choice by using one of our SDKs:
 
-### Java
-
-https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk
-
-### Ruby
-
-https://rubygems.org/gems/snaptrade
-
-### Python
-
-https://pypi.org/project/snaptrade-python-sdk
-
-### TypeScript
-
-https://www.npmjs.com/package/snaptrade-typescript-sdk
-
-### C#
-
-https://nuget.org/packages/SnapTrade.Net
-
-### PHP
-
-https://packagist.org/packages/konfig/snaptrade-php-sdk
+| Python     | https://pypi.org/project/snaptrade-python-sdk                           |
+| TypeScript | https://www.npmjs.com/package/snaptrade-typescript-sdk                  |
+| Java       | https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk |
+| Ruby       | https://rubygems.org/gems/snaptrade                                     |
+| C#         | https://nuget.org/packages/SnapTrade.Net                                |
+| PHP        | https://packagist.org/packages/konfig/snaptrade-php-sdk                 |
 
 If would prefer to manually integrate with SnapTrade, refer to [this
 guide](https://docs.snaptrade.com/reference/generating-request-signatures) on
