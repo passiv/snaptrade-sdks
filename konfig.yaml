@@ -61,6 +61,8 @@ portal:
       get: true
     /snapTrade/listUserErrors:
       get: true
+    /brokerages:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
