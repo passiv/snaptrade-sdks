@@ -8,7 +8,7 @@ Account Position
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**symbol** | **PositionSymbol** |  |  [optional] |
+|**symbol** | [**PositionSymbol**](PositionSymbol.md) |  |  [optional] |
 |**units** | **Double** |  |  [optional] |
 |**price** | **Double** | Last known market price for the symbol |  [optional] |
 |**openPnl** | **Double** |  |  [optional] |

@@ -12,9 +12,9 @@ Symbol
 |**symbol** | **String** |  |  [optional] |
 |**rawSymbol** | **String** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
-|**currency** | **Currency** |  |  [optional] |
-|**exchange** | **Exchange** |  |  [optional] |
-|**type** | **SecurityType** |  |  [optional] |
+|**currency** | [**Currency**](Currency.md) |  |  [optional] |
+|**exchange** | [**Exchange**](Exchange.md) |  |  [optional] |
+|**type** | [**SecurityType**](SecurityType.md) |  |  [optional] |
 
 
 

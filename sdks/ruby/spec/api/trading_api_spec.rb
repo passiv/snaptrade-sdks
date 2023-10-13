@@ -32,7 +32,7 @@ describe 'TradingApi' do
   # Cancel open order in account
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to cancel the order in.
   # @param trading_cancel_user_account_order_request The Order ID to be canceled
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecord]

@@ -563,9 +563,19 @@ public class Account {
       if ((jsonObj.get("created_date") != null && !jsonObj.get("created_date").isJsonNull()) && !jsonObj.get("created_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `created_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("created_date").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
+      if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonNull()) {
+        JsonArray jsonArraycashRestrictions = jsonObj.getAsJsonArray("cash_restrictions");
+        if (jsonArraycashRestrictions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("cash_restrictions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
+          }
+
+          // validate the optional field `cash_restrictions` (array)
+          for (int i = 0; i < jsonArraycashRestrictions.size(); i++) {
+            CashRestriction.validateJsonObject(jsonArraycashRestrictions.get(i).getAsJsonObject());
+          };
+        }
       }
       // validate the optional field `sync_status`
       if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {

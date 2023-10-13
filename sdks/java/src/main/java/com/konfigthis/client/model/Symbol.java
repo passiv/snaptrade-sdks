@@ -428,6 +428,18 @@ public class Symbol {
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
+      // validate the optional field `exchange`
+      if (jsonObj.get("exchange") != null && !jsonObj.get("exchange").isJsonNull()) {
+        Exchange.validateJsonObject(jsonObj.getAsJsonObject("exchange"));
+      }
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        SecurityType.validateJsonObject(jsonObj.getAsJsonObject("type"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

@@ -84,7 +84,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get balances.
             
             try
             {
@@ -144,7 +144,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get orders.
             var state = "all"; // defaults value is set to \"all\" (optional) 
             
             try
@@ -175,7 +175,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get positions.
             
             try
             {

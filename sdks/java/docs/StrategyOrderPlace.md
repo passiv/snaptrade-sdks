@@ -9,7 +9,7 @@ The reponse for a correctly placed order
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**orderId** | **Integer** |  |  [optional] |
-|**orders** | **List&lt;StrategyOrderPlaceOrdersInner&gt;** |  |  [optional] |
+|**orders** | [**List&lt;StrategyOrderPlaceOrdersInner&gt;**](StrategyOrderPlaceOrdersInner.md) |  |  [optional] |
 
 
 

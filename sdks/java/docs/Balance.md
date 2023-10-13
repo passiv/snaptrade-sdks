@@ -8,7 +8,7 @@ Account Balance
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**currency** | **Currency** |  |  [optional] |
+|**currency** | [**Currency**](Currency.md) |  |  [optional] |
 |**cash** | **Double** |  |  [optional] |
 
 

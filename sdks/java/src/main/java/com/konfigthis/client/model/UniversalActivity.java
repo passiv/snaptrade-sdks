@@ -843,6 +843,14 @@ public class UniversalActivity {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
+      // validate the optional field `account`
+      if (jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) {
+        AccountSimple.validateJsonObject(jsonObj.getAsJsonObject("account"));
+      }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
@@ -857,6 +865,14 @@ public class UniversalActivity {
       }
       if (!jsonObj.get("external_reference_id").isJsonNull() && (jsonObj.get("external_reference_id") != null && !jsonObj.get("external_reference_id").isJsonNull()) && !jsonObj.get("external_reference_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `external_reference_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_reference_id").toString()));
+      }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        Symbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `option_symbol`
+      if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
+        OptionsSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
       if (!jsonObj.get("trade_date").isJsonNull() && (jsonObj.get("trade_date") != null && !jsonObj.get("trade_date").isJsonNull()) && !jsonObj.get("trade_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `trade_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trade_date").toString()));

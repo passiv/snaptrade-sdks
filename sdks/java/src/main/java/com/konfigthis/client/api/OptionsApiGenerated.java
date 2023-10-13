@@ -289,7 +289,7 @@ public class OptionsApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to create the option strategy object in. (required)
      * @param optionsGetOptionStrategyRequest  (required)
      * @return GetOptionStrategyRequestBuilder
      * @http.response.details
@@ -499,7 +499,7 @@ public class OptionsApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to get the options chain from. (required)
      * @param symbol Universal symbol ID if symbol (required)
      * @return GetOptionsChainRequestBuilder
      * @http.response.details
@@ -702,7 +702,7 @@ public class OptionsApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account the strategy will be placed in. (required)
      * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
      * @return GetOptionsStrategyQuoteRequestBuilder
      * @http.response.details
@@ -897,7 +897,7 @@ public class OptionsApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to fetch options holdings for. (required)
      * @return ListOptionHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1121,7 +1121,7 @@ public class OptionsApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to execute the strategy in. (required)
      * @param optionStrategyId Option strategy id obtained from response when creating option strategy object (required)
      * @param optionsPlaceOptionStrategyRequest  (required)
      * @return PlaceOptionStrategyRequestBuilder

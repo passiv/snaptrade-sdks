@@ -9,7 +9,7 @@ SnapTrade Partner metadata
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**redirectUri** | **String** | URI to redirect user back to after user is done adding brokerage connections |  [optional] |
-|**allowedBrokerages** | **List&lt;Brokerage&gt;** | Brokerages that can be accessed by partners |  [optional] |
+|**allowedBrokerages** | [**List&lt;Brokerage&gt;**](Brokerage.md) | Brokerages that can be accessed by partners |  [optional] |
 |**name** | **String** | Name of Snaptrade Partner |  [optional] |
 |**slug** | **String** | Slug of Snaptrade Partner |  [optional] |
 |**logoUrl** | **String** | URL to partner&#39;s logo |  [optional] |

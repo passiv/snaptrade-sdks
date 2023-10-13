@@ -243,6 +243,10 @@ public class ModelPortfolioAssetClass {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelPortfolioAssetClass is not found in the empty JSON string", ModelPortfolioAssetClass.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `model_asset_class`
+      if (jsonObj.get("model_asset_class") != null && !jsonObj.get("model_asset_class").isJsonNull()) {
+        ModelAssetClass.validateJsonObject(jsonObj.getAsJsonObject("model_asset_class"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

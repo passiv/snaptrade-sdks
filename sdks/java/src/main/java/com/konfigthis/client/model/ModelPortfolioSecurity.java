@@ -247,6 +247,10 @@ public class ModelPortfolioSecurity {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelPortfolioSecurity is not found in the empty JSON string", ModelPortfolioSecurity.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

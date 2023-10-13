@@ -10,7 +10,7 @@
 |**id** | **UUID** |  |  [optional] |
 |**createdDate** | **String** | Time |  [optional] |
 |**updatedDate** | **String** | Time |  [optional] |
-|**brokerage** | **Brokerage** |  |  [optional] |
+|**brokerage** | [**Brokerage**](Brokerage.md) |  |  [optional] |
 |**name** | **String** | Connection Name |  [optional] |
 |**type** | **String** |  |  [optional] |
 |**disabled** | **Boolean** |  |  [optional] |

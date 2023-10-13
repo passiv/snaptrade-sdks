@@ -25,6 +25,8 @@ import { DeleteUserResponse } from '../models';
 // @ts-ignore
 import { EncryptedResponse } from '../models';
 // @ts-ignore
+import { EncryptedResponseEncryptedMessageData } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
@@ -235,6 +237,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -283,6 +286,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
+
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};

@@ -419,6 +419,14 @@ public class OptionsHoldings {
       if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
+      // validate the optional field `option_symbol`
+      if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
+        OptionsSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+      }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

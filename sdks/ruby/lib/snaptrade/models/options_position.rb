@@ -26,11 +26,6 @@ module SnapTrade
     # Average purchase price for this position
     attr_accessor :average_purchase_price
 
-    attr_accessor :open_pnl
-
-    # Deprecated, use the units field for both fractional and integer units going forward
-    attr_accessor :fractional_units
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,9 +33,7 @@ module SnapTrade
         :'price' => :'price',
         :'units' => :'units',
         :'currency' => :'currency',
-        :'average_purchase_price' => :'average_purchase_price',
-        :'open_pnl' => :'open_pnl',
-        :'fractional_units' => :'fractional_units'
+        :'average_purchase_price' => :'average_purchase_price'
       }
     end
 
@@ -56,9 +49,7 @@ module SnapTrade
         :'price' => :'Float',
         :'units' => :'Float',
         :'currency' => :'OptionsPositionCurrency',
-        :'average_purchase_price' => :'Float',
-        :'open_pnl' => :'Float',
-        :'fractional_units' => :'Float'
+        :'average_purchase_price' => :'Float'
       }
     end
 
@@ -67,9 +58,7 @@ module SnapTrade
       Set.new([
         :'price',
         :'currency',
-        :'average_purchase_price',
-        :'open_pnl',
-        :'fractional_units'
+        :'average_purchase_price'
       ])
     end
 
@@ -107,14 +96,6 @@ module SnapTrade
       if attributes.key?(:'average_purchase_price')
         self.average_purchase_price = attributes[:'average_purchase_price']
       end
-
-      if attributes.key?(:'open_pnl')
-        self.open_pnl = attributes[:'open_pnl']
-      end
-
-      if attributes.key?(:'fractional_units')
-        self.fractional_units = attributes[:'fractional_units']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,9 +120,7 @@ module SnapTrade
           price == o.price &&
           units == o.units &&
           currency == o.currency &&
-          average_purchase_price == o.average_purchase_price &&
-          open_pnl == o.open_pnl &&
-          fractional_units == o.fractional_units
+          average_purchase_price == o.average_purchase_price
     end
 
     # @see the `==` method
@@ -153,7 +132,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, price, units, currency, average_purchase_price, open_pnl, fractional_units].hash
+      [symbol, price, units, currency, average_purchase_price].hash
     end
 
     # Builds the object from hash

@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**modelAssetClass** | **ModelAssetClass** |  |  [optional] |
-|**modelAssetClassTarget** | **List&lt;ModelAssetClassTarget&gt;** |  |  [optional] |
+|**modelAssetClass** | [**ModelAssetClass**](ModelAssetClass.md) |  |  [optional] |
+|**modelAssetClassTarget** | [**List&lt;ModelAssetClassTarget&gt;**](ModelAssetClassTarget.md) |  |  [optional] |
 
 
 

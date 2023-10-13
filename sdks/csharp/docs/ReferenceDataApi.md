@@ -910,7 +910,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to search for symbols within.
             var substring = "apple";
             
             var symbolQuery = new SymbolQuery(
@@ -966,7 +966,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to search for symbols within. |  |
 | **symbolQuery** | [**SymbolQuery**](SymbolQuery.md) |  | [optional]  |
 
 ### Return type

@@ -24,7 +24,7 @@ module SnapTrade
     # @param strategy_type [StrategyType] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to create the option strategy object in.
     # @param body [OptionsGetOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
@@ -43,7 +43,7 @@ module SnapTrade
     # @param strategy_type [StrategyType] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to create the option strategy object in.
     # @param body [OptionsGetOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
@@ -58,7 +58,7 @@ module SnapTrade
     # Creates an option strategy object that will be used to place an option strategy order
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to create the option strategy object in.
     # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [StrategyQuotes]
@@ -70,7 +70,7 @@ module SnapTrade
     # Creates an option strategy object that will be used to place an option strategy order
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to create the option strategy object in.
     # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
@@ -145,7 +145,7 @@ module SnapTrade
     # Get the options chain
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get the options chain from.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {})
@@ -156,7 +156,7 @@ module SnapTrade
     # Get the options chain
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get the options chain from.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
@@ -166,7 +166,7 @@ module SnapTrade
     # Get the options chain
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get the options chain from.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] opts the optional parameters
     # @return [Array<OptionChainInner>]
@@ -178,7 +178,7 @@ module SnapTrade
     # Get the options chain
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get the options chain from.
     # @param symbol [String] Universal symbol ID if symbol
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<OptionChainInner>, Integer, Hash)>] Array<OptionChainInner> data, response status code and response headers
@@ -249,7 +249,7 @@ module SnapTrade
     # Get latest market data of option strategy
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account the strategy will be placed in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
@@ -260,7 +260,7 @@ module SnapTrade
     # Get latest market data of option strategy
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account the strategy will be placed in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
@@ -270,7 +270,7 @@ module SnapTrade
     # Get latest market data of option strategy
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account the strategy will be placed in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] opts the optional parameters
     # @return [StrategyQuotes]
@@ -282,7 +282,7 @@ module SnapTrade
     # Get latest market data of option strategy
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account the strategy will be placed in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param [Hash] opts the optional parameters
     # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
@@ -352,7 +352,7 @@ module SnapTrade
     # Get the options holdings in the account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to fetch options holdings for.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_option_holdings(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -362,7 +362,7 @@ module SnapTrade
     # Get the options holdings in the account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to fetch options holdings for.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_option_holdings_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -371,7 +371,7 @@ module SnapTrade
     # Get the options holdings in the account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to fetch options holdings for.
     # @param [Hash] opts the optional parameters
     # @return [Array<OptionsPosition>]
     def list_option_holdings_impl(user_id, user_secret, account_id, opts = {})
@@ -382,7 +382,7 @@ module SnapTrade
     # Get the options holdings in the account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to fetch options holdings for.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<OptionsPosition>, Integer, Hash)>] Array<OptionsPosition> data, response status code and response headers
     def list_option_holdings_with_http_info_impl(user_id, user_secret, account_id, opts = {})
@@ -450,7 +450,7 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -470,7 +470,7 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -486,7 +486,7 @@ module SnapTrade
     # Place an option strategy order on the brokerage
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters
@@ -499,7 +499,7 @@ module SnapTrade
     # Place an option strategy order on the brokerage
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
     # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] opts the optional parameters

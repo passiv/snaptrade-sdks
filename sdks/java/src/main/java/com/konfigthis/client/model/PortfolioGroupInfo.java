@@ -662,41 +662,135 @@ public class PortfolioGroupInfo {
           throw new IllegalArgumentException(String.format("The required field(s) %s in PortfolioGroupInfo is not found in the empty JSON string", PortfolioGroupInfo.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("symbols") != null && !jsonObj.get("symbols").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `symbols` to be an array in the JSON string but got `%s`", jsonObj.get("symbols").toString()));
+      if (jsonObj.get("symbols") != null && !jsonObj.get("symbols").isJsonNull()) {
+        JsonArray jsonArraysymbols = jsonObj.getAsJsonArray("symbols");
+        if (jsonArraysymbols != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("symbols").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `symbols` to be an array in the JSON string but got `%s`", jsonObj.get("symbols").toString()));
+          }
+
+          // validate the optional field `symbols` (array)
+          for (int i = 0; i < jsonArraysymbols.size(); i++) {
+            UniversalSymbol.validateJsonObject(jsonArraysymbols.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("quotable_symbols") != null && !jsonObj.get("quotable_symbols").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `quotable_symbols` to be an array in the JSON string but got `%s`", jsonObj.get("quotable_symbols").toString()));
+      if (jsonObj.get("quotable_symbols") != null && !jsonObj.get("quotable_symbols").isJsonNull()) {
+        JsonArray jsonArrayquotableSymbols = jsonObj.getAsJsonArray("quotable_symbols");
+        if (jsonArrayquotableSymbols != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("quotable_symbols").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `quotable_symbols` to be an array in the JSON string but got `%s`", jsonObj.get("quotable_symbols").toString()));
+          }
+
+          // validate the optional field `quotable_symbols` (array)
+          for (int i = 0; i < jsonArrayquotableSymbols.size(); i++) {
+            UniversalSymbol.validateJsonObject(jsonArrayquotableSymbols.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string but got `%s`", jsonObj.get("balances").toString()));
+      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonNull()) {
+        JsonArray jsonArraybalances = jsonObj.getAsJsonArray("balances");
+        if (jsonArraybalances != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("balances").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string but got `%s`", jsonObj.get("balances").toString()));
+          }
+
+          // validate the optional field `balances` (array)
+          for (int i = 0; i < jsonArraybalances.size(); i++) {
+            Balance.validateJsonObject(jsonArraybalances.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string but got `%s`", jsonObj.get("positions").toString()));
+      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonNull()) {
+        JsonArray jsonArraypositions = jsonObj.getAsJsonArray("positions");
+        if (jsonArraypositions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string but got `%s`", jsonObj.get("positions").toString()));
+          }
+
+          // validate the optional field `positions` (array)
+          for (int i = 0; i < jsonArraypositions.size(); i++) {
+            Position.validateJsonObject(jsonArraypositions.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("target_positions") != null && !jsonObj.get("target_positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `target_positions` to be an array in the JSON string but got `%s`", jsonObj.get("target_positions").toString()));
+      if (jsonObj.get("target_positions") != null && !jsonObj.get("target_positions").isJsonNull()) {
+        JsonArray jsonArraytargetPositions = jsonObj.getAsJsonArray("target_positions");
+        if (jsonArraytargetPositions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("target_positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `target_positions` to be an array in the JSON string but got `%s`", jsonObj.get("target_positions").toString()));
+          }
+
+          // validate the optional field `target_positions` (array)
+          for (int i = 0; i < jsonArraytargetPositions.size(); i++) {
+            TargetAsset.validateJsonObject(jsonArraytargetPositions.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("ideal_positions") != null && !jsonObj.get("ideal_positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `ideal_positions` to be an array in the JSON string but got `%s`", jsonObj.get("ideal_positions").toString()));
+      if (jsonObj.get("ideal_positions") != null && !jsonObj.get("ideal_positions").isJsonNull()) {
+        JsonArray jsonArrayidealPositions = jsonObj.getAsJsonArray("ideal_positions");
+        if (jsonArrayidealPositions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("ideal_positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `ideal_positions` to be an array in the JSON string but got `%s`", jsonObj.get("ideal_positions").toString()));
+          }
+
+          // validate the optional field `ideal_positions` (array)
+          for (int i = 0; i < jsonArrayidealPositions.size(); i++) {
+            Position.validateJsonObject(jsonArrayidealPositions.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("excluded_positions") != null && !jsonObj.get("excluded_positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `excluded_positions` to be an array in the JSON string but got `%s`", jsonObj.get("excluded_positions").toString()));
+      if (jsonObj.get("excluded_positions") != null && !jsonObj.get("excluded_positions").isJsonNull()) {
+        JsonArray jsonArrayexcludedPositions = jsonObj.getAsJsonArray("excluded_positions");
+        if (jsonArrayexcludedPositions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("excluded_positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `excluded_positions` to be an array in the JSON string but got `%s`", jsonObj.get("excluded_positions").toString()));
+          }
+
+          // validate the optional field `excluded_positions` (array)
+          for (int i = 0; i < jsonArrayexcludedPositions.size(); i++) {
+            ExcludedAsset.validateJsonObject(jsonArrayexcludedPositions.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("calculated_trades") != null && !jsonObj.get("calculated_trades").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `calculated_trades` to be an array in the JSON string but got `%s`", jsonObj.get("calculated_trades").toString()));
+      if (jsonObj.get("calculated_trades") != null && !jsonObj.get("calculated_trades").isJsonNull()) {
+        JsonArray jsonArraycalculatedTrades = jsonObj.getAsJsonArray("calculated_trades");
+        if (jsonArraycalculatedTrades != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("calculated_trades").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `calculated_trades` to be an array in the JSON string but got `%s`", jsonObj.get("calculated_trades").toString()));
+          }
+
+          // validate the optional field `calculated_trades` (array)
+          for (int i = 0; i < jsonArraycalculatedTrades.size(); i++) {
+            CalculatedTrade.validateJsonObject(jsonArraycalculatedTrades.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("brokerage_authorizations") != null && !jsonObj.get("brokerage_authorizations").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `brokerage_authorizations` to be an array in the JSON string but got `%s`", jsonObj.get("brokerage_authorizations").toString()));
+      if (jsonObj.get("brokerage_authorizations") != null && !jsonObj.get("brokerage_authorizations").isJsonNull()) {
+        JsonArray jsonArraybrokerageAuthorizations = jsonObj.getAsJsonArray("brokerage_authorizations");
+        if (jsonArraybrokerageAuthorizations != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("brokerage_authorizations").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `brokerage_authorizations` to be an array in the JSON string but got `%s`", jsonObj.get("brokerage_authorizations").toString()));
+          }
+
+          // validate the optional field `brokerage_authorizations` (array)
+          for (int i = 0; i < jsonArraybrokerageAuthorizations.size(); i++) {
+            BrokerageAuthorization.validateJsonObject(jsonArraybrokerageAuthorizations.get(i).getAsJsonObject());
+          };
+        }
+      }
+      // validate the optional field `settings`
+      if (jsonObj.get("settings") != null && !jsonObj.get("settings").isJsonNull()) {
+        PortfolioGroupSettings.validateJsonObject(jsonObj.getAsJsonObject("settings"));
       }
   }
 

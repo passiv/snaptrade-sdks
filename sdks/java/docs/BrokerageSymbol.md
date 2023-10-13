@@ -10,7 +10,7 @@ Brokerage symbol
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
 |**symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  |  [optional] |
-|**brokerageAuthorization** | **BrokerageAuthorization** |  |  [optional] |
+|**brokerageAuthorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**allowsFractionalUnits** | **Boolean** |  |  [optional] |
 |**optionSymbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  |  [optional] |

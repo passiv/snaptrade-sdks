@@ -498,7 +498,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -514,7 +514,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -530,7 +530,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -546,7 +546,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -562,7 +562,7 @@ public class AuthenticationApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully generated a list of users </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */

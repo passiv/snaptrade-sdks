@@ -396,6 +396,10 @@ public class ManualTradeSymbol {
       if ((jsonObj.get("universal_symbol_id") != null && !jsonObj.get("universal_symbol_id").isJsonNull()) && !jsonObj.get("universal_symbol_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `universal_symbol_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("universal_symbol_id").toString()));
       }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
       if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
       }

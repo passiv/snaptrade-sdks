@@ -374,6 +374,14 @@ public class TradeImpact {
           throw new IllegalArgumentException(String.format("The required field(s) %s in TradeImpact is not found in the empty JSON string", TradeImpact.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `account`
+      if (jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) {
+        Account.validateJsonObject(jsonObj.getAsJsonObject("account"));
+      }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

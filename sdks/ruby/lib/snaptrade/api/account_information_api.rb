@@ -115,7 +115,7 @@ module SnapTrade
     # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -125,7 +125,7 @@ module SnapTrade
     # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -134,7 +134,7 @@ module SnapTrade
     # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] opts the optional parameters
     # @return [Array<Balance>]
     def get_user_account_balance_impl(user_id, user_secret, account_id, opts = {})
@@ -145,7 +145,7 @@ module SnapTrade
     # List account balances
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Balance>, Integer, Hash)>] Array<Balance> data, response status code and response headers
     def get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, opts = {})
@@ -305,7 +305,7 @@ module SnapTrade
     # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get orders.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
@@ -317,7 +317,7 @@ module SnapTrade
     # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get orders.
     # @param state [String] defaults value is set to \&quot;all\&quot;
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
@@ -328,7 +328,7 @@ module SnapTrade
     # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
     # @return [Array<AccountOrderRecord>]
@@ -340,7 +340,7 @@ module SnapTrade
     # Get history of orders placed in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
     # @return [Array<(Array<AccountOrderRecord>, Integer, Hash)>] Array<AccountOrderRecord> data, response status code and response headers
@@ -411,7 +411,7 @@ module SnapTrade
     # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -421,7 +421,7 @@ module SnapTrade
     # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -430,7 +430,7 @@ module SnapTrade
     # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<Position>]
     def get_user_account_positions_impl(user_id, user_secret, account_id, opts = {})
@@ -441,7 +441,7 @@ module SnapTrade
     # List account positions
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Position>, Integer, Hash)>] Array<Position> data, response status code and response headers
     def get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, opts = {})

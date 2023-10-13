@@ -432,6 +432,14 @@ public class StrategyQuotes {
           throw new IllegalArgumentException(String.format("The required field(s) %s in StrategyQuotes is not found in the empty JSON string", StrategyQuotes.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `strategy`
+      if (jsonObj.get("strategy") != null && !jsonObj.get("strategy").isJsonNull()) {
+        OptionStrategy.validateJsonObject(jsonObj.getAsJsonObject("strategy"));
+      }
+      // validate the optional field `greek`
+      if (jsonObj.get("greek") != null && !jsonObj.get("greek").isJsonNull()) {
+        StrategyQuotesGreek.validateJsonObject(jsonObj.getAsJsonObject("greek"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

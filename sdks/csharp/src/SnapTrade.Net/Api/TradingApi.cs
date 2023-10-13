@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
@@ -195,7 +195,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -211,7 +211,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -492,7 +492,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
@@ -508,7 +508,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
@@ -605,7 +605,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -622,7 +622,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to cancel the order in.</param>
         /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

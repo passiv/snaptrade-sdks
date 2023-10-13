@@ -143,7 +143,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to get balances.
     try {
       List<Balance> result = client
               .accountInformation
@@ -187,7 +187,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to get balances. | |
 
 ### Return type
 
@@ -345,7 +345,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to get orders.
     String state = "all"; // defaults value is set to \"all\"
     try {
       List<AccountOrderRecord> result = client
@@ -392,7 +392,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to get orders. | |
 | **state** | **String**| defaults value is set to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
 
 ### Return type
@@ -445,7 +445,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to get positions.
     try {
       List<Position> result = client
               .accountInformation
@@ -489,7 +489,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to get positions. | |
 
 ### Return type
 

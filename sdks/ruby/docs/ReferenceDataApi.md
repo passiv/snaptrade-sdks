@@ -586,7 +586,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to search for symbols within. |  |
 | **symbol_query** | [**SymbolQuery**](SymbolQuery.md) |  | [optional] |
 
 ### Return type

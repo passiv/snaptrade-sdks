@@ -14,7 +14,7 @@ Options Symbol
 |**strikePrice** | **Double** |  |  |
 |**expirationDate** | **String** |  |  |
 |**isMiniOption** | **Boolean** |  |  [optional] |
-|**underlyingSymbol** | **UnderlyingSymbol** |  |  |
+|**underlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  |  |
 |**localId** | **String** |  |  [optional] |
 |**exchangeId** | **UUID** |  |  [optional] |
 

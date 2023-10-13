@@ -490,6 +490,10 @@ public class ManualTrade {
       if ((jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) && !jsonObj.get("account").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account").toString()));
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        ManualTradeSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

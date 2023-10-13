@@ -45,10 +45,5 @@ class OptionalOptionsPosition(TypedDict, total=False):
     # Average purchase price for this position
     average_purchase_price: typing.Optional[typing.Union[int, float]]
 
-    open_pnl: typing.Optional[typing.Union[int, float]]
-
-    # Deprecated, use the units field for both fractional and integer units going forward
-    fractional_units: typing.Optional[typing.Union[int, float]]
-
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):
     pass

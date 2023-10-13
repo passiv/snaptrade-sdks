@@ -855,6 +855,10 @@ public class Brokerage {
       if ((jsonObj.get("default_currency") != null && !jsonObj.get("default_currency").isJsonNull()) && !jsonObj.get("default_currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `default_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("default_currency").toString()));
       }
+      // validate the optional field `brokerage_type`
+      if (jsonObj.get("brokerage_type") != null && !jsonObj.get("brokerage_type").isJsonNull()) {
+        BrokerageType.validateJsonObject(jsonObj.getAsJsonObject("brokerage_type"));
+      }
       // ensure the optional json data is an array if present
       if (jsonObj.get("exchanges") != null && !jsonObj.get("exchanges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `exchanges` to be an array in the JSON string but got `%s`", jsonObj.get("exchanges").toString()));

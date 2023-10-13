@@ -38,7 +38,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to cancel the order in.
             var brokerageOrderId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             
             // The Order ID to be canceled
@@ -95,7 +95,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to cancel the order in. |  |
 | **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) | The Order ID to be canceled |  |
 
 ### Return type

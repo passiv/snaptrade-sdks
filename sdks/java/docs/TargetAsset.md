@@ -9,7 +9,7 @@ Target percentage of a certain asset
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**symbol** | **UniversalSymbol** |  |  [optional] |
+|**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**percent** | **Double** |  |  [optional] |
 |**isSupported** | **Boolean** |  |  [optional] |
 |**isExcluded** | **Boolean** |  |  [optional] |

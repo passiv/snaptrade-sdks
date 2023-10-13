@@ -202,6 +202,10 @@ public class ExcludedAsset {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ExcludedAsset is not found in the empty JSON string", ExcludedAsset.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

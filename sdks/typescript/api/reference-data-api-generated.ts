@@ -23,6 +23,10 @@ import { Brokerage } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTypeReadOnly } from '../models';
 // @ts-ignore
+import { BrokerageAuthorizationTypeReadOnlyBrokerage } from '../models';
+// @ts-ignore
+import { BrokerageType } from '../models';
+// @ts-ignore
 import { Currency } from '../models';
 // @ts-ignore
 import { Exchange } from '../models';
@@ -251,6 +255,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
+
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -498,7 +503,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
          * @summary Search for symbols available in an account
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to search for symbols within.
          * @param {SymbolQuery} [symbolQuery] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -540,6 +545,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
+
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -886,7 +892,7 @@ export type ReferenceDataApiSymbolSearchUserAccountRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to search for symbols within.
     * @type {string}
     * @memberof ReferenceDataApiSymbolSearchUserAccount
     */

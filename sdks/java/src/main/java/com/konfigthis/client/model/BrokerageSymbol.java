@@ -403,6 +403,10 @@ public class BrokerageSymbol {
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         BrokerageSymbolSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
       }
+      // validate the optional field `brokerage_authorization`
+      if (jsonObj.get("brokerage_authorization") != null && !jsonObj.get("brokerage_authorization").isJsonNull()) {
+        BrokerageAuthorization.validateJsonObject(jsonObj.getAsJsonObject("brokerage_authorization"));
+      }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }

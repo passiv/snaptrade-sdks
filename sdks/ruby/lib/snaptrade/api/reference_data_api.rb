@@ -758,7 +758,7 @@ module SnapTrade
     # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to search for symbols within.
     # @param substring [String] 
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -773,7 +773,7 @@ module SnapTrade
     # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to search for symbols within.
     # @param substring [String] 
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -787,7 +787,7 @@ module SnapTrade
     # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to search for symbols within.
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<UniversalSymbol>]
@@ -799,7 +799,7 @@ module SnapTrade
     # Search for symbols available in an account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to search for symbols within.
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<(Array<UniversalSymbol>, Integer, Hash)>] Array<UniversalSymbol> data, response status code and response headers

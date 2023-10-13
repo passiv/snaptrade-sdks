@@ -45,7 +45,7 @@ describe 'AccountInformationApi' do
   # List account balances
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to get balances.
   # @param [Hash] opts the optional parameters
   # @return [Array<Balance>]
   describe 'get_user_account_balance test' do
@@ -71,7 +71,7 @@ describe 'AccountInformationApi' do
   # Get history of orders placed in account
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to get orders.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :state defaults value is set to \&quot;all\&quot;
   # @return [Array<AccountOrderRecord>]
@@ -85,7 +85,7 @@ describe 'AccountInformationApi' do
   # List account positions
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to get positions.
   # @param [Hash] opts the optional parameters
   # @return [Array<Position>]
   describe 'get_user_account_positions test' do

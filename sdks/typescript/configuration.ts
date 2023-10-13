@@ -23,6 +23,11 @@ export interface ConfigurationParameters {
     clientId?: string;
     signature?: string;
     timestamp?: string;
+    /**
+     * parameter for apiKey security
+     * @param name security name
+     * @memberof Configuration
+     */
     apiKey?: ApiKey;
     username?: string;
     password?: string;
@@ -109,7 +114,7 @@ export class Configuration {
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/8.29.0/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/8.29.1/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 

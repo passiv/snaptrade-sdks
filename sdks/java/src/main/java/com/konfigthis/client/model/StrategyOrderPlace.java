@@ -243,9 +243,19 @@ public class StrategyOrderPlace {
           throw new IllegalArgumentException(String.format("The required field(s) %s in StrategyOrderPlace is not found in the empty JSON string", StrategyOrderPlace.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("orders") != null && !jsonObj.get("orders").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `orders` to be an array in the JSON string but got `%s`", jsonObj.get("orders").toString()));
+      if (jsonObj.get("orders") != null && !jsonObj.get("orders").isJsonNull()) {
+        JsonArray jsonArrayorders = jsonObj.getAsJsonArray("orders");
+        if (jsonArrayorders != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("orders").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `orders` to be an array in the JSON string but got `%s`", jsonObj.get("orders").toString()));
+          }
+
+          // validate the optional field `orders` (array)
+          for (int i = 0; i < jsonArrayorders.size(); i++) {
+            StrategyOrderPlaceOrdersInner.validateJsonObject(jsonArrayorders.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

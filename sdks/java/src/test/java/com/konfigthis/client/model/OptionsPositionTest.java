@@ -90,20 +90,4 @@ public class OptionsPositionTest {
         // TODO: test averagePurchasePrice
     }
 
-    /**
-     * Test the property 'openPnl'
-     */
-    @Test
-    public void openPnlTest() {
-        // TODO: test openPnl
-    }
-
-    /**
-     * Test the property 'fractionalUnits'
-     */
-    @Test
-    public void fractionalUnitsTest() {
-        // TODO: test fractionalUnits
-    }
-
 }

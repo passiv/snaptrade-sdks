@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
@@ -59,7 +59,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionChainInner&gt;</returns>
@@ -74,7 +74,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
@@ -85,7 +85,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
@@ -100,7 +100,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
@@ -111,7 +111,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
         List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -125,7 +125,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -135,7 +135,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -151,7 +151,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -175,7 +175,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -191,7 +191,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -206,7 +206,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -222,7 +222,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -237,7 +237,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -253,7 +253,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -268,7 +268,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
@@ -283,7 +283,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
@@ -297,7 +297,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -314,7 +314,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -447,7 +447,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
@@ -463,7 +463,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
@@ -560,7 +560,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -577,7 +577,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
         /// <param name="optionsGetOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -677,7 +677,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionChainInner&gt;</returns>
@@ -693,7 +693,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
@@ -789,7 +789,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -806,7 +806,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get the options chain from.</param>
         /// <param name="symbol">Universal symbol ID if symbol</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -905,7 +905,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StrategyQuotes</returns>
@@ -921,7 +921,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StrategyQuotes</returns>
@@ -1017,7 +1017,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1034,7 +1034,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1133,7 +1133,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
         public List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1148,7 +1148,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1236,7 +1236,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
@@ -1252,7 +1252,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
@@ -1343,7 +1343,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1360,7 +1360,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1465,7 +1465,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1483,7 +1483,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
         /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
         /// <param name="optionsPlaceOptionStrategyRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>

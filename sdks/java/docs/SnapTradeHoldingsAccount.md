@@ -9,7 +9,7 @@ SnapTradeUser Investment Account
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**brokerageAuthorization** | **BrokerageAuthorization** |  |  [optional] |
+|**brokerageAuthorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  |  [optional] |
 |**portfolioGroup** | **UUID** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
 |**number** | **String** |  |  [optional] |

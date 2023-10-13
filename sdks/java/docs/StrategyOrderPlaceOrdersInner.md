@@ -44,7 +44,7 @@
 |**isLimitOffsetInDollar** | **Boolean** |  |  [optional] |
 |**userId** | **Integer** |  |  [optional] |
 |**placementCommission** | **String** |  |  [optional] |
-|**legs** | **List&lt;StrategyOrderPlaceOrdersInnerLegsInner&gt;** |  |  [optional] |
+|**legs** | [**List&lt;StrategyOrderPlaceOrdersInnerLegsInner&gt;**](StrategyOrderPlaceOrdersInnerLegsInner.md) |  |  [optional] |
 |**strategyType** | **String** |  |  [optional] |
 |**triggerStopPrice** | **String** |  |  [optional] |
 |**orderGroupId** | **Integer** |  |  [optional] |

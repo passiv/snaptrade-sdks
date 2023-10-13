@@ -74,7 +74,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to cancel the order in. |  |
 | **trading_cancel_user_account_order_request** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) | The Order ID to be canceled |  |
 
 ### Return type

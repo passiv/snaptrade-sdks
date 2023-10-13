@@ -9,7 +9,7 @@ This response consists of 2 different components that must be decrypted to obtai
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**encryptedSharedKey** | **String** |  |  [optional] |
-|**encryptedMessageData** | **EncryptedResponseEncryptedMessageData** |  |  [optional] |
+|**encryptedMessageData** | [**EncryptedResponseEncryptedMessageData**](EncryptedResponseEncryptedMessageData.md) |  |  [optional] |
 
 
 

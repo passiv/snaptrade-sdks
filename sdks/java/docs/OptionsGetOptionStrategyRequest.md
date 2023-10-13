@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**underlyingSymbolId** | **UUID** |  |  |
-|**legs** | **List&lt;OptionLeg&gt;** |  |  |
+|**legs** | [**List&lt;OptionLeg&gt;**](OptionLeg.md) |  |  |
 |**strategyType** | [**StrategyTypeEnum**](#StrategyTypeEnum) |  |  |
 
 

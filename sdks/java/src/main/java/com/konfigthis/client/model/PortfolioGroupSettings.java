@@ -367,6 +367,10 @@ public class PortfolioGroupSettings {
       if ((jsonObj.get("notifyFrequency") != null && !jsonObj.get("notifyFrequency").isJsonNull()) && !jsonObj.get("notifyFrequency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `notifyFrequency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("notifyFrequency").toString()));
       }
+      // validate the optional field `preferred_currency`
+      if (jsonObj.get("preferred_currency") != null && !jsonObj.get("preferred_currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("preferred_currency"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

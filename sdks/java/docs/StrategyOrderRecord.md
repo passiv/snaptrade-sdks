@@ -8,7 +8,7 @@ Strategy order record
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**strategy** | **OptionStrategy** |  |  [optional] |
+|**strategy** | [**OptionStrategy**](OptionStrategy.md) |  |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) |  |  [optional] |
 |**filledQuantity** | **Double** |  |  [optional] |
 |**openQuantity** | **Double** |  |  [optional] |

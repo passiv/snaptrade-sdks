@@ -43,7 +43,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to cancel the order in.
     UUID brokerageOrderId = UUID.randomUUID();
     try {
       AccountOrderRecord result = client
@@ -108,7 +108,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to cancel the order in. | |
 | **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)| The Order ID to be canceled | |
 
 ### Return type

@@ -201,6 +201,10 @@ public class ModelAssetClassTarget {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelAssetClassTarget is not found in the empty JSON string", ModelAssetClassTarget.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

@@ -473,7 +473,7 @@ public class AccountInformationApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to get balances. (required)
      * @return GetUserAccountBalanceRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -870,7 +870,7 @@ public class AccountInformationApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to get orders. (required)
      * @return GetUserAccountOrdersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1061,7 +1061,7 @@ public class AccountInformationApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to get positions. (required)
      * @return GetUserAccountPositionsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**symbol** | **UniversalSymbol** |  |  [optional] |
+|**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**bidPrice** | **Double** |  |  [optional] |
 |**askPrice** | **Double** |  |  [optional] |
 |**lastTradePrice** | **Double** |  |  [optional] |

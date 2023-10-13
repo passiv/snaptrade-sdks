@@ -23,7 +23,7 @@
 |**allowsTradingThroughSnaptradeApi** | **Boolean** |  |  [optional] |
 |**isScrapingIntegration** | **Boolean** |  |  [optional] |
 |**defaultCurrency** | **UUID** |  |  [optional] |
-|**brokerageType** | **BrokerageType** |  |  [optional] |
+|**brokerageType** | [**BrokerageType**](BrokerageType.md) |  |  [optional] |
 |**exchanges** | **List&lt;Object&gt;** | List of exchange ID supported by brokerage |  [optional] |
 
 
