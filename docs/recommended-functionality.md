@@ -25,4 +25,4 @@ The ability to view and delete existing connections is critical to allow users t
 The following endpoints have the information you need for this:
 
 - :api[Connections_listBrokerageAuthorizations]
-- :api[ref:Connections_removeBrokerageAuthorization]
+- :api[Connections_removeBrokerageAuthorization]

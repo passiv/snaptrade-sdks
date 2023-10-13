@@ -4,7 +4,6 @@ A SnapTrade connection provides direct access to a user's trading account. Users
 
 - The user enters an OAuth connection flow and grants access to their account.
 - The user enters their account credentials in SnapTrade, which are used to login to their account and generate an access token.
-- The user is sent to one of SnapTrade aggregation providers who receive the account credentials and provide an access token.
 
 Connections can break for a variety of reasons, which are usually related to security needs. Access tokens usually have some sort of expiry associated with them, so that users occasionally need to reauthorize access in order to show that they still approve of the connection. It is important to understand that SnapTrade works with live trading accounts, which contain real money and real investments. Since the potential damages associated with any form of unauthorized access are high, access tokens typically expire after a few weeks and need to be reauthorized occasionally.
 
