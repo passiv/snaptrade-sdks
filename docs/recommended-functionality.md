@@ -10,7 +10,7 @@ There are a number of situations that may break a user's brokerage connection, i
 
 Because of this, it is critical to ensure that your project includes a flow to reconnect a user's brokerage account.
 
-We make this easy by notifying you of broken connections via webhooks. See our related section on [How to Fix Broken Connections](/reference/fix-broken-connections) for more information.
+We make this easy by notifying you of broken connections via webhooks. See our related section on [How to Fix Broken Connections](/docs/fix-broken-connections) for more information.
 
 ## Ability to edit trade permissions
 
