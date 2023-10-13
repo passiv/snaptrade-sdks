@@ -89,4 +89,4 @@ Cons:
 
 Tips:
 
-- Syncing may not be instant upon initial brokerage connection for some brokerages, make use of the ACCOUNT_TRANSACTIONS_INITIAL_UPDATE webhook to be notified exactly when all transactions have been loaded for an account
+- Syncing may not be instant upon initial brokerage connection for some brokerages, make use of the ACCOUNT_TRANSACTIONS_INITIAL_UPDATE webhook to be notified exactly when all transactions have been loaded for an account. See [our docs on webhooks](/docs/webhooks) for more information.
