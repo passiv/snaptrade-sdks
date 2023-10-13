@@ -26,25 +26,11 @@ After generating a redirect link (<https://docs.snaptrade.com/reference/authenti
 
 The application is also designed to initiate the firing of three distinct events in response to certain specific occurrences. These occurrences and their respective event triggers are as follows:
 
-- **Successful connection establishment:** After a successful connection, the application will transmit a message containing the following object:
-  ```
-  {
-    "status": "SUCCESS",
-    "authorizationId": "5713a7a3-baf4-401d-912a-83a1792fbd6c"
-  }
-  ```
-  This object includes the status field, which will be set to 'SUCCESS', along with the authorizationId field, holding a unique identifier (UUID) in the format: `5713a7a3-baf4-401d-912a-83a1792fbd6c`.
-- **Connection failure:** In the event of a connection failure, the parent application will receive a message with the following format:
-  ```
-  {
-    "status": "ERROR",
-    "errorCode": "1000",
-    "statusCode": 401,
-    "detail": "Invalid credentials provided, please try again."
-  }
-  ```
-  The `status` field will be set to 'ERROR' to indicate the error status. The `errorCode` field may contain a specific error code. The `statusCode` field has the corresponding HTTP status code like 401, 500, etc. The `detail` field will provide additional information about the encountered error.
-- **User tab closure:** When the user closes the second tab opened for completing oAuth connections, the application will promptly transmit a message to the parent application with the value `CLOSED`.
+- **Successful connection establishment:** 
+- **Connection failure:** 
+- **User tab closure:** 
+
+See [our documentation on SnapTrade Connection Messaging](/docs/connection-messaging) for more information.
 
 Example of how these events can be captured in a React app:
 
