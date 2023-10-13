@@ -36,4 +36,4 @@ SnapTrade provides webhooks to notify when new connections are:
 
 If you have a webhook listener URL associated with your SnapTrade account, you will automatically receive webhook events to let you know when any of those events take place. This is especially useful for noticing when connections break so that you can inform the user that they need to reconnect.
 
-Review the documentation on [SnapTrade Webhooks](https://docs.snaptrade.com/reference/webhooks-getting-started) for more detail, sample payloads, etc.
+Review the documentation on [SnapTrade Webhooks](https://docs.snaptrade.com/docs/webhooks-getting-started) for more detail, sample payloads, etc.
