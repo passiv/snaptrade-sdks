@@ -8,7 +8,7 @@ Here is a link to the SnapTrade React SDK: <https://www.npmjs.com/package/snaptr
 
 In order to make it easier and faster to use the SnapTrade Connection Portal, we added support for loading the Connection Portal in an `iframe`. This allows apps to make the connection experience more coherent so that users don't need to leave their app until the OAuth linking step.
 
-After generating a redirect link (<https://docs.snaptrade.com/reference/authentication_loginsnaptradeuser>), use the following template to load the portal in an `iframe` inside your app:
+After generating a redirect link :api[Authentication_loginSnapTradeUser], use the following template to load the portal in an `iframe` inside your app:
 
 ```html html
 <Modal>
