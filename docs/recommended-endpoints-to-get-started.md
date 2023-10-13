@@ -2,8 +2,6 @@
 
 # Holdings
 
-### /accounts/{accountId}/holdings
-
 :api[AccountInformation_getUserHoldings]
 
 Used to return holdings for a specific account a user has connected in the following format:
@@ -32,8 +30,6 @@ Tips:
 
 - If looking to instead fetch holdings info in parts, you can split up the calls with the endpoints listed below. No reason to use the below endpoints in addition to the holdings endpoint, since information returned from below endpoint is already available in the holdings call
 
-### /accounts
-
 :api[AccountInformation_listUserAccounts]
 
 Returns a list of all the accounts a user has connected
@@ -42,8 +38,6 @@ Pros:
 
 - Quickest way to get info on that brokerage accounts a user has access to
 
-### /accounts/{accountId}/balances
-
 :api[AccountInformation_getUserAccountBalance]
 
 Returns a list of all cash balances associated with the account id supplied, as well as what currency the balance is in
@@ -51,8 +45,6 @@ Returns a list of all cash balances associated with the account id supplied, as 
 Pros:
 
 - Quickest way to see what balances a user's account currently has
-
-### /accounts/{accountId}/positions
 
 :api[AccountInformation_getUserAccountPositions]
 
@@ -64,9 +56,7 @@ Pros:
 
 # Orders, Transactions, Activities
 
-### /accounts/{accountId}/orders
-
-<https://docs.snaptrade.com/reference/accountinformation_getuseraccountorders>
+:api[AccountInformation_getUserAccountOrders]
 
 Returns a list of recent orders (buys, sells) from the brokerage
 
@@ -80,8 +70,6 @@ Pros:
 Cons:
 
 - Limited history (brokerage dependent)
-
-### /activities
 
 :api[TransactionsAndReporting_getActivities]
 
