@@ -10,7 +10,7 @@
 |**id** | **UUID** |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
 |**authType** | [**AuthTypeEnum**](#AuthTypeEnum) |  |  [optional] |
-|**brokerage** | **BrokerageAuthorizationTypeReadOnlyBrokerage** |  |  [optional] |
+|**brokerage** | [**BrokerageAuthorizationTypeReadOnlyBrokerage**](BrokerageAuthorizationTypeReadOnlyBrokerage.md) |  |  [optional] |
 
 
 

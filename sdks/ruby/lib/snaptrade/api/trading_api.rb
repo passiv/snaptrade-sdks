@@ -21,7 +21,7 @@ module SnapTrade
     # Cancel open order in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to cancel the order in.
     # @param brokerage_order_id [String] 
     # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -36,7 +36,7 @@ module SnapTrade
     # Cancel open order in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to cancel the order in.
     # @param brokerage_order_id [String] 
     # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -50,7 +50,7 @@ module SnapTrade
     # Cancel open order in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to cancel the order in.
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
@@ -62,7 +62,7 @@ module SnapTrade
     # Cancel open order in account
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account get positions.
+    # @param account_id [String] The ID of the account to cancel the order in.
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers

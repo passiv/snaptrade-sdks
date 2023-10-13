@@ -40,17 +40,13 @@ namespace SnapTrade.Net.Model
         /// <param name="units">units.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        /// <param name="openPnl">openPnl.</param>
-        /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
-        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), double? price = default(double?), double units = default(double), OptionsPositionCurrency currency = default(OptionsPositionCurrency), double? averagePurchasePrice = default(double?), double? openPnl = default(double?), double? fractionalUnits = default(double?)) : base()
+        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), double? price = default(double?), double units = default(double), OptionsPositionCurrency currency = default(OptionsPositionCurrency), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
             this.Units = units;
             this.Currency = currency;
             this.AveragePurchasePrice = averagePurchasePrice;
-            this.OpenPnl = openPnl;
-            this.FractionalUnits = fractionalUnits;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -87,19 +83,6 @@ namespace SnapTrade.Net.Model
         public double? AveragePurchasePrice { get; set; }
 
         /// <summary>
-        /// Gets or Sets OpenPnl
-        /// </summary>
-        [DataMember(Name = "open_pnl", EmitDefaultValue = true)]
-        public double? OpenPnl { get; set; }
-
-        /// <summary>
-        /// Deprecated, use the units field for both fractional and integer units going forward
-        /// </summary>
-        /// <value>Deprecated, use the units field for both fractional and integer units going forward</value>
-        [DataMember(Name = "fractional_units", EmitDefaultValue = true)]
-        public double? FractionalUnits { get; set; }
-
-        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -119,8 +102,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
-            sb.Append("  OpenPnl: ").Append(OpenPnl).Append("\n");
-            sb.Append("  FractionalUnits: ").Append(FractionalUnits).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -180,16 +161,6 @@ namespace SnapTrade.Net.Model
                     this.AveragePurchasePrice == input.AveragePurchasePrice ||
                     (this.AveragePurchasePrice != null &&
                     this.AveragePurchasePrice.Equals(input.AveragePurchasePrice))
-                ) && base.Equals(input) && 
-                (
-                    this.OpenPnl == input.OpenPnl ||
-                    (this.OpenPnl != null &&
-                    this.OpenPnl.Equals(input.OpenPnl))
-                ) && base.Equals(input) && 
-                (
-                    this.FractionalUnits == input.FractionalUnits ||
-                    (this.FractionalUnits != null &&
-                    this.FractionalUnits.Equals(input.FractionalUnits))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -219,14 +190,6 @@ namespace SnapTrade.Net.Model
                 if (this.AveragePurchasePrice != null)
                 {
                     hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
-                }
-                if (this.OpenPnl != null)
-                {
-                    hashCode = (hashCode * 59) + this.OpenPnl.GetHashCode();
-                }
-                if (this.FractionalUnits != null)
-                {
-                    hashCode = (hashCode * 59) + this.FractionalUnits.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

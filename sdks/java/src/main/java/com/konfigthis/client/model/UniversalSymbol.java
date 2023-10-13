@@ -496,12 +496,24 @@ public class UniversalSymbol {
       if (!jsonObj.get("description").isJsonNull() && (jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("currencies") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("currencies").isJsonArray()) {
+      // validate the required field `currency`
+      Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      // validate the optional field `exchange`
+      if (jsonObj.get("exchange") != null && !jsonObj.get("exchange").isJsonNull()) {
+        Exchange.validateJsonObject(jsonObj.getAsJsonObject("exchange"));
+      }
+      // validate the required field `type`
+      SecurityType.validateJsonObject(jsonObj.getAsJsonObject("type"));
+      // ensure the json data is an array
+      if (!jsonObj.get("currencies").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `currencies` to be an array in the JSON string but got `%s`", jsonObj.get("currencies").toString()));
       }
+
+      JsonArray jsonArraycurrencies = jsonObj.getAsJsonArray("currencies");
+      // validate the required field `currencies` (array)
+      for (int i = 0; i < jsonArraycurrencies.size(); i++) {
+        Currency.validateJsonObject(jsonArraycurrencies.get(i).getAsJsonObject());
+      };
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

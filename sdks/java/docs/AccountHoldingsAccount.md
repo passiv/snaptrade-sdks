@@ -8,11 +8,11 @@ Account Holdings with Account ID
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**account** | **SnapTradeHoldingsAccountAccountId** |  |  [optional] |
-|**balances** | **List&lt;Balance&gt;** |  |  [optional] |
-|**positions** | **List&lt;Position&gt;** |  |  [optional] |
-|**orders** | **List&lt;AccountOrderRecord&gt;** |  |  [optional] |
-|**totalValue** | **SnapTradeHoldingsTotalValue** |  |  [optional] |
+|**account** | [**SnapTradeHoldingsAccountAccountId**](SnapTradeHoldingsAccountAccountId.md) |  |  [optional] |
+|**balances** | [**List&lt;Balance&gt;**](Balance.md) |  |  [optional] |
+|**positions** | [**List&lt;Position&gt;**](Position.md) |  |  [optional] |
+|**orders** | [**List&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md) |  |  [optional] |
+|**totalValue** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  |  [optional] |
 
 
 

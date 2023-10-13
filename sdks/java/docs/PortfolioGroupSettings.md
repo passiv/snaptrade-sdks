@@ -11,7 +11,7 @@
 |**cashOptimizer** | **Boolean** |  |  [optional] |
 |**notifyFrequency** | **String** |  |  [optional] |
 |**driftThreshold** | **Double** |  |  [optional] |
-|**preferredCurrency** | **Currency** |  |  [optional] |
+|**preferredCurrency** | [**Currency**](Currency.md) |  |  [optional] |
 
 
 

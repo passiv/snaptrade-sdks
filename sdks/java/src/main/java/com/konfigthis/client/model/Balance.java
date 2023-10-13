@@ -255,6 +255,10 @@ public class Balance {
           throw new IllegalArgumentException(String.format("The required field(s) %s in Balance is not found in the empty JSON string", Balance.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

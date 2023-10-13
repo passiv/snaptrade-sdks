@@ -32,7 +32,7 @@ describe 'OptionsApi' do
   # Creates an option strategy object that will be used to place an option strategy order
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to create the option strategy object in.
   # @param options_get_option_strategy_request 
   # @param [Hash] opts the optional parameters
   # @return [StrategyQuotes]
@@ -46,7 +46,7 @@ describe 'OptionsApi' do
   # Get the options chain
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to get the options chain from.
   # @param symbol Universal symbol ID if symbol
   # @param [Hash] opts the optional parameters
   # @return [Array<OptionChainInner>]
@@ -60,7 +60,7 @@ describe 'OptionsApi' do
   # Get latest market data of option strategy
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account the strategy will be placed in.
   # @param option_strategy_id Option strategy id obtained from response when creating option strategy object
   # @param [Hash] opts the optional parameters
   # @return [StrategyQuotes]
@@ -74,7 +74,7 @@ describe 'OptionsApi' do
   # Get the options holdings in the account
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to fetch options holdings for.
   # @param [Hash] opts the optional parameters
   # @return [Array<OptionsPosition>]
   describe 'list_option_holdings test' do
@@ -87,7 +87,7 @@ describe 'OptionsApi' do
   # Place an option strategy order on the brokerage
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to execute the strategy in.
   # @param option_strategy_id Option strategy id obtained from response when creating option strategy object
   # @param options_place_option_strategy_request 
   # @param [Hash] opts the optional parameters

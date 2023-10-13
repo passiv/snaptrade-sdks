@@ -291,7 +291,7 @@ public class TradingApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to cancel the order in. (required)
      * @param tradingCancelUserAccountOrderRequest The Order ID to be canceled (required)
      * @return CancelUserAccountOrderRequestBuilder
      * @http.response.details

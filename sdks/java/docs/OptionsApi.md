@@ -45,7 +45,7 @@ public class Example {
     String strategyType = "CUSTOM";
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to create the option strategy object in.
     try {
       StrategyQuotes result = client
               .options
@@ -95,7 +95,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to create the option strategy object in. | |
 | **optionsGetOptionStrategyRequest** | [**OptionsGetOptionStrategyRequest**](OptionsGetOptionStrategyRequest.md)|  | |
 
 ### Return type
@@ -148,7 +148,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to get the options chain from.
     UUID symbol = UUID.randomUUID(); // Universal symbol ID if symbol
     try {
       List<OptionChainInner> result = client
@@ -192,7 +192,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to get the options chain from. | |
 | **symbol** | **UUID**| Universal symbol ID if symbol | |
 
 ### Return type
@@ -245,7 +245,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account the strategy will be placed in.
     UUID optionStrategyId = UUID.randomUUID(); // Option strategy id obtained from response when creating option strategy object
     try {
       StrategyQuotes result = client
@@ -296,7 +296,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account the strategy will be placed in. | |
 | **optionStrategyId** | **UUID**| Option strategy id obtained from response when creating option strategy object | |
 
 ### Return type
@@ -349,7 +349,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to fetch options holdings for.
     try {
       List<OptionsPosition> result = client
               .options
@@ -393,7 +393,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to fetch options holdings for. | |
 
 ### Return type
 
@@ -448,7 +448,7 @@ public class Example {
     Double price = 3.4D; // Trade Price if limit or stop limit order
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account get positions.
+    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the strategy in.
     UUID optionStrategyId = UUID.randomUUID(); // Option strategy id obtained from response when creating option strategy object
     try {
       StrategyOrderRecord result = client
@@ -504,7 +504,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account get positions. | |
+| **accountId** | **UUID**| The ID of the account to execute the strategy in. | |
 | **optionStrategyId** | **UUID**| Option strategy id obtained from response when creating option strategy object | |
 | **optionsPlaceOptionStrategyRequest** | [**OptionsPlaceOptionStrategyRequest**](OptionsPlaceOptionStrategyRequest.md)|  | |
 

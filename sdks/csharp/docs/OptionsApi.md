@@ -37,7 +37,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to create the option strategy object in.
             var underlyingSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var legs = new List<OptionLeg>();
             var strategyType = OptionsGetOptionStrategyRequest.StrategyTypeEnum.CUSTOM;
@@ -97,7 +97,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to create the option strategy object in. |  |
 | **optionsGetOptionStrategyRequest** | [**OptionsGetOptionStrategyRequest**](OptionsGetOptionStrategyRequest.md) |  |  |
 
 ### Return type
@@ -140,7 +140,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get the options chain from.
             var symbol = "symbol_example"; // Universal symbol ID if symbol
             
             try
@@ -192,7 +192,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to get the options chain from. |  |
 | **symbol** | **string** | Universal symbol ID if symbol |  |
 
 ### Return type
@@ -235,7 +235,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account the strategy will be placed in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
             
             try
@@ -287,7 +287,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account the strategy will be placed in. |  |
 | **optionStrategyId** | **string** | Option strategy id obtained from response when creating option strategy object |  |
 
 ### Return type
@@ -330,7 +330,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to fetch options holdings for.
             
             try
             {
@@ -381,7 +381,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to fetch options holdings for. |  |
 
 ### Return type
 
@@ -423,7 +423,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
             var orderType = OptionsPlaceOptionStrategyRequest.OrderTypeEnum.Limit;
             var timeInForce = OptionsPlaceOptionStrategyRequest.TimeInForceEnum.DAY;
@@ -484,7 +484,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to execute the strategy in. |  |
 | **optionStrategyId** | **string** | Option strategy id obtained from response when creating option strategy object |  |
 | **optionsPlaceOptionStrategyRequest** | [**OptionsPlaceOptionStrategyRequest**](OptionsPlaceOptionStrategyRequest.md) |  |  |
 

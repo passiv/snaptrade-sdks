@@ -19,9 +19,33 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { Brokerage } from '../models';
+// @ts-ignore
+import { BrokerageAuthorization } from '../models';
+// @ts-ignore
+import { BrokerageSymbol } from '../models';
+// @ts-ignore
+import { BrokerageSymbolOptionSymbol } from '../models';
+// @ts-ignore
+import { BrokerageSymbolSymbol } from '../models';
+// @ts-ignore
+import { BrokerageType } from '../models';
+// @ts-ignore
+import { Currency } from '../models';
+// @ts-ignore
+import { Exchange } from '../models';
+// @ts-ignore
 import { OptionChainInner } from '../models';
 // @ts-ignore
+import { OptionChainInnerChainPerRootInner } from '../models';
+// @ts-ignore
+import { OptionChainInnerChainPerRootInnerChainPerStrikePriceInner } from '../models';
+// @ts-ignore
 import { OptionLeg } from '../models';
+// @ts-ignore
+import { OptionStrategy } from '../models';
+// @ts-ignore
+import { OptionStrategyLegsInner } from '../models';
 // @ts-ignore
 import { OptionsGetOptionStrategyRequest } from '../models';
 // @ts-ignore
@@ -29,9 +53,17 @@ import { OptionsPlaceOptionStrategyRequest } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';
 // @ts-ignore
+import { OptionsPositionCurrency } from '../models';
+// @ts-ignore
+import { SecurityType } from '../models';
+// @ts-ignore
 import { StrategyOrderRecord } from '../models';
 // @ts-ignore
 import { StrategyQuotes } from '../models';
+// @ts-ignore
+import { StrategyQuotesGreek } from '../models';
+// @ts-ignore
+import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
@@ -45,7 +77,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Creates an option strategy object that will be used to place an option strategy order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to create the option strategy object in.
          * @param {OptionsGetOptionStrategyRequest} optionsGetOptionStrategyRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -90,6 +122,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -112,7 +145,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get the options chain
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to get the options chain from.
          * @param {string} symbol Universal symbol ID if symbol
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -179,7 +212,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get latest market data of option strategy
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account the strategy will be placed in.
          * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -243,7 +276,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get the options holdings in the account
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to fetch options holdings for.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -303,7 +336,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Place an option strategy order on the brokerage
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to execute the strategy in.
          * @param {string} optionStrategyId Option strategy id obtained from response when creating option strategy object
          * @param {OptionsPlaceOptionStrategyRequest} optionsPlaceOptionStrategyRequest 
          * @param {*} [options] Override http request option.
@@ -351,6 +384,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
+
 
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -519,7 +553,7 @@ export type OptionsApiGetOptionStrategyRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to create the option strategy object in.
     * @type {string}
     * @memberof OptionsApiGetOptionStrategy
     */
@@ -549,7 +583,7 @@ export type OptionsApiGetOptionsChainRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to get the options chain from.
     * @type {string}
     * @memberof OptionsApiGetOptionsChain
     */
@@ -586,7 +620,7 @@ export type OptionsApiGetOptionsStrategyQuoteRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account the strategy will be placed in.
     * @type {string}
     * @memberof OptionsApiGetOptionsStrategyQuote
     */
@@ -623,7 +657,7 @@ export type OptionsApiListOptionHoldingsRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to fetch options holdings for.
     * @type {string}
     * @memberof OptionsApiListOptionHoldings
     */
@@ -653,7 +687,7 @@ export type OptionsApiPlaceOptionStrategyRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to execute the strategy in.
     * @type {string}
     * @memberof OptionsApiPlaceOptionStrategy
     */

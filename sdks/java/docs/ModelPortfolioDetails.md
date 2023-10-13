@@ -7,9 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**modelPortfolio** | **ModelPortfolio** |  |  [optional] |
-|**modelPortfolioSecurity** | **List&lt;ModelPortfolioSecurity&gt;** |  |  [optional] |
-|**modelPortfolioAssetClass** | **List&lt;ModelPortfolioAssetClass&gt;** |  |  [optional] |
+|**modelPortfolio** | [**ModelPortfolio**](ModelPortfolio.md) |  |  [optional] |
+|**modelPortfolioSecurity** | [**List&lt;ModelPortfolioSecurity&gt;**](ModelPortfolioSecurity.md) |  |  [optional] |
+|**modelPortfolioAssetClass** | [**List&lt;ModelPortfolioAssetClass&gt;**](ModelPortfolioAssetClass.md) |  |  [optional] |
 
 
 

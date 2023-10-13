@@ -412,6 +412,10 @@ public class BrokerageAuthorizationTypeReadOnly {
       if ((jsonObj.get("auth_type") != null && !jsonObj.get("auth_type").isJsonNull()) && !jsonObj.get("auth_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `auth_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("auth_type").toString()));
       }
+      // validate the optional field `brokerage`
+      if (jsonObj.get("brokerage") != null && !jsonObj.get("brokerage").isJsonNull()) {
+        BrokerageAuthorizationTypeReadOnlyBrokerage.validateJsonObject(jsonObj.getAsJsonObject("brokerage"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

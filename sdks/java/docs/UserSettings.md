@@ -17,7 +17,7 @@ User account settings
 |**demo** | **Boolean** |  |  [optional] |
 |**apiEnabled** | **Boolean** |  |  [optional] |
 |**driftThreshold** | **Double** |  |  [optional] |
-|**preferredCurrency** | **Currency** |  |  [optional] |
+|**preferredCurrency** | [**Currency**](Currency.md) |  |  [optional] |
 
 
 

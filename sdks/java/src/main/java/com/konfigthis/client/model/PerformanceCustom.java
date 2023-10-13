@@ -1015,37 +1015,111 @@ public class PerformanceCustom {
           throw new IllegalArgumentException(String.format("The required field(s) %s in PerformanceCustom is not found in the empty JSON string", PerformanceCustom.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("totalEquityTimeframe") != null && !jsonObj.get("totalEquityTimeframe").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `totalEquityTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("totalEquityTimeframe").toString()));
+      if (jsonObj.get("totalEquityTimeframe") != null && !jsonObj.get("totalEquityTimeframe").isJsonNull()) {
+        JsonArray jsonArraytotalEquityTimeframe = jsonObj.getAsJsonArray("totalEquityTimeframe");
+        if (jsonArraytotalEquityTimeframe != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("totalEquityTimeframe").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `totalEquityTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("totalEquityTimeframe").toString()));
+          }
+
+          // validate the optional field `totalEquityTimeframe` (array)
+          for (int i = 0; i < jsonArraytotalEquityTimeframe.size(); i++) {
+            PastValue.validateJsonObject(jsonArraytotalEquityTimeframe.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("contributionTimeframe") != null && !jsonObj.get("contributionTimeframe").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `contributionTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("contributionTimeframe").toString()));
+      // validate the optional field `contributions`
+      if (jsonObj.get("contributions") != null && !jsonObj.get("contributions").isJsonNull()) {
+        NetContributions.validateJsonObject(jsonObj.getAsJsonObject("contributions"));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("contributionTimeframeCumulative") != null && !jsonObj.get("contributionTimeframeCumulative").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `contributionTimeframeCumulative` to be an array in the JSON string but got `%s`", jsonObj.get("contributionTimeframeCumulative").toString()));
+      if (jsonObj.get("contributionTimeframe") != null && !jsonObj.get("contributionTimeframe").isJsonNull()) {
+        JsonArray jsonArraycontributionTimeframe = jsonObj.getAsJsonArray("contributionTimeframe");
+        if (jsonArraycontributionTimeframe != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("contributionTimeframe").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `contributionTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("contributionTimeframe").toString()));
+          }
+
+          // validate the optional field `contributionTimeframe` (array)
+          for (int i = 0; i < jsonArraycontributionTimeframe.size(); i++) {
+            PastValue.validateJsonObject(jsonArraycontributionTimeframe.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("withdrawalTimeframe") != null && !jsonObj.get("withdrawalTimeframe").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `withdrawalTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("withdrawalTimeframe").toString()));
+      if (jsonObj.get("contributionTimeframeCumulative") != null && !jsonObj.get("contributionTimeframeCumulative").isJsonNull()) {
+        JsonArray jsonArraycontributionTimeframeCumulative = jsonObj.getAsJsonArray("contributionTimeframeCumulative");
+        if (jsonArraycontributionTimeframeCumulative != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("contributionTimeframeCumulative").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `contributionTimeframeCumulative` to be an array in the JSON string but got `%s`", jsonObj.get("contributionTimeframeCumulative").toString()));
+          }
+
+          // validate the optional field `contributionTimeframeCumulative` (array)
+          for (int i = 0; i < jsonArraycontributionTimeframeCumulative.size(); i++) {
+            PastValue.validateJsonObject(jsonArraycontributionTimeframeCumulative.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("dividends") != null && !jsonObj.get("dividends").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `dividends` to be an array in the JSON string but got `%s`", jsonObj.get("dividends").toString()));
+      if (jsonObj.get("withdrawalTimeframe") != null && !jsonObj.get("withdrawalTimeframe").isJsonNull()) {
+        JsonArray jsonArraywithdrawalTimeframe = jsonObj.getAsJsonArray("withdrawalTimeframe");
+        if (jsonArraywithdrawalTimeframe != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("withdrawalTimeframe").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `withdrawalTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("withdrawalTimeframe").toString()));
+          }
+
+          // validate the optional field `withdrawalTimeframe` (array)
+          for (int i = 0; i < jsonArraywithdrawalTimeframe.size(); i++) {
+            PastValue.validateJsonObject(jsonArraywithdrawalTimeframe.get(i).getAsJsonObject());
+          };
+        }
+      }
+      if (jsonObj.get("dividends") != null && !jsonObj.get("dividends").isJsonNull()) {
+        JsonArray jsonArraydividends = jsonObj.getAsJsonArray("dividends");
+        if (jsonArraydividends != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("dividends").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `dividends` to be an array in the JSON string but got `%s`", jsonObj.get("dividends").toString()));
+          }
+
+          // validate the optional field `dividends` (array)
+          for (int i = 0; i < jsonArraydividends.size(); i++) {
+            NetDividend.validateJsonObject(jsonArraydividends.get(i).getAsJsonObject());
+          };
+        }
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("badTickers") != null && !jsonObj.get("badTickers").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `badTickers` to be an array in the JSON string but got `%s`", jsonObj.get("badTickers").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("dividendTimeline") != null && !jsonObj.get("dividendTimeline").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `dividendTimeline` to be an array in the JSON string but got `%s`", jsonObj.get("dividendTimeline").toString()));
+      if (jsonObj.get("dividendTimeline") != null && !jsonObj.get("dividendTimeline").isJsonNull()) {
+        JsonArray jsonArraydividendTimeline = jsonObj.getAsJsonArray("dividendTimeline");
+        if (jsonArraydividendTimeline != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("dividendTimeline").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `dividendTimeline` to be an array in the JSON string but got `%s`", jsonObj.get("dividendTimeline").toString()));
+          }
+
+          // validate the optional field `dividendTimeline` (array)
+          for (int i = 0; i < jsonArraydividendTimeline.size(); i++) {
+            MonthlyDividends.validateJsonObject(jsonArraydividendTimeline.get(i).getAsJsonObject());
+          };
+        }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("returnRateTimeframe") != null && !jsonObj.get("returnRateTimeframe").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `returnRateTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("returnRateTimeframe").toString()));
+      if (jsonObj.get("returnRateTimeframe") != null && !jsonObj.get("returnRateTimeframe").isJsonNull()) {
+        JsonArray jsonArrayreturnRateTimeframe = jsonObj.getAsJsonArray("returnRateTimeframe");
+        if (jsonArrayreturnRateTimeframe != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("returnRateTimeframe").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `returnRateTimeframe` to be an array in the JSON string but got `%s`", jsonObj.get("returnRateTimeframe").toString()));
+          }
+
+          // validate the optional field `returnRateTimeframe` (array)
+          for (int i = 0; i < jsonArrayreturnRateTimeframe.size(); i++) {
+            SubPeriodReturnRate.validateJsonObject(jsonArrayreturnRateTimeframe.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

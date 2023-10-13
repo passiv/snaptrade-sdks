@@ -362,9 +362,19 @@ public class OptionChainInner {
       if ((jsonObj.get("optionExerciseType") != null && !jsonObj.get("optionExerciseType").isJsonNull()) && !jsonObj.get("optionExerciseType").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `optionExerciseType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("optionExerciseType").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("chainPerRoot") != null && !jsonObj.get("chainPerRoot").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `chainPerRoot` to be an array in the JSON string but got `%s`", jsonObj.get("chainPerRoot").toString()));
+      if (jsonObj.get("chainPerRoot") != null && !jsonObj.get("chainPerRoot").isJsonNull()) {
+        JsonArray jsonArraychainPerRoot = jsonObj.getAsJsonArray("chainPerRoot");
+        if (jsonArraychainPerRoot != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("chainPerRoot").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `chainPerRoot` to be an array in the JSON string but got `%s`", jsonObj.get("chainPerRoot").toString()));
+          }
+
+          // validate the optional field `chainPerRoot` (array)
+          for (int i = 0; i < jsonArraychainPerRoot.size(); i++) {
+            OptionChainInnerChainPerRootInner.validateJsonObject(jsonArraychainPerRoot.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

@@ -478,6 +478,10 @@ public class SnapTradeHoldingsAccount {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
+      // validate the optional field `brokerage_authorization`
+      if (jsonObj.get("brokerage_authorization") != null && !jsonObj.get("brokerage_authorization").isJsonNull()) {
+        BrokerageAuthorization.validateJsonObject(jsonObj.getAsJsonObject("brokerage_authorization"));
+      }
       if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
       }

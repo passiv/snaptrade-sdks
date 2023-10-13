@@ -627,6 +627,18 @@ public class TradeExecutionStatus {
           throw new IllegalArgumentException(String.format("The required field(s) %s in TradeExecutionStatus is not found in the empty JSON string", TradeExecutionStatus.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        BrokerageSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `universal_symbol`
+      if (jsonObj.get("universal_symbol") != null && !jsonObj.get("universal_symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("universal_symbol"));
+      }
+      // validate the optional field `trade`
+      if (jsonObj.get("trade") != null && !jsonObj.get("trade").isJsonNull()) {
+        Trade.validateJsonObject(jsonObj.getAsJsonObject("trade"));
+      }
       if ((jsonObj.get("state") != null && !jsonObj.get("state").isJsonNull()) && !jsonObj.get("state").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `state` to be a primitive type in the JSON string but got `%s`", jsonObj.get("state").toString()));
       }

@@ -1829,7 +1829,7 @@ public class ReferenceDataApiGenerated {
      * 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account get positions. (required)
+     * @param accountId The ID of the account to search for symbols within. (required)
      * @return SymbolSearchUserAccountRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

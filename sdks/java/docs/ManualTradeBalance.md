@@ -8,8 +8,8 @@ Balance
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**account** | **Account** |  |  [optional] |
-|**currency** | **Currency** |  |  [optional] |
+|**account** | [**Account**](Account.md) |  |  [optional] |
+|**currency** | [**Currency**](Currency.md) |  |  [optional] |
 |**cash** | **Double** | Cash |  [optional] |
 
 

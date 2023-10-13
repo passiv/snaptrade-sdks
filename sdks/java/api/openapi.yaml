@@ -22,19 +22,19 @@ security:
 tags:
 - description: Check whether the API is operational and verify timestamps.
   name: API Status
-- description: Endpoints related to terms of conditions of SnapTrade API use
-  name: API Disclaimer
 - description: Register and authenticate users with SnapTrade.
   name: Authentication
 - description: Retrieve and manage user connections.
   name: Connections
 - description: "Retrieve account information, such as positions, balances, etc."
   name: Account Information
+- description: Manage orders on user accounts
+  name: Trading
+- description: Endpoints related to terms of conditions of SnapTrade API use
+  name: API Disclaimer
 - description: "Retrieve information on account transactions, performance, dividends,\
     \ contributions, etc."
   name: Transactions And Reporting
-- description: Manage orders on user accounts
-  name: Trading
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
@@ -63,39 +63,6 @@ paths:
       - API Status
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--
-      x-accepts: application/json
-  /snapTrade/listUsers:
-    get:
-      operationId: Authentication_listSnapTradeUsers
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserList'
-          description: Successfully generated a list of users
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request. Could be caused by various reasons. Error message
-            is provided in response
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Invalid SnapTrade Client ID provided in query
-          x-do-not-generate: true
-        "500":
-          description: Unexpected error
-      summary: List SnapTrade users
-      tags:
-      - Authentication
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-listUsers
       x-accepts: application/json
   /snapTrade/registerUser:
     post:
@@ -132,53 +99,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-registerUser
       x-content-type: application/json
-      x-accepts: application/json
-  /snapTrade/deleteUser:
-    delete:
-      operationId: Authentication_deleteSnapTradeUser
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteUserResponse'
-          description: Delete successful
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: Forbidden
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Not Found
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Delete SnapTrade user
-      tags:
-      - Authentication
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--snapTrade-deleteUser
       x-accepts: application/json
   /snapTrade/login:
     post:
@@ -236,6 +156,86 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-login
       x-content-type: application/json
       x-accepts: application/json
+  /snapTrade/listUsers:
+    get:
+      operationId: Authentication_listSnapTradeUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+          description: Successfully retrieved a list of users
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request. Could be caused by various reasons. Error message
+            is provided in response
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Invalid SnapTrade Client ID provided in query
+          x-do-not-generate: true
+        "500":
+          description: Unexpected error
+      summary: List SnapTrade users
+      tags:
+      - Authentication
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-listUsers
+      x-accepts: application/json
+  /snapTrade/deleteUser:
+    delete:
+      operationId: Authentication_deleteSnapTradeUser
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponse'
+          description: Delete successful
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Delete SnapTrade user
+      tags:
+      - Authentication
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--snapTrade-deleteUser
+      x-accepts: application/json
   /snapTrade/encryptedJWT:
     get:
       operationId: Authentication_getUserJWT
@@ -290,848 +290,6 @@ paths:
       - Authentication
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-encryptedJWT
-      x-accepts: application/json
-  /snapTrade/partners:
-    get:
-      operationId: ReferenceData_getPartnerInfo
-      parameters: []
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PartnerData'
-          description: Successfully obtained encrypted JWT data. See description on
-            how to object JWT token
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/401FailedRequestResponse'
-          description: Unauthorized
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Not Found
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Get metadata related to Snaptrade partner
-      tags:
-      - Reference Data
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-partners
-      x-accepts: application/json
-  /holdings:
-    get:
-      deprecated: true
-      operationId: AccountInformation_getAllUserHoldings
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: Optional. Comma seperated list of authorization IDs (only use
-          if filtering is needed on one or more authorizations).
-        explode: true
-        in: query
-        name: brokerage_authorizations
-        required: false
-        schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--holdings-get-parameters-2-schema
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AccountHoldings'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: Returns list of accounts and holdings
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: Forbidden
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: "List all accounts for the user, plus balances, positions, and orders\
-        \ for each account."
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--holdings
-      x-accepts: application/json
-  /accounts/{accountId}/holdings:
-    get:
-      operationId: AccountInformation_getUserHoldings
-      parameters:
-      - description: The ID of the account to fetch holdings for.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-parameters-0-schema
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountHoldingsAccount'
-          description: Returns holdings for the account
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: Forbidden
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: "List balances, positions and orders for the specified account."
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-holdings
-      x-accepts: application/json
-  /accounts:
-    get:
-      operationId: AccountInformation_listUserAccounts
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Account'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: A list of all Account objects for the authenticated user.
-        default:
-          description: Unexpected error.
-      summary: List accounts
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts
-      x-accepts: application/json
-  /accounts/{accountId}:
-    get:
-      operationId: AccountInformation_getUserAccountDetails
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account to get detail of.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-          description: Details of a specific investment account
-        default:
-          description: Unexpected error
-      summary: Return details of a specific investment account
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId
-      x-accepts: application/json
-    put:
-      operationId: AccountInformation_updateUserAccount
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account to update.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Account'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: Successfully updated details of an investment account
-        default:
-          description: Unexpected error
-      summary: Update details of an investment account
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-put--accounts-accountId
-      x-accepts: application/json
-  /accounts/{accountId}/balances:
-    get:
-      operationId: AccountInformation_getUserAccountBalance
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                items:
-                  $ref: '#/components/schemas/Balance'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: List of all balances in investment account
-        default:
-          description: Unexpected error
-      summary: List account balances
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balances
-      x-accepts: '*/*'
-  /accounts/{accountId}/positions:
-    get:
-      operationId: AccountInformation_getUserAccountPositions
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                items:
-                  $ref: '#/components/schemas/Position'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: List all positions in investment account
-        default:
-          description: Unexpected error
-      summary: List account positions
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions
-      x-accepts: '*/*'
-  /accounts/{accountId}/orders:
-    get:
-      operationId: AccountInformation_getUserAccountOrders
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: defaults value is set to "all"
-        explode: true
-        in: query
-        name: state
-        required: false
-        schema:
-          enum:
-          - all
-          - open
-          - executed
-          type: string
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AccountOrderRecord'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: List all orders in account
-        "500":
-          description: Unexpected error
-      summary: Get history of orders placed in account
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
-      x-accepts: application/json
-  /accounts/{accountId}/quotes:
-    get:
-      operationId: Trading_getUserAccountQuotes
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: List of universal_symbol_id or tickers to get quotes for.
-        explode: true
-        in: query
-        name: symbols
-        required: true
-        schema:
-          type: string
-        style: form
-      - description: Should be set to True if providing tickers.
-        explode: true
-        in: query
-        name: use_ticker
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - description: The ID of the account to get quotes.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SymbolsQuotes'
-          description: Returns quotes object with different prices
-        "500":
-          description: Unexpected error
-      summary: Get symbol quotes
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes
-      x-accepts: application/json
-  /accounts/{accountId}/orders/cancel:
-    post:
-      operationId: Trading_cancelUserAccountOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Order Record of canceled order
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Unable to cancel open order. Please verify status in brokerage
-            account
-          x-do-not-generate: true
-        "500":
-          description: Unexpected error
-      summary: Cancel open order in account
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/symbols:
-    post:
-      operationId: ReferenceData_symbolSearchUserAccount
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SymbolQuery'
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                items:
-                  $ref: '#/components/schemas/UniversalSymbol'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: Array of universal symbol supported by account based on substring
-            sent it
-        default:
-          description: Unexpected error
-      summary: Search for symbols available in an account
-      tags:
-      - Reference Data
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols
-      x-content-type: application/json
-      x-accepts: '*/*'
-  /accounts/{accountId}/options:
-    get:
-      operationId: Options_listOptionHoldings
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/OptionsPosition'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: The option holdings in the account
-        "500":
-          description: Unexpected error
-      summary: Get the options holdings in the account
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options
-      x-accepts: application/json
-  /accounts/{accountId}/optionsChain:
-    get:
-      operationId: Options_getOptionsChain
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Universal symbol ID if symbol
-        explode: true
-        in: query
-        name: symbol
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionChain'
-          description: List of all Options available for the brokerage symbol
-        "500":
-          description: Unexpected error
-      summary: Get the options chain
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy:
-    post:
-      operationId: Options_getOptionStrategy
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/OptionStrategyRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyQuotes'
-          description: Order Quotes
-        "500":
-          description: Unexpected error
-      summary: Creates an option strategy object that will be used to place an option
-        strategy order
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
-    get:
-      operationId: Options_getOptionsStrategyQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Option strategy id obtained from response when creating option
-          strategy object
-        explode: false
-        in: path
-        name: optionStrategyId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyQuotes'
-          description: Order Quotes
-        "500":
-          description: Unexpected error
-      summary: Get latest market data of option strategy
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
-    post:
-      operationId: Options_placeOptionStrategy
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account get positions.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      - description: Option strategy id obtained from response when creating option
-          strategy object
-        explode: false
-        in: path
-        name: optionStrategyId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/OrderStrategyExecuteBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyOrderRecord'
-          description: Status of strategy order placed
-        "500":
-          description: Unexpected error
-      summary: Place an option strategy order on the brokerage
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute
-      x-content-type: application/json
       x-accepts: application/json
   /authorizations:
     get:
@@ -1296,6 +454,1040 @@ paths:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sessionEvents
+      x-accepts: application/json
+  /accounts:
+    get:
+      operationId: AccountInformation_listUserAccounts
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: A list of all Account objects for the authenticated user.
+        default:
+          description: Unexpected error.
+      summary: List accounts
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts
+      x-accepts: application/json
+  /holdings:
+    get:
+      deprecated: true
+      operationId: AccountInformation_getAllUserHoldings
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: Optional. Comma seperated list of authorization IDs (only use
+          if filtering is needed on one or more authorizations).
+        explode: true
+        in: query
+        name: brokerage_authorizations
+        required: false
+        schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--holdings-get-parameters-2-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountHoldings'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: Returns list of accounts and holdings
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: "List all accounts for the user, plus balances, positions, and orders\
+        \ for each account."
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--holdings
+      x-accepts: application/json
+  /accounts/{accountId}/holdings:
+    get:
+      operationId: AccountInformation_getUserHoldings
+      parameters:
+      - description: The ID of the account to fetch holdings for.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-parameters-0-schema
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountHoldingsAccount'
+          description: Returns holdings for the account
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: "List balances, positions and orders for the specified account."
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-holdings
+      x-accepts: application/json
+  /accounts/{accountId}:
+    get:
+      operationId: AccountInformation_getUserAccountDetails
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to get detail of.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: Details of a specific investment account
+        default:
+          description: Unexpected error
+      summary: Return details of a specific investment account
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId
+      x-accepts: application/json
+    put:
+      operationId: AccountInformation_updateUserAccount
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to update.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: Successfully updated details of an investment account
+        default:
+          description: Unexpected error
+      summary: Update details of an investment account
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-put--accounts-accountId
+      x-accepts: application/json
+  /accounts/{accountId}/balances:
+    get:
+      operationId: AccountInformation_getUserAccountBalance
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to get balances.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Balance'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: List of all balances in investment account
+        default:
+          description: Unexpected error
+      summary: List account balances
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balances
+      x-accepts: '*/*'
+  /accounts/{accountId}/positions:
+    get:
+      operationId: AccountInformation_getUserAccountPositions
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to get positions.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: List all positions in investment account
+        default:
+          description: Unexpected error
+      summary: List account positions
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions
+      x-accepts: '*/*'
+  /accounts/{accountId}/orders:
+    get:
+      operationId: AccountInformation_getUserAccountOrders
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: defaults value is set to "all"
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        style: form
+      - description: The ID of the account to get orders.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountOrderRecord'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: List all orders in account
+        "500":
+          description: Unexpected error
+      summary: Get history of orders placed in account
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
+      x-accepts: application/json
+  /accounts/{accountId}/quotes:
+    get:
+      operationId: Trading_getUserAccountQuotes
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: List of universal_symbol_id or tickers to get quotes for.
+        explode: true
+        in: query
+        name: symbols
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Should be set to True if providing tickers.
+        explode: true
+        in: query
+        name: use_ticker
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The ID of the account to get quotes.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SymbolsQuotes'
+          description: Returns quotes object with different prices
+        "500":
+          description: Unexpected error
+      summary: Get symbol quotes
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes
+      x-accepts: application/json
+  /trade/impact:
+    post:
+      operationId: Trading_getOrderImpact
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualTradeAndImpact'
+          description: Return trade object and it's impact on the account
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Missing or wrong data format provided in request body
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Check impact of trades on account.
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-impact
+      x-content-type: application/json
+      x-accepts: application/json
+  /trade/{tradeId}:
+    post:
+      operationId: Trading_placeOrder
+      parameters:
+      - description: The ID of trade object obtained from trade/impact endpoint
+        explode: false
+        in: path
+        name: tradeId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Status of order placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Failed to submit order to broker
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-tradeId
+      x-accepts: application/json
+  /trade/place:
+    post:
+      operationId: Trading_placeForceOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Trade sucessfully placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place a trade with NO validation.
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
+      x-content-type: application/json
+      x-accepts: application/json
+  /trade/oco:
+    post:
+      operationId: Trading_placeOCOOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/OCORequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Status of order placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Failed to submit order to broker
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place a OCO (One Cancels Other) order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-oco
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/orders/cancel:
+    post:
+      operationId: Trading_cancelUserAccountOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to cancel the order in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Order Record of canceled order
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Unable to cancel open order. Please verify status in brokerage
+            account
+          x-do-not-generate: true
+        "500":
+          description: Unexpected error
+      summary: Cancel open order in account
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
+      x-content-type: application/json
+      x-accepts: application/json
+  /snapTrade/partners:
+    get:
+      operationId: ReferenceData_getPartnerInfo
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerData'
+          description: Successfully obtained encrypted JWT data. See description on
+            how to object JWT token
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Get metadata related to Snaptrade partner
+      tags:
+      - Reference Data
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-partners
+      x-accepts: application/json
+  /accounts/{accountId}/symbols:
+    post:
+      operationId: ReferenceData_symbolSearchUserAccount
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to search for symbols within.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SymbolQuery'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/UniversalSymbol'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: Array of universal symbol supported by account based on substring
+            sent it
+        default:
+          description: Unexpected error
+      summary: Search for symbols available in an account
+      tags:
+      - Reference Data
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols
+      x-content-type: application/json
+      x-accepts: '*/*'
+  /accounts/{accountId}/options:
+    get:
+      operationId: Options_listOptionHoldings
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to fetch options holdings for.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OptionsPosition'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: The option holdings in the account
+        "500":
+          description: Unexpected error
+      summary: Get the options holdings in the account
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options
+      x-accepts: application/json
+  /accounts/{accountId}/optionsChain:
+    get:
+      operationId: Options_getOptionsChain
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to get the options chain from.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universal symbol ID if symbol
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionChain'
+          description: List of all Options available for the brokerage symbol
+        "500":
+          description: Unexpected error
+      summary: Get the options chain
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy:
+    post:
+      operationId: Options_getOptionStrategy
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to create the option strategy object in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/OptionStrategyRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyQuotes'
+          description: Order Quotes
+        "500":
+          description: Unexpected error
+      summary: Creates an option strategy object that will be used to place an option
+        strategy order
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+    get:
+      operationId: Options_getOptionsStrategyQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account the strategy will be placed in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyQuotes'
+          description: Order Quotes
+        "500":
+          description: Unexpected error
+      summary: Get latest market data of option strategy
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
+    post:
+      operationId: Options_placeOptionStrategy
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to execute the strategy in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/OrderStrategyExecuteBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyOrderRecord'
+          description: Status of strategy order placed
+        "500":
+          description: Unexpected error
+      summary: Place an option strategy order on the brokerage
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute
+      x-content-type: application/json
       x-accepts: application/json
   /brokerages:
     get:
@@ -1564,198 +1756,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-ticker
       x-accepts: '*/*'
-  /trade/place:
-    post:
-      operationId: Trading_placeForceOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Trade sucessfully placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Trade could not be placed
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place a trade with NO validation.
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
-      x-content-type: application/json
-      x-accepts: application/json
-  /trade/impact:
-    post:
-      operationId: Trading_getOrderImpact
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManualTradeAndImpact'
-          description: Return trade object and it's impact on the account
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Missing or wrong data format provided in request body
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Check impact of trades on account.
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-impact
-      x-content-type: application/json
-      x-accepts: application/json
-  /trade/{tradeId}:
-    post:
-      operationId: Trading_placeOrder
-      parameters:
-      - description: The ID of trade object obtained from trade/impact endpoint
-        explode: false
-        in: path
-        name: tradeId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Status of order placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Failed to submit order to broker
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-tradeId
-      x-accepts: application/json
-  /trade/oco:
-    post:
-      operationId: Trading_placeOCOOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/OCORequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Status of order placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Failed to submit order to broker
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place a OCO (One Cancels Other) order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-oco
-      x-content-type: application/json
-      x-accepts: application/json
   /activities:
     get:
       description: Returns activities (transactions) for a user. Specifing start and
@@ -2977,9 +2977,7 @@ components:
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_symbol: null
-        fractional_units: 1.44
         price: 31.33
-        open_pnl: 0.44
         currency: null
         units: 10
         average_purchase_price: 108.3353
@@ -3007,20 +3005,6 @@ components:
           type: number
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
-        open_pnl:
-          example: 0.44
-          nullable: true
-          type: number
-          x-konfig-original-example: 0.44
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-open_pnl
-        fractional_units:
-          description: "Deprecated, use the units field for both fractional and integer\
-            \ units going forward"
-          example: 1.44
-          nullable: true
-          type: number
-          x-konfig-original-example: 1.44
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-fractional_units
       type: object
     OptionsHoldings:
       additionalProperties: true
@@ -6871,14 +6855,6 @@ components:
       example: 108.3353
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsPosition-properties-open_pnl:
-      example: 0.44
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsPosition-properties-fractional_units:
-      example: 1.44
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsHoldings-properties-id:
       example: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
       type: string
@@ -8127,78 +8103,6 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-apiCredentials:
-      additionalProperties: true
-      properties: {}
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-post--snapTrade-apiCredentials:
-      additionalProperties: true
-      properties:
-        brokerageAuthorizationTypeId:
-          description: Brokerage Authorization Type ID from BrokerageAuthorizationType
-            object
-        brokerageAPIClientId:
-          description: API Client ID from brokerage when registering app
-        brokerageAPIClientSecret:
-          description: API Client Secret from brokerage when registering app
-        redirectURI:
-          description: Redirect uri from brokerage when registering app
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-delete--snapTrade-apiCredentials-apiCredentialsId:
-      additionalProperties: true
-      properties:
-        apiCredentialsId:
-          format: uuid
-          type: string
-      required:
-      - apiCredentialsId
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - apiCredentialsId
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-apiCredentials-apiCredentialsId:
-      additionalProperties: true
-      properties:
-        apiCredentialsId:
-          format: uuid
-          type: string
-      required:
-      - apiCredentialsId
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - apiCredentialsId
-    konfig-generated-schema-single-parameter-schema-put--snapTrade-apiCredentials-apiCredentialsId:
-      additionalProperties: true
-      properties:
-        apiCredentialsId:
-          format: uuid
-          type: string
-        brokerageAuthorizationTypeId:
-          description: Brokerage Authorization Type ID from BrokerageAuthorizationType
-            object
-        brokerageAPIClientId:
-          description: API Client ID from brokerage when registering app
-        brokerageAPIClientSecret:
-          description: API Client Secret from brokerage when registering app
-        redirectURI:
-          description: Redirect uri from brokerage when registering app
-      required:
-      - apiCredentialsId
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - apiCredentialsId
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-listUsers:
-      additionalProperties: true
-      properties: {}
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter: []
     konfig-generated-schema-single-parameter-schema-post--snapTrade-registerUser:
       additionalProperties: true
       properties:
@@ -8209,17 +8113,6 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-delete--snapTrade-deleteUser:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-      required:
-      - userId
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
     konfig-generated-schema-single-parameter-schema-post--snapTrade-login:
       additionalProperties: true
       properties:
@@ -8260,6 +8153,23 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-get--snapTrade-listUsers:
+      additionalProperties: true
+      properties: {}
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-delete--snapTrade-deleteUser:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+      required:
+      - userId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-encryptedJWT:
       additionalProperties: true
       properties:
@@ -8275,12 +8185,91 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
+    konfig-generated-schema-single-parameter-schema-get--authorizations:
       additionalProperties: true
-      properties: {}
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
       type: object
       x-do-not-generate: true
-      x-konfig-is-parameter: []
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-delete--authorizations-authorizationId:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-get--sessionEvents:
+      additionalProperties: true
+      properties:
+        PartnerClientId:
+          $ref: '#/components/schemas/ClientID'
+        userId:
+          $ref: '#/components/schemas/AccountIDs'
+        sessionId:
+          $ref: '#/components/schemas/AccountIDs'
+      required:
+      - PartnerClientId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - PartnerClientId
+      - userId
+      - sessionId
+    konfig-generated-schema-single-parameter-schema-get--accounts:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--holdings:
       additionalProperties: true
       properties:
@@ -8324,21 +8313,6 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - accountId
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-get--accounts:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId:
@@ -8474,6 +8448,107 @@ components:
       - symbols
       - use_ticker
       - accountId
+    konfig-generated-schema-single-parameter-schema-post--trade-impact:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        account_id:
+          $ref: '#/components/schemas/Id'
+        action:
+          $ref: '#/components/schemas/Action'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        price:
+          $ref: '#/components/schemas/Price'
+        stop:
+          $ref: '#/components/schemas/StopPrice'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        units:
+          $ref: '#/components/schemas/Units'
+        universal_symbol_id:
+          $ref: '#/components/schemas/Id'
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--trade-tradeId:
+      additionalProperties: true
+      properties:
+        tradeId:
+          format: uuid
+          type: string
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - tradeId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - tradeId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--trade-place:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        account_id:
+          $ref: '#/components/schemas/Id'
+        action:
+          $ref: '#/components/schemas/Action'
+        order_type:
+          $ref: '#/components/schemas/OrderType'
+        price:
+          $ref: '#/components/schemas/Price'
+        stop:
+          $ref: '#/components/schemas/StopPrice'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForce'
+        units:
+          $ref: '#/components/schemas/Units'
+        universal_symbol_id:
+          $ref: '#/components/schemas/Id'
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--trade-oco:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        first_trade_id:
+          description: The ID of first trade object obtained from trade/impact endpoint
+        second_trade_id:
+          description: The ID of second trade object obtained from trade/impact endpoint
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
       additionalProperties: true
       properties:
@@ -8496,6 +8571,12 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
+      additionalProperties: true
+      properties: {}
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols:
       additionalProperties: true
       properties:
@@ -8663,76 +8744,6 @@ components:
       - userSecret
       - accountId
       - optionStrategyId
-    konfig-generated-schema-single-parameter-schema-get--authorizations:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-delete--authorizations-authorizationId:
-      additionalProperties: true
-      properties:
-        authorizationId:
-          $ref: '#/components/schemas/Id'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - authorizationId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - authorizationId
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId:
-      additionalProperties: true
-      properties:
-        authorizationId:
-          $ref: '#/components/schemas/Id'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - authorizationId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - authorizationId
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-get--sessionEvents:
-      additionalProperties: true
-      properties:
-        PartnerClientId:
-          $ref: '#/components/schemas/ClientID'
-        userId:
-          $ref: '#/components/schemas/AccountIDs'
-        sessionId:
-          $ref: '#/components/schemas/AccountIDs'
-      required:
-      - PartnerClientId
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - PartnerClientId
-      - userId
-      - sessionId
     konfig-generated-schema-single-parameter-schema-get--brokerages:
       additionalProperties: true
       properties: {}
@@ -8827,107 +8838,6 @@ components:
       x-konfig-is-parameter:
       - ticker
       - symbolId
-    konfig-generated-schema-single-parameter-schema-post--trade-place:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        account_id:
-          $ref: '#/components/schemas/Id'
-        action:
-          $ref: '#/components/schemas/Action'
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        price:
-          $ref: '#/components/schemas/Price'
-        stop:
-          $ref: '#/components/schemas/StopPrice'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        units:
-          $ref: '#/components/schemas/Units'
-        universal_symbol_id:
-          $ref: '#/components/schemas/Id'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-post--trade-impact:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        account_id:
-          $ref: '#/components/schemas/Id'
-        action:
-          $ref: '#/components/schemas/Action'
-        order_type:
-          $ref: '#/components/schemas/OrderType'
-        price:
-          $ref: '#/components/schemas/Price'
-        stop:
-          $ref: '#/components/schemas/StopPrice'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
-        units:
-          $ref: '#/components/schemas/Units'
-        universal_symbol_id:
-          $ref: '#/components/schemas/Id'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-post--trade-tradeId:
-      additionalProperties: true
-      properties:
-        tradeId:
-          format: uuid
-          type: string
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - tradeId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - tradeId
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-post--trade-oco:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        first_trade_id:
-          description: The ID of first trade object obtained from trade/impact endpoint
-        second_trade_id:
-          description: The ID of second trade object obtained from trade/impact endpoint
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--activities:
       additionalProperties: true
       properties:
@@ -9178,6 +9088,16 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    Connections_sessionEvents_200_response_inner:
+      anyOf:
+      - $ref: '#/components/schemas/SessionEvent'
+    Trading_placeOCOOrder_request:
+      properties:
+        first_trade_id:
+          description: The ID of first trade object obtained from trade/impact endpoint
+        second_trade_id:
+          description: The ID of second trade object obtained from trade/impact endpoint
+      type: object
     Trading_cancelUserAccountOrder_request:
       properties:
         brokerage_order_id:
@@ -9233,16 +9153,6 @@ components:
       - order_type
       - price
       - time_in_force
-      type: object
-    Connections_sessionEvents_200_response_inner:
-      anyOf:
-      - $ref: '#/components/schemas/SessionEvent'
-    Trading_placeOCOOrder_request:
-      properties:
-        first_trade_id:
-          description: The ID of first trade object obtained from trade/impact endpoint
-        second_trade_id:
-          description: The ID of second trade object obtained from trade/impact endpoint
       type: object
     OptionsPosition_currency:
       allOf:

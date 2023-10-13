@@ -333,12 +333,16 @@ public class OptionsGetOptionStrategyRequest {
       if (!jsonObj.get("underlying_symbol_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `underlying_symbol_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("underlying_symbol_id").toString()));
       }
-      // ensure the required json array is present
-      if (jsonObj.get("legs") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("legs").isJsonArray()) {
+      // ensure the json data is an array
+      if (!jsonObj.get("legs").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `legs` to be an array in the JSON string but got `%s`", jsonObj.get("legs").toString()));
       }
+
+      JsonArray jsonArraylegs = jsonObj.getAsJsonArray("legs");
+      // validate the required field `legs` (array)
+      for (int i = 0; i < jsonArraylegs.size(); i++) {
+        OptionLeg.validateJsonObject(jsonArraylegs.get(i).getAsJsonObject());
+      };
       if (!jsonObj.get("strategy_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `strategy_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("strategy_type").toString()));
       }

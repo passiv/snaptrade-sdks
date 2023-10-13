@@ -248,9 +248,23 @@ public class ModelAssetClassDetails {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelAssetClassDetails is not found in the empty JSON string", ModelAssetClassDetails.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("model_asset_class_target") != null && !jsonObj.get("model_asset_class_target").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `model_asset_class_target` to be an array in the JSON string but got `%s`", jsonObj.get("model_asset_class_target").toString()));
+      // validate the optional field `model_asset_class`
+      if (jsonObj.get("model_asset_class") != null && !jsonObj.get("model_asset_class").isJsonNull()) {
+        ModelAssetClass.validateJsonObject(jsonObj.getAsJsonObject("model_asset_class"));
+      }
+      if (jsonObj.get("model_asset_class_target") != null && !jsonObj.get("model_asset_class_target").isJsonNull()) {
+        JsonArray jsonArraymodelAssetClassTarget = jsonObj.getAsJsonArray("model_asset_class_target");
+        if (jsonArraymodelAssetClassTarget != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("model_asset_class_target").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `model_asset_class_target` to be an array in the JSON string but got `%s`", jsonObj.get("model_asset_class_target").toString()));
+          }
+
+          // validate the optional field `model_asset_class_target` (array)
+          for (int i = 0; i < jsonArraymodelAssetClassTarget.size(); i++) {
+            ModelAssetClassTarget.validateJsonObject(jsonArraymodelAssetClassTarget.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

@@ -15,7 +15,7 @@ Holdings with account ID
 |**number** | **String** |  |  [optional] |
 |**institutionName** | **String** |  |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** |  |  [optional] |
-|**cashRestrictions** | **List&lt;CashRestriction&gt;** |  |  [optional] |
+|**cashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) |  |  [optional] |
 |**createdDate** | **String** | Time |  [optional] |
 
 

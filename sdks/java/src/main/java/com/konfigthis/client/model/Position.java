@@ -440,6 +440,10 @@ public class Position {
           throw new IllegalArgumentException(String.format("The required field(s) %s in Position is not found in the empty JSON string", Position.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        PositionSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

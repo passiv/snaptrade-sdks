@@ -540,6 +540,10 @@ public class UserSettings {
       if ((jsonObj.get("activated_trial_date") != null && !jsonObj.get("activated_trial_date").isJsonNull()) && !jsonObj.get("activated_trial_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `activated_trial_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("activated_trial_date").toString()));
       }
+      // validate the optional field `preferred_currency`
+      if (jsonObj.get("preferred_currency") != null && !jsonObj.get("preferred_currency").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("preferred_currency"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

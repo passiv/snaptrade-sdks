@@ -275,7 +275,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully generated a list of users |  -  |
+| **200** | Successfully retrieved a list of users |  -  |
 | **400** | Bad Request. Could be caused by various reasons. Error message is provided in response |  -  |
 | **404** | Invalid SnapTrade Client ID provided in query |  -  |
 | **500** | Unexpected error |  -  |

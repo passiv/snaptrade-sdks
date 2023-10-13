@@ -280,9 +280,19 @@ public class OptionChainInnerChainPerRootInner {
       if ((jsonObj.get("optionRoot") != null && !jsonObj.get("optionRoot").isJsonNull()) && !jsonObj.get("optionRoot").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `optionRoot` to be a primitive type in the JSON string but got `%s`", jsonObj.get("optionRoot").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("chainPerStrikePrice") != null && !jsonObj.get("chainPerStrikePrice").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `chainPerStrikePrice` to be an array in the JSON string but got `%s`", jsonObj.get("chainPerStrikePrice").toString()));
+      if (jsonObj.get("chainPerStrikePrice") != null && !jsonObj.get("chainPerStrikePrice").isJsonNull()) {
+        JsonArray jsonArraychainPerStrikePrice = jsonObj.getAsJsonArray("chainPerStrikePrice");
+        if (jsonArraychainPerStrikePrice != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("chainPerStrikePrice").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `chainPerStrikePrice` to be an array in the JSON string but got `%s`", jsonObj.get("chainPerStrikePrice").toString()));
+          }
+
+          // validate the optional field `chainPerStrikePrice` (array)
+          for (int i = 0; i < jsonArraychainPerStrikePrice.size(); i++) {
+            OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.validateJsonObject(jsonArraychainPerStrikePrice.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

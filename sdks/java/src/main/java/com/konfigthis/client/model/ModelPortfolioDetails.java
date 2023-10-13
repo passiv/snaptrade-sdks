@@ -294,13 +294,37 @@ public class ModelPortfolioDetails {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ModelPortfolioDetails is not found in the empty JSON string", ModelPortfolioDetails.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("model_portfolio_security") != null && !jsonObj.get("model_portfolio_security").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `model_portfolio_security` to be an array in the JSON string but got `%s`", jsonObj.get("model_portfolio_security").toString()));
+      // validate the optional field `model_portfolio`
+      if (jsonObj.get("model_portfolio") != null && !jsonObj.get("model_portfolio").isJsonNull()) {
+        ModelPortfolio.validateJsonObject(jsonObj.getAsJsonObject("model_portfolio"));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("model_portfolio_asset_class") != null && !jsonObj.get("model_portfolio_asset_class").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `model_portfolio_asset_class` to be an array in the JSON string but got `%s`", jsonObj.get("model_portfolio_asset_class").toString()));
+      if (jsonObj.get("model_portfolio_security") != null && !jsonObj.get("model_portfolio_security").isJsonNull()) {
+        JsonArray jsonArraymodelPortfolioSecurity = jsonObj.getAsJsonArray("model_portfolio_security");
+        if (jsonArraymodelPortfolioSecurity != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("model_portfolio_security").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `model_portfolio_security` to be an array in the JSON string but got `%s`", jsonObj.get("model_portfolio_security").toString()));
+          }
+
+          // validate the optional field `model_portfolio_security` (array)
+          for (int i = 0; i < jsonArraymodelPortfolioSecurity.size(); i++) {
+            ModelPortfolioSecurity.validateJsonObject(jsonArraymodelPortfolioSecurity.get(i).getAsJsonObject());
+          };
+        }
+      }
+      if (jsonObj.get("model_portfolio_asset_class") != null && !jsonObj.get("model_portfolio_asset_class").isJsonNull()) {
+        JsonArray jsonArraymodelPortfolioAssetClass = jsonObj.getAsJsonArray("model_portfolio_asset_class");
+        if (jsonArraymodelPortfolioAssetClass != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("model_portfolio_asset_class").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `model_portfolio_asset_class` to be an array in the JSON string but got `%s`", jsonObj.get("model_portfolio_asset_class").toString()));
+          }
+
+          // validate the optional field `model_portfolio_asset_class` (array)
+          for (int i = 0; i < jsonArraymodelPortfolioAssetClass.size(); i++) {
+            ModelPortfolioAssetClass.validateJsonObject(jsonArraymodelPortfolioAssetClass.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

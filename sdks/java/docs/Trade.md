@@ -9,9 +9,9 @@ A trade object
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **UUID** |  |  [optional] |
-|**account** | **Account** |  |  [optional] |
-|**symbol** | **BrokerageSymbol** |  |  [optional] |
-|**universalSymbol** | **UniversalSymbol** |  |  [optional] |
+|**account** | [**Account**](Account.md) |  |  [optional] |
+|**symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  |  [optional] |
+|**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**action** | [**ActionEnum**](#ActionEnum) |  |  [optional] |
 |**units** | **Integer** |  |  [optional] |
 |**price** | **Double** |  |  [optional] |

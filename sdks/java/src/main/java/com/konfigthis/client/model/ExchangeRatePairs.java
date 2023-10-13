@@ -279,6 +279,14 @@ public class ExchangeRatePairs {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ExchangeRatePairs is not found in the empty JSON string", ExchangeRatePairs.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `src`
+      if (jsonObj.get("src") != null && !jsonObj.get("src").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("src"));
+      }
+      // validate the optional field `dst`
+      if (jsonObj.get("dst") != null && !jsonObj.get("dst").isJsonNull()) {
+        Currency.validateJsonObject(jsonObj.getAsJsonObject("dst"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

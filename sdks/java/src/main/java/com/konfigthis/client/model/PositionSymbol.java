@@ -400,6 +400,10 @@ public class PositionSymbol {
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
       if (!jsonObj.get("local_id").isJsonNull() && (jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
       }

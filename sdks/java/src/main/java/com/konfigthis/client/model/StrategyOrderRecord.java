@@ -800,6 +800,10 @@ public class StrategyOrderRecord {
           throw new IllegalArgumentException(String.format("The required field(s) %s in StrategyOrderRecord is not found in the empty JSON string", StrategyOrderRecord.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `strategy`
+      if (jsonObj.get("strategy") != null && !jsonObj.get("strategy").isJsonNull()) {
+        OptionStrategy.validateJsonObject(jsonObj.getAsJsonObject("strategy"));
+      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }

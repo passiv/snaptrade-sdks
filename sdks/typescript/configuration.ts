@@ -23,6 +23,11 @@ export interface ConfigurationParameters {
     clientId?: string;
     signature?: string;
     timestamp?: string;
+    /**
+     * parameter for apiKey security
+     * @param name security name
+     * @memberof Configuration
+     */
     apiKey?: ApiKey;
     username?: string;
     password?: string;

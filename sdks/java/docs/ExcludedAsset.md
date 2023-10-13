@@ -8,7 +8,7 @@ An excluded asset in a portfolio group
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**symbol** | **UniversalSymbol** |  |  [optional] |
+|**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 
 
 

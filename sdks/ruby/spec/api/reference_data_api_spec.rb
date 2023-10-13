@@ -137,7 +137,7 @@ describe 'ReferenceDataApi' do
   # Search for symbols available in an account
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account get positions.
+  # @param account_id The ID of the account to search for symbols within.
   # @param [Hash] opts the optional parameters
   # @option opts [SymbolQuery] :symbol_query 
   # @return [Array<UniversalSymbol>]

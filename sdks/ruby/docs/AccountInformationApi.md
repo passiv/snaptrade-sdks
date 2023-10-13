@@ -137,7 +137,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to get balances. |  |
 
 ### Return type
 
@@ -271,7 +271,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to get orders. |  |
 | **state** | **String** | defaults value is set to \&quot;all\&quot; | [optional] |
 
 ### Return type
@@ -337,7 +337,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to get positions. |  |
 
 ### Return type
 

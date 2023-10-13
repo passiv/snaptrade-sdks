@@ -333,7 +333,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to search for symbols within.
             var substring = "apple";
             
             var symbolQuery = new SymbolQuery(

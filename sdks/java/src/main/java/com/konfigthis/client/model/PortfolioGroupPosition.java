@@ -295,6 +295,10 @@ public class PortfolioGroupPosition {
           throw new IllegalArgumentException(String.format("The required field(s) %s in PortfolioGroupPosition is not found in the empty JSON string", PortfolioGroupPosition.openapiRequiredFields.toString()));
         }
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

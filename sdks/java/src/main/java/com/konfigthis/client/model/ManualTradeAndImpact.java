@@ -290,9 +290,27 @@ public class ManualTradeAndImpact {
           throw new IllegalArgumentException(String.format("The required field(s) %s in ManualTradeAndImpact is not found in the empty JSON string", ManualTradeAndImpact.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("trade_impacts") != null && !jsonObj.get("trade_impacts").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `trade_impacts` to be an array in the JSON string but got `%s`", jsonObj.get("trade_impacts").toString()));
+      // validate the optional field `trade`
+      if (jsonObj.get("trade") != null && !jsonObj.get("trade").isJsonNull()) {
+        ManualTrade.validateJsonObject(jsonObj.getAsJsonObject("trade"));
+      }
+      if (jsonObj.get("trade_impacts") != null && !jsonObj.get("trade_impacts").isJsonNull()) {
+        JsonArray jsonArraytradeImpacts = jsonObj.getAsJsonArray("trade_impacts");
+        if (jsonArraytradeImpacts != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("trade_impacts").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `trade_impacts` to be an array in the JSON string but got `%s`", jsonObj.get("trade_impacts").toString()));
+          }
+
+          // validate the optional field `trade_impacts` (array)
+          for (int i = 0; i < jsonArraytradeImpacts.size(); i++) {
+            ManualTrade.validateJsonObject(jsonArraytradeImpacts.get(i).getAsJsonObject());
+          };
+        }
+      }
+      // validate the optional field `combined_remaining_balance`
+      if (jsonObj.get("combined_remaining_balance") != null && !jsonObj.get("combined_remaining_balance").isJsonNull()) {
+        ManualTradeBalance.validateJsonObject(jsonObj.getAsJsonObject("combined_remaining_balance"));
       }
   }
 

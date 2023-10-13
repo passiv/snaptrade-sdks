@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to create the option strategy object in.
             var underlyingSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var legs = new List<OptionLeg>();
             var strategyType = OptionsGetOptionStrategyRequest.StrategyTypeEnum.CUSTOM;
@@ -93,7 +93,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get the options chain from.
             var symbol = "symbol_example"; // Universal symbol ID if symbol
             
             try
@@ -124,7 +124,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account the strategy will be placed in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
             
             try
@@ -155,7 +155,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to fetch options holdings for.
             
             try
             {
@@ -185,7 +185,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
             var orderType = OptionsPlaceOptionStrategyRequest.OrderTypeEnum.Limit;
             var timeInForce = OptionsPlaceOptionStrategyRequest.TimeInForceEnum.DAY;

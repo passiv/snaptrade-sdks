@@ -1783,9 +1783,19 @@ public class StrategyOrderPlaceOrdersInner {
       if ((jsonObj.get("placementCommission") != null && !jsonObj.get("placementCommission").isJsonNull()) && !jsonObj.get("placementCommission").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `placementCommission` to be a primitive type in the JSON string but got `%s`", jsonObj.get("placementCommission").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("legs") != null && !jsonObj.get("legs").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `legs` to be an array in the JSON string but got `%s`", jsonObj.get("legs").toString()));
+      if (jsonObj.get("legs") != null && !jsonObj.get("legs").isJsonNull()) {
+        JsonArray jsonArraylegs = jsonObj.getAsJsonArray("legs");
+        if (jsonArraylegs != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("legs").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `legs` to be an array in the JSON string but got `%s`", jsonObj.get("legs").toString()));
+          }
+
+          // validate the optional field `legs` (array)
+          for (int i = 0; i < jsonArraylegs.size(); i++) {
+            StrategyOrderPlaceOrdersInnerLegsInner.validateJsonObject(jsonArraylegs.get(i).getAsJsonObject());
+          };
+        }
       }
       if ((jsonObj.get("strategyType") != null && !jsonObj.get("strategyType").isJsonNull()) && !jsonObj.get("strategyType").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `strategyType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("strategyType").toString()));

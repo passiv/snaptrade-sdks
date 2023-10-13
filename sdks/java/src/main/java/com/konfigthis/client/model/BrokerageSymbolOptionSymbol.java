@@ -570,6 +570,8 @@ public class BrokerageSymbolOptionSymbol {
       if (!jsonObj.get("expiration_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `expiration_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("expiration_date").toString()));
       }
+      // validate the required field `underlying_symbol`
+      UnderlyingSymbol.validateJsonObject(jsonObj.getAsJsonObject("underlying_symbol"));
       if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
       }

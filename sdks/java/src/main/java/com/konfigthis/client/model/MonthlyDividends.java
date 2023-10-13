@@ -78,7 +78,7 @@ public class MonthlyDividends {
    * @return date
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
+  @ApiModelProperty(example = "Mon Jan 24 00:00:00 UTC 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)")
 
   public LocalDate getDate() {
     return date;
@@ -242,9 +242,19 @@ public class MonthlyDividends {
           throw new IllegalArgumentException(String.format("The required field(s) %s in MonthlyDividends is not found in the empty JSON string", MonthlyDividends.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("dividends") != null && !jsonObj.get("dividends").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `dividends` to be an array in the JSON string but got `%s`", jsonObj.get("dividends").toString()));
+      if (jsonObj.get("dividends") != null && !jsonObj.get("dividends").isJsonNull()) {
+        JsonArray jsonArraydividends = jsonObj.getAsJsonArray("dividends");
+        if (jsonArraydividends != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("dividends").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `dividends` to be an array in the JSON string but got `%s`", jsonObj.get("dividends").toString()));
+          }
+
+          // validate the optional field `dividends` (array)
+          for (int i = 0; i < jsonArraydividends.size(); i++) {
+            DividendAtDate.validateJsonObject(jsonArraydividends.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

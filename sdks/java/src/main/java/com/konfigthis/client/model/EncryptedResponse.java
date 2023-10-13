@@ -198,6 +198,10 @@ public class EncryptedResponse {
       if ((jsonObj.get("encryptedSharedKey") != null && !jsonObj.get("encryptedSharedKey").isJsonNull()) && !jsonObj.get("encryptedSharedKey").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `encryptedSharedKey` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encryptedSharedKey").toString()));
       }
+      // validate the optional field `encryptedMessageData`
+      if (jsonObj.get("encryptedMessageData") != null && !jsonObj.get("encryptedMessageData").isJsonNull()) {
+        EncryptedResponseEncryptedMessageData.validateJsonObject(jsonObj.getAsJsonObject("encryptedMessageData"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

@@ -27,13 +27,53 @@ import { AccountHoldingsAccount } from '../models';
 // @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
+import { AccountOrderRecordStatus } from '../models';
+// @ts-ignore
+import { AccountSyncStatus } from '../models';
+// @ts-ignore
+import { Action } from '../models';
+// @ts-ignore
 import { Balance } from '../models';
+// @ts-ignore
+import { Brokerage } from '../models';
+// @ts-ignore
+import { BrokerageAuthorization } from '../models';
+// @ts-ignore
+import { BrokerageType } from '../models';
+// @ts-ignore
+import { CashRestriction } from '../models';
+// @ts-ignore
+import { Currency } from '../models';
+// @ts-ignore
+import { Exchange } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { OptionsSymbol } from '../models';
+// @ts-ignore
+import { OrderType } from '../models';
+// @ts-ignore
 import { Position } from '../models';
+// @ts-ignore
+import { PositionSymbol } from '../models';
+// @ts-ignore
+import { SecurityType } from '../models';
+// @ts-ignore
+import { SnapTradeHoldingsAccount } from '../models';
+// @ts-ignore
+import { SnapTradeHoldingsAccountAccountId } from '../models';
+// @ts-ignore
+import { SnapTradeHoldingsTotalValue } from '../models';
+// @ts-ignore
+import { TimeInForce } from '../models';
+// @ts-ignore
+import { USExchange } from '../models';
+// @ts-ignore
+import { UnderlyingSymbol } from '../models';
+// @ts-ignore
+import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
@@ -109,7 +149,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @summary List account balances
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to get balances.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -229,7 +269,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @summary Get history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to get orders.
          * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -294,7 +334,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @summary List account positions
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account get positions.
+         * @param {string} accountId The ID of the account to get positions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -770,7 +810,7 @@ export type AccountInformationApiGetUserAccountBalanceRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to get balances.
     * @type {string}
     * @memberof AccountInformationApiGetUserAccountBalance
     */
@@ -830,7 +870,7 @@ export type AccountInformationApiGetUserAccountOrdersRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to get orders.
     * @type {string}
     * @memberof AccountInformationApiGetUserAccountOrders
     */
@@ -867,7 +907,7 @@ export type AccountInformationApiGetUserAccountPositionsRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account get positions.
+    * The ID of the account to get positions.
     * @type {string}
     * @memberof AccountInformationApiGetUserAccountPositions
     */

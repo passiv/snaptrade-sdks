@@ -8,10 +8,10 @@ Account Holdings
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**account** | **SnapTradeHoldingsAccount** |  |  [optional] |
-|**balances** | **List&lt;Balance&gt;** |  |  [optional] |
-|**positions** | **List&lt;Position&gt;** |  |  [optional] |
-|**totalValue** | **SnapTradeHoldingsTotalValue** |  |  [optional] |
+|**account** | [**SnapTradeHoldingsAccount**](SnapTradeHoldingsAccount.md) |  |  [optional] |
+|**balances** | [**List&lt;Balance&gt;**](Balance.md) |  |  [optional] |
+|**positions** | [**List&lt;Position&gt;**](Position.md) |  |  [optional] |
+|**totalValue** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  |  [optional] |
 
 
 

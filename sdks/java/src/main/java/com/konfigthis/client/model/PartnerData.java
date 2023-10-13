@@ -607,9 +607,19 @@ public class PartnerData {
       if ((jsonObj.get("redirect_uri") != null && !jsonObj.get("redirect_uri").isJsonNull()) && !jsonObj.get("redirect_uri").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `redirect_uri` to be a primitive type in the JSON string but got `%s`", jsonObj.get("redirect_uri").toString()));
       }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("allowed_brokerages") != null && !jsonObj.get("allowed_brokerages").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `allowed_brokerages` to be an array in the JSON string but got `%s`", jsonObj.get("allowed_brokerages").toString()));
+      if (jsonObj.get("allowed_brokerages") != null && !jsonObj.get("allowed_brokerages").isJsonNull()) {
+        JsonArray jsonArrayallowedBrokerages = jsonObj.getAsJsonArray("allowed_brokerages");
+        if (jsonArrayallowedBrokerages != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("allowed_brokerages").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `allowed_brokerages` to be an array in the JSON string but got `%s`", jsonObj.get("allowed_brokerages").toString()));
+          }
+
+          // validate the optional field `allowed_brokerages` (array)
+          for (int i = 0; i < jsonArrayallowedBrokerages.size(); i++) {
+            Brokerage.validateJsonObject(jsonArrayallowedBrokerages.get(i).getAsJsonObject());
+          };
+        }
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));

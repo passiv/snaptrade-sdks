@@ -349,13 +349,41 @@ public class AccountHoldings {
           throw new IllegalArgumentException(String.format("The required field(s) %s in AccountHoldings is not found in the empty JSON string", AccountHoldings.openapiRequiredFields.toString()));
         }
       }
-      // ensure the optional json data is an array if present (nullable)
-      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonNull() && !jsonObj.get("balances").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string or null but got `%s`", jsonObj.get("balances").toString()));
+      // validate the optional field `account`
+      if (jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) {
+        SnapTradeHoldingsAccount.validateJsonObject(jsonObj.getAsJsonObject("account"));
       }
-      // ensure the optional json data is an array if present (nullable)
-      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonNull() && !jsonObj.get("positions").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string or null but got `%s`", jsonObj.get("positions").toString()));
+      if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonNull()) {
+        JsonArray jsonArraybalances = jsonObj.getAsJsonArray("balances");
+        if (jsonArraybalances != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("balances").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `balances` to be an array in the JSON string but got `%s`", jsonObj.get("balances").toString()));
+          }
+
+          // validate the optional field `balances` (array)
+          for (int i = 0; i < jsonArraybalances.size(); i++) {
+            Balance.validateJsonObject(jsonArraybalances.get(i).getAsJsonObject());
+          };
+        }
+      }
+      if (jsonObj.get("positions") != null && !jsonObj.get("positions").isJsonNull()) {
+        JsonArray jsonArraypositions = jsonObj.getAsJsonArray("positions");
+        if (jsonArraypositions != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `positions` to be an array in the JSON string but got `%s`", jsonObj.get("positions").toString()));
+          }
+
+          // validate the optional field `positions` (array)
+          for (int i = 0; i < jsonArraypositions.size(); i++) {
+            Position.validateJsonObject(jsonArraypositions.get(i).getAsJsonObject());
+          };
+        }
+      }
+      // validate the optional field `total_value`
+      if (jsonObj.get("total_value") != null && !jsonObj.get("total_value").isJsonNull()) {
+        SnapTradeHoldingsTotalValue.validateJsonObject(jsonObj.getAsJsonObject("total_value"));
       }
   }
 

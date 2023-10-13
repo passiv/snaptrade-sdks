@@ -12,10 +12,10 @@ Universal symbol
 |**symbol** | **String** |  |  [optional] |
 |**rawSymbol** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
-|**currency** | **Currency** |  |  [optional] |
-|**exchange** | **Exchange** |  |  [optional] |
-|**type** | **SecurityType** |  |  [optional] |
-|**currencies** | **List&lt;Currency&gt;** |  |  [optional] |
+|**currency** | [**Currency**](Currency.md) |  |  [optional] |
+|**exchange** | [**Exchange**](Exchange.md) |  |  [optional] |
+|**type** | [**SecurityType**](SecurityType.md) |  |  [optional] |
+|**currencies** | [**List&lt;Currency&gt;**](Currency.md) |  |  [optional] |
 
 
 

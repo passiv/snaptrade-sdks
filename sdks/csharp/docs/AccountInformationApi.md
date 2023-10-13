@@ -135,7 +135,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get balances.
             
             try
             {
@@ -186,7 +186,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to get balances. |  |
 
 ### Return type
 
@@ -321,7 +321,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get orders.
             var state = "all"; // defaults value is set to \"all\" (optional) 
             
             try
@@ -373,7 +373,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to get orders. |  |
 | **state** | **string** | defaults value is set to \&quot;all\&quot; | [optional]  |
 
 ### Return type
@@ -416,7 +416,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account get positions.
+            var accountId = "accountId_example"; // The ID of the account to get positions.
             
             try
             {
@@ -467,7 +467,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account get positions. |  |
+| **accountId** | **string** | The ID of the account to get positions. |  |
 
 ### Return type
 

@@ -93,7 +93,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to create the option strategy object in. |  |
 | **options_get_option_strategy_request** | [**OptionsGetOptionStrategyRequest**](OptionsGetOptionStrategyRequest.md) |  |  |
 
 ### Return type
@@ -163,7 +163,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to get the options chain from. |  |
 | **symbol** | **String** | Universal symbol ID if symbol |  |
 
 ### Return type
@@ -233,7 +233,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account the strategy will be placed in. |  |
 | **option_strategy_id** | **String** | Option strategy id obtained from response when creating option strategy object |  |
 
 ### Return type
@@ -299,7 +299,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to fetch options holdings for. |  |
 
 ### Return type
 
@@ -380,7 +380,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
-| **account_id** | **String** | The ID of the account get positions. |  |
+| **account_id** | **String** | The ID of the account to execute the strategy in. |  |
 | **option_strategy_id** | **String** | Option strategy id obtained from response when creating option strategy object |  |
 | **options_place_option_strategy_request** | [**OptionsPlaceOptionStrategyRequest**](OptionsPlaceOptionStrategyRequest.md) |  |  |
 

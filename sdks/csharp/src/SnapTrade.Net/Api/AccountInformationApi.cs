@@ -59,7 +59,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Balance&gt;</returns>
         List<Balance> GetUserAccountBalance(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -73,7 +73,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Balance&gt;</returns>
         ApiResponse<List<Balance>> GetUserAccountBalanceWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -107,7 +107,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
@@ -122,7 +122,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
@@ -133,7 +133,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Position&gt;</returns>
         List<Position> GetUserAccountPositions(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -147,7 +147,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -270,7 +270,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Balance&gt;</returns>
@@ -285,7 +285,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Balance&gt;)</returns>
@@ -328,7 +328,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -344,7 +344,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -359,7 +359,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Position&gt;</returns>
@@ -374,7 +374,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>
@@ -798,7 +798,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Balance&gt;</returns>
         public List<Balance> GetUserAccountBalance(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -813,7 +813,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Balance&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<Balance>> GetUserAccountBalanceWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -901,7 +901,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Balance&gt;</returns>
@@ -917,7 +917,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get balances.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Balance&gt;)</returns>
@@ -1218,7 +1218,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
@@ -1234,7 +1234,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
@@ -1327,7 +1327,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1344,7 +1344,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1440,7 +1440,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Position&gt;</returns>
         public List<Position> GetUserAccountPositions(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1455,7 +1455,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1543,7 +1543,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Position&gt;</returns>
@@ -1559,7 +1559,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account get positions.</param>
+        /// <param name="accountId">The ID of the account to get positions.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>

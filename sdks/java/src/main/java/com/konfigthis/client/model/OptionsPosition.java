@@ -82,14 +82,6 @@ public class OptionsPosition {
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
   private Double averagePurchasePrice;
 
-  public static final String SERIALIZED_NAME_OPEN_PNL = "open_pnl";
-  @SerializedName(SERIALIZED_NAME_OPEN_PNL)
-  private Double openPnl;
-
-  public static final String SERIALIZED_NAME_FRACTIONAL_UNITS = "fractional_units";
-  @SerializedName(SERIALIZED_NAME_FRACTIONAL_UNITS)
-  private Double fractionalUnits;
-
   public OptionsPosition() {
   }
 
@@ -264,82 +256,6 @@ public class OptionsPosition {
     this.averagePurchasePrice = averagePurchasePrice;
   }
 
-
-  public OptionsPosition openPnl(Double openPnl) {
-    
-    
-    
-    
-    this.openPnl = openPnl;
-    return this;
-  }
-
-  public OptionsPosition openPnl(Integer openPnl) {
-    
-    
-    
-    
-    this.openPnl = openPnl.doubleValue();
-    return this;
-  }
-
-   /**
-   * Get openPnl
-   * @return openPnl
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "0.44", value = "")
-
-  public Double getOpenPnl() {
-    return openPnl;
-  }
-
-
-  public void setOpenPnl(Double openPnl) {
-    
-    
-    
-    this.openPnl = openPnl;
-  }
-
-
-  public OptionsPosition fractionalUnits(Double fractionalUnits) {
-    
-    
-    
-    
-    this.fractionalUnits = fractionalUnits;
-    return this;
-  }
-
-  public OptionsPosition fractionalUnits(Integer fractionalUnits) {
-    
-    
-    
-    
-    this.fractionalUnits = fractionalUnits.doubleValue();
-    return this;
-  }
-
-   /**
-   * Deprecated, use the units field for both fractional and integer units going forward
-   * @return fractionalUnits
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "1.44", value = "Deprecated, use the units field for both fractional and integer units going forward")
-
-  public Double getFractionalUnits() {
-    return fractionalUnits;
-  }
-
-
-  public void setFractionalUnits(Double fractionalUnits) {
-    
-    
-    
-    this.fractionalUnits = fractionalUnits;
-  }
-
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -399,9 +315,7 @@ public class OptionsPosition {
         Objects.equals(this.price, optionsPosition.price) &&
         Objects.equals(this.units, optionsPosition.units) &&
         Objects.equals(this.currency, optionsPosition.currency) &&
-        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice) &&
-        Objects.equals(this.openPnl, optionsPosition.openPnl) &&
-        Objects.equals(this.fractionalUnits, optionsPosition.fractionalUnits)&&
+        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice)&&
         Objects.equals(this.additionalProperties, optionsPosition.additionalProperties);
   }
 
@@ -411,7 +325,7 @@ public class OptionsPosition {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, price, units, currency, averagePurchasePrice, openPnl, fractionalUnits, additionalProperties);
+    return Objects.hash(symbol, price, units, currency, averagePurchasePrice, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -430,8 +344,6 @@ public class OptionsPosition {
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
-    sb.append("    openPnl: ").append(toIndentedString(openPnl)).append("\n");
-    sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -460,8 +372,6 @@ public class OptionsPosition {
     openapiFields.add("units");
     openapiFields.add("currency");
     openapiFields.add("average_purchase_price");
-    openapiFields.add("open_pnl");
-    openapiFields.add("fractional_units");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -478,6 +388,10 @@ public class OptionsPosition {
         if (!OptionsPosition.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in OptionsPosition is not found in the empty JSON string", OptionsPosition.openapiRequiredFields.toString()));
         }
+      }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        BrokerageSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {

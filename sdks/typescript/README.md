@@ -184,13 +184,14 @@ const getAllUserHoldingsResponse =
 Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
 #### 🔄 Return
+
 [AccountHoldings](./models/account-holdings.ts)
 
 #### 🌐 Endpoint
 
 `/holdings` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -218,16 +219,17 @@ const getUserAccountBalanceResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to get balances.
 
 #### 🔄 Return
+
 [Balance](./models/balance.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/balances` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -258,13 +260,14 @@ const getUserAccountDetailsResponse =
 The ID of the account to get detail of.
 
 #### 🔄 Return
+
 [Account](./models/account.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -293,20 +296,21 @@ const getUserAccountOrdersResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to get orders.
 
 ##### state: `'all' | 'open' | 'executed'`
 
 defaults value is set to \"all\"
 
 #### 🔄 Return
+
 [AccountOrderRecord](./models/account-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/orders` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -334,16 +338,17 @@ const getUserAccountPositionsResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to get positions.
 
 #### 🔄 Return
+
 [Position](./models/position.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/positions` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -374,13 +379,14 @@ The ID of the account to fetch holdings for.
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [AccountHoldingsAccount](./models/account-holdings-account.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/holdings` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -406,13 +412,14 @@ const listUserAccountsResponse =
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [Account](./models/account.ts)
 
 #### 🌐 Endpoint
 
 `/accounts` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -443,13 +450,14 @@ const updateUserAccountResponse =
 The ID of the account to update.
 
 #### 🔄 Return
+
 [Account](./models/account.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}` `PUT`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -465,13 +473,14 @@ const checkResponse = await snaptrade.apiStatus.check();
 ```
 
 #### 🔄 Return
+
 [Status](./models/status.ts)
 
 #### 🌐 Endpoint
 
 `/` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -494,13 +503,14 @@ const deleteSnapTradeUserResponse =
 ##### userId: `string`
 
 #### 🔄 Return
+
 [DeleteUserResponse](./models/delete-user-response.ts)
 
 #### 🌐 Endpoint
 
 `/snapTrade/deleteUser` `DELETE`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -528,7 +538,7 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 
 `/snapTrade/encryptedJWT` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -548,7 +558,7 @@ const listSnapTradeUsersResponse =
 
 `/snapTrade/listUsers` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -592,7 +602,7 @@ const loginSnapTradeUserResponse =
 
 `/snapTrade/login` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -623,13 +633,14 @@ SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as 
 Open SSH RSA public key
 
 #### 🔄 Return
+
 [UserIDandSecret](./models/user-idand-secret.ts)
 
 #### 🌐 Endpoint
 
 `/snapTrade/registerUser` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -660,13 +671,14 @@ The ID of a brokerage authorization object.
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [BrokerageAuthorization](./models/brokerage-authorization.ts)
 
 #### 🌐 Endpoint
 
 `/authorizations/{authorizationId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -692,13 +704,14 @@ const listBrokerageAuthorizationsResponse =
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [BrokerageAuthorization](./models/brokerage-authorization.ts)
 
 #### 🌐 Endpoint
 
 `/authorizations` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -732,7 +745,7 @@ The ID of the Authorization to delete.
 
 `/authorizations/{authorizationId}` `DELETE`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -769,7 +782,7 @@ Optional comma seperated list of session IDs used to filter the request on speci
 
 `/sessionEvents` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -794,13 +807,14 @@ const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [UserErrorLog](./models/user-error-log.ts)
 
 #### 🌐 Endpoint
 
 `/snapTrade/listUserErrors` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -830,11 +844,12 @@ const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
 
 #### ⚙️ Parameters
 
-##### underlyingSymbolId: `string`
+##### underlying_symbol_id: `string`
 
-##### legs: [`OptionLeg`](./models/option-leg.ts)[]
+##### legs: `OptionLeg`
+            [`OptionLeg`](./models/option-leg.ts)[]
 
-##### strategyType: `string`
+##### strategy_type: `string`
 
 ##### userId: `string`
 
@@ -842,16 +857,17 @@ const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to create the option strategy object in.
 
 #### 🔄 Return
+
 [StrategyQuotes](./models/strategy-quotes.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/optionStrategy` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -879,7 +895,7 @@ const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to get the options chain from.
 
 ##### symbol: `string`
 
@@ -889,7 +905,7 @@ Universal symbol ID if symbol
 
 `/accounts/{accountId}/optionsChain` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -918,20 +934,21 @@ const getOptionsStrategyQuoteResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account the strategy will be placed in.
 
 ##### optionStrategyId: `string`
 
 Option strategy id obtained from response when creating option strategy object
 
 #### 🔄 Return
+
 [StrategyQuotes](./models/strategy-quotes.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -958,16 +975,17 @@ const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to fetch options holdings for.
 
 #### 🔄 Return
+
 [OptionsPosition](./models/options-position.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/options` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -994,9 +1012,9 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 #### ⚙️ Parameters
 
-##### orderType: `string`
+##### order_type: `string`
 
-##### timeInForce: `string`
+##### time_in_force: `string`
 
 ##### price: `number`
 
@@ -1008,20 +1026,21 @@ Trade Price if limit or stop limit order
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to execute the strategy in.
 
 ##### optionStrategyId: `string`
 
 Option strategy id obtained from response when creating option strategy object
 
 #### 🔄 Return
+
 [StrategyOrderRecord](./models/strategy-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1046,13 +1065,14 @@ const getCurrencyExchangeRatePairResponse =
 A currency pair based on currency code for example, {CAD-USD}
 
 #### 🔄 Return
+
 [ExchangeRatePairs](./models/exchange-rate-pairs.ts)
 
 #### 🌐 Endpoint
 
 `/currencies/rates/{currencyPair}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1068,13 +1088,14 @@ const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 ```
 
 #### 🔄 Return
+
 [PartnerData](./models/partner-data.ts)
 
 #### 🌐 Endpoint
 
 `/snapTrade/partners` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1091,13 +1112,14 @@ const getSecurityTypesResponse =
 ```
 
 #### 🔄 Return
+
 [SecurityType](./models/security-type.ts)
 
 #### 🌐 Endpoint
 
 `/securityTypes` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1114,13 +1136,14 @@ const getStockExchangesResponse =
 ```
 
 #### 🔄 Return
+
 [Exchange](./models/exchange.ts)
 
 #### 🌐 Endpoint
 
 `/exchanges` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1142,13 +1165,14 @@ const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
 ##### substring: `string`
 
 #### 🔄 Return
+
 [UniversalSymbol](./models/universal-symbol.ts)
 
 #### 🌐 Endpoint
 
 `/symbols` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1177,13 +1201,14 @@ The ticker of the UniversalSymbol to get.
 OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
 
 #### 🔄 Return
+
 [UniversalSymbol](./models/universal-symbol.ts)
 
 #### 🌐 Endpoint
 
 `/symbols/{ticker}` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1208,13 +1233,14 @@ const listAllBrokerageAuthorizationTypeResponse =
 Comma separated value of brokerage slugs
 
 #### 🔄 Return
+
 [BrokerageAuthorizationTypeReadOnly](./models/brokerage-authorization-type-read-only.ts)
 
 #### 🌐 Endpoint
 
 `/brokerageAuthorizationTypes` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1231,13 +1257,14 @@ const listAllBrokeragesResponse =
 ```
 
 #### 🔄 Return
+
 [Brokerage](./models/brokerage.ts)
 
 #### 🌐 Endpoint
 
 `/brokerages` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1254,13 +1281,14 @@ const listAllCurrenciesResponse =
 ```
 
 #### 🔄 Return
+
 [Currency](./models/currency.ts)
 
 #### 🌐 Endpoint
 
 `/currencies` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1277,13 +1305,14 @@ const listAllCurrenciesRatesResponse =
 ```
 
 #### 🔄 Return
+
 [ExchangeRatePairs](./models/exchange-rate-pairs.ts)
 
 #### 🌐 Endpoint
 
 `/currencies/rates` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1312,18 +1341,19 @@ const symbolSearchUserAccountResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to search for symbols within.
 
 ##### substring: `string`
 
 #### 🔄 Return
+
 [UniversalSymbol](./models/universal-symbol.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/symbols` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1352,18 +1382,19 @@ const cancelUserAccountOrderResponse =
 
 ##### accountId: `string`
 
-The ID of the account get positions.
+The ID of the account to cancel the order in.
 
-##### brokerageOrderId: `string`
+##### brokerage_order_id: `string`
 
 #### 🔄 Return
+
 [AccountOrderRecord](./models/account-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/accounts/{accountId}/orders/cancel` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1394,11 +1425,11 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
 
 ##### userSecret: `string`
 
-##### accountId: `string`
+##### account_id: `string`
 
 ##### action:
 
-##### orderType:
+##### order_type:
 
 ##### price: `number`
 
@@ -1408,22 +1439,23 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### timeInForce:
+##### time_in_force:
 
 ##### units: `number`
 
 Trade Units
 
-##### universalSymbolId: `string`
+##### universal_symbol_id: `string`
 
 #### 🔄 Return
+
 [ManualTradeAndImpact](./models/manual-trade-and-impact.ts)
 
 #### 🌐 Endpoint
 
 `/trade/impact` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1466,7 +1498,7 @@ Should be set to True if providing tickers.
 
 `/accounts/{accountId}/quotes` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1497,11 +1529,11 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 ##### userSecret: `string`
 
-##### accountId: `string`
+##### account_id: `string`
 
 ##### action:
 
-##### orderType:
+##### order_type:
 
 ##### price: `number`
 
@@ -1511,22 +1543,23 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### timeInForce:
+##### time_in_force:
 
 ##### units: `number`
 
 Trade Units
 
-##### universalSymbolId: `string`
+##### universal_symbol_id: `string`
 
 #### 🔄 Return
+
 [AccountOrderRecord](./models/account-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/trade/place` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1550,22 +1583,23 @@ const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
 
 ##### userSecret: `string`
 
-##### firstTradeId:
+##### first_trade_id:
 
 The ID of first trade object obtained from trade/impact endpoint
 
-##### secondTradeId:
+##### second_trade_id:
 
 The ID of second trade object obtained from trade/impact endpoint
 
 #### 🔄 Return
+
 [AccountOrderRecord](./models/account-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/trade/oco` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1595,13 +1629,14 @@ The ID of trade object obtained from trade/impact endpoint
 ##### userSecret: `string`
 
 #### 🔄 Return
+
 [AccountOrderRecord](./models/account-order-record.ts)
 
 #### 🌐 Endpoint
 
 `/trade/{tradeId}` `POST`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1650,13 +1685,14 @@ Optional comma seperated list of brokerage authorization IDs used to filter the 
 Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
 
 #### 🔄 Return
+
 [UniversalActivity](./models/universal-activity.ts)
 
 #### 🌐 Endpoint
 
 `/activities` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
@@ -1704,13 +1740,14 @@ Optional, increases frequency of data points for the total value and contributio
 Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
 
 #### 🔄 Return
+
 [PerformanceCustom](./models/performance-custom.ts)
 
 #### 🌐 Endpoint
 
 `/performance/custom` `GET`
 
-[🔙 Back to Table of Contents](#table-of-contents)
+[🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 

@@ -282,7 +282,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully generated a list of users |  -  |
+| **200** | Successfully retrieved a list of users |  -  |
 | **500** | Unexpected error |  -  |
 
 <a name="loginSnapTradeUser"></a>
