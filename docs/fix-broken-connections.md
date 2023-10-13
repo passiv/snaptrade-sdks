@@ -13,11 +13,11 @@ When an access token is no longer valid, SnapTrade considered this to be a _brok
 
 It is important that users are directed to _fix connections_ rather than simply create new ones. Using the Connection Portal in the normal manner will create new connections, which will have a different connection id and different account ids if successful, and will also leave the broken connection lying around.
 
-All apps that connect through SnapTrade are expected to implement the ability to reconnect accounts so that connections can be fixed. There are mechanisms available to be notified when connections break, either through a) webhooks as described below, or b) by polling the [brokerage authorizations endpoint](https://docs.snaptrade.com/reference/get_authorizations-1) for each user and checking the `disabled` status. When `disabled == true`, the connection is broken and the user must take an action to fix it.
+All apps that connect through SnapTrade are expected to implement the ability to reconnect accounts so that connections can be fixed. There are mechanisms available to be notified when connections break, either through a) [webhooks](/docs/webhooks) as described below, or b) by polling the brokerage authorizations endpoint (:api[Connections_listBrokerageAuthorizations]) for each user and checking the `disabled` status. When `disabled == true`, the connection is broken and the user must take an action to fix it.
 
 # How to fix a broken connection
 
-SnapTrade's Connection Portal has a special mode that's designed for fixing connections, rather than creating new ones. To use the reconnect mode, you simply pass along the connection id (also known as brokerage authorization id) in the `reconnect` field as part of the request to [generate a login link](https://docs.snaptrade.com/reference/authentication_loginsnaptradeuser).
+SnapTrade's Connection Portal has a special mode that's designed for fixing connections, rather than creating new ones. To use the reconnect mode, you simply pass along the connection id (also known as brokerage authorization id) in the `reconnect` field as part of the request to generate a login link. See :api[Authentication_loginSnapTradeUser].
 
 When the Connection Portal is accessed with the `reconnect` parameter, it will immediately take the user into the appropriate reconnection flow for that connection. When successful, the broken connection will be updated with a new access token and start working again.
 
