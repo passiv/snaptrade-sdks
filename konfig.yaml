@@ -39,6 +39,8 @@ portal:
               path: docs/connection-messaging.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: webhooks
+              path: docs/webhooks.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
