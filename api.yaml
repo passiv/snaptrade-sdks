@@ -67,106 +67,6 @@ paths:
                 $ref: "#/components/schemas/Status"
         default:
           description: Unexpected error.
-  /snapTrade/apiCredentials:
-    get:
-      tags:
-        - Custom Brokerage API Credentials
-      summary: Gets a list of api credentials linked to SnapTrade Partner
-      operationId: CustomBrokerageAPICredentials_list
-      parameters: []
-      responses:
-        "200":
-          description: Returns data needed to verify that request signature is correct
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/SnapTradePartnerAPICredential"
-        "500":
-          description: Unexpected Error. Please contact support
-    post:
-      tags:
-        - Custom Brokerage API Credentials
-      summary: Creates a new SnapTradePartnerAPICredential object
-      operationId: CustomBrokerageAPICredentials_create
-      parameters: []
-      requestBody:
-        $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
-      responses:
-        "200":
-          description: Returns created SnapTradePartnerAPICredential object
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SnapTradePartnerAPICredential"
-        "500":
-          description: Unexpected Error. Please contact support
-  /snapTrade/apiCredentials/{apiCredentialsId}:
-    get:
-      tags:
-        - Custom Brokerage API Credentials
-      summary: Gets SnapTradePartnerAPICredential based on id
-      operationId: CustomBrokerageAPICredentials_getById
-      parameters:
-        - in: path
-          name: apiCredentialsId
-          required: true
-          description: The ID of the SnapTradePartnerAPICredential object.
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: Get SnapTradePartnerAPICredential obj based on id
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SnapTradePartnerAPICredential"
-        "500":
-          description: Unexpected Error. Please contact support
-    put:
-      tags:
-        - Custom Brokerage API Credentials
-      summary: Updates SnapTradePartnerAPICredential object
-      operationId: CustomBrokerageAPICredentials_updateById
-      parameters:
-        - in: path
-          name: apiCredentialsId
-          required: true
-          description: The ID of the SnapTradePartnerAPICredential object.
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        $ref: "#/components/requestBodies/CreateSnapTradeParterAPICredentialsRequestBody"
-      responses:
-        "200":
-          description: Get SnapTradePartnerAPICredential obj based on id
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SnapTradePartnerAPICredential"
-        "500":
-          description: Unexpected Error. Please contact support
-    delete:
-      tags:
-        - Custom Brokerage API Credentials
-      summary: Deletes SnapTradePartnerAPICredential object
-      operationId: CustomBrokerageAPICredentials_deleteById
-      parameters:
-        - in: path
-          name: apiCredentialsId
-          required: true
-          description: The ID of the SnapTradePartnerAPICredential object.
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "204":
-          description: SnapTradePartnerAPICredential object was delete successfully
-        "500":
-          description: Unexpected Error. Please contact support
   /snapTrade/listUsers:
     get:
       tags:
@@ -175,7 +75,7 @@ paths:
       operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
-          description: Successfully generated a list of users
+          description: Successfully retrieved a list of users
           content:
             application/json:
               schema:
@@ -612,7 +512,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to get balances.
           schema:
             type: string
             format: uuid
@@ -647,7 +547,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to get positions.
           schema:
             type: string
             format: uuid
@@ -691,7 +591,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to get orders.
           schema:
             type: string
             format: uuid
@@ -769,7 +669,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to cancel the order in.
           schema:
             type: string
             format: uuid
@@ -816,7 +716,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to search for symbols within.
           schema:
             type: string
             format: uuid
@@ -858,7 +758,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to fetch options holdings for.
           schema:
             type: string
             format: uuid
@@ -893,7 +793,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to get the options chain from.
           schema:
             type: string
             format: uuid
@@ -933,7 +833,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to create the option strategy object in.
           schema:
             type: string
             format: uuid
@@ -971,7 +871,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account the strategy will be placed in.
           schema:
             type: string
             format: uuid
@@ -1011,7 +911,7 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account get positions.
+          description: The ID of the account to execute the strategy in.
           schema:
             $ref: "#/components/schemas/Id"
         - in: path
@@ -2217,19 +2117,6 @@ components:
           nullable: true
           example: 108.3353
           description: Average purchase price for this position
-        open_pnl:
-          type: number
-          example: 0.44
-          nullable: true
-        fractional_units:
-          description:
-            Deprecated, use the units field for both fractional and integer
-            units going forward
-          type: number
-          nullable: true
-          example: 1.44
-
-
     OptionsHoldings:
       description: Option Holdings
       type: object
