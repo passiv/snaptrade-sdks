@@ -5,10 +5,19 @@ order:
   - tag: Authentication
     operations:
       - Authentication_registerSnapTradeUser
+      - Authentication_loginSnapTradeUser
   - tag: Account Information
     operations:
       - path: /accounts
         method: get
+  - tag: Trading
+    operations:
+      - Trading_getUserAccountQuotes
+      - Trading_getOrderImpact
+      - Trading_placeOrder
+      - Trading_placeForceOrder
+      - Trading_placeOCOOrder
+      - Trading_cancelUserAccountOrder
 portal:
   title: SnapTrade
   primaryColor: '#ebb964'
