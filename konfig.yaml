@@ -6,6 +6,7 @@ order:
     operations:
       - Authentication_registerSnapTradeUser
       - Authentication_loginSnapTradeUser
+  - tag: Connections
   - tag: Account Information
     operations:
       - path: /accounts
