@@ -3000,18 +3000,23 @@ components:
       type: object
       properties:
         broker:
+          description: Slug of the brokerage to connect the user to
           type: string
           example: ALPACA
         immediateRedirect:
+          description: When set to True, user will be redirected back to the partner's site instead of the connection portal
           type: boolean
           example: true
         customRedirect:
+          description: URL to redirect the user to after the user connects their brokerage account
           type: string
           example: https://snaptrade.com
         reconnect:
+          description: The UUID of the brokerage connection to be reconnected
           type: string
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         connectionType:
+          description: Sets whether the connection should be read or trade
           type: string
           enum:
             - read
