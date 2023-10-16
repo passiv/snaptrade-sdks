@@ -23,7 +23,9 @@ portal:
   title: SnapTrade
   primaryColor: '#ebb964'
   favicon: favicon.png
-  logo: portal-logo.png
+  logo:
+    light: portal-logo-light.png
+    dark: portal-logo-dark.png
   socials:
     website: https://snaptrade.com
   documentation:
