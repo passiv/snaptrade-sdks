@@ -73,6 +73,7 @@ paths:
         - Authentication
       summary: List SnapTrade users
       operationId: Authentication_listSnapTradeUsers
+      description: "Returns a list of users you've registered over the SnapTrade API."
       responses:
         "200":
           description: Successfully retrieved a list of users
@@ -96,6 +97,10 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /snapTrade/registerUser:
     post:
       tags:
@@ -127,6 +132,10 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /snapTrade/deleteUser:
     delete:
       tags:
@@ -134,6 +143,7 @@ paths:
       summary:
         Delete SnapTrade user
       operationId: Authentication_deleteSnapTradeUser
+      description: "Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts."
       parameters:
         - in: query
           required: true
@@ -173,6 +183,7 @@ paths:
         - Authentication
       summary: Login user & generate connection link
       operationId: Authentication_loginSnapTradeUser
+      description: Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
       parameters:
         - in: query
           required: true
@@ -355,7 +366,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List balances, positions and orders for the specified account.
+      summary: List balances, positions and orders for the specified account
       operationId: AccountInformation_getUserHoldings
       parameters:
         - in: path
@@ -498,6 +509,7 @@ paths:
         - Account Information
       summary: List account balances
       operationId: AccountInformation_getUserAccountBalance
+      description: A list of account balances for the specified account (one per currency that the account holds).
       parameters:
         - in: query
           required: true
@@ -568,6 +580,7 @@ paths:
         - Account Information
       summary: Get history of orders placed in account
       operationId: AccountInformation_getUserAccountOrders
+      description: Fetch all recent orders from a user's account.
       parameters:
         - in: query
           required: true
@@ -606,6 +619,10 @@ paths:
                   $ref: "#/components/schemas/AccountOrderRecord"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/quotes":
     get:
       tags:
@@ -649,6 +666,10 @@ paths:
                 $ref: "#/components/schemas/SymbolsQuotes"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/orders/cancel":
     post:
       tags:
@@ -695,6 +716,10 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/symbols":
     post:
       tags:
@@ -773,6 +798,10 @@ paths:
                     $ref: "#/components/schemas/OptionsPosition"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/optionsChain":
     get:
       tags:
@@ -813,6 +842,10 @@ paths:
                 $ref: "#/components/schemas/OptionChain"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/optionStrategy":
     post:
       tags:
@@ -849,6 +882,10 @@ paths:
                 $ref: "#/components/schemas/StrategyQuotes"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
 
 
   /accounts/{accountId}/optionStrategy/{optionStrategyId}:
@@ -890,6 +927,10 @@ paths:
                 $ref: "#/components/schemas/StrategyQuotes"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
 
   "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute":
     post:
@@ -932,6 +973,10 @@ paths:
                 $ref: "#/components/schemas/StrategyOrderRecord"
         "500":
           description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/authorizations":
     get:
       tags:
@@ -1113,7 +1158,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: A list of all supported currencies.
+          description: A list of all currencies.
           content:
             application/json:
               schema:
@@ -1204,8 +1249,9 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List of all security types.
+      summary: List of all security types
       operationId: ReferenceData_getSecurityTypes
+      description: List security types available on SnapTrade.
       parameters: []
       responses:
         "200":
@@ -1434,8 +1480,7 @@ paths:
       operationId: TransactionsAndReporting_getActivities
       description:
         Returns activities (transactions) for a user. Specifing start and
-        end date is highly recommended for automatic calls for better
-        performance
+        end date is highly recommended for better performance
       parameters:
         - in: query
           required: false
@@ -1903,6 +1948,16 @@ components:
           example: The requested resource does not exist.
         default_code:
           example: 1011
+    500UnexpectedExceptionResponse:
+      description: Example for a response that failed for unexpected reasons
+      type: object
+      properties:
+        detail:
+          example: Encountered an unexpected exception.
+        status_code:
+          example: 500
+        code:
+          example: 1000
     CashRestriction:
       description:
         Cash restriction rules that apply to this account when undergoing
@@ -2993,8 +3048,6 @@ components:
       properties:
         userId:
           $ref: "#/components/schemas/SnapTradeUserID"
-        rsaPublicKey:
-          $ref: "#/components/schemas/rsaPublicKey"
     SnapTradeLoginUserRequestBody:
       description: Data to login a user via SnapTrade Partner
       type: object
