@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
-| [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
+| [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
 | [**updateUserAccount**](AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
@@ -117,6 +117,8 @@ public class Example {
 > List&lt;Balance&gt; getUserAccountBalance(userId, userSecret, accountId).execute();
 
 List account balances
+
+A list of account balances for the specified account (one per currency that the account holds).
 
 ### Example
 ```java
@@ -320,6 +322,8 @@ public class Example {
 
 Get history of orders placed in account
 
+Fetch all recent orders from a user&#39;s account.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -412,7 +416,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | List all orders in account |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="getUserAccountPositions"></a>
 # **getUserAccountPositions**
@@ -514,7 +517,7 @@ public class Example {
 # **getUserHoldings**
 > AccountHoldingsAccount getUserHoldings(accountId, userId, userSecret).execute();
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 ### Example
 ```java

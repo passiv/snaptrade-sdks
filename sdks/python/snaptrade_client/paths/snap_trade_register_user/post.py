@@ -35,11 +35,13 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody as SnapTradeRegisterUserRequestBodySchema
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret as UserIDandSecretSchema
+from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 
 from snaptrade_client.type.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.user_i_dand_secret import UserIDandSecret
+from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 from . import path
@@ -123,21 +125,26 @@ _response_for_404 = api_client.OpenApiResponse(
             schema=SchemaFor404ResponseBodyApplicationJson),
     },
 )
+SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor500ResponseBodyApplicationJson),
+    },
 )
 _status_code_to_response = {
     '200': _response_for_200,
@@ -156,14 +163,11 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
-        rsa_public_key: typing.Optional[str] = None,
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _body = {}
         if user_id is not None:
             _body["userId"] = user_id
-        if rsa_public_key is not None:
-            _body["rsaPublicKey"] = rsa_public_key
         args.body = body if body is not None else _body
         return args
 
@@ -369,7 +373,6 @@ class RegisterSnapTradeUser(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
-        rsa_public_key: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -378,7 +381,6 @@ class RegisterSnapTradeUser(BaseApi):
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
-            rsa_public_key=rsa_public_key,
         )
         return await self._aregister_snap_trade_user_oapg(
             body=args.body,
@@ -388,7 +390,6 @@ class RegisterSnapTradeUser(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
-        rsa_public_key: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -396,7 +397,6 @@ class RegisterSnapTradeUser(BaseApi):
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
-            rsa_public_key=rsa_public_key,
         )
         return self._register_snap_trade_user_oapg(
             body=args.body,
@@ -409,7 +409,6 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
-        rsa_public_key: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -418,7 +417,6 @@ class ApiForpost(BaseApi):
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
-            rsa_public_key=rsa_public_key,
         )
         return await self._aregister_snap_trade_user_oapg(
             body=args.body,
@@ -428,7 +426,6 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
-        rsa_public_key: typing.Optional[str] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -436,7 +433,6 @@ class ApiForpost(BaseApi):
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
-            rsa_public_key=rsa_public_key,
         )
         return self._register_snap_trade_user_oapg(
             body=args.body,

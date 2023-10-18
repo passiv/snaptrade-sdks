@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -110,7 +110,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -129,7 +129,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -301,7 +301,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -320,7 +320,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -425,7 +425,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -445,7 +445,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

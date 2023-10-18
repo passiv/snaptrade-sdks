@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **broker** | **String** |  | [optional] |
-| **immediate_redirect** | **Boolean** |  | [optional] |
-| **custom_redirect** | **String** |  | [optional] |
-| **reconnect** | **String** |  | [optional] |
+| **broker** | **String** | Slug of the brokerage to connect the user to | [optional] |
+| **immediate_redirect** | **Boolean** | When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal | [optional] |
+| **custom_redirect** | **String** | URL to redirect the user to after the user connects their brokerage account | [optional] |
+| **reconnect** | **String** | The UUID of the brokerage connection to be reconnected | [optional] |
 | **connection_type** | [**ConnectionType**](ConnectionType.md) |  | [optional] |
 
 ## Example

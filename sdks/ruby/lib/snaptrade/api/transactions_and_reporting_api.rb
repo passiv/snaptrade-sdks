@@ -19,7 +19,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param start_date [Date] 
@@ -39,7 +39,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param start_date [Date] 
@@ -58,7 +58,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -74,7 +74,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+    # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

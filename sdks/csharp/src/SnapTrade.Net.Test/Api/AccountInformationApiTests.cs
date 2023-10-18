@@ -209,7 +209,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List balances, positions and orders for the specified account.
+                // List balances, positions and orders for the specified account
                 AccountHoldingsAccount result = client.AccountInformation.GetUserHoldings(accountId, userId, userSecret);
                 Console.WriteLine(result);
             }

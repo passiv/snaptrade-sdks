@@ -34,10 +34,12 @@ from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.user_list import UserList as UserListSchema
+from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 
 from snaptrade_client.type.user_list import UserList
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
+from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 from . import path
@@ -110,21 +112,26 @@ _response_for_404 = api_client.OpenApiResponse(
             schema=SchemaFor404ResponseBodyApplicationJson),
     },
 )
+SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor500ResponseBodyApplicationJson),
+    },
 )
 _status_code_to_response = {
     '200': _response_for_200,

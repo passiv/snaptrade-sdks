@@ -50,7 +50,8 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_security_types
-  # List of all security types.
+  # List of all security types
+  # List security types available on SnapTrade.
   # @param [Hash] opts the optional parameters
   # @return [Array<SecurityType>]
   describe 'get_security_types test' do

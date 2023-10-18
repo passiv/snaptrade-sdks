@@ -225,7 +225,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Delete SnapTrade user
-     * 
+     * Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
      * @param userId  (required)
      * @return DeleteSnapTradeUserRequestBuilder
      * @http.response.details
@@ -499,7 +499,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -515,7 +514,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public List<String> execute() throws ApiException {
@@ -531,7 +529,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<String>> executeWithHttpInfo() throws ApiException {
@@ -547,7 +544,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<String>> _callback) throws ApiException {
@@ -557,13 +553,12 @@ public class AuthenticationApiGenerated {
 
     /**
      * List SnapTrade users
-     * 
+     * Returns a list of users you&#39;ve registered over the SnapTrade API.
      * @return ListSnapTradeUsersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public ListSnapTradeUsersRequestBuilder listSnapTradeUsers() throws IllegalArgumentException {
@@ -669,7 +664,7 @@ public class AuthenticationApiGenerated {
 
         /**
          * Set broker
-         * @param broker  (optional)
+         * @param broker Slug of the brokerage to connect the user to (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder broker(String broker) {
@@ -679,7 +674,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set immediateRedirect
-         * @param immediateRedirect  (optional)
+         * @param immediateRedirect When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder immediateRedirect(Boolean immediateRedirect) {
@@ -689,7 +684,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set customRedirect
-         * @param customRedirect  (optional)
+         * @param customRedirect URL to redirect the user to after the user connects their brokerage account (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder customRedirect(String customRedirect) {
@@ -699,7 +694,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set reconnect
-         * @param reconnect  (optional)
+         * @param reconnect The UUID of the brokerage connection to be reconnected (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder reconnect(String reconnect) {
@@ -709,7 +704,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionType
-         * @param connectionType  (optional)
+         * @param connectionType Sets whether the connection should be read or trade (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {
@@ -798,7 +793,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Login user &amp; generate connection link
-     * 
+     * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @return LoginSnapTradeUserRequestBuilder
@@ -891,7 +886,6 @@ public class AuthenticationApiGenerated {
 
     public class RegisterSnapTradeUserRequestBuilder {
         private String userId;
-        private String rsaPublicKey;
 
         private RegisterSnapTradeUserRequestBuilder() {
         }
@@ -907,16 +901,6 @@ public class AuthenticationApiGenerated {
         }
         
         /**
-         * Set rsaPublicKey
-         * @param rsaPublicKey Open SSH RSA public key (optional)
-         * @return RegisterSnapTradeUserRequestBuilder
-         */
-        public RegisterSnapTradeUserRequestBuilder rsaPublicKey(String rsaPublicKey) {
-            this.rsaPublicKey = rsaPublicKey;
-            return this;
-        }
-        
-        /**
          * Build call for registerSnapTradeUser
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -925,7 +909,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -936,7 +919,6 @@ public class AuthenticationApiGenerated {
         private SnapTradeRegisterUserRequestBody buildBodyParams() {
             SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody();
             snapTradeRegisterUserRequestBody.userId(this.userId);
-            snapTradeRegisterUserRequestBody.rsaPublicKey(this.rsaPublicKey);
             return snapTradeRegisterUserRequestBody;
         }
 
@@ -948,7 +930,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public UserIDandSecret execute() throws ApiException {
@@ -965,7 +946,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<UserIDandSecret> executeWithHttpInfo() throws ApiException {
@@ -982,7 +962,6 @@ public class AuthenticationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserIDandSecret> _callback) throws ApiException {
@@ -1000,7 +979,6 @@ public class AuthenticationApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public RegisterSnapTradeUserRequestBuilder registerSnapTradeUser() throws IllegalArgumentException {

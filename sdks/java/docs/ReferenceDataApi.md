@@ -6,7 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |------------- | ------------- | -------------|
 | [**getCurrencyExchangeRatePair**](ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
 | [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
-| [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types. |
+| [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types |
 | [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | List exchanges |
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
@@ -215,7 +215,9 @@ This endpoint does not need any parameter.
 # **getSecurityTypes**
 > List&lt;SecurityType&gt; getSecurityTypes().execute();
 
-List of all security types.
+List of all security types
+
+List security types available on SnapTrade.
 
 ### Example
 ```java
@@ -852,7 +854,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all supported currencies. |  -  |
+| **200** | A list of all currencies. |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="listAllCurrenciesRates"></a>

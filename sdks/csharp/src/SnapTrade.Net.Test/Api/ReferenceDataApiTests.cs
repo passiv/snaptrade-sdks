@@ -110,7 +110,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List of all security types.
+                // List of all security types
                 List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
                 Console.WriteLine(result);
             }

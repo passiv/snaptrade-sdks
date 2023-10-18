@@ -198,7 +198,7 @@ Optional. Comma seperated list of authorization IDs (only use if filtering is ne
 
 ### `snaptrade.accountInformation.getUserAccountBalance`
 
-List account balances
+A list of account balances for the specified account (one per currency that the account holds).
 
 #### 🛠️ Usage
 
@@ -274,7 +274,7 @@ The ID of the account to get detail of.
 
 ### `snaptrade.accountInformation.getUserAccountOrders`
 
-Get history of orders placed in account
+Fetch all recent orders from a user\'s account.
 
 #### 🛠️ Usage
 
@@ -355,7 +355,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.accountInformation.getUserHoldings`
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 #### 🛠️ Usage
 
@@ -487,7 +487,7 @@ const checkResponse = await snaptrade.apiStatus.check();
 
 ### `snaptrade.authentication.deleteSnapTradeUser`
 
-Delete SnapTrade user
+Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
 #### 🛠️ Usage
 
@@ -545,7 +545,7 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 
 ### `snaptrade.authentication.listSnapTradeUsers`
 
-List SnapTrade users
+Returns a list of users you\'ve registered over the SnapTrade API.
 
 #### 🛠️ Usage
 
@@ -565,7 +565,7 @@ const listSnapTradeUsersResponse =
 
 ### `snaptrade.authentication.loginSnapTradeUser`
 
-Login user &amp; generate connection link
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
 #### 🛠️ Usage
 
@@ -590,13 +590,23 @@ const loginSnapTradeUserResponse =
 
 ##### broker: `string`
 
+Slug of the brokerage to connect the user to
+
 ##### immediateRedirect: `boolean`
+
+When set to True, user will be redirected back to the partner\\\'s site instead of the connection portal
 
 ##### customRedirect: `string`
 
+URL to redirect the user to after the user connects their brokerage account
+
 ##### reconnect: `string`
 
+The UUID of the brokerage connection to be reconnected
+
 ##### connectionType: `string`
+
+Sets whether the connection should be read or trade
 
 #### 🌐 Endpoint
 
@@ -617,8 +627,6 @@ Create SnapTrade user
 const registerSnapTradeUserResponse =
   await snaptrade.authentication.registerSnapTradeUser({
     userId: "snaptrade-user-123",
-    rsaPublicKey:
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
   });
 ```
 
@@ -627,10 +635,6 @@ const registerSnapTradeUserResponse =
 ##### userId: `string`
 
 SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\\\'s unique to a user
-
-##### rsaPublicKey: `string`
-
-Open SSH RSA public key
 
 #### 🔄 Return
 
@@ -1102,7 +1106,7 @@ const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 
 ### `snaptrade.referenceData.getSecurityTypes`
 
-List of all security types.
+List security types available on SnapTrade.
 
 #### 🛠️ Usage
 
@@ -1643,7 +1647,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ### `snaptrade.transactionsAndReporting.getActivities`
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
 #### 🛠️ Usage
 

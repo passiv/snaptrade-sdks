@@ -23,8 +23,5 @@ class OptionalSnapTradeRegisterUserRequestBody(TypedDict, total=False):
     # SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     userId: str
 
-    # Open SSH RSA public key
-    rsaPublicKey: str
-
 class SnapTradeRegisterUserRequestBody(RequiredSnapTradeRegisterUserRequestBody, OptionalSnapTradeRegisterUserRequestBody):
     pass

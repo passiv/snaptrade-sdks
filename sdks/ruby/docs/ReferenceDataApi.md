@@ -6,7 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | ------ | ------------ | ----------- |
 | [**get_currency_exchange_rate_pair**](ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
 | [**get_partner_info**](ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
-| [**get_security_types**](ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types. |
+| [**get_security_types**](ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types |
 | [**get_stock_exchanges**](ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges |
 | [**get_symbols**](ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols |
 | [**get_symbols_by_ticker**](ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
@@ -120,7 +120,9 @@ This endpoint does not need any parameter.
 
 ## get_security_types
 
-List of all security types.
+List of all security types
+
+List security types available on SnapTrade.
 
 ### Example
 
@@ -132,7 +134,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 
 begin
-  # List of all security types.
+  # List of all security types
   result = SnapTrade::ReferenceData.get_security_types
   p result
 rescue SnapTrade::ApiError => e
@@ -147,7 +149,7 @@ This returns an Array which contains the response data, status code and headers.
 ```ruby
 
 begin
-  # List of all security types.
+  # List of all security types
   data, status_code, headers, response = SnapTrade::ReferenceData.get_security_types_with_http_info
   p status_code # => 2xx
   p headers # => { ... }

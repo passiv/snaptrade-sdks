@@ -67,7 +67,7 @@ public class SnapTradeLoginUserRequestBody {
   private String reconnect;
 
   /**
-   * Gets or Sets connectionType
+   * Sets whether the connection should be read or trade
    */
   @JsonAdapter(ConnectionTypeEnum.Adapter.class)
  public enum ConnectionTypeEnum {
@@ -130,11 +130,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Get broker
+   * Slug of the brokerage to connect the user to
    * @return broker
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "ALPACA", value = "")
+  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to")
 
   public String getBroker() {
     return broker;
@@ -159,11 +159,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Get immediateRedirect
+   * When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
    * @return immediateRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "")
+  @ApiModelProperty(example = "true", value = "When set to True, user will be redirected back to the partner's site instead of the connection portal")
 
   public Boolean getImmediateRedirect() {
     return immediateRedirect;
@@ -188,11 +188,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Get customRedirect
+   * URL to redirect the user to after the user connects their brokerage account
    * @return customRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://snaptrade.com", value = "")
+  @ApiModelProperty(example = "https://snaptrade.com", value = "URL to redirect the user to after the user connects their brokerage account")
 
   public String getCustomRedirect() {
     return customRedirect;
@@ -217,11 +217,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Get reconnect
+   * The UUID of the brokerage connection to be reconnected
    * @return reconnect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "")
+  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "The UUID of the brokerage connection to be reconnected")
 
   public String getReconnect() {
     return reconnect;
@@ -246,11 +246,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Get connectionType
+   * Sets whether the connection should be read or trade
    * @return connectionType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "Sets whether the connection should be read or trade")
 
   public ConnectionTypeEnum getConnectionType() {
     return connectionType;

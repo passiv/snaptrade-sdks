@@ -13,7 +13,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 # **DeleteSnapTradeUser**
 
-Delete SnapTrade user
+
+
+Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
 ### Example
 ```csharp
@@ -199,7 +201,9 @@ catch (ApiException e)
 
 # **ListSnapTradeUsers**
 
-List SnapTrade users
+
+
+Returns a list of users you've registered over the SnapTrade API.
 
 ### Example
 ```csharp
@@ -285,7 +289,9 @@ This endpoint does not need any parameter.
 
 # **LoginSnapTradeUser**
 
-Login user & generate connection link
+
+
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
 ### Example
 ```csharp
@@ -309,11 +315,11 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var broker = "ALPACA";
-            var immediateRedirect = true;
-            var customRedirect = "https://snaptrade.com";
-            var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1";
-            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read;
+            var broker = "ALPACA"; // Slug of the brokerage to connect the user to
+            var immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
+            var customRedirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account
+            var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected
+            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read or trade
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
                 broker,
@@ -416,11 +422,9 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
             var userId = "snaptrade-user-123"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
-            var rsaPublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="; // Open SSH RSA public key
             
             var snapTradeRegisterUserRequestBody = new SnapTradeRegisterUserRequestBody(
-                userId,
-                rsaPublicKey
+                userId
             );
             
             try

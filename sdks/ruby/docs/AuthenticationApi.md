@@ -14,6 +14,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Delete SnapTrade user
 
+Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+
 ### Example
 
 ```ruby
@@ -129,6 +131,8 @@ end
 
 List SnapTrade users
 
+Returns a list of users you've registered over the SnapTrade API.
+
 ### Example
 
 ```ruby
@@ -175,6 +179,8 @@ This endpoint does not need any parameter.
 ## login_snap_trade_user
 
 Login user & generate connection link
+
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
 ### Example
 
@@ -266,13 +272,11 @@ SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 user_id = "snaptrade-user-123"
-rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="
 
 begin
   # Create SnapTrade user
   result = SnapTrade::Authentication.register_snap_trade_user(
                                                                  user_id: user_id,
-                                                                 rsa_public_key: rsa_public_key,
                                                                )
   p result
 rescue SnapTrade::ApiError => e
@@ -286,13 +290,11 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 user_id = "snaptrade-user-123"
-rsa_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw=="
 
 begin
   # Create SnapTrade user
   data, status_code, headers, response = SnapTrade::Authentication.register_snap_trade_user_with_http_info(
                                                                                                               user_id: user_id,
-                                                                                                              rsa_public_key: rsa_public_key,
                                                                                                             )
   p status_code # => 2xx
   p headers # => { ... }

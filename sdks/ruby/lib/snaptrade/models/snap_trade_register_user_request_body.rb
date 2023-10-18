@@ -17,14 +17,10 @@ module SnapTrade
     # SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     attr_accessor :user_id
 
-    # Open SSH RSA public key
-    attr_accessor :rsa_public_key
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'user_id' => :'userId',
-        :'rsa_public_key' => :'rsaPublicKey'
+        :'user_id' => :'userId'
       }
     end
 
@@ -36,8 +32,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'user_id' => :'String',
-        :'rsa_public_key' => :'String'
+        :'user_id' => :'String'
       }
     end
 
@@ -65,10 +60,6 @@ module SnapTrade
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
       end
-
-      if attributes.key?(:'rsa_public_key')
-        self.rsa_public_key = attributes[:'rsa_public_key']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,8 +80,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          user_id == o.user_id &&
-          rsa_public_key == o.rsa_public_key
+          user_id == o.user_id
     end
 
     # @see the `==` method
@@ -102,7 +92,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user_id, rsa_public_key].hash
+      [user_id].hash
     end
 
     # Builds the object from hash

@@ -30,6 +30,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Delete SnapTrade user
         /// </summary>
+        /// <remarks>
+        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -40,7 +43,7 @@ namespace SnapTrade.Net.Api
         /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
-        /// 
+        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -72,6 +75,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List SnapTrade users
         /// </summary>
+        /// <remarks>
+        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;string&gt;</returns>
@@ -81,7 +87,7 @@ namespace SnapTrade.Net.Api
         /// List SnapTrade users
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -90,6 +96,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Login user &amp; generate connection link
         /// </summary>
+        /// <remarks>
+        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -102,7 +111,7 @@ namespace SnapTrade.Net.Api
         /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
-        /// 
+        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -144,7 +153,7 @@ namespace SnapTrade.Net.Api
         /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
-        /// 
+        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -157,7 +166,7 @@ namespace SnapTrade.Net.Api
         /// Delete SnapTrade user
         /// </summary>
         /// <remarks>
-        /// 
+        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -196,7 +205,7 @@ namespace SnapTrade.Net.Api
         /// List SnapTrade users
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -208,7 +217,7 @@ namespace SnapTrade.Net.Api
         /// List SnapTrade users
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -219,7 +228,7 @@ namespace SnapTrade.Net.Api
         /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
-        /// 
+        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -234,7 +243,7 @@ namespace SnapTrade.Net.Api
         /// Login user &amp; generate connection link
         /// </summary>
         /// <remarks>
-        /// 
+        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -390,7 +399,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user 
+        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -403,7 +412,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user 
+        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -475,7 +484,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user 
+        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -489,7 +498,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user 
+        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -756,7 +765,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users 
+        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -768,7 +777,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users 
+        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -832,7 +841,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users 
+        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -845,7 +854,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users 
+        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -912,7 +921,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link 
+        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -927,7 +936,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link 
+        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1010,7 +1019,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link 
+        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1026,7 +1035,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link 
+        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

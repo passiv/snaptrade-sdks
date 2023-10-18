@@ -43,6 +43,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_account_balance
   # List account balances
+  # A list of account balances for the specified account (one per currency that the account holds).
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get balances.
@@ -69,6 +70,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_account_orders
   # Get history of orders placed in account
+  # Fetch all recent orders from a user&#39;s account.
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get orders.
@@ -95,7 +97,7 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_holdings
-  # List balances, positions and orders for the specified account.
+  # List balances, positions and orders for the specified account
   # @param account_id The ID of the account to fetch holdings for.
   # @param user_id 
   # @param user_secret 

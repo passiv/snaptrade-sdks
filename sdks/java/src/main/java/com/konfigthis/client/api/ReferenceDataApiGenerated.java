@@ -524,8 +524,8 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * List of all security types.
-     * 
+     * List of all security types
+     * List security types available on SnapTrade.
      * @return GetSecurityTypesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1423,7 +1423,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all currencies. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1439,7 +1439,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all currencies. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1455,7 +1455,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all currencies. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1471,7 +1471,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all currencies. </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1487,7 +1487,7 @@ public class ReferenceDataApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all supported currencies. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all currencies. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

@@ -78,7 +78,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List of all security types.
+     * List of all security types
+     *
+     * List security types available on SnapTrade.
      *
      * @throws ApiException if the Api call fails
      */

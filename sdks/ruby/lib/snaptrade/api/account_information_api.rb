@@ -113,6 +113,7 @@ module SnapTrade
 
 
     # List account balances
+    # A list of account balances for the specified account (one per currency that the account holds).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -123,6 +124,7 @@ module SnapTrade
     end
 
     # List account balances
+    # A list of account balances for the specified account (one per currency that the account holds).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -132,6 +134,7 @@ module SnapTrade
     end
 
     # List account balances
+    # A list of account balances for the specified account (one per currency that the account holds).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -143,6 +146,7 @@ module SnapTrade
     end
 
     # List account balances
+    # A list of account balances for the specified account (one per currency that the account holds).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -303,6 +307,7 @@ module SnapTrade
 
 
     # Get history of orders placed in account
+    # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
@@ -315,6 +320,7 @@ module SnapTrade
     end
 
     # Get history of orders placed in account
+    # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
@@ -326,6 +332,7 @@ module SnapTrade
     end
 
     # Get history of orders placed in account
+    # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
@@ -338,6 +345,7 @@ module SnapTrade
     end
 
     # Get history of orders placed in account
+    # Fetch all recent orders from a user&#39;s account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
@@ -503,7 +511,7 @@ module SnapTrade
     end
 
 
-    # List balances, positions and orders for the specified account.
+    # List balances, positions and orders for the specified account
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -513,7 +521,7 @@ module SnapTrade
       data
     end
 
-    # List balances, positions and orders for the specified account.
+    # List balances, positions and orders for the specified account
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -522,7 +530,7 @@ module SnapTrade
       get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
     end
 
-    # List balances, positions and orders for the specified account.
+    # List balances, positions and orders for the specified account
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -533,7 +541,7 @@ module SnapTrade
       data
     end
 
-    # List balances, positions and orders for the specified account.
+    # List balances, positions and orders for the specified account
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 

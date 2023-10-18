@@ -47,6 +47,7 @@ from snaptrade_client.model.account_order_record import AccountOrderRecord as Ac
 from snaptrade_client.model.currency import Currency as CurrencySchema
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol as UnderlyingSymbolSchema
 from snaptrade_client.model.us_exchange import USExchange as USExchangeSchema
+from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 from snaptrade_client.model.open_units import OpenUnits as OpenUnitsSchema
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus as AccountOrderRecordStatusSchema
@@ -67,6 +68,7 @@ from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.us_exchange import USExchange
 from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.type.open_units import OpenUnits
+from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 
@@ -241,21 +243,26 @@ _response_for_400 = api_client.OpenApiResponse(
             schema=SchemaFor400ResponseBodyApplicationJson),
     },
 )
+SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor500ResponseBodyApplicationJson),
+    },
 )
 _status_code_to_response = {
     '200': _response_for_200,

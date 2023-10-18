@@ -56,6 +56,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List account balances
         /// </summary>
+        /// <remarks>
+        /// A list of account balances for the specified account (one per currency that the account holds).
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -68,7 +71,7 @@ namespace SnapTrade.Net.Api
         /// List account balances
         /// </summary>
         /// <remarks>
-        /// 
+        /// A list of account balances for the specified account (one per currency that the account holds).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -104,6 +107,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Get history of orders placed in account
         /// </summary>
+        /// <remarks>
+        /// Fetch all recent orders from a user&#39;s account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -117,7 +123,7 @@ namespace SnapTrade.Net.Api
         /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Fetch all recent orders from a user&#39;s account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -152,7 +158,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
-        /// List balances, positions and orders for the specified account.
+        /// List balances, positions and orders for the specified account
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -163,7 +169,7 @@ namespace SnapTrade.Net.Api
         AccountHoldingsAccount GetUserHoldings(string accountId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// List balances, positions and orders for the specified account.
+        /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
         /// 
@@ -265,7 +271,7 @@ namespace SnapTrade.Net.Api
         /// List account balances
         /// </summary>
         /// <remarks>
-        /// 
+        /// A list of account balances for the specified account (one per currency that the account holds).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -280,7 +286,7 @@ namespace SnapTrade.Net.Api
         /// List account balances
         /// </summary>
         /// <remarks>
-        /// 
+        /// A list of account balances for the specified account (one per currency that the account holds).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -323,7 +329,7 @@ namespace SnapTrade.Net.Api
         /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Fetch all recent orders from a user&#39;s account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -339,7 +345,7 @@ namespace SnapTrade.Net.Api
         /// Get history of orders placed in account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Fetch all recent orders from a user&#39;s account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -380,7 +386,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Position>>> GetUserAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List balances, positions and orders for the specified account.
+        /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
         /// 
@@ -395,7 +401,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountHoldingsAccount> GetUserHoldingsAsync(string accountId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List balances, positions and orders for the specified account.
+        /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
         /// 
@@ -793,7 +799,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account balances 
+        /// List account balances A list of account balances for the specified account (one per currency that the account holds).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -808,7 +814,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account balances 
+        /// List account balances A list of account balances for the specified account (one per currency that the account holds).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -896,7 +902,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account balances 
+        /// List account balances A list of account balances for the specified account (one per currency that the account holds).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -912,7 +918,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account balances 
+        /// List account balances A list of account balances for the specified account (one per currency that the account holds).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1213,7 +1219,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account 
+        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1229,7 +1235,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account 
+        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1322,7 +1328,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account 
+        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1339,7 +1345,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account 
+        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1645,7 +1651,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account. 
+        /// List balances, positions and orders for the specified account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1660,7 +1666,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account. 
+        /// List balances, positions and orders for the specified account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1748,7 +1754,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account. 
+        /// List balances, positions and orders for the specified account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1764,7 +1770,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account. 
+        /// List balances, positions and orders for the specified account 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>

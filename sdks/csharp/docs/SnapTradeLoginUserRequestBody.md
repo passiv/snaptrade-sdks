@@ -5,11 +5,11 @@ Data to login a user via SnapTrade Partner
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Broker** | **string** |  | [optional] 
-**ImmediateRedirect** | **bool** |  | [optional] 
-**CustomRedirect** | **string** |  | [optional] 
-**Reconnect** | **string** |  | [optional] 
-**ConnectionType** | **string** |  | [optional] 
+**Broker** | **string** | Slug of the brokerage to connect the user to | [optional] 
+**ImmediateRedirect** | **bool** | When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal | [optional] 
+**CustomRedirect** | **string** | URL to redirect the user to after the user connects their brokerage account | [optional] 
+**Reconnect** | **string** | The UUID of the brokerage connection to be reconnected | [optional] 
+**ConnectionType** | **string** | Sets whether the connection should be read or trade | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

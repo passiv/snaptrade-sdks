@@ -54,10 +54,6 @@ public class SnapTradeRegisterUserRequestBody {
   @SerializedName(SERIALIZED_NAME_USER_ID)
   private String userId;
 
-  public static final String SERIALIZED_NAME_RSA_PUBLIC_KEY = "rsaPublicKey";
-  @SerializedName(SERIALIZED_NAME_RSA_PUBLIC_KEY)
-  private String rsaPublicKey;
-
   public SnapTradeRegisterUserRequestBody() {
   }
 
@@ -87,35 +83,6 @@ public class SnapTradeRegisterUserRequestBody {
     
     
     this.userId = userId;
-  }
-
-
-  public SnapTradeRegisterUserRequestBody rsaPublicKey(String rsaPublicKey) {
-    
-    
-    
-    
-    this.rsaPublicKey = rsaPublicKey;
-    return this;
-  }
-
-   /**
-   * Open SSH RSA public key
-   * @return rsaPublicKey
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==", value = "Open SSH RSA public key")
-
-  public String getRsaPublicKey() {
-    return rsaPublicKey;
-  }
-
-
-  public void setRsaPublicKey(String rsaPublicKey) {
-    
-    
-    
-    this.rsaPublicKey = rsaPublicKey;
   }
 
   /**
@@ -173,14 +140,13 @@ public class SnapTradeRegisterUserRequestBody {
       return false;
     }
     SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody = (SnapTradeRegisterUserRequestBody) o;
-    return Objects.equals(this.userId, snapTradeRegisterUserRequestBody.userId) &&
-        Objects.equals(this.rsaPublicKey, snapTradeRegisterUserRequestBody.rsaPublicKey)&&
+    return Objects.equals(this.userId, snapTradeRegisterUserRequestBody.userId)&&
         Objects.equals(this.additionalProperties, snapTradeRegisterUserRequestBody.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, rsaPublicKey, additionalProperties);
+    return Objects.hash(userId, additionalProperties);
   }
 
   @Override
@@ -188,7 +154,6 @@ public class SnapTradeRegisterUserRequestBody {
     StringBuilder sb = new StringBuilder();
     sb.append("class SnapTradeRegisterUserRequestBody {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    rsaPublicKey: ").append(toIndentedString(rsaPublicKey)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -213,7 +178,6 @@ public class SnapTradeRegisterUserRequestBody {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("userId");
-    openapiFields.add("rsaPublicKey");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -233,9 +197,6 @@ public class SnapTradeRegisterUserRequestBody {
       }
       if ((jsonObj.get("userId") != null && !jsonObj.get("userId").isJsonNull()) && !jsonObj.get("userId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `userId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("userId").toString()));
-      }
-      if ((jsonObj.get("rsaPublicKey") != null && !jsonObj.get("rsaPublicKey").isJsonNull()) && !jsonObj.get("rsaPublicKey").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `rsaPublicKey` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rsaPublicKey").toString()));
       }
   }
 

@@ -48,7 +48,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::AccountInformationApi* | [**get_user_account_details**](docs/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *SnapTrade::AccountInformationApi* | [**get_user_account_orders**](docs/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account
 *SnapTrade::AccountInformationApi* | [**get_user_account_positions**](docs/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions
-*SnapTrade::AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account.
+*SnapTrade::AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
 *SnapTrade::AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts
 *SnapTrade::AccountInformationApi* | [**update_user_account**](docs/AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account
 *SnapTrade::APIStatusApi* | [**check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
@@ -69,7 +69,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::OptionsApi* | [**place_option_strategy**](docs/OptionsApi.md#place_option_strategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage
 *SnapTrade::ReferenceDataApi* | [**get_currency_exchange_rate_pair**](docs/ReferenceDataApi.md#get_currency_exchange_rate_pair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
 *SnapTrade::ReferenceDataApi* | [**get_partner_info**](docs/ReferenceDataApi.md#get_partner_info) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
-*SnapTrade::ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types.
+*SnapTrade::ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types
 *SnapTrade::ReferenceDataApi* | [**get_stock_exchanges**](docs/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges
 *SnapTrade::ReferenceDataApi* | [**get_symbols**](docs/ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols
 *SnapTrade::ReferenceDataApi* | [**get_symbols_by_ticker**](docs/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
@@ -135,6 +135,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)
  - [SnapTrade::Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
  - [SnapTrade::Model404FailedRequestResponse](docs/Model404FailedRequestResponse.md)
+ - [SnapTrade::Model500UnexpectedExceptionResponse](docs/Model500UnexpectedExceptionResponse.md)
  - [SnapTrade::ModelAssetClass](docs/ModelAssetClass.md)
  - [SnapTrade::ModelAssetClassDetails](docs/ModelAssetClassDetails.md)
  - [SnapTrade::ModelAssetClassTarget](docs/ModelAssetClassTarget.md)

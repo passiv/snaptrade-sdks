@@ -46,12 +46,4 @@ public class SnapTradeRegisterUserRequestBodyTest {
         // TODO: test userId
     }
 
-    /**
-     * Test the property 'rsaPublicKey'
-     */
-    @Test
-    public void rsaPublicKeyTest() {
-        // TODO: test rsaPublicKey
-    }
-
 }

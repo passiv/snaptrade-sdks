@@ -470,7 +470,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account balances
-     * 
+     * A list of account balances for the specified account (one per currency that the account holds).
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get balances. (required)
@@ -809,7 +809,6 @@ public class AccountInformationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -825,7 +824,6 @@ public class AccountInformationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public List<AccountOrderRecord> execute() throws ApiException {
@@ -841,7 +839,6 @@ public class AccountInformationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<AccountOrderRecord>> executeWithHttpInfo() throws ApiException {
@@ -857,7 +854,6 @@ public class AccountInformationApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
@@ -867,7 +863,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * Get history of orders placed in account
-     * 
+     * Fetch all recent orders from a user&#39;s account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get orders. (required)
@@ -876,7 +872,6 @@ public class AccountInformationApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public GetUserAccountOrdersRequestBuilder getUserAccountOrders(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
@@ -1248,7 +1243,7 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      * 
      * @param accountId The ID of the account to fetch holdings for. (required)
      * @param userId  (required)

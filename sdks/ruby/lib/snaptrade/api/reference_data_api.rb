@@ -164,20 +164,23 @@ module SnapTrade
     end
 
 
-    # List of all security types.
+    # List of all security types
+    # List security types available on SnapTrade.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types(extra: {})
       data, _status_code, _headers = get_security_types_with_http_info_impl(extra)
       data
     end
 
-    # List of all security types.
+    # List of all security types
+    # List security types available on SnapTrade.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types_with_http_info(extra: {})
       get_security_types_with_http_info_impl(extra)
     end
 
-    # List of all security types.
+    # List of all security types
+    # List security types available on SnapTrade.
     # @param [Hash] opts the optional parameters
     # @return [Array<SecurityType>]
     def get_security_types_impl(opts = {})
@@ -185,7 +188,8 @@ module SnapTrade
       data
     end
 
-    # List of all security types.
+    # List of all security types
+    # List security types available on SnapTrade.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SecurityType>, Integer, Hash)>] Array<SecurityType> data, response status code and response headers
     def get_security_types_with_http_info_impl(opts = {})

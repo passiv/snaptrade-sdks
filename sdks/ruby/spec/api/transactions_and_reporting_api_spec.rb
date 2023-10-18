@@ -30,7 +30,7 @@ describe 'TransactionsAndReportingApi' do
 
   # unit tests for get_activities
   # Get transaction history for a user
-  # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+  # Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

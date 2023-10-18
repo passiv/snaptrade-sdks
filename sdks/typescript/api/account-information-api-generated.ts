@@ -51,6 +51,8 @@ import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
 import { OptionsSymbol } from '../models';
 // @ts-ignore
 import { OrderType } from '../models';
@@ -145,7 +147,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * A list of account balances for the specified account (one per currency that the account holds).
          * @summary List account balances
          * @param {string} userId 
          * @param {string} userSecret 
@@ -265,7 +267,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Fetch all recent orders from a user\'s account.
          * @summary Get history of orders placed in account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -391,7 +393,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
+         * @summary List balances, positions and orders for the specified account
          * @param {string} accountId The ID of the account to fetch holdings for.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -588,7 +590,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * A list of account balances for the specified account (one per currency that the account holds).
          * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -610,7 +612,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Fetch all recent orders from a user\'s account.
          * @summary Get history of orders placed in account
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -633,7 +635,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
+         * @summary List balances, positions and orders for the specified account
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -686,7 +688,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getAllUserHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * A list of account balances for the specified account (one per currency that the account holds).
          * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -706,7 +708,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountDetails(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Fetch all recent orders from a user\'s account.
          * @summary Get history of orders placed in account
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -727,7 +729,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary List balances, positions and orders for the specified account.
+         * @summary List balances, positions and orders for the specified account
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1019,7 +1021,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * A list of account balances for the specified account (one per currency that the account holds).
      * @summary List account balances
      * @param {AccountInformationApiGetUserAccountBalanceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1043,7 +1045,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Fetch all recent orders from a user\'s account.
      * @summary Get history of orders placed in account
      * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1068,7 +1070,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary List balances, positions and orders for the specified account.
+     * @summary List balances, positions and orders for the specified account
      * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

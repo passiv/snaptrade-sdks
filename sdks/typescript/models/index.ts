@@ -39,6 +39,7 @@ export * from './model400-failed-request-response';
 export * from './model401-failed-request-response';
 export * from './model403-failed-request-response';
 export * from './model404-failed-request-response';
+export * from './model500-unexpected-exception-response';
 export * from './model-asset-class';
 export * from './model-asset-class-details';
 export * from './model-asset-class-target';

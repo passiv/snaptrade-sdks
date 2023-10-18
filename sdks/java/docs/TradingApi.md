@@ -128,7 +128,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Order Record of canceled order |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="getOrderImpact"></a>
 # **getOrderImpact**
@@ -351,7 +350,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns quotes object with different prices |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="placeForceOrder"></a>
 # **placeForceOrder**

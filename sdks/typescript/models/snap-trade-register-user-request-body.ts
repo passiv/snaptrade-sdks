@@ -22,11 +22,5 @@ export interface SnapTradeRegisterUserRequestBody {
      * @memberof SnapTradeRegisterUserRequestBody
      */
     'userId'?: string;
-    /**
-     * Open SSH RSA public key
-     * @type {string}
-     * @memberof SnapTradeRegisterUserRequestBody
-     */
-    'rsaPublicKey'?: string;
 }
 

@@ -63,7 +63,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TransactionsAndReportingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {string} userId 
          * @param {string} userSecret 
@@ -247,7 +247,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
     const localVarAxiosParamCreator = TransactionsAndReportingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -279,7 +279,7 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
     const localVarFp = TransactionsAndReportingApiFp(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -425,7 +425,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
  */
 export class TransactionsAndReportingApiGenerated extends BaseAPI {
     /**
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
      * @summary Get transaction history for a user
      * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

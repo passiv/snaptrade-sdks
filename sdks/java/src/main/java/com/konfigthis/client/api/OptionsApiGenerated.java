@@ -216,7 +216,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -241,7 +240,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public StrategyQuotes execute() throws ApiException {
@@ -258,7 +256,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<StrategyQuotes> executeWithHttpInfo() throws ApiException {
@@ -275,7 +272,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<StrategyQuotes> _callback) throws ApiException {
@@ -296,7 +292,6 @@ public class OptionsApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public GetOptionStrategyRequestBuilder getOptionStrategy(UUID underlyingSymbolId, List<OptionLeg> legs, String strategyType, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
@@ -438,7 +433,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -454,7 +448,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public List<OptionChainInner> execute() throws ApiException {
@@ -470,7 +463,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<OptionChainInner>> executeWithHttpInfo() throws ApiException {
@@ -486,7 +478,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<OptionChainInner>> _callback) throws ApiException {
@@ -506,7 +497,6 @@ public class OptionsApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> List of all Options available for the brokerage symbol </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public GetOptionsChainRequestBuilder getOptionsChain(String userId, String userSecret, UUID accountId, UUID symbol) throws IllegalArgumentException {
@@ -641,7 +631,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -657,7 +646,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public StrategyQuotes execute() throws ApiException {
@@ -673,7 +661,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<StrategyQuotes> executeWithHttpInfo() throws ApiException {
@@ -689,7 +676,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<StrategyQuotes> _callback) throws ApiException {
@@ -709,7 +695,6 @@ public class OptionsApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Order Quotes </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public GetOptionsStrategyQuoteRequestBuilder getOptionsStrategyQuote(String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
@@ -836,7 +821,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -852,7 +836,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public List<OptionsPosition> execute() throws ApiException {
@@ -868,7 +851,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<OptionsPosition>> executeWithHttpInfo() throws ApiException {
@@ -884,7 +866,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<OptionsPosition>> _callback) throws ApiException {
@@ -903,7 +884,6 @@ public class OptionsApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public ListOptionHoldingsRequestBuilder listOptionHoldings(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
@@ -1047,7 +1027,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -1073,7 +1052,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public StrategyOrderRecord execute() throws ApiException {
@@ -1090,7 +1068,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<StrategyOrderRecord> executeWithHttpInfo() throws ApiException {
@@ -1107,7 +1084,6 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<StrategyOrderRecord> _callback) throws ApiException {
@@ -1129,7 +1105,6 @@ public class OptionsApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public PlaceOptionStrategyRequestBuilder placeOptionStrategy(String orderType, String timeInForce, double price, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
