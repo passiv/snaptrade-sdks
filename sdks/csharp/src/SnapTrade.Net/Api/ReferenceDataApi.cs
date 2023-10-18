@@ -66,18 +66,21 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of PartnerData</returns>
         ApiResponse<PartnerData> GetPartnerInfoWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// List of all security types.
+        /// List of all security types
         /// </summary>
+        /// <remarks>
+        /// List security types available on SnapTrade.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;SecurityType&gt;</returns>
         List<SecurityType> GetSecurityTypes(int operationIndex = 0);
 
         /// <summary>
-        /// List of all security types.
+        /// List of all security types
         /// </summary>
         /// <remarks>
-        /// 
+        /// List security types available on SnapTrade.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -301,10 +304,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (PartnerData)</returns>
         System.Threading.Tasks.Task<ApiResponse<PartnerData>> GetPartnerInfoWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List of all security types.
+        /// List of all security types
         /// </summary>
         /// <remarks>
-        /// 
+        /// List security types available on SnapTrade.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -313,10 +316,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<SecurityType>> GetSecurityTypesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List of all security types.
+        /// List of all security types
         /// </summary>
         /// <remarks>
-        /// 
+        /// List security types available on SnapTrade.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -974,7 +977,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all security types. 
+        /// List of all security types List security types available on SnapTrade.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -986,7 +989,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all security types. 
+        /// List of all security types List security types available on SnapTrade.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1050,7 +1053,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all security types. 
+        /// List of all security types List security types available on SnapTrade.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1063,7 +1066,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all security types. 
+        /// List of all security types List security types available on SnapTrade.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>

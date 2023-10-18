@@ -65,14 +65,6 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'UserId'
         }
-        /// <summary>
-        /// Test the property 'RsaPublicKey'
-        /// </summary>
-        [Fact]
-        public void RsaPublicKeyTest()
-        {
-            // TODO unit test for the property 'RsaPublicKey'
-        }
 
     }
 

@@ -221,7 +221,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -243,7 +242,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public AccountOrderRecord execute() throws ApiException {
@@ -260,7 +258,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
@@ -277,7 +274,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
@@ -298,7 +294,6 @@ public class TradingApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Order Record of canceled order </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public CancelUserAccountOrderRequestBuilder cancelUserAccountOrder(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
@@ -760,7 +755,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -776,7 +770,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public List<SymbolsQuotesInner> execute() throws ApiException {
@@ -792,7 +785,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<SymbolsQuotesInner>> executeWithHttpInfo() throws ApiException {
@@ -808,7 +800,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
@@ -828,7 +819,6 @@ public class TradingApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public GetUserAccountQuotesRequestBuilder getUserAccountQuotes(String userId, String userSecret, String symbols, String accountId) throws IllegalArgumentException {

@@ -115,7 +115,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Order Quotes |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="getOptionsChain"></a>
 # **getOptionsChain**
@@ -212,7 +211,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | List of all Options available for the brokerage symbol |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="getOptionsStrategyQuote"></a>
 # **getOptionsStrategyQuote**
@@ -316,7 +314,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Order Quotes |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="listOptionHoldings"></a>
 # **listOptionHoldings**
@@ -412,7 +409,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The option holdings in the account |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="placeOptionStrategy"></a>
 # **placeOptionStrategy**
@@ -525,5 +521,4 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Status of strategy order placed |  -  |
-| **500** | Unexpected error |  -  |
 

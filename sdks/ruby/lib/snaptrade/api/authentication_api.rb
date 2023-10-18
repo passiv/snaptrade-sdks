@@ -19,6 +19,7 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user(user_id:, extra: {})
@@ -27,6 +28,7 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user_with_http_info(user_id:, extra: {})
@@ -34,6 +36,7 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteUserResponse]
@@ -43,6 +46,7 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    # Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteUserResponse, Integer, Hash)>] DeleteUserResponse data, response status code and response headers
@@ -184,6 +188,7 @@ module SnapTrade
 
 
     # List SnapTrade users
+    # Returns a list of users you've registered over the SnapTrade API.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
       data, _status_code, _headers = list_snap_trade_users_with_http_info_impl(extra)
@@ -191,12 +196,14 @@ module SnapTrade
     end
 
     # List SnapTrade users
+    # Returns a list of users you've registered over the SnapTrade API.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
       list_snap_trade_users_with_http_info_impl(extra)
     end
 
     # List SnapTrade users
+    # Returns a list of users you've registered over the SnapTrade API.
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
     def list_snap_trade_users_impl(opts = {})
@@ -205,6 +212,7 @@ module SnapTrade
     end
 
     # List SnapTrade users
+    # Returns a list of users you&#39;ve registered over the SnapTrade API.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
     def list_snap_trade_users_with_http_info_impl(opts = {})
@@ -253,12 +261,13 @@ module SnapTrade
 
 
     # Login user & generate connection link
+    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] 
-    # @param immediate_redirect [Boolean] 
-    # @param custom_redirect [String] 
-    # @param reconnect [String] 
+    # @param broker [String] Slug of the brokerage to connect the user to
+    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected
     # @param connection_type [ConnectionType] 
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -275,12 +284,13 @@ module SnapTrade
     end
 
     # Login user & generate connection link
+    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] 
-    # @param immediate_redirect [Boolean] 
-    # @param custom_redirect [String] 
-    # @param reconnect [String] 
+    # @param broker [String] Slug of the brokerage to connect the user to
+    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected
     # @param connection_type [ConnectionType] 
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -296,6 +306,7 @@ module SnapTrade
     end
 
     # Login user & generate connection link
+    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -307,6 +318,7 @@ module SnapTrade
     end
 
     # Login user &amp; generate connection link
+    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -374,13 +386,11 @@ module SnapTrade
 
     # Create SnapTrade user
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
-    # @param rsa_public_key [String] Open SSH RSA public key
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
+    def register_snap_trade_user(user_id: SENTINEL, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
-      _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL
       snap_trade_register_user_request_body = _body
       data, _status_code, _headers = register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
       data
@@ -388,13 +398,11 @@ module SnapTrade
 
     # Create SnapTrade user
     # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
-    # @param rsa_public_key [String] Open SSH RSA public key
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user_with_http_info(user_id: SENTINEL, rsa_public_key: SENTINEL, extra: {})
+    def register_snap_trade_user_with_http_info(user_id: SENTINEL, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
-      _body[:rsaPublicKey] = rsa_public_key if rsa_public_key != SENTINEL
       snap_trade_register_user_request_body = _body
       register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
     end

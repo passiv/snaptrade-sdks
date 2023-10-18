@@ -14,12 +14,16 @@ require 'time'
 module SnapTrade
   # Data to login a user via SnapTrade Partner
   class SnapTradeLoginUserRequestBody
+    # Slug of the brokerage to connect the user to
     attr_accessor :broker
 
+    # When set to True, user will be redirected back to the partner's site instead of the connection portal
     attr_accessor :immediate_redirect
 
+    # URL to redirect the user to after the user connects their brokerage account
     attr_accessor :custom_redirect
 
+    # The UUID of the brokerage connection to be reconnected
     attr_accessor :reconnect
 
     attr_accessor :connection_type

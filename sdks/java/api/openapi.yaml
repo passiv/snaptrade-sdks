@@ -92,7 +92,12 @@ paths:
           description: Invalid SnapTrade Client ID provided in query
           x-do-not-generate: true
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Create SnapTrade user
       tags:
       - Authentication
@@ -102,6 +107,8 @@ paths:
       x-accepts: application/json
   /snapTrade/login:
     post:
+      description: Logs in a SnapTrade user and returns an authenticated connection
+        portal URL for them to use to connect a brokerage account.
       operationId: Authentication_loginSnapTradeUser
       parameters:
       - explode: true
@@ -158,6 +165,7 @@ paths:
       x-accepts: application/json
   /snapTrade/listUsers:
     get:
+      description: Returns a list of users you've registered over the SnapTrade API.
       operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
@@ -182,7 +190,12 @@ paths:
           description: Invalid SnapTrade Client ID provided in query
           x-do-not-generate: true
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: List SnapTrade users
       tags:
       - Authentication
@@ -191,6 +204,8 @@ paths:
       x-accepts: application/json
   /snapTrade/deleteUser:
     delete:
+      description: "Deletes a user you've registered over the SnapTrade API, and any\
+        \ data associated with them or their investment accounts."
       operationId: Authentication_deleteSnapTradeUser
       parameters:
       - explode: true
@@ -609,7 +624,7 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: "List balances, positions and orders for the specified account."
+      summary: "List balances, positions and orders for the specified account"
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -703,6 +718,8 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/balances:
     get:
+      description: A list of account balances for the specified account (one per currency
+        that the account holds).
       operationId: AccountInformation_getUserAccountBalance
       parameters:
       - explode: true
@@ -793,6 +810,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/orders:
     get:
+      description: Fetch all recent orders from a user's account.
       operationId: AccountInformation_getUserAccountOrders
       parameters:
       - explode: true
@@ -841,7 +859,12 @@ paths:
                 x-konfig-is-used-in-successful-response: true
           description: List all orders in account
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Get history of orders placed in account
       tags:
       - Account Information
@@ -898,7 +921,12 @@ paths:
                 $ref: '#/components/schemas/SymbolsQuotes'
           description: Returns quotes object with different prices
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Get symbol quotes
       tags:
       - Trading
@@ -1142,7 +1170,12 @@ paths:
             account
           x-do-not-generate: true
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Cancel open order in account
       tags:
       - Trading
@@ -1281,7 +1314,12 @@ paths:
                 x-konfig-is-used-in-successful-response: true
           description: The option holdings in the account
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Get the options holdings in the account
       tags:
       - Options
@@ -1332,7 +1370,12 @@ paths:
                 $ref: '#/components/schemas/OptionChain'
           description: List of all Options available for the brokerage symbol
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Get the options chain
       tags:
       - Options
@@ -1376,7 +1419,12 @@ paths:
                 $ref: '#/components/schemas/StrategyQuotes'
           description: Order Quotes
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Creates an option strategy object that will be used to place an option
         strategy order
       tags:
@@ -1429,7 +1477,12 @@ paths:
                 $ref: '#/components/schemas/StrategyQuotes'
           description: Order Quotes
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Get latest market data of option strategy
       tags:
       - Options
@@ -1481,7 +1534,12 @@ paths:
                 $ref: '#/components/schemas/StrategyOrderRecord'
           description: Status of strategy order placed
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
       summary: Place an option strategy order on the brokerage
       tags:
       - Options
@@ -1557,7 +1615,7 @@ paths:
                   $ref: '#/components/schemas/Currency'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: A list of all supported currencies.
+          description: A list of all currencies.
         default:
           description: Unexpected error.
       summary: List currencies
@@ -1668,6 +1726,7 @@ paths:
       x-accepts: application/json
   /securityTypes:
     get:
+      description: List security types available on SnapTrade.
       operationId: ReferenceData_getSecurityTypes
       parameters: []
       responses:
@@ -1682,7 +1741,7 @@ paths:
           description: A list of all defined Security Type objects.
         default:
           description: Unexpected error.
-      summary: List of all security types.
+      summary: List of all security types
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1759,7 +1818,7 @@ paths:
   /activities:
     get:
       description: Returns activities (transactions) for a user. Specifing start and
-        end date is highly recommended for automatic calls for better performance
+        end date is highly recommended for better performance
       operationId: TransactionsAndReporting_getActivities
       parameters:
       - explode: true
@@ -2060,6 +2119,22 @@ components:
         default_code:
           example: 1011
           x-konfig-original-example: 1011
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    "500UnexpectedExceptionResponse":
+      additionalProperties: true
+      description: Example for a response that failed for unexpected reasons
+      properties:
+        detail:
+          example: Encountered an unexpected exception.
+          x-konfig-original-example: Encountered an unexpected exception.
+        status_code:
+          example: 500
+          x-konfig-original-example: 500
+        code:
+          example: 1000
+          x-konfig-original-example: 1000
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true
@@ -4417,7 +4492,6 @@ components:
       description: Data required to register a user via SnapTrade Partner
       example:
         userId: snaptrade-user-123
-        rsaPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
       properties:
         userId:
           description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any\
@@ -4426,12 +4500,6 @@ components:
           type: string
           x-konfig-original-example: snaptrade-user-123
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeUserID
-        rsaPublicKey:
-          description: Open SSH RSA public key
-          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
-          type: string
-          x-konfig-original-example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-rsaPublicKey
       type: object
     SnapTradeLoginUserRequestBody:
       description: Data to login a user via SnapTrade Partner
@@ -4443,26 +4511,33 @@ components:
         connectionType: read
       properties:
         broker:
+          description: Slug of the brokerage to connect the user to
           example: ALPACA
           type: string
           x-konfig-original-example: ALPACA
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker
         immediateRedirect:
+          description: "When set to True, user will be redirected back to the partner's\
+            \ site instead of the connection portal"
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-immediateRedirect
         customRedirect:
+          description: URL to redirect the user to after the user connects their brokerage
+            account
           example: https://snaptrade.com
           type: string
           x-konfig-original-example: https://snaptrade.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-customRedirect
         reconnect:
+          description: The UUID of the brokerage connection to be reconnected
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           type: string
           x-konfig-original-example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-reconnect
         connectionType:
+          description: Sets whether the connection should be read or trade
           enum:
           - read
           - trade
@@ -8108,8 +8183,6 @@ components:
       properties:
         userId:
           $ref: '#/components/schemas/SnapTradeUserID'
-        rsaPublicKey:
-          $ref: '#/components/schemas/rsaPublicKey'
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
@@ -8121,26 +8194,33 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         broker:
+          description: Slug of the brokerage to connect the user to
           example: ALPACA
           type: string
           x-konfig-original-example: ALPACA
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker
         immediateRedirect:
+          description: "When set to True, user will be redirected back to the partner's\
+            \ site instead of the connection portal"
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-immediateRedirect
         customRedirect:
+          description: URL to redirect the user to after the user connects their brokerage
+            account
           example: https://snaptrade.com
           type: string
           x-konfig-original-example: https://snaptrade.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-customRedirect
         reconnect:
+          description: The UUID of the brokerage connection to be reconnected
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           type: string
           x-konfig-original-example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-reconnect
         connectionType:
+          description: Sets whether the connection should be read or trade
           enum:
           - read
           - trade

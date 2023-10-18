@@ -49,6 +49,8 @@ public class AuthenticationApiTest {
     /**
      * Delete SnapTrade user
      *
+     * Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -76,6 +78,8 @@ public class AuthenticationApiTest {
     /**
      * List SnapTrade users
      *
+     * Returns a list of users you&#39;ve registered over the SnapTrade API.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -87,6 +91,8 @@ public class AuthenticationApiTest {
 
     /**
      * Login user &amp; generate connection link
+     *
+     * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
      *
      * @throws ApiException if the Api call fails
      */
@@ -117,10 +123,8 @@ public class AuthenticationApiTest {
     @Test
     public void registerSnapTradeUserTest() throws ApiException {
         String userId = null;
-        String rsaPublicKey = null;
         UserIDandSecret response = api.registerSnapTradeUser()
                 .userId(userId)
-                .rsaPublicKey(rsaPublicKey)
                 .execute();
         // TODO: test validations
     }

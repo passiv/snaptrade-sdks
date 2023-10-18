@@ -30,6 +30,7 @@ describe 'AuthenticationApi' do
 
   # unit tests for delete_snap_trade_user
   # Delete SnapTrade user
+  # Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
   # @param user_id 
   # @param [Hash] opts the optional parameters
   # @return [DeleteUserResponse]
@@ -53,6 +54,7 @@ describe 'AuthenticationApi' do
 
   # unit tests for list_snap_trade_users
   # List SnapTrade users
+  # Returns a list of users you&#39;ve registered over the SnapTrade API.
   # @param [Hash] opts the optional parameters
   # @return [Array<String>]
   describe 'list_snap_trade_users test' do
@@ -63,6 +65,7 @@ describe 'AuthenticationApi' do
 
   # unit tests for login_snap_trade_user
   # Login user &amp; generate connection link
+  # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

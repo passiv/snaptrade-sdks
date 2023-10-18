@@ -49,6 +49,8 @@ import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
 import { OptionsSymbol } from '../models';
 // @ts-ignore
 import { OrderType } from '../models';

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**get_user_account_details**](AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**get_user_account_positions**](AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions |
-| [**get_user_holdings**](AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
+| [**get_user_holdings**](AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts |
 | [**update_user_account**](AccountInformationApi.md#update_user_account) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
@@ -81,6 +81,8 @@ end
 ## get_user_account_balance
 
 List account balances
+
+A list of account balances for the specified account (one per currency that the account holds).
 
 ### Example
 
@@ -211,6 +213,8 @@ end
 ## get_user_account_orders
 
 Get history of orders placed in account
+
+Fetch all recent orders from a user's account.
 
 ### Example
 
@@ -345,7 +349,7 @@ end
 
 ## get_user_holdings
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 ### Example
 
@@ -360,7 +364,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # List balances, positions and orders for the specified account.
+  # List balances, positions and orders for the specified account
   result = SnapTrade::AccountInformation.get_user_holdings(
                                                               account_id: account_id,
                                                               user_id: user_id,
@@ -382,7 +386,7 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 
 begin
-  # List balances, positions and orders for the specified account.
+  # List balances, positions and orders for the specified account
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_holdings_with_http_info(
                                                                                                            account_id: account_id,
                                                                                                            user_id: user_id,

@@ -39,6 +39,7 @@ from snaptrade_client.model.security_type import SecurityType as SecurityTypeSch
 from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs as OptionStrategyLegsSchema
 from snaptrade_client.model.currency import Currency as CurrencySchema
 from snaptrade_client.model.price import Price as PriceSchema
+from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
 from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
@@ -46,6 +47,7 @@ from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 from snaptrade_client.type.option_strategy import OptionStrategy
 from snaptrade_client.type.price import Price
@@ -290,21 +292,26 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor500ResponseBodyApplicationJson),
+    },
 )
 _status_code_to_response = {
     '200': _response_for_200,

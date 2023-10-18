@@ -12,7 +12,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
 ### Example
 ```csharp

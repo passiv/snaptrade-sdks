@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.2-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.2)
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.3-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.3)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.34.2
+pip install snaptrade-python-sdk==10.34.3
 ```
 
 ## Getting Started
@@ -225,7 +225,7 @@ Optional. Comma seperated list of authorization IDs (only use if filtering is ne
 
 ### `snaptrade.account_information.get_user_account_balance`
 
-List account balances
+A list of account balances for the specified account (one per currency that the account holds).
 
 #### 🛠️ Usage
 
@@ -301,7 +301,7 @@ The ID of the account to get detail of.
 
 ### `snaptrade.account_information.get_user_account_orders`
 
-Get history of orders placed in account
+Fetch all recent orders from a user's account.
 
 #### 🛠️ Usage
 
@@ -382,7 +382,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.account_information.get_user_holdings`
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 #### 🛠️ Usage
 
@@ -507,7 +507,7 @@ check_response = snaptrade.api_status.check()
 
 ### `snaptrade.authentication.delete_snap_trade_user`
 
-Delete SnapTrade user
+Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
 #### 🛠️ Usage
 
@@ -562,7 +562,7 @@ get_user_jwt_response = snaptrade.authentication.get_user_jwt(
 
 ### `snaptrade.authentication.list_snap_trade_users`
 
-List SnapTrade users
+Returns a list of users you've registered over the SnapTrade API.
 
 #### 🛠️ Usage
 
@@ -584,7 +584,7 @@ list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users(
 
 ### `snaptrade.authentication.login_snap_trade_user`
 
-Login user & generate connection link
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
 #### 🛠️ Usage
 
@@ -608,13 +608,23 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
 
 ##### broker: `str`
 
+Slug of the brokerage to connect the user to
+
 ##### immediate_redirect: `bool`
+
+When set to True, user will be redirected back to the partner's site instead of the connection portal
 
 ##### custom_redirect: `str`
 
+URL to redirect the user to after the user connects their brokerage account
+
 ##### reconnect: `str`
 
+The UUID of the brokerage connection to be reconnected
+
 ##### connection_type: `str`
+
+Sets whether the connection should be read or trade
 
 #### ⚙️ Request Body
 
@@ -636,7 +646,6 @@ Create SnapTrade user
 ```python
 register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
     user_id="snaptrade-user-123",
-    rsa_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==",
 )
 ```
 
@@ -645,10 +654,6 @@ register_snap_trade_user_response = snaptrade.authentication.register_snap_trade
 ##### user_id: `str`
 
 SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
-
-##### rsa_public_key: `str`
-
-Open SSH RSA public key
 
 #### ⚙️ Request Body
 
@@ -1114,7 +1119,7 @@ get_partner_info_response = snaptrade.reference_data.get_partner_info()
 
 ### `snaptrade.reference_data.get_security_types`
 
-List of all security types.
+List security types available on SnapTrade.
 
 #### 🛠️ Usage
 
@@ -1658,7 +1663,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ### `snaptrade.transactions_and_reporting.get_activities`
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
 #### 🛠️ Usage
 

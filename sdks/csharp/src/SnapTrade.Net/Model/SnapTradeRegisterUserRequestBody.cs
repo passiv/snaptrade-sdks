@@ -36,11 +36,9 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="SnapTradeRegisterUserRequestBody" /> class.
         /// </summary>
         /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
-        /// <param name="rsaPublicKey">Open SSH RSA public key.</param>
-        public SnapTradeRegisterUserRequestBody(string userId = default(string), string rsaPublicKey = default(string))
+        public SnapTradeRegisterUserRequestBody(string userId = default(string))
         {
             this.UserId = userId;
-            this.RsaPublicKey = rsaPublicKey;
         }
 
         /// <summary>
@@ -51,13 +49,6 @@ namespace SnapTrade.Net.Model
         public string UserId { get; set; }
 
         /// <summary>
-        /// Open SSH RSA public key
-        /// </summary>
-        /// <value>Open SSH RSA public key</value>
-        [DataMember(Name = "rsaPublicKey", EmitDefaultValue = false)]
-        public string RsaPublicKey { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -66,7 +57,6 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class SnapTradeRegisterUserRequestBody {\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
-            sb.Append("  RsaPublicKey: ").Append(RsaPublicKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -106,11 +96,6 @@ namespace SnapTrade.Net.Model
                     this.UserId == input.UserId ||
                     (this.UserId != null &&
                     this.UserId.Equals(input.UserId))
-                ) && 
-                (
-                    this.RsaPublicKey == input.RsaPublicKey ||
-                    (this.RsaPublicKey != null &&
-                    this.RsaPublicKey.Equals(input.RsaPublicKey))
                 );
         }
 
@@ -126,10 +111,6 @@ namespace SnapTrade.Net.Model
                 if (this.UserId != null)
                 {
                     hashCode = (hashCode * 59) + this.UserId.GetHashCode();
-                }
-                if (this.RsaPublicKey != null)
-                {
-                    hashCode = (hashCode * 59) + this.RsaPublicKey.GetHashCode();
                 }
                 return hashCode;
             }

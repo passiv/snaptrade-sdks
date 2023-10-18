@@ -86,6 +86,8 @@ public class AccountInformationApiTest {
     /**
      * List account balances
      *
+     * A list of account balances for the specified account (one per currency that the account holds).
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -115,6 +117,8 @@ public class AccountInformationApiTest {
 
     /**
      * Get history of orders placed in account
+     *
+     * Fetch all recent orders from a user&#39;s account.
      *
      * @throws ApiException if the Api call fails
      */
@@ -146,7 +150,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * List balances, positions and orders for the specified account.
+     * List balances, positions and orders for the specified account
      *
      * @throws ApiException if the Api call fails
      */

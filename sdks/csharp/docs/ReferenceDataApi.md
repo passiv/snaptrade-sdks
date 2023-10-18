@@ -6,7 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
 | [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
-| [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types. |
+| [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types |
 | [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges |
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
@@ -194,7 +194,9 @@ This endpoint does not need any parameter.
 
 # **GetSecurityTypes**
 
-List of all security types.
+
+
+List security types available on SnapTrade.
 
 ### Example
 ```csharp
@@ -219,7 +221,7 @@ namespace Example
             
             try
             {
-                // List of all security types.
+                // List of all security types
                 List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
                 Console.WriteLine(result);
             }
@@ -246,7 +248,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List of all security types.
+    // List of all security types
     ApiResponse<List<SecurityType>> response = apiInstance.GetSecurityTypesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -795,7 +797,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all supported currencies. |  -  |
+| **200** | A list of all currencies. |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -35,6 +35,8 @@ import { Currency } from '../models';
 // @ts-ignore
 import { Exchange } from '../models';
 // @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
 import { OptionChainInner } from '../models';
 // @ts-ignore
 import { OptionChainInnerChainPerRootInner } from '../models';

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
 | [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
 | [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions |
-| [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account. |
+| [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
 | [**UpdateUserAccount**](AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
@@ -111,7 +111,9 @@ catch (ApiException e)
 
 # **GetUserAccountBalance**
 
-List account balances
+
+
+A list of account balances for the specified account (one per currency that the account holds).
 
 ### Example
 ```csharp
@@ -297,7 +299,9 @@ catch (ApiException e)
 
 # **GetUserAccountOrders**
 
-Get history of orders placed in account
+
+
+Fetch all recent orders from a user's account.
 
 ### Example
 ```csharp
@@ -485,7 +489,7 @@ catch (ApiException e)
 
 # **GetUserHoldings**
 
-List balances, positions and orders for the specified account.
+List balances, positions and orders for the specified account
 
 ### Example
 ```csharp
@@ -513,7 +517,7 @@ namespace Example
             
             try
             {
-                // List balances, positions and orders for the specified account.
+                // List balances, positions and orders for the specified account
                 AccountHoldingsAccount result = client.AccountInformation.GetUserHoldings(accountId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -540,7 +544,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List balances, positions and orders for the specified account.
+    // List balances, positions and orders for the specified account
     ApiResponse<AccountHoldingsAccount> response = apiInstance.GetUserHoldingsWithHttpInfo(accountId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

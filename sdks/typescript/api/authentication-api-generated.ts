@@ -33,6 +33,8 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
 import { SnapTradeLoginUserRequestBody } from '../models';
 // @ts-ignore
 import { SnapTradeRegisterUserRequestBody } from '../models';
@@ -47,7 +49,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
          * @summary Delete SnapTrade user
          * @param {string} userId 
          * @param {*} [options] Override http request option.
@@ -152,7 +154,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * 
+         * Returns a list of users you\'ve registered over the SnapTrade API.
          * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -194,7 +196,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * 
+         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
          * @summary Login user & generate connection link
          * @param {string} userId 
          * @param {string} userSecret 
@@ -316,7 +318,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthenticationApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
          * @summary Delete SnapTrade user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -338,7 +340,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns a list of users you\'ve registered over the SnapTrade API.
          * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -348,7 +350,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
          * @summary Login user & generate connection link
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -380,7 +382,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
     const localVarFp = AuthenticationApiFp(configuration)
     return {
         /**
-         * 
+         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
          * @summary Delete SnapTrade user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -400,7 +402,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.getUserJWT(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of users you\'ve registered over the SnapTrade API.
          * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -409,7 +411,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.listSnapTradeUsers(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
          * @summary Login user & generate connection link
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -510,7 +512,7 @@ export type AuthenticationApiRegisterSnapTradeUserRequest = {
  */
 export class AuthenticationApiGenerated extends BaseAPI {
     /**
-     * 
+     * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
      * @summary Delete SnapTrade user
      * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -534,7 +536,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of users you\'ve registered over the SnapTrade API.
      * @summary List SnapTrade users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -545,7 +547,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
      * @summary Login user & generate connection link
      * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -63,7 +63,7 @@ public class TransactionsAndReportingApiTest {
     /**
      * Get transaction history for a user
      *
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for automatic calls for better performance
+     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
      *
      * @throws ApiException if the Api call fails
      */

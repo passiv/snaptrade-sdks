@@ -143,8 +143,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List of all security types.
+         * List security types available on SnapTrade.
+         * @summary List of all security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -596,8 +596,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List of all security types.
+         * List security types available on SnapTrade.
+         * @summary List of all security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -719,8 +719,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getPartnerInfo(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List of all security types.
+         * List security types available on SnapTrade.
+         * @summary List of all security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -931,8 +931,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List of all security types.
+     * List security types available on SnapTrade.
+     * @summary List of all security types
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated

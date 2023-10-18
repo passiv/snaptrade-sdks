@@ -33,8 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeLoginUserRequestBody : IEquatable<SnapTradeLoginUserRequestBody>, IValidatableObject
     {
         /// <summary>
-        /// Defines ConnectionType
+        /// Sets whether the connection should be read or trade
         /// </summary>
+        /// <value>Sets whether the connection should be read or trade</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionTypeEnum
         {
@@ -54,18 +55,19 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets ConnectionType
+        /// Sets whether the connection should be read or trade
         /// </summary>
+        /// <value>Sets whether the connection should be read or trade</value>
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
-        /// <param name="broker">broker.</param>
-        /// <param name="immediateRedirect">immediateRedirect.</param>
-        /// <param name="customRedirect">customRedirect.</param>
-        /// <param name="reconnect">reconnect.</param>
-        /// <param name="connectionType">connectionType.</param>
+        /// <param name="broker">Slug of the brokerage to connect the user to.</param>
+        /// <param name="immediateRedirect">When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal.</param>
+        /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account.</param>
+        /// <param name="reconnect">The UUID of the brokerage connection to be reconnected.</param>
+        /// <param name="connectionType">Sets whether the connection should be read or trade.</param>
         public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = default(ConnectionTypeEnum?))
         {
             this.Broker = broker;
@@ -76,26 +78,30 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Broker
+        /// Slug of the brokerage to connect the user to
         /// </summary>
+        /// <value>Slug of the brokerage to connect the user to</value>
         [DataMember(Name = "broker", EmitDefaultValue = false)]
         public string Broker { get; set; }
 
         /// <summary>
-        /// Gets or Sets ImmediateRedirect
+        /// When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
         /// </summary>
+        /// <value>When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal</value>
         [DataMember(Name = "immediateRedirect", EmitDefaultValue = true)]
         public bool ImmediateRedirect { get; set; }
 
         /// <summary>
-        /// Gets or Sets CustomRedirect
+        /// URL to redirect the user to after the user connects their brokerage account
         /// </summary>
+        /// <value>URL to redirect the user to after the user connects their brokerage account</value>
         [DataMember(Name = "customRedirect", EmitDefaultValue = false)]
         public string CustomRedirect { get; set; }
 
         /// <summary>
-        /// Gets or Sets Reconnect
+        /// The UUID of the brokerage connection to be reconnected
         /// </summary>
+        /// <value>The UUID of the brokerage connection to be reconnected</value>
         [DataMember(Name = "reconnect", EmitDefaultValue = false)]
         public string Reconnect { get; set; }
 

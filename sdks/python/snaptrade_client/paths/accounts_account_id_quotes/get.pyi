@@ -33,8 +33,10 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes as SymbolsQuotesSchema
+from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 
 from snaptrade_client.type.symbols_quotes import SymbolsQuotes
+from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -136,21 +138,26 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor500ResponseBodyApplicationJson),
+    },
 )
 _all_accept_content_types = (
     'application/json',

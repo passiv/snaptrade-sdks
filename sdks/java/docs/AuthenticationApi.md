@@ -17,6 +17,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Delete SnapTrade user
 
+Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -204,6 +206,8 @@ public class Example {
 
 List SnapTrade users
 
+Returns a list of users you&#39;ve registered over the SnapTrade API.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -283,13 +287,14 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successfully retrieved a list of users |  -  |
-| **500** | Unexpected error |  -  |
 
 <a name="loginSnapTradeUser"></a>
 # **loginSnapTradeUser**
 > Object loginSnapTradeUser(userId, userSecret).snapTradeLoginUserRequestBody(snapTradeLoginUserRequestBody).execute();
 
 Login user &amp; generate connection link
+
+Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
 ### Example
 ```java
@@ -316,11 +321,11 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String broker = "broker_example";
-    Boolean immediateRedirect = true;
-    String customRedirect = "customRedirect_example";
-    String reconnect = "reconnect_example";
-    String connectionType = "read";
+    String broker = "broker_example"; // Slug of the brokerage to connect the user to
+    Boolean immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
+    String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account
+    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected
+    String connectionType = "read"; // Sets whether the connection should be read or trade
     try {
       Object result = client
               .authentication
@@ -424,13 +429,11 @@ public class Example {
 
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
-    String rsaPublicKey = "rsaPublicKey_example"; // Open SSH RSA public key
     try {
       UserIDandSecret result = client
               .authentication
               .registerSnapTradeUser()
               .userId(userId)
-              .rsaPublicKey(rsaPublicKey)
               .execute();
       System.out.println(result);
       System.out.println(result.getUserId());
@@ -449,7 +452,6 @@ public class Example {
               .authentication
               .registerSnapTradeUser()
               .userId(userId)
-              .rsaPublicKey(rsaPublicKey)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -491,5 +493,4 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successfully registered user |  -  |
-| **500** | Unexpected error |  -  |
 
