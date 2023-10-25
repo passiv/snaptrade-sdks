@@ -21,7 +21,7 @@ order:
       - Trading_cancelUserAccountOrder
 portal:
   title: SnapTrade
-  primaryColor: '#ebb964'
+  primaryColor: "#ebb964"
   favicon: favicon.png
   logo:
     light: portal-logo-light.png
@@ -69,8 +69,6 @@ portal:
       get: true
     /accounts/{accountId}:
       put: true
-    /snapTrade/encryptedJWT:
-      get: true
     /sessionEvents:
       get: true
     /snapTrade/listUserErrors:
