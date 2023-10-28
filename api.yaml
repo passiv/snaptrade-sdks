@@ -1886,7 +1886,7 @@ components:
         application/json:
           schema:
             type: object
-            required: ["order_type", "time_in_force", "price"]
+            required: ["order_type", "time_in_force"]
             properties:
               order_type:
                 type: string
