@@ -1886,20 +1886,12 @@ components:
         application/json:
           schema:
             type: object
-            required: ["order_type", "time_in_force", "price"]
+            required: ["order_type", "time_in_force"]
             properties:
               order_type:
-                type: string
-                enum:
-                  - Limit
-                  - Market
-                  - NetDebit
-                  - NetCredit
+                $ref: "#/components/schemas/OrderType"
               time_in_force:
-                type: string
-                enum:
-                  - DAY
-                  - GTC
+                $ref: "#/components/schemas/TimeInForce"
               price:
                 $ref: "#/components/schemas/Price"
 
@@ -2533,17 +2525,9 @@ components:
           type: number
           example: 10
         order_type:
-          type: string
-          enum:
-            - Limit
-            - Market
-            - NetDebit
-            - NetCredit
+          $ref: "#/components/schemas/OrderType"
         time_in_force:
-          type: string
-          enum:
-            - DAY
-            - GTC
+          $ref: "#/components/schemas/TimeInForce"
         limit_price:
           $ref: "#/components/schemas/Price"
         execution_price:
