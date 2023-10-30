@@ -21,7 +21,8 @@ order:
       - Trading_cancelUserAccountOrder
 portal:
   title: SnapTrade
-  primaryColor: "#ebb964"
+  hideNonSdkSnippets: true
+  primaryColor: '#ebb964'
   favicon: favicon.png
   logo:
     light: portal-logo-light.png
