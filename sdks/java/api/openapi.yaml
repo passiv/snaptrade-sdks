@@ -3354,7 +3354,7 @@ components:
       additionalProperties: true
       description: Strategy order record
       example:
-        time_in_force: DAY
+        time_in_force: null
         execution_price: 31.33
         time_placed: 2022-01-21T20:11:19.217Z
         strategy:
@@ -3401,7 +3401,7 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
         filled_quantity: 10
-        order_type: Limit
+        order_type: null
         limit_price: 31.33
         open_quantity: 10
         closed_quantity: 10
@@ -3448,17 +3448,9 @@ components:
           x-konfig-original-example: 10
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderRecord-properties-closed_quantity
         order_type:
-          enum:
-          - Limit
-          - Market
-          - NetDebit
-          - NetCredit
-          type: string
+          $ref: '#/components/schemas/OrderType'
         time_in_force:
-          enum:
-          - DAY
-          - GTC
-          type: string
+          $ref: '#/components/schemas/TimeInForce'
         limit_price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -8796,24 +8788,15 @@ components:
         optionStrategyId:
           $ref: '#/components/schemas/Id'
         order_type:
-          enum:
-          - Limit
-          - Market
-          - NetDebit
-          - NetCredit
-          type: string
+          $ref: '#/components/schemas/OrderType'
         time_in_force:
-          enum:
-          - DAY
-          - GTC
-          type: string
+          $ref: '#/components/schemas/TimeInForce'
         price:
           $ref: '#/components/schemas/Price'
       required:
       - accountId
       - optionStrategyId
       - order_type
-      - price
       - time_in_force
       - userId
       - userSecret
@@ -9211,17 +9194,9 @@ components:
     Options_placeOptionStrategy_request:
       properties:
         order_type:
-          enum:
-          - Limit
-          - Market
-          - NetDebit
-          - NetCredit
-          type: string
+          $ref: '#/components/schemas/OrderType'
         time_in_force:
-          enum:
-          - DAY
-          - GTC
-          type: string
+          $ref: '#/components/schemas/TimeInForce'
         price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -9231,7 +9206,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
       required:
       - order_type
-      - price
       - time_in_force
       type: object
     OptionsPosition_currency:

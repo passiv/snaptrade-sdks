@@ -35,14 +35,17 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.exchange import Exchange as ExchangeSchema
 from snaptrade_client.model.option_strategy import OptionStrategy as OptionStrategySchema
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord as StrategyOrderRecordSchema
+from snaptrade_client.model.time_in_force import TimeInForce as TimeInForceSchema
 from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
 from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs as OptionStrategyLegsSchema
 from snaptrade_client.model.currency import Currency as CurrencySchema
+from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
 from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
+from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.strategy_order_record import StrategyOrderRecord
@@ -51,6 +54,7 @@ from snaptrade_client.type.model500_unexpected_exception_response import Model50
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 from snaptrade_client.type.option_strategy import OptionStrategy
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.order_type import OrderType
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -133,47 +137,18 @@ class SchemaForRequestBodyApplicationJson(
     class MetaOapg:
         required = {
             "time_in_force",
-            "price",
             "order_type",
         }
         
         class properties:
-            
-            
-            class order_type(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-                
-                @schemas.classproperty
-                def LIMIT(cls):
-                    return cls("Limit")
-                
-                @schemas.classproperty
-                def MARKET(cls):
-                    return cls("Market")
-                
-                @schemas.classproperty
-                def NET_DEBIT(cls):
-                    return cls("NetDebit")
-                
-                @schemas.classproperty
-                def NET_CREDIT(cls):
-                    return cls("NetCredit")
-            
-            
-            class time_in_force(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-                
-                @schemas.classproperty
-                def DAY(cls):
-                    return cls("DAY")
-                
-                @schemas.classproperty
-                def GTC(cls):
-                    return cls("GTC")
+        
+            @staticmethod
+            def order_type() -> typing.Type['OrderType']:
+                return OrderType
+        
+            @staticmethod
+            def time_in_force() -> typing.Type['TimeInForce']:
+                return TimeInForce
         
             @staticmethod
             def price() -> typing.Type['Price']:
@@ -184,15 +159,14 @@ class SchemaForRequestBodyApplicationJson(
                 "price": price,
             }
     
-    time_in_force: MetaOapg.properties.time_in_force
-    price: 'Price'
-    order_type: MetaOapg.properties.order_type
+    time_in_force: 'TimeInForce'
+    order_type: 'OrderType'
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> MetaOapg.properties.order_type: ...
+    def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
+    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
@@ -206,13 +180,13 @@ class SchemaForRequestBodyApplicationJson(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> MetaOapg.properties.order_type: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union['Price', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -224,9 +198,9 @@ class SchemaForRequestBodyApplicationJson(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
-        price: 'Price',
-        order_type: typing.Union[MetaOapg.properties.order_type, str, ],
+        time_in_force: 'TimeInForce',
+        order_type: 'OrderType',
+        price: typing.Union['Price', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':
@@ -234,8 +208,8 @@ class SchemaForRequestBodyApplicationJson(
             cls,
             *args,
             time_in_force=time_in_force,
-            price=price,
             order_type=order_type,
+            price=price,
             _configuration=_configuration,
             **kwargs,
         )
@@ -300,13 +274,13 @@ class BaseApi(api_client.Api):
     def _place_option_strategy_mapped_args(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
-        price: typing.Optional[Price] = None,
+        order_type: typing.Optional[OrderType] = None,
+        time_in_force: typing.Optional[TimeInForce] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         option_strategy_id: typing.Optional[str] = None,
+        price: typing.Optional[Price] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -600,13 +574,13 @@ class PlaceOptionStrategy(BaseApi):
     async def aplace_option_strategy(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
-        price: typing.Optional[Price] = None,
+        order_type: typing.Optional[OrderType] = None,
+        time_in_force: typing.Optional[TimeInForce] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         option_strategy_id: typing.Optional[str] = None,
+        price: typing.Optional[Price] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -620,11 +594,11 @@ class PlaceOptionStrategy(BaseApi):
             path_params=path_params,
             order_type=order_type,
             time_in_force=time_in_force,
-            price=price,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
             option_strategy_id=option_strategy_id,
+            price=price,
         )
         return await self._aplace_option_strategy_oapg(
             body=args.body,
@@ -635,13 +609,13 @@ class PlaceOptionStrategy(BaseApi):
     def place_option_strategy(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
-        price: typing.Optional[Price] = None,
+        order_type: typing.Optional[OrderType] = None,
+        time_in_force: typing.Optional[TimeInForce] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         option_strategy_id: typing.Optional[str] = None,
+        price: typing.Optional[Price] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -654,11 +628,11 @@ class PlaceOptionStrategy(BaseApi):
             path_params=path_params,
             order_type=order_type,
             time_in_force=time_in_force,
-            price=price,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
             option_strategy_id=option_strategy_id,
+            price=price,
         )
         return self._place_option_strategy_oapg(
             body=args.body,
@@ -672,13 +646,13 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
-        price: typing.Optional[Price] = None,
+        order_type: typing.Optional[OrderType] = None,
+        time_in_force: typing.Optional[TimeInForce] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         option_strategy_id: typing.Optional[str] = None,
+        price: typing.Optional[Price] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -692,11 +666,11 @@ class ApiForpost(BaseApi):
             path_params=path_params,
             order_type=order_type,
             time_in_force=time_in_force,
-            price=price,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
             option_strategy_id=option_strategy_id,
+            price=price,
         )
         return await self._aplace_option_strategy_oapg(
             body=args.body,
@@ -707,13 +681,13 @@ class ApiForpost(BaseApi):
     def post(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
-        price: typing.Optional[Price] = None,
+        order_type: typing.Optional[OrderType] = None,
+        time_in_force: typing.Optional[TimeInForce] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         option_strategy_id: typing.Optional[str] = None,
+        price: typing.Optional[Price] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -726,11 +700,11 @@ class ApiForpost(BaseApi):
             path_params=path_params,
             order_type=order_type,
             time_in_force=time_in_force,
-            price=price,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
             option_strategy_id=option_strategy_id,
+            price=price,
         )
         return self._place_option_strategy_oapg(
             body=args.body,

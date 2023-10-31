@@ -19,8 +19,10 @@ from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.option_strategy import OptionStrategy
 from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
+from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.security_type import SecurityType
+from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredStrategyOrderRecord(TypedDict):
@@ -37,9 +39,9 @@ class OptionalStrategyOrderRecord(TypedDict, total=False):
 
     closed_quantity: typing.Union[int, float]
 
-    order_type: str
+    order_type: OrderType
 
-    time_in_force: str
+    time_in_force: TimeInForce
 
     limit_price: Price
 

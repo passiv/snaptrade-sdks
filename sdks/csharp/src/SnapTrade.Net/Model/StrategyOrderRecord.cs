@@ -160,70 +160,18 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
-        /// <summary>
-        /// Defines OrderType
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum OrderTypeEnum
-        {
-            /// <summary>
-            /// Enum Limit for value: Limit
-            /// </summary>
-            [EnumMember(Value = "Limit")]
-            Limit = 1,
-
-            /// <summary>
-            /// Enum Market for value: Market
-            /// </summary>
-            [EnumMember(Value = "Market")]
-            Market = 2,
-
-            /// <summary>
-            /// Enum NetDebit for value: NetDebit
-            /// </summary>
-            [EnumMember(Value = "NetDebit")]
-            NetDebit = 3,
-
-            /// <summary>
-            /// Enum NetCredit for value: NetCredit
-            /// </summary>
-            [EnumMember(Value = "NetCredit")]
-            NetCredit = 4
-
-        }
-
 
         /// <summary>
         /// Gets or Sets OrderType
         /// </summary>
         [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderTypeEnum? OrderType { get; set; }
-        /// <summary>
-        /// Defines TimeInForce
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TimeInForceEnum
-        {
-            /// <summary>
-            /// Enum DAY for value: DAY
-            /// </summary>
-            [EnumMember(Value = "DAY")]
-            DAY = 1,
-
-            /// <summary>
-            /// Enum GTC for value: GTC
-            /// </summary>
-            [EnumMember(Value = "GTC")]
-            GTC = 2
-
-        }
-
+        public OrderType? OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
         /// </summary>
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForceEnum? TimeInForce { get; set; }
+        public TimeInForce? TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderRecord" /> class.
         /// </summary>
@@ -238,7 +186,7 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
-        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderTypeEnum? orderType = default(OrderTypeEnum?), TimeInForceEnum? timeInForce = default(TimeInForceEnum?), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
+        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
         {
             this.Strategy = strategy;
             this.Status = status;

@@ -1008,7 +1008,7 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type: "Limit",
-    time_in_force: "DAY",
+    time_in_force: "Day",
     price: 31.33,
   }
 );
@@ -1016,13 +1016,9 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 #### ⚙️ Parameters
 
-##### order_type: `string`
+##### order_type:
 
-##### time_in_force: `string`
-
-##### price: `number`
-
-Trade Price if limit or stop limit order
+##### time_in_force:
 
 ##### userId: `string`
 
@@ -1035,6 +1031,10 @@ The ID of the account to execute the strategy in.
 ##### optionStrategyId: `string`
 
 Option strategy id obtained from response when creating option strategy object
+
+##### price: `number`
+
+Trade Price if limit or stop limit order
 
 #### 🔄 Return
 

@@ -187,8 +187,8 @@ namespace SnapTrade.Net.Test.Api
             var userSecret = "userSecret_example";
             var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
-            var orderType = OptionsPlaceOptionStrategyRequest.OrderTypeEnum.Limit;
-            var timeInForce = OptionsPlaceOptionStrategyRequest.TimeInForceEnum.DAY;
+            var orderType = OrderType.Limit;
+            var timeInForce = TimeInForce.Day;
             var price = 31.33; // Trade Price if limit or stop limit order
             
             var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(

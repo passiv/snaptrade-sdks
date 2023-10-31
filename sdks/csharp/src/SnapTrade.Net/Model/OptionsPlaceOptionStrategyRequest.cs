@@ -32,70 +32,18 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "Options_placeOptionStrategy_request")]
     public partial class OptionsPlaceOptionStrategyRequest : IEquatable<OptionsPlaceOptionStrategyRequest>, IValidatableObject
     {
-        /// <summary>
-        /// Defines OrderType
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum OrderTypeEnum
-        {
-            /// <summary>
-            /// Enum Limit for value: Limit
-            /// </summary>
-            [EnumMember(Value = "Limit")]
-            Limit = 1,
-
-            /// <summary>
-            /// Enum Market for value: Market
-            /// </summary>
-            [EnumMember(Value = "Market")]
-            Market = 2,
-
-            /// <summary>
-            /// Enum NetDebit for value: NetDebit
-            /// </summary>
-            [EnumMember(Value = "NetDebit")]
-            NetDebit = 3,
-
-            /// <summary>
-            /// Enum NetCredit for value: NetCredit
-            /// </summary>
-            [EnumMember(Value = "NetCredit")]
-            NetCredit = 4
-
-        }
-
 
         /// <summary>
         /// Gets or Sets OrderType
         /// </summary>
         [DataMember(Name = "order_type", IsRequired = true, EmitDefaultValue = true)]
-        public OrderTypeEnum OrderType { get; set; }
-        /// <summary>
-        /// Defines TimeInForce
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TimeInForceEnum
-        {
-            /// <summary>
-            /// Enum DAY for value: DAY
-            /// </summary>
-            [EnumMember(Value = "DAY")]
-            DAY = 1,
-
-            /// <summary>
-            /// Enum GTC for value: GTC
-            /// </summary>
-            [EnumMember(Value = "GTC")]
-            GTC = 2
-
-        }
-
+        public OrderType OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
         /// </summary>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
-        public TimeInForceEnum TimeInForce { get; set; }
+        public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsPlaceOptionStrategyRequest" /> class.
         /// </summary>
@@ -106,16 +54,11 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
-        /// <param name="price">Trade Price if limit or stop limit order (required).</param>
-        public OptionsPlaceOptionStrategyRequest(OrderTypeEnum orderType = default(OrderTypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), double? price = default(double?))
+        /// <param name="price">Trade Price if limit or stop limit order.</param>
+        public OptionsPlaceOptionStrategyRequest(OrderType orderType = default(OrderType), TimeInForce timeInForce = default(TimeInForce), double? price = default(double?))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
-            // to ensure "price" is required (not null)
-            if (price == null)
-            {
-                throw new ArgumentNullException("price is a required property for OptionsPlaceOptionStrategyRequest and cannot be null");
-            }
             this.Price = price;
         }
 
@@ -123,7 +66,7 @@ namespace SnapTrade.Net.Model
         /// Trade Price if limit or stop limit order
         /// </summary>
         /// <value>Trade Price if limit or stop limit order</value>
-        [DataMember(Name = "price", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "price", EmitDefaultValue = true)]
         public double? Price { get; set; }
 
         /// <summary>

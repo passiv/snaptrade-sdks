@@ -57,6 +57,8 @@ import { OptionsPosition } from '../models';
 // @ts-ignore
 import { OptionsPositionCurrency } from '../models';
 // @ts-ignore
+import { OrderType } from '../models';
+// @ts-ignore
 import { SecurityType } from '../models';
 // @ts-ignore
 import { StrategyOrderRecord } from '../models';
@@ -64,6 +66,8 @@ import { StrategyOrderRecord } from '../models';
 import { StrategyQuotes } from '../models';
 // @ts-ignore
 import { StrategyQuotesGreek } from '../models';
+// @ts-ignore
+import { TimeInForce } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";

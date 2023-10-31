@@ -13,7 +13,9 @@ import { Currency } from './currency';
 import { Exchange } from './exchange';
 import { OptionStrategy } from './option-strategy';
 import { OptionStrategyLegsInner } from './option-strategy-legs-inner';
+import { OrderType } from './order-type';
 import { SecurityType } from './security-type';
+import { TimeInForce } from './time-in-force';
 import { UniversalSymbol } from './universal-symbol';
 
 /**
@@ -56,16 +58,16 @@ export interface StrategyOrderRecord {
     'closed_quantity'?: number;
     /**
      * 
-     * @type {string}
+     * @type {OrderType}
      * @memberof StrategyOrderRecord
      */
-    'order_type'?: StrategyOrderRecordOrderTypeEnum;
+    'order_type'?: OrderType;
     /**
      * 
-     * @type {string}
+     * @type {TimeInForce}
      * @memberof StrategyOrderRecord
      */
-    'time_in_force'?: StrategyOrderRecordTimeInForceEnum;
+    'time_in_force'?: TimeInForce;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}
@@ -93,7 +95,5 @@ export interface StrategyOrderRecord {
 }
 
 type StrategyOrderRecordStatusEnum = 'PENDING' | 'ACCEPTED' | 'FAILED' | 'REJECTED' | 'CANCELED' | 'PARTIAL_CANCELED' | 'CANCEL_PENDING' | 'EXECUTED' | 'PARTIAL' | 'REPLACE_PENDING' | 'REPLACED' | 'STOPPED' | 'SUSPENDED' | 'EXPIRED' | 'QUEUED' | 'TRIGGERED' | 'ACTIVATED' | 'PENDING_RISK_REVIEW' | 'CONTINGENT_ORDER'
-type StrategyOrderRecordOrderTypeEnum = 'Limit' | 'Market' | 'NetDebit' | 'NetCredit'
-type StrategyOrderRecordTimeInForceEnum = 'DAY' | 'GTC'
 
 

@@ -445,16 +445,16 @@ module SnapTrade
 
 
     # Place an option strategy order on the brokerage
-    # @param order_type [OrderStrategyExecuteBodyOrderType] 
-    # @param time_in_force [OrderStrategyExecuteBodyTimeInForce] 
-    # @param price [Float] Trade Price if limit or stop limit order
+    # @param order_type [OrderType] 
+    # @param time_in_force [TimeInForce] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param price [Float] Trade Price if limit or stop limit order
     # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
+    def place_option_strategy(order_type:, time_in_force:, user_id:, user_secret:, account_id:, option_strategy_id:, price: SENTINEL, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
@@ -465,16 +465,16 @@ module SnapTrade
     end
 
     # Place an option strategy order on the brokerage
-    # @param order_type [OrderStrategyExecuteBodyOrderType] 
-    # @param time_in_force [OrderStrategyExecuteBodyTimeInForce] 
-    # @param price [Float] Trade Price if limit or stop limit order
+    # @param order_type [OrderType] 
+    # @param time_in_force [TimeInForce] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to execute the strategy in.
     # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
+    # @param price [Float] Trade Price if limit or stop limit order
     # @param body [OptionsPlaceOptionStrategyRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy_with_http_info(order_type:, time_in_force:, price:, user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
+    def place_option_strategy_with_http_info(order_type:, time_in_force:, user_id:, user_secret:, account_id:, option_strategy_id:, price: SENTINEL, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL

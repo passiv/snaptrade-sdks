@@ -87,7 +87,7 @@ public class ApiClient extends ApiClientCustom {
      * Basic constructor for ApiClient
      */
     public ApiClient() {
-        this(null, null);
+        this((OkHttpClient) null, null);
     }
 
     /**
