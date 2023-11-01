@@ -9,8 +9,8 @@
 | **filled_quantity** | **Float** |  | [optional] |
 | **open_quantity** | **Float** |  | [optional] |
 | **closed_quantity** | **Float** |  | [optional] |
-| **order_type** | [**StrategyOrderRecordOrderType**](StrategyOrderRecordOrderType.md) |  | [optional] |
-| **time_in_force** | [**StrategyOrderRecordTimeInForce**](StrategyOrderRecordTimeInForce.md) |  | [optional] |
+| **order_type** | [**OrderType**](OrderType.md) |  | [optional] |
+| **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
 | **limit_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **execution_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **time_placed** | **String** | Time | [optional] |

@@ -13,8 +13,8 @@ Strategy order record
 |**filledQuantity** | **Double** |  |  [optional] |
 |**openQuantity** | **Double** |  |  [optional] |
 |**closedQuantity** | **Double** |  |  [optional] |
-|**orderType** | [**OrderTypeEnum**](#OrderTypeEnum) |  |  [optional] |
-|**timeInForce** | [**TimeInForceEnum**](#TimeInForceEnum) |  |  [optional] |
+|**orderType** | **OrderType** |  |  [optional] |
+|**timeInForce** | **TimeInForce** |  |  [optional] |
 |**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**timePlaced** | **String** | Time |  [optional] |
@@ -45,26 +45,6 @@ Strategy order record
 | ACTIVATED | &quot;ACTIVATED&quot; |
 | PENDING_RISK_REVIEW | &quot;PENDING_RISK_REVIEW&quot; |
 | CONTINGENT_ORDER | &quot;CONTINGENT_ORDER&quot; |
-
-
-
-## Enum: OrderTypeEnum
-
-| Name | Value |
-|---- | -----|
-| LIMIT | &quot;Limit&quot; |
-| MARKET | &quot;Market&quot; |
-| NETDEBIT | &quot;NetDebit&quot; |
-| NETCREDIT | &quot;NetCredit&quot; |
-
-
-
-## Enum: TimeInForceEnum
-
-| Name | Value |
-|---- | -----|
-| DAY | &quot;DAY&quot; |
-| GTC | &quot;GTC&quot; |
 
 
 

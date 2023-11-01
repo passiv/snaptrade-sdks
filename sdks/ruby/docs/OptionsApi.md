@@ -318,23 +318,23 @@ SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 order_type = "Limit"
-time_in_force = "DAY"
-price = 31.33
+time_in_force = "Day"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+price = 31.33
 
 begin
   # Place an option strategy order on the brokerage
   result = SnapTrade::Options.place_option_strategy(
                                                        order_type: order_type,
                                                        time_in_force: time_in_force,
-                                                       price: price,
                                                        user_id: user_id,
                                                        user_secret: user_secret,
                                                        account_id: account_id,
                                                        option_strategy_id: option_strategy_id,
+                                                       price: price,
                                                      )
   p result
 rescue SnapTrade::ApiError => e
@@ -348,23 +348,23 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 order_type = "Limit"
-time_in_force = "DAY"
-price = 31.33
+time_in_force = "Day"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
 option_strategy_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+price = 31.33
 
 begin
   # Place an option strategy order on the brokerage
   data, status_code, headers, response = SnapTrade::Options.place_option_strategy_with_http_info(
                                                                                                     order_type: order_type,
                                                                                                     time_in_force: time_in_force,
-                                                                                                    price: price,
                                                                                                     user_id: user_id,
                                                                                                     user_secret: user_secret,
                                                                                                     account_id: account_id,
                                                                                                     option_strategy_id: option_strategy_id,
+                                                                                                    price: price,
                                                                                                   )
   p status_code # => 2xx
   p headers # => { ... }

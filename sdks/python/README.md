@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.3-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.3)
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.4-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.4)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing
 
 ```sh
-pip install snaptrade-python-sdk==10.34.3
+pip install snaptrade-python-sdk==10.34.4
 ```
 
 ## Getting Started
@@ -1019,22 +1019,20 @@ Place an option strategy order on the brokerage
 ```python
 place_option_strategy_response = snaptrade.options.place_option_strategy(
     order_type="Limit",
-    time_in_force="DAY",
-    price=31.33,
+    time_in_force="Day",
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    price=31.33,
 )
 ```
 
 #### ⚙️ Parameters
 
-##### order_type: `str`
+##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)
 
-##### time_in_force: `str`
-
-##### price: [`Price`](./snaptrade_client/type/price.py)
+##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)
 
 ##### user_id: `str`
 
@@ -1047,6 +1045,8 @@ The ID of the account to execute the strategy in.
 ##### option_strategy_id: `str`
 
 Option strategy id obtained from response when creating option strategy object
+
+##### price: [`Price`](./snaptrade_client/type/price.py)
 
 #### ⚙️ Request Body
 

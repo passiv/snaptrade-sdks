@@ -44,10 +44,12 @@ import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.OptionsPositionCurrency;
+import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import com.konfigthis.client.model.StrategyQuotesGreek;
+import com.konfigthis.client.model.TimeInForce;
 import java.util.UUID;
 import com.konfigthis.client.model.UniversalSymbol;
 
@@ -1000,24 +1002,44 @@ public class OptionsApiGenerated {
     }
 
     public class PlaceOptionStrategyRequestBuilder {
-        private final String orderType;
-        private final String timeInForce;
-        private final Double price;
+        private final OrderType orderType;
+        private final TimeInForce timeInForce;
         private final String userId;
         private final String userSecret;
         private final UUID accountId;
         private final UUID optionStrategyId;
+        private Double price;
 
-        private PlaceOptionStrategyRequestBuilder(String orderType, String timeInForce, double price, String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
+        private PlaceOptionStrategyRequestBuilder(OrderType orderType, TimeInForce timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
             this.orderType = orderType;
             this.timeInForce = timeInForce;
-            this.price = price;
             this.userId = userId;
             this.userSecret = userSecret;
             this.accountId = accountId;
             this.optionStrategyId = optionStrategyId;
         }
 
+        /**
+         * Set price
+         * @param price Trade Price if limit or stop limit order (optional)
+         * @return PlaceOptionStrategyRequestBuilder
+         */
+        public PlaceOptionStrategyRequestBuilder price(Double price) {
+            this.price = price;
+            return this;
+        }
+        
+
+        /**
+         * Set price
+         * @param price Trade Price if limit or stop limit order (optional)
+         * @return PlaceOptionStrategyRequestBuilder
+         */
+        public PlaceOptionStrategyRequestBuilder price(Integer price) {
+            this.price = price.doubleValue();
+            return this;
+        }
+        
         /**
          * Build call for placeOptionStrategy
          * @param _callback ApiCallback API callback
@@ -1036,10 +1058,8 @@ public class OptionsApiGenerated {
 
         private OptionsPlaceOptionStrategyRequest buildBodyParams() {
             OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest();
-            if (this.orderType != null)
-            optionsPlaceOptionStrategyRequest.orderType(OptionsPlaceOptionStrategyRequest.OrderTypeEnum.fromValue(this.orderType));
-            if (this.timeInForce != null)
-            optionsPlaceOptionStrategyRequest.timeInForce(OptionsPlaceOptionStrategyRequest.TimeInForceEnum.fromValue(this.timeInForce));
+            optionsPlaceOptionStrategyRequest.orderType(this.orderType);
+            optionsPlaceOptionStrategyRequest.timeInForce(this.timeInForce);
             optionsPlaceOptionStrategyRequest.price(this.price);
             return optionsPlaceOptionStrategyRequest;
         }
@@ -1107,14 +1127,9 @@ public class OptionsApiGenerated {
         <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
      </table>
      */
-    public PlaceOptionStrategyRequestBuilder placeOptionStrategy(String orderType, String timeInForce, double price, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
+    public PlaceOptionStrategyRequestBuilder placeOptionStrategy(OrderType orderType, TimeInForce timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
         if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
-            
-
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
-            
-
-        
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
@@ -1127,6 +1142,6 @@ public class OptionsApiGenerated {
         if (optionStrategyId == null) throw new IllegalArgumentException("\"optionStrategyId\" is required but got null");
             
 
-        return new PlaceOptionStrategyRequestBuilder(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId);
+        return new PlaceOptionStrategyRequestBuilder(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId);
     }
 }

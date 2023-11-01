@@ -439,17 +439,18 @@ public class Example {
 
 
     Snaptrade client = new Snaptrade(configuration);
-    String orderType = "Limit";
-    String timeInForce = "DAY";
-    Double price = 3.4D; // Trade Price if limit or stop limit order
+    OrderType orderType = OrderType.fromValue("Limit");
+    TimeInForce timeInForce = TimeInForce.fromValue("Day");
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the strategy in.
     UUID optionStrategyId = UUID.randomUUID(); // Option strategy id obtained from response when creating option strategy object
+    Double price = 3.4D; // Trade Price if limit or stop limit order
     try {
       StrategyOrderRecord result = client
               .options
-              .placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+              .placeOptionStrategy(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId)
+              .price(price)
               .execute();
       System.out.println(result);
       System.out.println(result.getStrategy());
@@ -475,7 +476,8 @@ public class Example {
     try {
       ApiResponse<StrategyOrderRecord> response = client
               .options
-              .placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+              .placeOptionStrategy(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId)
+              .price(price)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

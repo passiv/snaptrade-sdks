@@ -23,7 +23,9 @@ import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.OptionStrategy;
 import com.konfigthis.client.model.OptionStrategyLegsInner;
+import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SecurityType;
+import com.konfigthis.client.model.TimeInForce;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -161,111 +163,13 @@ public class StrategyOrderRecord {
   @SerializedName(SERIALIZED_NAME_CLOSED_QUANTITY)
   private Double closedQuantity;
 
-  /**
-   * Gets or Sets orderType
-   */
-  @JsonAdapter(OrderTypeEnum.Adapter.class)
- public enum OrderTypeEnum {
-    LIMIT("Limit"),
-    
-    MARKET("Market"),
-    
-    NETDEBIT("NetDebit"),
-    
-    NETCREDIT("NetCredit");
-
-    private String value;
-
-    OrderTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OrderTypeEnum fromValue(String value) {
-      for (OrderTypeEnum b : OrderTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OrderTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OrderTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OrderTypeEnum.fromValue(value);
-      }
-    }
-  }
-
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-  private OrderTypeEnum orderType;
-
-  /**
-   * Gets or Sets timeInForce
-   */
-  @JsonAdapter(TimeInForceEnum.Adapter.class)
- public enum TimeInForceEnum {
-    DAY("DAY"),
-    
-    GTC("GTC");
-
-    private String value;
-
-    TimeInForceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TimeInForceEnum fromValue(String value) {
-      for (TimeInForceEnum b : TimeInForceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TimeInForceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TimeInForceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TimeInForceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TimeInForceEnum.fromValue(value);
-      }
-    }
-  }
+  private OrderType orderType;
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
-  private TimeInForceEnum timeInForce;
+  private TimeInForce timeInForce;
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
@@ -458,7 +362,7 @@ public class StrategyOrderRecord {
   }
 
 
-  public StrategyOrderRecord orderType(OrderTypeEnum orderType) {
+  public StrategyOrderRecord orderType(OrderType orderType) {
     
     
     
@@ -474,12 +378,12 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OrderTypeEnum getOrderType() {
+  public OrderType getOrderType() {
     return orderType;
   }
 
 
-  public void setOrderType(OrderTypeEnum orderType) {
+  public void setOrderType(OrderType orderType) {
     
     
     
@@ -487,7 +391,7 @@ public class StrategyOrderRecord {
   }
 
 
-  public StrategyOrderRecord timeInForce(TimeInForceEnum timeInForce) {
+  public StrategyOrderRecord timeInForce(TimeInForce timeInForce) {
     
     
     
@@ -503,12 +407,12 @@ public class StrategyOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public TimeInForceEnum getTimeInForce() {
+  public TimeInForce getTimeInForce() {
     return timeInForce;
   }
 
 
-  public void setTimeInForce(TimeInForceEnum timeInForce) {
+  public void setTimeInForce(TimeInForce timeInForce) {
     
     
     
@@ -806,12 +710,6 @@ public class StrategyOrderRecord {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      if ((jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
-      }
-      if ((jsonObj.get("time_in_force") != null && !jsonObj.get("time_in_force").isJsonNull()) && !jsonObj.get("time_in_force").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
       }
       if ((jsonObj.get("time_placed") != null && !jsonObj.get("time_placed").isJsonNull()) && !jsonObj.get("time_placed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_placed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_placed").toString()));

@@ -34,10 +34,12 @@ import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.OptionsPositionCurrency;
+import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import com.konfigthis.client.model.StrategyQuotesGreek;
+import com.konfigthis.client.model.TimeInForce;
 import java.util.UUID;
 import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
@@ -136,14 +138,15 @@ public class OptionsApiTest {
      */
     @Test
     public void placeOptionStrategyTest() throws ApiException {
-        String orderType = null;
-        String timeInForce = null;
-        Double price = null;
+        OrderType orderType = null;
+        TimeInForce timeInForce = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
         UUID optionStrategyId = null;
-        StrategyOrderRecord response = api.placeOptionStrategy(orderType, timeInForce, price, userId, userSecret, accountId, optionStrategyId)
+        Double price = null;
+        StrategyOrderRecord response = api.placeOptionStrategy(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId)
+                .price(price)
                 .execute();
         // TODO: test validations
     }
