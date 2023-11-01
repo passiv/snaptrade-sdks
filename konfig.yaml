@@ -178,6 +178,7 @@ generators:
     artifactId: snaptrade-java-sdk
   python:
     version: 10.34.4
+    responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
