@@ -2,7 +2,7 @@
 
 [![Visit SnapTrade](https://raw.githubusercontent.com/passiv/snaptrade-sdks/HEAD/sdks/python/header.png)](https://snaptrade.com)
 
-# SnapTrade
+# SnapTrade<a id="snaptrade"></a>
 
 Connect brokerage accounts to your app for live positions and trading
 
@@ -13,7 +13,7 @@ Connect brokerage accounts to your app for live positions and trading
 
 </div>
 
-## Table of Contents
+## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
 
@@ -68,17 +68,17 @@ Connect brokerage accounts to your app for live positions and trading
 
 <!-- tocstop -->
 
-## Requirements
+## Requirements<a id="requirements"></a>
 
 Python >=3.7
 
-## Installing
+## Installing<a id="installing"></a>
 
 ```sh
 pip install snaptrade-python-sdk==10.34.4
 ```
 
-## Getting Started
+## Getting Started<a id="getting-started"></a>
 
 ```python
 import os
@@ -114,16 +114,6 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 )
 print(redirect_uri.body)
 
-
-snaptrade.portfolio_management.create(
-    query_params={"userId": user_id, "userSecret": user_secret},
-    body={"id": str(uuid.uuid4()), "name": "MyPortfolio"},
-)
-res = snaptrade.portfolio_management.list(
-    query_params={"userId": user_id, "userSecret": user_secret}
-)
-pprint(res.body)
-
 # 5) Obtaining account holdings data
 holdings = snaptrade.account_information.get_all_user_holdings(
     query_params={"userId": user_id, "userSecret": user_secret}
@@ -137,7 +127,7 @@ deleted_response = snaptrade.authentication.delete_snap_trade_user(
 pprint(deleted_response.body)
 ```
 
-## Async
+## Async<a id="async"></a>
 
 `async` support is available by prepending `a` to any method.
 
@@ -186,12 +176,12 @@ asyncio.run(main())
 ```
 
 
-## Reference
-### `snaptrade.account_information.get_all_user_holdings`
+## Reference<a id="reference"></a>
+### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 
 List all accounts for the user, plus balances, positions, and orders for each account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
@@ -201,21 +191,21 @@ get_all_user_holdings_response = snaptrade.account_information.get_all_user_hold
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### brokerage_authorizations: `str`
+##### brokerage_authorizations: `str`<a id="brokerage_authorizations-str"></a>
 
 Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountHoldings](./snaptrade_client/type/account_holdings.py)
+[`AccountHoldings`](./snaptrade_client/type/account_holdings.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/holdings` `get`
 
@@ -223,11 +213,11 @@ Optional. Comma seperated list of authorization IDs (only use if filtering is ne
 
 ---
 
-### `snaptrade.account_information.get_user_account_balance`
+### `snaptrade.account_information.get_user_account_balance`<a id="snaptradeaccount_informationget_user_account_balance"></a>
 
 A list of account balances for the specified account (one per currency that the account holds).
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_account_balance_response = (
@@ -239,21 +229,21 @@ get_user_account_balance_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get balances.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Balance](./snaptrade_client/type/balance.py)
+[`Balance`](./snaptrade_client/type/balance.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balances` `get`
 
@@ -261,11 +251,11 @@ The ID of the account to get balances.
 
 ---
 
-### `snaptrade.account_information.get_user_account_details`
+### `snaptrade.account_information.get_user_account_details`<a id="snaptradeaccount_informationget_user_account_details"></a>
 
 Return details of a specific investment account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_account_details_response = (
@@ -277,21 +267,21 @@ get_user_account_details_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get detail of.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./snaptrade_client/type/account.py)
+[`Account`](./snaptrade_client/type/account.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `get`
 
@@ -299,11 +289,11 @@ The ID of the account to get detail of.
 
 ---
 
-### `snaptrade.account_information.get_user_account_orders`
+### `snaptrade.account_information.get_user_account_orders`<a id="snaptradeaccount_informationget_user_account_orders"></a>
 
 Fetch all recent orders from a user's account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_account_orders_response = (
@@ -316,25 +306,25 @@ get_user_account_orders_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get orders.
 
-##### state: `str`
+##### state: `str`<a id="state-str"></a>
 
 defaults value is set to \"all\"
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./snaptrade_client/type/account_order_record.py)
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders` `get`
 
@@ -342,11 +332,11 @@ defaults value is set to \"all\"
 
 ---
 
-### `snaptrade.account_information.get_user_account_positions`
+### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
 
 List account positions
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_account_positions_response = (
@@ -358,21 +348,21 @@ get_user_account_positions_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get positions.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Position](./snaptrade_client/type/position.py)
+[`Position`](./snaptrade_client/type/position.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions` `get`
 
@@ -380,11 +370,11 @@ The ID of the account to get positions.
 
 ---
 
-### `snaptrade.account_information.get_user_holdings`
+### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 
 List balances, positions and orders for the specified account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_holdings_response = snaptrade.account_information.get_user_holdings(
@@ -394,21 +384,21 @@ get_user_holdings_response = snaptrade.account_information.get_user_holdings(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to fetch holdings for.
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountHoldingsAccount](./snaptrade_client/type/account_holdings_account.py)
+[`AccountHoldingsAccount`](./snaptrade_client/type/account_holdings_account.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/holdings` `get`
 
@@ -416,11 +406,11 @@ The ID of the account to fetch holdings for.
 
 ---
 
-### `snaptrade.account_information.list_user_accounts`
+### `snaptrade.account_information.list_user_accounts`<a id="snaptradeaccount_informationlist_user_accounts"></a>
 
 List accounts
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_user_accounts_response = snaptrade.account_information.list_user_accounts(
@@ -429,17 +419,17 @@ list_user_accounts_response = snaptrade.account_information.list_user_accounts(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./snaptrade_client/type/account.py)
+[`Account`](./snaptrade_client/type/account.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts` `get`
 
@@ -447,11 +437,11 @@ list_user_accounts_response = snaptrade.account_information.list_user_accounts(
 
 ---
 
-### `snaptrade.account_information.update_user_account`
+### `snaptrade.account_information.update_user_account`<a id="snaptradeaccount_informationupdate_user_account"></a>
 
 Update details of an investment account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 update_user_account_response = snaptrade.account_information.update_user_account(
@@ -461,21 +451,21 @@ update_user_account_response = snaptrade.account_information.update_user_account
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to update.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./snaptrade_client/type/account.py)
+[`Account`](./snaptrade_client/type/account.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `put`
 
@@ -483,21 +473,21 @@ The ID of the account to update.
 
 ---
 
-### `snaptrade.api_status.check`
+### `snaptrade.api_status.check`<a id="snaptradeapi_statuscheck"></a>
 
 Check whether the API is operational and verify timestamps.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 check_response = snaptrade.api_status.check()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Status](./snaptrade_client/type/status.py)
+[`Status`](./snaptrade_client/type/status.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/` `get`
 
@@ -505,11 +495,11 @@ check_response = snaptrade.api_status.check()
 
 ---
 
-### `snaptrade.authentication.delete_snap_trade_user`
+### `snaptrade.authentication.delete_snap_trade_user`<a id="snaptradeauthenticationdelete_snap_trade_user"></a>
 
 Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
@@ -517,15 +507,15 @@ delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_use
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[DeleteUserResponse](./snaptrade_client/type/delete_user_response.py)
+[`DeleteUserResponse`](./snaptrade_client/type/delete_user_response.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `delete`
 
@@ -533,11 +523,11 @@ delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_use
 
 ---
 
-### `snaptrade.authentication.get_user_jwt`
+### `snaptrade.authentication.get_user_jwt`<a id="snaptradeauthenticationget_user_jwt"></a>
 
 Generate encrypted JWT token
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_jwt_response = snaptrade.authentication.get_user_jwt(
@@ -546,13 +536,13 @@ get_user_jwt_response = snaptrade.authentication.get_user_jwt(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/encryptedJWT` `get`
 
@@ -560,21 +550,21 @@ get_user_jwt_response = snaptrade.authentication.get_user_jwt(
 
 ---
 
-### `snaptrade.authentication.list_snap_trade_users`
+### `snaptrade.authentication.list_snap_trade_users`<a id="snaptradeauthenticationlist_snap_trade_users"></a>
 
 Returns a list of users you've registered over the SnapTrade API.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UserList](./snaptrade_client/type/user_list.py)
+[`UserList`](./snaptrade_client/type/user_list.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/listUsers` `get`
 
@@ -582,11 +572,11 @@ list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users(
 
 ---
 
-### `snaptrade.authentication.login_snap_trade_user`
+### `snaptrade.authentication.login_snap_trade_user`<a id="snaptradeauthenticationlogin_snap_trade_user"></a>
 
 Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
@@ -600,36 +590,36 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### broker: `str`
+##### broker: `str`<a id="broker-str"></a>
 
 Slug of the brokerage to connect the user to
 
-##### immediate_redirect: `bool`
+##### immediate_redirect: `bool`<a id="immediate_redirect-bool"></a>
 
 When set to True, user will be redirected back to the partner's site instead of the connection portal
 
-##### custom_redirect: `str`
+##### custom_redirect: `str`<a id="custom_redirect-str"></a>
 
 URL to redirect the user to after the user connects their brokerage account
 
-##### reconnect: `str`
+##### reconnect: `str`<a id="reconnect-str"></a>
 
 The UUID of the brokerage connection to be reconnected
 
-##### connection_type: `str`
+##### connection_type: `str`<a id="connection_type-str"></a>
 
 Sets whether the connection should be read or trade
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`SnapTradeLoginUserRequestBody`](./snaptrade_client/type/snap_trade_login_user_request_body.py)
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/login` `post`
 
@@ -637,11 +627,11 @@ Sets whether the connection should be read or trade
 
 ---
 
-### `snaptrade.authentication.register_snap_trade_user`
+### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
 Create SnapTrade user
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
@@ -649,20 +639,20 @@ register_snap_trade_user_response = snaptrade.authentication.register_snap_trade
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
 SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`SnapTradeRegisterUserRequestBody`](./snaptrade_client/type/snap_trade_register_user_request_body.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UserIDandSecret](./snaptrade_client/type/user_i_dand_secret.py)
+[`UserIDandSecret`](./snaptrade_client/type/user_i_dand_secret.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/registerUser` `post`
 
@@ -670,11 +660,11 @@ SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as 
 
 ---
 
-### `snaptrade.connections.detail_brokerage_authorization`
+### `snaptrade.connections.detail_brokerage_authorization`<a id="snaptradeconnectionsdetail_brokerage_authorization"></a>
 
 Get brokerage authorization details
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 detail_brokerage_authorization_response = (
@@ -686,21 +676,21 @@ detail_brokerage_authorization_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorization_id: `str`
+##### authorization_id: `str`<a id="authorization_id-str"></a>
 
 The ID of a brokerage authorization object.
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorization](./snaptrade_client/type/brokerage_authorization.py)
+[`BrokerageAuthorization`](./snaptrade_client/type/brokerage_authorization.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `get`
 
@@ -708,11 +698,11 @@ The ID of a brokerage authorization object.
 
 ---
 
-### `snaptrade.connections.list_brokerage_authorizations`
+### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
 List all brokerage authorizations for the user
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_brokerage_authorizations_response = (
@@ -723,17 +713,17 @@ list_brokerage_authorizations_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorization](./snaptrade_client/type/brokerage_authorization.py)
+[`BrokerageAuthorization`](./snaptrade_client/type/brokerage_authorization.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `get`
 
@@ -741,11 +731,11 @@ list_brokerage_authorizations_response = (
 
 ---
 
-### `snaptrade.connections.remove_brokerage_authorization`
+### `snaptrade.connections.remove_brokerage_authorization`<a id="snaptradeconnectionsremove_brokerage_authorization"></a>
 
 Delete brokerage authorization
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 snaptrade.connections.remove_brokerage_authorization(
@@ -755,17 +745,17 @@ snaptrade.connections.remove_brokerage_authorization(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorization_id: `str`
+##### authorization_id: `str`<a id="authorization_id-str"></a>
 
 The ID of the Authorization to delete.
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `delete`
 
@@ -773,11 +763,11 @@ The ID of the Authorization to delete.
 
 ---
 
-### `snaptrade.connections.session_events`
+### `snaptrade.connections.session_events`<a id="snaptradeconnectionssession_events"></a>
 
 List all session events for the partner
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 session_events_response = snaptrade.connections.session_events(
@@ -787,19 +777,19 @@ session_events_response = snaptrade.connections.session_events(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### partner_client_id: `str`
+##### partner_client_id: `str`<a id="partner_client_id-str"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
 Optional comma seperated list of user IDs used to filter the request on specific users
 
-##### session_id: `str`
+##### session_id: `str`<a id="session_id-str"></a>
 
 Optional comma seperated list of session IDs used to filter the request on specific users
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `get`
 
@@ -807,11 +797,11 @@ Optional comma seperated list of session IDs used to filter the request on speci
 
 ---
 
-### `snaptrade.error_logs.list_user_errors`
+### `snaptrade.error_logs.list_user_errors`<a id="snaptradeerror_logslist_user_errors"></a>
 
 Retrieve error logs on behalf of your SnapTrade users
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_user_errors_response = snaptrade.error_logs.list_user_errors(
@@ -820,17 +810,17 @@ list_user_errors_response = snaptrade.error_logs.list_user_errors(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UserErrorLog](./snaptrade_client/type/user_error_log.py)
+[`UserErrorLog`](./snaptrade_client/type/user_error_log.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/listUserErrors` `get`
 
@@ -838,11 +828,11 @@ list_user_errors_response = snaptrade.error_logs.list_user_errors(
 
 ---
 
-### `snaptrade.options.get_option_strategy`
+### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_option_strategy_response = snaptrade.options.get_option_strategy(
@@ -861,30 +851,30 @@ get_option_strategy_response = snaptrade.options.get_option_strategy(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### underlying_symbol_id: `str`
+##### underlying_symbol_id: `str`<a id="underlying_symbol_id-str"></a>
 
-##### legs: List[[`OptionLeg`](./snaptrade_client/type/option_leg.py)]
+##### legs: List[[`OptionLeg`](./snaptrade_client/type/option_leg.py)]<a id="legs-listoptionlegsnaptrade_clienttypeoption_legpy"></a>
 
-##### strategy_type: `str`
+##### strategy_type: `str`<a id="strategy_type-str"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to create the option strategy object in.
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`Any`](./snaptrade_client/type/typing_any.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[StrategyQuotes](./snaptrade_client/type/strategy_quotes.py)
+[`StrategyQuotes`](./snaptrade_client/type/strategy_quotes.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy` `post`
 
@@ -892,11 +882,11 @@ The ID of the account to create the option strategy object in.
 
 ---
 
-### `snaptrade.options.get_options_chain`
+### `snaptrade.options.get_options_chain`<a id="snaptradeoptionsget_options_chain"></a>
 
 Get the options chain
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_options_chain_response = snaptrade.options.get_options_chain(
@@ -907,25 +897,25 @@ get_options_chain_response = snaptrade.options.get_options_chain(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get the options chain from.
 
-##### symbol: `str`
+##### symbol: `str`<a id="symbol-str"></a>
 
 Universal symbol ID if symbol
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[OptionChain](./snaptrade_client/type/option_chain.py)
+[`OptionChain`](./snaptrade_client/type/option_chain.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionsChain` `get`
 
@@ -933,11 +923,11 @@ Universal symbol ID if symbol
 
 ---
 
-### `snaptrade.options.get_options_strategy_quote`
+### `snaptrade.options.get_options_strategy_quote`<a id="snaptradeoptionsget_options_strategy_quote"></a>
 
 Get latest market data of option strategy
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
@@ -948,25 +938,25 @@ get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quo
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account the strategy will be placed in.
 
-##### option_strategy_id: `str`
+##### option_strategy_id: `str`<a id="option_strategy_id-str"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[StrategyQuotes](./snaptrade_client/type/strategy_quotes.py)
+[`StrategyQuotes`](./snaptrade_client/type/strategy_quotes.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}` `get`
 
@@ -974,11 +964,11 @@ Option strategy id obtained from response when creating option strategy object
 
 ---
 
-### `snaptrade.options.list_option_holdings`
+### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
 
 Get the options holdings in the account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_option_holdings_response = snaptrade.options.list_option_holdings(
@@ -988,21 +978,21 @@ list_option_holdings_response = snaptrade.options.list_option_holdings(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to fetch options holdings for.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[OptionsPosition](./snaptrade_client/type/options_position.py)
+[`OptionsPosition`](./snaptrade_client/type/options_position.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `get`
 
@@ -1010,11 +1000,11 @@ The ID of the account to fetch options holdings for.
 
 ---
 
-### `snaptrade.options.place_option_strategy`
+### `snaptrade.options.place_option_strategy`<a id="snaptradeoptionsplace_option_strategy"></a>
 
 Place an option strategy order on the brokerage
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_option_strategy_response = snaptrade.options.place_option_strategy(
@@ -1028,34 +1018,34 @@ place_option_strategy_response = snaptrade.options.place_option_strategy(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)
+##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)
+##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to execute the strategy in.
 
-##### option_strategy_id: `str`
+##### option_strategy_id: `str`<a id="option_strategy_id-str"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-##### price: [`Price`](./snaptrade_client/type/price.py)
+##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`Any`](./snaptrade_client/type/typing_any.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[StrategyOrderRecord](./snaptrade_client/type/strategy_order_record.py)
+[`StrategyOrderRecord`](./snaptrade_client/type/strategy_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `post`
 
@@ -1063,11 +1053,11 @@ Option strategy id obtained from response when creating option strategy object
 
 ---
 
-### `snaptrade.reference_data.get_currency_exchange_rate_pair`
+### `snaptrade.reference_data.get_currency_exchange_rate_pair`<a id="snaptradereference_dataget_currency_exchange_rate_pair"></a>
 
 Return the exchange rate of a currency pair
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_currency_exchange_rate_pair_response = (
@@ -1077,17 +1067,17 @@ get_currency_exchange_rate_pair_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### currency_pair: `str`
+##### currency_pair: `str`<a id="currency_pair-str"></a>
 
 A currency pair based on currency code for example, {CAD-USD}
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[ExchangeRatePairs](./snaptrade_client/type/exchange_rate_pairs.py)
+[`ExchangeRatePairs`](./snaptrade_client/type/exchange_rate_pairs.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates/{currencyPair}` `get`
 
@@ -1095,21 +1085,21 @@ A currency pair based on currency code for example, {CAD-USD}
 
 ---
 
-### `snaptrade.reference_data.get_partner_info`
+### `snaptrade.reference_data.get_partner_info`<a id="snaptradereference_dataget_partner_info"></a>
 
 Get metadata related to Snaptrade partner
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_partner_info_response = snaptrade.reference_data.get_partner_info()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[PartnerData](./snaptrade_client/type/partner_data.py)
+[`PartnerData`](./snaptrade_client/type/partner_data.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `get`
 
@@ -1117,21 +1107,21 @@ get_partner_info_response = snaptrade.reference_data.get_partner_info()
 
 ---
 
-### `snaptrade.reference_data.get_security_types`
+### `snaptrade.reference_data.get_security_types`<a id="snaptradereference_dataget_security_types"></a>
 
 List security types available on SnapTrade.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_security_types_response = snaptrade.reference_data.get_security_types()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[SecurityType](./snaptrade_client/type/security_type.py)
+[`SecurityType`](./snaptrade_client/type/security_type.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/securityTypes` `get`
 
@@ -1139,21 +1129,21 @@ get_security_types_response = snaptrade.reference_data.get_security_types()
 
 ---
 
-### `snaptrade.reference_data.get_stock_exchanges`
+### `snaptrade.reference_data.get_stock_exchanges`<a id="snaptradereference_dataget_stock_exchanges"></a>
 
 List exchanges
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Exchange](./snaptrade_client/type/exchange.py)
+[`Exchange`](./snaptrade_client/type/exchange.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/exchanges` `get`
 
@@ -1161,11 +1151,11 @@ get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
 
 ---
 
-### `snaptrade.reference_data.get_symbols`
+### `snaptrade.reference_data.get_symbols`<a id="snaptradereference_dataget_symbols"></a>
 
 Search for symbols
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_symbols_response = snaptrade.reference_data.get_symbols(
@@ -1173,18 +1163,18 @@ get_symbols_response = snaptrade.reference_data.get_symbols(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### substring: `str`
+##### substring: `str`<a id="substring-str"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`SymbolQuery`](./snaptrade_client/type/symbol_query.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./snaptrade_client/type/universal_symbol.py)
+[`UniversalSymbol`](./snaptrade_client/type/universal_symbol.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols` `post`
 
@@ -1192,11 +1182,11 @@ get_symbols_response = snaptrade.reference_data.get_symbols(
 
 ---
 
-### `snaptrade.reference_data.get_symbols_by_ticker`
+### `snaptrade.reference_data.get_symbols_by_ticker`<a id="snaptradereference_dataget_symbols_by_ticker"></a>
 
 Get details of a symbol by the ticker
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
@@ -1205,21 +1195,21 @@ get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### ticker: `str`
+##### ticker: `str`<a id="ticker-str"></a>
 
 The ticker of the UniversalSymbol to get.
 
-##### symbol_id: `str`
+##### symbol_id: `str`<a id="symbol_id-str"></a>
 
 OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./snaptrade_client/type/universal_symbol.py)
+[`UniversalSymbol`](./snaptrade_client/type/universal_symbol.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols/{ticker}` `get`
 
@@ -1227,11 +1217,11 @@ OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymb
 
 ---
 
-### `snaptrade.reference_data.list_all_brokerage_authorization_type`
+### `snaptrade.reference_data.list_all_brokerage_authorization_type`<a id="snaptradereference_datalist_all_brokerage_authorization_type"></a>
 
 List of all brokerage authorization types
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_all_brokerage_authorization_type_response = (
@@ -1241,17 +1231,17 @@ list_all_brokerage_authorization_type_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage: `str`
+##### brokerage: `str`<a id="brokerage-str"></a>
 
 Comma separated value of brokerage slugs
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorizationTypeReadOnly](./snaptrade_client/type/brokerage_authorization_type_read_only.py)
+[`BrokerageAuthorizationTypeReadOnly`](./snaptrade_client/type/brokerage_authorization_type_read_only.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `get`
 
@@ -1259,21 +1249,21 @@ Comma separated value of brokerage slugs
 
 ---
 
-### `snaptrade.reference_data.list_all_brokerages`
+### `snaptrade.reference_data.list_all_brokerages`<a id="snaptradereference_datalist_all_brokerages"></a>
 
 List brokerages
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Brokerage](./snaptrade_client/type/brokerage.py)
+[`Brokerage`](./snaptrade_client/type/brokerage.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerages` `get`
 
@@ -1281,21 +1271,21 @@ list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
 
 ---
 
-### `snaptrade.reference_data.list_all_currencies`
+### `snaptrade.reference_data.list_all_currencies`<a id="snaptradereference_datalist_all_currencies"></a>
 
 List currencies
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_all_currencies_response = snaptrade.reference_data.list_all_currencies()
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[Currency](./snaptrade_client/type/currency.py)
+[`Currency`](./snaptrade_client/type/currency.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies` `get`
 
@@ -1303,11 +1293,11 @@ list_all_currencies_response = snaptrade.reference_data.list_all_currencies()
 
 ---
 
-### `snaptrade.reference_data.list_all_currencies_rates`
+### `snaptrade.reference_data.list_all_currencies_rates`<a id="snaptradereference_datalist_all_currencies_rates"></a>
 
 List currency exchange rates
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 list_all_currencies_rates_response = (
@@ -1315,11 +1305,11 @@ list_all_currencies_rates_response = (
 )
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[ExchangeRatePairs](./snaptrade_client/type/exchange_rate_pairs.py)
+[`ExchangeRatePairs`](./snaptrade_client/type/exchange_rate_pairs.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates` `get`
 
@@ -1327,11 +1317,11 @@ list_all_currencies_rates_response = (
 
 ---
 
-### `snaptrade.reference_data.symbol_search_user_account`
+### `snaptrade.reference_data.symbol_search_user_account`<a id="snaptradereference_datasymbol_search_user_account"></a>
 
 Search for symbols available in an account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 symbol_search_user_account_response = (
@@ -1344,26 +1334,26 @@ symbol_search_user_account_response = (
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to search for symbols within.
 
-##### substring: `str`
+##### substring: `str`<a id="substring-str"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`SymbolQuery`](./snaptrade_client/type/symbol_query.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./snaptrade_client/type/universal_symbol.py)
+[`UniversalSymbol`](./snaptrade_client/type/universal_symbol.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/symbols` `post`
 
@@ -1371,11 +1361,11 @@ The ID of the account to search for symbols within.
 
 ---
 
-### `snaptrade.trading.cancel_user_account_order`
+### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 
 Cancel open order in account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
@@ -1386,28 +1376,28 @@ cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to cancel the order in.
 
-##### brokerage_order_id: `str`
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`Any`](./snaptrade_client/type/typing_any.py)
 The Order ID to be canceled
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./snaptrade_client/type/account_order_record.py)
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/cancel` `post`
 
@@ -1415,11 +1405,11 @@ The Order ID to be canceled
 
 ---
 
-### `snaptrade.trading.get_order_impact`
+### `snaptrade.trading.get_order_impact`<a id="snaptradetradingget_order_impact"></a>
 
 Check impact of trades on account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_order_impact_response = snaptrade.trading.get_order_impact(
@@ -1436,38 +1426,38 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
-##### action: [`Action`](./snaptrade_client/type/action.py)
+##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)
+##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
 
-##### price: [`Price`](./snaptrade_client/type/price.py)
+##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
 
-##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)
+##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)
+##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
 
-##### units: `Union[int, float]`
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
 Trade Units
 
-##### universal_symbol_id: `str`
+##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`ManualTradeForm`](./snaptrade_client/type/manual_trade_form.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[ManualTradeAndImpact](./snaptrade_client/type/manual_trade_and_impact.py)
+[`ManualTradeAndImpact`](./snaptrade_client/type/manual_trade_and_impact.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/impact` `post`
 
@@ -1475,11 +1465,11 @@ Trade Units
 
 ---
 
-### `snaptrade.trading.get_user_account_quotes`
+### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
 Get symbol quotes
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
@@ -1491,29 +1481,29 @@ get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### symbols: `str`
+##### symbols: `str`<a id="symbols-str"></a>
 
 List of universal_symbol_id or tickers to get quotes for.
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to get quotes.
 
-##### use_ticker: `bool`
+##### use_ticker: `bool`<a id="use_ticker-bool"></a>
 
 Should be set to True if providing tickers.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[SymbolsQuotes](./snaptrade_client/type/symbols_quotes.py)
+[`SymbolsQuotes`](./snaptrade_client/type/symbols_quotes.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `get`
 
@@ -1521,11 +1511,11 @@ Should be set to True if providing tickers.
 
 ---
 
-### `snaptrade.trading.place_force_order`
+### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
 Place a trade with NO validation.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_force_order_response = snaptrade.trading.place_force_order(
@@ -1542,38 +1532,38 @@ place_force_order_response = snaptrade.trading.place_force_order(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`
+##### account_id: `str`<a id="account_id-str"></a>
 
-##### action: [`Action`](./snaptrade_client/type/action.py)
+##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)
+##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
 
-##### price: [`Price`](./snaptrade_client/type/price.py)
+##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
 
-##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)
+##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)
+##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
 
-##### units: `Union[int, float]`
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
 Trade Units
 
-##### universal_symbol_id: `str`
+##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`ManualTradeForm`](./snaptrade_client/type/manual_trade_form.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./snaptrade_client/type/account_order_record.py)
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `post`
 
@@ -1581,11 +1571,11 @@ Trade Units
 
 ---
 
-### `snaptrade.trading.place_oco_order`
+### `snaptrade.trading.place_oco_order`<a id="snaptradetradingplace_oco_order"></a>
 
 Place a OCO (One Cancels Other) order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_oco_order_response = snaptrade.trading.place_oco_order(
@@ -1596,28 +1586,28 @@ place_oco_order_response = snaptrade.trading.place_oco_order(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### first_trade_id: [`Union[bool, date, datetime, dict, float, int, list, str, None]`](./snaptrade_client/type/typing_union_bool_date_datetime_dict_float_int_list_str_none.py)
+##### first_trade_id: [`Union[bool, date, datetime, dict, float, int, list, str, None]`](./snaptrade_client/type/typing_union_bool_date_datetime_dict_float_int_list_str_none.py)<a id="first_trade_id-unionbool-date-datetime-dict-float-int-list-str-nonesnaptrade_clienttypetyping_union_bool_date_datetime_dict_float_int_list_str_nonepy"></a>
 
 The ID of first trade object obtained from trade/impact endpoint
 
-##### second_trade_id: [`Union[bool, date, datetime, dict, float, int, list, str, None]`](./snaptrade_client/type/typing_union_bool_date_datetime_dict_float_int_list_str_none.py)
+##### second_trade_id: [`Union[bool, date, datetime, dict, float, int, list, str, None]`](./snaptrade_client/type/typing_union_bool_date_datetime_dict_float_int_list_str_none.py)<a id="second_trade_id-unionbool-date-datetime-dict-float-int-list-str-nonesnaptrade_clienttypetyping_union_bool_date_datetime_dict_float_int_list_str_nonepy"></a>
 
 The ID of second trade object obtained from trade/impact endpoint
 
-#### ⚙️ Request Body
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`Any`](./snaptrade_client/type/typing_any.py)
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./snaptrade_client/type/account_order_record.py)
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/oco` `post`
 
@@ -1625,11 +1615,11 @@ The ID of second trade object obtained from trade/impact endpoint
 
 ---
 
-### `snaptrade.trading.place_order`
+### `snaptrade.trading.place_order`<a id="snaptradetradingplace_order"></a>
 
 Place order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_order_response = snaptrade.trading.place_order(
@@ -1639,21 +1629,21 @@ place_order_response = snaptrade.trading.place_order(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### trade_id: `str`
+##### trade_id: `str`<a id="trade_id-str"></a>
 
 The ID of trade object obtained from trade/impact endpoint
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./snaptrade_client/type/account_order_record.py)
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `post`
 
@@ -1661,11 +1651,11 @@ The ID of trade object obtained from trade/impact endpoint
 
 ---
 
-### `snaptrade.transactions_and_reporting.get_activities`
+### `snaptrade.transactions_and_reporting.get_activities`<a id="snaptradetransactions_and_reportingget_activities"></a>
 
 Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_activities_response = snaptrade.transactions_and_reporting.get_activities(
@@ -1679,33 +1669,33 @@ get_activities_response = snaptrade.transactions_and_reporting.get_activities(
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### start_date: `date`
+##### start_date: `date`<a id="start_date-date"></a>
 
-##### end_date: `date`
+##### end_date: `date`<a id="end_date-date"></a>
 
-##### accounts: `str`
+##### accounts: `str`<a id="accounts-str"></a>
 
 Optional comma seperated list of account IDs used to filter the request on specific accounts
 
-##### brokerage_authorizations: `str`
+##### brokerage_authorizations: `str`<a id="brokerage_authorizations-str"></a>
 
 Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
 
-##### type: `str`
+##### type: `str`<a id="type-str"></a>
 
 Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalActivity](./snaptrade_client/type/universal_activity.py)
+[`UniversalActivity`](./snaptrade_client/type/universal_activity.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/activities` `get`
 
@@ -1713,11 +1703,11 @@ Optional comma seperated list of types to filter activities by. This is not an e
 
 ---
 
-### `snaptrade.transactions_and_reporting.get_reporting_custom_range`
+### `snaptrade.transactions_and_reporting.get_reporting_custom_range`<a id="snaptradetransactions_and_reportingget_reporting_custom_range"></a>
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
@@ -1731,33 +1721,33 @@ get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_r
 )
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### start_date: `date`
+##### start_date: `date`<a id="start_date-date"></a>
 
-##### end_date: `date`
+##### end_date: `date`<a id="end_date-date"></a>
 
-##### user_id: `str`
+##### user_id: `str`<a id="user_id-str"></a>
 
-##### user_secret: `str`
+##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### accounts: `str`
+##### accounts: `str`<a id="accounts-str"></a>
 
 Optional comma seperated list of account IDs used to filter the request on specific accounts
 
-##### detailed: `bool`
+##### detailed: `bool`<a id="detailed-bool"></a>
 
 Optional, increases frequency of data points for the total value and contribution charts if set to true
 
-##### frequency: `str`
+##### frequency: `str`<a id="frequency-str"></a>
 
 Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
-[PerformanceCustom](./snaptrade_client/type/performance_custom.py)
+[`PerformanceCustom`](./snaptrade_client/type/performance_custom.py)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/performance/custom` `get`
 
@@ -1766,5 +1756,5 @@ Optional frequency for the rate of return chart (defaults to monthly). Possible 
 ---
 
 
-## Author
+## Author<a id="author"></a>
 This Python package is automatically generated by [Konfig](https://konfigthis.com)
