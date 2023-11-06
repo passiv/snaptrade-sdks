@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.4-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.4)
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.5-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.5)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing<a id="installing"></a>
 
 ```sh
-pip install snaptrade-python-sdk==10.34.4
+pip install snaptrade-python-sdk==10.34.5
 ```
 
 ## Getting Started<a id="getting-started"></a>
