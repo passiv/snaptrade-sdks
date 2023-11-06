@@ -31,16 +31,6 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 )
 print(redirect_uri.body)
 
-
-snaptrade.portfolio_management.create(
-    query_params={"userId": user_id, "userSecret": user_secret},
-    body={"id": str(uuid.uuid4()), "name": "MyPortfolio"},
-)
-res = snaptrade.portfolio_management.list(
-    query_params={"userId": user_id, "userSecret": user_secret}
-)
-pprint(res.body)
-
 # 5) Obtaining account holdings data
 holdings = snaptrade.account_information.get_all_user_holdings(
     query_params={"userId": user_id, "userSecret": user_secret}
