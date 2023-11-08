@@ -101,18 +101,22 @@ public class ApiClient extends ApiClientCustom {
 
     public ApiClient(OkHttpClient client, Configuration configuration) {
         init();
-        if (client == null) {
-            initHttpClient();
-        } else {
-            this.httpClient = client;
+        if (configuration != null) {
+            // Setting up authentications, if applicable, may rely on the following, so we initialize them first
+            setBasePath(configuration.host);
         }
-
         // Setup authentications (key: authentication name, value: authentication).
         authentications.put("PartnerClientId", new ApiKeyAuth("query", "clientId"));
         authentications.put("PartnerSignature", new ApiKeyAuth("header", "Signature"));
         authentications.put("PartnerTimestamp", new ApiKeyAuth("query", "timestamp"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
+
+        if (client == null) {
+            initHttpClient();
+        } else {
+            this.httpClient = client;
+        }
 
         if (configuration != null) {
             if (configuration.clientId != null) {
@@ -124,12 +128,10 @@ public class ApiClient extends ApiClientCustom {
             if (configuration.timestamp != null) {
                 this.setPartnerTimestamp(configuration.timestamp);
             }
-
             if (configuration.consumerKey != null) {
                 this.consumerKey = configuration.consumerKey;
             }
             setVerifyingSsl(configuration.verifyingSsl);
-            setBasePath(configuration.host);
         }
     }
 
@@ -166,7 +168,6 @@ public class ApiClient extends ApiClientCustom {
     public void setPartnerTimestampPrefix(String prefix) {
         ((ApiKeyAuth) this.getAuthentication("PartnerTimestamp")).setApiKeyPrefix(prefix);
     }
-
     private void initHttpClient() {
         initHttpClient(Collections.<Interceptor>emptyList());
     }
@@ -205,7 +206,7 @@ public class ApiClient extends ApiClientCustom {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://api.snaptrade.com/api/v1
+     * @param basePath Base path of the URL (e.g https://api.snaptrade.com/api/v1)
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {
@@ -216,6 +217,7 @@ public class ApiClient extends ApiClientCustom {
         this.basePath = basePath;
         return this;
     }
+
 
     /**
      * Get HTTP client

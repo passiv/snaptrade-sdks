@@ -69,13 +69,14 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_account_orders
-  # Get history of orders placed in account
+  # List account orders
   # Fetch all recent orders from a user&#39;s account.
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get orders.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+  # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
   # @return [Array<AccountOrderRecord>]
   describe 'get_user_account_orders test' do
     it 'should work' do

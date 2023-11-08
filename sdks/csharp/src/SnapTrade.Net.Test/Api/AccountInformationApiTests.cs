@@ -146,11 +146,12 @@ namespace SnapTrade.Net.Test.Api
             var userSecret = "userSecret_example";
             var accountId = "accountId_example"; // The ID of the account to get orders.
             var state = "all"; // defaults value is set to \"all\" (optional) 
+            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional) 
             
             try
             {
-                // Get history of orders placed in account
-                List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state);
+                // List account orders
+                List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state, days);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

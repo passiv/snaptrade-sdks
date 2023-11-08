@@ -7,7 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
+| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
@@ -318,9 +318,9 @@ public class Example {
 
 <a name="getUserAccountOrders"></a>
 # **getUserAccountOrders**
-> List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).execute();
+> List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).days(days).execute();
 
-Get history of orders placed in account
+List account orders
 
 Fetch all recent orders from a user&#39;s account.
 
@@ -351,11 +351,13 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID(); // The ID of the account to get orders.
     String state = "all"; // defaults value is set to \"all\"
+    Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     try {
       List<AccountOrderRecord> result = client
               .accountInformation
               .getUserAccountOrders(userId, userSecret, accountId)
               .state(state)
+              .days(days)
               .execute();
       System.out.println(result);
     } catch (ApiException e) {
@@ -372,6 +374,7 @@ public class Example {
               .accountInformation
               .getUserAccountOrders(userId, userSecret, accountId)
               .state(state)
+              .days(days)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -398,6 +401,7 @@ public class Example {
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**| The ID of the account to get orders. | |
 | **state** | **String**| defaults value is set to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
+| **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. | [optional] |
 
 ### Return type
 

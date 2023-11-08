@@ -105,7 +105,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of Account</returns>
         ApiResponse<Account> GetUserAccountDetailsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
-        /// Get history of orders placed in account
+        /// List account orders
         /// </summary>
         /// <remarks>
         /// Fetch all recent orders from a user&#39;s account.
@@ -115,12 +115,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
-        List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0);
+        List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
 
         /// <summary>
-        /// Get history of orders placed in account
+        /// List account orders
         /// </summary>
         /// <remarks>
         /// Fetch all recent orders from a user&#39;s account.
@@ -130,9 +131,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
-        ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0);
+        ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
         /// <summary>
         /// List account positions
         /// </summary>
@@ -326,7 +328,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (Account)</returns>
         System.Threading.Tasks.Task<ApiResponse<Account>> GetUserAccountDetailsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get history of orders placed in account
+        /// List account orders
         /// </summary>
         /// <remarks>
         /// Fetch all recent orders from a user&#39;s account.
@@ -336,13 +338,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountOrderRecord&gt;</returns>
-        System.Threading.Tasks.Task<List<AccountOrderRecord>> GetUserAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<AccountOrderRecord>> GetUserAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get history of orders placed in account
+        /// List account orders
         /// </summary>
         /// <remarks>
         /// Fetch all recent orders from a user&#39;s account.
@@ -352,10 +355,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountOrderRecord&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<AccountOrderRecord>>> GetUserAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<AccountOrderRecord>>> GetUserAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account positions
         /// </summary>
@@ -1219,32 +1223,34 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
+        /// List account orders Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
-        public List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0)
+        public List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> localVarResponse = GetUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state);
+            SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> localVarResponse = GetUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state, days);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
+        /// List account orders Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1292,6 +1298,10 @@ namespace SnapTrade.Net.Api
             if (state != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "state", state, ""));
+            }
+            if (days != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "days", days, "int32"));
             }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountOrders";
@@ -1328,34 +1338,36 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
+        /// List account orders Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountOrderRecord&gt;</returns>
-        public async System.Threading.Tasks.Task<List<AccountOrderRecord>> GetUserAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<AccountOrderRecord>> GetUserAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> localVarResponse = await GetUserAccountOrdersWithHttpInfoAsync(userId, userSecret, accountId, state, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> localVarResponse = await GetUserAccountOrdersWithHttpInfoAsync(userId, userSecret, accountId, state, days, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get history of orders placed in account Fetch all recent orders from a user&#39;s account.
+        /// List account orders Fetch all recent orders from a user&#39;s account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId">The ID of the account to get orders.</param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountOrderRecord&gt;)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>>> GetUserAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>>> GetUserAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1404,6 +1416,10 @@ namespace SnapTrade.Net.Api
             if (state != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "state", state, ""));
+            }
+            if (days != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "days", days, "int32"));
             }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountOrders";

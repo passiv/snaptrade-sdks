@@ -302,6 +302,7 @@ get_user_account_orders_response = (
         user_secret="USERSECRET123",
         account_id="accountId_example",
         state="all",
+        days=30,
     )
 )
 ```
@@ -319,6 +320,10 @@ The ID of the account to get orders.
 ##### state: `str`<a id="state-str"></a>
 
 defaults value is set to \"all\"
+
+##### days: `int`<a id="days-int"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -7,7 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**get_all_user_holdings**](AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**get_user_account_balance**](AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**get_user_account_details**](AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account |
+| [**get_user_account_orders**](AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**get_user_account_positions**](AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**get_user_holdings**](AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account |
 | [**list_user_accounts**](AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts |
@@ -212,7 +212,7 @@ end
 
 ## get_user_account_orders
 
-Get history of orders placed in account
+List account orders
 
 Fetch all recent orders from a user's account.
 
@@ -228,14 +228,16 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "accountId_example"
 state = "all"
+days = 30
 
 begin
-  # Get history of orders placed in account
+  # List account orders
   result = SnapTrade::AccountInformation.get_user_account_orders(
                                                                     user_id: user_id,
                                                                     user_secret: user_secret,
                                                                     account_id: account_id,
                                                                     state: state,
+                                                                    days: days,
                                                                   )
   p result
 rescue SnapTrade::ApiError => e
@@ -252,14 +254,16 @@ user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "accountId_example"
 state = "all"
+days = 30
 
 begin
-  # Get history of orders placed in account
+  # List account orders
   data, status_code, headers, response = SnapTrade::AccountInformation.get_user_account_orders_with_http_info(
                                                                                                                  user_id: user_id,
                                                                                                                  user_secret: user_secret,
                                                                                                                  account_id: account_id,
                                                                                                                  state: state,
+                                                                                                                 days: days,
                                                                                                                )
   p status_code # => 2xx
   p headers # => { ... }
@@ -277,6 +281,7 @@ end
 | **user_secret** | **String** |  |  |
 | **account_id** | **String** | The ID of the account to get orders. |  |
 | **state** | **String** | defaults value is set to \&quot;all\&quot; | [optional] |
+| **days** | **Integer** | Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. | [optional] |
 
 ### Return type
 

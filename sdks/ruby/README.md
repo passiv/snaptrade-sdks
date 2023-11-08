@@ -46,7 +46,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::AccountInformationApi* | [**get_all_user_holdings**](docs/AccountInformationApi.md#get_all_user_holdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *SnapTrade::AccountInformationApi* | [**get_user_account_balance**](docs/AccountInformationApi.md#get_user_account_balance) | **GET** /accounts/{accountId}/balances | List account balances
 *SnapTrade::AccountInformationApi* | [**get_user_account_details**](docs/AccountInformationApi.md#get_user_account_details) | **GET** /accounts/{accountId} | Return details of a specific investment account
-*SnapTrade::AccountInformationApi* | [**get_user_account_orders**](docs/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | Get history of orders placed in account
+*SnapTrade::AccountInformationApi* | [**get_user_account_orders**](docs/AccountInformationApi.md#get_user_account_orders) | **GET** /accounts/{accountId}/orders | List account orders
 *SnapTrade::AccountInformationApi* | [**get_user_account_positions**](docs/AccountInformationApi.md#get_user_account_positions) | **GET** /accounts/{accountId}/positions | List account positions
 *SnapTrade::AccountInformationApi* | [**get_user_holdings**](docs/AccountInformationApi.md#get_user_holdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
 *SnapTrade::AccountInformationApi* | [**list_user_accounts**](docs/AccountInformationApi.md#list_user_accounts) | **GET** /accounts | List accounts

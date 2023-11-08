@@ -306,51 +306,57 @@ module SnapTrade
     end
 
 
-    # Get history of orders placed in account
+    # List account orders
     # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param state [String] defaults value is set to \&quot;all\&quot;
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
+    def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
+      extra[:days] = days if days != SENTINEL
       data, _status_code, _headers = get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
-    # Get history of orders placed in account
+    # List account orders
     # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param state [String] defaults value is set to \&quot;all\&quot;
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, extra: {})
+    def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
+      extra[:days] = days if days != SENTINEL
       get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Get history of orders placed in account
+    # List account orders
     # Fetch all recent orders from a user's account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @return [Array<AccountOrderRecord>]
     def get_user_account_orders_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_orders_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
 
-    # Get history of orders placed in account
+    # List account orders
     # Fetch all recent orders from a user&#39;s account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @return [Array<(Array<AccountOrderRecord>, Integer, Hash)>] Array<AccountOrderRecord> data, response status code and response headers
     def get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
@@ -372,6 +378,10 @@ module SnapTrade
       if @api_client.config.client_side_validation && opts[:'state'] && !allowable_values.include?(opts[:'state'])
         fail ArgumentError, "invalid value for \"state\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling AccountInformationApi.get_user_account_orders, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/accounts/{accountId}/orders'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
@@ -380,6 +390,7 @@ module SnapTrade
       query_params[:'userId'] = user_id
       query_params[:'userSecret'] = user_secret
       query_params[:'state'] = opts[:'state'] if !opts[:'state'].nil?
+      query_params[:'days'] = opts[:'days'] if !opts[:'days'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
