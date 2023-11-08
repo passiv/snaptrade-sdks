@@ -2,22 +2,20 @@
 
 [![Visit SnapTrade](./header.png)](https://snaptrade.com)
 
-# [SnapTrade](https://snaptrade.com)
+# [SnapTrade](https://snaptrade.com)<a id="snaptrade"></a>
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v8.29.3-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.3)
+[![npm](https://img.shields.io/badge/npm-v8.29.4-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.4)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
 
-## Table of Contents
+## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
 
-- [Installing](#installing)
-  * [npm](#npm)
-  * [yarn](#yarn)
+- [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
@@ -66,19 +64,40 @@ Connect brokerage accounts to your app for live positions and trading
 
 <!-- tocstop -->
 
-## Installing
+## Installation<a id="installation"></a>
 
-### npm
-```
-npm install snaptrade-typescript-sdk --save
+<table>
+<tr>
+<th width="292px"><code>npm</code></th>
+<th width="293px"><code>pnpm</code></th>
+<th width="292px"><code>yarn</code></th>
+</tr>
+<tr>
+<td>
+
+```bash
+npm i snaptrade-typescript-sdk
 ```
 
-### yarn
+</td>
+<td>
+
+```bash
+pnpm i snaptrade-typescript-sdk
 ```
+
+</td>
+<td>
+
+```bash
 yarn add snaptrade-typescript-sdk
 ```
 
-## Getting Started
+</td>
+</tr>
+</table>
+
+## Getting Started<a id="getting-started"></a>
 
 ```typescript
 const { Snaptrade } = require("snaptrade-typescript-sdk");
@@ -155,14 +174,14 @@ function getUserId() {
 main();
 ```
 
-## Reference
+## Reference<a id="reference"></a>
 
 
-### `snaptrade.accountInformation.getAllUserHoldings`
+### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
 
 List all accounts for the user, plus balances, positions, and orders for each account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getAllUserHoldingsResponse =
@@ -173,21 +192,21 @@ const getAllUserHoldingsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### brokerageAuthorizations: `string`
+##### brokerageAuthorizations: `string`<a id="brokerageauthorizations-string"></a>
 
 Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountHoldings](./models/account-holdings.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/holdings` `GET`
 
@@ -196,11 +215,11 @@ Optional. Comma seperated list of authorization IDs (only use if filtering is ne
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountBalance`
+### `snaptrade.accountInformation.getUserAccountBalance`<a id="snaptradeaccountinformationgetuseraccountbalance"></a>
 
 A list of account balances for the specified account (one per currency that the account holds).
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountBalanceResponse =
@@ -211,21 +230,21 @@ const getUserAccountBalanceResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get balances.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Balance](./models/balance.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balances` `GET`
 
@@ -234,11 +253,11 @@ The ID of the account to get balances.
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountDetails`
+### `snaptrade.accountInformation.getUserAccountDetails`<a id="snaptradeaccountinformationgetuseraccountdetails"></a>
 
 Return details of a specific investment account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountDetailsResponse =
@@ -249,21 +268,21 @@ const getUserAccountDetailsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get detail of.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./models/account.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `GET`
 
@@ -272,11 +291,11 @@ The ID of the account to get detail of.
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountOrders`
+### `snaptrade.accountInformation.getUserAccountOrders`<a id="snaptradeaccountinformationgetuseraccountorders"></a>
 
 Fetch all recent orders from a user\'s account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountOrdersResponse =
@@ -284,29 +303,34 @@ const getUserAccountOrdersResponse =
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
     state: "all",
+    days: 30,
     accountId: "accountId_example",
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get orders.
 
-##### state: `'all' | 'open' | 'executed'`
+##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
 
 defaults value is set to \"all\"
 
-#### 🔄 Return
+##### days: `number`<a id="days-number"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./models/account-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders` `GET`
 
@@ -315,11 +339,11 @@ defaults value is set to \"all\"
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountPositions`
+### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
 
 List account positions
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountPositionsResponse =
@@ -330,21 +354,21 @@ const getUserAccountPositionsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get positions.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Position](./models/position.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions` `GET`
 
@@ -353,11 +377,11 @@ The ID of the account to get positions.
 ---
 
 
-### `snaptrade.accountInformation.getUserHoldings`
+### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
 List balances, positions and orders for the specified account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserHoldingsResponse =
@@ -368,21 +392,21 @@ const getUserHoldingsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to fetch holdings for.
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountHoldingsAccount](./models/account-holdings-account.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/holdings` `GET`
 
@@ -391,11 +415,11 @@ The ID of the account to fetch holdings for.
 ---
 
 
-### `snaptrade.accountInformation.listUserAccounts`
+### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
 List accounts
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listUserAccountsResponse =
@@ -405,17 +429,17 @@ const listUserAccountsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./models/account.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts` `GET`
 
@@ -424,11 +448,11 @@ const listUserAccountsResponse =
 ---
 
 
-### `snaptrade.accountInformation.updateUserAccount`
+### `snaptrade.accountInformation.updateUserAccount`<a id="snaptradeaccountinformationupdateuseraccount"></a>
 
 Update details of an investment account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const updateUserAccountResponse =
@@ -439,21 +463,21 @@ const updateUserAccountResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to update.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./models/account.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `PUT`
 
@@ -462,21 +486,21 @@ The ID of the account to update.
 ---
 
 
-### `snaptrade.apiStatus.check`
+### `snaptrade.apiStatus.check`<a id="snaptradeapistatuscheck"></a>
 
 Check whether the API is operational and verify timestamps.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const checkResponse = await snaptrade.apiStatus.check();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Status](./models/status.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/` `GET`
 
@@ -485,11 +509,11 @@ const checkResponse = await snaptrade.apiStatus.check();
 ---
 
 
-### `snaptrade.authentication.deleteSnapTradeUser`
+### `snaptrade.authentication.deleteSnapTradeUser`<a id="snaptradeauthenticationdeletesnaptradeuser"></a>
 
 Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const deleteSnapTradeUserResponse =
@@ -498,15 +522,15 @@ const deleteSnapTradeUserResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DeleteUserResponse](./models/delete-user-response.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `DELETE`
 
@@ -515,11 +539,11 @@ const deleteSnapTradeUserResponse =
 ---
 
 
-### `snaptrade.authentication.getUserJWT`
+### `snaptrade.authentication.getUserJWT`<a id="snaptradeauthenticationgetuserjwt"></a>
 
 Generate encrypted JWT token
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
@@ -528,13 +552,13 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/encryptedJWT` `GET`
 
@@ -543,18 +567,18 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 ---
 
 
-### `snaptrade.authentication.listSnapTradeUsers`
+### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
 Returns a list of users you\'ve registered over the SnapTrade API.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listSnapTradeUsersResponse =
   await snaptrade.authentication.listSnapTradeUsers();
 ```
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/listUsers` `GET`
 
@@ -563,11 +587,11 @@ const listSnapTradeUsersResponse =
 ---
 
 
-### `snaptrade.authentication.loginSnapTradeUser`
+### `snaptrade.authentication.loginSnapTradeUser`<a id="snaptradeauthenticationloginsnaptradeuser"></a>
 
 Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const loginSnapTradeUserResponse =
@@ -582,33 +606,33 @@ const loginSnapTradeUserResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### broker: `string`
+##### broker: `string`<a id="broker-string"></a>
 
 Slug of the brokerage to connect the user to
 
-##### immediateRedirect: `boolean`
+##### immediateRedirect: `boolean`<a id="immediateredirect-boolean"></a>
 
 When set to True, user will be redirected back to the partner\\\'s site instead of the connection portal
 
-##### customRedirect: `string`
+##### customRedirect: `string`<a id="customredirect-string"></a>
 
 URL to redirect the user to after the user connects their brokerage account
 
-##### reconnect: `string`
+##### reconnect: `string`<a id="reconnect-string"></a>
 
 The UUID of the brokerage connection to be reconnected
 
-##### connectionType: `string`
+##### connectionType: `string`<a id="connectiontype-string"></a>
 
 Sets whether the connection should be read or trade
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/login` `POST`
 
@@ -617,11 +641,11 @@ Sets whether the connection should be read or trade
 ---
 
 
-### `snaptrade.authentication.registerSnapTradeUser`
+### `snaptrade.authentication.registerSnapTradeUser`<a id="snaptradeauthenticationregistersnaptradeuser"></a>
 
 Create SnapTrade user
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const registerSnapTradeUserResponse =
@@ -630,17 +654,17 @@ const registerSnapTradeUserResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
 SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\\\'s unique to a user
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UserIDandSecret](./models/user-idand-secret.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/registerUser` `POST`
 
@@ -649,11 +673,11 @@ SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as 
 ---
 
 
-### `snaptrade.connections.detailBrokerageAuthorization`
+### `snaptrade.connections.detailBrokerageAuthorization`<a id="snaptradeconnectionsdetailbrokerageauthorization"></a>
 
 Get brokerage authorization details
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const detailBrokerageAuthorizationResponse =
@@ -664,21 +688,21 @@ const detailBrokerageAuthorizationResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `string`
+##### authorizationId: `string`<a id="authorizationid-string"></a>
 
 The ID of a brokerage authorization object.
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorization](./models/brokerage-authorization.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `GET`
 
@@ -687,11 +711,11 @@ The ID of a brokerage authorization object.
 ---
 
 
-### `snaptrade.connections.listBrokerageAuthorizations`
+### `snaptrade.connections.listBrokerageAuthorizations`<a id="snaptradeconnectionslistbrokerageauthorizations"></a>
 
 List all brokerage authorizations for the user
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listBrokerageAuthorizationsResponse =
@@ -701,17 +725,17 @@ const listBrokerageAuthorizationsResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorization](./models/brokerage-authorization.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `GET`
 
@@ -720,11 +744,11 @@ const listBrokerageAuthorizationsResponse =
 ---
 
 
-### `snaptrade.connections.removeBrokerageAuthorization`
+### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
 
 Delete brokerage authorization
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const removeBrokerageAuthorizationResponse =
@@ -735,17 +759,17 @@ const removeBrokerageAuthorizationResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `string`
+##### authorizationId: `string`<a id="authorizationid-string"></a>
 
 The ID of the Authorization to delete.
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `DELETE`
 
@@ -754,11 +778,11 @@ The ID of the Authorization to delete.
 ---
 
 
-### `snaptrade.connections.sessionEvents`
+### `snaptrade.connections.sessionEvents`<a id="snaptradeconnectionssessionevents"></a>
 
 List all session events for the partner
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const sessionEventsResponse = await snaptrade.connections.sessionEvents({
@@ -770,19 +794,19 @@ const sessionEventsResponse = await snaptrade.connections.sessionEvents({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### partnerClientId: `string`
+##### partnerClientId: `string`<a id="partnerclientid-string"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
 Optional comma seperated list of user IDs used to filter the request on specific users
 
-##### sessionId: `string`
+##### sessionId: `string`<a id="sessionid-string"></a>
 
 Optional comma seperated list of session IDs used to filter the request on specific users
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
 
@@ -791,11 +815,11 @@ Optional comma seperated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.errorLogs.listUserErrors`
+### `snaptrade.errorLogs.listUserErrors`<a id="snaptradeerrorlogslistusererrors"></a>
 
 Retrieve error logs on behalf of your SnapTrade users
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
@@ -804,17 +828,17 @@ const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UserErrorLog](./models/user-error-log.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/listUserErrors` `GET`
 
@@ -823,11 +847,11 @@ const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
 ---
 
 
-### `snaptrade.options.getOptionStrategy`
+### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
@@ -846,28 +870,28 @@ const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### underlying_symbol_id: `string`
+##### underlying_symbol_id: `string`<a id="underlying_symbol_id-string"></a>
 
-##### legs: `OptionLeg`
+##### legs: `OptionLeg`<a id="legs-optionleg"></a>
             [`OptionLeg`](./models/option-leg.ts)[]
 
-##### strategy_type: `string`
+##### strategy_type: `string`<a id="strategy_type-string"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to create the option strategy object in.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyQuotes](./models/strategy-quotes.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy` `POST`
 
@@ -876,11 +900,11 @@ The ID of the account to create the option strategy object in.
 ---
 
 
-### `snaptrade.options.getOptionsChain`
+### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
 
 Get the options chain
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
@@ -891,21 +915,21 @@ const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get the options chain from.
 
-##### symbol: `string`
+##### symbol: `string`<a id="symbol-string"></a>
 
 Universal symbol ID if symbol
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionsChain` `GET`
 
@@ -914,11 +938,11 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.getOptionsStrategyQuote`
+### `snaptrade.options.getOptionsStrategyQuote`<a id="snaptradeoptionsgetoptionsstrategyquote"></a>
 
 Get latest market data of option strategy
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getOptionsStrategyQuoteResponse =
@@ -930,25 +954,25 @@ const getOptionsStrategyQuoteResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account the strategy will be placed in.
 
-##### optionStrategyId: `string`
+##### optionStrategyId: `string`<a id="optionstrategyid-string"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyQuotes](./models/strategy-quotes.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
 
@@ -957,11 +981,11 @@ Option strategy id obtained from response when creating option strategy object
 ---
 
 
-### `snaptrade.options.listOptionHoldings`
+### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Get the options holdings in the account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
@@ -971,21 +995,21 @@ const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to fetch options holdings for.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [OptionsPosition](./models/options-position.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
 
@@ -994,11 +1018,11 @@ The ID of the account to fetch options holdings for.
 ---
 
 
-### `snaptrade.options.placeOptionStrategy`
+### `snaptrade.options.placeOptionStrategy`<a id="snaptradeoptionsplaceoptionstrategy"></a>
 
 Place an option strategy order on the brokerage
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
@@ -1014,33 +1038,33 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 );
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to execute the strategy in.
 
-##### optionStrategyId: `string`
+##### optionStrategyId: `string`<a id="optionstrategyid-string"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-##### price: `number`
+##### price: `number`<a id="price-number"></a>
 
 Trade Price if limit or stop limit order
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyOrderRecord](./models/strategy-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
@@ -1049,11 +1073,11 @@ Trade Price if limit or stop limit order
 ---
 
 
-### `snaptrade.referenceData.getCurrencyExchangeRatePair`
+### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
 
 Return the exchange rate of a currency pair
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getCurrencyExchangeRatePairResponse =
@@ -1062,17 +1086,17 @@ const getCurrencyExchangeRatePairResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### currencyPair: `string`
+##### currencyPair: `string`<a id="currencypair-string"></a>
 
 A currency pair based on currency code for example, {CAD-USD}
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ExchangeRatePairs](./models/exchange-rate-pairs.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates/{currencyPair}` `GET`
 
@@ -1081,21 +1105,21 @@ A currency pair based on currency code for example, {CAD-USD}
 ---
 
 
-### `snaptrade.referenceData.getPartnerInfo`
+### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
 Get metadata related to Snaptrade partner
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [PartnerData](./models/partner-data.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `GET`
 
@@ -1104,22 +1128,22 @@ const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 ---
 
 
-### `snaptrade.referenceData.getSecurityTypes`
+### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
 
 List security types available on SnapTrade.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getSecurityTypesResponse =
   await snaptrade.referenceData.getSecurityTypes();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [SecurityType](./models/security-type.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/securityTypes` `GET`
 
@@ -1128,22 +1152,22 @@ const getSecurityTypesResponse =
 ---
 
 
-### `snaptrade.referenceData.getStockExchanges`
+### `snaptrade.referenceData.getStockExchanges`<a id="snaptradereferencedatagetstockexchanges"></a>
 
 List exchanges
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getStockExchangesResponse =
   await snaptrade.referenceData.getStockExchanges();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Exchange](./models/exchange.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/exchanges` `GET`
 
@@ -1152,11 +1176,11 @@ const getStockExchangesResponse =
 ---
 
 
-### `snaptrade.referenceData.getSymbols`
+### `snaptrade.referenceData.getSymbols`<a id="snaptradereferencedatagetsymbols"></a>
 
 Search for symbols
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
@@ -1164,15 +1188,15 @@ const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### substring: `string`
+##### substring: `string`<a id="substring-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./models/universal-symbol.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols` `POST`
 
@@ -1181,11 +1205,11 @@ const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
 ---
 
 
-### `snaptrade.referenceData.getSymbolsByTicker`
+### `snaptrade.referenceData.getSymbolsByTicker`<a id="snaptradereferencedatagetsymbolsbyticker"></a>
 
 Get details of a symbol by the ticker
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getSymbolsByTickerResponse =
@@ -1194,21 +1218,21 @@ const getSymbolsByTickerResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### ticker: `string`
+##### ticker: `string`<a id="ticker-string"></a>
 
 The ticker of the UniversalSymbol to get.
 
-##### symbolId: `string`
+##### symbolId: `string`<a id="symbolid-string"></a>
 
 OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./models/universal-symbol.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols/{ticker}` `GET`
 
@@ -1217,11 +1241,11 @@ OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymb
 ---
 
 
-### `snaptrade.referenceData.listAllBrokerageAuthorizationType`
+### `snaptrade.referenceData.listAllBrokerageAuthorizationType`<a id="snaptradereferencedatalistallbrokerageauthorizationtype"></a>
 
 List of all brokerage authorization types
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listAllBrokerageAuthorizationTypeResponse =
@@ -1230,17 +1254,17 @@ const listAllBrokerageAuthorizationTypeResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage: `string`
+##### brokerage: `string`<a id="brokerage-string"></a>
 
 Comma separated value of brokerage slugs
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorizationTypeReadOnly](./models/brokerage-authorization-type-read-only.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `GET`
 
@@ -1249,22 +1273,22 @@ Comma separated value of brokerage slugs
 ---
 
 
-### `snaptrade.referenceData.listAllBrokerages`
+### `snaptrade.referenceData.listAllBrokerages`<a id="snaptradereferencedatalistallbrokerages"></a>
 
 List brokerages
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listAllBrokeragesResponse =
   await snaptrade.referenceData.listAllBrokerages();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Brokerage](./models/brokerage.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerages` `GET`
 
@@ -1273,22 +1297,22 @@ const listAllBrokeragesResponse =
 ---
 
 
-### `snaptrade.referenceData.listAllCurrencies`
+### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
 
 List currencies
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listAllCurrenciesResponse =
   await snaptrade.referenceData.listAllCurrencies();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Currency](./models/currency.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies` `GET`
 
@@ -1297,22 +1321,22 @@ const listAllCurrenciesResponse =
 ---
 
 
-### `snaptrade.referenceData.listAllCurrenciesRates`
+### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
 
 List currency exchange rates
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const listAllCurrenciesRatesResponse =
   await snaptrade.referenceData.listAllCurrenciesRates();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ExchangeRatePairs](./models/exchange-rate-pairs.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates` `GET`
 
@@ -1321,11 +1345,11 @@ const listAllCurrenciesRatesResponse =
 ---
 
 
-### `snaptrade.referenceData.symbolSearchUserAccount`
+### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Search for symbols available in an account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const symbolSearchUserAccountResponse =
@@ -1337,23 +1361,23 @@ const symbolSearchUserAccountResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to search for symbols within.
 
-##### substring: `string`
+##### substring: `string`<a id="substring-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./models/universal-symbol.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/symbols` `POST`
 
@@ -1362,11 +1386,11 @@ The ID of the account to search for symbols within.
 ---
 
 
-### `snaptrade.trading.cancelUserAccountOrder`
+### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
 Cancel open order in account
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const cancelUserAccountOrderResponse =
@@ -1378,23 +1402,23 @@ const cancelUserAccountOrderResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to cancel the order in.
 
-##### brokerage_order_id: `string`
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./models/account-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/cancel` `POST`
 
@@ -1403,11 +1427,11 @@ The ID of the account to cancel the order in.
 ---
 
 
-### `snaptrade.trading.getOrderImpact`
+### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
 Check impact of trades on account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
@@ -1423,39 +1447,39 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### account_id: `string`
+##### account_id: `string`<a id="account_id-string"></a>
 
-##### action:
+##### action:<a id="action"></a>
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### price: `number`
+##### price: `number`<a id="price-number"></a>
 
 Trade Price if limit or stop limit order
 
-##### stop: `number`
+##### stop: `number`<a id="stop-number"></a>
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### units: `number`
+##### units: `number`<a id="units-number"></a>
 
 Trade Units
 
-##### universal_symbol_id: `string`
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ManualTradeAndImpact](./models/manual-trade-and-impact.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/impact` `POST`
 
@@ -1464,11 +1488,11 @@ Trade Units
 ---
 
 
-### `snaptrade.trading.getUserAccountQuotes`
+### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
 Get symbol quotes
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountQuotesResponse =
@@ -1480,25 +1504,25 @@ const getUserAccountQuotesResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### symbols: `string`
+##### symbols: `string`<a id="symbols-string"></a>
 
 List of universal_symbol_id or tickers to get quotes for.
 
-##### accountId: `string`
+##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to get quotes.
 
-##### useTicker: `boolean`
+##### useTicker: `boolean`<a id="useticker-boolean"></a>
 
 Should be set to True if providing tickers.
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
 
@@ -1507,11 +1531,11 @@ Should be set to True if providing tickers.
 ---
 
 
-### `snaptrade.trading.placeForceOrder`
+### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
 Place a trade with NO validation.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
@@ -1527,39 +1551,39 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### account_id: `string`
+##### account_id: `string`<a id="account_id-string"></a>
 
-##### action:
+##### action:<a id="action"></a>
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### price: `number`
+##### price: `number`<a id="price-number"></a>
 
 Trade Price if limit or stop limit order
 
-##### stop: `number`
+##### stop: `number`<a id="stop-number"></a>
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### units: `number`
+##### units: `number`<a id="units-number"></a>
 
 Trade Units
 
-##### universal_symbol_id: `string`
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./models/account-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
 
@@ -1568,11 +1592,11 @@ Trade Units
 ---
 
 
-### `snaptrade.trading.placeOCOOrder`
+### `snaptrade.trading.placeOCOOrder`<a id="snaptradetradingplaceocoorder"></a>
 
 Place a OCO (One Cancels Other) order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
@@ -1581,25 +1605,25 @@ const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### first_trade_id:
+##### first_trade_id:<a id="first_trade_id"></a>
 
 The ID of first trade object obtained from trade/impact endpoint
 
-##### second_trade_id:
+##### second_trade_id:<a id="second_trade_id"></a>
 
 The ID of second trade object obtained from trade/impact endpoint
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./models/account-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/oco` `POST`
 
@@ -1608,11 +1632,11 @@ The ID of second trade object obtained from trade/impact endpoint
 ---
 
 
-### `snaptrade.trading.placeOrder`
+### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
 Place order
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const placeOrderResponse = await snaptrade.trading.placeOrder({
@@ -1622,21 +1646,21 @@ const placeOrderResponse = await snaptrade.trading.placeOrder({
 });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### tradeId: `string`
+##### tradeId: `string`<a id="tradeid-string"></a>
 
 The ID of trade object obtained from trade/impact endpoint
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./models/account-order-record.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
 
@@ -1645,11 +1669,11 @@ The ID of trade object obtained from trade/impact endpoint
 ---
 
 
-### `snaptrade.transactionsAndReporting.getActivities`
+### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
 
 Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getActivitiesResponse =
@@ -1666,33 +1690,33 @@ const getActivitiesResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### startDate: `string | Date`
+##### startDate: `string | Date`<a id="startdate-string--date"></a>
 
-##### endDate: `string | Date`
+##### endDate: `string | Date`<a id="enddate-string--date"></a>
 
-##### accounts: `string`
+##### accounts: `string`<a id="accounts-string"></a>
 
 Optional comma seperated list of account IDs used to filter the request on specific accounts
 
-##### brokerageAuthorizations: `string`
+##### brokerageAuthorizations: `string`<a id="brokerageauthorizations-string"></a>
 
 Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
 
-##### type: `string`
+##### type: `string`<a id="type-string"></a>
 
 Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalActivity](./models/universal-activity.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/activities` `GET`
 
@@ -1701,11 +1725,11 @@ Optional comma seperated list of types to filter activities by. This is not an e
 ---
 
 
-### `snaptrade.transactionsAndReporting.getReportingCustomRange`
+### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getReportingCustomRangeResponse =
@@ -1721,33 +1745,33 @@ const getReportingCustomRangeResponse =
   });
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### startDate: `string | Date`
+##### startDate: `string | Date`<a id="startdate-string--date"></a>
 
-##### endDate: `string | Date`
+##### endDate: `string | Date`<a id="enddate-string--date"></a>
 
-##### userId: `string`
+##### userId: `string`<a id="userid-string"></a>
 
-##### userSecret: `string`
+##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### accounts: `string`
+##### accounts: `string`<a id="accounts-string"></a>
 
 Optional comma seperated list of account IDs used to filter the request on specific accounts
 
-##### detailed: `boolean`
+##### detailed: `boolean`<a id="detailed-boolean"></a>
 
 Optional, increases frequency of data points for the total value and contribution charts if set to true
 
-##### frequency: `string`
+##### frequency: `string`<a id="frequency-string"></a>
 
 Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [PerformanceCustom](./models/performance-custom.ts)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/performance/custom` `GET`
 
@@ -1756,5 +1780,5 @@ Optional frequency for the rate of return chart (defaults to monthly). Possible 
 ---
 
 
-## Author
+## Author<a id="author"></a>
 This TypeScript package is automatically generated by [Konfig](https://konfigthis.com)

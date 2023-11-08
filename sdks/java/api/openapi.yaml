@@ -839,6 +839,20 @@ paths:
           - executed
           type: string
         style: form
+      - description: Number of days in the past to fetch the most recent orders. Defaults
+          to the last 90 days if no value is passed in.
+        explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          example: 30
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema
+        style: form
       - description: The ID of the account to get orders.
         explode: false
         in: path
@@ -865,7 +879,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Get history of orders placed in account
+      summary: List account orders
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -6834,6 +6848,10 @@ components:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema:
+      example: 30
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
       type: string
@@ -8480,6 +8498,13 @@ components:
           - open
           - executed
           type: string
+        days:
+          example: 30
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema
         accountId:
           format: uuid
           type: string
@@ -8493,6 +8518,7 @@ components:
       - userId
       - userSecret
       - state
+      - days
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes:
       additionalProperties: true

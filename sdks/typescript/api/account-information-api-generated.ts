@@ -268,15 +268,16 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * Fetch all recent orders from a user\'s account.
-         * @summary Get history of orders placed in account
+         * @summary List account orders
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account to get orders.
          * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+         * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrders: async (userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountOrders: async (userId: string, userSecret: string, accountId: string, state?: 'all' | 'open' | 'executed', days?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getUserAccountOrders', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -312,6 +313,10 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
             if (state !== undefined) {
                 localVarQueryParameter['state'] = state;
+            }
+
+            if (days !== undefined) {
+                localVarQueryParameter['days'] = days;
             }
 
 
@@ -613,13 +618,13 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
         },
         /**
          * Fetch all recent orders from a user\'s account.
-         * @summary Get history of orders placed in account
+         * @summary List account orders
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrders(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.state, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrders(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.state, requestParameters.days, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -709,7 +714,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
         /**
          * Fetch all recent orders from a user\'s account.
-         * @summary Get history of orders placed in account
+         * @summary List account orders
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -885,6 +890,13 @@ export type AccountInformationApiGetUserAccountOrdersRequest = {
     */
     readonly state?: 'all' | 'open' | 'executed'
     
+    /**
+    * Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+    * @type {number}
+    * @memberof AccountInformationApiGetUserAccountOrders
+    */
+    readonly days?: number
+    
 }
 
 /**
@@ -1046,7 +1058,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
 
     /**
      * Fetch all recent orders from a user\'s account.
-     * @summary Get history of orders placed in account
+     * @summary List account orders
      * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

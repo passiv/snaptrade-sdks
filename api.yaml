@@ -578,7 +578,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Get history of orders placed in account
+      summary: List account orders
       operationId: AccountInformation_getUserAccountOrders
       description: Fetch all recent orders from a user's account.
       parameters:
@@ -601,6 +601,14 @@ paths:
               - all
               - open
               - executed
+        - in: query
+          name: days
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 30
         - in: path
           name: accountId
           required: true

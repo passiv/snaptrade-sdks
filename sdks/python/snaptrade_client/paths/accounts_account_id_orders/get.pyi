@@ -91,6 +91,12 @@ class StateSchema(
     @schemas.classproperty
     def EXECUTED(cls):
         return cls("executed")
+
+
+class DaysSchema(
+    schemas.Int32Schema
+):
+    pass
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -102,6 +108,7 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'state': typing.Union[StateSchema, str, ],
+        'days': typing.Union[DaysSchema, decimal.Decimal, int, ],
     },
     total=False
 )
@@ -129,6 +136,12 @@ request_query_state = api_client.QueryParameter(
     name="state",
     style=api_client.ParameterStyle.FORM,
     schema=StateSchema,
+    explode=True,
+)
+request_query_days = api_client.QueryParameter(
+    name="days",
+    style=api_client.ParameterStyle.FORM,
+    schema=DaysSchema,
     explode=True,
 )
 # Path params
@@ -237,6 +250,7 @@ class BaseApi(api_client.Api):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
+        days: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -249,6 +263,8 @@ class BaseApi(api_client.Api):
             _query_params["userSecret"] = user_secret
         if state is not None:
             _query_params["state"] = state
+        if days is not None:
+            _query_params["days"] = days
         if account_id is not None:
             _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
@@ -269,7 +285,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get history of orders placed in account
+        List account orders
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -296,6 +312,7 @@ class BaseApi(api_client.Api):
             request_query_user_id,
             request_query_user_secret,
             request_query_state,
+            request_query_days,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -396,7 +413,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get history of orders placed in account
+        List account orders
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -423,6 +440,7 @@ class BaseApi(api_client.Api):
             request_query_user_id,
             request_query_user_secret,
             request_query_state,
+            request_query_days,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -489,6 +507,7 @@ class GetUserAccountOrders(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
+        days: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -503,6 +522,7 @@ class GetUserAccountOrders(BaseApi):
             user_secret=user_secret,
             account_id=account_id,
             state=state,
+            days=days,
         )
         return await self._aget_user_account_orders_oapg(
             query_params=args.query,
@@ -515,6 +535,7 @@ class GetUserAccountOrders(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
+        days: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -528,6 +549,7 @@ class GetUserAccountOrders(BaseApi):
             user_secret=user_secret,
             account_id=account_id,
             state=state,
+            days=days,
         )
         return self._get_user_account_orders_oapg(
             query_params=args.query,
@@ -543,6 +565,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
+        days: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -557,6 +580,7 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
             account_id=account_id,
             state=state,
+            days=days,
         )
         return await self._aget_user_account_orders_oapg(
             query_params=args.query,
@@ -569,6 +593,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
+        days: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -582,6 +607,7 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
             account_id=account_id,
             state=state,
+            days=days,
         )
         return self._get_user_account_orders_oapg(
             query_params=args.query,
