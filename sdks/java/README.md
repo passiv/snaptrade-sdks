@@ -227,6 +227,8 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Account](docs/Account.md)
+ - [AccountBalance](docs/AccountBalance.md)
+ - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
@@ -234,6 +236,7 @@ Class | Method | HTTP request | Description
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [Action](docs/Action.md)
+ - [Amount](docs/Amount.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)

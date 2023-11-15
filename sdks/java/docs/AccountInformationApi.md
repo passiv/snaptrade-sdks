@@ -258,6 +258,7 @@ public class Example {
       System.out.println(result.getMeta());
       System.out.println(result.getCashRestrictions());
       System.out.println(result.getSyncStatus());
+      System.out.println(result.getBalance());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
       System.err.println("Status code: " + e.getStatusCode());

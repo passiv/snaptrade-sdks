@@ -2217,11 +2217,33 @@ components:
           type: string
           x-konfig-original-example: 2022-01-24
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+    AccountBalance:
+      description: Balance of the account
+      example:
+        total: null
+      properties:
+        total:
+          $ref: '#/components/schemas/AccountBalance_total'
+    Amount:
+      description: Total Value of the account
+      properties:
+        amount:
+          example: 15363.23
+          type: number
+          x-konfig-original-example: 15363.23
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-amount
+        currency:
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-currency
     Account:
       additionalProperties: true
       description: SnapTradeUser Investment Account
       example:
         number: Q6542138443
+        balance:
+          total: null
         brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
         meta:
           type: Margin
@@ -2304,6 +2326,8 @@ components:
           type: array
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
+        balance:
+          $ref: '#/components/schemas/AccountBalance'
       type: object
       x-konfig-is-used-in-successful-response: true
     AccountSimple:
@@ -5881,6 +5905,8 @@ components:
         cash: 1.11
         account:
           number: Q6542138443
+          balance:
+            total: null
           brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
           meta:
             type: Margin
@@ -5984,6 +6010,8 @@ components:
           cash: 1.11
           account:
             number: Q6542138443
+            balance:
+              total: null
             brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
             meta:
               type: Margin
@@ -6881,6 +6909,14 @@ components:
     konfig-generated-schema-components-schemas-CashRestriction-properties-amount:
       example: 100
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Amount-properties-amount:
+      example: 15363.23
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Amount-properties-currency:
+      example: USD
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-name:
       example: Registered Retirement Savings Account
@@ -9234,6 +9270,12 @@ components:
       - order_type
       - time_in_force
       type: object
+    AccountBalance_total:
+      allOf:
+      - $ref: '#/components/schemas/Amount'
+      description: "Total value of this account (includes cash, equity, fixed income,\
+        \ etc)"
+      nullable: true
     OptionsPosition_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

@@ -34,6 +34,8 @@ module SnapTrade
 
     attr_accessor :sync_status
 
+    attr_accessor :balance
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -46,7 +48,8 @@ module SnapTrade
         :'created_date' => :'created_date',
         :'meta' => :'meta',
         :'cash_restrictions' => :'cash_restrictions',
-        :'sync_status' => :'sync_status'
+        :'sync_status' => :'sync_status',
+        :'balance' => :'balance'
       }
     end
 
@@ -67,7 +70,8 @@ module SnapTrade
         :'created_date' => :'String',
         :'meta' => :'Hash<String, Object>',
         :'cash_restrictions' => :'Array<CashRestriction>',
-        :'sync_status' => :'AccountSyncStatus'
+        :'sync_status' => :'AccountSyncStatus',
+        :'balance' => :'AccountBalance'
       }
     end
 
@@ -135,6 +139,10 @@ module SnapTrade
       if attributes.key?(:'sync_status')
         self.sync_status = attributes[:'sync_status']
       end
+
+      if attributes.key?(:'balance')
+        self.balance = attributes[:'balance']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -164,7 +172,8 @@ module SnapTrade
           created_date == o.created_date &&
           meta == o.meta &&
           cash_restrictions == o.cash_restrictions &&
-          sync_status == o.sync_status
+          sync_status == o.sync_status &&
+          balance == o.balance
     end
 
     # @see the `==` method
@@ -176,7 +185,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, portfolio_group, name, number, institution_name, created_date, meta, cash_restrictions, sync_status].hash
+      [id, brokerage_authorization, portfolio_group, name, number, institution_name, created_date, meta, cash_restrictions, sync_status, balance].hash
     end
 
     # Builds the object from hash

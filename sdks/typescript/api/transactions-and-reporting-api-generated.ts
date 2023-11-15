@@ -55,6 +55,7 @@ import { UniversalActivity } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * TransactionsAndReportingApi - axios parameter creator

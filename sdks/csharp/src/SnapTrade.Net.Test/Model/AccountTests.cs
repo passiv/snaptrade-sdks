@@ -137,6 +137,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'SyncStatus'
         }
+        /// <summary>
+        /// Test the property 'Balance'
+        /// </summary>
+        [Fact]
+        public void BalanceTest()
+        {
+            // TODO unit test for the property 'Balance'
+        }
 
     }
 

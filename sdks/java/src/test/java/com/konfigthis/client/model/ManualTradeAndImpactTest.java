@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Account;
+import com.konfigthis.client.model.AccountBalance;
 import com.konfigthis.client.model.AccountSyncStatus;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.CashRestriction;

@@ -47,6 +47,7 @@ import { SymbolQuery } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ReferenceDataApi - axios parameter creator

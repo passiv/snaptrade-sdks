@@ -111,11 +111,14 @@ public class JSON {
             }
         });
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Account.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountBalance.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountBalanceTotal.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountHoldings.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountHoldingsAccount.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountOrderRecord.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountSimple.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.AccountSyncStatus.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Amount.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Balance.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Brokerage.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorization.CustomTypeAdapterFactory());

@@ -40,6 +40,7 @@ from snaptrade_client.model.manual_trade_balance import ManualTradeBalance as Ma
 from snaptrade_client.model.time_in_force import TimeInForce as TimeInForceSchema
 from snaptrade_client.model.account_meta import AccountMeta as AccountMetaSchema
 from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
+from snaptrade_client.model.account_balance import AccountBalance as AccountBalanceSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
@@ -55,6 +56,7 @@ from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.account_meta import AccountMeta
+from snaptrade_client.type.account_balance import AccountBalance
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse

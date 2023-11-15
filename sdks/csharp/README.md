@@ -141,12 +141,15 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Account](docs/Account.md)
+ - [AccountBalance](docs/AccountBalance.md)
+ - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [Amount](docs/Amount.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)

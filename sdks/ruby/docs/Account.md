@@ -14,6 +14,7 @@
 | **meta** | **Hash&lt;String, Object&gt;** |  | [optional] |
 | **cash_restrictions** | [**Array&lt;CashRestriction&gt;**](CashRestriction.md) |  | [optional] |
 | **sync_status** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] |
+| **balance** | [**AccountBalance**](AccountBalance.md) |  | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = SnapTrade::Account.new(
   created_date: 2021-06-04T16:26:46.523Z,
   meta: {&quot;type&quot;:&quot;Margin&quot;,&quot;status&quot;:&quot;ACTIVE&quot;,&quot;institution_name&quot;:&quot;Alpaca&quot;},
   cash_restrictions: null,
-  sync_status: null
+  sync_status: null,
+  balance: null
 )
 ```
 
