@@ -21,6 +21,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { Status } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ApiStatusApi - axios parameter creator

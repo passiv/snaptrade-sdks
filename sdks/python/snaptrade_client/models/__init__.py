@@ -12,6 +12,7 @@
 # sys.setrecursionlimit(n)
 
 from snaptrade_client.model.account import Account
+from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.model.account_ids import AccountIDs
@@ -21,6 +22,7 @@ from snaptrade_client.model.account_order_record_status import AccountOrderRecor
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.amount import Amount
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_auth_ids import BrokerageAuthIDs

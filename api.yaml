@@ -1990,6 +1990,23 @@ components:
           type: boolean
         last_successful_sync:
           $ref: "#/components/schemas/SyncStatusDate"
+    AccountBalance:
+      description: Balance of the account
+      properties:
+        total:
+          description: Total value of this account (includes cash, equity, fixed income, etc)
+          nullable: true
+          allOf:
+           - $ref: "#/components/schemas/Amount"
+    Amount:
+      description: Total Value of the account
+      properties:
+        amount:
+          type: number
+          example: 15363.23
+        currency:
+          type: string
+          example: USD
     Account:
       description: SnapTradeUser Investment Account
       type: object
@@ -2024,6 +2041,8 @@ components:
             $ref: "#/components/schemas/CashRestriction"
         sync_status:
           $ref: "#/components/schemas/AccountSyncStatus"
+        balance:
+          $ref: "#/components/schemas/AccountBalance"
     AccountSimple:
       description: SnapTradeUser Investment Account
       type: object

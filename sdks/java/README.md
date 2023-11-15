@@ -1,6 +1,6 @@
 # snaptrade-java-sdk
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.4-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.4)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.5-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.5)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>4.13.4</version>
+  <version>4.13.5</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:4.13.4"
+   implementation "com.konfigthis:snaptrade-java-sdk:4.13.5"
 }
 ```
 
@@ -93,7 +93,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-4.13.4.jar`
+* `target/snaptrade-java-sdk-4.13.5.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -227,6 +227,8 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Account](docs/Account.md)
+ - [AccountBalance](docs/AccountBalance.md)
+ - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
@@ -234,6 +236,7 @@ Class | Method | HTTP request | Description
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [Action](docs/Action.md)
+ - [Amount](docs/Amount.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)

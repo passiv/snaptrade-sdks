@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import com.konfigthis.client.model.Account;
+import com.konfigthis.client.model.AccountBalance;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;

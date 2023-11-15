@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-4.0.4-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/4.0.4)
+[![NuGet](https://img.shields.io/badge/NuGet-4.0.5-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/4.0.5)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -141,12 +141,15 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Account](docs/Account.md)
+ - [AccountBalance](docs/AccountBalance.md)
+ - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [Amount](docs/Amount.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)

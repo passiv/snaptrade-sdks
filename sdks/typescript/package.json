@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "8.29.4",
+  "version": "8.29.5",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",
-    "@types/node": "^12.11.5",
+    "@types/node": "^18",
     "jest": "^29.3.1",
     "ts-jest": "^29.0.3",
     "ts-loader": "^9.4.4",

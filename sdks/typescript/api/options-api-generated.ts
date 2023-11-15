@@ -71,6 +71,7 @@ import { TimeInForce } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * OptionsApi - axios parameter creator

@@ -21,6 +21,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { Account } from '../models';
 // @ts-ignore
+import { AccountBalance } from '../models';
+// @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
 import { AccountOrderRecordStatus } from '../models';
@@ -71,6 +73,7 @@ import { UnderlyingSymbol } from '../models';
 // @ts-ignore
 import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * TradingApi - axios parameter creator

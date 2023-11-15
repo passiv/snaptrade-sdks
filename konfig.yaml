@@ -114,7 +114,7 @@ readmeHeader:
   url: https://snaptrade.com
 additionalGenerators:
   php7:
-    version: 1.4.4
+    version: 1.4.5
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -129,7 +129,7 @@ additionalGenerators:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 1.17.5
+    version: 1.17.6
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -140,7 +140,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 1.26.4
+    version: 1.26.5
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -152,7 +152,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 4.0.4
+    version: 4.0.5
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -163,7 +163,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 4.13.4
+    version: 4.13.5
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -177,7 +177,7 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 10.34.6
+    version: 10.34.7
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -194,7 +194,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 8.29.4
+    version: 8.29.5
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

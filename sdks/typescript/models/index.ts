@@ -1,4 +1,6 @@
 export * from './account';
+export * from './account-balance';
+export * from './account-balance-total';
 export * from './account-holdings';
 export * from './account-holdings-account';
 export * from './account-order-record';
@@ -6,6 +8,7 @@ export * from './account-order-record-status';
 export * from './account-simple';
 export * from './account-sync-status';
 export * from './action';
+export * from './amount';
 export * from './authentication-login-snap-trade-user200-response';
 export * from './balance';
 export * from './brokerage';

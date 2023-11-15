@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.17.5'
+gem 'snaptrade', '~> 1.17.6'
 ```
 
 ## Getting Started
@@ -91,6 +91,8 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [SnapTrade::Account](docs/Account.md)
+ - [SnapTrade::AccountBalance](docs/AccountBalance.md)
+ - [SnapTrade::AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [SnapTrade::AccountHoldings](docs/AccountHoldings.md)
  - [SnapTrade::AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [SnapTrade::AccountOrderRecord](docs/AccountOrderRecord.md)
@@ -98,6 +100,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::AccountSimple](docs/AccountSimple.md)
  - [SnapTrade::AccountSyncStatus](docs/AccountSyncStatus.md)
  - [SnapTrade::Action](docs/Action.md)
+ - [SnapTrade::Amount](docs/Amount.md)
  - [SnapTrade::AuthType](docs/AuthType.md)
  - [SnapTrade::AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [SnapTrade::Balance](docs/Balance.md)

@@ -27,6 +27,7 @@ import { BrokerageType } from '../models';
 // @ts-ignore
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * ConnectionsApi - axios parameter creator

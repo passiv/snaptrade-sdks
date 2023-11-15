@@ -41,6 +41,7 @@ import { SnapTradeRegisterUserRequestBody } from '../models';
 // @ts-ignore
 import { UserIDandSecret } from '../models';
 import { paginate } from "../pagination/paginate";
+import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
 /**
  * AuthenticationApi - axios parameter creator

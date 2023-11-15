@@ -17,6 +17,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Account;
+import com.konfigthis.client.model.AccountBalance;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.AccountSyncStatus;

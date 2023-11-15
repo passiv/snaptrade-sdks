@@ -124,6 +124,7 @@ class TradeImpact(
         )
 
 from snaptrade_client.model.account import Account
+from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_meta import AccountMeta
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.cash_restriction import CashRestriction
