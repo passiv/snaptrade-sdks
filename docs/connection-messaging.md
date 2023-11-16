@@ -43,4 +43,4 @@ window.addEventListener(
 );
 ```
 
-2. Using React Native in WebView: In this scenario, partners can use the `WebView` component to display a webpage, and then use the `onMessage` prop to listen for message events. The code might look something like this:
+2. Using React Native in WebView: In this scenario, partners can use the `WebView` component to display a webpage, and then use the `onMessage` prop to listen for message events.
