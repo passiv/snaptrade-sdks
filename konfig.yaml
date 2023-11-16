@@ -112,6 +112,7 @@ readmeHeader:
   title: SnapTrade
   image: header.png
   url: https://snaptrade.com
+useSecurityKeyName: true
 additionalGenerators:
   php7:
     version: 1.4.5
