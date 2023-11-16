@@ -1,6 +1,6 @@
 # SnapTrade Connection Messaging: Handling Connection Messages on the Client-side
 
-SnapTrade provides two main types of messages to facilitate the integration of its services into applications. These messages include `SUCCESS` and `ERROR` messages, as well as a `CLOSED` message for users who decide not to continue with the connection process. The way in which these messages can be accessed depends on the implementation being used.
+SnapTrade provides two main types of messages to facilitate the integration of its services. These messages include `SUCCESS` and `ERROR` messages, as well as a `CLOSED` message for users who decide not to continue with the connection process. The way in which these messages can be accessed depends on the implementation being used.
 
 Implementation 1 - Using the [snaptrade-react](https://www.npmjs.com/package/snaptrade-react) SDK(iframe implementation):
 
