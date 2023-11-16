@@ -18,41 +18,31 @@ Used to return holdings for a specific account a user has connected in the follo
 }
 ```
 
-Pros:
+Use for: Fetch Account Metadata, Positions, Balances and Orders with one API call.
 
-- Can fetch all relevant account info in one api call
+Note that this endpoint can provide a slower response compared to calling only what you need individually. If looking to instead fetch only Positions, Balances or Orders separately, you can split up the calls with the endpoints listed below. These endpoints are meant to be used independently and don’t require to call the holdings endpoint in addition to them. The information returned from the holdings endpoint is also available in these endpoints.
 
-Cons:
-
-- Can be slower response compared to calling only what you need individually
-
-Tips:
-
-- If looking to instead fetch holdings info in parts, you can split up the calls with the endpoints listed below. No reason to use the below endpoints in addition to the holdings endpoint, since information returned from below endpoint is already available in the holdings call
 
 :api[AccountInformation_listUserAccounts]
 
-Returns a list of all the accounts a user has connected
+Returns a list of all the accounts a user has connected as well as the associated Metadata.
 
-Pros:
+Use for: Quickest way to get info on that brokerage accounts a user has access to.
 
-- Quickest way to get info on that brokerage accounts a user has access to
 
 :api[AccountInformation_getUserAccountBalance]
 
-Returns a list of all cash balances associated with the account id supplied, as well as what currency the balance is in
+Returns a list of all cash balances associated with the account id supplied, as well as what currency the balance is in.
 
-Pros:
+Use for: Fetching only the cash balances in a user’s account.
 
-- Quickest way to see what balances a user's account currently has
 
 :api[AccountInformation_getUserAccountPositions]
 
 Returns a list of all positions associated with the account id supplied, as well as information on the security (current price, ticker, exchange, average purchase price, etc)
 
-Pros:
+Use for: Quickest way to see what positions a user's account currently has.
 
-- Quickest way to see what positions a user's account currently has
 
 # Orders, Transactions, Activities
 
