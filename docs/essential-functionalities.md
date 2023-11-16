@@ -1,4 +1,4 @@
-# Essential Functionality
+# Essential Functionalities
 
 This section describes required functionalities for your implementation of SnapTrade to avoid product issues and ensure that your users have the best possible experience. 
 
