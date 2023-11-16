@@ -44,7 +44,7 @@ Example payload is below:
 
 ## CONNECTION_ATTEMPTED
 
-Created when a user a user attempts to connect an account, will also report the result of the attempt.
+Created when a user a user attempts to make a brokerage connection, will also report the result of the attempt.
 
 Example payload is below:
 
@@ -171,7 +171,7 @@ Example payload is below:
 
 ## CONNECTION_FAILED
 
-Sent when a user attempt to connect to a brokerage has failed.
+Sent when a user’s attempt to connect to a brokerage has failed.
 
 Example payload is below:
 
@@ -188,7 +188,7 @@ Example payload is below:
 
 ## NEW_ACCOUNT_AVAILABLE
 
-Created when a new account is detected through your brokerage connection.
+Created when a new account is detected through a brokerage connection.
 
 Example payload is below:
 
