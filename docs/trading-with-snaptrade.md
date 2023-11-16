@@ -11,9 +11,9 @@
 1. Find the universal_symbol_id of the security you want to trade using :api[ReferenceData_symbolSearchUserAccount] with the users account  
    This will lookup tradeable securities based on the account you want to place the trade in. You will need to use this id in step 2.
 2. Either:  
-   Use order impact (to see how it affects the account) :api[Trading_getOrderImpact] 
+   Use order impact to present the user with the information needed to confirm the trade, as well as check to make sure the trade is valid: :api[Trading_getOrderImpact] 
    After getting impact, you use this endpoint to place the trade with the trade id: :api[Trading_placeOrder]  
-   OR  
+   OR
    If you don't want to have any validation or impact check you can use this endpoint instead of impact/place: :api[Trading_placeForceOrder] 
 
 ## Create a trading connection
