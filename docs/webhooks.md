@@ -252,3 +252,17 @@ We send 1 webhook regardless of how many new trades are identified in your accou
 Please contact us in order to receive these webhooks as they are disabled by default.
 
 Example payload is below:
+```json
+{
+  "userId": "vAzgPrUHizYheZVi_WEALTHSIMPLETRADE_oiuzalkd",
+  "clientId": "PARTNERAPP",
+  "webookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
+  "accountId": "45a2g56a-eef6-4904-a68e-d3f90c3e07c5",
+  "eventType": "TRADES_PLACED",
+  "webhookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
+  "brokerageId": "905872ac-a7b1-4031-a31f-790cba1bfc94",
+  "webhookSecret": "yfqvPlWrTFILBcjCERPh",
+  "eventTimestamp": "2023-03-01T14:38:13.111991+00:00",
+  "brokerageAuthorizationId": "6bb0ahb0-b8c8-4b59-8bf9-7841d7a89c63"
+}
+```
