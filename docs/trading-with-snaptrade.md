@@ -4,7 +4,7 @@
 
 > 🚧 Soft Rate Limit
 >
-> We ask that you limit trade requests to five (5) at a time. Every brokerage varies but we have found anything beyond five may be subject to issues.
+> We recommend that you limit trade requests to 1 trade per second per account to maximize the chances that they are all executed without error.
 
 
 
