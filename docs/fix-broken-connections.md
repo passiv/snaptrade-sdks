@@ -11,7 +11,7 @@ When an access token is no longer valid, SnapTrade considered this to be a _brok
 
 # Required Functionalities
 
-It is important that users are directed to _fix connections_ rather than they create new ones. Using the Connection Portal in the normal manner will create new connections, which will have a different connection id and different account ids if successful, as well as will leave the broken connection to remain.
+It is important that users are directed to _fix connections_ rather than they create new ones. This allows you to provide a better experience to the user, minimize the number of disabled connections you are managing, and retain historical session data. Using the Connection Portal in the normal manner will create new connections, which will have a different connection id and different account ids if successful, as well as will leave the broken connection to remain.
 
 It is a requirement to implement the ability to reconnect so that connections can be fixed. There are mechanisms available to be notified when connections break, either through a) [webhooks](/docs/webhooks) as described below, or b) by polling the brokerage authorizations endpoint (:api[Connections_listBrokerageAuthorizations]) for each user and checking the `disabled` status. When `disabled == true`, the connection is broken and the user must take an action to fix it.
 
