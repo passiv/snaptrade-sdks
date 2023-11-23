@@ -36,8 +36,8 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
-            - id: recommended-functionality
-              path: docs/recommended-functionality.md
+            - id: essential-functionalities
+              path: docs/essential-functionalities.md
             - id: recommended-endpoints-to-get-started
               path: docs/recommended-endpoints-to-get-started.md
             - id: request-ids
