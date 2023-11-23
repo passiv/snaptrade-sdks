@@ -1,6 +1,6 @@
 # Webhooks
 
-The SnapTrade API can be configured to send you webhook notifications when certain events happen in our backend.
+The SnapTrade API can be configured to send you webhook notifications when certain events happen.
 
 To get started with webhooks, contact your Customer Success Manager. They will need the URL of your webhook handler for webhook notifications to begin to be sent.
 
@@ -44,7 +44,7 @@ Example payload is below:
 
 ## CONNECTION_ATTEMPTED
 
-Created when a user a user attempts to connect an account, will also report the result of the attempt.
+Created when a user a user attempts to make a brokerage connection, will also report the result of the attempt.
 
 Example payload is below:
 
@@ -171,7 +171,7 @@ Example payload is below:
 
 ## CONNECTION_FAILED
 
-Sent when a user attempt to connect to a brokerage has failed.
+Sent when a user’s attempt to connect to a brokerage has failed.
 
 Example payload is below:
 
@@ -188,7 +188,7 @@ Example payload is below:
 
 ## NEW_ACCOUNT_AVAILABLE
 
-Created when a new account is detected through your brokerage connection.
+Created when a new account is detected through a brokerage connection.
 
 Example payload is below:
 
@@ -252,3 +252,17 @@ We send 1 webhook regardless of how many new trades are identified in your accou
 Please contact us in order to receive these webhooks as they are disabled by default.
 
 Example payload is below:
+```json
+{
+  "userId": "vAzgPrUHizYheZVi_WEALTHSIMPLETRADE_oiuzalkd",
+  "clientId": "PARTNERAPP",
+  "webookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
+  "accountId": "45a2g56a-eef6-4904-a68e-d3f90c3e07c5",
+  "eventType": "TRADES_PLACED",
+  "webhookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
+  "brokerageId": "905872ac-a7b1-4031-a31f-790cba1bfc94",
+  "webhookSecret": "yfqvPlWrTFILBcjCERPh",
+  "eventTimestamp": "2023-03-01T14:38:13.111991+00:00",
+  "brokerageAuthorizationId": "6bb0ahb0-b8c8-4b59-8bf9-7841d7a89c63"
+}
+```
