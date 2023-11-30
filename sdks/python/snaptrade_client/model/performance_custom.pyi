@@ -609,14 +609,9 @@ class PerformanceCustom(
             **kwargs,
         )
 
-from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.dividend_at_date import DividendAtDate
-from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.past_value import PastValue
 from snaptrade_client.model.performance_custom_bad_tickers import PerformanceCustomBadTickers
-from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate
-from snaptrade_client.model.universal_symbol import UniversalSymbol

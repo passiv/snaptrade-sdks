@@ -6,9 +6,9 @@ A trade object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] 
-**Account** | **Account** |  | [optional] 
-**Symbol** | **BrokerageSymbol** |  | [optional] 
-**UniversalSymbol** | **UniversalSymbol** |  | [optional] 
+**Account** | [**Account**](Account.md) |  | [optional] 
+**Symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] 
+**UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **_Action** | **string** |  | [optional] 
 **Units** | **int** |  | [optional] 
 **Price** | **double** |  | [optional] 

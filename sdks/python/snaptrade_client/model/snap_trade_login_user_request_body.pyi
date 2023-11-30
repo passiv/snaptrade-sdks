@@ -55,12 +55,27 @@ class SnapTradeLoginUserRequestBody(
                 @schemas.classproperty
                 def TRADE(cls):
                     return cls("trade")
+            
+            
+            class connectionPortalVersion(
+                schemas.EnumBase,
+                schemas.StrSchema
+            ):
+                
+                @schemas.classproperty
+                def V2(cls):
+                    return cls("v2")
+                
+                @schemas.classproperty
+                def V3(cls):
+                    return cls("v3")
             __annotations__ = {
                 "broker": broker,
                 "immediateRedirect": immediateRedirect,
                 "customRedirect": customRedirect,
                 "reconnect": reconnect,
                 "connectionType": connectionType,
+                "connectionPortalVersion": connectionPortalVersion,
             }
     
     @typing.overload
@@ -79,9 +94,12 @@ class SnapTradeLoginUserRequestBody(
     def __getitem__(self, name: typing_extensions.Literal["connectionType"]) -> MetaOapg.properties.connectionType: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> MetaOapg.properties.connectionPortalVersion: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "connectionPortalVersion", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -102,9 +120,12 @@ class SnapTradeLoginUserRequestBody(
     def get_item_oapg(self, name: typing_extensions.Literal["connectionType"]) -> typing.Union[MetaOapg.properties.connectionType, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> typing.Union[MetaOapg.properties.connectionPortalVersion, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "connectionPortalVersion", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -116,6 +137,7 @@ class SnapTradeLoginUserRequestBody(
         customRedirect: typing.Union[MetaOapg.properties.customRedirect, str, schemas.Unset] = schemas.unset,
         reconnect: typing.Union[MetaOapg.properties.reconnect, str, schemas.Unset] = schemas.unset,
         connectionType: typing.Union[MetaOapg.properties.connectionType, str, schemas.Unset] = schemas.unset,
+        connectionPortalVersion: typing.Union[MetaOapg.properties.connectionPortalVersion, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SnapTradeLoginUserRequestBody':
@@ -127,6 +149,7 @@ class SnapTradeLoginUserRequestBody(
             customRedirect=customRedirect,
             reconnect=reconnect,
             connectionType=connectionType,
+            connectionPortalVersion=connectionPortalVersion,
             _configuration=_configuration,
             **kwargs,
         )

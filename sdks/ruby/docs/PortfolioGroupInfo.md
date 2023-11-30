@@ -14,7 +14,7 @@
 | **calculated_trades** | [**Array&lt;CalculatedTrade&gt;**](CalculatedTrade.md) |  | [optional] |
 | **brokerage_authorizations** | [**Array&lt;BrokerageAuthorization&gt;**](BrokerageAuthorization.md) |  | [optional] |
 | **accuracy** | **Float** |  | [optional] |
-| **settings** | **PortfolioGroupSettings** |  | [optional] |
+| **settings** | [**PortfolioGroupSettings**](PortfolioGroupSettings.md) |  | [optional] |
 
 ## Example
 

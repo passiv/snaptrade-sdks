@@ -267,17 +267,19 @@ module SnapTrade
     # @param broker [String] Slug of the brokerage to connect the user to
     # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     # @param connection_type [ConnectionType] 
+    # @param connection_portal_version [ConnectionPortalVersion] 
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
+    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
       _body[:customRedirect] = custom_redirect if custom_redirect != SENTINEL
       _body[:reconnect] = reconnect if reconnect != SENTINEL
       _body[:connectionType] = connection_type if connection_type != SENTINEL
+      _body[:connectionPortalVersion] = connection_portal_version if connection_portal_version != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
       data, _status_code, _headers = login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
       data
@@ -290,17 +292,19 @@ module SnapTrade
     # @param broker [String] Slug of the brokerage to connect the user to
     # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     # @param connection_type [ConnectionType] 
+    # @param connection_portal_version [ConnectionPortalVersion] 
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, extra: {})
+    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
       _body[:customRedirect] = custom_redirect if custom_redirect != SENTINEL
       _body[:reconnect] = reconnect if reconnect != SENTINEL
       _body[:connectionType] = connection_type if connection_type != SENTINEL
+      _body[:connectionPortalVersion] = connection_portal_version if connection_portal_version != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
       login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
     end

@@ -13,24 +13,19 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.cancelled_units import CancelledUnits
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.filled_units import FilledUnits
 from snaptrade_client.type.open_units import OpenUnits
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
-from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.time_in_force import TimeInForce
-from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.type.universal_symbol import UniversalSymbol
-from snaptrade_client.type.us_exchange import USExchange
 
 class RequiredAccountOrderRecord(TypedDict):
     pass

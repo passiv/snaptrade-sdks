@@ -176,9 +176,5 @@ class SnapTradeHoldingsAccount(
         )
 
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
-from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
-from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta

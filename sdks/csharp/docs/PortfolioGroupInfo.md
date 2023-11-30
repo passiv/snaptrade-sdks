@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **CalculatedTrades** | [**List&lt;CalculatedTrade&gt;**](CalculatedTrade.md) |  | [optional] 
 **BrokerageAuthorizations** | [**List&lt;BrokerageAuthorization&gt;**](BrokerageAuthorization.md) |  | [optional] 
 **Accuracy** | **double** |  | [optional] 
-**Settings** | **PortfolioGroupSettings** |  | [optional] 
+**Settings** | [**PortfolioGroupSettings**](PortfolioGroupSettings.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

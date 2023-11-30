@@ -163,7 +163,6 @@ class ManualTrade(
         )
 
 from snaptrade_client.model.action import Action
-from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price

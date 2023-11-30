@@ -88,9 +88,10 @@ class BaseApi(api_client.Api):
     async def _acheck_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -123,6 +124,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -187,7 +189,7 @@ class BaseApi(api_client.Api):
     def _check_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -257,6 +259,7 @@ class Check(BaseApi):
 
     async def acheck(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -266,6 +269,7 @@ class Check(BaseApi):
         args = self._check_mapped_args(
         )
         return await self._acheck_oapg(
+            **kwargs,
         )
     
     def check(
@@ -285,6 +289,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -294,6 +299,7 @@ class ApiForget(BaseApi):
         args = self._check_mapped_args(
         )
         return await self._acheck_oapg(
+            **kwargs,
         )
     
     def get(

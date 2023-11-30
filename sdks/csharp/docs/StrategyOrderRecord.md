@@ -5,7 +5,7 @@ Strategy order record
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Strategy** | **OptionStrategy** |  | [optional] 
+**Strategy** | [**OptionStrategy**](OptionStrategy.md) |  | [optional] 
 **Status** | **string** |  | [optional] 
 **FilledQuantity** | **double** |  | [optional] 
 **OpenQuantity** | **double** |  | [optional] 

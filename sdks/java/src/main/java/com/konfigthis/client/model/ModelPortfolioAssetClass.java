@@ -23,8 +23,6 @@ import com.konfigthis.client.model.ModelAssetClass;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -93,10 +91,10 @@ public class ModelPortfolioAssetClass {
 
 
   public ModelPortfolioAssetClass percent(Integer percent) {
-    if (percent < 0) {
+    if (percent != null && percent < 0) {
       throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
     }
-    if (percent > 100) {
+    if (percent != null && percent > 100) {
       throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
     }
     
@@ -120,10 +118,10 @@ public class ModelPortfolioAssetClass {
 
 
   public void setPercent(Integer percent) {
-    if (percent < 0) {
+    if (percent != null && percent < 0) {
       throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
     }
-    if (percent > 100) {
+    if (percent != null && percent > 100) {
       throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
     }
     

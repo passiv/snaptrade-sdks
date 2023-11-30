@@ -13,7 +13,7 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.sync_status_date import SyncStatusDate
 

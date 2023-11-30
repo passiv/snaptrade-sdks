@@ -5,8 +5,8 @@ Impact of a group of trade
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | **Account** |  | [optional] 
-**Currency** | **Currency** |  | [optional] 
+**Account** | [**Account**](Account.md) |  | [optional] 
+**Currency** | [**Currency**](Currency.md) |  | [optional] 
 **RemainingCash** | **double** | Remaining balance after executing all trades | [optional] 
 **EstimatedCommissions** | **double** | Total estimated commissions across all trades to make | [optional] 
 **ForexFees** | **double** | Estimated forex fees to pay to excute trades | [optional] 

@@ -28,7 +28,6 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.DeleteUserResponse;
 import com.konfigthis.client.model.EncryptedResponse;
-import com.konfigthis.client.model.EncryptedResponseEncryptedMessageData;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -656,6 +655,7 @@ public class AuthenticationApiGenerated {
         private String customRedirect;
         private String reconnect;
         private String connectionType;
+        private String connectionPortalVersion;
 
         private LoginSnapTradeUserRequestBuilder(String userId, String userSecret) {
             this.userId = userId;
@@ -694,7 +694,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set reconnect
-         * @param reconnect The UUID of the brokerage connection to be reconnected (optional)
+         * @param reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information. (optional)
          * @return LoginSnapTradeUserRequestBuilder
          */
         public LoginSnapTradeUserRequestBuilder reconnect(String reconnect) {
@@ -709,6 +709,16 @@ public class AuthenticationApiGenerated {
          */
         public LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {
             this.connectionType = connectionType;
+            return this;
+        }
+        
+        /**
+         * Set connectionPortalVersion
+         * @param connectionPortalVersion Sets the version of the connection portal to render, with a default to &#39;v2&#39; (optional)
+         * @return LoginSnapTradeUserRequestBuilder
+         */
+        public LoginSnapTradeUserRequestBuilder connectionPortalVersion(String connectionPortalVersion) {
+            this.connectionPortalVersion = connectionPortalVersion;
             return this;
         }
         
@@ -737,6 +747,8 @@ public class AuthenticationApiGenerated {
             snapTradeLoginUserRequestBody.reconnect(this.reconnect);
             if (this.connectionType != null)
             snapTradeLoginUserRequestBody.connectionType(SnapTradeLoginUserRequestBody.ConnectionTypeEnum.fromValue(this.connectionType));
+            if (this.connectionPortalVersion != null)
+            snapTradeLoginUserRequestBody.connectionPortalVersion(SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.fromValue(this.connectionPortalVersion));
             return snapTradeLoginUserRequestBody;
         }
 

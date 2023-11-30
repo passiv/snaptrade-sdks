@@ -32,16 +32,10 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.exchange import Exchange as ExchangeSchema
 from snaptrade_client.model.symbol_query import SymbolQuery as SymbolQuerySchema
-from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
-from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.symbol_query import SymbolQuery
-from snaptrade_client.type.exchange import Exchange
-from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 from . import path
@@ -149,10 +143,11 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -201,6 +196,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -266,7 +262,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -355,6 +351,7 @@ class GetSymbols(BaseApi):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -367,6 +364,7 @@ class GetSymbols(BaseApi):
         )
         return await self._aget_symbols_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def get_symbols(
@@ -393,6 +391,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -405,6 +404,7 @@ class ApiForpost(BaseApi):
         )
         return await self._aget_symbols_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def post(

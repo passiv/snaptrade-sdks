@@ -32,47 +32,25 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.exchange import Exchange as ExchangeSchema
+from snaptrade_client.model.action import Action as ActionSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
 from snaptrade_client.model.time_in_force import TimeInForce as TimeInForceSchema
-from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
+from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
 from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
-from snaptrade_client.model.action import Action as ActionSchema
-from snaptrade_client.model.options_symbol import OptionsSymbol as OptionsSymbolSchema
-from snaptrade_client.model.filled_units import FilledUnits as FilledUnitsSchema
-from snaptrade_client.model.cancelled_units import CancelledUnits as CancelledUnitsSchema
-from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
-from snaptrade_client.model.underlying_symbol import UnderlyingSymbol as UnderlyingSymbolSchema
-from snaptrade_client.model.us_exchange import USExchange as USExchangeSchema
-from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
-from snaptrade_client.model.open_units import OpenUnits as OpenUnitsSchema
-from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus as AccountOrderRecordStatusSchema
 
-from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.type.action import Action
 from snaptrade_client.type.time_in_force import TimeInForce
-from snaptrade_client.type.security_type import SecurityType
-from snaptrade_client.type.filled_units import FilledUnits
+from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.stop_price import StopPrice
-from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
+from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.order_type import OrderType
-from snaptrade_client.type.action import Action
-from snaptrade_client.type.cancelled_units import CancelledUnits
-from snaptrade_client.type.options_symbol import OptionsSymbol
-from snaptrade_client.type.manual_trade_form import ManualTradeForm
-from snaptrade_client.type.exchange import Exchange
-from snaptrade_client.type.us_exchange import USExchange
-from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
-from snaptrade_client.type.open_units import OpenUnits
-from snaptrade_client.type.universal_symbol import UniversalSymbol
-from snaptrade_client.type.account_order_record import AccountOrderRecord
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -254,10 +232,11 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -323,6 +302,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -384,7 +364,7 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -495,6 +475,7 @@ class PlaceForceOrder(BaseApi):
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -517,6 +498,7 @@ class PlaceForceOrder(BaseApi):
         return await self._aplace_force_order_oapg(
             body=args.body,
             query_params=args.query,
+            **kwargs,
         )
     
     def place_force_order(
@@ -573,6 +555,7 @@ class ApiForpost(BaseApi):
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -595,6 +578,7 @@ class ApiForpost(BaseApi):
         return await self._aplace_force_order_oapg(
             body=args.body,
             query_params=args.query,
+            **kwargs,
         )
     
     def post(

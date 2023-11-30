@@ -32,27 +32,9 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.exchange import Exchange as ExchangeSchema
 from snaptrade_client.model.universal_activity import UniversalActivity as UniversalActivitySchema
-from snaptrade_client.model.symbol import Symbol as SymbolSchema
-from snaptrade_client.model.account_simple import AccountSimple as AccountSimpleSchema
-from snaptrade_client.model.options_symbol import OptionsSymbol as OptionsSymbolSchema
-from snaptrade_client.model.account_sync_status import AccountSyncStatus as AccountSyncStatusSchema
-from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
-from snaptrade_client.model.underlying_symbol import UnderlyingSymbol as UnderlyingSymbolSchema
-from snaptrade_client.model.us_exchange import USExchange as USExchangeSchema
 
-from snaptrade_client.type.options_symbol import OptionsSymbol
-from snaptrade_client.type.security_type import SecurityType
-from snaptrade_client.type.exchange import Exchange
-from snaptrade_client.type.account_simple import AccountSimple
 from snaptrade_client.type.universal_activity import UniversalActivity
-from snaptrade_client.type.us_exchange import USExchange
-from snaptrade_client.type.underlying_symbol import UnderlyingSymbol
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.account_sync_status import AccountSyncStatus
-from snaptrade_client.type.symbol import Symbol
 
 from . import path
 
@@ -243,9 +225,10 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -301,6 +284,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -366,7 +350,7 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -467,6 +451,7 @@ class GetActivities(BaseApi):
         brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -485,6 +470,7 @@ class GetActivities(BaseApi):
         )
         return await self._aget_activities_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def get_activities(
@@ -529,6 +515,7 @@ class ApiForget(BaseApi):
         brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -547,6 +534,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_activities_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def get(

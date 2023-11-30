@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **StrikePrice** | **double** |  | 
 **ExpirationDate** | **string** |  | 
 **IsMiniOption** | **bool** |  | [optional] 
-**UnderlyingSymbol** | **UnderlyingSymbol** |  | 
+**UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | 
 **LocalId** | **string** |  | [optional] 
 **ExchangeId** | **string** |  | [optional] 
 

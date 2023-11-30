@@ -97,6 +97,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'ConnectionType'
         }
+        /// <summary>
+        /// Test the property 'ConnectionPortalVersion'
+        /// </summary>
+        [Fact]
+        public void ConnectionPortalVersionTest()
+        {
+            // TODO unit test for the property 'ConnectionPortalVersion'
+        }
 
     }
 

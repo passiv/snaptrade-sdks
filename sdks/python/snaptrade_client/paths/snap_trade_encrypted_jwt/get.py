@@ -33,7 +33,6 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData as EncryptedResponseEncryptedMessageDataSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 from snaptrade_client.model.encrypted_response import EncryptedResponse as EncryptedResponseSchema
@@ -41,7 +40,6 @@ from snaptrade_client.model.encrypted_response import EncryptedResponse as Encry
 from snaptrade_client.type.encrypted_response import EncryptedResponse
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
-from snaptrade_client.type.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 from . import path
@@ -220,9 +218,10 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -272,6 +271,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -332,7 +332,7 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -417,6 +417,7 @@ class GetUserJwt(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -429,6 +430,7 @@ class GetUserJwt(BaseApi):
         )
         return await self._aget_user_jwt_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def get_user_jwt(
@@ -457,6 +459,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -469,6 +472,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_user_jwt_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     def get(

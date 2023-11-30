@@ -5,7 +5,7 @@ Object representing total dividends received during a timeframe
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **UniversalSymbol** |  | [optional] 
+**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **Amount** | **double?** |  | [optional] 
 **Currency** | **string** |  | [optional] 
 

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **brokerage_authorization** | **BrokerageAuthorization** |  | [optional] |
+| **brokerage_authorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] |
 | **portfolio_group** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **number** | **String** |  | [optional] |

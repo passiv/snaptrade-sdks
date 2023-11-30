@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | **PositionSymbol** |  | [optional] |
+| **symbol** | [**PositionSymbol**](PositionSymbol.md) |  | [optional] |
 | **units** | **Float** |  | [optional] |
 | **price** | **Float** | Last known market price for the symbol | [optional] |
 | **open_pnl** | **Float** |  | [optional] |

@@ -5,9 +5,9 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **account** | **Account** |  | [optional] |
-| **symbol** | **BrokerageSymbol** |  | [optional] |
-| **universal_symbol** | **UniversalSymbol** |  | [optional] |
+| **account** | [**Account**](Account.md) |  | [optional] |
+| **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
+| **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
 | **action** | [**TradeAction**](TradeAction.md) |  | [optional] |
 | **units** | **Integer** |  | [optional] |
 | **price** | **Float** |  | [optional] |

@@ -10,7 +10,7 @@
 | **strike_price** | **Float** |  |  |
 | **expiration_date** | **String** |  |  |
 | **is_mini_option** | **Boolean** |  | [optional] |
-| **underlying_symbol** | **UnderlyingSymbol** |  |  |
+| **underlying_symbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  |  |
 | **local_id** | **String** |  | [optional] |
 | **exchange_id** | **String** |  | [optional] |
 

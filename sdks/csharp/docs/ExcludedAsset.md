@@ -5,7 +5,7 @@ An excluded asset in a portfolio group
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **UniversalSymbol** |  | [optional] 
+**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

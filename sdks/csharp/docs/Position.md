@@ -5,7 +5,7 @@ Account Position
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **PositionSymbol** |  | [optional] 
+**Symbol** | [**PositionSymbol**](PositionSymbol.md) |  | [optional] 
 **Units** | **double?** |  | [optional] 
 **Price** | **double?** | Last known market price for the symbol | [optional] 
 **OpenPnl** | **double?** |  | [optional] 

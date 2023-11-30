@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **symbol** | **BrokerageSymbol** |  | [optional] |
-| **universal_symbol** | **UniversalSymbol** |  | [optional] |
-| **trade** | **Trade** |  | [optional] |
+| **symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] |
+| **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
+| **trade** | [**Trade**](Trade.md) |  | [optional] |
 | **state** | [**State**](State.md) |  | [optional] |
 | **filled_units** | **Integer** | Number of filled units | [optional] |
 | **action** | [**TradeExecutionStatusAction**](TradeExecutionStatusAction.md) |  | [optional] |

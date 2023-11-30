@@ -6,7 +6,7 @@ This response consists of 2 different components that must be decrypted to obtai
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EncryptedSharedKey** | **string** |  | [optional] 
-**EncryptedMessageData** | **EncryptedResponseEncryptedMessageData** |  | [optional] 
+**EncryptedMessageData** | [**EncryptedResponseEncryptedMessageData**](EncryptedResponseEncryptedMessageData.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

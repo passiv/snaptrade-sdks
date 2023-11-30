@@ -162,10 +162,11 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -215,6 +216,7 @@ class BaseApi(api_client.Api):
             body=body,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -275,7 +277,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -360,6 +362,7 @@ class RegisterSnapTradeUser(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -371,6 +374,7 @@ class RegisterSnapTradeUser(BaseApi):
         )
         return await self._aregister_snap_trade_user_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def register_snap_trade_user(
@@ -396,6 +400,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -407,6 +412,7 @@ class ApiForpost(BaseApi):
         )
         return await self._aregister_snap_trade_user_oapg(
             body=args.body,
+            **kwargs,
         )
     
     def post(

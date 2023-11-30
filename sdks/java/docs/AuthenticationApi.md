@@ -39,8 +39,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     try {
@@ -133,8 +132,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
@@ -143,6 +141,9 @@ public class Example {
               .authentication
               .getUserJWT(userId, userSecret)
               .execute();
+      System.out.println(result);
+      System.out.println(result.getEncryptedSharedKey());
+      System.out.println(result.getEncryptedMessageData());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#getUserJWT");
       System.err.println("Status code: " + e.getStatusCode());
@@ -228,8 +229,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<String> result = client
@@ -316,16 +316,16 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     String broker = "broker_example"; // Slug of the brokerage to connect the user to
     Boolean immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account
-    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected
+    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     String connectionType = "read"; // Sets whether the connection should be read or trade
+    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render, with a default to 'v2'
     try {
       Object result = client
               .authentication
@@ -335,6 +335,7 @@ public class Example {
               .customRedirect(customRedirect)
               .reconnect(reconnect)
               .connectionType(connectionType)
+              .connectionPortalVersion(connectionPortalVersion)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#loginSnapTradeUser");
@@ -354,6 +355,7 @@ public class Example {
               .customRedirect(customRedirect)
               .reconnect(reconnect)
               .connectionType(connectionType)
+              .connectionPortalVersion(connectionPortalVersion)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -425,8 +427,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example"; // SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     try {

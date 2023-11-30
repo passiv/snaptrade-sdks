@@ -33,12 +33,8 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
-from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
 
 from snaptrade_client.type.brokerage import Brokerage
-from snaptrade_client.type.brokerage_type import BrokerageType
-from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
 
 from . import path
 
@@ -128,9 +124,10 @@ class BaseApi(api_client.Api):
     async def _alist_all_brokerages_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -165,6 +162,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -229,7 +227,7 @@ class BaseApi(api_client.Api):
     def _list_all_brokerages_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -301,6 +299,7 @@ class ListAllBrokerages(BaseApi):
 
     async def alist_all_brokerages(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -310,6 +309,7 @@ class ListAllBrokerages(BaseApi):
         args = self._list_all_brokerages_mapped_args(
         )
         return await self._alist_all_brokerages_oapg(
+            **kwargs,
         )
     
     def list_all_brokerages(
@@ -329,6 +329,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -338,6 +339,7 @@ class ApiForget(BaseApi):
         args = self._list_all_brokerages_mapped_args(
         )
         return await self._alist_all_brokerages_oapg(
+            **kwargs,
         )
     
     def get(

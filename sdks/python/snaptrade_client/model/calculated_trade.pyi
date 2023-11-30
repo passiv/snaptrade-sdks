@@ -112,22 +112,4 @@ class CalculatedTrade(
             **kwargs,
         )
 
-from snaptrade_client.model.account import Account
-from snaptrade_client.model.account_balance import AccountBalance
-from snaptrade_client.model.account_meta import AccountMeta
-from snaptrade_client.model.account_sync_status import AccountSyncStatus
-from snaptrade_client.model.brokerage import Brokerage
-from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
-from snaptrade_client.model.brokerage_symbol import BrokerageSymbol
-from snaptrade_client.model.brokerage_type import BrokerageType
-from snaptrade_client.model.cash_restriction import CashRestriction
-from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.exchange import Exchange
-from snaptrade_client.model.options_symbol import OptionsSymbol
-from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.trade import Trade
-from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
-from snaptrade_client.model.universal_symbol import UniversalSymbol
-from snaptrade_client.model.us_exchange import USExchange

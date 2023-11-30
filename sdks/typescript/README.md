@@ -558,6 +558,10 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
+#### 🔄 Return<a id="🔄-return"></a>
+
+[EncryptedResponse](./models/encrypted-response.ts)
+
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/encryptedJWT` `GET`
@@ -603,6 +607,7 @@ const loginSnapTradeUserResponse =
     customRedirect: "https://snaptrade.com",
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connectionType: "read",
+    connectionPortalVersion: "v2",
   });
 ```
 
@@ -626,11 +631,19 @@ URL to redirect the user to after the user connects their brokerage account
 
 ##### reconnect: `string`<a id="reconnect-string"></a>
 
-The UUID of the brokerage connection to be reconnected
+The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
 
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
 Sets whether the connection should be read or trade
+
+##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
+
+Sets the version of the connection portal to render, with a default to \\\'v2\\\'
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AuthenticationLoginSnapTradeUser200Response](./models/authentication-login-snap-trade-user200-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -806,6 +819,10 @@ Optional comma seperated list of user IDs used to filter the request on specific
 
 Optional comma seperated list of session IDs used to filter the request on specific users
 
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ConnectionsSessionEvents200ResponseInner](./models/connections-session-events200-response-inner.ts)
+
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
@@ -874,8 +891,7 @@ const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
 
 ##### underlying_symbol_id: `string`<a id="underlying_symbol_id-string"></a>
 
-##### legs: `OptionLeg`<a id="legs-optionleg"></a>
-            [`OptionLeg`](./models/option-leg.ts)[]
+##### legs: [`OptionLeg`](./models/option-leg.ts)[]<a id="legs-optionlegmodelsoption-legts"></a>
 
 ##### strategy_type: `string`<a id="strategy_type-string"></a>
 
@@ -928,6 +944,10 @@ The ID of the account to get the options chain from.
 ##### symbol: `string`<a id="symbol-string"></a>
 
 Universal symbol ID if symbol
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionChainInner](./models/option-chain-inner.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1522,6 +1542,10 @@ The ID of the account to get quotes.
 
 Should be set to True if providing tickers.
 
+#### 🔄 Return<a id="🔄-return"></a>
+
+[SymbolsQuotesInner](./models/symbols-quotes-inner.ts)
+
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
@@ -1671,7 +1695,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1727,7 +1751,7 @@ Optional comma seperated list of types to filter activities by. This is not an e
 
 ### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
 
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

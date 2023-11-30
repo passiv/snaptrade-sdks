@@ -26,26 +26,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.konfigthis.client.model.AccountSimple;
-import com.konfigthis.client.model.AccountSyncStatus;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.DividendAtDate;
-import com.konfigthis.client.model.Exchange;
 import java.time.LocalDate;
-import com.konfigthis.client.model.MonthlyDividends;
-import com.konfigthis.client.model.NetContributions;
-import com.konfigthis.client.model.NetDividend;
-import com.konfigthis.client.model.OptionsSymbol;
-import com.konfigthis.client.model.PastValue;
 import com.konfigthis.client.model.PerformanceCustom;
-import com.konfigthis.client.model.SecurityType;
-import com.konfigthis.client.model.SubPeriodReturnRate;
-import com.konfigthis.client.model.Symbol;
-import com.konfigthis.client.model.USExchange;
-import java.util.UUID;
-import com.konfigthis.client.model.UnderlyingSymbol;
 import com.konfigthis.client.model.UniversalActivity;
-import com.konfigthis.client.model.UniversalSymbol;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -325,7 +308,7 @@ public class TransactionsAndReportingApiGenerated {
 
     /**
      * Get transaction history for a user
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+     * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetActivitiesRequestBuilder
@@ -571,7 +554,7 @@ public class TransactionsAndReportingApiGenerated {
 
     /**
      * Get performance information for a specific timeframe
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      * @param startDate  (required)
      * @param endDate  (required)
      * @param userId  (required)

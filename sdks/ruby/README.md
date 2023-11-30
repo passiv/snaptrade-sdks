@@ -117,6 +117,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::BrokerageType](docs/BrokerageType.md)
  - [SnapTrade::CalculatedTrade](docs/CalculatedTrade.md)
  - [SnapTrade::CashRestriction](docs/CashRestriction.md)
+ - [SnapTrade::ConnectionPortalVersion](docs/ConnectionPortalVersion.md)
  - [SnapTrade::ConnectionType](docs/ConnectionType.md)
  - [SnapTrade::ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [SnapTrade::Currency](docs/Currency.md)

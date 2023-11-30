@@ -33,10 +33,8 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.balance import Balance as BalanceSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
 
 from snaptrade_client.type.balance import Balance
-from snaptrade_client.type.currency import Currency
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -194,9 +192,10 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -261,6 +260,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -327,7 +327,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -434,6 +434,7 @@ class GetUserAccountBalance(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -450,6 +451,7 @@ class GetUserAccountBalance(BaseApi):
         return await self._aget_user_account_balance_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get_user_account_balance(
@@ -486,6 +488,7 @@ class ApiForget(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -502,6 +505,7 @@ class ApiForget(BaseApi):
         return await self._aget_user_account_balance_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

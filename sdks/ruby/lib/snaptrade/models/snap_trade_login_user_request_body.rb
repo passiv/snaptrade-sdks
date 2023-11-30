@@ -23,10 +23,12 @@ module SnapTrade
     # URL to redirect the user to after the user connects their brokerage account
     attr_accessor :custom_redirect
 
-    # The UUID of the brokerage connection to be reconnected
+    # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     attr_accessor :reconnect
 
     attr_accessor :connection_type
+
+    attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -35,7 +37,8 @@ module SnapTrade
         :'immediate_redirect' => :'immediateRedirect',
         :'custom_redirect' => :'customRedirect',
         :'reconnect' => :'reconnect',
-        :'connection_type' => :'connectionType'
+        :'connection_type' => :'connectionType',
+        :'connection_portal_version' => :'connectionPortalVersion'
       }
     end
 
@@ -51,7 +54,8 @@ module SnapTrade
         :'immediate_redirect' => :'Boolean',
         :'custom_redirect' => :'String',
         :'reconnect' => :'String',
-        :'connection_type' => :'ConnectionType'
+        :'connection_type' => :'ConnectionType',
+        :'connection_portal_version' => :'ConnectionPortalVersion'
       }
     end
 
@@ -95,6 +99,10 @@ module SnapTrade
       if attributes.key?(:'connection_type')
         self.connection_type = attributes[:'connection_type']
       end
+
+      if attributes.key?(:'connection_portal_version')
+        self.connection_portal_version = attributes[:'connection_portal_version']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -119,7 +127,8 @@ module SnapTrade
           immediate_redirect == o.immediate_redirect &&
           custom_redirect == o.custom_redirect &&
           reconnect == o.reconnect &&
-          connection_type == o.connection_type
+          connection_type == o.connection_type &&
+          connection_portal_version == o.connection_portal_version
     end
 
     # @see the `==` method
@@ -131,7 +140,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [broker, immediate_redirect, custom_redirect, reconnect, connection_type].hash
+      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, connection_portal_version].hash
     end
 
     # Builds the object from hash

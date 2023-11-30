@@ -16,26 +16,9 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
-import com.konfigthis.client.model.AccountSimple;
-import com.konfigthis.client.model.AccountSyncStatus;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.DividendAtDate;
-import com.konfigthis.client.model.Exchange;
 import java.time.LocalDate;
-import com.konfigthis.client.model.MonthlyDividends;
-import com.konfigthis.client.model.NetContributions;
-import com.konfigthis.client.model.NetDividend;
-import com.konfigthis.client.model.OptionsSymbol;
-import com.konfigthis.client.model.PastValue;
 import com.konfigthis.client.model.PerformanceCustom;
-import com.konfigthis.client.model.SecurityType;
-import com.konfigthis.client.model.SubPeriodReturnRate;
-import com.konfigthis.client.model.Symbol;
-import com.konfigthis.client.model.USExchange;
-import java.util.UUID;
-import com.konfigthis.client.model.UnderlyingSymbol;
 import com.konfigthis.client.model.UniversalActivity;
-import com.konfigthis.client.model.UniversalSymbol;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -63,7 +46,7 @@ public class TransactionsAndReportingApiTest {
     /**
      * Get transaction history for a user
      *
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+     * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
      *
      * @throws ApiException if the Api call fails
      */
@@ -89,7 +72,7 @@ public class TransactionsAndReportingApiTest {
     /**
      * Get performance information for a specific timeframe
      *
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      *
      * @throws ApiException if the Api call fails
      */

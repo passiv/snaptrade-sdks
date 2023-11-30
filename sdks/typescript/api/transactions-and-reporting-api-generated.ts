@@ -19,41 +19,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AccountSimple } from '../models';
-// @ts-ignore
-import { AccountSyncStatus } from '../models';
-// @ts-ignore
-import { Currency } from '../models';
-// @ts-ignore
-import { DividendAtDate } from '../models';
-// @ts-ignore
-import { Exchange } from '../models';
-// @ts-ignore
-import { MonthlyDividends } from '../models';
-// @ts-ignore
-import { NetContributions } from '../models';
-// @ts-ignore
-import { NetDividend } from '../models';
-// @ts-ignore
-import { OptionsSymbol } from '../models';
-// @ts-ignore
-import { PastValue } from '../models';
-// @ts-ignore
 import { PerformanceCustom } from '../models';
 // @ts-ignore
-import { SecurityType } from '../models';
-// @ts-ignore
-import { SubPeriodReturnRate } from '../models';
-// @ts-ignore
-import { Symbol } from '../models';
-// @ts-ignore
-import { USExchange } from '../models';
-// @ts-ignore
-import { UnderlyingSymbol } from '../models';
-// @ts-ignore
 import { UniversalActivity } from '../models';
-// @ts-ignore
-import { UniversalSymbol } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -64,7 +32,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TransactionsAndReportingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {string} userId 
          * @param {string} userSecret 
@@ -149,7 +117,7 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
             };
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
          * @summary Get performance information for a specific timeframe
          * @param {string | Date} startDate 
          * @param {string | Date} endDate 
@@ -248,7 +216,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
     const localVarAxiosParamCreator = TransactionsAndReportingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -259,7 +227,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -280,7 +248,7 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
     const localVarFp = TransactionsAndReportingApiFp(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -290,7 +258,7 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
             return localVarFp.getActivities(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -426,7 +394,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
  */
 export class TransactionsAndReportingApiGenerated extends BaseAPI {
     /**
-     * Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+     * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
      * @summary Get transaction history for a user
      * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -438,7 +406,7 @@ export class TransactionsAndReportingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
      * @summary Get performance information for a specific timeframe
      * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

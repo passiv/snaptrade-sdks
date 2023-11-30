@@ -124,9 +124,10 @@ class BaseApi(api_client.Api):
     async def _aget_security_types_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -161,6 +162,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -225,7 +227,7 @@ class BaseApi(api_client.Api):
     def _get_security_types_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -297,6 +299,7 @@ class GetSecurityTypes(BaseApi):
 
     async def aget_security_types(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -306,6 +309,7 @@ class GetSecurityTypes(BaseApi):
         args = self._get_security_types_mapped_args(
         )
         return await self._aget_security_types_oapg(
+            **kwargs,
         )
     
     def get_security_types(
@@ -325,6 +329,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -334,6 +339,7 @@ class ApiForget(BaseApi):
         args = self._get_security_types_mapped_args(
         )
         return await self._aget_security_types_oapg(
+            **kwargs,
         )
     
     def get(

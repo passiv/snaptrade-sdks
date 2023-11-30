@@ -54,10 +54,4 @@ class TargetAssetList(
     def __getitem__(self, i: int) -> 'TargetAsset':
         return super().__getitem__(i)
 
-from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.exchange import Exchange
-from snaptrade_client.model.percent import Percent
-from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.target_asset import TargetAsset
-from snaptrade_client.model.target_asset_meta import TargetAssetMeta
-from snaptrade_client.model.universal_symbol import UniversalSymbol
