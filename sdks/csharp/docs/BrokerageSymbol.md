@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] 
 **Symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  | [optional] 
-**BrokerageAuthorization** | **BrokerageAuthorization** |  | [optional] 
+**BrokerageAuthorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
 **AllowsFractionalUnits** | **bool?** |  | [optional] 
 **OptionSymbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  | [optional] 

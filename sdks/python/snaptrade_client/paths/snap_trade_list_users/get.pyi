@@ -142,9 +142,10 @@ class BaseApi(api_client.Api):
     async def _alist_snap_trade_users_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -178,6 +179,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -237,7 +239,7 @@ class BaseApi(api_client.Api):
     def _list_snap_trade_users_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -303,6 +305,7 @@ class ListSnapTradeUsers(BaseApi):
 
     async def alist_snap_trade_users(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -311,6 +314,7 @@ class ListSnapTradeUsers(BaseApi):
         args = self._list_snap_trade_users_mapped_args(
         )
         return await self._alist_snap_trade_users_oapg(
+            **kwargs,
         )
     
     def list_snap_trade_users(
@@ -329,6 +333,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -337,6 +342,7 @@ class ApiForget(BaseApi):
         args = self._list_snap_trade_users_mapped_args(
         )
         return await self._alist_snap_trade_users_oapg(
+            **kwargs,
         )
     
     def get(

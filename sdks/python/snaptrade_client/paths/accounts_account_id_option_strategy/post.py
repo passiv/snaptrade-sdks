@@ -32,29 +32,13 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.exchange import Exchange as ExchangeSchema
-from snaptrade_client.model.option_strategy import OptionStrategy as OptionStrategySchema
-from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
-from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek as StrategyQuotesGreekSchema
-from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs as OptionStrategyLegsSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
-from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.strategy_quotes import StrategyQuotes as StrategyQuotesSchema
-from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 from snaptrade_client.model.option_leg import OptionLeg as OptionLegSchema
 
 from snaptrade_client.type.strategy_quotes import StrategyQuotes
-from snaptrade_client.type.option_strategy_legs import OptionStrategyLegs
-from snaptrade_client.type.security_type import SecurityType
-from snaptrade_client.type.strategy_quotes_greek import StrategyQuotesGreek
-from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.option_leg import OptionLeg
-from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
-from snaptrade_client.type.universal_symbol import UniversalSymbol
-from snaptrade_client.type.option_strategy import OptionStrategy
-from snaptrade_client.type.price import Price
 
 from . import path
 
@@ -346,10 +330,11 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -429,6 +414,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -491,7 +477,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -613,6 +599,7 @@ class GetOptionStrategy(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -633,6 +620,7 @@ class GetOptionStrategy(BaseApi):
             body=args.body,
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get_option_strategy(
@@ -681,6 +669,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -701,6 +690,7 @@ class ApiForpost(BaseApi):
             body=args.body,
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def post(

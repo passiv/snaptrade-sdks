@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **symbol** | [**BrokerageSymbolSymbol**](BrokerageSymbolSymbol.md) |  | [optional] |
-| **brokerage_authorization** | **BrokerageAuthorization** |  | [optional] |
+| **brokerage_authorization** | [**BrokerageAuthorization**](BrokerageAuthorization.md) |  | [optional] |
 | **description** | **String** |  | [optional] |
 | **allows_fractional_units** | **Boolean** |  | [optional] |
 | **option_symbol** | [**BrokerageSymbolOptionSymbol**](BrokerageSymbolOptionSymbol.md) |  | [optional] |

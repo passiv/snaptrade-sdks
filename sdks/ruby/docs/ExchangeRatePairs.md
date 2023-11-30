@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **src** | **Currency** |  | [optional] |
-| **dst** | **Currency** |  | [optional] |
+| **src** | [**Currency**](Currency.md) |  | [optional] |
+| **dst** | [**Currency**](Currency.md) |  | [optional] |
 | **exchange_rate** | **Float** |  | [optional] |
 
 ## Example

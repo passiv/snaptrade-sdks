@@ -209,9 +209,10 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -277,6 +278,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -338,7 +340,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -443,6 +445,7 @@ class GetUserAccountQuotes(BaseApi):
         use_ticker: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -460,6 +463,7 @@ class GetUserAccountQuotes(BaseApi):
         return await self._aget_user_account_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get_user_account_quotes(
@@ -501,6 +505,7 @@ class ApiForget(BaseApi):
         use_ticker: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -518,6 +523,7 @@ class ApiForget(BaseApi):
         return await self._aget_user_account_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

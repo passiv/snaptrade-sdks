@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | [optional] 
 **CreatedDate** | **string** | Time | [optional] 
 **UpdatedDate** | **string** | Time | [optional] 
-**Brokerage** | **Brokerage** |  | [optional] 
+**Brokerage** | [**Brokerage**](Brokerage.md) |  | [optional] 
 **Name** | **string** | Connection Name | [optional] 
 **Type** | **string** |  | [optional] 
 **Disabled** | **bool** |  | [optional] 

@@ -8,9 +8,9 @@
 | **symbol** | **String** |  | [optional] |
 | **raw_symbol** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
-| **currency** | **Currency** |  | [optional] |
-| **exchange** | **Exchange** |  | [optional] |
-| **type** | **SecurityType** |  | [optional] |
+| **currency** | [**Currency**](Currency.md) |  | [optional] |
+| **exchange** | [**Exchange**](Exchange.md) |  | [optional] |
+| **type** | [**SecurityType**](SecurityType.md) |  | [optional] |
 | **currencies** | [**Array&lt;Currency&gt;**](Currency.md) |  | [optional] |
 
 ## Example

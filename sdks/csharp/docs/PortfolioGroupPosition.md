@@ -5,7 +5,7 @@ Details of a security held
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **UniversalSymbol** |  | [optional] 
+**Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **Price** | **double?** | Last known market price for the symbol | [optional] 
 **Units** | **int** |  | [optional] 
 

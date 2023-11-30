@@ -13,12 +13,9 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.percent import Percent
-from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.target_asset_meta import TargetAssetMeta
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 

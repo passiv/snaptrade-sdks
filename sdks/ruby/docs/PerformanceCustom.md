@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **total_equity_timeframe** | [**Array&lt;PastValue&gt;**](PastValue.md) |  | [optional] |
-| **contributions** | **NetContributions** |  | [optional] |
+| **contributions** | [**NetContributions**](NetContributions.md) |  | [optional] |
 | **contribution_timeframe** | [**Array&lt;PastValue&gt;**](PastValue.md) |  | [optional] |
 | **contribution_timeframe_cumulative** | [**Array&lt;PastValue&gt;**](PastValue.md) |  | [optional] |
 | **withdrawal_timeframe** | [**Array&lt;PastValue&gt;**](PastValue.md) |  | [optional] |

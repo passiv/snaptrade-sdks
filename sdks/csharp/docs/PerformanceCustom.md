@@ -6,7 +6,7 @@ Performance Custom Response Object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TotalEquityTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
-**Contributions** | **NetContributions** |  | [optional] 
+**Contributions** | [**NetContributions**](NetContributions.md) |  | [optional] 
 **ContributionTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
 **ContributionTimeframeCumulative** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
 **WithdrawalTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 

@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.7-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.7)
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.8-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.8)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing<a id="installing"></a>
 
 ```sh
-pip install snaptrade-python-sdk==10.34.7
+pip install snaptrade-python-sdk==10.34.8
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -547,6 +547,10 @@ get_user_jwt_response = snaptrade.authentication.get_user_jwt(
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`EncryptedResponse`](./snaptrade_client/type/encrypted_response.py)
+
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/encryptedJWT` `get`
@@ -592,6 +596,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     custom_redirect="https://snaptrade.com",
     reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connection_type="read",
+    connection_portal_version="v2",
 )
 ```
 
@@ -615,11 +620,15 @@ URL to redirect the user to after the user connects their brokerage account
 
 ##### reconnect: `str`<a id="reconnect-str"></a>
 
-The UUID of the brokerage connection to be reconnected
+The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
 
 ##### connection_type: `str`<a id="connection_type-str"></a>
 
 Sets whether the connection should be read or trade
+
+##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
+
+Sets the version of the connection portal to render, with a default to 'v2'
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -860,7 +869,7 @@ get_option_strategy_response = snaptrade.options.get_option_strategy(
 
 ##### underlying_symbol_id: `str`<a id="underlying_symbol_id-str"></a>
 
-##### legs: List[[`OptionLeg`](./snaptrade_client/type/option_leg.py)]<a id="legs-listoptionlegsnaptrade_clienttypeoption_legpy"></a>
+##### legs: List[`OptionLeg`]<a id="legs-listoptionleg"></a>
 
 ##### strategy_type: `str`<a id="strategy_type-str"></a>
 
@@ -1658,7 +1667,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ### `snaptrade.transactions_and_reporting.get_activities`<a id="snaptradetransactions_and_reportingget_activities"></a>
 
-Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1710,7 +1719,7 @@ Optional comma seperated list of types to filter activities by. This is not an e
 
 ### `snaptrade.transactions_and_reporting.get_reporting_custom_range`<a id="snaptradetransactions_and_reportingget_reporting_custom_range"></a>
 
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

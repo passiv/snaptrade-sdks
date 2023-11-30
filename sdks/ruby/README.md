@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.17.6'
+gem 'snaptrade', '~> 1.17.7'
 ```
 
 ## Getting Started
@@ -117,6 +117,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::BrokerageType](docs/BrokerageType.md)
  - [SnapTrade::CalculatedTrade](docs/CalculatedTrade.md)
  - [SnapTrade::CashRestriction](docs/CashRestriction.md)
+ - [SnapTrade::ConnectionPortalVersion](docs/ConnectionPortalVersion.md)
  - [SnapTrade::ConnectionType](docs/ConnectionType.md)
  - [SnapTrade::ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [SnapTrade::Currency](docs/Currency.md)

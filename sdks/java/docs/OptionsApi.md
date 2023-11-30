@@ -37,8 +37,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     UUID underlyingSymbolId = UUID.randomUUID();
     List<OptionLeg> legs = Arrays.asList();
@@ -142,8 +141,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
@@ -154,6 +152,7 @@ public class Example {
               .options
               .getOptionsChain(userId, userSecret, accountId, symbol)
               .execute();
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OptionsApi#getOptionsChain");
       System.err.println("Status code: " + e.getStatusCode());
@@ -238,8 +237,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
@@ -341,8 +339,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
@@ -436,8 +433,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     OrderType orderType = OrderType.fromValue("Limit");
     TimeInForce timeInForce = TimeInForce.fromValue("Day");

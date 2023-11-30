@@ -1571,7 +1571,7 @@ paths:
       operationId: TransactionsAndReporting_getReportingCustomRange
       description:
         Returns performance information (contributions, dividends, rate of
-        return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
+        return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
       parameters:
         - in: query
           required: true
@@ -3083,6 +3083,12 @@ components:
           enum:
             - read
             - trade
+        connectionPortalVersion:
+          description: Sets the version of the connection portal to render, with a default to 'v2'
+          type: string
+          enum:
+            - v2
+            - v3
     SnapTradeUserID:
       description: SnapTrade User ID. Provided by SnapTrade Partner. Can be any
         string, as long as it's unique to a user

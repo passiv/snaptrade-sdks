@@ -13,9 +13,8 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.option_chain_item_chain_per_root_item import OptionChainItemChainPerRootItem
-from snaptrade_client.type.option_chain_item_chain_per_root_item_chain_per_strike_price import OptionChainItemChainPerRootItemChainPerStrikePrice
 
 OptionChainItemChainPerRoot = typing.List[OptionChainItemChainPerRootItem]

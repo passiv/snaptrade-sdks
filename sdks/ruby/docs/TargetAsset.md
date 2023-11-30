@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **symbol** | **UniversalSymbol** |  | [optional] |
+| **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
 | **percent** | **Float** |  | [optional] |
 | **is_supported** | **Boolean** |  | [optional] |
 | **is_excluded** | **Boolean** |  | [optional] |

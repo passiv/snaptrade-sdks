@@ -18,7 +18,6 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.DeleteUserResponse;
 import com.konfigthis.client.model.EncryptedResponse;
-import com.konfigthis.client.model.EncryptedResponseEncryptedMessageData;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -105,12 +104,14 @@ public class AuthenticationApiTest {
         String customRedirect = null;
         String reconnect = null;
         String connectionType = null;
+        String connectionPortalVersion = null;
         Object response = api.loginSnapTradeUser(userId, userSecret)
                 .broker(broker)
                 .immediateRedirect(immediateRedirect)
                 .customRedirect(customRedirect)
                 .reconnect(reconnect)
                 .connectionType(connectionType)
+                .connectionPortalVersion(connectionPortalVersion)
                 .execute();
         // TODO: test validations
     }

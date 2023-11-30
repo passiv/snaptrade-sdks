@@ -197,6 +197,7 @@ immediate_redirect = True
 custom_redirect = "https://snaptrade.com"
 reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"
 connection_type = "read"
+connection_portal_version = "v2"
 
 begin
   # Login user & generate connection link
@@ -208,6 +209,7 @@ begin
                                                               custom_redirect: custom_redirect,
                                                               reconnect: reconnect,
                                                               connection_type: connection_type,
+                                                              connection_portal_version: connection_portal_version,
                                                             )
   p result
 rescue SnapTrade::ApiError => e
@@ -227,6 +229,7 @@ immediate_redirect = True
 custom_redirect = "https://snaptrade.com"
 reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"
 connection_type = "read"
+connection_portal_version = "v2"
 
 begin
   # Login user & generate connection link
@@ -238,6 +241,7 @@ begin
                                                                                                            custom_redirect: custom_redirect,
                                                                                                            reconnect: reconnect,
                                                                                                            connection_type: connection_type,
+                                                                                                           connection_portal_version: connection_portal_version,
                                                                                                          )
   p status_code # => 2xx
   p headers # => { ... }

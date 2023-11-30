@@ -54,7 +54,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-          description: API is alive and kicking in some fashion
+          description: API is operational.
         default:
           description: Unexpected error.
       security: []
@@ -458,7 +458,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Connections_sessionEvents_200_response_inner'
+                  $ref: '#/components/schemas/SessionEvent'
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: A list of all Session Events for the Partner.
@@ -1831,8 +1831,8 @@ paths:
       x-accepts: '*/*'
   /activities:
     get:
-      description: Returns activities (transactions) for a user. Specifing start and
-        end date is highly recommended for better performance
+      description: Returns activities (transactions) for a user. Specifying start
+        and end date is highly recommended for better performance
       operationId: TransactionsAndReporting_getActivities
       parameters:
       - explode: true
@@ -1919,8 +1919,9 @@ paths:
   /performance/custom:
     get:
       description: "Returns performance information (contributions, dividends, rate\
-        \ of return, etc) for a specific timeframe. Total Equity Timeframe and Rate\
-        \ of Returns are experimental and should not be trusted to be 100% accurate"
+        \ of return, etc) for a specific timeframe. Please note that Total Equity\
+        \ Timeframe and Rate of Returns are experimental features. Please contact\
+        \ support@snaptrade.com if you notice any inconsistencies."
       operationId: TransactionsAndReporting_getReportingCustomRange
       parameters:
       - explode: true
@@ -4534,6 +4535,7 @@ components:
     SnapTradeLoginUserRequestBody:
       description: Data to login a user via SnapTrade Partner
       example:
+        connectionPortalVersion: v2
         reconnect: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         immediateRedirect: true
         customRedirect: https://snaptrade.com
@@ -4561,7 +4563,9 @@ components:
           x-konfig-original-example: https://snaptrade.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-customRedirect
         reconnect:
-          description: The UUID of the brokerage connection to be reconnected
+          description: The UUID of the brokerage connection to be reconnected. This
+            parameter should be left empty unless you are reconnecting a disabled
+            connection. See ‘Reconnecting Accounts’ for more information.
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           type: string
           x-konfig-original-example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
@@ -4571,6 +4575,13 @@ components:
           enum:
           - read
           - trade
+          type: string
+        connectionPortalVersion:
+          description: "Sets the version of the connection portal to render, with\
+            \ a default to 'v2'"
+          enum:
+          - v2
+          - v3
           type: string
       type: object
     SnapTradeUserID:
@@ -4977,6 +4988,14 @@ components:
       x-konfig-is-used-in-successful-response: true
     SessionEvent:
       additionalProperties: true
+      example:
+        session_event_type: CONNECTION_FAILED
+        user_id: snaptrade-user-123
+        brokerage_status_code: 400
+        session_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        created_date: 2022-01-21T20:11:19.217Z
+        brokerage_authorization_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -8260,7 +8279,9 @@ components:
           x-konfig-original-example: https://snaptrade.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-customRedirect
         reconnect:
-          description: The UUID of the brokerage connection to be reconnected
+          description: The UUID of the brokerage connection to be reconnected. This
+            parameter should be left empty unless you are reconnecting a disabled
+            connection. See ‘Reconnecting Accounts’ for more information.
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
           type: string
           x-konfig-original-example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
@@ -8270,6 +8291,13 @@ components:
           enum:
           - read
           - trade
+          type: string
+        connectionPortalVersion:
+          description: "Sets the version of the connection portal to render, with\
+            \ a default to 'v2'"
+          enum:
+          - v2
+          - v3
           type: string
       required:
       - userId
@@ -9213,9 +9241,6 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    Connections_sessionEvents_200_response_inner:
-      anyOf:
-      - $ref: '#/components/schemas/SessionEvent'
     Trading_placeOCOOrder_request:
       properties:
         first_trade_id:

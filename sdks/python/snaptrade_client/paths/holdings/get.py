@@ -32,45 +32,13 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.exchange import Exchange as ExchangeSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.position_symbol import PositionSymbol as PositionSymbolSchema
-from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta as SnapTradeHoldingsAccountMetaSchema
-from snaptrade_client.model.balance import Balance as BalanceSchema
-from snaptrade_client.model.security_type import SecurityType as SecurityTypeSchema
-from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount as SnapTradeHoldingsAccountSchema
-from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
-from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization as BrokerageAuthorizationSchema
 from snaptrade_client.model.account_holdings import AccountHoldings as AccountHoldingsSchema
-from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta as BrokerageAuthorizationMetaSchema
-from snaptrade_client.model.position import Position as PositionSchema
-from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue as SnapTradeHoldingsTotalValueSchema
-from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
-from snaptrade_client.model.account_sync_status import AccountSyncStatus as AccountSyncStatusSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
-from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
 from snaptrade_client.type.account_holdings import AccountHoldings
-from snaptrade_client.type.brokerage import Brokerage
-from snaptrade_client.type.balance import Balance
-from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
-from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
-from snaptrade_client.type.snap_trade_holdings_account import SnapTradeHoldingsAccount
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.brokerage_type import BrokerageType
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
-from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
-from snaptrade_client.type.position import Position
-from snaptrade_client.type.exchange import Exchange
-from snaptrade_client.type.position_symbol import PositionSymbol
-from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.type.universal_symbol import UniversalSymbol
-from snaptrade_client.type.account_sync_status import AccountSyncStatus
-from snaptrade_client.type.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 
 from . import path
 
@@ -262,9 +230,10 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -315,6 +284,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -375,7 +345,7 @@ class BaseApi(api_client.Api):
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -463,6 +433,7 @@ class GetAllUserHoldings(BaseApi):
         user_secret: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -476,6 +447,7 @@ class GetAllUserHoldings(BaseApi):
         )
         return await self._aget_all_user_holdings_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     @api_client.DeprecationWarningOnce(prefix="account_information")
@@ -509,6 +481,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -522,6 +495,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_all_user_holdings_oapg(
             query_params=args.query,
+            **kwargs,
         )
     
     @api_client.DeprecationWarningOnce(prefix="account_information")

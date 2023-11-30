@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **strategy** | **OptionStrategy** |  | [optional] |
+| **strategy** | [**OptionStrategy**](OptionStrategy.md) |  | [optional] |
 | **open_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **bid_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **ask_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **volatility** | **Float** |  | [optional] |
-| **greek** | **StrategyQuotesGreek** |  | [optional] |
+| **greek** | [**StrategyQuotesGreek**](StrategyQuotesGreek.md) |  | [optional] |
 
 ## Example
 

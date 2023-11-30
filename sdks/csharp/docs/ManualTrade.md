@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Account** | **string** |  | [optional] 
 **OrderType** | **OrderType** |  | [optional] 
 **TimeInForce** | **TimeInForce** |  | [optional] 
-**Symbol** | **ManualTradeSymbol** |  | [optional] 
+**Symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
 **_Action** | **ModelAction** |  | [optional] 
 **Units** | **double** | Trade Units | [optional] 
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 

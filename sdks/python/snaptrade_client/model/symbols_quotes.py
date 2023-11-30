@@ -154,7 +154,4 @@ class SymbolsQuotes(
     def __getitem__(self, i: int) -> MetaOapg.items:
         return super().__getitem__(i)
 
-from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.exchange import Exchange
-from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.universal_symbol import UniversalSymbol

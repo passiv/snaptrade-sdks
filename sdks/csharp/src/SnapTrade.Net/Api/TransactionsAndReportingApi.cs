@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -66,7 +66,7 @@ namespace SnapTrade.Net.Api
         /// Get performance information for a specific timeframe
         /// </summary>
         /// <remarks>
-        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -84,7 +84,7 @@ namespace SnapTrade.Net.Api
         /// Get performance information for a specific timeframe
         /// </summary>
         /// <remarks>
-        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -110,7 +110,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -129,7 +129,7 @@ namespace SnapTrade.Net.Api
         /// Get transaction history for a user
         /// </summary>
         /// <remarks>
-        /// Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -147,7 +147,7 @@ namespace SnapTrade.Net.Api
         /// Get performance information for a specific timeframe
         /// </summary>
         /// <remarks>
-        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -166,7 +166,7 @@ namespace SnapTrade.Net.Api
         /// Get performance information for a specific timeframe
         /// </summary>
         /// <remarks>
-        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -301,7 +301,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -320,7 +320,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -425,7 +425,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -445,7 +445,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get transaction history for a user Returns activities (transactions) for a user. Specifing start and end date is highly recommended for better performance
+        /// Get transaction history for a user Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -553,7 +553,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -572,7 +572,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -671,7 +671,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>
@@ -691,7 +691,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Total Equity Timeframe and Rate of Returns are experimental and should not be trusted to be 100% accurate
+        /// Get performance information for a specific timeframe Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="startDate"></param>

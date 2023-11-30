@@ -61,20 +61,50 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
+        /// Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+        /// </summary>
+        /// <value>Sets the version of the connection portal to render, with a default to &#39;v2&#39;</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ConnectionPortalVersionEnum
+        {
+            /// <summary>
+            /// Enum V2 for value: v2
+            /// </summary>
+            [EnumMember(Value = "v2")]
+            V2 = 1,
+
+            /// <summary>
+            /// Enum V3 for value: v3
+            /// </summary>
+            [EnumMember(Value = "v3")]
+            V3 = 2
+
+        }
+
+
+        /// <summary>
+        /// Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+        /// </summary>
+        /// <value>Sets the version of the connection portal to render, with a default to &#39;v2&#39;</value>
+        [DataMember(Name = "connectionPortalVersion", EmitDefaultValue = false)]
+        public ConnectionPortalVersionEnum? ConnectionPortalVersion { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
         /// <param name="broker">Slug of the brokerage to connect the user to.</param>
         /// <param name="immediateRedirect">When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal.</param>
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account.</param>
-        /// <param name="reconnect">The UUID of the brokerage connection to be reconnected.</param>
+        /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information..</param>
         /// <param name="connectionType">Sets whether the connection should be read or trade.</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = default(ConnectionTypeEnum?))
+        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render, with a default to &#39;v2&#39;.</param>
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = default(ConnectionTypeEnum?), ConnectionPortalVersionEnum? connectionPortalVersion = default(ConnectionPortalVersionEnum?))
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
             this.CustomRedirect = customRedirect;
             this.Reconnect = reconnect;
             this.ConnectionType = connectionType;
+            this.ConnectionPortalVersion = connectionPortalVersion;
         }
 
         /// <summary>
@@ -99,9 +129,9 @@ namespace SnapTrade.Net.Model
         public string CustomRedirect { get; set; }
 
         /// <summary>
-        /// The UUID of the brokerage connection to be reconnected
+        /// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
         /// </summary>
-        /// <value>The UUID of the brokerage connection to be reconnected</value>
+        /// <value>The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.</value>
         [DataMember(Name = "reconnect", EmitDefaultValue = false)]
         public string Reconnect { get; set; }
 
@@ -118,6 +148,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  CustomRedirect: ").Append(CustomRedirect).Append("\n");
             sb.Append("  Reconnect: ").Append(Reconnect).Append("\n");
             sb.Append("  ConnectionType: ").Append(ConnectionType).Append("\n");
+            sb.Append("  ConnectionPortalVersion: ").Append(ConnectionPortalVersion).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -175,6 +206,10 @@ namespace SnapTrade.Net.Model
                 (
                     this.ConnectionType == input.ConnectionType ||
                     this.ConnectionType.Equals(input.ConnectionType)
+                ) && 
+                (
+                    this.ConnectionPortalVersion == input.ConnectionPortalVersion ||
+                    this.ConnectionPortalVersion.Equals(input.ConnectionPortalVersion)
                 );
         }
 
@@ -201,6 +236,7 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Reconnect.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.ConnectionType.GetHashCode();
+                hashCode = (hashCode * 59) + this.ConnectionPortalVersion.GetHashCode();
                 return hashCode;
             }
         }

@@ -33,10 +33,8 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs as ExchangeRatePairsSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
 
 from snaptrade_client.type.exchange_rate_pairs import ExchangeRatePairs
-from snaptrade_client.type.currency import Currency
 
 from . import path
 
@@ -118,9 +116,10 @@ class BaseApi(api_client.Api):
         self,
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -168,6 +167,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -228,7 +228,7 @@ class BaseApi(api_client.Api):
         self,
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -310,6 +310,7 @@ class GetCurrencyExchangeRatePair(BaseApi):
         self,
         currency_pair: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -321,6 +322,7 @@ class GetCurrencyExchangeRatePair(BaseApi):
         )
         return await self._aget_currency_exchange_rate_pair_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get_currency_exchange_rate_pair(
@@ -346,6 +348,7 @@ class ApiForget(BaseApi):
         self,
         currency_pair: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -357,6 +360,7 @@ class ApiForget(BaseApi):
         )
         return await self._aget_currency_exchange_rate_pair_oapg(
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

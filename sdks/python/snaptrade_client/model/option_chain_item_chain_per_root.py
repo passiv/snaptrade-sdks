@@ -53,4 +53,3 @@ class OptionChainItemChainPerRoot(
         return super().__getitem__(i)
 
 from snaptrade_client.model.option_chain_item_chain_per_root_item import OptionChainItemChainPerRootItem
-from snaptrade_client.model.option_chain_item_chain_per_root_item_chain_per_strike_price import OptionChainItemChainPerRootItemChainPerStrikePrice

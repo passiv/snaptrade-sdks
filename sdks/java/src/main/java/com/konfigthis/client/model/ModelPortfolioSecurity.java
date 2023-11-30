@@ -19,16 +19,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.Exchange;
-import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -97,10 +91,10 @@ public class ModelPortfolioSecurity {
 
 
   public ModelPortfolioSecurity percent(Integer percent) {
-    if (percent < 0) {
+    if (percent != null && percent < 0) {
       throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
     }
-    if (percent > 100) {
+    if (percent != null && percent > 100) {
       throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
     }
     
@@ -124,10 +118,10 @@ public class ModelPortfolioSecurity {
 
 
   public void setPercent(Integer percent) {
-    if (percent < 0) {
+    if (percent != null && percent < 0) {
       throw new IllegalArgumentException("Invalid value for percent. Must be greater than or equal to 0.");
     }
-    if (percent > 100) {
+    if (percent != null && percent > 100) {
       throw new IllegalArgumentException("Invalid value for percent. Must be less than or equal to 100.");
     }
     

@@ -34,8 +34,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       Status result = client
@@ -96,6 +95,6 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | API is alive and kicking in some fashion |  -  |
+| **200** | API is operational. |  -  |
 | **0** | Unexpected error. |  -  |
 

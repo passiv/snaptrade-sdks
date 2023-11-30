@@ -35,7 +35,6 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI as LoginRedirectURISchema
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody as SnapTradeLoginUserRequestBodySchema
-from snaptrade_client.model.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData as EncryptedResponseEncryptedMessageDataSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 from snaptrade_client.model.encrypted_response import EncryptedResponse as EncryptedResponseSchema
@@ -45,7 +44,6 @@ from snaptrade_client.type.login_redirect_uri import LoginRedirectURI
 from snaptrade_client.type.encrypted_response import EncryptedResponse
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
-from snaptrade_client.type.encrypted_response_encrypted_message_data import EncryptedResponseEncryptedMessageData
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 # Query params
@@ -247,6 +245,7 @@ class BaseApi(api_client.Api):
         custom_redirect: typing.Optional[str] = None,
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -262,6 +261,8 @@ class BaseApi(api_client.Api):
             _body["reconnect"] = reconnect
         if connection_type is not None:
             _body["connectionType"] = connection_type
+        if connection_portal_version is not None:
+            _body["connectionPortalVersion"] = connection_portal_version
         args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
@@ -275,10 +276,11 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -342,6 +344,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -403,7 +406,7 @@ class BaseApi(api_client.Api):
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         content_type: str = 'application/json',
         stream: bool = False,
@@ -508,7 +511,9 @@ class LoginSnapTradeUser(BaseApi):
         custom_redirect: typing.Optional[str] = None,
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -524,10 +529,12 @@ class LoginSnapTradeUser(BaseApi):
             custom_redirect=custom_redirect,
             reconnect=reconnect,
             connection_type=connection_type,
+            connection_portal_version=connection_portal_version,
         )
         return await self._alogin_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            **kwargs,
         )
     
     def login_snap_trade_user(
@@ -540,6 +547,7 @@ class LoginSnapTradeUser(BaseApi):
         custom_redirect: typing.Optional[str] = None,
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -555,6 +563,7 @@ class LoginSnapTradeUser(BaseApi):
             custom_redirect=custom_redirect,
             reconnect=reconnect,
             connection_type=connection_type,
+            connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(
             body=args.body,
@@ -574,7 +583,9 @@ class ApiForpost(BaseApi):
         custom_redirect: typing.Optional[str] = None,
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -590,10 +601,12 @@ class ApiForpost(BaseApi):
             custom_redirect=custom_redirect,
             reconnect=reconnect,
             connection_type=connection_type,
+            connection_portal_version=connection_portal_version,
         )
         return await self._alogin_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            **kwargs,
         )
     
     def post(
@@ -606,6 +619,7 @@ class ApiForpost(BaseApi):
         custom_redirect: typing.Optional[str] = None,
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -621,6 +635,7 @@ class ApiForpost(BaseApi):
             custom_redirect=custom_redirect,
             reconnect=reconnect,
             connection_type=connection_type,
+            connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(
             body=args.body,

@@ -165,19 +165,7 @@ class AccountHoldings(
             **kwargs,
         )
 
-from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.balance import Balance
-from snaptrade_client.model.brokerage import Brokerage
-from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
-from snaptrade_client.model.brokerage_type import BrokerageType
-from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.position import Position
-from snaptrade_client.model.position_symbol import PositionSymbol
-from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount
-from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
-from snaptrade_client.model.universal_symbol import UniversalSymbol

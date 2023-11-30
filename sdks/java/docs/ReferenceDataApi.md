@@ -43,8 +43,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String currencyPair = "currencyPair_example"; // A currency pair based on currency code for example, {CAD-USD}
     try {
@@ -137,8 +136,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       PartnerData result = client
@@ -239,8 +237,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<SecurityType> result = client
@@ -327,8 +324,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<Exchange> result = client
@@ -414,8 +410,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String substring = "substring_example";
     try {
@@ -508,8 +503,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
     UUID symbolId = UUID.randomUUID(); // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
@@ -613,8 +607,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String brokerage = "QUESTRADE,ALPACA"; // Comma separated value of brokerage slugs
     try {
@@ -707,8 +700,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<Brokerage> result = client
@@ -795,8 +787,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<Currency> result = client
@@ -883,8 +874,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     try {
       List<ExchangeRatePairs> result = client
@@ -970,8 +960,7 @@ public class Example {
     configuration.host = "https://api.snaptrade.com/api/v1";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-
-
+    
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";

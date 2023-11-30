@@ -1,6 +1,6 @@
 # snaptrade-java-sdk
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.5-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.5)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.6-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.6)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>4.13.5</version>
+  <version>4.13.6</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:4.13.5"
+   implementation "com.konfigthis:snaptrade-java-sdk:4.13.6"
 }
 ```
 
@@ -93,7 +93,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-4.13.5.jar`
+* `target/snaptrade-java-sdk-4.13.6.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -249,7 +249,6 @@ Class | Method | HTTP request | Description
  - [BrokerageType](docs/BrokerageType.md)
  - [CalculatedTrade](docs/CalculatedTrade.md)
  - [CashRestriction](docs/CashRestriction.md)
- - [ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [Currency](docs/Currency.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)

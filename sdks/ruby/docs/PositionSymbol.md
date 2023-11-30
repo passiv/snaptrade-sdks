@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
-| **symbol** | **UniversalSymbol** |  | [optional] |
+| **symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
 | **local_id** | **String** |  | [optional] |
 | **is_quotable** | **Boolean** |  | [optional] |
 | **is_tradable** | **Boolean** |  | [optional] |

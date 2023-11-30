@@ -23,8 +23,6 @@ import com.konfigthis.client.model.Currency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -163,10 +161,10 @@ public class PortfolioGroupSettings {
 
 
   public PortfolioGroupSettings driftThreshold(Double driftThreshold) {
-    if (driftThreshold < 0) {
+    if (driftThreshold != null && driftThreshold < 0) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
     }
-    if (driftThreshold > 100) {
+    if (driftThreshold != null && driftThreshold > 100) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
     }
     
@@ -176,10 +174,10 @@ public class PortfolioGroupSettings {
   }
 
   public PortfolioGroupSettings driftThreshold(Integer driftThreshold) {
-    if (driftThreshold < 0) {
+    if (driftThreshold != null && driftThreshold < 0) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
     }
-    if (driftThreshold > 100) {
+    if (driftThreshold != null && driftThreshold > 100) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
     }
     
@@ -203,10 +201,10 @@ public class PortfolioGroupSettings {
 
 
   public void setDriftThreshold(Double driftThreshold) {
-    if (driftThreshold < 0) {
+    if (driftThreshold != null && driftThreshold < 0) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be greater than or equal to 0.");
     }
-    if (driftThreshold > 100) {
+    if (driftThreshold != null && driftThreshold > 100) {
       throw new IllegalArgumentException("Invalid value for driftThreshold. Must be less than or equal to 100.");
     }
     

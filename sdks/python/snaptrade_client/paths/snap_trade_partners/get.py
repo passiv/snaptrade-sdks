@@ -33,19 +33,13 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
 from snaptrade_client.model.partner_data import PartnerData as PartnerDataSchema
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse as Model401FailedRequestResponseSchema
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
-from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 
-from snaptrade_client.type.brokerage import Brokerage
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.partner_data import PartnerData
 from snaptrade_client.type.model401_failed_request_response import Model401FailedRequestResponse
-from snaptrade_client.type.brokerage_type import BrokerageType
-from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 from . import path
@@ -178,9 +172,10 @@ class BaseApi(api_client.Api):
     async def _aget_partner_info_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -214,6 +209,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -273,7 +269,7 @@ class BaseApi(api_client.Api):
     def _get_partner_info_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -339,6 +335,7 @@ class GetPartnerInfo(BaseApi):
 
     async def aget_partner_info(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -347,6 +344,7 @@ class GetPartnerInfo(BaseApi):
         args = self._get_partner_info_mapped_args(
         )
         return await self._aget_partner_info_oapg(
+            **kwargs,
         )
     
     def get_partner_info(
@@ -365,6 +363,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -373,6 +372,7 @@ class ApiForget(BaseApi):
         args = self._get_partner_info_mapped_args(
         )
         return await self._aget_partner_info_oapg(
+            **kwargs,
         )
     
     def get(

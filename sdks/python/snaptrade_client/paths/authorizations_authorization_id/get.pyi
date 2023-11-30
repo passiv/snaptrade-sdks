@@ -32,17 +32,9 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.brokerage import Brokerage as BrokerageSchema
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges as BrokerageExchangesSchema
-from snaptrade_client.model.brokerage_type import BrokerageType as BrokerageTypeSchema
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization as BrokerageAuthorizationSchema
-from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta as BrokerageAuthorizationMetaSchema
 
-from snaptrade_client.type.brokerage import Brokerage
-from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
 from snaptrade_client.type.brokerage_authorization import BrokerageAuthorization
-from snaptrade_client.type.brokerage_type import BrokerageType
-from snaptrade_client.type.brokerage_exchanges import BrokerageExchanges
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -175,9 +167,10 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -242,6 +235,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -308,7 +302,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -415,6 +409,7 @@ class DetailBrokerageAuthorization(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -431,6 +426,7 @@ class DetailBrokerageAuthorization(BaseApi):
         return await self._adetail_brokerage_authorization_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def detail_brokerage_authorization(
@@ -467,6 +463,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -483,6 +480,7 @@ class ApiForget(BaseApi):
         return await self._adetail_brokerage_authorization_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def get(

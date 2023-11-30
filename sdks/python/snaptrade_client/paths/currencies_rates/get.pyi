@@ -33,10 +33,8 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs as ExchangeRatePairsSchema
-from snaptrade_client.model.currency import Currency as CurrencySchema
 
 from snaptrade_client.type.exchange_rate_pairs import ExchangeRatePairs
-from snaptrade_client.type.currency import Currency
 
 
 
@@ -100,9 +98,10 @@ class BaseApi(api_client.Api):
     async def _alist_all_currencies_rates_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -136,6 +135,7 @@ class BaseApi(api_client.Api):
             headers=_headers,
             auth_settings=_auth,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -195,7 +195,7 @@ class BaseApi(api_client.Api):
     def _list_all_currencies_rates_oapg(
         self,
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -261,6 +261,7 @@ class ListAllCurrenciesRates(BaseApi):
 
     async def alist_all_currencies_rates(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -269,6 +270,7 @@ class ListAllCurrenciesRates(BaseApi):
         args = self._list_all_currencies_rates_mapped_args(
         )
         return await self._alist_all_currencies_rates_oapg(
+            **kwargs,
         )
     
     def list_all_currencies_rates(
@@ -287,6 +289,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
@@ -295,6 +298,7 @@ class ApiForget(BaseApi):
         args = self._list_all_currencies_rates_mapped_args(
         )
         return await self._alist_all_currencies_rates_oapg(
+            **kwargs,
         )
     
     def get(

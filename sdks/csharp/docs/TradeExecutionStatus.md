@@ -5,9 +5,9 @@ Execution status of a trade
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **BrokerageSymbol** |  | [optional] 
-**UniversalSymbol** | **UniversalSymbol** |  | [optional] 
-**Trade** | **Trade** |  | [optional] 
+**Symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] 
+**UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
+**Trade** | [**Trade**](Trade.md) |  | [optional] 
 **State** | **string** | Execution state of a trade | [optional] 
 **FilledUnits** | **int** | Number of filled units | [optional] 
 **_Action** | **string** | Action of executed trade | [optional] 

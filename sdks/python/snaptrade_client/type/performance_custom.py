@@ -13,19 +13,14 @@
 from datetime import datetime, date
 import typing
 from enum import Enum
-from typing_extensions import TypedDict, Literal
+from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.dividend_at_date import DividendAtDate
-from snaptrade_client.type.exchange import Exchange
 from snaptrade_client.type.monthly_dividends import MonthlyDividends
 from snaptrade_client.type.net_contributions import NetContributions
 from snaptrade_client.type.net_dividend import NetDividend
 from snaptrade_client.type.past_value import PastValue
 from snaptrade_client.type.performance_custom_bad_tickers import PerformanceCustomBadTickers
-from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.sub_period_return_rate import SubPeriodReturnRate
-from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredPerformanceCustom(TypedDict):
     pass

@@ -32,17 +32,9 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.cash_restriction import CashRestriction as CashRestrictionSchema
 from snaptrade_client.model.account import Account as AccountSchema
-from snaptrade_client.model.account_sync_status import AccountSyncStatus as AccountSyncStatusSchema
-from snaptrade_client.model.account_meta import AccountMeta as AccountMetaSchema
-from snaptrade_client.model.account_balance import AccountBalance as AccountBalanceSchema
 
 from snaptrade_client.type.account import Account
-from snaptrade_client.type.cash_restriction import CashRestriction
-from snaptrade_client.type.account_meta import AccountMeta
-from snaptrade_client.type.account_balance import AccountBalance
-from snaptrade_client.type.account_sync_status import AccountSyncStatus
 
 from . import path
 
@@ -211,9 +203,10 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -278,6 +271,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -344,7 +338,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
         stream: bool = False,
     ) -> typing.Union[
@@ -451,6 +445,7 @@ class UpdateUserAccount(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -467,6 +462,7 @@ class UpdateUserAccount(BaseApi):
         return await self._aupdate_user_account_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def update_user_account(
@@ -503,6 +499,7 @@ class ApiForput(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         ApiResponseForDefaultAsync,
@@ -519,6 +516,7 @@ class ApiForput(BaseApi):
         return await self._aupdate_user_account_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def put(

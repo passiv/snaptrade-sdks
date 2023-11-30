@@ -189,8 +189,9 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         stream: bool = False,
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor204Async,
         ApiResponseForDefaultAsync,
@@ -251,6 +252,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
+            **kwargs
         )
     
         if stream:
@@ -317,7 +319,7 @@ class BaseApi(api_client.Api):
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
-        timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor204,
@@ -419,6 +421,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor204Async,
         ApiResponseForDefaultAsync,
@@ -435,6 +438,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         return await self._aremove_brokerage_authorization_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def remove_brokerage_authorization(
@@ -471,6 +475,7 @@ class ApiFordelete(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        **kwargs,
     ) -> typing.Union[
         ApiResponseFor204Async,
         ApiResponseForDefaultAsync,
@@ -487,6 +492,7 @@ class ApiFordelete(BaseApi):
         return await self._aremove_brokerage_authorization_oapg(
             query_params=args.query,
             path_params=args.path,
+            **kwargs,
         )
     
     def delete(

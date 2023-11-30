@@ -182,5 +182,3 @@ class BrokerageAuthorization(
 
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta
-from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
-from snaptrade_client.model.brokerage_type import BrokerageType
