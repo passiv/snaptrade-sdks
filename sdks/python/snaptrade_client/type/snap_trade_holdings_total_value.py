@@ -20,9 +20,9 @@ class RequiredSnapTradeHoldingsTotalValue(TypedDict):
     pass
 
 class OptionalSnapTradeHoldingsTotalValue(TypedDict, total=False):
-    value: typing.Union[int, float]
+    value: typing.Optional[typing.Union[int, float]]
 
-    currency: str
+    currency: typing.Optional[str]
 
 class SnapTradeHoldingsTotalValue(RequiredSnapTradeHoldingsTotalValue, OptionalSnapTradeHoldingsTotalValue):
     pass

@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="value">value.</param>
         /// <param name="currency">currency.</param>
-        public SnapTradeHoldingsTotalValue(double value = default(double), string currency = default(string)) : base()
+        public SnapTradeHoldingsTotalValue(double? value = default(double?), string currency = default(string)) : base()
         {
             this.Value = value;
             this.Currency = currency;
@@ -47,13 +47,13 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name = "value", EmitDefaultValue = false)]
-        public double Value { get; set; }
+        [DataMember(Name = "value", EmitDefaultValue = true)]
+        public double? Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = false)]
+        [DataMember(Name = "currency", EmitDefaultValue = true)]
         public string Currency { get; set; }
 
         /// <summary>
@@ -111,7 +111,8 @@ namespace SnapTrade.Net.Model
             return base.Equals(input) && 
                 (
                     this.Value == input.Value ||
-                    this.Value.Equals(input.Value)
+                    (this.Value != null &&
+                    this.Value.Equals(input.Value))
                 ) && base.Equals(input) && 
                 (
                     this.Currency == input.Currency ||
@@ -130,7 +131,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                hashCode = (hashCode * 59) + this.Value.GetHashCode();
+                if (this.Value != null)
+                {
+                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
+                }
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();

@@ -37,8 +37,46 @@ class SnapTradeHoldingsTotalValue(
     class MetaOapg:
         
         class properties:
-            value = schemas.NumberSchema
-            currency = schemas.StrSchema
+            
+            
+            class value(
+                schemas.NumberBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneDecimalMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'value':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class currency(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "value": value,
                 "currency": currency,
@@ -73,8 +111,8 @@ class SnapTradeHoldingsTotalValue(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        value: typing.Union[MetaOapg.properties.value, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        currency: typing.Union[MetaOapg.properties.currency, str, schemas.Unset] = schemas.unset,
+        value: typing.Union[MetaOapg.properties.value, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        currency: typing.Union[MetaOapg.properties.currency, None, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'SnapTradeHoldingsTotalValue':
