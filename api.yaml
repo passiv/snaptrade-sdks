@@ -2633,8 +2633,10 @@ components:
         value:
           type: number
           example: 32600.71
+          nullable: true
         currency:
           type: string
+          nullable: true
           example: USD
     Balance:
       description: Account Balance
