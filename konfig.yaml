@@ -76,6 +76,8 @@ portal:
       get: true
     /brokerages:
       get: true
+    /performance/custom:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
