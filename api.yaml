@@ -1565,6 +1565,7 @@ paths:
           description: Unexpected error
   /performance/custom:
     get:
+      deprecated: true
       tags:
         - Transactions And Reporting
       summary: Get performance information for a specific timeframe
