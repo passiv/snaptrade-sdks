@@ -407,6 +407,7 @@ class BaseApi(api_client.Api):
 class GetReportingCustomRange(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget_reporting_custom_range(
         self,
         start_date: typing.Optional[date] = None,
@@ -439,6 +440,7 @@ class GetReportingCustomRange(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get_reporting_custom_range(
         self,
         start_date: typing.Optional[date] = None,
@@ -471,6 +473,7 @@ class GetReportingCustomRange(BaseApi):
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget(
         self,
         start_date: typing.Optional[date] = None,
@@ -503,6 +506,7 @@ class ApiForget(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get(
         self,
         start_date: typing.Optional[date] = None,
