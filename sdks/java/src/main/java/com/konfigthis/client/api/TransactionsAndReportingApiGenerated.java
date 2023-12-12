@@ -400,6 +400,7 @@ public class TransactionsAndReportingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getReportingCustomRangeValidateBeforeCall(LocalDate startDate, LocalDate endDate, String userId, String userSecret, String accounts, Boolean detailed, String frequency, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'startDate' is set
@@ -498,7 +499,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getReportingCustomRangeCall(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
         }
@@ -514,7 +517,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public PerformanceCustom execute() throws ApiException {
             ApiResponse<PerformanceCustom> localVarResp = getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
             return localVarResp.getResponseBody();
@@ -530,7 +535,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<PerformanceCustom> executeWithHttpInfo() throws ApiException {
             return getReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
         }
@@ -546,7 +553,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<PerformanceCustom> _callback) throws ApiException {
             return getReportingCustomRangeAsync(startDate, endDate, userId, userSecret, accounts, detailed, frequency, _callback);
         }
@@ -566,7 +575,9 @@ public class TransactionsAndReportingApiGenerated {
         <tr><td> 200 </td><td> Successfully retrieved performance data </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public GetReportingCustomRangeRequestBuilder getReportingCustomRange(LocalDate startDate, LocalDate endDate, String userId, String userSecret) throws IllegalArgumentException {
         if (startDate == null) throw new IllegalArgumentException("\"startDate\" is required but got null");
         if (endDate == null) throw new IllegalArgumentException("\"endDate\" is required but got null");

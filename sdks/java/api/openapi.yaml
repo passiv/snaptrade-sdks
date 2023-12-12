@@ -1918,6 +1918,7 @@ paths:
       x-accepts: application/json
   /performance/custom:
     get:
+      deprecated: true
       description: "Returns performance information (contributions, dividends, rate\
         \ of return, etc) for a specific timeframe. Please note that Total Equity\
         \ Timeframe and Rate of Returns are experimental features. Please contact\

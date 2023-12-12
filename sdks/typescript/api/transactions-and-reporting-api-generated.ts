@@ -127,6 +127,7 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {boolean} [detailed] Optional, increases frequency of data points for the total value and contribution charts if set to true
          * @param {string} [frequency] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getReportingCustomRange: async (startDate: string | Date, endDate: string | Date, userId: string, userSecret: string, accounts?: string, detailed?: boolean, frequency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -231,6 +232,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getReportingCustomRange(requestParameters: TransactionsAndReportingApiGetReportingCustomRangeRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PerformanceCustom>> {
@@ -262,6 +264,7 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getReportingCustomRange(requestParameters: TransactionsAndReportingApiGetReportingCustomRangeRequest, options?: AxiosRequestConfig): AxiosPromise<PerformanceCustom> {
@@ -410,6 +413,7 @@ export class TransactionsAndReportingApiGenerated extends BaseAPI {
      * @summary Get performance information for a specific timeframe
      * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TransactionsAndReportingApiGenerated
      */

@@ -78,6 +78,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PerformanceCustom</returns>
+        [Obsolete]
         PerformanceCustom GetReportingCustomRange(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
 
         /// <summary>
@@ -96,6 +97,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PerformanceCustom</returns>
+        [Obsolete]
         ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0);
         #endregion Synchronous Operations
     }
@@ -160,6 +162,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PerformanceCustom</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -179,6 +182,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PerformanceCustom)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
@@ -565,6 +569,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PerformanceCustom</returns>
+        [Obsolete]
         public PerformanceCustom GetReportingCustomRange(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<PerformanceCustom> localVarResponse = GetReportingCustomRangeWithHttpInfo(startDate, endDate, userId, userSecret, accounts, detailed, frequency);
@@ -584,6 +589,7 @@ namespace SnapTrade.Net.Api
         /// <param name="frequency">Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PerformanceCustom</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<PerformanceCustom> GetReportingCustomRangeWithHttpInfo(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
@@ -684,6 +690,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PerformanceCustom</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<PerformanceCustom> GetReportingCustomRangeAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<PerformanceCustom> localVarResponse = await GetReportingCustomRangeWithHttpInfoAsync(startDate, endDate, userId, userSecret, accounts, detailed, frequency, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -704,6 +711,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PerformanceCustom)</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<PerformanceCustom>> GetReportingCustomRangeWithHttpInfoAsync(DateTime startDate, DateTime endDate, string userId, string userSecret, string accounts = default(string), bool? detailed = default(bool?), string frequency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
