@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v8.29.7-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.7)
+[![npm](https://img.shields.io/badge/npm-v8.29.8-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.8)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
