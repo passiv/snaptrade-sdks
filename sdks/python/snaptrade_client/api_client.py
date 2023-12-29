@@ -1476,7 +1476,7 @@ class ApiClient:
             data=body
         if fields:
             data=self.fields_to_dict(fields)
-        session = aiohttp.ClientSession()
+        session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=self.configuration.verify_ssl))
         t1 = time.time()
         if method == "GET":
             response = await session.get(url, headers=headers, timeout=timeout, **kwargs)

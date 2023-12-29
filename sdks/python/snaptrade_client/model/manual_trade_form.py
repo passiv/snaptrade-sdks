@@ -60,6 +60,10 @@ class ManualTradeForm(
                 return TimeInForce
             units = schemas.NumberSchema
             universal_symbol_id = schemas.UUIDSchema
+        
+            @staticmethod
+            def notional_value() -> typing.Type['NotionalValue']:
+                return NotionalValue
             __annotations__ = {
                 "account_id": account_id,
                 "action": action,
@@ -69,6 +73,7 @@ class ManualTradeForm(
                 "time_in_force": time_in_force,
                 "units": units,
                 "universal_symbol_id": universal_symbol_id,
+                "notional_value": notional_value,
             }
     
     @typing.overload
@@ -96,9 +101,12 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["universal_symbol_id"]) -> MetaOapg.properties.universal_symbol_id: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["notional_value"]) -> 'NotionalValue': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "price", "stop", "time_in_force", "units", "universal_symbol_id", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "price", "stop", "time_in_force", "units", "universal_symbol_id", "notional_value", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -128,9 +136,12 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["universal_symbol_id"]) -> typing.Union[MetaOapg.properties.universal_symbol_id, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["notional_value"]) -> typing.Union['NotionalValue', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "price", "stop", "time_in_force", "units", "universal_symbol_id", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "price", "stop", "time_in_force", "units", "universal_symbol_id", "notional_value", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -145,6 +156,7 @@ class ManualTradeForm(
         time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        notional_value: typing.Union['NotionalValue', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ManualTradeForm':
@@ -159,11 +171,13 @@ class ManualTradeForm(
             time_in_force=time_in_force,
             units=units,
             universal_symbol_id=universal_symbol_id,
+            notional_value=notional_value,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.notional_value import NotionalValue
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice

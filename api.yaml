@@ -3911,6 +3911,8 @@ components:
           $ref: "#/components/schemas/Units"
         universal_symbol_id:
           $ref: "#/components/schemas/Id"
+        notional_value:
+          $ref: "#/components/schemas/NotionalValue"
     Cash:
       description: Cash
       type: number
@@ -3970,6 +3972,11 @@ components:
       type: number
       nullable: true
       example: 31.33
+    NotionalValue:
+      description: Notional value of a trade
+      type: number
+      nullable: true
+      example: 100.00
     StopPrice:
       description:
         Stop Price. If stop loss or stop limit order, the price to trigger

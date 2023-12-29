@@ -41,8 +41,10 @@ from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
+from snaptrade_client.model.notional_value import NotionalValue as NotionalValueSchema
 
 from snaptrade_client.type.action import Action
+from snaptrade_client.type.notional_value import NotionalValue
 from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
@@ -198,6 +200,7 @@ class BaseApi(api_client.Api):
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        notional_value: typing.Optional[NotionalValue] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -219,6 +222,8 @@ class BaseApi(api_client.Api):
             _body["units"] = units
         if universal_symbol_id is not None:
             _body["universal_symbol_id"] = universal_symbol_id
+        if notional_value is not None:
+            _body["notional_value"] = notional_value
         args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
@@ -474,6 +479,7 @@ class PlaceForceOrder(BaseApi):
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        notional_value: typing.Optional[NotionalValue] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -494,6 +500,7 @@ class PlaceForceOrder(BaseApi):
             time_in_force=time_in_force,
             units=units,
             universal_symbol_id=universal_symbol_id,
+            notional_value=notional_value,
         )
         return await self._aplace_force_order_oapg(
             body=args.body,
@@ -514,6 +521,7 @@ class PlaceForceOrder(BaseApi):
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        notional_value: typing.Optional[NotionalValue] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -532,6 +540,7 @@ class PlaceForceOrder(BaseApi):
             time_in_force=time_in_force,
             units=units,
             universal_symbol_id=universal_symbol_id,
+            notional_value=notional_value,
         )
         return self._place_force_order_oapg(
             body=args.body,
@@ -554,6 +563,7 @@ class ApiForpost(BaseApi):
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        notional_value: typing.Optional[NotionalValue] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -574,6 +584,7 @@ class ApiForpost(BaseApi):
             time_in_force=time_in_force,
             units=units,
             universal_symbol_id=universal_symbol_id,
+            notional_value=notional_value,
         )
         return await self._aplace_force_order_oapg(
             body=args.body,
@@ -594,6 +605,7 @@ class ApiForpost(BaseApi):
         time_in_force: typing.Optional[TimeInForce] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        notional_value: typing.Optional[NotionalValue] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -612,6 +624,7 @@ class ApiForpost(BaseApi):
             time_in_force=time_in_force,
             units=units,
             universal_symbol_id=universal_symbol_id,
+            notional_value=notional_value,
         )
         return self._place_force_order_oapg(
             body=args.body,
