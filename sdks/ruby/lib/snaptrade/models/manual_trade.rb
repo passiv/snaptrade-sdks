@@ -26,7 +26,7 @@ module SnapTrade
 
     attr_accessor :action
 
-    # Trade Units
+    # Trade Units. Cannot work with notional value.
     attr_accessor :units
 
     # Trade Price if limit or stop limit order

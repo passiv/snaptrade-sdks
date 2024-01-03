@@ -84,6 +84,7 @@ public class TradingApiTest {
         TimeInForce timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
+        Double notionalValue = null;
         ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret)
                 .accountId(accountId)
                 .action(action)
@@ -93,6 +94,7 @@ public class TradingApiTest {
                 .timeInForce(timeInForce)
                 .units(units)
                 .universalSymbolId(universalSymbolId)
+                .notionalValue(notionalValue)
                 .execute();
         // TODO: test validations
     }
@@ -132,6 +134,7 @@ public class TradingApiTest {
         TimeInForce timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
+        Double notionalValue = null;
         AccountOrderRecord response = api.placeForceOrder(userId, userSecret)
                 .accountId(accountId)
                 .action(action)
@@ -141,6 +144,7 @@ public class TradingApiTest {
                 .timeInForce(timeInForce)
                 .units(units)
                 .universalSymbolId(universalSymbolId)
+                .notionalValue(notionalValue)
                 .execute();
         // TODO: test validations
     }

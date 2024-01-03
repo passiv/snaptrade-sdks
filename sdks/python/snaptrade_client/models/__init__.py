@@ -73,6 +73,7 @@ from snaptrade_client.model.model_portfolio_security import ModelPortfolioSecuri
 from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
+from snaptrade_client.model.notional_value import NotionalValue
 from snaptrade_client.model.open_units import OpenUnits
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_chain_item import OptionChainItem

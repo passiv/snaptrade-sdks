@@ -10,7 +10,7 @@
 | **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
 | **symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] |
 | **action** | [**Action**](Action.md) |  | [optional] |
-| **units** | **Float** | Trade Units | [optional] |
+| **units** | **Float** | Trade Units. Cannot work with notional value. | [optional] |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 
 ## Example

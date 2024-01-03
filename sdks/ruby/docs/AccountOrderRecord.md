@@ -10,7 +10,7 @@
 | **universal_symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] |
 | **option_symbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] |
 | **action** | [**Action**](Action.md) |  | [optional] |
-| **total_quantity** | **Float** | Trade Units | [optional] |
+| **total_quantity** | **Float** | Trade Units. Cannot work with notional value. | [optional] |
 | **open_quantity** | **Float** | Trade Units | [optional] |
 | **canceled_quantity** | **Float** | Trade Units | [optional] |
 | **filled_quantity** | **Float** | Trade Units | [optional] |

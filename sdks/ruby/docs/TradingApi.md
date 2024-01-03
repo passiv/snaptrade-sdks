@@ -103,6 +103,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+notional_value = 100
 
 begin
   # Check impact of trades on account.
@@ -117,6 +118,7 @@ begin
                                                   time_in_force: time_in_force,
                                                   units: units,
                                                   universal_symbol_id: universal_symbol_id,
+                                                  notional_value: notional_value,
                                                 )
   p result
 rescue SnapTrade::ApiError => e
@@ -139,6 +141,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+notional_value = 100
 
 begin
   # Check impact of trades on account.
@@ -153,6 +156,7 @@ begin
                                                                                                time_in_force: time_in_force,
                                                                                                units: units,
                                                                                                universal_symbol_id: universal_symbol_id,
+                                                                                               notional_value: notional_value,
                                                                                              )
   p status_code # => 2xx
   p headers # => { ... }
@@ -271,6 +275,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+notional_value = 100
 
 begin
   # Place a trade with NO validation.
@@ -285,6 +290,7 @@ begin
                                                    time_in_force: time_in_force,
                                                    units: units,
                                                    universal_symbol_id: universal_symbol_id,
+                                                   notional_value: notional_value,
                                                  )
   p result
 rescue SnapTrade::ApiError => e
@@ -307,6 +313,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
+notional_value = 100
 
 begin
   # Place a trade with NO validation.
@@ -321,6 +328,7 @@ begin
                                                                                                 time_in_force: time_in_force,
                                                                                                 units: units,
                                                                                                 universal_symbol_id: universal_symbol_id,
+                                                                                                notional_value: notional_value,
                                                                                               )
   p status_code # => 2xx
   p headers # => { ... }

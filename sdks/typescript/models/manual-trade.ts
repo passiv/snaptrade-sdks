@@ -60,7 +60,7 @@ export interface ManualTrade {
      */
     'action'?: Action;
     /**
-     * Trade Units
+     * Trade Units. Cannot work with notional value.
      * @type {number}
      * @memberof ManualTrade
      */

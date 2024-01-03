@@ -37,7 +37,7 @@ class OptionalManualTrade(TypedDict, total=False):
 
     action: Action
 
-    # Trade Units
+    # Trade Units. Cannot work with notional value.
     units: typing.Union[int, float]
 
     price: Price

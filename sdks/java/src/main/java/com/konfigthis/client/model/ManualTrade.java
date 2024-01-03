@@ -284,11 +284,11 @@ public class ManualTrade {
   }
 
    /**
-   * Trade Units
+   * Trade Units. Cannot work with notional value.
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Trade Units")
+  @ApiModelProperty(value = "Trade Units. Cannot work with notional value.")
 
   public Double getUnits() {
     return units;

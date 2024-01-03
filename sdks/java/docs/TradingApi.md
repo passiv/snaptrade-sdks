@@ -164,8 +164,9 @@ public class Example {
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForce timeInForce = TimeInForce.fromValue("Day");
-    Double units = 3.4D; // Trade Units
+    Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
+    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     try {
       ManualTradeAndImpact result = client
               .trading
@@ -178,6 +179,7 @@ public class Example {
               .timeInForce(timeInForce)
               .units(units)
               .universalSymbolId(universalSymbolId)
+              .notionalValue(notionalValue)
               .execute();
       System.out.println(result);
       System.out.println(result.getTrade());
@@ -204,6 +206,7 @@ public class Example {
               .timeInForce(timeInForce)
               .units(units)
               .universalSymbolId(universalSymbolId)
+              .notionalValue(notionalValue)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -385,8 +388,9 @@ public class Example {
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForce timeInForce = TimeInForce.fromValue("Day");
-    Double units = 3.4D; // Trade Units
+    Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
+    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     try {
       AccountOrderRecord result = client
               .trading
@@ -399,6 +403,7 @@ public class Example {
               .timeInForce(timeInForce)
               .units(units)
               .universalSymbolId(universalSymbolId)
+              .notionalValue(notionalValue)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -440,6 +445,7 @@ public class Example {
               .timeInForce(timeInForce)
               .units(units)
               .universalSymbolId(universalSymbolId)
+              .notionalValue(notionalValue)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

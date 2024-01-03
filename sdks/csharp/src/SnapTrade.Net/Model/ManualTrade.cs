@@ -59,7 +59,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">timeInForce.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="action">action.</param>
-        /// <param name="units">Trade Units.</param>
+        /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double units = default(double), double? price = default(double?)) : base()
         {
@@ -93,9 +93,9 @@ namespace SnapTrade.Net.Model
         public ManualTradeSymbol Symbol { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// Trade Units. Cannot work with notional value.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>Trade Units. Cannot work with notional value.</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
         public double Units { get; set; }
 

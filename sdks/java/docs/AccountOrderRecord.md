@@ -14,7 +14,7 @@ Record of order in brokerageaccount
 |**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
-|**totalQuantity** | **Double** | Trade Units |  [optional] |
+|**totalQuantity** | **Double** | Trade Units. Cannot work with notional value. |  [optional] |
 |**openQuantity** | **Double** | Trade Units |  [optional] |
 |**canceledQuantity** | **Double** | Trade Units |  [optional] |
 |**filledQuantity** | **Double** | Trade Units |  [optional] |

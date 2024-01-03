@@ -143,11 +143,12 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForce] 
-    # @param units [Float] Trade Units
+    # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
+    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -157,6 +158,7 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       data, _status_code, _headers = get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
@@ -171,11 +173,12 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForce] 
-    # @param units [Float] Trade Units
+    # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
+    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -185,6 +188,7 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
@@ -390,11 +394,12 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForce] 
-    # @param units [Float] Trade Units
+    # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
+    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -404,6 +409,7 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
@@ -418,11 +424,12 @@ module SnapTrade
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForce] 
-    # @param units [Float] Trade Units
+    # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, extra: {})
+    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -432,6 +439,7 @@ module SnapTrade
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end

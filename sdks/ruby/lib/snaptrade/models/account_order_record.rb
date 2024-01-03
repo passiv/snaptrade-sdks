@@ -27,7 +27,7 @@ module SnapTrade
 
     attr_accessor :action
 
-    # Trade Units
+    # Trade Units. Cannot work with notional value.
     attr_accessor :total_quantity
 
     # Trade Units

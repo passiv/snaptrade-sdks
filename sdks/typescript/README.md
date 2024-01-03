@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v8.29.8-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.8)
+[![npm](https://img.shields.io/badge/npm-v8.29.9-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.9)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1464,6 +1464,7 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   stop: 31.33,
   time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  notional_value: 100,
 });
 ```
 
@@ -1491,9 +1492,13 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ##### units: `number`<a id="units-number"></a>
 
-Trade Units
+Trade Units. Cannot work with notional value.
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+
+##### notional_value: `number`<a id="notional_value-number"></a>
+
+Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1572,6 +1577,7 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   stop: 31.33,
   time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  notional_value: 100,
 });
 ```
 
@@ -1599,9 +1605,13 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ##### units: `number`<a id="units-number"></a>
 
-Trade Units
+Trade Units. Cannot work with notional value.
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+
+##### notional_value: `number`<a id="notional_value-number"></a>
+
+Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
