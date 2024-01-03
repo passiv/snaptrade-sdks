@@ -107,4 +107,12 @@ public class ManualTradeFormTest {
         // TODO: test universalSymbolId
     }
 
+    /**
+     * Test the property 'notionalValue'
+     */
+    @Test
+    public void notionalValueTest() {
+        // TODO: test notionalValue
+    }
+
 }

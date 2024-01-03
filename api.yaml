@@ -3911,6 +3911,8 @@ components:
           $ref: "#/components/schemas/Units"
         universal_symbol_id:
           $ref: "#/components/schemas/Id"
+        notional_value:
+          $ref: "#/components/schemas/NotionalValue"
     Cash:
       description: Cash
       type: number
@@ -3951,7 +3953,7 @@ components:
         - BUY
         - SELL
     Units:
-      description: Trade Units
+      description: Trade Units. Cannot work with notional value.
       type: number
     OpenUnits:
       description: Trade Units
@@ -3970,6 +3972,11 @@ components:
       type: number
       nullable: true
       example: 31.33
+    NotionalValue:
+      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+      type: number
+      nullable: true
+      example: 100.00
     StopPrice:
       description:
         Stop Price. If stop loss or stop limit order, the price to trigger

@@ -28,10 +28,13 @@ module SnapTrade
 
     attr_accessor :time_in_force
 
-    # Trade Units
+    # Trade Units. Cannot work with notional value.
     attr_accessor :units
 
     attr_accessor :universal_symbol_id
+
+    # Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+    attr_accessor :notional_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -43,7 +46,8 @@ module SnapTrade
         :'stop' => :'stop',
         :'time_in_force' => :'time_in_force',
         :'units' => :'units',
-        :'universal_symbol_id' => :'universal_symbol_id'
+        :'universal_symbol_id' => :'universal_symbol_id',
+        :'notional_value' => :'notional_value'
       }
     end
 
@@ -62,7 +66,8 @@ module SnapTrade
         :'stop' => :'Float',
         :'time_in_force' => :'TimeInForce',
         :'units' => :'Float',
-        :'universal_symbol_id' => :'String'
+        :'universal_symbol_id' => :'String',
+        :'notional_value' => :'Float'
       }
     end
 
@@ -71,6 +76,7 @@ module SnapTrade
       Set.new([
         :'price',
         :'stop',
+        :'notional_value'
       ])
     end
 
@@ -120,6 +126,10 @@ module SnapTrade
       if attributes.key?(:'universal_symbol_id')
         self.universal_symbol_id = attributes[:'universal_symbol_id']
       end
+
+      if attributes.key?(:'notional_value')
+        self.notional_value = attributes[:'notional_value']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -147,7 +157,8 @@ module SnapTrade
           stop == o.stop &&
           time_in_force == o.time_in_force &&
           units == o.units &&
-          universal_symbol_id == o.universal_symbol_id
+          universal_symbol_id == o.universal_symbol_id &&
+          notional_value == o.notional_value
     end
 
     # @see the `==` method
@@ -159,7 +170,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, order_type, price, stop, time_in_force, units, universal_symbol_id].hash
+      [account_id, action, order_type, price, stop, time_in_force, units, universal_symbol_id, notional_value].hash
     end
 
     # Builds the object from hash

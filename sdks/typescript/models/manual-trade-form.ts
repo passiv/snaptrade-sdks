@@ -57,7 +57,7 @@ export interface ManualTradeForm {
      */
     'time_in_force'?: TimeInForce;
     /**
-     * Trade Units
+     * Trade Units. Cannot work with notional value.
      * @type {number}
      * @memberof ManualTradeForm
      */
@@ -68,5 +68,11 @@ export interface ManualTradeForm {
      * @memberof ManualTradeForm
      */
     'universal_symbol_id'?: string;
+    /**
+     * Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+     * @type {number}
+     * @memberof ManualTradeForm
+     */
+    'notional_value'?: number | null;
 }
 

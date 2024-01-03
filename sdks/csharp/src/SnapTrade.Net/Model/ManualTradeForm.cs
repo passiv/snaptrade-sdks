@@ -59,9 +59,10 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Trade Price if limit or stop limit order.</param>
         /// <param name="stop">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
         /// <param name="timeInForce">timeInForce.</param>
-        /// <param name="units">Trade Units.</param>
+        /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
-        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double units = default(double), string universalSymbolId = default(string))
+        /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force..</param>
+        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double units = default(double), string universalSymbolId = default(string), double? notionalValue = default(double?))
         {
             this.AccountId = accountId;
             this._Action = action;
@@ -71,6 +72,7 @@ namespace SnapTrade.Net.Model
             this.TimeInForce = timeInForce;
             this.Units = units;
             this.UniversalSymbolId = universalSymbolId;
+            this.NotionalValue = notionalValue;
         }
 
         /// <summary>
@@ -94,9 +96,9 @@ namespace SnapTrade.Net.Model
         public double? Stop { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// Trade Units. Cannot work with notional value.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>Trade Units. Cannot work with notional value.</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
         public double Units { get; set; }
 
@@ -105,6 +107,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "universal_symbol_id", EmitDefaultValue = false)]
         public string UniversalSymbolId { get; set; }
+
+        /// <summary>
+        /// Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+        /// </summary>
+        /// <value>Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.</value>
+        [DataMember(Name = "notional_value", EmitDefaultValue = true)]
+        public double? NotionalValue { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -122,6 +131,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
+            sb.Append("  NotionalValue: ").Append(NotionalValue).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -192,6 +202,11 @@ namespace SnapTrade.Net.Model
                     this.UniversalSymbolId == input.UniversalSymbolId ||
                     (this.UniversalSymbolId != null &&
                     this.UniversalSymbolId.Equals(input.UniversalSymbolId))
+                ) && 
+                (
+                    this.NotionalValue == input.NotionalValue ||
+                    (this.NotionalValue != null &&
+                    this.NotionalValue.Equals(input.NotionalValue))
                 );
         }
 
@@ -223,6 +238,10 @@ namespace SnapTrade.Net.Model
                 if (this.UniversalSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.UniversalSymbolId.GetHashCode();
+                }
+                if (this.NotionalValue != null)
+                {
+                    hashCode = (hashCode * 59) + this.NotionalValue.GetHashCode();
                 }
                 return hashCode;
             }

@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.10-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.10)
+[![PyPI](https://img.shields.io/badge/PyPI-v10.34.11-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.11)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing<a id="installing"></a>
 
 ```sh
-pip install snaptrade-python-sdk==10.34.10
+pip install snaptrade-python-sdk==10.34.11
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1437,6 +1437,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     time_in_force="Day",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    notional_value=100,
 )
 ```
 
@@ -1460,9 +1461,11 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
-Trade Units
+Trade Units. Cannot work with notional value.
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
+
+##### notional_value: [`NotionalValue`](./snaptrade_client/type/notional_value.py)<a id="notional_value-notionalvaluesnaptrade_clienttypenotional_valuepy"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -1543,6 +1546,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     time_in_force="Day",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    notional_value=100,
 )
 ```
 
@@ -1566,9 +1570,11 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
-Trade Units
+Trade Units. Cannot work with notional value.
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
+
+##### notional_value: [`NotionalValue`](./snaptrade_client/type/notional_value.py)<a id="notional_value-notionalvaluesnaptrade_clienttypenotional_valuepy"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

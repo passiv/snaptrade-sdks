@@ -394,6 +394,7 @@ public class TradingApiGenerated {
         private TimeInForce timeInForce;
         private Double units;
         private UUID universalSymbolId;
+        private Double notionalValue;
 
         private GetOrderImpactRequestBuilder(String userId, String userSecret) {
             this.userId = userId;
@@ -484,7 +485,7 @@ public class TradingApiGenerated {
         
         /**
          * Set units
-         * @param units Trade Units (optional)
+         * @param units Trade Units. Cannot work with notional value. (optional)
          * @return GetOrderImpactRequestBuilder
          */
         public GetOrderImpactRequestBuilder units(Double units) {
@@ -499,6 +500,27 @@ public class TradingApiGenerated {
          */
         public GetOrderImpactRequestBuilder universalSymbolId(UUID universalSymbolId) {
             this.universalSymbolId = universalSymbolId;
+            return this;
+        }
+        
+        /**
+         * Set notionalValue
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @return GetOrderImpactRequestBuilder
+         */
+        public GetOrderImpactRequestBuilder notionalValue(Double notionalValue) {
+            this.notionalValue = notionalValue;
+            return this;
+        }
+        
+
+        /**
+         * Set notionalValue
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @return GetOrderImpactRequestBuilder
+         */
+        public GetOrderImpactRequestBuilder notionalValue(Integer notionalValue) {
+            this.notionalValue = notionalValue.doubleValue();
             return this;
         }
         
@@ -529,6 +551,7 @@ public class TradingApiGenerated {
             manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.units(this.units);
             manualTradeForm.universalSymbolId(this.universalSymbolId);
+            manualTradeForm.notionalValue(this.notionalValue);
             return manualTradeForm;
         }
 
@@ -922,6 +945,7 @@ public class TradingApiGenerated {
         private TimeInForce timeInForce;
         private Double units;
         private UUID universalSymbolId;
+        private Double notionalValue;
 
         private PlaceForceOrderRequestBuilder(String userId, String userSecret) {
             this.userId = userId;
@@ -1012,7 +1036,7 @@ public class TradingApiGenerated {
         
         /**
          * Set units
-         * @param units Trade Units (optional)
+         * @param units Trade Units. Cannot work with notional value. (optional)
          * @return PlaceForceOrderRequestBuilder
          */
         public PlaceForceOrderRequestBuilder units(Double units) {
@@ -1027,6 +1051,27 @@ public class TradingApiGenerated {
          */
         public PlaceForceOrderRequestBuilder universalSymbolId(UUID universalSymbolId) {
             this.universalSymbolId = universalSymbolId;
+            return this;
+        }
+        
+        /**
+         * Set notionalValue
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @return PlaceForceOrderRequestBuilder
+         */
+        public PlaceForceOrderRequestBuilder notionalValue(Double notionalValue) {
+            this.notionalValue = notionalValue;
+            return this;
+        }
+        
+
+        /**
+         * Set notionalValue
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @return PlaceForceOrderRequestBuilder
+         */
+        public PlaceForceOrderRequestBuilder notionalValue(Integer notionalValue) {
+            this.notionalValue = notionalValue.doubleValue();
             return this;
         }
         
@@ -1057,6 +1102,7 @@ public class TradingApiGenerated {
             manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.units(this.units);
             manualTradeForm.universalSymbolId(this.universalSymbolId);
+            manualTradeForm.notionalValue(this.notionalValue);
             return manualTradeForm;
         }
 

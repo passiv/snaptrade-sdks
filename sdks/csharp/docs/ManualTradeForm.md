@@ -11,8 +11,9 @@ Name | Type | Description | Notes
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **Stop** | **double?** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] 
 **TimeInForce** | **TimeInForce** |  | [optional] 
-**Units** | **double** | Trade Units | [optional] 
+**Units** | **double** | Trade Units. Cannot work with notional value. | [optional] 
 **UniversalSymbolId** | **string** |  | [optional] 
+**NotionalValue** | **double?** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

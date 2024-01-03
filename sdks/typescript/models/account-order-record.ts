@@ -62,7 +62,7 @@ export interface AccountOrderRecord {
      */
     'action'?: Action;
     /**
-     * Trade Units
+     * Trade Units. Cannot work with notional value.
      * @type {number}
      * @memberof AccountOrderRecord
      */

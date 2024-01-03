@@ -121,6 +121,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'UniversalSymbolId'
         }
+        /// <summary>
+        /// Test the property 'NotionalValue'
+        /// </summary>
+        [Fact]
+        public void NotionalValueTest()
+        {
+            // TODO unit test for the property 'NotionalValue'
+        }
 
     }
 

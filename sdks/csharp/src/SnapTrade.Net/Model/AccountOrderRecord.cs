@@ -65,7 +65,7 @@ namespace SnapTrade.Net.Model
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="action">action.</param>
-        /// <param name="totalQuantity">Trade Units.</param>
+        /// <param name="totalQuantity">Trade Units. Cannot work with notional value..</param>
         /// <param name="openQuantity">Trade Units.</param>
         /// <param name="canceledQuantity">Trade Units.</param>
         /// <param name="filledQuantity">Trade Units.</param>
@@ -126,9 +126,9 @@ namespace SnapTrade.Net.Model
         public OptionsSymbol OptionSymbol { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// Trade Units. Cannot work with notional value.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>Trade Units. Cannot work with notional value.</value>
         [DataMember(Name = "total_quantity", EmitDefaultValue = false)]
         public double TotalQuantity { get; set; }
 
