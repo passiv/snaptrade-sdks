@@ -184,6 +184,7 @@ generators:
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
+    useAiohttp3_8: true
     setSkipSerializationToTrueByDefault: true
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
     clientName: SnapTrade
