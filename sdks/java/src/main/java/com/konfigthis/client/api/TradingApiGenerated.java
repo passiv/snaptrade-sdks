@@ -505,7 +505,7 @@ public class TradingApiGenerated {
         
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** (optional)
          * @return GetOrderImpactRequestBuilder
          */
         public GetOrderImpactRequestBuilder notionalValue(Double notionalValue) {
@@ -516,7 +516,7 @@ public class TradingApiGenerated {
 
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** (optional)
          * @return GetOrderImpactRequestBuilder
          */
         public GetOrderImpactRequestBuilder notionalValue(Integer notionalValue) {
@@ -1056,7 +1056,7 @@ public class TradingApiGenerated {
         
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** (optional)
          * @return PlaceForceOrderRequestBuilder
          */
         public PlaceForceOrderRequestBuilder notionalValue(Double notionalValue) {
@@ -1067,7 +1067,7 @@ public class TradingApiGenerated {
 
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. (optional)
+         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** (optional)
          * @return PlaceForceOrderRequestBuilder
          */
         public PlaceForceOrderRequestBuilder notionalValue(Integer notionalValue) {

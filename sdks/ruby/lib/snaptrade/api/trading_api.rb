@@ -145,7 +145,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -175,7 +175,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -396,7 +396,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -426,7 +426,7 @@ module SnapTrade
     # @param time_in_force [TimeInForce] 
     # @param units [Float] Trade Units. Cannot work with notional value.
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+    # @param notional_value [Float] Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
