@@ -3973,7 +3973,7 @@ components:
       nullable: true
       example: 31.33
     NotionalValue:
-      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
       type: number
       nullable: true
       example: 100.00
