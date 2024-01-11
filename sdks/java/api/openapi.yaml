@@ -6127,7 +6127,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         notional_value:
           description: Dollar amount to trade. Cannot work with units. Can only work
-            for market order types and day for time in force.
+            for market order types and day for time in force. **Only available for
+            Alpaca and Alpaca Paper. Please contact support to get access to place
+            notional trades**
           example: 100
           nullable: true
           type: number
@@ -6202,7 +6204,8 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
     NotionalValue:
       description: Dollar amount to trade. Cannot work with units. Can only work for
-        market order types and day for time in force.
+        market order types and day for time in force. **Only available for Alpaca
+        and Alpaca Paper. Please contact support to get access to place notional trades**
       example: 100
       nullable: true
       type: number

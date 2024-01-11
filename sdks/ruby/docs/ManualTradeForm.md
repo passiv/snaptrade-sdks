@@ -12,7 +12,7 @@
 | **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
 | **units** | **Float** | Trade Units. Cannot work with notional value. | [optional] |
 | **universal_symbol_id** | **String** |  | [optional] |
-| **notional_value** | **Float** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. | [optional] |
+| **notional_value** | **Float** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** | [optional] |
 
 ## Example
 

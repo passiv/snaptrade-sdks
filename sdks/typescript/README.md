@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v8.29.9-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.9)
+[![npm](https://img.shields.io/badge/npm-v8.29.10-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.10)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1498,7 +1498,7 @@ Trade Units. Cannot work with notional value.
 
 ##### notional_value: `number`<a id="notional_value-number"></a>
 
-Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1611,7 +1611,7 @@ Trade Units. Cannot work with notional value.
 
 ##### notional_value: `number`<a id="notional_value-number"></a>
 
-Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force.
+Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
 
 #### 🔄 Return<a id="🔄-return"></a>
 
