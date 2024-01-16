@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.AccountBalanceTotal;
+import com.konfigthis.client.model.AmountNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -54,12 +54,12 @@ import com.konfigthis.client.JSON;
 public class AccountBalance {
   public static final String SERIALIZED_NAME_TOTAL = "total";
   @SerializedName(SERIALIZED_NAME_TOTAL)
-  private AccountBalanceTotal total;
+  private AmountNullable total;
 
   public AccountBalance() {
   }
 
-  public AccountBalance total(AccountBalanceTotal total) {
+  public AccountBalance total(AmountNullable total) {
     
     
     
@@ -75,12 +75,12 @@ public class AccountBalance {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountBalanceTotal getTotal() {
+  public AmountNullable getTotal() {
     return total;
   }
 
 
-  public void setTotal(AccountBalanceTotal total) {
+  public void setTotal(AmountNullable total) {
     
     
     
@@ -210,7 +210,7 @@ public class AccountBalance {
       }
       // validate the optional field `total`
       if (jsonObj.get("total") != null && !jsonObj.get("total").isJsonNull()) {
-        AccountBalanceTotal.validateJsonObject(jsonObj.getAsJsonObject("total"));
+        AmountNullable.validateJsonObject(jsonObj.getAsJsonObject("total"));
       }
   }
 

@@ -28,12 +28,10 @@ module SnapTrade
 
     attr_accessor :time_in_force
 
-    # Trade Units. Cannot work with notional value.
     attr_accessor :units
 
     attr_accessor :universal_symbol_id
 
-    # Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
     attr_accessor :notional_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -76,6 +74,7 @@ module SnapTrade
       Set.new([
         :'price',
         :'stop',
+        :'units',
         :'notional_value'
       ])
     end

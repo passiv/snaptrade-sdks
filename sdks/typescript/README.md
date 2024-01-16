@@ -1464,7 +1464,6 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   stop: 31.33,
   time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
 });
 ```
 
@@ -1490,15 +1489,11 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ##### time_in_force:<a id="time_in_force"></a>
 
-##### units: `number`<a id="units-number"></a>
-
-Trade Units. Cannot work with notional value.
+##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-##### notional_value: `number`<a id="notional_value-number"></a>
-
-Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+##### notional_value: [`number`](./models/number.ts)<a id="notional_value-numbermodelsnumberts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1577,7 +1572,6 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   stop: 31.33,
   time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
 });
 ```
 
@@ -1603,15 +1597,11 @@ Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
 ##### time_in_force:<a id="time_in_force"></a>
 
-##### units: `number`<a id="units-number"></a>
-
-Trade Units. Cannot work with notional value.
+##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-##### notional_value: `number`<a id="notional_value-number"></a>
-
-Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+##### notional_value: [`number`](./models/number.ts)<a id="notional_value-numbermodelsnumberts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

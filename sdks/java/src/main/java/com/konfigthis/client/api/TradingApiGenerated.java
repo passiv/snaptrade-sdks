@@ -493,6 +493,17 @@ public class TradingApiGenerated {
             return this;
         }
         
+
+        /**
+         * Set units
+         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @return GetOrderImpactRequestBuilder
+         */
+        public GetOrderImpactRequestBuilder units(Integer units) {
+            this.units = units.doubleValue();
+            return this;
+        }
+        
         /**
          * Set universalSymbolId
          * @param universalSymbolId  (optional)
@@ -1041,6 +1052,17 @@ public class TradingApiGenerated {
          */
         public PlaceForceOrderRequestBuilder units(Double units) {
             this.units = units;
+            return this;
+        }
+        
+
+        /**
+         * Set units
+         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @return PlaceForceOrderRequestBuilder
+         */
+        public PlaceForceOrderRequestBuilder units(Integer units) {
+            this.units = units.doubleValue();
             return this;
         }
         

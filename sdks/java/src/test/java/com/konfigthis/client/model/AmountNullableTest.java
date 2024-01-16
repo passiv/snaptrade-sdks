@@ -20,47 +20,38 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for OptionsPositionCurrency
+ * Model tests for AmountNullable
  */
-public class OptionsPositionCurrencyTest {
-    private final OptionsPositionCurrency model = new OptionsPositionCurrency();
+public class AmountNullableTest {
+    private final AmountNullable model = new AmountNullable();
 
     /**
-     * Model tests for OptionsPositionCurrency
+     * Model tests for AmountNullable
      */
     @Test
-    public void testOptionsPositionCurrency() {
-        // TODO: test OptionsPositionCurrency
+    public void testAmountNullable() {
+        // TODO: test AmountNullable
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'amount'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void amountTest() {
+        // TODO: test amount
     }
 
     /**
-     * Test the property 'code'
+     * Test the property 'currency'
      */
     @Test
-    public void codeTest() {
-        // TODO: test code
-    }
-
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
+    public void currencyTest() {
+        // TODO: test currency
     }
 
 }

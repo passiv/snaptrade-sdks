@@ -8,7 +8,7 @@ Balance of the account
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**total** | [**AccountBalanceTotal**](AccountBalanceTotal.md) |  |  [optional] |
+|**total** | [**AmountNullable**](AmountNullable.md) |  |  [optional] |
 
 
 

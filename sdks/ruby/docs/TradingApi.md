@@ -103,7 +103,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
-notional_value = 100
+notional_value = 3.14
 
 begin
   # Check impact of trades on account.
@@ -141,7 +141,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
-notional_value = 100
+notional_value = 3.14
 
 begin
   # Check impact of trades on account.
@@ -275,7 +275,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
-notional_value = 100
+notional_value = 3.14
 
 begin
   # Place a trade with NO validation.
@@ -313,7 +313,7 @@ stop = 31.33
 time_in_force = "Day"
 units = 3.14
 universal_symbol_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
-notional_value = 100
+notional_value = 3.14
 
 begin
   # Place a trade with NO validation.

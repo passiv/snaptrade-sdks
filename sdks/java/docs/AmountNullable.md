@@ -1,8 +1,8 @@
 
 
-# AccountBalanceTotal
+# AmountNullable
 
-Total value of this account (includes cash, equity, fixed income, etc)
+Total Value of the account
 
 ## Properties
 

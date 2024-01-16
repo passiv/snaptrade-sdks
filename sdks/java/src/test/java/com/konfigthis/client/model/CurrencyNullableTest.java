@@ -20,38 +20,47 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for AccountBalanceTotal
+ * Model tests for CurrencyNullable
  */
-public class AccountBalanceTotalTest {
-    private final AccountBalanceTotal model = new AccountBalanceTotal();
+public class CurrencyNullableTest {
+    private final CurrencyNullable model = new CurrencyNullable();
 
     /**
-     * Model tests for AccountBalanceTotal
+     * Model tests for CurrencyNullable
      */
     @Test
-    public void testAccountBalanceTotal() {
-        // TODO: test AccountBalanceTotal
+    public void testCurrencyNullable() {
+        // TODO: test CurrencyNullable
     }
 
     /**
-     * Test the property 'amount'
+     * Test the property 'id'
      */
     @Test
-    public void amountTest() {
-        // TODO: test amount
+    public void idTest() {
+        // TODO: test id
     }
 
     /**
-     * Test the property 'currency'
+     * Test the property 'code'
      */
     @Test
-    public void currencyTest() {
-        // TODO: test currency
+    public void codeTest() {
+        // TODO: test code
+    }
+
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
     }
 
 }
