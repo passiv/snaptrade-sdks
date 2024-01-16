@@ -3908,11 +3908,15 @@ components:
         time_in_force:
           $ref: "#/components/schemas/TimeInForce"
         units:
-          $ref: "#/components/schemas/Units"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Units"
         universal_symbol_id:
           $ref: "#/components/schemas/Id"
         notional_value:
-          $ref: "#/components/schemas/NotionalValue"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/NotionalValue"
     Cash:
       description: Cash
       type: number
@@ -3975,7 +3979,6 @@ components:
     NotionalValue:
       description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
       type: number
-      nullable: true
       example: 100.00
     StopPrice:
       description:
