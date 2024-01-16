@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
         /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**.</param>
-        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double units = default(double), string universalSymbolId = default(string), double? notionalValue = default(double?))
+        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
         {
             this.AccountId = accountId;
             this._Action = action;
@@ -99,8 +99,8 @@ namespace SnapTrade.Net.Model
         /// Trade Units. Cannot work with notional value.
         /// </summary>
         /// <value>Trade Units. Cannot work with notional value.</value>
-        [DataMember(Name = "units", EmitDefaultValue = false)]
-        public double Units { get; set; }
+        [DataMember(Name = "units", EmitDefaultValue = true)]
+        public double? Units { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbolId
@@ -196,7 +196,8 @@ namespace SnapTrade.Net.Model
                 ) && 
                 (
                     this.Units == input.Units ||
-                    this.Units.Equals(input.Units)
+                    (this.Units != null &&
+                    this.Units.Equals(input.Units))
                 ) && 
                 (
                     this.UniversalSymbolId == input.UniversalSymbolId ||
@@ -234,7 +235,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Stop.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
-                hashCode = (hashCode * 59) + this.Units.GetHashCode();
+                if (this.Units != null)
+                {
+                    hashCode = (hashCode * 59) + this.Units.GetHashCode();
+                }
                 if (this.UniversalSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.UniversalSymbolId.GetHashCode();

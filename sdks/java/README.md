@@ -1,6 +1,6 @@
 # snaptrade-java-sdk
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.10-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.10)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v4.13.11-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/4.13.11)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>4.13.10</version>
+  <version>4.13.11</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:4.13.10"
+   implementation "com.konfigthis:snaptrade-java-sdk:4.13.11"
 }
 ```
 
@@ -93,7 +93,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-4.13.10.jar`
+* `target/snaptrade-java-sdk-4.13.11.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -228,7 +228,6 @@ Class | Method | HTTP request | Description
 
  - [Account](docs/Account.md)
  - [AccountBalance](docs/AccountBalance.md)
- - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
@@ -237,6 +236,7 @@ Class | Method | HTTP request | Description
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [Action](docs/Action.md)
  - [Amount](docs/Amount.md)
+ - [AmountNullable](docs/AmountNullable.md)
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
@@ -244,12 +244,11 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
  - [BrokerageSymbol](docs/BrokerageSymbol.md)
- - [BrokerageSymbolOptionSymbol](docs/BrokerageSymbolOptionSymbol.md)
- - [BrokerageSymbolSymbol](docs/BrokerageSymbolSymbol.md)
  - [BrokerageType](docs/BrokerageType.md)
  - [CalculatedTrade](docs/CalculatedTrade.md)
  - [CashRestriction](docs/CashRestriction.md)
  - [Currency](docs/Currency.md)
+ - [CurrencyNullable](docs/CurrencyNullable.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)
  - [EncryptedResponse](docs/EncryptedResponse.md)
@@ -284,8 +283,8 @@ Class | Method | HTTP request | Description
  - [OptionsHoldings](docs/OptionsHoldings.md)
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
- - [OptionsPositionCurrency](docs/OptionsPositionCurrency.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
+ - [OptionsSymbolNullable](docs/OptionsSymbolNullable.md)
  - [OrderType](docs/OrderType.md)
  - [PartnerData](docs/PartnerData.md)
  - [PastValue](docs/PastValue.md)
@@ -330,6 +329,7 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)
  - [UniversalActivity](docs/UniversalActivity.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
+ - [UniversalSymbolNullable](docs/UniversalSymbolNullable.md)
  - [UniversalSymbolTicker](docs/UniversalSymbolTicker.md)
  - [UserErrorLog](docs/UserErrorLog.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
