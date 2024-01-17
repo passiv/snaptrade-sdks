@@ -3122,6 +3122,10 @@ components:
           $ref: "#/components/schemas/Exchange"
         type:
           $ref: "#/components/schemas/SecurityType"
+        figi_code:
+          type: string
+          example: BBG000B9XRY4
+          nullable: true
     Timestamp:
       externalDocs:
         url: https://en.wikipedia.org/wiki/Unix_time
@@ -4092,6 +4096,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Currency"
+        figi_code:
+          type: string
+          example: BBG000B9XRY4
+          nullable: true
       required:
         - id
         - symbol
@@ -4099,33 +4107,6 @@ components:
         - currency
         - type
         - currencies
-
-
-    UniversalSymbolTicker:
-        description: Universal symbol
-        type: object
-        properties:
-          id:
-            $ref: "#/components/schemas/Id"
-          symbol:
-            type: string
-            example: VAB.TO
-          raw_symbol:
-            type: string
-            example: VAB
-          description:
-            type: string
-            example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            $ref: "#/components/schemas/Currency"
-          exchange:
-            $ref: "#/components/schemas/Exchange"
-          type:
-            $ref: "#/components/schemas/SecurityType"
-          currencies:
-            type: array
-            items:
-              $ref: "#/components/schemas/Currency"
     UnderlyingSymbol:
       description: Underlying Symbol
       type: object
@@ -4149,6 +4130,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Currency"
+        figi_code:
+          type: string
+          example: BBG000B9XRY4
+          nullable: true
     OptionsSymbol:
       description: Options Symbol
       type: object
