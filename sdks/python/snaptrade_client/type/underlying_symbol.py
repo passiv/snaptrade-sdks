@@ -37,5 +37,7 @@ class OptionalUnderlyingSymbol(TypedDict, total=False):
 
     currencies: typing.List[Currency]
 
+    figi_code: typing.Optional[str]
+
 class UnderlyingSymbol(RequiredUnderlyingSymbol, OptionalUnderlyingSymbol):
     pass

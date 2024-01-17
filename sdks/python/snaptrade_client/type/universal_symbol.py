@@ -37,5 +37,7 @@ class OptionalUniversalSymbol(TypedDict, total=False):
 
     exchange: Exchange
 
+    figi_code: typing.Optional[str]
+
 class UniversalSymbol(RequiredUniversalSymbol, OptionalUniversalSymbol):
     pass

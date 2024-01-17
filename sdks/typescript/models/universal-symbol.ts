@@ -70,5 +70,11 @@ export interface UniversalSymbol {
      * @memberof UniversalSymbol
      */
     'currencies': Array<Currency>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UniversalSymbol
+     */
+    'figi_code'?: string | null;
 }
 

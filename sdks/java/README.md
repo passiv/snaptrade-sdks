@@ -330,7 +330,6 @@ Class | Method | HTTP request | Description
  - [UniversalActivity](docs/UniversalActivity.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
  - [UniversalSymbolNullable](docs/UniversalSymbolNullable.md)
- - [UniversalSymbolTicker](docs/UniversalSymbolTicker.md)
  - [UserErrorLog](docs/UserErrorLog.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [UserSettings](docs/UserSettings.md)

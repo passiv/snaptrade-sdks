@@ -153,7 +153,6 @@ from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.units import Units
 from snaptrade_client.model.universal_activity import UniversalActivity
 from snaptrade_client.model.universal_symbol import UniversalSymbol
-from snaptrade_client.model.universal_symbol_ticker import UniversalSymbolTicker
 from snaptrade_client.model.user_error_log import UserErrorLog
 from snaptrade_client.model.user_id import UserID
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret

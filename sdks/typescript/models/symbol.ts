@@ -64,5 +64,11 @@ export interface Symbol {
      * @memberof Symbol
      */
     'type'?: SecurityType;
+    /**
+     * 
+     * @type {string}
+     * @memberof Symbol
+     */
+    'figi_code'?: string | null;
 }
 
