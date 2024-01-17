@@ -106,6 +106,26 @@ class UniversalSymbol(
             @staticmethod
             def exchange() -> typing.Type['Exchange']:
                 return Exchange
+            
+            
+            class figi_code(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'figi_code':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -115,6 +135,7 @@ class UniversalSymbol(
                 "currencies": currencies,
                 "description": description,
                 "exchange": exchange,
+                "figi_code": figi_code,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -150,9 +171,12 @@ class UniversalSymbol(
     def __getitem__(self, name: typing_extensions.Literal["exchange"]) -> 'Exchange': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["figi_code"]) -> MetaOapg.properties.figi_code: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], typing_extensions.Literal["figi_code"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -181,9 +205,12 @@ class UniversalSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["exchange"]) -> typing.Union['Exchange', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["figi_code"]) -> typing.Union[MetaOapg.properties.figi_code, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["currency"], typing_extensions.Literal["id"], typing_extensions.Literal["type"], typing_extensions.Literal["currencies"], typing_extensions.Literal["description"], typing_extensions.Literal["exchange"], typing_extensions.Literal["figi_code"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -197,6 +224,7 @@ class UniversalSymbol(
         currencies: typing.Union[MetaOapg.properties.currencies, list, tuple, ],
         description: typing.Union[MetaOapg.properties.description, None, str, schemas.Unset] = schemas.unset,
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
+        figi_code: typing.Union[MetaOapg.properties.figi_code, None, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'UniversalSymbol':
@@ -211,6 +239,7 @@ class UniversalSymbol(
             currencies=currencies,
             description=description,
             exchange=exchange,
+            figi_code=figi_code,
             _configuration=_configuration,
             **kwargs,
         )

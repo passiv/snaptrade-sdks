@@ -11,6 +11,7 @@
 | **currency** | [**Currency**](Currency.md) |  | [optional] |
 | **exchange** | [**Exchange**](Exchange.md) |  | [optional] |
 | **type** | [**SecurityType**](SecurityType.md) |  | [optional] |
+| **figi_code** | **String** |  | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = SnapTrade::Symbol.new(
   name: Vanguard Canadian Aggregate Bond Index ETF,
   currency: null,
   exchange: null,
-  type: null
+  type: null,
+  figi_code: BBG000B9XRY4
 )
 ```
 

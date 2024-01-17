@@ -64,5 +64,11 @@ export interface UnderlyingSymbol {
      * @memberof UnderlyingSymbol
      */
     'currencies'?: Array<Currency>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UnderlyingSymbol
+     */
+    'figi_code'?: string | null;
 }
 

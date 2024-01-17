@@ -109,7 +109,6 @@ export * from './usexchange';
 export * from './underlying-symbol';
 export * from './universal-activity';
 export * from './universal-symbol';
-export * from './universal-symbol-ticker';
 export * from './user-error-log';
 export * from './user-idand-secret';
 export * from './user-settings';

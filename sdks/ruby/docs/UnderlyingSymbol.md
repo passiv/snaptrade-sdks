@@ -11,6 +11,7 @@
 | **exchange** | [**USExchange**](USExchange.md) |  | [optional] |
 | **type** | [**SecurityType**](SecurityType.md) |  | [optional] |
 | **currencies** | [**Array&lt;Currency&gt;**](Currency.md) |  | [optional] |
+| **figi_code** | **String** |  | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = SnapTrade::UnderlyingSymbol.new(
   currency: null,
   exchange: null,
   type: null,
-  currencies: null
+  currencies: null,
+  figi_code: BBG000B9XRY4
 )
 ```
 

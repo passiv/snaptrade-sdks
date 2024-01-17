@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.17.12'
+gem 'snaptrade', '~> 1.17.13'
 ```
 
 ## Getting Started
@@ -216,7 +216,6 @@ Class | Method | HTTP request | Description
  - [SnapTrade::UnderlyingSymbol](docs/UnderlyingSymbol.md)
  - [SnapTrade::UniversalActivity](docs/UniversalActivity.md)
  - [SnapTrade::UniversalSymbol](docs/UniversalSymbol.md)
- - [SnapTrade::UniversalSymbolTicker](docs/UniversalSymbolTicker.md)
  - [SnapTrade::UserErrorLog](docs/UserErrorLog.md)
  - [SnapTrade::UserIDandSecret](docs/UserIDandSecret.md)
  - [SnapTrade::UserSettings](docs/UserSettings.md)

@@ -42,7 +42,8 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="exchange">exchange.</param>
         /// <param name="type">type.</param>
-        public Symbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType)) : base()
+        /// <param name="figiCode">figiCode.</param>
+        public Symbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), string figiCode = default(string)) : base()
         {
             this.Id = id;
             this._Symbol = symbol;
@@ -51,6 +52,7 @@ namespace SnapTrade.Net.Model
             this.Currency = currency;
             this.Exchange = exchange;
             this.Type = type;
+            this.FigiCode = figiCode;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -97,6 +99,12 @@ namespace SnapTrade.Net.Model
         public SecurityType Type { get; set; }
 
         /// <summary>
+        /// Gets or Sets FigiCode
+        /// </summary>
+        [DataMember(Name = "figi_code", EmitDefaultValue = true)]
+        public string FigiCode { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -118,6 +126,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Exchange: ").Append(Exchange).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  FigiCode: ").Append(FigiCode).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -188,6 +197,11 @@ namespace SnapTrade.Net.Model
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
+                    this.FigiCode == input.FigiCode ||
+                    (this.FigiCode != null &&
+                    this.FigiCode.Equals(input.FigiCode))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -228,6 +242,10 @@ namespace SnapTrade.Net.Model
                 if (this.Type != null)
                 {
                     hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                }
+                if (this.FigiCode != null)
+                {
+                    hashCode = (hashCode * 59) + this.FigiCode.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

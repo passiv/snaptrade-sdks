@@ -2401,6 +2401,7 @@ components:
         - symbol:
             is_quotable: true
             symbol:
+              figi_code: BBG000B9XRY4
               symbol: VAB.TO
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2442,6 +2443,7 @@ components:
         - symbol:
             is_quotable: true
             symbol:
+              figi_code: BBG000B9XRY4
               symbol: VAB.TO
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2566,6 +2568,7 @@ components:
         - symbol:
             is_quotable: true
             symbol:
+              figi_code: BBG000B9XRY4
               symbol: VAB.TO
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2607,6 +2610,7 @@ components:
         - symbol:
             is_quotable: true
             symbol:
+              figi_code: BBG000B9XRY4
               symbol: VAB.TO
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2659,6 +2663,7 @@ components:
           action: null
           total_quantity: 0.8008281904610115
           universal_symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2696,6 +2701,7 @@ components:
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
+              figi_code: BBG000B9XRY4
               symbol: SPY
               description: SPDR S&P 500 ETF Trust
               currency:
@@ -2744,6 +2750,7 @@ components:
           action: null
           total_quantity: 0.8008281904610115
           universal_symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2781,6 +2788,7 @@ components:
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
+              figi_code: BBG000B9XRY4
               symbol: SPY
               description: SPDR S&P 500 ETF Trust
               currency:
@@ -2878,6 +2886,7 @@ components:
         action: null
         total_quantity: 0.8008281904610115
         universal_symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -2915,6 +2924,7 @@ components:
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
+            figi_code: BBG000B9XRY4
             symbol: SPY
             description: SPDR S&P 500 ETF Trust
             currency:
@@ -3058,6 +3068,7 @@ components:
       example:
         symbol:
           symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -3131,6 +3142,7 @@ components:
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
+              figi_code: BBG000B9XRY4
               symbol: SPY
               description: SPDR S&P 500 ETF Trust
               currency:
@@ -3322,6 +3334,7 @@ components:
         strategy_type: BUTTERFLY
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         underlying_symbol_id:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -3399,6 +3412,7 @@ components:
           strategy_type: BUTTERFLY
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           underlying_symbol_id:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -3485,6 +3499,7 @@ components:
           strategy_type: BUTTERFLY
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           underlying_symbol_id:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -4046,6 +4061,7 @@ components:
         commissions: 3.26
         dividends:
         - symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -4078,6 +4094,7 @@ components:
           amount: 165.05
           currency: USD
         - symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -4455,6 +4472,7 @@ components:
         symbol:
           is_quotable: true
           symbol:
+            figi_code: BBG000B9XRY4
             symbol: VAB.TO
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -4680,6 +4698,7 @@ components:
       additionalProperties: true
       description: Symbol
       example:
+        figi_code: BBG000B9XRY4
         symbol: VAB.TO
         raw_symbol: VAB
         name: Vanguard Canadian Aggregate Bond Index ETF
@@ -4730,6 +4749,12 @@ components:
           $ref: '#/components/schemas/Exchange'
         type:
           $ref: '#/components/schemas/SecurityType'
+        figi_code:
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-figi_code
       type: object
     Timestamp:
       description: Unix Epoch time
@@ -5127,6 +5152,7 @@ components:
       description: Brokerage symbol
       example:
         symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -5200,6 +5226,7 @@ components:
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
+            figi_code: BBG000B9XRY4
             symbol: SPY
             description: SPDR S&P 500 ETF Trust
             currency:
@@ -5263,6 +5290,7 @@ components:
       example:
         is_quotable: true
         symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -5547,6 +5575,7 @@ components:
       description: Object representing total dividends received during a timeframe
       example:
         symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -6369,6 +6398,7 @@ components:
       description: A transaction or activity from an institution
       example:
         symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           name: Vanguard Canadian Aggregate Bond Index ETF
@@ -6415,6 +6445,7 @@ components:
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
+            figi_code: BBG000B9XRY4
             symbol: SPY
             description: SPDR S&P 500 ETF Trust
             currency:
@@ -6552,6 +6583,7 @@ components:
       additionalProperties: true
       description: Universal symbol
       example:
+        figi_code: BBG000B9XRY4
         symbol: VAB.TO
         raw_symbol: VAB
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -6614,6 +6646,12 @@ components:
           items:
             $ref: '#/components/schemas/Currency'
           type: array
+        figi_code:
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code
       required:
       - currencies
       - currency
@@ -6623,46 +6661,11 @@ components:
       - type
       type: object
       x-konfig-is-used-in-successful-response: true
-    UniversalSymbolTicker:
-      additionalProperties: true
-      description: Universal symbol
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        symbol:
-          example: VAB.TO
-          type: string
-          x-konfig-original-example: VAB.TO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-symbol
-        raw_symbol:
-          example: VAB
-          type: string
-          x-konfig-original-example: VAB
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-raw_symbol
-        description:
-          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          type: string
-          x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-description
-        currency:
-          $ref: '#/components/schemas/Currency'
-        exchange:
-          $ref: '#/components/schemas/Exchange'
-        type:
-          $ref: '#/components/schemas/SecurityType'
-        currencies:
-          items:
-            $ref: '#/components/schemas/Currency'
-          type: array
-      type: object
     UnderlyingSymbol:
       additionalProperties: true
       description: Underlying Symbol
       example:
+        figi_code: BBG000B9XRY4
         symbol: SPY
         description: SPDR S&P 500 ETF Trust
         currency:
@@ -6720,6 +6723,12 @@ components:
           items:
             $ref: '#/components/schemas/Currency'
           type: array
+        figi_code:
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-figi_code
       type: object
     OptionsSymbol:
       additionalProperties: true
@@ -6731,6 +6740,7 @@ components:
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
+          figi_code: BBG000B9XRY4
           symbol: SPY
           description: SPDR S&P 500 ETF Trust
           currency:
@@ -7769,6 +7779,10 @@ components:
       example: Vanguard Canadian Aggregate Bond Index ETF
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Symbol-properties-figi_code:
+      example: BBG000B9XRY4
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Timestamp:
       example: 1635790389
       type: number
@@ -8249,16 +8263,8 @@ components:
       example: VANGUARD CDN AGGREGATE BOND INDEX ETF
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-symbol:
-      example: VAB.TO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-raw_symbol:
-      example: VAB
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UniversalSymbolTicker-properties-description:
-      example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+    konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code:
+      example: BBG000B9XRY4
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-symbol:
@@ -8267,6 +8273,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-description:
       example: SPDR S&P 500 ETF Trust
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-figi_code:
+      example: BBG000B9XRY4
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker:
@@ -9464,6 +9474,7 @@ components:
       additionalProperties: true
       description: Universal symbol
       example:
+        figi_code: BBG000B9XRY4
         symbol: VAB.TO
         raw_symbol: VAB
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -9527,6 +9538,12 @@ components:
           items:
             $ref: '#/components/schemas/Currency'
           type: array
+        figi_code:
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code
       required:
       - currencies
       - currency
@@ -9546,6 +9563,7 @@ components:
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
+          figi_code: BBG000B9XRY4
           symbol: SPY
           description: SPDR S&P 500 ETF Trust
           currency:
@@ -10174,6 +10192,7 @@ components:
     SymbolsQuotes_inner:
       example:
         symbol:
+          figi_code: BBG000B9XRY4
           symbol: VAB.TO
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF

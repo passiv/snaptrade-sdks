@@ -69,5 +69,11 @@ export interface BrokerageSymbolSymbol {
      * @memberof BrokerageSymbolSymbol
      */
     'currencies': Array<Currency>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BrokerageSymbolSymbol
+     */
+    'figi_code'?: string | null;
 }
 

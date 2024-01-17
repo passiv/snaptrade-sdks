@@ -37,5 +37,7 @@ class OptionalSymbol(TypedDict, total=False):
 
     type: SecurityType
 
+    figi_code: typing.Optional[str]
+
 class Symbol(RequiredSymbol, OptionalSymbol):
     pass

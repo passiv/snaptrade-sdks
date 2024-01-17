@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Exchange** | [**USExchange**](USExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | [optional] 
 **Currencies** | [**List&lt;Currency&gt;**](Currency.md) |  | [optional] 
+**FigiCode** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

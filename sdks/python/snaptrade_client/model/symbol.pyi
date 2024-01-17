@@ -53,6 +53,26 @@ class Symbol(
             @staticmethod
             def type() -> typing.Type['SecurityType']:
                 return SecurityType
+            
+            
+            class figi_code(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'figi_code':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -61,6 +81,7 @@ class Symbol(
                 "currency": currency,
                 "exchange": exchange,
                 "type": type,
+                "figi_code": figi_code,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -86,9 +107,12 @@ class Symbol(
     def __getitem__(self, name: typing_extensions.Literal["type"]) -> 'SecurityType': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["figi_code"]) -> MetaOapg.properties.figi_code: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -114,9 +138,12 @@ class Symbol(
     def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union['SecurityType', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["figi_code"]) -> typing.Union[MetaOapg.properties.figi_code, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -129,6 +156,7 @@ class Symbol(
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
         type: typing.Union['SecurityType', schemas.Unset] = schemas.unset,
+        figi_code: typing.Union[MetaOapg.properties.figi_code, None, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Symbol':
@@ -142,6 +170,7 @@ class Symbol(
             currency=currency,
             exchange=exchange,
             type=type,
+            figi_code=figi_code,
             _configuration=_configuration,
             **kwargs,
         )
