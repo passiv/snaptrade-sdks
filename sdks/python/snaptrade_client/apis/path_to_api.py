@@ -39,7 +39,7 @@ from snaptrade_client.apis.paths.currencies_rates_currency_pair import Currencie
 from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
-from snaptrade_client.apis.paths.symbols_ticker import SymbolsTicker
+from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
 from snaptrade_client.apis.paths.activities import Activities
 from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 
@@ -84,7 +84,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
-        PathValues.SYMBOLS_TICKER: SymbolsTicker,
+        PathValues.SYMBOLS_QUERY: SymbolsQuery,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
     }
@@ -130,7 +130,7 @@ path_to_api = PathToApi(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
-        PathValues.SYMBOLS_TICKER: SymbolsTicker,
+        PathValues.SYMBOLS_QUERY: SymbolsQuery,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
     }

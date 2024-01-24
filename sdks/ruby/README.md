@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 1.17.13'
+gem 'snaptrade', '~> 2.0.0'
 ```
 
 ## Getting Started
@@ -72,7 +72,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::ReferenceDataApi* | [**get_security_types**](docs/ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types
 *SnapTrade::ReferenceDataApi* | [**get_stock_exchanges**](docs/ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges
 *SnapTrade::ReferenceDataApi* | [**get_symbols**](docs/ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols
-*SnapTrade::ReferenceDataApi* | [**get_symbols_by_ticker**](docs/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker
+*SnapTrade::ReferenceDataApi* | [**get_symbols_by_ticker**](docs/ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id
 *SnapTrade::ReferenceDataApi* | [**list_all_brokerage_authorization_type**](docs/ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
 *SnapTrade::ReferenceDataApi* | [**list_all_brokerages**](docs/ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List brokerages
 *SnapTrade::ReferenceDataApi* | [**list_all_currencies**](docs/ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List currencies

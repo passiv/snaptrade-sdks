@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v10.34.14-blue)](https://pypi.org/project/snaptrade-python-sdk/10.34.14)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.0-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.0)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing<a id="installing"></a>
 
 ```sh
-pip install snaptrade-python-sdk==10.34.14
+pip install snaptrade-python-sdk==11.0.0
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1198,26 +1198,21 @@ get_symbols_response = snaptrade.reference_data.get_symbols(
 
 ### `snaptrade.reference_data.get_symbols_by_ticker`<a id="snaptradereference_dataget_symbols_by_ticker"></a>
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
-    ticker="ticker_example",
-    symbol_id="046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    query="query_example",
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### ticker: `str`<a id="ticker-str"></a>
+##### query: `str`<a id="query-str"></a>
 
-The ticker of the UniversalSymbol to get.
-
-##### symbol_id: `str`<a id="symbol_id-str"></a>
-
-OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1225,7 +1220,7 @@ OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymb
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/symbols/{ticker}` `get`
+`/symbols/{query}` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

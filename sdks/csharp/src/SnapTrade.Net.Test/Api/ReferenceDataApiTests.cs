@@ -193,13 +193,12 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetSymbolsByTickerTest()
         {
-            var ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
-            var symbolId = "symbolId_example"; // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
+            var query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
             
             try
             {
-                // Get details of a symbol by the ticker
-                UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(ticker, symbolId);
+                // Get details of a symbol by the ticker or the universal_symbol_id
+                UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

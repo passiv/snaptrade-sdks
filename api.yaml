@@ -1295,26 +1295,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SymbolQuery"
-  /symbols/{ticker}:
+  /symbols/{query}:
     get:
       tags:
         - Reference Data
-      summary: Get details of a symbol by the ticker
+      summary: Get details of a symbol by the ticker or the universal_symbol_id
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
         - in: path
-          name: ticker
+          name: query
           required: true
-          description: The ticker of the UniversalSymbol to get.
+          description: The ticker or universal_symbol_id of the UniversalSymbol to get.
           schema:
             type: string
-        - in: query
-          name: symbolId
-          required: false
-          description: OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
-          schema:
-            type: string
-            format: uuid
       responses:
         "200":
           description: Successfully gets a symbol

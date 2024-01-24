@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v8.29.12-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/8.29.12)
+[![npm](https://img.shields.io/badge/npm-v9.0.0-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1051,8 +1051,8 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
     userSecret: "USERSECRET123",
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    order_type: "Limit",
-    time_in_force: "Day",
+    order_type: "string_example",
+    time_in_force: "string_example",
     price: 31.33,
   }
 );
@@ -1060,9 +1060,13 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type:<a id="order_type"></a>
+##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
 
-##### time_in_force:<a id="time_in_force"></a>
+Order Type
+
+##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+
+Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1227,26 +1231,22 @@ const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
 
 ### `snaptrade.referenceData.getSymbolsByTicker`<a id="snaptradereferencedatagetsymbolsbyticker"></a>
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getSymbolsByTickerResponse =
   await snaptrade.referenceData.getSymbolsByTicker({
-    ticker: "ticker_example",
+    query: "query_example",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### ticker: `string`<a id="ticker-string"></a>
+##### query: `string`<a id="query-string"></a>
 
-The ticker of the UniversalSymbol to get.
-
-##### symbolId: `string`<a id="symbolid-string"></a>
-
-OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1254,7 +1254,7 @@ OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymb
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/symbols/{ticker}` `GET`
+`/symbols/{query}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1458,11 +1458,8 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  action: "BUY",
-  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
 });
 ```
@@ -1475,9 +1472,13 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-##### action:<a id="action"></a>
+##### action: [`Action`](./models/action.ts)<a id="action-actionmodelsactionts"></a>
 
-##### order_type:<a id="order_type"></a>
+Trade Action
+
+##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
+
+Order Type
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -1487,7 +1488,9 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force:<a id="time_in_force"></a>
+##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+
+Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
@@ -1566,11 +1569,8 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  action: "BUY",
-  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "Day",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
 });
 ```
@@ -1583,9 +1583,13 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-##### action:<a id="action"></a>
+##### action: [`Action`](./models/action.ts)<a id="action-actionmodelsactionts"></a>
 
-##### order_type:<a id="order_type"></a>
+Trade Action
+
+##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
+
+Order Type
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -1595,7 +1599,9 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force:<a id="time_in_force"></a>
+##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+
+Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 

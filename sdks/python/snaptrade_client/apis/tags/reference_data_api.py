@@ -15,7 +15,7 @@ from snaptrade_client.paths.snap_trade_partners.get import GetPartnerInfo
 from snaptrade_client.paths.security_types.get import GetSecurityTypes
 from snaptrade_client.paths.exchanges.get import GetStockExchanges
 from snaptrade_client.paths.symbols.post import GetSymbols
-from snaptrade_client.paths.symbols_ticker.get import GetSymbolsByTicker
+from snaptrade_client.paths.symbols_query.get import GetSymbolsByTicker
 from snaptrade_client.paths.brokerage_authorization_types.get import ListAllBrokerageAuthorizationType
 from snaptrade_client.paths.brokerages.get import ListAllBrokerages
 from snaptrade_client.paths.currencies.get import ListAllCurrencies

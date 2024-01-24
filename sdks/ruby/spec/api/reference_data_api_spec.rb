@@ -82,10 +82,9 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_symbols_by_ticker
-  # Get details of a symbol by the ticker
-  # @param ticker The ticker of the UniversalSymbol to get.
+  # Get details of a symbol by the ticker or the universal_symbol_id
+  # @param query The ticker or universal_symbol_id of the UniversalSymbol to get.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :symbol_id OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
   # @return [UniversalSymbol]
   describe 'get_symbols_by_ticker test' do
     it 'should work' do

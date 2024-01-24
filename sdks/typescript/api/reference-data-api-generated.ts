@@ -273,17 +273,16 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Get details of a symbol by the ticker
-         * @param {string} ticker The ticker of the UniversalSymbol to get.
-         * @param {string} [symbolId] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+         * @summary Get details of a symbol by the ticker or the universal_symbol_id
+         * @param {string} query The ticker or universal_symbol_id of the UniversalSymbol to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSymbolsByTicker: async (ticker: string, symbolId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'ticker' is not null or undefined
-            assertParamExists('getSymbolsByTicker', 'ticker', ticker)
-            const localVarPath = `/symbols/{ticker}`
-                .replace(`{${"ticker"}}`, encodeURIComponent(String(ticker !== undefined ? ticker : `-ticker-`)));
+        getSymbolsByTicker: async (query: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'query' is not null or undefined
+            assertParamExists('getSymbolsByTicker', 'query', query)
+            const localVarPath = `/symbols/{query}`
+                .replace(`{${"query"}}`, encodeURIComponent(String(query !== undefined ? query : `-query-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -301,10 +300,6 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
             // authentication PartnerTimestamp required
             await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
-            if (symbolId !== undefined) {
-                localVarQueryParameter['symbolId'] = symbolId;
-            }
-
 
     
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -625,13 +620,13 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get details of a symbol by the ticker
+         * @summary Get details of a symbol by the ticker or the universal_symbol_id
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getSymbolsByTicker(requestParameters: ReferenceDataApiGetSymbolsByTickerRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbolsByTicker(requestParameters.ticker, requestParameters.symbolId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbolsByTicker(requestParameters.query, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -745,7 +740,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @summary Get details of a symbol by the ticker
+         * @summary Get details of a symbol by the ticker or the universal_symbol_id
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -836,18 +831,11 @@ export type ReferenceDataApiGetSymbolsRequest = {
 export type ReferenceDataApiGetSymbolsByTickerRequest = {
     
     /**
-    * The ticker of the UniversalSymbol to get.
+    * The ticker or universal_symbol_id of the UniversalSymbol to get.
     * @type {string}
     * @memberof ReferenceDataApiGetSymbolsByTicker
     */
-    readonly ticker: string
-    
-    /**
-    * OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
-    * @type {string}
-    * @memberof ReferenceDataApiGetSymbolsByTicker
-    */
-    readonly symbolId?: string
+    readonly query: string
     
 }
 
@@ -963,7 +951,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
 
     /**
      * 
-     * @summary Get details of a symbol by the ticker
+     * @summary Get details of a symbol by the ticker or the universal_symbol_id
      * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

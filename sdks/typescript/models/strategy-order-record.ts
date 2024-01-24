@@ -53,13 +53,13 @@ export interface StrategyOrderRecord {
      */
     'closed_quantity'?: number;
     /**
-     * 
+     * Order Type
      * @type {OrderType}
      * @memberof StrategyOrderRecord
      */
     'order_type'?: OrderType;
     /**
-     * 
+     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
      * @type {TimeInForce}
      * @memberof StrategyOrderRecord
      */

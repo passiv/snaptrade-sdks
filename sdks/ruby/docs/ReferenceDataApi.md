@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**get_security_types**](ReferenceDataApi.md#get_security_types) | **GET** /securityTypes | List of all security types |
 | [**get_stock_exchanges**](ReferenceDataApi.md#get_stock_exchanges) | **GET** /exchanges | List exchanges |
 | [**get_symbols**](ReferenceDataApi.md#get_symbols) | **POST** /symbols | Search for symbols |
-| [**get_symbols_by_ticker**](ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
+| [**get_symbols_by_ticker**](ReferenceDataApi.md#get_symbols_by_ticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id |
 | [**list_all_brokerage_authorization_type**](ReferenceDataApi.md#list_all_brokerage_authorization_type) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
 | [**list_all_brokerages**](ReferenceDataApi.md#list_all_brokerages) | **GET** /brokerages | List brokerages |
 | [**list_all_currencies**](ReferenceDataApi.md#list_all_currencies) | **GET** /currencies | List currencies |
@@ -271,7 +271,7 @@ end
 
 ## get_symbols_by_ticker
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 ### Example
 
@@ -281,14 +281,12 @@ require 'snaptrade'
 SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
-ticker = "ticker_example"
-symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+query = "query_example"
 
 begin
-  # Get details of a symbol by the ticker
+  # Get details of a symbol by the ticker or the universal_symbol_id
   result = SnapTrade::ReferenceData.get_symbols_by_ticker(
-                                                             ticker: ticker,
-                                                             symbol_id: symbol_id,
+                                                             query: query,
                                                            )
   p result
 rescue SnapTrade::ApiError => e
@@ -301,14 +299,12 @@ end
 This returns an Array which contains the response data, status code and headers.
 
 ```ruby
-ticker = "ticker_example"
-symbol_id = "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+query = "query_example"
 
 begin
-  # Get details of a symbol by the ticker
+  # Get details of a symbol by the ticker or the universal_symbol_id
   data, status_code, headers, response = SnapTrade::ReferenceData.get_symbols_by_ticker_with_http_info(
-                                                                                                          ticker: ticker,
-                                                                                                          symbol_id: symbol_id,
+                                                                                                          query: query,
                                                                                                         )
   p status_code # => 2xx
   p headers # => { ... }
@@ -322,8 +318,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ticker** | **String** | The ticker of the UniversalSymbol to get. |  |
-| **symbol_id** | **String** | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional] |
+| **query** | **String** | The ticker or universal_symbol_id of the UniversalSymbol to get. |  |
 
 ### Return type
 

@@ -392,54 +392,47 @@ module SnapTrade
     end
 
 
-    # Get details of a symbol by the ticker
-    # @param ticker [String] The ticker of the UniversalSymbol to get.
-    # @param symbol_id [String] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+    # Get details of a symbol by the ticker or the universal_symbol_id
+    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols_by_ticker(ticker:, symbol_id: SENTINEL, extra: {})
-      extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
-      data, _status_code, _headers = get_symbols_by_ticker_with_http_info_impl(ticker, extra)
+    def get_symbols_by_ticker(query:, extra: {})
+      data, _status_code, _headers = get_symbols_by_ticker_with_http_info_impl(query, extra)
       data
     end
 
-    # Get details of a symbol by the ticker
-    # @param ticker [String] The ticker of the UniversalSymbol to get.
-    # @param symbol_id [String] OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+    # Get details of a symbol by the ticker or the universal_symbol_id
+    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_symbols_by_ticker_with_http_info(ticker:, symbol_id: SENTINEL, extra: {})
-      extra[:symbol_id] = symbol_id if symbol_id != SENTINEL
-      get_symbols_by_ticker_with_http_info_impl(ticker, extra)
+    def get_symbols_by_ticker_with_http_info(query:, extra: {})
+      get_symbols_by_ticker_with_http_info_impl(query, extra)
     end
 
-    # Get details of a symbol by the ticker
-    # @param ticker [String] The ticker of the UniversalSymbol to get.
+    # Get details of a symbol by the ticker or the universal_symbol_id
+    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :symbol_id OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     # @return [UniversalSymbol]
-    def get_symbols_by_ticker_impl(ticker, opts = {})
-      data, _status_code, _headers = get_symbols_by_ticker_with_http_info(ticker, opts)
+    def get_symbols_by_ticker_impl(query, opts = {})
+      data, _status_code, _headers = get_symbols_by_ticker_with_http_info(query, opts)
       data
     end
 
-    # Get details of a symbol by the ticker
-    # @param ticker [String] The ticker of the UniversalSymbol to get.
+    # Get details of a symbol by the ticker or the universal_symbol_id
+    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :symbol_id OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
     # @return [Array<(UniversalSymbol, Integer, Hash)>] UniversalSymbol data, response status code and response headers
-    def get_symbols_by_ticker_with_http_info_impl(ticker, opts = {})
+    def get_symbols_by_ticker_with_http_info_impl(query, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ReferenceDataApi.get_symbols_by_ticker ...'
       end
-      # verify the required parameter 'ticker' is set
-      if @api_client.config.client_side_validation && ticker.nil?
-        fail ArgumentError, "Missing the required parameter 'ticker' when calling ReferenceDataApi.get_symbols_by_ticker"
+      # verify the required parameter 'query' is set
+      if @api_client.config.client_side_validation && query.nil?
+        fail ArgumentError, "Missing the required parameter 'query' when calling ReferenceDataApi.get_symbols_by_ticker"
       end
       # resource path
-      local_var_path = '/symbols/{ticker}'.sub('{' + 'ticker' + '}', CGI.escape(ticker.to_s))
+      local_var_path = '/symbols/{query}'.sub('{' + 'query' + '}', CGI.escape(query.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'symbolId'] = opts[:'symbol_id'] if !opts[:'symbol_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
