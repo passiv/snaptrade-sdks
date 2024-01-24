@@ -1198,26 +1198,21 @@ get_symbols_response = snaptrade.reference_data.get_symbols(
 
 ### `snaptrade.reference_data.get_symbols_by_ticker`<a id="snaptradereference_dataget_symbols_by_ticker"></a>
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
-    ticker="ticker_example",
-    symbol_id="046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    query="query_example",
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### ticker: `str`<a id="ticker-str"></a>
+##### query: `str`<a id="query-str"></a>
 
-The ticker of the UniversalSymbol to get.
-
-##### symbol_id: `str`<a id="symbol_id-str"></a>
-
-OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get.
+The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1225,7 +1220,7 @@ OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymb
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/symbols/{ticker}` `get`
+`/symbols/{query}` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

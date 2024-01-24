@@ -27,13 +27,13 @@ export interface ManualTradeForm {
      */
     'account_id'?: string;
     /**
-     * 
+     * Trade Action
      * @type {Action}
      * @memberof ManualTradeForm
      */
     'action'?: Action;
     /**
-     * 
+     * Order Type
      * @type {OrderType}
      * @memberof ManualTradeForm
      */
@@ -51,7 +51,7 @@ export interface ManualTradeForm {
      */
     'stop'?: number | null;
     /**
-     * 
+     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
      * @type {TimeInForce}
      * @memberof ManualTradeForm
      */

@@ -1790,28 +1790,18 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--symbols
       x-content-type: application/json
       x-accepts: application/json
-  /symbols/{ticker}:
+  /symbols/{query}:
     get:
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
-      - description: The ticker of the UniversalSymbol to get.
+      - description: The ticker or universal_symbol_id of the UniversalSymbol to get.
         explode: false
         in: path
-        name: ticker
+        name: query
         required: true
         schema:
           type: string
         style: simple
-      - description: OPTIONAL IN PATH Can be used instead of the ticker ; The ID of
-          the UniversalSymbol to get.
-        explode: true
-        in: query
-        name: symbolId
-        required: false
-        schema:
-          format: uuid
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -1823,11 +1813,11 @@ paths:
           description: No symbol with the specified ticker found.
         default:
           description: Unexpected error
-      summary: Get details of a symbol by the ticker
+      summary: Get details of a symbol by the ticker or the universal_symbol_id
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-ticker
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
       x-accepts: '*/*'
   /activities:
     get:
@@ -9162,21 +9152,17 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-get--symbols-ticker:
+    konfig-generated-schema-single-parameter-schema-get--symbols-query:
       additionalProperties: true
       properties:
-        ticker:
-          type: string
-        symbolId:
-          format: uuid
+        query:
           type: string
       required:
-      - ticker
+      - query
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
-      - ticker
-      - symbolId
+      - query
     konfig-generated-schema-single-parameter-schema-get--activities:
       additionalProperties: true
       properties:

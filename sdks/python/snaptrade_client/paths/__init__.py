@@ -44,6 +44,6 @@ class PathValues(str, enum.Enum):
     EXCHANGES = "/exchanges"
     SECURITY_TYPES = "/securityTypes"
     SYMBOLS = "/symbols"
-    SYMBOLS_TICKER = "/symbols/{ticker}"
+    SYMBOLS_QUERY = "/symbols/{query}"
     ACTIVITIES = "/activities"
     PERFORMANCE_CUSTOM = "/performance/custom"

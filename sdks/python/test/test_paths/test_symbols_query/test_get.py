@@ -16,16 +16,16 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.symbols_ticker import get
+from snaptrade_client.paths.symbols_query import get
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestSymbolsTicker(ApiTestMixin, unittest.TestCase):
+class TestSymbolsQuery(ApiTestMixin, unittest.TestCase):
     """
-    SymbolsTicker unit test stubs
-        Get details of a symbol by the ticker
+    SymbolsQuery unit test stubs
+        Get details of a symbol by the ticker or the universal_symbol_id
     """
 
     def setUp(self):

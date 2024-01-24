@@ -36,13 +36,13 @@ export interface ManualTrade {
      */
     'account'?: string;
     /**
-     * 
+     * Order Type
      * @type {OrderType}
      * @memberof ManualTrade
      */
     'order_type'?: OrderType;
     /**
-     * 
+     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
      * @type {TimeInForce}
      * @memberof ManualTrade
      */
@@ -54,7 +54,7 @@ export interface ManualTrade {
      */
     'symbol'?: ManualTradeSymbol;
     /**
-     * 
+     * Trade Action
      * @type {Action}
      * @memberof ManualTrade
      */

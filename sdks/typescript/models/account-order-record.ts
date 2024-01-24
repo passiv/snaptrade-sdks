@@ -56,7 +56,7 @@ export interface AccountOrderRecord {
      */
     'option_symbol'?: OptionsSymbol;
     /**
-     * 
+     * Trade Action
      * @type {Action}
      * @memberof AccountOrderRecord
      */
@@ -104,13 +104,13 @@ export interface AccountOrderRecord {
      */
     'stop_price'?: number | null;
     /**
-     * 
+     * Order Type
      * @type {OrderType}
      * @memberof AccountOrderRecord
      */
     'order_type'?: OrderType;
     /**
-     * 
+     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
      * @type {TimeInForce}
      * @memberof AccountOrderRecord
      */

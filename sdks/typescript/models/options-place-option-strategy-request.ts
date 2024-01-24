@@ -20,13 +20,13 @@ import { TimeInForce } from './time-in-force';
  */
 export interface OptionsPlaceOptionStrategyRequest {
     /**
-     * 
+     * Order Type
      * @type {OrderType}
      * @memberof OptionsPlaceOptionStrategyRequest
      */
     'order_type': OrderType;
     /**
-     * 
+     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
      * @type {TimeInForce}
      * @memberof OptionsPlaceOptionStrategyRequest
      */

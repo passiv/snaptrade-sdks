@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types |
 | [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges |
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols |
-| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{ticker} | Get details of a symbol by the ticker |
+| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
 | [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages |
 | [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies |
@@ -456,7 +456,7 @@ catch (ApiException e)
 
 # **GetSymbolsByTicker**
 
-Get details of a symbol by the ticker
+Get details of a symbol by the ticker or the universal_symbol_id
 
 ### Example
 ```csharp
@@ -478,13 +478,12 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var ticker = "ticker_example"; // The ticker of the UniversalSymbol to get.
-            var symbolId = "symbolId_example"; // OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. (optional) 
+            var query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
             
             try
             {
-                // Get details of a symbol by the ticker
-                UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(ticker, symbolId);
+                // Get details of a symbol by the ticker or the universal_symbol_id
+                UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -510,8 +509,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get details of a symbol by the ticker
-    ApiResponse<UniversalSymbol> response = apiInstance.GetSymbolsByTickerWithHttpInfo(ticker, symbolId);
+    // Get details of a symbol by the ticker or the universal_symbol_id
+    ApiResponse<UniversalSymbol> response = apiInstance.GetSymbolsByTickerWithHttpInfo(query);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -528,8 +527,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **ticker** | **string** | The ticker of the UniversalSymbol to get. |  |
-| **symbolId** | **string** | OPTIONAL IN PATH Can be used instead of the ticker ; The ID of the UniversalSymbol to get. | [optional]  |
+| **query** | **string** | The ticker or universal_symbol_id of the UniversalSymbol to get. |  |
 
 ### Return type
 

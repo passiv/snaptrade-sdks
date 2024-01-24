@@ -36,40 +36,12 @@ from snaptrade_client.model.universal_symbol import UniversalSymbol as Universal
 
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
-from . import path
-
-# Query params
-SymbolIdSchema = schemas.UUIDSchema
-RequestRequiredQueryParams = typing_extensions.TypedDict(
-    'RequestRequiredQueryParams',
-    {
-    }
-)
-RequestOptionalQueryParams = typing_extensions.TypedDict(
-    'RequestOptionalQueryParams',
-    {
-        'symbolId': typing.Union[SymbolIdSchema, str, uuid.UUID, ],
-    },
-    total=False
-)
-
-
-class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
-    pass
-
-
-request_query_symbol_id = api_client.QueryParameter(
-    name="symbolId",
-    style=api_client.ParameterStyle.FORM,
-    schema=SymbolIdSchema,
-    explode=True,
-)
 # Path params
-TickerSchema = schemas.StrSchema
+QuerySchema = schemas.StrSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'ticker': typing.Union[TickerSchema, str, ],
+        'query': typing.Union[QuerySchema, str, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -84,17 +56,12 @@ class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
     pass
 
 
-request_path_ticker = api_client.PathParameter(
-    name="ticker",
+request_path_query = api_client.PathParameter(
+    name="query",
     style=api_client.ParameterStyle.SIMPLE,
-    schema=TickerSchema,
+    schema=QuerySchema,
     required=True,
 )
-_auth = [
-    'PartnerClientId',
-    'PartnerSignature',
-    'PartnerTimestamp',
-]
 SchemaFor200ResponseBody = UniversalSymbolSchema
 
 
@@ -147,11 +114,6 @@ class ApiResponseForDefaultAsync(api_client.AsyncApiResponse):
 _response_for_default = api_client.OpenApiResponse(
     response_cls=ApiResponseForDefault,
 )
-_status_code_to_response = {
-    '200': _response_for_200,
-    '404': _response_for_404,
-    'default': _response_for_default,
-}
 _all_accept_content_types = (
     '*/*',
 )
@@ -161,25 +123,18 @@ class BaseApi(api_client.Api):
 
     def _get_symbols_by_ticker_mapped_args(
         self,
-        ticker: typing.Optional[str] = None,
-        symbol_id: typing.Optional[str] = None,
-        query_params: typing.Optional[dict] = {},
+        query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
-        _query_params = {}
         _path_params = {}
-        if symbol_id is not None:
-            _query_params["symbolId"] = symbol_id
-        if ticker is not None:
-            _path_params["ticker"] = ticker
-        args.query = query_params if query_params else _query_params
+        if query is not None:
+            _path_params["query"] = query
         args.path = path_params if path_params else _path_params
         return args
 
     async def _aget_symbols_by_ticker_oapg(
         self,
-        query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -193,18 +148,17 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get details of a symbol by the ticker
+        Get details of a symbol by the ticker or the universal_symbol_id
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
         _path_params = {}
         for parameter in (
-            request_path_ticker,
+            request_path_query,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -214,19 +168,6 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
-    
-        prefix_separator_iterator = None
-        for parameter in (
-            request_query_symbol_id,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
-            if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -247,7 +188,6 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
-            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
             **kwargs
         )
@@ -313,7 +253,6 @@ class BaseApi(api_client.Api):
 
     def _get_symbols_by_ticker_oapg(
         self,
-        query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -325,18 +264,17 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get details of a symbol by the ticker
+        Get details of a symbol by the ticker or the universal_symbol_id
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
         _path_params = {}
         for parameter in (
-            request_path_ticker,
+            request_path_query,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -346,19 +284,6 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
-    
-        prefix_separator_iterator = None
-        for parameter in (
-            request_query_symbol_id,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
-            if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -379,7 +304,6 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
-            prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
     
@@ -417,9 +341,7 @@ class GetSymbolsByTicker(BaseApi):
 
     async def aget_symbols_by_ticker(
         self,
-        ticker: typing.Optional[str] = None,
-        symbol_id: typing.Optional[str] = None,
-        query_params: typing.Optional[dict] = {},
+        query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -429,22 +351,17 @@ class GetSymbolsByTicker(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._get_symbols_by_ticker_mapped_args(
-            query_params=query_params,
             path_params=path_params,
-            ticker=ticker,
-            symbol_id=symbol_id,
+            query=query,
         )
         return await self._aget_symbols_by_ticker_oapg(
-            query_params=args.query,
             path_params=args.path,
             **kwargs,
         )
     
     def get_symbols_by_ticker(
         self,
-        ticker: typing.Optional[str] = None,
-        symbol_id: typing.Optional[str] = None,
-        query_params: typing.Optional[dict] = {},
+        query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -452,13 +369,10 @@ class GetSymbolsByTicker(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._get_symbols_by_ticker_mapped_args(
-            query_params=query_params,
             path_params=path_params,
-            ticker=ticker,
-            symbol_id=symbol_id,
+            query=query,
         )
         return self._get_symbols_by_ticker_oapg(
-            query_params=args.query,
             path_params=args.path,
         )
 
@@ -467,9 +381,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
-        ticker: typing.Optional[str] = None,
-        symbol_id: typing.Optional[str] = None,
-        query_params: typing.Optional[dict] = {},
+        query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -479,22 +391,17 @@ class ApiForget(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._get_symbols_by_ticker_mapped_args(
-            query_params=query_params,
             path_params=path_params,
-            ticker=ticker,
-            symbol_id=symbol_id,
+            query=query,
         )
         return await self._aget_symbols_by_ticker_oapg(
-            query_params=args.query,
             path_params=args.path,
             **kwargs,
         )
     
     def get(
         self,
-        ticker: typing.Optional[str] = None,
-        symbol_id: typing.Optional[str] = None,
-        query_params: typing.Optional[dict] = {},
+        query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -502,13 +409,10 @@ class ApiForget(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._get_symbols_by_ticker_mapped_args(
-            query_params=query_params,
             path_params=path_params,
-            ticker=ticker,
-            symbol_id=symbol_id,
+            query=query,
         )
         return self._get_symbols_by_ticker_oapg(
-            query_params=args.query,
             path_params=args.path,
         )
 
