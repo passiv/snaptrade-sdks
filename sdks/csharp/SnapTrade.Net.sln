@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapTrade.Net", "src\SnapTrade.Net\SnapTrade.Net.csproj", "{B12FD2A5-DC0D-4D6A-8E6A-91A8B696C033}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapTrade.Net", "src\SnapTrade.Net\SnapTrade.Net.csproj", "{7E30C404-18A9-41A0-B5D6-7C13B9F67A23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapTrade.Net.Test", "src\SnapTrade.Net.Test\SnapTrade.Net.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B12FD2A5-DC0D-4D6A-8E6A-91A8B696C033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B12FD2A5-DC0D-4D6A-8E6A-91A8B696C033}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B12FD2A5-DC0D-4D6A-8E6A-91A8B696C033}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B12FD2A5-DC0D-4D6A-8E6A-91A8B696C033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E30C404-18A9-41A0-B5D6-7C13B9F67A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E30C404-18A9-41A0-B5D6-7C13B9F67A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E30C404-18A9-41A0-B5D6-7C13B9F67A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E30C404-18A9-41A0-B5D6-7C13B9F67A23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
