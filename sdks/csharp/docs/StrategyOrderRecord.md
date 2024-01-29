@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **OpenQuantity** | **double** |  | [optional] 
 **ClosedQuantity** | **double** |  | [optional] 
 **OrderType** | **OrderType** |  | [optional] 
-**TimeInForce** | **TimeInForce** |  | [optional] 
+**TimeInForce** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **LimitPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **ExecutionPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **TimePlaced** | **string** | Time | [optional] 

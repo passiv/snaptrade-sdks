@@ -142,6 +142,7 @@ from snaptrade_client.model.target_asset_list import TargetAssetList
 from snaptrade_client.model.target_asset_meta import TargetAssetMeta
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
+from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.model.timestamp import Timestamp
 from snaptrade_client.model.trade import Trade
 from snaptrade_client.model.trade_execution_status import TradeExecutionStatus

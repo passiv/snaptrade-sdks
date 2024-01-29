@@ -1891,7 +1891,7 @@ components:
               order_type:
                 $ref: "#/components/schemas/OrderType"
               time_in_force:
-                $ref: "#/components/schemas/TimeInForce"
+                $ref: "#/components/schemas/TimeInForceStrict"
               price:
                 $ref: "#/components/schemas/Price"
 
@@ -3903,7 +3903,7 @@ components:
         stop:
           $ref: "#/components/schemas/StopPrice"
         time_in_force:
-          $ref: "#/components/schemas/TimeInForce"
+          $ref: "#/components/schemas/TimeInForceStrict"
         units:
           nullable: true
           allOf:
@@ -3936,17 +3936,25 @@ components:
         timestamp:
           type: string
           example: 2022-01-21T15:11:19.217000-05:00
-    TimeInForce:
+    TimeInForceStrict:
       description: |
-        Trade time in force:
+        Trade time in force examples:
           * FOK - Fill Or Kill
           * Day - Day
           * GTC - Good Til Canceled
       type: string
       enum:
-        - Day
         - FOK
+        - Day
         - GTC
+    TimeInForce:
+      description: |
+        Trade time in force examples:
+          * FOK - Fill Or Kill
+          * Day - Day
+          * GTC - Good Til Canceled
+          * GTD - Good Til Date
+      type: string
     Action:
       description: Trade Action
       type: string

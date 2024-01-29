@@ -318,7 +318,7 @@ SnapTrade.client_id = "YOUR_CLIENT_ID"
 SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 
 order_type = "Limit"
-time_in_force = "Day"
+time_in_force = "FOK"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"
@@ -348,7 +348,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 order_type = "Limit"
-time_in_force = "Day"
+time_in_force = "FOK"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
 account_id = "2bcd7cc3-e922-4976-bce1-9858296801c3"

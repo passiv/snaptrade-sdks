@@ -37,7 +37,7 @@ import { StrategyOrderRecord } from '../models';
 // @ts-ignore
 import { StrategyQuotes } from '../models';
 // @ts-ignore
-import { TimeInForce } from '../models';
+import { TimeInForceStrict } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';

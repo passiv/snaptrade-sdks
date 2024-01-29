@@ -22,7 +22,7 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotesInner;
-import com.konfigthis.client.model.TimeInForce;
+import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
@@ -81,7 +81,7 @@ public class TradingApiTest {
         OrderType orderType = null;
         Double price = null;
         Double stop = null;
-        TimeInForce timeInForce = null;
+        TimeInForceStrict timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
         Double notionalValue = null;
@@ -131,7 +131,7 @@ public class TradingApiTest {
         OrderType orderType = null;
         Double price = null;
         Double stop = null;
-        TimeInForce timeInForce = null;
+        TimeInForceStrict timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
         Double notionalValue = null;

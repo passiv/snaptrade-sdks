@@ -27,23 +27,23 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+    /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
     /// </summary>
-    /// <value>Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled </value>
+    /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled </value>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum TimeInForce
+    public enum TimeInForceStrict
     {
-        /// <summary>
-        /// Enum Day for value: Day
-        /// </summary>
-        [EnumMember(Value = "Day")]
-        Day = 1,
-
         /// <summary>
         /// Enum FOK for value: FOK
         /// </summary>
         [EnumMember(Value = "FOK")]
-        FOK = 2,
+        FOK = 1,
+
+        /// <summary>
+        /// Enum Day for value: Day
+        /// </summary>
+        [EnumMember(Value = "Day")]
+        Day = 2,
 
         /// <summary>
         /// Enum GTC for value: GTC

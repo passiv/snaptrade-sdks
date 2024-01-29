@@ -50,6 +50,7 @@ module SnapTrade
 
     attr_accessor :order_type
 
+    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
     attr_accessor :time_in_force
 
     # Time
@@ -107,7 +108,7 @@ module SnapTrade
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
         :'order_type' => :'OrderType',
-        :'time_in_force' => :'TimeInForce',
+        :'time_in_force' => :'String',
         :'time_placed' => :'String',
         :'time_updated' => :'String',
         :'expiry_date' => :'String'

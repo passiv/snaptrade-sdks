@@ -12,13 +12,13 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class TimeInForce
-    DAY = "Day".freeze
+  class TimeInForceStrict
     FOK = "FOK".freeze
+    DAY = "Day".freeze
     GTC = "GTC".freeze
 
     def self.all_vars
-      @all_vars ||= [DAY, FOK, GTC].freeze
+      @all_vars ||= [FOK, DAY, GTC].freeze
     end
 
     # Builds the enum from string
@@ -32,8 +32,8 @@ module SnapTrade
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      return value if TimeInForce.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #TimeInForce"
+      return value if TimeInForceStrict.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #TimeInForceStrict"
     end
   end
 end

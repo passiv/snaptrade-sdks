@@ -56,8 +56,8 @@ class ManualTradeForm(
                 return StopPrice
         
             @staticmethod
-            def time_in_force() -> typing.Type['TimeInForce']:
-                return TimeInForce
+            def time_in_force() -> typing.Type['TimeInForceStrict']:
+                return TimeInForceStrict
             
             
             class units(
@@ -161,7 +161,7 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["stop"]) -> 'StopPrice': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
+    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
@@ -196,7 +196,7 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["stop"]) -> typing.Union['StopPrice', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForce', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForceStrict', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
@@ -222,7 +222,7 @@ class ManualTradeForm(
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         stop: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
-        time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
+        time_in_force: typing.Union['TimeInForceStrict', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         notional_value: typing.Union[MetaOapg.properties.notional_value, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
@@ -249,4 +249,4 @@ from snaptrade_client.model.action import Action
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice
-from snaptrade_client.model.time_in_force import TimeInForce
+from snaptrade_client.model.time_in_force_strict import TimeInForceStrict

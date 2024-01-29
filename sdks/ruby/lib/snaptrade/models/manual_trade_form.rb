@@ -62,7 +62,7 @@ module SnapTrade
         :'order_type' => :'OrderType',
         :'price' => :'Float',
         :'stop' => :'Float',
-        :'time_in_force' => :'TimeInForce',
+        :'time_in_force' => :'TimeInForceStrict',
         :'units' => :'Float',
         :'universal_symbol_id' => :'String',
         :'notional_value' => :'Float'

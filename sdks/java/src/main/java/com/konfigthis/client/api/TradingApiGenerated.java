@@ -32,7 +32,7 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotesInner;
-import com.konfigthis.client.model.TimeInForce;
+import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
@@ -391,7 +391,7 @@ public class TradingApiGenerated {
         private OrderType orderType;
         private Double price;
         private Double stop;
-        private TimeInForce timeInForce;
+        private TimeInForceStrict timeInForce;
         private Double units;
         private UUID universalSymbolId;
         private Double notionalValue;
@@ -478,7 +478,7 @@ public class TradingApiGenerated {
          * @param timeInForce  (optional)
          * @return GetOrderImpactRequestBuilder
          */
-        public GetOrderImpactRequestBuilder timeInForce(TimeInForce timeInForce) {
+        public GetOrderImpactRequestBuilder timeInForce(TimeInForceStrict timeInForce) {
             this.timeInForce = timeInForce;
             return this;
         }
@@ -953,7 +953,7 @@ public class TradingApiGenerated {
         private OrderType orderType;
         private Double price;
         private Double stop;
-        private TimeInForce timeInForce;
+        private TimeInForceStrict timeInForce;
         private Double units;
         private UUID universalSymbolId;
         private Double notionalValue;
@@ -1040,7 +1040,7 @@ public class TradingApiGenerated {
          * @param timeInForce  (optional)
          * @return PlaceForceOrderRequestBuilder
          */
-        public PlaceForceOrderRequestBuilder timeInForce(TimeInForce timeInForce) {
+        public PlaceForceOrderRequestBuilder timeInForce(TimeInForceStrict timeInForce) {
             this.timeInForce = timeInForce;
             return this;
         }

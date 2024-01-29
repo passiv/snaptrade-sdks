@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.OrderType;
-import com.konfigthis.client.model.TimeInForce;
+import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
-  private TimeInForce timeInForce;
+  private TimeInForceStrict timeInForce;
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
@@ -257,7 +257,7 @@ public class ManualTradeForm {
   }
 
 
-  public ManualTradeForm timeInForce(TimeInForce timeInForce) {
+  public ManualTradeForm timeInForce(TimeInForceStrict timeInForce) {
     
     
     
@@ -273,12 +273,12 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public TimeInForce getTimeInForce() {
+  public TimeInForceStrict getTimeInForce() {
     return timeInForce;
   }
 
 
-  public void setTimeInForce(TimeInForce timeInForce) {
+  public void setTimeInForce(TimeInForceStrict timeInForce) {
     
     
     

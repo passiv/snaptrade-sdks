@@ -12,9 +12,9 @@ import type * as buffer from "buffer"
 
 
 /**
- * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+ * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
  * @export
  * @enum {string}
  */
-export type TimeInForce = 'Day' | 'FOK' | 'GTC'
+export type TimeInForceStrict = 'FOK' | 'Day' | 'GTC'
 

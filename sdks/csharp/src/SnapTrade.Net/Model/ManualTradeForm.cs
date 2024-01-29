@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets TimeInForce
         /// </summary>
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; set; }
+        public TimeInForceStrict? TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeForm" /> class.
         /// </summary>
@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
         /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**.</param>
-        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForce? timeInForce = default(TimeInForce?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
+        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
         {
             this.AccountId = accountId;
             this._Action = action;

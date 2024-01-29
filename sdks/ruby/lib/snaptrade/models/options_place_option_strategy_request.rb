@@ -38,7 +38,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'order_type' => :'OrderType',
-        :'time_in_force' => :'TimeInForce',
+        :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float'
       }
     end

@@ -9,7 +9,7 @@
 | **order_type** | [**OrderType**](OrderType.md) |  | [optional] |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **stop** | **Float** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] |
-| **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
+| **time_in_force** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | [optional] |
 | **units** | **Float** |  | [optional] |
 | **universal_symbol_id** | **String** |  | [optional] |
 | **notional_value** | **Float** |  | [optional] |

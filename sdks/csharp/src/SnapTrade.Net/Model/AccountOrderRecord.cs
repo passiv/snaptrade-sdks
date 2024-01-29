@@ -50,12 +50,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "order_type", EmitDefaultValue = false)]
         public OrderType? OrderType { get; set; }
-
-        /// <summary>
-        /// Gets or Sets TimeInForce
-        /// </summary>
-        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
@@ -73,11 +67,11 @@ namespace SnapTrade.Net.Model
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="stopPrice">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
         /// <param name="orderType">orderType.</param>
-        /// <param name="timeInForce">timeInForce.</param>
+        /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double totalQuantity = default(double), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double totalQuantity = default(double), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -173,6 +167,13 @@ namespace SnapTrade.Net.Model
         /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public double? StopPrice { get; set; }
+
+        /// <summary>
+        /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+        /// </summary>
+        /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date </value>
+        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
+        public string TimeInForce { get; set; }
 
         /// <summary>
         /// Time
@@ -332,7 +333,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
-                    this.TimeInForce.Equals(input.TimeInForce)
+                    (this.TimeInForce != null &&
+                    this.TimeInForce.Equals(input.TimeInForce))
                 ) && base.Equals(input) && 
                 (
                     this.TimePlaced == input.TimePlaced ||
@@ -405,7 +407,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                if (this.TimeInForce != null)
+                {
+                    hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                }
                 if (this.TimePlaced != null)
                 {
                     hashCode = (hashCode * 59) + this.TimePlaced.GetHashCode();

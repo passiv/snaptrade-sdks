@@ -7,7 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **account** | **String** |  | [optional] |
 | **order_type** | [**OrderType**](OrderType.md) |  | [optional] |
-| **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
+| **time_in_force** | **String** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] |
 | **symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] |
 | **action** | [**Action**](Action.md) |  | [optional] |
 | **units** | **Float** | Trade Units. Cannot work with notional value. | [optional] |

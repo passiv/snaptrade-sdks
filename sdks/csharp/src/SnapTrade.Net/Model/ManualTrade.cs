@@ -40,12 +40,6 @@ namespace SnapTrade.Net.Model
         public OrderType? OrderType { get; set; }
 
         /// <summary>
-        /// Gets or Sets TimeInForce
-        /// </summary>
-        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; set; }
-
-        /// <summary>
         /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
@@ -56,12 +50,12 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="account">account.</param>
         /// <param name="orderType">orderType.</param>
-        /// <param name="timeInForce">timeInForce.</param>
+        /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="action">action.</param>
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double units = default(double), double? price = default(double?)) : base()
+        public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double units = default(double), double? price = default(double?)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -85,6 +79,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "account", EmitDefaultValue = false)]
         public string Account { get; set; }
+
+        /// <summary>
+        /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+        /// </summary>
+        /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date </value>
+        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
+        public string TimeInForce { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
@@ -181,7 +182,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
-                    this.TimeInForce.Equals(input.TimeInForce)
+                    (this.TimeInForce != null &&
+                    this.TimeInForce.Equals(input.TimeInForce))
                 ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
@@ -222,7 +224,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Account.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                if (this.TimeInForce != null)
+                {
+                    hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                }
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();

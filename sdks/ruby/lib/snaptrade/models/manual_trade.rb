@@ -20,6 +20,7 @@ module SnapTrade
 
     attr_accessor :order_type
 
+    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
     attr_accessor :time_in_force
 
     attr_accessor :symbol
@@ -57,7 +58,7 @@ module SnapTrade
         :'id' => :'String',
         :'account' => :'String',
         :'order_type' => :'OrderType',
-        :'time_in_force' => :'TimeInForce',
+        :'time_in_force' => :'String',
         :'symbol' => :'ManualTradeSymbol',
         :'action' => :'Action',
         :'units' => :'Float',

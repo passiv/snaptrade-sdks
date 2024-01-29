@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **LimitPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **StopPrice** | **double?** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] 
 **OrderType** | **OrderType** |  | [optional] 
-**TimeInForce** | **TimeInForce** |  | [optional] 
+**TimeInForce** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **TimePlaced** | **string** | Time | [optional] 
 **TimeUpdated** | **string** | Time | [optional] 
 **ExpiryDate** | **string** | Time | [optional] 

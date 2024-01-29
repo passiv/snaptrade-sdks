@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.0-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.0)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.1-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.1)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installing<a id="installing"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.0
+pip install snaptrade-python-sdk==11.0.1
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1023,7 +1023,7 @@ Place an option strategy order on the brokerage
 ```python
 place_option_strategy_response = snaptrade.options.place_option_strategy(
     order_type="Limit",
-    time_in_force="Day",
+    time_in_force="FOK",
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1036,7 +1036,7 @@ place_option_strategy_response = snaptrade.options.place_option_strategy(
 
 ##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -1429,7 +1429,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     order_type="Limit",
     price=31.33,
     stop=31.33,
-    time_in_force="Day",
+    time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     notional_value=3.14,
@@ -1452,7 +1452,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
 ##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
@@ -1536,7 +1536,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     order_type="Limit",
     price=31.33,
     stop=31.33,
-    time_in_force="Day",
+    time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     notional_value=3.14,
@@ -1559,7 +1559,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
 
-##### time_in_force: [`TimeInForce`](./snaptrade_client/type/time_in_force.py)<a id="time_in_force-timeinforcesnaptrade_clienttypetime_in_forcepy"></a>
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
 ##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 

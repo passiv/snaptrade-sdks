@@ -144,7 +144,7 @@ namespace Example
             var orderType = OrderType.Limit;
             var price = 31.33; // Trade Price if limit or stop limit order
             var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
-            var timeInForce = TimeInForce.Day;
+            var timeInForce = TimeInForceStrict.FOK;
             var units = default(double?); // Trade Units. Cannot work with notional value.
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var notionalValue = 100; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
@@ -356,7 +356,7 @@ namespace Example
             var orderType = OrderType.Limit;
             var price = 31.33; // Trade Price if limit or stop limit order
             var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
-            var timeInForce = TimeInForce.Day;
+            var timeInForce = TimeInForceStrict.FOK;
             var units = default(double?); // Trade Units. Cannot work with notional value.
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var notionalValue = 100; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**

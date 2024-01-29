@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets TimeInForce
         /// </summary>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
-        public TimeInForce TimeInForce { get; set; }
+        public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsPlaceOptionStrategyRequest" /> class.
         /// </summary>
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public OptionsPlaceOptionStrategyRequest(OrderType orderType = default(OrderType), TimeInForce timeInForce = default(TimeInForce), double? price = default(double?))
+        public OptionsPlaceOptionStrategyRequest(OrderType orderType = default(OrderType), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;

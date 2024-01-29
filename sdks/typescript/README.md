@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.0-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.0)
+[![npm](https://img.shields.io/badge/npm-v9.0.1-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.1)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1064,9 +1064,9 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 Order Type
 
-##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1488,9 +1488,9 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
@@ -1599,9 +1599,9 @@ Trade Price if limit or stop limit order
 
 Stop Price. If stop loss or stop limit order, the price to trigger the stop
 
-##### time_in_force: [`TimeInForce`](./models/time-in-force.ts)<a id="time_in_force-timeinforcemodelstime-in-forcets"></a>
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
