@@ -14,7 +14,6 @@ import { AccountOrderRecordStatus } from './account-order-record-status';
 import { Action } from './action';
 import { OptionsSymbol } from './options-symbol';
 import { OrderType } from './order-type';
-import { TimeInForce } from './time-in-force';
 import { UniversalSymbol } from './universal-symbol';
 
 /**
@@ -110,11 +109,11 @@ export interface AccountOrderRecord {
      */
     'order_type'?: OrderType;
     /**
-     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
-     * @type {TimeInForce}
+     * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'time_in_force'?: TimeInForce;
+    'time_in_force'?: string;
     /**
      * Time
      * @type {string}

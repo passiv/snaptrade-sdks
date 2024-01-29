@@ -19,7 +19,6 @@ from snaptrade_client.type.action import Action
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
-from snaptrade_client.type.time_in_force import TimeInForce
 
 class RequiredManualTrade(TypedDict):
     pass
@@ -31,7 +30,8 @@ class OptionalManualTrade(TypedDict, total=False):
 
     order_type: OrderType
 
-    time_in_force: TimeInForce
+    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+    time_in_force: str
 
     symbol: ManualTradeSymbol
 

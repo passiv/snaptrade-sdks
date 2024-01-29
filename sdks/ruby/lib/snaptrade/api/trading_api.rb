@@ -142,7 +142,7 @@ module SnapTrade
     # @param order_type [OrderType] 
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForce] 
+    # @param time_in_force [TimeInForceStrict] 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -172,7 +172,7 @@ module SnapTrade
     # @param order_type [OrderType] 
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForce] 
+    # @param time_in_force [TimeInForceStrict] 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -393,7 +393,7 @@ module SnapTrade
     # @param order_type [OrderType] 
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForce] 
+    # @param time_in_force [TimeInForceStrict] 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -423,7 +423,7 @@ module SnapTrade
     # @param order_type [OrderType] 
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForce] 
+    # @param time_in_force [TimeInForceStrict] 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 

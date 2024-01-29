@@ -319,7 +319,7 @@ Class | Method | HTTP request | Description
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TargetAsset](docs/TargetAsset.md)
- - [TimeInForce](docs/TimeInForce.md)
+ - [TimeInForceStrict](docs/TimeInForceStrict.md)
  - [Trade](docs/Trade.md)
  - [TradeExecutionStatus](docs/TradeExecutionStatus.md)
  - [TradeImpact](docs/TradeImpact.md)

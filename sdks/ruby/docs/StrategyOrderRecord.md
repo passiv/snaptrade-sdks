@@ -10,7 +10,7 @@
 | **open_quantity** | **Float** |  | [optional] |
 | **closed_quantity** | **Float** |  | [optional] |
 | **order_type** | [**OrderType**](OrderType.md) |  | [optional] |
-| **time_in_force** | [**TimeInForce**](TimeInForce.md) |  | [optional] |
+| **time_in_force** | **String** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] |
 | **limit_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **execution_price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 | **time_placed** | **String** | Time | [optional] |

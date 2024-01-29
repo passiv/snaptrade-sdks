@@ -202,7 +202,7 @@ Class | Method | HTTP request | Description
  - [SnapTrade::SymbolQuery](docs/SymbolQuery.md)
  - [SnapTrade::SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [SnapTrade::TargetAsset](docs/TargetAsset.md)
- - [SnapTrade::TimeInForce](docs/TimeInForce.md)
+ - [SnapTrade::TimeInForceStrict](docs/TimeInForceStrict.md)
  - [SnapTrade::Trade](docs/Trade.md)
  - [SnapTrade::TradeAction](docs/TradeAction.md)
  - [SnapTrade::TradeExecutionStatus](docs/TradeExecutionStatus.md)

@@ -43,10 +43,7 @@ class ManualTrade(
             @staticmethod
             def order_type() -> typing.Type['OrderType']:
                 return OrderType
-        
-            @staticmethod
-            def time_in_force() -> typing.Type['TimeInForce']:
-                return TimeInForce
+            time_in_force = schemas.StrSchema
         
             @staticmethod
             def symbol() -> typing.Type['ManualTradeSymbol']:
@@ -82,7 +79,7 @@ class ManualTrade(
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
+    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'ManualTradeSymbol': ...
@@ -113,7 +110,7 @@ class ManualTrade(
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForce', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union[MetaOapg.properties.time_in_force, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['ManualTradeSymbol', schemas.Unset]: ...
@@ -139,7 +136,7 @@ class ManualTrade(
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         account: typing.Union[MetaOapg.properties.account, str, schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
-        time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
+        time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union['ManualTradeSymbol', schemas.Unset] = schemas.unset,
         action: typing.Union['Action', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -166,4 +163,3 @@ from snaptrade_client.model.action import Action
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
-from snaptrade_client.model.time_in_force import TimeInForce

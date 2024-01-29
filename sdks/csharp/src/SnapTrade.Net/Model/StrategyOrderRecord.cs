@@ -166,12 +166,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "order_type", EmitDefaultValue = false)]
         public OrderType? OrderType { get; set; }
-
-        /// <summary>
-        /// Gets or Sets TimeInForce
-        /// </summary>
-        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderRecord" /> class.
         /// </summary>
@@ -181,12 +175,12 @@ namespace SnapTrade.Net.Model
         /// <param name="openQuantity">openQuantity.</param>
         /// <param name="closedQuantity">closedQuantity.</param>
         /// <param name="orderType">orderType.</param>
-        /// <param name="timeInForce">timeInForce.</param>
+        /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
-        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderType? orderType = default(OrderType?), TimeInForce? timeInForce = default(TimeInForce?), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
+        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderType? orderType = default(OrderType?), string timeInForce = default(string), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
         {
             this.Strategy = strategy;
             this.Status = status;
@@ -225,6 +219,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "closed_quantity", EmitDefaultValue = false)]
         public double ClosedQuantity { get; set; }
+
+        /// <summary>
+        /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+        /// </summary>
+        /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date </value>
+        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
+        public string TimeInForce { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
@@ -343,7 +344,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
-                    this.TimeInForce.Equals(input.TimeInForce)
+                    (this.TimeInForce != null &&
+                    this.TimeInForce.Equals(input.TimeInForce))
                 ) && base.Equals(input) && 
                 (
                     this.LimitPrice == input.LimitPrice ||
@@ -386,7 +388,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.ClosedQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                if (this.TimeInForce != null)
+                {
+                    hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                }
                 if (this.LimitPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();

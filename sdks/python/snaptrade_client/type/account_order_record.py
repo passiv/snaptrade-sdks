@@ -24,7 +24,6 @@ from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
-from snaptrade_client.type.time_in_force import TimeInForce
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredAccountOrderRecord(TypedDict):
@@ -61,7 +60,8 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     order_type: OrderType
 
-    time_in_force: TimeInForce
+    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+    time_in_force: str
 
     # Time
     time_placed: str

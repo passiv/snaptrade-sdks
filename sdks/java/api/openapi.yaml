@@ -2647,7 +2647,7 @@ components:
           limit_price: 31.33
           time_updated: 2022-01-21T20:11:19.217Z
           canceled_quantity: 1.4658129805029452
-          time_in_force: null
+          time_in_force: time_in_force
           execution_price: 31.33
           stop_price: 31.33
           action: null
@@ -2734,7 +2734,7 @@ components:
           limit_price: 31.33
           time_updated: 2022-01-21T20:11:19.217Z
           canceled_quantity: 1.4658129805029452
-          time_in_force: null
+          time_in_force: time_in_force
           execution_price: 31.33
           stop_price: 31.33
           action: null
@@ -2870,7 +2870,7 @@ components:
         limit_price: 31.33
         time_updated: 2022-01-21T20:11:19.217Z
         canceled_quantity: 1.4658129805029452
-        time_in_force: null
+        time_in_force: time_in_force
         execution_price: 31.33
         stop_price: 31.33
         action: null
@@ -3008,7 +3008,13 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderType'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          description: |
+            Trade time in force examples:
+              * FOK - Fill Or Kill
+              * Day - Day
+              * GTC - Good Til Canceled
+              * GTD - Good Til Date
+          type: string
         time_placed:
           description: Time
           example: 2022-01-21T20:11:19.217Z
@@ -3472,7 +3478,7 @@ components:
       additionalProperties: true
       description: Strategy order record
       example:
-        time_in_force: null
+        time_in_force: time_in_force
         execution_price: 31.33
         time_placed: 2022-01-21T20:11:19.217Z
         strategy:
@@ -3569,7 +3575,13 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderType'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          description: |
+            Trade time in force examples:
+              * FOK - Fill Or Kill
+              * Day - Day
+              * GTC - Good Til Canceled
+              * GTD - Good Til Date
+          type: string
         limit_price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -5993,7 +6005,7 @@ components:
             code: USD
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
-        time_in_force: null
+        time_in_force: time_in_force
         price: 31.33
         action: null
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6015,7 +6027,13 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderType'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          description: |
+            Trade time in force examples:
+              * FOK - Fill Or Kill
+              * Day - Day
+              * GTC - Good Til Canceled
+              * GTD - Good Til Date
+          type: string
         symbol:
           $ref: '#/components/schemas/ManualTradeSymbol'
         action:
@@ -6144,7 +6162,7 @@ components:
               code: USD
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: null
+          time_in_force: time_in_force
           price: 31.33
           action: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6162,7 +6180,7 @@ components:
               code: USD
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: null
+          time_in_force: time_in_force
           price: 31.33
           action: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6179,7 +6197,7 @@ components:
               code: USD
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: null
+          time_in_force: time_in_force
           price: 31.33
           action: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6279,7 +6297,7 @@ components:
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopPrice
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          $ref: '#/components/schemas/TimeInForceStrict'
         units:
           description: Trade Units. Cannot work with notional value.
           nullable: true
@@ -6328,16 +6346,24 @@ components:
           x-konfig-original-example: 2022-01-21T20:11:19.217Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeAPIDisclaimerAcceptStatus-properties-timestamp
       type: object
-    TimeInForce:
+    TimeInForceStrict:
       description: |
-        Trade time in force:
+        Trade time in force examples:
           * FOK - Fill Or Kill
           * Day - Day
           * GTC - Good Til Canceled
       enum:
-      - Day
       - FOK
+      - Day
       - GTC
+      type: string
+    TimeInForce:
+      description: |
+        Trade time in force examples:
+          * FOK - Fill Or Kill
+          * Day - Day
+          * GTC - Good Til Canceled
+          * GTD - Good Til Date
       type: string
     Action:
       description: Trade Action
@@ -8800,7 +8826,7 @@ components:
         stop:
           $ref: '#/components/schemas/StopPrice'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          $ref: '#/components/schemas/TimeInForceStrict'
         units:
           $ref: '#/components/schemas/UnitsNullable'
         universal_symbol_id:
@@ -8853,7 +8879,7 @@ components:
         stop:
           $ref: '#/components/schemas/StopPrice'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          $ref: '#/components/schemas/TimeInForceStrict'
         units:
           $ref: '#/components/schemas/UnitsNullable'
         universal_symbol_id:
@@ -9056,7 +9082,7 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderType'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          $ref: '#/components/schemas/TimeInForceStrict'
         price:
           $ref: '#/components/schemas/Price'
       required:
@@ -9692,7 +9718,7 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderType'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForce'
+          $ref: '#/components/schemas/TimeInForceStrict'
         price:
           description: Trade Price if limit or stop limit order
           example: 31.33

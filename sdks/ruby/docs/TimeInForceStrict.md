@@ -1,4 +1,4 @@
-# SnapTrade::TimeInForce
+# SnapTrade::TimeInForceStrict
 
 ## Properties
 
@@ -10,6 +10,6 @@
 ```ruby
 require 'snaptrade'
 
-instance = SnapTrade::TimeInForce.new()
+instance = SnapTrade::TimeInForceStrict.new()
 ```
 

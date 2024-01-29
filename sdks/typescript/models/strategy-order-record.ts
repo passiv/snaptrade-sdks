@@ -12,7 +12,6 @@ import type * as buffer from "buffer"
 
 import { OptionStrategy } from './option-strategy';
 import { OrderType } from './order-type';
-import { TimeInForce } from './time-in-force';
 
 /**
  * Strategy order record
@@ -59,11 +58,11 @@ export interface StrategyOrderRecord {
      */
     'order_type'?: OrderType;
     /**
-     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
-     * @type {TimeInForce}
+     * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+     * @type {string}
      * @memberof StrategyOrderRecord
      */
-    'time_in_force'?: TimeInForce;
+    'time_in_force'?: string;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}

@@ -84,10 +84,7 @@ class AccountOrderRecord(
             @staticmethod
             def order_type() -> typing.Type['OrderType']:
                 return OrderType
-        
-            @staticmethod
-            def time_in_force() -> typing.Type['TimeInForce']:
-                return TimeInForce
+            time_in_force = schemas.StrSchema
             time_placed = schemas.StrSchema
             time_updated = schemas.StrSchema
             expiry_date = schemas.StrSchema
@@ -156,7 +153,7 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForce': ...
+    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["time_placed"]) -> MetaOapg.properties.time_placed: ...
@@ -217,7 +214,7 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderType', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForce', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union[MetaOapg.properties.time_in_force, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["time_placed"]) -> typing.Union[MetaOapg.properties.time_placed, schemas.Unset]: ...
@@ -251,7 +248,7 @@ class AccountOrderRecord(
         limit_price: typing.Union['Price', schemas.Unset] = schemas.unset,
         stop_price: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
-        time_in_force: typing.Union['TimeInForce', schemas.Unset] = schemas.unset,
+        time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, schemas.Unset] = schemas.unset,
         time_updated: typing.Union[MetaOapg.properties.time_updated, str, schemas.Unset] = schemas.unset,
         expiry_date: typing.Union[MetaOapg.properties.expiry_date, str, schemas.Unset] = schemas.unset,
@@ -292,5 +289,4 @@ from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice
-from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.universal_symbol import UniversalSymbol

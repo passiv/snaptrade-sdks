@@ -37,7 +37,7 @@ import { OrderType } from '../models';
 // @ts-ignore
 import { SymbolsQuotesInner } from '../models';
 // @ts-ignore
-import { TimeInForce } from '../models';
+import { TimeInForceStrict } from '../models';
 // @ts-ignore
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore

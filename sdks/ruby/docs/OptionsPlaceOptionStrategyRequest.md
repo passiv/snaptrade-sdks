@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **order_type** | [**OrderType**](OrderType.md) |  |  |
-| **time_in_force** | [**TimeInForce**](TimeInForce.md) |  |  |
+| **time_in_force** | [**TimeInForceStrict**](TimeInForceStrict.md) |  |  |
 | **price** | **Float** | Trade Price if limit or stop limit order | [optional] |
 
 ## Example

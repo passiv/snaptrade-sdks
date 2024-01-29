@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 import { Action } from './action';
 import { OrderType } from './order-type';
-import { TimeInForce } from './time-in-force';
+import { TimeInForceStrict } from './time-in-force-strict';
 
 /**
  * Manual Trade Form
@@ -51,11 +51,11 @@ export interface ManualTradeForm {
      */
     'stop'?: number | null;
     /**
-     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
-     * @type {TimeInForce}
+     * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+     * @type {TimeInForceStrict}
      * @memberof ManualTradeForm
      */
-    'time_in_force'?: TimeInForce;
+    'time_in_force'?: TimeInForceStrict;
     /**
      * 
      * @type {number}

@@ -13,7 +13,6 @@ import type * as buffer from "buffer"
 import { Action } from './action';
 import { ManualTradeSymbol } from './manual-trade-symbol';
 import { OrderType } from './order-type';
-import { TimeInForce } from './time-in-force';
 
 /**
  * A manual trade object
@@ -42,11 +41,11 @@ export interface ManualTrade {
      */
     'order_type'?: OrderType;
     /**
-     * Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
-     * @type {TimeInForce}
+     * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+     * @type {string}
      * @memberof ManualTrade
      */
-    'time_in_force'?: TimeInForce;
+    'time_in_force'?: string;
     /**
      * 
      * @type {ManualTradeSymbol}

@@ -19,7 +19,7 @@ from snaptrade_client.type.action import Action
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
-from snaptrade_client.type.time_in_force import TimeInForce
+from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 
 class RequiredManualTradeForm(TypedDict):
     pass
@@ -35,7 +35,7 @@ class OptionalManualTradeForm(TypedDict, total=False):
 
     stop: StopPrice
 
-    time_in_force: TimeInForce
+    time_in_force: TimeInForceStrict
 
     units: float
 

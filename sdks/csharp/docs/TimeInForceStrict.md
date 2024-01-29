@@ -1,5 +1,5 @@
-# SnapTrade.Net.Model.TimeInForce
-Trade time in force:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+# SnapTrade.Net.Model.TimeInForceStrict
+Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
 
 ## Properties
 

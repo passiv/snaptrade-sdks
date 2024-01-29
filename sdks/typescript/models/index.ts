@@ -98,7 +98,7 @@ export * from './symbol';
 export * from './symbol-query';
 export * from './symbols-quotes-inner';
 export * from './target-asset';
-export * from './time-in-force';
+export * from './time-in-force-strict';
 export * from './trade';
 export * from './trade-execution-status';
 export * from './trade-impact';

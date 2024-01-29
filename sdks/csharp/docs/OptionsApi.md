@@ -426,7 +426,7 @@ namespace Example
             var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
             var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
             var orderType = OrderType.Limit;
-            var timeInForce = TimeInForce.Day;
+            var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // Trade Price if limit or stop limit order
             
             var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(
