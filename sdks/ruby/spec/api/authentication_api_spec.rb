@@ -88,4 +88,15 @@ describe 'AuthenticationApi' do
     end
   end
 
+  # unit tests for reset_snap_trade_user_secret
+  # Obtain a new user secret for a user
+  # @param user_i_dand_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [UserIDandSecret]
+  describe 'reset_snap_trade_user_secret test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

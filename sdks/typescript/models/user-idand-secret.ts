@@ -17,8 +17,6 @@ import type * as buffer from "buffer"
  * @interface UserIDandSecret
  */
 export interface UserIDandSecret {
-    [key: string]: any;
-
     /**
      * SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\'s unique to a user
      * @type {string}

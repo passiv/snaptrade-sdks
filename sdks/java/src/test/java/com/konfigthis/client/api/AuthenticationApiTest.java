@@ -130,4 +130,20 @@ public class AuthenticationApiTest {
         // TODO: test validations
     }
 
+    /**
+     * Obtain a new user secret for a user
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void resetSnapTradeUserSecretTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UserIDandSecret response = api.resetSnapTradeUserSecret()
+                .userId(userId)
+                .userSecret(userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
 }

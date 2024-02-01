@@ -43,7 +43,6 @@ class UserIDandSecret(
                 "userId": userId,
                 "userSecret": userSecret,
             }
-        additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["userId"]) -> MetaOapg.properties.userId: ...
@@ -52,11 +51,12 @@ class UserIDandSecret(
     def __getitem__(self, name: typing_extensions.Literal["userSecret"]) -> MetaOapg.properties.userSecret: ...
     
     @typing.overload
-    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
+    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["userId"], typing_extensions.Literal["userSecret"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["userId", "userSecret", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
+    
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["userId"]) -> typing.Union[MetaOapg.properties.userId, schemas.Unset]: ...
@@ -65,10 +65,11 @@ class UserIDandSecret(
     def get_item_oapg(self, name: typing_extensions.Literal["userSecret"]) -> typing.Union[MetaOapg.properties.userSecret, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
+    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["userId"], typing_extensions.Literal["userSecret"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["userId", "userSecret", ], str]):
         return super().get_item_oapg(name)
+    
 
     def __new__(
         cls,
@@ -76,7 +77,7 @@ class UserIDandSecret(
         userId: typing.Union[MetaOapg.properties.userId, str, schemas.Unset] = schemas.unset,
         userSecret: typing.Union[MetaOapg.properties.userSecret, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'UserIDandSecret':
         return super().__new__(
             cls,

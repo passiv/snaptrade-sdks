@@ -306,6 +306,48 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-encryptedJWT
       x-accepts: application/json
+  /snapTrade/resetUserSecret:
+    post:
+      operationId: Authentication_resetSnapTradeUserSecret
+      requestBody:
+        $ref: '#/components/requestBodies/ResetUserSecretRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIDandSecret'
+          description: New user secret is generated
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request. Could be caused by various reasons. Error message
+            is provided in response
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Failed authenticaion. Wrong clientId, userId or userSecret\
+            \ provided"
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Obtain a new user secret for a user
+      tags:
+      - Authentication
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-resetUserSecret
+      x-content-type: application/json
+      x-accepts: application/json
   /authorizations:
     get:
       operationId: Connections_listBrokerageAuthorizations
@@ -1995,6 +2037,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SnapTradeRegisterUserRequestBody'
+      required: true
+    ResetUserSecretRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserIDandSecret'
       required: true
     SnapTradeLoginUserRequestBody:
       content:
@@ -4767,7 +4815,6 @@ components:
       x-konfig-original-example: 1635790389
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Timestamp
     UserIDandSecret:
-      additionalProperties: true
       description: Response when register user is successful
       example:
         userSecret: h81@cx1lkalablakwjaltkejraj11=
@@ -8537,6 +8584,16 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--snapTrade-resetUserSecret:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/SnapTradeUserID'
+        userSecret:
+          $ref: '#/components/schemas/SnapTradeUserSecret'
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
     konfig-generated-schema-single-parameter-schema-get--authorizations:
       additionalProperties: true
       properties:

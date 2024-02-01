@@ -27,6 +27,8 @@ import { EncryptedResponse } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model401FailedRequestResponse } from '../models';
+// @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
@@ -306,6 +308,56 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Obtain a new user secret for a user
+         * @param {UserIDandSecret} userIDandSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resetSnapTradeUserSecret: async (userIDandSecret: UserIDandSecret, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userIDandSecret' is not null or undefined
+            assertParamExists('resetSnapTradeUserSecret', 'userIDandSecret', userIDandSecret)
+            const localVarPath = `/snapTrade/resetUserSecret`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: userIDandSecret,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(userIDandSecret, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -370,6 +422,17 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerSnapTradeUser(requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary Obtain a new user secret for a user
+         * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resetSnapTradeUserSecret(requestParameters, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -428,6 +491,16 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          */
         registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest, options?: AxiosRequestConfig): AxiosPromise<UserIDandSecret> {
             return localVarFp.registerSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Obtain a new user secret for a user
+         * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest, options?: AxiosRequestConfig): AxiosPromise<UserIDandSecret> {
+            return localVarFp.resetSnapTradeUserSecret(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -504,6 +577,15 @@ export type AuthenticationApiRegisterSnapTradeUserRequest = {
 } & SnapTradeRegisterUserRequestBody
 
 /**
+ * Request parameters for resetSnapTradeUserSecret operation in AuthenticationApi.
+ * @export
+ * @interface AuthenticationApiResetSnapTradeUserSecretRequest
+ */
+export type AuthenticationApiResetSnapTradeUserSecretRequest = {
+    
+} & UserIDandSecret
+
+/**
  * AuthenticationApiGenerated - object-oriented interface
  * @export
  * @class AuthenticationApiGenerated
@@ -567,5 +649,17 @@ export class AuthenticationApiGenerated extends BaseAPI {
      */
     public registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest, options?: AxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).registerSnapTradeUser(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Obtain a new user secret for a user
+     * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApiGenerated
+     */
+    public resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).resetSnapTradeUserSecret(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }
