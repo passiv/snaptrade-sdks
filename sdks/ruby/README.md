@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.1'
+gem 'snaptrade', '~> 2.0.2'
 ```
 
 ## Getting Started
@@ -57,6 +57,7 @@ Class | Method | HTTP request | Description
 *SnapTrade::AuthenticationApi* | [**list_snap_trade_users**](docs/AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users
 *SnapTrade::AuthenticationApi* | [**login_snap_trade_user**](docs/AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user & generate connection link
 *SnapTrade::AuthenticationApi* | [**register_snap_trade_user**](docs/AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user
+*SnapTrade::AuthenticationApi* | [**reset_snap_trade_user_secret**](docs/AuthenticationApi.md#reset_snap_trade_user_secret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
 *SnapTrade::ConnectionsApi* | [**detail_brokerage_authorization**](docs/ConnectionsApi.md#detail_brokerage_authorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *SnapTrade::ConnectionsApi* | [**list_brokerage_authorizations**](docs/ConnectionsApi.md#list_brokerage_authorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *SnapTrade::ConnectionsApi* | [**remove_brokerage_authorization**](docs/ConnectionsApi.md#remove_brokerage_authorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization

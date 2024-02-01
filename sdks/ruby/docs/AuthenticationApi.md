@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**list_snap_trade_users**](AuthenticationApi.md#list_snap_trade_users) | **GET** /snapTrade/listUsers | List SnapTrade users |
 | [**login_snap_trade_user**](AuthenticationApi.md#login_snap_trade_user) | **POST** /snapTrade/login | Login user &amp; generate connection link |
 | [**register_snap_trade_user**](AuthenticationApi.md#register_snap_trade_user) | **POST** /snapTrade/registerUser | Create SnapTrade user |
+| [**reset_snap_trade_user_secret**](AuthenticationApi.md#reset_snap_trade_user_secret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user |
 
 ## delete_snap_trade_user
 
@@ -313,6 +314,65 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **snap_trade_register_user_request_body** | [**SnapTradeRegisterUserRequestBody**](SnapTradeRegisterUserRequestBody.md) |  |  |
+
+### Return type
+
+[**UserIDandSecret**](UserIDandSecret.md)
+
+## reset_snap_trade_user_secret
+
+Obtain a new user secret for a user
+
+### Example
+
+```ruby
+require 'snaptrade'
+
+SnapTrade.client_id = "YOUR_CLIENT_ID"
+SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
+
+user_id = "snaptrade-user-123"
+user_secret = "h81@cx1lkalablakwjaltkejraj11="
+
+begin
+  # Obtain a new user secret for a user
+  result = SnapTrade::Authentication.reset_snap_trade_user_secret(
+                                                                     user_id: user_id,
+                                                                     user_secret: user_secret,
+                                                                   )
+  p result
+rescue SnapTrade::ApiError => e
+  puts "Exception when calling SnapTrade::Authentication.reset_snap_trade_user_secret: #{e}"
+end
+```
+
+#### Using the reset_snap_trade_user_secret_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+```ruby
+user_id = "snaptrade-user-123"
+user_secret = "h81@cx1lkalablakwjaltkejraj11="
+
+begin
+  # Obtain a new user secret for a user
+  data, status_code, headers, response = SnapTrade::Authentication.reset_snap_trade_user_secret_with_http_info(
+                                                                                                                  user_id: user_id,
+                                                                                                                  user_secret: user_secret,
+                                                                                                                )
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => UserIDandSecret
+rescue SnapTrade::ApiError => e
+  puts "Exception when calling SnapTrade::Authentication.reset_snap_trade_user_secret: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **user_i_dand_secret** | [**UserIDandSecret**](UserIDandSecret.md) |  |  |
 
 ### Return type
 

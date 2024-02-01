@@ -1,10 +1,15 @@
-[![Visit SnapTrade](https://raw.githubusercontent.com/passiv/snaptrade-sdks/HEAD/sdks/java/header.png)](https://snaptrade.com)
-# snaptrade-java-sdk
+<div align="center">
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.1-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.1)
-[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
+[![Visit SnapTrade](https://raw.githubusercontent.com/passiv/snaptrade-sdks/HEAD/sdks/java/header.png)](https://snaptrade.com)
+
+# [SnapTrade](https://snaptrade.com)
 
 Connect brokerage accounts to your app for live positions and trading
+
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.2-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.2)
+[![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
+
+</div>
 
 ## Requirements
 
@@ -41,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.1</version>
+  <version>5.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.1"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.2"
 }
 ```
 
@@ -94,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.1.jar`
+* `target/snaptrade-java-sdk-5.0.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -194,6 +199,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**listSnapTradeUsers**](docs/AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users
 *AuthenticationApi* | [**loginSnapTradeUser**](docs/AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link
 *AuthenticationApi* | [**registerSnapTradeUser**](docs/AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user
+*AuthenticationApi* | [**resetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
 *ConnectionsApi* | [**detailBrokerageAuthorization**](docs/ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user
 *ConnectionsApi* | [**removeBrokerageAuthorization**](docs/ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization

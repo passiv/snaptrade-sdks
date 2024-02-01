@@ -12,6 +12,7 @@ class PathValues(str, enum.Enum):
     SNAP_TRADE_LIST_USERS = "/snapTrade/listUsers"
     SNAP_TRADE_DELETE_USER = "/snapTrade/deleteUser"
     SNAP_TRADE_ENCRYPTED_JWT = "/snapTrade/encryptedJWT"
+    SNAP_TRADE_RESET_USER_SECRET = "/snapTrade/resetUserSecret"
     AUTHORIZATIONS = "/authorizations"
     AUTHORIZATIONS_AUTHORIZATION_ID = "/authorizations/{authorizationId}"
     SESSION_EVENTS = "/sessionEvents"
