@@ -467,6 +467,7 @@ class BaseApi(api_client.Api):
 class PlaceOcoOrder(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def aplace_oco_order(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -495,6 +496,7 @@ class PlaceOcoOrder(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def place_oco_order(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -523,6 +525,7 @@ class PlaceOcoOrder(BaseApi):
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -551,6 +554,7 @@ class ApiForpost(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def post(
         self,
         body: typing.Optional[typing.Any] = None,

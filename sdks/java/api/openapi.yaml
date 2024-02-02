@@ -1140,6 +1140,7 @@ paths:
       x-accepts: application/json
   /trade/oco:
     post:
+      deprecated: true
       operationId: Trading_placeOCOOrder
       parameters:
       - explode: true
