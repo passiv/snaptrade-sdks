@@ -1476,6 +1476,7 @@ paths:
           description: Unexpected Error
   /trade/oco:
     post:
+      deprecated: true
       tags:
         - Trading
       summary: Place a OCO (One Cancels Other) order
