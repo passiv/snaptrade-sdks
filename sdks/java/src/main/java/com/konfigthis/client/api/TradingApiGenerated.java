@@ -1255,6 +1255,7 @@ public class TradingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call placeOCOOrderValidateBeforeCall(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -1333,7 +1334,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
             return placeOCOOrderCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
@@ -1356,7 +1359,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrderRecord execute() throws ApiException {
             TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
             ApiResponse<AccountOrderRecord> localVarResp = placeOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
@@ -1373,7 +1378,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
             TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
             return placeOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
@@ -1390,7 +1397,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
             TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
             return placeOCOOrderAsync(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
@@ -1410,7 +1419,9 @@ public class TradingApiGenerated {
         <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public PlaceOCOOrderRequestBuilder placeOCOOrder(String userId, String userSecret) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

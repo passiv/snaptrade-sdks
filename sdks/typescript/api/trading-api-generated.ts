@@ -326,6 +326,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} userSecret 
          * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         placeOCOOrder: async (userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -502,6 +503,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @summary Place a OCO (One Cancels Other) order
          * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
@@ -574,6 +576,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          * @summary Place a OCO (One Cancels Other) order
          * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
@@ -825,6 +828,7 @@ export class TradingApiGenerated extends BaseAPI {
      * @summary Place a OCO (One Cancels Other) order
      * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
