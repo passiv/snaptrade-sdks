@@ -55,11 +55,11 @@ export const ErrorLogsApiAxiosParamCreator = function (configuration?: Configura
             const localVarQueryParameter = {} as any;
 
             // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "clientId", configuration})
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, keyParamName: "Signature", configuration })
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
             // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, keyParamName: "timestamp", configuration})
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.3-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.3)
+[![npm](https://img.shields.io/badge/npm-v9.0.4-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.4)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -294,7 +294,7 @@ The ID of the account to get detail of.
 
 ### `snaptrade.accountInformation.getUserAccountOrders`<a id="snaptradeaccountinformationgetuseraccountorders"></a>
 
-Fetch all recent orders from a user\'s account.
+Fetch all recent orders from a user's account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -512,7 +512,7 @@ const checkResponse = await snaptrade.apiStatus.check();
 
 ### `snaptrade.authentication.deleteSnapTradeUser`<a id="snaptradeauthenticationdeletesnaptradeuser"></a>
 
-Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -574,7 +574,7 @@ const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
 
 ### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
-Returns a list of users you\'ve registered over the SnapTrade API.
+Returns a list of users you've registered over the SnapTrade API.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

@@ -61,7 +61,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">timeInForce.</param>
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
-        /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**.</param>
+        /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**.</param>
         public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
         {
             this.AccountId = accountId;
@@ -109,9 +109,9 @@ namespace SnapTrade.Net.Model
         public string UniversalSymbolId { get; set; }
 
         /// <summary>
-        /// Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+        /// Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
         /// </summary>
-        /// <value>Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**</value>
+        /// <value>Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**</value>
         [DataMember(Name = "notional_value", EmitDefaultValue = true)]
         public double? NotionalValue { get; set; }
 

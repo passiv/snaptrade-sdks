@@ -23,6 +23,7 @@ export interface ConfigurationParameters {
     clientId?: string;
     signature?: string;
     timestamp?: string;
+
     /**
      * parameter for apiKey security
      * @param name security name
@@ -99,13 +100,14 @@ export class Configuration {
 
     constructor(param: ConfigurationParameters = {}) {
         this.consumerKey = param.consumerKey
+
         this.apiKey = param.apiKey
         if (this.apiKey === undefined) {
             this.apiKey = {}
             if (param.clientId !== undefined)
                 this.apiKey["clientId"] = param.clientId
             if (param.signature !== undefined)
-                this.apiKey["Signature"] = param.signature
+                this.apiKey["signature"] = param.signature
             if (param.timestamp !== undefined)
                 this.apiKey["timestamp"] = param.timestamp
         }
@@ -114,7 +116,7 @@ export class Configuration {
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/9.0.3/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/9.0.4/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
