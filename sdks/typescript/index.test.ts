@@ -39,7 +39,7 @@ it("getting started", async () => {
     await snaptrade.authentication.registerSnapTradeUser({
       userId,
     })
-  ).data;
+  ).data as { userSecret: string };
 
   // Note: A user secret is only generated once. It's required to access
   // resources for certain endpoints.
@@ -73,15 +73,15 @@ it("getUserAccountBalance", async () => {
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
     clientId: process.env.SNAPTRADE_CLIENT_ID,
   });
-  const userId = process.env.SNAPTRADE_TEST_USER_ID;
-  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
   const accounts = await snaptrade.accountInformation.listUserAccounts({
     userId,
     userSecret,
   });
   console.log(accounts.data);
   const response = await snaptrade.accountInformation.getUserAccountBalance({
-    accountId: accounts.data[0].id,
+    accountId: accounts.data[0].id as string,
     userId,
     userSecret,
   });
@@ -93,8 +93,8 @@ it("getActivities", async () => {
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
     clientId: process.env.SNAPTRADE_CLIENT_ID,
   });
-  const userId = process.env.SNAPTRADE_TEST_USER_ID;
-  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
   let activities = await snaptrade.transactionsAndReporting.getActivities({
     userId,
     userSecret,
@@ -132,8 +132,8 @@ it("getUserHoldings", async () => {
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
     clientId: process.env.SNAPTRADE_CLIENT_ID,
   });
-  const userId = process.env.SNAPTRADE_TEST_USER_ID;
-  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
   const accounts = await snaptrade.accountInformation.listUserAccounts({
     userId,
     userSecret,
@@ -141,7 +141,7 @@ it("getUserHoldings", async () => {
   const holdings = await snaptrade.accountInformation.getUserHoldings({
     userId,
     userSecret,
-    accountId: accounts.data[0].id,
+    accountId: accounts.data[0].id as string,
   });
   // assert holdings is not null with jest
   expect(holdings).not.toBeNull();
@@ -153,14 +153,14 @@ it.skip("getOptionsChain", async () => {
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
     clientId: process.env.SNAPTRADE_CLIENT_ID,
   });
-  const userId = process.env.SNAPTRADE_TEST_USER_ID;
-  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET;
+  const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
+  const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
   const accounts = await snaptrade.accountInformation.listUserAccounts({
     userId,
     userSecret,
   });
   console.log(accounts.data);
-  const accountId = accounts.data[0].id;
+  const accountId = accounts.data[0].id as string;
   const symbols = await snaptrade.referenceData.getSymbols({
     substring: "apple",
   });

@@ -37,7 +37,7 @@ async function computeHmacSha256(
       cryptoKey,
       msgBuffer
     );
-    const byteArray = new Uint8Array(signature);
+    const byteArray = Array.from(new Uint8Array(signature));
     // Convert byte array to base64
     const base64 = btoa(String.fromCharCode.apply(null, byteArray));
     return base64;
