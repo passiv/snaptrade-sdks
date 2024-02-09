@@ -166,7 +166,7 @@ public class Example {
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
-    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
     try {
       ManualTradeAndImpact result = client
               .trading
@@ -390,7 +390,7 @@ public class Example {
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
-    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
     try {
       AccountOrderRecord result = client
               .trading

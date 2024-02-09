@@ -8,8 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/passiv/snaptrade-sdks/tree/master/sdks/typescript"
+    "url": "https://github.com/passiv/snaptrade-sdks.git",
+    "directory": "sdks/typescript"
   },
+  "homepage": "https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript#readme",
   "keywords": [
     "axios",
     "typescript",
@@ -36,6 +38,7 @@
     "@babel/traverse": "^7.23.2"
   },
   "devDependencies": {
+    "@jest/types": "^29.6.3",
     "@types/jest": "^29.2.4",
     "@types/node": "^18",
     "jest": "^29.3.1",

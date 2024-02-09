@@ -18,7 +18,7 @@ Connect brokerage accounts to your app for live positions and trading
 <!-- toc -->
 
 - [Requirements](#requirements)
-- [Installing](#installing)
+- [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
@@ -73,7 +73,7 @@ Connect brokerage accounts to your app for live positions and trading
 
 Python >=3.7
 
-## Installing<a id="installing"></a>
+## Installation<a id="installation"></a>
 
 ```sh
 pip install snaptrade-python-sdk==11.0.3

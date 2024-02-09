@@ -16,7 +16,7 @@ Manual Trade Form
 |**timeInForce** | **TimeInForceStrict** |  |  [optional] |
 |**units** | **Double** | Trade Units. Cannot work with notional value. |  [optional] |
 |**universalSymbolId** | **UUID** |  |  [optional] |
-|**notionalValue** | **Double** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades** |  [optional] |
+|**notionalValue** | **Double** | Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades** |  [optional] |
 
 
 

@@ -372,11 +372,11 @@ public class ManualTradeForm {
   }
 
    /**
-   * Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**
+   * Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
    * @return notionalValue
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "100", value = "Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca and Alpaca Paper. Please contact support to get access to place notional trades**")
+  @ApiModelProperty(example = "100", value = "Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**")
 
   public Double getNotionalValue() {
     return notionalValue;
