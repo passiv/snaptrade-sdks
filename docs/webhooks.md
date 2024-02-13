@@ -247,6 +247,8 @@ Example payload is below:
 
 Gets sent when new trades are detected in a user's account.
 
+On average, you'll receive a webhook within 30 minutes of activity occurring in the account (we poll once per hour).
+
 We send 1 webhook regardless of how many new trades are identified in your account. So if we identify 1 trade in the account, we'll send 1 webhook; and if we identify 10 trades in the account, we also only send 1 webhook.
 
 Please contact us in order to receive these webhooks as they are disabled by default.
