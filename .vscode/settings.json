@@ -34,5 +34,5 @@
       "useBundler": true
     }
   },
-  "ruby.format": "rubocop",
+  "ruby.format": "rubocop"
 }
