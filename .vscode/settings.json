@@ -35,7 +35,4 @@
     }
   },
   "ruby.format": "rubocop",
-  "conventionalCommits.scopes": [
-    "Webhooks"
-  ]
 }
