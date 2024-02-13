@@ -34,5 +34,8 @@
       "useBundler": true
     }
   },
-  "ruby.format": "rubocop"
+  "ruby.format": "rubocop",
+  "conventionalCommits.scopes": [
+    "Webhooks"
+  ]
 }
