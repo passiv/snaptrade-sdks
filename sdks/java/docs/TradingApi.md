@@ -611,7 +611,7 @@ public class Example {
 
 <a name="placeOrder"></a>
 # **placeOrder**
-> AccountOrderRecord placeOrder(tradeId, userId, userSecret).execute();
+> AccountOrderRecord placeOrder(tradeId, userId, userSecret).validatedTradeBody(validatedTradeBody).execute();
 
 Place order
 
@@ -640,10 +640,12 @@ public class Example {
     UUID tradeId = UUID.randomUUID(); // The ID of trade object obtained from trade/impact endpoint
     String userId = "userId_example";
     String userSecret = "userSecret_example";
+    Boolean waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
     try {
       AccountOrderRecord result = client
               .trading
               .placeOrder(tradeId, userId, userSecret)
+              .waitToConfirm(waitToConfirm)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -677,6 +679,7 @@ public class Example {
       ApiResponse<AccountOrderRecord> response = client
               .trading
               .placeOrder(tradeId, userId, userSecret)
+              .waitToConfirm(waitToConfirm)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -702,6 +705,7 @@ public class Example {
 | **tradeId** | **UUID**| The ID of trade object obtained from trade/impact endpoint | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
+| **validatedTradeBody** | [**ValidatedTradeBody**](ValidatedTradeBody.md)|  | [optional] |
 
 ### Return type
 
@@ -713,7 +717,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

@@ -36,6 +36,7 @@ import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
+import com.konfigthis.client.model.ValidatedTradeBody;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1431,7 +1432,7 @@ public class TradingApiGenerated {
 
         return new PlaceOCOOrderRequestBuilder(userId, userSecret);
     }
-    private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1445,7 +1446,7 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = validatedTradeBody;
 
         // create path and map variables
         String localVarPath = "/trade/{tradeId}"
@@ -1474,6 +1475,7 @@ public class TradingApiGenerated {
         }
 
         final String[] localVarContentTypes = {
+            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -1485,7 +1487,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeOrderValidateBeforeCall(UUID tradeId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeOrderValidateBeforeCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'tradeId' is set
         if (tradeId == null) {
             throw new ApiException("Missing the required parameter 'tradeId' when calling placeOrder(Async)");
@@ -1501,20 +1503,20 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling placeOrder(Async)");
         }
 
-        return placeOrderCall(tradeId, userId, userSecret, _callback);
+        return placeOrderCall(tradeId, userId, userSecret, validatedTradeBody, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecord> placeOrderWithHttpInfo(UUID tradeId, String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, null);
+    private ApiResponse<AccountOrderRecord> placeOrderWithHttpInfo(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody) throws ApiException {
+        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, validatedTradeBody, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeOrderAsync(UUID tradeId, String userId, String userSecret, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call placeOrderAsync(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, _callback);
+        okhttp3.Call localVarCall = placeOrderValidateBeforeCall(tradeId, userId, userSecret, validatedTradeBody, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1524,6 +1526,7 @@ public class TradingApiGenerated {
         private final UUID tradeId;
         private final String userId;
         private final String userSecret;
+        private Boolean waitToConfirm;
 
         private PlaceOrderRequestBuilder(UUID tradeId, String userId, String userSecret) {
             this.tradeId = tradeId;
@@ -1531,6 +1534,16 @@ public class TradingApiGenerated {
             this.userSecret = userSecret;
         }
 
+        /**
+         * Set waitToConfirm
+         * @param waitToConfirm Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request (optional)
+         * @return PlaceOrderRequestBuilder
+         */
+        public PlaceOrderRequestBuilder waitToConfirm(Boolean waitToConfirm) {
+            this.waitToConfirm = waitToConfirm;
+            return this;
+        }
+        
         /**
          * Build call for placeOrder
          * @param _callback ApiCallback API callback
@@ -1544,9 +1557,15 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return placeOrderCall(tradeId, userId, userSecret, _callback);
+            ValidatedTradeBody validatedTradeBody = buildBodyParams();
+            return placeOrderCall(tradeId, userId, userSecret, validatedTradeBody, _callback);
         }
 
+        private ValidatedTradeBody buildBodyParams() {
+            ValidatedTradeBody validatedTradeBody = new ValidatedTradeBody();
+            validatedTradeBody.waitToConfirm(this.waitToConfirm);
+            return validatedTradeBody;
+        }
 
         /**
          * Execute placeOrder request
@@ -1560,7 +1579,8 @@ public class TradingApiGenerated {
          </table>
          */
         public AccountOrderRecord execute() throws ApiException {
-            ApiResponse<AccountOrderRecord> localVarResp = placeOrderWithHttpInfo(tradeId, userId, userSecret);
+            ValidatedTradeBody validatedTradeBody = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = placeOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
             return localVarResp.getResponseBody();
         }
 
@@ -1576,7 +1596,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
-            return placeOrderWithHttpInfo(tradeId, userId, userSecret);
+            ValidatedTradeBody validatedTradeBody = buildBodyParams();
+            return placeOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
         }
 
         /**
@@ -1592,7 +1613,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
-            return placeOrderAsync(tradeId, userId, userSecret, _callback);
+            ValidatedTradeBody validatedTradeBody = buildBodyParams();
+            return placeOrderAsync(tradeId, userId, userSecret, validatedTradeBody, _callback);
         }
     }
 

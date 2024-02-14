@@ -255,6 +255,7 @@ Class | Method | HTTP request | Description
  - [UserErrorLog](docs/UserErrorLog.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [UserSettings](docs/UserSettings.md)
+ - [ValidatedTradeBody](docs/ValidatedTradeBody.md)
 
 
 ## Dependencies

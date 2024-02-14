@@ -160,3 +160,4 @@ from snaptrade_client.model.user_i_dand_secret import UserIDandSecret
 from snaptrade_client.model.user_list import UserList
 from snaptrade_client.model.user_secret import UserSecret
 from snaptrade_client.model.user_settings import UserSettings
+from snaptrade_client.model.validated_trade_body import ValidatedTradeBody

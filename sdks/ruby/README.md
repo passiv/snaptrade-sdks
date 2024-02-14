@@ -220,4 +220,5 @@ Class | Method | HTTP request | Description
  - [SnapTrade::UserErrorLog](docs/UserErrorLog.md)
  - [SnapTrade::UserIDandSecret](docs/UserIDandSecret.md)
  - [SnapTrade::UserSettings](docs/UserSettings.md)
+ - [SnapTrade::ValidatedTradeBody](docs/ValidatedTradeBody.md)
 

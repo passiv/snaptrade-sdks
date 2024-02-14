@@ -259,11 +259,16 @@ namespace SnapTrade.Net.Test.Api
             var tradeId = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
             var userId = "userId_example";
             var userSecret = "userSecret_example";
+            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+            
+            var validatedTradeBody = new ValidatedTradeBody(
+                waitToConfirm
+            );
             
             try
             {
                 // Place order
-                AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret);
+                AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

@@ -1711,6 +1711,7 @@ const placeOrderResponse = await snaptrade.trading.placeOrder({
   tradeId: "tradeId_example",
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
+  wait_to_confirm: true,
 });
 ```
 
@@ -1723,6 +1724,10 @@ The ID of trade object obtained from trade/impact endpoint
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### wait_to_confirm: `boolean`<a id="wait_to_confirm-boolean"></a>
+
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
 
 #### 🔄 Return<a id="🔄-return"></a>
 

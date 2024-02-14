@@ -146,6 +146,7 @@ require 'snaptrade/models/universal_symbol'
 require 'snaptrade/models/user_error_log'
 require 'snaptrade/models/user_i_dand_secret'
 require 'snaptrade/models/user_settings'
+require 'snaptrade/models/validated_trade_body'
 
 # APIs
 require 'snaptrade/api/account_information_api'

@@ -42,6 +42,8 @@ import { TimeInForceStrict } from '../models';
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingPlaceOCOOrderRequest } from '../models';
+// @ts-ignore
+import { ValidatedTradeBody } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -390,10 +392,11 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} tradeId The ID of trade object obtained from trade/impact endpoint
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {ValidatedTradeBody} [validatedTradeBody] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeOrder: async (tradeId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeOrder: async (tradeId: string, userId: string, userSecret: string, validatedTradeBody?: ValidatedTradeBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tradeId' is not null or undefined
             assertParamExists('placeOrder', 'tradeId', tradeId)
             // verify required parameter 'userId' is not null or undefined
@@ -429,14 +432,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
+                requestBody: validatedTradeBody,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(validatedTradeBody, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -518,7 +526,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeOrder(requestParameters: TradingApiPlaceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOrder(requestParameters.tradeId, requestParameters.userId, requestParameters.userSecret, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOrder(requestParameters.tradeId, requestParameters.userId, requestParameters.userSecret, requestParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -766,7 +774,7 @@ export type TradingApiPlaceOrderRequest = {
     */
     readonly userSecret: string
     
-}
+} & ValidatedTradeBody
 
 /**
  * TradingApiGenerated - object-oriented interface

@@ -102,6 +102,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
+  # @option opts [ValidatedTradeBody] :validated_trade_body 
   # @return [AccountOrderRecord]
   describe 'place_order test' do
     it 'should work' do

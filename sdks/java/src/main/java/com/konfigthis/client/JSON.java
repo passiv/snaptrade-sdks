@@ -213,6 +213,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserErrorLog.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserIDandSecret.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UserSettings.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.ValidatedTradeBody.CustomTypeAdapterFactory());
         gsonBuilder.disableHtmlEscaping();
         gson = gsonBuilder.create();
     }

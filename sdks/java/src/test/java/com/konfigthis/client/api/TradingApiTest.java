@@ -26,6 +26,7 @@ import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
+import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -177,7 +178,9 @@ public class TradingApiTest {
         UUID tradeId = null;
         String userId = null;
         String userSecret = null;
+        Boolean waitToConfirm = null;
         AccountOrderRecord response = api.placeOrder(tradeId, userId, userSecret)
+                .waitToConfirm(waitToConfirm)
                 .execute();
         // TODO: test validations
     }

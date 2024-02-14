@@ -641,8 +641,13 @@ module SnapTrade
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+    # @param body [ValidatedTradeBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_order(trade_id:, user_id:, user_secret:, extra: {})
+    def place_order(trade_id:, user_id:, user_secret:, wait_to_confirm: SENTINEL, extra: {})
+      _body = {}
+      _body[:wait_to_confirm] = wait_to_confirm if wait_to_confirm != SENTINEL
+      extra[:validated_trade_body] = _body if !_body.empty?
       data, _status_code, _headers = place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
       data
     end
@@ -651,8 +656,13 @@ module SnapTrade
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+    # @param body [ValidatedTradeBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_order_with_http_info(trade_id:, user_id:, user_secret:, extra: {})
+    def place_order_with_http_info(trade_id:, user_id:, user_secret:, wait_to_confirm: SENTINEL, extra: {})
+      _body = {}
+      _body[:wait_to_confirm] = wait_to_confirm if wait_to_confirm != SENTINEL
+      extra[:validated_trade_body] = _body if !_body.empty?
       place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
     end
 
@@ -661,6 +671,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [ValidatedTradeBody] :validated_trade_body 
     # @return [AccountOrderRecord]
     def place_order_impl(trade_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = place_order_with_http_info(trade_id, user_id, user_secret, opts)
@@ -672,6 +683,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [ValidatedTradeBody] :validated_trade_body 
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
     def place_order_with_http_info_impl(trade_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
@@ -701,12 +713,17 @@ module SnapTrade
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
 
       # form parameters
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body]
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'validated_trade_body'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'AccountOrderRecord'

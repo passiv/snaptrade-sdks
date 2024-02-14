@@ -34,7 +34,9 @@ from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
+from snaptrade_client.model.validated_trade_body import ValidatedTradeBody as ValidatedTradeBodySchema
 
+from snaptrade_client.type.validated_trade_body import ValidatedTradeBody
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 
@@ -99,6 +101,16 @@ request_path_trade_id = api_client.PathParameter(
     style=api_client.ParameterStyle.SIMPLE,
     schema=TradeIdSchema,
     required=True,
+)
+# body param
+SchemaForRequestBodyApplicationJson = ValidatedTradeBodySchema
+
+
+request_body_validated_trade_body = api_client.RequestBody(
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaForRequestBodyApplicationJson),
+    },
 )
 SchemaFor200ResponseBodyApplicationJson = AccountOrderRecordSchema
 
@@ -167,15 +179,21 @@ class BaseApi(api_client.Api):
 
     def _place_order_mapped_args(
         self,
+        body: typing.Optional[ValidatedTradeBody] = None,
         trade_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         _path_params = {}
+        _body = {}
+        if wait_to_confirm is not None:
+            _body["wait_to_confirm"] = wait_to_confirm
+        args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
@@ -188,11 +206,13 @@ class BaseApi(api_client.Api):
 
     async def _aplace_order_oapg(
         self,
+        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
         **kwargs,
     ) -> typing.Union[
@@ -243,18 +263,32 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        if body is not schemas.unset:
+            serialized_data = request_body_validated_trade_body.serialize(body, content_type)
+            if 'fields' in serialized_data:
+                _fields = serialized_data['fields']
+            elif 'body' in serialized_data:
+                _body = serialized_data['body']
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -317,11 +351,13 @@ class BaseApi(api_client.Api):
 
     def _place_order_oapg(
         self,
+        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200,
@@ -370,18 +406,32 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        if body is not schemas.unset:
+            serialized_data = request_body_validated_trade_body.serialize(body, content_type)
+            if 'fields' in serialized_data:
+                _fields = serialized_data['fields']
+            elif 'body' in serialized_data:
+                _body = serialized_data['body']
     
         response = self.api_client.call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -416,9 +466,11 @@ class PlaceOrder(BaseApi):
 
     async def aplace_order(
         self,
+        body: typing.Optional[ValidatedTradeBody] = None,
         trade_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -428,13 +480,16 @@ class PlaceOrder(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._place_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             trade_id=trade_id,
             user_id=user_id,
             user_secret=user_secret,
+            wait_to_confirm=wait_to_confirm,
         )
         return await self._aplace_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -442,9 +497,11 @@ class PlaceOrder(BaseApi):
     
     def place_order(
         self,
+        body: typing.Optional[ValidatedTradeBody] = None,
         trade_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -452,13 +509,16 @@ class PlaceOrder(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._place_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             trade_id=trade_id,
             user_id=user_id,
             user_secret=user_secret,
+            wait_to_confirm=wait_to_confirm,
         )
         return self._place_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )
@@ -468,9 +528,11 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
+        body: typing.Optional[ValidatedTradeBody] = None,
         trade_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -480,13 +542,16 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._place_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             trade_id=trade_id,
             user_id=user_id,
             user_secret=user_secret,
+            wait_to_confirm=wait_to_confirm,
         )
         return await self._aplace_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -494,9 +559,11 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
+        body: typing.Optional[ValidatedTradeBody] = None,
         trade_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -504,13 +571,16 @@ class ApiForpost(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         args = self._place_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             trade_id=trade_id,
             user_id=user_id,
             user_secret=user_secret,
+            wait_to_confirm=wait_to_confirm,
         )
         return self._place_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )
