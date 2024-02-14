@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.4-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.4)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.5-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.5)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -76,7 +76,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.4
+pip install snaptrade-python-sdk==11.0.5
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1678,6 +1678,7 @@ place_order_response = snaptrade.trading.place_order(
     trade_id="tradeId_example",
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
+    wait_to_confirm=True,
 )
 ```
 
@@ -1691,6 +1692,13 @@ The ID of trade object obtained from trade/impact endpoint
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
+##### wait_to_confirm: `Optional[bool]`<a id="wait_to_confirm-optionalbool"></a>
+
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ValidatedTradeBody`](./snaptrade_client/type/validated_trade_body.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)

@@ -567,11 +567,16 @@ namespace Example
             var tradeId = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
             var userId = "userId_example";
             var userSecret = "userSecret_example";
+            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+            
+            var validatedTradeBody = new ValidatedTradeBody(
+                waitToConfirm
+            );
             
             try
             {
                 // Place order
-                AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret);
+                AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -598,7 +603,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place order
-    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOrderWithHttpInfo(tradeId, userId, userSecret);
+    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -618,6 +623,7 @@ catch (ApiException e)
 | **tradeId** | **string** | The ID of trade object obtained from trade/impact endpoint |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
+| **validatedTradeBody** | [**ValidatedTradeBody**](ValidatedTradeBody.md) |  | [optional]  |
 
 ### Return type
 

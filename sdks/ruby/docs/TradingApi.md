@@ -434,6 +434,7 @@ SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
 trade_id = "tradeId_example"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
+wait_to_confirm = True
 
 begin
   # Place order
@@ -441,6 +442,7 @@ begin
                                              trade_id: trade_id,
                                              user_id: user_id,
                                              user_secret: user_secret,
+                                             wait_to_confirm: wait_to_confirm,
                                            )
   p result
 rescue SnapTrade::ApiError => e
@@ -456,6 +458,7 @@ This returns an Array which contains the response data, status code and headers.
 trade_id = "tradeId_example"
 user_id = "John.doe@snaptrade.com"
 user_secret = "USERSECRET123"
+wait_to_confirm = True
 
 begin
   # Place order
@@ -463,6 +466,7 @@ begin
                                                                                           trade_id: trade_id,
                                                                                           user_id: user_id,
                                                                                           user_secret: user_secret,
+                                                                                          wait_to_confirm: wait_to_confirm,
                                                                                         )
   p status_code # => 2xx
   p headers # => { ... }
@@ -479,6 +483,7 @@ end
 | **trade_id** | **String** | The ID of trade object obtained from trade/impact endpoint |  |
 | **user_id** | **String** |  |  |
 | **user_secret** | **String** |  |  |
+| **validated_trade_body** | [**ValidatedTradeBody**](ValidatedTradeBody.md) |  | [optional] |
 
 ### Return type
 

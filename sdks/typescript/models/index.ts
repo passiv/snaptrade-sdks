@@ -112,3 +112,4 @@ export * from './universal-symbol';
 export * from './user-error-log';
 export * from './user-idand-secret';
 export * from './user-settings';
+export * from './validated-trade-body';

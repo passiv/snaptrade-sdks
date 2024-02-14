@@ -162,9 +162,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, int operationIndex = 0);
+        AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
 
         /// <summary>
         /// Place order
@@ -176,9 +177,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -351,10 +353,11 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place order
@@ -366,10 +369,11 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1607,11 +1611,12 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, int operationIndex = 0)
+        public AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceOrderWithHttpInfo(tradeId, userId, userSecret);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
             return localVarResponse.Data;
         }
 
@@ -1622,9 +1627,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0)
         {
             // verify the required parameter 'tradeId' is set
             if (tradeId == null)
@@ -1647,6 +1653,7 @@ namespace SnapTrade.Net.Api
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1669,6 +1676,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("tradeId", SnapTrade.Net.Client.ClientUtils.ParameterToString(tradeId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = validatedTradeBody;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1710,12 +1718,13 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceOrderWithHttpInfoAsync(tradeId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceOrderWithHttpInfoAsync(tradeId, userId, userSecret, validatedTradeBody, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1726,10 +1735,11 @@ namespace SnapTrade.Net.Api
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
+        /// <param name="validatedTradeBody"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'tradeId' is set
             if (tradeId == null)
@@ -1753,6 +1763,7 @@ namespace SnapTrade.Net.Api
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1775,6 +1786,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("tradeId", SnapTrade.Net.Client.ClientUtils.ParameterToString(tradeId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = validatedTradeBody;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceOrder";
             localVarRequestOptions.OperationIndex = operationIndex;

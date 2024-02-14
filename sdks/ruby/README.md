@@ -9,7 +9,7 @@ For more information, please visit [https://snaptrade.com/](https://snaptrade.co
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.4'
+gem 'snaptrade', '~> 2.0.5'
 ```
 
 ## Getting Started
@@ -220,4 +220,5 @@ Class | Method | HTTP request | Description
  - [SnapTrade::UserErrorLog](docs/UserErrorLog.md)
  - [SnapTrade::UserIDandSecret](docs/UserIDandSecret.md)
  - [SnapTrade::UserSettings](docs/UserSettings.md)
+ - [SnapTrade::ValidatedTradeBody](docs/ValidatedTradeBody.md)
 

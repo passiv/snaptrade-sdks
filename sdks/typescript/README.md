@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.4-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.4)
+[![npm](https://img.shields.io/badge/npm-v9.0.5-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.5)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1711,6 +1711,7 @@ const placeOrderResponse = await snaptrade.trading.placeOrder({
   tradeId: "tradeId_example",
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
+  wait_to_confirm: true,
 });
 ```
 
@@ -1723,6 +1724,10 @@ The ID of trade object obtained from trade/impact endpoint
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### wait_to_confirm: `boolean`<a id="wait_to_confirm-boolean"></a>
+
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
 
 #### 🔄 Return<a id="🔄-return"></a>
 
