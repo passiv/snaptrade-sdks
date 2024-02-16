@@ -3258,6 +3258,16 @@ components:
           type: string
           format: url
           example: https://www.snaptrade.com/questrade.logo
+        aws_s3_square_logo_url:
+          type: string
+          format: url
+          example: https://www.snaptrade.com/questrade.logo
+          nullable: true
+        open_url:
+          type: string
+          format: url
+          example: https://www.brokerage.com
+          nullable: true
         slug:
           type: string
           example: QUESTRADE
