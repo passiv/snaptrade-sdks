@@ -2541,11 +2541,13 @@ components:
               - 4bcd8cc3-c122-4974-dc21-1858296801f4
               description: Questrade is an online brokerage firm and wealth management
                 firm based in Canada. It is Canada's largest discount broker.
+              open_url: https://www.brokerage.com
               display_name: Questrade
               url: https://www.questrade.com/
               enabled: true
               allows_trading: true
               has_reporting: true
+              aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
               is_real_time_connection: true
               name: Questrade
               allows_trading_through_snaptrade_api: true
@@ -3162,11 +3164,13 @@ components:
               - 4bcd8cc3-c122-4974-dc21-1858296801f4
               description: Questrade is an online brokerage firm and wealth management
                 firm based in Canada. It is Canada's largest discount broker.
+              open_url: https://www.brokerage.com
               display_name: Questrade
               url: https://www.questrade.com/
               enabled: true
               allows_trading: true
               has_reporting: true
+              aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
               is_real_time_connection: true
               name: Questrade
               allows_trading_through_snaptrade_api: true
@@ -3682,11 +3686,13 @@ components:
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
             description: Questrade is an online brokerage firm and wealth management
               firm based in Canada. It is Canada's largest discount broker.
+            open_url: https://www.brokerage.com
             display_name: Questrade
             url: https://www.questrade.com/
             enabled: true
             allows_trading: true
             has_reporting: true
+            aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
             is_real_time_connection: true
             name: Questrade
             allows_trading_through_snaptrade_api: true
@@ -4410,11 +4416,13 @@ components:
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
           description: Questrade is an online brokerage firm and wealth management
             firm based in Canada. It is Canada's largest discount broker.
+          open_url: https://www.brokerage.com
           display_name: Questrade
           url: https://www.questrade.com/
           enabled: true
           allows_trading: true
           has_reporting: true
+          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
           is_real_time_connection: true
           name: Questrade
           allows_trading_through_snaptrade_api: true
@@ -4433,11 +4441,13 @@ components:
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
           description: Questrade is an online brokerage firm and wealth management
             firm based in Canada. It is Canada's largest discount broker.
+          open_url: https://www.brokerage.com
           display_name: Questrade
           url: https://www.questrade.com/
           enabled: true
           allows_trading: true
           has_reporting: true
+          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
           is_real_time_connection: true
           name: Questrade
           allows_trading_through_snaptrade_api: true
@@ -4935,11 +4945,13 @@ components:
         - 4bcd8cc3-c122-4974-dc21-1858296801f4
         description: Questrade is an online brokerage firm and wealth management firm
           based in Canada. It is Canada's largest discount broker.
+        open_url: https://www.brokerage.com
         display_name: Questrade
         url: https://www.questrade.com/
         enabled: true
         allows_trading: true
         has_reporting: true
+        aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
         is_real_time_connection: true
         name: Questrade
         allows_trading_through_snaptrade_api: true
@@ -4981,6 +4993,20 @@ components:
           type: string
           x-konfig-original-example: https://www.snaptrade.com/questrade.logo
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_logo_url
+        aws_s3_square_logo_url:
+          example: https://www.snaptrade.com/questrade.logo
+          format: url
+          nullable: true
+          type: string
+          x-konfig-original-example: https://www.snaptrade.com/questrade.logo
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url
+        open_url:
+          example: https://www.brokerage.com
+          format: url
+          nullable: true
+          type: string
+          x-konfig-original-example: https://www.brokerage.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-open_url
         slug:
           example: QUESTRADE
           type: string
@@ -5067,11 +5093,13 @@ components:
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
           description: Questrade is an online brokerage firm and wealth management
             firm based in Canada. It is Canada's largest discount broker.
+          open_url: https://www.brokerage.com
           display_name: Questrade
           url: https://www.questrade.com/
           enabled: true
           allows_trading: true
           has_reporting: true
+          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
           is_real_time_connection: true
           name: Questrade
           allows_trading_through_snaptrade_api: true
@@ -5251,11 +5279,13 @@ components:
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
             description: Questrade is an online brokerage firm and wealth management
               firm based in Canada. It is Canada's largest discount broker.
+            open_url: https://www.brokerage.com
             display_name: Questrade
             url: https://www.questrade.com/
             enabled: true
             allows_trading: true
             has_reporting: true
+            aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
             is_real_time_connection: true
             name: Questrade
             allows_trading_through_snaptrade_api: true
@@ -7914,6 +7944,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_logo_url:
       example: https://www.snaptrade.com/questrade.logo
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url:
+      example: https://www.snaptrade.com/questrade.logo
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-open_url:
+      example: https://www.brokerage.com
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-slug:

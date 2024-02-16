@@ -98,6 +98,22 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'AwsS3LogoUrl'
         }
         /// <summary>
+        /// Test the property 'AwsS3SquareLogoUrl'
+        /// </summary>
+        [Fact]
+        public void AwsS3SquareLogoUrlTest()
+        {
+            // TODO unit test for the property 'AwsS3SquareLogoUrl'
+        }
+        /// <summary>
+        /// Test the property 'OpenUrl'
+        /// </summary>
+        [Fact]
+        public void OpenUrlTest()
+        {
+            // TODO unit test for the property 'OpenUrl'
+        }
+        /// <summary>
         /// Test the property 'Slug'
         /// </summary>
         [Fact]

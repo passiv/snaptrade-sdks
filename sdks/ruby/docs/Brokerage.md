@@ -9,6 +9,8 @@
 | **display_name** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
 | **aws_s3_logo_url** | **String** |  | [optional] |
+| **aws_s3_square_logo_url** | **String** |  | [optional] |
+| **open_url** | **String** |  | [optional] |
 | **slug** | **String** |  | [optional] |
 | **url** | **String** |  | [optional] |
 | **enabled** | **Boolean** |  | [optional] |
@@ -34,6 +36,8 @@ instance = SnapTrade::Brokerage.new(
   display_name: Questrade,
   description: Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada&#39;s largest discount broker.,
   aws_s3_logo_url: https://www.snaptrade.com/questrade.logo,
+  aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo,
+  open_url: https://www.brokerage.com,
   slug: QUESTRADE,
   url: https://www.questrade.com/,
   enabled: true,

@@ -32,6 +32,10 @@ class OptionalBrokerage(TypedDict, total=False):
 
     aws_s3_logo_url: str
 
+    aws_s3_square_logo_url: typing.Optional[str]
+
+    open_url: typing.Optional[str]
+
     slug: str
 
     url: str

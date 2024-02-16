@@ -40,6 +40,8 @@ namespace SnapTrade.Net.Model
         /// <param name="displayName">displayName.</param>
         /// <param name="description">description.</param>
         /// <param name="awsS3LogoUrl">awsS3LogoUrl.</param>
+        /// <param name="awsS3SquareLogoUrl">awsS3SquareLogoUrl.</param>
+        /// <param name="openUrl">openUrl.</param>
         /// <param name="slug">slug.</param>
         /// <param name="url">url.</param>
         /// <param name="enabled">enabled.</param>
@@ -53,13 +55,15 @@ namespace SnapTrade.Net.Model
         /// <param name="defaultCurrency">defaultCurrency.</param>
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">List of exchange ID supported by brokerage.</param>
-        public Brokerage(string id = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), string defaultCurrency = default(string), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
+        public Brokerage(string id = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string openUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), string defaultCurrency = default(string), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
         {
             this.Id = id;
             this.Name = name;
             this.DisplayName = displayName;
             this.Description = description;
             this.AwsS3LogoUrl = awsS3LogoUrl;
+            this.AwsS3SquareLogoUrl = awsS3SquareLogoUrl;
+            this.OpenUrl = openUrl;
             this.Slug = slug;
             this.Url = url;
             this.Enabled = enabled;
@@ -105,6 +109,18 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "aws_s3_logo_url", EmitDefaultValue = false)]
         public string AwsS3LogoUrl { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AwsS3SquareLogoUrl
+        /// </summary>
+        [DataMember(Name = "aws_s3_square_logo_url", EmitDefaultValue = true)]
+        public string AwsS3SquareLogoUrl { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OpenUrl
+        /// </summary>
+        [DataMember(Name = "open_url", EmitDefaultValue = true)]
+        public string OpenUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets Slug
@@ -205,6 +221,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  AwsS3LogoUrl: ").Append(AwsS3LogoUrl).Append("\n");
+            sb.Append("  AwsS3SquareLogoUrl: ").Append(AwsS3SquareLogoUrl).Append("\n");
+            sb.Append("  OpenUrl: ").Append(OpenUrl).Append("\n");
             sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
@@ -278,6 +296,16 @@ namespace SnapTrade.Net.Model
                     this.AwsS3LogoUrl == input.AwsS3LogoUrl ||
                     (this.AwsS3LogoUrl != null &&
                     this.AwsS3LogoUrl.Equals(input.AwsS3LogoUrl))
+                ) && base.Equals(input) && 
+                (
+                    this.AwsS3SquareLogoUrl == input.AwsS3SquareLogoUrl ||
+                    (this.AwsS3SquareLogoUrl != null &&
+                    this.AwsS3SquareLogoUrl.Equals(input.AwsS3SquareLogoUrl))
+                ) && base.Equals(input) && 
+                (
+                    this.OpenUrl == input.OpenUrl ||
+                    (this.OpenUrl != null &&
+                    this.OpenUrl.Equals(input.OpenUrl))
                 ) && base.Equals(input) && 
                 (
                     this.Slug == input.Slug ||
@@ -372,6 +400,14 @@ namespace SnapTrade.Net.Model
                 if (this.AwsS3LogoUrl != null)
                 {
                     hashCode = (hashCode * 59) + this.AwsS3LogoUrl.GetHashCode();
+                }
+                if (this.AwsS3SquareLogoUrl != null)
+                {
+                    hashCode = (hashCode * 59) + this.AwsS3SquareLogoUrl.GetHashCode();
+                }
+                if (this.OpenUrl != null)
+                {
+                    hashCode = (hashCode * 59) + this.OpenUrl.GetHashCode();
                 }
                 if (this.Slug != null)
                 {

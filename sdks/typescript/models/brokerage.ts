@@ -55,6 +55,18 @@ export interface Brokerage {
      * @type {string}
      * @memberof Brokerage
      */
+    'aws_s3_square_logo_url'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'open_url'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Brokerage
+     */
     'slug'?: string;
     /**
      * 

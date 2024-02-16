@@ -40,6 +40,54 @@ class Brokerage(
             display_name = schemas.StrSchema
             description = schemas.StrSchema
             aws_s3_logo_url = schemas.StrSchema
+            
+            
+            class aws_s3_square_logo_url(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'url'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'aws_s3_square_logo_url':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class open_url(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'url'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'open_url':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             slug = schemas.StrSchema
             url = schemas.StrSchema
             enabled = schemas.BoolSchema
@@ -141,6 +189,8 @@ class Brokerage(
                 "display_name": display_name,
                 "description": description,
                 "aws_s3_logo_url": aws_s3_logo_url,
+                "aws_s3_square_logo_url": aws_s3_square_logo_url,
+                "open_url": open_url,
                 "slug": slug,
                 "url": url,
                 "enabled": enabled,
@@ -171,6 +221,12 @@ class Brokerage(
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["aws_s3_logo_url"]) -> MetaOapg.properties.aws_s3_logo_url: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["aws_s3_square_logo_url"]) -> MetaOapg.properties.aws_s3_square_logo_url: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["open_url"]) -> MetaOapg.properties.open_url: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["slug"]) -> MetaOapg.properties.slug: ...
@@ -214,7 +270,7 @@ class Brokerage(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["slug"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["allows_trading_through_snaptrade_api"], typing_extensions.Literal["is_scraping_integration"], typing_extensions.Literal["default_currency"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["open_url"], typing_extensions.Literal["slug"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["allows_trading_through_snaptrade_api"], typing_extensions.Literal["is_scraping_integration"], typing_extensions.Literal["default_currency"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -232,6 +288,12 @@ class Brokerage(
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["aws_s3_logo_url"]) -> typing.Union[MetaOapg.properties.aws_s3_logo_url, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["aws_s3_square_logo_url"]) -> typing.Union[MetaOapg.properties.aws_s3_square_logo_url, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["open_url"]) -> typing.Union[MetaOapg.properties.open_url, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["slug"]) -> typing.Union[MetaOapg.properties.slug, schemas.Unset]: ...
@@ -275,7 +337,7 @@ class Brokerage(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["slug"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["allows_trading_through_snaptrade_api"], typing_extensions.Literal["is_scraping_integration"], typing_extensions.Literal["default_currency"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["open_url"], typing_extensions.Literal["slug"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["allows_trading_through_snaptrade_api"], typing_extensions.Literal["is_scraping_integration"], typing_extensions.Literal["default_currency"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -286,6 +348,8 @@ class Brokerage(
         display_name: typing.Union[MetaOapg.properties.display_name, str, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
         aws_s3_logo_url: typing.Union[MetaOapg.properties.aws_s3_logo_url, str, schemas.Unset] = schemas.unset,
+        aws_s3_square_logo_url: typing.Union[MetaOapg.properties.aws_s3_square_logo_url, None, str, schemas.Unset] = schemas.unset,
+        open_url: typing.Union[MetaOapg.properties.open_url, None, str, schemas.Unset] = schemas.unset,
         slug: typing.Union[MetaOapg.properties.slug, str, schemas.Unset] = schemas.unset,
         url: typing.Union[MetaOapg.properties.url, str, schemas.Unset] = schemas.unset,
         enabled: typing.Union[MetaOapg.properties.enabled, bool, schemas.Unset] = schemas.unset,
@@ -310,6 +374,8 @@ class Brokerage(
             display_name=display_name,
             description=description,
             aws_s3_logo_url=aws_s3_logo_url,
+            aws_s3_square_logo_url=aws_s3_square_logo_url,
+            open_url=open_url,
             slug=slug,
             url=url,
             enabled=enabled,

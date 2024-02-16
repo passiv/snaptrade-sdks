@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **DisplayName** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **AwsS3LogoUrl** | **string** |  | [optional] 
+**AwsS3SquareLogoUrl** | **string** |  | [optional] 
+**OpenUrl** | **string** |  | [optional] 
 **Slug** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 
 **Enabled** | **bool** |  | [optional] 
