@@ -6,7 +6,7 @@
 | ruby | 57720 |
 | python | 108182 |
 | typescript | 29097 |
-| csharp | 69363 |
+| csharp | 69297 |
 | php | 112736 |
 | php7 | 112907 |
-| **Total** | 590997 |
+| **Total** | 590931 |

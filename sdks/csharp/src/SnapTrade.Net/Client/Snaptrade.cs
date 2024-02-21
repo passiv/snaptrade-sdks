@@ -111,26 +111,6 @@ namespace SnapTrade.Net.Client
         }
 
         /// <summary>
-        /// Setter for Username
-        /// </summary>
-        public Snaptrade SetUsername(string username)
-        {
-            Configuration.Username = username;
-            init();
-            return this;
-        }
-
-        /// <summary>
-        /// Setter for Password
-        /// </summary>
-        public Snaptrade SetPassword(string password)
-        {
-            Configuration.Password = password;
-            init();
-            return this;
-        }
-
-        /// <summary>
         /// Setter for Access Token
         /// </summary>
         public Snaptrade SetAccessToken(string accessToken)
@@ -146,26 +126,6 @@ namespace SnapTrade.Net.Client
         public Snaptrade SetClientId(string apiKey)
         {
             Configuration.ApiKey["clientId"] = apiKey;
-            init();
-            return this;
-        }
-
-        /// <summary>
-        /// Setter for API Key
-        /// </summary>
-        public Snaptrade SetSignature(string apiKey)
-        {
-            Configuration.ApiKey["Signature"] = apiKey;
-            init();
-            return this;
-        }
-
-        /// <summary>
-        /// Setter for API Key
-        /// </summary>
-        public Snaptrade SetTimestamp(string apiKey)
-        {
-            Configuration.ApiKey["timestamp"] = apiKey;
             init();
             return this;
         }
