@@ -32,5 +32,11 @@ export interface Balance {
      * @memberof Balance
      */
     'cash'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Balance
+     */
+    'buying_power'?: number | null;
 }
 

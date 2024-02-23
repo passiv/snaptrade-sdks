@@ -56,4 +56,12 @@ public class BalanceTest {
         // TODO: test cash
     }
 
+    /**
+     * Test the property 'buyingPower'
+     */
+    @Test
+    public void buyingPowerTest() {
+        // TODO: test buyingPower
+    }
+
 }

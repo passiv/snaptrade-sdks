@@ -73,6 +73,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Cash'
         }
+        /// <summary>
+        /// Test the property 'BuyingPower'
+        /// </summary>
+        [Fact]
+        public void BuyingPowerTest()
+        {
+            // TODO unit test for the property 'BuyingPower'
+        }
 
     }
 

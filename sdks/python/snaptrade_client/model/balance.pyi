@@ -61,9 +61,30 @@ class Balance(
                         *args,
                         _configuration=_configuration,
                     )
+            
+            
+            class buying_power(
+                schemas.NumberBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneDecimalMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'buying_power':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "currency": currency,
                 "cash": cash,
+                "buying_power": buying_power,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -74,9 +95,12 @@ class Balance(
     def __getitem__(self, name: typing_extensions.Literal["cash"]) -> MetaOapg.properties.cash: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["buying_power"]) -> MetaOapg.properties.buying_power: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["currency"], typing_extensions.Literal["cash"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["currency"], typing_extensions.Literal["cash"], typing_extensions.Literal["buying_power"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -87,9 +111,12 @@ class Balance(
     def get_item_oapg(self, name: typing_extensions.Literal["cash"]) -> typing.Union[MetaOapg.properties.cash, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["buying_power"]) -> typing.Union[MetaOapg.properties.buying_power, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["currency"], typing_extensions.Literal["cash"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["currency"], typing_extensions.Literal["cash"], typing_extensions.Literal["buying_power"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -97,6 +124,7 @@ class Balance(
         *args: typing.Union[dict, frozendict.frozendict, ],
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         cash: typing.Union[MetaOapg.properties.cash, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        buying_power: typing.Union[MetaOapg.properties.buying_power, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Balance':
@@ -105,6 +133,7 @@ class Balance(
             *args,
             currency=currency,
             cash=cash,
+            buying_power=buying_power,
             _configuration=_configuration,
             **kwargs,
         )
