@@ -2690,6 +2690,10 @@ components:
           type: number
           example: 300.71
           nullable: true
+        buying_power:
+          type: number
+          example: 410.71
+          nullable: true
     ConsumerKey:
       description: Shared key used to sign requests
       type: string
