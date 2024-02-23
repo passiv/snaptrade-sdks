@@ -37,10 +37,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="currency">currency.</param>
         /// <param name="cash">cash.</param>
-        public Balance(Currency currency = default(Currency), double? cash = default(double?)) : base()
+        /// <param name="buyingPower">buyingPower.</param>
+        public Balance(Currency currency = default(Currency), double? cash = default(double?), double? buyingPower = default(double?)) : base()
         {
             this.Currency = currency;
             this.Cash = cash;
+            this.BuyingPower = buyingPower;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -55,6 +57,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
         public double? Cash { get; set; }
+
+        /// <summary>
+        /// Gets or Sets BuyingPower
+        /// </summary>
+        [DataMember(Name = "buying_power", EmitDefaultValue = true)]
+        public double? BuyingPower { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -73,6 +81,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Cash: ").Append(Cash).Append("\n");
+            sb.Append("  BuyingPower: ").Append(BuyingPower).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -118,6 +127,11 @@ namespace SnapTrade.Net.Model
                     this.Cash == input.Cash ||
                     (this.Cash != null &&
                     this.Cash.Equals(input.Cash))
+                ) && base.Equals(input) && 
+                (
+                    this.BuyingPower == input.BuyingPower ||
+                    (this.BuyingPower != null &&
+                    this.BuyingPower.Equals(input.BuyingPower))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -138,6 +152,10 @@ namespace SnapTrade.Net.Model
                 if (this.Cash != null)
                 {
                     hashCode = (hashCode * 59) + this.Cash.GetHashCode();
+                }
+                if (this.BuyingPower != null)
+                {
+                    hashCode = (hashCode * 59) + this.BuyingPower.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

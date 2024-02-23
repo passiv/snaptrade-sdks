@@ -60,6 +60,10 @@ public class Balance {
   @SerializedName(SERIALIZED_NAME_CASH)
   private Double cash;
 
+  public static final String SERIALIZED_NAME_BUYING_POWER = "buying_power";
+  @SerializedName(SERIALIZED_NAME_BUYING_POWER)
+  private Double buyingPower;
+
   public Balance() {
   }
 
@@ -129,6 +133,44 @@ public class Balance {
     this.cash = cash;
   }
 
+
+  public Balance buyingPower(Double buyingPower) {
+    
+    
+    
+    
+    this.buyingPower = buyingPower;
+    return this;
+  }
+
+  public Balance buyingPower(Integer buyingPower) {
+    
+    
+    
+    
+    this.buyingPower = buyingPower.doubleValue();
+    return this;
+  }
+
+   /**
+   * Get buyingPower
+   * @return buyingPower
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "410.71", value = "")
+
+  public Double getBuyingPower() {
+    return buyingPower;
+  }
+
+
+  public void setBuyingPower(Double buyingPower) {
+    
+    
+    
+    this.buyingPower = buyingPower;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -185,7 +227,8 @@ public class Balance {
     }
     Balance balance = (Balance) o;
     return Objects.equals(this.currency, balance.currency) &&
-        Objects.equals(this.cash, balance.cash)&&
+        Objects.equals(this.cash, balance.cash) &&
+        Objects.equals(this.buyingPower, balance.buyingPower)&&
         Objects.equals(this.additionalProperties, balance.additionalProperties);
   }
 
@@ -195,7 +238,7 @@ public class Balance {
 
   @Override
   public int hashCode() {
-    return Objects.hash(currency, cash, additionalProperties);
+    return Objects.hash(currency, cash, buyingPower, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -211,6 +254,7 @@ public class Balance {
     sb.append("class Balance {\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    cash: ").append(toIndentedString(cash)).append("\n");
+    sb.append("    buyingPower: ").append(toIndentedString(buyingPower)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -236,6 +280,7 @@ public class Balance {
     openapiFields = new HashSet<String>();
     openapiFields.add("currency");
     openapiFields.add("cash");
+    openapiFields.add("buying_power");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

@@ -2440,11 +2440,13 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
           cash: 300.71
+          buying_power: 410.71
         - currency:
             code: USD
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
           cash: 300.71
+          buying_power: 410.71
         positions:
         - symbol:
             is_quotable: true
@@ -2609,11 +2611,13 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
           cash: 300.71
+          buying_power: 410.71
         - currency:
             code: USD
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
           cash: 300.71
+          buying_power: 410.71
         positions:
         - symbol:
             is_quotable: true
@@ -3884,6 +3888,7 @@ components:
           name: US Dollar
           id: 87b24961-b51e-4db8-9226-f198f6518a89
         cash: 300.71
+        buying_power: 410.71
       properties:
         currency:
           $ref: '#/components/schemas/Currency'
@@ -3893,6 +3898,12 @@ components:
           type: number
           x-konfig-original-example: 300.71
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Balance-properties-cash
+        buying_power:
+          example: 410.71
+          nullable: true
+          type: number
+          x-konfig-original-example: 410.71
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Balance-properties-buying_power
       type: object
     ConsumerKey:
       description: Shared key used to sign requests
@@ -7631,6 +7642,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Balance-properties-cash:
       example: 300.71
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Balance-properties-buying_power:
+      example: 410.71
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ConsumerKey:

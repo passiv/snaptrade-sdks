@@ -25,5 +25,7 @@ class OptionalBalance(TypedDict, total=False):
 
     cash: typing.Optional[typing.Union[int, float]]
 
+    buying_power: typing.Optional[typing.Union[int, float]]
+
 class Balance(RequiredBalance, OptionalBalance):
     pass
