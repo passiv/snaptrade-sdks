@@ -110,8 +110,7 @@ Example payload is below:
   "eventType": "CONNECTION_DELETED",
   "brokerageId": "c8153291-0761-43a8-8ed0-4642103c2cb8",
   "brokerageAuthorizationId": "a0231bd2-9b77-4732-ba78-f9c6af6a1a62",
-  "webhookSecret": "lbTycRhXwzVRJPovdNSN",
-  "brokerageAuthorizationId": "183d507c-d531-4e83-8315-a5cc5bc9cbfd"
+  "webhookSecret": "lbTycRhXwzVRJPovdNSN"
 }
 ```
 
