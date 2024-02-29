@@ -111,7 +111,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/accounts/{accountId}/orders/cancel',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
 
@@ -175,7 +177,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/trade/impact',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
@@ -248,7 +252,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/accounts/{accountId}/quotes',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -311,7 +317,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/trade/place',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
 
@@ -376,7 +384,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/trade/oco',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceOCOOrderRequest, localVarRequestOptions, configuration)
 
@@ -442,7 +452,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/trade/{tradeId}',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(validatedTradeBody, localVarRequestOptions, configuration)
 

@@ -12,6 +12,7 @@ def request_before_hook(
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        **kwargs: typing.Any
 ) -> str:
     if auth_settings is None:
         return

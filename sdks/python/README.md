@@ -1473,7 +1473,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    notional_value=3.14,
+    notional_value=100,
 )
 ```
 
@@ -1580,7 +1580,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    notional_value=3.14,
+    notional_value=100,
 )
 ```
 

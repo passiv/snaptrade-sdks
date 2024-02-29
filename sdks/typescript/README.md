@@ -1089,8 +1089,8 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
     userSecret: "USERSECRET123",
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    order_type: "string_example",
-    time_in_force: "string_example",
+    order_type: "Limit",
+    time_in_force: "FOK",
     price: 31.33,
   }
 );
@@ -1496,9 +1496,13 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  action: "BUY",
+  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
+  time_in_force: "FOK",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  notional_value: 100,
 });
 ```
 
@@ -1607,9 +1611,13 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   userId: "John.doe@snaptrade.com",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  action: "BUY",
+  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
+  time_in_force: "FOK",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  notional_value: 100,
 });
 ```
 
@@ -1679,11 +1687,11 @@ const placeOCOOrderResponse = await snaptrade.trading.placeOCOOrder({
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### first_trade_id:<a id="first_trade_id"></a>
+##### first_trade_id: `any`<a id="first_trade_id-any"></a>
 
 The ID of first trade object obtained from trade/impact endpoint
 
-##### second_trade_id:<a id="second_trade_id"></a>
+##### second_trade_id: `any`<a id="second_trade_id-any"></a>
 
 The ID of second trade object obtained from trade/impact endpoint
 

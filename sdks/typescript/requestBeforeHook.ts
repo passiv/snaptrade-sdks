@@ -7,6 +7,7 @@ export function requestBeforeHook(request: {
   path: string;
   requestConfig: AxiosRequestConfig;
   configuration?: Configuration;
+  [key: string]: any;
 }): void {
   const { queryParameters } = request;
   queryParameters["timestamp"] = Math.round(
