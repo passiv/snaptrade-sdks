@@ -3,7 +3,7 @@
 |Language|Version|Package Manager|README|Source|
 |-|-|-|-|-|
 |Java|5.0.8|[Maven Central](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.8)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java)|
-|Ruby|2.0.8|[RubyGems](https://rubygems.org/gems/snaptrade/versions/2.0.8)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby)|
+|Ruby|2.0.9|[RubyGems](https://rubygems.org/gems/snaptrade/versions/2.0.9)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby)|
 |Python|11.0.8|[PyPI](https://pypi.org/project/snaptrade-python-sdk/11.0.8)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python)|
 |TypeScript|9.0.9|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.9)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript)|
 |C#|5.0.10|[NuGet](https://nuget.org/packages/SnapTrade.Net/5.0.10)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp)|

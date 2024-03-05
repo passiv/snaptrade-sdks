@@ -135,7 +135,7 @@ additionalGenerators:
 generators:
   ruby:
     moduleName: SnapTrade
-    version: 2.0.8
+    version: 2.0.9
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
