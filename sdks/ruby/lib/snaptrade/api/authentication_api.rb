@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'cgi'
@@ -19,7 +18,9 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    #
     # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    #
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user(user_id:, extra: {})
@@ -28,7 +29,9 @@ module SnapTrade
     end
 
     # Delete SnapTrade user
+    #
     # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    #
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def delete_snap_trade_user_with_http_info(user_id:, extra: {})
@@ -40,7 +43,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteUserResponse]
-    def delete_snap_trade_user_impl(user_id, opts = {})
+    private def delete_snap_trade_user_impl(user_id, opts = {})
       data, _status_code, _headers = delete_snap_trade_user_with_http_info(user_id, opts)
       data
     end
@@ -50,7 +53,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteUserResponse, Integer, Hash)>] DeleteUserResponse data, response status code and response headers
-    def delete_snap_trade_user_with_http_info_impl(user_id, opts = {})
+    private def delete_snap_trade_user_with_http_info_impl(user_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.delete_snap_trade_user ...'
       end
@@ -101,6 +104,7 @@ module SnapTrade
 
 
     # Generate encrypted JWT token
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -110,6 +114,7 @@ module SnapTrade
     end
 
     # Generate encrypted JWT token
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -122,7 +127,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [EncryptedResponse]
-    def get_user_jwt_impl(user_id, user_secret, opts = {})
+    private def get_user_jwt_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_user_jwt_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -132,7 +137,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(EncryptedResponse, Integer, Hash)>] EncryptedResponse data, response status code and response headers
-    def get_user_jwt_with_http_info_impl(user_id, user_secret, opts = {})
+    private def get_user_jwt_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.get_user_jwt ...'
       end
@@ -188,7 +193,9 @@ module SnapTrade
 
 
     # List SnapTrade users
+    #
     # Returns a list of users you've registered over the SnapTrade API.
+    #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
       data, _status_code, _headers = list_snap_trade_users_with_http_info_impl(extra)
@@ -196,7 +203,9 @@ module SnapTrade
     end
 
     # List SnapTrade users
+    #
     # Returns a list of users you've registered over the SnapTrade API.
+    #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
       list_snap_trade_users_with_http_info_impl(extra)
@@ -206,7 +215,7 @@ module SnapTrade
     # Returns a list of users you've registered over the SnapTrade API.
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
-    def list_snap_trade_users_impl(opts = {})
+    private def list_snap_trade_users_impl(opts = {})
       data, _status_code, _headers = list_snap_trade_users_with_http_info(opts)
       data
     end
@@ -215,7 +224,7 @@ module SnapTrade
     # Returns a list of users you&#39;ve registered over the SnapTrade API.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
-    def list_snap_trade_users_with_http_info_impl(opts = {})
+    private def list_snap_trade_users_with_http_info_impl(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.list_snap_trade_users ...'
       end
@@ -261,15 +270,17 @@ module SnapTrade
 
 
     # Login user & generate connection link
+    #
     # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] Slug of the brokerage to connect the user to
-    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-    # @param connection_type [ConnectionType] 
-    # @param connection_portal_version [ConnectionPortalVersion] 
+    # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v2'
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
@@ -286,15 +297,17 @@ module SnapTrade
     end
 
     # Login user & generate connection link
+    #
     # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] Slug of the brokerage to connect the user to
-    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-    # @param connection_type [ConnectionType] 
-    # @param connection_portal_version [ConnectionPortalVersion] 
+    # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v2'
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
@@ -316,7 +329,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body 
     # @return [AuthenticationLoginSnapTradeUser200Response]
-    def login_snap_trade_user_impl(user_id, user_secret, opts = {})
+    private def login_snap_trade_user_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = login_snap_trade_user_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -328,7 +341,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [SnapTradeLoginUserRequestBody] :snap_trade_login_user_request_body 
     # @return [Array<(AuthenticationLoginSnapTradeUser200Response, Integer, Hash)>] AuthenticationLoginSnapTradeUser200Response data, response status code and response headers
-    def login_snap_trade_user_with_http_info_impl(user_id, user_secret, opts = {})
+    private def login_snap_trade_user_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.login_snap_trade_user ...'
       end
@@ -389,7 +402,8 @@ module SnapTrade
 
 
     # Create SnapTrade user
-    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+    #
+    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user(user_id: SENTINEL, extra: {})
@@ -401,7 +415,8 @@ module SnapTrade
     end
 
     # Create SnapTrade user
-    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+    #
+    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def register_snap_trade_user_with_http_info(user_id: SENTINEL, extra: {})
@@ -415,7 +430,7 @@ module SnapTrade
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
-    def register_snap_trade_user_impl(snap_trade_register_user_request_body, opts = {})
+    private def register_snap_trade_user_impl(snap_trade_register_user_request_body, opts = {})
       data, _status_code, _headers = register_snap_trade_user_with_http_info(snap_trade_register_user_request_body, opts)
       data
     end
@@ -424,7 +439,7 @@ module SnapTrade
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers
-    def register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, opts = {})
+    private def register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.register_snap_trade_user ...'
       end
@@ -479,7 +494,8 @@ module SnapTrade
 
 
     # Obtain a new user secret for a user
-    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+    #
+    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This should be considered priviledged information and if compromised, you should delete and re-create this SnapTrade user.
     # @param body [UserIDandSecret] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -493,7 +509,8 @@ module SnapTrade
     end
 
     # Obtain a new user secret for a user
-    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+    #
+    # @param user_id [String] SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
     # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This should be considered priviledged information and if compromised, you should delete and re-create this SnapTrade user.
     # @param body [UserIDandSecret] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -509,7 +526,7 @@ module SnapTrade
     # @param user_i_dand_secret [UserIDandSecret] 
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
-    def reset_snap_trade_user_secret_impl(user_i_dand_secret, opts = {})
+    private def reset_snap_trade_user_secret_impl(user_i_dand_secret, opts = {})
       data, _status_code, _headers = reset_snap_trade_user_secret_with_http_info(user_i_dand_secret, opts)
       data
     end
@@ -518,7 +535,7 @@ module SnapTrade
     # @param user_i_dand_secret [UserIDandSecret] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers
-    def reset_snap_trade_user_secret_with_http_info_impl(user_i_dand_secret, opts = {})
+    private def reset_snap_trade_user_secret_with_http_info_impl(user_i_dand_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AuthenticationApi.reset_snap_trade_user_secret ...'
       end

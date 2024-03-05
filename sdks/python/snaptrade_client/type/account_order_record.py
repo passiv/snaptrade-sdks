@@ -43,8 +43,7 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     action: Action
 
-    # Trade Units. Cannot work with notional value.
-    total_quantity: typing.Union[int, float]
+    total_quantity: float
 
     open_quantity: OpenUnits
 

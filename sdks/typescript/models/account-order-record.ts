@@ -61,11 +61,11 @@ export interface AccountOrderRecord {
      */
     'action'?: Action;
     /**
-     * Trade Units. Cannot work with notional value.
+     * 
      * @type {number}
      * @memberof AccountOrderRecord
      */
-    'total_quantity'?: number;
+    'total_quantity'?: number | null;
     /**
      * Trade Units
      * @type {number}

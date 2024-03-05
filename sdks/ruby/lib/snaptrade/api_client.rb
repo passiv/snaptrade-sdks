@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'date'
@@ -179,7 +178,6 @@ module SnapTrade
 
     def build_connection
       Faraday.new(url: config.base_url, ssl: ssl_options) do |conn|
-        basic_auth(conn)
         config.configure_middleware(conn)
         yield(conn) if block_given?
         conn.adapter(Faraday.default_adapter)
@@ -194,16 +192,6 @@ module SnapTrade
         client_cert: config.ssl_client_cert,
         client_key: config.ssl_client_key
       }
-    end
-
-    def basic_auth(conn)
-      if config.username && config.password
-        if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2.0')
-          conn.request(:authorization, :basic, config.username, config.password)
-        else
-          conn.request(:basic_auth, config.username, config.password)
-        end
-      end
     end
 
     # Check if the given MIME is a JSON MIME.
@@ -342,9 +330,11 @@ module SnapTrade
       Array(auth_names).each do |auth_name|
         auth_setting = @config.auth_settings[auth_name]
         next unless auth_setting
+        value = auth_setting[:value]
+        next unless value
         case auth_setting[:in]
-        when 'header' then header_params[auth_setting[:key]] = auth_setting[:value]
-        when 'query'  then query_params[auth_setting[:key]] = auth_setting[:value]
+        when 'header' then header_params[auth_setting[:key]] = value
+        when 'query'  then query_params[auth_setting[:key]] = value
         else fail ArgumentError, 'Authentication token must be in `query` or `header`'
         end
       end
@@ -423,5 +413,25 @@ module SnapTrade
         fail "unknown collection format: #{collection_format.inspect}"
       end
     end
+  end
+
+  # Represents an HTTP response for method that end with *_with_http_info
+  class APIResponse
+    # [Object] deserialized data
+    attr_reader :data
+    # [Integer] response status code
+    attr_reader :status_code
+    # [Hash] response headers
+    attr_reader :headers
+    # [Faraday::Response] the original Faraday response object
+    attr_reader :response
+
+    def initialize(data, status_code, headers, response)
+      @data = data
+      @status_code = status_code
+      @headers = headers
+      @response = response
+    end
+
   end
 end

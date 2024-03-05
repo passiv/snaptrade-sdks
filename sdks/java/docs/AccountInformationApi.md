@@ -143,7 +143,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account to get balances.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get balances.
     try {
       List<Balance> result = client
               .accountInformation
@@ -238,7 +238,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account to get detail of.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get detail of.
     try {
       Account result = client
               .accountInformation
@@ -346,7 +346,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account to get orders.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get orders.
     String state = "all"; // defaults value is set to \"all\"
     Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     try {
@@ -448,7 +448,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account to get positions.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get positions.
     try {
       List<Position> result = client
               .accountInformation

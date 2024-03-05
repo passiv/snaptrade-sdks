@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         /// <param name="action">action.</param>
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double units = default(double), double? price = default(double?)) : base()
+        public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double? units = default(double?), double? price = default(double?)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -97,8 +97,8 @@ namespace SnapTrade.Net.Model
         /// Trade Units. Cannot work with notional value.
         /// </summary>
         /// <value>Trade Units. Cannot work with notional value.</value>
-        [DataMember(Name = "units", EmitDefaultValue = false)]
-        public double Units { get; set; }
+        [DataMember(Name = "units", EmitDefaultValue = true)]
+        public double? Units { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order
@@ -196,7 +196,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
-                    this.Units.Equals(input.Units)
+                    (this.Units != null &&
+                    this.Units.Equals(input.Units))
                 ) && base.Equals(input) && 
                 (
                     this.Price == input.Price ||
@@ -233,7 +234,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
-                hashCode = (hashCode * 59) + this.Units.GetHashCode();
+                if (this.Units != null)
+                {
+                    hashCode = (hashCode * 59) + this.Units.GetHashCode();
+                }
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();

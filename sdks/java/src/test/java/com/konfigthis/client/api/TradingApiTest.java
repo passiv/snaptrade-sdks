@@ -110,7 +110,7 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         String symbols = null;
-        String accountId = null;
+        UUID accountId = null;
         Boolean useTicker = null;
         List<SymbolsQuotesInner> response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
                 .useTicker(useTicker)

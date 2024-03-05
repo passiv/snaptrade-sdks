@@ -910,7 +910,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to search for symbols within.
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to search for symbols within.
             var substring = "apple";
             
             var symbolQuery = new SymbolQuery(

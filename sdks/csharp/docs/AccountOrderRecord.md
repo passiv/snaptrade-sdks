@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **_Action** | **ModelAction** |  | [optional] 
-**TotalQuantity** | **double** | Trade Units. Cannot work with notional value. | [optional] 
+**TotalQuantity** | **double?** | Trade Units. Cannot work with notional value. | [optional] 
 **OpenQuantity** | **double?** | Trade Units | [optional] 
 **CanceledQuantity** | **double?** | Trade Units | [optional] 
 **FilledQuantity** | **double?** | Trade Units | [optional] 

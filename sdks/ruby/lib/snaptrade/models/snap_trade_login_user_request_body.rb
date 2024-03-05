@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'date'
@@ -26,8 +25,10 @@ module SnapTrade
     # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     attr_accessor :reconnect
 
+    # Sets whether the connection should be read or trade
     attr_accessor :connection_type
 
+    # Sets the version of the connection portal to render, with a default to 'v2'
     attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.

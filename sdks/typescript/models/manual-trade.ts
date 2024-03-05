@@ -59,11 +59,11 @@ export interface ManualTrade {
      */
     'action'?: Action;
     /**
-     * Trade Units. Cannot work with notional value.
+     * 
      * @type {number}
      * @memberof ManualTrade
      */
-    'units'?: number;
+    'units'?: number | null;
     /**
      * Trade Price if limit or stop limit order
      * @type {number}

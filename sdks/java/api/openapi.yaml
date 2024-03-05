@@ -696,8 +696,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema
         style: simple
       responses:
         "200":
@@ -784,8 +787,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema
         style: simple
       responses:
         "200":
@@ -829,8 +835,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema
         style: simple
       responses:
         "200":
@@ -901,8 +910,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema
         style: simple
       responses:
         "200":
@@ -967,7 +979,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema
         style: simple
       responses:
         "200":
@@ -1209,8 +1225,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema
         style: simple
       requestBody:
         $ref: '#/components/requestBodies/CancelOrderRequestBody'
@@ -1308,8 +1327,11 @@ paths:
         name: accountId
         required: true
         schema:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema
         style: simple
       requestBody:
         content:
@@ -3034,6 +3056,7 @@ components:
           $ref: '#/components/schemas/Action'
         total_quantity:
           description: Trade Units. Cannot work with notional value.
+          nullable: true
           type: number
         open_quantity:
           description: Trade Units
@@ -6138,6 +6161,7 @@ components:
           $ref: '#/components/schemas/Action'
         units:
           description: Trade Units. Cannot work with notional value.
+          nullable: true
           type: number
         price:
           description: Trade Price if limit or stop limit order
@@ -7204,9 +7228,37 @@ components:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema:
       example: 30
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
@@ -8816,8 +8868,11 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema
       required:
       - accountId
       - userId
@@ -8856,8 +8911,11 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema
       required:
       - accountId
       - userId
@@ -8876,8 +8934,11 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema
       required:
       - accountId
       - userId
@@ -8909,8 +8970,11 @@ components:
           x-konfig-original-example: 30
           x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema
       required:
       - accountId
       - userId
@@ -8935,7 +8999,11 @@ components:
         use_ticker:
           type: boolean
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema
       required:
       - accountId
       - symbols
@@ -9072,8 +9140,11 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema
         brokerage_order_id:
           $ref: '#/components/schemas/Id'
       required:
@@ -9100,8 +9171,11 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema
         substring:
           example: apple
           type: string
@@ -9607,6 +9681,10 @@ components:
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-currency
+    UnitsNullable:
+      description: Trade Units. Cannot work with notional value.
+      nullable: true
+      type: number
     CurrencyNullable:
       additionalProperties: true
       description: Currency
@@ -9814,10 +9892,6 @@ components:
       - ticker
       - underlying_symbol
       type: object
-    UnitsNullable:
-      description: Trade Units. Cannot work with notional value.
-      nullable: true
-      type: number
     NotionalValueNullable:
       description: "Dollar amount to trade. Cannot work with units. Can only work\
         \ for market order types and day for time in force. **Only available for Alpaca,\

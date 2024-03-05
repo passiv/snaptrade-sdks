@@ -42,7 +42,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID(); // The ID of the account to cancel the order in.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to cancel the order in.
     UUID brokerageOrderId = UUID.randomUUID();
     try {
       AccountOrderRecord result = client
@@ -283,7 +283,7 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     String symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
-    String accountId = "accountId_example"; // The ID of the account to get quotes.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get quotes.
     Boolean useTicker = true; // Should be set to True if providing tickers.
     try {
       List<SymbolsQuotesInner> result = client
@@ -331,7 +331,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **symbols** | **String**| List of universal_symbol_id or tickers to get quotes for. | |
-| **accountId** | **String**| The ID of the account to get quotes. | |
+| **accountId** | **UUID**| The ID of the account to get quotes. | |
 | **useTicker** | **Boolean**| Should be set to True if providing tickers. | [optional] |
 
 ### Return type

@@ -71,7 +71,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double totalQuantity = default(double), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -123,8 +123,8 @@ namespace SnapTrade.Net.Model
         /// Trade Units. Cannot work with notional value.
         /// </summary>
         /// <value>Trade Units. Cannot work with notional value.</value>
-        [DataMember(Name = "total_quantity", EmitDefaultValue = false)]
-        public double TotalQuantity { get; set; }
+        [DataMember(Name = "total_quantity", EmitDefaultValue = true)]
+        public double? TotalQuantity { get; set; }
 
         /// <summary>
         /// Trade Units
@@ -295,7 +295,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.TotalQuantity == input.TotalQuantity ||
-                    this.TotalQuantity.Equals(input.TotalQuantity)
+                    (this.TotalQuantity != null &&
+                    this.TotalQuantity.Equals(input.TotalQuantity))
                 ) && base.Equals(input) && 
                 (
                     this.OpenQuantity == input.OpenQuantity ||
@@ -381,7 +382,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
-                hashCode = (hashCode * 59) + this.TotalQuantity.GetHashCode();
+                if (this.TotalQuantity != null)
+                {
+                    hashCode = (hashCode * 59) + this.TotalQuantity.GetHashCode();
+                }
                 if (this.OpenQuantity != null)
                 {
                     hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();

@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.7-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.7)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.8-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.8)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -76,7 +76,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.7
+pip install snaptrade-python-sdk==11.0.8
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -225,7 +225,7 @@ get_user_account_balance_response = (
     snaptrade.account_information.get_user_account_balance(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -263,7 +263,7 @@ get_user_account_details_response = (
     snaptrade.account_information.get_user_account_details(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -301,7 +301,7 @@ get_user_account_orders_response = (
     snaptrade.account_information.get_user_account_orders(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
     )
@@ -349,7 +349,7 @@ get_user_account_positions_response = (
     snaptrade.account_information.get_user_account_positions(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -1378,7 +1378,7 @@ symbol_search_user_account_response = (
     snaptrade.reference_data.symbol_search_user_account(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         substring="apple",
     )
 )
@@ -1421,7 +1421,7 @@ Cancel open order in account
 cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
-    account_id="accountId_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
 ```
@@ -1527,7 +1527,7 @@ get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
     symbols="symbols_example",
-    account_id="accountId_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     use_ticker=True,
 )
 ```

@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'cgi'
@@ -19,11 +18,12 @@ module SnapTrade
     end
 
     # Cancel open order in account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
     # @param brokerage_order_id [String] 
-    # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
+    # @param body [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
@@ -34,11 +34,12 @@ module SnapTrade
     end
 
     # Cancel open order in account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
     # @param brokerage_order_id [String] 
-    # @param body [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
+    # @param body [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
       _body = {}
@@ -54,7 +55,7 @@ module SnapTrade
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def cancel_user_account_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    private def cancel_user_account_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
       data, _status_code, _headers = cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts)
       data
     end
@@ -66,7 +67,7 @@ module SnapTrade
     # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    private def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.cancel_user_account_order ...'
       end
@@ -135,14 +136,15 @@ module SnapTrade
 
 
     # Check impact of trades on account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] 
-    # @param order_type [OrderType] 
+    # @param action [Action] Trade Action
+    # @param order_type [OrderType] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] 
+    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -165,14 +167,15 @@ module SnapTrade
     end
 
     # Check impact of trades on account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] 
-    # @param order_type [OrderType] 
+    # @param action [Action] Trade Action
+    # @param order_type [OrderType] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] 
+    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -199,7 +202,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [ManualTradeAndImpact]
-    def get_order_impact_impl(user_id, user_secret, manual_trade_form, opts = {})
+    private def get_order_impact_impl(user_id, user_secret, manual_trade_form, opts = {})
       data, _status_code, _headers = get_order_impact_with_http_info(user_id, user_secret, manual_trade_form, opts)
       data
     end
@@ -210,7 +213,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ManualTradeAndImpact, Integer, Hash)>] ManualTradeAndImpact data, response status code and response headers
-    def get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
+    private def get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_order_impact ...'
       end
@@ -275,6 +278,7 @@ module SnapTrade
 
 
     # Get symbol quotes
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -288,6 +292,7 @@ module SnapTrade
     end
 
     # Get symbol quotes
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -307,7 +312,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
     # @return [Array<SymbolsQuotesInner>]
-    def get_user_account_quotes_impl(user_id, user_secret, symbols, account_id, opts = {})
+    private def get_user_account_quotes_impl(user_id, user_secret, symbols, account_id, opts = {})
       data, _status_code, _headers = get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
       data
     end
@@ -320,7 +325,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
     # @return [Array<(Array<SymbolsQuotesInner>, Integer, Hash)>] Array<SymbolsQuotesInner> data, response status code and response headers
-    def get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, opts = {})
+    private def get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.get_user_account_quotes ...'
       end
@@ -386,14 +391,15 @@ module SnapTrade
 
 
     # Place a trade with NO validation.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] 
-    # @param order_type [OrderType] 
+    # @param action [Action] Trade Action
+    # @param order_type [OrderType] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] 
+    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -416,14 +422,15 @@ module SnapTrade
     end
 
     # Place a trade with NO validation.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] 
-    # @param order_type [OrderType] 
+    # @param action [Action] Trade Action
+    # @param order_type [OrderType] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] 
+    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
     # @param notional_value [Float] 
@@ -450,7 +457,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def place_force_order_impl(user_id, user_secret, manual_trade_form, opts = {})
+    private def place_force_order_impl(user_id, user_secret, manual_trade_form, opts = {})
       data, _status_code, _headers = place_force_order_with_http_info(user_id, user_secret, manual_trade_form, opts)
       data
     end
@@ -461,7 +468,7 @@ module SnapTrade
     # @param manual_trade_form [ManualTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
+    private def place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_force_order ...'
       end
@@ -526,6 +533,7 @@ module SnapTrade
 
 
     # Place a OCO (One Cancels Other) order
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
@@ -542,6 +550,7 @@ module SnapTrade
     end
 
     # Place a OCO (One Cancels Other) order
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
@@ -562,7 +571,7 @@ module SnapTrade
     # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    def place_oco_order_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
+    private def place_oco_order_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
       data, _status_code, _headers = place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request, opts)
       data
     end
@@ -573,7 +582,7 @@ module SnapTrade
     # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
+    private def place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_oco_order ...'
       end
@@ -638,6 +647,7 @@ module SnapTrade
 
 
     # Place order
+    #
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -653,6 +663,7 @@ module SnapTrade
     end
 
     # Place order
+    #
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -673,7 +684,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [ValidatedTradeBody] :validated_trade_body 
     # @return [AccountOrderRecord]
-    def place_order_impl(trade_id, user_id, user_secret, opts = {})
+    private def place_order_impl(trade_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = place_order_with_http_info(trade_id, user_id, user_secret, opts)
       data
     end
@@ -685,7 +696,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [ValidatedTradeBody] :validated_trade_body 
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    def place_order_with_http_info_impl(trade_id, user_id, user_secret, opts = {})
+    private def place_order_with_http_info_impl(trade_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_order ...'
       end
