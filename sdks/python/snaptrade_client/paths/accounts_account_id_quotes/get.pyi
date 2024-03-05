@@ -92,11 +92,11 @@ request_query_use_ticker = api_client.QueryParameter(
     explode=True,
 )
 # Path params
-AccountIdSchema = schemas.StrSchema
+AccountIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'accountId': typing.Union[AccountIdSchema, str, ],
+        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(

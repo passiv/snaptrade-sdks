@@ -225,7 +225,7 @@ get_user_account_balance_response = (
     snaptrade.account_information.get_user_account_balance(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -263,7 +263,7 @@ get_user_account_details_response = (
     snaptrade.account_information.get_user_account_details(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -301,7 +301,7 @@ get_user_account_orders_response = (
     snaptrade.account_information.get_user_account_orders(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
     )
@@ -349,7 +349,7 @@ get_user_account_positions_response = (
     snaptrade.account_information.get_user_account_positions(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
@@ -1378,7 +1378,7 @@ symbol_search_user_account_response = (
     snaptrade.reference_data.symbol_search_user_account(
         user_id="John.doe@snaptrade.com",
         user_secret="USERSECRET123",
-        account_id="accountId_example",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         substring="apple",
     )
 )
@@ -1421,7 +1421,7 @@ Cancel open order in account
 cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
-    account_id="accountId_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
 ```
@@ -1527,7 +1527,7 @@ get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
     user_id="John.doe@snaptrade.com",
     user_secret="USERSECRET123",
     symbols="symbols_example",
-    account_id="accountId_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     use_ticker=True,
 )
 ```

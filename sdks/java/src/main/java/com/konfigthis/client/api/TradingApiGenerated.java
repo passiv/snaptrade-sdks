@@ -641,7 +641,7 @@ public class TradingApiGenerated {
 
         return new GetOrderImpactRequestBuilder(userId, userSecret);
     }
-    private okhttp3.Call getUserAccountQuotesCall(String userId, String userSecret, String symbols, String accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountQuotesCall(String userId, String userSecret, String symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -703,7 +703,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserAccountQuotesValidateBeforeCall(String userId, String userSecret, String symbols, String accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountQuotesValidateBeforeCall(String userId, String userSecret, String symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountQuotes(Async)");
@@ -729,13 +729,13 @@ public class TradingApiGenerated {
     }
 
 
-    private ApiResponse<List<SymbolsQuotesInner>> getUserAccountQuotesWithHttpInfo(String userId, String userSecret, String symbols, String accountId, Boolean useTicker) throws ApiException {
+    private ApiResponse<List<SymbolsQuotesInner>> getUserAccountQuotesWithHttpInfo(String userId, String userSecret, String symbols, UUID accountId, Boolean useTicker) throws ApiException {
         okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, null);
         Type localVarReturnType = new TypeToken<List<SymbolsQuotesInner>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getUserAccountQuotesAsync(String userId, String userSecret, String symbols, String accountId, Boolean useTicker, final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountQuotesAsync(String userId, String userSecret, String symbols, UUID accountId, Boolean useTicker, final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getUserAccountQuotesValidateBeforeCall(userId, userSecret, symbols, accountId, useTicker, _callback);
         Type localVarReturnType = new TypeToken<List<SymbolsQuotesInner>>(){}.getType();
@@ -747,10 +747,10 @@ public class TradingApiGenerated {
         private final String userId;
         private final String userSecret;
         private final String symbols;
-        private final String accountId;
+        private final UUID accountId;
         private Boolean useTicker;
 
-        private GetUserAccountQuotesRequestBuilder(String userId, String userSecret, String symbols, String accountId) {
+        private GetUserAccountQuotesRequestBuilder(String userId, String userSecret, String symbols, UUID accountId) {
             this.userId = userId;
             this.userSecret = userSecret;
             this.symbols = symbols;
@@ -842,7 +842,7 @@ public class TradingApiGenerated {
         <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
      </table>
      */
-    public GetUserAccountQuotesRequestBuilder getUserAccountQuotes(String userId, String userSecret, String symbols, String accountId) throws IllegalArgumentException {
+    public GetUserAccountQuotesRequestBuilder getUserAccountQuotes(String userId, String userSecret, String symbols, UUID accountId) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 

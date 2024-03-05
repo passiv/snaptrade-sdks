@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'cgi'
@@ -19,6 +18,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -30,6 +30,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -45,7 +46,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<AccountHoldings>]
-    def get_all_user_holdings_impl(user_id, user_secret, opts = {})
+    private def get_all_user_holdings_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_all_user_holdings_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -56,7 +57,7 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<(Array<AccountHoldings>, Integer, Hash)>] Array<AccountHoldings> data, response status code and response headers
-    def get_all_user_holdings_with_http_info_impl(user_id, user_secret, opts = {})
+    private def get_all_user_holdings_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_all_user_holdings ...'
       end
@@ -113,7 +114,9 @@ module SnapTrade
 
 
     # List account balances
+    #
     # A list of account balances for the specified account (one per currency that the account holds).
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -124,7 +127,9 @@ module SnapTrade
     end
 
     # List account balances
+    #
     # A list of account balances for the specified account (one per currency that the account holds).
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get balances.
@@ -140,7 +145,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] opts the optional parameters
     # @return [Array<Balance>]
-    def get_user_account_balance_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_balance_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_balance_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -152,7 +157,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get balances.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Balance>, Integer, Hash)>] Array<Balance> data, response status code and response headers
-    def get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_balance ...'
       end
@@ -212,6 +217,7 @@ module SnapTrade
 
 
     # Return details of a specific investment account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -222,6 +228,7 @@ module SnapTrade
     end
 
     # Return details of a specific investment account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -236,7 +243,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
     # @return [Account]
-    def get_user_account_details_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_details_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_details_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -247,7 +254,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get detail of.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
-    def get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_details ...'
       end
@@ -307,11 +314,13 @@ module SnapTrade
 
 
     # List account orders
+    #
     # Fetch all recent orders from a user's account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
-    # @param state [String] defaults value is set to \&quot;all\&quot;
+    # @param state [String] defaults value is set to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
@@ -322,11 +331,13 @@ module SnapTrade
     end
 
     # List account orders
+    #
     # Fetch all recent orders from a user's account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
-    # @param state [String] defaults value is set to \&quot;all\&quot;
+    # @param state [String] defaults value is set to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
@@ -341,10 +352,10 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+    # @option opts [String] :state defaults value is set to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @return [Array<AccountOrderRecord>]
-    def get_user_account_orders_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_orders_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_orders_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -355,10 +366,10 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get orders.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+    # @option opts [String] :state defaults value is set to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
     # @return [Array<(Array<AccountOrderRecord>, Integer, Hash)>] Array<AccountOrderRecord> data, response status code and response headers
-    def get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_orders ...'
       end
@@ -428,6 +439,7 @@ module SnapTrade
 
 
     # List account positions
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -438,6 +450,7 @@ module SnapTrade
     end
 
     # List account positions
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -452,7 +465,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<Position>]
-    def get_user_account_positions_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_positions_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_positions_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -463,7 +476,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to get positions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Position>, Integer, Hash)>] Array<Position> data, response status code and response headers
-    def get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+    private def get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_positions ...'
       end
@@ -523,6 +536,7 @@ module SnapTrade
 
 
     # List balances, positions and orders for the specified account
+    #
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -533,6 +547,7 @@ module SnapTrade
     end
 
     # List balances, positions and orders for the specified account
+    #
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -547,7 +562,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [AccountHoldingsAccount]
-    def get_user_holdings_impl(account_id, user_id, user_secret, opts = {})
+    private def get_user_holdings_impl(account_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = get_user_holdings_with_http_info(account_id, user_id, user_secret, opts)
       data
     end
@@ -558,7 +573,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountHoldingsAccount, Integer, Hash)>] AccountHoldingsAccount data, response status code and response headers
-    def get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, opts = {})
+    private def get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_holdings ...'
       end
@@ -618,6 +633,7 @@ module SnapTrade
 
 
     # List accounts
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -627,6 +643,7 @@ module SnapTrade
     end
 
     # List accounts
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -639,7 +656,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<Account>]
-    def list_user_accounts_impl(user_id, user_secret, opts = {})
+    private def list_user_accounts_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = list_user_accounts_with_http_info(user_id, user_secret, opts)
       data
     end
@@ -649,7 +666,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
-    def list_user_accounts_with_http_info_impl(user_id, user_secret, opts = {})
+    private def list_user_accounts_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.list_user_accounts ...'
       end
@@ -705,6 +722,7 @@ module SnapTrade
 
 
     # Update details of an investment account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
@@ -715,6 +733,7 @@ module SnapTrade
     end
 
     # Update details of an investment account
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
@@ -729,7 +748,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] opts the optional parameters
     # @return [Array<Account>]
-    def update_user_account_impl(user_id, user_secret, account_id, opts = {})
+    private def update_user_account_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = update_user_account_with_http_info(user_id, user_secret, account_id, opts)
       data
     end
@@ -740,7 +759,7 @@ module SnapTrade
     # @param account_id [String] The ID of the account to update.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
-    def update_user_account_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+    private def update_user_account_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.update_user_account ...'
       end

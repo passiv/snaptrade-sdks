@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'forwardable'
@@ -163,21 +162,54 @@ module SnapTrade
   @config = Configuration.default
   SENTINEL = Object.new
   class << self
-    extend Forwardable
 
-    def is_sentinel(value)
+    private def is_sentinel(value)
       value == SENTINEL
     end
 
-    def_delegators :@config, :client_id, :client_id= # api key
-    def_delegators :@config, :signature, :signature= # api key
-    def_delegators :@config, :timestamp, :timestamp= # api key
-    def_delegators :@config, :consumer_key, :consumer_key= # client state from konfig.yaml
+    def host
+      @config.host
+    end
+
+    def host=(value)
+      @config.host = value
+    end
+    # api key from OpenAPI spec
+    def client_id
+      @config.client_id
+    end
+
+    def client_id=(value)
+      @config.client_id = value
+    end
+    # api key from OpenAPI spec
+    def signature
+      @config.signature
+    end
+
+    def signature=(value)
+      @config.signature = value
+    end
+    # api key from OpenAPI spec
+    def timestamp
+      @config.timestamp
+    end
+
+    def timestamp=(value)
+      @config.timestamp = value
+    end
+    # client state from konfig.yaml
+    def consumer_key
+      @config.consumer_key
+    end
+
+    def consumer_key=(value)
+      @config.consumer_key = value
+    end
 
     # Customize default settings for the SDK using block.
     #   SnapTrade.configure do |config|
-    #     config.username = "xxx"
-    #     config.password = "xxx"
+    #     config.host = "http://example.com"
     #   end
     # If no block given, return the default Configuration object.
     def configure
@@ -190,15 +222,15 @@ module SnapTrade
   end
 
   class Client
-    attr_accessor :account_information
-    attr_accessor :api_status
-    attr_accessor :authentication
-    attr_accessor :connections
-    attr_accessor :error_logs
-    attr_accessor :options
-    attr_accessor :reference_data
-    attr_accessor :trading
-    attr_accessor :transactions_and_reporting
+    attr_reader :account_information
+    attr_reader :api_status
+    attr_reader :authentication
+    attr_reader :connections
+    attr_reader :error_logs
+    attr_reader :options
+    attr_reader :reference_data
+    attr_reader :trading
+    attr_reader :transactions_and_reporting
 
     def initialize(config = Configuration.default)
       @api_client = ApiClient::new(config)

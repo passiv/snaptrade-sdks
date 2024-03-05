@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 require 'date'
@@ -20,11 +19,13 @@ module SnapTrade
 
     attr_accessor :trade
 
+    # Execution state of a trade
     attr_accessor :state
 
     # Number of filled units
     attr_accessor :filled_units
 
+    # Action of executed trade
     attr_accessor :action
 
     # Price of execution

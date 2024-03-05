@@ -227,7 +227,7 @@ const getUserAccountBalanceResponse =
   await snaptrade.accountInformation.getUserAccountBalance({
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
@@ -265,7 +265,7 @@ const getUserAccountDetailsResponse =
   await snaptrade.accountInformation.getUserAccountDetails({
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
@@ -305,7 +305,7 @@ const getUserAccountOrdersResponse =
     userSecret: "USERSECRET123",
     state: "all",
     days: 30,
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
@@ -351,7 +351,7 @@ const getUserAccountPositionsResponse =
   await snaptrade.accountInformation.getUserAccountPositions({
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
@@ -1414,7 +1414,7 @@ const symbolSearchUserAccountResponse =
   await snaptrade.referenceData.symbolSearchUserAccount({
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     substring: "apple",
   });
 ```
@@ -1455,7 +1455,7 @@ const cancelUserAccountOrderResponse =
   await snaptrade.trading.cancelUserAccountOrder({
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   });
 ```
@@ -1565,7 +1565,7 @@ const getUserAccountQuotesResponse =
     userId: "John.doe@snaptrade.com",
     userSecret: "USERSECRET123",
     symbols: "symbols_example",
-    accountId: "accountId_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 

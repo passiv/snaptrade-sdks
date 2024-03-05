@@ -5,7 +5,6 @@
 
 The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
-
 =end
 
 module SnapTrade
@@ -32,15 +31,15 @@ module SnapTrade
     attr_accessor :server_operation_variables
 
     def client_id=(value)
-      @api_key['PartnerClientId'] = value
+      @api_key_store['PartnerClientId'] = value
     end
 
     def signature=(value)
-      @api_key['PartnerSignature'] = value
+      @api_key_store['PartnerSignature'] = value
     end
 
     def timestamp=(value)
-      @api_key['PartnerTimestamp'] = value
+      @api_key_store['PartnerTimestamp'] = value
     end
 
     # client state configured through konfig.yaml
@@ -58,8 +57,8 @@ module SnapTrade
     # @return [Hash] key: parameter name, value: parameter value (API key)
     #
     # @example parameter name is "api_key", API key is "xxx" (e.g. "api_key=xxx" in query string)
-    #   config.api_key['api_key'] = 'xxx'
-    attr_accessor :api_key
+    #   config.api_key_store['api_key'] = 'xxx'
+    attr_accessor :api_key_store
 
     # Defines API key prefixes used with API Key authentications.
     #
@@ -68,19 +67,6 @@ module SnapTrade
     # @example parameter name is "Authorization", API key prefix is "Token" (e.g. "Authorization: Token xxx" in headers)
     #   config.api_key_prefix['api_key'] = 'Token'
     attr_accessor :api_key_prefix
-
-    # Defines the username used with HTTP basic authentication.
-    #
-    # @return [String]
-    attr_accessor :username
-
-    # Defines the password used with HTTP basic authentication.
-    #
-    # @return [String]
-    attr_accessor :password
-
-    # Defines the access token (Bearer) used with OAuth2.
-    attr_accessor :access_token
 
     # Set this to enable/disable debugging. When enabled (set to true), HTTP request/response
     # details will be logged with `logger.debug` (see the `logger` attribute).
@@ -165,7 +151,7 @@ module SnapTrade
       @server_operation_index = {}
       @server_variables = {}
       @server_operation_variables = {}
-      @api_key = {}
+      @api_key_store = {}
       @api_key_prefix = {}
       @client_side_validation = true
       @ssl_verify = true
@@ -233,18 +219,14 @@ module SnapTrade
     # Gets API key (with prefix if set).
     # @param [String] param_name the parameter name of API key auth
     def api_key_with_prefix(param_name, param_alias = nil)
-      key = @api_key[param_name]
-      key = @api_key.fetch(param_alias, key) unless param_alias.nil?
+      value = @api_key_store[param_name]
+      value = @api_key_store.fetch(param_alias, value) unless param_alias.nil?
+      return nil if value.nil?
       if @api_key_prefix[param_name]
-        "#{@api_key_prefix[param_name]} #{key}"
+        "#{@api_key_prefix[param_name]}#{value}"
       else
-        key
+        value
       end
-    end
-
-    # Gets Basic Auth token string
-    def basic_auth_token
-      'Basic ' + ["#{username}:#{password}"].pack('m').delete("\r\n")
     end
 
     # Returns Auth Settings hash for api client.
