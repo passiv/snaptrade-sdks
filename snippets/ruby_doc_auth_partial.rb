@@ -1,2 +1,4 @@
-SnapTrade.client_id = "YOUR_CLIENT_ID"
-SnapTrade.consumer_key = "YOUR_CONSUMER_KEY"
+configuration = SnapTrade::Configuration.new
+configuration.client_id = ENV["SNAPTRADE_CLIENT_ID"]
+configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
+snaptrade = SnapTrade::Client.new(configuration)
