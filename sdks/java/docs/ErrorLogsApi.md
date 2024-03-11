@@ -97,5 +97,5 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all user errors for a particular user in the last 90 days. |  -  |
+| **200** | A list of all user errors for a particular user in the last 30 days. |  -  |
 

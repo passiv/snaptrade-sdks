@@ -11,7 +11,6 @@ Manual trade symbol object
 |**brokerageSymbolId** | **UUID** |  |  [optional] |
 |**universalSymbolId** | **UUID** |  |  [optional] |
 |**currency** | [**Currency**](Currency.md) |  |  [optional] |
-|**localId** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**symbol** | **String** |  |  [optional] |
 

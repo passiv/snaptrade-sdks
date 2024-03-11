@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **BrokerageSymbolId** | **string** |  | [optional] 
 **UniversalSymbolId** | **string** |  | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
-**LocalId** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Symbol** | **string** |  | [optional] 
 

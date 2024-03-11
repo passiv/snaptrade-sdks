@@ -19,8 +19,6 @@ module SnapTrade
 
     attr_accessor :symbol
 
-    attr_accessor :local_id
-
     attr_accessor :is_quotable
 
     attr_accessor :is_tradable
@@ -31,7 +29,6 @@ module SnapTrade
         :'id' => :'id',
         :'description' => :'description',
         :'symbol' => :'symbol',
-        :'local_id' => :'local_id',
         :'is_quotable' => :'is_quotable',
         :'is_tradable' => :'is_tradable'
       }
@@ -48,7 +45,6 @@ module SnapTrade
         :'id' => :'String',
         :'description' => :'String',
         :'symbol' => :'UniversalSymbol',
-        :'local_id' => :'String',
         :'is_quotable' => :'Boolean',
         :'is_tradable' => :'Boolean'
       }
@@ -57,7 +53,6 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'local_id',
       ])
     end
 
@@ -86,10 +81,6 @@ module SnapTrade
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
-      end
-
-      if attributes.key?(:'local_id')
-        self.local_id = attributes[:'local_id']
       end
 
       if attributes.key?(:'is_quotable')
@@ -122,7 +113,6 @@ module SnapTrade
           id == o.id &&
           description == o.description &&
           symbol == o.symbol &&
-          local_id == o.local_id &&
           is_quotable == o.is_quotable &&
           is_tradable == o.is_tradable
     end
@@ -136,7 +126,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, description, symbol, local_id, is_quotable, is_tradable].hash
+      [id, description, symbol, is_quotable, is_tradable].hash
     end
 
     # Builds the object from hash

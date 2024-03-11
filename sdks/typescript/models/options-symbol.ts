@@ -67,12 +67,6 @@ export interface OptionsSymbol {
      * @type {string}
      * @memberof OptionsSymbol
      */
-    'local_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OptionsSymbol
-     */
     'exchange_id'?: string;
 }
 

@@ -76,9 +76,8 @@ namespace SnapTrade.Net.Model
         /// <param name="expirationDate">expirationDate (required).</param>
         /// <param name="isMiniOption">isMiniOption.</param>
         /// <param name="underlyingSymbol">underlyingSymbol (required).</param>
-        /// <param name="localId">localId.</param>
         /// <param name="exchangeId">exchangeId.</param>
-        public OptionsSymbolNullable(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), string exchangeId = default(string)) : base()
+        public OptionsSymbolNullable(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string exchangeId = default(string)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -107,7 +106,6 @@ namespace SnapTrade.Net.Model
             }
             this.UnderlyingSymbol = underlyingSymbol;
             this.IsMiniOption = isMiniOption;
-            this.LocalId = localId;
             this.ExchangeId = exchangeId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -149,12 +147,6 @@ namespace SnapTrade.Net.Model
         public UnderlyingSymbol UnderlyingSymbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets LocalId
-        /// </summary>
-        [DataMember(Name = "local_id", EmitDefaultValue = false)]
-        public string LocalId { get; set; }
-
-        /// <summary>
         /// Gets or Sets ExchangeId
         /// </summary>
         [DataMember(Name = "exchange_id", EmitDefaultValue = false)]
@@ -182,7 +174,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
             sb.Append("  IsMiniOption: ").Append(IsMiniOption).Append("\n");
             sb.Append("  UnderlyingSymbol: ").Append(UnderlyingSymbol).Append("\n");
-            sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  ExchangeId: ").Append(ExchangeId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -253,11 +244,6 @@ namespace SnapTrade.Net.Model
                     this.UnderlyingSymbol.Equals(input.UnderlyingSymbol))
                 ) && base.Equals(input) && 
                 (
-                    this.LocalId == input.LocalId ||
-                    (this.LocalId != null &&
-                    this.LocalId.Equals(input.LocalId))
-                ) && base.Equals(input) && 
-                (
                     this.ExchangeId == input.ExchangeId ||
                     (this.ExchangeId != null &&
                     this.ExchangeId.Equals(input.ExchangeId))
@@ -292,10 +278,6 @@ namespace SnapTrade.Net.Model
                 if (this.UnderlyingSymbol != null)
                 {
                     hashCode = (hashCode * 59) + this.UnderlyingSymbol.GetHashCode();
-                }
-                if (this.LocalId != null)
-                {
-                    hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
                 }
                 if (this.ExchangeId != null)
                 {

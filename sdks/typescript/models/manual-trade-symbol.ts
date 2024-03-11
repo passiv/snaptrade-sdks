@@ -43,12 +43,6 @@ export interface ManualTradeSymbol {
      * @type {string}
      * @memberof ManualTradeSymbol
      */
-    'local_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ManualTradeSymbol
-     */
     'description'?: string | null;
     /**
      * 

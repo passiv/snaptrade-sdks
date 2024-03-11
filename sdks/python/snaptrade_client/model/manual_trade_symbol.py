@@ -43,7 +43,6 @@ class ManualTradeSymbol(
             @staticmethod
             def currency() -> typing.Type['Currency']:
                 return Currency
-            local_id = schemas.StrSchema
             
             
             class description(
@@ -69,7 +68,6 @@ class ManualTradeSymbol(
                 "brokerage_symbol_id": brokerage_symbol_id,
                 "universal_symbol_id": universal_symbol_id,
                 "currency": currency,
-                "local_id": local_id,
                 "description": description,
                 "symbol": symbol,
             }
@@ -85,9 +83,6 @@ class ManualTradeSymbol(
     def __getitem__(self, name: typing_extensions.Literal["currency"]) -> 'Currency': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["local_id"]) -> MetaOapg.properties.local_id: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["description"]) -> MetaOapg.properties.description: ...
     
     @typing.overload
@@ -96,7 +91,7 @@ class ManualTradeSymbol(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -110,9 +105,6 @@ class ManualTradeSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union['Currency', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["local_id"]) -> typing.Union[MetaOapg.properties.local_id, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["description"]) -> typing.Union[MetaOapg.properties.description, schemas.Unset]: ...
     
     @typing.overload
@@ -121,7 +113,7 @@ class ManualTradeSymbol(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -130,7 +122,6 @@ class ManualTradeSymbol(
         brokerage_symbol_id: typing.Union[MetaOapg.properties.brokerage_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
-        local_id: typing.Union[MetaOapg.properties.local_id, str, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, None, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -142,7 +133,6 @@ class ManualTradeSymbol(
             brokerage_symbol_id=brokerage_symbol_id,
             universal_symbol_id=universal_symbol_id,
             currency=currency,
-            local_id=local_id,
             description=description,
             symbol=symbol,
             _configuration=_configuration,

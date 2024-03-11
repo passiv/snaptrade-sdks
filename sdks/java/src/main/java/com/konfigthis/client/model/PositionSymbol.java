@@ -24,7 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,10 +63,6 @@ public class PositionSymbol {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private UniversalSymbol symbol;
-
-  public static final String SERIALIZED_NAME_LOCAL_ID = "local_id";
-  @SerializedName(SERIALIZED_NAME_LOCAL_ID)
-  private String localId;
 
   public static final String SERIALIZED_NAME_IS_QUOTABLE = "is_quotable";
   @SerializedName(SERIALIZED_NAME_IS_QUOTABLE)
@@ -164,35 +159,6 @@ public class PositionSymbol {
     
     
     this.symbol = symbol;
-  }
-
-
-  public PositionSymbol localId(String localId) {
-    
-    
-    
-    
-    this.localId = localId;
-    return this;
-  }
-
-   /**
-   * Get localId
-   * @return localId
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3291231", value = "")
-
-  public String getLocalId() {
-    return localId;
-  }
-
-
-  public void setLocalId(String localId) {
-    
-    
-    
-    this.localId = localId;
   }
 
 
@@ -311,26 +277,14 @@ public class PositionSymbol {
     return Objects.equals(this.id, positionSymbol.id) &&
         Objects.equals(this.description, positionSymbol.description) &&
         Objects.equals(this.symbol, positionSymbol.symbol) &&
-        Objects.equals(this.localId, positionSymbol.localId) &&
         Objects.equals(this.isQuotable, positionSymbol.isQuotable) &&
         Objects.equals(this.isTradable, positionSymbol.isTradable)&&
         Objects.equals(this.additionalProperties, positionSymbol.additionalProperties);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
-    return Objects.hash(id, description, symbol, localId, isQuotable, isTradable, additionalProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, description, symbol, isQuotable, isTradable, additionalProperties);
   }
 
   @Override
@@ -340,7 +294,6 @@ public class PositionSymbol {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
-    sb.append("    localId: ").append(toIndentedString(localId)).append("\n");
     sb.append("    isQuotable: ").append(toIndentedString(isQuotable)).append("\n");
     sb.append("    isTradable: ").append(toIndentedString(isTradable)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -369,7 +322,6 @@ public class PositionSymbol {
     openapiFields.add("id");
     openapiFields.add("description");
     openapiFields.add("symbol");
-    openapiFields.add("local_id");
     openapiFields.add("is_quotable");
     openapiFields.add("is_tradable");
 
@@ -398,9 +350,6 @@ public class PositionSymbol {
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         UniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
-      }
-      if (!jsonObj.get("local_id").isJsonNull() && (jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
       }
   }
 
