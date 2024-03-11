@@ -26,8 +26,6 @@ module SnapTrade
 
     attr_accessor :underlying_symbol
 
-    attr_accessor :local_id
-
     attr_accessor :exchange_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -40,7 +38,6 @@ module SnapTrade
         :'expiration_date' => :'expiration_date',
         :'is_mini_option' => :'is_mini_option',
         :'underlying_symbol' => :'underlying_symbol',
-        :'local_id' => :'local_id',
         :'exchange_id' => :'exchange_id'
       }
     end
@@ -60,7 +57,6 @@ module SnapTrade
         :'expiration_date' => :'String',
         :'is_mini_option' => :'Boolean',
         :'underlying_symbol' => :'UnderlyingSymbol',
-        :'local_id' => :'String',
         :'exchange_id' => :'String'
       }
     end
@@ -119,10 +115,6 @@ module SnapTrade
 
       if attributes.key?(:'underlying_symbol')
         self.underlying_symbol = attributes[:'underlying_symbol']
-      end
-
-      if attributes.key?(:'local_id')
-        self.local_id = attributes[:'local_id']
       end
 
       if attributes.key?(:'exchange_id')
@@ -185,7 +177,6 @@ module SnapTrade
           expiration_date == o.expiration_date &&
           is_mini_option == o.is_mini_option &&
           underlying_symbol == o.underlying_symbol &&
-          local_id == o.local_id &&
           exchange_id == o.exchange_id
     end
 
@@ -198,7 +189,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, ticker, option_type, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
+      [id, ticker, option_type, strike_price, expiration_date, is_mini_option, underlying_symbol, exchange_id].hash
     end
 
     # Builds the object from hash

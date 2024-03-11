@@ -27,8 +27,6 @@ class OptionalManualTradeSymbol(TypedDict, total=False):
 
     currency: Currency
 
-    local_id: str
-
     description: typing.Optional[str]
 
     symbol: str

@@ -19,8 +19,6 @@ module SnapTrade
 
     attr_accessor :currency
 
-    attr_accessor :local_id
-
     attr_accessor :description
 
     attr_accessor :symbol
@@ -31,7 +29,6 @@ module SnapTrade
         :'brokerage_symbol_id' => :'brokerage_symbol_id',
         :'universal_symbol_id' => :'universal_symbol_id',
         :'currency' => :'currency',
-        :'local_id' => :'local_id',
         :'description' => :'description',
         :'symbol' => :'symbol'
       }
@@ -48,7 +45,6 @@ module SnapTrade
         :'brokerage_symbol_id' => :'String',
         :'universal_symbol_id' => :'String',
         :'currency' => :'Currency',
-        :'local_id' => :'String',
         :'description' => :'String',
         :'symbol' => :'String'
       }
@@ -88,10 +84,6 @@ module SnapTrade
         self.currency = attributes[:'currency']
       end
 
-      if attributes.key?(:'local_id')
-        self.local_id = attributes[:'local_id']
-      end
-
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -122,7 +114,6 @@ module SnapTrade
           brokerage_symbol_id == o.brokerage_symbol_id &&
           universal_symbol_id == o.universal_symbol_id &&
           currency == o.currency &&
-          local_id == o.local_id &&
           description == o.description &&
           symbol == o.symbol
     end
@@ -136,7 +127,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_symbol_id, universal_symbol_id, currency, local_id, description, symbol].hash
+      [brokerage_symbol_id, universal_symbol_id, currency, description, symbol].hash
     end
 
     # Builds the object from hash

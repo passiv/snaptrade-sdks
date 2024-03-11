@@ -15,7 +15,6 @@ Options Symbol
 |**expirationDate** | **String** |  |  |
 |**isMiniOption** | **Boolean** |  |  [optional] |
 |**underlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  |  |
-|**localId** | **String** |  |  [optional] |
 |**exchangeId** | **UUID** |  |  [optional] |
 
 

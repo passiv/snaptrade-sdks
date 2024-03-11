@@ -1734,7 +1734,7 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: A list of all user errors for a particular user in the last
-            90 days.
+            30 days.
       summary: Retrieve error logs on behalf of your SnapTrade users
       tags:
       - Error Logs
@@ -2504,7 +2504,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2546,7 +2545,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2675,7 +2673,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2717,7 +2714,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2773,7 +2769,6 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -2860,7 +2855,6 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -2996,7 +2990,6 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -3223,7 +3216,6 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -4607,7 +4599,6 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           is_tradable: true
-          local_id: "3291231"
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         fractional_units: 1.44
@@ -5345,7 +5336,6 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -5444,7 +5434,6 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         is_tradable: true
-        local_id: "3291231"
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
@@ -5461,12 +5450,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-description
         symbol:
           $ref: '#/components/schemas/UniversalSymbol'
-        local_id:
-          example: "3291231"
-          nullable: true
-          type: string
-          x-konfig-original-example: "3291231"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-local_id
         is_quotable:
           example: true
           type: boolean
@@ -6120,7 +6103,6 @@ components:
           universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           symbol: MVGP.U.TO
           brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          local_id: "1048101"
           description: Metaverse Global ETF
           currency:
             code: USD
@@ -6178,7 +6160,6 @@ components:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         symbol: MVGP.U.TO
         brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        local_id: "1048101"
         description: Metaverse Global ETF
         currency:
           code: USD
@@ -6199,11 +6180,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         currency:
           $ref: '#/components/schemas/Currency'
-        local_id:
-          example: "1048101"
-          type: string
-          x-konfig-original-example: "1048101"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id
         description:
           example: Metaverse Global ETF
           nullable: true
@@ -6278,7 +6254,6 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6296,7 +6271,6 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6313,7 +6287,6 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6596,7 +6569,6 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -6891,7 +6863,6 @@ components:
       example:
         ticker: SPY 220819P00200000
         exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        local_id: "40817960"
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
@@ -6966,11 +6937,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option
         underlying_symbol:
           $ref: '#/components/schemas/UnderlyingSymbol'
-        local_id:
-          example: "40817960"
-          type: string
-          x-konfig-original-example: "40817960"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
         exchange_id:
           format: uuid
           type: string
@@ -8112,10 +8078,6 @@ components:
       example: VANGUARD CDN AGGREGATE BOND INDEX ETF
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PositionSymbol-properties-local_id:
-      example: "3291231"
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-PositionSymbol-properties-is_quotable:
       example: true
       type: boolean
@@ -8346,10 +8308,6 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9855556801c3
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id:
-      example: "1048101"
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-description:
       example: Metaverse Global ETF
       type: string
@@ -8497,10 +8455,6 @@ components:
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option:
       example: false
       type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id:
-      example: "40817960"
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionLeg-properties-option_symbol_id:
       example: SPY220819P00200000
@@ -9800,7 +9754,6 @@ components:
       example:
         ticker: SPY 220819P00200000
         exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        local_id: "40817960"
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
@@ -9876,11 +9829,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option
         underlying_symbol:
           $ref: '#/components/schemas/UnderlyingSymbol'
-        local_id:
-          example: "40817960"
-          type: string
-          x-konfig-original-example: "40817960"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
         exchange_id:
           format: uuid
           type: string

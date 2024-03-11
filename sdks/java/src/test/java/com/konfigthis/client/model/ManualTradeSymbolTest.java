@@ -66,14 +66,6 @@ public class ManualTradeSymbolTest {
     }
 
     /**
-     * Test the property 'localId'
-     */
-    @Test
-    public void localIdTest() {
-        // TODO: test localId
-    }
-
-    /**
      * Test the property 'description'
      */
     @Test

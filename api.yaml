@@ -1237,7 +1237,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: A list of all user errors for a particular user in the last 90 days.
+          description: A list of all user errors for a particular user in the last 30 days.
           content:
             application/json:
               schema:
@@ -3420,10 +3420,6 @@ components:
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
         symbol:
           $ref: "#/components/schemas/UniversalSymbol"
-        local_id:
-          type: string
-          example: "3291231"
-          nullable: true
         is_quotable:
           type: boolean
           example: true
@@ -3908,9 +3904,6 @@ components:
           $ref: "#/components/schemas/Id"
         currency:
           $ref: "#/components/schemas/Currency"
-        local_id:
-          type: string
-          example: '1048101'
         description:
           type: string
           example: Metaverse Global ETF
@@ -4252,9 +4245,6 @@ components:
           example: false
         underlying_symbol:
           $ref: "#/components/schemas/UnderlyingSymbol"
-        local_id:
-          type: string
-          example: "40817960"
         exchange_id:
           type: string
           format: uuid

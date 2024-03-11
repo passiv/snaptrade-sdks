@@ -172,7 +172,7 @@ public class ErrorLogsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 30 days. </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -187,7 +187,7 @@ public class ErrorLogsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 30 days. </td><td>  -  </td></tr>
          </table>
          */
         public List<UserErrorLog> execute() throws ApiException {
@@ -202,7 +202,7 @@ public class ErrorLogsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 30 days. </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<UserErrorLog>> executeWithHttpInfo() throws ApiException {
@@ -217,7 +217,7 @@ public class ErrorLogsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 30 days. </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UserErrorLog>> _callback) throws ApiException {
@@ -234,7 +234,7 @@ public class ErrorLogsApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 90 days. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of all user errors for a particular user in the last 30 days. </td><td>  -  </td></tr>
      </table>
      */
     public ListUserErrorsRequestBuilder listUserErrors(String userId, String userSecret) throws IllegalArgumentException {
