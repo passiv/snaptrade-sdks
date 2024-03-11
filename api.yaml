@@ -3420,6 +3420,10 @@ components:
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
         symbol:
           $ref: "#/components/schemas/UniversalSymbol"
+        local_id:
+          type: string
+          example: "3291231"
+          nullable: true
         is_quotable:
           type: boolean
           example: true

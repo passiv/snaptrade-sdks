@@ -40,6 +40,12 @@ export interface PositionSymbol {
     'symbol'?: UniversalSymbol;
     /**
      * 
+     * @type {string}
+     * @memberof PositionSymbol
+     */
+    'local_id'?: string | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof PositionSymbol
      */
