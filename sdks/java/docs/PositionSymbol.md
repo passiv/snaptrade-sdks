@@ -11,6 +11,7 @@ Symbol returned in position object
 |**id** | **UUID** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
 |**symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
+|**localId** | **String** |  |  [optional] |
 |**isQuotable** | **Boolean** |  |  [optional] |
 |**isTradable** | **Boolean** |  |  [optional] |
 

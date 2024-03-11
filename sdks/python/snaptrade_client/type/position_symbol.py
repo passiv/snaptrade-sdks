@@ -27,6 +27,8 @@ class OptionalPositionSymbol(TypedDict, total=False):
 
     symbol: UniversalSymbol
 
+    local_id: typing.Optional[str]
+
     is_quotable: bool
 
     is_tradable: bool
