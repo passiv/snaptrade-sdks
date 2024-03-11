@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Symbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
+**LocalId** | **string** |  | [optional] 
 **IsQuotable** | **bool** |  | [optional] 
 **IsTradable** | **bool** |  | [optional] 
 
