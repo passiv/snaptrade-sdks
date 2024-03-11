@@ -2504,7 +2504,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2546,7 +2545,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2675,7 +2673,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -2717,7 +2714,6 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             is_tradable: true
-            local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           fractional_units: 1.44
@@ -4603,7 +4599,6 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           is_tradable: true
-          local_id: "3291231"
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         fractional_units: 1.44
@@ -5439,7 +5434,6 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         is_tradable: true
-        local_id: "3291231"
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
@@ -5456,12 +5450,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-description
         symbol:
           $ref: '#/components/schemas/UniversalSymbol'
-        local_id:
-          example: "3291231"
-          nullable: true
-          type: string
-          x-konfig-original-example: "3291231"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-local_id
         is_quotable:
           example: true
           type: boolean
@@ -8088,10 +8076,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PositionSymbol-properties-description:
       example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PositionSymbol-properties-local_id:
-      example: "3291231"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PositionSymbol-properties-is_quotable:

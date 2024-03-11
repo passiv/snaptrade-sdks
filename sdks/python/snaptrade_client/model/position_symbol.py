@@ -43,33 +43,12 @@ class PositionSymbol(
             @staticmethod
             def symbol() -> typing.Type['UniversalSymbol']:
                 return UniversalSymbol
-            
-            
-            class local_id(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'local_id':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
             is_quotable = schemas.BoolSchema
             is_tradable = schemas.BoolSchema
             __annotations__ = {
                 "id": id,
                 "description": description,
                 "symbol": symbol,
-                "local_id": local_id,
                 "is_quotable": is_quotable,
                 "is_tradable": is_tradable,
             }
@@ -85,9 +64,6 @@ class PositionSymbol(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'UniversalSymbol': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["local_id"]) -> MetaOapg.properties.local_id: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["is_quotable"]) -> MetaOapg.properties.is_quotable: ...
     
     @typing.overload
@@ -96,7 +72,7 @@ class PositionSymbol(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["local_id"], typing_extensions.Literal["is_quotable"], typing_extensions.Literal["is_tradable"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["is_quotable"], typing_extensions.Literal["is_tradable"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -110,9 +86,6 @@ class PositionSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['UniversalSymbol', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["local_id"]) -> typing.Union[MetaOapg.properties.local_id, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["is_quotable"]) -> typing.Union[MetaOapg.properties.is_quotable, schemas.Unset]: ...
     
     @typing.overload
@@ -121,7 +94,7 @@ class PositionSymbol(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["local_id"], typing_extensions.Literal["is_quotable"], typing_extensions.Literal["is_tradable"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["is_quotable"], typing_extensions.Literal["is_tradable"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -130,7 +103,6 @@ class PositionSymbol(
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union['UniversalSymbol', schemas.Unset] = schemas.unset,
-        local_id: typing.Union[MetaOapg.properties.local_id, None, str, schemas.Unset] = schemas.unset,
         is_quotable: typing.Union[MetaOapg.properties.is_quotable, bool, schemas.Unset] = schemas.unset,
         is_tradable: typing.Union[MetaOapg.properties.is_tradable, bool, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -142,7 +114,6 @@ class PositionSymbol(
             id=id,
             description=description,
             symbol=symbol,
-            local_id=local_id,
             is_quotable=is_quotable,
             is_tradable=is_tradable,
             _configuration=_configuration,

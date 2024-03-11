@@ -38,15 +38,13 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="description">description.</param>
         /// <param name="symbol">symbol.</param>
-        /// <param name="localId">localId.</param>
         /// <param name="isQuotable">isQuotable.</param>
         /// <param name="isTradable">isTradable.</param>
-        public PositionSymbol(string id = default(string), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        public PositionSymbol(string id = default(string), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
             this.Id = id;
             this.Description = description;
             this.Symbol = symbol;
-            this.LocalId = localId;
             this.IsQuotable = isQuotable;
             this.IsTradable = isTradable;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -69,12 +67,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
         public UniversalSymbol Symbol { get; set; }
-
-        /// <summary>
-        /// Gets or Sets LocalId
-        /// </summary>
-        [DataMember(Name = "local_id", EmitDefaultValue = true)]
-        public string LocalId { get; set; }
 
         /// <summary>
         /// Gets or Sets IsQuotable
@@ -106,7 +98,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
-            sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  IsQuotable: ").Append(IsQuotable).Append("\n");
             sb.Append("  IsTradable: ").Append(IsTradable).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -161,11 +152,6 @@ namespace SnapTrade.Net.Model
                     this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
-                    this.LocalId == input.LocalId ||
-                    (this.LocalId != null &&
-                    this.LocalId.Equals(input.LocalId))
-                ) && base.Equals(input) && 
-                (
                     this.IsQuotable == input.IsQuotable ||
                     this.IsQuotable.Equals(input.IsQuotable)
                 ) && base.Equals(input) && 
@@ -196,10 +182,6 @@ namespace SnapTrade.Net.Model
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
-                }
-                if (this.LocalId != null)
-                {
-                    hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsQuotable.GetHashCode();
                 hashCode = (hashCode * 59) + this.IsTradable.GetHashCode();

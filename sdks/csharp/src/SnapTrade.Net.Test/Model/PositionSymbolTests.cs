@@ -82,14 +82,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
-        /// Test the property 'LocalId'
-        /// </summary>
-        [Fact]
-        public void LocalIdTest()
-        {
-            // TODO unit test for the property 'LocalId'
-        }
-        /// <summary>
         /// Test the property 'IsQuotable'
         /// </summary>
         [Fact]
