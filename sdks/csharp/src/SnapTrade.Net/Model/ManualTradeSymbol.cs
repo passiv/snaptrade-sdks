@@ -38,13 +38,15 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageSymbolId">brokerageSymbolId.</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
         /// <param name="currency">currency.</param>
+        /// <param name="localId">localId.</param>
         /// <param name="description">description.</param>
         /// <param name="symbol">symbol.</param>
-        public ManualTradeSymbol(string brokerageSymbolId = default(string), string universalSymbolId = default(string), Currency currency = default(Currency), string description = default(string), string symbol = default(string)) : base()
+        public ManualTradeSymbol(string brokerageSymbolId = default(string), string universalSymbolId = default(string), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
         {
             this.BrokerageSymbolId = brokerageSymbolId;
             this.UniversalSymbolId = universalSymbolId;
             this.Currency = currency;
+            this.LocalId = localId;
             this.Description = description;
             this.Symbol = symbol;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -67,6 +69,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public Currency Currency { get; set; }
+
+        /// <summary>
+        /// Gets or Sets LocalId
+        /// </summary>
+        [DataMember(Name = "local_id", EmitDefaultValue = false)]
+        public string LocalId { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
@@ -98,6 +106,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  BrokerageSymbolId: ").Append(BrokerageSymbolId).Append("\n");
             sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
+            sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -152,6 +161,11 @@ namespace SnapTrade.Net.Model
                     this.Currency.Equals(input.Currency))
                 ) && base.Equals(input) && 
                 (
+                    this.LocalId == input.LocalId ||
+                    (this.LocalId != null &&
+                    this.LocalId.Equals(input.LocalId))
+                ) && base.Equals(input) && 
+                (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
@@ -184,6 +198,10 @@ namespace SnapTrade.Net.Model
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();
+                }
+                if (this.LocalId != null)
+                {
+                    hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
                 }
                 if (this.Description != null)
                 {

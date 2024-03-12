@@ -127,6 +127,10 @@ public class OptionsSymbolNullable {
   @SerializedName(SERIALIZED_NAME_UNDERLYING_SYMBOL)
   private UnderlyingSymbol underlyingSymbol;
 
+  public static final String SERIALIZED_NAME_LOCAL_ID = "local_id";
+  @SerializedName(SERIALIZED_NAME_LOCAL_ID)
+  private String localId;
+
   public static final String SERIALIZED_NAME_EXCHANGE_ID = "exchange_id";
   @SerializedName(SERIALIZED_NAME_EXCHANGE_ID)
   private UUID exchangeId;
@@ -346,6 +350,35 @@ public class OptionsSymbolNullable {
   }
 
 
+  public OptionsSymbolNullable localId(String localId) {
+    
+    
+    
+    
+    this.localId = localId;
+    return this;
+  }
+
+   /**
+   * Get localId
+   * @return localId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "40817960", value = "")
+
+  public String getLocalId() {
+    return localId;
+  }
+
+
+  public void setLocalId(String localId) {
+    
+    
+    
+    this.localId = localId;
+  }
+
+
   public OptionsSymbolNullable exchangeId(UUID exchangeId) {
     
     
@@ -436,13 +469,14 @@ public class OptionsSymbolNullable {
         Objects.equals(this.expirationDate, optionsSymbolNullable.expirationDate) &&
         Objects.equals(this.isMiniOption, optionsSymbolNullable.isMiniOption) &&
         Objects.equals(this.underlyingSymbol, optionsSymbolNullable.underlyingSymbol) &&
+        Objects.equals(this.localId, optionsSymbolNullable.localId) &&
         Objects.equals(this.exchangeId, optionsSymbolNullable.exchangeId)&&
         Objects.equals(this.additionalProperties, optionsSymbolNullable.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ticker, optionType, strikePrice, expirationDate, isMiniOption, underlyingSymbol, exchangeId, additionalProperties);
+    return Objects.hash(id, ticker, optionType, strikePrice, expirationDate, isMiniOption, underlyingSymbol, localId, exchangeId, additionalProperties);
   }
 
   @Override
@@ -456,6 +490,7 @@ public class OptionsSymbolNullable {
     sb.append("    expirationDate: ").append(toIndentedString(expirationDate)).append("\n");
     sb.append("    isMiniOption: ").append(toIndentedString(isMiniOption)).append("\n");
     sb.append("    underlyingSymbol: ").append(toIndentedString(underlyingSymbol)).append("\n");
+    sb.append("    localId: ").append(toIndentedString(localId)).append("\n");
     sb.append("    exchangeId: ").append(toIndentedString(exchangeId)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -487,6 +522,7 @@ public class OptionsSymbolNullable {
     openapiFields.add("expiration_date");
     openapiFields.add("is_mini_option");
     openapiFields.add("underlying_symbol");
+    openapiFields.add("local_id");
     openapiFields.add("exchange_id");
 
     // a set of required properties/fields (JSON key names)
@@ -532,6 +568,9 @@ public class OptionsSymbolNullable {
       }
       // validate the required field `underlying_symbol`
       UnderlyingSymbol.validateJsonObject(jsonObj.getAsJsonObject("underlying_symbol"));
+      if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
+      }
       if ((jsonObj.get("exchange_id") != null && !jsonObj.get("exchange_id").isJsonNull()) && !jsonObj.get("exchange_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `exchange_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("exchange_id").toString()));
       }

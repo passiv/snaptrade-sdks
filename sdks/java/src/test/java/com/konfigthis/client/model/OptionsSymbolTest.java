@@ -97,6 +97,14 @@ public class OptionsSymbolTest {
     }
 
     /**
+     * Test the property 'localId'
+     */
+    @Test
+    public void localIdTest() {
+        // TODO: test localId
+    }
+
+    /**
      * Test the property 'exchangeId'
      */
     @Test

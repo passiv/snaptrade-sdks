@@ -75,6 +75,7 @@ class OptionsSymbol(
             def underlying_symbol() -> typing.Type['UnderlyingSymbol']:
                 return UnderlyingSymbol
             is_mini_option = schemas.BoolSchema
+            local_id = schemas.StrSchema
             exchange_id = schemas.UUIDSchema
             __annotations__ = {
                 "id": id,
@@ -84,6 +85,7 @@ class OptionsSymbol(
                 "expiration_date": expiration_date,
                 "underlying_symbol": underlying_symbol,
                 "is_mini_option": is_mini_option,
+                "local_id": local_id,
                 "exchange_id": exchange_id,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -117,12 +119,15 @@ class OptionsSymbol(
     def __getitem__(self, name: typing_extensions.Literal["is_mini_option"]) -> MetaOapg.properties.is_mini_option: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["local_id"]) -> MetaOapg.properties.local_id: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["exchange_id"]) -> MetaOapg.properties.exchange_id: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["ticker"], typing_extensions.Literal["option_type"], typing_extensions.Literal["underlying_symbol"], typing_extensions.Literal["id"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["is_mini_option"], typing_extensions.Literal["exchange_id"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["ticker"], typing_extensions.Literal["option_type"], typing_extensions.Literal["underlying_symbol"], typing_extensions.Literal["id"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["is_mini_option"], typing_extensions.Literal["local_id"], typing_extensions.Literal["exchange_id"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -148,12 +153,15 @@ class OptionsSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["is_mini_option"]) -> typing.Union[MetaOapg.properties.is_mini_option, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["local_id"]) -> typing.Union[MetaOapg.properties.local_id, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["exchange_id"]) -> typing.Union[MetaOapg.properties.exchange_id, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["ticker"], typing_extensions.Literal["option_type"], typing_extensions.Literal["underlying_symbol"], typing_extensions.Literal["id"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["is_mini_option"], typing_extensions.Literal["exchange_id"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["ticker"], typing_extensions.Literal["option_type"], typing_extensions.Literal["underlying_symbol"], typing_extensions.Literal["id"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["is_mini_option"], typing_extensions.Literal["local_id"], typing_extensions.Literal["exchange_id"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -166,6 +174,7 @@ class OptionsSymbol(
         expiration_date: typing.Union[MetaOapg.properties.expiration_date, str, ],
         strike_price: typing.Union[MetaOapg.properties.strike_price, decimal.Decimal, int, float, ],
         is_mini_option: typing.Union[MetaOapg.properties.is_mini_option, bool, schemas.Unset] = schemas.unset,
+        local_id: typing.Union[MetaOapg.properties.local_id, str, schemas.Unset] = schemas.unset,
         exchange_id: typing.Union[MetaOapg.properties.exchange_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -180,6 +189,7 @@ class OptionsSymbol(
             expiration_date=expiration_date,
             strike_price=strike_price,
             is_mini_option=is_mini_option,
+            local_id=local_id,
             exchange_id=exchange_id,
             _configuration=_configuration,
             **kwargs,

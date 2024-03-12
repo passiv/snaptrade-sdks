@@ -2773,6 +2773,7 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -2859,6 +2860,7 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -2994,6 +2996,7 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -3220,6 +3223,7 @@ components:
           option_symbol:
             ticker: SPY 220819P00200000
             exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -5341,6 +5345,7 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -6115,6 +6120,7 @@ components:
           universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           symbol: MVGP.U.TO
           brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          local_id: "1048101"
           description: Metaverse Global ETF
           currency:
             code: USD
@@ -6172,6 +6178,7 @@ components:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         symbol: MVGP.U.TO
         brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        local_id: "1048101"
         description: Metaverse Global ETF
         currency:
           code: USD
@@ -6192,6 +6199,11 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         currency:
           $ref: '#/components/schemas/Currency'
+        local_id:
+          example: "1048101"
+          type: string
+          x-konfig-original-example: "1048101"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id
         description:
           example: Metaverse Global ETF
           nullable: true
@@ -6266,6 +6278,7 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6283,6 +6296,7 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6299,6 +6313,7 @@ components:
             universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             symbol: MVGP.U.TO
             brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            local_id: "1048101"
             description: Metaverse Global ETF
             currency:
               code: USD
@@ -6581,6 +6596,7 @@ components:
         option_symbol:
           ticker: SPY 220819P00200000
           exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -6875,6 +6891,7 @@ components:
       example:
         ticker: SPY 220819P00200000
         exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        local_id: "40817960"
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
@@ -6949,6 +6966,11 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option
         underlying_symbol:
           $ref: '#/components/schemas/UnderlyingSymbol'
+        local_id:
+          example: "40817960"
+          type: string
+          x-konfig-original-example: "40817960"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
         exchange_id:
           format: uuid
           type: string
@@ -8324,6 +8346,10 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9855556801c3
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id:
+      example: "1048101"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-description:
       example: Metaverse Global ETF
       type: string
@@ -8471,6 +8497,10 @@ components:
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option:
       example: false
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id:
+      example: "40817960"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionLeg-properties-option_symbol_id:
       example: SPY220819P00200000
@@ -9770,6 +9800,7 @@ components:
       example:
         ticker: SPY 220819P00200000
         exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        local_id: "40817960"
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
@@ -9845,6 +9876,11 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option
         underlying_symbol:
           $ref: '#/components/schemas/UnderlyingSymbol'
+        local_id:
+          example: "40817960"
+          type: string
+          x-konfig-original-example: "40817960"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
         exchange_id:
           format: uuid
           type: string

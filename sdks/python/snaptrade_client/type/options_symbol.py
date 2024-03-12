@@ -33,6 +33,8 @@ class RequiredOptionsSymbol(TypedDict):
 class OptionalOptionsSymbol(TypedDict, total=False):
     is_mini_option: bool
 
+    local_id: str
+
     exchange_id: str
 
 class OptionsSymbol(RequiredOptionsSymbol, OptionalOptionsSymbol):

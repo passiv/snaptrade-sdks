@@ -66,6 +66,12 @@ export interface BrokerageSymbolOptionSymbol {
      * @type {string}
      * @memberof BrokerageSymbolOptionSymbol
      */
+    'local_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BrokerageSymbolOptionSymbol
+     */
     'exchange_id'?: string;
 }
 

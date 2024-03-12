@@ -65,6 +65,10 @@ public class ManualTradeSymbol {
   @SerializedName(SERIALIZED_NAME_CURRENCY)
   private Currency currency;
 
+  public static final String SERIALIZED_NAME_LOCAL_ID = "local_id";
+  @SerializedName(SERIALIZED_NAME_LOCAL_ID)
+  private String localId;
+
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
@@ -160,6 +164,35 @@ public class ManualTradeSymbol {
     
     
     this.currency = currency;
+  }
+
+
+  public ManualTradeSymbol localId(String localId) {
+    
+    
+    
+    
+    this.localId = localId;
+    return this;
+  }
+
+   /**
+   * Get localId
+   * @return localId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1048101", value = "")
+
+  public String getLocalId() {
+    return localId;
+  }
+
+
+  public void setLocalId(String localId) {
+    
+    
+    
+    this.localId = localId;
   }
 
 
@@ -278,6 +311,7 @@ public class ManualTradeSymbol {
     return Objects.equals(this.brokerageSymbolId, manualTradeSymbol.brokerageSymbolId) &&
         Objects.equals(this.universalSymbolId, manualTradeSymbol.universalSymbolId) &&
         Objects.equals(this.currency, manualTradeSymbol.currency) &&
+        Objects.equals(this.localId, manualTradeSymbol.localId) &&
         Objects.equals(this.description, manualTradeSymbol.description) &&
         Objects.equals(this.symbol, manualTradeSymbol.symbol)&&
         Objects.equals(this.additionalProperties, manualTradeSymbol.additionalProperties);
@@ -289,7 +323,7 @@ public class ManualTradeSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageSymbolId, universalSymbolId, currency, description, symbol, additionalProperties);
+    return Objects.hash(brokerageSymbolId, universalSymbolId, currency, localId, description, symbol, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -306,6 +340,7 @@ public class ManualTradeSymbol {
     sb.append("    brokerageSymbolId: ").append(toIndentedString(brokerageSymbolId)).append("\n");
     sb.append("    universalSymbolId: ").append(toIndentedString(universalSymbolId)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    localId: ").append(toIndentedString(localId)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -334,6 +369,7 @@ public class ManualTradeSymbol {
     openapiFields.add("brokerage_symbol_id");
     openapiFields.add("universal_symbol_id");
     openapiFields.add("currency");
+    openapiFields.add("local_id");
     openapiFields.add("description");
     openapiFields.add("symbol");
 
@@ -362,6 +398,9 @@ public class ManualTradeSymbol {
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
         Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
+      if ((jsonObj.get("local_id") != null && !jsonObj.get("local_id").isJsonNull()) && !jsonObj.get("local_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `local_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("local_id").toString()));
       }
       if (!jsonObj.get("description").isJsonNull() && (jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
