@@ -3908,6 +3908,9 @@ components:
           $ref: "#/components/schemas/Id"
         currency:
           $ref: "#/components/schemas/Currency"
+        local_id:
+          type: string
+          example: '1048101'
         description:
           type: string
           example: Metaverse Global ETF
@@ -4249,6 +4252,9 @@ components:
           example: false
         underlying_symbol:
           $ref: "#/components/schemas/UnderlyingSymbol"
+        local_id:
+          type: string
+          example: "40817960"
         exchange_id:
           type: string
           format: uuid
