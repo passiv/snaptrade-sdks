@@ -2147,6 +2147,11 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Position"
+        option_postions:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/OptionsPosition"
         orders:
           type: array
           nullable: true
